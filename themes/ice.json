@@ -1,0 +1,19 @@
+{
+  "name": "ice",
+  "description": "A cold stretch of the hive. Every warm token swaps to a frozen one — the chitin goes blue-grey, the pheromone glow reads as a pale cold signal — while every silhouette, part and animation stays exactly where it was. One file, whole roster restyled.",
+  "colors": {
+    "pheromone": "#7fd4ff",
+    "chitin": "#5d7f97",
+    "carapace": "#22303f",
+    "husk": "#dbe8f0",
+    "spore": "#bfeaff",
+    "soil": "#0d1218",
+    "blood": "#4a9fd8",
+    "ember": "#7ac9ff",
+    "gold": "#cfeaff",
+    "venom": "#bfeaff",
+    "arcane": "#8f9fff",
+    "timber": "#5a7a8e",
+    "slate": "#33506b"
+  }
+}

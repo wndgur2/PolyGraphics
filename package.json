@@ -1,0 +1,27 @@
+{
+  "name": "polygraphics",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AI-legible procedural asset system: declarative asset documents + design tokens + deterministic SVG renderer",
+  "scripts": {
+    "check": "tsx src/cli.ts check",
+    "validate": "tsx src/cli.ts validate",
+    "render": "tsx src/cli.ts render",
+    "compile": "tsx src/cli.ts compile",
+    "gallery": "tsx src/cli.ts gallery",
+    "png": "tsx src/cli.ts png",
+    "baseline": "tsx src/cli.ts baseline",
+    "regress": "tsx src/cli.ts regress",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@types/node": "^26.2.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "grid": 4,
+  "colors": {
+    "ink": "#10121a",
+    "slate": "#3a4a5c",
+    "steel": "#9aa4b2",
+    "bone": "#e6e1d3",
+    "blood": "#d63756",
+    "ember": "#ff9b3d",
+    "gold": "#ffd93b",
+    "venom": "#7ae87a",
+    "arcane": "#b46bff",
+    "frost": "#8fd0ff",
+    "soul": "#55ffee",
+    "timber": "#8a6a2e",
+    "white": "#ffffff",
+    "coral": "#ff5b6e",
+    "aqua": "#7ee0ff",
+    "orchid": "#c86bff",
+    "pink": "#ff8fd0",
+    "coal": "#2a2a34",
+    "smoke": "#55555f",
+    "soil": "#131019",
+
+    "pheromone": "#e87ad0",
+    "spore": "#58e8d8",
+    "chitin": "#b07a2e",
+    "carapace": "#2e1e38",
+    "husk": "#d8cfc0",
+    "silent": "#eaf4ff",
+    "dead": "#191521"
+  },
+  "ramps": { "light": 0.22, "dark": 0.28 },
+  "strokes": { "hair": 1, "thin": 2, "bold": 3, "heavy": 4 },
+  "alpha": { "ghost": 0.15, "soft": 0.35, "heavy": 0.7 },
+  "layers": { "bg": -20, "ground": 0, "pickup": 2, "enemy": 5, "boss": 6, "fx": 8, "player": 10, "overlay": 20, "ui": 40 }
+}
