@@ -7,8 +7,8 @@
   "meta": { "radius": 12 },
   "parts": [
     { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [2.2, -10.2], "rot": -38, "scale": 0.52 },
-    { "id": "shell", "shape": { "kind": "rect", "w": 23, "h": 23, "corner": 5 }, "fill": "$gold.dark", "stroke": { "color": "$ink", "width": "thin" } },
-    { "id": "core", "at": [-0.6, -0.6], "shape": { "kind": "rect", "w": 18, "h": 18, "corner": 4 }, "fill": "$gold" },
+    { "id": "shell", "shape": { "kind": "rect", "w": 23, "h": 23, "corner": 5 }, "fill": "$gold", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "core", "at": [-0.6, -0.6], "shape": { "kind": "rect", "w": 18, "h": 18, "corner": 4 }, "fill": "$gold.light2" },
     { "id": "gloss", "at": [-4.4, -5.4], "shape": { "kind": "rect", "w": 6.4, "h": 2, "corner": 1 }, "fill": "$silent@soft" },
     { "id": "seam", "at": [0, 4.6], "shape": { "kind": "rect", "w": 22, "h": 1.1 }, "fill": "$gold.dark2" },
     { "id": "rivet_a", "at": [-7.4, 4.6], "shape": { "kind": "circle", "r": 1.1 }, "fill": "$gold.dark2" },

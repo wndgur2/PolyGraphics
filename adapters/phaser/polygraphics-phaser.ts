@@ -514,3 +514,62 @@ export function bakeSheet(scene: SheetSceneLike, ir: IRAsset, opts: SheetOptions
 
   return { key, frames, cell: [cellW, cellH], texture: [cols * cellW, rows * cellH] };
 }
+
+// ---------------------------------------------------------------- octants
+
+export interface OctantOptions {
+  key?: string;
+  variant?: string;
+  /** how many evenly spaced headings to author; 8 is the classic choice */
+  directions?: number;
+  resolution?: number;
+  maxWidth?: number;
+}
+
+export interface OctantResult { key: string; directions: number; cell: [number, number] }
+
+/**
+ * Bakes the asset once per heading into a spritesheet, so a projectile can face
+ * where it is going by picking a frame instead of by `setRotation`. Rotating a
+ * finished sprite turns its highlights and its baked contour with it, which
+ * reads wrong the moment the art implies a fixed light; a pre-authored heading
+ * keeps the shading upright.
+ *
+ * Frame n is the heading n × 360/directions, measured clockwise from +x — the
+ * same convention as `Math.atan2(vy, vx)`. Use `octantFrame` to pick one.
+ */
+export function bakeOctants(scene: SheetSceneLike, ir: IRAsset, opts: OctantOptions = {}): OctantResult {
+  const { nodes, vScale } = nodesOf(ir, opts.variant);
+  const directions = opts.directions ?? 8;
+  const res = (opts.resolution ?? 1) * vScale;
+  // a heading of 45° puts the diagonal of the artwork across the cell
+  const diag = Math.ceil(Math.hypot(ir.size[0], ir.size[1]) * res);
+  const cols = Math.max(1, Math.min(directions, Math.floor((opts.maxWidth ?? 2048) / diag)));
+  const rows = Math.ceil(directions / cols);
+  const key = opts.key ?? `pg:${ir.id}:oct`;
+
+  const g = scene.add.graphics();
+  for (let d = 0; d < directions; d++) {
+    const col = d % cols;
+    const row = Math.floor(d / cols);
+    const a = ((d * 360) / directions) * (Math.PI / 180);
+    const cos = Math.cos(a), sin = Math.sin(a);
+    // rotate about the cell centre, which is where the asset's anchor lands
+    const root: Mat = [cos * res, sin * res, -sin * res, cos * res, col * diag + diag / 2, row * diag + diag / 2];
+    for (const n of nodes) drawNode(g, n, root, 1);
+  }
+  g.generateTexture(key, cols * diag, rows * diag);
+  g.destroy();
+
+  const tex = scene.textures.get(key);
+  for (let d = 0; d < directions; d++) {
+    tex.add(d, 0, (d % cols) * diag, Math.floor(d / cols) * diag, diag, diag);
+  }
+  return { key, directions, cell: [diag, diag] };
+}
+
+/** Frame index for a heading in radians (as returned by Math.atan2(vy, vx)). */
+export function octantFrame(angleRad: number, directions = 8): number {
+  const step = (Math.PI * 2) / directions;
+  return ((Math.round(angleRad / step) % directions) + directions) % directions;
+}

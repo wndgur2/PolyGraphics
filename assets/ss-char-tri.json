@@ -7,8 +7,8 @@
   "meta": { "radius": 11.5 },
   "parts": [
     { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [2, -6.6], "rot": -38, "scale": 0.52 },
-    { "id": "shell", "at": [0, 1.6], "shape": { "kind": "ngon", "sides": 3, "r": 12.4 }, "fill": "$aqua.dark", "stroke": { "color": "$ink", "width": "thin" } },
-    { "id": "core", "at": [0, 2.6], "shape": { "kind": "ngon", "sides": 3, "r": 9 }, "fill": "$aqua" },
+    { "id": "shell", "at": [0, 1.6], "shape": { "kind": "ngon", "sides": 3, "r": 12.4 }, "fill": "$aqua", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "core", "at": [0, 2.6], "shape": { "kind": "ngon", "sides": 3, "r": 9 }, "fill": "$aqua.light2" },
     { "id": "gloss", "at": [-2.6, 1.6], "rot": 32, "shape": { "kind": "ellipse", "rx": 2.8, "ry": 1.5 }, "fill": "$silent@soft" },
     { "id": "seam", "at": [0, 8.4], "shape": { "kind": "rect", "w": 13.6, "h": 0.8 }, "fill": "$aqua.dark2" },
     { "id": "antenna", "use": "ss.lib.antenna", "variant": "dead", "at": [4.4, -6], "rot": -4, "scale": 0.72 },

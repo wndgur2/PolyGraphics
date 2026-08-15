@@ -7,9 +7,9 @@
   "meta": { "radius": 12 },
   "parts": [
     { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [1.8, -9], "rot": -38, "scale": 0.52 },
-    { "id": "shell", "shape": { "kind": "poly", "points": [[0, -12.4], [12.4, 0], [0, 12.4], [-12.4, 0]] }, "fill": "$pink.dark", "stroke": { "color": "$ink", "width": "thin" } },
-    { "id": "facet_l", "shape": { "kind": "poly", "points": [[0, -9.4], [0, 9.4], [-9.4, 0]] }, "fill": "$pink" },
-    { "id": "facet_r", "shape": { "kind": "poly", "points": [[0, -9.4], [9.4, 0], [0, 9.4]] }, "fill": "$pink.light" },
+    { "id": "shell", "shape": { "kind": "poly", "points": [[0, -12.4], [12.4, 0], [0, 12.4], [-12.4, 0]] }, "fill": "$pink", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "facet_l", "shape": { "kind": "poly", "points": [[0, -9.4], [0, 9.4], [-9.4, 0]] }, "fill": "$pink.light" },
+    { "id": "facet_r", "shape": { "kind": "poly", "points": [[0, -9.4], [9.4, 0], [0, 9.4]] }, "fill": "$pink.light2" },
     { "id": "ridge", "shape": { "kind": "rect", "w": 1, "h": 18.4 }, "fill": "$pink.dark2" },
     { "id": "gloss", "at": [-4.2, -3.4], "rot": 45, "shape": { "kind": "ellipse", "rx": 3, "ry": 1.2 }, "fill": "$silent@soft" },
     { "id": "antenna", "use": "ss.lib.antenna", "variant": "dead", "at": [4.6, -7.6], "rot": -6, "scale": 0.72 },

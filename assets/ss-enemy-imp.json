@@ -1,58 +1,41 @@
 {
   "id": "ss.enemy.imp",
   "name": "Tracker",
-  "description": "The hive's first responder — the one that found you. Three chitin segments low to the ground, six legs, bleached mandibles, two antennae reading the air ahead, and a lit organ on its back calling the others in. Eyeless: nothing here hunts by sight. Gameplay slot unchanged (fast, weak melee chaser); body radius still 8.5, canvas grown to 32 so legs and feelers have room.",
+  "description": "The hive's first responder — the one that found you. One bright chitin body, a dark maw at the front, two thick feelers and a lit organ on its back. Deliberately not an insect: at four hundred on screen you read a shape and a glow, not anatomy, so head and thorax are fused and the legs are three stubs. Gameplay slot unchanged (fast, weak melee chaser); body radius still 8.5.",
   "tags": ["ss-enemy", "tracker"],
   "size": [32, 32],
   "meta": { "radius": 8.5 },
   "parts": [
-    { "id": "leg_far_b", "at": [-6.5, 1.2], "rot": 18, "scale": 0.9, "shape": { "kind": "poly", "points": [[1, 0], [3.6, 4], [3, 9.4], [1.7, 9.4], [2.1, 4.4], [-1.2, 0.9]] }, "fill": "$carapace" },
-    { "id": "leg_far_m", "at": [-1, 1.6], "rot": 4, "scale": 0.9, "shape": { "kind": "poly", "points": [[1, 0], [3.6, 4], [3, 9.4], [1.7, 9.4], [2.1, 4.4], [-1.2, 0.9]] }, "fill": "$carapace" },
-    { "id": "leg_far_f", "at": [3.4, 1.2], "rot": -18, "scale": 0.9, "shape": { "kind": "poly", "points": [[1, 0], [3.6, 4], [3, 9.4], [1.7, 9.4], [2.1, 4.4], [-1.2, 0.9]] }, "fill": "$carapace" },
-    { "id": "leg_b", "at": [-6, 2.4], "rot": 26, "shape": { "kind": "poly", "points": [[1, 0], [3.6, 4], [3, 9.4], [1.7, 9.4], [2.1, 4.4], [-1.2, 0.9]] }, "fill": "$carapace.light" },
-    { "id": "leg_m", "at": [-0.4, 2.8], "rot": 0, "shape": { "kind": "poly", "points": [[1, 0], [3.6, 4], [3, 9.4], [1.7, 9.4], [2.1, 4.4], [-1.2, 0.9]] }, "fill": "$carapace.light" },
-    { "id": "leg_f", "at": [4.2, 2.2], "rot": -24, "shape": { "kind": "poly", "points": [[1, 0], [3.6, 4], [3, 9.4], [1.7, 9.4], [2.1, 4.4], [-1.2, 0.9]] }, "fill": "$carapace.light" },
-    { "id": "antenna_far", "use": "ss.lib.antenna", "at": [6, -1], "rot": 20, "scale": 0.78 },
-    { "id": "abdomen", "at": [-4.4, -0.6], "rot": -8, "shape": { "kind": "ellipse", "rx": 5.8, "ry": 5 }, "fill": "$chitin.dark", "stroke": { "color": "$ink", "width": "thin" } },
-    { "id": "ab_plate", "at": [-4.8, -2.2], "rot": -8, "shape": { "kind": "ellipse", "rx": 4.2, "ry": 2.6 }, "fill": "$chitin" },
-    { "id": "thorax", "at": [2.2, 0.2], "shape": { "kind": "ellipse", "rx": 4.6, "ry": 4.4 }, "fill": "$chitin", "stroke": { "color": "$ink", "width": "thin" } },
-    { "id": "th_plate", "at": [2, -1.4], "shape": { "kind": "ellipse", "rx": 3.2, "ry": 2 }, "fill": "$chitin.light" },
-    { "id": "head", "at": [7.6, 1], "shape": { "kind": "ellipse", "rx": 3.4, "ry": 3 }, "fill": "$chitin.dark", "stroke": { "color": "$ink", "width": "thin" } },
-    { "id": "face", "at": [8.8, 1.1], "shape": { "kind": "ellipse", "rx": 1.8, "ry": 2.2 }, "fill": "$carapace" },
-    { "id": "mandible_up", "at": [10, -0.4], "shape": { "kind": "poly", "points": [[0, -1], [4.2, -3.4], [6.6, -1.4], [4.4, -0.2], [0.4, 1]] }, "fill": "$husk", "stroke": { "color": "$ink", "width": "hair" } },
-    { "id": "mandible_dn", "at": [10, 2.4], "shape": { "kind": "poly", "points": [[0, 1], [4.2, 3.4], [6.6, 1.4], [4.4, 0.2], [0.4, -1]] }, "fill": "$husk.dark", "stroke": { "color": "$ink", "width": "hair" } },
-    { "id": "antenna", "use": "ss.lib.antenna", "at": [8, -1.8], "rot": -4 },
-    { "id": "organ", "use": "ss.lib.organ", "at": [1.4, -3.8], "scale": [0.52, 0.4] }
+    { "id": "leg_b", "at": [-6, 6.4], "rot": 18, "shape": { "kind": "rect", "w": 3.4, "h": 7.6, "corner": 1.6 }, "fill": "$carapace.dark" },
+    { "id": "leg_m", "at": [0.4, 7.4], "shape": { "kind": "rect", "w": 3.4, "h": 7.6, "corner": 1.6 }, "fill": "$carapace.dark" },
+    { "id": "leg_f", "at": [6.4, 6.2], "rot": -16, "shape": { "kind": "rect", "w": 3.4, "h": 7.6, "corner": 1.6 }, "fill": "$carapace.dark" },
+    { "id": "feeler_far", "at": [3.4, -6.6], "rot": -34, "shape": { "kind": "rect", "w": 2.4, "h": 11, "corner": 1.2 }, "fill": "$carapace" },
+    { "id": "feeler", "at": [7, -6.2], "rot": 22, "shape": { "kind": "rect", "w": 2.6, "h": 12, "corner": 1.3 }, "fill": "$carapace.light" },
+    { "id": "body", "at": [-0.4, 0.4], "shape": { "kind": "ellipse", "rx": 10.4, "ry": 8.4 }, "fill": "$chitin", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "back", "at": [-2.4, -2.4], "shape": { "kind": "ellipse", "rx": 6.6, "ry": 4.2 }, "fill": "$chitin.light" },
+    { "id": "maw", "at": [8.2, 2.4], "shape": { "kind": "poly", "points": [[2.4, -3.4], [-2.6, -1.6], [-2.6, 2], [2.6, 3.4], [1.2, 0]] }, "fill": "$ink" },
+    { "id": "fang", "at": [8.6, 2.4], "shape": { "kind": "poly", "points": [[2.8, -2.4], [-1, -0.6], [2.8, 0.4]] }, "fill": "$husk" },
+    { "id": "organ", "use": "ss.lib.organ", "at": [-3.2, -4], "scale": [0.62, 0.5] }
   ],
   "variants": {
     "elite": {
-      "description": "Marked by the hive: bleached warning plates, longer mandibles, a brighter organ and 1.25× mass. Not angrier — louder.",
+      "description": "Marked by the hive: bleached shell, a heavier maw and a brighter organ.",
       "scale": 1.25,
-      "set": {
-        "mandible_up.scale": [1.35, 1.2],
-        "mandible_dn.scale": [1.35, 1.2],
-        "organ.scale": [0.68, 0.52]
-      },
-      "add": [
-        { "id": "band_a", "at": [-3.4, -1.2], "rot": 78, "shape": { "kind": "rect", "w": 7.6, "h": 1.1 }, "fill": "$husk.dark" },
-        { "id": "band_b", "at": [-6.4, -0.4], "rot": 78, "shape": { "kind": "rect", "w": 6, "h": 1.1 }, "fill": "$husk.dark" }
-      ]
+      "set": { "body.fill": "$husk.dark", "back.fill": "$husk", "organ.scale": [0.78, 0.62], "fang.scale": [1.3, 1.3] }
     }
   },
   "animations": {
     "scuttle": {
-      "description": "legs cycle out of phase, abdomen lags the thorax, feelers sweep",
+      "description": "legs cycle out of phase, body bobs, feelers sweep",
       "duration": 0.5,
       "tracks": [
         { "part": "leg_b", "prop": "rot", "keys": [[0, 18], [0.5, 34], [1, 18]] },
         { "part": "leg_m", "prop": "rot", "keys": [[0, 8], [0.5, -8], [1, 8]] },
-        { "part": "leg_f", "prop": "rot", "keys": [[0, -32], [0.5, -16], [1, -32]] },
-        { "part": "leg_far_b", "prop": "rot", "keys": [[0, 26], [0.5, 10], [1, 26]] },
-        { "part": "leg_far_f", "prop": "rot", "keys": [[0, -12], [0.5, -26], [1, -12]] },
-        { "part": "abdomen", "prop": "rot", "keys": [[0, -11], [0.5, -5], [1, -11]] },
-        { "part": "thorax", "prop": "y", "keys": [[0, 0.4], [0.5, -0.4], [1, 0.4]] },
-        { "part": "antenna", "prop": "rot", "keys": [[0, -12], [0.5, 4], [1, -12]] },
-        { "part": "antenna_far", "prop": "rot", "keys": [[0, 26], [0.5, 12], [1, 26]] }
+        { "part": "leg_f", "prop": "rot", "keys": [[0, -30], [0.5, -12], [1, -30]] },
+        { "part": "body", "prop": "y", "keys": [[0, 0.8], [0.5, -0.4], [1, 0.8]] },
+        { "part": "back", "prop": "y", "keys": [[0, -2], [0.5, -3.2], [1, -2]] },
+        { "part": "feeler", "prop": "rot", "keys": [[0, 16], [0.5, 30], [1, 16]] },
+        { "part": "feeler_far", "prop": "rot", "keys": [[0, -30], [0.5, -40], [1, -30]] }
       ]
     }
   }

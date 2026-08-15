@@ -7,8 +7,8 @@
   "meta": { "radius": 11.5 },
   "parts": [
     { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [2, -9], "rot": -38, "scale": 0.52 },
-    { "id": "shell", "shape": { "kind": "ngon", "sides": 6, "r": 11.5, "rot": 30 }, "fill": "$orchid.dark", "stroke": { "color": "$ink", "width": "thin" } },
-    { "id": "core", "at": [-0.6, -0.6], "shape": { "kind": "ngon", "sides": 6, "r": 8.8, "rot": 30 }, "fill": "$orchid" },
+    { "id": "shell", "shape": { "kind": "ngon", "sides": 6, "r": 11.5, "rot": 30 }, "fill": "$orchid", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "core", "at": [-0.6, -0.6], "shape": { "kind": "ngon", "sides": 6, "r": 8.8, "rot": 30 }, "fill": "$orchid.light2" },
     { "id": "cell", "at": [-0.6, -0.6], "shape": { "kind": "ngon", "sides": 6, "r": 4.6, "rot": 30 }, "fill": "$orchid.light" },
     { "id": "gloss", "at": [-4.6, -5.2], "shape": { "kind": "rect", "w": 5, "h": 1.6, "corner": 0.8 }, "fill": "$silent@soft" },
     { "id": "antenna", "use": "ss.lib.antenna", "variant": "dead", "at": [5.2, -8.6], "rot": -6, "scale": 0.72 },

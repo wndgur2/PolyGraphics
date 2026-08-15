@@ -24,9 +24,9 @@
 
     "pheromone": "#e87ad0",
     "spore": "#58e8d8",
-    "chitin": "#b07a2e",
-    "carapace": "#2e1e38",
-    "husk": "#d8cfc0",
+    "chitin": "#d8973c",
+    "carapace": "#6a5170",
+    "husk": "#ded5c6",
     "silent": "#eaf4ff",
     "dead": "#191521"
   },
