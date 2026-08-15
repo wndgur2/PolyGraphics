@@ -81,6 +81,17 @@ export interface ImageLike {
 
 export interface ContainerLike { add(child: unknown): unknown }
 
+/** A generated texture, so frames can be carved out of a sheet after baking. */
+export interface TextureLike {
+  add(name: string | number, sourceIndex: number, x: number, y: number, width: number, height: number): unknown;
+}
+
+/** Extra surface `bakeSheet` needs beyond plain drawing. */
+export interface SheetSceneLike extends SceneLike {
+  textures: { get(key: string): TextureLike };
+  anims: { create(config: unknown): unknown; exists(key: string): boolean };
+}
+
 export interface SceneLike {
   add: {
     graphics(): GraphicsLike;
@@ -283,7 +294,17 @@ export interface Rig {
   tick(dtSec: number): void;
 }
 
-export interface RigOptions { variant?: string; resolution?: number; keyPrefix?: string }
+export interface RigOptions {
+  variant?: string;
+  resolution?: number;
+  keyPrefix?: string;
+  /**
+   * Optional probe so a rig rebuilt on a re-entered scene reuses the part
+   * textures it baked last time instead of regenerating them under the same
+   * keys. Pass `(k) => scene.textures.exists(k)`.
+   */
+  hasTexture?: (key: string) => boolean;
+}
 
 /**
  * Build a Container with one Image per top-level IR node (per-part textures baked
@@ -307,10 +328,12 @@ export function buildRig(scene: SceneLike, ir: IRAsset, opts: RigOptions = {}): 
     const w = Math.max(1, Math.ceil((box.maxX - box.minX) * res));
     const h = Math.max(1, Math.ceil((box.maxY - box.minY) * res));
     const key = `${prefix}/${node.id}#${i}`;
-    const g = scene.add.graphics();
-    drawNode(g, local, [res, 0, 0, res, -box.minX * res, -box.minY * res], 1);
-    g.generateTexture(key, w, h);
-    g.destroy();
+    if (!opts.hasTexture?.(key)) {
+      const g = scene.add.graphics();
+      drawNode(g, local, [res, 0, 0, res, -box.minX * res, -box.minY * res], 1);
+      g.generateTexture(key, w, h);
+      g.destroy();
+    }
 
     const sign = node.scale[0] < 0 ? -1 : 1;
     const img = scene.add.image(node.at[0] * vScale, node.at[1] * vScale, key);
@@ -390,4 +413,104 @@ export function buildRig(scene: SceneLike, ir: IRAsset, opts: RigOptions = {}): 
       applyProgress(t / current.duration);
     },
   };
+}
+
+// ---------------------------------------------------------------- spritesheet
+
+/**
+ * Applies an animation's tracks to a copy of the node list at `progress` (0..1).
+ * Offsets are additive over each node's authored transform, matching buildRig,
+ * and mirrored copies (which share their id) get x and rot negated so a pair
+ * stays symmetric.
+ */
+function poseNodes(nodes: IRNode[], anim: IRAnim, progress: number): IRNode[] {
+  const out = nodes.map((n) => structuredClone(n));
+  for (const track of anim.tracks) {
+    const v = evalTrack(track, progress);
+    for (const n of out) {
+      if (n.id !== track.part) continue;
+      const sign = n.scale[0] < 0 ? -1 : 1;
+      switch (track.prop) {
+        case "x": n.at = [n.at[0] + v * sign, n.at[1]]; break;
+        case "y": n.at = [n.at[0], n.at[1] + v]; break;
+        case "rot": n.rot += v * sign; break;
+        case "scale": n.scale = [n.scale[0] * v, n.scale[1] * v]; break;
+        case "opacity": n.opacity *= v; break;
+      }
+    }
+  }
+  return out;
+}
+
+export interface SheetOptions {
+  /** animation name on the asset */
+  animation: string;
+  key?: string;
+  variant?: string;
+  /** sample rate and playback rate; frames = duration × fps */
+  fps?: number;
+  maxFrames?: number;
+  /** frames wrap into a grid rather than one long row, so old GPUs cope */
+  maxWidth?: number;
+  resolution?: number;
+  /** Phaser repeat: -1 loops forever (default), 0 plays once */
+  repeat?: number;
+}
+
+export interface SheetResult {
+  key: string;
+  frames: number;
+  cell: [number, number];
+  texture: [number, number];
+}
+
+/**
+ * Renders an animation to a spritesheet texture and registers a matching Phaser
+ * animation under the same key. The sprite stays ONE quad, so pooled actors keep
+ * batching — this is the path for anything there are many of, or anything whose
+ * system already assumes a plain Sprite. Use buildRig instead when instances are
+ * few and continuous motion matters more than draw calls.
+ */
+export function bakeSheet(scene: SheetSceneLike, ir: IRAsset, opts: SheetOptions): SheetResult {
+  const anim = ir.animations[opts.animation];
+  if (!anim) throw new Error(`polygraphics: asset "${ir.id}" has no animation "${opts.animation}"`);
+  const { nodes, vScale } = nodesOf(ir, opts.variant);
+
+  const fps = opts.fps ?? 15;
+  const res = (opts.resolution ?? 1) * vScale;
+  const frames = Math.max(2, Math.min(opts.maxFrames ?? 48, Math.round(anim.duration * fps)));
+  const cellW = Math.ceil(ir.size[0] * res);
+  const cellH = Math.ceil(ir.size[1] * res);
+  // Wrap into a grid only when a single row would exceed the width floor, and
+  // never allocate more columns than there are frames to put in them.
+  const cols = Math.max(1, Math.min(frames, Math.floor((opts.maxWidth ?? 2048) / cellW)));
+  const rows = Math.ceil(frames / cols);
+  const key = opts.key ?? `pg:${ir.id}:${opts.animation}`;
+
+  const g = scene.add.graphics();
+  for (let f = 0; f < frames; f++) {
+    const col = f % cols;
+    const row = Math.floor(f / cols);
+    const root: Mat = [res, 0, 0, res, col * cellW + cellW * ir.anchor[0], row * cellH + cellH * ir.anchor[1]];
+    // progress stops short of 1 so the last frame flows back into the first
+    for (const n of poseNodes(nodes, anim, f / frames)) drawNode(g, n, root, 1);
+  }
+  g.generateTexture(key, cols * cellW, rows * cellH);
+  g.destroy();
+
+  const tex = scene.textures.get(key);
+  for (let f = 0; f < frames; f++) {
+    tex.add(f, 0, (f % cols) * cellW, Math.floor(f / cols) * cellH, cellW, cellH);
+  }
+
+  if (!scene.anims.exists(key)) {
+    scene.anims.create({
+      key,
+      frames: Array.from({ length: frames }, (_, f) => ({ key, frame: f })),
+      frameRate: fps,
+      repeat: opts.repeat ?? -1,
+    });
+  }
+
+  return { key, frames, cell: [cellW, cellH], texture: [cols * cellW, rows * cellH] };
 }

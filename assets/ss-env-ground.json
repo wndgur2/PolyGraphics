@@ -1,7 +1,7 @@
 {
   "id": "ss.env.ground",
   "name": "Hive ground (SS)",
-  "description": "Shape Survivors 128px ground tile: dark violet-brown soil, 32px checker (as a whisper of white), burrow pits, scent-trail flecks. Port of makeGround (BootScene.ts:56-102) — the original's hand-listed pebble coords kept verbatim, so the tile is pixel-stable.",
+  "description": "Feelers' 128px ground tile: near-neutral dark soil with only a hint of violet, a 32px checker as a whisper of white, burrow pits and old scent-trail flecks. The heavy purple is deliberately withheld here so event pulses have somewhere to go — matching the game's own `Calm the ambient palette` tuning. Hand-listed pit and fleck coordinates are kept verbatim from the original makeGround, so the tile stays pixel-stable.",
   "tags": ["ss-env", "tile"],
   "size": [128, 128],
   "parts": [
