@@ -1,0 +1,10 @@
+{
+  "id": "ss.lib.eye",
+  "name": "SS shared eye",
+  "description": "Shape Survivors' single direction-reading eye dot, shared by all 8 characters (BootScene.ts:112). Compose with `use` at [5, eyeY-14].",
+  "tags": ["ss-lib"],
+  "size": [8, 8],
+  "parts": [
+    { "id": "dot", "shape": { "kind": "circle", "r": 2.5 }, "fill": "$slate.dark2" }
+  ]
+}

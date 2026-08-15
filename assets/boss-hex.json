@@ -1,0 +1,46 @@
+{
+  "id": "boss.hex",
+  "name": "Hex Warden",
+  "description": "Arcane hexagonal boss: spiked crystal shell around a slowly rotating facet plate, a radial-gradient soul core, and angry ember eyes inside an orbit ring. Enraged variant goes blood-red, gold-cored, and grows horns.",
+  "tags": ["boss", "enemy"],
+  "size": [80, 80],
+  "meta": { "radius": 37 },
+  "parts": [
+    { "id": "aura", "shape": { "kind": "ring", "r": 36.5, "width": 2.5 }, "fill": "$arcane@soft" },
+    { "id": "spikes", "shape": { "kind": "star", "points": 6, "r": 37, "r2": 27 }, "fill": "$arcane.dark" },
+    { "id": "body", "shape": { "kind": "ngon", "sides": 6, "r": 30 }, "fill": "$arcane", "stroke": { "color": "$ink", "width": "heavy" } },
+    { "id": "plate", "shape": { "kind": "ngon", "sides": 6, "r": 21, "rot": 30 }, "fill": "$arcane.dark" },
+    { "id": "core_glow", "shape": { "kind": "circle", "r": 11 }, "fill": "$soul@soft" },
+    { "id": "core", "shape": { "kind": "circle", "r": 7 }, "fill": { "gradient": "radial", "from": [0.4, 0.35], "stops": [[0, "$soul.light"], [1, "$soul.dark"]] }, "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "eye", "mirrorX": true, "at": [-12, -9], "shape": { "kind": "circle", "r": 4 }, "fill": "$ember", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "pupil", "mirrorX": true, "at": [-12, -9], "shape": { "kind": "circle", "r": 1.6 }, "fill": "$ink" }
+  ],
+  "variants": {
+    "enraged": {
+      "description": "Blood shell, gold core, bone horns — phase-two look built from the same parts.",
+      "set": {
+        "body.fill": "$blood",
+        "plate.fill": "$blood.dark",
+        "spikes.fill": "$blood.dark2",
+        "aura.fill": "$blood@soft",
+        "core_glow.fill": "$gold@soft",
+        "core.fill": { "gradient": "radial", "from": [0.4, 0.35], "stops": [[0, "$gold.light"], [1, "$ember"]] },
+        "eye.fill": "$gold"
+      },
+      "add": [
+        { "id": "horn", "mirrorX": true, "shape": { "kind": "poly", "points": [[-13, -25], [-22, -38], [-25, -25]] }, "fill": "$bone", "stroke": { "color": "$ink", "width": "thin" } }
+      ]
+    }
+  },
+  "animations": {
+    "idle": {
+      "description": "facet plate spins slowly, core pulses, aura breathes",
+      "duration": 6,
+      "tracks": [
+        { "part": "plate", "prop": "rot", "keys": [[0, 0], [1, 360]], "ease": "linear" },
+        { "part": "core_glow", "prop": "scale", "keys": [[0, 1], [0.5, 1.3], [1, 1]] },
+        { "part": "aura", "prop": "scale", "keys": [[0, 1], [0.5, 1.05], [1, 1]] }
+      ]
+    }
+  }
+}

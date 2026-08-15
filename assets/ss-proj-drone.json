@@ -1,0 +1,25 @@
+{
+  "id": "ss.proj.drone",
+  "name": "Shell orbiter",
+  "description": "A hexagonal plate cut from a Molt and set spinning around you on nothing but momentum. The hive builds in hexagons, so this is quite literally a piece of their architecture turned into a weapon — the same cold grey as the shell it came from.",
+  "tags": ["ss-proj", "orbital"],
+  "size": [18, 18],
+  "parts": [
+    { "id": "fin_a", "at": [-7.4, 0], "shape": { "kind": "poly", "points": [[2.4, -2.2], [-2.6, -0.8], [-2.6, 0.8], [2.4, 2.2]] }, "fill": "$slate.light" },
+    { "id": "fin_b", "at": [7.4, 0], "shape": { "kind": "poly", "points": [[-2.4, -2.2], [2.6, -0.8], [2.6, 0.8], [-2.4, 2.2]] }, "fill": "$slate.light" },
+    { "id": "plate", "shape": { "kind": "ngon", "sides": 6, "r": 8.2, "rot": 30 }, "fill": "$steel.dark", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "face", "shape": { "kind": "ngon", "sides": 6, "r": 6.2, "rot": 30 }, "fill": "$steel.light" },
+    { "id": "cell", "shape": { "kind": "ngon", "sides": 6, "r": 3.2, "rot": 30 }, "fill": "$steel.dark" },
+    { "id": "core", "shape": { "kind": "circle", "r": 1.8 }, "fill": "$frost" }
+  ],
+  "animations": {
+    "hum": {
+      "description": "the cut cell turns inside a plate that does not",
+      "duration": 2,
+      "tracks": [
+        { "part": "cell", "prop": "rot", "keys": [[0, 0], [1, 60]], "ease": "linear" },
+        { "part": "core", "prop": "opacity", "keys": [[0, 0.7], [0.5, 1], [1, 0.7]] }
+      ]
+    }
+  }
+}

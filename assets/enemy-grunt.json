@@ -1,0 +1,39 @@
+{
+  "id": "enemy.grunt",
+  "name": "Grunt",
+  "description": "Armored walker: dark-plum torso, steel pauldrons, ember scarf, gold visor eye, swinging fists. The Cellspire grunt rebuilt with an actual silhouette.",
+  "tags": ["enemy", "walker"],
+  "size": [24, 32],
+  "meta": { "radius": 11 },
+  "parts": [
+    { "id": "fist", "mirrorX": true, "at": [-9, 7], "shape": { "kind": "circle", "r": 2.7 }, "fill": "$blood.dark2", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "foot", "mirrorX": true, "at": [-3.5, 14.4], "shape": { "kind": "rect", "w": 4.6, "h": 3, "corner": 1 }, "fill": "$slate.dark" },
+    { "id": "body", "at": [0, 3], "shape": { "kind": "rect", "w": 15, "h": 20, "corner": 4 }, "fill": "$blood.dark2", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "pauldron", "mirrorX": true, "at": [-7.8, -3.6], "shape": { "kind": "rect", "w": 6, "h": 5, "corner": 2 }, "fill": "$steel", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "scarf", "at": [0, -4.4], "shape": { "kind": "rect", "w": 12.6, "h": 4, "corner": 2 }, "fill": "$ember" },
+    { "id": "head", "at": [0, -9.6], "shape": { "kind": "rect", "w": 10, "h": 8, "corner": 3 }, "fill": "$blood.dark", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "visor", "at": [1, -9.6], "shape": { "kind": "rect", "w": 6, "h": 2.3, "corner": 1 }, "fill": "$gold" }
+  ],
+  "variants": {
+    "elite": {
+      "description": "Gold crown, soul-lit visor, 1.3× scale.",
+      "scale": 1.3,
+      "set": { "visor.fill": "$soul" },
+      "add": [
+        { "id": "crown", "at": [0, -15.6], "shape": { "kind": "poly", "points": [[-4, 2], [-4, -2.6], [-1.6, -0.4], [0, -3.2], [1.6, -0.4], [4, -2.6], [4, 2]] }, "fill": "$gold", "stroke": { "color": "$ink", "width": "hair" } }
+      ]
+    }
+  },
+  "animations": {
+    "walk": {
+      "description": "fist pump + head sway + body bob",
+      "duration": 0.7,
+      "tracks": [
+        { "part": "fist", "prop": "y", "keys": [[0, 0], [0.5, -2.2], [1, 0]] },
+        { "part": "body", "prop": "y", "keys": [[0, 0], [0.5, -0.8], [1, 0]] },
+        { "part": "head", "prop": "rot", "keys": [[0, -2.5], [0.5, 2.5], [1, -2.5]] },
+        { "part": "scarf", "prop": "y", "keys": [[0, 0], [0.5, -0.8], [1, 0]] }
+      ]
+    }
+  }
+}

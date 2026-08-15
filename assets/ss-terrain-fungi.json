@@ -1,0 +1,21 @@
+{
+  "id": "ss.terrain.fungi",
+  "name": "Glow fungi (SS)",
+  "description": "Shape Survivors set dressing: three glowing mushroom caps on pale stems. Port of t_fungi (BootScene.ts:277-290) — the original's shroom() closure becomes three part clusters.",
+  "tags": ["ss-terrain"],
+  "size": [34, 28],
+  "parts": [
+    { "id": "s1_stem", "at": [-8, 4], "shape": { "kind": "rect", "w": 3, "h": 6 }, "fill": "$steel.light" },
+    { "id": "s1_cap_o", "at": [-8, 1], "shape": { "kind": "ellipse", "rx": 8.4, "ry": 5.95 }, "fill": "$ink" },
+    { "id": "s1_cap", "at": [-8, 1], "shape": { "kind": "ellipse", "rx": 7, "ry": 4.55 }, "fill": "$spore.dark" },
+    { "id": "s1_shine", "at": [-10.45, -0.4], "shape": { "kind": "circle", "r": 1.96 }, "fill": "$spore.light2", "opacity": 0.9 },
+    { "id": "s2_stem", "at": [7, 2], "shape": { "kind": "rect", "w": 3, "h": 6 }, "fill": "$steel.light" },
+    { "id": "s2_cap_o", "at": [7, -1], "shape": { "kind": "ellipse", "rx": 6.6, "ry": 4.68 }, "fill": "$ink" },
+    { "id": "s2_cap", "at": [7, -1], "shape": { "kind": "ellipse", "rx": 5.5, "ry": 3.58 }, "fill": "$spore.dark" },
+    { "id": "s2_shine", "at": [5.08, -2.1], "shape": { "kind": "circle", "r": 1.54 }, "fill": "$spore.light2", "opacity": 0.9 },
+    { "id": "s3_stem", "at": [0, 9], "shape": { "kind": "rect", "w": 3, "h": 6 }, "fill": "$steel.light" },
+    { "id": "s3_cap_o", "at": [0, 6], "shape": { "kind": "ellipse", "rx": 5.4, "ry": 3.83 }, "fill": "$ink" },
+    { "id": "s3_cap", "at": [0, 6], "shape": { "kind": "ellipse", "rx": 4.5, "ry": 2.93 }, "fill": "$spore.dark" },
+    { "id": "s3_shine", "at": [-1.58, 5.1], "shape": { "kind": "circle", "r": 1.26 }, "fill": "$spore.light2", "opacity": 0.9 }
+  ]
+}

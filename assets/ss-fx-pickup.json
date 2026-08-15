@@ -1,0 +1,30 @@
+{
+  "id": "ss.fx.pickup",
+  "name": "Borrowed signal",
+  "description": "Absorbing a scent crystal — the only moment in the run when the player has a voice. A magenta bloom rises out of the pickup point, flares, and dies within half a second, and it is the one place the hive's colour is allowed to touch the player. Playing this on every XP pickup is what makes the dead organ on the character mean something.",
+  "tags": ["ss-fx", "pickup"],
+  "size": [32, 40],
+  "anchor": [0.5, 0.62],
+  "parts": [
+    { "id": "bloom", "shape": { "kind": "circle", "r": 9 }, "fill": "$pheromone@soft" },
+    { "id": "ring", "shape": { "kind": "ring", "r": 7, "width": 1.6 }, "fill": "$pheromone.light" },
+    { "id": "core", "shape": { "kind": "circle", "r": 2.6 }, "fill": "$white" },
+    { "id": "rise_a", "at": [-2.4, -6], "shape": { "kind": "ellipse", "rx": 1.7, "ry": 2.4 }, "fill": "$pheromone@soft" },
+    { "id": "rise_b", "at": [2.8, -10], "shape": { "kind": "ellipse", "rx": 1.3, "ry": 1.9 }, "fill": "$pheromone@0.24" },
+    { "id": "rise_c", "at": [-0.8, -14], "shape": { "kind": "ellipse", "rx": 0.9, "ry": 1.3 }, "fill": "$pheromone@ghost" }
+  ],
+  "animations": {
+    "play": {
+      "description": "a voice for half a second, then nothing again",
+      "duration": 0.55,
+      "tracks": [
+        { "part": "ring", "prop": "scale", "keys": [[0, 0.2], [1, 1.5]], "ease": "backOut" },
+        { "part": "bloom", "prop": "opacity", "keys": [[0, 0.2], [0.3, 1], [1, 0]] },
+        { "part": "core", "prop": "scale", "keys": [[0, 1.4], [0.35, 0.6], [1, 0]] },
+        { "part": "rise_a", "prop": "y", "keys": [[0, -2], [1, -9]], "ease": "linear" },
+        { "part": "rise_b", "prop": "y", "keys": [[0, -6], [1, -15]], "ease": "linear" },
+        { "part": "rise_c", "prop": "opacity", "keys": [[0, 0.9], [0.6, 0.5], [1, 0]] }
+      ]
+    }
+  }
+}

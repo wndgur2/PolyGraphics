@@ -1,0 +1,13 @@
+{
+  "id": "ss.icon.might",
+  "name": "Might icon (SS)",
+  "description": "Shape Survivors passive icon: coral up-arrow (triangle + stem). Port of i_might (BootScene.ts:574-576).",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$coral" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "head", "shape": { "kind": "poly", "points": [[0, -9], [9, 4], [-9, 4]] }, "fill": "$coral" },
+    { "id": "stem", "at": [0, 6], "shape": { "kind": "rect", "w": 6, "h": 6 }, "fill": "$coral" }
+  ]
+}

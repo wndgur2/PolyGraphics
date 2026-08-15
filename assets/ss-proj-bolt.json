@@ -1,0 +1,23 @@
+{
+  "id": "ss.proj.bolt",
+  "name": "Shell dart",
+  "description": "A chip of molt shell knapped to a point and thrown. There is no magic in this world, only things the hive left behind and a survivor who got good at throwing them. Points +x, which is the direction the weapon code rotates it to.",
+  "tags": ["ss-proj", "ranged"],
+  "size": [16, 16],
+  "parts": [
+    { "id": "streak", "at": [-5.4, 0], "shape": { "kind": "poly", "points": [[-2.6, -0.5], [3, -1.2], [3, 1.2], [-2.6, 0.5]] }, "fill": "$frost@soft" },
+    { "id": "body", "shape": { "kind": "poly", "points": [[7.2, 0], [1, -3.1], [-5, -1.7], [-5, 1.7], [1, 3.1]] }, "fill": "$steel", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "facet", "shape": { "kind": "poly", "points": [[5.8, -0.2], [1, -1.8], [-3.4, -0.9], [-3.4, 0.3], [1, 1.5]] }, "fill": "$steel.light2" },
+    { "id": "tip", "at": [5.6, 0], "shape": { "kind": "poly", "points": [[1.8, 0], [-1.4, -1.2], [-1.4, 1.2]] }, "fill": "$frost.light" }
+  ],
+  "animations": {
+    "fly": {
+      "description": "the streak stutters as it travels",
+      "duration": 0.22,
+      "tracks": [
+        { "part": "streak", "prop": "scale", "keys": [[0, 0.7], [0.5, 1.25], [1, 0.7]] },
+        { "part": "tip", "prop": "opacity", "keys": [[0, 0.7], [0.5, 1], [1, 0.7]] }
+      ]
+    }
+  }
+}

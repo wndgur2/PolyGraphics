@@ -1,0 +1,44 @@
+{
+  "id": "ss.pickup.chest",
+  "name": "Brood cell",
+  "description": "A sealed hexagonal cell the hive built and forgot. Prying one open is the only time in the run you are the thing doing the opening. Capped with wax, ribbed with chitin, and faintly lit from inside — something in there is still signalling.",
+  "tags": ["ss-pickup"],
+  "size": [28, 24],
+  "parts": [
+    { "id": "glow", "at": [0, -1], "shape": { "kind": "circle", "r": 11 }, "fill": "$gold@ghost" },
+    { "id": "cell", "at": [0, 1], "shape": { "kind": "ngon", "sides": 6, "r": 10.4, "rot": 30 }, "fill": "$chitin.dark", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "wall", "at": [0, 1], "shape": { "kind": "ngon", "sides": 6, "r": 8, "rot": 30 }, "fill": "$chitin" },
+    { "id": "cap", "at": [0, 0.4], "shape": { "kind": "ngon", "sides": 6, "r": 5.6, "rot": 30 }, "fill": "$gold.light" },
+    { "id": "cap_seam", "at": [0, 0.4], "shape": { "kind": "ring", "r": 3.4, "width": 1 }, "fill": "$timber.dark" },
+    { "id": "rib_l", "at": [-6.6, 1], "rot": -60, "shape": { "kind": "rect", "w": 6.4, "h": 1.4 }, "fill": "$chitin.dark2" },
+    { "id": "rib_r", "at": [6.6, 1], "rot": 60, "shape": { "kind": "rect", "w": 6.4, "h": 1.4 }, "fill": "$chitin.dark2" }
+  ],
+  "variants": {
+    "cursed": {
+      "description": "This one was not forgotten. The cap is dark, the seam is split, and whatever is inside answered when the hive called.",
+      "set": {
+        "cell.fill": "$carapace",
+        "wall.fill": "$carapace.light",
+        "cap.fill": "$dead",
+        "cap_seam.fill": "$pheromone",
+        "glow.fill": "$pheromone@ghost",
+        "rib_l.fill": "$carapace.dark",
+        "rib_r.fill": "$carapace.dark"
+      },
+      "add": [
+        { "id": "eye", "mirrorX": true, "at": [-2.4, 0.4], "shape": { "kind": "circle", "r": 1.3 }, "fill": "$pheromone.light" }
+      ]
+    }
+  },
+  "animations": {
+    "tease": {
+      "description": "the cap flexes as something inside pushes at it",
+      "duration": 1.5,
+      "tracks": [
+        { "part": "cap", "prop": "scale", "keys": [[0, 1], [0.42, 1], [0.52, 1.12], [0.62, 0.97], [1, 1]] },
+        { "part": "cap_seam", "prop": "rot", "keys": [[0, 0], [1, 60]], "ease": "linear" },
+        { "part": "glow", "prop": "scale", "keys": [[0, 1], [0.5, 1.16], [1, 1]] }
+      ]
+    }
+  }
+}

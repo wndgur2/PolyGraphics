@@ -1,0 +1,11 @@
+{
+  "id": "lib.face",
+  "name": "Face",
+  "description": "Shared friendly face: two ink eyes and soft blush cheeks. Composed into characters via `use` so every character shares one face definition.",
+  "tags": ["lib"],
+  "size": [16, 16],
+  "parts": [
+    { "id": "eye", "mirrorX": true, "at": [-3.2, -1], "shape": { "kind": "circle", "r": 1.6 }, "fill": "$ink" },
+    { "id": "cheek", "mirrorX": true, "at": [-5.2, 2.6], "shape": { "kind": "circle", "r": 1.5 }, "fill": "$blood@soft" }
+  ]
+}

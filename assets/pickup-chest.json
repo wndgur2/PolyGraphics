@@ -1,0 +1,40 @@
+{
+  "id": "pickup.chest",
+  "name": "Treasure chest",
+  "description": "Timber chest with iron bands, gold latch and a warm glow; the lid rattles. Cursed variant recolors to arcane wood with soul-lit eyes peeking from under the lid.",
+  "tags": ["pickup", "loot"],
+  "size": [28, 24],
+  "meta": { "radius": 11 },
+  "parts": [
+    { "id": "glow", "at": [0, 1], "shape": { "kind": "circle", "r": 11.5 }, "fill": "$gold@ghost" },
+    { "id": "base", "at": [0, 4.5], "shape": { "kind": "rect", "w": 20, "h": 11, "corner": 2.5 }, "fill": "$timber", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "band", "mirrorX": true, "at": [-6, 4.5], "shape": { "kind": "rect", "w": 2.6, "h": 11 }, "fill": "$timber.dark" },
+    { "id": "lid", "at": [0, -3.5], "shape": { "kind": "rect", "w": 22, "h": 8, "corner": 3 }, "fill": "$timber.light", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "latch", "at": [0, 0.6], "shape": { "kind": "rect", "w": 4, "h": 4.6, "corner": 1 }, "fill": "$gold", "stroke": { "color": "$ink", "width": "hair" } }
+  ],
+  "variants": {
+    "cursed": {
+      "description": "Arcane wood, soul latch, glowing eyes in the gap — same parts, darker story.",
+      "set": {
+        "base.fill": "$arcane.dark2",
+        "lid.fill": "$arcane.dark",
+        "band.fill": "$ink",
+        "latch.fill": "$soul",
+        "glow.fill": "$soul@ghost"
+      },
+      "add": [
+        { "id": "eye", "mirrorX": true, "at": [-4, -3.2], "shape": { "kind": "circle", "r": 1.5 }, "fill": "$soul" }
+      ]
+    }
+  },
+  "animations": {
+    "tease": {
+      "description": "lid rattle + glow pulse",
+      "duration": 1.4,
+      "tracks": [
+        { "part": "lid", "prop": "rot", "keys": [[0, 0], [0.42, 0], [0.5, -4], [0.58, 2.5], [0.66, 0], [1, 0]] },
+        { "part": "glow", "prop": "scale", "keys": [[0, 1], [0.5, 1.18], [1, 1]] }
+      ]
+    }
+  }
+}

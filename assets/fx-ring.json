@@ -1,0 +1,23 @@
+{
+  "id": "fx.ring",
+  "name": "AoE ring",
+  "description": "Expanding area-of-effect telegraph ring with a soft inner wash. Port of Cellspire's Glob.ring verb; tintable by swapping the fill token.",
+  "tags": ["fx", "aoe"],
+  "size": [64, 64],
+  "parts": [
+    { "id": "wash", "shape": { "kind": "circle", "r": 26 }, "fill": "$frost@ghost" },
+    { "id": "band", "shape": { "kind": "ring", "r": 26, "width": 3 }, "fill": "$frost" },
+    { "id": "band_in", "shape": { "kind": "ring", "r": 20, "width": 1.5 }, "fill": "$frost@soft" }
+  ],
+  "animations": {
+    "play": {
+      "description": "expand and fade",
+      "duration": 0.6,
+      "tracks": [
+        { "part": "band", "prop": "scale", "keys": [[0, 0.25], [1, 1]], "ease": "backOut" },
+        { "part": "band_in", "prop": "scale", "keys": [[0, 0.15], [1, 0.9]], "ease": "backOut" },
+        { "part": "wash", "prop": "opacity", "keys": [[0, 1], [0.6, 0.6], [1, 0]] }
+      ]
+    }
+  }
+}

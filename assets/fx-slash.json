@@ -1,0 +1,22 @@
+{
+  "id": "fx.slash",
+  "name": "Slash arc",
+  "description": "Melee slash feedback: a bone arc blade with a frost leading edge, fading out. Port of Cellspire's Glob.slash verb as a document.",
+  "tags": ["fx", "melee"],
+  "size": [48, 40],
+  "anchor": [0.3, 0.5],
+  "parts": [
+    { "id": "arc", "at": [-2, 0], "shape": { "kind": "ring", "r": 17, "width": 6, "from": -52, "to": 52 }, "fill": "$bone" },
+    { "id": "edge", "at": [0, 0], "shape": { "kind": "ring", "r": 19.5, "width": 2, "from": -44, "to": 44 }, "fill": "$frost" }
+  ],
+  "animations": {
+    "play": {
+      "description": "sweep and fade",
+      "duration": 0.5,
+      "tracks": [
+        { "part": "arc", "prop": "opacity", "keys": [[0, 1], [0.55, 0.9], [1, 0]] },
+        { "part": "edge", "prop": "opacity", "keys": [[0, 1], [0.4, 0.8], [1, 0]] }
+      ]
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "enemy.imp",
+  "name": "Imp",
+  "description": "Small aggressive melee chaser: round crimson body, bone horns, whipping tail, gold eyes. Elite variant turns arcane, grows a third eye and 25% size.",
+  "tags": ["enemy", "melee", "small"],
+  "size": [32, 32],
+  "meta": { "radius": 9 },
+  "parts": [
+    { "id": "tail", "shape": { "kind": "poly", "points": [[6, 5], [14, 2], [12, 8]] }, "fill": "$blood.dark" },
+    { "id": "horn", "mirrorX": true, "shape": { "kind": "poly", "points": [[-2.4, -7], [-6, -14.5], [-8, -8.5]] }, "fill": "$bone", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "foot", "mirrorX": true, "at": [-4, 10.8], "shape": { "kind": "ellipse", "rx": 2.6, "ry": 1.7 }, "fill": "$blood.dark" },
+    { "id": "body", "at": [0, 1], "shape": { "kind": "circle", "r": 9 }, "fill": "$blood", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "belly", "at": [0, 4], "shape": { "kind": "circle", "r": 5 }, "fill": "$blood.light" },
+    { "id": "eye", "mirrorX": true, "at": [-3.4, -2], "shape": { "kind": "circle", "r": 1.7 }, "fill": "$gold" }
+  ],
+  "variants": {
+    "elite": {
+      "description": "Arcane recolor + third eye + 1.25× scale. A themed variant, not just a tint.",
+      "scale": 1.25,
+      "set": {
+        "body.fill": "$arcane",
+        "belly.fill": "$arcane.light",
+        "tail.fill": "$arcane.dark",
+        "foot.fill": "$arcane.dark"
+      },
+      "add": [
+        { "id": "third_eye", "at": [0, -5], "shape": { "kind": "circle", "r": 1.7 }, "fill": "$gold", "stroke": { "color": "$ink", "width": "hair" } }
+      ]
+    }
+  },
+  "animations": {
+    "idle": {
+      "description": "body bob + tail wag",
+      "duration": 1.1,
+      "tracks": [
+        { "part": "body", "prop": "y", "keys": [[0, 0], [0.5, -1], [1, 0]] },
+        { "part": "belly", "prop": "y", "keys": [[0, 0], [0.5, -1], [1, 0]] },
+        { "part": "eye", "prop": "y", "keys": [[0, 0], [0.5, -1], [1, 0]] },
+        { "part": "horn", "prop": "y", "keys": [[0, 0], [0.5, -1], [1, 0]] },
+        { "part": "tail", "prop": "rot", "keys": [[0, -8], [0.5, 10], [1, -8]] }
+      ]
+    }
+  }
+}

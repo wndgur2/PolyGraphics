@@ -1,0 +1,27 @@
+{
+  "id": "ss.pickup.gem",
+  "name": "Scent crystal",
+  "description": "What a hive creature leaves behind when it dies: its signal, crystallized. You pick them up because each one is a piece of the voice you lost — which is why they count as experience. Deliberately kept near-white and neutral: the game tints this sprite per XP tier at runtime, so any hue baked in here would fight the tint.",
+  "tags": ["ss-pickup"],
+  "size": [16, 20],
+  "parts": [
+    { "id": "halo", "shape": { "kind": "circle", "r": 6.4 }, "fill": "$white@0.12" },
+    { "id": "base", "shape": { "kind": "poly", "points": [[0, -9], [5.4, -2.4], [3.4, 8], [-3.4, 8], [-5.4, -2.4]] }, "fill": "$smoke" },
+    { "id": "facet_l", "shape": { "kind": "poly", "points": [[0, -7], [0, 6.4], [-3.8, -1.8]] }, "fill": "$white" },
+    { "id": "facet_r", "shape": { "kind": "poly", "points": [[0, -7], [3.8, -1.8], [0, 6.4]] }, "fill": "$white@heavy" },
+    { "id": "spark", "at": [-1.2, -3.4], "shape": { "kind": "poly", "points": [[0, -2.4], [0.7, 0], [0, 2.4], [-0.7, 0]] }, "fill": "$white" }
+  ],
+  "animations": {
+    "bob": {
+      "description": "hovers and breathes — it is still, faintly, saying something",
+      "duration": 1.9,
+      "tracks": [
+        { "part": "base", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "facet_l", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "facet_r", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "spark", "prop": "opacity", "keys": [[0, 0.3], [0.5, 1], [1, 0.3]] },
+        { "part": "halo", "prop": "scale", "keys": [[0, 0.9], [0.5, 1.15], [1, 0.9]] }
+      ]
+    }
+  }
+}

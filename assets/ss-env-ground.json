@@ -1,0 +1,31 @@
+{
+  "id": "ss.env.ground",
+  "name": "Hive ground (SS)",
+  "description": "Shape Survivors 128px ground tile: dark violet-brown soil, 32px checker (as a whisper of white), burrow pits, scent-trail flecks. Port of makeGround (BootScene.ts:56-102) — the original's hand-listed pebble coords kept verbatim, so the tile is pixel-stable.",
+  "tags": ["ss-env", "tile"],
+  "size": [128, 128],
+  "parts": [
+    { "id": "base", "shape": { "kind": "rect", "w": 128, "h": 128 }, "fill": "$soil" },
+    { "id": "c1", "at": [-48, -48], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
+    { "id": "c2", "at": [16, -48], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
+    { "id": "c3", "at": [-16, -16], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
+    { "id": "c4", "at": [48, -16], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
+    { "id": "c5", "at": [-48, 16], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
+    { "id": "c6", "at": [16, 16], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
+    { "id": "c7", "at": [-16, 48], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
+    { "id": "c8", "at": [48, 48], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
+    { "id": "pit1", "at": [-52, -24], "shape": { "kind": "circle", "r": 9 }, "fill": "$ink@heavy" },
+    { "id": "pit2", "at": [6, -52], "shape": { "kind": "circle", "r": 7 }, "fill": "$ink@heavy" },
+    { "id": "pit3", "at": [36, 26], "shape": { "kind": "circle", "r": 11 }, "fill": "$ink@heavy" },
+    { "id": "pit4", "at": [-24, 36], "shape": { "kind": "circle", "r": 6 }, "fill": "$ink@heavy" },
+    { "id": "pit5", "at": [26, -14], "shape": { "kind": "circle", "r": 5 }, "fill": "$ink@heavy" },
+    { "id": "fleck1", "at": [-42.5, -42.5], "shape": { "kind": "rect", "w": 3, "h": 3 }, "fill": "$coal" },
+    { "id": "fleck2", "at": [-2.5, 13.5], "shape": { "kind": "rect", "w": 3, "h": 3 }, "fill": "$coal" },
+    { "id": "fleck3", "at": [45.5, -32.5], "shape": { "kind": "rect", "w": 3, "h": 3 }, "fill": "$coal" },
+    { "id": "fleck4", "at": [21.5, 53.5], "shape": { "kind": "rect", "w": 3, "h": 3 }, "fill": "$coal" },
+    { "id": "speck1", "at": [-17, -11], "shape": { "kind": "rect", "w": 2, "h": 2 }, "fill": "$coal@heavy" },
+    { "id": "speck2", "at": [33, 5], "shape": { "kind": "rect", "w": 2, "h": 2 }, "fill": "$coal@heavy" },
+    { "id": "speck3", "at": [-49, 37], "shape": { "kind": "rect", "w": 2, "h": 2 }, "fill": "$coal@heavy" },
+    { "id": "speck4", "at": [53, -51], "shape": { "kind": "rect", "w": 2, "h": 2 }, "fill": "$coal@heavy" }
+  ]
+}

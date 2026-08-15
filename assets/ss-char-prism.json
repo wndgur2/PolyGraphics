@@ -1,0 +1,31 @@
+{
+  "id": "ss.char.prism",
+  "name": "Prism",
+  "description": "Sealed survivor cut to a hard facet — the only one of the eight whose shell catches light on two planes at once. Underneath it is the same dead organ as the rest.",
+  "tags": ["ss-char"],
+  "size": [32, 32],
+  "meta": { "radius": 12 },
+  "parts": [
+    { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [1.8, -9], "rot": -38, "scale": 0.52 },
+    { "id": "shell", "shape": { "kind": "poly", "points": [[0, -12.4], [12.4, 0], [0, 12.4], [-12.4, 0]] }, "fill": "$pink.dark", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "facet_l", "shape": { "kind": "poly", "points": [[0, -9.4], [0, 9.4], [-9.4, 0]] }, "fill": "$pink" },
+    { "id": "facet_r", "shape": { "kind": "poly", "points": [[0, -9.4], [9.4, 0], [0, 9.4]] }, "fill": "$pink.light" },
+    { "id": "ridge", "shape": { "kind": "rect", "w": 1, "h": 18.4 }, "fill": "$pink.dark2" },
+    { "id": "gloss", "at": [-4.2, -3.4], "rot": 45, "shape": { "kind": "ellipse", "rx": 3, "ry": 1.2 }, "fill": "$silent@soft" },
+    { "id": "antenna", "use": "ss.lib.antenna", "variant": "dead", "at": [4.6, -7.6], "rot": -6, "scale": 0.72 },
+    { "id": "organ", "use": "ss.lib.organ", "variant": "dead", "at": [4.4, 1.4], "scale": 0.58 }
+  ],
+  "animations": {
+    "idle": {
+      "description": "a held breath",
+      "duration": 1.8,
+      "tracks": [
+        { "part": "shell", "prop": "y", "keys": [[0, 0], [0.5, -1.1], [1, 0]] },
+        { "part": "facet_l", "prop": "y", "keys": [[0, 0], [0.5, -1.1], [1, 0]] },
+        { "part": "facet_r", "prop": "y", "keys": [[0, 0], [0.5, -1.1], [1, 0]] },
+        { "part": "organ", "prop": "y", "keys": [[0, 1.4], [0.5, 0.3], [1, 1.4]] },
+        { "part": "antenna", "prop": "rot", "keys": [[0, -6], [0.5, 2], [1, -6]] }
+      ]
+    }
+  }
+}

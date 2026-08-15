@@ -1,0 +1,29 @@
+{
+  "id": "ss.fx.impact",
+  "name": "Shell break",
+  "description": "What it looks like when your weapon lands: chitin splitting, not blood. A hard cold flash and four shell chips thrown outward — deliberately frost-white so player damage never gets confused with the hive's magenta broadcast. Spawn it at the contact point.",
+  "tags": ["ss-fx", "hit"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "flash", "shape": { "kind": "circle", "r": 6.4 }, "fill": "$frost@heavy" },
+    { "id": "star", "shape": { "kind": "star", "points": 4, "r": 13.5, "r2": 2.6 }, "fill": "$silent" },
+    { "id": "cross", "rot": 45, "scale": 0.55, "shape": { "kind": "star", "points": 4, "r": 13.5, "r2": 2.6 }, "fill": "$frost.light" },
+    { "id": "chip_a", "at": [8.4, -6.4], "rot": 24, "shape": { "kind": "poly", "points": [[0, -2.4], [3.4, 0.4], [-1.2, 2.2]] }, "fill": "$husk" },
+    { "id": "chip_b", "at": [-8.8, -4.4], "rot": -38, "shape": { "kind": "poly", "points": [[0, -2], [2.8, 0.6], [-1.4, 1.8]] }, "fill": "$husk.dark" },
+    { "id": "chip_c", "at": [6.4, 8.4], "rot": 68, "shape": { "kind": "poly", "points": [[0, -1.8], [2.6, 0.4], [-1.2, 1.8]] }, "fill": "$chitin" }
+  ],
+  "animations": {
+    "play": {
+      "description": "snap out, chips fly, gone in a fifth of a second",
+      "duration": 0.22,
+      "tracks": [
+        { "part": "star", "prop": "scale", "keys": [[0, 0.35], [0.4, 1.1], [1, 1]], "ease": "backOut" },
+        { "part": "cross", "prop": "opacity", "keys": [[0, 1], [1, 0]] },
+        { "part": "flash", "prop": "opacity", "keys": [[0, 1], [0.4, 0.5], [1, 0]] },
+        { "part": "chip_a", "prop": "x", "keys": [[0, 4], [1, 12]], "ease": "backOut" },
+        { "part": "chip_b", "prop": "x", "keys": [[0, -4.5], [1, -12]], "ease": "backOut" },
+        { "part": "chip_c", "prop": "y", "keys": [[0, 4], [1, 12]], "ease": "backOut" }
+      ]
+    }
+  }
+}

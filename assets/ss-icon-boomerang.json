@@ -1,0 +1,18 @@
+{
+  "id": "ss.icon.boomerang",
+  "name": "Mandible icon",
+  "description": "UI slot icon for the paired mandibles, composing `ss.proj.boom` via `use`. Third of the weapon icons to be derived from its projectile instead of hand-drawn a second time — the original BootScene authored five weapon shapes twice, with independently tuned coordinates.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$husk.dark" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "glyph", "use": "ss.proj.boom", "at": [-1.5, 1.5], "scale": 1.05 }
+  ],
+  "variants": {
+    "evolved": {
+      "description": "Gold-rimmed evolved twin.",
+      "set": { "tile.fill": "$gold" }
+    }
+  }
+}

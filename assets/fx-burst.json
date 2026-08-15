@@ -1,0 +1,23 @@
+{
+  "id": "fx.burst",
+  "name": "Death burst",
+  "description": "Radial debris burst for kills and pickups: seeded gold shard scatter over an ember core. Port of Cellspire's Glob.burst verb.",
+  "tags": ["fx", "death"],
+  "size": [48, 48],
+  "parts": [
+    { "id": "core", "shape": { "kind": "circle", "r": 6 }, "fill": "$ember@heavy" },
+    { "id": "shards", "repeat": { "of": { "kind": "ngon", "sides": 3, "r": 2.6 }, "count": 9, "area": [30, 30], "seed": 21, "jitterRot": true, "scaleRange": [0.6, 1.3] }, "fill": "$gold" },
+    { "id": "sparks", "repeat": { "of": { "kind": "circle", "r": 1.1 }, "count": 7, "area": [38, 38], "seed": 22, "scaleRange": [0.6, 1.2] }, "fill": "$bone" }
+  ],
+  "animations": {
+    "play": {
+      "description": "shards fly out (uniform expand) and fade",
+      "duration": 0.45,
+      "tracks": [
+        { "part": "shards", "prop": "scale", "keys": [[0, 0.3], [0.6, 1.1], [1, 1.25]], "ease": "backOut" },
+        { "part": "sparks", "prop": "scale", "keys": [[0, 0.2], [1, 1.35]], "ease": "backOut" },
+        { "part": "core", "prop": "opacity", "keys": [[0, 1], [0.4, 0.7], [1, 0]] }
+      ]
+    }
+  }
+}

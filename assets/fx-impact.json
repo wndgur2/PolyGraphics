@@ -1,0 +1,23 @@
+{
+  "id": "fx.impact",
+  "name": "Impact flash",
+  "description": "Hit feedback: a four-point bone sliver star popping over a frost flash. Port of Cellspire's Glob.impact verb.",
+  "tags": ["fx", "hit"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "flash", "shape": { "kind": "circle", "r": 7 }, "fill": "$frost@heavy" },
+    { "id": "sliver", "shape": { "kind": "star", "points": 4, "r": 14, "r2": 3 }, "fill": "$bone" },
+    { "id": "sliver_x", "rot": 45, "scale": 0.6, "shape": { "kind": "star", "points": 4, "r": 14, "r2": 3 }, "fill": "$frost" }
+  ],
+  "animations": {
+    "play": {
+      "description": "pop out and vanish",
+      "duration": 0.3,
+      "tracks": [
+        { "part": "sliver", "prop": "scale", "keys": [[0, 0.4], [0.4, 1.15], [1, 1]], "ease": "backOut" },
+        { "part": "sliver_x", "prop": "opacity", "keys": [[0, 1], [1, 0]] },
+        { "part": "flash", "prop": "opacity", "keys": [[0, 0.9], [0.5, 0.4], [1, 0]] }
+      ]
+    }
+  }
+}

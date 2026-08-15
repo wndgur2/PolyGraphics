@@ -1,0 +1,26 @@
+{
+  "id": "ss.proj.aura",
+  "name": "Blast disc",
+  "description": "The shared area-of-effect wash every explosive weapon spawns. Two hard constraints keep this one plain: the weapon code scales it by `r / 64`, and it is tinted per weapon at runtime — so every fill here is neutral white, exactly as in the original. Any hue baked in would fight the tint, the same reason the scent crystal stays colourless.",
+  "tags": ["ss-proj", "aoe"],
+  "size": [128, 128],
+  "meta": { "radius": 64 },
+  "parts": [
+    { "id": "disc", "shape": { "kind": "circle", "r": 63 }, "fill": { "gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$white@0.55"], [1, "$white@0.16"]] } },
+    { "id": "core", "shape": { "kind": "circle", "r": 38 }, "fill": "$white@0.45" },
+    { "id": "shock", "shape": { "kind": "ring", "r": 50, "width": 2.5 }, "fill": "$white@soft" },
+    { "id": "rim", "shape": { "kind": "ring", "r": 61, "width": 3 }, "fill": "$white@0.7" }
+  ],
+  "animations": {
+    "play": {
+      "description": "core collapses as the rim runs out",
+      "duration": 0.34,
+      "tracks": [
+        { "part": "rim", "prop": "scale", "keys": [[0, 0.7], [1, 1.02]], "ease": "backOut" },
+        { "part": "shock", "prop": "scale", "keys": [[0, 0.45], [1, 1.15]], "ease": "backOut" },
+        { "part": "core", "prop": "opacity", "keys": [[0, 1], [1, 0]] },
+        { "part": "disc", "prop": "opacity", "keys": [[0, 1], [0.6, 0.8], [1, 0]] }
+      ]
+    }
+  }
+}

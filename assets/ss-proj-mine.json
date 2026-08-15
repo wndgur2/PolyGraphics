@@ -1,0 +1,26 @@
+{
+  "id": "ss.proj.mine",
+  "name": "Spore pod",
+  "description": "A hollowed spore case packed with whatever was left and set down to wait. Its fuse light is deliberately cold: in this world a magenta glow means something is calling to the hive, and the last thing you want from your own trap is for it to advertise you.",
+  "tags": ["ss-proj", "trap"],
+  "size": [20, 20],
+  "parts": [
+    { "id": "case", "shape": { "kind": "ngon", "sides": 8, "r": 9.4, "rot": 22.5 }, "fill": "$chitin.dark2", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "plate", "shape": { "kind": "ngon", "sides": 8, "r": 7.2, "rot": 22.5 }, "fill": "$chitin.dark" },
+    { "id": "seam_a", "shape": { "kind": "rect", "w": 15, "h": 0.9 }, "fill": "$chitin.dark2" },
+    { "id": "seam_b", "rot": 90, "shape": { "kind": "rect", "w": 15, "h": 0.9 }, "fill": "$chitin.dark2" },
+    { "id": "collar", "shape": { "kind": "ring", "r": 4.4, "width": 1.4 }, "fill": "$husk.dark" },
+    { "id": "fuse", "shape": { "kind": "circle", "r": 2.6 }, "fill": "$frost.dark" },
+    { "id": "spark", "shape": { "kind": "circle", "r": 1.3 }, "fill": "$frost.light" }
+  ],
+  "animations": {
+    "armed": {
+      "description": "the fuse ticks — cold, quiet, and not on the hive's frequency",
+      "duration": 1.1,
+      "tracks": [
+        { "part": "spark", "prop": "opacity", "keys": [[0, 0.25], [0.42, 0.3], [0.5, 1], [0.62, 0.3], [1, 0.25]] },
+        { "part": "collar", "prop": "scale", "keys": [[0, 1], [0.5, 1.12], [1, 1]] }
+      ]
+    }
+  }
+}

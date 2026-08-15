@@ -1,0 +1,30 @@
+{
+  "id": "ss.char.hex",
+  "name": "Hex",
+  "description": "Sealed survivor in cell-shaped plating — the same hexagon the hive builds with, worn by something the hive no longer counts. Dead organ, dead feelers, six flat sides that fit nowhere any more.",
+  "tags": ["ss-char"],
+  "size": [32, 32],
+  "meta": { "radius": 11.5 },
+  "parts": [
+    { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [2, -9], "rot": -38, "scale": 0.52 },
+    { "id": "shell", "shape": { "kind": "ngon", "sides": 6, "r": 11.5, "rot": 30 }, "fill": "$orchid.dark", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "core", "at": [-0.6, -0.6], "shape": { "kind": "ngon", "sides": 6, "r": 8.8, "rot": 30 }, "fill": "$orchid" },
+    { "id": "cell", "at": [-0.6, -0.6], "shape": { "kind": "ngon", "sides": 6, "r": 4.6, "rot": 30 }, "fill": "$orchid.light" },
+    { "id": "gloss", "at": [-4.6, -5.2], "shape": { "kind": "rect", "w": 5, "h": 1.6, "corner": 0.8 }, "fill": "$silent@soft" },
+    { "id": "antenna", "use": "ss.lib.antenna", "variant": "dead", "at": [5.2, -8.6], "rot": -6, "scale": 0.72 },
+    { "id": "organ", "use": "ss.lib.organ", "variant": "dead", "at": [5.2, 3.6], "scale": 0.54 }
+  ],
+  "animations": {
+    "idle": {
+      "description": "a held breath",
+      "duration": 1.8,
+      "tracks": [
+        { "part": "shell", "prop": "y", "keys": [[0, 0], [0.5, -1], [1, 0]] },
+        { "part": "core", "prop": "y", "keys": [[0, -0.6], [0.5, -1.6], [1, -0.6]] },
+        { "part": "cell", "prop": "rot", "keys": [[0, 0], [1, 60]], "ease": "linear" },
+        { "part": "organ", "prop": "y", "keys": [[0, 3.6], [0.5, 2.6], [1, 3.6]] },
+        { "part": "antenna", "prop": "rot", "keys": [[0, -6], [0.5, 2], [1, -6]] }
+      ]
+    }
+  }
+}

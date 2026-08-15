@@ -1,0 +1,26 @@
+{
+  "id": "char.dot",
+  "name": "Dot",
+  "description": "Round frost-blue starter character: glowing aura, circular body with a highlight, shared library face. Bobs gently at idle.",
+  "tags": ["char", "player"],
+  "size": [28, 28],
+  "meta": { "radius": 10 },
+  "parts": [
+    { "id": "aura", "shape": { "kind": "circle", "r": 12.5 }, "fill": "$frost@ghost" },
+    { "id": "body", "shape": { "kind": "circle", "r": 10 }, "fill": "$frost", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "shine", "at": [-3.5, -4], "shape": { "kind": "circle", "r": 2.6 }, "fill": "$bone@soft" },
+    { "id": "face", "use": "lib.face", "at": [0, 1] }
+  ],
+  "animations": {
+    "idle": {
+      "description": "gentle vertical bob",
+      "duration": 1.6,
+      "tracks": [
+        { "part": "body", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "shine", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "face", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "aura", "prop": "scale", "keys": [[0, 1], [0.5, 1.08], [1, 1]] }
+      ]
+    }
+  }
+}

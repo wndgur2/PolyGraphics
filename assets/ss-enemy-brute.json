@@ -1,0 +1,49 @@
+{
+  "id": "ss.enemy.brute",
+  "name": "Soldier",
+  "description": "The caste that gets sent when a Tracker's call is answered. Layered chitin plates over a low heavy body, four thick legs, a tiny recessed head between two enormous shearing mandibles, and a pair of organs on the shoulders broadcasting the kill order. Gameplay slot unchanged (slow, heavy-hitting tank); body radius still ~16.",
+  "tags": ["ss-enemy", "tank"],
+  "size": [44, 44],
+  "meta": { "radius": 16 },
+  "parts": [
+    { "id": "leg_far_b", "at": [-9, 3], "rot": 20, "scale": 0.85, "shape": { "kind": "poly", "points": [[2.4, 0], [5, 5], [4.4, 11.6], [1, 11.6], [1.2, 5.4], [-2.2, 1]] }, "fill": "$carapace" },
+    { "id": "leg_far_f", "at": [5, 3], "rot": -18, "scale": 0.85, "shape": { "kind": "poly", "points": [[2.4, 0], [5, 5], [4.4, 11.6], [1, 11.6], [1.2, 5.4], [-2.2, 1]] }, "fill": "$carapace" },
+    { "id": "leg_b", "at": [-8.4, 4.4], "rot": 26, "shape": { "kind": "poly", "points": [[2.4, 0], [5, 5], [4.4, 11.6], [1, 11.6], [1.2, 5.4], [-2.2, 1]] }, "fill": "$carapace.light" },
+    { "id": "leg_f", "at": [6.2, 4.2], "rot": -24, "shape": { "kind": "poly", "points": [[2.4, 0], [5, 5], [4.4, 11.6], [1, 11.6], [1.2, 5.4], [-2.2, 1]] }, "fill": "$carapace.light" },
+    { "id": "body", "at": [-1, 1], "shape": { "kind": "poly", "points": [[12, -1.6], [8.4, -7.4], [0, -10], [-9.4, -8], [-14.4, -2], [-12.4, 5.4], [-3, 8.6], [8, 6.4]] }, "fill": "$carapace.light", "stroke": { "color": "$ink", "width": "bold" } },
+    { "id": "plate_rear", "at": [-6.6, -1.4], "shape": { "kind": "poly", "points": [[6.6, -4.4], [-1.4, -6], [-6.6, -1.6], [-4.6, 4.4], [4.2, 4.6], [7.4, 0.4]] }, "fill": "$chitin.dark", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "plate_mid", "at": [2.4, -2.2], "shape": { "kind": "poly", "points": [[6.4, -2.6], [1.4, -5.6], [-5, -4], [-6.4, 1.4], [-1.6, 4.6], [5.6, 2.6]] }, "fill": "$chitin", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "plate_shine", "at": [2, -3.4], "shape": { "kind": "ellipse", "rx": 4, "ry": 1.8 }, "fill": "$chitin.light" },
+    { "id": "head", "at": [11.4, 2.4], "shape": { "kind": "ellipse", "rx": 3.2, "ry": 3 }, "fill": "$dead" },
+    { "id": "mandible_up", "at": [10.4, 0], "rot": 6, "shape": { "kind": "poly", "points": [[-1.4, -2.4], [4.6, -5.2], [8.6, -2.8], [7.2, -0.2], [3.6, -1.2], [-0.6, 1.6]] }, "fill": "$husk", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "mandible_dn", "at": [10.4, 4.6], "rot": -6, "shape": { "kind": "poly", "points": [[-1.4, 2.4], [4.6, 5.2], [8.6, 2.8], [7.2, 0.2], [3.6, 1.2], [-0.6, -1.6]] }, "fill": "$husk.dark", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "antenna", "use": "ss.lib.antenna", "at": [10.4, -3.6], "rot": -12, "scale": 0.8 },
+    { "id": "organ", "use": "ss.lib.organ", "at": [-1.6, -7.4], "scale": 0.6 },
+    { "id": "organ_rear", "use": "ss.lib.organ", "at": [-9.4, -5.4], "scale": 0.44 }
+  ],
+  "variants": {
+    "elite": {
+      "description": "A war caste: spined dorsal ridge, bleached plates and a third organ. When this one broadcasts, everything on the level turns around.",
+      "scale": 1.25,
+      "set": { "plate_mid.fill": "$husk.dark", "plate_shine.fill": "$husk", "organ.scale": 0.74 },
+      "add": [
+        { "id": "spines", "at": [-2, -9.6], "shape": { "kind": "poly", "points": [[-8.6, 2], [-6.6, -2.6], [-4.4, 1.2], [-1.6, -3.8], [1, 0.6], [3.8, -3], [5.6, 1.4], [7.4, 2.4]] }, "fill": "$husk.dark" },
+        { "id": "organ_top", "use": "ss.lib.organ", "at": [5, -8], "scale": 0.4 }
+      ]
+    }
+  },
+  "animations": {
+    "stomp": {
+      "description": "slow heavy gait, plates settling a beat behind the body",
+      "duration": 1.3,
+      "tracks": [
+        { "part": "body", "prop": "y", "keys": [[0, 1], [0.5, -0.8], [1, 1]] },
+        { "part": "plate_mid", "prop": "y", "keys": [[0, -2.6], [0.5, -1.4], [1, -2.6]] },
+        { "part": "leg_b", "prop": "rot", "keys": [[0, 20], [0.5, 32], [1, 20]] },
+        { "part": "leg_f", "prop": "rot", "keys": [[0, -30], [0.5, -18], [1, -30]] },
+        { "part": "mandible_up", "prop": "rot", "keys": [[0, 0], [0.5, -8], [1, 0]] },
+        { "part": "mandible_dn", "prop": "rot", "keys": [[0, 0], [0.5, 8], [1, 0]] }
+      ]
+    }
+  }
+}

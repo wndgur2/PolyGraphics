@@ -1,0 +1,25 @@
+{
+  "id": "ss.pickup.coin",
+  "name": "Chitin shard",
+  "description": "Currency, of a sort. A polished disc of shell — the hive trades in material, not metal, and a clean plate off a Soldier is worth carrying out. Gold-warm so it never gets confused with the near-white scent crystals.",
+  "tags": ["ss-pickup"],
+  "size": [16, 16],
+  "parts": [
+    { "id": "outline", "shape": { "kind": "ngon", "sides": 6, "r": 6.8, "rot": 30 }, "fill": "$ink" },
+    { "id": "disc", "shape": { "kind": "ngon", "sides": 6, "r": 5.4, "rot": 30 }, "fill": "$gold" },
+    { "id": "inner", "shape": { "kind": "ngon", "sides": 6, "r": 3, "rot": 30 }, "fill": "$gold.light2" },
+    { "id": "notch", "at": [0, -4.2], "shape": { "kind": "poly", "points": [[-1.4, -1.2], [1.4, -1.2], [0, 1.4]] }, "fill": "$timber.dark" }
+  ],
+  "animations": {
+    "spin": {
+      "description": "catches the light as it turns",
+      "duration": 1.5,
+      "tracks": [
+        { "part": "disc", "prop": "scale", "keys": [[0, 1], [0.25, 0.34], [0.5, 1], [0.75, 0.34], [1, 1]] },
+        { "part": "inner", "prop": "scale", "keys": [[0, 1], [0.25, 0.3], [0.5, 1], [0.75, 0.3], [1, 1]] },
+        { "part": "outline", "prop": "scale", "keys": [[0, 1], [0.25, 0.4], [0.5, 1], [0.75, 0.4], [1, 1]] },
+        { "part": "notch", "prop": "opacity", "keys": [[0, 1], [0.2, 0], [0.55, 1], [0.7, 0], [1, 1]] }
+      ]
+    }
+  }
+}

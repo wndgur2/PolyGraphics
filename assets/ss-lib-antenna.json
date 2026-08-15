@@ -1,0 +1,18 @@
+{
+  "id": "ss.lib.antenna",
+  "name": "Scent antenna",
+  "description": "Tapered feeler rooted at the origin, curving up and forward (+x), tipped with a sensing nub. The hive reads the world with these instead of eyes — which is why nothing in the enemy roster has any. Deliberately unlit: in this world a glow means emission, never sensing, so only organs light up and an antenna can never be mistaken for an eye.",
+  "tags": ["ss-lib"],
+  "size": [16, 24],
+  "anchor": [0.5, 0.8],
+  "parts": [
+    { "id": "shaft", "shape": { "kind": "poly", "points": [[0.7, 0.4], [2.4, -3.6], [4, -7], [4.9, -10.2], [3.9, -10.4], [2.6, -7.2], [1, -3.9], [-0.8, -0.4]] }, "fill": "$carapace.light" },
+    { "id": "tip", "at": [4.3, -10.3], "shape": { "kind": "ellipse", "rx": 0.95, "ry": 1.25 }, "fill": "$carapace.light2" }
+  ],
+  "variants": {
+    "dead": {
+      "description": "A survivor's antenna — intact, but nothing on the air to read.",
+      "set": { "shaft.fill": "$slate.dark", "tip.fill": "$slate" }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "ss.enemy.brazier",
+  "name": "Signal stalk",
+  "description": "Not a creature — a relay. The hive grows these to repeat a scent across a level, which is why smashing one buys you quiet ground. A chitin stalk on a splayed root, a bulb organ at the top, and wisps going up where everything can smell them. The `spent` variant is the destroyed state: cracked stalk, dead bulb, no wisp.",
+  "tags": ["ss-enemy", "prop"],
+  "size": [32, 36],
+  "meta": { "radius": 12 },
+  "parts": [
+    { "id": "wisp", "use": "ss.lib.wisp", "at": [0.6, -8] },
+    { "id": "root_l", "at": [-5, 12.4], "shape": { "kind": "poly", "points": [[3.4, -3.6], [-1.4, 1.6], [-6, 2.6], [-5.6, 4], [1.6, 3.4], [5, -0.6]] }, "fill": "$chitin.dark" },
+    { "id": "root_r", "at": [5, 12.4], "shape": { "kind": "poly", "points": [[-3.4, -3.6], [1.4, 1.6], [6, 2.6], [5.6, 4], [-1.6, 3.4], [-5, -0.6]] }, "fill": "$chitin.dark" },
+    { "id": "stalk", "at": [0, 5], "shape": { "kind": "poly", "points": [[3.4, -12], [-3, -11.4], [-4.6, 10.6], [4.8, 10.6]] }, "fill": "$chitin", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "ring_a", "at": [0.2, 8.4], "shape": { "kind": "rect", "w": 9.6, "h": 1.4 }, "fill": "$chitin.dark" },
+    { "id": "ring_b", "at": [0, 2.4], "shape": { "kind": "rect", "w": 8.2, "h": 1.4 }, "fill": "$chitin.dark" },
+    { "id": "cup", "at": [0.2, -7.6], "shape": { "kind": "poly", "points": [[6.4, -2.6], [-6, -2.6], [-4, 4.4], [4.4, 4.4]] }, "fill": "$carapace.light", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "organ", "use": "ss.lib.organ", "at": [0.2, -9.4], "scale": 1.05 }
+  ],
+  "variants": {
+    "spent": {
+      "description": "Smashed. The relay is dark, the cup is split and this stretch of hive has gone deaf — which is exactly why you broke it.",
+      "set": {
+        "organ.variant": "dead",
+        "stalk.fill": "$chitin.dark",
+        "cup.fill": "$carapace",
+        "wisp.opacity": 0
+      },
+      "add": [
+        { "id": "break", "at": [1.4, -2.6], "rot": 68, "shape": { "kind": "poly", "points": [[-5.4, 0], [-1.6, -1.4], [1.6, 0.8], [5.4, -0.6], [5.4, 0.6], [1.5, 1.8], [-1.7, 0.4]] }, "fill": "$dead" }
+      ]
+    }
+  },
+  "animations": {
+    "broadcast": {
+      "description": "the bulb swells on a slow cycle and the wisp climbs",
+      "duration": 2.6,
+      "tracks": [
+        { "part": "organ", "prop": "scale", "keys": [[0, 0.98], [0.5, 1.14], [1, 0.98]] },
+        { "part": "wisp", "prop": "y", "keys": [[0, 1.5], [1, -2.5]], "ease": "linear" },
+        { "part": "cup", "prop": "y", "keys": [[0, 0], [0.5, -0.5], [1, 0]] }
+      ]
+    }
+  }
+}

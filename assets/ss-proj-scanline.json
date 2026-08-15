@@ -1,0 +1,10 @@
+{
+  "id": "ss.proj.scanline",
+  "name": "Scanline tile (SS)",
+  "description": "Shape Survivors CRT scanline tile: one 4×2 dark row in a 4×4 tile, tiled full-screen by the HUD. Port of scanline (BootScene.ts:448-453).",
+  "tags": ["ss-proj", "post"],
+  "size": [4, 4],
+  "parts": [
+    { "id": "row", "at": [0, -1], "shape": { "kind": "rect", "w": 4, "h": 2 }, "fill": "$ink" }
+  ]
+}

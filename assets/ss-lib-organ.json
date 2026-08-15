@@ -1,0 +1,48 @@
+{
+  "id": "ss.lib.organ",
+  "name": "Pheromone organ",
+  "description": "The premise of the game in one part. Every creature in the hive carries this scent organ, lit — it is how they announce themselves and how they are recognized. The player carries the same organ in the same place, `dead`: cracked, unlit, silent. That is why they are hunted. Composed everywhere via `use`, so the whole roster shares one definition.",
+  "tags": ["ss-lib"],
+  "size": [16, 16],
+  "parts": [
+    { "id": "halo", "shape": { "kind": "circle", "r": 6.5 }, "fill": "$pheromone@ghost" },
+    { "id": "bloom", "shape": { "kind": "circle", "r": 4 }, "fill": "$pheromone@soft" },
+    { "id": "socket", "shape": { "kind": "ellipse", "rx": 3.1, "ry": 3.7 }, "fill": "$carapace" },
+    { "id": "bulb", "shape": { "kind": "ellipse", "rx": 2.2, "ry": 2.8 }, "fill": "$pheromone" },
+    { "id": "core", "at": [-0.5, -0.7], "shape": { "kind": "circle", "r": 1.1 }, "fill": "$pheromone.light2" }
+  ],
+  "variants": {
+    "dead": {
+      "description": "The player's organ: no halo, no bloom, a hairline crack across a cold grey bulb. The silence that gets you chased.",
+      "set": {
+        "halo.fill": "$dead@0",
+        "bloom.fill": "$dead@0",
+        "socket.fill": "$dead",
+        "bulb.fill": "$slate.dark",
+        "core.fill": "$slate@soft"
+      },
+      "add": [
+        { "id": "crack", "rot": -24, "shape": { "kind": "rect", "w": 6.4, "h": 0.7 }, "fill": "$dead" }
+      ]
+    },
+    "faint": {
+      "description": "A dying signal — husks and spent stalks. Lit, but barely.",
+      "set": {
+        "halo.fill": "$dead@0",
+        "bloom.fill": "$pheromone@ghost",
+        "bulb.fill": "$pheromone.dark",
+        "core.fill": "$pheromone@soft"
+      }
+    }
+  },
+  "animations": {
+    "pulse": {
+      "description": "the scent broadcast — a slow swell",
+      "duration": 2.2,
+      "tracks": [
+        { "part": "halo", "prop": "scale", "keys": [[0, 0.85], [0.5, 1.15], [1, 0.85]] },
+        { "part": "bloom", "prop": "opacity", "keys": [[0, 0.7], [0.5, 1], [1, 0.7]] }
+      ]
+    }
+  }
+}

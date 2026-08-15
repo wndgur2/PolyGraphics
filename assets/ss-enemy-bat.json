@@ -1,0 +1,55 @@
+{
+  "id": "ss.enemy.bat",
+  "name": "Drifter",
+  "description": "Released from a vent to sweep for you. Two pairs of long veined wings held back over a segmented body, a barbed abdomen, and an organ underneath that leaks scent as it goes — that trail is how the ground castes learn where you were. Gameplay slot unchanged (fast, fragile swooper); the wide swept-wing silhouette is unmistakable against the Tracker's low crawl.",
+  "tags": ["ss-enemy", "flier"],
+  "size": [36, 28],
+  "meta": { "radius": 7 },
+  "parts": [
+    { "id": "wisp", "use": "ss.lib.wisp", "at": [-13, 3.6], "rot": -104, "scale": 0.58 },
+    { "id": "wing_far_up", "at": [-4.6, -2.6], "rot": -14, "shape": { "kind": "ellipse", "rx": 8.6, "ry": 2.1 }, "fill": "$carapace.light" },
+    { "id": "wing_far_dn", "at": [-4.2, 1], "rot": 6, "shape": { "kind": "ellipse", "rx": 7.4, "ry": 1.7 }, "fill": "$carapace" },
+    { "id": "wing_up", "at": [-4, -4.4], "rot": -20, "shape": { "kind": "ellipse", "rx": 9.4, "ry": 2.4 }, "fill": "$steel.light", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "vein_up", "at": [-4, -4.4], "rot": -20, "shape": { "kind": "rect", "w": 15.6, "h": 0.7 }, "fill": "$slate.light" },
+    { "id": "wing_dn", "at": [-3.6, -0.4], "rot": -2, "shape": { "kind": "ellipse", "rx": 8, "ry": 2 }, "fill": "$steel", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "vein_dn", "at": [-3.6, -0.4], "rot": -2, "shape": { "kind": "rect", "w": 13, "h": 0.6 }, "fill": "$slate" },
+    { "id": "abdomen", "at": [-6.6, 2.4], "rot": 6, "shape": { "kind": "poly", "points": [[4.4, -2.8], [-3, -2.2], [-7.2, 0.2], [-3, 2.6], [4.4, 2.4]] }, "fill": "$carapace.light", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "seg_a", "at": [-7.4, 2.4], "rot": 82, "shape": { "kind": "rect", "w": 4.4, "h": 0.9 }, "fill": "$carapace.dark" },
+    { "id": "seg_b", "at": [-10, 2.6], "rot": 82, "shape": { "kind": "rect", "w": 3.6, "h": 0.9 }, "fill": "$carapace.dark" },
+    { "id": "barb", "at": [-13.4, 2.6], "shape": { "kind": "poly", "points": [[2.4, -1.7], [-3.4, 0.2], [2.4, 1.7]] }, "fill": "$husk" },
+    { "id": "thorax", "at": [1.8, 0.6], "shape": { "kind": "ellipse", "rx": 4.6, "ry": 3.8 }, "fill": "$chitin.dark", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "th_shine", "at": [1.4, -1], "shape": { "kind": "ellipse", "rx": 2.8, "ry": 1.5 }, "fill": "$chitin" },
+    { "id": "head", "at": [7.2, 1.4], "shape": { "kind": "ellipse", "rx": 2.7, "ry": 2.5 }, "fill": "$carapace.light" },
+    { "id": "proboscis", "at": [9.6, 1.8], "shape": { "kind": "poly", "points": [[0, -1.1], [6.2, 0.2], [0, 1.3]] }, "fill": "$husk" },
+    { "id": "antenna", "use": "ss.lib.antenna", "at": [7.6, -0.6], "rot": 24, "scale": 0.6 },
+    { "id": "organ", "use": "ss.lib.organ", "at": [-7.4, 4.4], "scale": [0.42, 0.34] }
+  ],
+  "variants": {
+    "elite": {
+      "description": "A marked scout: bleached wing membranes, a heavier barb and a fatter trail behind it.",
+      "scale": 1.25,
+      "set": {
+        "wing_up.fill": "$husk",
+        "wing_dn.fill": "$husk.dark",
+        "wing_far_up.fill": "$husk.dark2",
+        "barb.scale": [1.4, 1.3],
+        "organ.scale": [0.54, 0.44]
+      }
+    }
+  },
+  "animations": {
+    "flit": {
+      "description": "wing pairs beat out of phase, body rocks, trail drifts behind",
+      "duration": 0.26,
+      "tracks": [
+        { "part": "wing_up", "prop": "rot", "keys": [[0, -32], [0.5, -6], [1, -32]] },
+        { "part": "wing_dn", "prop": "rot", "keys": [[0, 8], [0.5, -14], [1, 8]] },
+        { "part": "wing_far_up", "prop": "rot", "keys": [[0, -4], [0.5, -26], [1, -4]] },
+        { "part": "wing_far_dn", "prop": "rot", "keys": [[0, -6], [0.5, 14], [1, -6]] },
+        { "part": "thorax", "prop": "y", "keys": [[0, 0.1], [0.5, 1.1], [1, 0.1]] },
+        { "part": "abdomen", "prop": "rot", "keys": [[0, 9], [0.5, 3], [1, 9]] },
+        { "part": "wisp", "prop": "opacity", "keys": [[0, 0.85], [0.5, 0.5], [1, 0.85]] }
+      ]
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "ss.enemy.zombie",
+  "name": "Husk",
+  "description": "A drone that ran out of scent and stopped being anybody — the hive grafted an organ onto its chest and it walks again. Bleached, cracked, slumped forward, one arm hanging longer than the other. Its organ is set to `faint`: a borrowed signal, not its own. Gameplay slot unchanged (slow, tough shambler); the tall lopsided silhouette is the opposite read from the low Tracker.",
+  "tags": ["ss-enemy", "shambler"],
+  "size": [32, 36],
+  "meta": { "radius": 11 },
+  "parts": [
+    { "id": "leg_far", "at": [-1.6, 6], "rot": 8, "shape": { "kind": "poly", "points": [[2.2, 0], [3.4, 5.4], [3, 10.4], [0.4, 10.4], [0.2, 5.6], [-1.6, 0.6]] }, "fill": "$husk.dark2" },
+    { "id": "arm_far", "at": [-4.4, -2.6], "rot": -14, "shape": { "kind": "poly", "points": [[1.8, 0], [3.2, 5], [2.4, 10.6], [0.2, 10.4], [0.4, 5.2], [-1.8, 0.8]] }, "fill": "$husk.dark2" },
+    { "id": "leg", "at": [2.6, 6.4], "rot": -6, "shape": { "kind": "poly", "points": [[2.2, 0], [3.4, 5.4], [3, 10.4], [0.4, 10.4], [0.2, 5.6], [-1.6, 0.6]] }, "fill": "$husk.dark" },
+    { "id": "torso", "at": [0, -0.4], "rot": 7, "shape": { "kind": "poly", "points": [[5.4, -6.6], [-4.8, -7.4], [-7, -1], [-5.2, 6.2], [4.6, 6.6], [6.6, -0.6]] }, "fill": "$husk", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "crack_a", "at": [-1.4, -1], "rot": 74, "shape": { "kind": "poly", "points": [[-5, 0], [-1.6, -1], [1.4, 0.6], [4.6, -0.4], [4.6, 0.5], [1.3, 1.4], [-1.7, 0]] }, "fill": "$husk.dark2" },
+    { "id": "crack_b", "at": [2.6, 2.6], "rot": 22, "shape": { "kind": "poly", "points": [[-3, 0], [-0.6, -0.8], [2.4, 0.4], [2.4, 1.1], [-0.7, 0.2]] }, "fill": "$husk.dark2" },
+    { "id": "graft", "at": [1.2, -1.4], "shape": { "kind": "ngon", "sides": 6, "r": 4.2, "rot": 12 }, "fill": "$carapace" },
+    { "id": "organ", "use": "ss.lib.organ", "variant": "faint", "at": [1.2, -1.4], "scale": 0.6 },
+    { "id": "arm", "at": [5.2, -3.4], "rot": -22, "shape": { "kind": "poly", "points": [[2, 0], [3.6, 5.6], [3, 12], [0.4, 11.8], [0.6, 5.8], [-2, 0.8]] }, "fill": "$husk.dark", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "head", "at": [1.8, -10.4], "rot": 12, "shape": { "kind": "poly", "points": [[3.8, -1.6], [1.6, -4.2], [-2.8, -3.4], [-4, 0.6], [-1.6, 3.4], [3, 2.6]] }, "fill": "$husk.dark", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "hollow", "at": [3, -10], "shape": { "kind": "ellipse", "rx": 1.8, "ry": 2.4 }, "fill": "$dead" },
+    { "id": "antenna_stub", "at": [0.4, -13], "rot": -18, "scale": 0.5, "use": "ss.lib.antenna", "variant": "dead" }
+  ],
+  "variants": {
+    "elite": {
+      "description": "The hive doubled down: a fresh, fully lit graft in the shoulder next to the dying one in the chest.",
+      "scale": 1.25,
+      "add": [
+        { "id": "graft2", "at": [-4, -5.4], "shape": { "kind": "ngon", "sides": 6, "r": 2.8, "rot": 20 }, "fill": "$carapace" },
+        { "id": "organ2", "use": "ss.lib.organ", "at": [-4, -5.4], "scale": 0.4 }
+      ]
+    }
+  },
+  "animations": {
+    "shamble": {
+      "description": "heavy lopsided gait — the long arm swings a beat behind the legs",
+      "duration": 1.1,
+      "tracks": [
+        { "part": "torso", "prop": "rot", "keys": [[0, 5], [0.5, 9], [1, 5]] },
+        { "part": "head", "prop": "rot", "keys": [[0, 15], [0.5, 9], [1, 15]] },
+        { "part": "leg", "prop": "rot", "keys": [[0, -12], [0.5, 4], [1, -12]] },
+        { "part": "leg_far", "prop": "rot", "keys": [[0, 14], [0.5, -2], [1, 14]] },
+        { "part": "arm", "prop": "rot", "keys": [[0, -14], [0.5, -30], [1, -14]] },
+        { "part": "arm_far", "prop": "rot", "keys": [[0, -22], [0.5, -6], [1, -22]] }
+      ]
+    }
+  }
+}

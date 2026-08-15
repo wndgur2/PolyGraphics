@@ -1,0 +1,15 @@
+{
+  "id": "ss.proj.card",
+  "name": "Wing blade",
+  "description": "A Drifter's wing membrane stretched taut on a bone frame and thrown edge-first — the veins are still in it. Of the whole arsenal this is the one that most obviously used to be alive, which is the point.",
+  "tags": ["ss-proj", "ranged"],
+  "size": [12, 16],
+  "parts": [
+    { "id": "frame", "shape": { "kind": "rect", "w": 12, "h": 16, "corner": 2.5 }, "fill": "$husk.dark", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "membrane", "shape": { "kind": "rect", "w": 9.4, "h": 13.4, "corner": 2 }, "fill": "$steel.light" },
+    { "id": "vein_a", "at": [-0.6, -2.4], "rot": 62, "shape": { "kind": "rect", "w": 9.6, "h": 0.7 }, "fill": "$slate.light" },
+    { "id": "vein_b", "at": [0.8, 2.6], "rot": 74, "shape": { "kind": "rect", "w": 8, "h": 0.6 }, "fill": "$slate.light" },
+    { "id": "spine", "at": [-4.4, 0], "shape": { "kind": "rect", "w": 1.4, "h": 14.4, "corner": 0.6 }, "fill": "$husk" },
+    { "id": "edge", "at": [5.2, 0], "shape": { "kind": "rect", "w": 1, "h": 13.6 }, "fill": "$frost.light" }
+  ]
+}

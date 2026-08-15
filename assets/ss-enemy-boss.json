@@ -1,0 +1,69 @@
+{
+  "id": "ss.enemy.boss",
+  "name": "Chorus",
+  "description": "Not the biggest thing in the hive — the loudest. A seated mass of carapace ringed by six organs that fire in sequence, so the light travels around it like a voice going round a room; that rotation is the whole read. Under the plates is a ring of husk teeth around a vent that has never eaten anything, only shouted. Gameplay slot unchanged (5:00 / 10:00 boss); body radius still ~38.",
+  "tags": ["ss-enemy", "boss"],
+  "size": [96, 96],
+  "meta": { "radius": 38 },
+  "parts": [
+    { "id": "spine_a", "at": [25.98, 15], "rot": 120, "shape": { "kind": "poly", "points": [[-3.4, 2], [0, -8], [3.4, 2]] }, "fill": "$carapace.light" },
+    { "id": "spine_b", "at": [0, 30], "rot": 180, "shape": { "kind": "poly", "points": [[-3.4, 2], [0, -8], [3.4, 2]] }, "fill": "$carapace.light" },
+    { "id": "spine_c", "at": [-25.98, 15], "rot": 240, "shape": { "kind": "poly", "points": [[-3.4, 2], [0, -8], [3.4, 2]] }, "fill": "$carapace.light" },
+    { "id": "spine_d", "at": [-25.98, -15], "rot": 300, "shape": { "kind": "poly", "points": [[-3.4, 2], [0, -8], [3.4, 2]] }, "fill": "$carapace.light" },
+    { "id": "spine_e", "at": [0, -30], "rot": 0, "shape": { "kind": "poly", "points": [[-3.4, 2], [0, -8], [3.4, 2]] }, "fill": "$carapace.light" },
+    { "id": "spine_f", "at": [25.98, -15], "rot": 60, "shape": { "kind": "poly", "points": [[-3.4, 2], [0, -8], [3.4, 2]] }, "fill": "$carapace.light" },
+    { "id": "mass", "shape": { "kind": "poly", "points": [[30, 0], [23.82, 13.75], [15, 25.98], [0, 27.5], [-15, 25.98], [-23.82, 13.75], [-30, 0], [-23.82, -13.75], [-15, -25.98], [0, -27.5], [15, -25.98], [23.82, -13.75]] }, "fill": "$carapace.light", "stroke": { "color": "$ink", "width": "heavy" } },
+    { "id": "plate_outer", "shape": { "kind": "ring", "r": 23, "width": 5 }, "fill": "$chitin.dark" },
+    { "id": "plate_mid", "shape": { "kind": "ring", "r": 16, "width": 3.5 }, "fill": "$chitin" },
+    { "id": "dome", "shape": { "kind": "ngon", "sides": 12, "r": 13 }, "fill": "$carapace" },
+    { "id": "teeth", "shape": { "kind": "star", "points": 8, "r": 11.5, "r2": 7 }, "fill": "$husk.dark" },
+    { "id": "vent", "shape": { "kind": "circle", "r": 7.2 }, "fill": "$dead" },
+    { "id": "vent_glow", "shape": { "kind": "circle", "r": 5 }, "fill": { "gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$pheromone.light"], [1, "$pheromone@0.1"]] } },
+    { "id": "organ_a", "use": "ss.lib.organ", "at": [32, 0], "scale": 0.56 },
+    { "id": "organ_b", "use": "ss.lib.organ", "at": [16, 27.71], "scale": 0.56 },
+    { "id": "organ_c", "use": "ss.lib.organ", "at": [-16, 27.71], "scale": 0.56 },
+    { "id": "organ_d", "use": "ss.lib.organ", "at": [-32, 0], "scale": 0.56 },
+    { "id": "organ_e", "use": "ss.lib.organ", "at": [-16, -27.71], "scale": 0.56 },
+    { "id": "organ_f", "use": "ss.lib.organ", "at": [16, -27.71], "scale": 0.56 }
+  ],
+  "variants": {
+    "enraged": {
+      "description": "Phase two: the shell splits along every seam, the vent burns through, and the sequence collapses into all six organs screaming at once.",
+      "scale": 1.1,
+      "set": {
+        "mass.fill": "$carapace",
+        "plate_outer.fill": "$husk.dark2",
+        "teeth.fill": "$husk",
+        "vent_glow.fill": { "gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$white"], [1, "$pheromone@soft"]] },
+        "organ_a.scale": 0.78,
+        "organ_b.scale": 0.78,
+        "organ_c.scale": 0.78,
+        "organ_d.scale": 0.78,
+        "organ_e.scale": 0.78,
+        "organ_f.scale": 0.78
+      },
+      "add": [
+        { "id": "split_a", "rot": 18, "shape": { "kind": "poly", "points": [[-27, 0], [-9, -2.4], [8, 2], [27, -1.6], [27, 1.6], [8, 3.6], [-9, -0.6]] }, "fill": "$dead" },
+        { "id": "split_b", "rot": 104, "shape": { "kind": "poly", "points": [[-24, 0], [-8, -2], [7, 1.8], [24, -1.4], [24, 1.4], [7, 3.2], [-8, -0.4]] }, "fill": "$dead" }
+      ]
+    }
+  },
+  "animations": {
+    "chorus": {
+      "description": "the light travels the ring — six organs firing in sequence, plates counter-rotating under them",
+      "duration": 2.4,
+      "tracks": [
+        { "part": "organ_a", "prop": "scale", "keys": [[0, 0.72], [0.17, 0.5], [0.83, 0.5], [1, 0.72]] },
+        { "part": "organ_b", "prop": "scale", "keys": [[0, 0.5], [0.167, 0.72], [0.33, 0.5], [1, 0.5]] },
+        { "part": "organ_c", "prop": "scale", "keys": [[0, 0.5], [0.167, 0.5], [0.333, 0.72], [0.5, 0.5], [1, 0.5]] },
+        { "part": "organ_d", "prop": "scale", "keys": [[0, 0.5], [0.333, 0.5], [0.5, 0.72], [0.667, 0.5], [1, 0.5]] },
+        { "part": "organ_e", "prop": "scale", "keys": [[0, 0.5], [0.5, 0.5], [0.667, 0.72], [0.833, 0.5], [1, 0.5]] },
+        { "part": "organ_f", "prop": "scale", "keys": [[0, 0.5], [0.667, 0.5], [0.833, 0.72], [1, 0.5]] },
+        { "part": "plate_outer", "prop": "rot", "keys": [[0, 0], [1, 30]], "ease": "linear" },
+        { "part": "plate_mid", "prop": "rot", "keys": [[0, 0], [1, -45]], "ease": "linear" },
+        { "part": "teeth", "prop": "rot", "keys": [[0, 0], [1, 45]], "ease": "linear" },
+        { "part": "vent_glow", "prop": "opacity", "keys": [[0, 0.6], [0.5, 1], [1, 0.6]] }
+      ]
+    }
+  }
+}

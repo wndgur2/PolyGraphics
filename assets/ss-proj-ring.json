@@ -1,0 +1,30 @@
+{
+  "id": "ss.proj.ring",
+  "name": "Frost nova",
+  "description": "The one thing in the arsenal that isn't scavenged — cold thrown outward in a ring, the survivor's own answer to being surrounded. Geometry is load-bearing: the weapon code scales this sprite by `wave.r / 62`, so the 128px canvas and the 60px rim radius must not move. Kept near-white so any runtime tint still reads.",
+  "tags": ["ss-proj", "aoe"],
+  "size": [128, 128],
+  "meta": { "radius": 62 },
+  "parts": [
+    { "id": "wash", "shape": { "kind": "ring", "r": 55, "width": 13 }, "fill": "$frost@0.16" },
+    { "id": "rim", "shape": { "kind": "ring", "r": 60, "width": 5.5 }, "fill": "$white@0.9" },
+    { "id": "inner", "shape": { "kind": "ring", "r": 47, "width": 2 }, "fill": "$frost@soft" },
+    { "id": "shard_n", "at": [0, -60], "shape": { "kind": "poly", "points": [[0, -7], [3, 3], [-3, 3]] }, "fill": "$white@heavy" },
+    { "id": "shard_e", "at": [60, 0], "rot": 90, "shape": { "kind": "poly", "points": [[0, -7], [3, 3], [-3, 3]] }, "fill": "$white@heavy" },
+    { "id": "shard_s", "at": [0, 60], "rot": 180, "shape": { "kind": "poly", "points": [[0, -7], [3, 3], [-3, 3]] }, "fill": "$white@heavy" },
+    { "id": "shard_w", "at": [-60, 0], "rot": 270, "shape": { "kind": "poly", "points": [[0, -7], [3, 3], [-3, 3]] }, "fill": "$white@heavy" },
+    { "id": "shard_ne", "at": [42.4, -42.4], "rot": 45, "shape": { "kind": "poly", "points": [[0, -5], [2.2, 2.2], [-2.2, 2.2]] }, "fill": "$frost.light@heavy" },
+    { "id": "shard_sw", "at": [-42.4, 42.4], "rot": 225, "shape": { "kind": "poly", "points": [[0, -5], [2.2, 2.2], [-2.2, 2.2]] }, "fill": "$frost.light@heavy" }
+  ],
+  "animations": {
+    "play": {
+      "description": "the rim snaps outward and the wash follows it out",
+      "duration": 0.5,
+      "tracks": [
+        { "part": "rim", "prop": "scale", "keys": [[0, 0.55], [1, 1]], "ease": "backOut" },
+        { "part": "wash", "prop": "opacity", "keys": [[0, 1], [0.6, 0.7], [1, 0]] },
+        { "part": "inner", "prop": "scale", "keys": [[0, 0.4], [1, 1.05]], "ease": "backOut" }
+      ]
+    }
+  }
+}

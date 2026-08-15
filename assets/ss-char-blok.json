@@ -1,0 +1,32 @@
+{
+  "id": "ss.char.blok",
+  "name": "Blok",
+  "description": "Sealed survivor in a squared-off shell with a riveted seam — the heaviest plating of the eight, and the same dead organ under it. Nothing about the armour helps: the hive isn't looking for a shape, it's listening for a signal that never comes.",
+  "tags": ["ss-char"],
+  "size": [32, 32],
+  "meta": { "radius": 12 },
+  "parts": [
+    { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [2.2, -10.2], "rot": -38, "scale": 0.52 },
+    { "id": "shell", "shape": { "kind": "rect", "w": 23, "h": 23, "corner": 5 }, "fill": "$gold.dark", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "core", "at": [-0.6, -0.6], "shape": { "kind": "rect", "w": 18, "h": 18, "corner": 4 }, "fill": "$gold" },
+    { "id": "gloss", "at": [-4.4, -5.4], "shape": { "kind": "rect", "w": 6.4, "h": 2, "corner": 1 }, "fill": "$silent@soft" },
+    { "id": "seam", "at": [0, 4.6], "shape": { "kind": "rect", "w": 22, "h": 1.1 }, "fill": "$gold.dark2" },
+    { "id": "rivet_a", "at": [-7.4, 4.6], "shape": { "kind": "circle", "r": 1.1 }, "fill": "$gold.dark2" },
+    { "id": "rivet_b", "at": [7.4, 4.6], "shape": { "kind": "circle", "r": 1.1 }, "fill": "$gold.dark2" },
+    { "id": "antenna", "use": "ss.lib.antenna", "variant": "dead", "at": [5, -9], "rot": -6, "scale": 0.72 },
+    { "id": "organ", "use": "ss.lib.organ", "variant": "dead", "at": [4.6, -1.6], "scale": 0.64 }
+  ],
+  "animations": {
+    "idle": {
+      "description": "a held breath",
+      "duration": 1.8,
+      "tracks": [
+        { "part": "shell", "prop": "y", "keys": [[0, 0], [0.5, -1], [1, 0]] },
+        { "part": "core", "prop": "y", "keys": [[0, -0.6], [0.5, -1.6], [1, -0.6]] },
+        { "part": "organ", "prop": "y", "keys": [[0, -1.6], [0.5, -2.6], [1, -1.6]] },
+        { "part": "antenna", "prop": "rot", "keys": [[0, -6], [0.5, 2], [1, -6]] },
+        { "part": "antenna_far", "prop": "rot", "keys": [[0, -38], [0.5, -30], [1, -38]] }
+      ]
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "ss.proj.slash",
+  "name": "Lash sweep",
+  "description": "The whip is a Soldier's mandible on a cord, so its arc is a bone crescent with a honed frost edge on the leading side and a thinner echo trailing behind it. Nothing about it glows — it is hive material with the signal stripped out. Canvas and anchor unchanged from the original `slash` texture so the weapon code's spawn offsets still land.",
+  "tags": ["ss-proj", "melee"],
+  "size": [62, 100],
+  "anchor": [0.16, 0.5],
+  "parts": [
+    { "id": "echo", "shape": { "kind": "ring", "r": 29, "width": 2.4, "from": -50, "to": 50 }, "fill": "$husk@soft" },
+    { "id": "body", "shape": { "kind": "ring", "r": 37, "width": 19, "from": -64, "to": 64 }, "fill": "$husk" },
+    { "id": "grain", "shape": { "kind": "ring", "r": 33, "width": 2, "from": -58, "to": 58 }, "fill": "$husk.dark@soft" },
+    { "id": "edge", "shape": { "kind": "ring", "r": 45.4, "width": 3.4, "from": -59, "to": 59 }, "fill": "$frost.light" },
+    { "id": "sliver_a", "at": [40, -22], "rot": -28, "shape": { "kind": "poly", "points": [[-7, -0.9], [7, -0.4], [7, 0.4], [-7, 0.9]] }, "fill": "$frost@soft" },
+    { "id": "sliver_b", "at": [43, 0], "shape": { "kind": "poly", "points": [[-8, -0.8], [8, -0.4], [8, 0.4], [-8, 0.8]] }, "fill": "$frost@soft" },
+    { "id": "sliver_c", "at": [40, 22], "rot": 28, "shape": { "kind": "poly", "points": [[-7, -0.9], [7, -0.4], [7, 0.4], [-7, 0.9]] }, "fill": "$frost@soft" }
+  ],
+  "animations": {
+    "play": {
+      "description": "the edge outruns the body, then both go",
+      "duration": 0.26,
+      "tracks": [
+        { "part": "edge", "prop": "scale", "keys": [[0, 0.92], [0.4, 1.04], [1, 1.06]], "ease": "backOut" },
+        { "part": "body", "prop": "opacity", "keys": [[0, 1], [0.5, 0.85], [1, 0]] },
+        { "part": "echo", "prop": "opacity", "keys": [[0, 0.9], [1, 0]] },
+        { "part": "sliver_b", "prop": "x", "keys": [[0, 0], [1, 5]], "ease": "linear" }
+      ]
+    }
+  }
+}
