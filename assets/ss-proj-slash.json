@@ -25,5 +25,24 @@
         { "part": "sliver_b", "prop": "x", "keys": [[0, 0], [1, 5]], "ease": "linear" }
       ]
     }
+  },
+  "variants": {
+    "recover": {
+      "description": "the stroke coming back up. The lash is already spent, so the body is thinner and the honed edge is nearly gone; what's left is the trail — a longer, brighter echo where the tip has just been. Same canvas and anchor as the base, so the weapon code can swap textures without moving anything.",
+      "set": {
+        "body.shape.width": 13,
+        "body.shape.from": -58,
+        "body.shape.to": 58,
+        "echo.shape.r": 33,
+        "echo.shape.width": 3.6,
+        "echo.shape.from": -62,
+        "echo.shape.to": 62,
+        "echo.fill": "$husk.light@soft",
+        "edge.shape.width": 2,
+        "edge.shape.r": 43,
+        "grain.fill": "$husk.dark@ghost"
+      },
+      "remove": ["sliver_a", "sliver_c"]
+    }
   }
 }

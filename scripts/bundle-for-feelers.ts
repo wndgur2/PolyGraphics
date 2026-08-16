@@ -67,6 +67,15 @@ const MAP: Record<string, string> = {
 /** Icon keys whose `evolved` variant should bake as `<key>_evo`. */
 const EVO = ["i_whip", "i_wand", "i_boomerang"];
 
+/**
+ * Any other variant the game wants as a texture of its own. `EVO` is the same
+ * idea with the variant name and suffix assumed; this is for the ones that
+ * aren't a weapon icon's evolved form.
+ */
+const VARIANTS: { key: string; variant: string; as: string }[] = [
+  { key: "slash", variant: "recover", as: "slash_recover" },
+];
+
 const bundle: Record<string, unknown> = {};
 for (const [key, id] of Object.entries(MAP)) {
   const file = new URL(`out/compiled/${id.replace(/\./g, "-")}.json`, root);
@@ -75,6 +84,10 @@ for (const [key, id] of Object.entries(MAP)) {
 
 writeFileSync(
   dest,
-  JSON.stringify({ generated: "polygraphics bundle for feelers", evo: EVO, textures: bundle }, null, 0) + "\n",
+  JSON.stringify(
+    { generated: "polygraphics bundle for feelers", evo: EVO, variants: VARIANTS, textures: bundle },
+    null,
+    0,
+  ) + "\n",
 );
 console.log(`✓ ${Object.keys(bundle).length} textures (+${EVO.length} evolved variants) → ${dest}`);
