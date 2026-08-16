@@ -57,6 +57,8 @@ const MAP: Record<string, string> = {
   t_fungi: "ss.terrain.fungi",
   arrow: "ss.terrain.arrow",
 
+  lash: "ss.fx.lash",
+
   i_whip: "ss.icon.whip",
   i_wand: "ss.icon.wand",
   i_boomerang: "ss.icon.boomerang",
