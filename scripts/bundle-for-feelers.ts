@@ -50,6 +50,7 @@ const MAP: Record<string, string> = {
   scanline: "ss.proj.scanline",
 
   ground: "ss.env.ground",
+  menu_bg: "ss.env.menu",
   t_spire: "ss.terrain.spire",
   t_boulder: "ss.terrain.boulder",
   t_fungi: "ss.terrain.fungi",
