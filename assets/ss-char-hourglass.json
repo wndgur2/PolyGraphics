@@ -33,11 +33,11 @@
       ]
     },
     "whip": {
-      "description": "the feelers crack forward twice and recoil — in this brood the whip is the animal, not a tool it holds",
+      "description": "the near feeler shoots out to twice its length and snaps back, twice; the far one counter-sweeps behind it. In this brood the whip is the animal, not a tool it holds, so the throw has to be visible in the feeler itself — one animated prop per part means the near one spends its channel on reach and the far one on the arc.",
       "duration": 0.35,
       "tracks": [
-        { "part": "antenna", "prop": "rot", "keys": [[0, -13], [0.08, 44], [0.22, -24], [0.36, 36], [0.58, -19], [1, -13]] },
-        { "part": "antenna_far", "prop": "rot", "keys": [[0, 14], [0.1, -34], [0.24, 20], [0.38, -28], [0.6, 17], [1, 14]] }
+        { "part": "antenna", "prop": "scale", "keys": [[0, 1], [0.08, 2.05], [0.24, 1.15], [0.38, 1.8], [0.62, 1.05], [1, 1]] },
+        { "part": "antenna_far", "prop": "rot", "keys": [[0, 14], [0.1, -46], [0.24, 26], [0.38, -38], [0.6, 18], [1, 14]] }
       ]
     }
   }
