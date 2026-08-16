@@ -29,14 +29,6 @@
         { "part": "antenna", "prop": "rot", "keys": [[0, -13], [0.35, 17], [0.7, -4], [1, -13]] },
         { "part": "antenna_far", "prop": "rot", "keys": [[0, 14], [0.4, -12], [0.75, 6], [1, 14]] }
       ]
-    },
-    "whip": {
-      "description": "the near feeler shoots out past the shell — four times its length, well outside the body — and snaps back, twice; the far one counter-sweeps behind it. In this brood the whip is the animal, not a tool it holds, so the throw has to be visible in the feeler itself — one animated prop per part means the near one spends its channel on reach and the far one on the arc.",
-      "duration": 0.35,
-      "tracks": [
-        { "part": "antenna", "prop": "scale", "keys": [[0, 1], [0.08, 4.4], [0.24, 1.4], [0.38, 3.6], [0.62, 1.1], [1, 1]] },
-        { "part": "antenna_far", "prop": "rot", "keys": [[0, 14], [0.1, -46], [0.24, 26], [0.38, -38], [0.6, 18], [1, 14]] }
-      ]
     }
   }
 }
