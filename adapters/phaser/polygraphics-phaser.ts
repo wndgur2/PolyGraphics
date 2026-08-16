@@ -455,6 +455,16 @@ export interface SheetOptions {
   resolution?: number;
   /** Phaser repeat: -1 loops forever (default), 0 plays once */
   repeat?: number;
+  /**
+   * Extra room around the document's canvas, in document units per side.
+   *
+   * A document's `size` is the body at rest, so anything an animation throws
+   * past it — a limb that doubles in length, a lash that leaves the frame — is
+   * clipped at the cell edge and simply never appears. Padding is symmetric
+   * and the anchor moves with it, so the body stays exactly where it was and
+   * the new space is only somewhere for the motion to go.
+   */
+  bleed?: number;
 }
 
 export interface SheetResult {
@@ -479,8 +489,9 @@ export function bakeSheet(scene: SheetSceneLike, ir: IRAsset, opts: SheetOptions
   const fps = opts.fps ?? 15;
   const res = (opts.resolution ?? 1) * vScale;
   const frames = Math.max(2, Math.min(opts.maxFrames ?? 48, Math.round(anim.duration * fps)));
-  const cellW = Math.ceil(ir.size[0] * res);
-  const cellH = Math.ceil(ir.size[1] * res);
+  const bleed = opts.bleed ?? 0;
+  const cellW = Math.ceil((ir.size[0] + bleed * 2) * res);
+  const cellH = Math.ceil((ir.size[1] + bleed * 2) * res);
   // Wrap into a grid only when a single row would exceed the width floor, and
   // never allocate more columns than there are frames to put in them.
   const cols = Math.max(1, Math.min(frames, Math.floor((opts.maxWidth ?? 2048) / cellW)));
@@ -491,7 +502,16 @@ export function bakeSheet(scene: SheetSceneLike, ir: IRAsset, opts: SheetOptions
   for (let f = 0; f < frames; f++) {
     const col = f % cols;
     const row = Math.floor(f / cols);
-    const root: Mat = [res, 0, 0, res, col * cellW + cellW * ir.anchor[0], row * cellH + cellH * ir.anchor[1]];
+    // Anchor against the *document*, then shift by the bleed, so padding never
+    // moves the body inside its cell.
+    const root: Mat = [
+      res,
+      0,
+      0,
+      res,
+      col * cellW + (ir.size[0] * ir.anchor[0] + bleed) * res,
+      row * cellH + (ir.size[1] * ir.anchor[1] + bleed) * res,
+    ];
     // progress stops short of 1 so the last frame flows back into the first
     for (const n of poseNodes(nodes, anim, f / frames)) drawNode(g, n, root, 1);
   }
