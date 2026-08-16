@@ -17,14 +17,17 @@
   ],
   "animations": {
     "idle": {
-      "description": "a held breath",
-      "duration": 1.8,
+      "description": "the shell holds its breath; the dead feelers keep sweeping for a signal that never comes",
+      "duration": 1.15,
       "tracks": [
-        { "part": "shell", "prop": "y", "keys": [[0, 0], [0.5, -1.1], [1, 0]] },
-        { "part": "facet_l", "prop": "y", "keys": [[0, 0], [0.5, -1.1], [1, 0]] },
-        { "part": "facet_r", "prop": "y", "keys": [[0, 0], [0.5, -1.1], [1, 0]] },
-        { "part": "organ", "prop": "y", "keys": [[0, 1.4], [0.5, 0.3], [1, 1.4]] },
-        { "part": "antenna", "prop": "rot", "keys": [[0, -6], [0.5, 2], [1, -6]] }
+        { "part": "shell", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "facet_l", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "facet_r", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "ridge", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "gloss", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "organ", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "antenna", "prop": "rot", "keys": [[0, -13], [0.35, 17], [0.7, -4], [1, -13]] },
+        { "part": "antenna_far", "prop": "rot", "keys": [[0, 14], [0.4, -12], [0.75, 6], [1, 14]] }
       ]
     }
   }

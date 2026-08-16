@@ -15,8 +15,8 @@
       "description": "blobs drift up and thin out, staggered",
       "duration": 2.4,
       "tracks": [
-        { "part": "w1", "prop": "y", "keys": [[0, 1.5], [1, -3]] },
-        { "part": "w2", "prop": "y", "keys": [[0, 1], [1, -3.5]] },
+        { "part": "w1", "prop": "y", "keys": [[0, 0], [1, -4.5]] },
+        { "part": "w2", "prop": "y", "keys": [[0, 0], [1, -4.5]] },
         { "part": "w3", "prop": "opacity", "keys": [[0, 0.9], [0.6, 0.4], [1, 0]] }
       ]
     }

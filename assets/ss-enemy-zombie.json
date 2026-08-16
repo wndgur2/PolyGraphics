@@ -32,12 +32,12 @@
       "description": "heavy lopsided gait — the long arm swings a beat behind the legs",
       "duration": 1.1,
       "tracks": [
-        { "part": "torso", "prop": "rot", "keys": [[0, 5], [0.5, 9], [1, 5]] },
-        { "part": "head", "prop": "rot", "keys": [[0, 15], [0.5, 9], [1, 15]] },
-        { "part": "leg", "prop": "rot", "keys": [[0, -12], [0.5, 4], [1, -12]] },
-        { "part": "leg_far", "prop": "rot", "keys": [[0, 14], [0.5, -2], [1, 14]] },
-        { "part": "arm", "prop": "rot", "keys": [[0, -14], [0.5, -30], [1, -14]] },
-        { "part": "arm_far", "prop": "rot", "keys": [[0, -20], [0.5, -4], [1, -20]] }
+        { "part": "torso", "prop": "rot", "keys": [[0, 0], [0.5, 4], [1, 0]] },
+        { "part": "head", "prop": "rot", "keys": [[0, 0], [0.5, -6], [1, 0]] },
+        { "part": "leg", "prop": "rot", "keys": [[0, 0], [0.5, 16], [1, 0]] },
+        { "part": "leg_far", "prop": "rot", "keys": [[0, 0], [0.5, -16], [1, 0]] },
+        { "part": "arm", "prop": "rot", "keys": [[0, 0], [0.5, -16], [1, 0]] },
+        { "part": "arm_far", "prop": "rot", "keys": [[0, 0], [0.5, 16], [1, 0]] }
       ]
     }
   }

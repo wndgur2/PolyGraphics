@@ -29,13 +29,13 @@
       "description": "legs cycle out of phase, body bobs, feelers sweep",
       "duration": 0.5,
       "tracks": [
-        { "part": "leg_b", "prop": "rot", "keys": [[0, 18], [0.5, 34], [1, 18]] },
-        { "part": "leg_m", "prop": "rot", "keys": [[0, 8], [0.5, -8], [1, 8]] },
-        { "part": "leg_f", "prop": "rot", "keys": [[0, -30], [0.5, -12], [1, -30]] },
-        { "part": "body", "prop": "y", "keys": [[0, 0.8], [0.5, -0.4], [1, 0.8]] },
-        { "part": "back", "prop": "y", "keys": [[0, -2], [0.5, -3.2], [1, -2]] },
-        { "part": "feeler", "prop": "rot", "keys": [[0, 16], [0.5, 30], [1, 16]] },
-        { "part": "feeler_far", "prop": "rot", "keys": [[0, -30], [0.5, -40], [1, -30]] }
+        { "part": "leg_b", "prop": "rot", "keys": [[0, 0], [0.5, 16], [1, 0]] },
+        { "part": "leg_m", "prop": "rot", "keys": [[0, 0], [0.5, -16], [1, 0]] },
+        { "part": "leg_f", "prop": "rot", "keys": [[0, 0], [0.5, 18], [1, 0]] },
+        { "part": "body", "prop": "y", "keys": [[0, 0], [0.5, -1.2], [1, 0]] },
+        { "part": "back", "prop": "y", "keys": [[0, 0], [0.5, -1.2], [1, 0]] },
+        { "part": "feeler", "prop": "rot", "keys": [[0, 0], [0.5, 14], [1, 0]] },
+        { "part": "feeler_far", "prop": "rot", "keys": [[0, 0], [0.5, -10], [1, 0]] }
       ]
     }
   }

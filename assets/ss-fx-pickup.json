@@ -21,8 +21,8 @@
         { "part": "ring", "prop": "scale", "keys": [[0, 0.2], [1, 1.5]], "ease": "backOut" },
         { "part": "bloom", "prop": "opacity", "keys": [[0, 0.2], [0.3, 1], [1, 0]] },
         { "part": "core", "prop": "scale", "keys": [[0, 1.4], [0.35, 0.6], [1, 0]] },
-        { "part": "rise_a", "prop": "y", "keys": [[0, -2], [1, -9]], "ease": "linear" },
-        { "part": "rise_b", "prop": "y", "keys": [[0, -6], [1, -15]], "ease": "linear" },
+        { "part": "rise_a", "prop": "y", "keys": [[0, 0], [1, -7]], "ease": "linear" },
+        { "part": "rise_b", "prop": "y", "keys": [[0, 0], [1, -9]], "ease": "linear" },
         { "part": "rise_c", "prop": "opacity", "keys": [[0, 0.9], [0.6, 0.5], [1, 0]] }
       ]
     }

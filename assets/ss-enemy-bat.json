@@ -28,10 +28,10 @@
       "description": "wings beat out of phase, body rocks under them",
       "duration": 0.26,
       "tracks": [
-        { "part": "wing", "prop": "rot", "keys": [[0, -30], [0.5, -2], [1, -30]] },
-        { "part": "vein", "prop": "rot", "keys": [[0, -30], [0.5, -2], [1, -30]] },
-        { "part": "wing_far", "prop": "rot", "keys": [[0, 26], [0.5, -2], [1, 26]] },
-        { "part": "body", "prop": "y", "keys": [[0, 1], [0.5, 1.9], [1, 1]] },
+        { "part": "wing", "prop": "rot", "keys": [[0, 0], [0.5, 28], [1, 0]] },
+        { "part": "vein", "prop": "rot", "keys": [[0, 0], [0.5, 28], [1, 0]] },
+        { "part": "wing_far", "prop": "rot", "keys": [[0, 0], [0.5, -28], [1, 0]] },
+        { "part": "body", "prop": "y", "keys": [[0, 0], [0.5, 0.9], [1, 0]] },
         { "part": "wisp", "prop": "opacity", "keys": [[0, 0.85], [0.5, 0.5], [1, 0.85]] }
       ]
     }
