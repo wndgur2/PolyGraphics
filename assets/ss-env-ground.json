@@ -1,31 +1,146 @@
 {
   "id": "ss.env.ground",
   "name": "Hive ground (SS)",
-  "description": "Feelers' 128px ground tile: dark iron-red dirt. Warm enough to read as earth rather than void, dark enough that the hive's magenta still has somewhere to go — the ambient screen stays calm and event pulses do the shouting. A 32px checker as a whisper of white, burrow pits, and rust flecks where old scent trails dried. Hand-listed pit and fleck coordinates are kept verbatim from the original makeGround, so the tile stays pixel-stable.",
-  "tags": ["ss-env", "tile"],
+  "description": "Feelers' 128px ground tile: dark iron-red dirt. Warm enough to read as earth rather than void, dark enough that the hive's magenta still has somewhere to go \u2014 the ambient screen stays calm and event pulses do the shouting. No checker: the 32px grid read as tiling rather than as ground, so the floor is now plain dirt with burrow pits and rust flecks where old scent trails dried. Hand-listed pit and fleck coordinates are kept verbatim from the original makeGround, so the tile stays pixel-stable.",
+  "tags": [
+    "ss-env",
+    "tile"
+  ],
   "size": [128, 128],
   "parts": [
-    { "id": "base", "shape": { "kind": "rect", "w": 128, "h": 128 }, "fill": "$soil" },
-    { "id": "c1", "at": [-48, -48], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
-    { "id": "c2", "at": [16, -48], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
-    { "id": "c3", "at": [-16, -16], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
-    { "id": "c4", "at": [48, -16], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
-    { "id": "c5", "at": [-48, 16], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
-    { "id": "c6", "at": [16, 16], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
-    { "id": "c7", "at": [-16, 48], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
-    { "id": "c8", "at": [48, 48], "shape": { "kind": "rect", "w": 32, "h": 32 }, "fill": "$white@0.03" },
-    { "id": "pit1", "at": [-52, -24], "shape": { "kind": "circle", "r": 9 }, "fill": "$ink@heavy" },
-    { "id": "pit2", "at": [6, -52], "shape": { "kind": "circle", "r": 7 }, "fill": "$ink@heavy" },
-    { "id": "pit3", "at": [36, 26], "shape": { "kind": "circle", "r": 11 }, "fill": "$ink@heavy" },
-    { "id": "pit4", "at": [-24, 36], "shape": { "kind": "circle", "r": 6 }, "fill": "$ink@heavy" },
-    { "id": "pit5", "at": [26, -14], "shape": { "kind": "circle", "r": 5 }, "fill": "$ink@heavy" },
-    { "id": "fleck1", "at": [-42.5, -42.5], "shape": { "kind": "rect", "w": 3, "h": 3 }, "fill": "$rust" },
-    { "id": "fleck2", "at": [-2.5, 13.5], "shape": { "kind": "rect", "w": 3, "h": 3 }, "fill": "$rust" },
-    { "id": "fleck3", "at": [45.5, -32.5], "shape": { "kind": "rect", "w": 3, "h": 3 }, "fill": "$rust" },
-    { "id": "fleck4", "at": [21.5, 53.5], "shape": { "kind": "rect", "w": 3, "h": 3 }, "fill": "$rust" },
-    { "id": "speck1", "at": [-17, -11], "shape": { "kind": "rect", "w": 2, "h": 2 }, "fill": "$rust.dark@heavy" },
-    { "id": "speck2", "at": [33, 5], "shape": { "kind": "rect", "w": 2, "h": 2 }, "fill": "$rust.dark@heavy" },
-    { "id": "speck3", "at": [-49, 37], "shape": { "kind": "rect", "w": 2, "h": 2 }, "fill": "$rust.dark@heavy" },
-    { "id": "speck4", "at": [53, -51], "shape": { "kind": "rect", "w": 2, "h": 2 }, "fill": "$rust.dark@heavy" }
+    {
+      "id": "base",
+      "shape": {
+        "kind": "rect",
+        "w": 128,
+        "h": 128
+      },
+      "fill": "$soil"
+    },
+    {
+      "id": "pit1",
+      "at": [-52, -24],
+      "shape": {
+        "kind": "circle",
+        "r": 9
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "pit2",
+      "at": [6, -52],
+      "shape": {
+        "kind": "circle",
+        "r": 7
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "pit3",
+      "at": [36, 26],
+      "shape": {
+        "kind": "circle",
+        "r": 11
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "pit4",
+      "at": [-24, 36],
+      "shape": {
+        "kind": "circle",
+        "r": 6
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "pit5",
+      "at": [26, -14],
+      "shape": {
+        "kind": "circle",
+        "r": 5
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "fleck1",
+      "at": [-42.5, -42.5],
+      "shape": {
+        "kind": "rect",
+        "w": 3,
+        "h": 3
+      },
+      "fill": "$rust"
+    },
+    {
+      "id": "fleck2",
+      "at": [-2.5, 13.5],
+      "shape": {
+        "kind": "rect",
+        "w": 3,
+        "h": 3
+      },
+      "fill": "$rust"
+    },
+    {
+      "id": "fleck3",
+      "at": [45.5, -32.5],
+      "shape": {
+        "kind": "rect",
+        "w": 3,
+        "h": 3
+      },
+      "fill": "$rust"
+    },
+    {
+      "id": "fleck4",
+      "at": [21.5, 53.5],
+      "shape": {
+        "kind": "rect",
+        "w": 3,
+        "h": 3
+      },
+      "fill": "$rust"
+    },
+    {
+      "id": "speck1",
+      "at": [-17, -11],
+      "shape": {
+        "kind": "rect",
+        "w": 2,
+        "h": 2
+      },
+      "fill": "$rust.dark@heavy"
+    },
+    {
+      "id": "speck2",
+      "at": [33, 5],
+      "shape": {
+        "kind": "rect",
+        "w": 2,
+        "h": 2
+      },
+      "fill": "$rust.dark@heavy"
+    },
+    {
+      "id": "speck3",
+      "at": [-49, 37],
+      "shape": {
+        "kind": "rect",
+        "w": 2,
+        "h": 2
+      },
+      "fill": "$rust.dark@heavy"
+    },
+    {
+      "id": "speck4",
+      "at": [53, -51],
+      "shape": {
+        "kind": "rect",
+        "w": 2,
+        "h": 2
+      },
+      "fill": "$rust.dark@heavy"
+    }
   ]
 }
