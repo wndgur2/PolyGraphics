@@ -51,41 +51,51 @@
   ],
   "variants": {
     "evolved": {
-      "description": "Sentinel Drone's chip, driven hard enough to go through. Drawn out into a lance with a bright leading facet and the hexagon squashed behind it — the same splinter, moving fast enough that its shape has stopped being the point.",
-      "scale": 1.2,
+      "description": "Sentinel Drone's chip, driven hard enough to go through. Nearly twice the size of the one it grew from and lit rather than grey — a shot that pierces has to be findable on a dark floor, and the unevolved chip is deliberately small enough to lose.",
+      "scale": 1.9,
       "set": {
-        "plate.fill": "$steel",
+        "trail.fill": "$aqua@soft",
+        "plate.fill": "$frost.dark",
         "face.fill": "$white"
       },
       "add": [
         {
+          "id": "halo",
+          "shape": {
+            "kind": "ellipse",
+            "rx": 6.4,
+            "ry": 3.4
+          },
+          "fill": "$aqua@ghost"
+        },
+        {
           "id": "lance",
           "at": [
-            1.6,
+            2.2,
             0
           ],
           "shape": {
             "kind": "poly",
             "points": [
               [
-                5.4,
+                5.8,
                 0
               ],
               [
-                0.4,
-                -1.7
+                0.6,
+                -2
               ],
               [
-                -3.4,
+                -3.6,
                 0
               ],
               [
-                0.4,
-                1.7
+                0.6,
+                2
               ]
             ]
           },
-          "fill": "$frost.light2",
+          "fill": "$aqua.light",
           "stroke": {
             "color": "$ink",
             "width": "hair"
@@ -94,12 +104,12 @@
         {
           "id": "spark",
           "at": [
-            4.6,
+            5.6,
             0
           ],
           "shape": {
             "kind": "circle",
-            "r": 1.15
+            "r": 1.5
           },
           "fill": "$white"
         }
