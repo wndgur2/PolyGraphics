@@ -45,6 +45,7 @@ const MAP: Record<string, string> = {
   p_drone: "ss.proj.drone",
   p_ball: "ss.proj.ball",
   p_card: "ss.proj.card",
+  p_chip: "ss.proj.chip",
   ring: "ss.proj.ring",
   aura: "ss.proj.aura",
   scanline: "ss.proj.scanline",
@@ -56,6 +57,9 @@ const MAP: Record<string, string> = {
   t_boulder: "ss.terrain.boulder",
   t_fungi: "ss.terrain.fungi",
   arrow: "ss.terrain.arrow",
+
+  gust: "ss.fx.gust",
+  punch: "ss.fx.punch",
 
   i_whip: "ss.icon.whip",
   i_wand: "ss.icon.wand",
@@ -74,6 +78,8 @@ const EVO = ["i_whip", "i_wand", "i_boomerang"];
  */
 const VARIANTS: { key: string; variant: string; as: string }[] = [
   { key: "slash", variant: "recover", as: "slash_recover" },
+  { key: "p_card", variant: "evolved", as: "p_card_evo" },
+  { key: "p_chip", variant: "evolved", as: "p_chip_evo" },
 ];
 
 const bundle: Record<string, unknown> = {};

@@ -1,0 +1,60 @@
+{
+  "id": "ss.fx.gust",
+  "name": "Gust",
+  "description": "Air dragged along behind Twin Vortex. Three curved streaks of different length, none of them closed and none of them concentric — a closed ring reads as a shockwave, and this is supposed to read as the room being pulled after something.",
+  "tags": [
+    "ss-fx",
+    "trail"
+  ],
+  "size": [
+    28,
+    20
+  ],
+  "parts": [
+    {
+      "id": "arc_long",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 11,
+        "width": 1.6,
+        "from": 205,
+        "to": 335
+      },
+      "fill": "$frost.light@soft"
+    },
+    {
+      "id": "arc_mid",
+      "at": [
+        2.5,
+        1.5
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 7.5,
+        "width": 1.3,
+        "from": 195,
+        "to": 300
+      },
+      "fill": "$frost@soft"
+    },
+    {
+      "id": "arc_short",
+      "at": [
+        -2,
+        -2
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 5,
+        "width": 1,
+        "from": 220,
+        "to": 290
+      },
+      "fill": "$white@ghost"
+    }
+  ]
+}

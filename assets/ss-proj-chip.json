@@ -1,0 +1,109 @@
+{
+  "id": "ss.proj.chip",
+  "name": "Shell chip",
+  "description": "A splinter the orbiter sheds when it fires — the same hexagon it is, an eighth the size and still cold. Its whole job is to not be mistaken for the dart you throw, so it keeps the drone's grey and none of the violet.",
+  "tags": [
+    "ss-proj",
+    "orbital"
+  ],
+  "size": [
+    10,
+    10
+  ],
+  "parts": [
+    {
+      "id": "trail",
+      "at": [
+        -3.2,
+        0
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.2,
+        "ry": 1.1
+      },
+      "fill": "$frost@ghost"
+    },
+    {
+      "id": "plate",
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.4,
+        "rot": 30
+      },
+      "fill": "$steel.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "face",
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 2.1,
+        "rot": 30
+      },
+      "fill": "$frost.light"
+    }
+  ],
+  "variants": {
+    "evolved": {
+      "description": "Sentinel Drone's chip, driven hard enough to go through. Drawn out into a lance with a bright leading facet and the hexagon squashed behind it — the same splinter, moving fast enough that its shape has stopped being the point.",
+      "scale": 1.2,
+      "set": {
+        "plate.fill": "$steel",
+        "face.fill": "$white"
+      },
+      "add": [
+        {
+          "id": "lance",
+          "at": [
+            1.6,
+            0
+          ],
+          "shape": {
+            "kind": "poly",
+            "points": [
+              [
+                5.4,
+                0
+              ],
+              [
+                0.4,
+                -1.7
+              ],
+              [
+                -3.4,
+                0
+              ],
+              [
+                0.4,
+                1.7
+              ]
+            ]
+          },
+          "fill": "$frost.light2",
+          "stroke": {
+            "color": "$ink",
+            "width": "hair"
+          }
+        },
+        {
+          "id": "spark",
+          "at": [
+            4.6,
+            0
+          ],
+          "shape": {
+            "kind": "circle",
+            "r": 1.15
+          },
+          "fill": "$white"
+        }
+      ]
+    }
+  }
+}

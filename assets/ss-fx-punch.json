@@ -1,0 +1,136 @@
+{
+  "id": "ss.fx.punch",
+  "name": "Puncture",
+  "description": "What a pierced body leaves behind for an instant: a hole with its edge lit and four short splinters thrown out along the line of travel. Marks the moment a shot went through rather than stopped, which is the whole difference the evolution buys.",
+  "tags": [
+    "ss-fx",
+    "impact"
+  ],
+  "size": [
+    24,
+    24
+  ],
+  "parts": [
+    {
+      "id": "hole",
+      "shape": {
+        "kind": "circle",
+        "r": 4.2
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "rim",
+      "shape": {
+        "kind": "ring",
+        "r": 4.8,
+        "width": 1.2
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "shard_a",
+      "at": [
+        7.6,
+        -1.6
+      ],
+      "rot": -12,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3.4,
+            0
+          ],
+          [
+            -2.6,
+            -1
+          ],
+          [
+            -2.6,
+            1
+          ]
+        ]
+      },
+      "fill": "$frost.light@soft"
+    },
+    {
+      "id": "shard_b",
+      "at": [
+        7.2,
+        2.2
+      ],
+      "rot": 14,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.8,
+            0
+          ],
+          [
+            -2.2,
+            -0.8
+          ],
+          [
+            -2.2,
+            0.8
+          ]
+        ]
+      },
+      "fill": "$white@soft"
+    },
+    {
+      "id": "shard_c",
+      "at": [
+        -7.4,
+        -1.2
+      ],
+      "rot": 8,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3,
+            0
+          ],
+          [
+            2.4,
+            -0.9
+          ],
+          [
+            2.4,
+            0.9
+          ]
+        ]
+      },
+      "fill": "$frost@soft"
+    },
+    {
+      "id": "shard_d",
+      "at": [
+        -6.8,
+        2
+      ],
+      "rot": -10,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.4,
+            0
+          ],
+          [
+            2,
+            -0.7
+          ],
+          [
+            2,
+            0.7
+          ]
+        ]
+      },
+      "fill": "$frost@ghost"
+    }
+  ]
+}

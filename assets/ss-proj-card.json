@@ -2,14 +2,214 @@
   "id": "ss.proj.card",
   "name": "Wing blade",
   "description": "A Drifter's wing membrane stretched taut on a bone frame and thrown edge-first — the veins are still in it. Of the whole arsenal this is the one that most obviously used to be alive, which is the point.",
-  "tags": ["ss-proj", "ranged"],
-  "size": [12, 16],
+  "tags": [
+    "ss-proj",
+    "ranged"
+  ],
+  "size": [
+    12,
+    16
+  ],
   "parts": [
-    { "id": "frame", "shape": { "kind": "rect", "w": 12, "h": 16, "corner": 2.5 }, "fill": "$husk.dark", "stroke": { "color": "$ink", "width": "hair" } },
-    { "id": "membrane", "shape": { "kind": "rect", "w": 9.4, "h": 13.4, "corner": 2 }, "fill": "$steel.light" },
-    { "id": "vein_a", "at": [-0.6, -2.4], "rot": 62, "shape": { "kind": "rect", "w": 9.6, "h": 0.7 }, "fill": "$slate.light" },
-    { "id": "vein_b", "at": [0.8, 2.6], "rot": 74, "shape": { "kind": "rect", "w": 8, "h": 0.6 }, "fill": "$slate.light" },
-    { "id": "spine", "at": [-4.4, 0], "shape": { "kind": "rect", "w": 1.4, "h": 14.4, "corner": 0.6 }, "fill": "$husk" },
-    { "id": "edge", "at": [5.2, 0], "shape": { "kind": "rect", "w": 1, "h": 13.6 }, "fill": "$frost.light" }
-  ]
+    {
+      "id": "frame",
+      "shape": {
+        "kind": "rect",
+        "w": 12,
+        "h": 16,
+        "corner": 2.5
+      },
+      "fill": "$husk.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "membrane",
+      "shape": {
+        "kind": "rect",
+        "w": 9.4,
+        "h": 13.4,
+        "corner": 2
+      },
+      "fill": "$steel.light"
+    },
+    {
+      "id": "vein_a",
+      "at": [
+        -0.6,
+        -2.4
+      ],
+      "rot": 62,
+      "shape": {
+        "kind": "rect",
+        "w": 9.6,
+        "h": 0.7
+      },
+      "fill": "$slate.light"
+    },
+    {
+      "id": "vein_b",
+      "at": [
+        0.8,
+        2.6
+      ],
+      "rot": 74,
+      "shape": {
+        "kind": "rect",
+        "w": 8,
+        "h": 0.6
+      },
+      "fill": "$slate.light"
+    },
+    {
+      "id": "spine",
+      "at": [
+        -4.4,
+        0
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1.4,
+        "h": 14.4,
+        "corner": 0.6
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "edge",
+      "at": [
+        5.2,
+        0
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1,
+        "h": 13.6
+      },
+      "fill": "$frost.light"
+    }
+  ],
+  "variants": {
+    "evolved": {
+      "description": "Marked Deck's ace: the membrane cured to gold leaf and a spade burned into it, point up. A wing that has been made into a card rather than a card that was always one — the bone frame and the spine are still there under the gilding.",
+      "scale": 1.15,
+      "set": {
+        "frame.fill": "$gold.dark2",
+        "frame.stroke.color": "$ink",
+        "membrane.fill": "$gold.light",
+        "vein_a.fill": "$gold.dark@0.5",
+        "vein_b.fill": "$gold.dark@0.5",
+        "spine.fill": "$gold.dark",
+        "edge.fill": "$gold.light2"
+      },
+      "add": [
+        {
+          "id": "pip_point",
+          "at": [
+            0.4,
+            -0.6
+          ],
+          "shape": {
+            "kind": "poly",
+            "points": [
+              [
+                0,
+                -5.2
+              ],
+              [
+                3.5,
+                0.8
+              ],
+              [
+                -3.5,
+                0.8
+              ]
+            ]
+          },
+          "fill": "$ink"
+        },
+        {
+          "id": "pip_lobe",
+          "at": [
+            -1.9,
+            0.2
+          ],
+          "mirrorX": true,
+          "shape": {
+            "kind": "circle",
+            "r": 2.35
+          },
+          "fill": "$ink"
+        },
+        {
+          "id": "pip_stem",
+          "at": [
+            0.4,
+            3.9
+          ],
+          "shape": {
+            "kind": "poly",
+            "points": [
+              [
+                0,
+                -1.6
+              ],
+              [
+                1.9,
+                2.3
+              ],
+              [
+                -1.9,
+                2.3
+              ]
+            ]
+          },
+          "fill": "$ink"
+        },
+        {
+          "id": "ace_bar",
+          "at": [
+            -3.6,
+            -5.9
+          ],
+          "shape": {
+            "kind": "rect",
+            "w": 2.2,
+            "h": 0.5
+          },
+          "fill": "$ink"
+        },
+        {
+          "id": "ace_leg",
+          "at": [
+            -4.3,
+            -6.8
+          ],
+          "rot": 20,
+          "shape": {
+            "kind": "rect",
+            "w": 0.5,
+            "h": 2.6
+          },
+          "fill": "$ink"
+        },
+        {
+          "id": "ace_leg2",
+          "at": [
+            -2.9,
+            -6.8
+          ],
+          "rot": -20,
+          "shape": {
+            "kind": "rect",
+            "w": 0.5,
+            "h": 2.6
+          },
+          "fill": "$ink"
+        }
+      ]
+    }
+  }
 }
