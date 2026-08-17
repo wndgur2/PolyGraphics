@@ -1,7 +1,7 @@
 {
   "id": "ss.proj.bolt",
   "name": "Shell dart",
-  "description": "A chip of molt shell knapped to a point, thrown, and still wet with the scent you marked it with — the violet is yours, which is what separates it from the drone's grey chips at a glance. Points +x, which is the direction the weapon code rotates it to.",
+  "description": "A chip of molt shell knapped to a point and thrown, lit cold along the edge. Points +x, which is the direction the weapon code rotates it to. Seeker Storm's variant runs pink instead — the one that hunts is the one that carries your scent.",
   "tags": [
     "ss-proj",
     "ranged"
@@ -22,7 +22,7 @@
         "rx": 9.5,
         "ry": 4.2
       },
-      "fill": "$pheromone@ghost"
+      "fill": "$frost@ghost"
     },
     {
       "id": "streak",
@@ -51,7 +51,7 @@
           ]
         ]
       },
-      "fill": "$pheromone@soft"
+      "fill": "$frost@soft"
     },
     {
       "id": "body",
@@ -113,7 +113,7 @@
           ]
         ]
       },
-      "fill": "$orchid.light"
+      "fill": "$aqua.light"
     },
     {
       "id": "tip",
@@ -138,7 +138,7 @@
           ]
         ]
       },
-      "fill": "$pheromone.light"
+      "fill": "$frost.light"
     }
   ],
   "animations": {
@@ -201,6 +201,17 @@
           ]
         }
       ]
+    }
+  },
+  "variants": {
+    "evolved": {
+      "description": "Seeker Storm's dart: the same shell, wet with the scent it is following. Pink where the thrown one is cold — a bolt that turns is a bolt that knows where you want it, and that has to read at a glance from the ones that just fly straight.",
+      "set": {
+        "glow.fill": "$pink@ghost",
+        "streak.fill": "$pink@soft",
+        "facet.fill": "$pink.light",
+        "tip.fill": "$pink.light2"
+      }
     }
   }
 }

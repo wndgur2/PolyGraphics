@@ -80,6 +80,7 @@ const VARIANTS: { key: string; variant: string; as: string }[] = [
   { key: "slash", variant: "recover", as: "slash_recover" },
   { key: "p_card", variant: "evolved", as: "p_card_evo" },
   { key: "p_chip", variant: "evolved", as: "p_chip_evo" },
+  { key: "p_bolt", variant: "evolved", as: "p_bolt_evo" },
 ];
 
 const bundle: Record<string, unknown> = {};
