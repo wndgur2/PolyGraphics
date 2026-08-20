@@ -1,0 +1,13 @@
+{
+  "id": "ss.icon.greed",
+  "name": "Greed icon",
+  "description": "Meta powerup icon: gold coin with a pale slot gleam down the middle. Port of the hand-drawn i_greed from Feelers' BootScene.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$gold" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "coin", "shape": { "kind": "circle", "r": 9 }, "fill": "$gold" },
+    { "id": "slot", "shape": { "kind": "rect", "w": 3, "h": 12 }, "fill": "$gold.light2" }
+  ]
+}

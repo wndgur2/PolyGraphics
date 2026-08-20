@@ -1,0 +1,13 @@
+{
+  "id": "ss.icon.armor",
+  "name": "Armor icon",
+  "description": "Passive icon: pale steel shield — a flat plate over a point. Port of the hand-drawn i_armor from Feelers' BootScene.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$steel.light" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "plate", "at": [0, -4.5], "shape": { "kind": "rect", "w": 18, "h": 7 }, "fill": "$steel.light" },
+    { "id": "point", "shape": { "kind": "poly", "points": [[-9, -2], [9, -2], [0, 10]] }, "fill": "$steel.light" }
+  ]
+}

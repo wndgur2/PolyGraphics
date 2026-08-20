@@ -1,0 +1,15 @@
+{
+  "id": "ss.terrain.vent",
+  "name": "Pheromone vent (SS)",
+  "description": "Shape Survivors set dressing: a fumarole crater mound exhaling pheromone — three pink wisps rising and fading. Port of t_vent from Feelers' BootScene.",
+  "tags": ["ss-terrain"],
+  "size": [30, 26],
+  "parts": [
+    { "id": "rim", "at": [0, 6], "shape": { "kind": "ellipse", "rx": 14, "ry": 6.5 }, "fill": "$ink" },
+    { "id": "mound", "at": [0, 6], "shape": { "kind": "ellipse", "rx": 11.5, "ry": 4.5 }, "fill": "$smoke.dark" },
+    { "id": "throat", "at": [0, 5], "shape": { "kind": "ellipse", "rx": 6, "ry": 2.5 }, "fill": "$ink" },
+    { "id": "wisp_low", "at": [0, -1], "shape": { "kind": "circle", "r": 3.4 }, "fill": "$pheromone@0.5" },
+    { "id": "wisp_mid", "at": [-3, -6], "shape": { "kind": "circle", "r": 2.6 }, "fill": "$pheromone@0.32" },
+    { "id": "wisp_high", "at": [2, -10], "shape": { "kind": "circle", "r": 2.2 }, "fill": "$pheromone@0.18" }
+  ]
+}

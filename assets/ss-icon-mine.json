@@ -1,0 +1,18 @@
+{
+  "id": "ss.icon.mine",
+  "name": "Spore Caches icon",
+  "description": "UI slot icon for the spore caches. Composes `ss.proj.mine` itself via `use` — the cache the icon promises is the cache the ground shows — replacing the old hand-drawn i_mine (grey disc, red core). Rim keeps that original's red: the slot color the HUD taught players to read as 'trap'.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$coral" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "glyph", "use": "ss.proj.mine", "scale": 1.15 }
+  ],
+  "variants": {
+    "evolved": {
+      "description": "Gold-rimmed evolved twin (the old i_mine_evo), derived rather than drawn again.",
+      "set": { "tile.fill": "$gold" }
+    }
+  }
+}

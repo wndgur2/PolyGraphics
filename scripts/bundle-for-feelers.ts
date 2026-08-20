@@ -32,6 +32,9 @@ const MAP: Record<string, string> = {
   e_brute: "ss.enemy.brute",
   e_boss: "ss.enemy.boss",
   e_brazier: "ss.enemy.brazier",
+  e_spitter: "ss.enemy.spitter",
+  e_charger: "ss.enemy.charger",
+  e_shot: "ss.enemy.shot",
 
   gem: "ss.pickup.gem",
   food: "ss.pickup.food",
@@ -56,6 +59,14 @@ const MAP: Record<string, string> = {
   t_spire: "ss.terrain.spire",
   t_boulder: "ss.terrain.boulder",
   t_fungi: "ss.terrain.fungi",
+  t_chitin: "ss.terrain.chitin",
+  t_vent: "ss.terrain.vent",
+  t_ruins: "ss.terrain.ruins",
+  t_pillar: "ss.terrain.pillar",
+  t_arch: "ss.terrain.arch",
+  t_slab: "ss.terrain.slab",
+  t_rubble: "ss.terrain.rubble",
+  t_husk: "ss.terrain.husk",
   arrow: "ss.terrain.arrow",
 
   gust: "ss.fx.gust",
@@ -64,12 +75,36 @@ const MAP: Record<string, string> = {
   i_whip: "ss.icon.whip",
   i_wand: "ss.icon.wand",
   i_boomerang: "ss.icon.boomerang",
+  i_mine: "ss.icon.mine",
+  i_drone: "ss.icon.drone",
+  i_frost: "ss.icon.frost",
+  i_pendulum: "ss.icon.pendulum",
+  i_card: "ss.icon.card",
   i_might: "ss.icon.might",
   i_magnet: "ss.icon.magnet",
+
+  i_cooldown: "ss.icon.cooldown",
+  i_area: "ss.icon.area",
+  i_speed: "ss.icon.speed",
+  i_duration: "ss.icon.duration",
+  i_amount: "ss.icon.amount",
+  i_armor: "ss.icon.armor",
+  i_maxhp: "ss.icon.maxhp",
+  i_recovery: "ss.icon.recovery",
+  i_movespeed: "ss.icon.movespeed",
+  i_luck: "ss.icon.luck",
+  i_growth: "ss.icon.growth",
+  i_greed: "ss.icon.greed",
+  i_curse: "ss.icon.curse",
+  i_revival: "ss.icon.revival",
+  i_reroll: "ss.icon.reroll",
+  i_skip: "ss.icon.skip",
+  i_banish: "ss.icon.banish",
+  i_food: "ss.icon.food",
 };
 
 /** Icon keys whose `evolved` variant should bake as `<key>_evo`. */
-const EVO = ["i_whip", "i_wand", "i_boomerang"];
+const EVO = ["i_whip", "i_wand", "i_boomerang", "i_mine", "i_drone", "i_frost", "i_pendulum", "i_card"];
 
 /**
  * Any other variant the game wants as a texture of its own. `EVO` is the same

@@ -1,0 +1,16 @@
+{
+  "id": "ss.icon.curse",
+  "name": "Curse icon",
+  "description": "Meta powerup icon: arcane imp face — round head, dark eyes, two hanging fangs. Port of the hand-drawn i_curse from Feelers' BootScene.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$arcane" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "head", "at": [0, -2], "shape": { "kind": "circle", "r": 8 }, "fill": "$arcane" },
+    { "id": "eye_l", "at": [-3, -3], "shape": { "kind": "circle", "r": 2 }, "fill": "$coal.dark" },
+    { "id": "eye_r", "at": [3, -3], "shape": { "kind": "circle", "r": 2 }, "fill": "$coal.dark" },
+    { "id": "fang_l", "shape": { "kind": "poly", "points": [[-7, 4], [-3, 10], [-1, 4]] }, "fill": "$arcane" },
+    { "id": "fang_r", "shape": { "kind": "poly", "points": [[1, 4], [3, 10], [7, 4]] }, "fill": "$arcane" }
+  ]
+}

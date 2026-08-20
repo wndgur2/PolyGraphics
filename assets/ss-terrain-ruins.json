@@ -1,0 +1,20 @@
+{
+  "id": "ss.terrain.ruins",
+  "name": "Sunken ruin ring (SS)",
+  "description": "Shape Survivors set dressing: a sunken stone ring humming with old scent — a glowing pheromone core in a dark bowl, three broken standing stones around the rim. Port of t_ruins from Feelers' BootScene.",
+  "tags": ["ss-terrain"],
+  "size": [68, 52],
+  "parts": [
+    { "id": "shadow", "at": [0, 14], "shape": { "kind": "ellipse", "rx": 31, "ry": 10 }, "fill": "$ink@0.55" },
+    { "id": "ring_outline", "at": [0, 12], "shape": { "kind": "ellipse", "rx": 28, "ry": 12 }, "fill": "$ink" },
+    { "id": "ring", "at": [0, 12], "shape": { "kind": "ellipse", "rx": 25, "ry": 9.5 }, "fill": "$carapace.dark" },
+    { "id": "bowl", "at": [0, 12], "shape": { "kind": "ellipse", "rx": 15, "ry": 5.5 }, "fill": "$coal" },
+    { "id": "core", "at": [0, 12], "shape": { "kind": "ellipse", "rx": 7, "ry": 2.5 }, "fill": "$pheromone@0.85" },
+    { "id": "stone_l_outline", "at": [-22.5, 0], "shape": { "kind": "rect", "w": 10, "h": 23, "corner": 2 }, "fill": "$ink" },
+    { "id": "stone_l", "at": [-22.5, 0], "shape": { "kind": "rect", "w": 7, "h": 20, "corner": 2 }, "fill": "$carapace" },
+    { "id": "stone_r_outline", "at": [22, -3], "shape": { "kind": "rect", "w": 11, "h": 25, "corner": 2 }, "fill": "$ink" },
+    { "id": "stone_r", "at": [22, -3], "shape": { "kind": "rect", "w": 8, "h": 22, "corner": 2 }, "fill": "$carapace" },
+    { "id": "stone_t_outline", "at": [-0.5, -12], "shape": { "kind": "rect", "w": 10, "h": 19, "corner": 2 }, "fill": "$ink" },
+    { "id": "stone_t", "at": [-0.5, -12], "shape": { "kind": "rect", "w": 7, "h": 16, "corner": 2 }, "fill": "$carapace" }
+  ]
+}

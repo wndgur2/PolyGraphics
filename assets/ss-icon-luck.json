@@ -1,0 +1,16 @@
+{
+  "id": "ss.icon.luck",
+  "name": "Luck icon",
+  "description": "Passive icon: four-leaf clover — four venom circles and a darker stem. Port of the hand-drawn i_luck from Feelers' BootScene.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$venom" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "leaf_tl", "at": [-4, -4], "shape": { "kind": "circle", "r": 5 }, "fill": "$venom" },
+    { "id": "leaf_tr", "at": [4, -4], "shape": { "kind": "circle", "r": 5 }, "fill": "$venom" },
+    { "id": "leaf_bl", "at": [-4, 4], "shape": { "kind": "circle", "r": 5 }, "fill": "$venom" },
+    { "id": "leaf_br", "at": [4, 4], "shape": { "kind": "circle", "r": 5 }, "fill": "$venom" },
+    { "id": "stem", "at": [0, 4.5], "shape": { "kind": "rect", "w": 2, "h": 11 }, "fill": "$venom.dark2" }
+  ]
+}

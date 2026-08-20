@@ -1,0 +1,13 @@
+{
+  "id": "ss.icon.reroll",
+  "name": "Reroll icon",
+  "description": "Shop icon: venom refresh arrow — a three-quarter arc with an arrowhead at its start. Port of the hand-drawn i_reroll from Feelers' BootScene.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$venom" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "arc", "shape": { "kind": "ring", "r": 8, "width": 3, "from": -72, "to": 198 }, "fill": "$venom" },
+    { "id": "head", "shape": { "kind": "poly", "points": [[4, -11], [10, -5], [1, -4]] }, "fill": "$venom" }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "ss.icon.movespeed",
+  "name": "Move speed icon",
+  "description": "Passive icon: a single pale-aqua arrowhead aimed right. Port of the hand-drawn i_movespeed from Feelers' BootScene.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$aqua.light" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "dart", "shape": { "kind": "poly", "points": [[-9, -6], [9, 0], [-9, 6]] }, "fill": "$aqua.light" }
+  ]
+}

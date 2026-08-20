@@ -1,0 +1,13 @@
+{
+  "id": "ss.icon.amount",
+  "name": "Amount icon",
+  "description": "Passive icon: two white dots side by side — one more of everything. Port of the hand-drawn i_amount from Feelers' BootScene.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$white" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "dot_l", "at": [-5, 0], "shape": { "kind": "circle", "r": 4.5 }, "fill": "$white" },
+    { "id": "dot_r", "at": [5, 0], "shape": { "kind": "circle", "r": 4.5 }, "fill": "$white" }
+  ]
+}

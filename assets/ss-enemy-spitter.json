@@ -1,0 +1,15 @@
+{
+  "id": "ss.enemy.spitter",
+  "name": "Gland",
+  "description": "Ranged sac that holds the far edge of your reach and spits where you're going to be. A bulbous teal body with a firing snout on the right — drawn facing +x, the game flips it. Faithful port of the hand-drawn e_spitter (canvas grew 27→28 wide for the grid; geometry unchanged). Gameplay radius 11.",
+  "tags": ["ss-enemy", "gland"],
+  "size": [28, 24],
+  "meta": { "radius": 11 },
+  "parts": [
+    { "id": "outline", "at": [-2.5, 0], "shape": { "kind": "circle", "r": 11 }, "fill": "$ink" },
+    { "id": "snout_outline", "shape": { "kind": "poly", "points": [[5.5, -5], [12.5, 0], [5.5, 5]] }, "fill": "$ink" },
+    { "id": "body", "at": [-2.5, 0], "shape": { "kind": "circle", "r": 9 }, "fill": "$spore.dark" },
+    { "id": "snout", "shape": { "kind": "poly", "points": [[5.5, -3], [10, 0], [5.5, 3]] }, "fill": "$spore.dark" },
+    { "id": "gleam", "at": [-5.5, -3], "shape": { "kind": "circle", "r": 3.5 }, "fill": "$spore.light" }
+  ]
+}

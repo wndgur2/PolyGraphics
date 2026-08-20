@@ -1,0 +1,13 @@
+{
+  "id": "ss.icon.skip",
+  "name": "Skip icon",
+  "description": "Shop icon: pale double chevron skipping forward. Port of the hand-drawn i_skip from Feelers' BootScene.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$steel.light2" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "back", "shape": { "kind": "poly", "points": [[-7, -7], [1, 0], [-7, 7]] }, "fill": "$steel.light2" },
+    { "id": "front", "shape": { "kind": "poly", "points": [[1, -7], [9, 0], [1, 7]] }, "fill": "$steel.light2" }
+  ]
+}

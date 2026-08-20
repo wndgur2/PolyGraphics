@@ -1,0 +1,13 @@
+{
+  "id": "ss.icon.growth",
+  "name": "Growth icon",
+  "description": "Meta powerup icon: frost up-arrow, head over stem. Port of the hand-drawn i_growth from Feelers' BootScene.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$frost" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "head", "shape": { "kind": "poly", "points": [[0, -10], [8, 0], [-8, 0]] }, "fill": "$frost" },
+    { "id": "stem", "at": [0, 4.5], "shape": { "kind": "rect", "w": 6, "h": 11 }, "fill": "$frost" }
+  ]
+}
