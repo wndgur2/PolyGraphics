@@ -4,6 +4,7 @@
  *   npm run validate   schema + token lints only
  *   npm run render     out/svg/*.svg + out/manifest.json   (--theme <name>)
  *   npm run gallery    out/gallery.html
+ *   npm run dist       dist/assets.json — the bundle consumers import
  */
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, basename } from "node:path";
@@ -15,6 +16,13 @@ import { compileAsset } from "./compile.js";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const dir = (...p: string[]) => join(ROOT, ...p);
+
+/**
+ * Stamped into dist/assets.json so a consumer can refuse a bundle it doesn't
+ * understand instead of failing later as a wrong-looking sprite. Bump it when
+ * the IR shape changes in a way that would break one.
+ */
+const BUNDLE_FORMAT = "polygraphics-bundle@1";
 
 function readJson(path: string): unknown {
   try {
@@ -211,6 +219,33 @@ if (cmd === "gallery" || cmd === "check") {
   console.log(`✓ gallery → out/gallery.html`);
 }
 
+/**
+ * The published artifact: every asset's IR in one file, keyed by asset id.
+ *
+ * `out/` is a scratch directory a consumer never reads — this is the one thing
+ * that leaves the repo, so it is committed rather than ignored, and a game
+ * imports it as `polygraphics/assets` instead of running a script that writes
+ * into its own source tree.
+ *
+ * Keyed by canonical id (`ss.icon.mine`), never by any game's texture key:
+ * what a consumer calls its textures is the consumer's business, and it maps
+ * them on its own side.
+ */
+if (cmd === "dist" || cmd === "check") {
+  mkdirSync(dir("dist"), { recursive: true });
+  // Sorted and timestamp-free, so the same documents always produce the same
+  // bytes; one line per asset, so a committed re-bundle diffs as the handful of
+  // assets that actually changed rather than as one 300KB line.
+  const rows = [...reg.assets.values()]
+    .sort((a, b) => a.id.localeCompare(b.id))
+    .map((a) => `${JSON.stringify(a.id)}:${JSON.stringify(compileAsset(a, reg).ir)}`);
+  writeFileSync(
+    dir("dist", "assets.json"),
+    `{"format":${JSON.stringify(BUNDLE_FORMAT)},"assets":{\n${rows.join(",\n")}\n}}\n`,
+  );
+  console.log(`✓ ${rows.length} assets → dist/assets.json (${BUNDLE_FORMAT})`);
+}
+
 // ---- png / baseline / regress (rasterization is optional tooling, deps loaded lazily)
 
 async function renderAllPngs(): Promise<Map<string, Buffer>> {
@@ -262,5 +297,5 @@ if (cmd === "png" || cmd === "baseline" || cmd === "regress") {
 if (cmd === "check")
   console.log(`\n✓ ${reg.assets.size} assets, ${themes.length} themes, ${warns} warnings, 0 errors`);
 
-if (!["check", "validate", "render", "compile", "gallery", "png", "baseline", "regress"].includes(cmd))
+if (!["check", "validate", "render", "compile", "gallery", "dist", "png", "baseline", "regress"].includes(cmd))
   fail(`unknown command "${cmd}"`);

@@ -4,25 +4,37 @@
   "private": true,
   "type": "module",
   "description": "AI-legible procedural asset system: declarative asset documents + design tokens + deterministic SVG renderer",
+  "exports": {
+    "./phaser": "./adapters/phaser/polygraphics-phaser.ts",
+    "./assets": "./dist/assets.json",
+    "./godot": "./adapters/godot/polygraphics.gd",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "adapters",
+    "dist",
+    "assets",
+    "tokens",
+    "themes"
+  ],
   "scripts": {
     "check": "tsx src/cli.ts check",
     "validate": "tsx src/cli.ts validate",
     "render": "tsx src/cli.ts render",
     "compile": "tsx src/cli.ts compile",
     "gallery": "tsx src/cli.ts gallery",
+    "dist": "tsx src/cli.ts dist",
     "png": "tsx src/cli.ts png",
     "baseline": "tsx src/cli.ts baseline",
     "regress": "tsx src/cli.ts regress",
     "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",
     "@types/node": "^26.2.0",
     "pngjs": "^7.0.0",
     "tsx": "^4.23.12",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "zod": "^4.4.3"
   }
 }
