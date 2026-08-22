@@ -136,15 +136,19 @@ The repo is a package. A game depends on it and imports two things — the rende
 
 ```jsonc
 // the game's package.json
-"dependencies": { "polygraphics": "file:../polygraphics" }
+"dependencies": { "polygraphics": "github:wndgur2/polygraphics" }
 ```
+
+A git dependency, not a path: CI and deploy builds clone only the consuming repo, so `file:../polygraphics` resolves to nothing there — npm links it to a dangling symlink, says nothing, and the build fails later at `Cannot find module`. The repo is public, so no credentials are involved. `dist/` and the adapter are committed, so there is no build step on install.
+
+The lockfile pins the exact commit, which is what makes a build reproducible; `npm update polygraphics` is how you take new art.
 
 ```ts
 import { bakeFlat } from "polygraphics/phaser";   // the adapter: zero deps, zero engine imports
 import bundle from "polygraphics/assets";         // { format, assets: { "ss.enemy.imp": IR, … } }
 ```
 
-Nothing is generated into the consuming repo and nothing is copied across repos. Pointing the dependency at a working copy (`npm i file:../polygraphics-worktrees/my-branch`) is how you try art before it lands; `npm update polygraphics` is how you pick it up after.
+Nothing is generated into the consuming repo and nothing is copied across repos. To try art before it lands, point the dependency at a branch (`npm i github:wndgur2/polygraphics#my-branch`) or at a local working copy (`npm i file:../polygraphics`) — the latter only for local work, never committed.
 
 Assets are keyed by their canonical id, never by any game's texture key — what a game calls its textures is the game's business, so the mapping lives on the consuming side:
 
