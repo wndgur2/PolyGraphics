@@ -1,14 +1,30 @@
 {
   "id": "ss.relic.growth",
-  "name": "Gem hoard",
-  "description": "Three crystallized signals where a kill leaves one, composed from `ss.pickup.gem` — the pickup this stat multiplies, drawn as more of itself. Nothing about a spore or an arrow says experience; the gem the player already stoops for does.",
+  "name": "Rootstock",
+  "description": "A taproot that has forked three times and put hairs out of every fork, with three new buds breaking the crown. Old knowledge taking root, drawn as the roots — most of the body is below the line, which is the part of the idea the four-leaf spore does not carry.",
   "tags": ["ss-relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},
-    {"id": "gem_back_l", "at": [-6.4, -1.6], "rot": -16, "scale": 0.62, "use": "ss.pickup.gem"},
-    {"id": "gem_back_r", "at": [6.6, -1.2], "rot": 15, "scale": 0.62, "use": "ss.pickup.gem"},
-    {"id": "gem_front", "at": [0, 3.2], "scale": 0.95, "use": "ss.pickup.gem"}
+    {"id": "taproot_outline", "shape": {"kind": "poly", "points": [[-3.11, -11.26], [-2.79, -4], [-2.46, 3.26], [2.46, 3.26], [2.79, -4], [3.11, -11.26]]}, "fill": "$ink"},
+    {"id": "fork_l_outline", "shape": {"kind": "poly", "points": [[-1.19, -2.48], [-5.35, 2.65], [-9.52, 7.77], [-7.77, 9.52], [-2.65, 5.35], [2.48, 1.19]]}, "fill": "$ink"},
+    {"id": "fork_r_outline", "shape": {"kind": "poly", "points": [[-2.46, 1.39], [2.59, 5.04], [7.64, 8.7], [9.33, 6.84], [5.21, 2.16], [1.09, -2.52]]}, "fill": "$ink"},
+    {"id": "fork_c_outline", "shape": {"kind": "poly", "points": [[-2.17, -0.6], [-2.05, 6.06], [-1.91, 12.72], [0.01, 12.89], [1.25, 6.34], [2.48, -0.21]]}, "fill": "$ink"},
+    {"id": "crown_outline", "at": [0, -10.4], "shape": {"kind": "ellipse", "rx": 6, "ry": 4}, "fill": "$ink"},
+    {"id": "bud_l_outline", "at": [-2.8, -12.2], "rot": -24, "shape": {"kind": "ellipse", "rx": 2.9, "ry": 4}, "fill": "$ink"},
+    {"id": "bud_r_outline", "at": [2.4, -12.6], "rot": 20, "shape": {"kind": "ellipse", "rx": 2.8, "ry": 3.8}, "fill": "$ink"},
+    {"id": "bud_c_outline", "at": [-0.2, -13.4], "shape": {"kind": "ellipse", "rx": 2.7, "ry": 3.6}, "fill": "$ink"},
+    {"id": "taproot", "shape": {"kind": "poly", "points": [[-2.4, -9.6], [-2.15, -4], [-1.9, 1.6], [1.9, 1.6], [2.15, -4], [2.4, -9.6]]}, "fill": "$timber"},
+    {"id": "fork_l", "shape": {"kind": "poly", "points": [[-1.94, -0.74], [-4.99, 3.01], [-8.04, 6.76], [-6.76, 8.04], [-3.01, 4.99], [0.74, 1.94]]}, "fill": "$timber"},
+    {"id": "fork_r", "shape": {"kind": "poly", "points": [[-0.68, 2.01], [2.96, 4.64], [6.59, 7.27], [7.81, 5.93], [4.84, 2.56], [1.88, -0.81]]}, "fill": "$timber"},
+    {"id": "fork_c", "shape": {"kind": "poly", "points": [[-1.69, 1.26], [-1.6, 6.1], [-1.5, 10.94], [-0.1, 11.06], [0.8, 6.3], [1.69, 1.54]]}, "fill": "$timber"},
+    {"id": "hair_l", "shape": {"kind": "poly", "points": [[-5.7, 4.44], [-7.91, 7.59], [-10.11, 10.75], [-9.49, 11.25], [-6.89, 8.41], [-4.3, 5.56]]}, "fill": "$timber.dark"},
+    {"id": "hair_r", "shape": {"kind": "poly", "points": [[4.25, 5.1], [6.46, 7.96], [8.67, 10.82], [9.33, 10.38], [7.54, 7.24], [5.75, 4.1]]}, "fill": "$timber.dark"},
+    {"id": "hair_c", "shape": {"kind": "poly", "points": [[-1.05, 6.87], [0.91, 9.25], [2.88, 11.63], [3.52, 11.17], [1.89, 8.55], [0.25, 5.93]]}, "fill": "$timber.dark"},
+    {"id": "crown", "at": [0, -10.4], "shape": {"kind": "ellipse", "rx": 4.6, "ry": 2.6}, "fill": "$timber.light"},
+    {"id": "bud_l", "at": [-2.8, -12.2], "rot": -24, "shape": {"kind": "ellipse", "rx": 1.5, "ry": 2.6}, "fill": "$venom.dark"},
+    {"id": "bud_r", "at": [2.4, -12.6], "rot": 20, "shape": {"kind": "ellipse", "rx": 1.4, "ry": 2.4}, "fill": "$venom"},
+    {"id": "bud_c", "at": [-0.2, -13.4], "shape": {"kind": "ellipse", "rx": 1.3, "ry": 2.2}, "fill": "$venom.light"}
   ],
   "variants": {
     "glyph": {

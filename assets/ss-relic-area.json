@@ -1,17 +1,26 @@
 {
   "id": "ss.relic.area",
-  "name": "Spreading scent",
-  "description": "A scent bulb and the two rings of reach around it, the far one fainter. The passive for this stat is exactly those two rings — this puts the thing doing the spreading in the middle of them, and keeps the count at two so the far ring still reads as the new one.",
+  "name": "Blooming cap",
+  "description": "A fungus cap and the cloud already off it, spread wider than the cap is: four soft puffs with three brighter ones inside them, and two motes that have got further than the rest. Reach drawn as the thing that reaches.",
   "tags": ["ss-relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},
-    {"id": "socket_outline", "shape": {"kind": "ellipse", "rx": 5, "ry": 5.4}, "fill": "$ink"},
-    {"id": "far", "shape": {"kind": "ring", "r": 11.4, "width": 1.8}, "fill": "$pheromone@0.38"},
-    {"id": "near", "shape": {"kind": "ring", "r": 7, "width": 2.4}, "fill": "$pheromone@0.85"},
-    {"id": "socket", "shape": {"kind": "ellipse", "rx": 3.6, "ry": 4}, "fill": "$carapace"},
-    {"id": "bulb", "shape": {"kind": "ellipse", "rx": 2.5, "ry": 2.9}, "fill": "$pheromone"},
-    {"id": "core", "at": [-0.6, -0.8], "shape": {"kind": "circle", "r": 1.2}, "fill": "$pheromone.light2"}
+    {"id": "stem_outline", "at": [0, 7.6], "shape": {"kind": "rect", "w": 6.2, "h": 11.8, "corner": 2.6}, "fill": "$ink"},
+    {"id": "cap_outline", "at": [0, 2.4], "shape": {"kind": "ellipse", "rx": 9.8, "ry": 6.6}, "fill": "$ink"},
+    {"id": "puff_0", "at": [-7.4, -4.4], "shape": {"kind": "circle", "r": 4.4}, "fill": "$spore@0.34"},
+    {"id": "puff_1", "at": [-2.6, -7.4], "shape": {"kind": "circle", "r": 5.4}, "fill": "$spore@0.34"},
+    {"id": "puff_2", "at": [3, -6.6], "shape": {"kind": "circle", "r": 5}, "fill": "$spore@0.34"},
+    {"id": "puff_3", "at": [7.2, -3.4], "shape": {"kind": "circle", "r": 4}, "fill": "$spore@0.34"},
+    {"id": "core_0", "at": [-4.4, -4.6], "shape": {"kind": "circle", "r": 2.8}, "fill": "$spore@0.6"},
+    {"id": "core_1", "at": [0.6, -6], "shape": {"kind": "circle", "r": 3.2}, "fill": "$spore@0.6"},
+    {"id": "core_2", "at": [4.6, -4.2], "shape": {"kind": "circle", "r": 2.4}, "fill": "$spore@0.6"},
+    {"id": "stem", "at": [0, 7.6], "shape": {"kind": "rect", "w": 3.4, "h": 9, "corner": 1.2}, "fill": "$steel.light"},
+    {"id": "cap", "at": [0, 2.4], "shape": {"kind": "ellipse", "rx": 8.4, "ry": 5.2}, "fill": "$spore.dark"},
+    {"id": "cap_lit", "at": [-2.8, 1], "shape": {"kind": "circle", "r": 2.2}, "fill": "$spore.light2"},
+    {"id": "gill", "at": [0, 6.4], "shape": {"kind": "ellipse", "rx": 6, "ry": 1.4}, "fill": "$husk.dark"},
+    {"id": "mote_l", "at": [-9.4, -9.4], "shape": {"kind": "circle", "r": 1.1}, "fill": "$spore.light"},
+    {"id": "mote_r", "at": [8.6, -9], "shape": {"kind": "circle", "r": 0.9}, "fill": "$spore.light"}
   ],
   "variants": {
     "glyph": {
