@@ -1,0 +1,38 @@
+{
+  "id": "ss.relic.growth",
+  "name": "Rootstock",
+  "description": "A cut trunk and everything under it: five primary roots off the collar, six finer ones splitting away from those, and the grain still showing on the shaft. All of the body is below the line — which is the half of taking root that a spore or a leaf never shows.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "trunk_outline", "shape": {"kind": "poly", "points": [[-4.44, -14.11], [-4.19, -6.1], [-3.94, 1.91], [3.94, 1.91], [4.19, -6.1], [4.44, -14.11]]}, "fill": "$ink"},
+    {"id": "root_a_outline", "shape": {"kind": "poly", "points": [[-2.66, -4.37], [-7.34, 1.13], [-12.03, 6.63], [-10.11, 8.8], [-4.06, 4.87], [2, 0.94]]}, "fill": "$ink"},
+    {"id": "root_b_outline", "shape": {"kind": "poly", "points": [[-1.94, 1.16], [4.02, 4.56], [9.99, 7.98], [11.81, 5.7], [7.18, 0.64], [2.54, -4.43]]}, "fill": "$ink"},
+    {"id": "root_c_outline", "shape": {"kind": "poly", "points": [[-3.47, -1.86], [-4.82, 5.49], [-6.18, 12.85], [-3.7, 13.66], [-0.48, 6.91], [2.74, 0.15]]}, "fill": "$ink"},
+    {"id": "root_d_outline", "shape": {"kind": "poly", "points": [[-2.78, 0.33], [0.7, 6.8], [4.17, 13.28], [6.64, 12.36], [5, 5.2], [3.36, -1.97]]}, "fill": "$ink"},
+    {"id": "root_e_outline", "shape": {"kind": "poly", "points": [[-2.93, -0.7], [-1.82, 6.97], [-0.71, 14.63], [1.63, 14.55], [2.22, 6.83], [2.81, -0.88]]}, "fill": "$ink"},
+    {"id": "crown_outline", "at": [0, -12.8], "shape": {"kind": "ellipse", "rx": 6.2, "ry": 3.4}, "fill": "$ink"},
+    {"id": "trunk", "shape": {"kind": "poly", "points": [[-3.6, -12.6], [-3.4, -6.1], [-3.2, 0.4], [3.2, 0.4], [3.4, -6.1], [3.6, -12.6]]}, "fill": "$timber"},
+    {"id": "root_a", "shape": {"kind": "poly", "points": [[-3.38, -2.63], [-6.95, 1.57], [-10.53, 5.77], [-9.07, 7.43], [-4.45, 4.43], [0.18, 1.43]]}, "fill": "$timber"},
+    {"id": "root_b", "shape": {"kind": "poly", "points": [[-0.09, 1.51], [4.41, 4.08], [8.91, 6.66], [10.29, 4.94], [6.79, 1.12], [3.29, -2.71]]}, "fill": "$timber"},
+    {"id": "root_c", "shape": {"kind": "poly", "points": [[-3.28, 0.03], [-4.31, 5.66], [-5.35, 11.29], [-3.45, 11.91], [-0.99, 6.74], [1.48, 1.57]]}, "fill": "$timber"},
+    {"id": "root_d", "shape": {"kind": "poly", "points": [[-1.44, 1.68], [1.21, 6.61], [3.86, 11.55], [5.74, 10.85], [4.49, 5.39], [3.24, -0.08]]}, "fill": "$timber"},
+    {"id": "root_e", "shape": {"kind": "poly", "points": [[-2.2, 1.07], [-1.35, 6.95], [-0.5, 12.83], [1.3, 12.77], [1.75, 6.85], [2.2, 0.93]]}, "fill": "$timber.dark"},
+    {"id": "branch_a", "shape": {"kind": "poly", "points": [[-7.37, 3.29], [-9.58, 6.9], [-11.8, 10.5], [-11, 11.1], [-8.22, 7.9], [-5.43, 4.71]]}, "fill": "$timber.dark"},
+    {"id": "branch_b", "shape": {"kind": "poly", "points": [[5.24, 4.12], [8.02, 7.21], [10.8, 10.3], [11.6, 9.7], [9.38, 6.19], [7.16, 2.68]]}, "fill": "$timber.dark"},
+    {"id": "branch_c", "shape": {"kind": "poly", "points": [[-3.98, 6.57], [-5.96, 9.44], [-7.95, 12.32], [-7.25, 12.88], [-4.84, 10.36], [-2.42, 7.83]]}, "fill": "$timber.dark"},
+    {"id": "branch_d", "shape": {"kind": "poly", "points": [[2.81, 7.42], [5.23, 10.05], [7.65, 12.68], [8.35, 12.12], [6.37, 9.15], [4.39, 6.18]]}, "fill": "$timber.dark"},
+    {"id": "branch_e", "shape": {"kind": "poly", "points": [[-3.17, 4.66], [-1.66, 6.73], [-0.14, 8.8], [0.54, 8.4], [-0.54, 6.07], [-1.63, 3.74]]}, "fill": "$timber.dark2"},
+    {"id": "branch_f", "shape": {"kind": "poly", "points": [[1.81, 3.56], [0.53, 6.38], [-0.75, 9.21], [-0.05, 9.59], [1.67, 7.02], [3.39, 4.44]]}, "fill": "$timber.dark2"},
+    {"id": "grain_l", "at": [-1.2, -6.6], "shape": {"kind": "rect", "w": 0.9, "h": 11, "corner": 0.45}, "fill": "$timber.light2"},
+    {"id": "grain_r", "at": [1.3, -5.6], "shape": {"kind": "rect", "w": 0.7, "h": 9, "corner": 0.35}, "fill": "$timber.dark2"},
+    {"id": "crown", "at": [0, -12.8], "shape": {"kind": "ellipse", "rx": 4.8, "ry": 2}, "fill": "$timber.light"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}

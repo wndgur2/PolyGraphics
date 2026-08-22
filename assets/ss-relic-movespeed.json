@@ -1,0 +1,32 @@
+{
+  "id": "ss.relic.movespeed",
+  "name": "Cricket leg",
+  "description": "The back leg of a cricket, folded the way it waits: a broad femur banded across the grain, a thin tibia falling away from the knee at a hard angle, four curved spines hooking back off its outer edge and the tarsus still on the end. Dark carapace rather than bright chitin — this one came off something that had stopped moving.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "femur_outline", "shape": {"kind": "poly", "points": [[-8.81, 12.25], [-2.62, 5.52], [0.61, -3.16], [2.59, -12.42], [-0.57, -13.88], [-6.36, -6.38], [-10.86, 1.72], [-11.98, 10.78]]}, "fill": "$ink"},
+    {"id": "tibia_outline", "shape": {"kind": "poly", "points": [[-1.86, -11.87], [10.52, 9.23], [12.01, 8.42], [0.92, -13.38]]}, "fill": "$ink"},
+    {"id": "tarsus_outline", "at": [11.6, 10.2], "rot": -22, "shape": {"kind": "rect", "w": 4.3, "h": 7.4, "corner": 2.15}, "fill": "$ink"},
+    {"id": "femur", "shape": {"kind": "poly", "points": [[-8.24, 10.43], [-2.92, 4.65], [-0.14, -2.81], [1.56, -10.77], [-1.16, -12.03], [-6.13, -5.58], [-10, 1.38], [-10.96, 9.17]]}, "fill": "$carapace.dark"},
+    {"id": "femur_lit", "shape": {"kind": "poly", "points": [[-8.25, 9.05], [-4.26, 3.45], [-1.63, -3.25], [0.55, -10.15], [-0.55, -10.65], [-4.36, -4.5], [-7.71, 1.86], [-9.35, 8.55]]}, "fill": "$carapace"},
+    {"id": "bar_0", "at": [-6.66, 3.44], "rot": 90.8, "shape": {"kind": "rect", "w": 1.1, "h": 6.4, "corner": 0.55}, "fill": "$carapace.dark2"},
+    {"id": "bar_1", "at": [-5.29, 0.47], "rot": 90.8, "shape": {"kind": "rect", "w": 1.1, "h": 6.4, "corner": 0.55}, "fill": "$carapace.dark2"},
+    {"id": "bar_2", "at": [-3.92, -2.5], "rot": 90.8, "shape": {"kind": "rect", "w": 1.1, "h": 6.4, "corner": 0.55}, "fill": "$carapace.dark2"},
+    {"id": "tibia", "shape": {"kind": "poly", "points": [[-1.03, -10.73], [9.94, 7.96], [11.26, 7.24], [1.43, -12.07]]}, "fill": "$carapace.dark2"},
+    {"id": "spine_0", "at": [4.09, -4.71], "shape": {"kind": "ring", "r": 6.53, "width": 1.7, "from": -122.1, "to": -78.7}, "fill": "$husk.dark"},
+    {"id": "spine_1", "at": [6.17, -0.91], "shape": {"kind": "ring", "r": 6.53, "width": 1.7, "from": -122.1, "to": -78.7}, "fill": "$husk.dark"},
+    {"id": "spine_2", "at": [8.25, 2.89], "shape": {"kind": "ring", "r": 6.53, "width": 1.7, "from": -122.1, "to": -78.7}, "fill": "$husk.dark"},
+    {"id": "spine_3", "at": [10.33, 6.69], "shape": {"kind": "ring", "r": 6.53, "width": 1.7, "from": -122.1, "to": -78.7}, "fill": "$husk.dark"},
+    {"id": "knee", "at": [0.2, -11.4], "shape": {"kind": "circle", "r": 2.1}, "fill": "$carapace.light"},
+    {"id": "hip", "at": [-9.6, 9.8], "shape": {"kind": "circle", "r": 1.7}, "fill": "$carapace.dark2"},
+    {"id": "tarsus", "at": [11.6, 10.2], "rot": -22, "shape": {"kind": "rect", "w": 1.5, "h": 4.6, "corner": 0.75}, "fill": "$husk.dark"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}

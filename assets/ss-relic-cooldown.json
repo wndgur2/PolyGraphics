@@ -1,0 +1,37 @@
+{
+  "id": "ss.relic.cooldown",
+  "name": "The beat",
+  "description": "A pulse trace and nothing else: flat, one hard spike, a smaller second, flat again, the two spikes lit brighter than the line that carries them. The heart that used to be behind it was read as health — a rate has to be a rate.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "beat_0_back", "at": [-11, 0], "rot": 90, "shape": {"kind": "rect", "w": 4, "h": 7.6, "corner": 2}, "fill": "$ink"},
+    {"id": "beat_1_back", "at": [-7.5, 1.8], "rot": 148.6, "shape": {"kind": "rect", "w": 4, "h": 7.02, "corner": 2}, "fill": "$ink"},
+    {"id": "beat_2_back", "at": [-5.3, -2.7], "rot": 9.9, "shape": {"kind": "rect", "w": 4, "h": 15.59, "corner": 2}, "fill": "$ink"},
+    {"id": "beat_3_back", "at": [-2.9, -0.3], "rot": 171.5, "shape": {"kind": "rect", "w": 4, "h": 20.39, "corner": 2}, "fill": "$ink"},
+    {"id": "beat_4_back", "at": [-0.3, 4.2], "rot": 17.2, "shape": {"kind": "rect", "w": 4, "h": 11.59, "corner": 2}, "fill": "$ink"},
+    {"id": "beat_5_back", "at": [2.8, 0], "rot": 90, "shape": {"kind": "rect", "w": 4, "h": 6.4, "corner": 2}, "fill": "$ink"},
+    {"id": "beat_6_back", "at": [5.7, -2.1], "rot": 27.6, "shape": {"kind": "rect", "w": 4, "h": 7.54, "corner": 2}, "fill": "$ink"},
+    {"id": "beat_7_back", "at": [7.9, -2.1], "rot": 152.4, "shape": {"kind": "rect", "w": 4, "h": 7.54, "corner": 2}, "fill": "$ink"},
+    {"id": "beat_8_back", "at": [11.2, 0], "rot": 90, "shape": {"kind": "rect", "w": 4, "h": 7.2, "corner": 2}, "fill": "$ink"},
+    {"id": "beat_0", "at": [-11, 0], "rot": 90, "shape": {"kind": "rect", "w": 2.1, "h": 6.27, "corner": 1.05}, "fill": "$coral"},
+    {"id": "beat_1", "at": [-7.5, 1.8], "rot": 148.6, "shape": {"kind": "rect", "w": 2.1, "h": 5.69, "corner": 1.05}, "fill": "$coral"},
+    {"id": "beat_2", "at": [-5.3, -2.7], "rot": 9.9, "shape": {"kind": "rect", "w": 2.1, "h": 14.26, "corner": 1.05}, "fill": "$coral"},
+    {"id": "beat_3", "at": [-2.9, -0.3], "rot": 171.5, "shape": {"kind": "rect", "w": 2.1, "h": 19.06, "corner": 1.05}, "fill": "$coral"},
+    {"id": "beat_4", "at": [-0.3, 4.2], "rot": 17.2, "shape": {"kind": "rect", "w": 2.1, "h": 10.26, "corner": 1.05}, "fill": "$coral"},
+    {"id": "beat_5", "at": [2.8, 0], "rot": 90, "shape": {"kind": "rect", "w": 2.1, "h": 5.07, "corner": 1.05}, "fill": "$coral"},
+    {"id": "beat_6", "at": [5.7, -2.1], "rot": 27.6, "shape": {"kind": "rect", "w": 2.1, "h": 6.21, "corner": 1.05}, "fill": "$coral"},
+    {"id": "beat_7", "at": [7.9, -2.1], "rot": 152.4, "shape": {"kind": "rect", "w": 2.1, "h": 6.21, "corner": 1.05}, "fill": "$coral"},
+    {"id": "beat_8", "at": [11.2, 0], "rot": 90, "shape": {"kind": "rect", "w": 2.1, "h": 5.87, "corner": 1.05}, "fill": "$coral"},
+    {"id": "beat_2_hot", "at": [-5.3, -2.7], "rot": 9.9, "shape": {"kind": "rect", "w": 0.8, "h": 13.35, "corner": 0.4}, "fill": "$coral.light2"},
+    {"id": "beat_3_hot", "at": [-2.9, -0.3], "rot": 171.5, "shape": {"kind": "rect", "w": 0.8, "h": 18.15, "corner": 0.4}, "fill": "$coral.light2"},
+    {"id": "beat_4_hot", "at": [-0.3, 4.2], "rot": 17.2, "shape": {"kind": "rect", "w": 0.8, "h": 9.35, "corner": 0.4}, "fill": "$coral.light2"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}

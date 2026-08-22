@@ -1,0 +1,20 @@
+{
+  "id": "ss.relic.speed",
+  "name": "Streaking dart",
+  "description": "One thrown dart with the air it has already crossed behind it, three streaks tapering off to nothing. The stat is about how fast the thing you throw travels, so the icon is the thing you throw, travelling.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "trail_far", "at": [-9.4, 0], "shape": {"kind": "poly", "points": [[-3.6, -1], [3.6, -2.2], [3.6, 2.2], [-3.6, 1]]}, "fill": "$frost@0.22"},
+    {"id": "trail_mid", "at": [-3.6, 0], "shape": {"kind": "poly", "points": [[-3.4, -1.8], [3.4, -3], [3.4, 3], [-3.4, 1.8]]}, "fill": "$frost@0.4"},
+    {"id": "trail_near", "at": [1.6, 0], "shape": {"kind": "poly", "points": [[-3.2, -2.6], [3.2, -3.6], [3.2, 3.6], [-3.2, 2.6]]}, "fill": "$frost@0.62"},
+    {"id": "dart", "at": [4.6, 0], "scale": 1.02, "use": "ss.proj.bolt"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}

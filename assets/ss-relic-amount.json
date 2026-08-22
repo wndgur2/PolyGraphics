@@ -1,0 +1,18 @@
+{
+  "id": "ss.relic.amount",
+  "name": "Paired shot",
+  "description": "Two thrown darts where a weapon sends one, composed from `ss.proj.bolt` so the slot shows the object the stat actually adds. The passive for this stat is two dots side by side; this is the same count in the same arrangement, made of the thing being counted.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "shot_far", "at": [-1.6, -5.4], "rot": -12, "scale": 0.82, "use": "ss.proj.bolt"},
+    {"id": "shot_near", "at": [0.8, 5.2], "rot": 12, "scale": 0.82, "use": "ss.proj.bolt"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}
