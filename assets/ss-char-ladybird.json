@@ -1,9 +1,9 @@
 {
-  "id": "ss.char.donut",
-  "name": "Donut",
-  "description": "Sealed survivor built around a hole — the shell closed into a ring where the emitter chamber used to be, so this one didn't just go quiet, it grew over the wound. The dead organ sits on the rim, off to one side.",
+  "id": "ss.char.ladybird",
+  "name": "Ladybird",
+  "description": "A survivor of the same brood as everything hunting you — same feelers, same organ, same socket in the shell. The organ is `dead`: no halo, no bloom, a hairline crack across cold grey, and that silence is the premise all eight wear in the same place. The grown-over ring, unchanged — hole, rim and all — with ink spots set around it. Spots are the entire homage because spots are the entire ladybird: no other feature of the animal is recognised at this size. They are placed unevenly and none is paired across the centre, so that the two nearest the top cannot be read as eyes, and the dead organ on the rim is not read as a sixth.",
   "tags": ["ss-char"],
-  "size": [32, 32],
+  "size": [36, 36],
   "meta": { "radius": 11.5 },
   "parts": [
     { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [1.6, -10.2], "rot": -38, "scale": 0.52 },
@@ -11,6 +11,11 @@
     { "id": "core", "at": [-0.6, -0.6], "shape": { "kind": "circle", "r": 9 }, "fill": "$coral.light2" },
     { "id": "hole_rim", "shape": { "kind": "circle", "r": 4.6 }, "fill": "$coral.dark2" },
     { "id": "hole", "shape": { "kind": "circle", "r": 3.4 }, "fill": "$coral.dark2" },
+    { "id": "spot_a", "at": [-0.4, -7.4], "shape": { "kind": "circle", "r": 2.1 }, "fill": "$ink" },
+    { "id": "spot_b", "at": [7.2, -3.2], "shape": { "kind": "circle", "r": 1.9 }, "fill": "$ink" },
+    { "id": "spot_c", "at": [-7.6, -0.6], "shape": { "kind": "circle", "r": 2.2 }, "fill": "$ink" },
+    { "id": "spot_d", "at": [-3.6, 7.4], "shape": { "kind": "circle", "r": 2 }, "fill": "$ink" },
+    { "id": "spot_e", "at": [4.2, 6.4], "shape": { "kind": "circle", "r": 1.6 }, "fill": "$ink" },
     { "id": "gloss", "at": [-5.4, -5.6], "rot": -34, "shape": { "kind": "ellipse", "rx": 2.6, "ry": 1.3 }, "fill": "$silent@soft" },
     { "id": "antenna", "use": "ss.lib.antenna", "variant": "dead", "at": [5.4, -8], "rot": -6, "scale": 0.72 },
     { "id": "organ", "use": "ss.lib.organ", "variant": "dead", "at": [7.2, 2.4], "scale": 0.5 }
@@ -27,7 +32,12 @@
         { "part": "gloss", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
         { "part": "organ", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
         { "part": "antenna", "prop": "rot", "keys": [[0, -13], [0.35, 17], [0.7, -4], [1, -13]] },
-        { "part": "antenna_far", "prop": "rot", "keys": [[0, 14], [0.4, -12], [0.75, 6], [1, 14]] }
+        { "part": "antenna_far", "prop": "rot", "keys": [[0, 14], [0.4, -12], [0.75, 6], [1, 14]] },
+        { "part": "spot_a", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "spot_b", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "spot_c", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "spot_d", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "spot_e", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] }
       ]
     }
   }
