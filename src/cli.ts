@@ -231,6 +231,30 @@ if (cmd === "gallery" || cmd === "check") {
  * what a consumer calls its textures is the consumer's business, and it maps
  * them on its own side.
  */
+/**
+ * Prose is for whoever reads the documents — it never leaves with them.
+ *
+ * `name`, `description` and `tags` are the authoring layer: they make an asset
+ * legible in the gallery, the manifest and the document itself, which is the
+ * premise of the whole repo. No engine adapter declares them (see `IRAsset`),
+ * no consumer reads them, and they are 12% of what a game downloads.
+ *
+ * Keeping them out of the bundle also keeps a boundary honest. A description
+ * that ships is a description someone will write against the game reading it —
+ * naming a weapon the way that game's UI names it — and then this repo owes an
+ * edit every time the game renames something it merely draws.
+ */
+function stripProse(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(stripProse);
+  if (value && typeof value === "object")
+    return Object.fromEntries(
+      Object.entries(value as Record<string, unknown>)
+        .filter(([k]) => k !== "name" && k !== "description" && k !== "tags")
+        .map(([k, v]) => [k, stripProse(v)]),
+    );
+  return value;
+}
+
 if (cmd === "dist" || cmd === "check") {
   mkdirSync(dir("dist"), { recursive: true });
   // Sorted and timestamp-free, so the same documents always produce the same
@@ -238,7 +262,7 @@ if (cmd === "dist" || cmd === "check") {
   // assets that actually changed rather than as one 300KB line.
   const rows = [...reg.assets.values()]
     .sort((a, b) => a.id.localeCompare(b.id))
-    .map((a) => `${JSON.stringify(a.id)}:${JSON.stringify(compileAsset(a, reg).ir)}`);
+    .map((a) => `${JSON.stringify(a.id)}:${JSON.stringify(stripProse(compileAsset(a, reg).ir))}`);
   writeFileSync(
     dir("dist", "assets.json"),
     `{"format":${JSON.stringify(BUNDLE_FORMAT)},"assets":{\n${rows.join(",\n")}\n}}\n`,

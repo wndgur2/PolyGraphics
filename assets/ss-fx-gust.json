@@ -1,7 +1,7 @@
 {
   "id": "ss.fx.gust",
   "name": "Gust",
-  "description": "Air dragged along behind Dancing Mandibles. Three curved streaks of different length, none of them closed and none of them concentric — a closed ring reads as a shockwave, and this is supposed to read as the room being pulled after something.",
+  "description": "Air dragged along behind the paired mandibles. Three curved streaks of different length, none of them closed and none of them concentric — a closed ring reads as a shockwave, and this is supposed to read as the room being pulled after something.",
   "tags": [
     "ss-fx",
     "trail"

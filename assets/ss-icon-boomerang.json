@@ -1,6 +1,6 @@
 {
   "id": "ss.icon.boomerang",
-  "name": "Mandible icon",
+  "name": "Paired mandibles icon",
   "description": "UI slot icon for the paired mandibles, composing `ss.proj.boom` via `use`. Third of the weapon icons to be derived from its projectile instead of hand-drawn a second time — the original BootScene authored five weapon shapes twice, with independently tuned coordinates.",
   "tags": ["ss-icon"],
   "size": [32, 32],

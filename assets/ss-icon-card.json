@@ -1,7 +1,7 @@
 {
   "id": "ss.icon.card",
-  "name": "Ricochet Spine icon",
-  "description": "UI slot icon for the Ricochet Spine. Composes `ss.proj.card` via `use`, tilted the way the wand icon tilts its dart, so the slot shows the wing membrane itself instead of the old hand-drawn i_card (white rounded rect, red pip).",
+  "name": "Wing blade icon",
+  "description": "UI slot icon for the wing blade. Composes `ss.proj.card` via `use`, tilted the way the wand icon tilts its dart, so the slot shows the wing membrane itself instead of the old hand-drawn i_card (white rounded rect, red pip).",
   "tags": ["ss-icon"],
   "size": [32, 32],
   "parts": [

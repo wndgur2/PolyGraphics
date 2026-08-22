@@ -1,7 +1,7 @@
 {
   "id": "ss.icon.drone",
-  "name": "Broodling icon",
-  "description": "UI slot icon for the broodling. Composes `ss.proj.drone` via `use` so the hatchling in the slot is the hatchling on screen, replacing the old hand-drawn i_drone (flat hexagon, navy core). Rim keeps the original's aqua.",
+  "name": "Shell orbiter icon",
+  "description": "UI slot icon for the shell orbiter. Composes `ss.proj.drone` via `use` so the plate in the slot is the plate on screen, replacing the old hand-drawn i_drone (flat hexagon, navy core). Rim keeps the original's aqua.",
   "tags": ["ss-icon"],
   "size": [32, 32],
   "parts": [
