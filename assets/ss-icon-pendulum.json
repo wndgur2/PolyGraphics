@@ -11,8 +11,8 @@
   ],
   "variants": {
     "evolved": {
-      "description": "Gold-rimmed evolved twin (the old i_pendulum_evo), derived rather than drawn again.",
-      "set": { "tile.fill": "$gold" }
+      "description": "Gold-rimmed evolved twin (the old i_pendulum_evo), derived rather than drawn again. Takes the ball's own evolved variant with it, so the slot shows the amber head the evolved weapon actually swings rather than the base brown one.",
+      "set": { "tile.fill": "$gold", "glyph.variant": "evolved" }
     }
   }
 }
