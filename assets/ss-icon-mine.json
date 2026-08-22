@@ -1,7 +1,7 @@
 {
   "id": "ss.icon.mine",
-  "name": "Spore icon",
-  "description": "UI slot icon for Spore, the cache dropper. Composes `ss.proj.mine` itself via `use` — the cache the icon promises is the cache the ground shows — replacing the old hand-drawn i_mine (grey disc, red core). Rim keeps that original's red: the slot color the HUD taught players to read as 'trap'.",
+  "name": "Spore pod icon",
+  "description": "UI slot icon for the spore pod. Composes `ss.proj.mine` itself via `use` — the cache the icon promises is the cache the ground shows — replacing the old hand-drawn i_mine (grey disc, red core). Rim keeps that original's red: the slot color the HUD taught players to read as 'trap'.",
   "tags": ["ss-icon"],
   "size": [32, 32],
   "parts": [
