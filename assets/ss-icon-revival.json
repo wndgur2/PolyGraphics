@@ -1,0 +1,14 @@
+{
+  "id": "ss.icon.revival",
+  "name": "Revival icon",
+  "description": "Meta powerup icon: bright gold lightning bolt, three overlapping triangles. Port of the hand-drawn i_revival from Feelers' BootScene.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$gold.light" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "bolt_top", "shape": { "kind": "poly", "points": [[0, -11], [5, -2], [-5, -2]] }, "fill": "$gold.light" },
+    { "id": "bolt_mid", "shape": { "kind": "poly", "points": [[-5, -2], [5, -2], [-3, 11]] }, "fill": "$gold.light" },
+    { "id": "bolt_tail", "shape": { "kind": "poly", "points": [[-3, 11], [5, -2], [3, 2]] }, "fill": "$gold.light" }
+  ]
+}

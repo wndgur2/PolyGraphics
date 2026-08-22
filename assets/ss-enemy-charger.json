@@ -1,0 +1,13 @@
+{
+  "id": "ss.enemy.charger",
+  "name": "Lance",
+  "description": "Winds up in place, then crosses the gap faster than you can turn. A swept ember dart that reads as 'about to move fast' — drawn facing +x, the game flips it. Faithful port of the hand-drawn e_charger. Gameplay radius 10.",
+  "tags": ["ss-enemy", "lance"],
+  "size": [24, 20],
+  "meta": { "radius": 10 },
+  "parts": [
+    { "id": "outline", "shape": { "kind": "poly", "points": [[-12, -10], [12, 0], [-12, 10]] }, "fill": "$ink" },
+    { "id": "body", "shape": { "kind": "poly", "points": [[-9.5, -7], [8, 0], [-9.5, 7]] }, "fill": "$ember" },
+    { "id": "core", "shape": { "kind": "poly", "points": [[-9.5, -4], [1, 0], [-9.5, 4]] }, "fill": "$ember.light2" }
+  ]
+}

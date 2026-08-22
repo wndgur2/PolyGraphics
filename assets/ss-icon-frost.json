@@ -1,0 +1,19 @@
+{
+  "id": "ss.icon.frost",
+  "name": "Chirp icon",
+  "description": "UI slot icon for Chirp, the expanding wave. The one weapon icon that does not compose its projectile: `ss.proj.ring` is a 128px wash of near-transparent bands, and at a sixth scale it dissolves to nothing. The glyph instead draws the same idea — an expanding ring, a fainter one behind it — at icon weight. Port of the hand-drawn i_frost.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$frost" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "wave", "shape": { "kind": "ring", "r": 9, "width": 3 }, "fill": "$frost" },
+    { "id": "wake", "shape": { "kind": "ring", "r": 5, "width": 2 }, "fill": "$frost@0.5" }
+  ],
+  "variants": {
+    "evolved": {
+      "description": "Gold-rimmed evolved twin (the old i_frost_evo).",
+      "set": { "tile.fill": "$gold" }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "ss.icon.pendulum",
+  "name": "Chained Head icon",
+  "description": "UI slot icon for the Chained Head. Composes `ss.proj.ball` via `use` so the slot shows the actual packed head-plate, replacing the old hand-drawn i_pendulum (grey line and ball). Rim keeps the original's steel.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$steel" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "glyph", "use": "ss.proj.ball", "scale": 0.82 }
+  ],
+  "variants": {
+    "evolved": {
+      "description": "Gold-rimmed evolved twin (the old i_pendulum_evo), derived rather than drawn again.",
+      "set": { "tile.fill": "$gold" }
+    }
+  }
+}

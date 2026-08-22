@@ -1,7 +1,7 @@
 {
   "id": "ss.proj.bolt",
   "name": "Shell dart",
-  "description": "A chip of molt shell knapped to a point and thrown, lit cold along the edge. Points +x, which is the direction the weapon code rotates it to. Seeker Storm's variant runs pink instead — the one that hunts is the one that carries your scent.",
+  "description": "A chip of molt shell knapped to a point and thrown, lit cold along the edge. Points +x, which is the direction the weapon code rotates it to. Acid Rain's variant runs pink instead — the one that hunts is the one that carries your scent.",
   "tags": [
     "ss-proj",
     "ranged"
@@ -205,7 +205,7 @@
   },
   "variants": {
     "evolved": {
-      "description": "Seeker Storm's dart: the same shell, wet with the scent it is following. Pink where the thrown one is cold — a bolt that turns is a bolt that knows where you want it, and that has to read at a glance from the ones that just fly straight.",
+      "description": "Acid Rain's dart: the same shell, wet with the scent it is following. Pink where the thrown one is cold — a bolt that turns is a bolt that knows where you want it, and that has to read at a glance from the ones that just fly straight.",
       "set": {
         "glow.fill": "$pink@ghost",
         "streak.fill": "$pink@soft",

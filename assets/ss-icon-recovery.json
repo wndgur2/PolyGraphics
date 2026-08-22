@@ -1,0 +1,13 @@
+{
+  "id": "ss.icon.recovery",
+  "name": "Recovery icon",
+  "description": "Passive icon: venom green plus sign, two crossed bars. Port of the hand-drawn i_recovery from Feelers' BootScene.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$venom" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "bar_v", "shape": { "kind": "rect", "w": 6, "h": 18 }, "fill": "$venom" },
+    { "id": "bar_h", "shape": { "kind": "rect", "w": 18, "h": 6 }, "fill": "$venom" }
+  ]
+}

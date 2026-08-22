@@ -26,7 +26,8 @@ assets/*.json          asset documents, one per asset, filename = id with dots�
 adapters/phaser|godot  one drop-in file per engine, consuming compiled IR
 src/                   schema (zod) · token resolver · SVG renderer · compiler · gallery · cli
 scripts/               inspect (design loop) · compare (before/after) · adapter tests
-out/                   generated: svg/, compiled/, png/, gallery.html, manifest.json
+dist/assets.json       committed: the bundle consumers import as `polygraphics/assets`
+out/                   generated, ignored: svg/, compiled/, png/, gallery.html, manifest.json
 baselines/             accepted PNG renders; `npm run regress` diffs against these
 docs/                  reference-analysis.md — why this exists
 ```
@@ -122,11 +123,42 @@ The system has one source of truth and four compiled outputs:
 |---|---|---|
 | **authoring documents** | `assets/*.json` + `tokens/` + `themes/` | humans and AI agents (the only thing you edit) |
 | **compiled IR** | `out/compiled/*.json` (+ per-theme) | **game engines** — tokens resolved to `[r,g,b,a]` floats, variants pre-applied, `use` inlined, `mirrorX`/`repeat` expanded, ngon/star → concrete points. Engine adapters are dumb interpreters; no token/grammar/PRNG logic ships to the game |
+| **the bundle** | `dist/assets.json` via `npm run dist` | the same IR as one file keyed by asset id — what a consuming game imports as `polygraphics/assets`. Committed, unlike `out/`, because it is the thing that leaves the repo |
 | **previews** | `out/svg/*.svg`, `out/gallery.html` | humans and AI agents (inspect/iterate; CSS animations play in the gallery) |
 | **bakes** | `out/png/*.png` (4×) via `npm run png` | any engine as plain images; also the regression baseline |
 | **manifest** | `out/manifest.json` | engines/AI index: description, tags, named parts, variants, animations, **derived bounding radius** (art and collision can't silently desync) |
 
 ## Using it from a game
+
+### Install it as a package
+
+The repo is a package. A game depends on it and imports two things — the renderer for its engine, and the art:
+
+```jsonc
+// the game's package.json
+"dependencies": { "polygraphics": "github:wndgur2/polygraphics" }
+```
+
+A git dependency, not a path: CI and deploy builds clone only the consuming repo, so `file:../polygraphics` resolves to nothing there — npm links it to a dangling symlink, says nothing, and the build fails later at `Cannot find module`. The repo is public, so no credentials are involved. `dist/` and the adapter are committed, so there is no build step on install.
+
+The lockfile pins the exact commit, which is what makes a build reproducible; `npm update polygraphics` is how you take new art.
+
+```ts
+import { bakeFlat } from "polygraphics/phaser";   // the adapter: zero deps, zero engine imports
+import bundle from "polygraphics/assets";         // { format, assets: { "ss.enemy.imp": IR, … } }
+```
+
+Nothing is generated into the consuming repo and nothing is copied across repos. To try art before it lands, point the dependency at a branch (`npm i github:wndgur2/polygraphics#my-branch`) or at a local working copy (`npm i file:../polygraphics`) — the latter only for local work, never committed.
+
+Assets are keyed by their canonical id, never by any game's texture key — what a game calls its textures is the game's business, so the mapping lives on the consuming side:
+
+```ts
+const MAP = { e_imp: "ss.enemy.imp", i_frost: "ss.icon.frost" };   // in the game
+```
+
+Check `bundle.format` (`polygraphics-bundle@1`) on the way in: a mismatch means the IR changed shape, and failing loudly beats every sprite coming out subtly wrong.
+
+### What actually changes in the game
 
 The render pipeline does **not** change — Phaser still renders sprites, Godot still renders nodes. What changes is one seam: **asset instantiation** (the hand-written `BootScene` blocks / `_build_gfx()` match-arms are replaced by an adapter call). Three integration levels, per entity:
 
@@ -135,7 +167,7 @@ The render pipeline does **not** change — Phaser still renders sprites, Godot 
 **Level 1 — flat bake (Phaser).** One generated texture per asset; existing sprite pipeline untouched. For hot-path objects (projectiles, pickups, massed enemies):
 
 ```ts
-import { bakeFlat } from "./polygraphics-phaser";           // 1 file, no deps
+import { bakeFlat } from "polygraphics/phaser";             // 1 file, no deps
 const key = bakeFlat(this, impIR);                          // in BootScene.preload/create
 this.add.sprite(x, y, key);                                 // exactly as before
 const eliteKey = bakeFlat(this, impIR, { variant: "elite" });
@@ -144,7 +176,7 @@ const eliteKey = bakeFlat(this, impIR, { variant: "elite" });
 **Level 2 — rig (per-part animation).** A Container of per-part Images plus a data-driven keyframe player. For characters/bosses where parts move:
 
 ```ts
-import { buildRig } from "./polygraphics-phaser";
+import { buildRig } from "polygraphics/phaser";
 const rig = buildRig(this, impIR);        // rig.container, rig.parts
 rig.play("idle");
 // in update(): rig.tick(dt)
@@ -184,6 +216,7 @@ What the system contributed that imperative draw code could not:
 - **`themes/ice.json`** restyles the entire redesigned roster — chitin to blue-grey, pheromone to a cold signal — without touching a silhouette.
 - **The arsenal follows a second rule**: player weapons are hive material with the signal stripped out — chitin, husk bone, molt shell, honed to a cold frost edge, and never magenta. A lash is a Soldier's mandible on a cord; the orbiting drone is a hexagonal plate cut from a Molt; the thrown card is a Drifter's wing on a bone frame. The one place the hive's colour touches the player is `ss.fx.pickup`, the half-second of borrowed voice when a scent crystal is absorbed.
 - **Weapon icons compose their weapons.** `ss.icon.wand/whip/boomerang` `use` `ss.proj.bolt/slash/boom` directly, so the original's five-shapes-authored-twice problem cannot recur; `evolved` is a rim-colour patch, not a second drawing.
+- **The game draws nothing of its own any more.** Every icon, terrain prop and creature it once drew in `BootScene.ts` is a document here; what stayed behind is the handful of things that were never art — a runtime-tinted particle, procedural noise canvases, damage digits. It consumes this repo as a package and keeps only the map from its texture keys to these ids.
 - Gameplay contracts held throughout: ids, body radii and variant slots are unchanged, so the redesign drops into the same code that consumed the faithful port. Three assets carry hard geometry contracts noted in their own descriptions — `ss.proj.ring` (`wave.r / 62`), `ss.proj.ball` (`ballR / 14`) and `ss.proj.aura` (`r / 64`, plus runtime tinting, so it stays neutral white).
 
 ## For AI agents
