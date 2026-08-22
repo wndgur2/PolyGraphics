@@ -23,6 +23,7 @@
     "render": "tsx src/cli.ts render",
     "compile": "tsx src/cli.ts compile",
     "gallery": "tsx src/cli.ts gallery",
+    "watch": "tsx scripts/watch.ts",
     "dist": "tsx src/cli.ts dist",
     "png": "tsx src/cli.ts png",
     "baseline": "tsx src/cli.ts baseline",
