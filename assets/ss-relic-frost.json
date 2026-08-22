@@ -1,0 +1,20 @@
+{
+  "id": "ss.relic.frost",
+  "name": "Deep resonance",
+  "description": "Three rings off the same silent point, the outer one heavy where the weapon's is a hairline. The Chirp has no body to compose — it is a sound — so the upgrade is drawn as how far and how hard the sound goes.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "wave_far", "shape": {"kind": "ring", "r": 11.4, "width": 2.4}, "fill": "$frost@0.4"},
+    {"id": "wave_mid", "shape": {"kind": "ring", "r": 7.8, "width": 2.7}, "fill": "$frost@0.72"},
+    {"id": "wave_near", "shape": {"kind": "ring", "r": 4.1, "width": 2.9}, "fill": "$frost"},
+    {"id": "core", "shape": {"kind": "circle", "r": 1.7}, "fill": "$silent"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}
