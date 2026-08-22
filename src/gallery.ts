@@ -73,7 +73,7 @@ function partRow(p: Part): string {
   return `<tr>
   <td><code class="pid">${esc(p.id)}</code></td>
   <td>${esc(bits.join(""))}</td>
-  <td>${paint ? `<code class="tok">${esc(paint)}</code>` : ""}${stroke ? ` <span class="dim">${esc(stroke)}</span>` : ""}</td>
+  <td>${paint ? `<code class="paint">${esc(paint)}</code>` : ""}${stroke ? ` <span class="dim">${esc(stroke)}</span>` : ""}</td>
   <td class="dim">${esc(xf.join(" · "))}</td>
 </tr>`;
 }
@@ -179,12 +179,11 @@ function assetCard(asset: Asset, reg: Registry, issues: Issue[]): string {
   const meta: string[] = [`${asset.size[0]}×${asset.size[1]}`];
   if (anims.length) meta.push(`anim: ${anims.join(", ")}`);
   const hay = `${asset.id} ${asset.name} ${asset.description} ${asset.tags.join(" ")} ${asset.parts.map((p) => p.id).join(" ")}`;
-  return `<article class="card" id="c-${slug(asset.id)}" data-id="${esc(asset.id)}" data-cat="${esc(asset.tags[0])}" data-hay="${esc(hay.toLowerCase())}">
+  return `<article class="card" id="c-${slug(asset.id)}" role="button" tabindex="0" data-id="${esc(asset.id)}" data-cat="${esc(asset.tags[0])}" data-hay="${esc(hay.toLowerCase())}">
   <header><h3>${esc(asset.name)}</h3><code>${esc(asset.id)}</code></header>
   <p class="desc">${esc(asset.description)}</p>
   <div class="tags">${asset.tags.map((t) => `<span>${esc(t)}</span>`).join("")}<span class="dim">${meta.join(" · ")}</span></div>
   <div class="row" data-row>${cells.join("")}</div>
-  <a class="open" href="#/${esc(asset.id)}">open ↗</a>
 </article>`;
 }
 
@@ -241,17 +240,21 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
 
   const tabs = [
     `<button data-tab="tokens">tokens</button>`,
-    ...cats.map((c) => `<button data-tab="${esc(c)}">${esc(c)} <i>${byCat.get(c)!.length}</i></button>`),
     `<button data-tab="themes">themes</button>`,
+    `<div class="group">assets</div>`,
+    // The landing tab is named here rather than inferred from position: the
+    // sidebar's order is a reading order, and it has already changed once.
+    ...cats.map((c, i) => `<button data-tab="${esc(c)}"${i === 0 ? " data-first" : ""}><span>${esc(c)}</span><i>${byCat.get(c)!.length}</i></button>`),
   ].join("");
 
   return `<!doctype html>
 <meta charset="utf-8">
 <title>PolyGraphics gallery</title>
 <style>
-  :root { color-scheme: dark; --bg:#0d0f14; --panel:#151824; --line:#232838; --dim:#5b6575; --mut:#9aa4b2; --acc:#8fd0ff; }
+  :root { color-scheme: dark; --bg:#0d0f14; --panel:#151824; --line:#232838; --dim:#5b6575; --mut:#9aa4b2; --acc:#8fd0ff; --side:212px; }
   * { box-sizing: border-box; margin: 0; }
-  body { background:var(--bg); color:#e6ecf5; font: 14px/1.5 system-ui, sans-serif; padding-bottom: 80px; }
+  body { background:var(--bg); color:#e6ecf5; font: 14px/1.5 system-ui, sans-serif;
+    display:grid; grid-template-columns: var(--side) 1fr; align-items:start; }
   h1 { font-size: 18px; } h3 { font-size: 14px; }
   h4 { font-size: 12px; color:var(--mut); margin: 16px 0 6px; text-transform: uppercase; letter-spacing:.08em; }
   code { color:var(--acc); font: 12px ui-monospace, monospace; }
@@ -260,25 +263,32 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
   button:hover { border-color:#3a4a63; background:#273047; }
   button.primary { background:#1d3652; border-color:#2f5c86; }
 
-  header.top { position: sticky; top:0; z-index:20; background:rgba(13,15,20,.94); backdrop-filter: blur(8px); border-bottom:1px solid var(--line); padding: 10px 20px 0; }
-  .titlerow { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
-  .titlerow .sub { color:var(--mut); font-size:12px; }
-  .spacer { flex:1; }
-  #q { background:#11141d; border:1px solid var(--line); border-radius:6px; padding:5px 10px; color:inherit; width:280px; font:inherit; }
-  #live { font-size:11px; color:var(--dim); display:flex; align-items:center; gap:5px; }
+  .side { position:sticky; top:0; height:100vh; overflow-y:auto; border-right:1px solid var(--line);
+    background:#0b0d12; padding:14px 10px 20px; display:flex; flex-direction:column; gap:10px; }
+  .brand { padding:0 6px; }
+  .brand h1 { font-size:15px; }
+  .brand .sub { color:var(--dim); font-size:11px; }
+  #q { background:#11141d; border:1px solid var(--line); border-radius:6px; padding:6px 9px; color:inherit; width:100%; font:inherit; font-size:13px; }
+  .side nav { display:flex; flex-direction:column; gap:1px; }
+  .side nav button { text-align:left; background:none; border:none; border-radius:6px; padding:5px 8px;
+    display:flex; justify-content:space-between; align-items:center; gap:8px; color:var(--mut); }
+  .side nav button:hover { background:#161b28; color:#e6ecf5; }
+  .side nav button.on { background:#22304a; color:#fff; }
+  .side nav i { color:var(--dim); font-style:normal; font-size:11px; font-variant-numeric:tabular-nums; }
+  .side nav button.on i { color:#9fc4ea; }
+  .group { font-size:10px; text-transform:uppercase; letter-spacing:.1em; color:var(--dim); padding:10px 8px 2px; }
+  #live { margin-top:auto; font-size:11px; color:var(--dim); display:flex; align-items:center; gap:5px; padding:0 8px; }
   #live b { width:7px; height:7px; border-radius:50%; background:#2f9e5f; display:inline-block; }
-  nav.tabs { display:flex; gap:4px; overflow-x:auto; padding-bottom:8px; }
-  nav.tabs button { white-space:nowrap; border-radius:6px 6px 0 0; border-bottom-color:transparent; }
-  nav.tabs button.on { background:#273047; border-color:#3a4a63; color:#fff; }
-  nav.tabs i { color:var(--dim); font-style:normal; font-size:11px; }
 
-  main { padding: 18px 20px; }
+  main { padding: 18px 22px 80px; min-width:0; }
   .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap:14px; }
-  .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px; position:relative; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px;
+    cursor:pointer; transition: border-color .12s, background .12s, transform .12s; }
+  .card:hover { border-color:#3a4a63; background:#191d2b; transform: translateY(-1px); }
+  .card:focus-visible { outline:2px solid var(--acc); outline-offset:2px; }
+  .card:active { transform:none; }
   .card header { display:flex; justify-content:space-between; align-items:baseline; gap:8px; margin-bottom:4px; }
   .card h3 { font-size:14px; }
-  .card .open { position:absolute; top:10px; right:10px; font-size:11px; color:var(--dim); text-decoration:none; opacity:0; }
-  .card:hover .open { opacity:1; color:var(--acc); }
   .desc { color:var(--mut); font-size:12px; margin-bottom:8px; }
   .desc.big { font-size:13px; margin-bottom:12px; }
   .tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
@@ -290,11 +300,12 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
   .stage { background: repeating-conic-gradient(#181c28 0% 25%, #141824 0% 50%) 0 0/16px 16px; border-radius:6px; padding:8px; display:flex; align-items:center; justify-content:center; }
   figcaption { font-size:11px; color:var(--dim); }
 
+  .facts { max-width: 980px; min-width:0; }
   .detail-head { display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
   .detail-head h2 { font-size:18px; }
   .big-id { font-size:13px; }
   .detail-body { display:grid; grid-template-columns: minmax(320px, 460px) 1fr; gap:24px; align-items:start; }
-  .viewer { position:sticky; top:104px; }
+  .viewer { position:sticky; top:16px; }
   .viewer-stage { border:1px solid var(--line); border-radius:10px; padding:24px; min-height:240px; display:flex; align-items:center; justify-content:center;
     background: repeating-conic-gradient(#181c28 0% 25%, #141824 0% 50%) 0 0/16px 16px; }
   .viewer-stage.bg-ground { background:#1a1420; } .viewer-stage.bg-ink { background:#10121a; } .viewer-stage.bg-light { background:#e6e1d3; }
@@ -308,13 +319,18 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
   .bgs button { width:18px; height:18px; padding:0; border-radius:4px; background: repeating-conic-gradient(#181c28 0% 25%, #141824 0% 50%) 0 0/8px 8px; }
   .bgs button.on { outline:2px solid var(--acc); outline-offset:1px; }
   .hint { font-size:11px; margin-top:8px; max-width:44ch; }
-  .factgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:6px 14px; margin-bottom:12px; font-size:12px; }
-  .factgrid > div { display:flex; gap:8px; justify-content:space-between; border-bottom:1px dotted #222736; padding-bottom:3px; }
+  .factgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(112px,1fr)); gap:8px 16px; margin-bottom:14px; font-size:12px; }
+  .factgrid > div { display:flex; flex-direction:column; gap:1px; border-bottom:1px dotted #222736; padding-bottom:5px; min-width:0; }
   .factgrid > div.wide { grid-column: 1 / -1; }
+  .factgrid .dim { font-size:10px; text-transform:uppercase; letter-spacing:.08em; }
+  .factgrid code { overflow-wrap:anywhere; }
   table.parts { width:100%; border-collapse:collapse; font-size:12px; }
-  table.parts td { padding:4px 8px 4px 0; border-bottom:1px solid #1b2030; vertical-align:top; }
+  table.parts td { padding:4px 14px 4px 0; border-bottom:1px solid #1b2030; vertical-align:top; }
+  table.parts td:nth-child(-n+3) { width:1%; white-space:nowrap; }
+  table.parts td:last-child { width:auto; padding-right:0; }
   table.parts tr:hover { background:#171b28; }
-  .pid { color:#ffd93b; } .tok { color:#7ae87a; }
+  .pid { color:#ffd93b; }
+  .paint { color:#7ae87a; background:#131c17; border:1px solid #1d2b21; border-radius:4px; padding:1px 6px; white-space:nowrap; }
   .sub-item { border-left:2px solid var(--line); padding:2px 0 2px 10px; margin-bottom:10px; }
   .sub-item p { color:var(--mut); font-size:12px; }
   .sub-item ul { margin:4px 0 0 0; padding-left:16px; }
@@ -330,19 +346,16 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
   .tok { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px 14px; min-width:130px; }
   .tok > div { display:flex; justify-content:space-between; gap:16px; }
   .empty { color:var(--dim); padding:40px 0; }
-  @media (max-width: 900px) { .detail-body { grid-template-columns:1fr; } .viewer { position:static; } }
+  @media (max-width: 1000px) { .detail-body { grid-template-columns:1fr; } .viewer { position:static; } }
+  @media (max-width: 760px) { body { grid-template-columns:1fr; } .side { position:static; height:auto; border-right:none; border-bottom:1px solid var(--line); } }
 </style>
 
-<header class="top">
-  <div class="titlerow">
-    <h1>PolyGraphics</h1>
-    <span class="sub">${reg.assets.size} assets · ${cats.length} categories</span>
-    <div class="spacer"></div>
-    <input id="q" type="search" placeholder="search id, name, description, part…  ( / )">
-    <span id="live"><b></b> live</span>
-  </div>
-  <nav class="tabs">${tabs}</nav>
-</header>
+<aside class="side">
+  <div class="brand"><h1>PolyGraphics</h1><div class="sub">${reg.assets.size} assets · ${cats.length} categories</div></div>
+  <input id="q" type="search" placeholder="search…  ( / )">
+  <nav>${tabs}</nav>
+  <span id="live"><b></b> live · reloads on rebuild</span>
+</aside>
 
 <main>
   <section class="panel" data-panel="tokens" hidden>${swatches(reg.tokens)}</section>
@@ -356,9 +369,9 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const panels = $$('.panel'), tabs = $$('nav.tabs button'), details = $$('.detail');
+  const panels = $$('.panel'), tabs = $$('.side nav button'), details = $$('.detail');
   const q = $('#q'), results = $('#results');
-  const firstTab = tabs[1]?.dataset.tab || 'tokens';
+  const firstTab = $('.side nav button[data-first]')?.dataset.tab || 'tokens';
 
   const show = (name) => {
     panels.forEach(p => p.hidden = p.dataset.panel !== name);
@@ -452,6 +465,21 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
       stage.className = 'viewer-stage' + (b.dataset.bg === 'checker' ? '' : ' bg-' + b.dataset.bg) +
         (stage.classList.contains('sil') ? ' sil' : '');
     });
+  });
+
+  // ---- the whole card is the way in; there is no separate link to hit
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.card');
+    if (!card || !card.dataset.id) return;
+    // A drag that selected text was not a click on the card.
+    if (String(getSelection())) return;
+    location.hash = '#/' + card.dataset.id;
+  });
+  document.addEventListener('keydown', (e) => {
+    const card = e.target.closest?.('.card');
+    if (!card || (e.key !== 'Enter' && e.key !== ' ')) return;
+    e.preventDefault();
+    location.hash = '#/' + card.dataset.id;
   });
 
   // ---- copy buttons
