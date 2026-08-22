@@ -161,7 +161,7 @@ ${a.description ? `<p>${esc(a.description)}</p>` : ""}<ul><li><code>${esc(tracks
   </div>
   <div class="detail-body">
     <div class="viewer">
-      <div class="viewer-stage" data-stage></div>
+      <div class="viewer-stage" data-stage><div class="zoomer" data-zoomer></div></div>
       <div class="viewer-controls">
         <label>zoom <input type="range" min="1" max="6" step="0.5" value="2" data-zoom></label>
         <label><input type="checkbox" data-silhouette> silhouette</label>
@@ -336,6 +336,7 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
   .viewer-stage.sil svg { filter: brightness(0) saturate(0); }
   .viewer-stage.sil.bg-ink svg, .viewer-stage.sil.bg-ground svg { filter: brightness(0) invert(1); }
   .viewer-stage .stage { background:none; padding:0; }
+  .zoomer { display:block; }
   .viewer-stage .row { gap:20px; justify-content:center; }
   .viewer-controls { display:flex; align-items:center; gap:14px; margin-top:10px; font-size:12px; color:var(--mut); flex-wrap:wrap; }
   .viewer-controls label { display:flex; align-items:center; gap:6px; }
@@ -409,7 +410,7 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
     if (!openId) return;
     const d = $('#d-' + openId.replace(/\\./g, '-'));
     const card = $('#c-' + openId.replace(/\\./g, '-'));
-    const row = $('[data-stage]', d).firstElementChild;
+    const row = $('[data-zoomer]', d).firstElementChild;
     if (row && card) card.appendChild(row);      // put the art back where it lives
     d.hidden = true;
     openId = null;
@@ -422,8 +423,7 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
     // Move (not clone) the card's row in: one copy in the DOM means the
     // animation CSS keeps its unique ids.
     const card = $('#c-' + id.replace(/\\./g, '-'));
-    const stage = $('[data-stage]', d);
-    if (card) stage.appendChild($('[data-row]', card));
+    if (card) $('[data-zoomer]', d).appendChild($('[data-row]', card));
     applyZoom(d);
     d.hidden = false;
     openId = id;
@@ -431,10 +431,10 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
     window.scrollTo(0, 0);
     return true;
   };
-  const applyZoom = (d) => {
-    const row = $('[data-stage] > *', d);
-    if (row) row.style.zoom = $('[data-zoom]', d).value;
-  };
+  // Zoom belongs to the viewer, so it is set on the viewer's own element. Put
+  // it on the borrowed row instead and the row carries it home: the card comes
+  // back rendered at 2x and reflows the grid until the next reload.
+  const applyZoom = (d) => { $('[data-zoomer]', d).style.zoom = $('[data-zoom]', d).value; };
 
   const route = () => {
     const m = location.hash.match(/^#\\/(.+)$/);
