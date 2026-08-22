@@ -1,0 +1,40 @@
+{
+  "id": "ss.relic.thorns",
+  "name": "Barbed carapace",
+  "description": "A back plate cut off something and worn: five bone barbs standing off a purple shell, tallest in the middle, that one still wet at the tip with a bead coming off it. Every barb is rooted on the shell's upper arc and sized to the room above it, so the fan is the shell's own curve rather than five copies of one spike. The hollow under the bottom rim is the body it is no longer on, which is what makes this armour rather than a picture of a spiny animal — and the red, the only red in the set, is the whole point of the find: armour that costs the thing that hits it, one barb already used.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+
+    {"id": "barb_ll_outline", "at": [-6.8, -2], "shape": {"kind": "poly", "points": [[-2.6, 1.8], [0, -7.3], [2.6, 1.8]]}, "fill": "$ink"},
+    {"id": "barb_l_outline", "at": [-3.6, -3.6], "shape": {"kind": "poly", "points": [[-2.65, 1.8], [0, -8.5], [2.65, 1.8]]}, "fill": "$ink"},
+    {"id": "barb_c_outline", "at": [0, -3.6], "shape": {"kind": "poly", "points": [[-2.75, 1.8], [0, -9.7], [2.75, 1.8]]}, "fill": "$ink"},
+    {"id": "barb_r_outline", "at": [3.6, -3.6], "shape": {"kind": "poly", "points": [[-2.65, 1.8], [0, -8.5], [2.65, 1.8]]}, "fill": "$ink"},
+    {"id": "barb_rr_outline", "at": [6.8, -2], "shape": {"kind": "poly", "points": [[-2.6, 1.8], [0, -7.3], [2.6, 1.8]]}, "fill": "$ink"},
+    {"id": "shell_outline", "shape": {"kind": "poly", "points": [[-11, 1.4], [-9.2, -3.4], [-4.6, -6.2], [4.6, -6.2], [9.2, -3.4], [11, 1.4], [9.4, 7.4], [4.6, 11.2], [-4.6, 11.2], [-9.4, 7.4]]}, "fill": "$ink"},
+
+    {"id": "barb_ll", "at": [-6.8, -2], "shape": {"kind": "poly", "points": [[-1.9, 1.4], [0, -6.6], [1.9, 1.4]]}, "fill": "$husk"},
+    {"id": "barb_l", "at": [-3.6, -3.6], "shape": {"kind": "poly", "points": [[-1.95, 1.4], [0, -7.8], [1.95, 1.4]]}, "fill": "$husk"},
+    {"id": "barb_c", "at": [0, -3.6], "shape": {"kind": "poly", "points": [[-2.05, 1.4], [0, -9], [2.05, 1.4]]}, "fill": "$husk"},
+    {"id": "barb_r", "at": [3.6, -3.6], "shape": {"kind": "poly", "points": [[-1.95, 1.4], [0, -7.8], [1.95, 1.4]]}, "fill": "$husk"},
+    {"id": "barb_rr", "at": [6.8, -2], "shape": {"kind": "poly", "points": [[-1.9, 1.4], [0, -6.6], [1.9, 1.4]]}, "fill": "$husk"},
+    {"id": "barb_c_lit", "at": [-0.65, -3.6], "shape": {"kind": "poly", "points": [[-0.55, 1.4], [0, -7.4], [0.55, 1.4]]}, "fill": "$husk.light2"},
+    {"id": "barb_l_lit", "at": [-4.15, -3.6], "shape": {"kind": "poly", "points": [[-0.5, 1.4], [0, -6.4], [0.5, 1.4]]}, "fill": "$husk.light2"},
+
+    {"id": "shell", "shape": {"kind": "poly", "points": [[-9.7, 1.4], [-8.1, -2.8], [-4.2, -5.2], [4.2, -5.2], [8.1, -2.8], [9.7, 1.4], [8.3, 6.6], [4.1, 10], [-4.1, 10], [-8.3, 6.6]]}, "fill": "$carapace"},
+    {"id": "crown", "at": [0, 1], "shape": {"kind": "ellipse", "rx": 8, "ry": 5.4}, "fill": "$carapace.light"},
+    {"id": "crown_lit", "at": [-0.5, -2.2], "shape": {"kind": "ellipse", "rx": 4.4, "ry": 1.5}, "fill": "$carapace.light2"},
+    {"id": "hollow", "at": [0, 8.4], "shape": {"kind": "ellipse", "rx": 5.6, "ry": 2.1}, "fill": "$ink"},
+    {"id": "sheen", "at": [-5.2, -1.4], "rot": -34, "shape": {"kind": "rect", "w": 1.5, "h": 3.8, "corner": 0.75}, "fill": "$silent@soft"},
+
+    {"id": "wet", "at": [0, -11.2], "shape": {"kind": "poly", "points": [[-1.15, 1.6], [0, -1.5], [1.15, 1.6]]}, "fill": "$blood"},
+    {"id": "bead", "at": [1.5, -8.6], "shape": {"kind": "ellipse", "rx": 0.85, "ry": 1.15}, "fill": "$blood.light"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}
