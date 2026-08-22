@@ -1,0 +1,29 @@
+{
+  "id": "ss.pickup.pulp",
+  "name": "Pulp",
+  "description": "What a hive creature leaves behind when it dies: a torn lump of soft tissue, still wet. You pick them up because the hive grows on what it reclaims — which is why they count as experience. The silhouette is a lobed horizontal chunk — three soft bulges along the top, two along the bottom, no spike and no single bite — because the draft that leaned on one notch and a hanging drip read as a speech bubble at 16px. Lumpiness is what keeps it off the Gland's clean round sac, and it is what carries the flat-silhouette test. Interior detail is deliberately single and off-centre — one sheen up the left, one torn pit down the right — because a second highlight plus a crease across the middle turned the whole thing into a face. The fill is kept near-white and neutral: the game tints this sprite per XP tier at runtime, so any hue baked in here would fight the tint.",
+  "tags": ["ss-pickup"],
+  "size": [16, 16],
+  "parts": [
+    { "id": "halo", "shape": { "kind": "circle", "r": 6.4 }, "fill": "$white@0.12" },
+    { "id": "mass", "shape": { "kind": "poly", "points": [[-6.2, -0.6], [-5.4, -3.2], [-3.4, -4.6], [-1.6, -3.6], [0.2, -5.4], [2.4, -4.4], [4.2, -4.8], [5.8, -2.6], [6.6, -0.2], [6, 2.4], [3.8, 4.4], [1.6, 3.4], [-0.8, 5.2], [-3.6, 4.6], [-5.4, 2.4]] }, "fill": "$smoke" },
+    { "id": "flesh", "shape": { "kind": "poly", "points": [[-4.9, -0.5], [-4.2, -2.5], [-2.6, -3.5], [-1.4, -2.7], [0.2, -4.1], [2.1, -3.3], [3.6, -3.6], [4.7, -1.9], [5.3, -0.2], [4.8, 1.8], [3.1, 3.3], [1.4, 2.5], [-0.6, 3.9], [-2.9, 3.4], [-4.3, 1.7]] }, "fill": "$bone" },
+    { "id": "shade", "shape": { "kind": "poly", "points": [[5.3, -0.2], [4.8, 1.8], [3.1, 3.3], [1.4, 2.5], [-0.6, 3.9], [-2.9, 3.4], [-4.3, 1.7], [-2.6, 0.9], [0.4, 1.1], [3.2, 0.4]] }, "fill": "$bone.dark" },
+    { "id": "pit", "at": [2.2, 2.2], "rot": 12, "shape": { "kind": "ellipse", "rx": 1.1, "ry": 0.8 }, "fill": "$smoke" },
+    { "id": "gloss", "at": [-2.6, -2.4], "rot": -26, "shape": { "kind": "ellipse", "rx": 2.2, "ry": 0.75 }, "fill": "$white" }
+  ],
+  "animations": {
+    "squelch": {
+      "description": "swells and settles — soft tissue, not a stone. The mass swells less than the flesh inside it, so the dark rim thins as it fills, and the sheen wets and dries with it.",
+      "duration": 2.1,
+      "tracks": [
+        { "part": "flesh", "prop": "scale", "keys": [[0, 1], [0.5, 1.06], [1, 1]] },
+        { "part": "shade", "prop": "scale", "keys": [[0, 1], [0.5, 1.06], [1, 1]] },
+        { "part": "pit", "prop": "scale", "keys": [[0, 1], [0.5, 1.06], [1, 1]] },
+        { "part": "mass", "prop": "scale", "keys": [[0, 1], [0.5, 1.04], [1, 1]] },
+        { "part": "gloss", "prop": "opacity", "keys": [[0, 0.45], [0.5, 1], [1, 0.45]] },
+        { "part": "halo", "prop": "scale", "keys": [[0, 0.9], [0.5, 1.15], [1, 0.9]] }
+      ]
+    }
+  }
+}

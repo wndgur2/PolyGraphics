@@ -1,7 +1,7 @@
 {
   "id": "ss.pickup.coin",
   "name": "Chitin shard",
-  "description": "Currency, of a sort. A polished disc of shell — the hive trades in material, not metal, and a clean plate off a Soldier is worth carrying out. Gold-warm so it never gets confused with the near-white scent crystals.",
+  "description": "Currency, of a sort. A polished disc of shell — the hive trades in material, not metal, and a clean plate off a Soldier is worth carrying out. Hard, flat and gold-warm, so it never gets confused with the near-white pulp.",
   "tags": ["ss-pickup"],
   "size": [16, 16],
   "parts": [
