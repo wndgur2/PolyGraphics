@@ -1,28 +1,14 @@
 {
   "id": "ss.relic.growth",
-  "name": "Rooted elder spore",
-  "description": "A spore that has sat long enough to put roots down and band itself twice over. The four-leaf spore in the set is four fresh caps with nothing under them; this one is a single old body with more below the line than above it.",
+  "name": "Gem hoard",
+  "description": "Three crystallized signals where a kill leaves one, composed from `ss.pickup.gem` — the pickup this stat multiplies, drawn as more of itself. Nothing about a spore or an arrow says experience; the gem the player already stoops for does.",
   "tags": ["ss-relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},
-    {"id": "root_l_outline", "at": [-5.6, 6.4], "rot": 34, "shape": {"kind": "poly", "points": [[-1.8, -6.42], [1.73, -6.42], [0.47, 8.44]]}, "fill": "$ink"},
-    {"id": "root_c_outline", "at": [-0.4, 8.4], "rot": -6, "shape": {"kind": "poly", "points": [[-1.89, -7.02], [1.84, -7.02], [0.35, 8.64]]}, "fill": "$ink"},
-    {"id": "root_r_outline", "at": [5.4, 6], "rot": -40, "shape": {"kind": "poly", "points": [[-1.68, -6.02], [1.64, -6.02], [0.24, 8.04]]}, "fill": "$ink"},
-    {"id": "rootlet_l_outline", "at": [-8.4, 9.4], "rot": 62, "shape": {"kind": "rect", "w": 3.9, "h": 7.2, "corner": 1.95}, "fill": "$ink"},
-    {"id": "rootlet_r_outline", "at": [7.6, 9.6], "rot": -66, "shape": {"kind": "rect", "w": 3.9, "h": 6.8, "corner": 1.95}, "fill": "$ink"},
-    {"id": "pod_outline", "at": [0, -3.4], "shape": {"kind": "ellipse", "rx": 8.8, "ry": 9}, "fill": "$ink"},
-    {"id": "sprout_outline", "at": [1.6, -11.2], "rot": 18, "shape": {"kind": "rect", "w": 4.4, "h": 7.8, "corner": 2.2}, "fill": "$ink"},
-    {"id": "root_l", "at": [-5.6, 6.4], "rot": 34, "shape": {"kind": "poly", "points": [[-1.4, -5.4], [1.4, -5.4], [0.4, 6.4]]}, "fill": "$timber.dark"},
-    {"id": "root_c", "at": [-0.4, 8.4], "rot": -6, "shape": {"kind": "poly", "points": [[-1.5, -6], [1.5, -6], [0.3, 6.6]]}, "fill": "$timber.dark"},
-    {"id": "root_r", "at": [5.4, 6], "rot": -40, "shape": {"kind": "poly", "points": [[-1.3, -5], [1.3, -5], [0.2, 6]]}, "fill": "$timber.dark"},
-    {"id": "rootlet_l", "at": [-8.4, 9.4], "rot": 62, "shape": {"kind": "rect", "w": 1.1, "h": 4.4, "corner": 0.55}, "fill": "$timber.dark2"},
-    {"id": "rootlet_r", "at": [7.6, 9.6], "rot": -66, "shape": {"kind": "rect", "w": 1.1, "h": 4, "corner": 0.55}, "fill": "$timber.dark2"},
-    {"id": "pod", "at": [0, -3.4], "shape": {"kind": "ellipse", "rx": 7.4, "ry": 7.6}, "fill": "$spore.dark"},
-    {"id": "band_a", "at": [0, -5.4], "shape": {"kind": "ellipse", "rx": 6.4, "ry": 4}, "fill": "$spore"},
-    {"id": "band_b", "at": [0, -6.8], "shape": {"kind": "ellipse", "rx": 4.6, "ry": 2.4}, "fill": "$spore.light"},
-    {"id": "shine", "at": [-2.8, -7], "shape": {"kind": "circle", "r": 1.3}, "fill": "$spore.light2"},
-    {"id": "sprout", "at": [1.6, -11.2], "rot": 18, "shape": {"kind": "rect", "w": 1.6, "h": 5, "corner": 0.8}, "fill": "$venom.dark"}
+    {"id": "gem_back_l", "at": [-6.4, -1.6], "rot": -16, "scale": 0.62, "use": "ss.pickup.gem"},
+    {"id": "gem_back_r", "at": [6.6, -1.2], "rot": 15, "scale": 0.62, "use": "ss.pickup.gem"},
+    {"id": "gem_front", "at": [0, 3.2], "scale": 0.95, "use": "ss.pickup.gem"}
   ],
   "variants": {
     "glyph": {
