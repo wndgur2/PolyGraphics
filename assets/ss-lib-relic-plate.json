@@ -1,0 +1,21 @@
+{
+  "id": "ss.lib.relic-plate",
+  "name": "Relic plate",
+  "description": "The ground a ruins find is shown on: a rim, a dark panel, and an old light bleeding out of the middle. Every find composes this via `use`, so the twenty-odd of them share one definition and the plate can be lifted off in one line — the `glyph` variant each of them declares removes this part and nothing else, which is what an unmet collection entry shows. The `curse` variant swaps gold for arcane, the two colours the ruins outcome already switches between.",
+  "tags": ["ss-lib"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "rim", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$gold"},
+    {"id": "panel", "shape": {"kind": "rect", "w": 28, "h": 28, "corner": 5}, "fill": "$coal.dark"},
+    {"id": "glow", "shape": {"kind": "circle", "r": 13}, "fill": {"gradient": "radial", "stops": [[0, "$gold@0.42"], [0.55, "$gold@0.16"], [1, "$gold@0"]]}}
+  ],
+  "variants": {
+    "curse": {
+      "description": "What the ruins hand you when the trespass is answered instead of rewarded. Same plate, arcane light.",
+      "set": {
+        "rim.fill": "$arcane",
+        "glow.fill": {"gradient": "radial", "stops": [[0, "$arcane@0.42"], [0.55, "$arcane@0.16"], [1, "$arcane@0"]]}
+      }
+    }
+  }
+}

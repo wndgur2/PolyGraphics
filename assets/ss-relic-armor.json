@@ -1,0 +1,24 @@
+{
+  "id": "ss.relic.armor",
+  "name": "Beetle helm",
+  "description": "A beetle's head plate cut off and worn: a domed helm with the pronotum ridge running down it, a lit crown, the horn still standing on the front, and the hollow open under the rim where a head would go. Somebody else's armour, put on.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "horn_outline", "at": [0, 1.1], "shape": {"kind": "poly", "points": [[-2.4, -6.6], [1.2, -13.4], [4.4, -6.4]]}, "fill": "$ink"},
+    {"id": "helm_outline", "at": [0, 1.1], "shape": {"kind": "poly", "points": [[-10.4, -1.4], [-8, -7.2], [-2.6, -10.4], [3.4, -10.4], [8.8, -7.2], [11.2, -1.4], [10.4, 5], [6.6, 9.6], [0.4, 11], [-5.8, 9.6], [-9.6, 5]]}, "fill": "$ink"},
+    {"id": "horn", "at": [0, 1.1], "shape": {"kind": "poly", "points": [[-1.6, -6.6], [1.2, -12.2], [3.4, -6.4]]}, "fill": "$chitin.dark"},
+    {"id": "helm", "at": [0, 1.1], "shape": {"kind": "poly", "points": [[-9.2, -1.2], [-7, -6.4], [-2.2, -9.2], [3, -9.2], [7.8, -6.4], [10, -1.2], [9.2, 4.6], [5.8, 8.6], [0.4, 9.8], [-5, 8.6], [-8.4, 4.6]]}, "fill": "$chitin.dark"},
+    {"id": "crown", "at": [0.4, -1.5], "shape": {"kind": "ellipse", "rx": 8.6, "ry": 6}, "fill": "$chitin"},
+    {"id": "crown_lit", "at": [-0.4, -4.3], "shape": {"kind": "ellipse", "rx": 6.2, "ry": 2.6}, "fill": "$chitin.light2"},
+    {"id": "ridge", "at": [0.6, -1.5], "shape": {"kind": "rect", "w": 1.6, "h": 12}, "fill": "$chitin.dark2"},
+    {"id": "hollow", "at": [0.4, 9.5], "shape": {"kind": "ellipse", "rx": 6.6, "ry": 2.8}, "fill": "$ink"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}

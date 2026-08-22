@@ -1,0 +1,26 @@
+{
+  "id": "ss.relic.might",
+  "name": "Souring acid gland",
+  "description": "A gland gone sour: a lumpy sac with walls thin enough to show the stuff working inside it, a flat level line across the middle and bubbles coming off the floor, bent duct pinched shut at the top. It is a container of something live rather than a solid body, which is what separates it at a glance from the spore that shares its green.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "duct_outline", "at": [2.05, -5.46], "rot": -26, "shape": {"kind": "rect", "w": 6.2, "h": 7.4, "corner": 3}, "fill": "$ink"},
+    {"id": "sac_outline", "at": [-0.15, 2.14], "shape": {"kind": "poly", "points": [[-8.9, -3.3], [-5.2, -7.7], [1.5, -9.1], [7.4, -5.6], [9.2, 0.9], [6.1, 6.4], [-0.6, 8], [-6.6, 4.4]]}, "fill": "$ink"},
+    {"id": "duct", "at": [2.05, -5.46], "rot": -26, "shape": {"kind": "rect", "w": 3.8, "h": 6.4, "corner": 1.8}, "fill": "$venom.dark2"},
+    {"id": "sac", "at": [-0.15, 2.14], "shape": {"kind": "poly", "points": [[-7.6, -2.8], [-4.4, -6.6], [1.4, -7.8], [6.4, -4.8], [8, 0.8], [5.2, 5.6], [-0.6, 7], [-5.8, 3.8]]}, "fill": "$venom.dark"},
+    {"id": "liquid", "at": [-0.15, 2.14], "shape": {"kind": "poly", "points": [[-6.8, -1.2], [7.2, -1.2], [5, 4.6], [-0.6, 5.8], [-5.4, 3]]}, "fill": "$venom"},
+    {"id": "level", "at": [0.05, 0.94], "shape": {"kind": "ellipse", "rx": 7, "ry": 1.2}, "fill": "$venom.light2"},
+    {"id": "bubble_a", "at": [-2.95, 2.94], "shape": {"kind": "circle", "r": 1.5}, "fill": "$venom.light2"},
+    {"id": "bubble_b", "at": [1.45, 4.74], "shape": {"kind": "circle", "r": 1}, "fill": "$venom.light2"},
+    {"id": "bubble_c", "at": [3.85, 1.94], "shape": {"kind": "circle", "r": 0.8}, "fill": "$venom.light"},
+    {"id": "sheen", "at": [-4.75, -1.46], "rot": -32, "shape": {"kind": "rect", "w": 1.4, "h": 3.8, "corner": 0.7}, "fill": "$silent@soft"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}

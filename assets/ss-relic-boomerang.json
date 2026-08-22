@@ -1,0 +1,37 @@
+{
+  "id": "ss.relic.boomerang",
+  "name": "Blown seed",
+  "description": "A husk seed under a pappus of seven bristles, tipped over and travelling. The plume is the whole argument — it is what carries the thing, and it needs no weather drawn around it to say so.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "plume_0_outline", "at": [-3.11, -3.91], "rot": -56, "shape": {"kind": "rect", "w": 2.6, "h": 10.4, "corner": 1.3}, "fill": "$ink"},
+    {"id": "plume_1_outline", "at": [-2, -5.1], "rot": -38, "shape": {"kind": "rect", "w": 2.6, "h": 10.4, "corner": 1.3}, "fill": "$ink"},
+    {"id": "plume_2_outline", "at": [-0.58, -5.89], "rot": -20, "shape": {"kind": "rect", "w": 2.6, "h": 10.4, "corner": 1.3}, "fill": "$ink"},
+    {"id": "plume_3_outline", "at": [1.02, -6.2], "rot": -2, "shape": {"kind": "rect", "w": 2.6, "h": 10.4, "corner": 1.3}, "fill": "$ink"},
+    {"id": "plume_4_outline", "at": [2.63, -6], "rot": 16, "shape": {"kind": "rect", "w": 2.6, "h": 10.4, "corner": 1.3}, "fill": "$ink"},
+    {"id": "plume_5_outline", "at": [4.11, -5.31], "rot": 34, "shape": {"kind": "rect", "w": 2.6, "h": 10.4, "corner": 1.3}, "fill": "$ink"},
+    {"id": "plume_6_outline", "at": [5.3, -4.2], "rot": 52, "shape": {"kind": "rect", "w": 2.6, "h": 10.4, "corner": 1.3}, "fill": "$ink"},
+    {"id": "stalk_outline", "at": [0.4, 3.2], "rot": 10, "shape": {"kind": "rect", "w": 3.2, "h": 9.6}, "fill": "$ink"},
+    {"id": "seed_outline", "at": [-0.4, 7.8], "rot": 10, "shape": {"kind": "ellipse", "rx": 3.4, "ry": 4.6}, "fill": "$ink"},
+    {"id": "plume_0", "at": [-2.78, -3.68], "rot": -56, "shape": {"kind": "rect", "w": 1.1, "h": 9.6, "corner": 0.55}, "fill": "$silent@0.75"},
+    {"id": "plume_1", "at": [-1.76, -4.78], "rot": -38, "shape": {"kind": "rect", "w": 1.1, "h": 9.6, "corner": 0.55}, "fill": "$silent@0.75"},
+    {"id": "plume_2", "at": [-0.44, -5.51], "rot": -20, "shape": {"kind": "rect", "w": 1.1, "h": 9.6, "corner": 0.55}, "fill": "$silent@0.75"},
+    {"id": "plume_3", "at": [1.03, -5.8], "rot": -2, "shape": {"kind": "rect", "w": 1.1, "h": 9.6, "corner": 0.55}, "fill": "$silent@0.75"},
+    {"id": "plume_4", "at": [2.52, -5.61], "rot": 16, "shape": {"kind": "rect", "w": 1.1, "h": 9.6, "corner": 0.55}, "fill": "$silent@0.75"},
+    {"id": "plume_5", "at": [3.88, -4.98], "rot": 34, "shape": {"kind": "rect", "w": 1.1, "h": 9.6, "corner": 0.55}, "fill": "$silent@0.75"},
+    {"id": "plume_6", "at": [4.98, -3.96], "rot": 52, "shape": {"kind": "rect", "w": 1.1, "h": 9.6, "corner": 0.55}, "fill": "$silent@0.75"},
+    {"id": "hub", "at": [1.2, -1], "shape": {"kind": "circle", "r": 1.5}, "fill": "$husk.light2"},
+    {"id": "stalk", "at": [0.4, 3.2], "rot": 10, "shape": {"kind": "rect", "w": 1.4, "h": 9}, "fill": "$husk.dark"},
+    {"id": "seed", "at": [-0.4, 7.8], "rot": 10, "shape": {"kind": "ellipse", "rx": 2.4, "ry": 3.6}, "fill": "$husk"},
+    {"id": "seed_lit", "at": [-1.2, 6.8], "rot": 10, "shape": {"kind": "ellipse", "rx": 1, "ry": 1.6}, "fill": "$husk.light2"},
+    {"id": "seed_tip", "at": [0.4, 10.8], "rot": 10, "shape": {"kind": "ellipse", "rx": 1.2, "ry": 1.4}, "fill": "$chitin.dark"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}
