@@ -1,0 +1,39 @@
+{
+  "id": "ss.char.toad",
+  "name": "Toad",
+  "description": "A survivor of the same brood as everything hunting you — same feelers, same organ, same socket in the shell. The organ is `dead`: no halo, no bloom, a hairline crack across cold grey, and that silence is the premise all eight wear in the same place. The wedge shell, unchanged — and a gape cut across its flat underside with bile already pooled on the floor of it. One feature, and it is the right one: the triangle's bottom edge was already a wide flat mouth-line waiting to be opened. The bile is the same colour token the Spit glob flies in, so what it opens with is visibly what it is full of.",
+  "tags": ["ss-char"],
+  "size": [36, 36],
+  "meta": { "radius": 11.5 },
+  "parts": [
+    { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [2, -6.6], "rot": -38, "scale": 0.52 },
+    { "id": "shell", "at": [0, 1.6], "shape": { "kind": "ngon", "sides": 3, "r": 12.4 }, "fill": "$aqua", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "core", "at": [0, 2.6], "shape": { "kind": "ngon", "sides": 3, "r": 9 }, "fill": "$aqua.light2" },
+    { "id": "gloss", "at": [-2.6, 1.6], "rot": 32, "shape": { "kind": "ellipse", "rx": 2.8, "ry": 1.5 }, "fill": "$silent@soft" },
+    { "id": "lip", "at": [0, 0], "shape": { "kind": "poly", "points": [[-10.2, 8.2], [-7.8, 3.4], [-4.2, 1.1], [0, 0.4], [4.2, 1.1], [7.8, 3.4], [10.2, 8.2]] }, "fill": "$aqua.dark2" },
+    { "id": "mouth", "at": [0, 0], "shape": { "kind": "poly", "points": [[-8.8, 7.9], [-6.6, 3.8], [-3.4, 1.8], [0, 1.2], [3.4, 1.8], [6.6, 3.8], [8.8, 7.9]] }, "fill": "$ink" },
+    { "id": "bile", "at": [0, 7], "shape": { "kind": "ellipse", "rx": 5.2, "ry": 1.1 }, "fill": "$bile" },
+    { "id": "bile_light", "at": [-2.2, 6.7], "shape": { "kind": "ellipse", "rx": 1.7, "ry": 0.6 }, "fill": "$bile.light2" },
+    { "id": "seam", "at": [0, 8.4], "shape": { "kind": "rect", "w": 13.6, "h": 0.8 }, "fill": "$aqua.dark2" },
+    { "id": "antenna", "use": "ss.lib.antenna", "variant": "dead", "at": [4.4, -6], "rot": -4, "scale": 0.72 },
+    { "id": "organ", "use": "ss.lib.organ", "variant": "dead", "at": [4.6, -1], "scale": 0.6 }
+  ],
+  "animations": {
+    "idle": {
+      "description": "the shell holds its breath; the dead feelers keep sweeping for a signal that never comes",
+      "duration": 1.15,
+      "tracks": [
+        { "part": "shell", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "core", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "gloss", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "organ", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "antenna", "prop": "rot", "keys": [[0, -13], [0.35, 17], [0.7, -4], [1, -13]] },
+        { "part": "antenna_far", "prop": "rot", "keys": [[0, 14], [0.4, -12], [0.75, 6], [1, 14]] },
+        { "part": "lip", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "mouth", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "bile", "prop": "x", "keys": [[0, 0], [0.5, -1], [1, 0]] },
+        { "part": "bile_light", "prop": "x", "keys": [[0, 0], [0.5, -1], [1, 0]] }
+      ]
+    }
+  }
+}

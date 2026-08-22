@@ -1,0 +1,36 @@
+{
+  "id": "ss.char.foundress",
+  "name": "Foundress",
+  "description": "A survivor of the same brood as everything hunting you — same feelers, same organ, same socket in the shell. The organ is `dead`: no halo, no bloom, a hairline crack across cold grey, and that silence is the premise all eight wear in the same place. The comb-cell plating, unchanged — with two shed wing stubs behind it. A queen bites her own wings off when she lands and never flies again, and the scars are the single detail that separates a foundress from any worker in the hive, which is why they are the whole homage here. She wears the hexagon the hive builds with and has no hive: a queen with a brood weapon and nobody to carry it for. Named `foundress` rather than `queen` because `ss.enemy.matriarch` already holds that office, at the other end of it.",
+  "tags": ["ss-char"],
+  "size": [36, 36],
+  "meta": { "radius": 11.5 },
+  "parts": [
+    { "id": "scar_far", "at": [-9.6, -6.2], "rot": -30, "shape": { "kind": "poly", "points": [[-6.8, -0.4], [-2.6, -1.9], [2.4, -2.4], [5.6, -1.6], [5.8, 1], [1.4, 1.8], [-3, 1.6], [-6.8, 1]] }, "fill": "$silent@soft", "stroke": { "color": "$orchid.dark2", "width": "hair" } },
+    { "id": "scar_near", "at": [-9.6, 6.2], "rot": 30, "shape": { "kind": "poly", "points": [[-6.8, -0.4], [-2.6, -1.9], [2.4, -2.4], [5.6, -1.6], [5.8, 1], [1.4, 1.8], [-3, 1.6], [-6.8, 1]] }, "fill": "$silent@soft", "stroke": { "color": "$orchid.dark2", "width": "hair" } },
+    { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [2, -9], "rot": -38, "scale": 0.52 },
+    { "id": "shell", "shape": { "kind": "ngon", "sides": 6, "r": 11.5, "rot": 30 }, "fill": "$orchid", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "core", "at": [-0.6, -0.6], "shape": { "kind": "ngon", "sides": 6, "r": 8.8, "rot": 30 }, "fill": "$orchid.light2" },
+    { "id": "cell", "at": [-0.6, -0.6], "shape": { "kind": "ngon", "sides": 6, "r": 4.6, "rot": 30 }, "fill": "$orchid.light" },
+    { "id": "gloss", "at": [-4.6, -5.2], "shape": { "kind": "rect", "w": 5, "h": 1.6, "corner": 0.8 }, "fill": "$silent@soft" },
+    { "id": "antenna", "use": "ss.lib.antenna", "variant": "dead", "at": [5.2, -8.6], "rot": -6, "scale": 0.72 },
+    { "id": "organ", "use": "ss.lib.organ", "variant": "dead", "at": [5.2, 3.6], "scale": 0.54 }
+  ],
+  "animations": {
+    "idle": {
+      "description": "the shell holds its breath; the dead feelers keep sweeping for a signal that never comes",
+      "duration": 1.15,
+      "tracks": [
+        { "part": "shell", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "core", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "cell", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "gloss", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "organ", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "antenna", "prop": "rot", "keys": [[0, -13], [0.35, 17], [0.7, -4], [1, -13]] },
+        { "part": "antenna_far", "prop": "rot", "keys": [[0, 14], [0.4, -12], [0.75, 6], [1, 14]] },
+        { "part": "scar_far", "prop": "y", "keys": [[0, 0], [0.5, -1.1], [1, 0]] },
+        { "part": "scar_near", "prop": "y", "keys": [[0, 0], [0.5, -1.1], [1, 0]] }
+      ]
+    }
+  }
+}

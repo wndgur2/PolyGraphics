@@ -1,12 +1,14 @@
 {
-  "id": "ss.char.egg",
-  "name": "Egg",
-  "description": "Sealed survivor, and the one the fiction is least kind to — an unhatched shell that was never given a signal to lose. Same dead organ, same dead feelers; on this one they were dead from the start.",
+  "id": "ss.char.stag",
+  "name": "Stag",
+  "description": "A survivor of the same brood as everything hunting you — same feelers, same organ, same socket in the shell. The organ is `dead`: no halo, no bloom, a hairline crack across cold grey, and that silence is the premise all eight wear in the same place. The unhatched shell, unchanged, hairs and all — with two hooked jaws out in front of it. The Mandible weapon is literally a bound pair of Soldier jaws thrown and caught, so this is the one character whose feature leaves the body and comes back; they are toothed down the inside edge for the same reason the projectile is. Bone rather than the brown a stag beetle is, because the shell it is attached to keeps its own colour.",
   "tags": ["ss-char"],
-  "size": [32, 32],
+  "size": [36, 36],
   "meta": { "radius": 12 },
   "parts": [
     { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [1.8, -10.6], "rot": -38, "scale": 0.52 },
+    { "id": "mandible_up", "at": [12.4, -4.6], "shape": { "kind": "poly", "points": [[-5, -1.5], [-1.4, -2], [1.8, -1.8], [4.2, -0.9], [5.6, 0.6], [4.4, 1.7], [3.2, 0.5], [2.4, 2], [0.6, 0.7], [-0.2, 2.2], [-2, 1.1], [-5, 1.5]] }, "fill": "$husk", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "mandible_dn", "at": [12.4, 4.6], "shape": { "kind": "poly", "points": [[-5, 1.5], [-1.4, 2], [1.8, 1.8], [4.2, 0.9], [5.6, -0.6], [4.4, -1.7], [3.2, -0.5], [2.4, -2], [0.6, -0.7], [-0.2, -2.2], [-2, -1.1], [-5, -1.5]] }, "fill": "$husk.dark", "stroke": { "color": "$ink", "width": "hair" } },
     { "id": "shell", "shape": { "kind": "ellipse", "rx": 9.6, "ry": 12 }, "fill": "$silent.dark2", "stroke": { "color": "$ink", "width": "thin" } },
     { "id": "core", "at": [-0.6, -0.8], "shape": { "kind": "ellipse", "rx": 7.4, "ry": 9.6 }, "fill": "$silent.light2" },
     { "id": "gloss", "at": [-3.2, -5.6], "rot": -20, "shape": { "kind": "ellipse", "rx": 2.4, "ry": 1.4 }, "fill": "$white@heavy" },
@@ -27,7 +29,9 @@
         { "part": "hair_b", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
         { "part": "organ", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
         { "part": "antenna", "prop": "rot", "keys": [[0, -13], [0.35, 17], [0.7, -4], [1, -13]] },
-        { "part": "antenna_far", "prop": "rot", "keys": [[0, 14], [0.4, -12], [0.75, 6], [1, 14]] }
+        { "part": "antenna_far", "prop": "rot", "keys": [[0, 14], [0.4, -12], [0.75, 6], [1, 14]] },
+        { "part": "mandible_up", "prop": "rot", "keys": [[0, 0], [0.5, -7], [1, 0]] },
+        { "part": "mandible_dn", "prop": "rot", "keys": [[0, 0], [0.5, 7], [1, 0]] }
       ]
     }
   }
