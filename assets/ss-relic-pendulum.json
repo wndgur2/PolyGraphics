@@ -1,0 +1,26 @@
+{
+  "id": "ss.relic.pendulum",
+  "name": "Amethyst head",
+  "description": "The weapon's own head-plate at the weapon's own size, centred, with every ridge and stud still cut where the base document cuts them — and all of it gone over to one violet stone, lit where a facet catches. What the relic does to the thing is the material, so the material is all that is drawn.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "outline", "shape": {"kind": "circle", "r": 11.4}, "fill": "$ink"},
+    {"id": "body", "shape": {"kind": "circle", "r": 9.6}, "fill": "$carapace"},
+    {"id": "ridge_a", "at": [0, -3.7], "shape": {"kind": "ring", "r": 7.1, "width": 1.5, "from": 200, "to": 340}, "fill": "$carapace.dark2"},
+    {"id": "ridge_b", "at": [0, 0.8], "shape": {"kind": "ring", "r": 7.9, "width": 1.4, "from": 195, "to": 345}, "fill": "$carapace.dark2"},
+    {"id": "boss_plate", "at": [-2.2, -2.2], "shape": {"kind": "ngon", "sides": 6, "r": 4.2, "rot": 30}, "fill": "$carapace.light"},
+    {"id": "stud_a", "at": [5.4, 3.7], "shape": {"kind": "circle", "r": 1.3}, "fill": "$carapace.dark2"},
+    {"id": "stud_b", "at": [1.2, 7.1], "shape": {"kind": "circle", "r": 1.1}, "fill": "$carapace.dark2"},
+    {"id": "sheen", "at": [-4.4, -5], "rot": -32, "shape": {"kind": "ellipse", "rx": 2.2, "ry": 4}, "fill": "$silent@0.45"},
+    {"id": "spark", "at": [4.6, -6], "shape": {"kind": "star", "points": 4, "r": 3.4, "r2": 0.7}, "fill": "$silent"},
+    {"id": "spark_small", "at": [-6.6, 2.6], "shape": {"kind": "star", "points": 4, "r": 1.9, "r2": 0.4}, "fill": "$silent@0.8"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}

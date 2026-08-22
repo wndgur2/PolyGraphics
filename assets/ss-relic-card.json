@@ -1,0 +1,19 @@
+{
+  "id": "ss.relic.card",
+  "name": "Marked spines",
+  "description": "Three wing-blades in the air where the weapon throws one, fanned the way they leave the hand. The stat adds bounces, and a spine that bounces more is a spine you see in more places at once.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "spine_far", "at": [-5.6, -4.4], "rot": -52, "scale": 0.7, "use": "ss.proj.card"},
+    {"id": "spine_side", "at": [5.8, -3.2], "rot": 34, "scale": 0.66, "use": "ss.proj.card"},
+    {"id": "spine_near", "at": [-0.4, 4.8], "rot": -8, "scale": 0.84, "use": "ss.proj.card"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}

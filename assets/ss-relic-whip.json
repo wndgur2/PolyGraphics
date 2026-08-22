@@ -1,0 +1,34 @@
+{
+  "id": "ss.relic.whip",
+  "name": "Barbed feeler",
+  "description": "A feeler grown wrong: the same tapered shaft the hive reads the world with, thick at the root and thinning to the sensing nub, with four thorns leaning back along it the way a thorn actually sits on a stem. The stat is damage and knockback, and a feeler that has become a weapon is both.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "shaft_outline", "shape": {"kind": "poly", "points": [[-5.27, 12.46], [1.05, 2.93], [5.74, -4.64], [8.35, -9.03], [6.93, -10.09], [3.4, -6.42], [-2.63, 0.14], [-10.12, 8.76]]}, "fill": "$ink"},
+    {"id": "thorn_0_outline", "at": [-2.72, 9.23], "rot": 161.2, "shape": {"kind": "poly", "points": [[-1.72, 2.09], [0, -3.31], [1.72, 2.09]]}, "fill": "$ink"},
+    {"id": "thorn_1_outline", "at": [-0.16, 5.35], "rot": 161.2, "shape": {"kind": "poly", "points": [[-1.75, 2], [0, -3.18], [1.75, 2]]}, "fill": "$ink"},
+    {"id": "thorn_2_outline", "at": [2.38, 1.39], "rot": 161.2, "shape": {"kind": "poly", "points": [[-1.81, 1.81], [0, -2.92], [1.81, 1.81]]}, "fill": "$ink"},
+    {"id": "thorn_3_outline", "at": [4.66, -2.23], "rot": 161.2, "shape": {"kind": "poly", "points": [[-1.9, 1.58], [0, -2.56], [1.9, 1.58]]}, "fill": "$ink"},
+    {"id": "nub_outline", "at": [7.54, -9.38], "shape": {"kind": "ellipse", "rx": 3.6, "ry": 3.3}, "fill": "$ink"},
+    {"id": "root_outline", "at": [-7.08, 9.84], "shape": {"kind": "circle", "r": 3.5}, "fill": "$ink"},
+    {"id": "shaft", "shape": {"kind": "poly", "points": [[-4.5, 10.82], [1.03, 2.47], [5.14, -4.15], [7.43, -7.99], [6.18, -8.93], [3.1, -5.71], [-2.19, 0.03], [-8.75, 7.58]]}, "fill": "$carapace"},
+    {"id": "shaft_lit", "shape": {"kind": "poly", "points": [[-6.39, 9.24], [-0.49, 1.2], [4.02, -5.12], [6.61, -8.72], [6.09, -9.13], [3.23, -5.74], [-1.79, 0.18], [-8.14, 7.88]]}, "fill": "$carapace.light2"},
+    {"id": "seg_0", "at": [-2.59, 3.9], "rot": 127.2, "shape": {"kind": "rect", "w": 1, "h": 5.4}, "fill": "$carapace.dark2"},
+    {"id": "seg_1", "at": [0.09, 0.37], "rot": 127.2, "shape": {"kind": "rect", "w": 1, "h": 5.4}, "fill": "$carapace.dark2"},
+    {"id": "seg_2", "at": [2.78, -3.16], "rot": 127.2, "shape": {"kind": "rect", "w": 1, "h": 5.4}, "fill": "$carapace.dark2"},
+    {"id": "thorn_0", "at": [-2.72, 9.23], "rot": 161.2, "shape": {"kind": "poly", "points": [[-1.06, 1.39], [0, -1.92], [1.06, 1.39]]}, "fill": "$carapace.dark2"},
+    {"id": "thorn_1", "at": [-0.16, 5.35], "rot": 161.2, "shape": {"kind": "poly", "points": [[-1.06, 1.32], [0, -1.81], [1.06, 1.32]]}, "fill": "$carapace.dark2"},
+    {"id": "thorn_2", "at": [2.38, 1.39], "rot": 161.2, "shape": {"kind": "poly", "points": [[-1.06, 1.16], [0, -1.6], [1.06, 1.16]]}, "fill": "$carapace.dark2"},
+    {"id": "thorn_3", "at": [4.66, -2.23], "rot": 161.2, "shape": {"kind": "poly", "points": [[-1.06, 0.97], [0, -1.33], [1.06, 0.97]]}, "fill": "$carapace.dark2"},
+    {"id": "nub", "at": [7.54, -9.38], "shape": {"kind": "ellipse", "rx": 2.4, "ry": 2.1}, "fill": "$carapace.light2"},
+    {"id": "root", "at": [-7.08, 9.84], "shape": {"kind": "circle", "r": 2.3}, "fill": "$carapace.dark"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}

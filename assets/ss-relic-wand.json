@@ -1,0 +1,26 @@
+{
+  "id": "ss.relic.wand",
+  "name": "Spitting maw",
+  "description": "A maw hinged open with the acid already leaving it: two mandibles curved back off the jaw, the throat lit behind them, and three globs of `ss.proj.bolt` on their way out. The stat adds a glob and speeds every one of them, and a mouth mid-spit is both at once.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "head_outline", "at": [-7.2, 0], "shape": {"kind": "ellipse", "rx": 5.7, "ry": 7.7}, "fill": "$ink"},
+    {"id": "head", "at": [-7.2, 0], "shape": {"kind": "ellipse", "rx": 4.3, "ry": 6.3}, "fill": "$carapace.dark"},
+    {"id": "head_lit", "at": [-8.3, -1.9], "shape": {"kind": "ellipse", "rx": 1.9, "ry": 3}, "fill": "$carapace"},
+    {"id": "throat", "at": [-4.6, 0], "shape": {"kind": "ellipse", "rx": 3, "ry": 4}, "fill": "$venom.dark2"},
+    {"id": "throat_hot", "at": [-4.2, 0], "shape": {"kind": "ellipse", "rx": 1.6, "ry": 2.3}, "fill": "$venom"},
+    {"id": "mandible_u", "at": [-3.8, -1.4], "shape": {"kind": "ring", "r": 6.4, "width": 2.2, "from": -92, "to": -18}, "fill": "$husk"},
+    {"id": "mandible_d", "at": [-3.8, 1.4], "shape": {"kind": "ring", "r": 6.4, "width": 2.2, "from": 18, "to": 92}, "fill": "$husk"},
+    {"id": "spit_a", "at": [2.6, -0.4], "rot": -6, "scale": 0.72, "use": "ss.proj.bolt"},
+    {"id": "spit_b", "at": [7.4, -5], "rot": -24, "scale": 0.5, "use": "ss.proj.bolt"},
+    {"id": "spit_c", "at": [8, 4], "rot": 20, "scale": 0.44, "use": "ss.proj.bolt"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}
