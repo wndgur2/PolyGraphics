@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.might",
   "name": "Souring acid gland",
-  "description": "A gland gone sour: a lumpy sac thin enough to show what is working inside it, bubbles coming off the floor, and one drop already through the wall and hissing on the shard below. The bitten shard is the part that says corrosive rather than merely green — a green sac on its own would read as another spore.",
+  "description": "A gland gone sour: a lumpy sac with walls thin enough to show the stuff working inside it, a flat level line across the middle and bubbles coming off the floor, bent duct pinched shut at the top. It is a container of something live rather than a solid body, which is what separates it at a glance from the spore that shares its green.",
   "tags": ["ss-relic"],
   "size": [32, 32],
   "parts": [
@@ -15,12 +15,7 @@
     {"id": "bubble_a", "at": [-2.8, 0.8], "shape": {"kind": "circle", "r": 1.5}, "fill": "$venom.light2"},
     {"id": "bubble_b", "at": [1.6, 2.6], "shape": {"kind": "circle", "r": 1}, "fill": "$venom.light2"},
     {"id": "bubble_c", "at": [4, -0.2], "shape": {"kind": "circle", "r": 0.8}, "fill": "$venom.light"},
-    {"id": "sheen", "at": [-4.6, -3.6], "rot": -32, "shape": {"kind": "rect", "w": 1.4, "h": 3.8, "corner": 0.7}, "fill": "$silent@soft"},
-    {"id": "shard", "at": [1, 11], "shape": {"kind": "poly", "points": [[-6.8, 0.6], [-3.6, -2], [-0.6, 0.4], [2.6, -2.2], [6.8, 0.4], [5.6, 2.8], [-5.6, 2.8]]}, "fill": "$husk"},
-    {"id": "etch", "at": [0.6, 10.2], "shape": {"kind": "ellipse", "rx": 3.8, "ry": 1.4}, "fill": "$venom@heavy"},
-    {"id": "drip", "at": [0.6, 8], "shape": {"kind": "ellipse", "rx": 1.5, "ry": 2.1}, "fill": "$venom.light"},
-    {"id": "spit_l", "at": [-3.8, 9.4], "shape": {"kind": "circle", "r": 0.8}, "fill": "$venom.light2"},
-    {"id": "spit_r", "at": [4.6, 9], "shape": {"kind": "circle", "r": 0.7}, "fill": "$venom.light2"}
+    {"id": "sheen", "at": [-4.6, -3.6], "rot": -32, "shape": {"kind": "rect", "w": 1.4, "h": 3.8, "corner": 0.7}, "fill": "$silent@soft"}
   ],
   "variants": {
     "glyph": {

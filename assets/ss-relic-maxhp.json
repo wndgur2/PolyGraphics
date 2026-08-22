@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.maxhp",
   "name": "Flask of royal jelly",
-  "description": "A corked flask two-thirds full of jelly, the fill line sitting flat across the glass with air above it. Drawn as a bottle rather than as the comb it came from, because a bottle is the shape a player already reads as 'drink this and you are bigger' — the comb read as scenery.",
+  "description": "A corked flask two-thirds full of jelly, the fill line sitting flat across the glass with air above it. The glass is pale rather than clear: over a dark panel a transparent bottle is no bottle at all, so the walls carry a little white of their own and the jelly reads as being inside something.",
   "tags": ["ss-relic"],
   "size": [32, 32],
   "parts": [
@@ -9,8 +9,8 @@
     {"id": "cork_outline", "at": [0, -9.6], "shape": {"kind": "rect", "w": 8.6, "h": 4.8, "corner": 2.2}, "fill": "$ink"},
     {"id": "neck_outline", "at": [0, -6], "shape": {"kind": "rect", "w": 7.4, "h": 8.4, "corner": 1.4}, "fill": "$ink"},
     {"id": "body_outline", "at": [0, 3.4], "shape": {"kind": "circle", "r": 8.8}, "fill": "$ink"},
-    {"id": "neck", "at": [0, -6], "shape": {"kind": "rect", "w": 5, "h": 8, "corner": 1}, "fill": "$slate.dark"},
-    {"id": "glass", "at": [0, 3.4], "shape": {"kind": "circle", "r": 7.4}, "fill": "$slate.dark"},
+    {"id": "neck", "at": [0, -6], "shape": {"kind": "rect", "w": 5, "h": 8, "corner": 1}, "fill": "$silent@0.34"},
+    {"id": "glass", "at": [0, 3.4], "shape": {"kind": "circle", "r": 7.4}, "fill": "$silent@0.42"},
     {"id": "jelly", "at": [0, 4.2], "shape": {"kind": "circle", "r": 6.2}, "fill": "$gold"},
     {"id": "level", "at": [0, -1.6], "shape": {"kind": "ellipse", "rx": 5.6, "ry": 1.5}, "fill": "$gold.light2"},
     {"id": "bubble", "at": [2.6, 5.4], "shape": {"kind": "circle", "r": 1.2}, "fill": "$gold.light2"},

@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.armor",
   "name": "Beetle helm",
-  "description": "A beetle's head plate cut off and worn: a domed helm with the pronotum ridge running down it, a lit crown, and the horn still standing on the front. The hollow under the rim and the two chitin stitches closing it are what make it a graft rather than a picture of a beetle — this is somebody else's armour, put on.",
+  "description": "A beetle's head plate cut off and worn: a domed helm with the pronotum ridge running down it, a lit crown, the horn still standing on the front, and the hollow open under the rim where a head would go. Somebody else's armour, put on.",
   "tags": ["ss-relic"],
   "size": [32, 32],
   "parts": [
@@ -13,10 +13,7 @@
     {"id": "crown", "at": [0.4, -2.6], "shape": {"kind": "ellipse", "rx": 8.6, "ry": 6}, "fill": "$chitin"},
     {"id": "crown_lit", "at": [-0.4, -5.4], "shape": {"kind": "ellipse", "rx": 6.2, "ry": 2.6}, "fill": "$chitin.light2"},
     {"id": "ridge", "at": [0.6, -2.6], "shape": {"kind": "rect", "w": 1.6, "h": 12}, "fill": "$chitin.dark2"},
-    {"id": "hollow", "at": [0.4, 8.4], "shape": {"kind": "ellipse", "rx": 6.6, "ry": 2.8}, "fill": "$ink"},
-    {"id": "stitch_a", "at": [-4.4, 8.4], "rot": 96, "shape": {"kind": "rect", "w": 1.1, "h": 4.2, "corner": 0.55}, "fill": "$husk.dark"},
-    {"id": "stitch_b", "at": [0.4, 8.4], "rot": 90, "shape": {"kind": "rect", "w": 1.1, "h": 4.2, "corner": 0.55}, "fill": "$husk.dark"},
-    {"id": "stitch_c", "at": [5.2, 8.4], "rot": 84, "shape": {"kind": "rect", "w": 1.1, "h": 4.2, "corner": 0.55}, "fill": "$husk.dark"}
+    {"id": "hollow", "at": [0.4, 8.4], "shape": {"kind": "ellipse", "rx": 6.6, "ry": 2.8}, "fill": "$ink"}
   ],
   "variants": {
     "glyph": {
