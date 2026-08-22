@@ -1,7 +1,7 @@
 {
   "id": "ss.proj.aura",
   "name": "Blast disc",
-  "description": "The shared area-of-effect wash every explosive weapon spawns. Two hard constraints keep this one plain: the weapon code scales it by `r / 64`, and it is tinted per weapon at runtime — so every fill here is neutral white, exactly as in the original. Any hue baked in would fight the tint, the same reason the scent crystal stays colourless.",
+  "description": "The shared area-of-effect wash every explosive weapon spawns. Two hard constraints keep this one plain: the weapon code scales it by `r / 64`, and it is tinted per weapon at runtime — so every fill here is neutral white, exactly as in the original. Any hue baked in would fight the tint, the same reason the pulp stays colourless.",
   "tags": ["ss-proj", "aoe"],
   "size": [128, 128],
   "meta": { "radius": 64 },

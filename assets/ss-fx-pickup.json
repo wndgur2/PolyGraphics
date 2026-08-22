@@ -1,7 +1,7 @@
 {
   "id": "ss.fx.pickup",
   "name": "Borrowed signal",
-  "description": "Absorbing a scent crystal — the only moment in the run when the player has a voice. A magenta bloom rises out of the pickup point, flares, and dies within half a second, and it is the one place the hive's colour is allowed to touch the player. Playing this on every XP pickup is what makes the dead organ on the character mean something.",
+  "description": "Absorbing a lump of pulp — the only moment in the run when the player has a voice. The signal still in the tissue leaves as you take it in: a magenta bloom rises out of the pickup point, flares, and dies within half a second, and it is the one place the hive's colour is allowed to touch the player. Playing this on every XP pickup is what makes the dead organ on the character mean something.",
   "tags": ["ss-fx", "pickup"],
   "size": [32, 40],
   "anchor": [0.5, 0.62],
