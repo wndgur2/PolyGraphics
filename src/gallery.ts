@@ -18,7 +18,8 @@ import { renderSVG, type Issue, type Registry } from "./render.js";
 import { applyTheme, resolveColor, type Theme, type Tokens } from "./tokens.js";
 
 const CATEGORY_ORDER = [
-  "ss-char", "ss-enemy", "ss-proj", "ss-fx", "ss-pickup", "ss-terrain", "ss-env", "ss-icon", "ss-lib",
+  "ss-char", "ss-enemy", "ss-proj", "ss-fx", "ss-pickup", "ss-terrain", "ss-env", "ss-icon", "ss-relic",
+  "ss-curse", "ss-lib",
   "char", "enemy", "boss", "weapon", "icon", "pickup", "fx", "tile", "env", "lib",
 ];
 

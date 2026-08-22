@@ -1,0 +1,21 @@
+{
+  "id": "ss.relic.maxhp",
+  "name": "Comb cell of jelly",
+  "description": "One cell cut out of a comb, still holding its dome of jelly. Three rings of chitin step down into the well — wall, shadow, then the jelly sitting proud of it — so a flat hexagon reads as a cell with depth at the size a slot actually shows.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "plate", "use": "ss.lib.relic-plate" },
+    { "id": "cell_outline", "rot": 30, "shape": { "kind": "ngon", "sides": 6, "r": 11.4 }, "fill": "$ink" },
+    { "id": "cell", "rot": 30, "shape": { "kind": "ngon", "sides": 6, "r": 10 }, "fill": "$chitin.dark" },
+    { "id": "wall", "rot": 30, "shape": { "kind": "ngon", "sides": 6, "r": 8 }, "fill": "$chitin" },
+    { "id": "well", "rot": 30, "shape": { "kind": "ngon", "sides": 6, "r": 6.6 }, "fill": "$chitin.dark2" },
+    { "id": "jelly", "at": [0, 0.6], "shape": { "kind": "circle", "r": 5.2 }, "fill": "$gold" }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "ss.relic.might",
+  "name": "Swollen gland",
+  "description": "A gland dug out of the ruins and still full: a lobed sac under a bent duct, one bead of it caught at the bottom edge. Lit the way the roster lights everything — ink outline, body, one highlight up-left — over the plate's old glow, so the slot reads as an object you picked up rather than a symbol printed on a tile.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "plate", "use": "ss.lib.relic-plate" },
+    { "id": "duct_outline", "at": [1.5, -7.5], "rot": 18, "shape": { "kind": "rect", "w": 6.8, "h": 9.8, "corner": 3.4 }, "fill": "$ink" },
+    { "id": "sac_outline", "at": [0, 2], "shape": { "kind": "ellipse", "rx": 8.4, "ry": 8.6 }, "fill": "$ink" },
+    { "id": "lobe_outline", "at": [-3.5, 5], "shape": { "kind": "circle", "r": 5.8 }, "fill": "$ink" },
+    { "id": "bead_outline", "at": [5.4, 7.6], "shape": { "kind": "circle", "r": 3 }, "fill": "$ink" },
+    { "id": "duct", "at": [1.5, -7.5], "rot": 18, "shape": { "kind": "rect", "w": 4, "h": 7, "corner": 2 }, "fill": "$coral.dark2" },
+    { "id": "sac", "at": [0, 2], "shape": { "kind": "ellipse", "rx": 7, "ry": 7.2 }, "fill": "$coral.dark" },
+    { "id": "lobe", "at": [-3.5, 5], "shape": { "kind": "circle", "r": 4.4 }, "fill": "$coral" },
+    { "id": "belly", "at": [1.5, 1], "shape": { "kind": "ellipse", "rx": 5, "ry": 5.4 }, "fill": "$coral" },
+    { "id": "sheen", "at": [-2.6, -1.6], "shape": { "kind": "ellipse", "rx": 2.2, "ry": 3 }, "fill": "$coral.light2" },
+    { "id": "bead", "at": [5.4, 7.6], "shape": { "kind": "circle", "r": 1.6 }, "fill": "$coral.light" }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met. Baked from the document instead of recovered from the pixels of the baked one.",
+      "remove": ["plate"]
+    }
+  }
+}

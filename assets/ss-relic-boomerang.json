@@ -1,0 +1,21 @@
+{
+  "id": "ss.relic.boomerang",
+  "name": "Wind-borne mandibles",
+  "description": "The thrown mandibles with the air they ride: `ss.proj.boom` composed via `use`, and two arcs trailing off the outer corner. Each arc is drawn twice — a wide ink stroke, then the spore-bright one on top — because a hairline arc over the plate's glow loses its edge at the size this is seen at. The mandibles are the document the field throws, not a second drawing of it.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "plate", "use": "ss.lib.relic-plate" },
+    { "id": "gust_outer_outline", "at": [2, 2], "shape": { "kind": "ring", "r": 11.5, "width": 4.4, "from": -70, "to": 30 }, "fill": "$ink" },
+    { "id": "gust_inner_outline", "at": [2, 2], "shape": { "kind": "ring", "r": 8.6, "width": 4, "from": -55, "to": 15 }, "fill": "$ink" },
+    { "id": "gust_outer", "at": [2, 2], "shape": { "kind": "ring", "r": 11.5, "width": 1.6, "from": -70, "to": 30 }, "fill": "$spore@0.9" },
+    { "id": "gust_inner", "at": [2, 2], "shape": { "kind": "ring", "r": 8.6, "width": 1.2, "from": -55, "to": 15 }, "fill": "$spore@0.55" },
+    { "id": "mandibles", "use": "ss.proj.boom", "at": [-2.5, 0.5], "scale": 0.92 }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}
