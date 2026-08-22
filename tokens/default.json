@@ -22,17 +22,39 @@
     "smoke": "#55555f",
     "soil": "#1b1210",
     "rust": "#4a2318",
-
     "pheromone": "#e87ad0",
     "spore": "#58e8d8",
+    "bile": "#bce05a",
     "chitin": "#d8973c",
     "carapace": "#6a5170",
     "husk": "#ded5c6",
     "silent": "#eaf4ff",
     "dead": "#191521"
   },
-  "ramps": { "light": 0.22, "dark": 0.28 },
-  "strokes": { "hair": 1, "thin": 2, "bold": 3, "heavy": 4 },
-  "alpha": { "ghost": 0.15, "soft": 0.35, "heavy": 0.7 },
-  "layers": { "bg": -20, "ground": 0, "pickup": 2, "enemy": 5, "boss": 6, "fx": 8, "player": 10, "overlay": 20, "ui": 40 }
+  "ramps": {
+    "light": 0.22,
+    "dark": 0.28
+  },
+  "strokes": {
+    "hair": 1,
+    "thin": 2,
+    "bold": 3,
+    "heavy": 4
+  },
+  "alpha": {
+    "ghost": 0.15,
+    "soft": 0.35,
+    "heavy": 0.7
+  },
+  "layers": {
+    "bg": -20,
+    "ground": 0,
+    "pickup": 2,
+    "enemy": 5,
+    "boss": 6,
+    "fx": 8,
+    "player": 10,
+    "overlay": 20,
+    "ui": 40
+  }
 }

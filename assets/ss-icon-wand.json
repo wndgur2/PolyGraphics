@@ -1,18 +1,52 @@
 {
   "id": "ss.icon.wand",
-  "name": "Shell dart icon",
-  "description": "UI slot icon for the dart thrower. The glyph is not a second drawing of the weapon — it composes `ss.proj.bolt` itself via `use`, so the icon can never drift from the projectile the way the original i_wand and p_bolt did. Evolved is a rim swap, not a redraw.",
-  "tags": ["ss-icon"],
-  "size": [32, 32],
+  "name": "Acid glob icon",
+  "description": "UI slot icon for the spitter. The glyph is not a second drawing of the weapon \u2014 it composes `ss.proj.bolt` itself via `use`, so the icon can never drift from the projectile the way the original i_wand and p_bolt did; when that document stopped being a knapped shell dart and became a drop of acid, this followed with no edit here. Evolved is a rim swap, not a redraw.",
+  "tags": [
+    "ss-icon"
+  ],
+  "size": [
+    32,
+    32
+  ],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$frost" },
-    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
-    { "id": "glyph", "use": "ss.proj.bolt", "at": [-1, 0], "rot": -20, "scale": 1.7 }
+    {
+      "id": "tile",
+      "shape": {
+        "kind": "rect",
+        "w": 32,
+        "h": 32,
+        "corner": 6
+      },
+      "fill": "$frost"
+    },
+    {
+      "id": "inner",
+      "shape": {
+        "kind": "rect",
+        "w": 28,
+        "h": 28,
+        "corner": 5
+      },
+      "fill": "$coal.dark"
+    },
+    {
+      "id": "glyph",
+      "use": "ss.proj.bolt",
+      "at": [
+        -1,
+        0
+      ],
+      "rot": -20,
+      "scale": 1.7
+    }
   ],
   "variants": {
     "evolved": {
       "description": "Gold-rimmed evolved twin (the old i_wand_evo), derived rather than drawn again.",
-      "set": { "tile.fill": "$gold" }
+      "set": {
+        "tile.fill": "$gold"
+      }
     }
   }
 }
