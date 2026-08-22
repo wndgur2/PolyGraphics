@@ -22,9 +22,26 @@ const CATEGORY_ORDER = [
   "char", "enemy", "boss", "weapon", "icon", "pickup", "fx", "tile", "env", "lib",
 ];
 
+/**
+ * The longest side a cell may occupy. 128 × 1.25 is exactly this, so the
+ * enlarge curve below meets the cap without a step where the two change hands.
+ */
+const CELL_BOX = 160;
+
+/**
+ * Small assets are drawn up so their shape is judgeable; large ones are drawn
+ * down so they fit the cell they are in.
+ *
+ * Only the first half of that used to exist. The floor of the curve was 1.25×
+ * and it applied to everything past 80px, so a 1280×720 menu illustration
+ * rendered at 1600×900 and pushed the grid, the sidebar and the page sideways
+ * under it. Fitting is a cap on the same curve, so every asset that already
+ * looked right is untouched.
+ */
 function displayScale(asset: Asset, variantScale = 1): number {
   const m = Math.max(asset.size[0], asset.size[1]) * variantScale;
-  return m <= 32 ? 3 : m <= 48 ? 2.5 : m <= 80 ? 1.75 : 1.25;
+  const enlarge = m <= 32 ? 3 : m <= 48 ? 2.5 : m <= 80 ? 1.75 : 1.25;
+  return Math.min(enlarge, CELL_BOX / m);
 }
 
 function esc(s: string): string {
@@ -298,6 +315,10 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
   .strip { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px; margin:8px 0 20px; }
   .cell { display:flex; flex-direction:column; align-items:center; gap:4px; }
   .stage { background: repeating-conic-gradient(#181c28 0% 25%, #141824 0% 50%) 0 0/16px 16px; border-radius:6px; padding:8px; display:flex; align-items:center; justify-content:center; }
+  /* Cards clamp; the viewer must not, or the zoom control would top out on
+     exactly the assets big enough to need it. The stage scrolls instead. */
+  .card .stage svg { max-width:100%; height:auto; display:block; }
+  .card .row { max-width:100%; }
   figcaption { font-size:11px; color:var(--dim); }
 
   .facts { max-width: 980px; min-width:0; }
@@ -305,8 +326,11 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
   .detail-head h2 { font-size:18px; }
   .big-id { font-size:13px; }
   .detail-body { display:grid; grid-template-columns: minmax(320px, 460px) 1fr; gap:24px; align-items:start; }
-  .viewer { position:sticky; top:16px; }
-  .viewer-stage { border:1px solid var(--line); border-radius:10px; padding:24px; min-height:240px; display:flex; align-items:center; justify-content:center;
+  /* A grid item defaults to min-width:auto, which lets it grow to its content
+     instead of letting the stage scroll — the zoomed art would push the layout. */
+  .viewer { position:sticky; top:16px; min-width:0; }
+  .viewer-stage { border:1px solid var(--line); border-radius:10px; padding:24px; min-height:240px; display:flex;
+    align-items:safe center; justify-content:safe center; overflow:auto; max-height:72vh;
     background: repeating-conic-gradient(#181c28 0% 25%, #141824 0% 50%) 0 0/16px 16px; }
   .viewer-stage.bg-ground { background:#1a1420; } .viewer-stage.bg-ink { background:#10121a; } .viewer-stage.bg-light { background:#e6e1d3; }
   .viewer-stage.sil svg { filter: brightness(0) saturate(0); }
