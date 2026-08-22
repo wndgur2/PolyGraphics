@@ -1,0 +1,27 @@
+{
+  "id": "ss.relic.area",
+  "name": "Opened scent bloom",
+  "description": "A scent organ that has burst its case: five carapace petals thrown back off the same pheromone bulb every creature in the hive carries, composed here via `use`. Wider is drawn as the case being open, not as a ring around something.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "petal_0_outline", "at": [0, -6.4], "rot": 0, "shape": {"kind": "ellipse", "rx": 4.6, "ry": 7}, "fill": "$ink"},
+    {"id": "petal_1_outline", "at": [6.09, -1.98], "rot": 72, "shape": {"kind": "ellipse", "rx": 4.6, "ry": 7}, "fill": "$ink"},
+    {"id": "petal_2_outline", "at": [3.76, 5.18], "rot": 144, "shape": {"kind": "ellipse", "rx": 4.6, "ry": 7}, "fill": "$ink"},
+    {"id": "petal_3_outline", "at": [-3.76, 5.18], "rot": 216, "shape": {"kind": "ellipse", "rx": 4.6, "ry": 7}, "fill": "$ink"},
+    {"id": "petal_4_outline", "at": [-6.09, -1.98], "rot": 288, "shape": {"kind": "ellipse", "rx": 4.6, "ry": 7}, "fill": "$ink"},
+    {"id": "petal_0", "at": [0, -6.4], "rot": 0, "shape": {"kind": "ellipse", "rx": 3.2, "ry": 5.6}, "fill": "$carapace"},
+    {"id": "petal_1", "at": [6.09, -1.98], "rot": 72, "shape": {"kind": "ellipse", "rx": 3.2, "ry": 5.6}, "fill": "$carapace.light"},
+    {"id": "petal_2", "at": [3.76, 5.18], "rot": 144, "shape": {"kind": "ellipse", "rx": 3.2, "ry": 5.6}, "fill": "$carapace"},
+    {"id": "petal_3", "at": [-3.76, 5.18], "rot": 216, "shape": {"kind": "ellipse", "rx": 3.2, "ry": 5.6}, "fill": "$carapace.light"},
+    {"id": "petal_4", "at": [-6.09, -1.98], "rot": 288, "shape": {"kind": "ellipse", "rx": 3.2, "ry": 5.6}, "fill": "$carapace"},
+    {"id": "core", "scale": 0.85, "use": "ss.lib.organ"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}

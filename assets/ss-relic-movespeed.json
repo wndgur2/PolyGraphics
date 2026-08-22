@@ -1,0 +1,31 @@
+{
+  "id": "ss.relic.movespeed",
+  "name": "Running leg",
+  "description": "One leg, three segments, thinning all the way to the claw: hip low, knee up over the shoulder, ankle out front. Nothing in it is thicker than the joint above it, which is what keeps a leg from reading as a tool — the set has no other limb, so it says movement before it says anything else.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "femur_outline", "at": [-6.5, -3.2], "rot": 24.4, "shape": {"kind": "rect", "w": 5.2, "h": 16.65, "corner": 2.6}, "fill": "$ink"},
+    {"id": "tibia_outline", "at": [0.5, -5.6], "rot": 134.3, "shape": {"kind": "rect", "w": 4.7, "h": 14.06, "corner": 2.35}, "fill": "$ink"},
+    {"id": "tarsus_outline", "at": [2.9, 4.5], "rot": -164.4, "shape": {"kind": "rect", "w": 4.3, "h": 15.26, "corner": 2.15}, "fill": "$ink"},
+    {"id": "hip_outline", "at": [-9.4, 3.2], "shape": {"kind": "circle", "r": 3.6}, "fill": "$ink"},
+    {"id": "claw_outline", "at": [0.8, 12], "rot": 16, "shape": {"kind": "poly", "points": [[-2.36, -2.71], [2.28, -2.09], [0.27, 4.4]]}, "fill": "$ink"},
+    {"id": "femur", "at": [-6.5, -3.2], "rot": 24.4, "shape": {"kind": "rect", "w": 2.6, "h": 14.05, "corner": 1.3}, "fill": "$steel"},
+    {"id": "tibia", "at": [0.5, -5.6], "rot": 134.3, "shape": {"kind": "rect", "w": 2.1, "h": 11.46, "corner": 1.05}, "fill": "$steel"},
+    {"id": "tarsus", "at": [2.9, 4.5], "rot": -164.4, "shape": {"kind": "rect", "w": 1.7, "h": 12.66, "corner": 0.85}, "fill": "$steel.dark"},
+    {"id": "hip", "at": [-9.4, 3.2], "shape": {"kind": "circle", "r": 2.3}, "fill": "$steel.dark"},
+    {"id": "knee", "at": [-3.6, -9.6], "shape": {"kind": "circle", "r": 1.9}, "fill": "$steel.light"},
+    {"id": "ankle", "at": [4.6, -1.6], "shape": {"kind": "circle", "r": 1.6}, "fill": "$steel.light"},
+    {"id": "claw", "at": [0.8, 12], "rot": 16, "shape": {"kind": "poly", "points": [[-1.5, -1.8], [1.5, -1.4], [0.2, 2.8]]}, "fill": "$husk"},
+    {"id": "spur_0", "at": [-3.12, -5.5], "rot": -135.7, "shape": {"kind": "poly", "points": [[-1.1, 1.8], [0, -2.8], [1.1, 1.8]]}, "fill": "$silent@0.9"},
+    {"id": "spur_1", "at": [-0.99, -3.42], "rot": -135.7, "shape": {"kind": "poly", "points": [[-1.1, 1.8], [0, -2.8], [1.1, 1.8]]}, "fill": "$silent@0.9"},
+    {"id": "spur_2", "at": [1.14, -1.34], "rot": -135.7, "shape": {"kind": "poly", "points": [[-1.1, 1.8], [0, -2.8], [1.1, 1.8]]}, "fill": "$silent@0.9"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}

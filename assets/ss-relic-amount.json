@@ -1,0 +1,26 @@
+{
+  "id": "ss.relic.amount",
+  "name": "Dividing gland",
+  "description": "A gland caught halfway through becoming two: one duct still feeding both lobes, and a bright seam down the pinch where the wall is closing. The other glands in the set are single bodies — this one is the only silhouette in the family with a waist, which is the whole claim it makes.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "duct_outline", "at": [0, -9.4], "shape": {"kind": "rect", "w": 6.4, "h": 10.8, "corner": 3.2}, "fill": "$ink"},
+    {"id": "sac_l_outline", "at": [-4, 2], "shape": {"kind": "ellipse", "rx": 6.6, "ry": 7.6}, "fill": "$ink"},
+    {"id": "sac_r_outline", "at": [4, 2], "shape": {"kind": "ellipse", "rx": 6.6, "ry": 7.6}, "fill": "$ink"},
+    {"id": "duct", "at": [0, -9.4], "shape": {"kind": "rect", "w": 3.6, "h": 8, "corner": 1.8}, "fill": "$pheromone.dark2"},
+    {"id": "sac_l", "at": [-4, 2], "shape": {"kind": "ellipse", "rx": 5.2, "ry": 6.2}, "fill": "$pheromone.dark"},
+    {"id": "sac_r", "at": [4, 2], "shape": {"kind": "ellipse", "rx": 5.2, "ry": 6.2}, "fill": "$pheromone.dark"},
+    {"id": "belly_l", "at": [-4.4, 2.4], "shape": {"kind": "ellipse", "rx": 3.6, "ry": 4.4}, "fill": "$pheromone"},
+    {"id": "belly_r", "at": [4.4, 2.4], "shape": {"kind": "ellipse", "rx": 3.6, "ry": 4.4}, "fill": "$pheromone"},
+    {"id": "seam", "at": [0, 2], "shape": {"kind": "rect", "w": 1.5, "h": 11.4, "corner": 0.75}, "fill": "$pheromone.light2"},
+    {"id": "sheen_l", "at": [-6, -0.6], "shape": {"kind": "ellipse", "rx": 1.4, "ry": 2}, "fill": "$pheromone.light2"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}

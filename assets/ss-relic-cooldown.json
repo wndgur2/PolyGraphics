@@ -1,0 +1,25 @@
+{
+  "id": "ss.relic.cooldown",
+  "name": "Racing heart",
+  "description": "A muscular heart with two vessels cut short at the top and something hot still going in the middle of it. Angular where the glands are round, and the darkest red in the set — an organ that works rather than one that holds.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "vessel_l_outline", "at": [-3.8, -7.2], "rot": -22, "shape": {"kind": "rect", "w": 6.2, "h": 7.4, "corner": 3}, "fill": "$ink"},
+    {"id": "vessel_r_outline", "at": [4.2, -7.6], "rot": 24, "shape": {"kind": "rect", "w": 5.8, "h": 7, "corner": 2.8}, "fill": "$ink"},
+    {"id": "heart_outline", "shape": {"kind": "poly", "points": [[-9.06, -3.24], [-3.17, -7.71], [1.77, -4.42], [6.48, -7.95], [10.48, -1.83], [7.42, 6.18], [-0.58, 12.53], [-8.35, 3.82]]}, "fill": "$ink"},
+    {"id": "vessel_l", "at": [-3.8, -7.2], "rot": -22, "shape": {"kind": "rect", "w": 3.4, "h": 4.6, "corner": 1.6}, "fill": "$blood.dark2"},
+    {"id": "vessel_r", "at": [4.2, -7.6], "rot": 24, "shape": {"kind": "rect", "w": 3, "h": 4.2, "corner": 1.4}, "fill": "$blood.dark2"},
+    {"id": "heart", "shape": {"kind": "poly", "points": [[-7.6, -2.8], [-2.6, -6.6], [1.6, -3.8], [5.6, -6.8], [9, -1.6], [6.4, 5.2], [-0.4, 10.6], [-7, 3.2]]}, "fill": "$blood"},
+    {"id": "chamber", "at": [0.4, -0.4], "shape": {"kind": "poly", "points": [[-4.6, -2.4], [1, -4.6], [5.4, -1.6], [4, 3.6], [0, 7], [-4.4, 2.6]]}, "fill": "$coral"},
+    {"id": "beat", "at": [0.4, 0.4], "shape": {"kind": "ellipse", "rx": 1.8, "ry": 2.6}, "fill": "$ember.light2"},
+    {"id": "sheen", "at": [-4, -3.4], "rot": -28, "shape": {"kind": "rect", "w": 1.4, "h": 3.6, "corner": 0.7}, "fill": "$coral.light2"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}
