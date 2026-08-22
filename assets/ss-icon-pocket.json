@@ -1,0 +1,14 @@
+{
+  "id": "ss.icon.pocket",
+  "name": "Pocket icon",
+  "description": "Meta powerup icon for the relic pocket: a drawstring pouch, flared mouth over a round body, cinched dark across the neck. Port of the hand-drawn i_pocket from Feelers' BootScene.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$chitin.light" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "mouth", "shape": { "kind": "poly", "points": [[-5, -9], [5, -9], [0, -2]] }, "fill": "$chitin.light" },
+    { "id": "body", "at": [0, 3], "shape": { "kind": "circle", "r": 8 }, "fill": "$chitin.light" },
+    { "id": "cinch", "at": [0, -2.75], "shape": { "kind": "rect", "w": 12, "h": 2.5 }, "fill": "$coal.dark" }
+  ]
+}
