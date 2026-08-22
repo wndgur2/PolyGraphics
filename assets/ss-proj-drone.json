@@ -1,24 +1,155 @@
 {
   "id": "ss.proj.drone",
-  "name": "Shell orbiter",
-  "description": "A hexagonal plate cut from a Molt and set spinning around you on nothing but momentum. The hive builds in hexagons, so this is quite literally a piece of their architecture turned into a weapon — the same cold grey as the shell it came from.",
-  "tags": ["ss-proj", "orbital"],
-  "size": [18, 18],
+  "name": "Brood vent",
+  "description": "The thing that follows you and pushes out grubs \u2014 an orifice, drawn as one. The geometry is unchanged from the shell plate this used to be, because the plate was already three hexagons inside each other and that is exactly a pucker; only the colours moved. They step inward from a red-brown rim through burnt ochre flesh to a deep maroon ring and then to soil, and the last of those is the hole. The reds are held back on purpose: a saturated `$blood` face read as an alarm on a screen where red means something is wrong, and this thing is yours. Yellow in the flesh takes the edge off without giving up the one thing that has to survive eighteen pixels, which is dark centre inside light ring.",
+  "tags": [
+    "ss-proj",
+    "orbital"
+  ],
+  "size": [
+    18,
+    18
+  ],
   "parts": [
-    { "id": "fin_a", "at": [-7.4, 0], "shape": { "kind": "poly", "points": [[2.4, -2.2], [-2.6, -0.8], [-2.6, 0.8], [2.4, 2.2]] }, "fill": "$slate.light" },
-    { "id": "fin_b", "at": [7.4, 0], "shape": { "kind": "poly", "points": [[-2.4, -2.2], [2.6, -0.8], [2.6, 0.8], [-2.4, 2.2]] }, "fill": "$slate.light" },
-    { "id": "plate", "shape": { "kind": "ngon", "sides": 6, "r": 8.2, "rot": 30 }, "fill": "$steel.dark", "stroke": { "color": "$ink", "width": "hair" } },
-    { "id": "face", "shape": { "kind": "ngon", "sides": 6, "r": 6.2, "rot": 30 }, "fill": "$steel.light" },
-    { "id": "cell", "shape": { "kind": "ngon", "sides": 6, "r": 3.2, "rot": 30 }, "fill": "$steel.dark" },
-    { "id": "core", "shape": { "kind": "circle", "r": 1.8 }, "fill": "$frost" }
+    {
+      "id": "fin_a",
+      "at": [
+        -7.4,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.4,
+            -2.2
+          ],
+          [
+            -2.6,
+            -0.8
+          ],
+          [
+            -2.6,
+            0.8
+          ],
+          [
+            2.4,
+            2.2
+          ]
+        ]
+      },
+      "fill": "$rust.light"
+    },
+    {
+      "id": "fin_b",
+      "at": [
+        7.4,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.4,
+            -2.2
+          ],
+          [
+            2.6,
+            -0.8
+          ],
+          [
+            2.6,
+            0.8
+          ],
+          [
+            -2.4,
+            2.2
+          ]
+        ]
+      },
+      "fill": "$rust.light"
+    },
+    {
+      "id": "plate",
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 8.2,
+        "rot": 30
+      },
+      "fill": "$rust",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "face",
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 6.2,
+        "rot": 30
+      },
+      "fill": "$ember.dark"
+    },
+    {
+      "id": "cell",
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.2,
+        "rot": 30
+      },
+      "fill": "$blood.dark2"
+    },
+    {
+      "id": "core",
+      "shape": {
+        "kind": "circle",
+        "r": 1.8
+      },
+      "fill": "$soil"
+    }
   ],
   "animations": {
     "hum": {
       "description": "the cut cell turns inside a plate that does not",
       "duration": 2,
       "tracks": [
-        { "part": "cell", "prop": "rot", "keys": [[0, 0], [1, 60]], "ease": "linear" },
-        { "part": "core", "prop": "opacity", "keys": [[0, 0.7], [0.5, 1], [1, 0.7]] }
+        {
+          "part": "cell",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              60
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "core",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0.7
+            ],
+            [
+              0.5,
+              1
+            ],
+            [
+              1,
+              0.7
+            ]
+          ]
+        }
       ]
     }
   }

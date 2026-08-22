@@ -1,7 +1,7 @@
 {
   "id": "ss.proj.chip",
-  "name": "Shell chip",
-  "description": "A splinter the orbiter sheds when it fires — the same hexagon it is, an eighth the size and still cold. Its whole job is to not be mistaken for the dart you throw, so it keeps the drone's grey and none of the violet.",
+  "name": "Grub",
+  "description": "What a broodling drops: a pale larva that crawls at whatever it was aimed at. It is seven pixels on screen, so the drawing is two decisions \u2014 one body that is round at the front and drawn out to a tail, and one segment line. Front-ness lives entirely in the silhouette now: flatten this to black and it still points. That matters because the weapon code already wags this sprite sixteen degrees either side of its heading at twenty-six hertz and lurches the pace with it \u2014 the hexagon that used to be here was symmetric, so all of that scuttle landed on a shape with no front and read as nothing. Kept near-white so the fed one, which is amber, is the one that draws the eye.",
   "tags": [
     "ss-proj",
     "orbital"
@@ -12,108 +12,150 @@
   ],
   "parts": [
     {
-      "id": "trail",
-      "at": [
-        -3.2,
-        0
-      ],
+      "id": "body",
       "shape": {
-        "kind": "ellipse",
-        "rx": 3.2,
-        "ry": 1.1
+        "kind": "poly",
+        "points": [
+          [
+            -4.5,
+            0.0
+          ],
+          [
+            0.42,
+            2.19
+          ],
+          [
+            1.46,
+            2.4
+          ],
+          [
+            2.48,
+            2.14
+          ],
+          [
+            3.29,
+            1.48
+          ],
+          [
+            3.74,
+            0.53
+          ],
+          [
+            3.74,
+            -0.53
+          ],
+          [
+            3.29,
+            -1.48
+          ],
+          [
+            2.48,
+            -2.14
+          ],
+          [
+            1.46,
+            -2.4
+          ],
+          [
+            0.42,
+            -2.19
+          ]
+        ]
       },
-      "fill": "$frost@ghost"
-    },
-    {
-      "id": "plate",
-      "shape": {
-        "kind": "ngon",
-        "sides": 6,
-        "r": 3.4,
-        "rot": 30
-      },
-      "fill": "$steel.dark",
+      "fill": "$silent",
       "stroke": {
         "color": "$ink",
         "width": "hair"
       }
     },
     {
-      "id": "face",
+      "id": "seg",
+      "at": [
+        -1.5,
+        0
+      ],
       "shape": {
-        "kind": "ngon",
-        "sides": 6,
-        "r": 2.1,
-        "rot": 30
+        "kind": "rect",
+        "w": 0.5,
+        "h": 2.6
       },
-      "fill": "$frost.light"
+      "fill": "$steel@soft"
     }
   ],
   "variants": {
     "evolved": {
-      "description": "Sentinel Drone's chip, driven hard enough to go through. Nearly twice the size of the one it grew from and lit rather than grey — a shot that pierces has to be findable on a dark floor, and the unevolved chip is deliberately small enough to lose.",
-      "scale": 1.9,
+      "description": "A Brood Swarm grub: the same larva, fed. It carries the head the plain one gave up \u2014 a near-black rust dot at the front \u2014 over an amber body, and it is authored a third larger. The 1.3 is a texel budget and not a size: a consumer folds it into the texture and divides it back out when it asks for a world scale, so this variant is drawn at thirteen pixels in order to be sharp at whatever size it is asked for, and how big it actually lands is the game's call, not this document's. What the extra detail buys is that the head survives \u2014 at seven pixels a bigger, darker head was invisible next to the plain grub, which is why hue was carrying the whole distinction. This one does not spend itself on one hit: it latches, bites three times, and is thrown off backwards between bites still facing its mark, which is a thing only a drawing with a front can do.",
       "set": {
-        "trail.fill": "$aqua@soft",
-        "plate.fill": "$frost.dark",
-        "face.fill": "$white"
+        "body.fill": "$chitin",
+        "seg.fill": "$chitin.dark"
       },
       "add": [
         {
-          "id": "halo",
-          "shape": {
-            "kind": "ellipse",
-            "rx": 6.4,
-            "ry": 3.4
-          },
-          "fill": "$aqua@ghost"
-        },
-        {
-          "id": "lance",
+          "id": "head",
           "at": [
-            2.2,
-            0
-          ],
-          "shape": {
-            "kind": "poly",
-            "points": [
-              [
-                5.8,
-                0
-              ],
-              [
-                0.6,
-                -2
-              ],
-              [
-                -3.6,
-                0
-              ],
-              [
-                0.6,
-                2
-              ]
-            ]
-          },
-          "fill": "$aqua.light",
-          "stroke": {
-            "color": "$ink",
-            "width": "hair"
-          }
-        },
-        {
-          "id": "spark",
-          "at": [
-            5.6,
+            1.85,
             0
           ],
           "shape": {
             "kind": "circle",
-            "r": 1.5
+            "r": 1.55
           },
-          "fill": "$white"
+          "fill": "$rust"
+        },
+        {
+          "id": "jaw",
+          "at": [
+            3.3,
+            -0.75
+          ],
+          "rot": -20,
+          "shape": {
+            "kind": "poly",
+            "points": [
+              [
+                1.1,
+                0
+              ],
+              [
+                -0.7,
+                -0.5
+              ],
+              [
+                -0.7,
+                0.5
+              ]
+            ]
+          },
+          "fill": "$husk.light"
+        },
+        {
+          "id": "jaw_low",
+          "at": [
+            3.3,
+            0.75
+          ],
+          "rot": 20,
+          "shape": {
+            "kind": "poly",
+            "points": [
+              [
+                1.1,
+                0
+              ],
+              [
+                -0.7,
+                -0.5
+              ],
+              [
+                -0.7,
+                0.5
+              ]
+            ]
+          },
+          "fill": "$husk.light"
         }
-      ]
+      ],
+      "scale": 1.3
     }
   }
 }
