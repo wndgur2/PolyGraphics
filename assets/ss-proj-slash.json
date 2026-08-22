@@ -1,48 +1,1493 @@
 {
   "id": "ss.proj.slash",
   "name": "Lash sweep",
-  "description": "The whip is a Soldier's mandible on a cord, so its arc is a bone crescent with a honed frost edge on the leading side and a thinner echo trailing behind it. Nothing about it glows — it is hive material with the signal stripped out. Canvas and anchor unchanged from the original `slash` texture so the weapon code's spawn offsets still land.",
-  "tags": ["ss-proj", "melee"],
-  "size": [62, 100],
-  "anchor": [0.16, 0.5],
+  "description": "The whip is a Soldier's mandible on a cord, and this is the path its tip takes \u2014 drawn as it happens rather than as a finished mark. The arc is cut into six bands from one end of the stroke to the other, and each lights a frame or two after the one before it \u2014 the whole arc is down inside the first third of the clip, because a stroke that takes its time arriving reads as a fade rather than a crack, with a frost edge that flashes as the tip passes and dies behind it. That is the whole point: a single crescent, however well tapered, is a photograph of a swing, and the swing is what the weapon is. The evolved lash already works this way in code \u2014 seven bands trailing a bright leading edge \u2014 and this is the same idea cut into frames a sprite sheet can carry. There is no second drawing for the stroke coming back: it is this clip played in reverse, which is what a lash returning actually is. Nothing glows \u2014 hive material with the signal stripped out. Canvas and anchor unchanged from the original `slash` texture so the weapon code's spawn offsets still land. Bands never dim once they arrive: they overlap so the joins do not show, and any partial opacity turns exactly those overlaps into seams \u2014 whatever draws this should fade the whole sprite instead. Bake as a sheet and play ONCE; looped, the lash re-cracks forever.",
+  "tags": [
+    "ss-proj",
+    "melee"
+  ],
+  "size": [
+    62,
+    100
+  ],
+  "anchor": [
+    0.16,
+    0.5
+  ],
   "parts": [
-    { "id": "echo", "shape": { "kind": "ring", "r": 29, "width": 2.4, "from": -50, "to": 50 }, "fill": "$husk@soft" },
-    { "id": "body", "shape": { "kind": "ring", "r": 37, "width": 19, "from": -64, "to": 64 }, "fill": "$husk" },
-    { "id": "grain", "shape": { "kind": "ring", "r": 33, "width": 2, "from": -58, "to": 58 }, "fill": "$husk.dark@soft" },
-    { "id": "edge", "shape": { "kind": "ring", "r": 45.4, "width": 3.4, "from": -59, "to": 59 }, "fill": "$frost.light" },
-    { "id": "sliver_a", "at": [40, -22], "rot": -28, "shape": { "kind": "poly", "points": [[-7, -0.9], [7, -0.4], [7, 0.4], [-7, 0.9]] }, "fill": "$frost@soft" },
-    { "id": "sliver_b", "at": [43, 0], "shape": { "kind": "poly", "points": [[-8, -0.8], [8, -0.4], [8, 0.4], [-8, 0.8]] }, "fill": "$frost@soft" },
-    { "id": "sliver_c", "at": [40, 22], "rot": 28, "shape": { "kind": "poly", "points": [[-7, -0.9], [7, -0.4], [7, 0.4], [-7, 0.9]] }, "fill": "$frost@soft" }
+    {
+      "id": "band_0",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -6.6,
+            -26.4
+          ],
+          [
+            -4.2,
+            -27.3
+          ],
+          [
+            -1.7,
+            -28.2
+          ],
+          [
+            1.0,
+            -28.9
+          ],
+          [
+            3.7,
+            -29.4
+          ],
+          [
+            6.6,
+            -29.6
+          ],
+          [
+            9.5,
+            -29.6
+          ],
+          [
+            12.6,
+            -29.3
+          ],
+          [
+            10.1,
+            -23.6
+          ],
+          [
+            7.9,
+            -24.7
+          ],
+          [
+            5.7,
+            -25.6
+          ],
+          [
+            3.3,
+            -26.2
+          ],
+          [
+            0.9,
+            -26.6
+          ],
+          [
+            -1.6,
+            -26.7
+          ],
+          [
+            -4.1,
+            -26.6
+          ],
+          [
+            -6.5,
+            -26.0
+          ]
+        ]
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "lit_0",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -6.6,
+            -26.4
+          ],
+          [
+            -4.2,
+            -27.3
+          ],
+          [
+            -1.7,
+            -28.2
+          ],
+          [
+            1.0,
+            -28.9
+          ],
+          [
+            3.7,
+            -29.4
+          ],
+          [
+            6.6,
+            -29.6
+          ],
+          [
+            9.5,
+            -29.6
+          ],
+          [
+            12.6,
+            -29.3
+          ],
+          [
+            11.6,
+            -27.1
+          ],
+          [
+            8.8,
+            -27.4
+          ],
+          [
+            6.1,
+            -27.3
+          ],
+          [
+            3.4,
+            -27.0
+          ],
+          [
+            0.9,
+            -26.5
+          ],
+          [
+            -1.5,
+            -25.8
+          ],
+          [
+            -3.8,
+            -25.0
+          ],
+          [
+            -6.0,
+            -24.1
+          ]
+        ]
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "band_1",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            9.7,
+            -29.6
+          ],
+          [
+            12.9,
+            -29.3
+          ],
+          [
+            16.2,
+            -28.6
+          ],
+          [
+            19.4,
+            -27.6
+          ],
+          [
+            22.6,
+            -26.1
+          ],
+          [
+            25.7,
+            -24.4
+          ],
+          [
+            28.6,
+            -22.2
+          ],
+          [
+            31.3,
+            -19.7
+          ],
+          [
+            20.3,
+            -12.8
+          ],
+          [
+            19.1,
+            -14.8
+          ],
+          [
+            17.7,
+            -16.8
+          ],
+          [
+            16.2,
+            -18.7
+          ],
+          [
+            14.4,
+            -20.4
+          ],
+          [
+            12.5,
+            -22.0
+          ],
+          [
+            10.4,
+            -23.4
+          ],
+          [
+            8.1,
+            -24.6
+          ]
+        ]
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "lit_1",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            9.7,
+            -29.6
+          ],
+          [
+            12.9,
+            -29.3
+          ],
+          [
+            16.2,
+            -28.6
+          ],
+          [
+            19.4,
+            -27.6
+          ],
+          [
+            22.6,
+            -26.1
+          ],
+          [
+            25.7,
+            -24.4
+          ],
+          [
+            28.6,
+            -22.2
+          ],
+          [
+            31.3,
+            -19.7
+          ],
+          [
+            29.2,
+            -18.4
+          ],
+          [
+            26.7,
+            -20.7
+          ],
+          [
+            23.9,
+            -22.7
+          ],
+          [
+            21.0,
+            -24.3
+          ],
+          [
+            18.0,
+            -25.6
+          ],
+          [
+            15.0,
+            -26.5
+          ],
+          [
+            12.0,
+            -27.1
+          ],
+          [
+            9.0,
+            -27.3
+          ]
+        ]
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "band_2",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            28.9,
+            -21.9
+          ],
+          [
+            31.6,
+            -19.3
+          ],
+          [
+            34.0,
+            -16.5
+          ],
+          [
+            36.1,
+            -13.3
+          ],
+          [
+            37.9,
+            -9.8
+          ],
+          [
+            39.3,
+            -6.1
+          ],
+          [
+            40.2,
+            -2.2
+          ],
+          [
+            40.7,
+            1.8
+          ],
+          [
+            23.4,
+            1.0
+          ],
+          [
+            23.4,
+            -1.3
+          ],
+          [
+            23.2,
+            -3.6
+          ],
+          [
+            22.7,
+            -5.9
+          ],
+          [
+            22.2,
+            -8.1
+          ],
+          [
+            21.4,
+            -10.3
+          ],
+          [
+            20.4,
+            -12.5
+          ],
+          [
+            19.3,
+            -14.6
+          ]
+        ]
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "lit_2",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            28.9,
+            -21.9
+          ],
+          [
+            31.6,
+            -19.3
+          ],
+          [
+            34.0,
+            -16.5
+          ],
+          [
+            36.1,
+            -13.3
+          ],
+          [
+            37.9,
+            -9.8
+          ],
+          [
+            39.3,
+            -6.1
+          ],
+          [
+            40.2,
+            -2.2
+          ],
+          [
+            40.7,
+            1.8
+          ],
+          [
+            38.3,
+            1.7
+          ],
+          [
+            37.8,
+            -2.1
+          ],
+          [
+            36.9,
+            -5.7
+          ],
+          [
+            35.5,
+            -9.2
+          ],
+          [
+            33.9,
+            -12.4
+          ],
+          [
+            31.8,
+            -15.4
+          ],
+          [
+            29.5,
+            -18.1
+          ],
+          [
+            27.0,
+            -20.5
+          ]
+        ]
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "band_3",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            40.3,
+            -1.8
+          ],
+          [
+            40.8,
+            2.3
+          ],
+          [
+            40.8,
+            6.3
+          ],
+          [
+            40.3,
+            10.4
+          ],
+          [
+            39.4,
+            14.5
+          ],
+          [
+            38.0,
+            18.4
+          ],
+          [
+            36.1,
+            22.1
+          ],
+          [
+            33.9,
+            25.7
+          ],
+          [
+            20.0,
+            15.2
+          ],
+          [
+            21.0,
+            12.9
+          ],
+          [
+            21.8,
+            10.6
+          ],
+          [
+            22.5,
+            8.3
+          ],
+          [
+            23.0,
+            5.9
+          ],
+          [
+            23.3,
+            3.6
+          ],
+          [
+            23.4,
+            1.3
+          ],
+          [
+            23.4,
+            -1.0
+          ]
+        ]
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "lit_3",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            40.3,
+            -1.8
+          ],
+          [
+            40.8,
+            2.3
+          ],
+          [
+            40.8,
+            6.3
+          ],
+          [
+            40.3,
+            10.4
+          ],
+          [
+            39.4,
+            14.5
+          ],
+          [
+            38.0,
+            18.4
+          ],
+          [
+            36.1,
+            22.1
+          ],
+          [
+            33.9,
+            25.7
+          ],
+          [
+            31.9,
+            24.2
+          ],
+          [
+            34.1,
+            20.9
+          ],
+          [
+            35.8,
+            17.3
+          ],
+          [
+            37.1,
+            13.6
+          ],
+          [
+            38.0,
+            9.8
+          ],
+          [
+            38.4,
+            6.0
+          ],
+          [
+            38.4,
+            2.1
+          ],
+          [
+            37.9,
+            -1.7
+          ]
+        ]
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "band_4",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            35.9,
+            22.6
+          ],
+          [
+            33.6,
+            26.1
+          ],
+          [
+            30.8,
+            29.3
+          ],
+          [
+            27.8,
+            32.1
+          ],
+          [
+            24.4,
+            34.6
+          ],
+          [
+            20.7,
+            36.6
+          ],
+          [
+            16.9,
+            38.2
+          ],
+          [
+            12.9,
+            39.3
+          ],
+          [
+            9.2,
+            28.1
+          ],
+          [
+            11.6,
+            26.2
+          ],
+          [
+            13.7,
+            24.1
+          ],
+          [
+            15.5,
+            22.0
+          ],
+          [
+            17.2,
+            19.9
+          ],
+          [
+            18.6,
+            17.7
+          ],
+          [
+            19.9,
+            15.4
+          ],
+          [
+            20.9,
+            13.1
+          ]
+        ]
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "lit_4",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            35.9,
+            22.6
+          ],
+          [
+            33.6,
+            26.1
+          ],
+          [
+            30.8,
+            29.3
+          ],
+          [
+            27.8,
+            32.1
+          ],
+          [
+            24.4,
+            34.6
+          ],
+          [
+            20.7,
+            36.6
+          ],
+          [
+            16.9,
+            38.2
+          ],
+          [
+            12.9,
+            39.3
+          ],
+          [
+            12.1,
+            37.0
+          ],
+          [
+            15.9,
+            36.0
+          ],
+          [
+            19.5,
+            34.5
+          ],
+          [
+            23.0,
+            32.6
+          ],
+          [
+            26.2,
+            30.3
+          ],
+          [
+            29.1,
+            27.6
+          ],
+          [
+            31.7,
+            24.6
+          ],
+          [
+            33.9,
+            21.3
+          ]
+        ]
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "band_5",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            16.4,
+            38.3
+          ],
+          [
+            12.7,
+            39.3
+          ],
+          [
+            8.9,
+            39.9
+          ],
+          [
+            5.1,
+            40.0
+          ],
+          [
+            1.3,
+            39.6
+          ],
+          [
+            -2.3,
+            38.9
+          ],
+          [
+            -5.8,
+            37.7
+          ],
+          [
+            -9.0,
+            36.1
+          ],
+          [
+            -8.9,
+            35.7
+          ],
+          [
+            -5.3,
+            35.0
+          ],
+          [
+            -2.0,
+            34.0
+          ],
+          [
+            1.1,
+            32.8
+          ],
+          [
+            4.0,
+            31.4
+          ],
+          [
+            6.6,
+            29.9
+          ],
+          [
+            9.1,
+            28.2
+          ],
+          [
+            11.3,
+            26.4
+          ]
+        ]
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "lit_5",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            16.4,
+            38.3
+          ],
+          [
+            12.7,
+            39.3
+          ],
+          [
+            8.9,
+            39.9
+          ],
+          [
+            5.1,
+            40.0
+          ],
+          [
+            1.3,
+            39.6
+          ],
+          [
+            -2.3,
+            38.9
+          ],
+          [
+            -5.8,
+            37.7
+          ],
+          [
+            -9.0,
+            36.1
+          ],
+          [
+            -8.4,
+            33.8
+          ],
+          [
+            -5.4,
+            35.3
+          ],
+          [
+            -2.2,
+            36.5
+          ],
+          [
+            1.3,
+            37.2
+          ],
+          [
+            4.8,
+            37.6
+          ],
+          [
+            8.4,
+            37.5
+          ],
+          [
+            11.9,
+            37.0
+          ],
+          [
+            15.5,
+            36.1
+          ]
+        ]
+      },
+      "fill": "$frost.light"
+    }
   ],
   "animations": {
     "play": {
-      "description": "the edge outruns the body, then both go",
+      "description": "the stroke draws itself from the top down, each band a frame or two behind the one above",
       "duration": 0.26,
       "tracks": [
-        { "part": "edge", "prop": "scale", "keys": [[0, 0.92], [0.4, 1.04], [1, 1.06]], "ease": "backOut" },
-        { "part": "body", "prop": "opacity", "keys": [[0, 1], [0.5, 0.85], [1, 0]] },
-        { "part": "echo", "prop": "opacity", "keys": [[0, 0.9], [1, 0]] },
-        { "part": "sliver_b", "prop": "x", "keys": [[0, 0], [1, 5]], "ease": "linear" }
+        {
+          "part": "band_0",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "lit_0",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0.0,
+              1
+            ],
+            [
+              0.1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_1",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.056,
+              0
+            ],
+            [
+              0.06,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "lit_1",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.056,
+              0
+            ],
+            [
+              0.06,
+              1
+            ],
+            [
+              0.16,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_2",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.116,
+              0
+            ],
+            [
+              0.12,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "lit_2",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.116,
+              0
+            ],
+            [
+              0.12,
+              1
+            ],
+            [
+              0.22,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_3",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.176,
+              0
+            ],
+            [
+              0.18,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "lit_3",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.176,
+              0
+            ],
+            [
+              0.18,
+              1
+            ],
+            [
+              0.28,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_4",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.236,
+              0
+            ],
+            [
+              0.24,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "lit_4",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.236,
+              0
+            ],
+            [
+              0.24,
+              1
+            ],
+            [
+              0.34,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_5",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.296,
+              0
+            ],
+            [
+              0.3,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "lit_5",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.296,
+              0
+            ],
+            [
+              0.3,
+              1
+            ],
+            [
+              0.4,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
       ]
-    }
-  },
-  "variants": {
-    "recover": {
-      "description": "the stroke coming back up. The lash is already spent, so the body is thinner and the honed edge is nearly gone; what's left is the trail — a longer, brighter echo where the tip has just been. Same canvas and anchor as the base, so the weapon code can swap textures without moving anything.",
-      "set": {
-        "body.shape.width": 13,
-        "body.shape.from": -58,
-        "body.shape.to": 58,
-        "echo.shape.r": 33,
-        "echo.shape.width": 3.6,
-        "echo.shape.from": -62,
-        "echo.shape.to": 62,
-        "echo.fill": "$husk.light@soft",
-        "edge.shape.width": 2,
-        "edge.shape.r": 43,
-        "grain.fill": "$husk.dark@ghost"
-      },
-      "remove": ["sliver_a", "sliver_c"]
+    },
+    "back": {
+      "description": "the same stroke drawn from the bottom up \u2014 the lash coming back. Not the `play` clip run in reverse: reversing frames un-draws the arc, starting whole and erasing down to a sliver, which reads as the mark disappearing rather than as a second cut. The bands have to light in the other order, and that is a different clip, not a playback flag. Same colour as the forehand \u2014 this is one lash, not two weapons.",
+      "duration": 0.26,
+      "tracks": [
+        {
+          "part": "band_0",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.296,
+              0
+            ],
+            [
+              0.3,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "lit_0",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.296,
+              0
+            ],
+            [
+              0.3,
+              1
+            ],
+            [
+              0.4,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_1",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.236,
+              0
+            ],
+            [
+              0.24,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "lit_1",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.236,
+              0
+            ],
+            [
+              0.24,
+              1
+            ],
+            [
+              0.34,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_2",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.176,
+              0
+            ],
+            [
+              0.18,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "lit_2",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.176,
+              0
+            ],
+            [
+              0.18,
+              1
+            ],
+            [
+              0.28,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_3",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.116,
+              0
+            ],
+            [
+              0.12,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "lit_3",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.116,
+              0
+            ],
+            [
+              0.12,
+              1
+            ],
+            [
+              0.22,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_4",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.056,
+              0
+            ],
+            [
+              0.06,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "lit_4",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.056,
+              0
+            ],
+            [
+              0.06,
+              1
+            ],
+            [
+              0.16,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_5",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "lit_5",
+          "prop": "opacity",
+          "ease": "linear",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0.0,
+              1
+            ],
+            [
+              0.1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
     }
   }
 }
