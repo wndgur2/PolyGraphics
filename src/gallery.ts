@@ -189,11 +189,18 @@ ${a.description ? `<p>${esc(a.description)}</p>` : ""}<ul><li><code>${esc(tracks
 }
 
 function assetCard(asset: Asset, reg: Registry, issues: Issue[]): string {
-  const firstAnim = Object.keys(asset.animations ?? {})[0];
-  const cells: string[] = [cell(asset, reg, issues, firstAnim ? `base · ▸ ${firstAnim}` : "base", { animation: firstAnim })];
+  const anims = Object.keys(asset.animations ?? {});
+  const firstAnim = anims[0];
+  // A cell per animation, not just the first. A document may carry a walk and
+  // a windup, and the second one was listed in the meta line and then never
+  // playable anywhere — which is the one thing a gallery is for.
+  const cells: string[] = anims.length
+    ? anims.map((name) => cell(asset, reg, issues, `base · ▸ ${name}`, { animation: name }))
+    : [cell(asset, reg, issues, "base")];
+  // Variants stay on the first: every variant against every animation is a
+  // grid that grows by multiplication, and the variants are a colour question.
   for (const v of Object.keys(asset.variants ?? {}))
     cells.push(cell(asset, reg, issues, `#${v}`, { variant: v, animation: firstAnim }));
-  const anims = Object.keys(asset.animations ?? {});
   const meta: string[] = [`${asset.size[0]}×${asset.size[1]}`];
   if (anims.length) meta.push(`anim: ${anims.join(", ")}`);
   const hay = `${asset.id} ${asset.name} ${asset.description} ${asset.tags.join(" ")} ${asset.parts.map((p) => p.id).join(" ")}`;
