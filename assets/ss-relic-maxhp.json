@@ -1,16 +1,22 @@
 {
   "id": "ss.relic.maxhp",
-  "name": "Comb cell of jelly",
-  "description": "One cell cut out of a comb, still holding its dome of jelly. Three rings of chitin step down into the well — wall, shadow, then the jelly sitting proud of it — so a flat hexagon reads as a cell with depth at the size a slot actually shows.",
+  "name": "Flask of royal jelly",
+  "description": "A corked flask two-thirds full of jelly, the fill line sitting flat across the glass with air above it. Drawn as a bottle rather than as the comb it came from, because a bottle is the shape a player already reads as 'drink this and you are bigger' — the comb read as scenery.",
   "tags": ["ss-relic"],
   "size": [32, 32],
   "parts": [
-    { "id": "plate", "use": "ss.lib.relic-plate" },
-    { "id": "cell_outline", "rot": 30, "shape": { "kind": "ngon", "sides": 6, "r": 11.4 }, "fill": "$ink" },
-    { "id": "cell", "rot": 30, "shape": { "kind": "ngon", "sides": 6, "r": 10 }, "fill": "$chitin.dark" },
-    { "id": "wall", "rot": 30, "shape": { "kind": "ngon", "sides": 6, "r": 8 }, "fill": "$chitin" },
-    { "id": "well", "rot": 30, "shape": { "kind": "ngon", "sides": 6, "r": 6.6 }, "fill": "$chitin.dark2" },
-    { "id": "jelly", "at": [0, 0.6], "shape": { "kind": "circle", "r": 5.2 }, "fill": "$gold" }
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "cork_outline", "at": [0, -9.6], "shape": {"kind": "rect", "w": 8.6, "h": 4.8, "corner": 2.2}, "fill": "$ink"},
+    {"id": "neck_outline", "at": [0, -6], "shape": {"kind": "rect", "w": 7.4, "h": 8.4, "corner": 1.4}, "fill": "$ink"},
+    {"id": "body_outline", "at": [0, 3.4], "shape": {"kind": "circle", "r": 8.8}, "fill": "$ink"},
+    {"id": "neck", "at": [0, -6], "shape": {"kind": "rect", "w": 5, "h": 8, "corner": 1}, "fill": "$slate.dark"},
+    {"id": "glass", "at": [0, 3.4], "shape": {"kind": "circle", "r": 7.4}, "fill": "$slate.dark"},
+    {"id": "jelly", "at": [0, 4.2], "shape": {"kind": "circle", "r": 6.2}, "fill": "$gold"},
+    {"id": "level", "at": [0, -1.6], "shape": {"kind": "ellipse", "rx": 5.6, "ry": 1.5}, "fill": "$gold.light2"},
+    {"id": "bubble", "at": [2.6, 5.4], "shape": {"kind": "circle", "r": 1.2}, "fill": "$gold.light2"},
+    {"id": "shine", "at": [-4, 1.4], "rot": -22, "shape": {"kind": "rect", "w": 1.6, "h": 5.6, "corner": 0.8}, "fill": "$silent@soft"},
+    {"id": "cork", "at": [0, -9.6], "shape": {"kind": "rect", "w": 7.4, "h": 3.6, "corner": 1.4}, "fill": "$timber"},
+    {"id": "cork_lit", "at": [0, -10.6], "shape": {"kind": "rect", "w": 6, "h": 1.4, "corner": 0.7}, "fill": "$timber.light2"}
   ],
   "variants": {
     "glyph": {

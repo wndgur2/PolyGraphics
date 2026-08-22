@@ -5,16 +5,16 @@
   "tags": ["ss-curse"],
   "size": [32, 32],
   "parts": [
-    { "id": "plate", "use": "ss.lib.relic-plate", "variant": "curse" },
-    { "id": "head_outline", "at": [0, -1.5], "shape": { "kind": "circle", "r": 9.4 }, "fill": "$ink" },
-    { "id": "fang_l_outline", "shape": { "kind": "poly", "points": [[-7.66, 3.22], [-2.81, 11.55], [-0.03, 3.22]] }, "fill": "$ink" },
-    { "id": "fang_r_outline", "shape": { "kind": "poly", "points": [[0.03, 3.22], [2.81, 11.55], [7.66, 3.22]] }, "fill": "$ink" },
-    { "id": "head", "at": [0, -1.5], "shape": { "kind": "circle", "r": 8 }, "fill": "$arcane.dark" },
-    { "id": "crown", "at": [-2.6, -4.6], "shape": { "kind": "circle", "r": 3.4 }, "fill": "$arcane.light2" },
-    { "id": "fang_l", "shape": { "kind": "poly", "points": [[-6.5, 4], [-3, 10], [-1, 4]] }, "fill": "$arcane.dark" },
-    { "id": "fang_r", "shape": { "kind": "poly", "points": [[1, 4], [3, 10], [6.5, 4]] }, "fill": "$arcane.dark" },
-    { "id": "eye_l", "at": [-3.2, -2.4], "shape": { "kind": "circle", "r": 1.9 }, "fill": "$ink" },
-    { "id": "eye_r", "at": [3.2, -2.4], "shape": { "kind": "circle", "r": 1.9 }, "fill": "$ink" }
+    {"id": "plate", "use": "ss.lib.relic-plate", "variant": "curse"},
+    {"id": "head_outline", "at": [0, -1.5], "shape": {"kind": "circle", "r": 9.4}, "fill": "$ink"},
+    {"id": "fang_l_outline", "shape": {"kind": "poly", "points": [[-7.66, 3.22], [-2.81, 11.55], [-0.03, 3.22]]}, "fill": "$ink"},
+    {"id": "fang_r_outline", "shape": {"kind": "poly", "points": [[0.03, 3.22], [2.81, 11.55], [7.66, 3.22]]}, "fill": "$ink"},
+    {"id": "head", "at": [0, -1.5], "shape": {"kind": "circle", "r": 8}, "fill": "$arcane.dark"},
+    {"id": "crown", "at": [-2.6, -4.6], "shape": {"kind": "circle", "r": 3.4}, "fill": "$arcane.light2"},
+    {"id": "fang_l", "shape": {"kind": "poly", "points": [[-6.5, 4], [-3, 10], [-1, 4]]}, "fill": "$arcane.dark"},
+    {"id": "fang_r", "shape": {"kind": "poly", "points": [[1, 4], [3, 10], [6.5, 4]]}, "fill": "$arcane.dark"},
+    {"id": "eye_l", "at": [-3.2, -2.4], "shape": {"kind": "circle", "r": 1.9}, "fill": "$ink"},
+    {"id": "eye_r", "at": [3.2, -2.4], "shape": {"kind": "circle", "r": 1.9}, "fill": "$ink"}
   ],
   "variants": {
     "glyph": {

@@ -1,16 +1,25 @@
 {
   "id": "ss.relic.boomerang",
-  "name": "Wind-borne mandibles",
-  "description": "The thrown mandibles with the air they ride: `ss.proj.boom` composed via `use`, and two arcs trailing off the outer corner. Each arc is drawn twice — a wide ink stroke, then the spore-bright one on top — because a hairline arc over the plate's glow loses its edge at the size this is seen at. The mandibles are the document the field throws, not a second drawing of it.",
+  "name": "Wind charm",
+  "description": "A husk tag on a cord, cut through by the mark it was made for: two arcs of moving air, carved and still. The charm says wind and nothing else — it deliberately does not draw the mandibles it makes fly farther, because the plate already tells you a find is a find and the mark is what makes this one the wind's.",
   "tags": ["ss-relic"],
   "size": [32, 32],
   "parts": [
-    { "id": "plate", "use": "ss.lib.relic-plate" },
-    { "id": "gust_outer_outline", "at": [2, 2], "shape": { "kind": "ring", "r": 11.5, "width": 4.4, "from": -70, "to": 30 }, "fill": "$ink" },
-    { "id": "gust_inner_outline", "at": [2, 2], "shape": { "kind": "ring", "r": 8.6, "width": 4, "from": -55, "to": 15 }, "fill": "$ink" },
-    { "id": "gust_outer", "at": [2, 2], "shape": { "kind": "ring", "r": 11.5, "width": 1.6, "from": -70, "to": 30 }, "fill": "$spore@0.9" },
-    { "id": "gust_inner", "at": [2, 2], "shape": { "kind": "ring", "r": 8.6, "width": 1.2, "from": -55, "to": 15 }, "fill": "$spore@0.55" },
-    { "id": "mandibles", "use": "ss.proj.boom", "at": [-2.5, 0.5], "scale": 0.92 }
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "cord_l_outline", "at": [-2.6, -7.4], "rot": 24, "shape": {"kind": "rect", "w": 2.8, "h": 7.2}, "fill": "$ink"},
+    {"id": "cord_r_outline", "at": [2.6, -7.4], "rot": -24, "shape": {"kind": "rect", "w": 2.8, "h": 7.2}, "fill": "$ink"},
+    {"id": "tag_outline", "shape": {"kind": "poly", "points": [[-7.85, -5.7], [7.85, -5.7], [9.37, 4.32], [0, 12.83], [-9.37, 4.32]]}, "fill": "$ink"},
+    {"id": "cord_l", "at": [-2.6, -7.4], "rot": 24, "shape": {"kind": "rect", "w": 1.6, "h": 6.8}, "fill": "$carapace.light"},
+    {"id": "cord_r", "at": [2.6, -7.4], "rot": -24, "shape": {"kind": "rect", "w": 1.6, "h": 6.8}, "fill": "$carapace.light"},
+    {"id": "knot", "at": [0, -9.8], "shape": {"kind": "circle", "r": 1.6}, "fill": "$carapace.light"},
+    {"id": "tag", "shape": {"kind": "poly", "points": [[-6.54, -4.61], [6.54, -4.61], [7.85, 3.89], [0, 11.3], [-7.85, 3.89]]}, "fill": "$husk"},
+    {"id": "tag_lit", "shape": {"kind": "poly", "points": [[-6.1, -4.18], [6.1, -4.18], [6.54, -1.13], [-6.32, -1.13]]}, "fill": "$husk.light2"},
+    {"id": "tag_shade", "shape": {"kind": "poly", "points": [[-6.98, 4.11], [6.98, 4.11], [0, 10.86]]}, "fill": "$husk.dark"},
+    {"id": "hole", "at": [0, -2.8], "shape": {"kind": "circle", "r": 1.4}, "fill": "$ink"},
+    {"id": "mark_far", "at": [1.4, 2.2], "shape": {"kind": "ring", "r": 5.2, "width": 1.6, "from": 108, "to": 252}, "fill": "$spore"},
+    {"id": "mark_near", "at": [3.2, 2.2], "shape": {"kind": "ring", "r": 2.8, "width": 1.4, "from": 104, "to": 256}, "fill": "$spore@0.7"},
+    {"id": "gust_outline", "at": [3, 1], "shape": {"kind": "ring", "r": 11.4, "width": 4.2, "from": -54, "to": 12}, "fill": "$ink"},
+    {"id": "gust", "at": [3, 1], "shape": {"kind": "ring", "r": 11.4, "width": 1.6, "from": -54, "to": 12}, "fill": "$spore@0.9"}
   ],
   "variants": {
     "glyph": {
