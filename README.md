@@ -8,12 +8,16 @@ npm run check     # validate + render all + gallery + manifest — the one comma
 open out/gallery.html
 ```
 
+Working on art? Leave the gallery open and run `npm run watch`: a save rebuilds, and the page reloads itself without losing the tab, the search or the asset you had open.
+
 ## The loop
 
 1. Write/edit an asset document in `assets/<id-with-dashes>.json`
-2. `npm run check` — errors come back with suggestions ("unknown color token `$bloood` — did you mean `$blood`?")
-3. Inspect `out/gallery.html` (every asset, variant, animation, theme) or `out/svg/*.svg`
+2. `npm run check` — errors come back with suggestions ("unknown color token `$bloood` — did you mean `$blood`?"), or `npm run watch` to have that happen on save
+3. Inspect `out/gallery.html` — tabs per category, search across all of them, and a page per asset
 4. Iterate
+
+The per-asset page is where a change gets discussed: the render big, at any zoom, on the ground colour it will actually sit on, or flattened to a silhouette — beside the parts in draw order with their ids, token fills and transforms. Naming `fang` beats pointing at a tooth, and **copy brief** puts exactly that on the clipboard for a chat.
 
 Renders are **byte-identical across runs** (seeded scatter, no wall-clock anywhere), so SVG diffs are meaningful and visual regressions are testable.
 
@@ -25,7 +29,7 @@ themes/*.json          partial token overlays (e.g. ice.json) — restyle everyt
 assets/*.json          asset documents, one per asset, filename = id with dots→dashes
 adapters/phaser|godot  one drop-in file per engine, consuming compiled IR
 src/                   schema (zod) · token resolver · SVG renderer · compiler · gallery · cli
-scripts/               inspect (design loop) · compare (before/after) · adapter tests
+scripts/               watch (rebuild on save) · inspect · compare (before/after) · adapter tests
 dist/assets.json       committed: the bundle consumers import as `polygraphics/assets`
 out/                   generated, ignored: svg/, compiled/, png/, gallery.html, manifest.json
 baselines/             accepted PNG renders; `npm run regress` diffs against these
