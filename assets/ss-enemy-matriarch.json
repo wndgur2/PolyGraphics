@@ -1,0 +1,64 @@
+{
+  "id": "ss.enemy.matriarch",
+  "name": "Matriarch",
+  "description": "The hive itself, arriving. Almost all of her is the brood chamber — one round translucent mass with the next wave already drifting inside it and a crown of spines standing off the shell, dragged by an amber head barely big enough to steer, drawn behind the body because it is not what is in charge. Round where the Courser is a dart, and the only body on the roster whose inside is the thing you look at: the pink is the brood, and it is the only pink here that is not an organ. She carries the largest organ anyway, because she is what all the others were announcing. Drawn facing +x, the game flips her. Gameplay radius 46.",
+  "tags": ["ss-enemy", "boss"],
+  "size": [120, 112],
+  "meta": { "radius": 46 },
+  "parts": [
+    { "id": "spines", "at": [-8, 0], "shape": { "kind": "star", "points": 12, "r": 42, "r2": 32 }, "fill": "$husk.dark" },
+    { "id": "leg_b", "at": [-22, 32], "rot": 20, "shape": { "kind": "rect", "w": 7.4, "h": 16, "corner": 3.6 }, "fill": "$carapace.dark2" },
+    { "id": "leg_m", "at": [2, 34], "rot": 4, "shape": { "kind": "rect", "w": 7.4, "h": 16, "corner": 3.6 }, "fill": "$carapace.dark2" },
+    { "id": "head", "at": [30, 4], "shape": { "kind": "circle", "r": 15 }, "fill": "$chitin.dark", "stroke": { "color": "$ink", "width": "bold" } },
+    { "id": "brow", "at": [30, 4], "shape": { "kind": "ring", "r": 10.5, "width": 3.4, "from": -52, "to": 52 }, "fill": "$husk" },
+    { "id": "maw", "at": [42, 5], "shape": { "kind": "poly", "points": [[4, -4.6], [-6, -3.4], [-6, 3.4], [4, 5.4], [0.6, 0]] }, "fill": "$ink" },
+    { "id": "abdomen", "at": [-8, 0], "shape": { "kind": "circle", "r": 34 }, "fill": "$carapace.dark", "stroke": { "color": "$ink", "width": "heavy" } },
+    { "id": "shell", "at": [-8, 0], "shape": { "kind": "ring", "r": 29, "width": 5 }, "fill": "$carapace" },
+    { "id": "sac", "at": [-8, 1], "shape": { "kind": "circle", "r": 25 }, "fill": "$pheromone@soft" },
+    { "id": "eggs", "at": [-8, 1], "repeat": { "of": { "kind": "circle", "r": 5.4 }, "count": 7, "area": [34, 32], "seed": 5, "scaleRange": [0.7, 1.1] }, "fill": "$pheromone.light" },
+    { "id": "sac_rim", "at": [-8, 1], "shape": { "kind": "ring", "r": 25, "width": 2.6 }, "fill": "$pheromone.light@heavy" },
+    { "id": "core", "at": [-8, 1], "shape": { "kind": "circle", "r": 6.4 }, "fill": { "gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$white"], [1, "$pheromone@soft"]] } },
+    { "id": "organ", "use": "ss.lib.organ", "at": [-8, -25], "scale": 0.95 }
+  ],
+  "variants": {
+    "enraged": {
+      "description": "Phase two: the chamber has gone to term all at once. The shell splits, what is inside burns white through it, and the spines stand up off a body that has gone dark around them.",
+      "scale": 1.08,
+      "set": {
+        "abdomen.fill": "$dead",
+        "shell.fill": "$carapace.dark",
+        "spines.fill": "$carapace.light",
+        "spines.scale": 1.08,
+        "sac.fill": "$pheromone",
+        "eggs.fill": "$white",
+        "sac_rim.fill": "$white",
+        "head.fill": "$chitin.dark2",
+        "brow.fill": "$bone.light",
+        "organ.scale": 1.15
+      },
+      "add": [
+        { "id": "split_a", "at": [-8, -12], "rot": 14, "shape": { "kind": "poly", "points": [[-27, 0], [-9, -2.4], [8, 2], [27, -1.6], [27, 1.6], [8, 3.6], [-9, -0.6]] }, "fill": "$dead" },
+        { "id": "split_b", "at": [-10, 15], "rot": -10, "shape": { "kind": "poly", "points": [[-23, 0], [-7, -2], [7, 1.8], [23, -1.4], [23, 1.4], [7, 3.2], [-7, -0.4]] }, "fill": "$dead" }
+      ]
+    }
+  },
+  "animations": {
+    "swell": {
+      "description": "the chamber working — the mass fills and settles, the brood drifts inside it, and the legs take the weight a beat behind",
+      "duration": 2.8,
+      "tracks": [
+        { "part": "abdomen", "prop": "scale", "keys": [[0, 1], [0.5, 1.04], [1, 1]] },
+        { "part": "shell", "prop": "scale", "keys": [[0, 1], [0.5, 1.04], [1, 1]] },
+        { "part": "sac", "prop": "scale", "keys": [[0, 1], [0.5, 1.06], [1, 1]] },
+        { "part": "eggs", "prop": "y", "keys": [[0, 0], [0.5, -1.8], [1, 0]] },
+        { "part": "sac_rim", "prop": "opacity", "keys": [[0, 0.7], [0.5, 1], [1, 0.7]] },
+        { "part": "core", "prop": "scale", "keys": [[0, 0.9], [0.5, 1.16], [1, 0.9]] },
+        { "part": "spines", "prop": "rot", "keys": [[0, -2], [0.5, 2], [1, -2]] },
+        { "part": "head", "prop": "y", "keys": [[0, 0], [0.5, -1.2], [1, 0]] },
+        { "part": "leg_b", "prop": "rot", "keys": [[0, 20], [0.5, 26], [1, 20]] },
+        { "part": "leg_m", "prop": "rot", "keys": [[0, 4], [0.5, 10], [1, 4]] },
+        { "part": "organ", "prop": "scale", "keys": [[0, 0.9], [0.5, 1.04], [1, 0.9]] }
+      ]
+    }
+  }
+}
