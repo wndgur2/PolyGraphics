@@ -1,31 +1,20 @@
 {
   "id": "ss.lib.relic-plate",
-  "name": "Beetle-helm plate",
-  "description": "The ground a ruins find is shown on, built as a piece of beetle rather than as a slot: a chitin shell domed at the top into a lit pronotum with a ridge down it, tapering to a tip where the wing-case seam splits the bottom edge, two spiracles on the flanks, and a dark visor cut through the middle for the find to sit in. The light inside it is gold — the shell is the insect, the glow is the age. Every find composes this via `use`, so the twenty-odd of them share one definition and the plate lifts off in one line: the `glyph` variant each of them declares removes this part and nothing else. The `curse` variant drops the shell to dead carapace and turns the light arcane, the two colours the ruins outcome already switches between.",
+  "name": "Relic plate",
+  "description": "The ground a ruins find is shown on: a rim, a dark panel, and an old light bleeding out of the middle. Every find composes this via `use`, so the twenty-odd of them share one definition and the plate can be lifted off in one line — the `glyph` variant each of them declares removes this part and nothing else, which is what an unmet collection entry shows. The `curse` variant swaps gold for arcane, the two colours the ruins outcome already switches between.",
   "tags": ["ss-lib"],
   "size": [32, 32],
   "parts": [
-    {"id": "edge", "shape": {"kind": "poly", "points": [[0, -17.02], [6.41, -16.17], [11.75, -13.39], [14.52, -8.9], [16.23, -3.14], [16.23, 5.4], [13.45, 12.24], [7.47, 16.29], [0, 17.15], [-7.47, 16.29], [-13.45, 12.24], [-16.23, 5.4], [-16.23, -3.14], [-14.52, -8.9], [-11.75, -13.39], [-6.41, -16.17]]}, "fill": "$ink"},
-    {"id": "shell", "shape": {"kind": "poly", "points": [[0, -16], [6, -15.2], [11, -12.6], [13.6, -8.4], [15.2, -3], [15.2, 5], [12.6, 11.4], [7, 15.2], [0, 16], [-7, 15.2], [-12.6, 11.4], [-15.2, 5], [-15.2, -3], [-13.6, -8.4], [-11, -12.6], [-6, -15.2]]}, "fill": "$chitin.dark"},
-    {"id": "upper", "shape": {"kind": "poly", "points": [[0, -16.85], [5.7, -16.09], [10.45, -13.62], [12.92, -9.63], [14.44, -4.5], [14.44, 3.1], [11.97, 9.18], [6.65, 12.79], [0, 13.55], [-6.65, 12.79], [-11.97, 9.18], [-14.44, 3.1], [-14.44, -4.5], [-12.92, -9.63], [-10.45, -13.62], [-5.7, -16.09]]}, "fill": "$chitin"},
-    {"id": "pronotum", "at": [0, -10.2], "shape": {"kind": "ellipse", "rx": 10.6, "ry": 5.4}, "fill": "$chitin.light"},
-    {"id": "pronotum_lit", "at": [0, -11.8], "shape": {"kind": "ellipse", "rx": 8.2, "ry": 2.8}, "fill": "$chitin.light2"},
-    {"id": "ridge", "at": [0, -11], "shape": {"kind": "rect", "w": 1.6, "h": 6}, "fill": "$chitin.dark2"},
-    {"id": "socket", "at": [0, 1.2], "shape": {"kind": "rect", "w": 23, "h": 22.6, "corner": 6}, "fill": "$coal.dark"},
-    {"id": "glow", "at": [0, 1.2], "shape": {"kind": "circle", "r": 11.4}, "fill": {"gradient": "radial", "stops": [[0, "$gold@0.42"], [0.55, "$gold@0.16"], [1, "$gold@0"]]}},
-    {"id": "seam", "at": [0, 13.6], "shape": {"kind": "rect", "w": 1.6, "h": 5}, "fill": "$chitin.dark2"},
-    {"id": "spiracle_l", "at": [-13.4, 2], "shape": {"kind": "circle", "r": 1}, "fill": "$chitin.dark2"},
-    {"id": "spiracle_r", "at": [13.4, 2], "shape": {"kind": "circle", "r": 1}, "fill": "$chitin.dark2"}
+    {"id": "rim", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$gold"},
+    {"id": "panel", "shape": {"kind": "rect", "w": 28, "h": 28, "corner": 5}, "fill": "$coal.dark"},
+    {"id": "glow", "shape": {"kind": "circle", "r": 13}, "fill": {"gradient": "radial", "stops": [[0, "$gold@0.42"], [0.55, "$gold@0.16"], [1, "$gold@0"]]}}
   ],
   "variants": {
     "curse": {
-      "description": "What the ruins hand you when the trespass is answered instead of rewarded. Same shell, arcane light.",
+      "description": "What the ruins hand you when the trespass is answered instead of rewarded. Same plate, arcane light.",
       "set": {
-        "shell.fill": "$carapace.dark2",
-        "upper.fill": "$carapace.dark",
-        "pronotum.fill": "$carapace",
-        "pronotum_lit.fill": "$arcane",
-        "glow.fill": {"gradient": "radial", "stops": [[0, "$arcane@0.45"], [0.55, "$arcane@0.18"], [1, "$arcane@0"]]}
+        "rim.fill": "$arcane",
+        "glow.fill": {"gradient": "radial", "stops": [[0, "$arcane@0.42"], [0.55, "$arcane@0.16"], [1, "$arcane@0"]]}
       }
     }
   }
