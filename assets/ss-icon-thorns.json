@@ -1,0 +1,16 @@
+{
+  "id": "ss.icon.thorns",
+  "name": "Thorns icon",
+  "description": "Relic icon: pale steel carapace — a dome under three teeth, the middle one tipped red. A dome where ss.icon.armor is an angular shield, because Chitin Graft and Barbed Carapace sit next to each other in the collection and the relic that soaks damage must not read like the relic that returns it. The teeth are rooted at y+5, well inside the dome that covers them, so they only have to clear each other where they actually show.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$steel.light" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "tooth_l", "shape": { "kind": "poly", "points": [[-8.5, 5], [-5.5, -6.5], [-2.5, 5]] }, "fill": "$steel.light" },
+    { "id": "tooth_c", "shape": { "kind": "poly", "points": [[-3, 5], [0, -11.5], [3, 5]] }, "fill": "$steel.light" },
+    { "id": "tooth_r", "shape": { "kind": "poly", "points": [[2.5, 5], [5.5, -6.5], [8.5, 5]] }, "fill": "$steel.light" },
+    { "id": "shell", "at": [0, 7], "shape": { "kind": "ellipse", "rx": 10, "ry": 6 }, "fill": "$steel.light" },
+    { "id": "wet", "shape": { "kind": "poly", "points": [[-1, -7.5], [0, -11.5], [1, -7.5]] }, "fill": "$blood" }
+  ]
+}
