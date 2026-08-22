@@ -1,18 +1,22 @@
 {
   "id": "ss.relic.armor",
-  "name": "Grafted carapace plate",
-  "description": "A shard of somebody else's shell, stitched on. The silhouette is deliberately asymmetric — broken off, not cut — and the seam runs across it under two chitin stitches, which is the whole reason the shape is a `poly` and not a rounded rect. Lit along the top edge, shadowed below the seam.",
+  "name": "Beetle helm",
+  "description": "A beetle's head plate cut off and worn: a domed helm with the pronotum ridge running down it, a lit crown, and the horn still standing on the front. The hollow under the rim and the two chitin stitches closing it are what make it a graft rather than a picture of a beetle — this is somebody else's armour, put on.",
   "tags": ["ss-relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},
-    {"id": "shard_outline", "shape": {"kind": "poly", "points": [[-10.2, -7.9], [9.1, -10.2], [11.3, 2.3], [0, 11.3], [-10.7, 3.4]]}, "fill": "$ink"},
-    {"id": "shard", "shape": {"kind": "poly", "points": [[-9, -7], [8, -9], [10, 2], [0, 10], [-9.5, 3]]}, "fill": "$husk.dark"},
-    {"id": "lit", "shape": {"kind": "poly", "points": [[-8.6, -6.4], [7.6, -8.2], [8.2, -4.6], [-8.4, -2.8]]}, "fill": "$husk.light2"},
-    {"id": "shade", "shape": {"kind": "poly", "points": [[-8.6, 2.4], [9, 0.6], [0, 9.4], [-8.4, 2.8]]}, "fill": "$husk.dark2"},
-    {"id": "seam", "at": [0.5, -0.6], "rot": -7, "shape": {"kind": "rect", "w": 17.5, "h": 1.2}, "fill": "$ink@heavy"},
-    {"id": "stitch_a", "at": [-4.5, -0.9], "rot": 68, "shape": {"kind": "rect", "w": 1.5, "h": 6, "corner": 0.7}, "fill": "$chitin"},
-    {"id": "stitch_b", "at": [1.5, -1.6], "rot": 68, "shape": {"kind": "rect", "w": 1.5, "h": 6, "corner": 0.7}, "fill": "$chitin"}
+    {"id": "horn_outline", "shape": {"kind": "poly", "points": [[-2.4, -6.6], [1.2, -13.4], [4.4, -6.4]]}, "fill": "$ink"},
+    {"id": "helm_outline", "shape": {"kind": "poly", "points": [[-10.4, -1.4], [-8, -7.2], [-2.6, -10.4], [3.4, -10.4], [8.8, -7.2], [11.2, -1.4], [10.4, 5], [6.6, 9.6], [0.4, 11], [-5.8, 9.6], [-9.6, 5]]}, "fill": "$ink"},
+    {"id": "horn", "shape": {"kind": "poly", "points": [[-1.6, -6.6], [1.2, -12.2], [3.4, -6.4]]}, "fill": "$chitin.dark"},
+    {"id": "helm", "shape": {"kind": "poly", "points": [[-9.2, -1.2], [-7, -6.4], [-2.2, -9.2], [3, -9.2], [7.8, -6.4], [10, -1.2], [9.2, 4.6], [5.8, 8.6], [0.4, 9.8], [-5, 8.6], [-8.4, 4.6]]}, "fill": "$chitin.dark"},
+    {"id": "crown", "at": [0.4, -2.6], "shape": {"kind": "ellipse", "rx": 8.6, "ry": 6}, "fill": "$chitin"},
+    {"id": "crown_lit", "at": [-0.4, -5.4], "shape": {"kind": "ellipse", "rx": 6.2, "ry": 2.6}, "fill": "$chitin.light2"},
+    {"id": "ridge", "at": [0.6, -2.6], "shape": {"kind": "rect", "w": 1.6, "h": 12}, "fill": "$chitin.dark2"},
+    {"id": "hollow", "at": [0.4, 8.4], "shape": {"kind": "ellipse", "rx": 6.6, "ry": 2.8}, "fill": "$ink"},
+    {"id": "stitch_a", "at": [-4.4, 8.4], "rot": 96, "shape": {"kind": "rect", "w": 1.1, "h": 4.2, "corner": 0.55}, "fill": "$husk.dark"},
+    {"id": "stitch_b", "at": [0.4, 8.4], "rot": 90, "shape": {"kind": "rect", "w": 1.1, "h": 4.2, "corner": 0.55}, "fill": "$husk.dark"},
+    {"id": "stitch_c", "at": [5.2, 8.4], "rot": 84, "shape": {"kind": "rect", "w": 1.1, "h": 4.2, "corner": 0.55}, "fill": "$husk.dark"}
   ],
   "variants": {
     "glyph": {
