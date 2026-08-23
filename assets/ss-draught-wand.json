@@ -13,5 +13,19 @@
     { "id": "bub_e", "at": [-3, 7], "shape": { "kind": "circle", "r": 0.8 }, "fill": "$bile.light2" },
     { "id": "bub_f", "at": [0.9, 8.4], "shape": { "kind": "circle", "r": 0.5 }, "fill": "$bile.light2" },
     { "id": "cap", "use": "ss.lib.vial-cap" }
-  ]
+  ],
+  "animations": {
+    "settle": {
+      "description": "bubbles take their turn up the column and go at the top",
+      "duration": 1.5,
+      "tracks": [
+        { "part": "bub_f", "prop": "opacity", "keys": [[0, 0], [0.18, 1], [0.42, 0.85], [0.6, 0], [1, 0]] },
+        { "part": "bub_e", "prop": "opacity", "keys": [[0, 0], [0.16, 0], [0.34, 1], [0.58, 0.85], [0.76, 0], [1, 0]] },
+        { "part": "bub_d", "prop": "opacity", "keys": [[0, 0], [0.32, 0], [0.5, 1], [0.74, 0.85], [0.92, 0], [1, 0]] },
+        { "part": "bub_c", "prop": "opacity", "keys": [[0, 0], [0.08, 0], [0.48, 0], [0.66, 1], [0.9, 0.85], [1, 0]] },
+        { "part": "bub_b", "prop": "opacity", "keys": [[0, 0.85], [0.06, 0.85], [0.24, 0], [0.64, 0], [0.82, 1], [1, 0.85]] },
+        { "part": "bub_a", "prop": "opacity", "keys": [[0, 0.85], [0.22, 0.85], [0.4, 0], [0.8, 0], [0.98, 1], [1, 0.85]] }
+      ]
+    }
+  }
 }

@@ -12,5 +12,18 @@
     { "id": "clot_c", "at": [-0.5, 4.2], "shape": { "kind": "circle", "r": 0.6 }, "fill": "$blood.dark2" },
     { "id": "clot_d", "at": [3, 5], "shape": { "kind": "circle", "r": 0.5 }, "fill": "$blood.dark2" },
     { "id": "cap", "use": "ss.lib.vial-cap" }
-  ]
+  ],
+  "animations": {
+    "settle": {
+      "description": "the clots keep sinking and the bed keeps taking them",
+      "duration": 3.2,
+      "tracks": [
+        { "part": "clot_a", "prop": "y", "keys": [[0, 0], [0.5, 1.4], [1, 0]] },
+        { "part": "clot_b", "prop": "y", "keys": [[0, 0.6], [0.5, -0.5], [1, 0.6]] },
+        { "part": "clot_c", "prop": "y", "keys": [[0, -0.4], [0.5, 1.1], [1, -0.4]] },
+        { "part": "clot_d", "prop": "y", "keys": [[0, 0.3], [0.5, -0.7], [1, 0.3]] },
+        { "part": "settled", "prop": "opacity", "keys": [[0, 0.86], [0.5, 1], [1, 0.86]] }
+      ]
+    }
+  }
 }

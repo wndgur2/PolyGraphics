@@ -13,5 +13,19 @@
     { "id": "yolk_a", "at": [-2.6, 5.2], "shape": { "kind": "circle", "r": 0.7 }, "fill": "$pheromone.light2" },
     { "id": "yolk_c", "at": [-0.8, 8], "shape": { "kind": "circle", "r": 0.75 }, "fill": "$pheromone.light2" },
     { "id": "cap", "use": "ss.lib.vial-cap" }
-  ]
+  ],
+  "animations": {
+    "settle": {
+      "description": "the brood drifts, and the two furthest along keep swelling",
+      "duration": 2.4,
+      "tracks": [
+        { "part": "egg_a", "prop": "y", "keys": [[0, 0], [0.5, -0.9], [1, 0]] },
+        { "part": "egg_b", "prop": "y", "keys": [[0, -0.5], [0.5, 0.7], [1, -0.5]] },
+        { "part": "egg_c", "prop": "y", "keys": [[0, 0.4], [0.5, -0.6], [1, 0.4]] },
+        { "part": "egg_d", "prop": "y", "keys": [[0, -0.3], [0.5, 0.8], [1, -0.3]] },
+        { "part": "yolk_a", "prop": "scale", "keys": [[0, 1], [0.5, 1.28], [1, 1]] },
+        { "part": "yolk_c", "prop": "scale", "keys": [[0, 1.22], [0.5, 1], [1, 1.22]] }
+      ]
+    }
+  }
 }

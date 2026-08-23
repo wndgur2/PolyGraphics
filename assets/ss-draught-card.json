@@ -12,5 +12,18 @@
     { "id": "flake_d", "at": [2.8, 7.8], "rot": -12, "shape": { "kind": "poly", "points": [[-1.53, -0.27], [0.18000000000000002, -0.9], [1.53, -0.18000000000000002], [0.36000000000000004, 0.81]] }, "fill": "$husk.light" },
     { "id": "flake_e", "at": [0.4, 5.6], "rot": 8, "shape": { "kind": "poly", "points": [[-1.19, -0.21], [0.13999999999999999, -0.7], [1.19, -0.13999999999999999], [0.27999999999999997, 0.63]] }, "fill": "$silent" },
     { "id": "cap", "use": "ss.lib.vial-cap" }
-  ]
+  ],
+  "animations": {
+    "settle": {
+      "description": "the scales turn where they hang, because none of them sinks",
+      "duration": 2.6,
+      "tracks": [
+        { "part": "flake_a", "prop": "rot", "keys": [[0, -24], [0.5, -8], [1, -24]] },
+        { "part": "flake_b", "prop": "rot", "keys": [[0, 36], [0.5, 18], [1, 36]] },
+        { "part": "flake_c", "prop": "rot", "keys": [[0, 62], [0.5, 76], [1, 62]] },
+        { "part": "flake_d", "prop": "rot", "keys": [[0, -12], [0.5, 4], [1, -12]] },
+        { "part": "flake_e", "prop": "rot", "keys": [[0, 8], [0.5, -10], [1, 8]] }
+      ]
+    }
+  }
 }

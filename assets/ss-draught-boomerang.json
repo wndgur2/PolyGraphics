@@ -13,5 +13,15 @@
     { "id": "grit_c", "at": [3, 7.2], "shape": { "kind": "circle", "r": 0.5 }, "fill": "$husk" },
     { "id": "grit_d", "at": [-0.4, 6.6], "shape": { "kind": "circle", "r": 0.45 }, "fill": "$husk" },
     { "id": "cap", "use": "ss.lib.vial-cap" }
-  ]
+  ],
+  "animations": {
+    "settle": {
+      "description": "the fat rolls on top; the grit under it is settled for good",
+      "duration": 3,
+      "tracks": [
+        { "part": "fat", "prop": "rot", "keys": [[0, -1.8], [0.5, 1.8], [1, -1.8]] },
+        { "part": "fat_lit", "prop": "x", "keys": [[0, 0], [0.5, 1.6], [1, 0]] }
+      ]
+    }
+  }
 }
