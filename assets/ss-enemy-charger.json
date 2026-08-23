@@ -18,6 +18,31 @@
     { "id": "barb_organ", "use": "ss.lib.organ", "at": [-7.05, 2.11], "scale": 0.3 },
     { "id": "organ", "use": "ss.lib.organ", "at": [5.99, -7.58], "scale": 0.38 }
   ],
+  "variants": {
+    "loosed": {
+      "description": "The barb alone, in flight. Everything the bow was is gone from it, because the bow did not come — that is the whole point of there being two animals. Recentred on its own body: the canvas was sized for a pair, so left where it was strung it would fly a third of a body off its own hitbox.",
+      "remove": ["rib_upper", "rib_lower", "tendon_upper", "tendon_lower", "vein_upper", "vein_lower", "prow", "organ"],
+      "set": {
+        "barb.at": [-3.23, 1.05],
+        "barb_core.at": [-3.8, 1.23],
+        "barb_organ.at": [-6.24, 1.82]
+      }
+    },
+    "spent": {
+      "description": "The bow after it has let go, left standing where it loosed. Ribs fallen open past rest, tendon hanging off the angle it was held at and gone dark, scent organ down to `faint` — it has nothing left to throw and about a second before it stops signalling. Drawn so the field keeps a record of where a volley came from.",
+      "remove": ["barb", "barb_core", "barb_organ"],
+      "set": {
+        "rib_upper.rot": -15.4,
+        "rib_lower.rot": -20.6,
+        "tendon_upper.rot": -107.53,
+        "tendon_lower.rot": 65.47,
+        "tendon_upper.fill": "$ember.dark",
+        "tendon_lower.fill": "$ember.dark",
+        "rib_upper.fill": "$husk.dark",
+        "organ.variant": "faint"
+      }
+    }
+  },
   "animations": {
     "read": {
       "description": "held and loaded — the frame is never slack, so the idle is the ribs breathing against their own tension and the barb riding an eighth of the draw. The two organs pulse out of phase with each other, because they are two animals. Nothing walks; this pair does not walk.",
