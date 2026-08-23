@@ -1,0 +1,13 @@
+{
+  "id": "ss.lib.vial-cap",
+  "name": "Draught stopper",
+  "description": "The chitin stopper and the glass highlight, split off from `ss.lib.vial` because they are the only two parts of the flask that must be drawn *over* whatever is suspended inside it. Compose the vial, then the emblem, then this.",
+  "tags": ["ss-lib"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "shine", "at": [-4, 1.6], "rot": -20, "shape": { "kind": "ellipse", "rx": 1.1, "ry": 3.4 }, "fill": "$silent@soft" },
+    { "id": "collar", "at": [0, -8.4], "shape": { "kind": "rect", "w": 8, "h": 1.8, "corner": 0.6 }, "fill": "$chitin.dark" },
+    { "id": "stopper", "at": [0, -10.6], "shape": { "kind": "rect", "w": 6, "h": 3.6, "corner": 1.2 }, "fill": "$chitin" },
+    { "id": "stopper_lit", "at": [-1.2, -11.2], "shape": { "kind": "rect", "w": 2.2, "h": 1.4, "corner": 0.6 }, "fill": "$chitin.light2" }
+  ]
+}

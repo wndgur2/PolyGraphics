@@ -1,0 +1,17 @@
+{
+  "id": "ss.draught.drone",
+  "name": "Matriarch's Milk",
+  "description": "Taken from the Matriarch, who was not asked, and it came away with brood still in it. Four of them, and two are far enough along to have something looking back.",
+  "tags": ["ss-draught"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "vial", "use": "ss.lib.vial", "variant": "milk" },
+    { "id": "egg_a", "at": [-2.4, 5.4], "rot": -18, "shape": { "kind": "ellipse", "rx": 1.5, "ry": 2 }, "fill": "$silent" },
+    { "id": "egg_b", "at": [1.9, 4.4], "rot": 22, "shape": { "kind": "ellipse", "rx": 1.3, "ry": 1.8 }, "fill": "$silent" },
+    { "id": "egg_c", "at": [-0.6, 8.2], "rot": 6, "shape": { "kind": "ellipse", "rx": 1.6, "ry": 2.1 }, "fill": "$silent" },
+    { "id": "egg_d", "at": [3, 7.6], "rot": -34, "shape": { "kind": "ellipse", "rx": 1.2, "ry": 1.6 }, "fill": "$silent" },
+    { "id": "yolk_a", "at": [-2.6, 5.2], "shape": { "kind": "circle", "r": 0.7 }, "fill": "$pheromone.light2" },
+    { "id": "yolk_c", "at": [-0.8, 8], "shape": { "kind": "circle", "r": 0.75 }, "fill": "$pheromone.light2" },
+    { "id": "cap", "use": "ss.lib.vial-cap" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "ss.draught.whip",
+  "name": "Tracker's Ichor",
+  "description": "Hive blood, and it separates in the bottle the way blood does — thin on top, everything solid settled into a dark bed at the bottom with a few clots still on their way down.",
+  "tags": ["ss-draught"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "vial", "use": "ss.lib.vial", "variant": "ichor" },
+    { "id": "settled", "at": [0, 8.9], "shape": { "kind": "ellipse", "rx": 4.6, "ry": 1.9 }, "fill": "$blood.dark2" },
+    { "id": "clot_a", "at": [-2.4, 6], "shape": { "kind": "circle", "r": 0.9 }, "fill": "$blood.dark2" },
+    { "id": "clot_b", "at": [1.9, 7.2], "shape": { "kind": "circle", "r": 0.7 }, "fill": "$blood.dark2" },
+    { "id": "clot_c", "at": [-0.5, 4.2], "shape": { "kind": "circle", "r": 0.6 }, "fill": "$blood.dark2" },
+    { "id": "clot_d", "at": [3, 5], "shape": { "kind": "circle", "r": 0.5 }, "fill": "$blood.dark2" },
+    { "id": "cap", "use": "ss.lib.vial-cap" }
+  ]
+}
