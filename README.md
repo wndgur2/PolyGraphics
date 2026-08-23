@@ -253,6 +253,11 @@ level. RMS is measured over the sounding extent rather than the canvas, because
 a sound that ends early is shorter, not quieter, and a lint that confuses the two
 sends you to raise the gain on the wrong thing.
 
+A document may state, in writing, why it belongs outside that band —
+`offBand` — for the cue whose whole job is to sit under the cues it shares a
+frame with. The exception then reads as a decision somebody made rather than a
+warning everybody learns to scroll past.
+
 It earns its keep immediately: porting the sibling project's set, the lint put
 `whoosh` 17dB under the median. Not a transcription slip — the original gave a
 noise burst the same gain number it gave its oscillators, and a wide bandpass

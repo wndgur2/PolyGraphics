@@ -190,11 +190,11 @@ console.log(`\nthe set — ${all.size} documents`);
 const compiled = [...all.values()].map((sd) => ({ sd, ...compileSound(sd, sreg) }));
 check("every document compiles", compiled.every((c) => !c.issues.some((i) => i.level === "error")));
 
-const measured = compiled.map((c) => ({ id: c.ir.id, tags: c.sd.tags, d: describe(renderPCM(c.ir)) }));
+const measured = compiled.map((c) => ({ id: c.ir.id, tags: c.sd.tags, offBand: c.sd.offBand, d: describe(renderPCM(c.ir)) }));
 check("nothing clips", measured.every((m) => m.d.clipped === 0));
 check("nothing is silent", measured.every((m) => m.d.peak > 0.02), measured.filter((m) => m.d.peak <= 0.02).map((m) => m.id).join(", "));
 
-const triggered = measured.filter((m) => m.tags[0] !== "lib").map((m) => m.d.rmsDb).sort((a, b) => a - b);
+const triggered = measured.filter((m) => m.tags[0] !== "lib" && !m.offBand).map((m) => m.d.rmsDb).sort((a, b) => a - b);
 const median = triggered[Math.floor(triggered.length / 2)];
 check(
   "the triggered set holds together within 9dB of its median",

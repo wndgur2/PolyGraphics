@@ -159,8 +159,9 @@ function lintSounds(sreg: SoundRegistry, issues: Issue[]): void {
         issues.push({ level: "warn", where, msg: `renders essentially silent (peak ${d.peakDb}dBFS)` });
       // Library documents are material, not sounds the game triggers; they are
       // still checked for clipping, but they have no business setting the level
-      // the triggered set is compared against.
-      if (!variant && sound.tags[0] !== "lib") levels.push({ id: ir.id, rmsDb: d.rmsDb });
+      // the triggered set is compared against. Nor does a document that has
+      // said in writing why it sits outside it.
+      if (!variant && sound.tags[0] !== "lib" && !sound.offBand) levels.push({ id: ir.id, rmsDb: d.rmsDb });
     }
   }
   if (levels.length < 3) return; // a median of two says nothing

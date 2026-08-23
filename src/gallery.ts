@@ -355,6 +355,7 @@ function soundDetailBlock(sd: Sound, sreg: SoundRegistry, issues: Issue[]): stri
     ["rms", `${base.rmsDb} dBFS`],
     ...(sd.gain !== undefined ? [["gain", String(sd.gain)] as [string, string]] : []),
     ...(sd.jitter?.freq ? [["jitter", `×${sd.jitter.freq[0]}–${sd.jitter.freq[1]}`] as [string, string]] : []),
+    ...(sd.offBand ? [["off-band", esc(sd.offBand), "wide"] as [string, string, string]] : []),
     ...Object.entries(sd.meta ?? {}).map(([k, v]) => [k, String(v)] as [string, string]),
   ] as [string, string, string?][])
     .map(([k, v, cls]) => `<div${cls ? ` class="${cls}"` : ""}><span class="dim">${k}</span>${v}</div>`)
@@ -420,16 +421,16 @@ function soundSet(sreg: SoundRegistry, issues: Issue[]): string {
   const rows = [...sreg.sounds.values()]
     .map((sd) => ({ sd, t: takesOf(sd, sreg, issues)[0] }))
     .sort((a, b) => b.t.rmsDb - a.t.rmsDb);
-  const triggered = rows.filter((r) => r.sd.tags[0] !== "lib").map((r) => r.t.rmsDb).sort((a, b) => a - b);
+  const inBand = (sd: Sound) => sd.tags[0] !== "lib" && !sd.offBand;
+  const triggered = rows.filter((r) => inBand(r.sd)).map((r) => r.t.rmsDb).sort((a, b) => a - b);
   const median = triggered.length ? triggered[Math.floor(triggered.length / 2)] : 0;
   return `<table class="set">
   <tr><th>sound</th><th>family</th><th></th><th>dur</th><th>peak</th><th>rms</th><th>vs median</th></tr>
   ${rows
     .map(({ sd, t }) => {
-      const lib = sd.tags[0] === "lib";
-      const off = lib ? "—" : `${t.rmsDb - median > 0 ? "+" : ""}${Math.round(t.rmsDb - median)}dB`;
-      const far = !lib && Math.abs(t.rmsDb - median) > 9;
-      return `<tr${far ? ' class="far"' : ""}>
+      const off = !inBand(sd) ? "—" : `${t.rmsDb - median > 0 ? "+" : ""}${Math.round(t.rmsDb - median)}dB`;
+      const far = inBand(sd) && Math.abs(t.rmsDb - median) > 9;
+      return `<tr${far ? ' class="far"' : ""}${sd.offBand ? ` title="off-band on purpose: ${esc(sd.offBand)}"` : ""}>
       <td><a href="#/${esc(sd.id)}">${esc(sd.id)}</a></td>
       <td class="dim">${esc(sd.tags[1] ?? sd.tags[0])}</td>
       <td><button data-play="${esc(t.wav)}" data-lo="1" data-hi="1" data-n="1">▸</button></td>

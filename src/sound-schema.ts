@@ -170,6 +170,16 @@ export const SoundSchema = z.strictObject({
   gain: LevelSchema.optional(), // master for this document; default 1
   jitter: JitterSchema.optional(),
   meta: z.record(z.string(), z.number()).optional(), // sim-facing hints (minInterval, …)
+  /**
+   * Why this document sits outside the set's level band, if it does.
+   *
+   * The loudness lint compares every triggered sound against the set median
+   * and complains past 9dB, which is right almost always and wrong for a cue
+   * whose whole job is to be under the cues it shares a frame with. Writing
+   * the reason down turns the exception into a decision somebody made, rather
+   * than a warning everybody learns to scroll past.
+   */
+  offBand: z.string().min(8).optional(),
   voices: z.array(VoiceSchema).min(1),
   variants: z.record(z.string(), SoundVariantSchema).optional(),
 });
