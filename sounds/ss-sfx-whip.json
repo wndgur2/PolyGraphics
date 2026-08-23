@@ -1,0 +1,47 @@
+{
+  "id": "ss.sfx.whip",
+  "name": "Lash",
+  "description": "A cord snapping: a sawtooth thrown upward from the low end, the opposite gesture to every impact in the set, because a lash is the swing and not the landing.",
+  "tags": [
+    "sfx",
+    "weapon"
+  ],
+  "duration": 0.09,
+  "meta": {
+    "minInterval": 60
+  },
+  "jitter": {
+    "freq": [
+      0.95,
+      1.16
+    ]
+  },
+  "voices": [
+    {
+      "id": "lash",
+      "gain": "mid",
+      "dur": "blip",
+      "source": {
+        "kind": "osc",
+        "wave": "sawtooth",
+        "freq": "$swarm",
+        "to": 700
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -10,7 +10,7 @@ import { spawn } from "node:child_process";
 import { watch } from "node:fs";
 
 const ROOT = new URL("..", import.meta.url).pathname;
-const DIRS = ["assets", "tokens", "themes"];
+const DIRS = ["assets", "sounds", "tokens", "themes"];
 /** Long enough to swallow an editor's write-truncate-write, short enough to feel instant. */
 const SETTLE_MS = 120;
 

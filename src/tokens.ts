@@ -9,7 +9,28 @@
  *   "$blood@soft"     → alpha from alpha tokens
  *   "$blood.dark@0.4" → literal alpha
  * Raw "#rrggbb" is accepted but reported as a lint warning — prefer tokens.
+ *
+ * Sound documents resolve against the same file's `audio` section, with a
+ * deliberately parallel grammar:
+ *   "$tap"            → audio.pitch.tap, in Hz
+ *   "$tap.down"       → multiplied by audio.ramps.down   (.up2 / .down2 = twice)
+ * Gain, Q and duration take a number or a token name, exactly as stroke widths
+ * and opacities do. A theme may overlay any of it, so one overlay file can
+ * restyle how the roster looks *and* how it sounds.
  */
+
+export interface AudioTokens {
+  /** The palette: named pitches in Hz. Sound's answer to `colors`. */
+  pitch: Record<string, number>;
+  /** Frequency multipliers for the `.up` / `.down` suffixes (octaves by default). */
+  ramps: Record<string, number>;
+  /** Named output levels, 0..1 — sound's answer to `alpha`. */
+  gain: Record<string, number>;
+  /** Named filter resonances — sound's answer to `strokes`. */
+  q: Record<string, number>;
+  /** Named lengths in seconds. */
+  dur: Record<string, number>;
+}
 
 export interface Tokens {
   grid: number;
@@ -18,6 +39,7 @@ export interface Tokens {
   strokes: Record<string, number>;
   alpha: Record<string, number>;
   layers: Record<string, number>;
+  audio?: AudioTokens;
 }
 
 export interface Theme {
@@ -28,6 +50,7 @@ export interface Theme {
   strokes?: Record<string, number>;
   alpha?: Record<string, number>;
   layers?: Record<string, number>;
+  audio?: Partial<AudioTokens>;
 }
 
 export function applyTheme(base: Tokens, theme?: Theme): Tokens {
@@ -39,6 +62,13 @@ export function applyTheme(base: Tokens, theme?: Theme): Tokens {
     strokes: { ...base.strokes, ...theme.strokes },
     alpha: { ...base.alpha, ...theme.alpha },
     layers: { ...base.layers, ...theme.layers },
+    audio: base.audio && {
+      pitch: { ...base.audio.pitch, ...theme.audio?.pitch },
+      ramps: { ...base.audio.ramps, ...theme.audio?.ramps },
+      gain: { ...base.audio.gain, ...theme.audio?.gain },
+      q: { ...base.audio.q, ...theme.audio?.q },
+      dur: { ...base.audio.dur, ...theme.audio?.dur },
+    },
   };
 }
 
@@ -147,4 +177,42 @@ export function resolveNumber(
   const name = ref.startsWith("$") ? ref.slice(1) : ref;
   if (name in table) return { ok: true, value: table[name] };
   return { ok: false, error: `unknown ${kind} token "${ref}"`, suggestions: suggest(name, Object.keys(table)) };
+}
+
+const PITCH_REF = /^\$([a-z][a-z0-9_-]*)(?:\.([a-z][a-z0-9]*?)(2)?)?$/i;
+
+/**
+ * Resolve a pitch reference to Hz. Same shape as a color reference, one table
+ * over: `$tap` is the palette entry, `$tap.down` walks a ramp, `$tap.down2`
+ * walks it twice. A raw number renders but warns — identity should come from
+ * the palette, exactly as it does for color.
+ */
+export function resolvePitch(ref: string | number, a: AudioTokens): Resolved<number> {
+  if (typeof ref === "number") {
+    if (!(ref > 0)) return { ok: false, error: `pitch must be positive Hz, got ${ref}` };
+    return { ok: true, value: ref, warn: `raw ${ref}Hz — prefer a token like $${nearestPitch(ref, a)}` };
+  }
+  const m = PITCH_REF.exec(ref);
+  if (!m) return { ok: false, error: `bad pitch ref "${ref}" — expected "$name" or "$name.up|down(2)"` };
+  const [, name, ramp, twice] = m;
+  const base = a.pitch[name];
+  if (base === undefined)
+    return { ok: false, error: `unknown pitch token "$${name}"`, suggestions: suggest(name, Object.keys(a.pitch)).map((s) => `$${s}`) };
+  let hz = base;
+  if (ramp) {
+    const f = a.ramps[ramp];
+    if (f === undefined) return { ok: false, error: `unknown audio ramp "${ramp}"`, suggestions: Object.keys(a.ramps) };
+    hz *= twice ? f * f : f;
+  }
+  return { ok: true, value: Math.round(hz * 100) / 100 };
+}
+
+function nearestPitch(hz: number, a: AudioTokens): string {
+  let best = "", bestD = Infinity;
+  for (const [name, v] of Object.entries(a.pitch)) {
+    // Compared in octaves: 100Hz is as far from 200 as 1000 is from 2000.
+    const d = Math.abs(Math.log2(hz / v));
+    if (d < bestD) { bestD = d; best = name; }
+  }
+  return best || "?";
 }

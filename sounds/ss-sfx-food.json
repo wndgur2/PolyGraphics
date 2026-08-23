@@ -1,0 +1,37 @@
+{
+  "id": "ss.sfx.food",
+  "name": "Absorb",
+  "description": "A lump of pulp going down: the same borrowed note as a pickup, but taken from the bottom of the scale to the top of it, slower, because this one is swallowed rather than snatched.",
+  "tags": [
+    "sfx",
+    "pickup"
+  ],
+  "duration": 0.12,
+  "voices": [
+    {
+      "id": "swallow",
+      "gain": "mid",
+      "source": {
+        "kind": "osc",
+        "wave": "square",
+        "freq": "$third",
+        "to": "$third.up"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

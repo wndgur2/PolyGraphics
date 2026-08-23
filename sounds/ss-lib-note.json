@@ -1,0 +1,56 @@
+{
+  "id": "ss.lib.note",
+  "name": "Interface note",
+  "description": "One note of the flat square voice every fanfare in the game is built from. Composed rather than copied, so the whole interface retunes from a single file, and the variants only pick which degree of the scale it lands on.",
+  "tags": [
+    "lib",
+    "interface"
+  ],
+  "duration": 0.12,
+  "voices": [
+    {
+      "id": "tone",
+      "gain": "mid",
+      "source": {
+        "kind": "osc",
+        "wave": "square",
+        "freq": "$third"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "variants": {
+    "fifth": {
+      "description": "A third up the scale \u2014 the second rung of any rising figure.",
+      "set": {
+        "tone.source.freq": "$fifth"
+      }
+    },
+    "seventh": {
+      "description": "A fifth up \u2014 the third rung.",
+      "set": {
+        "tone.source.freq": "$seventh"
+      }
+    },
+    "octave": {
+      "description": "The octave, where a rising figure lands.",
+      "set": {
+        "tone.source.freq": "$third.up"
+      }
+    }
+  }
+}
