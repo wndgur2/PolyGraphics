@@ -23,6 +23,7 @@
     "loosed": {
       "description": "The barb alone, in flight. Everything the bow was is gone from it, because the bow did not come — that is the whole point of there being two animals. Recentred on its own body: the canvas was sized for a pair, so left where it was strung it would fly a third of a body off its own hitbox.",
       "remove": ["rib_upper", "rib_lower", "tendon_upper", "tendon_lower", "vein_upper", "vein_lower", "prow", "organ"],
+      "animations": [],
       "set": {
         "barb_sac.at": [-4.18, 1.36],
         "barb_point.at": [1.14, -0.37],
@@ -33,6 +34,7 @@
     "planted": {
       "description": "The barb after it has landed and before it goes off. The same two parts it flew as — nothing is cut or added to the animal — standing in a scorch it put there arriving, with the core already swollen past anything the windup asked for. The half-second it holds this is the half-second the player has to not be here.",
       "remove": ["rib_upper", "rib_lower", "tendon_upper", "tendon_lower", "vein_upper", "vein_lower", "prow", "organ"],
+      "animations": ["fuse"],
       "add": [
         { "id": "scorch", "at": [-1.95, 3.37], "rot": -18.0, "shape": {"kind": "ellipse", "rx": 8.5, "ry": 4.0}, "fill": "$dead@soft" }
       ],
@@ -47,6 +49,7 @@
     "spent": {
       "description": "The bow after it has let go, left standing where it loosed. Ribs fallen open past rest, tendon hanging off the angle it was held at and gone dark, scent organ down to `faint` — it has nothing left to throw and about a second before it stops signalling. Drawn so the field keeps a record of where a volley came from.",
       "remove": ["barb_sac", "barb_point", "barb_core", "barb_organ"],
+      "animations": ["strike"],
       "set": {
         "rib_upper.rot": -15.4,
         "rib_lower.rot": -20.6,

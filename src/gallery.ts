@@ -198,31 +198,25 @@ function assetCard(asset: Asset, reg: Registry, issues: Issue[]): string {
     ? anims.map((name) => cell(asset, reg, issues, `base · ▸ ${name}`, { animation: name }))
     : [cell(asset, reg, issues, "base")];
   /**
-   * Which animations a variant can actually play: the ones whose every track
-   * addresses a part that variant still has.
+   * A state, against the clips it is drawn to be played with.
    *
-   * Variants used to be shown against the first animation and no other, on the
-   * grounds that every variant against every animation multiplies. It does —
-   * but the pairing a document means is not always the first one, and showing
-   * only that hid the case this exists for: a state with a clip of its own,
-   * played on the body that state describes. A Lance's barb fills while it is
-   * planted, and the gallery was showing the fill on the whole bow-and-barb
-   * (a pose the game never bakes) and the planted body doing its idle. Both
-   * wrong, in a way that reads as a bug in the art rather than in the page.
+   * Variants used to be shown against the first animation and no other, which
+   * hid the case the machinery exists for: a state with a clip of its own,
+   * played on the body that state describes. Showing every pairing instead is
+   * worse — a state and a clip are separate axes and most of the grid between
+   * them is nonsense.
    *
-   * The filter is what keeps this from multiplying: a clip that moves parts the
-   * variant removed is not a pairing anybody meant, so it is not drawn.
+   * So the document says. `variant.animations` lists them in the order they
+   * happen; `[]` is a still. Where it is absent — which is every variant that
+   * is a recolour, and most of this roster — the old behaviour stands: one
+   * cell, on the first clip, because a recoloured body walks the same way.
    */
   for (const [v, patch] of Object.entries(asset.variants ?? {})) {
-    const gone = new Set(patch.remove ?? []);
-    const playable = anims.filter((name) =>
-      (asset.animations?.[name].tracks ?? []).every((t) => !gone.has(t.part)),
-    );
-    // Nothing playable means still, not "play the first one anyway": a Lance's
-    // spent bow has had every barb part taken off it, and every clip this
-    // document owns moves one.
-    for (const name of playable.length ? playable : [undefined])
-      cells.push(cell(asset, reg, issues, `#${v}${name ? ` · ▸ ${name}` : ""}`, { variant: v, animation: name }));
+    const named = patch.animations;
+    const clips = named ?? (firstAnim ? [firstAnim] : []);
+    if (!clips.length) cells.push(cell(asset, reg, issues, `#${v}`, { variant: v }));
+    for (const name of clips)
+      cells.push(cell(asset, reg, issues, `#${v} · ▸ ${name}`, { variant: v, animation: name }));
   }
   const meta: string[] = [`${asset.size[0]}×${asset.size[1]}`];
   if (anims.length) meta.push(`anim: ${anims.join(", ")}`);
