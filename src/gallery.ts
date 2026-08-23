@@ -197,10 +197,33 @@ function assetCard(asset: Asset, reg: Registry, issues: Issue[]): string {
   const cells: string[] = anims.length
     ? anims.map((name) => cell(asset, reg, issues, `base · ▸ ${name}`, { animation: name }))
     : [cell(asset, reg, issues, "base")];
-  // Variants stay on the first: every variant against every animation is a
-  // grid that grows by multiplication, and the variants are a colour question.
-  for (const v of Object.keys(asset.variants ?? {}))
-    cells.push(cell(asset, reg, issues, `#${v}`, { variant: v, animation: firstAnim }));
+  /**
+   * Which animations a variant can actually play: the ones whose every track
+   * addresses a part that variant still has.
+   *
+   * Variants used to be shown against the first animation and no other, on the
+   * grounds that every variant against every animation multiplies. It does —
+   * but the pairing a document means is not always the first one, and showing
+   * only that hid the case this exists for: a state with a clip of its own,
+   * played on the body that state describes. A Lance's barb fills while it is
+   * planted, and the gallery was showing the fill on the whole bow-and-barb
+   * (a pose the game never bakes) and the planted body doing its idle. Both
+   * wrong, in a way that reads as a bug in the art rather than in the page.
+   *
+   * The filter is what keeps this from multiplying: a clip that moves parts the
+   * variant removed is not a pairing anybody meant, so it is not drawn.
+   */
+  for (const [v, patch] of Object.entries(asset.variants ?? {})) {
+    const gone = new Set(patch.remove ?? []);
+    const playable = anims.filter((name) =>
+      (asset.animations?.[name].tracks ?? []).every((t) => !gone.has(t.part)),
+    );
+    // Nothing playable means still, not "play the first one anyway": a Lance's
+    // spent bow has had every barb part taken off it, and every clip this
+    // document owns moves one.
+    for (const name of playable.length ? playable : [undefined])
+      cells.push(cell(asset, reg, issues, `#${v}${name ? ` · ▸ ${name}` : ""}`, { variant: v, animation: name }));
+  }
   const meta: string[] = [`${asset.size[0]}×${asset.size[1]}`];
   if (anims.length) meta.push(`anim: ${anims.join(", ")}`);
   const hay = `${asset.id} ${asset.name} ${asset.description} ${asset.tags.join(" ")} ${asset.parts.map((p) => p.id).join(" ")}`;
