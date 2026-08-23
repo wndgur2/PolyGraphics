@@ -219,16 +219,30 @@ function ringEl(part: ShapePart, ctx: Ctx, where: string): string {
   return `<path d="M${fmt(x1)},${fmt(y1)} A${fmt(shape.r)},${fmt(shape.r)} 0 ${large} 1 ${fmt(x2)},${fmt(y2)}"${attrs}/>`;
 }
 
-function partTransform(part: Part): string {
-  const t: string[] = [];
+/**
+ * A part's static transform, split where an animation has to be inserted.
+ *
+ * `place` is where the part sits in its parent; `pose` is how it is turned and
+ * sized about that point. They come apart because an animated offset has to
+ * land between them: the engine adapters move a part by adding to its position
+ * in the *parent's* frame and rotate it about its own, and an animation class
+ * sitting inside the whole transform would instead translate along the part's
+ * own rotated axes. A head at -33 degrees and a mouth at 0 would then set off
+ * in different directions from the same `x` track — which is a body coming
+ * apart in the gallery and holding together in the game.
+ */
+function partTransform(part: Part): { place: string; pose: string } {
   const [x, y] = part.at ?? [0, 0];
-  if (x !== 0 || y !== 0) t.push(`translate(${fmt(x)},${fmt(y)})`);
+  const t: string[] = [];
   if (part.rot) t.push(`rotate(${fmt(part.rot)})`);
   if (part.scale !== undefined) {
     const [sx, sy] = typeof part.scale === "number" ? [part.scale, part.scale] : part.scale;
     t.push(`scale(${fmt(sx)},${fmt(sy)})`);
   }
-  return t.length ? ` transform="${t.join(" ")}"` : "";
+  return {
+    place: x !== 0 || y !== 0 ? ` transform="translate(${fmt(x)},${fmt(y)})"` : "",
+    pose: t.length ? ` transform="${t.join(" ")}"` : "",
+  };
 }
 
 function renderPartContent(part: Part, ctx: Ctx, where: string, owner: Asset): string {
@@ -281,16 +295,21 @@ function renderRepeat(part: RepeatPart, ctx: Ctx, where: string, ownerId: string
 
 function renderPart(part: Part, ctx: Ctx, where: string, owner: Asset): string {
   let content = renderPartContent(part, ctx, where, owner);
+  const { place, pose } = partTransform(part);
+  // Turned and sized first, then offset by the animation, then placed: the
+  // order the adapters pose a node in. Uniform scale commutes with rotation, so
+  // an animated scale reads the same on either side of the static one.
+  let body = pose ? `<g${pose}>${content}</g>` : content;
   if (ctx.animated.has(part.id) && ctx.useStack.length === 0)
-    content = `<g class="aw-${ctx.uid}-${part.id}">${content}</g>`;
-  let attrs = partTransform(part);
+    body = `<g class="aw-${ctx.uid}-${part.id}">${body}</g>`;
+  let attrs = place;
   if (part.opacity !== undefined) {
     const o = resolveNumber(part.opacity, ctx.reg.tokens.alpha, "alpha");
     if (!o.ok) ctx.issues.push({ level: "error", where, msg: o.error });
     attrs += ` opacity="${fmt(o.ok ? o.value : 1)}"`;
   }
-  const el = `<g${attrs}>${content}</g>`;
-  if (part.mirrorX) return `${el}<g transform="scale(-1,1)"><g${attrs}>${content}</g></g>`;
+  const el = `<g${attrs}>${body}</g>`;
+  if (part.mirrorX) return `${el}<g transform="scale(-1,1)"><g${attrs}>${body}</g></g>`;
   return el;
 }
 
