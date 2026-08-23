@@ -1,7 +1,7 @@
 {
   "id": "ss.enemy.courser",
   "name": "Courser",
-  "description": "The caste that answers a Chorus. Everything else in the hive walks toward you; this one holds still, reads the air, and then commits the whole body along the line it read — so it is drawn with nothing to walk on. A ringed annelid laid along a curve, tail low and behind, head lifted and forward, thickest a third of the way back and tapering to a point at either end. No shell and no legs, which is what separates it from every other body here: a Tracker is an ellipse, a Soldier is a dome, the Chorus is a disc, the Matriarch is a circle, and all four are a mass with limbs attached. This one is a line. Straight it would read as a grub, so it never is — the curve and the reared head are the whole posture, and the mouth is a rasping ring rather than jaws, because it does not bite things, it goes through them. Crimson because nothing else in the hive is. Drawn facing +x, the game flips it. Gameplay radius 44.",
+  "description": "The caste that answers a Chorus. Everything else in the hive walks toward you; this one holds still, reads the air, and then commits the whole body along the line it read — so it is drawn with nothing to walk on. A ringed annelid laid along a curve, tail low and behind, head lifted and forward, thickest a third of the way back and tapering to a point at either end. No shell and no legs, which is what separates it from every other body here: a Tracker is an ellipse, a Soldier is a dome, the Chorus is a disc, the Matriarch is a circle, and all four are a mass with limbs attached. This one is a line. Straight it would read as a grub, so it never is — the curve and the reared head are the whole posture, and the mouth is a rasping ring rather than jaws, because it does not bite things, it goes through them. The scent organ rides the head rather than the back, the one lit point on a body that is otherwise all shell — close enough to an eye that the front of it reads as a face. Crimson because nothing else in the hive is. Drawn facing +x, the game flips it. Gameplay radius 44.",
   "tags": ["ss-enemy", "boss"],
   "size": [112, 96],
   "meta": { "radius": 44 },
@@ -21,9 +21,9 @@
     { "id": "ring_12", "at": [20.6, -2.2], "rot": -29.2, "shape": {"kind": "ellipse", "rx": 4.6, "ry": 14.3}, "fill": "$blood.dark", "stroke": {"color": "$ink", "width": "thin"} },
     { "id": "ring_13", "at": [26.0, -5.3], "rot": -30.3, "shape": {"kind": "ellipse", "rx": 4.6, "ry": 12.6}, "fill": "$blood.dark2", "stroke": {"color": "$ink", "width": "thin"} },
     { "id": "ring_14", "at": [31.4, -8.6], "rot": -31.4, "shape": {"kind": "ellipse", "rx": 3.6, "ry": 10.6}, "fill": "$blood.dark2", "stroke": {"color": "$ink", "width": "thin"} },
-    { "id": "organ", "use": "ss.lib.organ", "at": [7.3, -4.3], "scale": 0.95 },
     { "id": "collar", "at": [33.3, -9.6], "rot": -33.1, "shape": {"kind": "ellipse", "rx": 3.4, "ry": 12.5}, "fill": "$blood.dark2" },
     { "id": "head", "at": [40.0, -14.0], "rot": -33.1, "shape": {"kind": "ellipse", "rx": 11, "ry": 12.5}, "fill": "$blood.dark", "stroke": {"color": "$ink", "width": "heavy"} },
+    { "id": "organ", "use": "ss.lib.organ", "at": [35.5, -15.0], "scale": 0.74 },
     { "id": "mouth_ring", "at": [45.9, -17.8], "shape": {"kind": "circle", "r": 8.6}, "fill": "$ink" },
     { "id": "gullet", "at": [45.9, -17.8], "shape": {"kind": "circle", "r": 6.2}, "fill": "$dead" },
     { "id": "teeth", "at": [45.9, -17.8], "shape": {"kind": "star", "points": 9, "r": 6.4, "r2": 3.2}, "fill": "$bone.light" },
@@ -52,7 +52,7 @@
         "head.fill": "$dead",
         "collar.fill": "$blood",
         "teeth.fill": "$white",
-        "organ.scale": 1.2,
+        "organ.scale": 0.78,
         "gorge.fill": {"gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$white"], [1, "$pheromone@soft"]]}
       }
     }
