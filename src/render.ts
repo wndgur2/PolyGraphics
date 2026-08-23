@@ -219,16 +219,30 @@ function ringEl(part: ShapePart, ctx: Ctx, where: string): string {
   return `<path d="M${fmt(x1)},${fmt(y1)} A${fmt(shape.r)},${fmt(shape.r)} 0 ${large} 1 ${fmt(x2)},${fmt(y2)}"${attrs}/>`;
 }
 
-function partTransform(part: Part): string {
-  const t: string[] = [];
+/**
+ * A part's static transform, split where an animation has to be inserted.
+ *
+ * `place` is where the part sits in its parent; `pose` is how it is turned and
+ * sized about that point. They come apart because an animated offset has to
+ * land between them: the engine adapters move a part by adding to its position
+ * in the *parent's* frame and rotate it about its own, and an animation class
+ * sitting inside the whole transform would instead translate along the part's
+ * own rotated axes. A head at -33 degrees and a mouth at 0 would then set off
+ * in different directions from the same `x` track — which is a body coming
+ * apart in the gallery and holding together in the game.
+ */
+function partTransform(part: Part): { place: string; pose: string } {
   const [x, y] = part.at ?? [0, 0];
-  if (x !== 0 || y !== 0) t.push(`translate(${fmt(x)},${fmt(y)})`);
+  const t: string[] = [];
   if (part.rot) t.push(`rotate(${fmt(part.rot)})`);
   if (part.scale !== undefined) {
     const [sx, sy] = typeof part.scale === "number" ? [part.scale, part.scale] : part.scale;
     t.push(`scale(${fmt(sx)},${fmt(sy)})`);
   }
-  return t.length ? ` transform="${t.join(" ")}"` : "";
+  return {
+    place: x !== 0 || y !== 0 ? ` transform="translate(${fmt(x)},${fmt(y)})"` : "",
+    pose: t.length ? ` transform="${t.join(" ")}"` : "",
+  };
 }
 
 function renderPartContent(part: Part, ctx: Ctx, where: string, owner: Asset): string {
@@ -281,16 +295,21 @@ function renderRepeat(part: RepeatPart, ctx: Ctx, where: string, ownerId: string
 
 function renderPart(part: Part, ctx: Ctx, where: string, owner: Asset): string {
   let content = renderPartContent(part, ctx, where, owner);
+  const { place, pose } = partTransform(part);
+  // Turned and sized first, then offset by the animation, then placed: the
+  // order the adapters pose a node in. Uniform scale commutes with rotation, so
+  // an animated scale reads the same on either side of the static one.
+  let body = pose ? `<g${pose}>${content}</g>` : content;
   if (ctx.animated.has(part.id) && ctx.useStack.length === 0)
-    content = `<g class="aw-${ctx.uid}-${part.id}">${content}</g>`;
-  let attrs = partTransform(part);
+    body = `<g class="aw-${ctx.uid}-${part.id}">${body}</g>`;
+  let attrs = place;
   if (part.opacity !== undefined) {
     const o = resolveNumber(part.opacity, ctx.reg.tokens.alpha, "alpha");
     if (!o.ok) ctx.issues.push({ level: "error", where, msg: o.error });
     attrs += ` opacity="${fmt(o.ok ? o.value : 1)}"`;
   }
-  const el = `<g${attrs}>${content}</g>`;
-  if (part.mirrorX) return `${el}<g transform="scale(-1,1)"><g${attrs}>${content}</g></g>`;
+  const el = `<g${attrs}>${body}</g>`;
+  if (part.mirrorX) return `${el}<g transform="scale(-1,1)"><g${attrs}>${body}</g></g>`;
   return el;
 }
 
@@ -301,6 +320,37 @@ const EASE: Record<string, string> = {
   sine: "ease-in-out",
   backOut: "cubic-bezier(0.34,1.56,0.64,1)",
 };
+
+/**
+ * The same easing the engine adapters use, so a value sampled here and a value
+ * posed there agree. Only needed when one part carries tracks that do not share
+ * a timeline — see animCss.
+ */
+const EASE_FN: Record<string, (t: number) => number> = {
+  linear: (t) => t,
+  sine: (t) => 0.5 - 0.5 * Math.cos(Math.PI * t),
+  backOut: (t) => {
+    const c = 1.70158;
+    const u = t - 1;
+    return 1 + (c + 1) * u * u * u + c * u * u;
+  },
+};
+
+/** A track's value at an arbitrary time, interpolated with its own ease. */
+function valueAt(tr: Anim["tracks"][number], t: number): number {
+  const keys = tr.keys;
+  if (t <= keys[0][0]) return keys[0][1];
+  for (let i = 1; i < keys.length; i++) {
+    const [t1, v1] = keys[i];
+    const [t0, v0] = keys[i - 1];
+    if (t <= t1) {
+      const span = t1 - t0;
+      if (span <= 0) return v1;
+      return v0 + (v1 - v0) * EASE_FN[tr.ease ?? "sine"]((t - t0) / span);
+    }
+  }
+  return keys[keys.length - 1][1];
+}
 
 function animCss(anim: Anim, animName: string, ctx: Ctx, where: string, parts: Part[]): string {
   let css = "";
@@ -315,31 +365,56 @@ function animCss(anim: Anim, animName: string, ctx: Ctx, where: string, parts: P
     perPart.set(tr.part, list);
   }
   for (const [pid, tracks] of perPart) {
-    if (tracks.length > 1) {
-      ctx.issues.push({
-        level: "error",
-        where,
-        msg: `animation "${animName}": part "${pid}" has ${tracks.length} tracks — one animated prop per part`,
-      });
+    // A part may animate several properties at once; it may not animate the
+    // same one twice, which is the collision the one-track-per-part rule was
+    // really protecting against.
+    const byProp = new Map<string, (typeof tracks)[number]>();
+    for (const tr of tracks) {
+      if (byProp.has(tr.prop)) {
+        ctx.issues.push({
+          level: "error",
+          where,
+          msg: `animation "${animName}": part "${pid}" animates "${tr.prop}" more than once`,
+        });
+        continue;
+      }
+      byProp.set(tr.prop, tr);
     }
-    const tr = tracks[0];
     ctx.animated.add(pid);
-    const kf = tr.keys
-      .map(([t, v]) => {
-        const val =
-          tr.prop === "opacity"
-            ? `opacity: ${fmt(v)}`
-            : tr.prop === "rot"
-              ? `transform: rotate(${fmt(v)}deg)`
-              : tr.prop === "scale"
-                ? `transform: scale(${fmt(v)})`
-                : tr.prop === "x"
-                  ? `transform: translateX(${fmt(v)}px)`
-                  : `transform: translateY(${fmt(v)}px)`;
-        return `${fmt(t * 100)}% { ${val} }`;
+    const x = byProp.get("x");
+    const y = byProp.get("y");
+    const rot = byProp.get("rot");
+    const scale = byProp.get("scale");
+    const opacity = byProp.get("opacity");
+
+    // CSS gives one transform and one timing function per rule, so several
+    // tracks have to become one timeline. Sample every key time any of them
+    // states, and read each track at those times through its own ease.
+    const times = [...new Set(tracks.flatMap((tr) => tr.keys.map((k) => k[0])))].sort((a, b) => a - b);
+    const kf = times
+      .map((t) => {
+        const tf: string[] = [];
+        if (x || y) tf.push(`translate(${fmt(x ? valueAt(x, t) : 0)}px, ${fmt(y ? valueAt(y, t) : 0)}px)`);
+        if (rot) tf.push(`rotate(${fmt(valueAt(rot, t))}deg)`);
+        if (scale) tf.push(`scale(${fmt(valueAt(scale, t))})`);
+        const decls: string[] = [];
+        if (tf.length) decls.push(`transform: ${tf.join(" ")}`);
+        if (opacity) decls.push(`opacity: ${fmt(valueAt(opacity, t))}`);
+        return `${fmt(t * 100)}% { ${decls.join("; ")} }`;
       })
       .join(" ");
-    css += `@keyframes kf-${ctx.uid}-${pid} { ${kf} } .aw-${ctx.uid}-${pid} { animation: kf-${ctx.uid}-${pid} ${fmt(anim.duration)}s ${EASE[tr.ease ?? "sine"]} infinite; }\n`;
+
+    // Whose ease the rule runs on. One track, or several agreeing on both ease
+    // and key times, and the browser re-eases between the same points the
+    // author stated — identical to what a single track used to emit. Anything
+    // else is already sampled with each track's own ease above, so the rule
+    // goes linear between those samples rather than easing them twice.
+    const first = tracks[0];
+    const uniform =
+      tracks.every((tr) => (tr.ease ?? "sine") === (first.ease ?? "sine")) &&
+      tracks.every((tr) => tr.keys.length === times.length);
+    const timing = uniform ? EASE[first.ease ?? "sine"] : EASE.linear;
+    css += `@keyframes kf-${ctx.uid}-${pid} { ${kf} } .aw-${ctx.uid}-${pid} { animation: kf-${ctx.uid}-${pid} ${fmt(anim.duration)}s ${timing} infinite; }\n`;
   }
   return css;
 }

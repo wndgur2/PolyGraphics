@@ -115,7 +115,7 @@ Patched parts are re-validated, so a variant can never silently produce an inval
 }
 ```
 
-Props: `x` `y` (px) · `rot` (deg) · `scale` (factor) · `opacity`. One animated prop per part per animation (transform channels never collide — the `scale.x`-is-also-facing bug class is structurally impossible). The gallery plays them as CSS; engine adapters read the same keys as tweens.
+Props: `x` `y` (px) · `rot` (deg) · `scale` (factor) · `opacity`. A part may animate several of them at once but each at most once, which is the guarantee that actually mattered: transform channels never collide, so the `scale.x`-is-also-facing bug class stays structurally impossible while a part can still gather and swell in the same breath. CSS gets one transform and one timing function per rule, so tracks that disagree on key times are sampled onto a shared timeline through each track's own ease; tracks that agree emit exactly what they always did. The gallery plays them as CSS; engine adapters read the same keys as tweens.
 
 **Scope: animations move parts within a body, never the body itself.** A part's `rot` turns it about its own origin, so a whole-asset spin cannot be written as one track per part — and shouldn't be. Whole-body transforms (spin, facing flip, knockback, hit-flash tint) belong to the engine, which already owns them; `ss.proj.boom` therefore declares no spin animation, because the weapon code does `sprite.rotation += spin * dt`. Keep the two layers separate and neither can fight the other.
 
