@@ -1,13 +1,94 @@
 {
   "id": "ss.enemy.charger",
-  "name": "Lance",
-  "description": "Winds up in place, then crosses the gap faster than you can turn. A swept ember dart that reads as 'about to move fast' — drawn facing +x, the game flips it. Faithful port of the hand-drawn e_charger. Gameplay radius 10.",
-  "tags": ["ss-enemy", "lance"],
-  "size": [24, 20],
-  "meta": { "radius": 10 },
+  "name": "Bow and barb",
+  "description": "Two animals that are useless apart. The bow-caste is a frame — a wedge head, two ribs of different lengths sweeping back off it, a tendon strung tip to tip — and it has nothing to hurt anything with. The barb-caste is the swollen thing gripped across that tendon: a hard point on an abdomen full of something that goes off, and no way of getting anywhere. One winds, the other lands, and both are spent in the same second — which is why neither is drawn to survive it, and why the hive only ever sends them in volleys.\n\nTwo lit scent organs on one sprite is the tell that this is two creatures and not one with a decoration, and it costs nothing to say it: the shared organ is already what every body in this roster carries. The barb's is small and set back in the abdomen; the bow's rides its head, lifted clear of the shaft it grips.\n\nThree shapes this could fall back into, all of them tried on the way here. Ribs curled to a brace height of 0.45 of the tip-to-tip span came out a horseshoe, then a snail. At 0.30 they read as a bow, but with a soft gut slung at the tendon's middle the hollow split into two slots and the whole thing became a leaf — the barb settles that by filling the hollow with something that belongs in it. And the bow's head had to come out in front of its own frame: ribs arcing over it read as a handle around a lens, which is a magnifying glass.\n\nThe windup is the point. The barb hauls back down the body's own axis while both ribs roll under the load and its core swells half again and brightens — which is the yellow flash the game used to paint over this sprite for 0.55s, drawn instead. On release the bow unwinds through rest and past it while the barb keeps going, because it has left the string. Nothing here points down the line it is about to take: the sprite only ever flips and never rotates, so an arrowhead would promise a heading the engine cannot keep.\n\nOne approximation sits in the numbers rather than hidden. Each tendon half is authored from the nock and given the exact rot and length that lands it on a tip which is itself moving, and the halves pay for that as a stretch at full draw. It is a tendon, not a bowstring, and strain is the right read. Drawn facing +x. Same id and radius 10.",
+  "tags": ["ss-enemy", "duo"],
+  "size": [36, 28],
+  "meta": {"radius": 10},
   "parts": [
-    { "id": "outline", "shape": { "kind": "poly", "points": [[-12, -10], [12, 0], [-12, 10]] }, "fill": "$ink" },
-    { "id": "body", "shape": { "kind": "poly", "points": [[-9.5, -7], [8, 0], [-9.5, 7]] }, "fill": "$ember" },
-    { "id": "core", "shape": { "kind": "poly", "points": [[-9.5, -4], [1, 0], [-9.5, 4]] }, "fill": "$ember.light2" }
-  ]
+    { "id": "rib_upper", "at": [1.98, -0.18], "rot": -18.0, "shape": {"kind": "poly", "points": [[2.1, -0.97], [1.94, -3.7], [1.4, -6.3], [0.53, -8.59], [-0.62, -10.54], [-1.99, -12.11], [-3.53, -13.27], [-5.17, -13.99], [-6.75, -14.23], [-7.05, -13.17], [-5.75, -12.62], [-4.65, -11.77], [-3.69, -10.61], [-2.9, -9.19], [-2.31, -7.51], [-1.95, -5.6], [-1.87, -3.49], [-2.1, -1.03]]}, "fill": "$husk", "stroke": {"color": "$ink", "width": "thin"} },
+    { "id": "rib_lower", "at": [1.98, -0.18], "rot": -18.0, "shape": {"kind": "poly", "points": [[-1.9, 1.02], [-1.7, 2.91], [-1.75, 4.51], [-2.03, 5.97], [-2.5, 7.26], [-3.13, 8.38], [-3.89, 9.28], [-4.74, 9.97], [-5.73, 10.42], [-5.47, 11.38], [-4.22, 11.21], [-2.89, 10.66], [-1.62, 9.76], [-0.47, 8.54], [0.51, 7.01], [1.27, 5.2], [1.75, 3.13], [1.9, 0.98]]}, "fill": "$husk.dark2", "stroke": {"color": "$ink", "width": "thin"} },
+    { "id": "tendon_upper", "at": [-4.04, 1.34], "rot": -111.03, "shape": {"kind": "poly", "points": [[0.0, -1.5], [13.3, -0.7], [13.3, 0.7], [0.0, 1.5]]}, "fill": "$ember" },
+    { "id": "tendon_lower", "at": [-4.04, 1.34], "rot": 68.97, "shape": {"kind": "poly", "points": [[0.0, -1.5], [11.33, -0.7], [11.33, 0.7], [0.0, 1.5]]}, "fill": "$ember" },
+    { "id": "vein_upper", "at": [1.98, -0.18], "rot": -18.0, "shape": {"kind": "poly", "points": [[-1.51, -11.04], [-3.87, -9.15], [-3.63, -8.78], [-0.92, -10.11]]}, "fill": "$husk.dark2" },
+    { "id": "vein_lower", "at": [1.98, -0.18], "rot": -18.0, "shape": {"kind": "poly", "points": [[-2.76, 8.39], [-0.47, 9.67], [-0.21, 9.31], [-2.11, 7.5]]}, "fill": "$husk.dark2" },
+    { "id": "prow", "at": [5.32, -6.73], "rot": -18.0, "shape": {"kind": "poly", "points": [[4.6, 0.1], [1.2, 3.0], [-3.4, 2.4], [-3.0, -2.6], [1.4, -2.9]]}, "fill": "$husk", "stroke": {"color": "$ink", "width": "thin"} },
+    { "id": "barb", "at": [-4.04, 1.34], "rot": -18.0, "shape": {"kind": "poly", "points": [[12.2, 0.0], [8.0, -1.9], [4.6, -1.5], [1.4, -3.5], [-1.9, -3.2], [-4.4, -1.6], [-5.2, 0.0], [-4.4, 1.6], [-1.9, 3.2], [1.4, 3.5], [4.6, 1.5], [8.0, 1.9]]}, "fill": "$venom.dark2", "stroke": {"color": "$ink", "width": "thin"} },
+    { "id": "barb_core", "at": [-4.61, 1.52], "rot": -18.0, "shape": {"kind": "ellipse", "rx": 2.4, "ry": 1.9}, "fill": {"gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$gold.light"], [0.55, "$gold"], [1, "$venom.dark@0.2"]]} },
+    { "id": "barb_organ", "use": "ss.lib.organ", "at": [-7.05, 2.11], "scale": 0.3 },
+    { "id": "organ", "use": "ss.lib.organ", "at": [5.99, -7.58], "scale": 0.38 }
+  ],
+  "animations": {
+    "read": {
+      "description": "held and loaded — the frame is never slack, so the idle is the ribs breathing against their own tension and the barb riding an eighth of the draw. The two organs pulse out of phase with each other, because they are two animals. Nothing walks; this pair does not walk.",
+      "duration": 1.9,
+      "tracks": [
+        { "part": "rib_upper", "prop": "rot", "keys": [[0, -0.5], [0.5, -1.9], [1, -0.5]] },
+        { "part": "rib_lower", "prop": "rot", "keys": [[0, 0.5], [0.5, 1.9], [1, 0.5]] },
+        { "part": "vein_upper", "prop": "rot", "keys": [[0, -0.5], [0.5, -1.9], [1, -0.5]] },
+        { "part": "vein_lower", "prop": "rot", "keys": [[0, 0.5], [0.5, 1.9], [1, 0.5]] },
+        { "part": "barb_core", "prop": "scale", "keys": [[0, 0.92], [0.5, 1.1], [1, 0.92]] },
+        { "part": "organ", "prop": "scale", "keys": [[0, 0.95], [0.5, 1.06], [1, 0.95]] },
+        { "part": "barb_organ", "prop": "scale", "keys": [[0, 1.06], [0.5, 0.95], [1, 1.06]] },
+        { "part": "barb", "prop": "x", "keys": [[0, 0], [0.5, -0.742], [1, 0]] },
+        { "part": "barb", "prop": "y", "keys": [[0, 0], [0.5, 0.241], [1, 0]] },
+        { "part": "barb_core", "prop": "x", "keys": [[0, 0], [0.5, -0.742], [1, 0]] },
+        { "part": "barb_core", "prop": "y", "keys": [[0, 0], [0.5, 0.241], [1, 0]] },
+        { "part": "barb_organ", "prop": "x", "keys": [[0, 0], [0.5, -0.742], [1, 0]] },
+        { "part": "barb_organ", "prop": "y", "keys": [[0, 0], [0.5, 0.241], [1, 0]] }
+      ]
+    },
+    "coil": {
+      "description": "the windup, 0.55s to match the game's. The barb hauls back down the body's own axis rather than along the canvas — the frame rakes 18 degrees, so a draw in x alone would drag it off the tendon — while both ribs roll under the load and the core swells. Wound rather than eased: a fast first draw, a slow creep against the load, a settle, a last snatch. Holds on the final frame, because the release is the dash.",
+      "duration": 0.55,
+      "tracks": [
+        { "part": "rib_upper", "prop": "rot", "keys": [[0, 0.0], [0.24, -3.6], [0.52, -4.8], [0.78, -6.0], [0.9, -5.7], [1, -6.0]], "ease": "linear" },
+        { "part": "rib_lower", "prop": "rot", "keys": [[0, 0.0], [0.24, 3.6], [0.52, 4.8], [0.78, 6.0], [0.9, 5.7], [1, 6.0]], "ease": "linear" },
+        { "part": "vein_upper", "prop": "rot", "keys": [[0, 0.0], [0.24, -3.6], [0.52, -4.8], [0.78, -6.0], [0.9, -5.7], [1, -6.0]], "ease": "linear" },
+        { "part": "vein_lower", "prop": "rot", "keys": [[0, 0.0], [0.24, 3.6], [0.52, 4.8], [0.78, 6.0], [0.9, 5.7], [1, 6.0]], "ease": "linear" },
+        { "part": "tendon_upper", "prop": "x", "keys": [[0, 0.0], [0.24, -3.424], [0.52, -4.565], [0.78, -5.706], [0.9, -5.421], [1, -5.706]], "ease": "linear" },
+        { "part": "tendon_upper", "prop": "y", "keys": [[0, 0.0], [0.24, 1.112], [0.52, 1.483], [0.78, 1.854], [0.9, 1.761], [1, 1.854]], "ease": "linear" },
+        { "part": "tendon_upper", "prop": "rot", "keys": [[0, 0.0], [0.24, 12.231], [0.52, 16.308], [0.78, 20.385], [0.9, 19.365], [1, 20.385]], "ease": "linear" },
+        { "part": "tendon_upper", "prop": "scale", "keys": [[0, 1.0], [0.24, 0.99], [0.52, 0.987], [0.78, 0.984], [0.9, 0.984], [1, 0.984]], "ease": "linear" },
+        { "part": "tendon_lower", "prop": "x", "keys": [[0, 0.0], [0.24, -3.424], [0.52, -4.565], [0.78, -5.706], [0.9, -5.421], [1, -5.706]], "ease": "linear" },
+        { "part": "tendon_lower", "prop": "y", "keys": [[0, 0.0], [0.24, 1.112], [0.52, 1.483], [0.78, 1.854], [0.9, 1.761], [1, 1.854]], "ease": "linear" },
+        { "part": "tendon_lower", "prop": "rot", "keys": [[0, 0.0], [0.24, -14.518], [0.52, -19.358], [0.78, -24.197], [0.9, -22.987], [1, -24.197]], "ease": "linear" },
+        { "part": "tendon_lower", "prop": "scale", "keys": [[0, 1.0], [0.24, 1.035], [0.52, 1.047], [0.78, 1.059], [0.9, 1.056], [1, 1.059]], "ease": "linear" },
+        { "part": "barb", "prop": "x", "keys": [[0, 0.0], [0.24, -3.424], [0.52, -4.565], [0.78, -5.706], [0.9, -5.421], [1, -5.706]], "ease": "linear" },
+        { "part": "barb_core", "prop": "x", "keys": [[0, 0.0], [0.24, -3.424], [0.52, -4.565], [0.78, -5.706], [0.9, -5.421], [1, -5.706]], "ease": "linear" },
+        { "part": "barb_organ", "prop": "x", "keys": [[0, 0.0], [0.24, -3.424], [0.52, -4.565], [0.78, -5.706], [0.9, -5.421], [1, -5.706]], "ease": "linear" },
+        { "part": "barb", "prop": "y", "keys": [[0, 0.0], [0.24, 1.112], [0.52, 1.483], [0.78, 1.854], [0.9, 1.761], [1, 1.854]], "ease": "linear" },
+        { "part": "barb_core", "prop": "y", "keys": [[0, 0.0], [0.24, 1.112], [0.52, 1.483], [0.78, 1.854], [0.9, 1.761], [1, 1.854]], "ease": "linear" },
+        { "part": "barb_organ", "prop": "y", "keys": [[0, 0.0], [0.24, 1.112], [0.52, 1.483], [0.78, 1.854], [0.9, 1.761], [1, 1.854]], "ease": "linear" },
+        { "part": "barb_core", "prop": "scale", "keys": [[0, 1.0], [0.24, 1.33], [0.52, 1.44], [0.78, 1.55], [0.9, 1.522], [1, 1.55]], "ease": "linear" },
+        { "part": "barb", "prop": "scale", "keys": [[0, 1.0], [0.24, 1.048], [0.52, 1.064], [0.78, 1.08], [0.9, 1.076], [1, 1.08]], "ease": "linear" }
+      ]
+    },
+    "strike": {
+      "description": "the release, and the only one of these that is not symmetrical. It opens on the coil's last frame exactly, so the handover reads as the same motion continuing rather than a cut. The bow unwinds through neutral, past it, and settles; the barb does not come back at all, because it has left the string — it lunges a full length forward and holds there for the rest of the dash, which is the pose it detonates in.",
+      "duration": 0.3,
+      "tracks": [
+        { "part": "rib_upper", "prop": "rot", "keys": [[0, -6.0], [0.3, 1.8], [0.62, -0.66], [1, 0.0]], "ease": "linear" },
+        { "part": "rib_lower", "prop": "rot", "keys": [[0, 6.0], [0.3, -1.8], [0.62, 0.66], [1, 0.0]], "ease": "linear" },
+        { "part": "vein_upper", "prop": "rot", "keys": [[0, -6.0], [0.3, 1.8], [0.62, -0.66], [1, 0.0]], "ease": "linear" },
+        { "part": "vein_lower", "prop": "rot", "keys": [[0, 6.0], [0.3, -1.8], [0.62, 0.66], [1, 0.0]], "ease": "linear" },
+        { "part": "tendon_upper", "prop": "x", "keys": [[0, -5.706], [0.3, 1.712], [0.62, -0.628], [1, 0.0]], "ease": "linear" },
+        { "part": "tendon_upper", "prop": "y", "keys": [[0, 1.854], [0.3, -0.556], [0.62, 0.204], [1, 0.0]], "ease": "linear" },
+        { "part": "tendon_upper", "prop": "rot", "keys": [[0, 20.385], [0.3, -6.115], [0.62, 2.242], [1, 0.0]], "ease": "linear" },
+        { "part": "tendon_upper", "prop": "scale", "keys": [[0, 0.984], [0.3, 1.005], [0.62, 0.998], [1, 1.0]], "ease": "linear" },
+        { "part": "tendon_lower", "prop": "x", "keys": [[0, -5.706], [0.3, 1.712], [0.62, -0.628], [1, 0.0]], "ease": "linear" },
+        { "part": "tendon_lower", "prop": "y", "keys": [[0, 1.854], [0.3, -0.556], [0.62, 0.204], [1, 0.0]], "ease": "linear" },
+        { "part": "tendon_lower", "prop": "rot", "keys": [[0, -24.197], [0.3, 7.259], [0.62, -2.662], [1, 0.0]], "ease": "linear" },
+        { "part": "tendon_lower", "prop": "scale", "keys": [[0, 1.059], [0.3, 0.982], [0.62, 1.006], [1, 1.0]], "ease": "linear" },
+        { "part": "barb", "prop": "x", "keys": [[0, -5.706], [0.3, 7.133], [0.62, 6.134], [1, 6.42]], "ease": "linear" },
+        { "part": "barb_core", "prop": "x", "keys": [[0, -5.706], [0.3, 7.133], [0.62, 6.134], [1, 6.42]], "ease": "linear" },
+        { "part": "barb_organ", "prop": "x", "keys": [[0, -5.706], [0.3, 7.133], [0.62, 6.134], [1, 6.42]], "ease": "linear" },
+        { "part": "barb", "prop": "y", "keys": [[0, 1.854], [0.3, -2.318], [0.62, -1.993], [1, -2.086]], "ease": "linear" },
+        { "part": "barb_core", "prop": "y", "keys": [[0, 1.854], [0.3, -2.318], [0.62, -1.993], [1, -2.086]], "ease": "linear" },
+        { "part": "barb_organ", "prop": "y", "keys": [[0, 1.854], [0.3, -2.318], [0.62, -1.993], [1, -2.086]], "ease": "linear" },
+        { "part": "barb_core", "prop": "scale", "keys": [[0, 1.55], [0.3, 1.2], [1, 1.3]], "ease": "linear" },
+        { "part": "barb", "prop": "scale", "keys": [[0, 1.08], [0.3, 1.0], [1, 1.02]], "ease": "linear" }
+      ]
+    }
+  }
 }
