@@ -194,8 +194,21 @@ function assetCard(asset: Asset, reg: Registry, issues: Issue[]): string {
   // A cell per animation, not just the first. A document may carry a walk and
   // a windup, and the second one was listed in the meta line and then never
   // playable anywhere — which is the one thing a gallery is for.
-  const cells: string[] = anims.length
-    ? anims.map((name) => cell(asset, reg, issues, `base · ▸ ${name}`, { animation: name }))
+  /**
+   * A clip a state has claimed belongs to that state, and not also to the base.
+   *
+   * Otherwise the page draws it twice and one of the two is a pose nothing
+   * bakes: a Lance's fill on the whole bow-and-barb is a bow that has not let
+   * go watching its own barb swell, which is not a thing this creature does.
+   * Claimed clips move down to their state's row; anything unclaimed stays here,
+   * which is every clip in every other document.
+   */
+  const claimed = new Set(
+    Object.values(asset.variants ?? {}).flatMap((v) => v.animations ?? []),
+  );
+  const onBase = anims.filter((name) => !claimed.has(name));
+  const cells: string[] = onBase.length
+    ? onBase.map((name) => cell(asset, reg, issues, `base · ▸ ${name}`, { animation: name }))
     : [cell(asset, reg, issues, "base")];
   /**
    * A state, against the clips it is drawn to be played with.
