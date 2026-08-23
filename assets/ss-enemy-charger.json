@@ -14,8 +14,8 @@
     { "id": "vein_lower", "at": [1.98, -0.18], "rot": -18.0, "shape": {"kind": "poly", "points": [[-2.76, 8.39], [-0.47, 9.67], [-0.21, 9.31], [-2.11, 7.5]]}, "fill": "$husk.dark2" },
     { "id": "prow", "at": [5.32, -6.73], "rot": -18.0, "shape": {"kind": "poly", "points": [[4.6, 0.1], [1.2, 3.0], [-3.4, 2.4], [-3.0, -2.6], [1.4, -2.9]]}, "fill": "$husk", "stroke": {"color": "$ink", "width": "thin"} },
     { "id": "barb", "at": [-4.04, 1.34], "rot": -18.0, "shape": {"kind": "poly", "points": [[12.2, 0.0], [8.0, -1.9], [4.6, -1.5], [1.4, -3.5], [-1.9, -3.2], [-4.4, -1.6], [-5.2, 0.0], [-4.4, 1.6], [-1.9, 3.2], [1.4, 3.5], [4.6, 1.5], [8.0, 1.9]]}, "fill": "$venom.dark2", "stroke": {"color": "$ink", "width": "thin"} },
-    { "id": "barb_core", "at": [-4.61, 1.52], "rot": -18.0, "shape": {"kind": "ellipse", "rx": 2.4, "ry": 1.9}, "fill": {"gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$gold.light"], [0.55, "$gold"], [1, "$venom.dark@0.2"]]} },
-    { "id": "barb_organ", "use": "ss.lib.organ", "at": [-7.05, 2.11], "scale": 0.3 },
+    { "id": "barb_core", "at": [-4.99, 1.65], "rot": -18.0, "shape": {"kind": "ellipse", "rx": 2.4, "ry": 1.9}, "fill": {"gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$gold.light"], [0.55, "$gold"], [1, "$venom.dark@0.2"]]} },
+    { "id": "barb_organ", "use": "ss.lib.organ", "at": [0.68, -0.3], "scale": 0.26 },
     { "id": "organ", "use": "ss.lib.organ", "at": [5.99, -7.58], "scale": 0.38 }
   ],
   "variants": {
@@ -24,8 +24,22 @@
       "remove": ["rib_upper", "rib_lower", "tendon_upper", "tendon_lower", "vein_upper", "vein_lower", "prow", "organ"],
       "set": {
         "barb.at": [-3.23, 1.05],
-        "barb_core.at": [-3.8, 1.23],
-        "barb_organ.at": [-6.24, 1.82]
+        "barb_core.at": [-4.18, 1.36],
+        "barb_organ.at": [1.49, -0.59]
+      }
+    },
+    "planted": {
+      "description": "The barb after it has landed and before it goes off. The same body the flight wears, standing in a scorch it put there itself, with the core swollen past anything the windup asked for — this is the last thing it does and there is no reason for it to be subtle. The half-second it holds this is the half-second the player has to not be here.",
+      "remove": ["rib_upper", "rib_lower", "tendon_upper", "tendon_lower", "vein_upper", "vein_lower", "prow", "organ"],
+      "add": [
+        { "id": "scorch", "at": [-3.23, 1.05], "rot": -18.0, "shape": {"kind": "ellipse", "rx": 8.5, "ry": 4.4}, "fill": "$dead@soft" }
+      ],
+      "set": {
+        "barb.at": [-3.23, 1.05],
+        "barb_core.at": [-4.18, 1.36],
+        "barb_organ.at": [1.49, -0.59],
+        "barb_core.scale": 1.7,
+        "barb.fill": "$venom.dark"
       }
     },
     "spent": {
@@ -61,6 +75,16 @@
         { "part": "barb_core", "prop": "y", "keys": [[0, 0], [0.5, 0.241], [1, 0]] },
         { "part": "barb_organ", "prop": "x", "keys": [[0, 0], [0.5, -0.742], [1, 0]] },
         { "part": "barb_organ", "prop": "y", "keys": [[0, 0], [0.5, 0.241], [1, 0]] }
+      ]
+    },
+    "fuse": {
+      "description": "landed, and counting. The core beats about three times in the half-second it stands there — hard on, soft off, faster than the idle and faster than the windup — and the body shivers a pixel against the ground it is stuck in. Only barb parts move, which is what lets this same clip be baked from the `planted` variant, where the bow it came off is not in the document at all.",
+      "duration": 0.18,
+      "tracks": [
+        { "part": "barb_core", "prop": "scale", "keys": [[0, 1.0], [0.35, 1.34], [1, 1.0]], "ease": "linear" },
+        { "part": "barb_core", "prop": "opacity", "keys": [[0, 1], [0.35, 0.72], [1, 1]], "ease": "linear" },
+        { "part": "barb_organ", "prop": "scale", "keys": [[0, 1.08], [0.5, 0.9], [1, 1.08]] },
+        { "part": "barb", "prop": "y", "keys": [[0, -0.35], [0.5, 0.35], [1, -0.35]], "ease": "linear" }
       ]
     },
     "coil": {
