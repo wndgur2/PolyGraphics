@@ -27,19 +27,24 @@
   ],
   "variants": {
     "elite": {
-      "description": "Sent out under two. The second clutch is stacked on the first, the hauler underneath has bleached to war colour, and it is still not putting either of them down.",
+      "description": "The clutch it was given has gone to term on its back — the grub burns white and its head end has darkened and swollen — while the hauler underneath goes the other way, down to silhouette with one bone plate marking it and jaws grown past the head that will not open them. Darker under, brighter over: this body is built on that one contrast and an elite has to keep it. A second clutch stacked on the first was tried here and thrown out — parts a variant adds have no tracks in the body's animation, so the top load sat rigid while the one under it rolled.",
       "scale": 1.25,
       "set": {
-        "body.fill": "$husk.dark2",
-        "body_plate.fill": "$husk.dark",
-        "grub_gloss.fill": "$white@heavy",
+        "body.fill": "$dead",
+        "body_plate.fill": "$bone.light",
+        "head.fill": "$ink",
+        "grub_1.fill": "$bone.light",
+        "grub_2.fill": "$white",
+        "grub_3.fill": "$white",
+        "grub_4.fill": "$white",
+        "grub_5.fill": "$husk.dark",
+        "grub_5.scale": 1.2,
+        "grub_eye.scale": 1.3,
+        "grub_gloss.fill": "$white",
+        "mandible_up.scale": [1.35, 1.3],
+        "mandible_dn.scale": [1.35, 1.3],
         "organ.scale": 0.58
-      },
-      "add": [
-        {"id": "grub2_2", "at": [-3.6, -11.4], "shape": {"kind": "ellipse", "rx": 3.6, "ry": 3.4}, "fill": "$bone.light", "stroke": {"color": "$ink", "width": "thin"}},
-        {"id": "grub2_3", "at": [1.4, -12.2], "shape": {"kind": "ellipse", "rx": 3.8, "ry": 3.6}, "fill": "$bone.light", "stroke": {"color": "$ink", "width": "thin"}},
-        {"id": "grub2_4", "at": [6.2, -11], "shape": {"kind": "ellipse", "rx": 3.4, "ry": 3.2}, "fill": "$bone", "stroke": {"color": "$ink", "width": "thin"}}
-      ]
+      }
     }
   },
   "animations": {
@@ -58,11 +63,11 @@
         {"part": "grub_3", "prop": "y", "keys": [[0, 0], [0.18, -1.8], [0.54, 0], [1, 0]]},
         {"part": "grub_4", "prop": "y", "keys": [[0, 0], [0.1, -1.7], [0.46, 0], [1, 0]]},
         {"part": "grub_5", "prop": "y", "keys": [[0, -0.2], [0.02, -1.5], [0.38, 0], [1, -0.2]]},
+        {"part": "grub_eye", "prop": "y", "keys": [[0, -0.2], [0.02, -1.5], [0.38, 0], [1, -0.2]]},
         {"part": "grub_gloss", "prop": "y", "keys": [[0, 0], [0.18, -1.8], [0.54, 0], [1, 0]]},
         {"part": "mandible_up", "prop": "rot", "keys": [[0, -34], [0.5, -30], [1, -34]]},
         {"part": "antenna_a", "prop": "rot", "keys": [[0, 54], [0.5, 44], [1, 54]]},
-        {"part": "antenna_b", "prop": "rot", "keys": [[0, 108], [0.5, 96], [1, 108]]},
-        {"part": "organ", "prop": "scale", "keys": [[0, 0.4], [0.5, 0.46], [1, 0.4]]}
+        {"part": "antenna_b", "prop": "rot", "keys": [[0, 108], [0.5, 96], [1, 108]]}
       ]
     }
   }
