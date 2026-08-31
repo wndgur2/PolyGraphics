@@ -1,0 +1,39 @@
+{
+  "id": "ss.sfx.move",
+  "name": "Cursor move",
+  "description": "A menu cursor stepping one row: the shortest and quietest thing here, a single tick on the scale's seventh with nowhere to slide to.",
+  "tags": [
+    "sfx",
+    "interface"
+  ],
+  "duration": 0.035,
+  "meta": {
+    "minInterval": 40
+  },
+  "voices": [
+    {
+      "id": "tick",
+      "gain": "faint",
+      "source": {
+        "kind": "osc",
+        "wave": "square",
+        "freq": "$seventh.down"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

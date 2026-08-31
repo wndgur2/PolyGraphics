@@ -1,0 +1,65 @@
+{
+  "id": "ss.sfx.curse",
+  "name": "Curse",
+  "description": "The other thing a chest can hold. Two sawtooths falling, the second entering under the first and going lower still \u2014 the only figure in the set where both voices move down together.",
+  "tags": [
+    "sfx",
+    "world"
+  ],
+  "duration": 0.76,
+  "voices": [
+    {
+      "id": "arrive",
+      "gain": "loud",
+      "dur": 0.45,
+      "source": {
+        "kind": "osc",
+        "wave": "sawtooth",
+        "freq": "$moan",
+        "to": 55
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "settle",
+      "at": 0.16,
+      "gain": "loud",
+      "dur": 0.6,
+      "source": {
+        "kind": "osc",
+        "wave": "sawtooth",
+        "freq": "$dirge",
+        "to": 40
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

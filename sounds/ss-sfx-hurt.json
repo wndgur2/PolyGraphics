@@ -1,0 +1,37 @@
+{
+  "id": "ss.sfx.hurt",
+  "name": "Hurt",
+  "description": "The player's own frame taking it: the lowest, longest and loudest sound in the set, falling an octave with no brightness anywhere in it. Nothing else is allowed to sit this low.",
+  "tags": [
+    "sfx",
+    "player"
+  ],
+  "duration": 0.22,
+  "voices": [
+    {
+      "id": "frame",
+      "gain": "peak",
+      "source": {
+        "kind": "osc",
+        "wave": "sawtooth",
+        "freq": "$bone",
+        "to": "$bone.down"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

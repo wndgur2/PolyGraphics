@@ -1,0 +1,38 @@
+{
+  "id": "ss.sfx.elite-die",
+  "name": "Elite death",
+  "description": "The same collapse from something much bigger: it starts where a weapon strikes chitin and falls two octaves over a third of a second, long enough to be heard through a crowd of the small ones.",
+  "tags": [
+    "sfx",
+    "creature"
+  ],
+  "duration": 0.35,
+  "voices": [
+    {
+      "id": "cutout",
+      "gain": "peak",
+      "dur": "tail",
+      "source": {
+        "kind": "osc",
+        "wave": "sawtooth",
+        "freq": "$tap",
+        "to": "$tap.down2"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

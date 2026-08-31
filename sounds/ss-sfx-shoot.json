@@ -1,0 +1,46 @@
+{
+  "id": "ss.sfx.shoot",
+  "name": "Shot",
+  "description": "Something small leaving the tube: a bright chirp dropping most of an octave inside sixty milliseconds. Fires constantly, so it is short, quiet and pitched where the score already sits.",
+  "tags": [
+    "sfx",
+    "weapon"
+  ],
+  "duration": 0.06,
+  "meta": {
+    "minInterval": 35
+  },
+  "jitter": {
+    "freq": [
+      0.88,
+      1.06
+    ]
+  },
+  "voices": [
+    {
+      "id": "spit",
+      "gain": "soft",
+      "source": {
+        "kind": "osc",
+        "wave": "square",
+        "freq": "$tonic",
+        "to": 380
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -4,7 +4,8 @@
  *   npm run validate   schema + token lints only
  *   npm run render     out/svg/*.svg + out/manifest.json   (--theme <name>)
  *   npm run gallery    out/gallery.html
- *   npm run dist       dist/assets.json — the bundle consumers import
+ *   npm run wav        out/wav/*.wav — the sound bake, and what `regress` hashes
+ *   npm run dist       dist/assets.json + dist/sounds.json — the bundles consumers import
  */
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, basename } from "node:path";
@@ -13,6 +14,9 @@ import { applyVariant, derivedRadius, renderSVG, type Issue, type Registry } fro
 import { applyTheme, type Theme, type Tokens } from "./tokens.js";
 import { buildGallery } from "./gallery.js";
 import { compileAsset } from "./compile.js";
+import { SoundSchema, type Sound } from "./sound-schema.js";
+import { compileSound, type SoundRegistry } from "./sound-compile.js";
+import { describe, renderPCM, SAMPLE_RATE, toWav } from "./sound-render.js";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const dir = (...p: string[]) => join(ROOT, ...p);
@@ -23,6 +27,7 @@ const dir = (...p: string[]) => join(ROOT, ...p);
  * the IR shape changes in a way that would break one.
  */
 const BUNDLE_FORMAT = "polygraphics-bundle@1";
+const SOUND_FORMAT = "polygraphics-sounds@1";
 
 function readJson(path: string): unknown {
   try {
@@ -37,7 +42,7 @@ function fail(msg: string): never {
   process.exit(1);
 }
 
-function loadAll(): { reg: Registry; themes: Theme[]; issues: Issue[] } {
+function loadAll(): { reg: Registry; sreg: SoundRegistry; themes: Theme[]; issues: Issue[] } {
   const issues: Issue[] = [];
   const tokens = readJson(dir("tokens", "default.json")) as Tokens;
   for (const key of ["grid", "colors", "ramps", "strokes", "alpha", "layers"])
@@ -69,7 +74,32 @@ function loadAll(): { reg: Registry; themes: Theme[]; issues: Issue[] } {
       issues.push({ level: "warn", where: a.id, msg: `size ${a.size[0]}×${a.size[1]} is not a multiple of grid ${tokens.grid}` });
     assets.set(a.id, a);
   }
-  return { reg: { assets, tokens }, themes, issues };
+
+  // sounds/ is optional: a repo may be all art and no audio, and that is not an error.
+  const sounds = new Map<string, Sound>();
+  let soundFiles: string[] = [];
+  try {
+    soundFiles = readdirSync(dir("sounds")).filter((f) => f.endsWith(".json"));
+  } catch { /* no sounds/ */ }
+  for (const f of soundFiles) {
+    const raw = readJson(dir("sounds", f));
+    const parsed = SoundSchema.safeParse(raw);
+    if (!parsed.success) {
+      for (const iss of parsed.error.issues)
+        issues.push({ level: "error", where: `sounds/${f}`, msg: `${iss.path.join(".") || "(root)"}: ${iss.message}` });
+      continue;
+    }
+    const sd = parsed.data;
+    if (sounds.has(sd.id)) issues.push({ level: "error", where: `sounds/${f}`, msg: `duplicate sound id "${sd.id}"` });
+    const expectFile = sd.id.replace(/\./g, "-") + ".json";
+    if (basename(f) !== expectFile)
+      issues.push({ level: "warn", where: `sounds/${f}`, msg: `file name should match id: "${expectFile}"` });
+    if (sounds.size === 0 && !tokens.audio)
+      issues.push({ level: "error", where: "tokens/default.json", msg: "sounds/ has documents but tokens has no `audio` section" });
+    sounds.set(sd.id, sd);
+  }
+
+  return { reg: { assets, tokens }, sreg: { sounds, tokens }, themes, issues };
 }
 
 /**
@@ -89,7 +119,61 @@ function lintPalette(tokens: Tokens, issues: Issue[]): void {
     for (const name of Object.keys(t.colors ?? {}))
       if (!(name in tokens.colors))
         issues.push({ level: "error", where: `themes/${theme}`, msg: `overrides unknown color token "$${name}"` });
+    for (const name of Object.keys(t.audio?.pitch ?? {}))
+      if (!(name in (tokens.audio?.pitch ?? {})))
+        issues.push({ level: "error", where: `themes/${theme}`, msg: `overrides unknown pitch token "$${name}"` });
   }
+
+  // Same rule one table over: a pitch nothing plays is drift waiting to happen.
+  if (tokens.audio) {
+    const heard = new Set<string>();
+    let files: string[] = [];
+    try { files = readdirSync(dir("sounds")).filter((f) => f.endsWith(".json")); } catch { /* none */ }
+    for (const f of files)
+      for (const m of readFileSync(dir("sounds", f), "utf8").matchAll(/\$([a-z][a-z0-9_-]*)/gi)) heard.add(m[1]);
+    if (files.length)
+      for (const name of Object.keys(tokens.audio.pitch))
+        if (!heard.has(name))
+          issues.push({ level: "warn", where: "tokens/default.json", msg: `pitch token "$${name}" is unused — drop it or use it` });
+  }
+}
+
+/**
+ * What `describe()` is for: the author of these documents cannot hear them, so
+ * the properties an ear would catch are asserted instead. Clipping and silence
+ * are absolute; loudness consistency is relative, because the bug that actually
+ * happens is one sound sitting 20dB off the rest of the set.
+ */
+function lintSounds(sreg: SoundRegistry, issues: Issue[]): void {
+  const levels: { id: string; rmsDb: number }[] = [];
+  for (const sound of sreg.sounds.values()) {
+    const { ir, issues: cissues } = compileSound(sound, sreg);
+    issues.push(...cissues);
+    if (cissues.some((i) => i.level === "error")) continue;
+    for (const variant of [undefined, ...Object.keys(ir.variants)]) {
+      const where = variant ? `${ir.id}#${variant}` : ir.id;
+      const d = describe(renderPCM(ir, { variant }));
+      if (d.clipped)
+        issues.push({ level: "warn", where, msg: `clips on ${d.clipped} samples — lower a voice gain` });
+      if (d.peak < 0.01)
+        issues.push({ level: "warn", where, msg: `renders essentially silent (peak ${d.peakDb}dBFS)` });
+      // Library documents are material, not sounds the game triggers; they are
+      // still checked for clipping, but they have no business setting the level
+      // the triggered set is compared against. Nor does a document that has
+      // said in writing why it sits outside it.
+      if (!variant && sound.tags[0] !== "lib" && !sound.offBand) levels.push({ id: ir.id, rmsDb: d.rmsDb });
+    }
+  }
+  if (levels.length < 3) return; // a median of two says nothing
+  const sorted = [...levels].sort((a, b) => a.rmsDb - b.rmsDb);
+  const median = sorted[Math.floor(sorted.length / 2)].rmsDb;
+  for (const l of levels)
+    if (Math.abs(l.rmsDb - median) > 9)
+      issues.push({
+        level: "warn",
+        where: l.id,
+        msg: `${Math.round(l.rmsDb - median)}dB from the set median (${median}dBFS) — it will stand out`,
+      });
 }
 
 /** Render everything once (all variants, all themes) purely to harvest issues. */
@@ -156,7 +240,33 @@ function writeCompiled(reg: Registry, themeName?: string): number {
   return n;
 }
 
-function writeManifest(reg: Registry): void {
+function writeSoundIR(sreg: SoundRegistry): number {
+  if (sreg.sounds.size === 0) return 0;
+  mkdirSync(dir("out", "sounds"), { recursive: true });
+  let n = 0;
+  for (const sound of sreg.sounds.values()) {
+    const { ir } = compileSound(sound, sreg);
+    writeFileSync(dir("out", "sounds", `${sound.id.replace(/\./g, "-")}.json`), JSON.stringify(ir));
+    n++;
+  }
+  return n;
+}
+
+/** Every sound, every variant, baked — keyed the way the PNG bake is. */
+function renderAllWavs(sreg: SoundRegistry): Map<string, { wav: Buffer; d: ReturnType<typeof describe> }> {
+  const out = new Map<string, { wav: Buffer; d: ReturnType<typeof describe> }>();
+  for (const sound of sreg.sounds.values()) {
+    const { ir } = compileSound(sound, sreg);
+    const fileId = sound.id.replace(/\./g, "-");
+    for (const variant of [undefined, ...Object.keys(ir.variants)]) {
+      const pcm = renderPCM(ir, { variant });
+      out.set(`${fileId}${variant ? `--${variant}` : ""}.wav`, { wav: toWav(pcm), d: describe(pcm) });
+    }
+  }
+  return out;
+}
+
+function writeManifest(reg: Registry, sreg: SoundRegistry): void {
   const entries = [...reg.assets.values()].map((a) => ({
     id: a.id,
     file: `svg/${a.id.replace(/\./g, "-")}.svg`,
@@ -170,7 +280,24 @@ function writeManifest(reg: Registry): void {
     variants: Object.keys(a.variants ?? {}),
     animations: Object.keys(a.animations ?? {}),
   }));
-  writeFileSync(dir("out", "manifest.json"), JSON.stringify({ generated: "polygraphics v0", entries }, null, 2));
+  // Sounds carry their measurements: an index an agent can read is the closest
+  // thing to listening it has.
+  const sounds = [...sreg.sounds.values()].map((sd) => {
+    const { ir } = compileSound(sd, sreg);
+    return {
+      id: sd.id,
+      file: `wav/${sd.id.replace(/\./g, "-")}.wav`,
+      name: sd.name,
+      description: sd.description,
+      tags: sd.tags,
+      duration: sd.duration,
+      meta: { ...sd.meta },
+      voices: sd.voices.map((v) => v.id),
+      variants: Object.keys(sd.variants ?? {}),
+      measured: describe(renderPCM(ir)),
+    };
+  });
+  writeFileSync(dir("out", "manifest.json"), JSON.stringify({ generated: "polygraphics v0", entries, sounds }, null, 2));
 }
 
 // ------------------------------------------------------------------ main
@@ -178,11 +305,12 @@ function writeManifest(reg: Registry): void {
 const [cmd = "check", ...rest] = process.argv.slice(2);
 const themeFlag = rest.includes("--theme") ? rest[rest.indexOf("--theme") + 1] : undefined;
 
-const { reg, themes, issues } = loadAll();
+const { reg, sreg, themes, issues } = loadAll();
 
 if (cmd === "validate" || cmd === "check") {
   dryRun(reg, themes, issues);
   lintPalette(reg.tokens, issues);
+  lintSounds(sreg, issues);
 }
 
 // variant-applied documents also get schema-checked during dryRun via applyVariant
@@ -191,7 +319,7 @@ void applyVariant;
 const { errors, warns } = report(issues);
 
 if (cmd === "validate") {
-  console.log(`\n${reg.assets.size} assets, ${themes.length} themes — ${errors} errors, ${warns} warnings`);
+  console.log(`\n${reg.assets.size} assets, ${sreg.sounds.size} sounds, ${themes.length} themes — ${errors} errors, ${warns} warnings`);
   process.exit(errors ? 1 : 0);
 }
 
@@ -215,14 +343,21 @@ if (cmd === "render" || cmd === "compile" || cmd === "check") {
   }
   const c = writeCompiled(reg);
   for (const t of themes) writeCompiled({ assets: reg.assets, tokens: applyTheme(reg.tokens, t) }, t.name);
-  writeManifest(reg);
-  console.log(`✓ compiled ${c} IR files → out/compiled, manifest → out/manifest.json`);
+  const sc = writeSoundIR(sreg);
+  writeManifest(reg, sreg);
+  console.log(`✓ compiled ${c} IR files → out/compiled${sc ? `, ${sc} sound IR → out/sounds` : ""}, manifest → out/manifest.json`);
 }
 
 if (cmd === "gallery" || cmd === "check") {
   mkdirSync(dir("out"), { recursive: true });
+  // The gallery links the bake rather than embedding it, so writing one means
+  // writing the other; `npm run gallery` alone must not leave dead play buttons.
+  if (sreg.sounds.size) {
+    mkdirSync(dir("out", "wav"), { recursive: true });
+    for (const [name, { wav }] of renderAllWavs(sreg)) writeFileSync(dir("out", "wav", name), wav);
+  }
   const galleryIssues: Issue[] = [];
-  writeFileSync(dir("out", "gallery.html"), buildGallery(reg, themes, galleryIssues));
+  writeFileSync(dir("out", "gallery.html"), buildGallery(reg, sreg, themes, galleryIssues));
   console.log(`✓ gallery → out/gallery.html`);
 }
 
@@ -275,6 +410,31 @@ if (cmd === "dist" || cmd === "check") {
     `{"format":${JSON.stringify(BUNDLE_FORMAT)},"assets":{\n${rows.join(",\n")}\n}}\n`,
   );
   console.log(`✓ ${rows.length} assets → dist/assets.json (${BUNDLE_FORMAT})`);
+
+  if (sreg.sounds.size) {
+    const srows = [...sreg.sounds.values()]
+      .sort((a, b) => a.id.localeCompare(b.id))
+      .map((sd) => `${JSON.stringify(sd.id)}:${JSON.stringify(stripProse(compileSound(sd, sreg).ir))}`);
+    writeFileSync(
+      dir("dist", "sounds.json"),
+      `{"format":${JSON.stringify(SOUND_FORMAT)},"sounds":{\n${srows.join(",\n")}\n}}\n`,
+    );
+    console.log(`✓ ${srows.length} sounds → dist/sounds.json (${SOUND_FORMAT})`);
+  }
+}
+
+if (cmd === "wav" || cmd === "check") {
+  if (sreg.sounds.size) {
+    const wavs = renderAllWavs(sreg);
+    mkdirSync(dir("out", "wav"), { recursive: true });
+    for (const [name, { wav }] of wavs) writeFileSync(dir("out", "wav", name), wav);
+    console.log(`✓ baked ${wavs.size} wav files → out/wav (${SAMPLE_RATE}Hz mono)`);
+    if (cmd === "wav")
+      for (const [name, { d }] of wavs)
+        console.log(`  ${name.padEnd(28)} ${d.duration}s  peak ${String(d.peakDb).padStart(6)}dB  rms ${String(d.rmsDb).padStart(6)}dB  ${d.brightness}Hz zc`);
+  } else if (cmd === "wav") {
+    console.log("no sounds/ documents to bake");
+  }
 }
 
 // ---- png / baseline / regress (rasterization is optional tooling, deps loaded lazily)
@@ -297,11 +457,15 @@ async function renderAllPngs(): Promise<Map<string, Buffer>> {
 
 if (cmd === "png" || cmd === "baseline" || cmd === "regress") {
   const pngs = await renderAllPngs();
+  // Sound rides the same rails: a bake is bytes, and bytes compare.
+  if (cmd !== "png")
+    for (const [name, { wav }] of renderAllWavs(sreg)) pngs.set(join("sounds", name), wav);
   if (cmd === "png" || cmd === "baseline") {
     const sub = cmd === "png" ? join("out", "png") : "baselines";
     mkdirSync(dir(sub), { recursive: true });
+    mkdirSync(dir(sub, "sounds"), { recursive: true });
     for (const [name, buf] of pngs) writeFileSync(dir(sub, name), buf);
-    console.log(`✓ ${pngs.size} png files → ${sub}/ (4× scale)`);
+    console.log(`✓ ${pngs.size} baked files → ${sub}/`);
     if (cmd === "baseline") console.log("  baselines updated — future `npm run regress` compares against these");
   } else {
     let pass = 0, changed = 0, missing = 0;
@@ -326,7 +490,7 @@ if (cmd === "png" || cmd === "baseline" || cmd === "regress") {
 }
 
 if (cmd === "check")
-  console.log(`\n✓ ${reg.assets.size} assets, ${themes.length} themes, ${warns} warnings, 0 errors`);
+  console.log(`\n✓ ${reg.assets.size} assets, ${sreg.sounds.size} sounds, ${themes.length} themes, ${warns} warnings, 0 errors`);
 
-if (!["check", "validate", "render", "compile", "gallery", "dist", "png", "baseline", "regress"].includes(cmd))
+if (!["check", "validate", "render", "compile", "gallery", "dist", "wav", "png", "baseline", "regress"].includes(cmd))
   fail(`unknown command "${cmd}"`);

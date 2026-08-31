@@ -14,7 +14,10 @@
  * for the animation CSS to collide on.
  */
 import type { Asset, Part } from "./schema.js";
+import type { Sound, Voice } from "./sound-schema.js";
 import { renderSVG, type Issue, type Registry } from "./render.js";
+import { compileSound, type SoundRegistry } from "./sound-compile.js";
+import { describe, renderPCM, waveformSvg } from "./sound-render.js";
 import { applyTheme, resolveColor, type Theme, type Tokens } from "./tokens.js";
 
 const CATEGORY_ORDER = [
@@ -51,6 +54,20 @@ function esc(s: string): string {
 
 const slug = (id: string) => id.replace(/\./g, "-");
 const fileOf = (a: Asset) => `assets/${slug(a.id)}.json`;
+
+/**
+ * Sound families get their own tabs under their own heading, keyed apart from
+ * the asset categories so a document tagged `lib` on both sides cannot collide.
+ */
+const SOUND_ORDER = ["weapon", "impact", "creature", "player", "pickup", "world", "interface", "fanfare"];
+const soundCat = (sd: Sound) => `snd-${sd.tags[1] ?? sd.tags[0]}`;
+const soundFileOf = (sd: Sound) => `sounds/${slug(sd.id)}.json`;
+/**
+ * The bake, referenced rather than embedded. Twenty-seven takes inline would
+ * add ~3MB of base64 to a page that reloads itself on every rebuild; `out/wav`
+ * sits beside this file and every command that writes the gallery writes it.
+ */
+const wavOf = (id: string, variant?: string) => `wav/${slug(id)}${variant ? `--${variant}` : ""}.wav`;
 
 let uidCounter = 0;
 function cell(asset: Asset, reg: Registry, issues: Issue[], caption: string, opts: { variant?: string; animation?: string } = {}): string {
@@ -242,6 +259,189 @@ function assetCard(asset: Asset, reg: Registry, issues: Issue[]): string {
 </article>`;
 }
 
+/** One line per voice, in mix order — the vocabulary a change gets described in. */
+function voiceRow(v: Voice): string {
+  const bits: string[] = [];
+  if ("use" in v) bits.push(`use ${v.use}${v.variant ? `#${v.variant}` : ""}`);
+  else if ("repeat" in v)
+    bits.push(`repeat ×${v.repeat.count} ${v.repeat.of.kind} · ${v.repeat.spread}s spread, ${v.repeat.grain} grain`);
+  else if (v.source.kind === "osc")
+    bits.push(`${v.source.wave} ${v.source.freq}${v.source.to !== undefined ? ` → ${v.source.to}` : ""}`);
+  else bits.push("noise");
+
+  // The gain is this row's paint; everything else is a modifier and lives in
+  // the wrapping column, because a swept filter written out is long enough to
+  // push a nowrap column off the page.
+  const xf: string[] = [];
+  if (v.at) xf.push(`at ${v.at}s`);
+  if (v.dur !== undefined) xf.push(`dur ${v.dur}`);
+  if (v.filter)
+    xf.push(
+      `${v.filter.type} ${v.filter.freq}${v.filter.to !== undefined ? `→${v.filter.to}` : ""}${v.filter.q !== undefined ? ` q ${v.filter.q}` : ""}`,
+    );
+  for (const t of v.env ?? []) xf.push(`${t.prop} ${t.keys.map((k) => k[1]).join("→")}`);
+
+  return `<tr>
+  <td><code class="pid">${esc(v.id)}</code></td>
+  <td>${esc(bits.join(""))}</td>
+  <td>${v.gain !== undefined ? `<code class="paint">${esc(String(v.gain))}</code>` : ""}</td>
+  <td class="dim">${esc(xf.join(" · "))}</td>
+</tr>`;
+}
+
+interface Take { label: string; variant?: string; wav: string; wave: string; peakDb: number; rmsDb: number; dur: number; voices: number }
+
+function takesOf(sd: Sound, sreg: SoundRegistry, issues: Issue[]): Take[] {
+  const { ir, issues: cissues } = compileSound(sd, sreg);
+  issues.push(...cissues);
+  return [undefined, ...Object.keys(ir.variants)].map((variant) => {
+    const pcm = renderPCM(ir, { variant });
+    const d = describe(pcm);
+    return {
+      label: variant ? `#${variant}` : "base",
+      variant,
+      wav: wavOf(sd.id, variant),
+      wave: waveformSvg(pcm, 640, 90),
+      peakDb: d.peakDb,
+      rmsDb: d.rmsDb,
+      dur: d.duration,
+      voices: (variant ? ir.variants[variant].voices : ir.voices).length,
+    };
+  });
+}
+
+/**
+ * The transport is the whole point of a sound cell: `burst` fires it the way
+ * the game will, jitter rolled per trigger, because a sound that plays three
+ * hundred times a run is judged on the third hundredth and not the first.
+ */
+function takeCell(sd: Sound, t: Take): string {
+  const j = sd.jitter?.freq ?? [1, 1];
+  const btn = (n: number, label: string) =>
+    `<button data-play="${esc(t.wav)}" data-lo="${j[0]}" data-hi="${j[1]}" data-n="${n}">${label}</button>`;
+  return `<figure class="cell snd">
+  <div class="wave">${t.wave}<span class="norm">peak-normalized</span></div>
+  <figcaption>
+    <span class="take">${esc(t.label)}</span>
+    ${btn(1, "play")}${btn(8, "burst ×8")}
+    <span class="dim">${t.dur}s · ${t.voices} voices · peak ${t.peakDb} · rms ${t.rmsDb}</span>
+  </figcaption>
+</figure>`;
+}
+
+function soundCard(sd: Sound, sreg: SoundRegistry, issues: Issue[]): string {
+  const takes = takesOf(sd, sreg, issues);
+  const meta = [`${sd.duration}s`, `${sd.voices.length} voices`];
+  if (sd.meta?.minInterval) meta.push(`min ${sd.meta.minInterval}ms`);
+  const hay = `${sd.id} ${sd.name} ${sd.description} ${sd.tags.join(" ")} ${sd.voices.map((v) => v.id).join(" ")}`;
+  return `<article class="card" id="c-${slug(sd.id)}" role="button" tabindex="0" data-id="${esc(sd.id)}" data-cat="${esc(soundCat(sd))}" data-hay="${esc(hay.toLowerCase())}">
+  <header><h3>${esc(sd.name)}</h3><code>${esc(sd.id)}</code></header>
+  <p class="desc">${esc(sd.description)}</p>
+  <div class="tags">${sd.tags.map((t) => `<span>${esc(t)}</span>`).join("")}<span class="dim">${meta.join(" · ")}</span></div>
+  <div class="row snd" data-row>${takes.map((t) => takeCell(sd, t)).join("")}</div>
+</article>`;
+}
+
+function soundDetailBlock(sd: Sound, sreg: SoundRegistry, issues: Issue[]): string {
+  const variants = Object.entries(sd.variants ?? {});
+  const base = takesOf(sd, sreg, issues)[0];
+
+  const facts = ([
+    ["id", `<code>${esc(sd.id)}</code>`],
+    ["file", `<code>${esc(soundFileOf(sd))}</code>`, "wide"],
+    ["duration", `${sd.duration}s`],
+    ["voices", String(sd.voices.length)],
+    ["peak", `${base.peakDb} dBFS`],
+    ["rms", `${base.rmsDb} dBFS`],
+    ...(sd.gain !== undefined ? [["gain", String(sd.gain)] as [string, string]] : []),
+    ...(sd.jitter?.freq ? [["jitter", `×${sd.jitter.freq[0]}–${sd.jitter.freq[1]}`] as [string, string]] : []),
+    ...(sd.offBand ? [["off-band", esc(sd.offBand), "wide"] as [string, string, string]] : []),
+    ...Object.entries(sd.meta ?? {}).map(([k, v]) => [k, String(v)] as [string, string]),
+  ] as [string, string, string?][])
+    .map(([k, v, cls]) => `<div${cls ? ` class="${cls}"` : ""}><span class="dim">${k}</span>${v}</div>`)
+    .join("");
+
+  const variantHtml = variants.length
+    ? `<h4>variants</h4>${variants
+        .map(([name, v]) => {
+          const changes: string[] = [];
+          if (v.pitch) changes.push(`pitch ×${v.pitch}`);
+          if (v.stretch) changes.push(`stretch ×${v.stretch}`);
+          if (v.set) changes.push(...Object.entries(v.set).map(([k, val]) => `${k} = ${JSON.stringify(val)}`));
+          if (v.add?.length) changes.push(`+${v.add.length} voice${v.add.length > 1 ? "s" : ""}: ${v.add.map((x) => x.id).join(", ")}`);
+          if (v.remove?.length) changes.push(`−${v.remove.join(", ")}`);
+          return `<div class="sub-item"><code>#${esc(name)}</code><p>${esc(v.description)}</p><ul>${changes
+            .map((c) => `<li><code>${esc(c)}</code></li>`)
+            .join("")}</ul></div>`;
+        })
+        .join("")}`
+    : "";
+
+  const brief = [
+    `${sd.id} — ${sd.name} (${soundFileOf(sd)})`,
+    sd.description,
+    `${sd.duration}s, peak ${base.peakDb}dBFS, rms ${base.rmsDb}dBFS`,
+    `voices: ${sd.voices.map((v) => v.id).join(", ")}`,
+    ...(variants.length ? [`variants: ${variants.map(([n]) => n).join(", ")}`] : []),
+  ].join("\n");
+
+  return `<section class="detail" id="d-${slug(sd.id)}" hidden>
+  <div class="detail-head">
+    <button class="back" data-back>← ${esc(sd.tags[1] ?? sd.tags[0])}</button>
+    <h2>${esc(sd.name)}</h2>
+    <code class="big-id">${esc(sd.id)}</code>
+    <div class="spacer"></div>
+    <button data-copy="${esc(sd.id)}">copy id</button>
+    <button data-copy="${esc(soundFileOf(sd))}">copy path</button>
+    <button data-copy="${esc(brief)}" class="primary">copy brief</button>
+  </div>
+  <div class="detail-body snd">
+    <div class="viewer">
+      <div class="viewer-stage snd" data-stage><div class="zoomer" data-zoomer></div></div>
+      <p class="hint dim">Burst fires it the way the game will, with this document's jitter rolled per trigger — the only way to hear whether something that plays hundreds of times a run wears out.</p>
+    </div>
+    <div class="facts">
+      <p class="desc big">${esc(sd.description)}</p>
+      <div class="factgrid">${facts}</div>
+      <div class="tags">${sd.tags.map((t) => `<span>${esc(t)}</span>`).join("")}</div>
+      <h4>voices <span class="dim">mix order</span></h4>
+      <table class="parts"><tbody>${sd.voices.map(voiceRow).join("")}</tbody></table>
+      ${variantHtml}
+    </div>
+  </div>
+</section>`;
+}
+
+/**
+ * The one view a card cannot give you. Clipping is per sound and the cards
+ * report it, but "does this set hold together" is a question about the set, and
+ * it is answered by sorting twenty numbers and looking at the ends.
+ */
+function soundSet(sreg: SoundRegistry, issues: Issue[]): string {
+  const rows = [...sreg.sounds.values()]
+    .map((sd) => ({ sd, t: takesOf(sd, sreg, issues)[0] }))
+    .sort((a, b) => b.t.rmsDb - a.t.rmsDb);
+  const inBand = (sd: Sound) => sd.tags[0] !== "lib" && !sd.offBand;
+  const triggered = rows.filter((r) => inBand(r.sd)).map((r) => r.t.rmsDb).sort((a, b) => a - b);
+  const median = triggered.length ? triggered[Math.floor(triggered.length / 2)] : 0;
+  return `<table class="set">
+  <tr><th>sound</th><th>family</th><th></th><th>dur</th><th>peak</th><th>rms</th><th>vs median</th></tr>
+  ${rows
+    .map(({ sd, t }) => {
+      const off = !inBand(sd) ? "—" : `${t.rmsDb - median > 0 ? "+" : ""}${Math.round(t.rmsDb - median)}dB`;
+      const far = inBand(sd) && Math.abs(t.rmsDb - median) > 9;
+      return `<tr${far ? ' class="far"' : ""}${sd.offBand ? ` title="off-band on purpose: ${esc(sd.offBand)}"` : ""}>
+      <td><a href="#/${esc(sd.id)}">${esc(sd.id)}</a></td>
+      <td class="dim">${esc(sd.tags[1] ?? sd.tags[0])}</td>
+      <td><button data-play="${esc(t.wav)}" data-lo="1" data-hi="1" data-n="1">▸</button></td>
+      <td class="num">${t.dur}s</td><td class="num">${t.peakDb}</td><td class="num">${t.rmsDb}</td>
+      <td class="num">${off}</td></tr>`;
+    })
+    .join("")}
+</table>
+<p class="hint dim">Median of the triggered set: ${median} dBFS. Library documents are material rather than sounds the game fires, so they sit outside it. Anything more than 9dB out is flagged here and by <code>npm run check</code>.</p>`;
+}
+
 function swatches(tokens: Tokens): string {
   const rows = Object.entries(tokens.colors)
     .map(([name, hex]) => {
@@ -257,11 +457,25 @@ function swatches(tokens: Tokens): string {
     `<div class="tok"><h4>${title}</h4>${Object.entries(obj)
       .map(([k, v]) => `<div><code>${esc(k)}</code><span>${v}</span></div>`)
       .join("")}</div>`;
+  const audio = tokens.audio
+    ? `<h4>audio — pitch</h4>
+<div class="tokrow">${Object.entries(tokens.audio.pitch)
+        .map(
+          ([name, v]) => `<div class="tok pitch"><code>$${esc(name)}</code><div><span class="dim">base</span><span>${v}Hz</span></div>${Object.entries(
+            tokens.audio!.ramps,
+          )
+            .map(([r, f]) => `<div><span class="dim">.${esc(r)}</span><span>${Math.round(v * f * 100) / 100}</span></div>`)
+            .join("")}</div>`,
+        )
+        .join("")}</div>
+<div class="tokrow">${table("gain", tokens.audio.gain)}${table("q", tokens.audio.q)}${table("dur (s)", tokens.audio.dur)}${table("ramps (×)", tokens.audio.ramps)}</div>`
+    : "";
   return `<div class="swatches">${rows}</div>
-<div class="tokrow">${table("strokes", tokens.strokes)}${table("alpha", tokens.alpha)}${table("layers", tokens.layers)}<div class="tok"><h4>grid</h4><div><code>unit</code><span>${tokens.grid}px</span></div></div></div>`;
+<div class="tokrow">${table("strokes", tokens.strokes)}${table("alpha", tokens.alpha)}${table("layers", tokens.layers)}<div class="tok"><h4>grid</h4><div><code>unit</code><span>${tokens.grid}px</span></div></div></div>
+${audio}`;
 }
 
-export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): string {
+export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[], issues: Issue[]): string {
   const byCat = new Map<string, Asset[]>();
   for (const a of reg.assets.values()) byCat.set(a.tags[0], [...(byCat.get(a.tags[0]) ?? []), a]);
   const rank = (c: string) => {
@@ -280,7 +494,31 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
     )
     .join("\n");
 
-  const details = [...reg.assets.values()].map((a) => detailBlock(a, reg)).join("\n");
+  // Sounds ride the same rails: one card per document, the same #/<id> routing,
+  // the same search index. A workbench with the art in it and the audio in a
+  // second file is two workbenches.
+  const soundsByCat = new Map<string, Sound[]>();
+  for (const sd of sreg.sounds.values()) soundsByCat.set(soundCat(sd), [...(soundsByCat.get(soundCat(sd)) ?? []), sd]);
+  const srank = (c: string) => {
+    const i = SOUND_ORDER.indexOf(c.replace(/^snd-/, ""));
+    return i < 0 ? 999 : i;
+  };
+  const scats = [...soundsByCat.keys()].sort((a, b) => srank(a) - srank(b) || a.localeCompare(b));
+
+  const soundPanels = scats
+    .map(
+      (cat) =>
+        `<section class="panel" data-panel="${esc(cat)}" hidden><div class="grid snd">${soundsByCat
+          .get(cat)!
+          .map((sd) => soundCard(sd, sreg, issues))
+          .join("\n")}</div></section>`,
+    )
+    .join("\n");
+
+  const details = [
+    ...[...reg.assets.values()].map((a) => detailBlock(a, reg)),
+    ...[...sreg.sounds.values()].map((sd) => soundDetailBlock(sd, sreg, issues)),
+  ].join("\n");
 
   const themeSections = themes
     .map((theme) => {
@@ -300,6 +538,8 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
     // The landing tab is named here rather than inferred from position: the
     // sidebar's order is a reading order, and it has already changed once.
     ...cats.map((c, i) => `<button data-tab="${esc(c)}"${i === 0 ? " data-first" : ""}><span>${esc(c)}</span><i>${byCat.get(c)!.length}</i></button>`),
+    ...(scats.length ? [`<div class="group">sounds</div>`, `<button data-tab="snd-set"><span>the set</span><i>${sreg.sounds.size}</i></button>`] : []),
+    ...scats.map((c) => `<button data-tab="${esc(c)}"><span>${esc(c.replace(/^snd-/, ""))}</span><i>${soundsByCat.get(c)!.length}</i></button>`),
   ].join("");
 
   return `<!doctype html>
@@ -408,13 +648,36 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
   .tokrow { display:flex; gap:12px; flex-wrap:wrap; }
   .tok { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px 14px; min-width:130px; }
   .tok > div { display:flex; justify-content:space-between; gap:16px; }
+  /* sounds: a waveform wants width, not a square cell, so their grid is wider
+     and their cells stack instead of sitting side by side. */
+  .grid.snd { grid-template-columns: repeat(auto-fill, minmax(420px,1fr)); }
+  .row.snd { flex-direction:column; align-items:stretch; gap:12px; }
+  .cell.snd { align-items:stretch; gap:6px; }
+  .cell.snd .wave { position:relative; background:#0b0d12; border:1px solid var(--line); border-radius:6px; padding:4px 0; }
+  .cell.snd .wave svg { display:block; width:100%; height:auto; }
+  .cell.snd .norm { position:absolute; right:8px; top:5px; color:#2b3244; font-size:10px; }
+  .cell.snd figcaption { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .cell.snd .take { color:#e87ad0; font: 12px ui-monospace, monospace; min-width:52px; }
+  .cell.snd button { padding:2px 10px; font-size:12px; }
+  .viewer-stage.snd { background:none; border:none; padding:0; display:block; max-height:none; overflow:visible; }
+  .viewer-stage.snd .zoomer, .viewer-stage.snd .row { display:block; }
+  table.set { width:100%; max-width:900px; border-collapse:collapse; font-size:12px; }
+  table.set th { text-align:left; color:var(--dim); font-weight:400; padding-bottom:6px; border-bottom:1px solid var(--line); }
+  table.set td { padding:4px 16px 4px 0; border-bottom:1px solid #1b2030; }
+  table.set td.num { text-align:right; color:#bce05a; font-variant-numeric:tabular-nums; }
+  table.set tr:hover td { background:#171b28; }
+  table.set tr.far td, table.set tr.far td.num { color:#ff9b3d; }
+  table.set a { color:var(--acc); text-decoration:none; } table.set a:hover { text-decoration:underline; }
+  table.set button { padding:0 8px; }
+  .tok.pitch { min-width:150px; }
+  .tok.pitch code { display:block; margin-bottom:4px; }
   .empty { color:var(--dim); padding:40px 0; }
   @media (max-width: 1000px) { .detail-body { grid-template-columns:1fr; } .viewer { position:static; } }
   @media (max-width: 760px) { body { grid-template-columns:1fr; } .side { position:static; height:auto; border-right:none; border-bottom:1px solid var(--line); } }
 </style>
 
 <aside class="side">
-  <div class="brand"><h1>PolyGraphics</h1><div class="sub">${reg.assets.size} assets · ${cats.length} categories</div></div>
+  <div class="brand"><h1>PolyGraphics</h1><div class="sub">${reg.assets.size} assets · ${sreg.sounds.size} sounds</div></div>
   <input id="q" type="search" placeholder="search…  ( / )">
   <nav>${tabs}</nav>
   <span id="live"><b></b> live · reloads on rebuild</span>
@@ -423,6 +686,8 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
 <main>
   <section class="panel" data-panel="tokens" hidden>${swatches(reg.tokens)}</section>
   ${panels}
+  ${sreg.sounds.size ? `<section class="panel" data-panel="snd-set" hidden>${soundSet(sreg, issues)}</section>` : ""}
+  ${soundPanels}
   <section class="panel" data-panel="themes" hidden>${themeSections}</section>
   <section class="panel" data-panel="__search" hidden><div class="grid" id="results"></div><p class="empty" id="noresults" hidden>nothing matches.</p></section>
   ${details}
@@ -472,7 +737,9 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
   // Zoom belongs to the viewer, so it is set on the viewer's own element. Put
   // it on the borrowed row instead and the row carries it home: the card comes
   // back rendered at 2x and reflows the grid until the next reload.
-  const applyZoom = (d) => { $('[data-zoomer]', d).style.zoom = $('[data-zoom]', d).value; };
+  // Sound details borrow the same viewer plumbing but have no zoom control —
+  // there is nothing to look closer at.
+  const applyZoom = (d) => { const z = $('[data-zoom]', d); if (z) $('[data-zoomer]', d).style.zoom = z.value; };
 
   const route = () => {
     const m = location.hash.match(/^#\\/(.+)$/);
@@ -518,6 +785,7 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
 
   // ---- viewer controls
   $$('.detail').forEach(d => {
+    if (!$('[data-zoom]', d)) return;
     $('[data-zoom]', d).oninput = () => applyZoom(d);
     const stage = $('[data-stage]', d);
     $('[data-silhouette]', d).onchange = (e) => stage.classList.toggle('sil', e.target.checked);
@@ -533,6 +801,8 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
   document.addEventListener('click', (e) => {
     const card = e.target.closest('.card');
     if (!card || !card.dataset.id) return;
+    // A transport button inside a card is a control, not a way into the detail.
+    if (e.target.closest('button')) return;
     // A drag that selected text was not a click on the card.
     if (String(getSelection())) return;
     location.hash = '#/' + card.dataset.id;
@@ -542,6 +812,32 @@ export function buildGallery(reg: Registry, themes: Theme[], issues: Issue[]): s
     if (!card || (e.key !== 'Enter' && e.key !== ' ')) return;
     e.preventDefault();
     location.hash = '#/' + card.dataset.id;
+  });
+
+  // ---- transport: the bake next door, decoded once and replayed with a
+  // jittered rate. Nothing is fetched until something is played.
+  let actx = null;
+  const buffers = new Map();
+  const load = (src) => {
+    if (!buffers.has(src)) buffers.set(src, fetch(src).then(r => r.arrayBuffer()).then(b => actx.decodeAudioData(b)));
+    return buffers.get(src);
+  };
+  document.addEventListener('click', async (e) => {
+    const b = e.target.closest('[data-play]');
+    if (!b) return;
+    actx = actx || new AudioContext();
+    await actx.resume();
+    let buf;
+    try { buf = await load(b.dataset.play); }
+    catch { b.textContent = 'no bake'; return; }
+    const lo = +b.dataset.lo, hi = +b.dataset.hi, n = +b.dataset.n;
+    for (let i = 0; i < n; i++) {
+      const s = actx.createBufferSource();
+      s.buffer = buf;
+      s.playbackRate.value = lo + Math.random() * (hi - lo);
+      s.connect(actx.destination);
+      s.start(actx.currentTime + i * (buf.duration < 0.12 ? 0.07 : buf.duration * 0.75));
+    }
   });
 
   // ---- copy buttons

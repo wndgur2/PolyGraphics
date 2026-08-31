@@ -1,0 +1,56 @@
+{
+  "id": "ss.lib.knell",
+  "name": "Knell",
+  "description": "The interface note's opposite number: a long sawtooth an octave down, for the figure that plays when a run ends. Same scale as the bright one, so a loss and a win are audibly the same instrument in two moods.",
+  "tags": [
+    "lib",
+    "interface"
+  ],
+  "duration": 0.28,
+  "voices": [
+    {
+      "id": "tone",
+      "gain": "loud",
+      "source": {
+        "kind": "osc",
+        "wave": "sawtooth",
+        "freq": "$seventh.down"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "variants": {
+    "fifth": {
+      "description": "A step down the descent.",
+      "set": {
+        "tone.source.freq": "$fifth.down"
+      }
+    },
+    "third": {
+      "description": "Another step down.",
+      "set": {
+        "tone.source.freq": "$third.down"
+      }
+    },
+    "low": {
+      "description": "The bottom of the fall, an octave under where it started.",
+      "set": {
+        "tone.source.freq": "$seventh.down2"
+      }
+    }
+  }
+}
