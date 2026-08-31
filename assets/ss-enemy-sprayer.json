@@ -1,0 +1,43 @@
+{
+  "id": "ss.enemy.sprayer",
+  "name": "Sprayer",
+  "description": "The burrow's ranged caste: it turns its own gaster over its back and points the acidopore down the passage. That posture is the entire silhouette and the entire tell — a sac carried high with a spout aimed forward, so a body holding still at the far end of a corridor still reads as loaded. Teal for the same reason the Gland is: the bolt it fires is `ss.enemy.shot`, and a shooter should be the colour of what it throws. No `elite` variant on purpose — the marking only ever lands on a body the wave table is spawning, and this one arrives in squads. Drawn facing +x, the game flips it. Gameplay radius 10.",
+  "tags": ["ss-enemy", "sprayer"],
+  "size": [32, 28],
+  "meta": {"radius": 10},
+  "parts": [
+    {"id": "leg_b", "at": [-7, 8.2], "rot": 22, "shape": {"kind": "rect", "w": 2.8, "h": 8, "corner": 1.4}, "fill": "$carapace.dark2"},
+    {"id": "leg_m", "at": [0, 9], "rot": 4, "shape": {"kind": "rect", "w": 2.8, "h": 8.4, "corner": 1.4}, "fill": "$carapace.dark2"},
+    {"id": "leg_f", "at": [6.4, 8.2], "rot": -20, "shape": {"kind": "rect", "w": 2.8, "h": 8, "corner": 1.4}, "fill": "$carapace.dark2"},
+    {"id": "thorax", "at": [-1.4, 3.4], "shape": {"kind": "ellipse", "rx": 5, "ry": 4.2}, "fill": "$spore.dark2", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "head", "at": [5, 4.2], "shape": {"kind": "ellipse", "rx": 3.8, "ry": 3.6}, "fill": "$spore.dark2", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "maw", "at": [8.4, 4.4], "shape": {"kind": "poly", "points": [[2.2, -2], [-1.6, -2.4], [-1.6, 2.4], [2.2, 2], [0.4, 0]]}, "fill": "$ink"},
+    {"id": "antenna", "at": [8.6, 0.8], "rot": 48, "shape": {"kind": "rect", "w": 1.2, "h": 5, "corner": 0.6}, "fill": "$spore.dark"},
+    {"id": "stalk", "at": [-4.6, 1], "rot": 34, "shape": {"kind": "rect", "w": 3.4, "h": 5.6, "corner": 1.6}, "fill": "$spore.dark2"},
+    {"id": "gaster", "at": [-5.4, -3.6], "rot": -16, "shape": {"kind": "ellipse", "rx": 7.2, "ry": 5.8}, "fill": "$spore.dark", "stroke": {"color": "$ink", "width": "bold"}},
+    {"id": "gleam", "at": [-7.6, -5.6], "rot": -16, "shape": {"kind": "ellipse", "rx": 3.6, "ry": 2.2}, "fill": "$spore.light"},
+    {"id": "neck", "at": [2.4, -6.2], "shape": {"kind": "poly", "points": [[-3.6, 2.4], [-1.4, -2], [3.4, -1.4], [2.6, 2.8]]}, "fill": "$spore.dark2"},
+    {"id": "nozzle", "at": [6.6, -6.6], "shape": {"kind": "poly", "points": [[-1.6, -2.4], [5, 0], [-1.6, 2.4], [0.4, 0]]}, "fill": "$spore.light"},
+    {"id": "drip", "at": [11.4, -6.6], "shape": {"kind": "circle", "r": 1.9}, "fill": "$silent"},
+    {"id": "organ", "use": "ss.lib.organ", "at": [-0.4, 0.6], "scale": 0.42}
+  ],
+  "animations": {
+    "charge": {
+      "description": "loading — the sac draws up and swells, the pressure runs out along the neck and gathers at the pore, and the head goes on scanning while it happens",
+      "duration": 1.5,
+      "tracks": [
+        {"part": "gaster", "prop": "scale", "keys": [[0, 1], [0.55, 1.07], [1, 1]]},
+        {"part": "gaster", "prop": "y", "keys": [[0, 0], [0.55, -0.9], [1, 0]]},
+        {"part": "gleam", "prop": "opacity", "keys": [[0, 0.6], [0.55, 1], [1, 0.6]]},
+        {"part": "nozzle", "prop": "scale", "keys": [[0, 0.94], [0.62, 1.08], [1, 0.94]]},
+        {"part": "drip", "prop": "scale", "keys": [[0, 0.5], [0.72, 1.25], [0.86, 0.4], [1, 0.5]]},
+        {"part": "drip", "prop": "opacity", "keys": [[0, 0.45], [0.72, 1], [0.88, 0.3], [1, 0.45]]},
+        {"part": "head", "prop": "rot", "keys": [[0, -5], [0.5, 6], [1, -5]]},
+        {"part": "antenna", "prop": "rot", "keys": [[0, 48], [0.5, 36], [1, 48]]},
+        {"part": "leg_b", "prop": "rot", "keys": [[0, 22], [0.5, 27], [1, 22]]},
+        {"part": "leg_f", "prop": "rot", "keys": [[0, -20], [0.5, -15], [1, -20]]},
+        {"part": "organ", "prop": "scale", "keys": [[0, 0.4], [0.5, 0.46], [1, 0.4]]}
+      ]
+    }
+  }
+}

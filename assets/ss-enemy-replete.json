@@ -1,0 +1,60 @@
+{
+  "id": "ss.enemy.replete",
+  "name": "Replete",
+  "description": "A worker the nest filled up and stopped sending anywhere — the honeypot caste, hung in a store chamber until something needs feeding. The whole body is the larder: a pale stretched sac with the amber it is holding showing through, towed by a head and thorax too small to have any say in it. It is not coming for you, it is in the way, and in a passage 130px wide those are the same sentence. Pale shell rather than an amber one so it cannot be confused with the Tracker it outweighs, and the bright contents are deliberately the biggest target on the body. Drawn facing +x, the game flips it. Gameplay radius 13.",
+  "tags": ["ss-enemy", "replete"],
+  "size": [36, 32],
+  "meta": {"radius": 13},
+  "parts": [
+    {"id": "leg_b", "at": [-10.4, 10.4], "rot": 22, "shape": {"kind": "rect", "w": 3.6, "h": 8.4, "corner": 1.8}, "fill": "$carapace.dark2"},
+    {"id": "leg_m", "at": [-2.4, 11.6], "rot": 6, "shape": {"kind": "rect", "w": 3.6, "h": 8.4, "corner": 1.8}, "fill": "$carapace.dark2"},
+    {"id": "leg_f", "at": [6.6, 6.6], "rot": -20, "shape": {"kind": "rect", "w": 3, "h": 7.4, "corner": 1.5}, "fill": "$carapace.dark2"},
+    {"id": "gaster", "at": [-5, 1], "shape": {"kind": "ellipse", "rx": 11.5, "ry": 10}, "fill": "$husk", "stroke": {"color": "$ink", "width": "bold"}},
+    {"id": "crop", "at": [-5.4, 2], "shape": {"kind": "ellipse", "rx": 8.4, "ry": 7.2}, "fill": "$chitin.light2"},
+    {"id": "stores", "at": [-5.4, 2], "repeat": {"of": {"kind": "circle", "r": 2.2}, "count": 6, "area": [11, 9], "seed": 3, "scaleRange": [0.7, 1.15]}, "fill": "$chitin@soft"},
+    {"id": "seam_a", "at": [-5, 1], "shape": {"kind": "ring", "r": 8.6, "width": 1.4, "from": -128, "to": -52}, "fill": "$husk.dark2"},
+    {"id": "seam_b", "at": [-5, 1], "shape": {"kind": "ring", "r": 8.6, "width": 1.4, "from": 52, "to": 128}, "fill": "$husk.dark2"},
+    {"id": "gloss", "at": [-9, -3.6], "rot": -28, "shape": {"kind": "ellipse", "rx": 3.8, "ry": 2.2}, "fill": "$white@soft"},
+    {"id": "waist", "at": [5.2, 0.4], "shape": {"kind": "rect", "w": 3.6, "h": 3.8, "corner": 1.8}, "fill": "$dead"},
+    {"id": "thorax", "at": [8, -0.6], "shape": {"kind": "ellipse", "rx": 4.2, "ry": 3.8}, "fill": "$dead", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "head", "at": [12.8, 0.6], "shape": {"kind": "ellipse", "rx": 3.6, "ry": 3.4}, "fill": "$dead", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "mandible", "at": [15.4, 0.8], "shape": {"kind": "poly", "points": [[2.2, -2], [-1.6, -2.2], [-1.6, 2.2], [2.2, 2], [0.4, 0]]}, "fill": "$husk.dark"},
+    {"id": "antenna", "at": [14.6, -3.4], "rot": 58, "shape": {"kind": "rect", "w": 1.2, "h": 5.2, "corner": 0.6}, "fill": "$husk.dark2"},
+    {"id": "organ", "use": "ss.lib.organ", "at": [7.4, -3.8], "scale": 0.4}
+  ],
+  "variants": {
+    "elite": {
+      "description": "Filled past what the shell was for: the sac bleached to bone, the contents burning through it, and a split opened along one seam that has not let go yet.",
+      "scale": 1.25,
+      "set": {
+        "gaster.fill": "$bone.light",
+        "crop.fill": "$white",
+        "stores.fill": "$chitin.light@heavy",
+        "seam_a.fill": "$ink",
+        "organ.scale": 0.54
+      },
+      "add": [
+        {"id": "split", "at": [-6, -7.4], "rot": -14, "shape": {"kind": "poly", "points": [[-7, 0], [-2.4, -1.6], [2, 1.2], [7, -1], [7, 1], [2, 2.4], [-2.4, -0.4]]}, "fill": "$ink"}
+      ]
+    }
+  },
+  "animations": {
+    "heave": {
+      "description": "the load working — the sac fills and settles, what is in it drifts a beat behind the shell, and the legs take the weight late",
+      "duration": 1.8,
+      "tracks": [
+        {"part": "gaster", "prop": "scale", "keys": [[0, 1], [0.5, 1.045], [1, 1]]},
+        {"part": "crop", "prop": "scale", "keys": [[0, 1], [0.5, 1.07], [1, 1]]},
+        {"part": "stores", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]]},
+        {"part": "gloss", "prop": "opacity", "keys": [[0, 0.5], [0.5, 0.85], [1, 0.5]]},
+        {"part": "leg_b", "prop": "rot", "keys": [[0, 22], [0.5, 28], [1, 22]]},
+        {"part": "leg_m", "prop": "rot", "keys": [[0, 6], [0.5, -4], [1, 6]]},
+        {"part": "leg_f", "prop": "rot", "keys": [[0, -20], [0.5, -12], [1, -20]]},
+        {"part": "thorax", "prop": "y", "keys": [[0, 0], [0.5, -0.8], [1, 0]]},
+        {"part": "head", "prop": "rot", "keys": [[0, 0], [0.5, -7], [1, 0]]},
+        {"part": "antenna", "prop": "rot", "keys": [[0, 58], [0.5, 48], [1, 58]]},
+        {"part": "organ", "prop": "scale", "keys": [[0, 0.38], [0.5, 0.44], [1, 0.38]]}
+      ]
+    }
+  }
+}
