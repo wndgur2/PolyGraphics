@@ -1,0 +1,489 @@
+{
+  "id": "ss.relic.venom",
+  "name": "Septic acid",
+  "description": "A drop of something gone bad, and the hole it has already eaten through a plate of carapace: a bead hanging over a slab of dark husk with a ragged pit burnt clean through the middle of it, the pit's edge corroded green and still frothing. The hole is the point — the ability is damage that keeps working after the hit lands, and a hole is the only way to draw a wound that is still getting worse. Three things keep it from reading as an eye, which is how the first spiracle failed: the pit is irregular, the slab is dark rather than pale, and the green sits off-centre — corrosion piles up on the side the drop lands and runs out before it gets round, so there is no iris. Not ss.relic.might either, the other green thing on the shelf — that one is a sac, a container of live fluid, and this is fluid that has already left the container and is busy.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "slab_outline",
+      "at": [
+        0,
+        3.4
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -12.2,
+            -3.0
+          ],
+          [
+            -6.2,
+            -5.0
+          ],
+          [
+            1.1,
+            -5.5
+          ],
+          [
+            8.2,
+            -4.3
+          ],
+          [
+            11.9,
+            -2.2
+          ],
+          [
+            11.3,
+            4.2
+          ],
+          [
+            5.4,
+            6.9
+          ],
+          [
+            -3.2,
+            7.3
+          ],
+          [
+            -10.2,
+            5.3
+          ],
+          [
+            -12.4,
+            1.7
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "slab",
+      "at": [
+        0,
+        3.4
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -11.2,
+            -2.6
+          ],
+          [
+            -6.0,
+            -4.2
+          ],
+          [
+            1.0,
+            -4.6
+          ],
+          [
+            7.6,
+            -3.6
+          ],
+          [
+            11.0,
+            -1.8
+          ],
+          [
+            10.4,
+            3.6
+          ],
+          [
+            5.0,
+            6.0
+          ],
+          [
+            -3.0,
+            6.4
+          ],
+          [
+            -9.4,
+            4.6
+          ],
+          [
+            -11.4,
+            1.4
+          ]
+        ]
+      },
+      "fill": "$husk.dark2"
+    },
+    {
+      "id": "slab_lit",
+      "at": [
+        0,
+        2.6
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -9.8,
+            -2.3
+          ],
+          [
+            -5.3,
+            -3.7
+          ],
+          [
+            0.9,
+            -4.0
+          ],
+          [
+            6.7,
+            -3.2
+          ],
+          [
+            9.7,
+            -1.6
+          ],
+          [
+            9.2,
+            2.2
+          ],
+          [
+            4.4,
+            4.2
+          ],
+          [
+            -2.6,
+            4.5
+          ],
+          [
+            -8.3,
+            3.2
+          ],
+          [
+            -10.0,
+            1.2
+          ]
+        ]
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "burn",
+      "at": [
+        -0.9,
+        1.2
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -6.45,
+            -0.9
+          ],
+          [
+            -4.65,
+            -3.45
+          ],
+          [
+            -1.2,
+            -4.2
+          ],
+          [
+            2.85,
+            -3.6
+          ],
+          [
+            5.85,
+            -1.65
+          ],
+          [
+            6.45,
+            1.05
+          ],
+          [
+            3.9,
+            3.75
+          ],
+          [
+            0.3,
+            4.35
+          ],
+          [
+            -3.6,
+            3.6
+          ],
+          [
+            -6.0,
+            1.8
+          ]
+        ]
+      },
+      "fill": "$venom.dark2"
+    },
+    {
+      "id": "corrode",
+      "at": [
+        -0.7,
+        1.4
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.42,
+            -0.76
+          ],
+          [
+            -3.91,
+            -2.9
+          ],
+          [
+            -1.01,
+            -3.53
+          ],
+          [
+            2.39,
+            -3.02
+          ],
+          [
+            4.91,
+            -1.39
+          ],
+          [
+            5.42,
+            0.88
+          ],
+          [
+            3.28,
+            3.15
+          ],
+          [
+            0.25,
+            3.65
+          ],
+          [
+            -3.02,
+            3.02
+          ],
+          [
+            -5.04,
+            1.51
+          ]
+        ]
+      },
+      "fill": "$venom.dark"
+    },
+    {
+      "id": "pit",
+      "at": [
+        1.0,
+        2.7
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.3,
+            -0.6
+          ],
+          [
+            -3.1,
+            -2.3
+          ],
+          [
+            -0.8,
+            -2.8
+          ],
+          [
+            1.9,
+            -2.4
+          ],
+          [
+            3.9,
+            -1.1
+          ],
+          [
+            4.3,
+            0.7
+          ],
+          [
+            2.6,
+            2.5
+          ],
+          [
+            0.2,
+            2.9
+          ],
+          [
+            -2.4,
+            2.4
+          ],
+          [
+            -4.0,
+            1.2
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "froth_a",
+      "at": [
+        -5.0,
+        -0.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.15
+      },
+      "fill": "$venom.light"
+    },
+    {
+      "id": "froth_b",
+      "at": [
+        -2.6,
+        5.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.85
+      },
+      "fill": "$venom"
+    },
+    {
+      "id": "froth_c",
+      "at": [
+        -5.6,
+        2.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.6
+      },
+      "fill": "$venom.light2"
+    },
+    {
+      "id": "drop_outline",
+      "at": [
+        0.6,
+        -6.6
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            -6.0
+          ],
+          [
+            2.2,
+            -1.9
+          ],
+          [
+            2.9,
+            0.8
+          ],
+          [
+            1.8,
+            3.3
+          ],
+          [
+            -1.8,
+            3.3
+          ],
+          [
+            -2.9,
+            0.8
+          ],
+          [
+            -2.2,
+            -1.9
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "drop",
+      "at": [
+        0.6,
+        -6.6
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            -4.9
+          ],
+          [
+            1.6,
+            -1.6
+          ],
+          [
+            2.1,
+            0.6
+          ],
+          [
+            1.3,
+            2.4
+          ],
+          [
+            -1.3,
+            2.4
+          ],
+          [
+            -2.1,
+            0.6
+          ],
+          [
+            -1.6,
+            -1.6
+          ]
+        ]
+      },
+      "fill": "$venom.dark"
+    },
+    {
+      "id": "drop_lit",
+      "at": [
+        0.4,
+        -6.0
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.35,
+        "ry": 1.7
+      },
+      "fill": "$venom"
+    },
+    {
+      "id": "drop_gleam",
+      "at": [
+        -0.5,
+        -7.2
+      ],
+      "rot": -22,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 0.5,
+        "ry": 1.1
+      },
+      "fill": "$venom.light2"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}
