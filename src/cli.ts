@@ -96,8 +96,15 @@ function lintPalette(tokens: Tokens, issues: Issue[]): void {
 function dryRun(reg: Registry, themes: Theme[], issues: Issue[]): void {
   for (const asset of reg.assets.values()) {
     issues.push(...renderSVG(asset, reg).issues);
-    for (const v of Object.keys(asset.variants ?? {}))
+    for (const [v, patch] of Object.entries(asset.variants ?? {})) {
       issues.push(...renderSVG(asset, reg, { variant: v }).issues);
+      // A state against the clips it says it is drawn for. Neither of the two
+      // passes around this one covers that combination, so a pairing could name
+      // a part its own variant had removed and nothing would say so until the
+      // gallery drew it.
+      for (const anim of patch.animations ?? [])
+        issues.push(...renderSVG(asset, reg, { variant: v, animation: anim }).issues);
+    }
     for (const anim of Object.keys(asset.animations ?? {}))
       issues.push(...renderSVG(asset, reg, { animation: anim }).issues);
   }

@@ -194,13 +194,43 @@ function assetCard(asset: Asset, reg: Registry, issues: Issue[]): string {
   // A cell per animation, not just the first. A document may carry a walk and
   // a windup, and the second one was listed in the meta line and then never
   // playable anywhere — which is the one thing a gallery is for.
-  const cells: string[] = anims.length
-    ? anims.map((name) => cell(asset, reg, issues, `base · ▸ ${name}`, { animation: name }))
+  /**
+   * A clip a state has claimed belongs to that state, and not also to the base.
+   *
+   * Otherwise the page draws it twice and one of the two is a pose nothing
+   * bakes: a Lance's fill on the whole bow-and-barb is a bow that has not let
+   * go watching its own barb swell, which is not a thing this creature does.
+   * Claimed clips move down to their state's row; anything unclaimed stays here,
+   * which is every clip in every other document.
+   */
+  const claimed = new Set(
+    Object.values(asset.variants ?? {}).flatMap((v) => v.animations ?? []),
+  );
+  const onBase = anims.filter((name) => !claimed.has(name));
+  const cells: string[] = onBase.length
+    ? onBase.map((name) => cell(asset, reg, issues, `base · ▸ ${name}`, { animation: name }))
     : [cell(asset, reg, issues, "base")];
-  // Variants stay on the first: every variant against every animation is a
-  // grid that grows by multiplication, and the variants are a colour question.
-  for (const v of Object.keys(asset.variants ?? {}))
-    cells.push(cell(asset, reg, issues, `#${v}`, { variant: v, animation: firstAnim }));
+  /**
+   * A state, against the clips it is drawn to be played with.
+   *
+   * Variants used to be shown against the first animation and no other, which
+   * hid the case the machinery exists for: a state with a clip of its own,
+   * played on the body that state describes. Showing every pairing instead is
+   * worse — a state and a clip are separate axes and most of the grid between
+   * them is nonsense.
+   *
+   * So the document says. `variant.animations` lists them in the order they
+   * happen; `[]` is a still. Where it is absent — which is every variant that
+   * is a recolour, and most of this roster — the old behaviour stands: one
+   * cell, on the first clip, because a recoloured body walks the same way.
+   */
+  for (const [v, patch] of Object.entries(asset.variants ?? {})) {
+    const named = patch.animations;
+    const clips = named ?? (firstAnim ? [firstAnim] : []);
+    if (!clips.length) cells.push(cell(asset, reg, issues, `#${v}`, { variant: v }));
+    for (const name of clips)
+      cells.push(cell(asset, reg, issues, `#${v} · ▸ ${name}`, { variant: v, animation: name }));
+  }
   const meta: string[] = [`${asset.size[0]}×${asset.size[1]}`];
   if (anims.length) meta.push(`anim: ${anims.join(", ")}`);
   const hay = `${asset.id} ${asset.name} ${asset.description} ${asset.tags.join(" ")} ${asset.parts.map((p) => p.id).join(" ")}`;

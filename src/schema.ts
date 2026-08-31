@@ -121,6 +121,21 @@ export const VariantSchema = z.strictObject({
   set: z.record(z.string(), z.unknown()).optional(),
   add: z.array(PartSchema).optional(),
   remove: z.array(partId).optional(),
+  /**
+   * The clips this state is drawn to be played with, in the order they happen.
+   * `[]` means it is a still — a state that plays nothing.
+   *
+   * A state and a clip are separate axes and most pairings between them are
+   * nonsense, but which pairings are not was only ever written down in the
+   * consuming game. So the gallery guessed, and guessed wrong in both
+   * directions: it played a Lance's fill on the whole bow-and-barb, a pose
+   * nothing bakes, and drew the spent bow still when its entire purpose is to
+   * unwind. Omit it and the gallery goes back to guessing, which is right for
+   * a variant that is a recolour; state it and the document says what it means.
+   *
+   * Names are checked against this document's own animations.
+   */
+  animations: z.array(z.string()).optional(),
 });
 export type Variant = z.infer<typeof VariantSchema>;
 

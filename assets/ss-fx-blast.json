@@ -1,0 +1,49 @@
+{
+  "id": "ss.fx.blast",
+  "name": "Barb burst",
+  "description": "What is inside a Lance's barb, once the barb is not holding it any more. Authored so the outer ring reaches r=30, which is the number the game scales by: a 62px blast draws this at 62/30. The canvas is 80 rather than the 64 that ring fits in, because it fits it exactly — at full expansion the stroke landed on the boundary and the bang came out with a square cut across it. Acid rather than fire — the core runs gold through bile out to venom, the shell comes apart into six chips of its own green, and what lands stays as spatter for the moment the flash is gone. Nothing here is frost or magenta: frost-white is what the player's own weapons break shell with, and magenta is the hive broadcasting, so an enemy detonation has to be neither. Spawn it at the point the barb was standing in.",
+  "tags": ["ss-fx", "hit"],
+  "size": [80, 80],
+  "seed": 41,
+  "parts": [
+    { "id": "scorch", "shape": { "kind": "circle", "r": 17 }, "fill": "$dead@heavy" },
+    { "id": "spatter", "repeat": { "of": { "kind": "circle", "r": 2.1 }, "count": 14, "area": [46, 46], "seed": 41, "scaleRange": [0.5, 1.4] }, "fill": "$venom.dark@heavy" },
+    { "id": "shock", "shape": { "kind": "ring", "r": 26, "width": 3.5 }, "fill": "$bile" },
+    { "id": "core", "shape": { "kind": "circle", "r": 15 }, "fill": { "gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$gold.light"], [0.45, "$bile"], [1, "$venom@0.15"]] } },
+    { "id": "flare", "shape": { "kind": "star", "points": 6, "r": 24, "r2": 4.5, "rot": 12 }, "fill": "$gold.light@heavy" },
+    { "id": "chip_a", "at": [9, -7], "rot": 28, "shape": { "kind": "poly", "points": [[0, -2.6], [3.8, 0.4], [-1.4, 2.4]] }, "fill": "$venom.dark2" },
+    { "id": "chip_b", "at": [-9.5, -5], "rot": -42, "shape": { "kind": "poly", "points": [[0, -2.2], [3.2, 0.6], [-1.6, 2]] }, "fill": "$venom.dark" },
+    { "id": "chip_c", "at": [7, 9], "rot": 72, "shape": { "kind": "poly", "points": [[0, -2], [3, 0.4], [-1.4, 2]] }, "fill": "$venom.dark2" },
+    { "id": "chip_d", "at": [-7.5, 8], "rot": 128, "shape": { "kind": "poly", "points": [[0, -1.9], [2.8, 0.5], [-1.3, 1.9]] }, "fill": "$husk.dark2" }
+  ],
+  "animations": {
+    "play": {
+      "description": "The order matters more than the length. The flare is gone before the eye finds it, which is what makes it read as a bang rather than a light; the ring is the thing that actually says how far the damage went, so it is the one that survives to full size; and the scorch and spatter outlast both, because the ground should still be telling you something happened after the flash has stopped telling you anything. A third of a second, all in.",
+      "duration": 0.34,
+      "tracks": [
+        { "part": "flare", "prop": "scale", "keys": [[0, 0.3], [0.28, 1.15], [1, 1.2]], "ease": "backOut" },
+        { "part": "flare", "prop": "opacity", "keys": [[0, 1], [0.22, 0.7], [0.5, 0]] },
+        { "part": "core", "prop": "scale", "keys": [[0, 0.25], [0.35, 1.1], [1, 0.85]], "ease": "backOut" },
+        { "part": "core", "prop": "opacity", "keys": [[0, 1], [0.4, 0.85], [1, 0]] },
+        { "part": "shock", "prop": "scale", "keys": [[0, 0.18], [1, 1.15]], "ease": "backOut" },
+        { "part": "shock", "prop": "opacity", "keys": [[0, 0.9], [0.6, 0.55], [1, 0]] },
+        { "part": "scorch", "prop": "scale", "keys": [[0, 0.4], [0.5, 1.05], [1, 1.15]] },
+        { "part": "scorch", "prop": "opacity", "keys": [[0, 0.75], [0.7, 0.55], [1, 0.25]] },
+        { "part": "spatter", "prop": "scale", "keys": [[0, 0.35], [0.6, 1], [1, 1.05]], "ease": "backOut" },
+        { "part": "spatter", "prop": "opacity", "keys": [[0, 0], [0.25, 1], [1, 0.45]] },
+        { "part": "chip_a", "prop": "x", "keys": [[0, 3], [1, 15]], "ease": "backOut" },
+        { "part": "chip_a", "prop": "y", "keys": [[0, -2], [1, -11]], "ease": "backOut" },
+        { "part": "chip_b", "prop": "x", "keys": [[0, -3.5], [1, -16]], "ease": "backOut" },
+        { "part": "chip_b", "prop": "y", "keys": [[0, -2], [1, -9]], "ease": "backOut" },
+        { "part": "chip_c", "prop": "x", "keys": [[0, 2.5], [1, 12]], "ease": "backOut" },
+        { "part": "chip_c", "prop": "y", "keys": [[0, 3], [1, 15]], "ease": "backOut" },
+        { "part": "chip_d", "prop": "x", "keys": [[0, -2.5], [1, -12]], "ease": "backOut" },
+        { "part": "chip_d", "prop": "y", "keys": [[0, 3], [1, 14]], "ease": "backOut" },
+        { "part": "chip_a", "prop": "opacity", "keys": [[0, 1], [0.7, 0.9], [1, 0]] },
+        { "part": "chip_b", "prop": "opacity", "keys": [[0, 1], [0.7, 0.9], [1, 0]] },
+        { "part": "chip_c", "prop": "opacity", "keys": [[0, 1], [0.7, 0.9], [1, 0]] },
+        { "part": "chip_d", "prop": "opacity", "keys": [[0, 1], [0.7, 0.9], [1, 0]] }
+      ]
+    }
+  }
+}
