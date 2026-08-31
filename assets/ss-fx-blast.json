@@ -1,9 +1,9 @@
 {
   "id": "ss.fx.blast",
   "name": "Barb burst",
-  "description": "What is inside a Lance's barb, once the barb is not holding it any more. Authored so the outer ring reaches r=30 on a 64px canvas, which is the number the game scales by: a 62px blast draws this at 62/30. Acid rather than fire — the core runs gold through bile out to venom, the shell comes apart into six chips of its own green, and what lands stays as spatter for the moment the flash is gone. Nothing here is frost or magenta: frost-white is what the player's own weapons break shell with, and magenta is the hive broadcasting, so an enemy detonation has to be neither. Spawn it at the point the barb was standing in.",
+  "description": "What is inside a Lance's barb, once the barb is not holding it any more. Authored so the outer ring reaches r=30, which is the number the game scales by: a 62px blast draws this at 62/30. The canvas is 80 rather than the 64 that ring fits in, because it fits it exactly — at full expansion the stroke landed on the boundary and the bang came out with a square cut across it. Acid rather than fire — the core runs gold through bile out to venom, the shell comes apart into six chips of its own green, and what lands stays as spatter for the moment the flash is gone. Nothing here is frost or magenta: frost-white is what the player's own weapons break shell with, and magenta is the hive broadcasting, so an enemy detonation has to be neither. Spawn it at the point the barb was standing in.",
   "tags": ["ss-fx", "hit"],
-  "size": [64, 64],
+  "size": [80, 80],
   "seed": 41,
   "parts": [
     { "id": "scorch", "shape": { "kind": "circle", "r": 17 }, "fill": "$dead@heavy" },
