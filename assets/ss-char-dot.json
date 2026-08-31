@@ -1,0 +1,31 @@
+{
+  "id": "ss.char.dot",
+  "name": "Dot",
+  "description": "A survivor of the same brood as everything hunting you — same antennae, same organ, same socket in the shell. The organ is `dead`: no halo, no bloom, a hairline crack across cold grey. That silence is the entire premise, and every one of the eight characters wears it in the same place. Dot is the sealed sphere: nothing leaks out of it at all.",
+  "tags": ["ss-char"],
+  "size": [32, 32],
+  "meta": { "radius": 11.5 },
+  "parts": [
+    { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [1.6, -10.2], "rot": -38, "scale": 0.52 },
+    { "id": "shell", "shape": { "kind": "circle", "r": 11.5 }, "fill": "$frost", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "core", "at": [-0.8, -0.8], "shape": { "kind": "circle", "r": 8.8 }, "fill": "$frost.light2" },
+    { "id": "gloss", "at": [-3.6, -4.4], "rot": -28, "shape": { "kind": "ellipse", "rx": 3.4, "ry": 1.8 }, "fill": "$silent@soft" },
+    { "id": "seam", "at": [1.4, 4.2], "rot": -12, "shape": { "kind": "rect", "w": 11, "h": 0.8 }, "fill": "$frost.dark2" },
+    { "id": "antenna", "use": "ss.lib.antenna", "variant": "dead", "at": [5.4, -8], "rot": -6, "scale": 0.74 },
+    { "id": "organ", "use": "ss.lib.organ", "variant": "dead", "at": [4.6, -0.6], "scale": 0.66 }
+  ],
+  "animations": {
+    "idle": {
+      "description": "the shell holds its breath; the dead feelers keep sweeping for a signal that never comes",
+      "duration": 1.15,
+      "tracks": [
+        { "part": "shell", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "core", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "gloss", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "organ", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "antenna", "prop": "rot", "keys": [[0, -13], [0.35, 17], [0.7, -4], [1, -13]] },
+        { "part": "antenna_far", "prop": "rot", "keys": [[0, 14], [0.4, -12], [0.75, 6], [1, 14]] }
+      ]
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "ss.char.tri",
+  "name": "Tri",
+  "description": "Sealed survivor, wedge-shelled and pointed the way it runs. Same dead organ and dead feelers as the rest of the eight — the shape is the only thing that tells them apart, because none of them has anything to say.",
+  "tags": ["ss-char"],
+  "size": [32, 32],
+  "meta": { "radius": 11.5 },
+  "parts": [
+    { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [2, -6.6], "rot": -38, "scale": 0.52 },
+    { "id": "shell", "at": [0, 1.6], "shape": { "kind": "ngon", "sides": 3, "r": 12.4 }, "fill": "$aqua", "stroke": { "color": "$ink", "width": "thin" } },
+    { "id": "core", "at": [0, 2.6], "shape": { "kind": "ngon", "sides": 3, "r": 9 }, "fill": "$aqua.light2" },
+    { "id": "gloss", "at": [-2.6, 1.6], "rot": 32, "shape": { "kind": "ellipse", "rx": 2.8, "ry": 1.5 }, "fill": "$silent@soft" },
+    { "id": "seam", "at": [0, 8.4], "shape": { "kind": "rect", "w": 13.6, "h": 0.8 }, "fill": "$aqua.dark2" },
+    { "id": "antenna", "use": "ss.lib.antenna", "variant": "dead", "at": [4.4, -6], "rot": -4, "scale": 0.72 },
+    { "id": "organ", "use": "ss.lib.organ", "variant": "dead", "at": [4, 4.4], "scale": 0.6 }
+  ],
+  "animations": {
+    "idle": {
+      "description": "the shell holds its breath; the dead feelers keep sweeping for a signal that never comes",
+      "duration": 1.15,
+      "tracks": [
+        { "part": "shell", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "core", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "gloss", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "organ", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
+        { "part": "antenna", "prop": "rot", "keys": [[0, -13], [0.35, 17], [0.7, -4], [1, -13]] },
+        { "part": "antenna_far", "prop": "rot", "keys": [[0, 14], [0.4, -12], [0.75, 6], [1, 14]] }
+      ]
+    }
+  }
+}
