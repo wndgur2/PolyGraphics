@@ -1,0 +1,69 @@
+{
+  "id": "ss.enemy.porter",
+  "name": "Porter",
+  "description": "The nest's traffic, carrying. The first cut of this slot was called Worker and was drawn as an ant, which is the one thing a middle rank cannot afford to be — an amber three-lobe body next to the Mite's amber blob is two creatures competing for the same read. So it is given the thing the nest is actually doing: a low dark body under a pale grub slung the whole length of its back, and the silhouette is the cargo. It also earns the number it carries in the game. This is the body that barely moves when you hit it, and a creature with both jaws locked around brood it will not put down is a better account of that than any amount of shell. Brood pale against #372d3f earth, hauler dark under it, so the load is what you see and what you shoot. Drawn facing +x, the game flips it. Gameplay radius 10.",
+  "tags": ["ss-enemy", "porter"],
+  "size": [40, 36],
+  "meta": {"radius": 10},
+  "parts": [
+    {"id": "leg_b", "at": [-8.4, 9.6], "rot": 28, "shape": {"kind": "rect", "w": 2.8, "h": 9, "corner": 1.4}, "fill": "$ink"},
+    {"id": "leg_m", "at": [0, 10.4], "rot": 4, "shape": {"kind": "rect", "w": 2.8, "h": 9.2, "corner": 1.4}, "fill": "$ink"},
+    {"id": "leg_f", "at": [8.4, 9.4], "rot": -26, "shape": {"kind": "rect", "w": 2.8, "h": 9, "corner": 1.4}, "fill": "$ink"},
+    {"id": "body", "at": [-0.4, 4.4], "shape": {"kind": "ellipse", "rx": 8.8, "ry": 4.5}, "fill": "$chitin.dark2", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "body_plate", "at": [-2.6, 3.8], "shape": {"kind": "ellipse", "rx": 5, "ry": 2.4}, "fill": "$chitin.dark"},
+    {"id": "head", "at": [10.6, 4.6], "shape": {"kind": "ellipse", "rx": 4.2, "ry": 3.9}, "fill": "$dead", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "organ", "use": "ss.lib.organ", "at": [4.4, 3.4], "scale": 0.42},
+    {"id": "grub_5", "at": [10.2, -2.6], "shape": {"kind": "ellipse", "rx": 3.4, "ry": 3.2}, "fill": "$husk.dark", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "grub_4", "at": [5.6, -4.8], "shape": {"kind": "ellipse", "rx": 4.4, "ry": 4.2}, "fill": "$husk", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "grub_3", "at": [0.4, -5.8], "shape": {"kind": "ellipse", "rx": 4.8, "ry": 4.6}, "fill": "$husk", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "grub_2", "at": [-4.8, -5], "shape": {"kind": "ellipse", "rx": 4.5, "ry": 4.3}, "fill": "$husk", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "grub_1", "at": [-9.6, -2.8], "shape": {"kind": "ellipse", "rx": 3.6, "ry": 3.4}, "fill": "$husk.dark", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "grub_gloss", "at": [-0.4, -8.4], "rot": -6, "shape": {"kind": "ellipse", "rx": 7.4, "ry": 1.8}, "fill": "$bone.light@heavy"},
+    {"id": "grub_eye", "at": [12.2, -2.2], "shape": {"kind": "circle", "r": 1.5}, "fill": "$ink"},
+    {"id": "mandible_up", "at": [13.4, 1.2], "rot": -34, "shape": {"kind": "poly", "points": [[-1.4, -3.4], [2, -4.2], [3.2, -1], [0.6, 0.6]]}, "fill": "$husk"},
+    {"id": "mandible_dn", "at": [13.8, 5.4], "shape": {"kind": "poly", "points": [[-1.6, 1.4], [2.8, 2.8], [3.8, 0.6], [0.4, -0.8]]}, "fill": "$husk.dark"},
+    {"id": "antenna_a", "at": [13.6, 0.4], "rot": 54, "shape": {"kind": "rect", "w": 1.3, "h": 5.6, "corner": 0.65}, "fill": "$husk.dark2"},
+    {"id": "antenna_b", "at": [16.4, -2.4], "rot": 108, "shape": {"kind": "rect", "w": 1.2, "h": 4.4, "corner": 0.6}, "fill": "$husk.dark2"}
+  ],
+  "variants": {
+    "elite": {
+      "description": "Sent out under two. The second clutch is stacked on the first, the hauler underneath has bleached to war colour, and it is still not putting either of them down.",
+      "scale": 1.25,
+      "set": {
+        "body.fill": "$husk.dark2",
+        "body_plate.fill": "$husk.dark",
+        "grub_gloss.fill": "$white@heavy",
+        "organ.scale": 0.58
+      },
+      "add": [
+        {"id": "grub2_2", "at": [-3.6, -11.4], "shape": {"kind": "ellipse", "rx": 3.6, "ry": 3.4}, "fill": "$bone.light", "stroke": {"color": "$ink", "width": "thin"}},
+        {"id": "grub2_3", "at": [1.4, -12.2], "shape": {"kind": "ellipse", "rx": 3.8, "ry": 3.6}, "fill": "$bone.light", "stroke": {"color": "$ink", "width": "thin"}},
+        {"id": "grub2_4", "at": [6.2, -11], "shape": {"kind": "ellipse", "rx": 3.4, "ry": 3.2}, "fill": "$bone", "stroke": {"color": "$ink", "width": "thin"}}
+      ]
+    }
+  },
+  "animations": {
+    "haul": {
+      "description": "carrying, not walking — the legs work under a load that answers a beat late, and the grub rolls along its own length rather than riding rigid. The head never lifts: it is looking at the floor in front of the next step.",
+      "duration": 0.9,
+      "tracks": [
+        {"part": "leg_f", "prop": "rot", "keys": [[0, -26], [0.5, -8], [1, -26]]},
+        {"part": "leg_m", "prop": "rot", "keys": [[0, 4], [0.5, -14], [1, 4]]},
+        {"part": "leg_b", "prop": "rot", "keys": [[0, 28], [0.5, 12], [1, 28]]},
+        {"part": "body", "prop": "y", "keys": [[0, 0], [0.5, -1], [1, 0]]},
+        {"part": "body_plate", "prop": "y", "keys": [[0, 0], [0.5, -1], [1, 0]]},
+        {"part": "head", "prop": "y", "keys": [[0, 0], [0.5, -0.8], [1, 0]]},
+        {"part": "grub_1", "prop": "y", "keys": [[0, 0], [0.34, -1.5], [0.7, 0], [1, 0]]},
+        {"part": "grub_2", "prop": "y", "keys": [[0, 0], [0.26, -1.7], [0.62, 0], [1, 0]]},
+        {"part": "grub_3", "prop": "y", "keys": [[0, 0], [0.18, -1.8], [0.54, 0], [1, 0]]},
+        {"part": "grub_4", "prop": "y", "keys": [[0, 0], [0.1, -1.7], [0.46, 0], [1, 0]]},
+        {"part": "grub_5", "prop": "y", "keys": [[0, -0.2], [0.02, -1.5], [0.38, 0], [1, -0.2]]},
+        {"part": "grub_gloss", "prop": "y", "keys": [[0, 0], [0.18, -1.8], [0.54, 0], [1, 0]]},
+        {"part": "mandible_up", "prop": "rot", "keys": [[0, -34], [0.5, -30], [1, -34]]},
+        {"part": "antenna_a", "prop": "rot", "keys": [[0, 54], [0.5, 44], [1, 54]]},
+        {"part": "antenna_b", "prop": "rot", "keys": [[0, 108], [0.5, 96], [1, 108]]},
+        {"part": "organ", "prop": "scale", "keys": [[0, 0.4], [0.5, 0.46], [1, 0.4]]}
+      ]
+    }
+  }
+}
