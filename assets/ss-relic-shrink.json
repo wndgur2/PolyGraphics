@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.shrink",
   "name": "Runt instar",
-  "description": "One body drawn twice at two sizes: behind, the skin it shed — a pale casing with nothing left in it; in front and less than half as wide, the live body that walked away, dark chitin with a lit back. The ability is the size difference, so the two sit as one pair and nothing else on the shelf is a pair. Three earlier passes tried to say shed skin literally — a tear at the crown, a split down the back, segment bands across the belly — and read as a horseshoe, a wishbone, and an egg with motion lines. What survives is thickness alone: a thin pale wall around a dark middle reads hollow at 32px, and hollow-beside-solid is the whole sentence.",
+  "description": "One grub, small and never finished: white through and through, curled the way a young one lies, head a size larger than the segment behind it with the eye still shut. It is drawn small in the frame on purpose — the plate is left mostly empty around it, and that emptiness is what carries 'less of you' now that the object is a single body rather than a before-and-after pair. Colour is what keeps it apart from the brood in ss.relic.drone, which is this same chain-of-circles recipe in carapace purple inside a yellow cell; this one is bare white on the bare plate, and nothing else on the shelf is white.",
   "tags": [
     "ss-relic"
   ],
@@ -15,122 +15,250 @@
       "use": "ss.lib.relic-plate"
     },
     {
-      "id": "husk_outline",
+      "id": "shadow",
       "at": [
-        -2.4,
-        -1.6
+        0.6,
+        7.4
       ],
       "shape": {
         "kind": "ellipse",
-        "rx": 8.4,
-        "ry": 10.2
+        "rx": 6.2,
+        "ry": 1.4
+      },
+      "fill": "$ink@soft"
+    },
+    {
+      "id": "seg_o0",
+      "at": [
+        2.72,
+        -1.79
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.1
       },
       "fill": "$ink"
     },
     {
-      "id": "husk",
+      "id": "seg_o1",
       "at": [
-        -2.4,
-        -1.6
+        4.08,
+        -0.37
       ],
       "shape": {
-        "kind": "ellipse",
-        "rx": 7.2,
-        "ry": 9.0
+        "kind": "circle",
+        "r": 2.33
       },
-      "fill": "$husk.dark"
+      "fill": "$ink"
     },
     {
-      "id": "husk_hollow",
+      "id": "seg_o2",
       "at": [
-        -2.4,
-        -0.6
+        4.6,
+        1.54
       ],
       "shape": {
-        "kind": "ellipse",
-        "rx": 5.1,
-        "ry": 6.9
+        "kind": "circle",
+        "r": 2.56
       },
-      "fill": "$coal.dark"
+      "fill": "$ink"
     },
     {
-      "id": "crown",
+      "id": "seg_o3",
       "at": [
-        -2.4,
-        -9.4
+        4.14,
+        3.46
       ],
       "shape": {
-        "kind": "ellipse",
-        "rx": 3.4,
-        "ry": 1.3
+        "kind": "circle",
+        "r": 2.79
       },
-      "fill": "$husk.light2"
+      "fill": "$ink"
     },
     {
-      "id": "husk_gloss",
+      "id": "seg_o4",
       "at": [
-        -8.0,
-        -0.4
+        2.82,
+        4.93
       ],
-      "rot": -10,
       "shape": {
-        "kind": "rect",
-        "w": 1.2,
-        "h": 6.4,
-        "corner": 0.6
+        "kind": "circle",
+        "r": 3.01
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "seg_o5",
+      "at": [
+        0.96,
+        5.58
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.24
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "seg_o6",
+      "at": [
+        -0.99,
+        5.27
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.47
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "seg_o7",
+      "at": [
+        -2.55,
+        4.06
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.7
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "seg0",
+      "at": [
+        2.72,
+        -1.79
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.1
       },
       "fill": "$husk.light"
     },
     {
-      "id": "body_outline",
+      "id": "seg1",
       "at": [
-        6.2,
-        6.8
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 5.0,
-        "ry": 5.8
-      },
-      "fill": "$ink"
-    },
-    {
-      "id": "body",
-      "at": [
-        6.2,
-        6.8
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 3.8,
-        "ry": 4.6
-      },
-      "fill": "$chitin.dark"
-    },
-    {
-      "id": "body_lit",
-      "at": [
-        5.8,
-        5.4
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 2.6,
-        "ry": 2.4
-      },
-      "fill": "$chitin"
-    },
-    {
-      "id": "body_gloss",
-      "at": [
-        5.0,
-        4.5
+        4.08,
+        -0.37
       ],
       "shape": {
         "kind": "circle",
-        "r": 0.9
+        "r": 1.33
       },
-      "fill": "$chitin.light2"
+      "fill": "$silent"
+    },
+    {
+      "id": "seg2",
+      "at": [
+        4.6,
+        1.54
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.56
+      },
+      "fill": "$husk.light"
+    },
+    {
+      "id": "seg3",
+      "at": [
+        4.14,
+        3.46
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.79
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "seg4",
+      "at": [
+        2.82,
+        4.93
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.01
+      },
+      "fill": "$husk.light"
+    },
+    {
+      "id": "seg5",
+      "at": [
+        0.96,
+        5.58
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.24
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "seg6",
+      "at": [
+        -0.99,
+        5.27
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.47
+      },
+      "fill": "$husk.light"
+    },
+    {
+      "id": "seg7",
+      "at": [
+        -2.55,
+        4.06
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.7
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "head",
+      "at": [
+        -2.55,
+        4.06
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.7
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "eye",
+      "at": [
+        -3.1,
+        3.35
+      ],
+      "rot": 142,
+      "shape": {
+        "kind": "rect",
+        "w": 0.75,
+        "h": 2.4,
+        "corner": 0.37
+      },
+      "fill": "$husk.dark2"
+    },
+    {
+      "id": "sheen",
+      "at": [
+        -2.2,
+        -1.8
+      ],
+      "rot": -28,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 0.8,
+        "ry": 1.8
+      },
+      "fill": "$white@0.6"
     }
   ],
   "variants": {

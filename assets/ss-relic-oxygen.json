@@ -1,25 +1,492 @@
 {
   "id": "ss.relic.oxygen",
   "name": "Swollen spiracle",
-  "description": "A breathing hole from the side of a body, taken while it was still open too far: a chitin ring stretched past round, the dark trachea going down out of sight behind it, and three beads of air coming up out of it and off the top of the plate. The ring carries a taut highlight all the way round rather than a lit crown — that is what says swollen instead of merely open, and it is the only reason this does not read as another gland.",
-  "tags": ["ss-relic"],
-  "size": [32, 32],
+  "description": "A pair of lungs packed past what they hold, and the air already coming off them: two dark blue-grey lobes either side of a pale windpipe, each with a bright cyan core showing through as though the organ were lit from inside, and three beads climbing away off one shoulder. The first pass drew the spiracle itself — a chitin ring around a dark throat — and it read as an orange eye and nothing else, so the ring is gone. The beads escape on a diagonal rather than flanking the windpipe evenly: set symmetrically they became a second pair of eyes above the first, which is the same failure the ring had. The cyan is the only saturated colour here and it is the substance the relic is named for; the vessel around it stays desaturated so the two never compete.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
   "parts": [
-    {"id": "plate", "use": "ss.lib.relic-plate"},
-    {"id": "lip_outline", "at": [0, 2.4], "shape": {"kind": "ellipse", "rx": 10.6, "ry": 9.2}, "fill": "$ink"},
-    {"id": "lip", "at": [0, 2.4], "shape": {"kind": "ellipse", "rx": 9.4, "ry": 8}, "fill": "$chitin.dark"},
-    {"id": "lip_taut", "at": [0, 1.8], "shape": {"kind": "ellipse", "rx": 8.2, "ry": 6.9}, "fill": "$chitin"},
-    {"id": "throat", "at": [0, 2.6], "shape": {"kind": "ellipse", "rx": 5.4, "ry": 4.4}, "fill": "$soil"},
-    {"id": "throat_deep", "at": [0, 3.6], "shape": {"kind": "ellipse", "rx": 3.2, "ry": 2.4}, "fill": "$ink"},
-    {"id": "sheen", "at": [-4.6, -1.8], "rot": -34, "shape": {"kind": "rect", "w": 1.6, "h": 4.6, "corner": 0.8}, "fill": "$chitin.light2"},
-    {"id": "bead_a", "at": [-1.8, -7.4], "shape": {"kind": "circle", "r": 2.2}, "fill": "$spore"},
-    {"id": "bead_b", "at": [3.4, -10.2], "shape": {"kind": "circle", "r": 1.5}, "fill": "$spore.light"},
-    {"id": "bead_c", "at": [-5.2, -11.4], "shape": {"kind": "circle", "r": 1}, "fill": "$spore.light2"}
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "trachea_outline",
+      "at": [
+        0,
+        -6.4
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 4.5,
+        "h": 8.0,
+        "corner": 2.2
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bronch_l_outline",
+      "at": [
+        -2.9,
+        -1.9
+      ],
+      "rot": 34,
+      "shape": {
+        "kind": "rect",
+        "w": 4.0,
+        "h": 6.6,
+        "corner": 2.0
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bronch_r_outline",
+      "at": [
+        2.9,
+        -1.9
+      ],
+      "rot": -34,
+      "shape": {
+        "kind": "rect",
+        "w": 4.0,
+        "h": 6.6,
+        "corner": 2.0
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bronch_l",
+      "at": [
+        -2.9,
+        -1.9
+      ],
+      "rot": 34,
+      "shape": {
+        "kind": "rect",
+        "w": 2.5,
+        "h": 5.4,
+        "corner": 1.25
+      },
+      "fill": "$slate.light"
+    },
+    {
+      "id": "bronch_r",
+      "at": [
+        2.9,
+        -1.9
+      ],
+      "rot": -34,
+      "shape": {
+        "kind": "rect",
+        "w": 2.5,
+        "h": 5.4,
+        "corner": 1.25
+      },
+      "fill": "$slate.light"
+    },
+    {
+      "id": "lobe_l_outline",
+      "at": [
+        -5.1,
+        2.6
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.9,
+            -6.8
+          ],
+          [
+            -1.39,
+            -5.67
+          ],
+          [
+            -4.41,
+            -1.64
+          ],
+          [
+            -4.66,
+            3.65
+          ],
+          [
+            -2.39,
+            7.06
+          ],
+          [
+            1.64,
+            6.55
+          ],
+          [
+            3.15,
+            1.89
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "lobe_l",
+      "at": [
+        -5.1,
+        2.6
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.3,
+            -5.4
+          ],
+          [
+            -1.1,
+            -4.5
+          ],
+          [
+            -3.5,
+            -1.3
+          ],
+          [
+            -3.7,
+            2.9
+          ],
+          [
+            -1.9,
+            5.6
+          ],
+          [
+            1.3,
+            5.2
+          ],
+          [
+            2.5,
+            1.5
+          ]
+        ]
+      },
+      "fill": "$frost.dark2"
+    },
+    {
+      "id": "lobe_l_lit",
+      "at": [
+        -5.1,
+        2.1
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.89,
+            -4.43
+          ],
+          [
+            -0.9,
+            -3.69
+          ],
+          [
+            -2.87,
+            -1.07
+          ],
+          [
+            -3.03,
+            2.38
+          ],
+          [
+            -1.56,
+            4.59
+          ],
+          [
+            1.07,
+            4.26
+          ],
+          [
+            2.05,
+            1.23
+          ]
+        ]
+      },
+      "fill": "$frost.dark"
+    },
+    {
+      "id": "lobe_l_full",
+      "at": [
+        -5.1,
+        3.0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.33,
+            -3.13
+          ],
+          [
+            -0.64,
+            -2.61
+          ],
+          [
+            -2.03,
+            -0.75
+          ],
+          [
+            -2.15,
+            1.68
+          ],
+          [
+            -1.1,
+            3.25
+          ],
+          [
+            0.75,
+            3.02
+          ],
+          [
+            1.45,
+            0.87
+          ]
+        ]
+      },
+      "fill": "$spore"
+    },
+    {
+      "id": "lobe_r_outline",
+      "at": [
+        5.1,
+        2.6
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.9,
+            -6.8
+          ],
+          [
+            1.39,
+            -5.67
+          ],
+          [
+            4.41,
+            -1.64
+          ],
+          [
+            4.66,
+            3.65
+          ],
+          [
+            2.39,
+            7.06
+          ],
+          [
+            -1.64,
+            6.55
+          ],
+          [
+            -3.15,
+            1.89
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "lobe_r",
+      "at": [
+        5.1,
+        2.6
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.3,
+            -5.4
+          ],
+          [
+            1.1,
+            -4.5
+          ],
+          [
+            3.5,
+            -1.3
+          ],
+          [
+            3.7,
+            2.9
+          ],
+          [
+            1.9,
+            5.6
+          ],
+          [
+            -1.3,
+            5.2
+          ],
+          [
+            -2.5,
+            1.5
+          ]
+        ]
+      },
+      "fill": "$frost.dark2"
+    },
+    {
+      "id": "lobe_r_lit",
+      "at": [
+        5.1,
+        2.1
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.89,
+            -4.43
+          ],
+          [
+            0.9,
+            -3.69
+          ],
+          [
+            2.87,
+            -1.07
+          ],
+          [
+            3.03,
+            2.38
+          ],
+          [
+            1.56,
+            4.59
+          ],
+          [
+            -1.07,
+            4.26
+          ],
+          [
+            -2.05,
+            1.23
+          ]
+        ]
+      },
+      "fill": "$frost.dark"
+    },
+    {
+      "id": "lobe_r_full",
+      "at": [
+        5.1,
+        3.0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.33,
+            -3.13
+          ],
+          [
+            0.64,
+            -2.61
+          ],
+          [
+            2.03,
+            -0.75
+          ],
+          [
+            2.15,
+            1.68
+          ],
+          [
+            1.1,
+            3.25
+          ],
+          [
+            -0.75,
+            3.02
+          ],
+          [
+            -1.45,
+            0.87
+          ]
+        ]
+      },
+      "fill": "$spore"
+    },
+    {
+      "id": "trachea",
+      "at": [
+        0,
+        -6.4
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 3.0,
+        "h": 6.8,
+        "corner": 1.5
+      },
+      "fill": "$slate.light"
+    },
+    {
+      "id": "trachea_rings",
+      "at": [
+        0,
+        -6.4
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 6.8,
+        "corner": 0.55
+      },
+      "fill": "$steel.light"
+    },
+    {
+      "id": "bead_a",
+      "at": [
+        2.3,
+        -9.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.9
+      },
+      "fill": "$spore"
+    },
+    {
+      "id": "bead_b",
+      "at": [
+        4.9,
+        -12.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.2
+      },
+      "fill": "$spore.light"
+    },
+    {
+      "id": "bead_c",
+      "at": [
+        6.7,
+        -13.7
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.8
+      },
+      "fill": "$spore.light2"
+    }
   ],
   "variants": {
     "glyph": {
       "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
-      "remove": ["plate"]
+      "remove": [
+        "plate"
+      ]
     }
   }
 }
