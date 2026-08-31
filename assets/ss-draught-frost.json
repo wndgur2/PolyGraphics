@@ -14,5 +14,16 @@
     { "id": "salt_c", "at": [3, 7.4], "rot": 40, "shape": { "kind": "poly", "points": [[0, -1.1199999999999999], [0.8800000000000001, 0], [0, 1.1199999999999999], [-0.8800000000000001, 0]] }, "fill": "$silent" },
     { "id": "salt_d", "at": [-0.4, 9.2], "rot": -8, "shape": { "kind": "poly", "points": [[0, -1.26], [0.9900000000000001, 0], [0, 1.26], [-0.9900000000000001, 0]] }, "fill": "$silent" },
     { "id": "cap", "use": "ss.lib.vial-cap" }
-  ]
+  ],
+  "animations": {
+    "settle": {
+      "description": "the rings keep going out, because it never stopped ringing",
+      "duration": 1.9,
+      "tracks": [
+        { "part": "ripple_a", "prop": "opacity", "keys": [[0, 0.2], [0.35, 1], [0.8, 0], [1, 0.2]] },
+        { "part": "ripple_b", "prop": "opacity", "keys": [[0, 0.6], [0.2, 1], [0.65, 0], [1, 0.6]] },
+        { "part": "ripple_c", "prop": "opacity", "keys": [[0, 1], [0.45, 0], [0.9, 0.7], [1, 1]] }
+      ]
+    }
+  }
 }
