@@ -1,0 +1,566 @@
+{
+  "id": "ss.relic.oxygen",
+  "name": "Swollen spiracle",
+  "description": "A pair of lungs, drawn as the organ: blood-red, apexes rounded at the top, broad at the base, a pale cartilage windpipe forking into a bronchus for each, an oblique fissure across each lobe, and the cardiac notch cut into the left one — that notch is the single detail that stops two red beans reading as anything but lungs. Three cyan beads climb away off one shoulder, the only cold colour on the plate and the only thing on it that is air rather than tissue. Earlier passes drew the spiracle itself as a chitin ring around a dark throat (an orange eye, and nothing else) and then the lungs in desaturated blue-grey, which read as machinery.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "trachea_outline",
+      "at": [
+        0,
+        -7.4
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 4.4,
+        "h": 7.4,
+        "corner": 2.1
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bronch_l_outline",
+      "at": [
+        -2.7,
+        -2.8
+      ],
+      "rot": 38,
+      "shape": {
+        "kind": "rect",
+        "w": 3.8,
+        "h": 6.2,
+        "corner": 1.9
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bronch_r_outline",
+      "at": [
+        2.7,
+        -2.8
+      ],
+      "rot": -38,
+      "shape": {
+        "kind": "rect",
+        "w": 3.8,
+        "h": 6.2,
+        "corner": 1.9
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bronch_l",
+      "at": [
+        -2.7,
+        -2.8
+      ],
+      "rot": 38,
+      "shape": {
+        "kind": "rect",
+        "w": 2.4,
+        "h": 5.0,
+        "corner": 1.2
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "bronch_r",
+      "at": [
+        2.7,
+        -2.8
+      ],
+      "rot": -38,
+      "shape": {
+        "kind": "rect",
+        "w": 2.4,
+        "h": 5.0,
+        "corner": 1.2
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "lung_l_outline",
+      "at": [
+        -5.0,
+        2.2
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.28,
+            -7.44
+          ],
+          [
+            -0.48,
+            -8.76
+          ],
+          [
+            -3.12,
+            -6.72
+          ],
+          [
+            -4.92,
+            -2.16
+          ],
+          [
+            -5.16,
+            2.88
+          ],
+          [
+            -3.84,
+            6.72
+          ],
+          [
+            -1.32,
+            7.8
+          ],
+          [
+            1.08,
+            6.48
+          ],
+          [
+            1.32,
+            3.84
+          ],
+          [
+            0.24,
+            1.92
+          ],
+          [
+            2.28,
+            0.24
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "lung_l",
+      "at": [
+        -5.0,
+        2.2
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.9,
+            -6.2
+          ],
+          [
+            -0.4,
+            -7.3
+          ],
+          [
+            -2.6,
+            -5.6
+          ],
+          [
+            -4.1,
+            -1.8
+          ],
+          [
+            -4.3,
+            2.4
+          ],
+          [
+            -3.2,
+            5.6
+          ],
+          [
+            -1.1,
+            6.5
+          ],
+          [
+            0.9,
+            5.4
+          ],
+          [
+            1.1,
+            3.2
+          ],
+          [
+            0.2,
+            1.6
+          ],
+          [
+            1.9,
+            0.2
+          ]
+        ]
+      },
+      "fill": "$blood.dark"
+    },
+    {
+      "id": "lung_l_lit",
+      "at": [
+        -5.0,
+        1.5000000000000002
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.6,
+            -5.21
+          ],
+          [
+            -0.34,
+            -6.13
+          ],
+          [
+            -2.18,
+            -4.7
+          ],
+          [
+            -3.44,
+            -1.51
+          ],
+          [
+            -3.61,
+            2.02
+          ],
+          [
+            -2.69,
+            4.7
+          ],
+          [
+            -0.92,
+            5.46
+          ],
+          [
+            0.76,
+            4.54
+          ],
+          [
+            0.92,
+            2.69
+          ],
+          [
+            0.17,
+            1.34
+          ],
+          [
+            1.6,
+            0.17
+          ]
+        ]
+      },
+      "fill": "$blood"
+    },
+    {
+      "id": "lung_l_sheen",
+      "at": [
+        -6.5,
+        -0.3999999999999999
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.9,
+        "ry": 2.6
+      },
+      "fill": "$blood.light@0.55"
+    },
+    {
+      "id": "lung_l_fissure",
+      "at": [
+        -5.0,
+        2.8000000000000003
+      ],
+      "rot": -22,
+      "shape": {
+        "kind": "rect",
+        "w": 0.8,
+        "h": 7.2,
+        "corner": 0.4
+      },
+      "fill": "$blood.dark2"
+    },
+    {
+      "id": "lung_r_outline",
+      "at": [
+        5.0,
+        2.2
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.28,
+            -7.44
+          ],
+          [
+            0.48,
+            -8.76
+          ],
+          [
+            3.12,
+            -6.72
+          ],
+          [
+            4.92,
+            -2.16
+          ],
+          [
+            5.16,
+            2.88
+          ],
+          [
+            3.84,
+            6.72
+          ],
+          [
+            1.32,
+            7.8
+          ],
+          [
+            -1.08,
+            6.48
+          ],
+          [
+            -2.28,
+            2.16
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "lung_r",
+      "at": [
+        5.0,
+        2.2
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.9,
+            -6.2
+          ],
+          [
+            0.4,
+            -7.3
+          ],
+          [
+            2.6,
+            -5.6
+          ],
+          [
+            4.1,
+            -1.8
+          ],
+          [
+            4.3,
+            2.4
+          ],
+          [
+            3.2,
+            5.6
+          ],
+          [
+            1.1,
+            6.5
+          ],
+          [
+            -0.9,
+            5.4
+          ],
+          [
+            -1.9,
+            1.8
+          ]
+        ]
+      },
+      "fill": "$blood.dark"
+    },
+    {
+      "id": "lung_r_lit",
+      "at": [
+        5.0,
+        1.5000000000000002
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.6,
+            -5.21
+          ],
+          [
+            0.34,
+            -6.13
+          ],
+          [
+            2.18,
+            -4.7
+          ],
+          [
+            3.44,
+            -1.51
+          ],
+          [
+            3.61,
+            2.02
+          ],
+          [
+            2.69,
+            4.7
+          ],
+          [
+            0.92,
+            5.46
+          ],
+          [
+            -0.76,
+            4.54
+          ],
+          [
+            -1.6,
+            1.51
+          ]
+        ]
+      },
+      "fill": "$blood"
+    },
+    {
+      "id": "lung_r_sheen",
+      "at": [
+        6.5,
+        -0.3999999999999999
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.9,
+        "ry": 2.6
+      },
+      "fill": "$blood.light@0.55"
+    },
+    {
+      "id": "lung_r_fissure",
+      "at": [
+        5.0,
+        2.8000000000000003
+      ],
+      "rot": 22,
+      "shape": {
+        "kind": "rect",
+        "w": 0.8,
+        "h": 7.2,
+        "corner": 0.4
+      },
+      "fill": "$blood.dark2"
+    },
+    {
+      "id": "trachea",
+      "at": [
+        0,
+        -7.4
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 3.0,
+        "h": 6.4,
+        "corner": 1.5
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "ring_a",
+      "at": [
+        0,
+        -9.4
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 3.0,
+        "h": 0.7,
+        "corner": 0.35
+      },
+      "fill": "$husk.dark2"
+    },
+    {
+      "id": "ring_b",
+      "at": [
+        0,
+        -7.4
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 3.0,
+        "h": 0.7,
+        "corner": 0.35
+      },
+      "fill": "$husk.dark2"
+    },
+    {
+      "id": "ring_c",
+      "at": [
+        0,
+        -5.4
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 3.0,
+        "h": 0.7,
+        "corner": 0.35
+      },
+      "fill": "$husk.dark2"
+    },
+    {
+      "id": "bead_a",
+      "at": [
+        2.6,
+        -11.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.8
+      },
+      "fill": "$spore"
+    },
+    {
+      "id": "bead_b",
+      "at": [
+        5.2,
+        -12.9
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.15
+      },
+      "fill": "$spore.light"
+    },
+    {
+      "id": "bead_c",
+      "at": [
+        7.0,
+        -14.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.75
+      },
+      "fill": "$spore.light2"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}
