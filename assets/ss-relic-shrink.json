@@ -1,0 +1,144 @@
+{
+  "id": "ss.relic.shrink",
+  "name": "Runt instar",
+  "description": "One body drawn twice at two sizes: behind, the skin it shed — a pale casing with nothing left in it; in front and less than half as wide, the live body that walked away, dark chitin with a lit back. The ability is the size difference, so the two sit as one pair and nothing else on the shelf is a pair. Three earlier passes tried to say shed skin literally — a tear at the crown, a split down the back, segment bands across the belly — and read as a horseshoe, a wishbone, and an egg with motion lines. What survives is thickness alone: a thin pale wall around a dark middle reads hollow at 32px, and hollow-beside-solid is the whole sentence.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "husk_outline",
+      "at": [
+        -2.4,
+        -1.6
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 8.4,
+        "ry": 10.2
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "husk",
+      "at": [
+        -2.4,
+        -1.6
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.2,
+        "ry": 9.0
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "husk_hollow",
+      "at": [
+        -2.4,
+        -0.6
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.1,
+        "ry": 6.9
+      },
+      "fill": "$coal.dark"
+    },
+    {
+      "id": "crown",
+      "at": [
+        -2.4,
+        -9.4
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.4,
+        "ry": 1.3
+      },
+      "fill": "$husk.light2"
+    },
+    {
+      "id": "husk_gloss",
+      "at": [
+        -8.0,
+        -0.4
+      ],
+      "rot": -10,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 6.4,
+        "corner": 0.6
+      },
+      "fill": "$husk.light"
+    },
+    {
+      "id": "body_outline",
+      "at": [
+        6.2,
+        6.8
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.0,
+        "ry": 5.8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "body",
+      "at": [
+        6.2,
+        6.8
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.8,
+        "ry": 4.6
+      },
+      "fill": "$chitin.dark"
+    },
+    {
+      "id": "body_lit",
+      "at": [
+        5.8,
+        5.4
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.6,
+        "ry": 2.4
+      },
+      "fill": "$chitin"
+    },
+    {
+      "id": "body_gloss",
+      "at": [
+        5.0,
+        4.5
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.9
+      },
+      "fill": "$chitin.light2"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

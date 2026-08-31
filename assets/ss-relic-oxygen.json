@@ -1,0 +1,25 @@
+{
+  "id": "ss.relic.oxygen",
+  "name": "Swollen spiracle",
+  "description": "A breathing hole from the side of a body, taken while it was still open too far: a chitin ring stretched past round, the dark trachea going down out of sight behind it, and three beads of air coming up out of it and off the top of the plate. The ring carries a taut highlight all the way round rather than a lit crown — that is what says swollen instead of merely open, and it is the only reason this does not read as another gland.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "lip_outline", "at": [0, 2.4], "shape": {"kind": "ellipse", "rx": 10.6, "ry": 9.2}, "fill": "$ink"},
+    {"id": "lip", "at": [0, 2.4], "shape": {"kind": "ellipse", "rx": 9.4, "ry": 8}, "fill": "$chitin.dark"},
+    {"id": "lip_taut", "at": [0, 1.8], "shape": {"kind": "ellipse", "rx": 8.2, "ry": 6.9}, "fill": "$chitin"},
+    {"id": "throat", "at": [0, 2.6], "shape": {"kind": "ellipse", "rx": 5.4, "ry": 4.4}, "fill": "$soil"},
+    {"id": "throat_deep", "at": [0, 3.6], "shape": {"kind": "ellipse", "rx": 3.2, "ry": 2.4}, "fill": "$ink"},
+    {"id": "sheen", "at": [-4.6, -1.8], "rot": -34, "shape": {"kind": "rect", "w": 1.6, "h": 4.6, "corner": 0.8}, "fill": "$chitin.light2"},
+    {"id": "bead_a", "at": [-1.8, -7.4], "shape": {"kind": "circle", "r": 2.2}, "fill": "$spore"},
+    {"id": "bead_b", "at": [3.4, -10.2], "shape": {"kind": "circle", "r": 1.5}, "fill": "$spore.light"},
+    {"id": "bead_c", "at": [-5.2, -11.4], "shape": {"kind": "circle", "r": 1}, "fill": "$spore.light2"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}
