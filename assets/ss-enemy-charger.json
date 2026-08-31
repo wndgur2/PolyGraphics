@@ -6,6 +6,12 @@
   "size": [40, 32],
   "meta": {"radius": 10},
   "parts": [
+    { "id": "leg_f_u", "at": [-0.5, -5.85], "rot": -32.0, "shape": {"kind": "rect", "w": 2.2, "h": 7.0, "corner": 1.2}, "fill": "$carapace.dark" },
+    { "id": "leg_f_l", "at": [1.34, 7.22], "rot": 16.0, "shape": {"kind": "rect", "w": 2.2, "h": 7.0, "corner": 1.2}, "fill": "$carapace.dark" },
+    { "id": "leg_m_u", "at": [-5.53, -5.75], "rot": -8.0, "shape": {"kind": "rect", "w": 2.2, "h": 7.0, "corner": 1.2}, "fill": "$carapace.dark" },
+    { "id": "leg_m_l", "at": [-3.53, 8.51], "rot": -8.0, "shape": {"kind": "rect", "w": 2.2, "h": 7.0, "corner": 1.2}, "fill": "$carapace.dark" },
+    { "id": "leg_b_u", "at": [-10.17, -4.29], "rot": 16.0, "shape": {"kind": "rect", "w": 2.2, "h": 7.0, "corner": 1.2}, "fill": "$carapace.dark" },
+    { "id": "leg_b_l", "at": [-8.39, 8.38], "rot": -32.0, "shape": {"kind": "rect", "w": 2.2, "h": 7.0, "corner": 1.2}, "fill": "$carapace.dark" },
     { "id": "stock", "at": [-1.56, 0.96], "rot": -8.0, "shape": {"kind": "poly", "points": [[9.8, 0.0], [8.4, -2.6], [4.6, -3.8], [0.0, -4.4], [-5.4, -4.2], [-9.6, -3.2], [-12.4, -1.4], [-12.4, 1.4], [-9.6, 3.2], [-5.4, 4.2], [0.0, 4.4], [4.6, 3.8], [8.4, 2.6]]}, "fill": "$carapace", "stroke": {"color": "$ink", "width": "thin"} },
     { "id": "groove", "at": [-1.56, 0.96], "rot": -8.0, "shape": {"kind": "poly", "points": [[8.0, -1.5], [-10.8, -1.5], [-10.8, 1.5], [8.0, 1.5]]}, "fill": "$carapace.dark2" },
     { "id": "prod_upper", "at": [2.4, 0.4], "rot": -8.0, "shape": {"kind": "poly", "points": [[2.08, -0.47], [2.57, -2.52], [2.68, -4.69], [2.4, -6.73], [1.76, -8.6], [0.82, -10.26], [-0.38, -11.68], [-1.77, -12.82], [-3.28, -13.65], [-3.92, -12.75], [-2.76, -11.68], [-1.87, -10.47], [-1.24, -9.14], [-0.86, -7.75], [-0.74, -6.32], [-0.88, -4.89], [-1.3, -3.49], [-2.08, -1.93]]}, "fill": "$husk", "stroke": {"color": "$ink", "width": "thin"} },
@@ -24,7 +30,7 @@
   "variants": {
     "loosed": {
       "description": "The barb alone, in flight. Everything the bow was is gone from it, because the bow did not come — that is the whole point of there being two animals. Recentred on its own body: the canvas is sized for a pair, so left where it lay in the groove it would fly a third of a body off its own hitbox.",
-      "remove": ["stock", "groove", "prod_upper", "prod_lower", "tendon_upper", "tendon_lower", "vein_upper", "vein_lower", "head", "organ"],
+      "remove": ["leg_f_u", "leg_f_l", "leg_m_u", "leg_m_l", "leg_b_u", "leg_b_l", "stock", "groove", "prod_upper", "prod_lower", "tendon_upper", "tendon_lower", "vein_upper", "vein_lower", "head", "organ"],
       "animations": [],
       "set": {
         "barb_sac.at": [-4.36, 0.61],
@@ -35,7 +41,7 @@
     },
     "planted": {
       "description": "The barb after it has landed and before it goes off. The same two parts it flew as, standing in a scorch it put there arriving, with the core already swollen past anything the windup asked for. The half-second it holds this is the half-second the player has to not be here.",
-      "remove": ["stock", "groove", "prod_upper", "prod_lower", "tendon_upper", "tendon_lower", "vein_upper", "vein_lower", "head", "organ"],
+      "remove": ["leg_f_u", "leg_f_l", "leg_m_u", "leg_m_l", "leg_b_u", "leg_b_l", "stock", "groove", "prod_upper", "prod_lower", "tendon_upper", "tendon_lower", "vein_upper", "vein_lower", "head", "organ"],
       "animations": ["fuse"],
       "add": [
         { "id": "scorch", "at": [-2.51, 2.98], "rot": -8.0, "shape": {"kind": "ellipse", "rx": 8.5, "ry": 4.0}, "fill": "$dead@soft" }
@@ -65,10 +71,16 @@
     }
   },
   "animations": {
-    "read": {
-      "description": "held and loaded — the prod is never slack, so the idle is the limbs breathing against their own tension and the barb riding an eighth of the draw down its groove. The two organs pulse out of phase with each other, because they are two animals. Nothing walks; this pair does not walk.",
-      "duration": 1.9,
+    "walk": {
+      "description": "carrying it into range. Six legs on an alternating tripod — front and back of one side swinging with the middle of the other, the two sets half a cycle apart — which is the gait the leg count implies and the one that reads as walking rather than as paddling. The prod breathes against its own tension over the top of it, because a loaded bow is never slack, and the barb rides a little of the draw down its groove: the pair is carried, not dragged. The two organs pulse out of phase with each other, because they are two animals.\n\nThis used to be a held pose on the theory that the pair does not walk. It does — the approach is most of the time it is alive, and it spent all of that standing still.",
+      "duration": 0.62,
       "tracks": [
+        { "part": "leg_f_u", "prop": "rot", "keys": [[0, -32.0], [0.5, -15.0], [1, -32.0]] },
+        { "part": "leg_f_l", "prop": "rot", "keys": [[0, 16.0], [0.5, 33.0], [1, 16.0]] },
+        { "part": "leg_m_u", "prop": "rot", "keys": [[0, -8.0], [0.5, -25.0], [1, -8.0]] },
+        { "part": "leg_m_l", "prop": "rot", "keys": [[0, -8.0], [0.5, -25.0], [1, -8.0]] },
+        { "part": "leg_b_u", "prop": "rot", "keys": [[0, 16.0], [0.5, 33.0], [1, 16.0]] },
+        { "part": "leg_b_l", "prop": "rot", "keys": [[0, -32.0], [0.5, -15.0], [1, -32.0]] },
         { "part": "prod_upper", "prop": "rot", "keys": [[0, -0.5], [0.5, -1.9], [1, -0.5]] },
         { "part": "prod_lower", "prop": "rot", "keys": [[0, 0.5], [0.5, 1.9], [1, 0.5]] },
         { "part": "vein_upper", "prop": "rot", "keys": [[0, -0.5], [0.5, -1.9], [1, -0.5]] },
@@ -76,14 +88,14 @@
         { "part": "barb_core", "prop": "scale", "keys": [[0, 0.92], [0.5, 1.1], [1, 0.92]] },
         { "part": "organ", "prop": "scale", "keys": [[0, 0.95], [0.5, 1.06], [1, 0.95]] },
         { "part": "barb_organ", "prop": "scale", "keys": [[0, 1.06], [0.5, 0.95], [1, 1.06]] },
-        { "part": "barb_sac", "prop": "x", "keys": [[0, 0], [0.5, -0.837], [1, 0]] },
-        { "part": "barb_sac", "prop": "y", "keys": [[0, 0], [0.5, 0.118], [1, 0]] },
-        { "part": "barb_point", "prop": "x", "keys": [[0, 0], [0.5, -0.837], [1, 0]] },
-        { "part": "barb_point", "prop": "y", "keys": [[0, 0], [0.5, 0.118], [1, 0]] },
-        { "part": "barb_core", "prop": "x", "keys": [[0, 0], [0.5, -0.837], [1, 0]] },
-        { "part": "barb_core", "prop": "y", "keys": [[0, 0], [0.5, 0.118], [1, 0]] },
-        { "part": "barb_organ", "prop": "x", "keys": [[0, 0], [0.5, -0.837], [1, 0]] },
-        { "part": "barb_organ", "prop": "y", "keys": [[0, 0], [0.5, 0.118], [1, 0]] }
+        { "part": "barb_sac", "prop": "x", "keys": [[0, 0], [0.5, -0.579], [1, 0]] },
+        { "part": "barb_sac", "prop": "y", "keys": [[0, 0], [0.5, 0.081], [1, 0]] },
+        { "part": "barb_point", "prop": "x", "keys": [[0, 0], [0.5, -0.579], [1, 0]] },
+        { "part": "barb_point", "prop": "y", "keys": [[0, 0], [0.5, 0.081], [1, 0]] },
+        { "part": "barb_core", "prop": "x", "keys": [[0, 0], [0.5, -0.579], [1, 0]] },
+        { "part": "barb_core", "prop": "y", "keys": [[0, 0], [0.5, 0.081], [1, 0]] },
+        { "part": "barb_organ", "prop": "x", "keys": [[0, 0], [0.5, -0.579], [1, 0]] },
+        { "part": "barb_organ", "prop": "y", "keys": [[0, 0], [0.5, 0.081], [1, 0]] }
       ]
     },
     "fuse": {
