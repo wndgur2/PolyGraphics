@@ -1,0 +1,49 @@
+{
+  "id": "ss.lib.vial",
+  "name": "Draught flask",
+  "description": "The shared vessel every draught is served in: a round-bottomed flask under a chitin stopper, filled two thirds. The glass is drawn behind the fluid rather than over it — a translucent pane across the liquid washes the colour out, and on these the colour IS the identity, so the pane is a highlight streak instead. Each fluid is a variant, which is what keeps eight draughts one family: a change to the flask changes all of them at once. What tells the eight apart is not the flask but what is suspended in it — specks, bubbles, pulp, lumps, crystals, grit, flakes, eggs. Those are authored per draught rather than composed from the library, because nothing in the library is a lump of sediment; the flask is the only part they share, and it is this document. That division is the point: a draught is one variant of this plus one handful of solids. Note for whoever picks this up next: `description` and `name` are gallery and manifest copy — a consuming game reads ids, geometry and animation names, never these — so a pass that only rewrites them changes nothing downstream. The pin in the game is deliberately **not** being moved for it.",
+  "tags": ["ss-lib"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "neck_outline", "at": [0, -4.6], "shape": { "kind": "rect", "w": 7.4, "h": 9.6, "corner": 1 }, "fill": "$ink" },
+    { "id": "bulb_outline", "at": [0, 3.6], "shape": { "kind": "circle", "r": 9.2 }, "fill": "$ink" },
+    { "id": "neck", "at": [0, -4.6], "shape": { "kind": "rect", "w": 5.6, "h": 9, "corner": 0.8 }, "fill": "$silent@0.42" },
+    { "id": "bulb", "at": [0, 3.6], "shape": { "kind": "circle", "r": 7.6 }, "fill": "$silent@0.42" },
+    { "id": "fluid", "shape": { "kind": "poly", "points": [[-6.98, 0.6], [6.98, 0.6], [7.6, 3.6], [5.37, 8.97], [0, 11.2], [-5.37, 8.97], [-7.6, 3.6]] }, "fill": "$pheromone" },
+    { "id": "meniscus", "at": [0, 0.6], "shape": { "kind": "ellipse", "rx": 6.98, "ry": 1.2 }, "fill": "$pheromone.light2" }
+  ],
+  "variants": {
+    "ichor": {
+      "description": "The hive's own blood, drawn from a Tracker.",
+      "set": { "fluid.fill": "$blood", "meniscus.fill": "$blood.light" }
+    },
+    "bile": {
+      "description": "Acid, straight from a Gland's sac.",
+      "set": { "fluid.fill": "$bile", "meniscus.fill": "$bile.light2" }
+    },
+    "must": {
+      "description": "Pressed from the fruiting bodies in the deep chambers.",
+      "set": { "fluid.fill": "$spore", "meniscus.fill": "$spore.light2" }
+    },
+    "midden": {
+      "description": "Steeped from the heap until it went green. Exactly what it looks like.",
+      "set": { "fluid.fill": "$venom.dark", "meniscus.fill": "$venom" }
+    },
+    "brine": {
+      "description": "Drained from a tymbal — the organ a Chorus shouts with.",
+      "set": { "fluid.fill": "$frost", "meniscus.fill": "$frost.light2" }
+    },
+    "marrow": {
+      "description": "Rendered out of a Soldier's jaw.",
+      "set": { "fluid.fill": "$rust", "meniscus.fill": "$rust.light" }
+    },
+    "wingblood": {
+      "description": "Bled from a Drifter's wing where it meets the body.",
+      "set": { "fluid.fill": "$gold", "meniscus.fill": "$gold.light2" }
+    },
+    "milk": {
+      "description": "Taken from the Matriarch. She was not asked.",
+      "set": { "fluid.fill": "$pheromone", "meniscus.fill": "$pheromone.light2" }
+    }
+  }
+}

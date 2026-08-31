@@ -1,0 +1,17 @@
+{
+  "id": "ss.draught.boomerang",
+  "name": "Soldier's Marrow",
+  "description": "Rendered, so it separated: a pale layer of fat standing on top of the dark, and bone grit too heavy to stay in either. It is the only draught you would have to shake.",
+  "tags": ["ss-draught"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "vial", "use": "ss.lib.vial", "variant": "marrow" },
+    { "id": "fat", "at": [0, 2.7], "shape": { "kind": "ellipse", "rx": 6, "ry": 1.9 }, "fill": "$husk.dark" },
+    { "id": "fat_lit", "at": [-1.6, 2.3], "shape": { "kind": "ellipse", "rx": 2.6, "ry": 0.8 }, "fill": "$husk" },
+    { "id": "grit_a", "at": [-2.2, 8.2], "shape": { "kind": "circle", "r": 0.7 }, "fill": "$husk" },
+    { "id": "grit_b", "at": [1.6, 8.8], "shape": { "kind": "circle", "r": 0.6 }, "fill": "$husk" },
+    { "id": "grit_c", "at": [3, 7.2], "shape": { "kind": "circle", "r": 0.5 }, "fill": "$husk" },
+    { "id": "grit_d", "at": [-0.4, 6.6], "shape": { "kind": "circle", "r": 0.45 }, "fill": "$husk" },
+    { "id": "cap", "use": "ss.lib.vial-cap" }
+  ]
+}

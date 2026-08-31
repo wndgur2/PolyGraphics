@@ -1,0 +1,17 @@
+{
+  "id": "ss.draught.wand",
+  "name": "Gland's Bile",
+  "description": "Still working. The bubbles are the tell — this is the only draught that is doing something to the bottle while you decide, and it climbs in a stream rather than sitting in a haze.",
+  "tags": ["ss-draught"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "vial", "use": "ss.lib.vial", "variant": "bile" },
+    { "id": "bub_a", "at": [-2.3, 2.6], "shape": { "kind": "circle", "r": 1.3 }, "fill": "$bile.light2" },
+    { "id": "bub_b", "at": [1.5, 3.8], "shape": { "kind": "circle", "r": 0.9 }, "fill": "$bile.light2" },
+    { "id": "bub_c", "at": [-0.5, 5.6], "shape": { "kind": "circle", "r": 0.7 }, "fill": "$bile.light2" },
+    { "id": "bub_d", "at": [2.8, 6.4], "shape": { "kind": "circle", "r": 0.6 }, "fill": "$bile.light2" },
+    { "id": "bub_e", "at": [-3, 7], "shape": { "kind": "circle", "r": 0.8 }, "fill": "$bile.light2" },
+    { "id": "bub_f", "at": [0.9, 8.4], "shape": { "kind": "circle", "r": 0.5 }, "fill": "$bile.light2" },
+    { "id": "cap", "use": "ss.lib.vial-cap" }
+  ]
+}

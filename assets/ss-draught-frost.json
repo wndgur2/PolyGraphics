@@ -1,0 +1,18 @@
+{
+  "id": "ss.draught.frost",
+  "name": "Tymbal Brine",
+  "description": "Clear, salt already crystallising out on the bottom, and two standing rings on the surface that have not stopped since it was drawn. It came out of the organ a Chorus shouts with and it has not finished shouting.",
+  "tags": ["ss-draught"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "vial", "use": "ss.lib.vial", "variant": "brine" },
+    { "id": "ripple_a", "at": [0, 2.8], "scale": [1, 0.34], "shape": { "kind": "ring", "r": 5, "width": 1.2 }, "fill": "$silent@heavy" },
+    { "id": "ripple_b", "at": [0, 4.4], "scale": [1, 0.32], "shape": { "kind": "ring", "r": 3, "width": 1 }, "fill": "$silent@heavy" },
+    { "id": "ripple_c", "at": [0, 5.9], "scale": [1, 0.3], "shape": { "kind": "ring", "r": 1.4, "width": 0.9 }, "fill": "$silent@soft" },
+    { "id": "salt_a", "at": [-2.6, 8.4], "rot": 14, "shape": { "kind": "poly", "points": [[0, -1.4], [1.1, 0], [0, 1.4], [-1.1, 0]] }, "fill": "$silent" },
+    { "id": "salt_b", "at": [1.4, 9], "rot": -22, "shape": { "kind": "poly", "points": [[0, -1.68], [1.32, 0], [0, 1.68], [-1.32, 0]] }, "fill": "$silent" },
+    { "id": "salt_c", "at": [3, 7.4], "rot": 40, "shape": { "kind": "poly", "points": [[0, -1.1199999999999999], [0.8800000000000001, 0], [0, 1.1199999999999999], [-0.8800000000000001, 0]] }, "fill": "$silent" },
+    { "id": "salt_d", "at": [-0.4, 9.2], "rot": -8, "shape": { "kind": "poly", "points": [[0, -1.26], [0.9900000000000001, 0], [0, 1.26], [-0.9900000000000001, 0]] }, "fill": "$silent" },
+    { "id": "cap", "use": "ss.lib.vial-cap" }
+  ]
+}
