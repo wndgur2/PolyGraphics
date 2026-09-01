@@ -357,6 +357,21 @@ function compileVoices(
       }
       const resolved = voice.variant ? applySoundVariant(target, voice.variant, issues) : target;
       const vdef = voice.variant ? target.variants?.[voice.variant] : undefined;
+      // Playing an instrument: the ratio between the pitch asked for and the
+      // one the document says it was written at. It multiplies into the frame
+      // like any other scale, so every voice inside transposes together and a
+      // noise voice is left alone — which is what makes a two-voice instrument
+      // stay itself at a different pitch.
+      let play = 1;
+      if (voice.pitch !== undefined) {
+        if (target.root === undefined)
+          issues.push({
+            level: "error",
+            where,
+            msg: `use: "${voice.use}" has no \`root\`, so there is no pitch to play it at — give it one`,
+          });
+        else play = hz(voice.pitch, a, issues, where) / hz(target.root, a, issues, voice.use);
+      }
       // A composed document keeps its own timeline; `dur` on the use voice fits
       // it to a different one, which is what `scale` does for a composed asset.
       const fit = voice.dur === undefined ? 1 : own / target.duration;
@@ -364,7 +379,7 @@ function compileVoices(
         ...compileVoices(resolved.voices, { id: target.id, duration: target.duration }, reg, issues, voice.use, {
           offset: at,
           gain: gain * level(target.gain, a.gain, "gain", 1, issues, voice.use),
-          pitch: frame.pitch * (vdef?.pitch ?? 1),
+          pitch: frame.pitch * (vdef?.pitch ?? 1) * play,
           stretch: frame.stretch * (vdef?.stretch ?? 1) * fit,
           idPrefix: `${id}.`,
           useStack: [...frame.useStack, voice.use],

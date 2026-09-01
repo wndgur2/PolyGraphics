@@ -12,42 +12,43 @@
       "id": "n0",
       "at": 0.0,
       "use": "ss.lib.note",
-      "dur": 0.16
+      "dur": 0.16,
+      "pitch": "$third"
     },
     {
       "id": "n1",
       "at": 0.13,
       "use": "ss.lib.note",
-      "variant": "fifth",
-      "dur": 0.16
+      "dur": 0.16,
+      "pitch": "$fifth"
     },
     {
       "id": "n2",
       "at": 0.26,
       "use": "ss.lib.note",
-      "variant": "seventh",
-      "dur": 0.16
+      "dur": 0.16,
+      "pitch": "$seventh"
     },
     {
       "id": "n3",
       "at": 0.39,
       "use": "ss.lib.note",
-      "variant": "octave",
-      "dur": 0.16
+      "dur": 0.16,
+      "pitch": "$third.up"
     },
     {
       "id": "n4",
       "at": 0.52,
       "use": "ss.lib.note",
-      "variant": "seventh",
-      "dur": 0.16
+      "dur": 0.16,
+      "pitch": "$seventh"
     },
     {
       "id": "n5",
       "at": 0.65,
       "use": "ss.lib.note",
-      "variant": "octave",
-      "dur": 0.16
+      "dur": 0.16,
+      "pitch": "$third.up"
     }
   ]
 }

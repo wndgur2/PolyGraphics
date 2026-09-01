@@ -228,5 +228,51 @@ check(
 const victory = compileSound(all.get("ss.sfx.victory")!, sreg).ir;
 check("a use voice's `dur` refits the composed document", victory.voices.every((v) => close(v.dur, 0.16)), `${victory.voices[0].dur}s`);
 
+/**
+ * The claim `root` exists to make: a library document is written at one pitch
+ * and played at another, so the degree lives at the call site with the melody
+ * instead of as a variant inside the instrument. The four rungs of the level-up
+ * figure have to come out as the four scale tokens themselves.
+ */
+const freqs = (id: string) =>
+  compileSound(all.get(id)!, sreg).ir.voices.map((v) => (v.source as { freq: number }).freq);
+check(
+  "playing an instrument at a pitch transposes it to exactly that pitch",
+  JSON.stringify(freqs("ss.sfx.levelup")) === JSON.stringify([523.25, 659.25, 784, 1046.5]),
+  freqs("ss.sfx.levelup").join(", "),
+);
+check(
+  "…and the same instrument walks the other way down for the loss figure",
+  JSON.stringify(freqs("ss.sfx.gameover")) === JSON.stringify([392, 329.63, 261.63, 196]),
+  freqs("ss.sfx.gameover").join(", "),
+);
+check(
+  "an instrument played at its own root is the instrument unchanged",
+  freqs("ss.sfx.levelup")[0] === freqs("ss.lib.note")[0],
+  `${freqs("ss.sfx.levelup")[0]} vs ${freqs("ss.lib.note")[0]}Hz`,
+);
+
+// A document with no `root` has not said what pitch it is written at, so there
+// is nothing to measure a requested pitch against. Guessing one would make every
+// figure built on it quietly wrong; saying so is the whole value of the field.
+const rootless = structuredClone(all.get("ss.sfx.select")!);
+const caller = SoundSchema.parse({
+  id: "test.caller",
+  name: "Caller",
+  description: "Plays a document that never said what pitch it was written at.",
+  tags: ["sfx"],
+  duration: 0.2,
+  voices: [{ id: "n", use: rootless.id, pitch: "$fifth" }],
+});
+const rootlessIssues = compileSound(caller, {
+  sounds: new Map(all).set(caller.id, caller),
+  tokens,
+}).issues;
+check(
+  "playing a document that declares no `root` is an error, not a guess",
+  rootlessIssues.some((i) => i.level === "error" && i.msg.includes("no `root`")),
+  rootlessIssues.map((i) => i.msg).join("; ") || "no issue raised",
+);
+
 console.log(`\n${failures === 0 ? "✓ all checks passed" : `✖ ${failures} failed`}`);
 process.exit(failures ? 1 : 0);

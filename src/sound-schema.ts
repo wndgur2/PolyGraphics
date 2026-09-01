@@ -113,11 +113,21 @@ export const SourceVoiceSchema = z.strictObject({ ...voiceBase, ...shaping, sour
  * Compose another sound document in place, offset by this voice's `at` and
  * scaled by its `gain`. The whole point of `ss.lib.*`: one document holds what
  * the hive's chitin sounds like, and every creature sound composes it.
+ *
+ * `pitch` plays the composed document at a pitch other than the one it was
+ * written at, which is what makes an instrument an instrument. It is the
+ * frequency half of the pair a visual `use` part spends on `scale`; `dur` is
+ * the time half. Requires a `root` on the target — see `SoundSchema.root`.
+ *
+ * It is an absolute pitch and not a ratio, for the reason every other slot in
+ * this file takes a token: `"pitch": 1.26` is a bare number nobody can read,
+ * and `"pitch": "$fifth"` is the note it actually plays.
  */
 export const UseVoiceSchema = z.strictObject({
   ...voiceBase,
   use: soundId,
   variant: z.string().optional(),
+  pitch: PitchSchema.optional(),
 });
 
 /**
@@ -180,6 +190,19 @@ export const SoundSchema = z.strictObject({
   tags: z.array(z.string()).min(1), // tags[0] = gallery category
   duration: z.number().positive(), // seconds — the canvas
   gain: LevelSchema.optional(), // master for this document; default 1
+  /**
+   * The pitch this document is written at — and, by declaring it, the statement
+   * that this document is an instrument: something another document can play,
+   * rather than a sound the game triggers.
+   *
+   * It is the reference a `use` voice's `pitch` is measured against; nothing
+   * else reads it, and a document without one renders exactly as it always did.
+   * Deliberately not a separate kind of file: a library document is the same
+   * document as a sound, so it lands in the gallery, bakes to a take somebody
+   * can listen to, and gets clip-checked like everything else. `lib.face` is
+   * just an asset for the same reason.
+   */
+  root: PitchSchema.optional(),
   jitter: JitterSchema.optional(),
   meta: z.record(z.string(), z.number()).optional(), // sim-facing hints (minInterval, …)
   /**

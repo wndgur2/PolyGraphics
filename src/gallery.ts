@@ -262,7 +262,8 @@ function assetCard(asset: Asset, reg: Registry, issues: Issue[]): string {
 /** One line per voice, in mix order — the vocabulary a change gets described in. */
 function voiceRow(v: Voice): string {
   const bits: string[] = [];
-  if ("use" in v) bits.push(`use ${v.use}${v.variant ? `#${v.variant}` : ""}`);
+  if ("use" in v)
+    bits.push(`use ${v.use}${v.variant ? `#${v.variant}` : ""}${v.pitch !== undefined ? ` @ ${v.pitch}` : ""}`);
   else if ("repeat" in v)
     bits.push(`repeat ×${v.repeat.count} ${v.repeat.of.kind} · ${v.repeat.spread}s spread, ${v.repeat.grain} grain`);
   else if (v.source.kind === "osc")

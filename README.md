@@ -202,14 +202,26 @@ scatter, not the same sweep five times. The compiler cuts the envelope into
 per-grain windows so the IR stays a flat list of voices and no adapter has to
 learn what a bus is.
 
-**Library documents are instruments.** `ss.lib.note` is one note of the flat
-square voice; `ss.sfx.levelup` and `ss.sfx.victory` are that document composed
-four and six times with a `variant` picking the degree, and `dur` on the use
-voice refitting it to a slower step. `ss.lib.knell` is its low sawtooth twin and
-`ss.sfx.gameover` walks the same ladder down it. Retune the library and every
-figure built on it moves together — the exact `ss.lib.organ` argument, and
-`scripts/test-webaudio-adapter.ts` asserts it by retuning the note in memory and
-checking that both fanfares follow while the knell-based one does not.
+**Library documents are instruments, and `root` is what says so.** `ss.lib.note`
+is one note of the flat square voice, written at `$third` and saying as much;
+`ss.sfx.levelup` and `ss.sfx.victory` are that document composed four and six
+times with a `pitch` on each use voice picking the degree, and `dur` refitting it
+to a slower step. `ss.lib.knell` is its low sawtooth twin and `ss.sfx.gameover`
+walks the same ladder down it.
+
+The degree therefore lives at the call site, next to the melody, rather than as a
+named variant inside the instrument — a fanfare can reach a note nobody
+anticipated without editing the thing that plays it. `pitch` is an absolute
+pitch and not a ratio, for the same reason every other slot takes a token:
+`"pitch": 1.26` is a bare number nobody can read, and `"pitch": "$fifth"` is the
+note it plays. Playing a document that declares no `root` is an error rather
+than a guess, and a `root` nothing composes is a warning, exactly as an unused
+palette token is.
+
+Retune the library and every figure built on it moves together — the exact
+`ss.lib.organ` argument, and `scripts/test-webaudio-adapter.ts` asserts it by
+retuning the note in memory and checking that both fanfares follow while the
+knell-based one does not.
 
 **Whole-sound behaviour belongs to the engine**, the same boundary the visual
 side draws at whole-body transforms. A document describes one trigger: rate
