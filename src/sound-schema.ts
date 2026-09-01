@@ -87,16 +87,27 @@ export const EnvTrackSchema = z.strictObject({
 });
 export type EnvTrack = z.infer<typeof EnvTrackSchema>;
 
+/** What every voice does, whatever it is made of: place itself, and set its level. */
 const voiceBase = {
   id: voiceId,
   at: z.number().min(0).optional(), // start, seconds from t=0; default 0
   dur: LevelSchema.optional(), // seconds or a dur token; default = the rest of the sound
   gain: LevelSchema.optional(), // 0..1 or a gain token name; default 1
+};
+
+/**
+ * Shaping belongs to a voice that owns a waveform. A `use` voice does not: the
+ * document it composes brings its own envelopes, and a track written here would
+ * have to be sliced across every voice inside it — which is a bus, and the IR
+ * has none. Leaving these off `use` makes that a schema error at the point of
+ * writing rather than a track the compiler drops without a word.
+ */
+const shaping = {
   env: z.array(EnvTrackSchema).optional(),
   filter: FilterSchema.optional(),
 };
 
-export const SourceVoiceSchema = z.strictObject({ ...voiceBase, source: SourceSchema });
+export const SourceVoiceSchema = z.strictObject({ ...voiceBase, ...shaping, source: SourceSchema });
 
 /**
  * Compose another sound document in place, offset by this voice's `at` and
@@ -117,6 +128,7 @@ export const UseVoiceSchema = z.strictObject({
  */
 export const RepeatVoiceSchema = z.strictObject({
   ...voiceBase,
+  ...shaping,
   repeat: z.strictObject({
     of: SourceSchema,
     count: z.number().int().min(1).max(256),

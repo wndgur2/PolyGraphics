@@ -16,7 +16,7 @@
         "kind": "osc",
         "wave": "sawtooth",
         "freq": "$moan",
-        "to": 55
+        "to": "$bone.down"
       },
       "env": [
         {

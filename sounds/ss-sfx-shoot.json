@@ -24,7 +24,7 @@
         "kind": "osc",
         "wave": "square",
         "freq": "$tonic",
-        "to": 380
+        "to": "$swarm.up"
       },
       "env": [
         {

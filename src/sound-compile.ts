@@ -235,7 +235,13 @@ function withGlides(
     }
     out.push({
       prop,
-      keys: [[0, hz(from, a, issues, where, false)], [1, hz(to, a, issues, where, false)]],
+      // `from` was already resolved (and warned about) where it was written, so
+      // it passes quietly here. `to` is written nowhere else: it is a pitch on
+      // the source, next to `freq`, and it carries identity the same way — a
+      // theme that retunes the palette has to move where a slide lands too, or
+      // half the gesture stays behind. So it warns on a bare number like every
+      // other pitch does; only the keyframes it compiles into are trajectories.
+      keys: [[0, hz(from, a, issues, where, false)], [1, hz(to, a, issues, where)]],
       ease: "exp",
     });
   };

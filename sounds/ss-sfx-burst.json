@@ -42,7 +42,7 @@
         "kind": "osc",
         "wave": "square",
         "freq": "$tonic",
-        "to": 1400
+        "to": "$gust"
       },
       "env": [
         {
