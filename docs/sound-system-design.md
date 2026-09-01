@@ -238,13 +238,19 @@ them, and it is why this order is safe.
 | # | Change | Invariant |
 |---|---|---|
 | 0 | Fix finding 4a and 4b | 28/28 wav baselines unchanged |
-| 1 | Thread pitch/stretch down `compileVoices`; delete the post-hoc `scaleVoices` pass | 28/28 unchanged — pure refactor |
+| 1 | Thread pitch/stretch down `compileVoices`; delete the post-hoc `scaleVoices` pass | 27/28 unchanged; `hit#elite` rebaselined (below) |
 | 2 | `root` + use-site `pitch`; delete 6 degree variants; rewrite the 3 fanfares | 28/28 unchanged — the same Hz by a different route |
 | 3 | `adsr` + `attackMs` in `describe()`; re-author chime | **wav changes here**, deliberately, and a human has to listen |
 | 4 | `phrase`; rewrite levelup / victory / gameover | 28/28 unchanged |
 
-Phases 0 through 2 are provably sound-neutral: they change how a document is written, not what it renders to.
-Phase 3 is the first one that needs ears.
+Phases 0 through 2 are all but sound-neutral: they change how a document is written, not what it renders to.
+Phase 1 has one exception, and it is worth recording rather than rebaselining quietly. Threading the scales
+means a value is rounded once, at the end, where the old two-pass order rounded it twice. Three noise grains in
+`ss.sfx.hit#elite` — the only shipped document that puts a `repeat` under a `stretch` — therefore land up to
+0.1ms from where they used to, and its bake is one byte-diff. Peak and RMS are unchanged to a tenth of a dB,
+the grains are the same seeds through the same filter, and the new value is the more accurate of the two.
+
+Phase 3 is the first one that changes a sound on purpose, and the first that needs ears.
 
 Unrelated but worth noting before anyone runs `npm run regress` and reads the result as damage: the *visual*
 baselines are stale (45 changed, 127 new), while all 28 sound baselines pass. That is pre-existing drift on the

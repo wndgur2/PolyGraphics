@@ -275,11 +275,15 @@ function voiceRow(v: Voice): string {
   const xf: string[] = [];
   if (v.at) xf.push(`at ${v.at}s`);
   if (v.dur !== undefined) xf.push(`dur ${v.dur}`);
-  if (v.filter)
-    xf.push(
-      `${v.filter.type} ${v.filter.freq}${v.filter.to !== undefined ? `→${v.filter.to}` : ""}${v.filter.q !== undefined ? ` q ${v.filter.q}` : ""}`,
-    );
-  for (const t of v.env ?? []) xf.push(`${t.prop} ${t.keys.map((k) => k[1]).join("→")}`);
+  // A `use` voice carries no shaping of its own — the document it composes
+  // brings its own — so only the two that own a waveform have these columns.
+  if (!("use" in v)) {
+    if (v.filter)
+      xf.push(
+        `${v.filter.type} ${v.filter.freq}${v.filter.to !== undefined ? `→${v.filter.to}` : ""}${v.filter.q !== undefined ? ` q ${v.filter.q}` : ""}`,
+      );
+    for (const t of v.env ?? []) xf.push(`${t.prop} ${t.keys.map((k) => k[1]).join("→")}`);
+  }
 
   return `<tr>
   <td><code class="pid">${esc(v.id)}</code></td>
