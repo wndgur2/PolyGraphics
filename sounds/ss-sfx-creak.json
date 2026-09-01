@@ -17,7 +17,7 @@
       "filter": {
         "type": "bandpass",
         "freq": "$grit",
-        "to": 380,
+        "to": "$swarm.up",
         "q": "band"
       },
       "env": [
