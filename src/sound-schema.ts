@@ -64,9 +64,57 @@ export const FilterSchema = z.strictObject({
 });
 export type Filter = z.infer<typeof FilterSchema>;
 
+const easing = z.enum(["linear", "exp", "sine"]);
+
+export const KeysTrackSchema = z.strictObject({
+  prop: z.enum(["gain", "freq", "cutoff"]),
+  // The value is a plain number or a pitch ref; which one is legal depends on
+  // `prop`, so the compiler checks it and says so in the prop's own words
+  // rather than the schema rejecting a perfectly good `[1, 0]` gain key.
+  keys: z.array(z.tuple([z.number().min(0).max(1), z.union([z.number(), z.string()])])).min(2),
+  ease: easing.optional(),
+});
+
+/**
+ * The one part of a sound written in seconds rather than in fractions of a span.
+ *
+ * Keys are proportional, which is right for a trajectory: a slide from one pitch
+ * to another is the same slide however long it takes. It is wrong for an attack.
+ * A plucked note reaches its peak in about ten milliseconds whether the note
+ * lasts a tenth of a second or two, so an instrument written with a proportional
+ * attack stops being the same instrument the moment somebody plays it longer.
+ *
+ * Before this existed, `ss.sfx.chime` said `0.017` in one voice and `0.013` in
+ * the other to mean 12ms in both — the author dividing by the duration by hand,
+ * twice, in the one document in the set with an attack at all.
+ *
+ * Expanded into the keys you would have written once the voice's final length
+ * is known, in the relationship `to` has to a `freq` track: the IR never learns
+ * it existed, and no adapter has to implement a second kind of envelope.
+ *
+ * Gain only. `sustain` and `peak` are levels 0..1, which is what a gain track
+ * carries; a cutoff envelope's values are pitches, and calling those "sustain"
+ * would be borrowing a word that no longer means anything.
+ */
+export const AdsrSchema = z.strictObject({
+  attack: z.number().min(0), // seconds, silence → peak
+  peak: z.number().min(0).max(1).optional(), // level the attack reaches; default 1
+  decay: z.number().min(0).optional(), // seconds, peak → sustain; default: the rest of the voice
+  sustain: z.number().min(0).max(1).optional(), // level held after the decay; default 0
+  release: z.number().min(0).optional(), // seconds, sustain → silence, ending at dur; default 0
+});
+export type Adsr = z.infer<typeof AdsrSchema>;
+
+export const AdsrTrackSchema = z.strictObject({
+  prop: z.literal("gain"),
+  adsr: AdsrSchema,
+  ease: easing.optional(),
+});
+
 /**
  * A keyframe track, structurally identical to an animation track: [t 0..1,
- * value] pairs over the voice's own span.
+ * value] pairs over the voice's own span — or an `adsr`, which says the same
+ * thing in seconds and is expanded into one.
  *
  * `gain` values are factors 0..1 of the voice's level (opacity's twin);
  * `freq` and `cutoff` values are Hz or pitch refs, so a slide reads as the two
@@ -77,14 +125,7 @@ export type Filter = z.infer<typeof FilterSchema>;
  * Default ease is `exp`, not `sine`: pitch and loudness are perceived
  * logarithmically, so an exponential ramp is the one that sounds linear.
  */
-export const EnvTrackSchema = z.strictObject({
-  prop: z.enum(["gain", "freq", "cutoff"]),
-  // The value is a plain number or a pitch ref; which one is legal depends on
-  // `prop`, so the compiler checks it and says so in the prop's own words
-  // rather than the schema rejecting a perfectly good `[1, 0]` gain key.
-  keys: z.array(z.tuple([z.number().min(0).max(1), z.union([z.number(), z.string()])])).min(2),
-  ease: z.enum(["linear", "exp", "sine"]).optional(),
-});
+export const EnvTrackSchema = z.union([KeysTrackSchema, AdsrTrackSchema]);
 export type EnvTrack = z.infer<typeof EnvTrackSchema>;
 
 /** What every voice does, whatever it is made of: place itself, and set its level. */

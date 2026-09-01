@@ -441,7 +441,7 @@ if (cmd === "wav" || cmd === "check") {
     console.log(`✓ baked ${wavs.size} wav files → out/wav (${SAMPLE_RATE}Hz mono)`);
     if (cmd === "wav")
       for (const [name, { d }] of wavs)
-        console.log(`  ${name.padEnd(28)} ${d.duration}s  peak ${String(d.peakDb).padStart(6)}dB  rms ${String(d.rmsDb).padStart(6)}dB  ${d.brightness}Hz zc`);
+        console.log(`  ${name.padEnd(28)} ${d.duration}s  peak ${String(d.peakDb).padStart(6)}dB  rms ${String(d.rmsDb).padStart(6)}dB  ${String(d.attackMs).padStart(6)}ms atk  ${d.brightness}Hz zc`);
   } else if (cmd === "wav") {
     console.log("no sounds/ documents to bake");
   }

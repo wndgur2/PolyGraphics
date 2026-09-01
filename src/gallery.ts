@@ -283,7 +283,12 @@ function voiceRow(v: Voice): string {
       xf.push(
         `${v.filter.type} ${v.filter.freq}${v.filter.to !== undefined ? `→${v.filter.to}` : ""}${v.filter.q !== undefined ? ` q ${v.filter.q}` : ""}`,
       );
-    for (const t of v.env ?? []) xf.push(`${t.prop} ${t.keys.map((k) => k[1]).join("→")}`);
+    for (const t of v.env ?? [])
+      xf.push(
+        "adsr" in t
+          ? `${t.prop} adsr ${[t.adsr.attack, t.adsr.decay, t.adsr.sustain, t.adsr.release].filter((n) => n !== undefined).join("/")}`
+          : `${t.prop} ${t.keys.map((k) => k[1]).join("→")}`,
+      );
   }
 
   return `<tr>
@@ -294,7 +299,7 @@ function voiceRow(v: Voice): string {
 </tr>`;
 }
 
-interface Take { label: string; variant?: string; wav: string; wave: string; peakDb: number; rmsDb: number; dur: number; voices: number }
+interface Take { label: string; variant?: string; wav: string; wave: string; peakDb: number; rmsDb: number; attackMs: number; dur: number; voices: number }
 
 function takesOf(sd: Sound, sreg: SoundRegistry, issues: Issue[]): Take[] {
   const { ir, issues: cissues } = compileSound(sd, sreg);
@@ -309,6 +314,7 @@ function takesOf(sd: Sound, sreg: SoundRegistry, issues: Issue[]): Take[] {
       wave: waveformSvg(pcm, 640, 90),
       peakDb: d.peakDb,
       rmsDb: d.rmsDb,
+      attackMs: d.attackMs,
       dur: d.duration,
       voices: (variant ? ir.variants[variant].voices : ir.voices).length,
     };
@@ -358,6 +364,7 @@ function soundDetailBlock(sd: Sound, sreg: SoundRegistry, issues: Issue[]): stri
     ["voices", String(sd.voices.length)],
     ["peak", `${base.peakDb} dBFS`],
     ["rms", `${base.rmsDb} dBFS`],
+    ["attack", `${base.attackMs} ms`],
     ...(sd.gain !== undefined ? [["gain", String(sd.gain)] as [string, string]] : []),
     ...(sd.jitter?.freq ? [["jitter", `×${sd.jitter.freq[0]}–${sd.jitter.freq[1]}`] as [string, string]] : []),
     ...(sd.offBand ? [["off-band", esc(sd.offBand), "wide"] as [string, string, string]] : []),

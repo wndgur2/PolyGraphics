@@ -196,6 +196,16 @@ by editing four numbers.
 you would have written, and nothing downstream knows it existed. Same on a
 filter, where it sweeps the cutoff. It is the relationship `ngon` has to `poly`.
 
+**`adsr` is the one envelope written in seconds.** Keys are fractions of a span,
+which is right for a trajectory — a slide between two pitches is the same slide
+however long it takes — and wrong for an attack. A struck note reaches its peak
+in about ten milliseconds whether it lasts a tenth of a second or two, so an
+instrument written with a proportional attack stops being that instrument the
+moment somebody plays it longer. `{ "prop": "gain", "adsr": { "attack": 0.012 } }`
+is expanded into the keys you would have written once the voice's final length
+is known, so the IR never learns it existed. Before it did, `ss.sfx.chime` said
+`0.017` in one voice and `0.013` in the other to mean 12ms in both.
+
 **An envelope on a scatter belongs to the gesture, not to each grain.** A dry
 crack is bright grains first and dull grains last — one sweep across the whole
 scatter, not the same sweep five times. The compiler cuts the envelope into
@@ -264,6 +274,13 @@ clipping, near-silence, and any sound sitting more than 9dB off the set's median
 level. RMS is measured over the sounding extent rather than the canvas, because
 a sound that ends early is shorter, not quieter, and a lint that confuses the two
 sends you to raise the gain on the wrong thing.
+
+`npm run wav` also prints **attack** — milliseconds from the onset to 90% of
+peak. Loudness and brightness say nothing about how fast a sound arrives, which
+is the one property an instrument has to hold while it is played at four
+different lengths, and the property a proportional envelope cannot hold. It is
+measured from the onset rather than from t=0, so a voice that starts late reads
+as fast rather than as slow.
 
 A document may state, in writing, why it belongs outside that band —
 `offBand` — for the cue whose whole job is to sit under the cues it shares a

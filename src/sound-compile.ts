@@ -14,7 +14,7 @@
  * re-walking the document. Whatever you hear in the bake is what an engine
  * plays, by construction.
  */
-import type { EnvTrack, Filter, Sound, Source, Voice } from "./sound-schema.js";
+import type { Adsr, EnvTrack, Filter, Sound, Source, Voice } from "./sound-schema.js";
 import { VoiceSchema } from "./sound-schema.js";
 import type { Issue } from "./render.js";
 import { resolveNumber, resolvePitch, type AudioTokens, type Tokens } from "./tokens.js";
@@ -289,6 +289,57 @@ function withGlides(
 }
 
 /**
+ * `adsr` → the keys it stands for, against the voice's final length.
+ *
+ * This is why the two scales are carried down the recursion rather than
+ * multiplied over the result: `dur` here is already the number of seconds the
+ * voice will actually last, so a 12ms attack stays 12ms whether the note was
+ * written short, stretched by a variant, or refitted by whoever plays it.
+ *
+ * Segments that do not fit are compressed rather than truncated — a voice too
+ * short for its own envelope should sound like a hurried version of itself, not
+ * like a shape with its tail cut off — and the compiler says it did so.
+ */
+function expandAdsr(adsr: Adsr, dur: number, issues: Issue[], where: string): [number, number][] {
+  const peak = adsr.peak ?? 1;
+  const sustain = adsr.sustain ?? 0;
+  let attack = adsr.attack;
+  let release = adsr.release ?? 0;
+  let decay = adsr.decay ?? Math.max(0, dur - attack - release);
+
+  const total = attack + decay + release;
+  if (total > dur + 1e-9) {
+    const fit = dur / total;
+    attack *= fit;
+    decay *= fit;
+    release *= fit;
+    issues.push({
+      level: "warn",
+      where,
+      msg: `adsr runs ${r4(total)}s in a ${r4(dur)}s voice — compressed to fit`,
+    });
+  }
+
+  const at = (t: number): number => r4(Math.min(1, t / dur));
+  const raw: [number, number][] = [
+    [0, 0],
+    [at(attack), peak],
+    [at(attack + decay), sustain],
+    [at(dur - release), sustain],
+    [1, 0],
+  ];
+  // Collapse keys that land on the same instant, last one winning: with no
+  // sustain and no release the middle three all sit at the end, and the shape
+  // that survives is the plain decay it was asking for.
+  const keys: [number, number][] = [];
+  for (const k of raw) {
+    if (keys.length && keys[keys.length - 1][0] === k[0]) keys.pop();
+    keys.push(k);
+  }
+  return keys;
+}
+
+/**
  * Envelope tracks. `gain` keys are plain factors; `freq`/`cutoff` keys resolve
  * as pitches, so a slide is written as the two pitches it moves between.
  * One track per prop, for the same reason the visual side allows one per
@@ -298,6 +349,7 @@ function compileEnv(
   env: EnvTrack[] | undefined,
   a: AudioTokens,
   pitch: number,
+  dur: number,
   issues: Issue[],
   where: string,
 ): IREnvTrack[] {
@@ -309,6 +361,10 @@ function compileEnv(
       continue;
     }
     seen.add(track.prop);
+    if ("adsr" in track) {
+      out.push({ prop: "gain", keys: expandAdsr(track.adsr, dur, issues, where), ease: track.ease ?? "exp" });
+      continue;
+    }
     const keys = track.keys.map(([t, v]) => {
       if (track.prop === "gain") {
         if (typeof v !== "number") {
@@ -392,19 +448,21 @@ function compileVoices(
       const { of, count, spread, grain, seed, pitchRange, gainRange } = voice.repeat;
       const rng = mulberry32(seed ?? hashSeed(`${owner.id}:${voice.id}`));
       const glen = level(grain, a.dur, "dur", 0.02, issues, where);
+      // The scatter's own span, which the envelope describes. Kept in the
+      // document's units so the per-grain windows below stay ratios, and a
+      // stretched gesture slices exactly where an unstretched one does — but an
+      // `adsr` on it is expanded against the seconds the gesture really lasts,
+      // because that is the point of writing one.
+      const gesture = spread + glen;
       const filter = voice.filter && compileFilter(voice.filter, a, frame.pitch, issues, where);
       const env = withGlides(
         { source: of, filter: voice.filter },
-        compileEnv(voice.env, a, frame.pitch, issues, where),
+        compileEnv(voice.env, a, frame.pitch, gesture * frame.stretch, issues, where),
         a,
         frame.pitch,
         issues,
         where,
       );
-      // The scatter's own span, which the envelope describes. Kept in the
-      // document's units so the per-grain windows below stay ratios, and a
-      // stretched gesture slices exactly where an unstretched one does.
-      const gesture = spread + glen;
       for (let i = 0; i < count; i++) {
         const src = compileSource(of, owner.id, `${voice.id}_${i}`, a, frame.pitch, issues, where);
         const t = rng() * spread;
@@ -431,7 +489,14 @@ function compileVoices(
       gain: r4(gain),
       source: compileSource(voice.source, owner.id, voice.id, a, frame.pitch, issues, where),
       ...(voice.filter ? { filter: compileFilter(voice.filter, a, frame.pitch, issues, where) } : {}),
-      env: withGlides(voice, compileEnv(voice.env, a, frame.pitch, issues, where), a, frame.pitch, issues, where),
+      env: withGlides(
+        voice,
+        compileEnv(voice.env, a, frame.pitch, own * frame.stretch, issues, where),
+        a,
+        frame.pitch,
+        issues,
+        where,
+      ),
     });
   }
   return out;

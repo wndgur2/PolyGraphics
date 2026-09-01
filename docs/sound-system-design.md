@@ -2,6 +2,8 @@
 
 *2026-09-01. Answers one question: is an instrument layer premature, and if it isn't, what has to change underneath it.*
 
+*Status: phases 0–3 of the migration below have landed. Phase 4 (`phrase`) has not.*
+
 The question is not whether `use` can compose documents — it already does, and the README already calls
 `ss.lib.note` and `ss.lib.knell` instruments. The question is whether the model *under* `use` can carry an
 instrument at all.
@@ -240,8 +242,13 @@ them, and it is why this order is safe.
 | 0 | Fix finding 4a and 4b | 28/28 wav baselines unchanged |
 | 1 | Thread pitch/stretch down `compileVoices`; delete the post-hoc `scaleVoices` pass | 27/28 unchanged; `hit#elite` rebaselined (below) |
 | 2 | `root` + use-site `pitch`; delete 6 degree variants; rewrite the 3 fanfares | 28/28 unchanged — the same Hz by a different route |
-| 3 | `adsr` + `attackMs` in `describe()`; re-author chime | **wav changes here**, deliberately, and a human has to listen |
-| 4 | `phrase`; rewrite levelup / victory / gameover | 28/28 unchanged |
+| 3 | `adsr` + `attackMs` in `describe()`; re-author chime | **wav changes here**, deliberately: `chime` only, by 0.1dB peak |
+| 4 | `phrase`; rewrite levelup / victory / gameover | unchanged |
+
+Phase 2 removes six takes along with the six degree variants they were bakes of, so the set goes from 28 to 22.
+Phase 3's one intended change is `ss.sfx.chime`: its two voices asked for a 12ms attack as `0.017` and `0.013`,
+and now both ask for `0.012` in seconds, which lands the peak 0.07ms and 0.04ms from where it used to be. Peak
+moves by 0.1dB, RMS and brightness not at all. Somebody should still listen to it.
 
 Phases 0 through 2 are all but sound-neutral: they change how a document is written, not what it renders to.
 Phase 1 has one exception, and it is worth recording rather than rebaselining quietly. Threading the scales

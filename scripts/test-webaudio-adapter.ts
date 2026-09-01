@@ -27,6 +27,7 @@ function check(name: string, cond: boolean, detail = ""): void {
   if (!cond) failures++;
 }
 const close = (a: number, b: number, eps = 1e-4) => Math.abs(a - b) <= eps;
+const r = (n: number) => Math.round(n * 10000) / 10000;
 
 // ---------------------------------------------------------------- mock context
 
@@ -255,6 +256,62 @@ check(
 // A document with no `root` has not said what pitch it is written at, so there
 // is nothing to measure a requested pitch against. Guessing one would make every
 // figure built on it quietly wrong; saying so is the whole value of the field.
+/**
+ * The claim `adsr` exists to make: an attack written in seconds is that many
+ * seconds at every length the voice is played at. Two voices three times apart,
+ * one envelope — the compiled keys have to put the peak at the same instant,
+ * which means the two normalized positions have to differ. That difference is
+ * the division `ss.sfx.chime` used to do by hand.
+ */
+const struck = SoundSchema.parse({
+  id: "test.struck",
+  name: "Struck",
+  description: "One attack, written once, at two different lengths.",
+  tags: ["sfx"],
+  duration: 1,
+  voices: [
+    { id: "short", dur: 0.3, source: { kind: "osc", wave: "sine", freq: "$tonic" }, env: [{ prop: "gain", adsr: { attack: 0.012 } }] },
+    { id: "long", dur: 0.9, source: { kind: "osc", wave: "sine", freq: "$tonic" }, env: [{ prop: "gain", adsr: { attack: 0.012 } }] },
+  ],
+});
+const struckVoices = compileSound(struck, { sounds: new Map(all).set(struck.id, struck), tokens }).ir.voices;
+const peakAt = (v: (typeof struckVoices)[number]) => v.env[0].keys[1][0] * v.dur;
+check(
+  "an adsr attack is the same seconds however long the voice is",
+  struckVoices.every((v) => close(peakAt(v), 0.012, 1e-3)),
+  struckVoices.map((v) => `${v.dur}s → ${r(peakAt(v))}s`).join(", "),
+);
+check(
+  "…which it can only be by landing on different fractions of each span",
+  struckVoices[0].env[0].keys[1][0] !== struckVoices[1].env[0].keys[1][0],
+  struckVoices.map((v) => v.env[0].keys[1][0]).join(" vs "),
+);
+
+const chime = compileSound(all.get("ss.sfx.chime")!, sreg).ir.voices;
+check(
+  "chime's two voices now peak at the same instant, not at the same fraction",
+  close(peakAt(chime[0]), peakAt(chime[1]), 1e-3),
+  chime.map((v) => `${v.id} ${r(peakAt(v))}s`).join(", "),
+);
+
+// An envelope longer than the voice it is written on is compressed rather than
+// truncated — a hurried version of the shape, not the shape with its tail cut.
+const crammed = SoundSchema.parse({
+  id: "test.crammed",
+  name: "Crammed",
+  description: "An envelope that does not fit the voice it is written on.",
+  tags: ["sfx"],
+  duration: 0.1,
+  voices: [{ id: "v", dur: 0.05, source: { kind: "osc", wave: "sine", freq: "$tonic" }, env: [{ prop: "gain", adsr: { attack: 0.04, decay: 0.04, release: 0.04 } }] }],
+});
+const crammedOut = compileSound(crammed, { sounds: new Map(all).set(crammed.id, crammed), tokens });
+check(
+  "an adsr too long for its voice is compressed, and says so",
+  crammedOut.issues.some((i) => i.level === "warn" && i.msg.includes("compressed to fit")) &&
+    crammedOut.ir.voices[0].env[0].keys.every((k) => k[0] <= 1),
+  crammedOut.issues.map((i) => i.msg).join("; ") || "no issue raised",
+);
+
 const rootless = structuredClone(all.get("ss.sfx.select")!);
 const caller = SoundSchema.parse({
   id: "test.caller",
