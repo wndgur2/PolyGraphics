@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.shrink",
   "name": "Runt instar",
-  "description": "A brood egg at full size with far too little in it: a steel-grey shell, the hollow inside left dark and mostly empty, and one small white grub curled at the bottom of it with the eye still shut. The egg is the ruler — it is the size the occupant was supposed to grow to fill, and the gap between the two is the whole reading. Deliberately not ss.relic.drone, which is the same idea inverted: a yellow cell packed so tight that three young had to interlock. Yellow and full there, grey and empty here.",
+  "description": "A brood egg at full size with far too little in it: a steel-grey shell, the hollow inside left dark and mostly empty, and one small white grub curled at the bottom of it, eye still shut, its head a size down from the segment behind it rather than the widest ring on the body. The egg is the ruler — it is the size the occupant was supposed to grow to fill, and the gap between the two is the whole reading. Deliberately not ss.relic.drone, which is the same idea inverted: a yellow cell packed so tight that three young had to interlock. Yellow and full there, grey and empty here.",
   "tags": [
     "ss-relic"
   ],
@@ -146,7 +146,7 @@
       ],
       "shape": {
         "kind": "circle",
-        "r": 3.05
+        "r": 2.6
       },
       "fill": "$ink"
     },
@@ -230,7 +230,7 @@
       ],
       "shape": {
         "kind": "circle",
-        "r": 2.25
+        "r": 1.8
       },
       "fill": "$husk.light"
     },
@@ -242,22 +242,22 @@
       ],
       "shape": {
         "kind": "circle",
-        "r": 2.25
+        "r": 1.8
       },
       "fill": "$silent"
     },
     {
       "id": "eye",
       "at": [
-        -2.78,
-        4.85
+        -2.7,
+        4.98
       ],
       "rot": 150,
       "shape": {
         "kind": "rect",
-        "w": 0.65,
-        "h": 2.0,
-        "corner": 0.32
+        "w": 0.6,
+        "h": 1.7,
+        "corner": 0.3
       },
       "fill": "$husk.dark2"
     },
