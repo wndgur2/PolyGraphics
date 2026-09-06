@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.venom",
   "name": "Septic acid",
-  "description": "A drop of something gone bad, and the hole it has already eaten through a plate of carapace: a bead hanging over a slab of dark husk with a ragged pit burnt clean through the middle of it, the pit's edge corroded green and still frothing. The hole is the point — the ability is damage that keeps working after the hit lands, and a hole is the only way to draw a wound that is still getting worse. Three things keep it from reading as an eye, which is how the first spiracle failed: the pit is irregular, the slab is dark rather than pale, and the green sits off-centre — corrosion piles up on the side the drop lands and runs out before it gets round, so there is no iris. Not ss.relic.might either, the other green thing on the shelf — that one is a sac, a container of live fluid, and this is fluid that has already left the container and is busy.",
+  "description": "A drop of something gone bad landing on a plate of carapace, and the same fluid already coming out the underside of it: a green stain eating into the top face, and beneath the slab a swell of it welling through with two beads falling away. There is no hole drawn. A hole was the first idea — the ability is a wound that keeps getting worse — but a dark centre ringed in a bright colour is an eye whatever shape it is, and that is exactly how the first pass at ss.relic.oxygen failed. The plate not stopping it says the same thing without a pupil: what went in one side is out the other and still going. It also stays clear of ss.relic.might, the other green thing on the shelf — that one is a sac, a container of live fluid, and this is fluid that has left the container and is busy.",
   "tags": [
     "ss-relic"
   ],
@@ -177,50 +177,50 @@
       "id": "burn",
       "at": [
         -0.9,
-        1.2
+        1.4
       ],
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -6.45,
-            -0.9
+            -5.4,
+            -0.8
           ],
           [
-            -4.65,
-            -3.45
+            -3.9,
+            -2.9
           ],
           [
-            -1.2,
-            -4.2
+            -1.0,
+            -3.5
           ],
           [
-            2.85,
-            -3.6
+            2.4,
+            -3.0
           ],
           [
-            5.85,
-            -1.65
+            4.9,
+            -1.4
           ],
           [
-            6.45,
-            1.05
+            5.4,
+            0.9
           ],
           [
-            3.9,
-            3.75
+            3.3,
+            3.1
           ],
           [
             0.3,
-            4.35
-          ],
-          [
-            -3.6,
             3.6
           ],
           [
-            -6.0,
-            1.8
+            -3.0,
+            3.0
+          ],
+          [
+            -5.0,
+            1.5
           ]
         ]
       },
@@ -229,103 +229,144 @@
     {
       "id": "corrode",
       "at": [
-        -0.7,
-        1.4
+        -0.5,
+        1.6
       ],
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -5.42,
-            -0.76
+            -3.9,
+            -0.5
           ],
           [
-            -3.91,
-            -2.9
+            -2.8,
+            -2.1
           ],
           [
-            -1.01,
-            -3.53
+            -0.7,
+            -2.5
           ],
           [
-            2.39,
-            -3.02
+            1.7,
+            -2.2
           ],
           [
-            4.91,
-            -1.39
+            3.5,
+            -1.0
           ],
           [
-            5.42,
-            0.88
+            3.9,
+            0.6
           ],
           [
-            3.28,
-            3.15
+            2.3,
+            2.3
           ],
           [
-            0.25,
-            3.65
+            0.2,
+            2.6
           ],
           [
-            -3.02,
-            3.02
+            -2.2,
+            2.2
           ],
           [
-            -5.04,
-            1.51
+            -3.6,
+            1.1
           ]
         ]
       },
       "fill": "$venom.dark"
     },
     {
-      "id": "pit",
+      "id": "wet",
       "at": [
-        1.0,
-        2.7
+        -0.9,
+        1.2
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.1,
+        "ry": 1.3
+      },
+      "fill": "$venom"
+    },
+    {
+      "id": "froth_a",
+      "at": [
+        -4.8,
+        -0.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.1
+      },
+      "fill": "$venom.light"
+    },
+    {
+      "id": "froth_b",
+      "at": [
+        -2.4,
+        4.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.8
+      },
+      "fill": "$venom"
+    },
+    {
+      "id": "froth_c",
+      "at": [
+        3.4,
+        -1.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.6
+      },
+      "fill": "$venom.light2"
+    },
+    {
+      "id": "seep_outline",
+      "at": [
+        1.4,
+        8.6
       ],
       "shape": {
         "kind": "poly",
         "points": [
           [
             -4.3,
-            -0.6
-          ],
-          [
-            -3.1,
-            -2.3
-          ],
-          [
-            -0.8,
-            -2.8
-          ],
-          [
-            1.9,
             -2.4
           ],
           [
-            3.9,
-            -1.1
+            -1.4,
+            -3.0
           ],
           [
-            4.3,
-            0.7
+            2.0,
+            -2.7
           ],
           [
-            2.6,
-            2.5
+            4.1,
+            -1.5
           ],
           [
-            0.2,
-            2.9
+            3.4,
+            1.9
           ],
           [
-            -2.4,
-            2.4
+            1.1,
+            3.7
           ],
           [
-            -4.0,
+            -1.5,
+            3.0
+          ],
+          [
+            -3.8,
             1.2
           ]
         ]
@@ -333,40 +374,110 @@
       "fill": "$ink"
     },
     {
-      "id": "froth_a",
+      "id": "seep",
       "at": [
-        -5.0,
-        -0.4
+        1.4,
+        8.4
       ],
       "shape": {
-        "kind": "circle",
-        "r": 1.15
+        "kind": "poly",
+        "points": [
+          [
+            -3.4,
+            -2.0
+          ],
+          [
+            -1.1,
+            -2.5
+          ],
+          [
+            1.7,
+            -2.2
+          ],
+          [
+            3.2,
+            -1.2
+          ],
+          [
+            2.6,
+            1.5
+          ],
+          [
+            0.8,
+            2.9
+          ],
+          [
+            -1.2,
+            2.4
+          ],
+          [
+            -3.0,
+            0.9
+          ]
+        ]
       },
-      "fill": "$venom.light"
+      "fill": "$venom.dark"
     },
     {
-      "id": "froth_b",
+      "id": "seep_lit",
       "at": [
-        -2.6,
-        5.0
+        1.2,
+        8.0
       ],
       "shape": {
-        "kind": "circle",
-        "r": 0.85
+        "kind": "ellipse",
+        "rx": 1.9,
+        "ry": 1.2
       },
       "fill": "$venom"
     },
     {
-      "id": "froth_c",
+      "id": "drip_a_outline",
       "at": [
-        -5.6,
-        2.6
+        2.2,
+        11.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.75
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "drip_a",
+      "at": [
+        2.2,
+        11.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.05
+      },
+      "fill": "$venom"
+    },
+    {
+      "id": "drip_b_outline",
+      "at": [
+        0.7,
+        13.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.25
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "drip_b",
+      "at": [
+        0.7,
+        13.4
       ],
       "shape": {
         "kind": "circle",
         "r": 0.6
       },
-      "fill": "$venom.light2"
+      "fill": "$venom.light"
     },
     {
       "id": "drop_outline",
