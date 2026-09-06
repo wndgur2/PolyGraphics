@@ -1,0 +1,546 @@
+{
+  "id": "ss.relic.camo",
+  "name": "Dead leaf",
+  "description": "A dead leaf with two legs folded under it, painted for the near half and drawn as nothing but a contour for the far one — the silhouette continues, the leaf does not. The ability is not being found, and this is the hard-edged way to say it: an object that is definitely there and then definitely is not, rather than one faded evenly along its length, which at this size is just a faint object. Three earlier passes did fade it and each came out as mud on a dark plate. The rib is the darkest mark on the leaf rather than the brightest, which is what it was in the first pass, where it read as a needle driven through the middle.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "leg_a",
+      "at": [
+        -1.0,
+        4.38
+      ],
+      "rot": 26,
+      "shape": {
+        "kind": "rect",
+        "w": 0.9,
+        "h": 5.0,
+        "corner": 0.45
+      },
+      "fill": "$coal.dark"
+    },
+    {
+      "id": "leg_b",
+      "at": [
+        -3.31,
+        1.81
+      ],
+      "rot": 54,
+      "shape": {
+        "kind": "rect",
+        "w": 0.85,
+        "h": 4.2,
+        "corner": 0.42
+      },
+      "fill": "$coal.dark"
+    },
+    {
+      "id": "stalk",
+      "at": [
+        -5.69,
+        -9.55
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "rect",
+        "w": 0.9,
+        "h": 4.2,
+        "corner": 0.45
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "ghost_r",
+      "at": [
+        0.4,
+        0.2
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            4.32,
+            1.73
+          ],
+          [
+            4.21,
+            2.68
+          ],
+          [
+            4.04,
+            3.62
+          ],
+          [
+            3.82,
+            4.57
+          ],
+          [
+            3.53,
+            5.52
+          ],
+          [
+            3.15,
+            6.47
+          ],
+          [
+            2.67,
+            7.42
+          ],
+          [
+            2.01,
+            8.36
+          ],
+          [
+            0.93,
+            9.31
+          ],
+          [
+            0.08,
+            9.31
+          ],
+          [
+            1.16,
+            8.36
+          ],
+          [
+            1.82,
+            7.42
+          ],
+          [
+            2.3,
+            6.47
+          ],
+          [
+            2.68,
+            5.52
+          ],
+          [
+            2.97,
+            4.57
+          ],
+          [
+            3.19,
+            3.62
+          ],
+          [
+            3.36,
+            2.68
+          ],
+          [
+            3.47,
+            1.73
+          ]
+        ]
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "ghost_l",
+      "at": [
+        0.4,
+        0.2
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.32,
+            1.73
+          ],
+          [
+            -4.21,
+            2.68
+          ],
+          [
+            -4.04,
+            3.62
+          ],
+          [
+            -3.82,
+            4.57
+          ],
+          [
+            -3.53,
+            5.52
+          ],
+          [
+            -3.15,
+            6.47
+          ],
+          [
+            -2.67,
+            7.42
+          ],
+          [
+            -2.01,
+            8.36
+          ],
+          [
+            -0.93,
+            9.31
+          ],
+          [
+            -0.08,
+            9.31
+          ],
+          [
+            -1.16,
+            8.36
+          ],
+          [
+            -1.82,
+            7.42
+          ],
+          [
+            -2.3,
+            6.47
+          ],
+          [
+            -2.68,
+            5.52
+          ],
+          [
+            -2.97,
+            4.57
+          ],
+          [
+            -3.19,
+            3.62
+          ],
+          [
+            -3.36,
+            2.68
+          ],
+          [
+            -3.47,
+            1.73
+          ]
+        ]
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "solid_o",
+      "at": [
+        0.4,
+        0.2
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.0,
+            -10.5
+          ],
+          [
+            1.74,
+            -8.86
+          ],
+          [
+            3.14,
+            -7.22
+          ],
+          [
+            3.96,
+            -5.58
+          ],
+          [
+            4.49,
+            -3.94
+          ],
+          [
+            4.81,
+            -2.29
+          ],
+          [
+            4.96,
+            -0.65
+          ],
+          [
+            4.94,
+            0.99
+          ],
+          [
+            4.76,
+            2.63
+          ],
+          [
+            -4.76,
+            2.63
+          ],
+          [
+            -4.94,
+            0.99
+          ],
+          [
+            -4.96,
+            -0.65
+          ],
+          [
+            -4.81,
+            -2.29
+          ],
+          [
+            -4.49,
+            -3.94
+          ],
+          [
+            -3.96,
+            -5.58
+          ],
+          [
+            -3.14,
+            -7.22
+          ],
+          [
+            -1.74,
+            -8.86
+          ],
+          [
+            -0.0,
+            -10.5
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "solid",
+      "at": [
+        0.4,
+        0.2
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.0,
+            -9.6
+          ],
+          [
+            2.16,
+            -8.18
+          ],
+          [
+            3.02,
+            -6.77
+          ],
+          [
+            3.59,
+            -5.35
+          ],
+          [
+            3.98,
+            -3.94
+          ],
+          [
+            4.23,
+            -2.52
+          ],
+          [
+            4.37,
+            -1.1
+          ],
+          [
+            4.4,
+            0.31
+          ],
+          [
+            4.32,
+            1.73
+          ],
+          [
+            -4.32,
+            1.73
+          ],
+          [
+            -4.4,
+            0.31
+          ],
+          [
+            -4.37,
+            -1.1
+          ],
+          [
+            -4.23,
+            -2.52
+          ],
+          [
+            -3.98,
+            -3.94
+          ],
+          [
+            -3.59,
+            -5.35
+          ],
+          [
+            -3.02,
+            -6.77
+          ],
+          [
+            -2.16,
+            -8.18
+          ],
+          [
+            -0.0,
+            -9.6
+          ]
+        ]
+      },
+      "fill": "$timber.dark"
+    },
+    {
+      "id": "lit",
+      "at": [
+        -1.95,
+        -1.87
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.34,
+            -6.72
+          ],
+          [
+            1.5,
+            -5.86
+          ],
+          [
+            1.63,
+            -4.99
+          ],
+          [
+            1.73,
+            -4.13
+          ],
+          [
+            1.81,
+            -3.26
+          ],
+          [
+            1.87,
+            -2.4
+          ],
+          [
+            1.91,
+            -1.54
+          ],
+          [
+            1.93,
+            -0.67
+          ],
+          [
+            1.94,
+            0.19
+          ],
+          [
+            -1.94,
+            0.19
+          ],
+          [
+            -1.93,
+            -0.67
+          ],
+          [
+            -1.91,
+            -1.54
+          ],
+          [
+            -1.87,
+            -2.4
+          ],
+          [
+            -1.81,
+            -3.26
+          ],
+          [
+            -1.73,
+            -4.13
+          ],
+          [
+            -1.63,
+            -4.99
+          ],
+          [
+            -1.5,
+            -5.86
+          ],
+          [
+            -1.34,
+            -6.72
+          ]
+        ]
+      },
+      "fill": "$timber"
+    },
+    {
+      "id": "rib",
+      "at": [
+        -1.83,
+        -3.36
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "rect",
+        "w": 0.85,
+        "h": 9.4,
+        "corner": 0.42
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "vein_a",
+      "at": [
+        -1.32,
+        -4.62
+      ],
+      "rot": 4,
+      "shape": {
+        "kind": "rect",
+        "w": 0.5,
+        "h": 3.0,
+        "corner": 0.25
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "vein_b",
+      "at": [
+        0.34,
+        -2.35
+      ],
+      "rot": 4,
+      "shape": {
+        "kind": "rect",
+        "w": 0.5,
+        "h": 3.2,
+        "corner": 0.25
+      },
+      "fill": "$timber.dark2"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}
