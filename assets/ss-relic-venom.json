@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.venom",
   "name": "Septic acid",
-  "description": "A drop of something gone bad landing on a plate of carapace, and the same fluid already coming out the underside of it: a green stain eating into the top face, and beneath the slab a swell of it welling through with two beads falling away. There is no hole drawn. A hole was the first idea — the ability is a wound that keeps getting worse — but a dark centre ringed in a bright colour is an eye whatever shape it is, and that is exactly how the first pass at ss.relic.oxygen failed. The plate not stopping it says the same thing without a pupil: what went in one side is out the other and still going. It also stays clear of ss.relic.might, the other green thing on the shelf — that one is a sac, a container of live fluid, and this is fluid that has left the container and is busy.",
+  "description": "A drop of something gone bad landing on a plate of carapace, and the plate fizzing where it lands: the top face discoloured and eaten back, and a froth of bubbles working over it — the big ones drawn hollow, because a ring reads as a bubble where a filled disc reads as a bead — and their outlines are rings too, since a filled disc behind a hollow bubble shows through the middle of it as exactly the black hole this icon has spent three passes getting away from — with three that have let go of the surface and are rising. The bubbles are the event. The ability is damage that keeps working after the hit lands, and corrosion caught mid-fizz is the one way to draw a surface that is still being lost. Two earlier passes drew the damage as a pit eaten through, and a dark centre ringed in a bright colour is an eye whatever shape the centre is — the same failure the first pass at ss.relic.oxygen had. Nothing here is a hole. It also stays clear of ss.relic.might, the other green thing on the shelf: that one is a sac, a container of live fluid, and this is fluid out of the container and busy.",
   "tags": [
     "ss-relic"
   ],
@@ -174,7 +174,60 @@
       "fill": "$husk.dark"
     },
     {
-      "id": "burn",
+      "id": "etch",
+      "at": [
+        -0.6,
+        1.8
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -6.4,
+            -1.2
+          ],
+          [
+            -4.4,
+            -3.2
+          ],
+          [
+            -1.2,
+            -4.0
+          ],
+          [
+            2.4,
+            -3.4
+          ],
+          [
+            5.2,
+            -1.8
+          ],
+          [
+            5.8,
+            0.8
+          ],
+          [
+            4.0,
+            3.2
+          ],
+          [
+            0.6,
+            4.2
+          ],
+          [
+            -3.2,
+            3.6
+          ],
+          [
+            -5.8,
+            1.6
+          ]
+        ]
+      },
+      "fill": "$venom.dark2"
+    },
+    {
+      "id": "etch_wet",
       "at": [
         -0.9,
         1.4
@@ -183,96 +236,43 @@
         "kind": "poly",
         "points": [
           [
-            -5.4,
-            -0.8
+            -4.6,
+            -0.9
           ],
           [
-            -3.9,
+            -3.1,
+            -2.4
+          ],
+          [
+            -0.8,
             -2.9
           ],
           [
-            -1.0,
-            -3.5
+            1.8,
+            -2.4
           ],
           [
-            2.4,
-            -3.0
+            3.8,
+            -1.2
           ],
           [
-            4.9,
-            -1.4
-          ],
-          [
-            5.4,
-            0.9
-          ],
-          [
-            3.3,
-            3.1
-          ],
-          [
-            0.3,
-            3.6
-          ],
-          [
-            -3.0,
-            3.0
-          ],
-          [
-            -5.0,
-            1.5
-          ]
-        ]
-      },
-      "fill": "$venom.dark2"
-    },
-    {
-      "id": "corrode",
-      "at": [
-        -0.5,
-        1.6
-      ],
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -3.9,
-            -0.5
-          ],
-          [
-            -2.8,
-            -2.1
-          ],
-          [
-            -0.7,
-            -2.5
-          ],
-          [
-            1.7,
-            -2.2
-          ],
-          [
-            3.5,
-            -1.0
-          ],
-          [
-            3.9,
+            4.2,
             0.6
           ],
           [
-            2.3,
-            2.3
+            2.8,
+            2.4
           ],
           [
-            0.2,
+            0.3,
+            3.1
+          ],
+          [
+            -2.4,
             2.6
           ],
           [
-            -2.2,
-            2.2
-          ],
-          [
-            -3.6,
+            -4.2,
             1.1
           ]
         ]
@@ -280,162 +280,36 @@
       "fill": "$venom.dark"
     },
     {
-      "id": "wet",
+      "id": "b0_o",
       "at": [
-        -0.9,
-        1.2
+        -3.4,
+        0.7
       ],
       "shape": {
-        "kind": "ellipse",
-        "rx": 2.1,
-        "ry": 1.3
-      },
-      "fill": "$venom"
-    },
-    {
-      "id": "froth_a",
-      "at": [
-        -4.8,
-        -0.2
-      ],
-      "shape": {
-        "kind": "circle",
-        "r": 1.1
-      },
-      "fill": "$venom.light"
-    },
-    {
-      "id": "froth_b",
-      "at": [
-        -2.4,
-        4.6
-      ],
-      "shape": {
-        "kind": "circle",
-        "r": 0.8
-      },
-      "fill": "$venom"
-    },
-    {
-      "id": "froth_c",
-      "at": [
-        3.4,
-        -1.6
-      ],
-      "shape": {
-        "kind": "circle",
-        "r": 0.6
-      },
-      "fill": "$venom.light2"
-    },
-    {
-      "id": "seep_outline",
-      "at": [
-        1.4,
-        8.6
-      ],
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -4.3,
-            -2.4
-          ],
-          [
-            -1.4,
-            -3.0
-          ],
-          [
-            2.0,
-            -2.7
-          ],
-          [
-            4.1,
-            -1.5
-          ],
-          [
-            3.4,
-            1.9
-          ],
-          [
-            1.1,
-            3.7
-          ],
-          [
-            -1.5,
-            3.0
-          ],
-          [
-            -3.8,
-            1.2
-          ]
-        ]
+        "kind": "ring",
+        "r": 1.95,
+        "width": 1.46
       },
       "fill": "$ink"
     },
     {
-      "id": "seep",
+      "id": "b1_o",
       "at": [
-        1.4,
-        8.4
+        2.6,
+        2.4
       ],
       "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -3.4,
-            -2.0
-          ],
-          [
-            -1.1,
-            -2.5
-          ],
-          [
-            1.7,
-            -2.2
-          ],
-          [
-            3.2,
-            -1.2
-          ],
-          [
-            2.6,
-            1.5
-          ],
-          [
-            0.8,
-            2.9
-          ],
-          [
-            -1.2,
-            2.4
-          ],
-          [
-            -3.0,
-            0.9
-          ]
-        ]
+        "kind": "ring",
+        "r": 1.55,
+        "width": 1.28
       },
-      "fill": "$venom.dark"
+      "fill": "$ink"
     },
     {
-      "id": "seep_lit",
+      "id": "b2_o",
       "at": [
-        1.2,
-        8.0
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 1.9,
-        "ry": 1.2
-      },
-      "fill": "$venom"
-    },
-    {
-      "id": "drip_a_outline",
-      "at": [
-        2.2,
-        11.6
+        -0.4,
+        -1.1
       ],
       "shape": {
         "kind": "circle",
@@ -444,38 +318,200 @@
       "fill": "$ink"
     },
     {
-      "id": "drip_a",
+      "id": "b3_o",
       "at": [
-        2.2,
-        11.6
+        4.1,
+        0.6
       ],
       "shape": {
         "kind": "circle",
-        "r": 1.05
-      },
-      "fill": "$venom"
-    },
-    {
-      "id": "drip_b_outline",
-      "at": [
-        0.7,
-        13.4
-      ],
-      "shape": {
-        "kind": "circle",
-        "r": 1.25
+        "r": 1.55
       },
       "fill": "$ink"
     },
     {
-      "id": "drip_b",
+      "id": "b4_o",
       "at": [
-        0.7,
-        13.4
+        -5.6,
+        2.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.5
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "b5_o",
+      "at": [
+        1.2,
+        4.1
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 0.85,
+        "width": 1.1
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "b9_o",
+      "at": [
+        3.1,
+        -3.8
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 0.75,
+        "width": 1.1
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "b0",
+      "at": [
+        -3.4,
+        0.7
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 1.95,
+        "width": 0.86
+      },
+      "fill": "$venom.light"
+    },
+    {
+      "id": "b1",
+      "at": [
+        2.6,
+        2.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 1.55,
+        "width": 0.68
+      },
+      "fill": "$venom.light"
+    },
+    {
+      "id": "b2",
+      "at": [
+        -0.4,
+        -1.1
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.2
+      },
+      "fill": "$venom"
+    },
+    {
+      "id": "b3",
+      "at": [
+        4.1,
+        0.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.0
+      },
+      "fill": "$venom.light"
+    },
+    {
+      "id": "b4",
+      "at": [
+        -5.6,
+        2.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.95
+      },
+      "fill": "$venom"
+    },
+    {
+      "id": "b5",
+      "at": [
+        1.2,
+        4.1
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 0.85,
+        "width": 0.5
+      },
+      "fill": "$venom"
+    },
+    {
+      "id": "b6",
+      "at": [
+        -2.6,
+        3.9
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.7
+      },
+      "fill": "$venom.light2"
+    },
+    {
+      "id": "b7",
+      "at": [
+        5.1,
+        2.8
       ],
       "shape": {
         "kind": "circle",
         "r": 0.6
+      },
+      "fill": "$venom"
+    },
+    {
+      "id": "b8",
+      "at": [
+        -6.3,
+        0.3
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.5
+      },
+      "fill": "$venom.light2"
+    },
+    {
+      "id": "b9",
+      "at": [
+        3.1,
+        -3.8
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 0.75,
+        "width": 0.5
+      },
+      "fill": "$venom.light"
+    },
+    {
+      "id": "b10",
+      "at": [
+        -3.7,
+        -4.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.55
+      },
+      "fill": "$venom.light2"
+    },
+    {
+      "id": "b11",
+      "at": [
+        5.3,
+        -5.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.4
       },
       "fill": "$venom.light"
     },
