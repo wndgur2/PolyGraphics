@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.camo",
   "name": "Dead leaf",
-  "description": "A dead leaf with legs: a whole brown leaf — rib, veins, stalk — and three short curved limbs reaching out from under one side of it. The limbs are arcs rather than jointed bars, and short enough that each is mostly still under the leaf. Straight two-part legs were tried twice at this size and neither worked: with the shin bent back each limb met its thigh at a narrow angle and became an arrowhead aimed at the leaf, and with the shin dropped straight the bend vanished under the outline and three parallel bars read as motion lines. A curve carries 'bent limb' without a vertex sharp enough to turn into a symbol — the same reason the spines in ss.relic.movespeed are drawn as arcs. Four passes before that drew the leaf itself half-there, fading or giving out into a contour, on the idea that not-being-found should be an unfinished object; a leaf that stops being a leaf is a broken drawing before it is a clever one, and at 32px every soft end was mud. The camouflage is carried by the joke: a leaf until you notice it has legs, which is exactly what the relic does to the swarm.",
+  "description": "A dead leaf with legs: a whole brown leaf — rib, veins, stalk — with three short limbs tucked so far under one side that only a stub of each clears the outline. The camouflage is carried by the joke rather than by the drawing coming apart: it is a leaf until you notice it has legs, which is exactly what the relic does to the swarm. Limbs drawn in full turned the icon into something carrying a leaf instead, so they are deliberately barely there — at 32px this reads as a plain brown leaf and the joke only lands at modal and codex size, which is the trade taken on purpose. Shapes tried and rejected: shin bent back up, which met the thigh at a narrow angle and became an arrowhead aimed at the leaf; shin dropped straight, which hid the bend and left three parallel bars reading as motion lines; and arcs instead of jointed bars, which disappeared under the leaf altogether. Four passes before those drew the leaf itself half-there, fading or giving out into a contour, on the idea that not-being-found should be an unfinished object — but a leaf that stops being a leaf is a broken drawing before it is a clever one, and at 32px every soft end was mud.",
   "tags": [
     "ss-relic"
   ],
@@ -17,70 +17,85 @@
     {
       "id": "leg0_f_o",
       "at": [
-        -5.45,
-        -2.52
+        -5.21,
+        -2.35
       ],
-      "rot": 78.0,
+      "rot": 72.0,
       "shape": {
         "kind": "rect",
-        "w": 1.55,
-        "h": 2.8,
-        "corner": 0.78
+        "w": 1.7,
+        "h": 3.2,
+        "corner": 0.85
       },
       "fill": "$ink"
     },
     {
       "id": "leg0_t_o",
       "at": [
-        -7.24,
-        -1.22
+        -7.43,
+        -2.43
       ],
-      "rot": 32.0,
+      "rot": 116.0,
       "shape": {
         "kind": "rect",
-        "w": 1.4,
-        "h": 3.0,
-        "corner": 0.7
+        "w": 1.55,
+        "h": 2.8,
+        "corner": 0.78
       },
       "fill": "$ink"
     },
     {
       "id": "leg1_f_o",
       "at": [
-        -3.53,
-        1.83
+        -3.27,
+        2.06
       ],
-      "rot": 62.0,
+      "rot": 56.0,
       "shape": {
         "kind": "rect",
-        "w": 1.55,
-        "h": 2.9,
-        "corner": 0.78
+        "w": 1.7,
+        "h": 3.5,
+        "corner": 0.85
       },
       "fill": "$ink"
     },
     {
       "id": "leg1_t_o",
       "at": [
-        -5.09,
-        3.65
+        -5.62,
+        2.5
       ],
-      "rot": 22.0,
+      "rot": 108.0,
       "shape": {
         "kind": "rect",
-        "w": 1.4,
-        "h": 3.2,
-        "corner": 0.7
+        "w": 1.55,
+        "h": 3.0,
+        "corner": 0.78
       },
       "fill": "$ink"
     },
     {
       "id": "leg2_f_o",
       "at": [
-        -0.72,
-        5.21
+        -0.25,
+        5.39
       ],
-      "rot": 44.0,
+      "rot": 36.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.7,
+        "h": 3.1,
+        "corner": 0.85
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "leg2_t_o",
+      "at": [
+        -2.03,
+        6.29
+      ],
+      "rot": 96.0,
       "shape": {
         "kind": "rect",
         "w": 1.55,
@@ -90,107 +105,92 @@
       "fill": "$ink"
     },
     {
-      "id": "leg2_t_o",
-      "at": [
-        -1.73,
-        7.13
-      ],
-      "rot": 12.0,
-      "shape": {
-        "kind": "rect",
-        "w": 1.4,
-        "h": 2.8,
-        "corner": 0.7
-      },
-      "fill": "$ink"
-    },
-    {
       "id": "leg0_f",
       "at": [
-        -5.45,
-        -2.52
+        -5.21,
+        -2.35
       ],
-      "rot": 78.0,
+      "rot": 72.0,
       "shape": {
         "kind": "rect",
-        "w": 0.85,
-        "h": 2.3,
-        "corner": 0.42
+        "w": 0.9,
+        "h": 2.6,
+        "corner": 0.45
       },
       "fill": "$husk.dark"
     },
     {
       "id": "leg0_t",
       "at": [
-        -7.24,
-        -1.22
+        -7.43,
+        -2.43
       ],
-      "rot": 32.0,
+      "rot": 116.0,
       "shape": {
         "kind": "rect",
-        "w": 0.7,
-        "h": 2.5,
-        "corner": 0.35
+        "w": 0.75,
+        "h": 2.2,
+        "corner": 0.38
       },
       "fill": "$husk.dark"
     },
     {
       "id": "leg1_f",
       "at": [
-        -3.53,
-        1.83
+        -3.27,
+        2.06
       ],
-      "rot": 62.0,
+      "rot": 56.0,
       "shape": {
         "kind": "rect",
-        "w": 0.85,
-        "h": 2.4,
-        "corner": 0.42
+        "w": 0.9,
+        "h": 2.9,
+        "corner": 0.45
       },
       "fill": "$husk.dark"
     },
     {
       "id": "leg1_t",
       "at": [
-        -5.09,
-        3.65
+        -5.62,
+        2.5
       ],
-      "rot": 22.0,
+      "rot": 108.0,
       "shape": {
         "kind": "rect",
-        "w": 0.7,
-        "h": 2.7,
-        "corner": 0.35
+        "w": 0.75,
+        "h": 2.4,
+        "corner": 0.38
       },
       "fill": "$husk.dark"
     },
     {
       "id": "leg2_f",
       "at": [
-        -0.72,
-        5.21
+        -0.25,
+        5.39
       ],
-      "rot": 44.0,
+      "rot": 36.0,
       "shape": {
         "kind": "rect",
-        "w": 0.85,
-        "h": 2.2,
-        "corner": 0.42
+        "w": 0.9,
+        "h": 2.5,
+        "corner": 0.45
       },
       "fill": "$husk.dark"
     },
     {
       "id": "leg2_t",
       "at": [
-        -1.73,
-        7.13
+        -2.03,
+        6.29
       ],
-      "rot": 12.0,
+      "rot": 96.0,
       "shape": {
         "kind": "rect",
-        "w": 0.7,
-        "h": 2.3,
-        "corner": 0.35
+        "w": 0.75,
+        "h": 2.1,
+        "corner": 0.38
       },
       "fill": "$husk.dark"
     },
