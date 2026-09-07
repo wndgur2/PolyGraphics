@@ -52,9 +52,9 @@
       "description": "carrying, not walking — the legs work under a load that answers a beat late, and the grub rolls along its own length rather than riding rigid. The head never lifts: it is looking at the floor in front of the next step.",
       "duration": 0.9,
       "tracks": [
-        {"part": "leg_f", "prop": "rot", "keys": [[0, -26], [0.5, -8], [1, -26]]},
-        {"part": "leg_m", "prop": "rot", "keys": [[0, 4], [0.5, -14], [1, 4]]},
-        {"part": "leg_b", "prop": "rot", "keys": [[0, 28], [0.5, 12], [1, 28]]},
+        {"part": "leg_f", "prop": "rot", "keys": [[0, -9.0], [0.5, 9.0], [1, -9.0]]},
+        {"part": "leg_m", "prop": "rot", "keys": [[0, 9.0], [0.5, -9.0], [1, 9.0]]},
+        {"part": "leg_b", "prop": "rot", "keys": [[0, 8.0], [0.5, -8.0], [1, 8.0]]},
         {"part": "body", "prop": "y", "keys": [[0, 0], [0.5, -1], [1, 0]]},
         {"part": "body_plate", "prop": "y", "keys": [[0, 0], [0.5, -1], [1, 0]]},
         {"part": "head", "prop": "y", "keys": [[0, 0], [0.5, -0.8], [1, 0]]},
@@ -65,9 +65,9 @@
         {"part": "grub_5", "prop": "y", "keys": [[0, -0.2], [0.02, -1.5], [0.38, 0], [1, -0.2]]},
         {"part": "grub_eye", "prop": "y", "keys": [[0, -0.2], [0.02, -1.5], [0.38, 0], [1, -0.2]]},
         {"part": "grub_gloss", "prop": "y", "keys": [[0, 0], [0.18, -1.8], [0.54, 0], [1, 0]]},
-        {"part": "mandible_up", "prop": "rot", "keys": [[0, -34], [0.5, -30], [1, -34]]},
-        {"part": "antenna_a", "prop": "rot", "keys": [[0, 54], [0.5, 44], [1, 54]]},
-        {"part": "antenna_b", "prop": "rot", "keys": [[0, 108], [0.5, 96], [1, 108]]}
+        {"part": "mandible_up", "prop": "rot", "keys": [[0, -2.0], [0.5, 2.0], [1, -2.0]]},
+        {"part": "antenna_a", "prop": "rot", "keys": [[0, 5.0], [0.5, -5.0], [1, 5.0]]},
+        {"part": "antenna_b", "prop": "rot", "keys": [[0, 6.0], [0.5, -6.0], [1, 6.0]]}
       ]
     }
   }

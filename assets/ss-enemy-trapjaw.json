@@ -32,19 +32,19 @@
       "description": "not a swing — a hold. The jaws are already loaded against their own catch, so they only shiver in it while the legs walk the body into range and the trigger hairs quiver out ahead of everything.",
       "duration": 0.55,
       "tracks": [
-        {"part": "jaw_up", "prop": "rot", "keys": [[0, 0], [0.5, -2.8], [1, 0]]},
-        {"part": "jaw_dn", "prop": "rot", "keys": [[0, 0], [0.5, 2.8], [1, 0]]},
+        {"part": "jaw_up", "prop": "rot", "keys": [[0, 1.4], [0.5, -1.4], [1, 1.4]]},
+        {"part": "jaw_dn", "prop": "rot", "keys": [[0, -1.4], [0.5, 1.4], [1, -1.4]]},
         {"part": "tip_up", "prop": "y", "keys": [[0, 0], [0.5, -1.2], [1, 0]]},
         {"part": "tip_dn", "prop": "y", "keys": [[0, 0], [0.5, 1.2], [1, 0]]},
-        {"part": "trigger_up", "prop": "rot", "keys": [[0, 54], [0.5, 46], [1, 54]]},
-        {"part": "trigger_dn", "prop": "rot", "keys": [[0, -42], [0.5, -34], [1, -42]]},
+        {"part": "trigger_up", "prop": "rot", "keys": [[0, 4.0], [0.5, -4.0], [1, 4.0]]},
+        {"part": "trigger_dn", "prop": "rot", "keys": [[0, -4.0], [0.5, 4.0], [1, -4.0]]},
         {"part": "gaster", "prop": "x", "keys": [[0, 0], [0.5, -0.8], [1, 0]]},
         {"part": "gaster_band", "prop": "x", "keys": [[0, 0], [0.5, -0.8], [1, 0]]},
-        {"part": "leg_b", "prop": "rot", "keys": [[0, 42], [0.5, 14], [1, 42]]},
-        {"part": "leg_m", "prop": "rot", "keys": [[0, -10], [0.5, 18], [1, -10]]},
-        {"part": "leg_f", "prop": "rot", "keys": [[0, -12], [0.5, -40], [1, -12]]},
-        {"part": "leg_b_far", "prop": "rot", "keys": [[0, 14], [0.5, 38], [1, 14]]},
-        {"part": "leg_f_far", "prop": "rot", "keys": [[0, -34], [0.5, -10], [1, -34]]}
+        {"part": "leg_b", "prop": "rot", "keys": [[0, 14.0], [0.5, -14.0], [1, 14.0]]},
+        {"part": "leg_m", "prop": "rot", "keys": [[0, -14.0], [0.5, 14.0], [1, -14.0]]},
+        {"part": "leg_f", "prop": "rot", "keys": [[0, 14.0], [0.5, -14.0], [1, 14.0]]},
+        {"part": "leg_b_far", "prop": "rot", "keys": [[0, -12.0], [0.5, 12.0], [1, -12.0]]},
+        {"part": "leg_f_far", "prop": "rot", "keys": [[0, -12.0], [0.5, 12.0], [1, -12.0]]}
       ]
     }
   }
