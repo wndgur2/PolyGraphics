@@ -1,0 +1,590 @@
+{
+  "id": "ss.relic.camo",
+  "name": "Dead leaf",
+  "description": "A dead leaf with legs: a whole brown leaf — rib, veins, stalk — with three short limbs tucked so far under one side that only a stub of each clears the outline. The camouflage is carried by the joke rather than by the drawing coming apart: it is a leaf until you notice it has legs, which is exactly what the relic does to the swarm. Limbs drawn in full turned the icon into something carrying a leaf instead, so they are deliberately barely there — at 32px this reads as a plain brown leaf and the joke only lands at modal and codex size, which is the trade taken on purpose. Shapes tried and rejected: shin bent back up, which met the thigh at a narrow angle and became an arrowhead aimed at the leaf; shin dropped straight, which hid the bend and left three parallel bars reading as motion lines; and arcs instead of jointed bars, which disappeared under the leaf altogether. Four passes before those drew the leaf itself half-there, fading or giving out into a contour, on the idea that not-being-found should be an unfinished object — but a leaf that stops being a leaf is a broken drawing before it is a clever one, and at 32px every soft end was mud.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "leg0_f_o",
+      "at": [
+        -5.21,
+        -2.35
+      ],
+      "rot": 72.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.7,
+        "h": 3.2,
+        "corner": 0.85
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "leg0_t_o",
+      "at": [
+        -7.43,
+        -2.43
+      ],
+      "rot": 116.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.55,
+        "h": 2.8,
+        "corner": 0.78
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "leg1_f_o",
+      "at": [
+        -3.27,
+        2.06
+      ],
+      "rot": 56.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.7,
+        "h": 3.5,
+        "corner": 0.85
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "leg1_t_o",
+      "at": [
+        -5.62,
+        2.5
+      ],
+      "rot": 108.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.55,
+        "h": 3.0,
+        "corner": 0.78
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "leg2_f_o",
+      "at": [
+        -0.25,
+        5.39
+      ],
+      "rot": 36.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.7,
+        "h": 3.1,
+        "corner": 0.85
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "leg2_t_o",
+      "at": [
+        -2.03,
+        6.29
+      ],
+      "rot": 96.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.55,
+        "h": 2.7,
+        "corner": 0.78
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "leg0_f",
+      "at": [
+        -5.21,
+        -2.35
+      ],
+      "rot": 72.0,
+      "shape": {
+        "kind": "rect",
+        "w": 0.9,
+        "h": 2.6,
+        "corner": 0.45
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "leg0_t",
+      "at": [
+        -7.43,
+        -2.43
+      ],
+      "rot": 116.0,
+      "shape": {
+        "kind": "rect",
+        "w": 0.75,
+        "h": 2.2,
+        "corner": 0.38
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "leg1_f",
+      "at": [
+        -3.27,
+        2.06
+      ],
+      "rot": 56.0,
+      "shape": {
+        "kind": "rect",
+        "w": 0.9,
+        "h": 2.9,
+        "corner": 0.45
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "leg1_t",
+      "at": [
+        -5.62,
+        2.5
+      ],
+      "rot": 108.0,
+      "shape": {
+        "kind": "rect",
+        "w": 0.75,
+        "h": 2.4,
+        "corner": 0.38
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "leg2_f",
+      "at": [
+        -0.25,
+        5.39
+      ],
+      "rot": 36.0,
+      "shape": {
+        "kind": "rect",
+        "w": 0.9,
+        "h": 2.5,
+        "corner": 0.45
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "leg2_t",
+      "at": [
+        -2.03,
+        6.29
+      ],
+      "rot": 96.0,
+      "shape": {
+        "kind": "rect",
+        "w": 0.75,
+        "h": 2.1,
+        "corner": 0.38
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "stalk_o",
+      "at": [
+        -5.89,
+        -10.15
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "rect",
+        "w": 2.1,
+        "h": 5.2,
+        "corner": 1.05
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "stalk",
+      "at": [
+        -5.89,
+        -10.15
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 4.4,
+        "corner": 0.5
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "leaf_o",
+      "at": [
+        0.2,
+        -0.4
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.0,
+            -10.5
+          ],
+          [
+            3.14,
+            -8.4
+          ],
+          [
+            4.3,
+            -6.3
+          ],
+          [
+            5.0,
+            -4.2
+          ],
+          [
+            5.38,
+            -2.1
+          ],
+          [
+            5.5,
+            0.0
+          ],
+          [
+            5.38,
+            2.1
+          ],
+          [
+            5.0,
+            4.2
+          ],
+          [
+            4.3,
+            6.3
+          ],
+          [
+            3.14,
+            8.4
+          ],
+          [
+            0.0,
+            10.5
+          ],
+          [
+            -3.14,
+            8.4
+          ],
+          [
+            -4.3,
+            6.3
+          ],
+          [
+            -5.0,
+            4.2
+          ],
+          [
+            -5.38,
+            2.1
+          ],
+          [
+            -5.5,
+            0.0
+          ],
+          [
+            -5.38,
+            -2.1
+          ],
+          [
+            -5.0,
+            -4.2
+          ],
+          [
+            -4.3,
+            -6.3
+          ],
+          [
+            -3.14,
+            -8.4
+          ],
+          [
+            -0.0,
+            -10.5
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "leaf",
+      "at": [
+        0.2,
+        -0.4
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.0,
+            -9.5
+          ],
+          [
+            2.57,
+            -7.6
+          ],
+          [
+            3.52,
+            -5.7
+          ],
+          [
+            4.09,
+            -3.8
+          ],
+          [
+            4.4,
+            -1.9
+          ],
+          [
+            4.5,
+            0.0
+          ],
+          [
+            4.4,
+            1.9
+          ],
+          [
+            4.09,
+            3.8
+          ],
+          [
+            3.52,
+            5.7
+          ],
+          [
+            2.57,
+            7.6
+          ],
+          [
+            0.0,
+            9.5
+          ],
+          [
+            -2.57,
+            7.6
+          ],
+          [
+            -3.52,
+            5.7
+          ],
+          [
+            -4.09,
+            3.8
+          ],
+          [
+            -4.4,
+            1.9
+          ],
+          [
+            -4.5,
+            0.0
+          ],
+          [
+            -4.4,
+            -1.9
+          ],
+          [
+            -4.09,
+            -3.8
+          ],
+          [
+            -3.52,
+            -5.7
+          ],
+          [
+            -2.57,
+            -7.6
+          ],
+          [
+            -0.0,
+            -9.5
+          ]
+        ]
+      },
+      "fill": "$timber.dark"
+    },
+    {
+      "id": "leaf_lit",
+      "at": [
+        -1.24,
+        -1.39
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.0,
+            -7.03
+          ],
+          [
+            1.28,
+            -5.62
+          ],
+          [
+            1.76,
+            -4.22
+          ],
+          [
+            2.04,
+            -2.81
+          ],
+          [
+            2.2,
+            -1.41
+          ],
+          [
+            2.25,
+            -0.0
+          ],
+          [
+            2.2,
+            1.41
+          ],
+          [
+            2.04,
+            2.81
+          ],
+          [
+            1.76,
+            4.22
+          ],
+          [
+            1.28,
+            5.62
+          ],
+          [
+            0.0,
+            7.03
+          ],
+          [
+            -1.28,
+            5.62
+          ],
+          [
+            -1.76,
+            4.22
+          ],
+          [
+            -2.04,
+            2.81
+          ],
+          [
+            -2.2,
+            1.41
+          ],
+          [
+            -2.25,
+            -0.0
+          ],
+          [
+            -2.2,
+            -1.41
+          ],
+          [
+            -2.04,
+            -2.81
+          ],
+          [
+            -1.76,
+            -4.22
+          ],
+          [
+            -1.28,
+            -5.62
+          ],
+          [
+            -0.0,
+            -7.03
+          ]
+        ]
+      },
+      "fill": "$timber"
+    },
+    {
+      "id": "rib",
+      "at": [
+        0.2,
+        -0.4
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "rect",
+        "w": 0.85,
+        "h": 17.67,
+        "corner": 0.42
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "vein_a",
+      "at": [
+        -1.03,
+        -4.82
+      ],
+      "rot": 6,
+      "shape": {
+        "kind": "rect",
+        "w": 0.5,
+        "h": 3.2,
+        "corner": 0.25
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "vein_b",
+      "at": [
+        1.08,
+        -2.01
+      ],
+      "rot": 6,
+      "shape": {
+        "kind": "rect",
+        "w": 0.5,
+        "h": 3.8,
+        "corner": 0.25
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "vein_c",
+      "at": [
+        2.77,
+        1.06
+      ],
+      "rot": 6,
+      "shape": {
+        "kind": "rect",
+        "w": 0.5,
+        "h": 3.2,
+        "corner": 0.25
+      },
+      "fill": "$timber.dark2"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}
