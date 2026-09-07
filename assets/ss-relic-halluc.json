@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.halluc",
   "name": "Crossed scent",
-  "description": "Three scent trails knotted through one another, each a colour the others never share a screen with, each ending in a head going somewhere else. The trails are what this relic ruins, so they are what it draws — and three saturated hues tangled in one 32px frame is the same sentence the relic writes on the field, where every body starts wearing a colour that is not its own. Everything about the three is deliberately unequal: struck at even spacing with one radius and one span they came out rotationally symmetric and read as a badge, a recycling mark rather than a tangle. No two here share a radius, a span, a centre distance or a head size.",
+  "description": "Three scent trails knotted through one another and none of them printing straight: every trail carries a ghost of itself a couple of pixels off in somebody else's hue, the way a badly registered page separates, and no stroke holds the same width along its length. Three loose beads of colour sit around the tangle belonging to nothing. The trails are what this relic ruins, so they are what it draws — and a frame where the colours refuse to line up is the same sentence it writes on the field, where every body starts wearing a colour that is not its own and will not keep it. An earlier version drew the three as clean even arcs and read as a badge, a recycling mark rather than a hallucination: nothing was wrong with it, which was what was wrong with it.",
   "tags": [
     "ss-relic"
   ],
@@ -15,7 +15,52 @@
       "use": "ss.lib.relic-plate"
     },
     {
-      "id": "trail0_o",
+      "id": "ghost0",
+      "at": [
+        1.66,
+        2.78
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 7.8,
+        "width": 2.6,
+        "from": 200,
+        "to": 354
+      },
+      "fill": "$arcane@0.62"
+    },
+    {
+      "id": "ghost1",
+      "at": [
+        -4.77,
+        0.55
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 6.7,
+        "width": 2.6,
+        "from": 294,
+        "to": 480
+      },
+      "fill": "$blood@0.62"
+    },
+    {
+      "id": "ghost2",
+      "at": [
+        5.74,
+        0.46
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 8.7,
+        "width": 2.6,
+        "from": 458,
+        "to": 580
+      },
+      "fill": "$spore@0.62"
+    },
+    {
+      "id": "trail0_0_o",
       "at": [
         -0.44,
         4.18
@@ -23,14 +68,14 @@
       "shape": {
         "kind": "ring",
         "r": 7.4,
-        "width": 3.4,
-        "from": 198,
-        "to": 354
+        "width": 3.8,
+        "from": 192,
+        "to": 251.8
       },
       "fill": "$ink"
     },
     {
-      "id": "trail0",
+      "id": "trail0_1_o",
       "at": [
         -0.44,
         4.18
@@ -38,14 +83,74 @@
       "shape": {
         "kind": "ring",
         "r": 7.4,
-        "width": 2.1,
-        "from": 198,
-        "to": 354
+        "width": 2.7,
+        "from": 247.8,
+        "to": 297.7
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "trail0_2_o",
+      "at": [
+        -0.44,
+        4.18
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 7.4,
+        "width": 4.2,
+        "from": 293.7,
+        "to": 360
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "trail0_0",
+      "at": [
+        -0.44,
+        4.18
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 7.4,
+        "width": 2.5,
+        "from": 194,
+        "to": 249.8
       },
       "fill": "$venom"
     },
     {
-      "id": "trail1_o",
+      "id": "trail0_1",
+      "at": [
+        -0.44,
+        4.18
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 7.4,
+        "width": 1.4,
+        "from": 249.8,
+        "to": 295.7
+      },
+      "fill": "$venom"
+    },
+    {
+      "id": "trail0_2",
+      "at": [
+        -0.44,
+        4.18
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 7.4,
+        "width": 2.9,
+        "from": 295.7,
+        "to": 358
+      },
+      "fill": "$venom"
+    },
+    {
+      "id": "trail1_0_o",
       "at": [
         -2.97,
         -1.45
@@ -53,14 +158,14 @@
       "shape": {
         "kind": "ring",
         "r": 6.3,
-        "width": 3.4,
-        "from": 290,
-        "to": 482
+        "width": 3.8,
+        "from": 286,
+        "to": 356.6
       },
       "fill": "$ink"
     },
     {
-      "id": "trail1",
+      "id": "trail1_1_o",
       "at": [
         -2.97,
         -1.45
@@ -68,14 +173,74 @@
       "shape": {
         "kind": "ring",
         "r": 6.3,
-        "width": 2.1,
-        "from": 290,
-        "to": 482
+        "width": 2.7,
+        "from": 352.6,
+        "to": 411.5
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "trail1_2_o",
+      "at": [
+        -2.97,
+        -1.45
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 6.3,
+        "width": 4.2,
+        "from": 407.5,
+        "to": 486
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "trail1_0",
+      "at": [
+        -2.97,
+        -1.45
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 6.3,
+        "width": 2.5,
+        "from": 288,
+        "to": 354.6
       },
       "fill": "$frost"
     },
     {
-      "id": "trail2_o",
+      "id": "trail1_1",
+      "at": [
+        -2.97,
+        -1.45
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 6.3,
+        "width": 1.4,
+        "from": 354.6,
+        "to": 409.5
+      },
+      "fill": "$frost"
+    },
+    {
+      "id": "trail1_2",
+      "at": [
+        -2.97,
+        -1.45
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 6.3,
+        "width": 2.9,
+        "from": 409.5,
+        "to": 484
+      },
+      "fill": "$frost"
+    },
+    {
+      "id": "trail2_0_o",
       "at": [
         4.54,
         -1.84
@@ -83,14 +248,14 @@
       "shape": {
         "kind": "ring",
         "r": 8.3,
-        "width": 3.4,
-        "from": 456,
-        "to": 580
+        "width": 3.8,
+        "from": 450,
+        "to": 498.9
       },
       "fill": "$ink"
     },
     {
-      "id": "trail2",
+      "id": "trail2_1_o",
       "at": [
         4.54,
         -1.84
@@ -98,17 +263,77 @@
       "shape": {
         "kind": "ring",
         "r": 8.3,
-        "width": 2.1,
-        "from": 456,
-        "to": 580
+        "width": 2.7,
+        "from": 494.9,
+        "to": 535.8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "trail2_2_o",
+      "at": [
+        4.54,
+        -1.84
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 8.3,
+        "width": 4.2,
+        "from": 531.8,
+        "to": 586
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "trail2_0",
+      "at": [
+        4.54,
+        -1.84
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 8.3,
+        "width": 2.5,
+        "from": 452,
+        "to": 496.9
+      },
+      "fill": "$blood"
+    },
+    {
+      "id": "trail2_1",
+      "at": [
+        4.54,
+        -1.84
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 8.3,
+        "width": 1.4,
+        "from": 496.9,
+        "to": 533.8
+      },
+      "fill": "$blood"
+    },
+    {
+      "id": "trail2_2",
+      "at": [
+        4.54,
+        -1.84
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 8.3,
+        "width": 2.9,
+        "from": 533.8,
+        "to": 584
       },
       "fill": "$blood"
     },
     {
       "id": "head0_o",
       "at": [
-        6.92,
-        3.4
+        6.96,
+        3.92
       ],
       "shape": {
         "kind": "circle",
@@ -117,10 +342,22 @@
       "fill": "$ink"
     },
     {
+      "id": "head0g",
+      "at": [
+        8.22,
+        3.08
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.0
+      },
+      "fill": "$arcane@0.7"
+    },
+    {
       "id": "head0",
       "at": [
-        6.92,
-        3.4
+        6.96,
+        3.92
       ],
       "shape": {
         "kind": "circle",
@@ -131,8 +368,8 @@
     {
       "id": "head1_o",
       "at": [
-        -6.3,
-        3.9
+        -6.49,
+        3.78
       ],
       "shape": {
         "kind": "circle",
@@ -141,10 +378,22 @@
       "fill": "$ink"
     },
     {
+      "id": "head1g",
+      "at": [
+        -7.57,
+        4.98
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.4
+      },
+      "fill": "$blood@0.7"
+    },
+    {
       "id": "head1",
       "at": [
-        -6.3,
-        3.9
+        -6.49,
+        3.78
       ],
       "shape": {
         "kind": "circle",
@@ -155,8 +404,8 @@
     {
       "id": "head2_o",
       "at": [
-        -1.81,
-        -7.17
+        -1.43,
+        -7.6
       ],
       "shape": {
         "kind": "circle",
@@ -165,16 +414,64 @@
       "fill": "$ink"
     },
     {
+      "id": "head2g",
+      "at": [
+        -0.71,
+        -6.22
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.7
+      },
+      "fill": "$spore@0.7"
+    },
+    {
       "id": "head2",
       "at": [
-        -1.81,
-        -7.17
+        -1.43,
+        -7.6
       ],
       "shape": {
         "kind": "circle",
         "r": 1.7
       },
       "fill": "$blood.light"
+    },
+    {
+      "id": "stray_a",
+      "at": [
+        -8.6,
+        -6.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.15
+      },
+      "fill": "$arcane"
+    },
+    {
+      "id": "stray_b",
+      "at": [
+        7.9,
+        -8.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.8
+      },
+      "fill": "$spore"
+    },
+    {
+      "id": "stray_c",
+      "at": [
+        -6.2,
+        9.1
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.65
+      },
+      "fill": "$frost.light"
     }
   ],
   "variants": {
