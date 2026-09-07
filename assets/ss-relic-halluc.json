@@ -1,0 +1,188 @@
+{
+  "id": "ss.relic.halluc",
+  "name": "Crossed scent",
+  "description": "Three scent trails knotted through one another, each a colour the others never share a screen with, each ending in a head going somewhere else. The trails are what this relic ruins, so they are what it draws — and three saturated hues tangled in one 32px frame is the same sentence the relic writes on the field, where every body starts wearing a colour that is not its own. Everything about the three is deliberately unequal: struck at even spacing with one radius and one span they came out rotationally symmetric and read as a badge, a recycling mark rather than a tangle. No two here share a radius, a span, a centre distance or a head size.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "trail0_o",
+      "at": [
+        -0.44,
+        4.18
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 7.4,
+        "width": 3.4,
+        "from": 198,
+        "to": 354
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "trail0",
+      "at": [
+        -0.44,
+        4.18
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 7.4,
+        "width": 2.1,
+        "from": 198,
+        "to": 354
+      },
+      "fill": "$venom"
+    },
+    {
+      "id": "trail1_o",
+      "at": [
+        -2.97,
+        -1.45
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 6.3,
+        "width": 3.4,
+        "from": 290,
+        "to": 482
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "trail1",
+      "at": [
+        -2.97,
+        -1.45
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 6.3,
+        "width": 2.1,
+        "from": 290,
+        "to": 482
+      },
+      "fill": "$frost"
+    },
+    {
+      "id": "trail2_o",
+      "at": [
+        4.54,
+        -1.84
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 8.3,
+        "width": 3.4,
+        "from": 456,
+        "to": 580
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "trail2",
+      "at": [
+        4.54,
+        -1.84
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 8.3,
+        "width": 2.1,
+        "from": 456,
+        "to": 580
+      },
+      "fill": "$blood"
+    },
+    {
+      "id": "head0_o",
+      "at": [
+        6.92,
+        3.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.85
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "head0",
+      "at": [
+        6.92,
+        3.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.0
+      },
+      "fill": "$venom.light"
+    },
+    {
+      "id": "head1_o",
+      "at": [
+        -6.3,
+        3.9
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.25
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "head1",
+      "at": [
+        -6.3,
+        3.9
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.4
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "head2_o",
+      "at": [
+        -1.81,
+        -7.17
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.55
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "head2",
+      "at": [
+        -1.81,
+        -7.17
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.7
+      },
+      "fill": "$blood.light"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}
