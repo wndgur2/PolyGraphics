@@ -382,5 +382,49 @@ const shootD = describe(renderPCM(compileSound(all.get("ss.sfx.shoot")!, sreg).i
 check("stomp loses far more on a phone than shoot", stompD.phoneLossDb > shootD.phoneLossDb + 5, `stomp -${stompD.phoneLossDb} vs shoot -${shootD.phoneLossDb}`);
 check("tail is inside the take and after the attack", ref.tailS <= 0.5 && ref.tailS > ref.attackMs / 1000, `${ref.tailS}s`);
 
+/**
+ * The four idioms. Each compiles to voices the IR already knows, so the claim
+ * to check is that the voices are the ones the author would have written by
+ * hand — and, for `phrase`, that the three fanfares came out exactly as they
+ * were when they were hand-written, which the baselines also enforce.
+ */
+const probeDoc = (id: string, voices: unknown[], extra: Record<string, unknown> = {}) =>
+  SoundSchema.parse({ id, name: id, description: `A probe document for ${id}.`, tags: ["sfx", "probe"], duration: 1, voices, ...extra });
+const probe = (sd: ReturnType<typeof SoundSchema.parse>) => compileSound(sd, { sounds: new Map(all).set(sd.id, sd), tokens });
+
+const wide = probe(probeDoc("test.wide", [{ id: "pad", source: { kind: "osc", wave: "triangle", freq: "$tonic", to: "$tonic.up", unison: { count: 2, detune: 7 } }, gain: "mid" }]));
+const uf = wide.ir.voices.map((v) => (v.source as { freq: number }).freq);
+check("unison is the voice twice, spread either side of its pitch", wide.ir.voices.length === 2 && uf[0] < 880 && uf[1] > 880 && close(uf[1] / uf[0], Math.pow(2, 14 / 1200), 1e-4), uf.join(", "));
+check("…each at 1/√2 of the level", wide.ir.voices.every((v) => close(v.gain, 0.28 / Math.SQRT2)), `${wide.ir.voices[0].gain}`);
+const glides = wide.ir.voices.map((v) => v.env.find((t) => t.prop === "freq")!.keys[1][1]);
+check("…and a glide detunes with each copy", glides[0] < 1760 && glides[1] > 1760, glides.join(", "));
+
+const room = probe(probeDoc("test.room", [{ id: "pluck", at: 0.1, dur: 0.2, source: { kind: "osc", wave: "sine", freq: "$tonic" }, echo: { time: 0.25, feedback: 0.5 } }]));
+const taps = room.ir.voices;
+check("echo is the voice again at each multiple of time", taps.length === 4 && taps.map((v) => v.at).join() === "0.1,0.35,0.6,0.85", taps.map((v) => v.at).join(", "));
+check("…each tap feedback times quieter", close(taps[1].gain, 0.5) && close(taps[2].gain, 0.25) && close(taps[3].gain, 0.125), taps.map((v) => v.gain).join(", "));
+check("…cut at the canvas rather than run past it", taps[3].dur === 0.15 && !room.issues.some((i) => i.msg.includes("cut short")), `${taps[3].dur}s`);
+const far = probe(probeDoc("test.far", [{ id: "pluck", dur: 0.2, source: { kind: "osc", wave: "sine", freq: "$tonic" }, echo: { time: 0.6, feedback: 0.9, taps: 3 } }]));
+check("a tap that would start past the canvas is dropped, and said so", far.ir.voices.length === 2 && far.issues.some((i) => i.level === "warn" && i.msg.includes("dropped")), far.issues.map((i) => i.msg).join("; "));
+
+const byHand = [0, 0.09, 0.18, 0.27];
+const climb = compileSound(all.get("ss.sfx.levelup")!, sreg).ir;
+check("a phrase unrolls to the use voices somebody would have written", climb.voices.length === 4 && climb.voices.map((v) => v.at).join() === byHand.join() && freqs("ss.sfx.levelup").join() === "523.25,659.25,784,1046.5", climb.voices.map((v) => `${v.id}@${v.at}`).join(", "));
+const rest = probe(probeDoc("test.rest", [{ id: "f", phrase: { use: "ss.lib.note", step: 0.1, notes: ["$third", null, "$fifth"] } }]));
+check("null in a phrase is a rest", rest.ir.voices.length === 2 && rest.ir.voices[1].at === 0.2, rest.ir.voices.map((v) => v.at).join(", "));
+
+const alts = probe(probeDoc("test.alts", [{ id: "grit", filter: { type: "bandpass", freq: "$grit", q: "band" }, repeat: { of: { kind: "noise" }, count: 3, spread: 0.05, grain: 0.01 } }], { takes: 3, jitter: { freq: [0.9, 1.1] } }));
+const t2 = alts.ir.variants["take-2"], t3 = alts.ir.variants["take-3"];
+check("takes are variants take-2… of the same length", !!t2 && !!t3 && t2.duration === 1 && Object.keys(alts.ir.variants).length === 2, Object.keys(alts.ir.variants).join(", "));
+const seeds = (vs: typeof t2.voices) => vs.map((v) => (v.source as { seed: number }).seed).join();
+check("…with every scatter reseeded", seeds(alts.ir.voices) !== seeds(t2.voices) && seeds(t2.voices) !== seeds(t3.voices) && alts.ir.voices.map((v) => v.at).join() !== t2.voices.map((v) => v.at).join());
+const plain = probe(probeDoc("test.alts", [{ id: "grit", filter: { type: "bandpass", freq: "$grit", q: "band" }, repeat: { of: { kind: "noise" }, count: 3, spread: 0.05, grain: 0.01 } }]));
+check("…and the base take exactly what it was without takes", JSON.stringify(plain.ir.voices) === JSON.stringify(alts.ir.voices));
+const jt = probe(probeDoc("test.jt", [{ id: "t", source: { kind: "osc", wave: "sine", freq: "$tonic" } }], { takes: 2, jitter: { freq: [0.9, 1.1] } }));
+const jf = (jt.ir.variants["take-2"].voices[0].source as { freq: number }).freq;
+check("…and its jitter rolled once, inside the range, and frozen", jf !== 880 && jf >= 880 * 0.9 && jf <= 880 * 1.1 && jf === (probe(probeDoc("test.jt", [{ id: "t", source: { kind: "osc", wave: "sine", freq: "$tonic" } }], { takes: 2, jitter: { freq: [0.9, 1.1] } })).ir.variants["take-2"].voices[0].source as { freq: number }).freq, `${jf}Hz`);
+const still = probe(probeDoc("test.still", [{ id: "t", source: { kind: "osc", wave: "sine", freq: "$tonic" } }], { takes: 2 }));
+check("a take with nothing to vary says so", still.issues.some((i) => i.level === "warn" && i.msg.includes("identical to the base")), still.issues.map((i) => i.msg).join("; ") || "no issue raised");
+
 console.log(`\n${failures === 0 ? "✓ all checks passed" : `✖ ${failures} failed`}`);
 process.exit(failures ? 1 : 0);
