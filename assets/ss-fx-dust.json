@@ -1,0 +1,135 @@
+{
+  "id": "ss.fx.dust",
+  "name": "Dust kick",
+  "description": "What the ground does when something leaves it or lands on it hard: a low smear of disturbed soil where the feet were, and a fan of motes thrown up and out of it, larger and darker low down, smaller and paler as they rise. Authored at the instant it leaves the ground; the game scales it up and fades it over the next third of a second. No outlines anywhere — dust has no edge, and a mote with ink round it is a pebble.",
+  "tags": [
+    "ss-fx"
+  ],
+  "size": [
+    24,
+    16
+  ],
+  "parts": [
+    {
+      "id": "smear",
+      "at": [
+        0,
+        4.6
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 8.4,
+        "ry": 2.0
+      },
+      "fill": "$soil.light@0.55"
+    },
+    {
+      "id": "mote_a",
+      "at": [
+        -7.2,
+        1.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.3
+      },
+      "fill": "$timber.dark@0.9"
+    },
+    {
+      "id": "mote_b",
+      "at": [
+        -3.4,
+        -2.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.7
+      },
+      "fill": "$husk.dark@0.85"
+    },
+    {
+      "id": "mote_c",
+      "at": [
+        0.6,
+        -4.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.25
+      },
+      "fill": "$husk@0.8"
+    },
+    {
+      "id": "mote_d",
+      "at": [
+        4.6,
+        -2.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.9
+      },
+      "fill": "$timber.dark@0.9"
+    },
+    {
+      "id": "mote_e",
+      "at": [
+        8.0,
+        1.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.4
+      },
+      "fill": "$husk.dark@0.8"
+    },
+    {
+      "id": "mote_f",
+      "at": [
+        -1.0,
+        0.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.6
+      },
+      "fill": "$soil.light@0.85"
+    },
+    {
+      "id": "fleck_a",
+      "at": [
+        -5.6,
+        -5.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.6
+      },
+      "fill": "$husk.light@0.7"
+    },
+    {
+      "id": "fleck_b",
+      "at": [
+        3.2,
+        -6.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.55
+      },
+      "fill": "$husk.light@0.7"
+    },
+    {
+      "id": "fleck_c",
+      "at": [
+        7.4,
+        -4.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.5
+      },
+      "fill": "$husk@0.6"
+    }
+  ]
+}
