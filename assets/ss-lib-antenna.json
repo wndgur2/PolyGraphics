@@ -76,18 +76,6 @@
         "shaft.fill": "$slate.dark",
         "tip.fill": "$slate"
       }
-    },
-    "bobble": {
-      "description": "A survivor's feeler the way the survivors wear them now: same dead slate, nothing on the air, but the sensing nub swollen into a round bobble — a hairpin more than an organ, which is what a feeler is once it has stopped feeling.",
-      "set": {
-        "shaft.fill": "$slate",
-        "tip.fill": "$slate.light2",
-        "tip.scale": 1.9,
-        "tip.stroke": {
-          "color": "$ink",
-          "width": "hair"
-        }
-      }
     }
   }
 }
