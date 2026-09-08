@@ -1,0 +1,121 @@
+{
+  "id": "ss.lib.leg",
+  "name": "Survivor leg",
+  "description": "One leg of the survivor caste, hinged at the origin: the hip sits at [0,0] and the limb hangs down +y, so a `rot` track swings it the way a leg swings rather than turning it about its own middle. One tapered shaft, a knee plate, and a tarsal claw that points forward (+x) — the survivors walk on the same clawed feet the rest of the hive does, they have simply stood up on two of them. Cold slate throughout: the survivors' bare chitin is the dead grey of their organ, and whatever colour they carry is plate worn over it, never the body itself. `far` is the leg on the other side of the body, a step darker so the pair reads as depth rather than as two legs on one hip.",
+  "tags": [
+    "ss-lib"
+  ],
+  "size": [
+    12,
+    16
+  ],
+  "anchor": [
+    0.5,
+    0.125
+  ],
+  "parts": [
+    {
+      "id": "shaft",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.4,
+            -1.4
+          ],
+          [
+            2.4,
+            -1.4
+          ],
+          [
+            2.6,
+            5.2
+          ],
+          [
+            2.1,
+            10.6
+          ],
+          [
+            -1.9,
+            10.8
+          ],
+          [
+            -2.7,
+            5.2
+          ]
+        ]
+      },
+      "fill": "$steel.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "claw",
+      "at": [
+        0.2,
+        11.2
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.3,
+            -1.2
+          ],
+          [
+            2.1,
+            -1.5
+          ],
+          [
+            5.2,
+            1.4
+          ],
+          [
+            3.7,
+            2.3
+          ],
+          [
+            1,
+            1.5
+          ],
+          [
+            -2.3,
+            1.7
+          ]
+        ]
+      },
+      "fill": "$steel",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "knee",
+      "at": [
+        0.1,
+        5.5
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.3,
+        "ry": 1.4
+      },
+      "fill": "$steel"
+    }
+  ],
+  "variants": {
+    "far": {
+      "description": "The leg on the far side of the body: no ink line, a step darker, so it sits behind the near one instead of beside it.",
+      "set": {
+        "shaft.fill": "$slate.light",
+        "shaft.stroke.color": "$slate.dark",
+        "claw.fill": "$slate.light2",
+        "claw.stroke.color": "$slate.dark",
+        "knee.fill": "$slate.light2"
+      }
+    }
+  }
+}

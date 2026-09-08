@@ -45,9 +45,12 @@ docs/                  reference-analysis.md — why this exists
 
 ```bash
 npx tsx scripts/inspect.ts ss.enemy.imp ss.enemy.bat --anim   # open out/inspect.html
+npx tsx scripts/sheet.ts ss.char.dot --anim walk              # out/sheet/ss-char-dot--walk.png
 ```
 
 Renders each asset **big** (judge the form), **at true game scale on the real ground color** (judge whether it survives the size it is actually seen at), and **as a flat silhouette** (if two enemies are indistinguishable in black, colour is doing work that shape should be doing). This is the loop the Shape Survivors redesign was built in — it caught a chaser that read as facing backwards, two antennae that overlapped into one, and two creatures that were the same cream colour.
+
+`sheet.ts` is the same loop for a clip: one PNG per asset with the base render, the silhouette, two game-scale copies, and then the animation **posed frame by frame the way the engine adapters pose it** — offsets in the parent frame, rotation about the part's own origin — so a leg hinged at the hip or a ball on a chain can be judged without a browser. It also prints the rendered bounds against the canvas, because a feeler that crosses the edge is invisible in the SVG and a hard cut in the bake. It is how the survivors' walk cycles were tuned, and it caught a chain that let go of the hand mid-stride.
 
 ## Asset document
 
@@ -382,6 +385,7 @@ Because rendering is deterministic, a one-digit token drift (the `ff9b3d` vs `ff
 What the system contributed that imperative draw code could not:
 
 - **`ss.lib.organ`** is the premise as a single document. Enemies compose it lit; the eight player characters compose the *same document* with `variant: "dead"` — cracked, unlit, silent. Change that one file and every creature in the game changes together. Verified to diverge correctly in both the Phaser and Godot adapters.
+- **The eight survivors are drones that stood up.** `ss.char.dot`…`ss.char.hex` began as the game's eight geometric shells — a disc, a triangle, a square — and are now humanoid hive bodies: two legs and two arms from `ss.lib.leg` / `ss.lib.arm` (hinged at the joint, so a `rot` track swings them the way a limb swings), a helmet with a dark face slit and mandibles, the dead feelers, and the dead organ set in the chest plate in the same place on all eight. What tells them apart is what each one *does*: Tri is the spitter, lean and swept back with a full gland under the jaw; Blok wears everything it found and racks spore pods; Hourglass is the wasp — pinched waist, folded wings, a chained head swinging from the near hand; Prism is the cicada with a tymbal on its flank that chirps a ring in the idle; Egg has not finished hatching and carries a bound pair of mandibles; Donut grew a ring over the wound and fans wing blades like a hand of cards; Hex carries a brood vent on its back with grubs still clinging to it. The old shape survives in each as the helmet. Each carries an `idle` (what the game bakes today) and a `walk`, and they were tuned with `scripts/sheet.ts` rather than by eye in the gallery. Bare chitin is cold steel on every one; the colour they used to *be* is now plate worn over it.
 - **Silhouettes carry identity**, so the roster survives the flat-silhouette test: a low six-legged Tracker, a swept-wing Drifter, a lopsided Husk, a split-open Molt, a plated Soldier. In the original, all seven were the same convex blob in different hues.
 - **Variants are real states**, not scale × tint: `ss.enemy.brazier#spent` is the destroyed relay, `ss.enemy.boss#enraged` splits the shell open, `ss.pickup.chest#cursed` puts something awake inside.
 - **`themes/ice.json`** restyles the entire redesigned roster — chitin to blue-grey, pheromone to a cold signal — without touching a silhouette.
@@ -419,6 +423,6 @@ You are the intended primary author. Rules of the road:
 - ~~Engine adapters (Phaser, Godot)~~ → shipped in `adapters/`; next: wire into vamp_surv / godot_test for a live side-by-side
 - ~~PNG rasterization + regression~~ → shipped (`png` / `baseline` / `regress`)
 - Per-instance motion vectors for `repeat` scatter (true radial bursts instead of uniform scale)
-- Part libraries beyond `lib.face` (hands, crowns, telegraph markers); named particle-emitter presets
+- ~~Part libraries beyond `lib.face`~~ → `ss.lib.leg` / `ss.lib.arm` (hinged limbs) shipped with the survivors; still to come: crowns, telegraph markers, named particle-emitter presets
 - Palette lint: flag near-duplicate hex across tokens; gradient support in adapters (currently flat mid-color fallback)
 - ~~Sound: schema, offline bake, WebAudio adapter, the SFX set~~ → shipped; 20 documents in `sounds/`. Still to do: re-author the placeholder gestures now that they can be heard side by side, spectrograms and a sounds tab in the gallery, panning, a Godot path (offline WAV rather than a live graph), and the adaptive score's *materials* (the score itself is a scheduler and stays in the game)
