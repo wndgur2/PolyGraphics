@@ -1,0 +1,686 @@
+{
+  "id": "ss.relic.ram",
+  "name": "Ram horns",
+  "description": "A rhinoceros beetle's horn in profile: rooted in a dark strip of head at the bottom of the plate, rising and leaning forward to the right, thick at the base and forked at the tip, with the front face lit amber and the back face in shadow. Behind it, two short solid grey strokes of different lengths — the air it has just come through — set low and left so the horn is plainly moving forward, not standing. The relic adds knockback, and a horn thrown forward is the one insect shape whose entire job is shoving. The strokes are solid shapes and not a fade, because a translucent smear at this size is a blur; and the head is kept to a sliver so there is no face under the horn.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "head_o",
+      "at": [
+        -3.2,
+        10.4
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 8.2,
+        "ry": 3.4
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "prong_a_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            6.45,
+            -6.06
+          ],
+          [
+            10.9,
+            -7.28
+          ],
+          [
+            7.32,
+            -12.13
+          ],
+          [
+            6.21,
+            -12.56
+          ],
+          [
+            5.71,
+            -11.48
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "prong_b_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            7.66,
+            -6.71
+          ],
+          [
+            7.71,
+            -5.43
+          ],
+          [
+            8.99,
+            -5.52
+          ],
+          [
+            10.73,
+            -7.04
+          ],
+          [
+            12.4,
+            -10.4
+          ],
+          [
+            12.13,
+            -11.69
+          ],
+          [
+            10.86,
+            -11.31
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "wake_a_o",
+      "at": [
+        -9,
+        -5
+      ],
+      "rot": -6,
+      "shape": {
+        "kind": "rect",
+        "w": 8.2,
+        "h": 3.2,
+        "corner": 1.6
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "wake_b_o",
+      "at": [
+        -10,
+        0.6
+      ],
+      "rot": -6,
+      "shape": {
+        "kind": "rect",
+        "w": 6.2,
+        "h": 2.9,
+        "corner": 1.45
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "wake_a",
+      "at": [
+        -9,
+        -5
+      ],
+      "rot": -6,
+      "shape": {
+        "kind": "rect",
+        "w": 6.6,
+        "h": 1.7,
+        "corner": 0.85
+      },
+      "fill": "$steel"
+    },
+    {
+      "id": "wake_b",
+      "at": [
+        -10,
+        0.6
+      ],
+      "rot": -6,
+      "shape": {
+        "kind": "rect",
+        "w": 4.6,
+        "h": 1.5,
+        "corner": 0.75
+      },
+      "fill": "$steel.dark"
+    },
+    {
+      "id": "head",
+      "at": [
+        -3.2,
+        10.4
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.3,
+        "ry": 2.6
+      },
+      "fill": "$chitin.dark2"
+    },
+    {
+      "id": "head_lit",
+      "at": [
+        -4.6,
+        9.6
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.4,
+        "ry": 1
+      },
+      "fill": "$chitin.dark"
+    },
+    {
+      "id": "prong_a",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            7.2,
+            -7.2
+          ],
+          [
+            9.4,
+            -7.8
+          ],
+          [
+            6.6,
+            -11.6
+          ]
+        ]
+      },
+      "fill": "$chitin.dark"
+    },
+    {
+      "id": "prong_b",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            8.4,
+            -6.2
+          ],
+          [
+            10,
+            -7.6
+          ],
+          [
+            11.6,
+            -10.8
+          ]
+        ]
+      },
+      "fill": "$chitin"
+    },
+    {
+      "id": "horn_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.21,
+            11.63
+          ],
+          [
+            0.07,
+            8.25
+          ],
+          [
+            0.43,
+            6.02
+          ],
+          [
+            0.95,
+            3.94
+          ],
+          [
+            1.63,
+            2.02
+          ],
+          [
+            2.47,
+            0.24
+          ],
+          [
+            3.48,
+            -1.41
+          ],
+          [
+            4.68,
+            -2.94
+          ],
+          [
+            6.08,
+            -4.36
+          ],
+          [
+            7.68,
+            -5.65
+          ],
+          [
+            10.2,
+            -7.26
+          ],
+          [
+            8.6,
+            -10.77
+          ],
+          [
+            5.44,
+            -9.46
+          ],
+          [
+            3.19,
+            -8.24
+          ],
+          [
+            1.1,
+            -6.79
+          ],
+          [
+            -0.83,
+            -5.1
+          ],
+          [
+            -2.58,
+            -3.18
+          ],
+          [
+            -4.13,
+            -1.03
+          ],
+          [
+            -5.48,
+            1.33
+          ],
+          [
+            -6.61,
+            3.9
+          ],
+          [
+            -7.54,
+            6.66
+          ],
+          [
+            -8.48,
+            10.55
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "horn",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.03,
+            10.61
+          ],
+          [
+            -0.82,
+            8.14
+          ],
+          [
+            -0.45,
+            5.84
+          ],
+          [
+            0.09,
+            3.68
+          ],
+          [
+            0.79,
+            1.68
+          ],
+          [
+            1.68,
+            -0.19
+          ],
+          [
+            2.74,
+            -1.93
+          ],
+          [
+            4,
+            -3.54
+          ],
+          [
+            5.47,
+            -5.02
+          ],
+          [
+            7.15,
+            -6.38
+          ],
+          [
+            9.06,
+            -7.6
+          ],
+          [
+            8.14,
+            -9.6
+          ],
+          [
+            5.83,
+            -8.64
+          ],
+          [
+            3.67,
+            -7.47
+          ],
+          [
+            1.65,
+            -6.08
+          ],
+          [
+            -0.2,
+            -4.46
+          ],
+          [
+            -1.88,
+            -2.61
+          ],
+          [
+            -3.37,
+            -0.54
+          ],
+          [
+            -4.67,
+            1.74
+          ],
+          [
+            -5.77,
+            4.23
+          ],
+          [
+            -6.67,
+            6.91
+          ],
+          [
+            -7.37,
+            9.79
+          ]
+        ]
+      },
+      "fill": "$chitin.dark"
+    },
+    {
+      "id": "horn_back",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.71,
+            10.13
+          ],
+          [
+            -4.22,
+            7.43
+          ],
+          [
+            -3.54,
+            4.9
+          ],
+          [
+            -2.67,
+            2.56
+          ],
+          [
+            -1.62,
+            0.39
+          ],
+          [
+            -0.38,
+            -1.59
+          ],
+          [
+            1.04,
+            -3.39
+          ],
+          [
+            2.64,
+            -5.01
+          ],
+          [
+            4.42,
+            -6.44
+          ],
+          [
+            6.39,
+            -7.69
+          ],
+          [
+            8.53,
+            -8.76
+          ],
+          [
+            8.14,
+            -9.6
+          ],
+          [
+            5.83,
+            -8.64
+          ],
+          [
+            3.67,
+            -7.47
+          ],
+          [
+            1.65,
+            -6.08
+          ],
+          [
+            -0.2,
+            -4.46
+          ],
+          [
+            -1.88,
+            -2.61
+          ],
+          [
+            -3.37,
+            -0.54
+          ],
+          [
+            -4.67,
+            1.74
+          ],
+          [
+            -5.77,
+            4.23
+          ],
+          [
+            -6.67,
+            6.91
+          ],
+          [
+            -7.37,
+            9.79
+          ]
+        ]
+      },
+      "fill": "$chitin.dark2"
+    },
+    {
+      "id": "horn_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.03,
+            10.61
+          ],
+          [
+            -0.82,
+            8.14
+          ],
+          [
+            -0.45,
+            5.84
+          ],
+          [
+            0.09,
+            3.68
+          ],
+          [
+            0.79,
+            1.68
+          ],
+          [
+            1.68,
+            -0.19
+          ],
+          [
+            2.74,
+            -1.93
+          ],
+          [
+            4,
+            -3.54
+          ],
+          [
+            5.47,
+            -5.02
+          ],
+          [
+            7.15,
+            -6.38
+          ],
+          [
+            9.06,
+            -7.6
+          ],
+          [
+            8.67,
+            -8.44
+          ],
+          [
+            6.6,
+            -7.33
+          ],
+          [
+            4.71,
+            -6.05
+          ],
+          [
+            3.02,
+            -4.61
+          ],
+          [
+            1.51,
+            -2.99
+          ],
+          [
+            0.18,
+            -1.21
+          ],
+          [
+            -0.95,
+            0.75
+          ],
+          [
+            -1.91,
+            2.87
+          ],
+          [
+            -2.69,
+            5.16
+          ],
+          [
+            -3.28,
+            7.63
+          ],
+          [
+            -3.69,
+            10.27
+          ]
+        ]
+      },
+      "fill": "$chitin"
+    },
+    {
+      "id": "horn_gleam",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.77,
+            5.74
+          ],
+          [
+            -0.2,
+            3.57
+          ],
+          [
+            0.54,
+            1.54
+          ],
+          [
+            1.46,
+            -0.34
+          ],
+          [
+            2.57,
+            -2.08
+          ],
+          [
+            3.86,
+            -3.69
+          ],
+          [
+            5.36,
+            -5.17
+          ],
+          [
+            5.11,
+            -5.51
+          ],
+          [
+            3.53,
+            -4.05
+          ],
+          [
+            2.15,
+            -2.43
+          ],
+          [
+            0.97,
+            -0.67
+          ],
+          [
+            -0.04,
+            1.23
+          ],
+          [
+            -0.86,
+            3.3
+          ],
+          [
+            -1.52,
+            5.51
+          ]
+        ]
+      },
+      "fill": "$chitin.light"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

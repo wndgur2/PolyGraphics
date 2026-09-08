@@ -1,0 +1,500 @@
+{
+  "id": "ss.relic.flare",
+  "name": "Scent flare",
+  "description": "A short incense stick set at a slant, bare timber at the handle and coated dark above it, its tip an ember with a white-hot point, and a ring of fire standing off the tip with seven licks of flame leaning off it — the ring made of two arcs of different radius and the licks unequal, so it is a burst and not a compass rose. The relic sends a ring of fire out of you on a timer, and a stick that burns down is the timer while the ring is what it sends. The ring is a hollow ring over a ring outline; the stick crosses behind it so the fire is in front, and the inside of the ring is warmed with a soft glow so the ember at its centre is a coal in a fire and not a pupil in an iris. The glows are the only soft things on the plate; every shape over them is solid.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "glow",
+      "at": [
+        1.6,
+        -2.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 7.8
+      },
+      "fill": "$ember@0.18"
+    },
+    {
+      "id": "stick_outline",
+      "at": [
+        -3.5,
+        3.4
+      ],
+      "rot": 41.33,
+      "shape": {
+        "kind": "rect",
+        "w": 3.9,
+        "h": 15.45,
+        "corner": 1.95
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "stick",
+      "at": [
+        -3.5,
+        3.4
+      ],
+      "rot": 41.33,
+      "shape": {
+        "kind": "rect",
+        "w": 2.3,
+        "h": 15.45,
+        "corner": 1.15
+      },
+      "fill": "$timber.dark"
+    },
+    {
+      "id": "coat",
+      "at": [
+        -1.36,
+        0.96
+      ],
+      "rot": 41.33,
+      "shape": {
+        "kind": "rect",
+        "w": 2.3,
+        "h": 8.96,
+        "corner": 1.15
+      },
+      "fill": "$rust.light"
+    },
+    {
+      "id": "stick_lit",
+      "at": [
+        -5.76,
+        6.16
+      ],
+      "rot": 41.33,
+      "shape": {
+        "kind": "rect",
+        "w": 0.6,
+        "h": 6.49,
+        "corner": 0.3
+      },
+      "fill": "$timber"
+    },
+    {
+      "id": "heat",
+      "at": [
+        1.6,
+        -2.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 5.0
+      },
+      "fill": "$ember@0.34"
+    },
+    {
+      "id": "fire_a_o",
+      "at": [
+        1.6,
+        -2.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 5.8,
+        "width": 3.0,
+        "from": -128,
+        "to": 96
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "fire_b_o",
+      "at": [
+        1.6,
+        -2.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 5.3,
+        "width": 2.8,
+        "from": 88,
+        "to": 238
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "lick_0_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3.04,
+            -6.98
+          ],
+          [
+            2.49,
+            -12.51
+          ],
+          [
+            -1.6,
+            -6.52
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "lick_1_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            6.03,
+            -4.06
+          ],
+          [
+            9.83,
+            -7.22
+          ],
+          [
+            3.17,
+            -7.34
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "lick_2_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            5.38,
+            0.62
+          ],
+          [
+            11.56,
+            2.16
+          ],
+          [
+            6.54,
+            -4.03
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "lick_3_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.14,
+            2.3
+          ],
+          [
+            4.37,
+            6.93
+          ],
+          [
+            5.99,
+            0.3
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "lick_4_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.36,
+            -0.54
+          ],
+          [
+            -5.95,
+            4.24
+          ],
+          [
+            1.37,
+            2.37
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "lick_5_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.41,
+            -3.82
+          ],
+          [
+            -7.26,
+            -3.59
+          ],
+          [
+            -2.17,
+            0.44
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "lick_6_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.05,
+            -6.4
+          ],
+          [
+            -4.21,
+            -10.11
+          ],
+          [
+            -3.1,
+            -3.01
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "fire_a",
+      "at": [
+        1.6,
+        -2.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 5.8,
+        "width": 1.5,
+        "from": -128,
+        "to": 96
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "fire_b",
+      "at": [
+        1.6,
+        -2.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 5.3,
+        "width": 1.3,
+        "from": 88,
+        "to": 238
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "lick_0",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.2,
+            -7.69
+          ],
+          [
+            2.04,
+            -10.79
+          ],
+          [
+            -0.09,
+            -7.45
+          ]
+        ]
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "lick_1",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            6.13,
+            -5.14
+          ],
+          [
+            8.14,
+            -6.65
+          ],
+          [
+            4.8,
+            -6.62
+          ]
+        ]
+      },
+      "fill": "$ember.light"
+    },
+    {
+      "id": "lick_2",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            6.34,
+            0.07
+          ],
+          [
+            10.07,
+            1.19
+          ],
+          [
+            6.95,
+            -2.35
+          ]
+        ]
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "lick_3",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3.16,
+            2.66
+          ],
+          [
+            4.2,
+            5.16
+          ],
+          [
+            4.92,
+            1.72
+          ]
+        ]
+      },
+      "fill": "$ember.light"
+    },
+    {
+      "id": "lick_4",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.24,
+            0.56
+          ],
+          [
+            -4.47,
+            3.26
+          ],
+          [
+            -0.35,
+            2.04
+          ]
+        ]
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "lick_5",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.15,
+            -3.02
+          ],
+          [
+            -5.57,
+            -3.03
+          ],
+          [
+            -3.02,
+            -1.12
+          ]
+        ]
+      },
+      "fill": "$ember.light"
+    },
+    {
+      "id": "lick_6",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.16,
+            -6.36
+          ],
+          [
+            -3.37,
+            -8.54
+          ],
+          [
+            -2.63,
+            -4.73
+          ]
+        ]
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "ember_outline",
+      "at": [
+        1.6,
+        -2.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.9
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "ember",
+      "at": [
+        1.6,
+        -2.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.1
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "ember_hot",
+      "at": [
+        1.9,
+        -2.7
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.9
+      },
+      "fill": "$silent"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

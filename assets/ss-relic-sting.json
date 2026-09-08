@@ -1,0 +1,742 @@
+{
+  "id": "ss.relic.sting",
+  "name": "Stinging hairs",
+  "description": "One fat segment of a caterpillar — an amber lump with a yellow-green lit back and two grooves where the next segments would join — and fifteen pale hairs standing straight out of it all the way round, no two the same length and none of them at an even angle. Each hair is a thin solid triangle with its own dark under-copy, so the whole thing silhouettes as a burr. The hairs are the relic: anything that touches you takes damage, and the fat body under them is the you. A spiky ball with even spokes read as a sun, so the hairs are jittered in length and angle and the ones underneath are a little shorter; the body is drawn as one segment rather than a caterpillar so the icon stays one object and not a small animal.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "hair0_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            5.9,
+            3.05
+          ],
+          [
+            11.29,
+            2.71
+          ],
+          [
+            6.5,
+            0.21
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hair1_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            5.18,
+            4.57
+          ],
+          [
+            9.34,
+            4.58
+          ],
+          [
+            6.2,
+            1.85
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hair2_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.17,
+            5.94
+          ],
+          [
+            5.03,
+            9.37
+          ],
+          [
+            4.87,
+            4.9
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hair3_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.4,
+            6.61
+          ],
+          [
+            3.33,
+            10.8
+          ],
+          [
+            3.14,
+            5.69
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hair4_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.65,
+            5.95
+          ],
+          [
+            -2.21,
+            9.84
+          ],
+          [
+            0.15,
+            6.71
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hair5_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.25,
+            5.57
+          ],
+          [
+            -3.7,
+            9.85
+          ],
+          [
+            -1.41,
+            6.19
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hair6_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.83,
+            2.96
+          ],
+          [
+            -8.98,
+            6.8
+          ],
+          [
+            -4.23,
+            5.38
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hair7_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.71,
+            0.58
+          ],
+          [
+            -9.62,
+            1.72
+          ],
+          [
+            -5.95,
+            3.48
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hair8_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.39,
+            -0.92
+          ],
+          [
+            -10.48,
+            -0.39
+          ],
+          [
+            -5.93,
+            1.94
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hair9_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.22,
+            -2.65
+          ],
+          [
+            -7.15,
+            -4.92
+          ],
+          [
+            -5.4,
+            -0.73
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hair10_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.62,
+            -3.66
+          ],
+          [
+            -6.05,
+            -7.23
+          ],
+          [
+            -3.96,
+            -1.94
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hair11_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.88,
+            -3.44
+          ],
+          [
+            0.9,
+            -7.58
+          ],
+          [
+            -1,
+            -3.78
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hair12_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3.87,
+            -3.01
+          ],
+          [
+            3.58,
+            -7.92
+          ],
+          [
+            1.05,
+            -3.69
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hair13_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            5.76,
+            -1
+          ],
+          [
+            8.59,
+            -5.48
+          ],
+          [
+            3.82,
+            -3.16
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hair14_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            6.6,
+            0.45
+          ],
+          [
+            9.47,
+            -3.18
+          ],
+          [
+            5,
+            -1.97
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "body_outline",
+      "at": [
+        0.2,
+        1.4
+      ],
+      "rot": -9,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 8.6,
+        "ry": 7.4
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "body",
+      "at": [
+        0.2,
+        1.4
+      ],
+      "rot": -9,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.4,
+        "ry": 6.2
+      },
+      "fill": "$chitin.dark"
+    },
+    {
+      "id": "body_mid",
+      "at": [
+        -0.1,
+        0.8
+      ],
+      "rot": -9,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.4,
+        "ry": 5
+      },
+      "fill": "$chitin"
+    },
+    {
+      "id": "body_lit",
+      "at": [
+        -1.4,
+        -0.8
+      ],
+      "rot": -13,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.6,
+        "ry": 2.9
+      },
+      "fill": "$bile"
+    },
+    {
+      "id": "groove_a",
+      "at": [
+        -2,
+        1.6
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 5.6,
+        "width": 0.9,
+        "from": 250,
+        "to": 300
+      },
+      "fill": "$chitin.dark2"
+    },
+    {
+      "id": "groove_b",
+      "at": [
+        2.8,
+        2
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 5,
+        "width": 0.9,
+        "from": 245,
+        "to": 292
+      },
+      "fill": "$chitin.dark2"
+    },
+    {
+      "id": "hair0",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            6.63,
+            2.49
+          ],
+          [
+            10.9,
+            2.64
+          ],
+          [
+            6.95,
+            1.03
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "hair1",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            5.99,
+            4.12
+          ],
+          [
+            8.97,
+            4.44
+          ],
+          [
+            6.51,
+            2.72
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "hair2",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3.03,
+            6.25
+          ],
+          [
+            4.89,
+            9
+          ],
+          [
+            4.43,
+            5.71
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "hair3",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.25,
+            6.96
+          ],
+          [
+            3.2,
+            10.43
+          ],
+          [
+            2.67,
+            6.48
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "hair4",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.13,
+            6.71
+          ],
+          [
+            -2.11,
+            9.45
+          ],
+          [
+            -0.69,
+            7.11
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "hair5",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.69,
+            6.31
+          ],
+          [
+            -3.61,
+            9.46
+          ],
+          [
+            -2.23,
+            6.63
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "hair6",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.95,
+            3.88
+          ],
+          [
+            -8.64,
+            6.57
+          ],
+          [
+            -5.11,
+            5.12
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "hair7",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -6.37,
+            1.23
+          ],
+          [
+            -9.22,
+            1.75
+          ],
+          [
+            -6.49,
+            2.73
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "hair8",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -6.11,
+            -0.34
+          ],
+          [
+            -10.08,
+            -0.32
+          ],
+          [
+            -6.39,
+            1.14
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "hair9",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.15,
+            -2.63
+          ],
+          [
+            -6.89,
+            -4.62
+          ],
+          [
+            -5.27,
+            -1.65
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "hair10",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.55,
+            -3.73
+          ],
+          [
+            -5.82,
+            -6.9
+          ],
+          [
+            -3.75,
+            -2.83
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "hair11",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.26,
+            -4.12
+          ],
+          [
+            0.85,
+            -7.19
+          ],
+          [
+            -0.24,
+            -4.3
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "hair12",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3.33,
+            -3.75
+          ],
+          [
+            3.48,
+            -7.52
+          ],
+          [
+            1.87,
+            -4.11
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "hair13",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            5.74,
+            -1.92
+          ],
+          [
+            8.3,
+            -5.21
+          ],
+          [
+            4.74,
+            -3.04
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "hair14",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            6.71,
+            -0.46
+          ],
+          [
+            9.14,
+            -2.96
+          ],
+          [
+            5.89,
+            -1.72
+          ]
+        ]
+      },
+      "fill": "$bone"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

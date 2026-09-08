@@ -1,0 +1,559 @@
+{
+  "id": "ss.relic.mine-chain",
+  "name": "Spore chain",
+  "description": "Two armed spore cases (`ss.proj.mine`, small) on one fuse, and the third case at the end of it already gone: an uneven cold burst with a near-white centre, five chips of its chitin shell in the air, and the length of fuse running into it lit while the length behind is still dead. The relic makes one blast set off every cache it reaches, so the drawing is the fuse doing exactly that, caught between the second case and the third. The burst has no dark middle — the centre is the brightest thing on the plate — and its spikes are unequal so it is an explosion rather than a star. It stays off ss.relic.mine by being a line of three going off instead of a heap of six waiting.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "fuse_a_outline",
+      "at": [
+        -5.4,
+        4.8
+      ],
+      "rot": 48.37,
+      "shape": {
+        "kind": "rect",
+        "w": 2.6,
+        "h": 9.63,
+        "corner": 1.3
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "fuse_b_outline",
+      "at": [
+        2.4,
+        -1.9
+      ],
+      "rot": 50.19,
+      "shape": {
+        "kind": "rect",
+        "w": 2.6,
+        "h": 10.93,
+        "corner": 1.3
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "fuse_a",
+      "at": [
+        -5.4,
+        4.8
+      ],
+      "rot": 48.37,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 9.63,
+        "corner": 0.55
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "fuse_b",
+      "at": [
+        2.4,
+        -1.9
+      ],
+      "rot": 50.19,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 10.93,
+        "corner": 0.6
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "blast_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            14.0,
+            -5.38
+          ],
+          [
+            9.7,
+            -3.76
+          ],
+          [
+            10.23,
+            -0.87
+          ],
+          [
+            7.75,
+            -1.76
+          ],
+          [
+            5.58,
+            2.33
+          ],
+          [
+            4.33,
+            -2.08
+          ],
+          [
+            1.57,
+            -2.24
+          ],
+          [
+            3.12,
+            -4.78
+          ],
+          [
+            -0.15,
+            -7.25
+          ],
+          [
+            3.97,
+            -7.96
+          ],
+          [
+            4.58,
+            -10.11
+          ],
+          [
+            6.71,
+            -9.3
+          ],
+          [
+            10.87,
+            -12.05
+          ],
+          [
+            9.72,
+            -7.1
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "blast",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            12.0,
+            -5.4
+          ],
+          [
+            8.67,
+            -4.39
+          ],
+          [
+            9.06,
+            -2.25
+          ],
+          [
+            7.27,
+            -2.89
+          ],
+          [
+            5.79,
+            0.34
+          ],
+          [
+            5.06,
+            -2.94
+          ],
+          [
+            3.12,
+            -3.05
+          ],
+          [
+            4.33,
+            -5.04
+          ],
+          [
+            1.79,
+            -6.78
+          ],
+          [
+            4.67,
+            -7.14
+          ],
+          [
+            5.18,
+            -8.92
+          ],
+          [
+            6.85,
+            -8.29
+          ],
+          [
+            9.73,
+            -10.4
+          ],
+          [
+            8.61,
+            -6.52
+          ]
+        ]
+      },
+      "fill": "$frost"
+    },
+    {
+      "id": "blast_core",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            9.04,
+            -4.51
+          ],
+          [
+            7.01,
+            -4.17
+          ],
+          [
+            5.19,
+            -3.21
+          ],
+          [
+            5.31,
+            -5.27
+          ],
+          [
+            4.78,
+            -7.26
+          ],
+          [
+            6.76,
+            -6.69
+          ],
+          [
+            8.81,
+            -6.76
+          ]
+        ]
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "chip_0_outline",
+      "at": [
+        11.2,
+        -6.9
+      ],
+      "rot": 10.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.24,
+            2.06
+          ],
+          [
+            2.97,
+            0.43
+          ],
+          [
+            -1.24,
+            -2.46
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "chip_0",
+      "at": [
+        11.2,
+        -6.9
+      ],
+      "rot": 10.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.3,
+            1.04
+          ],
+          [
+            1.43,
+            0.2
+          ],
+          [
+            -0.78,
+            -1.3
+          ]
+        ]
+      },
+      "fill": "$chitin"
+    },
+    {
+      "id": "chip_1_outline",
+      "at": [
+        9.8,
+        0.14
+      ],
+      "rot": 40.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.04,
+            1.89
+          ],
+          [
+            2.75,
+            0.45
+          ],
+          [
+            -1.12,
+            -2.27
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "chip_1",
+      "at": [
+        9.8,
+        0.14
+      ],
+      "rot": 40.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.1,
+            0.88
+          ],
+          [
+            1.21,
+            0.2
+          ],
+          [
+            -0.66,
+            -1.1
+          ]
+        ]
+      },
+      "fill": "$chitin"
+    },
+    {
+      "id": "chip_2_outline",
+      "at": [
+        2.29,
+        0.12
+      ],
+      "rot": -20.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.35,
+            2.15
+          ],
+          [
+            3.08,
+            0.42
+          ],
+          [
+            -1.3,
+            -2.55
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "chip_2",
+      "at": [
+        2.29,
+        0.12
+      ],
+      "rot": -20.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.4,
+            1.12
+          ],
+          [
+            1.54,
+            0.2
+          ],
+          [
+            -0.84,
+            -1.4
+          ]
+        ]
+      },
+      "fill": "$chitin"
+    },
+    {
+      "id": "chip_3_outline",
+      "at": [
+        1.03,
+        -9.3
+      ],
+      "rot": 70.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.14,
+            1.98
+          ],
+          [
+            2.86,
+            0.44
+          ],
+          [
+            -1.18,
+            -2.36
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "chip_3",
+      "at": [
+        1.03,
+        -9.3
+      ],
+      "rot": 70.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.2,
+            0.96
+          ],
+          [
+            1.32,
+            0.2
+          ],
+          [
+            -0.72,
+            -1.2
+          ]
+        ]
+      },
+      "fill": "$chitin"
+    },
+    {
+      "id": "chip_4_outline",
+      "at": [
+        7.66,
+        -11.41
+      ],
+      "rot": 15.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.94,
+            1.8
+          ],
+          [
+            2.63,
+            0.46
+          ],
+          [
+            -1.06,
+            -2.18
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "chip_4",
+      "at": [
+        7.66,
+        -11.41
+      ],
+      "rot": 15.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.0,
+            0.8
+          ],
+          [
+            1.1,
+            0.2
+          ],
+          [
+            -0.6,
+            -1.0
+          ]
+        ]
+      },
+      "fill": "$chitin"
+    },
+    {
+      "id": "cache_a_outline",
+      "at": [
+        -9.0,
+        8.0
+      ],
+      "rot": 22.5,
+      "shape": {
+        "kind": "ngon",
+        "sides": 8,
+        "r": 4.7
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cache_a",
+      "at": [
+        -9.0,
+        8.0
+      ],
+      "scale": 0.42,
+      "use": "ss.proj.mine"
+    },
+    {
+      "id": "cache_b_outline",
+      "at": [
+        -1.8,
+        1.6
+      ],
+      "rot": 22.5,
+      "shape": {
+        "kind": "ngon",
+        "sides": 8,
+        "r": 4.7
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cache_b",
+      "at": [
+        -1.8,
+        1.6
+      ],
+      "scale": 0.42,
+      "use": "ss.proj.mine"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

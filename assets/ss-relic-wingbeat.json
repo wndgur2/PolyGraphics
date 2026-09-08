@@ -1,0 +1,24 @@
+{
+  "id": "ss.relic.wingbeat",
+  "name": "Wingbeat",
+  "description": "One forewing in profile, root at the lower-left and tip driving up and right: a straight leading edge, a bellied trailing edge, a near-white membrane cooling to aqua toward the tip, and dark veins — three long ones fanning from the root with two cross-veins — over it. Three solid tapered speed-dashes of different lengths trail straight back from the root the way it came, staggered and weighted to the trailing side rather than fanned evenly around the axis. The relic rewards holding one heading, so the whole object is a heading: the streaks say it has been going that way for a while. It is not ss.relic.camo's leaf, which is symmetric about a midrib and brown; this is lopsided, veined like a wing and cold. Fanned, curling streaks were tried and made a squid of it at 1×, and three even parallel dashes made a rocket; the lopsided set stays motion.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "streak_a", "shape": {"kind": "poly", "points": [[-7.38, 6.69], [-8.75, 8.24], [-11.89, 11.91], [-7.73, 9.45], [-5.97, 8.38]]}, "fill": "$aqua.dark"},
+    {"id": "streak_b", "shape": {"kind": "poly", "points": [[-4.78, 8.56], [-5.72, 9.67], [-7.88, 12.33], [-4.88, 10.67], [-3.62, 9.93]]}, "fill": "$aqua.dark"},
+    {"id": "streak_c", "shape": {"kind": "poly", "points": [[-10.06, 5.68], [-10.72, 6.49], [-12.22, 8.4], [-10.07, 7.25], [-9.16, 6.75]]}, "fill": "$frost.dark"},
+    {"id": "wing_outline", "shape": {"kind": "poly", "points": [[-8.34, 5.39], [-6.33, 1.18], [-3.39, -2.66], [0.66, -6.06], [4.76, -7.83], [9.92, -8.75], [10.61, -5.23], [9.8, -1.36], [7.37, 2.8], [3.49, 6.18], [-0.59, 8.06], [-4.15, 8.39], [-6.46, 7.64]]}, "fill": "$ink"},
+    {"id": "wing", "shape": {"kind": "poly", "points": [[-7.04, 5.23], [-5.39, 1.76], [-2.59, -1.9], [1.24, -5.11], [5.08, -6.77], [9.05, -7.48], [9.49, -5.24], [8.76, -1.76], [6.51, 2.09], [2.89, 5.25], [-0.88, 6.98], [-4.03, 7.27], [-5.82, 6.69]]}, "fill": {"gradient": "linear", "from": [0, 0], "to": [1, 1], "stops": [[0, "$silent"], [1, "$aqua"]]}},
+    {"id": "vein_costa", "shape": {"kind": "poly", "points": [[-5.6, 5.07], [7.47, -6.42], [6.94, -7.02], [-6.13, 4.47]]}, "fill": "$slate"},
+    {"id": "vein_media", "shape": {"kind": "poly", "points": [[-5.03, 5.88], [8.59, -2.16], [8.2, -2.84], [-5.42, 5.19]]}, "fill": "$slate"},
+    {"id": "vein_anal", "shape": {"kind": "poly", "points": [[-4.72, 6.37], [4.49, 3.35], [4.25, 2.59], [-4.96, 5.61]]}, "fill": "$slate"},
+    {"id": "cross_a", "shape": {"kind": "poly", "points": [[-0.51, -0.82], [1.73, 2.78], [2.24, 2.45], [0, -1.15]]}, "fill": "$slate.light"},
+    {"id": "cross_b", "shape": {"kind": "poly", "points": [[3.34, -4.33], [5.32, -1.03], [5.85, -1.34], [3.86, -4.64]]}, "fill": "$slate.light"},
+    {"id": "root", "shape": {"kind": "poly", "points": [[-7.76, 5.31], [-5.86, 3.85], [-3.84, 5.94], [-5.74, 7.41]]}, "fill": "$slate.dark"}
+  ],
+  "variants": {
+    "glyph": {"description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.", "remove": ["plate"]}
+  }
+}

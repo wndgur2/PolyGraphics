@@ -1,0 +1,771 @@
+{
+  "id": "ss.relic.burst",
+  "name": "Burst sac",
+  "description": "A sac at the moment it goes: a bright core — gold-white at the middle falling to ember at the edge — with three curled scraps of dark red wall still clinging round it, and nine spokes of hot ember thrown outward at uneven angles and lengths, with five loose specks beyond their tips. The overkill of a kill is what bursts into the bodies around it, so the picture is the leftover energy leaving the body, and it leaves in every direction at once but not tidily; the spokes are irregular so it is a splat and not a badge. The centre is the brightest part and is kept that way on purpose — a dark middle inside a ring of spikes would have been a hole. The wall scraps are drawn as ring arcs with ring outlines, never a filled disc, so nothing dark sits behind the core.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "splat_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.93,
+            -3.43
+          ],
+          [
+            -2.59,
+            -11.33
+          ],
+          [
+            -1.75,
+            -12.43
+          ],
+          [
+            -0.64,
+            -11.61
+          ],
+          [
+            1.34,
+            -5.69
+          ],
+          [
+            2,
+            -5.37
+          ],
+          [
+            4.66,
+            -7.55
+          ],
+          [
+            6,
+            -7.68
+          ],
+          [
+            6.2,
+            -6.35
+          ],
+          [
+            4.76,
+            -3.32
+          ],
+          [
+            5.27,
+            -2.84
+          ],
+          [
+            10.95,
+            -2.53
+          ],
+          [
+            12.03,
+            -1.69
+          ],
+          [
+            11.22,
+            -0.59
+          ],
+          [
+            5.88,
+            1.27
+          ],
+          [
+            5.59,
+            1.81
+          ],
+          [
+            7.38,
+            3.81
+          ],
+          [
+            7.59,
+            5.12
+          ],
+          [
+            6.3,
+            5.41
+          ],
+          [
+            3.72,
+            4.49
+          ],
+          [
+            3.43,
+            4.78
+          ],
+          [
+            3.52,
+            10.07
+          ],
+          [
+            2.79,
+            11.21
+          ],
+          [
+            1.63,
+            10.55
+          ],
+          [
+            -0.82,
+            5.77
+          ],
+          [
+            -1.46,
+            5.48
+          ],
+          [
+            -3.36,
+            7.19
+          ],
+          [
+            -4.64,
+            7.42
+          ],
+          [
+            -4.99,
+            6.17
+          ],
+          [
+            -4.33,
+            3.91
+          ],
+          [
+            -4.38,
+            3.88
+          ],
+          [
+            -10.01,
+            4.68
+          ],
+          [
+            -11.23,
+            4.09
+          ],
+          [
+            -10.68,
+            2.84
+          ],
+          [
+            -5.95,
+            -0.1
+          ],
+          [
+            -5.77,
+            -0.81
+          ],
+          [
+            -8.21,
+            -2.93
+          ],
+          [
+            -8.58,
+            -4.19
+          ],
+          [
+            -7.36,
+            -4.66
+          ],
+          [
+            -4.11,
+            -4.04
+          ],
+          [
+            -3.59,
+            -4.55
+          ],
+          [
+            -4.27,
+            -8.87
+          ],
+          [
+            -3.68,
+            -10.1
+          ],
+          [
+            -2.43,
+            -9.54
+          ],
+          [
+            0.84,
+            -4.12
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "splat",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.87,
+            -4.64
+          ],
+          [
+            -1.59,
+            -11.29
+          ],
+          [
+            0.52,
+            -4.97
+          ],
+          [
+            2.13,
+            -4.19
+          ],
+          [
+            5.29,
+            -6.78
+          ],
+          [
+            3.55,
+            -3.08
+          ],
+          [
+            4.85,
+            -1.86
+          ],
+          [
+            10.89,
+            -1.53
+          ],
+          [
+            5.18,
+            0.45
+          ],
+          [
+            4.39,
+            1.95
+          ],
+          [
+            6.63,
+            4.47
+          ],
+          [
+            3.45,
+            3.33
+          ],
+          [
+            2.42,
+            4.37
+          ],
+          [
+            2.52,
+            10.09
+          ],
+          [
+            -0.09,
+            5
+          ],
+          [
+            -1.65,
+            4.29
+          ],
+          [
+            -4.03,
+            6.45
+          ],
+          [
+            -3.14,
+            3.36
+          ],
+          [
+            -4.23,
+            2.85
+          ],
+          [
+            -10.15,
+            3.69
+          ],
+          [
+            -5.07,
+            0.53
+          ],
+          [
+            -4.66,
+            -1.16
+          ],
+          [
+            -7.55,
+            -3.68
+          ],
+          [
+            -3.78,
+            -2.96
+          ],
+          [
+            -2.52,
+            -4.2
+          ],
+          [
+            -3.28,
+            -9.02
+          ],
+          [
+            -0.77,
+            -4.84
+          ]
+        ]
+      },
+      "fill": "$ember.dark"
+    },
+    {
+      "id": "chip0",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.21,
+            -7.36
+          ],
+          [
+            -1.53,
+            -10.89
+          ],
+          [
+            0.09,
+            -7.69
+          ]
+        ]
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "chip1",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3.28,
+            -5.42
+          ],
+          [
+            5.05,
+            -6.46
+          ],
+          [
+            4.47,
+            -4.5
+          ]
+        ]
+      },
+      "fill": "$ember.light"
+    },
+    {
+      "id": "chip2",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            7.34,
+            -2.11
+          ],
+          [
+            10.5,
+            -1.48
+          ],
+          [
+            7.64,
+            0.01
+          ]
+        ]
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "chip3",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            5.43,
+            2.87
+          ],
+          [
+            6.3,
+            4.25
+          ],
+          [
+            4.69,
+            3.97
+          ]
+        ]
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "chip4",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.87,
+            6.68
+          ],
+          [
+            2.42,
+            9.7
+          ],
+          [
+            0.6,
+            7.24
+          ]
+        ]
+      },
+      "fill": "$ember.light"
+    },
+    {
+      "id": "chip5",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.49,
+            5.3
+          ],
+          [
+            -3.82,
+            6.11
+          ],
+          [
+            -3.67,
+            4.57
+          ]
+        ]
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "chip6",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -6.57,
+            3.6
+          ],
+          [
+            -9.77,
+            3.56
+          ],
+          [
+            -7.35,
+            1.47
+          ]
+        ]
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "chip7",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.98,
+            -2.01
+          ],
+          [
+            -7.19,
+            -3.51
+          ],
+          [
+            -5.27,
+            -3.48
+          ]
+        ]
+      },
+      "fill": "$ember.light"
+    },
+    {
+      "id": "chip8",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.1,
+            -6.13
+          ],
+          [
+            -3.15,
+            -8.65
+          ],
+          [
+            -1.57,
+            -6.69
+          ]
+        ]
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "skin_a_o",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 5.9,
+        "width": 3.2,
+        "from": 22,
+        "to": 80
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "skin_b_o",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 5.7,
+        "width": 3.2,
+        "from": 126,
+        "to": 198
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "skin_c_o",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 6,
+        "width": 3.2,
+        "from": 244,
+        "to": 298
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "skin_a",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 5.9,
+        "width": 1.7,
+        "from": 24,
+        "to": 78
+      },
+      "fill": "$blood.dark"
+    },
+    {
+      "id": "skin_b",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 5.7,
+        "width": 1.7,
+        "from": 128,
+        "to": 196
+      },
+      "fill": "$blood.dark"
+    },
+    {
+      "id": "skin_c",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 6,
+        "width": 1.7,
+        "from": 246,
+        "to": 296
+      },
+      "fill": "$blood.dark"
+    },
+    {
+      "id": "core",
+      "at": [
+        0.2,
+        0.1
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 5
+      },
+      "fill": {
+        "gradient": "radial",
+        "stops": [
+          [
+            0,
+            "$gold.light"
+          ],
+          [
+            0.5,
+            "$ember.light"
+          ],
+          [
+            1,
+            "$ember"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "core_flare",
+      "at": [
+        -1.2,
+        -1.3
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.6
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "spat_a_o",
+      "at": [
+        -9.6,
+        -9.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.7
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "spat_a",
+      "at": [
+        -9.6,
+        -9.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "spat_b_o",
+      "at": [
+        10.6,
+        -6.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.5
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "spat_b",
+      "at": [
+        10.6,
+        -6.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.8
+      },
+      "fill": "$coral"
+    },
+    {
+      "id": "spat_c_o",
+      "at": [
+        9.2,
+        9
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "spat_c",
+      "at": [
+        9.2,
+        9
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.1
+      },
+      "fill": "$ember.light"
+    },
+    {
+      "id": "spat_d_o",
+      "at": [
+        -10.4,
+        5.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.4
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "spat_d",
+      "at": [
+        -10.4,
+        5.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.7
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "spat_e_o",
+      "at": [
+        2.2,
+        -11
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.3
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "spat_e",
+      "at": [
+        2.2,
+        -11
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.6
+      },
+      "fill": "$coral"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

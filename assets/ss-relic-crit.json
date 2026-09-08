@@ -1,0 +1,510 @@
+{
+  "id": "ss.relic.crit",
+  "name": "Hunter's eye",
+  "description": "A compound eye as a clutch of thirteen hexagonal facets, each one a lit dome — a dusky violet cell with a paler crown set up-left — packed on a scalloped ink ground, the cluster tilted eight degrees and one facet short at the bottom so it is a grown thing and not a honeycomb logo. One facet up-right of centre burns coral with a soft coral bleed onto its neighbours: the ommatidium that found the seam in the target, which is what a fifteen-percent double hit is. Every facet is a lit dome rather than a dark cell with a bright rim, because a ring of bright around dark is an eye socket or a hole at this size and this icon is an eye that is looking, not one that is empty. The facets that face away from the light darken toward the lower right so the whole reads as one curved organ.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "cell0_o",
+      "at": [
+        -0.93,
+        -8.46
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.2,
+        "rot": 8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cell1_o",
+      "at": [
+        3.87,
+        -7.78
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.2,
+        "rot": 8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cell2_o",
+      "at": [
+        -3.92,
+        -4.63
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.2,
+        "rot": 8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cell3_o",
+      "at": [
+        0.88,
+        -3.96
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.2,
+        "rot": 8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cell4_o",
+      "at": [
+        5.69,
+        -3.28
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.2,
+        "rot": 8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cell5_o",
+      "at": [
+        -6.9,
+        -0.81
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.2,
+        "rot": 8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cell6_o",
+      "at": [
+        -2.1,
+        -0.14
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.2,
+        "rot": 8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cell7_o",
+      "at": [
+        2.7,
+        0.54
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.2,
+        "rot": 8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cell8_o",
+      "at": [
+        7.5,
+        1.21
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.2,
+        "rot": 8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cell9_o",
+      "at": [
+        -5.09,
+        3.68
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.2,
+        "rot": 8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cell10_o",
+      "at": [
+        -0.28,
+        4.36
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.2,
+        "rot": 8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cell11_o",
+      "at": [
+        4.52,
+        5.03
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.2,
+        "rot": 8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cell12_o",
+      "at": [
+        -3.27,
+        8.18
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 3.2,
+        "rot": 8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "facet0",
+      "at": [
+        -0.93,
+        -8.46
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 2.35,
+        "rot": 8
+      },
+      "fill": "$carapace.light2"
+    },
+    {
+      "id": "facet1",
+      "at": [
+        3.87,
+        -7.78
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 2.35,
+        "rot": 8
+      },
+      "fill": "$carapace.light"
+    },
+    {
+      "id": "dome1",
+      "at": [
+        3.27,
+        -8.43
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.95
+      },
+      "fill": "$carapace.light2"
+    },
+    {
+      "id": "facet2",
+      "at": [
+        -3.92,
+        -4.63
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 2.35,
+        "rot": 8
+      },
+      "fill": "$carapace.light2"
+    },
+    {
+      "id": "dome2",
+      "at": [
+        -4.52,
+        -5.28
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.95
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "facet3",
+      "at": [
+        0.88,
+        -3.96
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 2.35,
+        "rot": 8
+      },
+      "fill": "$carapace.light"
+    },
+    {
+      "id": "dome3",
+      "at": [
+        0.28,
+        -4.61
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.95
+      },
+      "fill": "$carapace.light2"
+    },
+    {
+      "id": "facet5",
+      "at": [
+        -6.9,
+        -0.81
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 2.35,
+        "rot": 8
+      },
+      "fill": "$carapace.light2"
+    },
+    {
+      "id": "facet6",
+      "at": [
+        -2.1,
+        -0.14
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 2.35,
+        "rot": 8
+      },
+      "fill": "$carapace.light"
+    },
+    {
+      "id": "dome6",
+      "at": [
+        -2.7,
+        -0.79
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.95
+      },
+      "fill": "$carapace.light2"
+    },
+    {
+      "id": "facet7",
+      "at": [
+        2.7,
+        0.54
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 2.35,
+        "rot": 8
+      },
+      "fill": "$carapace.light"
+    },
+    {
+      "id": "dome7",
+      "at": [
+        2.1,
+        -0.11
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.95
+      },
+      "fill": "$carapace.light2"
+    },
+    {
+      "id": "facet8",
+      "at": [
+        7.5,
+        1.21
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 2.35,
+        "rot": 8
+      },
+      "fill": "$carapace"
+    },
+    {
+      "id": "facet9",
+      "at": [
+        -5.09,
+        3.68
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 2.35,
+        "rot": 8
+      },
+      "fill": "$carapace.light"
+    },
+    {
+      "id": "dome9",
+      "at": [
+        -5.69,
+        3.03
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.95
+      },
+      "fill": "$carapace.light2"
+    },
+    {
+      "id": "facet10",
+      "at": [
+        -0.28,
+        4.36
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 2.35,
+        "rot": 8
+      },
+      "fill": "$carapace"
+    },
+    {
+      "id": "facet11",
+      "at": [
+        4.52,
+        5.03
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 2.35,
+        "rot": 8
+      },
+      "fill": "$carapace"
+    },
+    {
+      "id": "dome11",
+      "at": [
+        3.92,
+        4.38
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.95
+      },
+      "fill": "$carapace.light"
+    },
+    {
+      "id": "facet12",
+      "at": [
+        -3.27,
+        8.18
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 2.35,
+        "rot": 8
+      },
+      "fill": "$carapace"
+    },
+    {
+      "id": "dome12",
+      "at": [
+        -3.87,
+        7.53
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.95
+      },
+      "fill": "$carapace.light"
+    },
+    {
+      "id": "seam_glow",
+      "at": [
+        5.69,
+        -3.28
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 4.6
+      },
+      "fill": "$coral@0.32"
+    },
+    {
+      "id": "seam_facet",
+      "at": [
+        5.69,
+        -3.28
+      ],
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 2.5,
+        "rot": 8
+      },
+      "fill": "$coral"
+    },
+    {
+      "id": "seam_dome",
+      "at": [
+        5.14,
+        -3.88
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.05
+      },
+      "fill": "$coral.light2"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

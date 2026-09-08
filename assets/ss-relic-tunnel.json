@@ -1,0 +1,36 @@
+{
+  "id": "ss.relic.tunnel",
+  "name": "Boring jaws",
+  "description": "A cross-section of packed earth — a lit crust, a rusty band, dark loam and red subsoil, with two grey stones and a few pebbles caught in the layers — and a tunnel bored up through it from the lower-left edge to a round mouth at the right, where a pair of chitin mandibles sit open, biting up toward the surface and past the block's edge. The bore is filled with a pale sandy brown rather than a dark tone: a dark channel through earth is a crack or a worm, and a dark round mouth ringed in brown is an eye, so the tunnel is the palest thing on the plate and the jaws are what is warm against it. Walking through earth and stone is the relic, so the jaws are the object and the earth is what they are in; the bite past the edge is what keeps the silhouette from being the plain slab ss.relic.mason already owns.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "earth_outline", "shape": {"kind": "poly", "points": [[-12.34, -6.16], [-9.01, -9.49], [-3.22, -10.83], [1.76, -9.83], [6.36, -11.09], [11.37, -8.23], [12.99, -3.83], [13.2, 2.46], [12.33, 8.79], [9.11, 11.77], [0.39, 12.4], [-9.16, 11.55], [-12.77, 7.7], [-13.2, 0.56]]}, "fill": "$ink"},
+    {"id": "topsoil", "shape": {"kind": "poly", "points": [[-11.2, -5.6], [-8.4, -8.4], [-3.2, -9.6], [1.8, -8.6], [6.2, -9.8], [10.4, -7.4], [11.58, -4.2], [-11.38, -4.2]]}, "fill": "$timber.dark"},
+    {"id": "band_rust", "shape": {"kind": "poly", "points": [[11.58, -4.2], [11.8, -3.6], [11.97, 1.6], [-11.94, 1.6], [-12, 0.6], [-11.38, -4.2]]}, "fill": "$rust.light"},
+    {"id": "band_loam", "shape": {"kind": "poly", "points": [[11.97, 1.6], [12, 2.4], [11.45, 6.4], [-11.65, 6.4], [-11.94, 1.6]]}, "fill": "$soil.light2"},
+    {"id": "subsoil", "shape": {"kind": "poly", "points": [[11.45, 6.4], [11.2, 8.2], [8.6, 10.6], [0.4, 11.2], [-8.6, 10.4], [-11.6, 7.2], [-11.65, 6.4]]}, "fill": "$rust"},
+    {"id": "surface", "shape": {"kind": "poly", "points": [[-9, -7.8], [-8.4, -8.4], [-3.2, -9.6], [1.8, -8.6], [6.2, -9.8], [9.7, -7.8]]}, "fill": "$timber"},
+    {"id": "stone_a", "at": [8.2, 4], "shape": {"kind": "ellipse", "rx": 2, "ry": 1.4}, "fill": "$slate.light", "rot": -18},
+    {"id": "stone_b", "at": [-7.4, 8.4], "shape": {"kind": "ellipse", "rx": 1.6, "ry": 1.1}, "fill": "$steel.dark", "rot": 12},
+    {"id": "pebble_a", "at": [-8.8, -2], "shape": {"kind": "ellipse", "rx": 1, "ry": 0.7}, "fill": "$chitin.dark", "rot": 30},
+    {"id": "pebble_b", "at": [3.4, 8.8], "shape": {"kind": "ellipse", "rx": 1.1, "ry": 0.7}, "fill": "$slate.light", "rot": 8},
+    {"id": "pebble_c", "at": [-4.2, -6.2], "shape": {"kind": "ellipse", "rx": 0.9, "ry": 0.6}, "fill": "$rust.light2", "rot": -20},
+    {"id": "bore_outline", "shape": {"kind": "poly", "points": [[-8.95, 0.73], [-8.07, 1.53], [-7.31, 2.07], [-6.62, 2.45], [-5.98, 2.69], [-5.38, 2.83], [-4.81, 2.87], [-4.24, 2.83], [-3.65, 2.71], [-3.01, 2.49], [-2.29, 2.15], [-1.51, 1.69], [-0.65, 1.08], [0.26, 0.33], [1.24, -0.59], [2.26, -1.66], [3.38, -2.97], [9.42, 2.57], [8.06, 3.96], [6.64, 5.27], [5.2, 6.45], [3.75, 7.46], [2.27, 8.33], [0.77, 9.03], [-0.77, 9.55], [-2.35, 9.89], [-3.94, 10.01], [-5.51, 9.91], [-7.06, 9.59], [-8.52, 9.05], [-9.92, 8.33], [-11.21, 7.41], [-12.41, 6.37], [-13.45, 5.27]]}, "fill": "$ink"},
+    {"id": "mouth_outline", "at": [6.4, -0.2], "shape": {"kind": "circle", "r": 4.8}, "fill": "$ink"},
+    {"id": "bore", "shape": {"kind": "poly", "points": [[-9.58, 1.37], [-8.67, 2.2], [-7.84, 2.79], [-7.06, 3.24], [-6.31, 3.53], [-5.6, 3.71], [-4.9, 3.77], [-4.2, 3.73], [-3.49, 3.59], [-2.74, 3.34], [-1.92, 2.97], [-1.07, 2.48], [-0.14, 1.82], [0.83, 1.03], [1.85, 0.07], [2.9, -1.04], [4.04, -2.36], [8.76, 1.96], [7.42, 3.34], [6.03, 4.61], [4.63, 5.75], [3.24, 6.72], [1.83, 7.54], [0.4, 8.21], [-1.04, 8.7], [-2.51, 9.01], [-3.98, 9.11], [-5.42, 9.01], [-6.84, 8.71], [-8.19, 8.21], [-9.48, 7.54], [-10.68, 6.69], [-11.81, 5.7], [-12.82, 4.63]]}, "fill": "$timber.light"},
+    {"id": "bore_floor", "shape": {"kind": "poly", "points": [[-11.65, 3.46], [-10.68, 4.44], [-9.66, 5.29], [-8.61, 5.99], [-7.51, 6.53], [-6.39, 6.91], [-5.23, 7.12], [-4.06, 7.17], [-2.86, 7.06], [-1.65, 6.77], [-0.43, 6.32], [0.79, 5.72], [2.02, 4.96], [3.26, 4.05], [4.53, 2.98], [5.79, 1.76], [7.06, 0.41], [8.76, 1.96], [7.42, 3.34], [6.03, 4.61], [4.63, 5.75], [3.24, 6.72], [1.83, 7.54], [0.4, 8.21], [-1.04, 8.7], [-2.51, 9.01], [-3.98, 9.11], [-5.42, 9.01], [-6.84, 8.71], [-8.19, 8.21], [-9.48, 7.54], [-10.68, 6.69], [-11.81, 5.7], [-12.82, 4.63]]}, "fill": "$timber"},
+    {"id": "mouth", "at": [6.4, -0.2], "shape": {"kind": "circle", "r": 3.9}, "fill": "$timber.light"},
+    {"id": "mouth_deep", "at": [5.5, 0.8], "shape": {"kind": "circle", "r": 2.4}, "fill": "$timber"},
+    {"id": "jaw_l_outline", "shape": {"kind": "poly", "points": [[2.34, 1.05], [4.11, -3.03], [7.06, -4.91], [11.93, -5.77], [12.22, -2.53], [8.85, -1.21], [6.56, 0.83]]}, "fill": "$ink"},
+    {"id": "jaw_r_outline", "shape": {"kind": "poly", "points": [[5.23, 3.71], [9.62, 2.34], [12.13, 0.27], [13.46, -4.55], [10.16, -4.22], [8.83, -1.54], [6.52, 0.31]]}, "fill": "$ink"},
+    {"id": "jaw_l", "shape": {"kind": "poly", "points": [[3.9, -0.03], [4.91, -2.35], [7.43, -3.96], [11.03, -4.6], [11.16, -3.19], [8.32, -2.08], [6.16, -0.15]]}, "fill": "$chitin"},
+    {"id": "jaw_r", "shape": {"kind": "poly", "points": [[6.85, 2.19], [9.13, 1.45], [11.25, -0.3], [12.11, -3.41], [10.81, -3.28], [9.63, -0.9], [7.35, 0.92]]}, "fill": "$chitin.dark"},
+    {"id": "jaw_l_edge", "shape": {"kind": "poly", "points": [[5.09, -2.19], [7.39, -3.67], [10.75, -4.41], [9.62, -3.28], [7.34, -2.53], [5.71, -1.2]]}, "fill": "$chitin.light"},
+    {"id": "jaw_r_edge", "shape": {"kind": "poly", "points": [[8.95, 1.29], [10.91, -0.4], [11.83, -3.22], [10.82, -1.98], [9.83, -0.29], [8.26, 1.1]]}, "fill": "$chitin"}
+  ],
+  "variants": {
+    "glyph": {"description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.", "remove": ["plate"]}
+  }
+}

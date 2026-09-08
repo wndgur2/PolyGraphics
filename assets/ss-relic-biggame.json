@@ -1,0 +1,562 @@
+{
+  "id": "ss.relic.biggame",
+  "name": "Trophy jaw",
+  "description": "One lower jaw, whole, stood on a small block of dark timber the way a trophy is mounted: the chin at the left, the body running right with five uneven teeth standing up along it, the front one the biggest,, and the ramus rising at the back as a tall stump. Pale bone with a darker band along the underside and a darker still facet on the rising branch, so it is a thick object with a side rather than a flat cutout. The relic is extra damage against the big ones, and the thing you keep from a big one is its jaw; the plinth is what says it was kept, and it is kept small so the bone is the object. There is one jaw and it is at rest, which separates it from the single moving mandible of ss.relic.execute.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "plinth_o",
+      "at": [
+        0,
+        10
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 19.2,
+        "h": 5.2,
+        "corner": 1.4
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "jaw_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -11.05,
+            0.07
+          ],
+          [
+            -11.32,
+            4.9
+          ],
+          [
+            -8.86,
+            7.85
+          ],
+          [
+            -3.04,
+            8.5
+          ],
+          [
+            3.91,
+            8.3
+          ],
+          [
+            8.87,
+            7.17
+          ],
+          [
+            10.7,
+            2.37
+          ],
+          [
+            10.8,
+            -3.04
+          ],
+          [
+            10.15,
+            -9.12
+          ],
+          [
+            7.78,
+            -10.69
+          ],
+          [
+            5.58,
+            -9.12
+          ],
+          [
+            4.72,
+            -4.42
+          ],
+          [
+            3.48,
+            -0.51
+          ],
+          [
+            0.45,
+            0.5
+          ],
+          [
+            -3.96,
+            0.5
+          ],
+          [
+            -7.55,
+            0.2
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "jaw",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -10.2,
+            1
+          ],
+          [
+            -10.4,
+            4.6
+          ],
+          [
+            -8.4,
+            7
+          ],
+          [
+            -3,
+            7.6
+          ],
+          [
+            3.8,
+            7.4
+          ],
+          [
+            8.2,
+            6.4
+          ],
+          [
+            9.8,
+            2.2
+          ],
+          [
+            9.9,
+            -3
+          ],
+          [
+            9.3,
+            -8.6
+          ],
+          [
+            7.8,
+            -9.6
+          ],
+          [
+            6.4,
+            -8.6
+          ],
+          [
+            5.6,
+            -4.2
+          ],
+          [
+            4.2,
+            0.2
+          ],
+          [
+            0.6,
+            1.4
+          ],
+          [
+            -4,
+            1.4
+          ],
+          [
+            -7.6,
+            1.1
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "jaw_facet",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -10.2,
+            3
+          ],
+          [
+            -10.4,
+            4.6
+          ],
+          [
+            -8.4,
+            7
+          ],
+          [
+            -3,
+            7.6
+          ],
+          [
+            3.8,
+            7.4
+          ],
+          [
+            8.2,
+            6.4
+          ],
+          [
+            9.8,
+            2.2
+          ],
+          [
+            8.9,
+            3.4
+          ],
+          [
+            6.2,
+            4.9
+          ],
+          [
+            2,
+            5.4
+          ],
+          [
+            -4,
+            5.2
+          ],
+          [
+            -8.2,
+            4.4
+          ]
+        ]
+      },
+      "fill": "$bone.dark"
+    },
+    {
+      "id": "ramus_facet",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            9.9,
+            -3
+          ],
+          [
+            9.3,
+            -8.6
+          ],
+          [
+            7.8,
+            -9.6
+          ],
+          [
+            7.6,
+            -4.2
+          ],
+          [
+            8.1,
+            2.4
+          ],
+          [
+            9.8,
+            2.2
+          ]
+        ]
+      },
+      "fill": "$bone.dark2"
+    },
+    {
+      "id": "plinth",
+      "at": [
+        0,
+        10.1
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 17.4,
+        "h": 3.2,
+        "corner": 0.7
+      },
+      "fill": "$timber.dark"
+    },
+    {
+      "id": "plinth_top",
+      "at": [
+        0,
+        8.85
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 17.4,
+        "h": 1,
+        "corner": 0.4
+      },
+      "fill": "$timber"
+    },
+    {
+      "id": "tooth0_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -10.86,
+            2.7
+          ],
+          [
+            -6.27,
+            2.7
+          ],
+          [
+            -7.42,
+            -2.86
+          ],
+          [
+            -8.14,
+            -3.62
+          ],
+          [
+            -8.96,
+            -2.96
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth1_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -7.57,
+            2.7
+          ],
+          [
+            -3.39,
+            2.7
+          ],
+          [
+            -4.38,
+            -1.48
+          ],
+          [
+            -5.1,
+            -2.22
+          ],
+          [
+            -5.91,
+            -1.59
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth2_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.69,
+            2.7
+          ],
+          [
+            -0.25,
+            2.7
+          ],
+          [
+            -1.34,
+            -2.17
+          ],
+          [
+            -2.06,
+            -2.92
+          ],
+          [
+            -2.88,
+            -2.27
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth3_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.93,
+            1.58
+          ],
+          [
+            -0.97,
+            2.4
+          ],
+          [
+            -0.2,
+            2.7
+          ],
+          [
+            2.85,
+            2.7
+          ],
+          [
+            1.81,
+            -1.11
+          ],
+          [
+            1.11,
+            -1.82
+          ],
+          [
+            0.31,
+            -1.22
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth4_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.32,
+            2.7
+          ],
+          [
+            5.72,
+            2.7
+          ],
+          [
+            4.64,
+            -1.69
+          ],
+          [
+            3.93,
+            -2.42
+          ],
+          [
+            3.12,
+            -1.8
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth0",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -9.75,
+            1.9
+          ],
+          [
+            -7.25,
+            1.9
+          ],
+          [
+            -8.2,
+            -2.7
+          ]
+        ]
+      },
+      "fill": "$bone.light2"
+    },
+    {
+      "id": "tooth1",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -6.4,
+            1.9
+          ],
+          [
+            -4.4,
+            1.9
+          ],
+          [
+            -5.16,
+            -1.3
+          ]
+        ]
+      },
+      "fill": "$bone.light2"
+    },
+    {
+      "id": "tooth2",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.55,
+            1.9
+          ],
+          [
+            -1.25,
+            1.9
+          ],
+          [
+            -2.12,
+            -2
+          ]
+        ]
+      },
+      "fill": "$bone.light2"
+    },
+    {
+      "id": "tooth3",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.2,
+            1.9
+          ],
+          [
+            1.8,
+            1.9
+          ],
+          [
+            1.04,
+            -0.9
+          ]
+        ]
+      },
+      "fill": "$bone.light2"
+    },
+    {
+      "id": "tooth4",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.5,
+            1.9
+          ],
+          [
+            4.7,
+            1.9
+          ],
+          [
+            3.86,
+            -1.5
+          ]
+        ]
+      },
+      "fill": "$bone.light2"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}
