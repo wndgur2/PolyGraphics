@@ -1,121 +1,19 @@
 {
   "id": "ss.lib.leg",
   "name": "Survivor leg",
-  "description": "One leg of the survivor caste, hinged at the origin: the hip sits at [0,0] and the limb hangs down +y, so a `rot` track swings it the way a leg swings rather than turning it about its own middle. One tapered shaft, a knee plate, and a tarsal claw that points forward (+x) — the survivors walk on the same clawed feet the rest of the hive does, they have simply stood up on two of them. Cold slate throughout: the survivors' bare chitin is the dead grey of their organ, and whatever colour they carry is plate worn over it, never the body itself. `far` is the leg on the other side of the body, a step darker so the pair reads as depth rather than as two legs on one hip.",
-  "tags": [
-    "ss-lib"
-  ],
-  "size": [
-    12,
-    16
-  ],
-  "anchor": [
-    0.5,
-    0.125
-  ],
+  "description": "One stubby leg of a survivor, hinged at the origin: hip at [0,0], limb hanging down +y, so a `rot` track swings it from the hip. A short soft-cornered leg in dark hose and a round little shoe pointing forward (+x) — a child's leg, drawn the way a plush toy has legs, because the survivors are built at two heads tall and everything below the head is small. `far` is the leg on the other side, a step darker.",
+  "tags": ["ss-lib"],
+  "size": [12, 12],
+  "anchor": [0.5, 0.15],
   "parts": [
-    {
-      "id": "shaft",
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -2.4,
-            -1.4
-          ],
-          [
-            2.4,
-            -1.4
-          ],
-          [
-            2.6,
-            5.2
-          ],
-          [
-            2.1,
-            10.6
-          ],
-          [
-            -1.9,
-            10.8
-          ],
-          [
-            -2.7,
-            5.2
-          ]
-        ]
-      },
-      "fill": "$steel.dark",
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "claw",
-      "at": [
-        0.2,
-        11.2
-      ],
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -2.3,
-            -1.2
-          ],
-          [
-            2.1,
-            -1.5
-          ],
-          [
-            5.2,
-            1.4
-          ],
-          [
-            3.7,
-            2.3
-          ],
-          [
-            1,
-            1.5
-          ],
-          [
-            -2.3,
-            1.7
-          ]
-        ]
-      },
-      "fill": "$steel",
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "knee",
-      "at": [
-        0.1,
-        5.5
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 2.3,
-        "ry": 1.4
-      },
-      "fill": "$steel"
-    }
+    { "id": "shaft", "at": [0, 3], "shape": { "kind": "rect", "w": 4.2, "h": 7.4, "corner": 2 }, "fill": "$slate", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "shoe", "at": [0.8, 6.6], "shape": { "kind": "ellipse", "rx": 3.1, "ry": 1.9 }, "fill": "$coal", "stroke": { "color": "$ink", "width": "hair" } },
+    { "id": "shoe_shine", "at": [1.4, 5.8], "shape": { "kind": "ellipse", "rx": 1.3, "ry": 0.6 }, "fill": "$smoke" }
   ],
   "variants": {
     "far": {
-      "description": "The leg on the far side of the body: no ink line, a step darker, so it sits behind the near one instead of beside it.",
-      "set": {
-        "shaft.fill": "$slate.light",
-        "shaft.stroke.color": "$slate.dark",
-        "claw.fill": "$slate.light2",
-        "claw.stroke.color": "$slate.dark",
-        "knee.fill": "$slate.light2"
-      }
+      "description": "The far leg: darker hose, darker shoe, so it reads as behind.",
+      "set": { "shaft.fill": "$slate.dark", "shoe.fill": "$coal.dark", "shoe_shine.fill": "$coal" }
     }
   }
 }

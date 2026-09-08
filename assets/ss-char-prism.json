@@ -1,7 +1,7 @@
 {
   "id": "ss.char.prism",
   "name": "Prism",
-  "description": "A survivor cut to a facet — the cicada of the eight. The chest plate is two planes meeting on a ridge, one lit and one in shade, and the helmet is the same diamond it always was, worn as a face. Two long clear wings lie folded down the back from the shoulders to the hip, and on the flank under the near arm sits a ribbed tymbal: the drum a cicada sings with, and the one thing this body still makes a sound with. It chirps — a hum thrown outward in a ring — and the ring is drawn leaving the drum in the idle, faint and cold, because it is a sound and not a scent. The feelers are held wide, one thrown forward and one back, the widest spread on the roster: this is the survivor that finds things. Long light legs, because it is also the one that runs. Same dead organ as the rest, same place. Bare chitin cold slate, pink plate over it. Drawn facing +x; the game flips it.",
+  "description": "The cicada of the eight, and the loud one. Pink hair cut to a point on top — the diamond it used to be — with two pointed pigtails sticking straight out to the sides, both eyes shut in two happy arcs, and the mouth open round: Prism is singing. What comes out is the chirp, a hum thrown outward in a ring, and the ring is drawn leaving the mouth in the idle, faint and cold, because it is a sound and not a scent. Two long clear wings lie folded down the back from the shoulders, and the dress has the facet — one plane lit, one in shade, a ridge between. Long light legs, because this is also the one that runs, and the feelers held the widest apart on the roster, one thrown forward and one back: the survivor that finds things. Same dead organ as the rest, worn as a brooch. Drawn facing +x; the game flips it.",
   "tags": [
     "ss-char"
   ],
@@ -16,27 +16,52 @@
     {
       "id": "antenna_far",
       "use": "ss.lib.antenna",
-      "variant": "dead",
+      "variant": "bobble",
       "at": [
-        -1.2,
-        -14.6
+        -3.6,
+        -15.6
       ],
-      "rot": -70,
-      "scale": [
-        0.6,
-        1.02
-      ]
+      "rot": -84,
+      "scale": 0.6
+    },
+    {
+      "id": "antenna",
+      "use": "ss.lib.antenna",
+      "variant": "bobble",
+      "at": [
+        3.4,
+        -17.2
+      ],
+      "rot": 76,
+      "scale": 0.64
+    },
+    {
+      "id": "hair_back",
+      "at": [
+        1.6,
+        -9.5
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 9.8,
+        "ry": 9.2
+      },
+      "fill": "$pink.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
     },
     {
       "id": "wing_far",
       "at": [
         -6.2,
-        -0.4
+        4.4
       ],
       "rot": 74,
       "shape": {
         "kind": "ellipse",
-        "rx": 8.6,
+        "rx": 7.6,
         "ry": 2.2
       },
       "fill": "$silent@soft"
@@ -45,12 +70,12 @@
       "id": "wing",
       "at": [
         -4.6,
-        0.4
+        5
       ],
       "rot": 78,
       "shape": {
         "kind": "ellipse",
-        "rx": 9.4,
+        "rx": 8.2,
         "ry": 2.6
       },
       "fill": "$silent@heavy",
@@ -63,12 +88,12 @@
       "id": "vein",
       "at": [
         -4.6,
-        0.4
+        5
       ],
       "rot": 78,
       "shape": {
         "kind": "rect",
-        "w": 15.6,
+        "w": 13.6,
         "h": 0.7
       },
       "fill": "$pink.light"
@@ -78,14 +103,10 @@
       "use": "ss.lib.arm",
       "variant": "far",
       "at": [
-        -3.6,
-        -4.6
+        -4.6,
+        0.8
       ],
-      "rot": 14,
-      "scale": [
-        0.9,
-        1
-      ]
+      "rot": 16
     },
     {
       "id": "leg_far",
@@ -93,55 +114,47 @@
       "variant": "far",
       "at": [
         -1.8,
-        4
+        8.2
       ],
-      "rot": 8,
+      "rot": 5,
       "scale": [
-        0.9,
-        1.06
+        0.92,
+        1.12
       ]
     },
     {
       "id": "leg",
       "use": "ss.lib.leg",
       "at": [
-        3,
-        3.6
+        2.6,
+        7.8
       ],
-      "rot": -8,
+      "rot": -5,
       "scale": [
-        0.9,
-        1.06
+        0.92,
+        1.12
       ]
     },
     {
-      "id": "torso",
+      "id": "body",
       "shape": {
         "kind": "poly",
         "points": [
           [
-            6.2,
-            -6.8
+            -5.4,
+            -1.6
           ],
           [
-            -5,
-            -7
+            6,
+            -1.6
+          ],
+          [
+            7.4,
+            8.8
           ],
           [
             -6.4,
-            -0.6
-          ],
-          [
-            -4.6,
-            5.4
-          ],
-          [
-            4.8,
-            5.6
-          ],
-          [
-            7.2,
-            -0.4
+            8.8
           ]
         ]
       },
@@ -152,58 +165,25 @@
       }
     },
     {
-      "id": "facet_l",
+      "id": "facet",
       "shape": {
         "kind": "poly",
         "points": [
           [
             0.6,
-            -5.2
+            -1.6
           ],
           [
-            -3.8,
-            -5.4
+            6,
+            -1.6
           ],
           [
-            -4.8,
-            -0.8
-          ],
-          [
-            -3,
-            3.6
+            7.4,
+            8.8
           ],
           [
             0.6,
-            3.8
-          ]
-        ]
-      },
-      "fill": "$pink.light"
-    },
-    {
-      "id": "facet_r",
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            0.6,
-            -5.2
-          ],
-          [
-            4.6,
-            -5
-          ],
-          [
-            5.6,
-            -0.8
-          ],
-          [
-            3.4,
-            3.6
-          ],
-          [
-            0.6,
-            3.8
+            8.8
           ]
         ]
       },
@@ -213,52 +193,57 @@
       "id": "ridge",
       "at": [
         0.6,
-        -0.7
+        3.6
       ],
       "shape": {
         "kind": "rect",
         "w": 0.9,
-        "h": 9.2
+        "h": 10.4
       },
       "fill": "$pink.dark2"
     },
     {
-      "id": "belt",
+      "id": "bow",
       "at": [
-        0.2,
-        4.2
+        0.8,
+        0.2
       ],
       "shape": {
-        "kind": "rect",
-        "w": 11.4,
-        "h": 2,
-        "corner": 0.8
-      },
-      "fill": "$slate.dark"
-    },
-    {
-      "id": "chirp",
-      "at": [
-        7.2,
-        1.2
-      ],
-      "shape": {
-        "kind": "ring",
-        "r": 3.4,
-        "width": 0.9
-      },
-      "fill": "$silent@soft"
-    },
-    {
-      "id": "tymbal",
-      "at": [
-        7.2,
-        1.2
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 2.4,
-        "ry": 2.9
+        "kind": "poly",
+        "points": [
+          [
+            -3.2,
+            -1.6
+          ],
+          [
+            -0.4,
+            0
+          ],
+          [
+            -3.2,
+            1.6
+          ],
+          [
+            -2.6,
+            0
+          ],
+          [
+            3.4,
+            1.6
+          ],
+          [
+            0.6,
+            0
+          ],
+          [
+            3.4,
+            -1.6
+          ],
+          [
+            0,
+            0
+          ]
+        ]
       },
       "fill": "$pink.dark",
       "stroke": {
@@ -267,96 +252,168 @@
       }
     },
     {
-      "id": "rib_a",
+      "id": "hem",
       "at": [
-        7.2,
-        0
+        0.5,
+        7.6
       ],
       "shape": {
         "kind": "rect",
-        "w": 3.2,
-        "h": 0.6
+        "w": 13,
+        "h": 1.4
       },
-      "fill": "$pink.dark2"
-    },
-    {
-      "id": "rib_b",
-      "at": [
-        7.2,
-        1.3
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 3.6,
-        "h": 0.6
-      },
-      "fill": "$pink.dark2"
-    },
-    {
-      "id": "rib_c",
-      "at": [
-        7.2,
-        2.6
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 3,
-        "h": 0.6
-      },
-      "fill": "$pink.dark2"
+      "fill": "$pink.dark"
     },
     {
       "id": "organ",
       "use": "ss.lib.organ",
       "variant": "dead",
       "at": [
-        1.2,
-        -1.6
+        3.4,
+        3.2
       ],
-      "scale": 0.56
+      "scale": 0.5
     },
     {
-      "id": "neck",
+      "id": "arm",
+      "use": "ss.lib.arm",
       "at": [
-        2,
-        -7.4
+        6.2,
+        0.6
+      ],
+      "rot": -16
+    },
+    {
+      "id": "ear",
+      "at": [
+        -6.6,
+        -8.8
       ],
       "shape": {
-        "kind": "rect",
-        "w": 3.8,
-        "h": 3.2,
-        "corner": 1
+        "kind": "circle",
+        "r": 1.8
       },
-      "fill": "$slate.dark"
+      "fill": "$skin",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
     },
     {
       "id": "head",
       "at": [
-        2.6,
-        -11.8
+        1.6,
+        -9.5
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 9
+      },
+      "fill": "$skin",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "face",
+      "use": "ss.lib.face",
+      "at": [
+        1.6,
+        -9.5
+      ],
+      "variant": "sing"
+    },
+    {
+      "id": "chirp",
+      "at": [
+        5.2,
+        -5.8
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 3,
+        "width": 0.9
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "chirp_b",
+      "at": [
+        5.2,
+        -5.8
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 3,
+        "width": 0.8
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "hair",
+      "at": [
+        1.6,
+        -9.5
       ],
       "shape": {
         "kind": "poly",
         "points": [
           [
-            0.4,
-            -6.4
+            -9.6,
+            -1
           ],
           [
-            6.2,
-            -1.6
+            -7.2,
+            -6.8
           ],
           [
-            5.2,
-            4.2
+            -2.6,
+            -10.2
           ],
           [
-            -4.6,
-            4.4
+            0.2,
+            -12.6
           ],
           [
-            -6,
-            -1.4
+            3,
+            -10.4
+          ],
+          [
+            7.4,
+            -7.4
+          ],
+          [
+            9.6,
+            -2.6
+          ],
+          [
+            9.4,
+            0.6
+          ],
+          [
+            7.2,
+            -2.4
+          ],
+          [
+            4.4,
+            -4.8
+          ],
+          [
+            1.4,
+            -5.6
+          ],
+          [
+            -2.2,
+            -5
+          ],
+          [
+            -4.8,
+            -3.6
+          ],
+          [
+            -6.8,
+            -0.6
           ]
         ]
       },
@@ -367,221 +424,85 @@
       }
     },
     {
-      "id": "crown",
+      "id": "tail_far",
       "at": [
-        1.4,
-        -13.4
+        -8.6,
+        -12.4
       ],
       "shape": {
         "kind": "poly",
         "points": [
           [
-            1.2,
+            1.4,
             -3.2
           ],
           [
-            -2.6,
-            -0.4
+            -5.8,
+            -1.4
           ],
           [
-            -2.2,
-            2.2
-          ],
-          [
-            1.4,
-            2.6
-          ],
-          [
-            3.4,
-            0
-          ]
-        ]
-      },
-      "fill": "$pink.light2"
-    },
-    {
-      "id": "head_ridge",
-      "at": [
-        3,
-        -11.6
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 0.8,
-        "h": 9.6
-      },
-      "fill": "$pink.dark2"
-    },
-    {
-      "id": "face",
-      "at": [
-        2.6,
-        -11.8
-      ],
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            1.4,
-            -1.8
-          ],
-          [
-            5.6,
-            -0.8
-          ],
-          [
-            5,
-            1.8
-          ],
-          [
-            1.2,
-            2.4
-          ]
-        ]
-      },
-      "fill": "$ink"
-    },
-    {
-      "id": "gloss",
-      "at": [
-        0.4,
-        -14.4
-      ],
-      "rot": 36,
-      "shape": {
-        "kind": "ellipse",
-        "rx": 1.7,
-        "ry": 0.7
-      },
-      "fill": "$silent@heavy"
-    },
-    {
-      "id": "mandible_up",
-      "at": [
-        7.6,
-        -8.8
-      ],
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -1.2,
-            -1
-          ],
-          [
-            3,
-            -0.4
-          ],
-          [
-            -0.6,
-            0.8
-          ]
-        ]
-      },
-      "fill": "$husk"
-    },
-    {
-      "id": "mandible_dn",
-      "at": [
-        7.6,
-        -7.2
-      ],
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -1.2,
-            1
-          ],
-          [
-            3,
-            0.4
-          ],
-          [
-            -0.6,
-            -0.8
-          ]
-        ]
-      },
-      "fill": "$husk.dark"
-    },
-    {
-      "id": "antenna",
-      "use": "ss.lib.antenna",
-      "variant": "dead",
-      "at": [
-        4.4,
-        -16.2
-      ],
-      "rot": 66,
-      "scale": [
-        0.62,
-        1.06
-      ]
-    },
-    {
-      "id": "pauldron",
-      "at": [
-        5.4,
-        -6.4
-      ],
-      "rot": -14,
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -3.6,
-            0.6
-          ],
-          [
-            -1.6,
-            -2.4
-          ],
-          [
-            2.6,
-            -2.2
-          ],
-          [
-            4,
-            0.8
-          ],
-          [
-            1.4,
-            2.4
-          ],
-          [
-            -2.4,
-            2.2
+            -0.4,
+            3
           ]
         ]
       },
       "fill": "$pink.dark",
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
-      "id": "arm",
-      "use": "ss.lib.arm",
+      "id": "tail",
       "at": [
-        5.4,
-        -4.6
+        11,
+        -12.8
       ],
-      "rot": -14,
-      "scale": [
-        0.9,
-        1
-      ]
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.4,
+            -3.2
+          ],
+          [
+            5.8,
+            -1.2
+          ],
+          [
+            0.4,
+            3
+          ]
+        ]
+      },
+      "fill": "$pink",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "hair_shine",
+      "at": [
+        -0.6,
+        -18.6
+      ],
+      "rot": -40,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.2,
+        "ry": 0.9
+      },
+      "fill": "$white@soft"
     }
   ],
   "animations": {
     "idle": {
-      "description": "the spring in the legs: a quick, light breath with the body settling onto its feet and back up; the chirp leaves the tymbal once a cycle as a ring that grows and fades, the folded wings shimmer, and the feelers sweep — the forward one hunting, the back one keeping watch",
+      "description": "the spring in the legs — a lighter, quicker bounce — with the pigtails flapping and the wings shimmering; twice a cycle a ring of chirp leaves the open mouth, grows, and fades",
       "duration": 1.15,
       "tracks": [
         {
-          "part": "torso",
+          "part": "body",
           "prop": "y",
           "keys": [
             [
@@ -590,7 +511,7 @@
             ],
             [
               0.5,
-              -1.1
+              -1.2
             ],
             [
               1,
@@ -599,7 +520,7 @@
           ]
         },
         {
-          "part": "facet_l",
+          "part": "hem",
           "prop": "y",
           "keys": [
             [
@@ -608,61 +529,7 @@
             ],
             [
               0.5,
-              -1.1
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "facet_r",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.1
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "ridge",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.1
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "belt",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -0.7
+              -1.2
             ],
             [
               1,
@@ -680,7 +547,7 @@
             ],
             [
               0.5,
-              -1.1
+              -1.2
             ],
             [
               1,
@@ -689,7 +556,7 @@
           ]
         },
         {
-          "part": "tymbal",
+          "part": "arm",
           "prop": "y",
           "keys": [
             [
@@ -698,7 +565,7 @@
             ],
             [
               0.5,
-              -1.1
+              -1.2
             ],
             [
               1,
@@ -707,7 +574,7 @@
           ]
         },
         {
-          "part": "rib_a",
+          "part": "arm_far",
           "prop": "y",
           "keys": [
             [
@@ -716,7 +583,7 @@
             ],
             [
               0.5,
-              -1.1
+              -1.2
             ],
             [
               1,
@@ -725,7 +592,7 @@
           ]
         },
         {
-          "part": "rib_b",
+          "part": "facet",
           "prop": "y",
           "keys": [
             [
@@ -734,7 +601,7 @@
             ],
             [
               0.5,
-              -1.1
+              -1.2
             ],
             [
               1,
@@ -743,7 +610,7 @@
           ]
         },
         {
-          "part": "rib_c",
+          "part": "ridge",
           "prop": "y",
           "keys": [
             [
@@ -752,7 +619,7 @@
             ],
             [
               0.5,
-              -1.1
+              -1.2
             ],
             [
               1,
@@ -761,7 +628,7 @@
           ]
         },
         {
-          "part": "chirp",
+          "part": "bow",
           "prop": "y",
           "keys": [
             [
@@ -770,59 +637,13 @@
             ],
             [
               0.5,
-              -1.1
+              -1.2
             ],
             [
               1,
               0
             ]
           ]
-        },
-        {
-          "part": "chirp",
-          "prop": "scale",
-          "keys": [
-            [
-              0,
-              0.5
-            ],
-            [
-              0.2,
-              0.5
-            ],
-            [
-              0.7,
-              2.2
-            ],
-            [
-              1,
-              2.2
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "chirp",
-          "prop": "opacity",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.2,
-              0.9
-            ],
-            [
-              0.7,
-              0
-            ],
-            [
-              1,
-              0
-            ]
-          ],
-          "ease": "linear"
         },
         {
           "part": "wing",
@@ -834,7 +655,7 @@
             ],
             [
               0.5,
-              -1.1
+              -1.2
             ],
             [
               1,
@@ -852,7 +673,7 @@
             ],
             [
               0.5,
-              -1.1
+              -1.2
             ],
             [
               1,
@@ -870,11 +691,571 @@
             ],
             [
               0.5,
-              -1.1
+              -1.2
             ],
             [
               1,
               0
+            ]
+          ]
+        },
+        {
+          "part": "arm",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -6
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "arm_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              0.2
+            ],
+            [
+              0.6,
+              -1.6
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "hair_back",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              0.2
+            ],
+            [
+              0.6,
+              -1.6
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "ear",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              0.2
+            ],
+            [
+              0.6,
+              -1.6
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "face",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              0.2
+            ],
+            [
+              0.6,
+              -1.6
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chirp",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              0.2
+            ],
+            [
+              0.6,
+              -1.6
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chirp_b",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              0.2
+            ],
+            [
+              0.6,
+              -1.6
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "hair",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.16,
+              0.3
+            ],
+            [
+              0.64,
+              -1.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "hair_shine",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.16,
+              0.3
+            ],
+            [
+              0.64,
+              -1.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "antenna",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.16,
+              0.3
+            ],
+            [
+              0.64,
+              -1.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "antenna_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.16,
+              0.3
+            ],
+            [
+              0.64,
+              -1.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "tail",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.16,
+              0.3
+            ],
+            [
+              0.64,
+              -1.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "tail_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.16,
+              0.3
+            ],
+            [
+              0.64,
+              -1.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.12,
+              0.98
+            ],
+            [
+              0.6,
+              1.04
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "hair_back",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.12,
+              0.98
+            ],
+            [
+              0.6,
+              1.04
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "face",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.12,
+              0.98
+            ],
+            [
+              0.6,
+              1.04
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "hair",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.12,
+              0.98
+            ],
+            [
+              0.6,
+              1.04
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "antenna",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -10
+            ],
+            [
+              0.35,
+              12
+            ],
+            [
+              0.7,
+              -4
+            ],
+            [
+              1,
+              -10
+            ]
+          ]
+        },
+        {
+          "part": "antenna_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              8
+            ],
+            [
+              0.4,
+              -10
+            ],
+            [
+              0.75,
+              3
+            ],
+            [
+              1,
+              8
+            ]
+          ]
+        },
+        {
+          "part": "chirp",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.4
+            ],
+            [
+              0.06,
+              0.4
+            ],
+            [
+              0.56,
+              2.4
+            ],
+            [
+              1,
+              2.4
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "chirp",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.06,
+              1
+            ],
+            [
+              0.56,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "chirp_b",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.4
+            ],
+            [
+              0.5,
+              0.4
+            ],
+            [
+              0.56,
+              0.4
+            ],
+            [
+              1,
+              2.2
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "chirp_b",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              0.56,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "tail",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -5
+            ],
+            [
+              0.4,
+              7
+            ],
+            [
+              1,
+              -5
+            ]
+          ]
+        },
+        {
+          "part": "tail_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              5
+            ],
+            [
+              0.4,
+              -7
+            ],
+            [
+              1,
+              5
             ]
           ]
         },
@@ -921,362 +1302,12 @@
               1
             ]
           ]
-        },
-        {
-          "part": "neck",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.2
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "head",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.12,
-              0.1
-            ],
-            [
-              0.6,
-              -1.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "crown",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.12,
-              0.1
-            ],
-            [
-              0.6,
-              -1.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "head_ridge",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.12,
-              0.1
-            ],
-            [
-              0.6,
-              -1.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "face",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.12,
-              0.1
-            ],
-            [
-              0.6,
-              -1.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "gloss",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.12,
-              0.1
-            ],
-            [
-              0.6,
-              -1.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "mandible_up",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.12,
-              0.1
-            ],
-            [
-              0.6,
-              -1.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "mandible_dn",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.12,
-              0.1
-            ],
-            [
-              0.6,
-              -1.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "antenna",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.12,
-              0.1
-            ],
-            [
-              0.6,
-              -1.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "antenna_far",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.12,
-              0.1
-            ],
-            [
-              0.6,
-              -1.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "pauldron",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.1
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "arm",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.1
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "arm_far",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.1
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "arm",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "arm_far",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              4
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "antenna",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              -14
-            ],
-            [
-              0.35,
-              12
-            ],
-            [
-              0.7,
-              -6
-            ],
-            [
-              1,
-              -14
-            ]
-          ]
-        },
-        {
-          "part": "antenna_far",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              10
-            ],
-            [
-              0.4,
-              -12
-            ],
-            [
-              0.75,
-              4
-            ],
-            [
-              1,
-              10
-            ]
-          ]
         }
       ]
     },
     "walk": {
-      "description": "a bounding run on long legs: the highest bob of the eight, the wings lifting off the back on every push, the feelers streaming",
-      "duration": 0.5,
+      "description": "a bounding run on long legs: the highest hop of the eight, the pigtails flapping and the wings lifting off the back on every push",
+      "duration": 0.48,
       "tracks": [
         {
           "part": "leg",
@@ -1284,15 +1315,15 @@
           "keys": [
             [
               0,
-              -30
+              -32
             ],
             [
               0.5,
-              30
+              32
             ],
             [
               1,
-              -30
+              -32
             ]
           ]
         },
@@ -1302,15 +1333,15 @@
           "keys": [
             [
               0,
-              30
+              32
             ],
             [
               0.5,
-              -30
+              -32
             ],
             [
               1,
-              30
+              32
             ]
           ]
         },
@@ -1320,15 +1351,15 @@
           "keys": [
             [
               0,
-              22
+              26
             ],
             [
               0.5,
-              -26
+              -30
             ],
             [
               1,
-              22
+              26
             ]
           ]
         },
@@ -1338,145 +1369,67 @@
           "keys": [
             [
               0,
-              -26
+              -30
             ],
             [
               0.5,
-              22
+              26
             ],
             [
               1,
-              -26
+              -30
             ]
           ]
         },
         {
-          "part": "torso",
+          "part": "body",
           "prop": "y",
           "keys": [
             [
               0,
-              0.4
+              0.3
             ],
             [
               0.25,
-              -1.8
+              -2.2
             ],
             [
               0.5,
-              0.4
+              0.3
             ],
             [
               0.75,
-              -1.8
+              -2.2
             ],
             [
               1,
-              0.4
+              0.3
             ]
           ]
         },
         {
-          "part": "facet_l",
+          "part": "hem",
           "prop": "y",
           "keys": [
             [
               0,
-              0.4
+              0.3
             ],
             [
               0.25,
-              -1.8
+              -2.2
             ],
             [
               0.5,
-              0.4
+              0.3
             ],
             [
               0.75,
-              -1.8
+              -2.2
             ],
             [
               1,
-              0.4
-            ]
-          ]
-        },
-        {
-          "part": "facet_r",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.4
-            ],
-            [
-              0.25,
-              -1.8
-            ],
-            [
-              0.5,
-              0.4
-            ],
-            [
-              0.75,
-              -1.8
-            ],
-            [
-              1,
-              0.4
-            ]
-          ]
-        },
-        {
-          "part": "ridge",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.4
-            ],
-            [
-              0.25,
-              -1.8
-            ],
-            [
-              0.5,
-              0.4
-            ],
-            [
-              0.75,
-              -1.8
-            ],
-            [
-              1,
-              0.4
-            ]
-          ]
-        },
-        {
-          "part": "belt",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.4
-            ],
-            [
-              0.25,
-              -1.8
-            ],
-            [
-              0.5,
-              0.4
-            ],
-            [
-              0.75,
-              -1.8
-            ],
-            [
-              1,
-              0.4
+              0.3
             ]
           ]
         },
@@ -1486,127 +1439,797 @@
           "keys": [
             [
               0,
-              0.4
+              0.3
             ],
             [
               0.25,
-              -1.8
+              -2.2
             ],
             [
               0.5,
-              0.4
+              0.3
             ],
             [
               0.75,
-              -1.8
+              -2.2
             ],
             [
               1,
-              0.4
+              0.3
             ]
           ]
         },
         {
-          "part": "tymbal",
+          "part": "arm",
           "prop": "y",
           "keys": [
             [
               0,
-              0.4
+              0.3
             ],
             [
               0.25,
-              -1.8
+              -2.2
             ],
             [
               0.5,
-              0.4
+              0.3
             ],
             [
               0.75,
-              -1.8
+              -2.2
             ],
             [
               1,
-              0.4
+              0.3
             ]
           ]
         },
         {
-          "part": "rib_a",
+          "part": "arm_far",
           "prop": "y",
           "keys": [
             [
               0,
-              0.4
+              0.3
             ],
             [
               0.25,
-              -1.8
+              -2.2
             ],
             [
               0.5,
-              0.4
+              0.3
             ],
             [
               0.75,
-              -1.8
+              -2.2
             ],
             [
               1,
-              0.4
+              0.3
             ]
           ]
         },
         {
-          "part": "rib_b",
+          "part": "facet",
           "prop": "y",
           "keys": [
             [
               0,
-              0.4
+              0.3
             ],
             [
               0.25,
-              -1.8
+              -2.2
             ],
             [
               0.5,
-              0.4
+              0.3
             ],
             [
               0.75,
-              -1.8
+              -2.2
             ],
             [
               1,
-              0.4
+              0.3
             ]
           ]
         },
         {
-          "part": "rib_c",
+          "part": "ridge",
           "prop": "y",
           "keys": [
             [
               0,
-              0.4
+              0.3
             ],
             [
               0.25,
-              -1.8
+              -2.2
             ],
             [
               0.5,
-              0.4
+              0.3
             ],
             [
               0.75,
-              -1.8
+              -2.2
             ],
             [
               1,
-              0.4
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "bow",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.3
+            ],
+            [
+              0.25,
+              -2.2
+            ],
+            [
+              0.5,
+              0.3
+            ],
+            [
+              0.75,
+              -2.2
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "wing",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.3
+            ],
+            [
+              0.25,
+              -2.2
+            ],
+            [
+              0.5,
+              0.3
+            ],
+            [
+              0.75,
+              -2.2
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "vein",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.3
+            ],
+            [
+              0.25,
+              -2.2
+            ],
+            [
+              0.5,
+              0.3
+            ],
+            [
+              0.75,
+              -2.2
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "wing_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.3
+            ],
+            [
+              0.25,
+              -2.2
+            ],
+            [
+              0.5,
+              0.3
+            ],
+            [
+              0.75,
+              -2.2
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -0.2
+            ],
+            [
+              0.32,
+              -2.8000000000000003
+            ],
+            [
+              0.5,
+              -0.2
+            ],
+            [
+              0.82,
+              -2.8000000000000003
+            ],
+            [
+              1,
+              -0.2
+            ]
+          ]
+        },
+        {
+          "part": "hair_back",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -0.2
+            ],
+            [
+              0.32,
+              -2.8000000000000003
+            ],
+            [
+              0.5,
+              -0.2
+            ],
+            [
+              0.82,
+              -2.8000000000000003
+            ],
+            [
+              1,
+              -0.2
+            ]
+          ]
+        },
+        {
+          "part": "ear",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -0.2
+            ],
+            [
+              0.32,
+              -2.8000000000000003
+            ],
+            [
+              0.5,
+              -0.2
+            ],
+            [
+              0.82,
+              -2.8000000000000003
+            ],
+            [
+              1,
+              -0.2
+            ]
+          ]
+        },
+        {
+          "part": "face",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -0.2
+            ],
+            [
+              0.32,
+              -2.8000000000000003
+            ],
+            [
+              0.5,
+              -0.2
+            ],
+            [
+              0.82,
+              -2.8000000000000003
+            ],
+            [
+              1,
+              -0.2
+            ]
+          ]
+        },
+        {
+          "part": "chirp",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -0.2
+            ],
+            [
+              0.32,
+              -2.8000000000000003
+            ],
+            [
+              0.5,
+              -0.2
+            ],
+            [
+              0.82,
+              -2.8000000000000003
+            ],
+            [
+              1,
+              -0.2
+            ]
+          ]
+        },
+        {
+          "part": "chirp_b",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -0.2
+            ],
+            [
+              0.32,
+              -2.8000000000000003
+            ],
+            [
+              0.5,
+              -0.2
+            ],
+            [
+              0.82,
+              -2.8000000000000003
+            ],
+            [
+              1,
+              -0.2
+            ]
+          ]
+        },
+        {
+          "part": "hair",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.36,
+              -3.2
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.86,
+              -3.2
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "hair_shine",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.36,
+              -3.2
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.86,
+              -3.2
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "antenna",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.36,
+              -3.2
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.86,
+              -3.2
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "antenna_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.36,
+              -3.2
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.86,
+              -3.2
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "tail",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.36,
+              -3.2
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.86,
+              -3.2
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "tail_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.36,
+              -3.2
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.86,
+              -3.2
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -3
+            ],
+            [
+              0.5,
+              3
+            ],
+            [
+              1,
+              -3
+            ]
+          ]
+        },
+        {
+          "part": "face",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -3
+            ],
+            [
+              0.5,
+              3
+            ],
+            [
+              1,
+              -3
+            ]
+          ]
+        },
+        {
+          "part": "hair",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -3
+            ],
+            [
+              0.5,
+              3
+            ],
+            [
+              1,
+              -3
+            ]
+          ]
+        },
+        {
+          "part": "hair_back",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -3
+            ],
+            [
+              0.5,
+              3
+            ],
+            [
+              1,
+              -3
+            ]
+          ]
+        },
+        {
+          "part": "antenna",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -8
+            ],
+            [
+              0.25,
+              10
+            ],
+            [
+              0.5,
+              -8
+            ],
+            [
+              0.75,
+              10
+            ],
+            [
+              1,
+              -8
+            ]
+          ]
+        },
+        {
+          "part": "antenna_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              8
+            ],
+            [
+              0.25,
+              -8
+            ],
+            [
+              0.5,
+              8
+            ],
+            [
+              0.75,
+              -8
+            ],
+            [
+              1,
+              8
+            ]
+          ]
+        },
+        {
+          "part": "tail",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -8
+            ],
+            [
+              0.25,
+              10
+            ],
+            [
+              0.5,
+              -8
+            ],
+            [
+              0.75,
+              10
+            ],
+            [
+              1,
+              -8
+            ]
+          ]
+        },
+        {
+          "part": "tail_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              8
+            ],
+            [
+              0.25,
+              -10
+            ],
+            [
+              0.5,
+              8
+            ],
+            [
+              0.75,
+              -10
+            ],
+            [
+              1,
+              8
+            ]
+          ]
+        },
+        {
+          "part": "wing",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.25,
+              -9
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              0.75,
+              -9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "vein",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.25,
+              -9
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              0.75,
+              -9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "wing_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.25,
+              -7
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              0.75,
+              -7
+            ],
+            [
+              1,
+              0
             ]
           ]
         },
@@ -1625,548 +2248,16 @@
           ]
         },
         {
-          "part": "wing",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.4
-            ],
-            [
-              0.25,
-              -1.8
-            ],
-            [
-              0.5,
-              0.4
-            ],
-            [
-              0.75,
-              -1.8
-            ],
-            [
-              1,
-              0.4
-            ]
-          ]
-        },
-        {
-          "part": "vein",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.4
-            ],
-            [
-              0.25,
-              -1.8
-            ],
-            [
-              0.5,
-              0.4
-            ],
-            [
-              0.75,
-              -1.8
-            ],
-            [
-              1,
-              0.4
-            ]
-          ]
-        },
-        {
-          "part": "wing_far",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.4
-            ],
-            [
-              0.25,
-              -1.8
-            ],
-            [
-              0.5,
-              0.4
-            ],
-            [
-              0.75,
-              -1.8
-            ],
-            [
-              1,
-              0.4
-            ]
-          ]
-        },
-        {
-          "part": "wing",
-          "prop": "rot",
+          "part": "chirp_b",
+          "prop": "opacity",
           "keys": [
             [
               0,
               0
             ],
             [
-              0.25,
-              -9
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.75,
-              -9
-            ],
-            [
               1,
               0
-            ]
-          ]
-        },
-        {
-          "part": "vein",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.25,
-              -9
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.75,
-              -9
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "wing_far",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.25,
-              -7
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.75,
-              -7
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "pauldron",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.4
-            ],
-            [
-              0.25,
-              -1.8
-            ],
-            [
-              0.5,
-              0.4
-            ],
-            [
-              0.75,
-              -1.8
-            ],
-            [
-              1,
-              0.4
-            ]
-          ]
-        },
-        {
-          "part": "arm",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.4
-            ],
-            [
-              0.25,
-              -1.8
-            ],
-            [
-              0.5,
-              0.4
-            ],
-            [
-              0.75,
-              -1.8
-            ],
-            [
-              1,
-              0.4
-            ]
-          ]
-        },
-        {
-          "part": "arm_far",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.4
-            ],
-            [
-              0.25,
-              -1.8
-            ],
-            [
-              0.5,
-              0.4
-            ],
-            [
-              0.75,
-              -1.8
-            ],
-            [
-              1,
-              0.4
-            ]
-          ]
-        },
-        {
-          "part": "neck",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.4
-            ],
-            [
-              0.25,
-              -1.8
-            ],
-            [
-              0.5,
-              0.4
-            ],
-            [
-              0.75,
-              -1.8
-            ],
-            [
-              1,
-              0.4
-            ]
-          ]
-        },
-        {
-          "part": "head",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.32,
-              -2.2
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.82,
-              -2.2
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "crown",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.32,
-              -2.2
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.82,
-              -2.2
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "head_ridge",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.32,
-              -2.2
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.82,
-              -2.2
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "face",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.32,
-              -2.2
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.82,
-              -2.2
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "gloss",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.32,
-              -2.2
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.82,
-              -2.2
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "mandible_up",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.32,
-              -2.2
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.82,
-              -2.2
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "mandible_dn",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.32,
-              -2.2
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.82,
-              -2.2
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "antenna",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.32,
-              -2.2
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.82,
-              -2.2
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "antenna_far",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.32,
-              -2.2
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.82,
-              -2.2
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "antenna",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              -6
-            ],
-            [
-              0.25,
-              8
-            ],
-            [
-              0.5,
-              -6
-            ],
-            [
-              0.75,
-              8
-            ],
-            [
-              1,
-              -6
-            ]
-          ]
-        },
-        {
-          "part": "antenna_far",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              6
-            ],
-            [
-              0.25,
-              -6
-            ],
-            [
-              0.5,
-              6
-            ],
-            [
-              0.75,
-              -6
-            ],
-            [
-              1,
-              6
             ]
           ]
         }
