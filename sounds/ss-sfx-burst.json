@@ -1,0 +1,64 @@
+{
+  "id": "ss.sfx.burst",
+  "name": "Burst",
+  "description": "Something opening all at once: a low heave thrown upward, and sixty milliseconds behind it a bright flare going the same way. Two voices moving in the same direction is what makes it read as release rather than as damage.",
+  "tags": [
+    "sfx",
+    "world"
+  ],
+  "duration": 0.28,
+  "voices": [
+    {
+      "id": "heave",
+      "gain": "loud",
+      "source": {
+        "kind": "osc",
+        "wave": "sawtooth",
+        "freq": "$swarm",
+        "to": 900
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "flare",
+      "at": 0.06,
+      "gain": "mid",
+      "dur": 0.18,
+      "source": {
+        "kind": "osc",
+        "wave": "square",
+        "freq": "$tonic",
+        "to": 1400
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -8,12 +8,15 @@
     "./phaser": "./adapters/phaser/polygraphics-phaser.ts",
     "./assets": "./dist/assets.json",
     "./godot": "./adapters/godot/polygraphics.gd",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./webaudio": "./adapters/webaudio/polygraphics-webaudio.ts",
+    "./sounds": "./dist/sounds.json"
   },
   "files": [
     "adapters",
     "dist",
     "assets",
+    "sounds",
     "tokens",
     "themes"
   ],
@@ -25,6 +28,8 @@
     "gallery": "tsx src/cli.ts gallery",
     "watch": "tsx scripts/watch.ts",
     "dist": "tsx src/cli.ts dist",
+    "wav": "tsx src/cli.ts wav",
+    "sound": "tsx scripts/inspect-sound.ts",
     "png": "tsx src/cli.ts png",
     "baseline": "tsx src/cli.ts baseline",
     "regress": "tsx src/cli.ts regress",

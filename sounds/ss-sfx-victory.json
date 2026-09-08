@@ -1,0 +1,53 @@
+{
+  "id": "ss.sfx.victory",
+  "name": "Victory",
+  "description": "The level-up figure taken further: the same four rungs at a slower step and a longer note, then the top two struck again so it ends on the octave rather than merely reaching it.",
+  "tags": [
+    "sfx",
+    "fanfare"
+  ],
+  "duration": 0.81,
+  "voices": [
+    {
+      "id": "n0",
+      "at": 0.0,
+      "use": "ss.lib.note",
+      "dur": 0.16
+    },
+    {
+      "id": "n1",
+      "at": 0.13,
+      "use": "ss.lib.note",
+      "variant": "fifth",
+      "dur": 0.16
+    },
+    {
+      "id": "n2",
+      "at": 0.26,
+      "use": "ss.lib.note",
+      "variant": "seventh",
+      "dur": 0.16
+    },
+    {
+      "id": "n3",
+      "at": 0.39,
+      "use": "ss.lib.note",
+      "variant": "octave",
+      "dur": 0.16
+    },
+    {
+      "id": "n4",
+      "at": 0.52,
+      "use": "ss.lib.note",
+      "variant": "seventh",
+      "dur": 0.16
+    },
+    {
+      "id": "n5",
+      "at": 0.65,
+      "use": "ss.lib.note",
+      "variant": "octave",
+      "dur": 0.16
+    }
+  ]
+}

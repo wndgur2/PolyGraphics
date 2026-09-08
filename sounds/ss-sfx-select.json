@@ -1,0 +1,37 @@
+{
+  "id": "ss.sfx.select",
+  "name": "Select",
+  "description": "A confirmation: the interface singing a third, up rather than down, so it reads as an answer and not as a refusal.",
+  "tags": [
+    "sfx",
+    "interface"
+  ],
+  "duration": 0.08,
+  "voices": [
+    {
+      "id": "note",
+      "gain": "mid",
+      "source": {
+        "kind": "osc",
+        "wave": "square",
+        "freq": "$third",
+        "to": "$fifth"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

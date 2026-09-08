@@ -38,6 +38,13 @@ export function applyVariant(base: Asset, variantName: string, issues: Issue[]):
   const where = `${base.id}#${variantName}`;
   let parts: Part[] = structuredClone(base.parts);
 
+  // A state may name the clips it is drawn to be played with, and a name that
+  // does not exist is a pairing nothing will ever draw — the sort of thing that
+  // survives a rename silently and then reads as a state that forgot to move.
+  for (const aname of v.animations ?? [])
+    if (!base.animations?.[aname])
+      issues.push({ level: "error", where, msg: `animations: no animation "${aname}"` });
+
   for (const rid of v.remove ?? []) {
     if (!parts.some((p) => p.id === rid))
       issues.push({ level: "error", where, msg: `remove: no part "${rid}"` });
@@ -352,12 +359,24 @@ function valueAt(tr: Anim["tracks"][number], t: number): number {
   return keys[keys.length - 1][1];
 }
 
-function animCss(anim: Anim, animName: string, ctx: Ctx, where: string, parts: Part[]): string {
+/**
+ * `base` is the un-patched part list, and it is what decides whether a track
+ * pointing at a missing part is a mistake.
+ *
+ * A track naming a part the document does not have is an error: it is a typo or
+ * a rename that got away. A track naming a part a *variant* removed is not — a
+ * state that takes half the body off is expected to leave some of the clip with
+ * nothing to move, and that is how a Lance's release plays on its spent bow: the
+ * rib and tendon tracks run, and the four barb tracks have nothing to answer to
+ * because the barb is away being an enemy.
+ */
+function animCss(anim: Anim, animName: string, ctx: Ctx, where: string, parts: Part[], base: Part[]): string {
   let css = "";
   const perPart = new Map<string, typeof anim.tracks>();
   for (const tr of anim.tracks) {
     if (!parts.some((p) => p.id === tr.part)) {
-      ctx.issues.push({ level: "error", where, msg: `animation "${animName}": no part "${tr.part}"` });
+      if (!base.some((p) => p.id === tr.part))
+        ctx.issues.push({ level: "error", where, msg: `animation "${animName}": no part "${tr.part}"` });
       continue;
     }
     const list = perPart.get(tr.part) ?? [];
@@ -436,7 +455,7 @@ export function renderSVG(
   if (opts.animation) {
     const anim = asset.animations?.[opts.animation];
     if (!anim) issues.push({ level: "error", where, msg: `unknown animation "${opts.animation}"` });
-    else css = animCss(anim, opts.animation, ctx, where, asset.parts);
+    else css = animCss(anim, opts.animation, ctx, where, asset.parts, assetIn.parts);
   }
 
   const dup = new Set<string>();

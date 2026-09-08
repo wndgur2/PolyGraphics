@@ -56,5 +56,44 @@
     "player": 10,
     "overlay": 20,
     "ui": 40
+  },
+  "audio": {
+    "pitch": {
+      "tap": 200,
+      "shell": 310,
+      "bone": 110,
+      "swarm": 190,
+      "grit": 1100,
+      "gust": 1400,
+      "tonic": 880,
+      "third": 523.25,
+      "fifth": 659.25,
+      "seventh": 784,
+      "moan": 140,
+      "dirge": 97
+    },
+    "ramps": {
+      "up": 2,
+      "down": 0.5
+    },
+    "gain": {
+      "hush": 0.07,
+      "faint": 0.14,
+      "soft": 0.2,
+      "mid": 0.28,
+      "loud": 0.4,
+      "peak": 0.5
+    },
+    "q": {
+      "wide": 0.8,
+      "band": 2.6,
+      "sharp": 6
+    },
+    "dur": {
+      "tick": 0.045,
+      "blip": 0.09,
+      "beat": 0.2,
+      "tail": 0.35
+    }
   }
 }

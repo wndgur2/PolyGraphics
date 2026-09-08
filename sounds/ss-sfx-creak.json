@@ -1,0 +1,52 @@
+{
+  "id": "ss.sfx.creak",
+  "name": "Creak",
+  "description": "Something dry giving way when it is poked. Grains rather than a tone, scattered unevenly on purpose \u2014 evenly spaced clicks read as a machine, and the whole point is that this is a living thing bending.",
+  "tags": [
+    "sfx",
+    "world"
+  ],
+  "duration": 0.17,
+  "meta": {
+    "minInterval": 70
+  },
+  "voices": [
+    {
+      "id": "grains",
+      "gain": 1.2,
+      "filter": {
+        "type": "bandpass",
+        "freq": "$grit",
+        "to": 380,
+        "q": "band"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.05
+            ]
+          ]
+        }
+      ],
+      "repeat": {
+        "of": {
+          "kind": "noise"
+        },
+        "count": 6,
+        "spread": 0.13,
+        "grain": 0.022,
+        "gainRange": [
+          0.5,
+          1
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "ss.sfx.gameover",
+  "name": "Game over",
+  "description": "The same ladder walked down instead of up, on the low sawtooth voice, at a step slow enough to be four separate events rather than one figure.",
+  "tags": [
+    "sfx",
+    "fanfare"
+  ],
+  "duration": 0.94,
+  "voices": [
+    {
+      "id": "n0",
+      "at": 0.0,
+      "use": "ss.lib.knell"
+    },
+    {
+      "id": "n1",
+      "at": 0.22,
+      "use": "ss.lib.knell",
+      "variant": "fifth"
+    },
+    {
+      "id": "n2",
+      "at": 0.44,
+      "use": "ss.lib.knell",
+      "variant": "third"
+    },
+    {
+      "id": "n3",
+      "at": 0.66,
+      "use": "ss.lib.knell",
+      "variant": "low"
+    }
+  ]
+}

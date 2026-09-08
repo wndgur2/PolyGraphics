@@ -1,0 +1,46 @@
+{
+  "id": "ss.sfx.pickup",
+  "name": "Pickup",
+  "description": "A half-second of borrowed voice: the one place the hive's own note reaches the player, so it is the only bright rising thing in the whole set and it is over almost before it starts.",
+  "tags": [
+    "sfx",
+    "pickup"
+  ],
+  "duration": 0.07,
+  "meta": {
+    "minInterval": 40
+  },
+  "jitter": {
+    "freq": [
+      0.9,
+      1.1
+    ]
+  },
+  "voices": [
+    {
+      "id": "borrowed",
+      "gain": "soft",
+      "source": {
+        "kind": "osc",
+        "wave": "square",
+        "freq": "$third.up",
+        "to": 1500
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

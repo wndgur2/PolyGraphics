@@ -1,0 +1,44 @@
+{
+  "id": "ss.sfx.whoosh",
+  "name": "Whoosh",
+  "description": "Air between screens. Oscillators cannot do this one \u2014 smoke is broadband \u2014 so it is noise swept down through a wide band, swelling in and away rather than arriving and stopping. Its gain is the one raw number in the set and it looks enormous beside the others: a wide bandpass throws most of a noise burst away, so the level that reaches the output is nothing like the level written here.",
+  "tags": [
+    "sfx",
+    "world"
+  ],
+  "duration": 0.9,
+  "voices": [
+    {
+      "id": "air",
+      "gain": 0.8,
+      "source": {
+        "kind": "noise"
+      },
+      "filter": {
+        "type": "bandpass",
+        "freq": "$gust",
+        "to": 260,
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              0.005
+            ],
+            [
+              0.3,
+              1
+            ],
+            [
+              1,
+              0.005
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

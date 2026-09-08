@@ -1,0 +1,39 @@
+{
+  "id": "ss.sfx.hit",
+  "name": "Hit",
+  "description": "A weapon landing on chitin. A short square thump falling an octave, over a scatter of dry grains that dulls as it goes — the shell giving a little, not air moving. Every enemy takes hundreds of these in a run, so it is deliberately the smallest sound in the set.",
+  "tags": ["sfx", "impact"],
+  "duration": 0.09,
+  "meta": { "minInterval": 45 },
+  "jitter": { "freq": [0.82, 1.2] },
+  "voices": [
+    {
+      "id": "thump",
+      "dur": "tick",
+      "gain": "soft",
+      "source": { "kind": "osc", "wave": "square", "freq": "$tap", "to": "$tap.down" },
+      "env": [{ "prop": "gain", "keys": [[0, 1], [1, 0]] }]
+    },
+    {
+      "id": "grit",
+      "at": 0.004,
+      "gain": "faint",
+      "filter": { "type": "bandpass", "freq": "$grit", "to": "$grit.down2", "q": "band" },
+      "env": [{ "prop": "gain", "keys": [[0, 1], [1, 0.06]] }],
+      "repeat": {
+        "of": { "kind": "noise" },
+        "count": 5,
+        "spread": 0.03,
+        "grain": 0.012,
+        "gainRange": [0.55, 1]
+      }
+    }
+  ],
+  "variants": {
+    "elite": {
+      "description": "The same strike on something armoured: everything drops well below the ordinary hit and takes half again as long to give, so an elite reads as heavier without a second sound being authored.",
+      "pitch": 0.55,
+      "stretch": 1.5
+    }
+  }
+}

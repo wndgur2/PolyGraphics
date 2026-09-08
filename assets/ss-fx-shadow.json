@@ -1,0 +1,10 @@
+{
+  "id": "ss.fx.shadow",
+  "name": "Cast shadow",
+  "description": "The ground under something that is not on it. This roster is drawn flat to a top-down field where everything touches the floor, so the one cue that a body is above it is the dark it puts below — a Lance's barb is lobbed, and without this it reads as sliding along the ground rather than arcing over it. Authored as a soft ellipse at rx=12 on a 32×20 canvas, which is the number the game scales by; it shrinks and darkens as the thing above it comes down, and that is the whole of the height cue. Deliberately a gradient rather than a flat disc: a hard-edged oval reads as a second object lying on the floor, and this has to read as absence of light. Terrain props bake their own shadow into their art because they never move — this is for the things that do.",
+  "tags": ["ss-fx", "hit"],
+  "size": [32, 20],
+  "parts": [
+    { "id": "pool", "shape": { "kind": "ellipse", "rx": 12, "ry": 6 }, "fill": { "gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$ink@heavy"], [0.6, "$ink@soft"], [1, "$ink@0"]] } }
+  ]
+}

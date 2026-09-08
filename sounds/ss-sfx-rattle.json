@@ -1,0 +1,42 @@
+{
+  "id": "ss.sfx.rattle",
+  "name": "Rattle",
+  "description": "A shell straining against whatever is inside it. Called faster and faster as the thing gives, so the document is deliberately one short unpitched-sounding tick with a wide roll on it rather than a figure with its own rhythm.",
+  "tags": [
+    "sfx",
+    "world"
+  ],
+  "duration": 0.05,
+  "jitter": {
+    "freq": [
+      0.95,
+      1.35
+    ]
+  },
+  "voices": [
+    {
+      "id": "strain",
+      "gain": "soft",
+      "source": {
+        "kind": "osc",
+        "wave": "square",
+        "freq": "$shell"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

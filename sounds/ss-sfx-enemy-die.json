@@ -1,0 +1,46 @@
+{
+  "id": "ss.sfx.enemy-die",
+  "name": "Small death",
+  "description": "One of the small ones coming apart \u2014 the signal cutting out rather than a body landing, which is why it is a pitch collapsing and not an impact.",
+  "tags": [
+    "sfx",
+    "creature"
+  ],
+  "duration": 0.1,
+  "meta": {
+    "minInterval": 55
+  },
+  "jitter": {
+    "freq": [
+      0.9,
+      1.1
+    ]
+  },
+  "voices": [
+    {
+      "id": "cutout",
+      "gain": "soft",
+      "source": {
+        "kind": "osc",
+        "wave": "sawtooth",
+        "freq": "$shell",
+        "to": 60
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
