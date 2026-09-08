@@ -284,26 +284,44 @@ in [docs/listening.md](docs/listening.md), are how a change gets listened to.
 
 That page exists because the rest of the system leans on rendering something and
 looking at it, and **an agent authoring these documents cannot listen**. So the
-bake is also the instrument: `npm run check` measures every sound and reports
-clipping, near-silence, and any sound sitting more than 9dB off the set's median
-level. RMS is measured over the sounding extent rather than the canvas, because
-a sound that ends early is shorter, not quieter, and a lint that confuses the two
-sends you to raise the gain on the wrong thing.
+bake is also the instrument. `describe()` measures every take, and `npm run
+check` lints on what it finds:
 
-`npm run wav` also prints **attack** — milliseconds from the onset to 90% of
-peak. Loudness and brightness say nothing about how fast a sound arrives, which
-is the one property an instrument has to hold while it is played at four
-different lengths, and the property a proportional envelope cannot hold. It is
-measured from the onset rather than from t=0, so a voice that starts late reads
-as fast rather than as slow.
+- **loudness** — K-weighted (ITU-R BS.1770) level over the sounding extent, not
+  the canvas, because a sound that ends early is shorter, not quieter. RMS says
+  how much signal there is; this says how loud it is.
+- **family bands** — `audio.loudness` in the tokens names an `anchor` and an
+  offset per family (`tags[1]`): a `field` sound sits above an `impact` sound
+  and the lint knows it, rather than being told per document. Anything more
+  than `band` dB off its family's place is flagged. `offBand` is for the one
+  document that is off *its family's* band on purpose.
+- **the phone** — the loudest 50ms, before and after the same 250Hz–8kHz
+  filter the gallery toggle plays through. Past `phoneLoss` dB the low end is
+  carrying the sound and a small speaker gets nothing.
+- **true peak** — four times oversampled; a bake that reads −0.3dBFS sample by
+  sample can pass 0dB in the DAC.
+- **attack** — milliseconds from the onset to 90% of peak. Anything but an
+  impact that reaches its peak inside the renderer's 1.5ms declick has no onset
+  of its own, and is told to write one.
+- **unfiltered square or sawtooth** — every harmonic to Nyquist, the one
+  timbre this set had in two waveforms. Read off the document; a voice keeps
+  one on purpose by saying `why`.
+- plus clipping, near-silence, the spectral centroid and the low / mid / high
+  split, and the −60dB tail, all in the manifest for an agent to read before
+  it writes.
 
-A document may state, in writing, why it belongs outside that band —
-`offBand` — for the cue whose whole job is to sit under the cues it shares a
-frame with. The exception then reads as a decision somebody made rather than a
-warning everybody learns to scroll past.
+Attack is measured from the onset rather than from t=0, so a voice that starts
+late reads as fast rather than as slow; it is the one property an instrument has
+to hold while it is played at four different lengths, and the property a
+proportional envelope cannot hold.
 
-It earns its keep immediately: porting the sibling project's set, the lint put
-`whoosh` 17dB under the median. Not a transcription slip — the original gave a
+A document may state, in writing, why it belongs outside its band — `offBand`
+— for the cue whose whole job is to sit under the cues it shares a frame with,
+and a voice may say `why` it keeps a raw sawtooth. The exception then reads as
+a decision somebody made rather than a warning everybody learns to scroll past.
+
+It earns its keep immediately: porting the sibling project's set, the first
+version of the lint put `whoosh` 17dB under the median. Not a transcription slip — the original gave a
 noise burst the same gain number it gave its oscillators, and a wide bandpass
 throws most of a noise burst away. (Its own `creak` comment says exactly this
 about a different sound; the lint is that comment, applied to all of them.)
