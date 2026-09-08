@@ -180,6 +180,18 @@ export interface Descriptors {
   rmsDb: number;
   /** Zero crossings per second — a cheap brightness proxy, no FFT needed. */
   brightness: number;
+  /**
+   * Milliseconds from the first sounding sample to 90% of peak — how fast the
+   * sound arrives.
+   *
+   * The other four numbers say how loud a document is and roughly how bright.
+   * None of them can see the one property an instrument has to hold constant
+   * while it is played at four different lengths, which is exactly the property
+   * an envelope written in fractions of a span cannot hold. Measured from the
+   * onset rather than from t=0, so a voice that starts late reads as fast, not
+   * as slow.
+   */
+  attackMs: number;
   clipped: number;
 }
 
@@ -207,6 +219,9 @@ export function describe(pcm: Float32Array, sr = SAMPLE_RATE): Descriptors {
   let sum = 0;
   for (let i = first; i <= last; i++) sum += pcm[i] * pcm[i];
   const rms = Math.sqrt(sum / Math.max(1, last - first + 1));
+
+  let rise = first;
+  while (rise <= last && Math.abs(pcm[rise]) < peak * 0.9) rise++;
   return {
     duration: Math.round((pcm.length / sr) * 10000) / 10000,
     peak: Math.round(peak * 10000) / 10000,
@@ -214,6 +229,7 @@ export function describe(pcm: Float32Array, sr = SAMPLE_RATE): Descriptors {
     peakDb: db(peak),
     rmsDb: db(rms),
     brightness: Math.round((cross / (pcm.length / sr)) * 10) / 10,
+    attackMs: Math.round(((rise - first) / sr) * 10000) / 10,
     clipped,
   };
 }

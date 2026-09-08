@@ -11,25 +11,26 @@
     {
       "id": "n0",
       "at": 0.0,
-      "use": "ss.lib.knell"
+      "use": "ss.lib.knell",
+      "pitch": "$seventh.down"
     },
     {
       "id": "n1",
       "at": 0.22,
       "use": "ss.lib.knell",
-      "variant": "fifth"
+      "pitch": "$fifth.down"
     },
     {
       "id": "n2",
       "at": 0.44,
       "use": "ss.lib.knell",
-      "variant": "third"
+      "pitch": "$third.down"
     },
     {
       "id": "n3",
       "at": 0.66,
       "use": "ss.lib.knell",
-      "variant": "low"
+      "pitch": "$seventh.down2"
     }
   ]
 }

@@ -196,20 +196,42 @@ by editing four numbers.
 you would have written, and nothing downstream knows it existed. Same on a
 filter, where it sweeps the cutoff. It is the relationship `ngon` has to `poly`.
 
+**`adsr` is the one envelope written in seconds.** Keys are fractions of a span,
+which is right for a trajectory — a slide between two pitches is the same slide
+however long it takes — and wrong for an attack. A struck note reaches its peak
+in about ten milliseconds whether it lasts a tenth of a second or two, so an
+instrument written with a proportional attack stops being that instrument the
+moment somebody plays it longer. `{ "prop": "gain", "adsr": { "attack": 0.012 } }`
+is expanded into the keys you would have written once the voice's final length
+is known, so the IR never learns it existed. Before it did, `ss.sfx.chime` said
+`0.017` in one voice and `0.013` in the other to mean 12ms in both.
+
 **An envelope on a scatter belongs to the gesture, not to each grain.** A dry
 crack is bright grains first and dull grains last — one sweep across the whole
 scatter, not the same sweep five times. The compiler cuts the envelope into
 per-grain windows so the IR stays a flat list of voices and no adapter has to
 learn what a bus is.
 
-**Library documents are instruments.** `ss.lib.note` is one note of the flat
-square voice; `ss.sfx.levelup` and `ss.sfx.victory` are that document composed
-four and six times with a `variant` picking the degree, and `dur` on the use
-voice refitting it to a slower step. `ss.lib.knell` is its low sawtooth twin and
-`ss.sfx.gameover` walks the same ladder down it. Retune the library and every
-figure built on it moves together — the exact `ss.lib.organ` argument, and
-`scripts/test-webaudio-adapter.ts` asserts it by retuning the note in memory and
-checking that both fanfares follow while the knell-based one does not.
+**Library documents are instruments, and `root` is what says so.** `ss.lib.note`
+is one note of the flat square voice, written at `$third` and saying as much;
+`ss.sfx.levelup` and `ss.sfx.victory` are that document composed four and six
+times with a `pitch` on each use voice picking the degree, and `dur` refitting it
+to a slower step. `ss.lib.knell` is its low sawtooth twin and `ss.sfx.gameover`
+walks the same ladder down it.
+
+The degree therefore lives at the call site, next to the melody, rather than as a
+named variant inside the instrument — a fanfare can reach a note nobody
+anticipated without editing the thing that plays it. `pitch` is an absolute
+pitch and not a ratio, for the same reason every other slot takes a token:
+`"pitch": 1.26` is a bare number nobody can read, and `"pitch": "$fifth"` is the
+note it plays. Playing a document that declares no `root` is an error rather
+than a guess, and a `root` nothing composes is a warning, exactly as an unused
+palette token is.
+
+Retune the library and every figure built on it moves together — the exact
+`ss.lib.organ` argument, and `scripts/test-webaudio-adapter.ts` asserts it by
+retuning the note in memory and checking that both fanfares follow while the
+knell-based one does not.
 
 **Whole-sound behaviour belongs to the engine**, the same boundary the visual
 side draws at whole-body transforms. A document describes one trigger: rate
@@ -252,6 +274,13 @@ clipping, near-silence, and any sound sitting more than 9dB off the set's median
 level. RMS is measured over the sounding extent rather than the canvas, because
 a sound that ends early is shorter, not quieter, and a lint that confuses the two
 sends you to raise the gain on the wrong thing.
+
+`npm run wav` also prints **attack** — milliseconds from the onset to 90% of
+peak. Loudness and brightness say nothing about how fast a sound arrives, which
+is the one property an instrument has to hold while it is played at four
+different lengths, and the property a proportional envelope cannot hold. It is
+measured from the onset rather than from t=0, so a voice that starts late reads
+as fast rather than as slow.
 
 A document may state, in writing, why it belongs outside that band —
 `offBand` — for the cue whose whole job is to sit under the cues it shares a

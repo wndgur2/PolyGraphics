@@ -262,7 +262,8 @@ function assetCard(asset: Asset, reg: Registry, issues: Issue[]): string {
 /** One line per voice, in mix order — the vocabulary a change gets described in. */
 function voiceRow(v: Voice): string {
   const bits: string[] = [];
-  if ("use" in v) bits.push(`use ${v.use}${v.variant ? `#${v.variant}` : ""}`);
+  if ("use" in v)
+    bits.push(`use ${v.use}${v.variant ? `#${v.variant}` : ""}${v.pitch !== undefined ? ` @ ${v.pitch}` : ""}`);
   else if ("repeat" in v)
     bits.push(`repeat ×${v.repeat.count} ${v.repeat.of.kind} · ${v.repeat.spread}s spread, ${v.repeat.grain} grain`);
   else if (v.source.kind === "osc")
@@ -275,11 +276,20 @@ function voiceRow(v: Voice): string {
   const xf: string[] = [];
   if (v.at) xf.push(`at ${v.at}s`);
   if (v.dur !== undefined) xf.push(`dur ${v.dur}`);
-  if (v.filter)
-    xf.push(
-      `${v.filter.type} ${v.filter.freq}${v.filter.to !== undefined ? `→${v.filter.to}` : ""}${v.filter.q !== undefined ? ` q ${v.filter.q}` : ""}`,
-    );
-  for (const t of v.env ?? []) xf.push(`${t.prop} ${t.keys.map((k) => k[1]).join("→")}`);
+  // A `use` voice carries no shaping of its own — the document it composes
+  // brings its own — so only the two that own a waveform have these columns.
+  if (!("use" in v)) {
+    if (v.filter)
+      xf.push(
+        `${v.filter.type} ${v.filter.freq}${v.filter.to !== undefined ? `→${v.filter.to}` : ""}${v.filter.q !== undefined ? ` q ${v.filter.q}` : ""}`,
+      );
+    for (const t of v.env ?? [])
+      xf.push(
+        "adsr" in t
+          ? `${t.prop} adsr ${[t.adsr.attack, t.adsr.decay, t.adsr.sustain, t.adsr.release].filter((n) => n !== undefined).join("/")}`
+          : `${t.prop} ${t.keys.map((k) => k[1]).join("→")}`,
+      );
+  }
 
   return `<tr>
   <td><code class="pid">${esc(v.id)}</code></td>
@@ -289,7 +299,7 @@ function voiceRow(v: Voice): string {
 </tr>`;
 }
 
-interface Take { label: string; variant?: string; wav: string; wave: string; peakDb: number; rmsDb: number; dur: number; voices: number }
+interface Take { label: string; variant?: string; wav: string; wave: string; peakDb: number; rmsDb: number; attackMs: number; dur: number; voices: number }
 
 function takesOf(sd: Sound, sreg: SoundRegistry, issues: Issue[]): Take[] {
   const { ir, issues: cissues } = compileSound(sd, sreg);
@@ -304,6 +314,7 @@ function takesOf(sd: Sound, sreg: SoundRegistry, issues: Issue[]): Take[] {
       wave: waveformSvg(pcm, 640, 90),
       peakDb: d.peakDb,
       rmsDb: d.rmsDb,
+      attackMs: d.attackMs,
       dur: d.duration,
       voices: (variant ? ir.variants[variant].voices : ir.voices).length,
     };
@@ -353,6 +364,7 @@ function soundDetailBlock(sd: Sound, sreg: SoundRegistry, issues: Issue[]): stri
     ["voices", String(sd.voices.length)],
     ["peak", `${base.peakDb} dBFS`],
     ["rms", `${base.rmsDb} dBFS`],
+    ["attack", `${base.attackMs} ms`],
     ...(sd.gain !== undefined ? [["gain", String(sd.gain)] as [string, string]] : []),
     ...(sd.jitter?.freq ? [["jitter", `×${sd.jitter.freq[0]}–${sd.jitter.freq[1]}`] as [string, string]] : []),
     ...(sd.offBand ? [["off-band", esc(sd.offBand), "wide"] as [string, string, string]] : []),

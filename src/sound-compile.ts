@@ -14,7 +14,7 @@
  * re-walking the document. Whatever you hear in the bake is what an engine
  * plays, by construction.
  */
-import type { EnvTrack, Filter, Sound, Source, Voice } from "./sound-schema.js";
+import type { Adsr, EnvTrack, Filter, Sound, Source, Voice } from "./sound-schema.js";
 import { VoiceSchema } from "./sound-schema.js";
 import type { Issue } from "./render.js";
 import { resolveNumber, resolvePitch, type AudioTokens, type Tokens } from "./tokens.js";
@@ -199,20 +199,53 @@ export function applySoundVariant(base: Sound, name: string, issues: Issue[]): S
 
 // ---------------------------------------------------------------- voices
 
+/**
+ * What a voice inherits from wherever it is being compiled.
+ *
+ * The two scalars are the two ways a sound gets bigger, which the document
+ * schema already names: a thing drops in pitch, or it takes longer. They are
+ * carried *down* the recursion rather than multiplied over the result, because
+ * a voice has to know its final Hz and its final seconds before its envelope is
+ * expanded — an envelope anchored to a real duration cannot survive being
+ * rescaled after the fact, and `adsr` is exactly such an envelope.
+ */
+interface Frame {
+  offset: number; // seconds, already in the outermost document's timeline
+  gain: number; // parents' gains, folded
+  pitch: number; // frequency scale
+  stretch: number; // time scale
+  idPrefix: string;
+  useStack: string[];
+}
+
+const rootFrame = (pitch = 1, stretch = 1): Frame => ({
+  offset: 0,
+  gain: 1,
+  pitch,
+  stretch,
+  idPrefix: "",
+  useStack: [],
+});
+
 function compileSource(
   src: Source,
   ownerId: string,
   voiceId: string,
   a: AudioTokens,
+  pitch: number,
   issues: Issue[],
   where: string,
 ): IRSource {
   if (src.kind === "noise") return { kind: "noise", seed: src.seed ?? hashSeed(`${ownerId}:${voiceId}`) };
-  return { kind: "osc", wave: src.wave, freq: hz(src.freq, a, issues, where) };
+  return { kind: "osc", wave: src.wave, freq: r4(hz(src.freq, a, issues, where) * pitch) };
 }
 
-function compileFilter(f: Filter, a: AudioTokens, issues: Issue[], where: string): IRFilter {
-  return { type: f.type, freq: hz(f.freq, a, issues, where), q: level(f.q, a.q, "q", 1, issues, where) };
+function compileFilter(f: Filter, a: AudioTokens, pitch: number, issues: Issue[], where: string): IRFilter {
+  return {
+    type: f.type,
+    freq: r4(hz(f.freq, a, issues, where) * pitch),
+    q: level(f.q, a.q, "q", 1, issues, where),
+  };
 }
 
 /**
@@ -224,6 +257,7 @@ function withGlides(
   voice: { source?: Source; filter?: Filter },
   env: IREnvTrack[],
   a: AudioTokens,
+  pitch: number,
   issues: Issue[],
   where: string,
 ): IREnvTrack[] {
@@ -235,7 +269,16 @@ function withGlides(
     }
     out.push({
       prop,
-      keys: [[0, hz(from, a, issues, where, false)], [1, hz(to, a, issues, where, false)]],
+      // `from` was already resolved (and warned about) where it was written, so
+      // it passes quietly here. `to` is written nowhere else: it is a pitch on
+      // the source, next to `freq`, and it carries identity the same way — a
+      // theme that retunes the palette has to move where a slide lands too, or
+      // half the gesture stays behind. So it warns on a bare number like every
+      // other pitch does; only the keyframes it compiles into are trajectories.
+      keys: [
+        [0, r4(hz(from, a, issues, where, false) * pitch)],
+        [1, r4(hz(to, a, issues, where) * pitch)],
+      ],
       ease: "exp",
     });
   };
@@ -246,12 +289,70 @@ function withGlides(
 }
 
 /**
+ * `adsr` → the keys it stands for, against the voice's final length.
+ *
+ * This is why the two scales are carried down the recursion rather than
+ * multiplied over the result: `dur` here is already the number of seconds the
+ * voice will actually last, so a 12ms attack stays 12ms whether the note was
+ * written short, stretched by a variant, or refitted by whoever plays it.
+ *
+ * Segments that do not fit are compressed rather than truncated — a voice too
+ * short for its own envelope should sound like a hurried version of itself, not
+ * like a shape with its tail cut off — and the compiler says it did so.
+ */
+function expandAdsr(adsr: Adsr, dur: number, issues: Issue[], where: string): [number, number][] {
+  const peak = adsr.peak ?? 1;
+  const sustain = adsr.sustain ?? 0;
+  let attack = adsr.attack;
+  let release = adsr.release ?? 0;
+  let decay = adsr.decay ?? Math.max(0, dur - attack - release);
+
+  const total = attack + decay + release;
+  if (total > dur + 1e-9) {
+    const fit = dur / total;
+    attack *= fit;
+    decay *= fit;
+    release *= fit;
+    issues.push({
+      level: "warn",
+      where,
+      msg: `adsr runs ${r4(total)}s in a ${r4(dur)}s voice — compressed to fit`,
+    });
+  }
+
+  const at = (t: number): number => r4(Math.min(1, t / dur));
+  const raw: [number, number][] = [
+    [0, 0],
+    [at(attack), peak],
+    [at(attack + decay), sustain],
+    [at(dur - release), sustain],
+    [1, 0],
+  ];
+  // Collapse keys that land on the same instant, last one winning: with no
+  // sustain and no release the middle three all sit at the end, and the shape
+  // that survives is the plain decay it was asking for.
+  const keys: [number, number][] = [];
+  for (const k of raw) {
+    if (keys.length && keys[keys.length - 1][0] === k[0]) keys.pop();
+    keys.push(k);
+  }
+  return keys;
+}
+
+/**
  * Envelope tracks. `gain` keys are plain factors; `freq`/`cutoff` keys resolve
  * as pitches, so a slide is written as the two pitches it moves between.
  * One track per prop, for the same reason the visual side allows one per
  * channel: two tracks fighting over one value is a bug with no useful meaning.
  */
-function compileEnv(env: EnvTrack[] | undefined, a: AudioTokens, issues: Issue[], where: string): IREnvTrack[] {
+function compileEnv(
+  env: EnvTrack[] | undefined,
+  a: AudioTokens,
+  pitch: number,
+  dur: number,
+  issues: Issue[],
+  where: string,
+): IREnvTrack[] {
   const out: IREnvTrack[] = [];
   const seen = new Set<string>();
   for (const track of env ?? []) {
@@ -260,6 +361,10 @@ function compileEnv(env: EnvTrack[] | undefined, a: AudioTokens, issues: Issue[]
       continue;
     }
     seen.add(track.prop);
+    if ("adsr" in track) {
+      out.push({ prop: "gain", keys: expandAdsr(track.adsr, dur, issues, where), ease: track.ease ?? "exp" });
+      continue;
+    }
     const keys = track.keys.map(([t, v]) => {
       if (track.prop === "gain") {
         if (typeof v !== "number") {
@@ -269,7 +374,7 @@ function compileEnv(env: EnvTrack[] | undefined, a: AudioTokens, issues: Issue[]
         if (v < 0 || v > 1) issues.push({ level: "error", where, msg: `gain env key ${v} is outside 0..1` });
         return [r4(t), v] as [number, number];
       }
-      return [r4(t), hz(v, a, issues, where, false)] as [number, number];
+      return [r4(t), r4(hz(v, a, issues, where, false) * pitch)] as [number, number];
     });
     const sorted = keys.every((k, i) => i === 0 || k[0] >= keys[i - 1][0]);
     if (!sorted) issues.push({ level: "error", where, msg: `${track.prop} env keys are out of time order` });
@@ -278,42 +383,23 @@ function compileEnv(env: EnvTrack[] | undefined, a: AudioTokens, issues: Issue[]
   return out;
 }
 
-/** `pitch` / `stretch`: the two ways a sound gets bigger, applied to resolved IR. */
-function scaleVoices(voices: IRVoice[], pitch: number, stretch: number): IRVoice[] {
-  if (pitch === 1 && stretch === 1) return voices;
-  return voices.map((v) => ({
-    ...v,
-    at: r4(v.at * stretch),
-    dur: r4(v.dur * stretch),
-    source: v.source.kind === "osc" ? { ...v.source, freq: r4(v.source.freq * pitch) } : { ...v.source },
-    ...(v.filter ? { filter: { ...v.filter, freq: r4(v.filter.freq * pitch) } } : {}),
-    env: v.env.map((t) => ({
-      ...t,
-      keys: t.keys.map(([k, val]) => [k, t.prop === "gain" ? val : r4(val * pitch)] as [number, number]),
-    })),
-  }));
-}
-
 function compileVoices(
   voices: Voice[],
   owner: { id: string; duration: number },
   reg: SoundRegistry,
   issues: Issue[],
   whereBase: string,
-  useStack: string[],
-  offset: number,
-  gainMul: number,
-  idPrefix: string,
+  frame: Frame,
 ): IRVoice[] {
   const a = audioTokens(reg.tokens, issues, whereBase);
   const out: IRVoice[] = [];
 
   for (const voice of voices) {
     const where = `${whereBase}(${voice.id})`;
-    const at = r4(offset + (voice.at ?? 0));
-    const gain = gainMul * level(voice.gain, a.gain, "gain", 1, issues, where);
-    const span = level(voice.dur, a.dur, "dur", owner.duration - (voice.at ?? 0), issues, where);
-    const id = idPrefix + voice.id;
+    const at = r4(frame.offset + (voice.at ?? 0) * frame.stretch);
+    const gain = frame.gain * level(voice.gain, a.gain, "gain", 1, issues, where);
+    const own = level(voice.dur, a.dur, "dur", owner.duration - (voice.at ?? 0), issues, where);
+    const id = frame.idPrefix + voice.id;
 
     if ("use" in voice) {
       const target = reg.sounds.get(voice.use);
@@ -321,33 +407,40 @@ function compileVoices(
         issues.push({ level: "error", where, msg: `use: unknown sound "${voice.use}"` });
         continue;
       }
-      if (useStack.includes(voice.use) || useStack.length >= 4) {
+      if (frame.useStack.includes(voice.use) || frame.useStack.length >= 4) {
         issues.push({ level: "error", where, msg: `use: cycle or depth > 4 via "${voice.use}"` });
         continue;
       }
       const resolved = voice.variant ? applySoundVariant(target, voice.variant, issues) : target;
+      const vdef = voice.variant ? target.variants?.[voice.variant] : undefined;
+      // Playing an instrument: the ratio between the pitch asked for and the
+      // one the document says it was written at. It multiplies into the frame
+      // like any other scale, so every voice inside transposes together and a
+      // noise voice is left alone — which is what makes a two-voice instrument
+      // stay itself at a different pitch.
+      let play = 1;
+      if (voice.pitch !== undefined) {
+        if (target.root === undefined)
+          issues.push({
+            level: "error",
+            where,
+            msg: `use: "${voice.use}" has no \`root\`, so there is no pitch to play it at — give it one`,
+          });
+        else play = hz(voice.pitch, a, issues, where) / hz(target.root, a, issues, voice.use);
+      }
       // A composed document keeps its own timeline; `dur` on the use voice fits
       // it to a different one, which is what `scale` does for a composed asset.
-      const fit = voice.dur === undefined ? 1 : level(voice.dur, a.dur, "dur", target.duration, issues, where) / target.duration;
-      const vdef = voice.variant ? target.variants?.[voice.variant] : undefined;
-      // Compile at the origin so the variant's scalars land before the offset does.
-      const child = scaleVoices(
-        compileVoices(
-          resolved.voices,
-          { id: target.id, duration: target.duration },
-          reg,
-          issues,
-          voice.use,
-          [...useStack, voice.use],
-          0,
-          gain * level(target.gain, a.gain, "gain", 1, issues, voice.use),
-          `${id}.`,
-        ),
-        vdef?.pitch ?? 1,
-        (vdef?.stretch ?? 1) * fit,
+      const fit = voice.dur === undefined ? 1 : own / target.duration;
+      out.push(
+        ...compileVoices(resolved.voices, { id: target.id, duration: target.duration }, reg, issues, voice.use, {
+          offset: at,
+          gain: gain * level(target.gain, a.gain, "gain", 1, issues, voice.use),
+          pitch: frame.pitch * (vdef?.pitch ?? 1) * play,
+          stretch: frame.stretch * (vdef?.stretch ?? 1) * fit,
+          idPrefix: `${id}.`,
+          useStack: [...frame.useStack, voice.use],
+        }),
       );
-      for (const c of child) c.at = r4(c.at + at);
-      out.push(...child);
       continue;
     }
 
@@ -355,19 +448,31 @@ function compileVoices(
       const { of, count, spread, grain, seed, pitchRange, gainRange } = voice.repeat;
       const rng = mulberry32(seed ?? hashSeed(`${owner.id}:${voice.id}`));
       const glen = level(grain, a.dur, "dur", 0.02, issues, where);
-      const filter = voice.filter && compileFilter(voice.filter, a, issues, where);
-      const env = withGlides({ source: of, filter: voice.filter }, compileEnv(voice.env, a, issues, where), a, issues, where);
-      const gesture = spread + glen; // the whole scatter's span, which the envelope describes
+      // The scatter's own span, which the envelope describes. Kept in the
+      // document's units so the per-grain windows below stay ratios, and a
+      // stretched gesture slices exactly where an unstretched one does — but an
+      // `adsr` on it is expanded against the seconds the gesture really lasts,
+      // because that is the point of writing one.
+      const gesture = spread + glen;
+      const filter = voice.filter && compileFilter(voice.filter, a, frame.pitch, issues, where);
+      const env = withGlides(
+        { source: of, filter: voice.filter },
+        compileEnv(voice.env, a, frame.pitch, gesture * frame.stretch, issues, where),
+        a,
+        frame.pitch,
+        issues,
+        where,
+      );
       for (let i = 0; i < count; i++) {
-        const src = compileSource(of, owner.id, `${voice.id}_${i}`, a, issues, where);
+        const src = compileSource(of, owner.id, `${voice.id}_${i}`, a, frame.pitch, issues, where);
         const t = rng() * spread;
         const pitchMul = pitchRange ? pitchRange[0] + rng() * (pitchRange[1] - pitchRange[0]) : 1;
         const gainMulI = gainRange ? gainRange[0] + rng() * (gainRange[1] - gainRange[0]) : 1;
         if (src.kind === "osc" && pitchMul !== 1) src.freq = r4(src.freq * pitchMul);
         out.push({
           id: `${id}.g${i}`,
-          at: r4(at + t),
-          dur: r4(glen),
+          at: r4(at + t * frame.stretch),
+          dur: r4(glen * frame.stretch),
           gain: r4(gain * gainMulI),
           source: src,
           ...(filter ? { filter: { ...filter } } : {}),
@@ -380,11 +485,18 @@ function compileVoices(
     out.push({
       id,
       at,
-      dur: r4(span),
+      dur: r4(own * frame.stretch),
       gain: r4(gain),
-      source: compileSource(voice.source, owner.id, voice.id, a, issues, where),
-      ...(voice.filter ? { filter: compileFilter(voice.filter, a, issues, where) } : {}),
-      env: withGlides(voice, compileEnv(voice.env, a, issues, where), a, issues, where),
+      source: compileSource(voice.source, owner.id, voice.id, a, frame.pitch, issues, where),
+      ...(voice.filter ? { filter: compileFilter(voice.filter, a, frame.pitch, issues, where) } : {}),
+      env: withGlides(
+        voice,
+        compileEnv(voice.env, a, frame.pitch, own * frame.stretch, issues, where),
+        a,
+        frame.pitch,
+        issues,
+        where,
+      ),
     });
   }
   return out;
@@ -395,7 +507,7 @@ export function compileSound(sound: Sound, reg: SoundRegistry): { ir: IRSound; i
   const a = audioTokens(reg.tokens, issues, sound.id);
   const owner = { id: sound.id, duration: sound.duration };
   const gain = level(sound.gain, a.gain, "gain", 1, issues, sound.id);
-  const voices = compileVoices(sound.voices, owner, reg, issues, sound.id, [], 0, 1, "");
+  const voices = compileVoices(sound.voices, owner, reg, issues, sound.id, rootFrame());
 
   for (const v of voices)
     if (v.at + v.dur > sound.duration + 1e-6)
@@ -412,10 +524,13 @@ export function compileSound(sound: Sound, reg: SoundRegistry): { ir: IRSound; i
     variants[vname] = {
       description: v.description,
       duration: r4(sound.duration * stretch),
-      voices: scaleVoices(
-        compileVoices(applied.voices, owner, reg, issues, `${sound.id}#${vname}`, [], 0, 1, ""),
-        v.pitch ?? 1,
-        stretch,
+      voices: compileVoices(
+        applied.voices,
+        owner,
+        reg,
+        issues,
+        `${sound.id}#${vname}`,
+        rootFrame(v.pitch ?? 1, stretch),
       ),
     };
   }

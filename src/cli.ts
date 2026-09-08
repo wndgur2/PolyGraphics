@@ -145,6 +145,16 @@ function lintPalette(tokens: Tokens, issues: Issue[]): void {
  * happens is one sound sitting 20dB off the rest of the set.
  */
 function lintSounds(sreg: SoundRegistry, issues: Issue[]): void {
+  // Declaring a `root` says "this is an instrument, play me". One nobody plays
+  // is drift waiting to happen — the same rule as an unused palette token, one
+  // table over, and the same reason: it will be retuned by somebody who thinks
+  // something depends on it, or left behind by somebody who thinks nothing does.
+  const played = new Set<string>();
+  for (const sd of sreg.sounds.values()) for (const v of sd.voices) if ("use" in v) played.add(v.use);
+  for (const sd of sreg.sounds.values())
+    if (sd.root !== undefined && !played.has(sd.id))
+      issues.push({ level: "warn", where: sd.id, msg: "declares a `root` but nothing composes it — an instrument nobody plays" });
+
   const levels: { id: string; rmsDb: number }[] = [];
   for (const sound of sreg.sounds.values()) {
     const { ir, issues: cissues } = compileSound(sound, sreg);
@@ -431,7 +441,7 @@ if (cmd === "wav" || cmd === "check") {
     console.log(`✓ baked ${wavs.size} wav files → out/wav (${SAMPLE_RATE}Hz mono)`);
     if (cmd === "wav")
       for (const [name, { d }] of wavs)
-        console.log(`  ${name.padEnd(28)} ${d.duration}s  peak ${String(d.peakDb).padStart(6)}dB  rms ${String(d.rmsDb).padStart(6)}dB  ${d.brightness}Hz zc`);
+        console.log(`  ${name.padEnd(28)} ${d.duration}s  peak ${String(d.peakDb).padStart(6)}dB  rms ${String(d.rmsDb).padStart(6)}dB  ${String(d.attackMs).padStart(6)}ms atk  ${d.brightness}Hz zc`);
   } else if (cmd === "wav") {
     console.log("no sounds/ documents to bake");
   }
