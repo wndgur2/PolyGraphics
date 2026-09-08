@@ -1,7 +1,7 @@
 {
   "id": "ss.sfx.whip",
   "name": "Lash",
-  "description": "A cord snapping: a sawtooth thrown upward from the low end, the opposite gesture to every impact in the set, because a lash is the swing and not the landing.",
+  "description": "A cord snapping: a sawtooth thrown upward from the low end, the opposite gesture to every impact in the set, because a lash is the swing and not the landing. The sawtooth sits under a lowpass that opens as it rises, and over it is the air — noise swept up through a band, swelling into the snap and gone — because most of what a lash is, is air. The air's gain is a raw number for the reason the whoosh's is: a bandpass keeps a sliver of a noise burst. Three takes.",
   "tags": [
     "sfx",
     "weapon"
@@ -16,6 +16,7 @@
       1.16
     ]
   },
+  "takes": 3,
   "voices": [
     {
       "id": "lash",
@@ -27,17 +28,49 @@
         "freq": "$swarm",
         "to": "$gust.down"
       },
+      "filter": {
+        "type": "lowpass",
+        "freq": "$grit",
+        "to": "$gust.up",
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.003
+          }
+        }
+      ]
+    },
+    {
+      "id": "air",
+      "gain": 0.7,
+      "dur": "blip",
+      "source": {
+        "kind": "noise"
+      },
+      "filter": {
+        "type": "bandpass",
+        "freq": "$shell.up",
+        "to": "$gust.up",
+        "q": "band"
+      },
       "env": [
         {
           "prop": "gain",
           "keys": [
             [
               0,
+              0.7
+            ],
+            [
+              0.3,
               1
             ],
             [
               1,
-              0.0
+              0
             ]
           ]
         }

@@ -1,7 +1,7 @@
 {
   "id": "ss.sfx.shoot",
   "name": "Shot",
-  "description": "Something small leaving the tube: a bright chirp dropping most of an octave inside sixty milliseconds. Fires constantly, so it is short, quiet and pitched where the score already sits.",
+  "description": "Something small leaving the tube: a breath of air the instant it clears the muzzle — twelve milliseconds of noise in a wide band at $gust — and then a bright chirp dropping most of an octave inside sixty milliseconds, under a lowpass that closes with it, so the chirp is a thing and not a buzz. Its two-millisecond onset is written down rather than left to the declick. Fires constantly, so it is short, quiet, pitched where the score already sits, and comes in three takes so the hundredth is not the first again.",
   "tags": [
     "sfx",
     "weapon"
@@ -16,15 +16,19 @@
       1.06
     ]
   },
+  "takes": 3,
   "voices": [
     {
-      "id": "spit",
-      "gain": "soft",
+      "id": "breath",
+      "dur": 0.012,
+      "gain": "mid",
       "source": {
-        "kind": "osc",
-        "wave": "square",
-        "freq": "$tonic",
-        "to": "$swarm.up"
+        "kind": "noise"
+      },
+      "filter": {
+        "type": "bandpass",
+        "freq": "$gust",
+        "q": "wide"
       },
       "env": [
         {
@@ -36,9 +40,33 @@
             ],
             [
               1,
-              0.0
+              0.1
             ]
           ]
+        }
+      ]
+    },
+    {
+      "id": "spit",
+      "gain": "soft",
+      "source": {
+        "kind": "osc",
+        "wave": "square",
+        "freq": "$tonic",
+        "to": "$swarm.up"
+      },
+      "filter": {
+        "type": "lowpass",
+        "freq": "$gust.up",
+        "to": "$tonic.up",
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.002
+          }
         }
       ]
     }
