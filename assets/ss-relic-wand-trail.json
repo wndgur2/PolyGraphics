@@ -1,0 +1,462 @@
+{
+  "id": "ss.relic.wand-trail",
+  "name": "Caustic trail",
+  "description": "One acid glob — the weapon's own `ss.proj.bolt`, head down — arriving on the near end of a wide flat spill that lies low across the plate, lumpy along both ends, its far rim lit and its middle darker and wet, with a bead of it kicked up where the glob meets it and a froth of three hollow bubbles of three sizes working a little way off from the strike. The relic leaves a burning pool wherever a glob dies, so the pool is the subject and the glob only explains where it came from. Corrosion is drawn as bubbles again — the hollow ones are rings over ring outlines, never a disc behind a ring — because a pit or a dark centre in a green field is a hole and then an eye; and the hollow bubbles are a cluster of three unequal rings rather than a pair or a single one, because a pair of rings across a green lump under a falling drop was a frog in a hat, and one ring at the round end of a spill with a pointed tail was a fish. It stays off ss.relic.wand by having no mouth: that one is the spitter, this is what the spit leaves behind.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "pool_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -11.81,
+            7.41
+          ],
+          [
+            -9.02,
+            5.19
+          ],
+          [
+            -4.99,
+            4.02
+          ],
+          [
+            0.59,
+            3.19
+          ],
+          [
+            4.75,
+            3.69
+          ],
+          [
+            7.54,
+            3.04
+          ],
+          [
+            10.93,
+            4.98
+          ],
+          [
+            12.05,
+            8.07
+          ],
+          [
+            10.44,
+            9.5
+          ],
+          [
+            11.74,
+            11.13
+          ],
+          [
+            6.01,
+            11.7
+          ],
+          [
+            0.4,
+            11.3
+          ],
+          [
+            -4.44,
+            11.6
+          ],
+          [
+            -9.53,
+            10.83
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "pool_rim",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -10.6,
+            7.6
+          ],
+          [
+            -8.6,
+            6.0
+          ],
+          [
+            -4.8,
+            4.9
+          ],
+          [
+            0.6,
+            4.1
+          ],
+          [
+            4.8,
+            4.6
+          ],
+          [
+            7.4,
+            4.0
+          ],
+          [
+            10.2,
+            5.6
+          ],
+          [
+            11.0,
+            7.8
+          ],
+          [
+            9.2,
+            9.4
+          ],
+          [
+            10.0,
+            10.4
+          ],
+          [
+            6.0,
+            10.8
+          ],
+          [
+            0.4,
+            10.4
+          ],
+          [
+            -4.4,
+            10.7
+          ],
+          [
+            -9.0,
+            10.0
+          ]
+        ]
+      },
+      "fill": "$venom.light"
+    },
+    {
+      "id": "pool",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -10.18,
+            8.5
+          ],
+          [
+            -8.26,
+            6.9
+          ],
+          [
+            -4.61,
+            5.8
+          ],
+          [
+            0.58,
+            5.0
+          ],
+          [
+            4.61,
+            5.5
+          ],
+          [
+            7.1,
+            4.9
+          ],
+          [
+            9.79,
+            6.5
+          ],
+          [
+            10.56,
+            8.7
+          ],
+          [
+            8.83,
+            10.3
+          ],
+          [
+            9.6,
+            11.3
+          ],
+          [
+            5.76,
+            11.7
+          ],
+          [
+            0.38,
+            11.3
+          ],
+          [
+            -4.22,
+            11.6
+          ],
+          [
+            -8.64,
+            10.9
+          ]
+        ]
+      },
+      "fill": "$venom.dark2"
+    },
+    {
+      "id": "pool_wet",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -7.0,
+            8.0
+          ],
+          [
+            -4.6,
+            6.6
+          ],
+          [
+            0.0,
+            5.9
+          ],
+          [
+            4.4,
+            6.2
+          ],
+          [
+            7.8,
+            7.0
+          ],
+          [
+            7.6,
+            9.0
+          ],
+          [
+            3.4,
+            9.6
+          ],
+          [
+            -1.6,
+            9.4
+          ],
+          [
+            -5.8,
+            9.4
+          ]
+        ]
+      },
+      "fill": "$venom.dark"
+    },
+    {
+      "id": "bubble_a_o",
+      "at": [
+        2.8,
+        7.5
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 1.25,
+        "width": 2.35
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bubble_a",
+      "at": [
+        2.8,
+        7.5
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 1.25,
+        "width": 0.75
+      },
+      "fill": "$venom.light"
+    },
+    {
+      "id": "bubble_b_o",
+      "at": [
+        5.5,
+        6.3
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 0.85,
+        "width": 2.15
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bubble_b",
+      "at": [
+        5.5,
+        6.3
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 0.85,
+        "width": 0.55
+      },
+      "fill": "$venom.light"
+    },
+    {
+      "id": "bubble_c_o",
+      "at": [
+        5.1,
+        8.9
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 0.6,
+        "width": 2.1
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bubble_c",
+      "at": [
+        5.1,
+        8.9
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 0.6,
+        "width": 0.5
+      },
+      "fill": "$venom.light"
+    },
+    {
+      "id": "bead_a",
+      "at": [
+        0.4,
+        9.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.55
+      },
+      "fill": "$venom.light2"
+    },
+    {
+      "id": "bead_b",
+      "at": [
+        8.4,
+        8.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.5
+      },
+      "fill": "$venom.light"
+    },
+    {
+      "id": "bead_c",
+      "at": [
+        -8.2,
+        8.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.45
+      },
+      "fill": "$venom.light2"
+    },
+    {
+      "id": "bead_d",
+      "at": [
+        -1.4,
+        6.9
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.45
+      },
+      "fill": "$venom"
+    },
+    {
+      "id": "bead_e",
+      "at": [
+        7.6,
+        6.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.35
+      },
+      "fill": "$venom.light2"
+    },
+    {
+      "id": "bead_f",
+      "at": [
+        -4.6,
+        8.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.4
+      },
+      "fill": "$venom.light"
+    },
+    {
+      "id": "glob",
+      "at": [
+        -4.6,
+        -3.0
+      ],
+      "rot": 70.0,
+      "scale": 0.82,
+      "use": "ss.proj.bolt"
+    },
+    {
+      "id": "splash_outline",
+      "at": [
+        -6.4,
+        2.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.3
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "splash",
+      "at": [
+        -6.4,
+        2.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.7
+      },
+      "fill": "$bile.light"
+    },
+    {
+      "id": "splash_fleck",
+      "at": [
+        -1.2,
+        3.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.4
+      },
+      "fill": "$bile.light"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

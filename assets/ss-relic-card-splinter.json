@@ -1,0 +1,720 @@
+{
+  "id": "ss.relic.card-splinter",
+  "name": "Splinter",
+  "description": "One wing-blade snapped across its middle: the two halves still carry the blade's own vocabulary — bone frame, grey membrane, the bone spine down one edge and the cold cutting edge down the other, a vein across each — and they lean apart into a V with the break at the right and five chips of frame and membrane flying out of it. The relic breaks a spent spine into two splinters that fly on, and a break still shedding its chips is the moment that says so. `ss.proj.card` is not composed directly because a document cannot be cut in half; the shards are redrawn from its parts at its size, and the jagged edges are where the two drawings agree they were once one. It stays off ss.relic.card by being one blade in pieces instead of three whole.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "shard_low_outline",
+      "at": [
+        2.4,
+        3.4
+      ],
+      "rot": 40.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.9,
+            5.56
+          ],
+          [
+            -3.8,
+            7.4
+          ],
+          [
+            3.8,
+            7.4
+          ],
+          [
+            5.9,
+            5.56
+          ],
+          [
+            5.9,
+            0.13
+          ],
+          [
+            3.01,
+            -1.46
+          ],
+          [
+            1.25,
+            0.0
+          ],
+          [
+            -0.58,
+            -1.26
+          ],
+          [
+            -2.42,
+            -0.09
+          ],
+          [
+            -3.99,
+            -1.45
+          ],
+          [
+            -5.9,
+            0.12
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "shard_low_frame",
+      "at": [
+        2.4,
+        3.4
+      ],
+      "rot": 40.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.1,
+            5.2
+          ],
+          [
+            -3.5,
+            6.6
+          ],
+          [
+            3.5,
+            6.6
+          ],
+          [
+            5.1,
+            5.2
+          ],
+          [
+            5.1,
+            0.6
+          ],
+          [
+            3.1,
+            -0.5
+          ],
+          [
+            1.3,
+            1.0
+          ],
+          [
+            -0.6,
+            -0.3
+          ],
+          [
+            -2.5,
+            0.9
+          ],
+          [
+            -4.0,
+            -0.4
+          ],
+          [
+            -5.1,
+            0.5
+          ]
+        ]
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "shard_low_membrane",
+      "at": [
+        2.4,
+        3.4
+      ],
+      "rot": 40.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.95,
+            4.68
+          ],
+          [
+            -3.07,
+            5.45
+          ],
+          [
+            3.07,
+            5.45
+          ],
+          [
+            3.95,
+            4.68
+          ],
+          [
+            3.95,
+            1.28
+          ],
+          [
+            3.23,
+            0.89
+          ],
+          [
+            1.37,
+            2.44
+          ],
+          [
+            -0.63,
+            1.08
+          ],
+          [
+            -2.61,
+            2.33
+          ],
+          [
+            -4.02,
+            1.1
+          ],
+          [
+            -3.95,
+            1.04
+          ]
+        ]
+      },
+      "fill": "$steel.light"
+    },
+    {
+      "id": "shard_low_spine",
+      "at": [
+        -2.81,
+        3.54
+      ],
+      "rot": 40.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 5.4,
+        "corner": 0.5
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "shard_low_edge",
+      "at": [
+        3.48,
+        8.81
+      ],
+      "rot": 40.0,
+      "shape": {
+        "kind": "rect",
+        "w": 0.9,
+        "h": 5.2
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "shard_low_vein",
+      "at": [
+        0.41,
+        6.24
+      ],
+      "rot": 102.0,
+      "shape": {
+        "kind": "rect",
+        "w": 5.6,
+        "h": 0.65
+      },
+      "fill": "$slate.light"
+    },
+    {
+      "id": "shard_high_outline",
+      "at": [
+        -2.6,
+        -1.8
+      ],
+      "rot": -38.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.9,
+            -5.56
+          ],
+          [
+            -3.8,
+            -7.4
+          ],
+          [
+            3.8,
+            -7.4
+          ],
+          [
+            5.9,
+            -5.56
+          ],
+          [
+            5.9,
+            -0.13
+          ],
+          [
+            3.01,
+            1.46
+          ],
+          [
+            1.25,
+            0.0
+          ],
+          [
+            -0.58,
+            1.26
+          ],
+          [
+            -2.42,
+            0.09
+          ],
+          [
+            -3.99,
+            1.45
+          ],
+          [
+            -5.9,
+            -0.12
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "shard_high_frame",
+      "at": [
+        -2.6,
+        -1.8
+      ],
+      "rot": -38.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.1,
+            -5.2
+          ],
+          [
+            -3.5,
+            -6.6
+          ],
+          [
+            3.5,
+            -6.6
+          ],
+          [
+            5.1,
+            -5.2
+          ],
+          [
+            5.1,
+            -0.6
+          ],
+          [
+            3.1,
+            0.5
+          ],
+          [
+            1.3,
+            -1.0
+          ],
+          [
+            -0.6,
+            0.3
+          ],
+          [
+            -2.5,
+            -0.9
+          ],
+          [
+            -4.0,
+            0.4
+          ],
+          [
+            -5.1,
+            -0.5
+          ]
+        ]
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "shard_high_membrane",
+      "at": [
+        -2.6,
+        -1.8
+      ],
+      "rot": -38.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.95,
+            -4.68
+          ],
+          [
+            -3.07,
+            -5.45
+          ],
+          [
+            3.07,
+            -5.45
+          ],
+          [
+            3.95,
+            -4.68
+          ],
+          [
+            3.95,
+            -1.28
+          ],
+          [
+            3.23,
+            -0.89
+          ],
+          [
+            1.37,
+            -2.44
+          ],
+          [
+            -0.63,
+            -1.08
+          ],
+          [
+            -2.61,
+            -2.33
+          ],
+          [
+            -4.02,
+            -1.1
+          ],
+          [
+            -3.95,
+            -1.04
+          ]
+        ]
+      },
+      "fill": "$steel.light"
+    },
+    {
+      "id": "shard_high_spine",
+      "at": [
+        -7.8,
+        -2.12
+      ],
+      "rot": -38.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 5.4,
+        "corner": 0.5
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "shard_high_edge",
+      "at": [
+        -1.34,
+        -7.17
+      ],
+      "rot": -38.0,
+      "shape": {
+        "kind": "rect",
+        "w": 0.9,
+        "h": 5.2
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "shard_high_vein",
+      "at": [
+        -4.49,
+        -4.7
+      ],
+      "rot": 24.0,
+      "shape": {
+        "kind": "rect",
+        "w": 5.6,
+        "h": 0.65
+      },
+      "fill": "$slate.light"
+    },
+    {
+      "id": "chip_0_outline",
+      "at": [
+        7.01,
+        -0.57
+      ],
+      "rot": -3.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.07,
+            1.79
+          ],
+          [
+            2.89,
+            0.09
+          ],
+          [
+            -1.36,
+            -2.05
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "chip_0",
+      "at": [
+        7.01,
+        -0.57
+      ],
+      "rot": -3.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.3,
+            0.91
+          ],
+          [
+            1.56,
+            0.0
+          ],
+          [
+            -0.91,
+            -1.17
+          ]
+        ]
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "chip_1_outline",
+      "at": [
+        7.81,
+        2.95
+      ],
+      "rot": 43.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.77,
+            1.58
+          ],
+          [
+            2.53,
+            0.09
+          ],
+          [
+            -1.15,
+            -1.78
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "chip_1",
+      "at": [
+        7.81,
+        2.95
+      ],
+      "rot": 43.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.0,
+            0.7
+          ],
+          [
+            1.2,
+            0.0
+          ],
+          [
+            -0.7,
+            -0.9
+          ]
+        ]
+      },
+      "fill": "$steel.light"
+    },
+    {
+      "id": "chip_2_outline",
+      "at": [
+        6.16,
+        -3.81
+      ],
+      "rot": -43.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.87,
+            1.65
+          ],
+          [
+            2.65,
+            0.09
+          ],
+          [
+            -1.22,
+            -1.87
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "chip_2",
+      "at": [
+        6.16,
+        -3.81
+      ],
+      "rot": -43.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.1,
+            0.77
+          ],
+          [
+            1.32,
+            0.0
+          ],
+          [
+            -0.77,
+            -0.99
+          ]
+        ]
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "chip_3_outline",
+      "at": [
+        5.13,
+        5.93
+      ],
+      "rot": 87.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.57,
+            1.44
+          ],
+          [
+            2.29,
+            0.09
+          ],
+          [
+            -1.01,
+            -1.6
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "chip_3",
+      "at": [
+        5.13,
+        5.93
+      ],
+      "rot": 87.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.8,
+            0.56
+          ],
+          [
+            0.96,
+            0.0
+          ],
+          [
+            -0.56,
+            -0.72
+          ]
+        ]
+      },
+      "fill": "$husk.light"
+    },
+    {
+      "id": "chip_4_outline",
+      "at": [
+        10.76,
+        1.37
+      ],
+      "rot": 21.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.47,
+            1.37
+          ],
+          [
+            2.17,
+            0.09
+          ],
+          [
+            -0.94,
+            -1.51
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "chip_4",
+      "at": [
+        10.76,
+        1.37
+      ],
+      "rot": 21.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.7,
+            0.49
+          ],
+          [
+            0.84,
+            0.0
+          ],
+          [
+            -0.49,
+            -0.63
+          ]
+        ]
+      },
+      "fill": "$silent"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

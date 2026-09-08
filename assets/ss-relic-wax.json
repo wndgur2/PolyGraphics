@@ -1,0 +1,23 @@
+{
+  "id": "ss.relic.wax",
+  "name": "Wax seal",
+  "description": "A blob of sealing wax, lumpy at the edge, dark red with a lit top and one sheen, stamped with a honeycomb cell: a hexagon raised as a ridge, its lit edge up-left and its shadow edge down-right, and the same red on the floor inside it so it is a ridge and not a hole. A short pale ribbon end is tucked under the lower-right of the blob. A seal is what closes a chest, and a hive's own cell pressed into it is the mark of the hive's stores — one more thing in every chest. The reds are ss.relic.oxygen's lungs' family, but that is two lobes and a windpipe; this is one round blob with a tail.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "ribbon_outline", "shape": {"kind": "poly", "points": [[4.06, 2.68], [12.08, 8.61], [8.64, 9.6], [8.68, 13.32], [0.76, 6.89]]}, "fill": "$ink"},
+    {"id": "ribbon", "shape": {"kind": "poly", "points": [[4.25, 4.06], [9.89, 8.21], [7.61, 8.85], [7.7, 11.33], [2.15, 6.74]]}, "fill": "$bone"},
+    {"id": "ribbon_fold", "shape": {"kind": "poly", "points": [[3.08, 5.56], [8.37, 9.82], [7.51, 10.93], [2.21, 6.66]]}, "fill": "$husk.dark"},
+    {"id": "wax_outline", "shape": {"kind": "poly", "points": [[11.98, 0.5], [11.28, 3.4], [10.16, 5.8], [8.53, 7.99], [6.18, 9.36], [3.87, 10.1], [1.54, 10.61], [-0.84, 10.39], [-2.83, 9.9], [-5.32, 9.81], [-8.66, 8.91], [-10.29, 5.73], [-9.68, 2.56], [-9.28, 0.5], [-9.32, -1.66], [-8.62, -4.06], [-7.35, -6.07], [-5.85, -8.07], [-3.64, -9.74], [-1.01, -10.45], [1.72, -10.67], [4.7, -9.94], [6.62, -7.41], [7.3, -5.21], [8.39, -4.11], [10.72, -2.49]]}, "fill": "$ink"},
+    {"id": "wax", "shape": {"kind": "poly", "points": [[10.72, 0.6], [10.14, 3], [9.12, 5.18], [7.71, 7.08], [5.69, 8.26], [3.56, 8.94], [1.47, 9.4], [-0.64, 9.2], [-2.67, 8.7], [-5.14, 8.62], [-7.83, 7.89], [-9.03, 5.55], [-8.5, 2.79], [-8.08, 0.6], [-8.12, -1.5], [-7.52, -3.56], [-6.36, -5.39], [-4.99, -7.21], [-3.1, -8.64], [-0.8, -9.26], [1.62, -9.46], [4, -8.88], [5.54, -6.85], [6.24, -4.57], [7.62, -3.19], [9.75, -1.7]]}, "fill": "$blood.dark"},
+    {"id": "wax_lit", "shape": {"kind": "poly", "points": [[7.15, -0.9], [6.55, 1.2], [5.22, 2.84], [3.84, 4.23], [2.18, 5.18], [0.3, 5.36], [-1.49, 5.32], [-3.53, 5.52], [-5.78, 5.08], [-7.1, 3.28], [-7.02, 0.98], [-6.65, -0.9], [-6.7, -2.69], [-6.39, -4.62], [-5.2, -6.2], [-3.56, -7.38], [-1.66, -8.3], [0.47, -8.34], [2.2, -7.03], [3.26, -5.35], [4.51, -4.18], [6.22, -2.9]]}, "fill": "$blood"},
+    {"id": "wax_sheen", "at": [-4.2, -5.4], "shape": {"kind": "ellipse", "rx": 2.2, "ry": 1.1}, "fill": "$coral.light", "rot": -35},
+    {"id": "cell_shadow", "at": [1, 1.4], "rot": 14, "shape": {"kind": "ngon", "sides": 6, "r": 4.9}, "fill": "$blood.dark2"},
+    {"id": "cell_lit", "at": [0, 0.3], "rot": 14, "shape": {"kind": "ngon", "sides": 6, "r": 4.9}, "fill": "$coral"},
+    {"id": "cell_floor", "at": [0.5, 0.85], "rot": 14, "shape": {"kind": "ngon", "sides": 6, "r": 3.7}, "fill": "$blood"}
+  ],
+  "variants": {
+    "glyph": {"description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.", "remove": ["plate"]}
+  }
+}

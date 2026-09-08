@@ -1,0 +1,358 @@
+{
+  "id": "ss.relic.tithe",
+  "name": "Tithe",
+  "description": "A shallow wooden bowl with a chitin lip, seen from a little above, holding blood to two-thirds: the level sits well below the rim, a dark-red tide mark on the inner wall shows where it used to stand, and the band of dry wall between the two is the third that is gone. One drop hangs in the air above the bowl with a bead below it, lifted out rather than falling in. The relic takes thirty from the health bar and gives thirty to the hit, and a measure taken out of a vessel is the trade drawn as an object. The inside of the bowl is red and not dark, so the ring of the lip does not read as the rim of a hole.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "bowl_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -11.16,
+            -1.39
+          ],
+          [
+            11.16,
+            -1.39
+          ],
+          [
+            11.08,
+            3.48
+          ],
+          [
+            7.97,
+            7.02
+          ],
+          [
+            3.17,
+            8.99
+          ],
+          [
+            -3.17,
+            8.99
+          ],
+          [
+            -7.97,
+            7.02
+          ],
+          [
+            -11.08,
+            3.48
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "lip_outline",
+      "at": [
+        0.0,
+        -0.4
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 12.0,
+        "ry": 4.5
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bowl",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -11.0,
+            -0.4
+          ],
+          [
+            11.0,
+            -0.4
+          ],
+          [
+            10.2,
+            3.0
+          ],
+          [
+            7.4,
+            6.2
+          ],
+          [
+            3.0,
+            8.0
+          ],
+          [
+            -3.0,
+            8.0
+          ],
+          [
+            -7.4,
+            6.2
+          ],
+          [
+            -10.2,
+            3.0
+          ]
+        ]
+      },
+      "fill": "$timber.dark"
+    },
+    {
+      "id": "bowl_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -9.4,
+            1.6
+          ],
+          [
+            -5.0,
+            4.6
+          ],
+          [
+            0.6,
+            5.8
+          ],
+          [
+            0.2,
+            7.2
+          ],
+          [
+            -5.4,
+            6.2
+          ],
+          [
+            -8.6,
+            4.2
+          ]
+        ]
+      },
+      "fill": "$timber"
+    },
+    {
+      "id": "lip",
+      "at": [
+        0.0,
+        -0.4
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 11.0,
+        "ry": 3.6
+      },
+      "fill": "$chitin"
+    },
+    {
+      "id": "wall",
+      "at": [
+        0.0,
+        -0.2
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 9.6,
+        "ry": 2.9
+      },
+      "fill": "$timber.light"
+    },
+    {
+      "id": "tide",
+      "at": [
+        0.0,
+        -0.1
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 9.1,
+        "ry": 2.6
+      },
+      "fill": "$blood.dark2"
+    },
+    {
+      "id": "wall_inner",
+      "at": [
+        0.0,
+        0.0
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 8.6,
+        "ry": 2.35
+      },
+      "fill": "$timber.light"
+    },
+    {
+      "id": "blood",
+      "at": [
+        0.0,
+        0.9
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.4,
+        "ry": 1.45
+      },
+      "fill": "$blood"
+    },
+    {
+      "id": "blood_sheen",
+      "at": [
+        -2.4,
+        0.6
+      ],
+      "rot": -6,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.4,
+        "ry": 0.55
+      },
+      "fill": "$blood.light"
+    },
+    {
+      "id": "drop_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            4.6,
+            -10.0
+          ],
+          [
+            6.65,
+            -9.12
+          ],
+          [
+            7.5,
+            -6.97
+          ],
+          [
+            6.68,
+            -4.95
+          ],
+          [
+            5.87,
+            -3.93
+          ],
+          [
+            4.6,
+            -2.4
+          ],
+          [
+            3.33,
+            -3.93
+          ],
+          [
+            2.52,
+            -4.95
+          ],
+          [
+            1.7,
+            -6.97
+          ],
+          [
+            2.55,
+            -9.12
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "drop",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            4.6,
+            -9.1
+          ],
+          [
+            6.0,
+            -8.5
+          ],
+          [
+            6.6,
+            -7.0
+          ],
+          [
+            5.9,
+            -5.4
+          ],
+          [
+            5.1,
+            -4.4
+          ],
+          [
+            4.6,
+            -3.3
+          ],
+          [
+            4.1,
+            -4.4
+          ],
+          [
+            3.3,
+            -5.4
+          ],
+          [
+            2.6,
+            -7.0
+          ],
+          [
+            3.2,
+            -8.5
+          ]
+        ]
+      },
+      "fill": "$blood"
+    },
+    {
+      "id": "drop_lit",
+      "at": [
+        4.4,
+        -7.1
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.2,
+        "ry": 1.3
+      },
+      "fill": "$blood.light"
+    },
+    {
+      "id": "drop_gleam",
+      "at": [
+        3.8,
+        -8.0
+      ],
+      "rot": -20,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 0.45,
+        "ry": 0.75
+      },
+      "fill": "$blood.light2"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

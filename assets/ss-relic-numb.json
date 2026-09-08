@@ -1,0 +1,627 @@
+{
+  "id": "ss.relic.numb",
+  "name": "Numbing sting",
+  "description": "A wasp's sting run out from the point of a banded amber abdomen — a fat teardrop at the top left with three dark bands across it — a pale curved needle, thick at the root and drawn to nothing at the point, lower edge in shadow — with two frost-blue arcs standing off its point down to the right, the near one tighter and paler. The arcs are ring segments with ring outlines under them, never filled discs, so they are ripples of cold going out ahead of the sting and not beads sitting on it. Every hit slows for a second; the sting is the hit, and the cold arcs are the second. The abdomen is the only body there is, so there is no face, and the bands are what say wasp rather than the ball-and-tube of ss.relic.feed; the sting does not fork, which keeps it apart from the horn of ss.relic.ram.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "abdomen_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.9,
+            -0.66
+          ],
+          [
+            -8.06,
+            -2.11
+          ],
+          [
+            -9.45,
+            -2.63
+          ],
+          [
+            -10.67,
+            -3.59
+          ],
+          [
+            -11.54,
+            -4.87
+          ],
+          [
+            -11.97,
+            -6.36
+          ],
+          [
+            -11.93,
+            -7.91
+          ],
+          [
+            -11.41,
+            -9.38
+          ],
+          [
+            -10.47,
+            -10.61
+          ],
+          [
+            -9.2,
+            -11.5
+          ],
+          [
+            -7.72,
+            -11.96
+          ],
+          [
+            -6.17,
+            -11.94
+          ],
+          [
+            -4.7,
+            -11.45
+          ],
+          [
+            -3.45,
+            -10.53
+          ],
+          [
+            -2.54,
+            -9.28
+          ],
+          [
+            -2.08,
+            -7.87
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "ripple_b_o",
+      "at": [
+        7.08,
+        5.6
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 5.4,
+        "width": 2.4,
+        "from": -22,
+        "to": 100
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "ripple_a_o",
+      "at": [
+        6.88,
+        5.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 3.1,
+        "width": 2.4,
+        "from": -34,
+        "to": 112
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "ripple_b",
+      "at": [
+        7.08,
+        5.6
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 5.4,
+        "width": 1,
+        "from": -20,
+        "to": 98
+      },
+      "fill": "$frost"
+    },
+    {
+      "id": "ripple_a",
+      "at": [
+        6.88,
+        5.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 3.1,
+        "width": 1.1,
+        "from": -32,
+        "to": 110
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "abdomen",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2,
+            -1.8
+          ],
+          [
+            -7.82,
+            -2.98
+          ],
+          [
+            -9.01,
+            -3.42
+          ],
+          [
+            -10,
+            -4.21
+          ],
+          [
+            -10.71,
+            -5.26
+          ],
+          [
+            -11.07,
+            -6.48
+          ],
+          [
+            -11.03,
+            -7.75
+          ],
+          [
+            -10.61,
+            -8.94
+          ],
+          [
+            -9.84,
+            -9.96
+          ],
+          [
+            -8.8,
+            -10.68
+          ],
+          [
+            -7.59,
+            -11.06
+          ],
+          [
+            -6.32,
+            -11.04
+          ],
+          [
+            -5.12,
+            -10.64
+          ],
+          [
+            -4.09,
+            -9.89
+          ],
+          [
+            -3.35,
+            -8.86
+          ],
+          [
+            -2.95,
+            -7.66
+          ]
+        ]
+      },
+      "fill": "$chitin"
+    },
+    {
+      "id": "abdomen_lit",
+      "at": [
+        -8.2,
+        -8.4
+      ],
+      "rot": 45,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.2,
+        "ry": 1.6
+      },
+      "fill": "$chitin.light"
+    },
+    {
+      "id": "band_a",
+      "at": [
+        -5,
+        -5
+      ],
+      "rot": 45,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 0.9,
+        "ry": 3.4
+      },
+      "fill": "$chitin.dark2"
+    },
+    {
+      "id": "band_b",
+      "at": [
+        -8,
+        -8
+      ],
+      "rot": 45,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 0.9,
+        "ry": 3.9
+      },
+      "fill": "$chitin.dark2"
+    },
+    {
+      "id": "band_c",
+      "at": [
+        -2.9,
+        -2.9
+      ],
+      "rot": 45,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 0.7,
+        "ry": 1.8
+      },
+      "fill": "$chitin.dark2"
+    },
+    {
+      "id": "sting_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.08,
+            -5.75
+          ],
+          [
+            -1.03,
+            -4.89
+          ],
+          [
+            0.07,
+            -4.33
+          ],
+          [
+            1.12,
+            -3.7
+          ],
+          [
+            2.11,
+            -2.99
+          ],
+          [
+            3.04,
+            -2.22
+          ],
+          [
+            3.91,
+            -1.38
+          ],
+          [
+            4.71,
+            -0.49
+          ],
+          [
+            5.43,
+            0.45
+          ],
+          [
+            6.09,
+            1.44
+          ],
+          [
+            6.66,
+            2.47
+          ],
+          [
+            7.15,
+            3.53
+          ],
+          [
+            7.85,
+            5.39
+          ],
+          [
+            5.88,
+            6.25
+          ],
+          [
+            4.95,
+            4.69
+          ],
+          [
+            4.39,
+            3.89
+          ],
+          [
+            3.77,
+            3.14
+          ],
+          [
+            3.11,
+            2.44
+          ],
+          [
+            2.4,
+            1.8
+          ],
+          [
+            1.65,
+            1.22
+          ],
+          [
+            0.86,
+            0.69
+          ],
+          [
+            0.05,
+            0.23
+          ],
+          [
+            -0.8,
+            -0.16
+          ],
+          [
+            -1.66,
+            -0.49
+          ],
+          [
+            -2.54,
+            -0.76
+          ],
+          [
+            -4.39,
+            -1.17
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "sting",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.49,
+            -4.53
+          ],
+          [
+            -1.41,
+            -4.08
+          ],
+          [
+            -0.37,
+            -3.55
+          ],
+          [
+            0.62,
+            -2.95
+          ],
+          [
+            1.56,
+            -2.28
+          ],
+          [
+            2.44,
+            -1.55
+          ],
+          [
+            3.26,
+            -0.76
+          ],
+          [
+            4.01,
+            0.09
+          ],
+          [
+            4.7,
+            0.98
+          ],
+          [
+            5.32,
+            1.91
+          ],
+          [
+            5.86,
+            2.88
+          ],
+          [
+            6.32,
+            3.88
+          ],
+          [
+            6.71,
+            4.9
+          ],
+          [
+            6.25,
+            5.1
+          ],
+          [
+            5.71,
+            4.2
+          ],
+          [
+            5.11,
+            3.35
+          ],
+          [
+            4.45,
+            2.54
+          ],
+          [
+            3.74,
+            1.8
+          ],
+          [
+            2.98,
+            1.11
+          ],
+          [
+            2.17,
+            0.49
+          ],
+          [
+            1.33,
+            -0.07
+          ],
+          [
+            0.46,
+            -0.57
+          ],
+          [
+            -0.44,
+            -0.99
+          ],
+          [
+            -1.37,
+            -1.35
+          ],
+          [
+            -2.31,
+            -1.63
+          ],
+          [
+            -3.26,
+            -1.84
+          ]
+        ]
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "sting_shade",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.43,
+            -4.72
+          ],
+          [
+            -1.35,
+            -4.25
+          ],
+          [
+            -0.3,
+            -3.7
+          ],
+          [
+            0.69,
+            -3.08
+          ],
+          [
+            1.63,
+            -2.39
+          ],
+          [
+            2.51,
+            -1.64
+          ],
+          [
+            3.33,
+            -0.83
+          ],
+          [
+            4.07,
+            0.03
+          ],
+          [
+            4.75,
+            0.93
+          ],
+          [
+            5.36,
+            1.88
+          ],
+          [
+            5.88,
+            2.86
+          ],
+          [
+            6.34,
+            3.87
+          ],
+          [
+            6.71,
+            4.9
+          ],
+          [
+            6.52,
+            4.99
+          ],
+          [
+            6.07,
+            4.01
+          ],
+          [
+            5.55,
+            3.07
+          ],
+          [
+            4.96,
+            2.17
+          ],
+          [
+            4.3,
+            1.31
+          ],
+          [
+            3.59,
+            0.51
+          ],
+          [
+            2.81,
+            -0.25
+          ],
+          [
+            1.99,
+            -0.94
+          ],
+          [
+            1.11,
+            -1.58
+          ],
+          [
+            0.19,
+            -2.15
+          ],
+          [
+            -0.78,
+            -2.65
+          ],
+          [
+            -1.78,
+            -3.08
+          ],
+          [
+            -2.81,
+            -3.43
+          ]
+        ]
+      },
+      "fill": "$husk.dark2"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

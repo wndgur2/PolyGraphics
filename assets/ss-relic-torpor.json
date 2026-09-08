@@ -1,0 +1,213 @@
+{
+  "id": "ss.relic.torpor",
+  "name": "Torpor",
+  "description": "A pill bug rolled up tight — a ball of dusky violet with its plates drawn as four broad bands curving across the back toward the tucked head at the lower right, every plate stepping over the next with a dark seam and a lit edge — and above it one soft curl of white breath going up in a lazy S. The curl is the point: the body is not dead, it is still and breathing, and standing still is what heals you. The bands run across the ball rather than spiralling into it, because a spiral on a disc is a snail, and they are broad steps rather than thin stripes, because thin stripes made a ball of yarn; the steam is a thick solid stroke with its own outline, not a fade, and a wisp rather than a ring so it does not read as a letter: two arcs of different size, leaning as they rise, because an upright S of two equal arcs over a round body was a letter S in silhouette, and its mirror a question mark.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "ball_outline",
+      "at": [
+        0.8,
+        3.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 9.1
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "ball",
+      "at": [
+        0.8,
+        3.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 7.9
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "ball_lit",
+      "at": [
+        -0.1,
+        2.6
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.9,
+        "ry": 6.6
+      },
+      "fill": "$carapace"
+    },
+    {
+      "id": "seam1",
+      "at": [
+        14.2,
+        13.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 12.4,
+        "width": 1.15,
+        "from": 191,
+        "to": 241
+      },
+      "fill": "$carapace.dark2"
+    },
+    {
+      "id": "ridge1",
+      "at": [
+        14.2,
+        13.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 11.3,
+        "width": 1,
+        "from": 193,
+        "to": 239
+      },
+      "fill": "$carapace.light"
+    },
+    {
+      "id": "seam2",
+      "at": [
+        14.2,
+        13.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 16.4,
+        "width": 1.15,
+        "from": 190,
+        "to": 242
+      },
+      "fill": "$carapace.dark2"
+    },
+    {
+      "id": "ridge2",
+      "at": [
+        14.2,
+        13.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 15.3,
+        "width": 1,
+        "from": 192,
+        "to": 240
+      },
+      "fill": "$carapace.light"
+    },
+    {
+      "id": "seam3",
+      "at": [
+        14.2,
+        13.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 20.6,
+        "width": 1.15,
+        "from": 197,
+        "to": 236
+      },
+      "fill": "$carapace.dark2"
+    },
+    {
+      "id": "ridge3",
+      "at": [
+        14.2,
+        13.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 19.5,
+        "width": 1,
+        "from": 199,
+        "to": 234
+      },
+      "fill": "$carapace.light"
+    },
+    {
+      "id": "breath_a_outline",
+      "at": [
+        -4.8,
+        -7.2
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 2.2,
+        "width": 3.1,
+        "from": 126,
+        "to": 298
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "breath_b_outline",
+      "at": [
+        -3.22,
+        -10.44
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 1.4,
+        "width": 3.1,
+        "from": 294,
+        "to": 478
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "breath_a",
+      "at": [
+        -4.8,
+        -7.2
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 2.2,
+        "width": 1.5,
+        "from": 128,
+        "to": 296
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "breath_b",
+      "at": [
+        -3.22,
+        -10.44
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 1.4,
+        "width": 1.5,
+        "from": 296,
+        "to": 476
+      },
+      "fill": "$silent"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}
