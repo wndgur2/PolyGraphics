@@ -253,19 +253,34 @@ measurements. Two things are sound-specific:
   Clipping is a per-sound question the cards answer; *does this hold together*
   is a question about the set, and it is answered by looking at the two ends of
   one sorted list.
+- **the spectrogram** under every waveform — log frequency, 60Hz to 16kHz, an
+  octave the same height everywhere — is the picture the waveform cannot draw:
+  a pitched voice is a comb, noise is a wash, and an empty top half is what a
+  phone will hear of it. `out/spec/*.png`, one per take, and the manifest
+  points at them.
+- **phone**, a toggle beside the sound tabs, puts a 250Hz highpass and an 8kHz
+  lowpass between every transport and the output — roughly what a small
+  speaker keeps. Most of what is wrong with a sound in this set is only wrong
+  there.
 
 The gallery links `out/wav/` rather than embedding it — twenty-seven takes of
 base64 would add ~3MB to a page that reloads itself on every rebuild — so every
 command that writes the gallery writes the bake too.
 
 ```bash
-npm run check                        # everything, gallery and bake included
-npm run wav                          # just the bake, and print what it measures
-npx tsx scripts/inspect-sound.ts     # a standalone, self-contained page to send someone
+npm run check                                          # everything, gallery and bake included
+npm run wav                                            # just the bake, and print what it measures
+npx tsx scripts/inspect-sound.ts                       # a standalone, self-contained page to send someone
+npx tsx scripts/inspect-sound.ts --against baselines   # …with every take beside its accepted one
 ```
 
-That last one is the shareable export: takes embedded, no server, opens
-anywhere. Pass ids to narrow it (`… ss.sfx.hit ss.sfx.creak`).
+The inspect page is the shareable export: takes embedded, no server, opens
+anywhere. Pass ids to narrow it (`… ss.sfx.hit ss.sfx.creak`). With
+`--against baselines` each take sits beside the WAV in `baselines/sounds/`
+with one transport for both and an **A/B** button that plays them back to
+back, so a re-author is judged against what it replaces at the same level,
+and the numbers beside it say what moved. That page, and the four questions
+in [docs/listening.md](docs/listening.md), are how a change gets listened to.
 
 That page exists because the rest of the system leans on rendering something and
 looking at it, and **an agent authoring these documents cannot listen**. So the
@@ -440,7 +455,7 @@ You are the intended primary author. Rules of the road:
 4. Prefer `use` over copying parts between assets; prefer a variant over a near-duplicate asset; prefer a theme over recoloring assets one by one.
 5. After every edit: `npm run check`. It either passes or tells you exactly what to fix (with suggestions). Then read the SVG or screenshot the gallery to judge the result visually before declaring it good.
 6. Add jitter only via `repeat.seed` — never invent randomness elsewhere; renders must stay diffable. In a sound, per-trigger variation is `jitter`, which the engine rolls and the bake ignores; everything else stays seeded.
-7. Sounds follow the same rules one table over: author pitches from `tokens.audio.pitch`, name voices for what they are, prefer `use` over copying, prefer a variant over a near-duplicate. You cannot hear what you wrote — read the measurements `npm run check` prints, and get a human to listen before declaring it good.
+7. Sounds follow the same rules one table over: author pitches from `tokens.audio.pitch`, name voices for what they are, prefer `use` over copying, prefer a variant over a near-duplicate. You cannot hear what you wrote — read the measurements `npm run check` prints, look at the spectrogram, and get a human to listen before declaring it good. [docs/listening.md](docs/listening.md) says how, and what to ask them.
 
 ## Roadmap (v0.x)
 

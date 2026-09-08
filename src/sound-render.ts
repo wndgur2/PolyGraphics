@@ -289,3 +289,159 @@ export function waveformSvg(pcm: Float32Array, w = 640, h = 120): string {
     `</svg>`,
   ].join("");
 }
+
+// ---------------------------------------------------------------- spectrogram
+
+/**
+ * The picture that shows what the waveform cannot: whether a voice is a
+ * harmonic comb or a wash of noise, where the onset really is, and whether
+ * the top half of the picture is empty — which is what a phone hears.
+ *
+ * Log frequency from 60Hz to 16kHz at twelve rows per octave, so an octave is
+ * the same height everywhere and a harmonic series is a ladder with rungs
+ * that get closer. 80dB of range, peak-normalized like the waveform, for the
+ * same reason: the question is what shape the sound has. One column per
+ * 1/320th of the take, whatever its length, so the picture sits under the
+ * waveform on the same time axis. Deterministic: same PCM, same picture.
+ */
+export interface Spectrogram {
+  width: number;
+  height: number;
+  /** Row-major, top row = highest frequency; 0 = -80dB or below, 255 = peak. */
+  data: Uint8Array;
+}
+
+const SPEC_FFT = 2048;
+const SPEC_LO_HZ = 60;
+const SPEC_HI_HZ = 16000;
+const SPEC_RANGE_DB = 80;
+
+/** In-place iterative radix-2 FFT. `re.length` must be a power of two. */
+function fft(re: Float64Array, im: Float64Array): void {
+  const n = re.length;
+  for (let i = 1, j = 0; i < n; i++) {
+    let bit = n >> 1;
+    for (; j & bit; bit >>= 1) j ^= bit;
+    j ^= bit;
+    if (i < j) {
+      [re[i], re[j]] = [re[j], re[i]];
+      [im[i], im[j]] = [im[j], im[i]];
+    }
+  }
+  for (let len = 2; len <= n; len <<= 1) {
+    const ang = (-2 * Math.PI) / len;
+    const wr = Math.cos(ang), wi = Math.sin(ang);
+    for (let i = 0; i < n; i += len) {
+      let cr = 1, ci = 0;
+      for (let k = 0; k < len / 2; k++) {
+        const a = i + k, b = a + len / 2;
+        const vr = re[b] * cr - im[b] * ci;
+        const vi = re[b] * ci + im[b] * cr;
+        re[b] = re[a] - vr; im[b] = im[a] - vi;
+        re[a] += vr; im[a] += vi;
+        const t = cr * wr - ci * wi;
+        ci = cr * wi + ci * wr;
+        cr = t;
+      }
+    }
+  }
+}
+
+export function spectrogram(pcm: Float32Array, sr = SAMPLE_RATE, width = 320, rows = 96): Spectrogram {
+  const n = SPEC_FFT;
+  const cols = Math.max(1, Math.min(width, pcm.length));
+  const hop = pcm.length / cols;
+  const win = new Float64Array(n);
+  for (let i = 0; i < n; i++) win[i] = 0.5 - 0.5 * Math.cos((2 * Math.PI * i) / (n - 1));
+  const re = new Float64Array(n), im = new Float64Array(n);
+  // Fractional FFT bin per row, bottom row lowest; magnitude is interpolated
+  // between the two bins either side so the bottom octaves are not staircases.
+  const bins = new Float64Array(rows);
+  for (let r = 0; r < rows; r++) bins[r] = (SPEC_LO_HZ * Math.pow(SPEC_HI_HZ / SPEC_LO_HZ, r / (rows - 1)) * n) / sr;
+
+  const mags = new Float64Array(cols * rows);
+  let max = 0;
+  for (let c = 0; c < cols; c++) {
+    const start = Math.round((c + 0.5) * hop) - n / 2;
+    for (let i = 0; i < n; i++) {
+      const s = start + i;
+      re[i] = (s >= 0 && s < pcm.length ? pcm[s] : 0) * win[i];
+      im[i] = 0;
+    }
+    fft(re, im);
+    for (let r = 0; r < rows; r++) {
+      const b0 = Math.floor(bins[r]);
+      const f = bins[r] - b0;
+      const m0 = Math.hypot(re[b0], im[b0]);
+      const m1 = Math.hypot(re[b0 + 1], im[b0 + 1]);
+      const m = m0 + (m1 - m0) * f;
+      mags[(rows - 1 - r) * cols + c] = m;
+      if (m > max) max = m;
+    }
+  }
+
+  const data = new Uint8Array(cols * rows);
+  if (max > 0)
+    for (let i = 0; i < data.length; i++) {
+      const db = mags[i] > 0 ? 20 * Math.log10(mags[i] / max) : -Infinity;
+      data[i] = Math.round(Math.max(0, 1 + db / SPEC_RANGE_DB) * 255);
+    }
+  return { width: cols, height: rows, data };
+}
+
+/**
+ * The spectrogram in the gallery's own inks — ground, then the spore teal the
+ * waveform is drawn in, then bone at the peak — as RGBA, ready for a PNG.
+ */
+export function spectrogramRGBA(s: Spectrogram): Uint8Array {
+  const stops: [number, [number, number, number]][] = [
+    [0, [11, 13, 18]],
+    [0.4, [24, 58, 74]],
+    [0.8, [88, 232, 216]],
+    [1, [234, 244, 255]],
+  ];
+  const out = new Uint8Array(s.width * s.height * 4);
+  for (let i = 0; i < s.data.length; i++) {
+    const v = s.data[i] / 255;
+    let k = 0;
+    while (k < stops.length - 2 && stops[k + 1][0] < v) k++;
+    const [t0, c0] = stops[k], [t1, c1] = stops[k + 1];
+    const f = (v - t0) / (t1 - t0);
+    out[i * 4] = Math.round(c0[0] + (c1[0] - c0[0]) * f);
+    out[i * 4 + 1] = Math.round(c0[1] + (c1[1] - c0[1]) * f);
+    out[i * 4 + 2] = Math.round(c0[2] + (c1[2] - c0[2]) * f);
+    out[i * 4 + 3] = 255;
+  }
+  return out;
+}
+
+/**
+ * The bake, read back. `regress` and the inspect page's `--against` both
+ * start from a WAV somebody accepted, and this is the one reader for it:
+ * 16-bit mono PCM, the only shape `toWav` writes.
+ */
+export function fromWav(buf: Buffer): { pcm: Float32Array; sampleRate: number } {
+  if (buf.toString("ascii", 0, 4) !== "RIFF" || buf.toString("ascii", 8, 12) !== "WAVE") throw new Error("not a WAV");
+  const channels = buf.readUInt16LE(22);
+  const sampleRate = buf.readUInt32LE(24);
+  const bits = buf.readUInt16LE(34);
+  if (channels !== 1 || bits !== 16) throw new Error(`expected 16-bit mono, got ${bits}-bit ×${channels}`);
+  // Walk the chunks to the data; a bake from here has it at 44, a WAV from
+  // elsewhere may carry a LIST chunk first.
+  let off = 12;
+  while (off + 8 <= buf.length) {
+    const id = buf.toString("ascii", off, off + 4);
+    const size = buf.readUInt32LE(off + 4);
+    if (id === "data") {
+      const n = Math.floor(Math.min(size, buf.length - off - 8) / 2);
+      const pcm = new Float32Array(n);
+      for (let i = 0; i < n; i++) {
+        const v = buf.readInt16LE(off + 8 + i * 2);
+        pcm[i] = v < 0 ? v / 32768 : v / 32767;
+      }
+      return { pcm, sampleRate };
+    }
+    off += 8 + size + (size & 1);
+  }
+  throw new Error("WAV has no data chunk");
+}

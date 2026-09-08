@@ -16,7 +16,7 @@ import { buildGallery } from "./gallery.js";
 import { compileAsset } from "./compile.js";
 import { SoundSchema, type Sound } from "./sound-schema.js";
 import { compileSound, type SoundRegistry } from "./sound-compile.js";
-import { describe, renderPCM, SAMPLE_RATE, toWav } from "./sound-render.js";
+import { describe, renderPCM, SAMPLE_RATE, spectrogram, spectrogramRGBA, toWav } from "./sound-render.js";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const dir = (...p: string[]) => join(ROOT, ...p);
@@ -263,17 +263,35 @@ function writeSoundIR(sreg: SoundRegistry): number {
 }
 
 /** Every sound, every variant, baked — keyed the way the PNG bake is. */
-function renderAllWavs(sreg: SoundRegistry): Map<string, { wav: Buffer; d: ReturnType<typeof describe> }> {
-  const out = new Map<string, { wav: Buffer; d: ReturnType<typeof describe> }>();
+type Take = { wav: Buffer; d: ReturnType<typeof describe>; pcm: Float32Array };
+function renderAllWavs(sreg: SoundRegistry): Map<string, Take> {
+  const out = new Map<string, Take>();
   for (const sound of sreg.sounds.values()) {
     const { ir } = compileSound(sound, sreg);
     const fileId = sound.id.replace(/\./g, "-");
     for (const variant of [undefined, ...Object.keys(ir.variants)]) {
       const pcm = renderPCM(ir, { variant });
-      out.set(`${fileId}${variant ? `--${variant}` : ""}.wav`, { wav: toWav(pcm), d: describe(pcm) });
+      out.set(`${fileId}${variant ? `--${variant}` : ""}.wav`, { wav: toWav(pcm), d: describe(pcm), pcm });
     }
   }
   return out;
+}
+
+/**
+ * One spectrogram per take, beside the WAV. The gallery draws it under the
+ * waveform and the manifest points at it: the one picture that shows whether
+ * a voice is a comb or a wash, and whether its top half is empty.
+ */
+async function writeSpectrograms(takes: Map<string, Take>): Promise<number> {
+  const { PNG } = await import("pngjs");
+  mkdirSync(dir("out", "spec"), { recursive: true });
+  for (const [name, { pcm }] of takes) {
+    const s = spectrogram(pcm);
+    const png = new PNG({ width: s.width, height: s.height });
+    png.data = Buffer.from(spectrogramRGBA(s));
+    writeFileSync(dir("out", "spec", name.replace(/\.wav$/, ".png")), PNG.sync.write(png));
+  }
+  return takes.size;
 }
 
 function writeManifest(reg: Registry, sreg: SoundRegistry): void {
@@ -297,6 +315,7 @@ function writeManifest(reg: Registry, sreg: SoundRegistry): void {
     return {
       id: sd.id,
       file: `wav/${sd.id.replace(/\./g, "-")}.wav`,
+      spec: `spec/${sd.id.replace(/\./g, "-")}.png`,
       name: sd.name,
       description: sd.description,
       tags: sd.tags,
@@ -438,7 +457,8 @@ if (cmd === "wav" || cmd === "check") {
     const wavs = renderAllWavs(sreg);
     mkdirSync(dir("out", "wav"), { recursive: true });
     for (const [name, { wav }] of wavs) writeFileSync(dir("out", "wav", name), wav);
-    console.log(`✓ baked ${wavs.size} wav files → out/wav (${SAMPLE_RATE}Hz mono)`);
+    const specs = await writeSpectrograms(wavs);
+    console.log(`✓ baked ${wavs.size} wav files → out/wav (${SAMPLE_RATE}Hz mono), ${specs} spectrograms → out/spec`);
     if (cmd === "wav")
       for (const [name, { d }] of wavs)
         console.log(`  ${name.padEnd(28)} ${d.duration}s  peak ${String(d.peakDb).padStart(6)}dB  rms ${String(d.rmsDb).padStart(6)}dB  ${String(d.attackMs).padStart(6)}ms atk  ${d.brightness}Hz zc`);

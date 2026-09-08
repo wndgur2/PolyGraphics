@@ -68,6 +68,7 @@ const soundFileOf = (sd: Sound) => `sounds/${slug(sd.id)}.json`;
  * sits beside this file and every command that writes the gallery writes it.
  */
 const wavOf = (id: string, variant?: string) => `wav/${slug(id)}${variant ? `--${variant}` : ""}.wav`;
+const specOf = (id: string, variant?: string) => `spec/${slug(id)}${variant ? `--${variant}` : ""}.png`;
 
 let uidCounter = 0;
 function cell(asset: Asset, reg: Registry, issues: Issue[], caption: string, opts: { variant?: string; animation?: string } = {}): string {
@@ -299,7 +300,7 @@ function voiceRow(v: Voice): string {
 </tr>`;
 }
 
-interface Take { label: string; variant?: string; wav: string; wave: string; peakDb: number; rmsDb: number; attackMs: number; dur: number; voices: number }
+interface Take { label: string; variant?: string; wav: string; spec: string; wave: string; peakDb: number; rmsDb: number; attackMs: number; dur: number; voices: number }
 
 function takesOf(sd: Sound, sreg: SoundRegistry, issues: Issue[]): Take[] {
   const { ir, issues: cissues } = compileSound(sd, sreg);
@@ -311,6 +312,7 @@ function takesOf(sd: Sound, sreg: SoundRegistry, issues: Issue[]): Take[] {
       label: variant ? `#${variant}` : "base",
       variant,
       wav: wavOf(sd.id, variant),
+      spec: specOf(sd.id, variant),
       wave: waveformSvg(pcm, 640, 90),
       peakDb: d.peakDb,
       rmsDb: d.rmsDb,
@@ -330,8 +332,12 @@ function takeCell(sd: Sound, t: Take): string {
   const j = sd.jitter?.freq ?? [1, 1];
   const btn = (n: number, label: string) =>
     `<button data-play="${esc(t.wav)}" data-lo="${j[0]}" data-hi="${j[1]}" data-n="${n}">${label}</button>`;
+  // The spectrogram sits under the waveform on the same time axis: 60Hz at
+  // the bottom, 16kHz at the top, an octave the same height everywhere. A
+  // comb is a pitched voice, a wash is noise, and an empty top half is what a
+  // phone will hear of it.
   return `<figure class="cell snd">
-  <div class="wave">${t.wave}<span class="norm">peak-normalized</span></div>
+  <div class="wave">${t.wave}<img class="spec" src="${esc(t.spec)}" alt="" loading="lazy"><span class="norm">peak-normalized</span></div>
   <figcaption>
     <span class="take">${esc(t.label)}</span>
     ${btn(1, "play")}${btn(8, "burst ×8")}
@@ -550,7 +556,16 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
     // The landing tab is named here rather than inferred from position: the
     // sidebar's order is a reading order, and it has already changed once.
     ...cats.map((c, i) => `<button data-tab="${esc(c)}"${i === 0 ? " data-first" : ""}><span>${esc(c)}</span><i>${byCat.get(c)!.length}</i></button>`),
-    ...(scats.length ? [`<div class="group">sounds</div>`, `<button data-tab="snd-set"><span>the set</span><i>${sreg.sounds.size}</i></button>`] : []),
+    ...(scats.length
+      ? [
+          `<div class="group">sounds</div>`,
+          `<button data-tab="snd-set"><span>the set</span><i>${sreg.sounds.size}</i></button>`,
+          // What a small speaker keeps: a 250Hz highpass and an 8kHz lowpass
+          // between every transport and the output. Most of what is wrong with
+          // a sound in this set is only wrong here.
+          `<button data-phone title="Play everything through what a phone speaker keeps — a 250Hz highpass and an 8kHz lowpass"><span>phone</span></button>`,
+        ]
+      : []),
     ...scats.map((c) => `<button data-tab="${esc(c)}"><span>${esc(c.replace(/^snd-/, ""))}</span><i>${soundsByCat.get(c)!.length}</i></button>`),
   ].join("");
 
@@ -667,6 +682,8 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
   .cell.snd { align-items:stretch; gap:6px; }
   .cell.snd .wave { position:relative; background:#0b0d12; border:1px solid var(--line); border-radius:6px; padding:4px 0; }
   .cell.snd .wave svg { display:block; width:100%; height:auto; }
+  .cell.snd .spec { display:block; width:100%; height:64px; image-rendering:pixelated; border-top:1px solid var(--line); margin-top:4px; }
+  [data-phone] { border-style:dashed; } [data-phone].on { border-style:solid; border-color:var(--acc); color:var(--acc); }
   .cell.snd .norm { position:absolute; right:8px; top:5px; color:#2b3244; font-size:10px; }
   .cell.snd figcaption { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
   .cell.snd .take { color:#e87ad0; font: 12px ui-monospace, monospace; min-width:52px; }
@@ -830,6 +847,24 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
   // jittered rate. Nothing is fetched until something is played.
   let actx = null;
   const buffers = new Map();
+  // The phone: what a small speaker keeps, in the way of every transport.
+  let phone = sessionStorage.phone === '1';
+  const phoneBtn = $('[data-phone]');
+  if (phoneBtn) {
+    phoneBtn.classList.toggle('on', phone);
+    phoneBtn.onclick = () => { phone = !phone; sessionStorage.phone = phone ? '1' : ''; phoneBtn.classList.toggle('on', phone); };
+  }
+  let phoneChain = null;
+  const output = () => {
+    if (!phone) return actx.destination;
+    if (!phoneChain) {
+      const hp = actx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 250; hp.Q.value = 0.707;
+      const lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 8000; lp.Q.value = 0.707;
+      hp.connect(lp); lp.connect(actx.destination);
+      phoneChain = hp;
+    }
+    return phoneChain;
+  };
   const load = (src) => {
     if (!buffers.has(src)) buffers.set(src, fetch(src).then(r => r.arrayBuffer()).then(b => actx.decodeAudioData(b)));
     return buffers.get(src);
@@ -847,7 +882,7 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
       const s = actx.createBufferSource();
       s.buffer = buf;
       s.playbackRate.value = lo + Math.random() * (hi - lo);
-      s.connect(actx.destination);
+      s.connect(output());
       s.start(actx.currentTime + i * (buf.duration < 0.12 ? 0.07 : buf.duration * 0.75));
     }
   });
