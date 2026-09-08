@@ -17,7 +17,7 @@ import type { Asset, Part } from "./schema.js";
 import type { Sound, Voice } from "./sound-schema.js";
 import { renderSVG, type Issue, type Registry } from "./render.js";
 import { compileSound, type SoundRegistry } from "./sound-compile.js";
-import { describe, renderPCM, waveformSvg } from "./sound-render.js";
+import { describe, renderPCM, waveformSvg, type Descriptors } from "./sound-render.js";
 import { applyTheme, resolveColor, type Theme, type Tokens } from "./tokens.js";
 
 const CATEGORY_ORDER = [
@@ -59,7 +59,7 @@ const fileOf = (a: Asset) => `assets/${slug(a.id)}.json`;
  * Sound families get their own tabs under their own heading, keyed apart from
  * the asset categories so a document tagged `lib` on both sides cannot collide.
  */
-const SOUND_ORDER = ["weapon", "impact", "creature", "player", "pickup", "world", "interface", "fanfare"];
+const SOUND_ORDER = ["weapon", "impact", "creature", "player", "pickup", "world", "field", "interface", "fanfare"];
 const soundCat = (sd: Sound) => `snd-${sd.tags[1] ?? sd.tags[0]}`;
 const soundFileOf = (sd: Sound) => `sounds/${slug(sd.id)}.json`;
 /**
@@ -68,6 +68,7 @@ const soundFileOf = (sd: Sound) => `sounds/${slug(sd.id)}.json`;
  * sits beside this file and every command that writes the gallery writes it.
  */
 const wavOf = (id: string, variant?: string) => `wav/${slug(id)}${variant ? `--${variant}` : ""}.wav`;
+const specOf = (id: string, variant?: string) => `spec/${slug(id)}${variant ? `--${variant}` : ""}.png`;
 
 let uidCounter = 0;
 function cell(asset: Asset, reg: Registry, issues: Issue[], caption: string, opts: { variant?: string; animation?: string } = {}): string {
@@ -264,10 +265,12 @@ function voiceRow(v: Voice): string {
   const bits: string[] = [];
   if ("use" in v)
     bits.push(`use ${v.use}${v.variant ? `#${v.variant}` : ""}${v.pitch !== undefined ? ` @ ${v.pitch}` : ""}`);
+  else if ("phrase" in v)
+    bits.push(`phrase ${v.phrase.use}${v.phrase.variant ? `#${v.phrase.variant}` : ""} · ${v.phrase.notes.map((n) => n ?? "·").join(" ")} · step ${v.phrase.step}s`);
   else if ("repeat" in v)
     bits.push(`repeat ×${v.repeat.count} ${v.repeat.of.kind} · ${v.repeat.spread}s spread, ${v.repeat.grain} grain`);
   else if (v.source.kind === "osc")
-    bits.push(`${v.source.wave} ${v.source.freq}${v.source.to !== undefined ? ` → ${v.source.to}` : ""}`);
+    bits.push(`${v.source.wave} ${v.source.freq}${v.source.to !== undefined ? ` → ${v.source.to}` : ""}${v.source.unison ? ` ×${v.source.unison.count} ±${v.source.unison.detune}¢` : ""}`);
   else bits.push("noise");
 
   // The gain is this row's paint; everything else is a modifier and lives in
@@ -275,10 +278,11 @@ function voiceRow(v: Voice): string {
   // push a nowrap column off the page.
   const xf: string[] = [];
   if (v.at) xf.push(`at ${v.at}s`);
-  if (v.dur !== undefined) xf.push(`dur ${v.dur}`);
-  // A `use` voice carries no shaping of its own — the document it composes
-  // brings its own — so only the two that own a waveform have these columns.
-  if (!("use" in v)) {
+  if ("dur" in v && v.dur !== undefined) xf.push(`dur ${v.dur}`);
+  if (v.echo) xf.push(`echo ${v.echo.time}s ×${v.echo.feedback}`);
+  // A `use` or `phrase` voice carries no shaping of its own — the document it
+  // composes brings its own — so only the two that own a waveform have these.
+  if ("source" in v || "repeat" in v) {
     if (v.filter)
       xf.push(
         `${v.filter.type} ${v.filter.freq}${v.filter.to !== undefined ? `→${v.filter.to}` : ""}${v.filter.q !== undefined ? ` q ${v.filter.q}` : ""}`,
@@ -299,7 +303,7 @@ function voiceRow(v: Voice): string {
 </tr>`;
 }
 
-interface Take { label: string; variant?: string; wav: string; wave: string; peakDb: number; rmsDb: number; attackMs: number; dur: number; voices: number }
+interface Take { label: string; variant?: string; wav: string; spec: string; wave: string; d: Descriptors; dur: number; voices: number }
 
 function takesOf(sd: Sound, sreg: SoundRegistry, issues: Issue[]): Take[] {
   const { ir, issues: cissues } = compileSound(sd, sreg);
@@ -311,10 +315,9 @@ function takesOf(sd: Sound, sreg: SoundRegistry, issues: Issue[]): Take[] {
       label: variant ? `#${variant}` : "base",
       variant,
       wav: wavOf(sd.id, variant),
+      spec: specOf(sd.id, variant),
       wave: waveformSvg(pcm, 640, 90),
-      peakDb: d.peakDb,
-      rmsDb: d.rmsDb,
-      attackMs: d.attackMs,
+      d,
       dur: d.duration,
       voices: (variant ? ir.variants[variant].voices : ir.voices).length,
     };
@@ -330,12 +333,16 @@ function takeCell(sd: Sound, t: Take): string {
   const j = sd.jitter?.freq ?? [1, 1];
   const btn = (n: number, label: string) =>
     `<button data-play="${esc(t.wav)}" data-lo="${j[0]}" data-hi="${j[1]}" data-n="${n}">${label}</button>`;
+  // The spectrogram sits under the waveform on the same time axis: 60Hz at
+  // the bottom, 16kHz at the top, an octave the same height everywhere. A
+  // comb is a pitched voice, a wash is noise, and an empty top half is what a
+  // phone will hear of it.
   return `<figure class="cell snd">
-  <div class="wave">${t.wave}<span class="norm">peak-normalized</span></div>
+  <div class="wave">${t.wave}<img class="spec" src="${esc(t.spec)}" alt="" loading="lazy"><span class="norm">peak-normalized</span></div>
   <figcaption>
     <span class="take">${esc(t.label)}</span>
     ${btn(1, "play")}${btn(8, "burst ×8")}
-    <span class="dim">${t.dur}s · ${t.voices} voices · peak ${t.peakDb} · rms ${t.rmsDb}</span>
+    <span class="dim">${t.dur}s · ${t.voices} voices · loud ${t.d.loudnessDb} · peak ${t.d.truePeakDb} · phone −${t.d.phoneLossDb}</span>
   </figcaption>
 </figure>`;
 }
@@ -362,9 +369,14 @@ function soundDetailBlock(sd: Sound, sreg: SoundRegistry, issues: Issue[]): stri
     ["file", `<code>${esc(soundFileOf(sd))}</code>`, "wide"],
     ["duration", `${sd.duration}s`],
     ["voices", String(sd.voices.length)],
-    ["peak", `${base.peakDb} dBFS`],
-    ["rms", `${base.rmsDb} dBFS`],
-    ["attack", `${base.attackMs} ms`],
+    ["loudness", `${base.d.loudnessDb} dB`],
+    ["true peak", `${base.d.truePeakDb} dBTP`],
+    ["rms", `${base.d.rmsDb} dBFS`],
+    ["attack", `${base.d.attackMs} ms`],
+    ["tail", `${base.d.tailS} s`],
+    ["phone loses", `${base.d.phoneLossDb} dB`],
+    ["centroid", `${base.d.centroidHz} Hz`],
+    ["low / mid / high", `${Math.round(base.d.bands.low * 100)} / ${Math.round(base.d.bands.mid * 100)} / ${Math.round(base.d.bands.high * 100)} %`],
     ...(sd.gain !== undefined ? [["gain", String(sd.gain)] as [string, string]] : []),
     ...(sd.jitter?.freq ? [["jitter", `×${sd.jitter.freq[0]}–${sd.jitter.freq[1]}`] as [string, string]] : []),
     ...(sd.offBand ? [["off-band", esc(sd.offBand), "wide"] as [string, string, string]] : []),
@@ -392,7 +404,7 @@ function soundDetailBlock(sd: Sound, sreg: SoundRegistry, issues: Issue[]): stri
   const brief = [
     `${sd.id} — ${sd.name} (${soundFileOf(sd)})`,
     sd.description,
-    `${sd.duration}s, peak ${base.peakDb}dBFS, rms ${base.rmsDb}dBFS`,
+    `${sd.duration}s, loudness ${base.d.loudnessDb}dB K-weighted, true peak ${base.d.truePeakDb}dBTP, attack ${base.d.attackMs}ms, phone loses ${base.d.phoneLossDb}dB, centroid ${base.d.centroidHz}Hz`,
     `voices: ${sd.voices.map((v) => v.id).join(", ")}`,
     ...(variants.length ? [`variants: ${variants.map(([n]) => n).join(", ")}`] : []),
   ].join("\n");
@@ -430,28 +442,32 @@ function soundDetailBlock(sd: Sound, sreg: SoundRegistry, issues: Issue[]): stri
  * it is answered by sorting twenty numbers and looking at the ends.
  */
 function soundSet(sreg: SoundRegistry, issues: Issue[]): string {
+  const L = sreg.tokens.audio?.loudness ?? {};
+  const anchor = L.anchor ?? -26, band = L.band ?? 4, phoneLoss = L.phoneLoss ?? 6;
   const rows = [...sreg.sounds.values()]
     .map((sd) => ({ sd, t: takesOf(sd, sreg, issues)[0] }))
-    .sort((a, b) => b.t.rmsDb - a.t.rmsDb);
+    .sort((a, b) => b.t.d.loudnessDb - a.t.d.loudnessDb);
   const inBand = (sd: Sound) => sd.tags[0] !== "lib" && !sd.offBand;
-  const triggered = rows.filter((r) => inBand(r.sd)).map((r) => r.t.rmsDb).sort((a, b) => a - b);
-  const median = triggered.length ? triggered[Math.floor(triggered.length / 2)] : 0;
+  const family = (sd: Sound) => sd.tags[1] ?? sd.tags[0];
+  const target = (sd: Sound) => anchor + (L[family(sd)] ?? 0);
   return `<table class="set">
-  <tr><th>sound</th><th>family</th><th></th><th>dur</th><th>peak</th><th>rms</th><th>vs median</th></tr>
+  <tr><th>sound</th><th>family</th><th></th><th>dur</th><th>loudness</th><th>sits at</th><th>vs</th><th>phone</th><th>centroid</th></tr>
   ${rows
     .map(({ sd, t }) => {
-      const off = !inBand(sd) ? "—" : `${t.rmsDb - median > 0 ? "+" : ""}${Math.round(t.rmsDb - median)}dB`;
-      const far = inBand(sd) && Math.abs(t.rmsDb - median) > 9;
+      const diff = t.d.loudnessDb - target(sd);
+      const off = !inBand(sd) ? "—" : `${diff > 0 ? "+" : ""}${Math.round(diff)}dB`;
+      const far = inBand(sd) && Math.abs(diff) > band;
+      const deaf = sd.tags[0] !== "lib" && t.d.phoneLossDb > phoneLoss;
       return `<tr${far ? ' class="far"' : ""}${sd.offBand ? ` title="off-band on purpose: ${esc(sd.offBand)}"` : ""}>
       <td><a href="#/${esc(sd.id)}">${esc(sd.id)}</a></td>
-      <td class="dim">${esc(sd.tags[1] ?? sd.tags[0])}</td>
+      <td class="dim">${esc(family(sd))}</td>
       <td><button data-play="${esc(t.wav)}" data-lo="1" data-hi="1" data-n="1">▸</button></td>
-      <td class="num">${t.dur}s</td><td class="num">${t.peakDb}</td><td class="num">${t.rmsDb}</td>
-      <td class="num">${off}</td></tr>`;
+      <td class="num">${t.dur}s</td><td class="num">${t.d.loudnessDb}</td><td class="num dim">${inBand(sd) ? target(sd) : "—"}</td>
+      <td class="num">${off}</td><td class="num${deaf ? " far" : ""}">−${t.d.phoneLossDb}</td><td class="num dim">${t.d.centroidHz}</td></tr>`;
     })
     .join("")}
 </table>
-<p class="hint dim">Median of the triggered set: ${median} dBFS. Library documents are material rather than sounds the game fires, so they sit outside it. Anything more than 9dB out is flagged here and by <code>npm run check</code>.</p>`;
+<p class="hint dim">Loudness is K-weighted over the sounding extent, in dBFS. Each family sits at the anchor (${anchor}) plus its offset in <code>audio.loudness</code>, ±${band}; library documents are material rather than sounds the game fires, so they sit outside it. <em>phone</em> is what the loudest instant loses through a small speaker — past ${phoneLoss}dB the low end is carrying the sound. Both are flagged here and by <code>npm run check</code>.</p>`;
 }
 
 function swatches(tokens: Tokens): string {
@@ -550,7 +566,16 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
     // The landing tab is named here rather than inferred from position: the
     // sidebar's order is a reading order, and it has already changed once.
     ...cats.map((c, i) => `<button data-tab="${esc(c)}"${i === 0 ? " data-first" : ""}><span>${esc(c)}</span><i>${byCat.get(c)!.length}</i></button>`),
-    ...(scats.length ? [`<div class="group">sounds</div>`, `<button data-tab="snd-set"><span>the set</span><i>${sreg.sounds.size}</i></button>`] : []),
+    ...(scats.length
+      ? [
+          `<div class="group">sounds</div>`,
+          `<button data-tab="snd-set"><span>the set</span><i>${sreg.sounds.size}</i></button>`,
+          // What a small speaker keeps: a 250Hz highpass and an 8kHz lowpass
+          // between every transport and the output. Most of what is wrong with
+          // a sound in this set is only wrong here.
+          `<button data-phone title="Play everything through what a phone speaker keeps — a 250Hz highpass and an 8kHz lowpass"><span>phone</span></button>`,
+        ]
+      : []),
     ...scats.map((c) => `<button data-tab="${esc(c)}"><span>${esc(c.replace(/^snd-/, ""))}</span><i>${soundsByCat.get(c)!.length}</i></button>`),
   ].join("");
 
@@ -667,6 +692,8 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
   .cell.snd { align-items:stretch; gap:6px; }
   .cell.snd .wave { position:relative; background:#0b0d12; border:1px solid var(--line); border-radius:6px; padding:4px 0; }
   .cell.snd .wave svg { display:block; width:100%; height:auto; }
+  .cell.snd .spec { display:block; width:100%; height:64px; image-rendering:pixelated; border-top:1px solid var(--line); margin-top:4px; }
+  [data-phone] { border-style:dashed; } [data-phone].on { border-style:solid; border-color:var(--acc); color:var(--acc); }
   .cell.snd .norm { position:absolute; right:8px; top:5px; color:#2b3244; font-size:10px; }
   .cell.snd figcaption { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
   .cell.snd .take { color:#e87ad0; font: 12px ui-monospace, monospace; min-width:52px; }
@@ -678,7 +705,7 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
   table.set td { padding:4px 16px 4px 0; border-bottom:1px solid #1b2030; }
   table.set td.num { text-align:right; color:#bce05a; font-variant-numeric:tabular-nums; }
   table.set tr:hover td { background:#171b28; }
-  table.set tr.far td, table.set tr.far td.num { color:#ff9b3d; }
+  table.set tr.far td, table.set tr.far td.num, table.set td.far { color:#ff9b3d; }
   table.set a { color:var(--acc); text-decoration:none; } table.set a:hover { text-decoration:underline; }
   table.set button { padding:0 8px; }
   .tok.pitch { min-width:150px; }
@@ -830,6 +857,24 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
   // jittered rate. Nothing is fetched until something is played.
   let actx = null;
   const buffers = new Map();
+  // The phone: what a small speaker keeps, in the way of every transport.
+  let phone = sessionStorage.phone === '1';
+  const phoneBtn = $('[data-phone]');
+  if (phoneBtn) {
+    phoneBtn.classList.toggle('on', phone);
+    phoneBtn.onclick = () => { phone = !phone; sessionStorage.phone = phone ? '1' : ''; phoneBtn.classList.toggle('on', phone); };
+  }
+  let phoneChain = null;
+  const output = () => {
+    if (!phone) return actx.destination;
+    if (!phoneChain) {
+      const hp = actx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 250; hp.Q.value = 0.707;
+      const lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 8000; lp.Q.value = 0.707;
+      hp.connect(lp); lp.connect(actx.destination);
+      phoneChain = hp;
+    }
+    return phoneChain;
+  };
   const load = (src) => {
     if (!buffers.has(src)) buffers.set(src, fetch(src).then(r => r.arrayBuffer()).then(b => actx.decodeAudioData(b)));
     return buffers.get(src);
@@ -847,7 +892,7 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
       const s = actx.createBufferSource();
       s.buffer = buf;
       s.playbackRate.value = lo + Math.random() * (hi - lo);
-      s.connect(actx.destination);
+      s.connect(output());
       s.start(actx.currentTime + i * (buf.duration < 0.12 ? 0.07 : buf.duration * 0.75));
     }
   });

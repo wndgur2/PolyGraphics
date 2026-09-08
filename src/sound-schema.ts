@@ -15,6 +15,19 @@
  *   animations → env    (keyframe tracks; the same [t, value] pairs)
  *
  * Coordinate system: origin at t=0, +t forward, units seconds.
+ *
+ * Four things here compile away into the vocabulary above and never reach the
+ * IR, in the relationship `to` has to a `freq` track and `ngon` has to `poly`:
+ *
+ *   unison  → N detuned copies of an oscillator voice          (width)
+ *   echo    → decaying copies of any voice, later               (space)
+ *   phrase  → a sequence of `use` voices playing one instrument (a figure)
+ *   takes   → N alternates of the document, reseeded and rolled (variety)
+ *
+ * `phrase` is the one construct on this side with no twin on the visual side.
+ * Time carries an ordering that space does not, and a melody written as six
+ * hand-offset `use` voices was the document fighting the author. It is an
+ * asymmetry on purpose, and this is where it is written down.
  */
 import { z } from "zod";
 
@@ -41,6 +54,14 @@ export const SourceSchema = z.discriminatedUnion("kind", [
     wave: z.enum(["sine", "square", "sawtooth", "triangle"]),
     freq: PitchSchema,
     to: PitchSchema.optional(),
+    /**
+     * Width: `count` copies of this oscillator spread ±`detune` cents either
+     * side of the pitch, each at 1/√count of the level. Two triangles seven
+     * cents apart are what the game's own pad is made of, and nothing in a
+     * document could say so until now. Compiles to plain voices; a glide on
+     * the source detunes with each copy, a filter stays where it was.
+     */
+    unison: z.strictObject({ count: z.number().int().min(2).max(8), detune: z.number().positive().max(100) }).optional(),
   }),
   // Broadband noise — air, smoke, anything that isn't a pitch. Seeded, because
   // a sound that renders differently every time cannot be regression-tested.
@@ -128,12 +149,39 @@ export const AdsrTrackSchema = z.strictObject({
 export const EnvTrackSchema = z.union([KeysTrackSchema, AdsrTrackSchema]);
 export type EnvTrack = z.infer<typeof EnvTrackSchema>;
 
+/**
+ * Space, flattened. The voice again at `time`, `2·time`, `3·time`… each copy
+ * `feedback` times quieter than the last, until a tap would sit under -40dB or
+ * `taps` is reached. The pluck in the game's score runs through a feedback
+ * delay; here the delay is more voices, deterministic and bakeable, so the IR
+ * still has no bus and every adapter stays a dumb interpreter. A tap that
+ * would start past the canvas is dropped and said so; one that runs past it
+ * is cut there, which is what a tail does.
+ */
+export const EchoSchema = z.strictObject({
+  time: z.number().positive(), // seconds between taps, in the document's own time
+  feedback: z.number().min(0).max(1), // level of each tap relative to the one before
+  taps: z.number().int().min(1).max(8).optional(), // default: until -40dB, at most 8
+});
+export type Echo = z.infer<typeof EchoSchema>;
+
 /** What every voice does, whatever it is made of: place itself, and set its level. */
-const voiceBase = {
+const placing = {
   id: voiceId,
   at: z.number().min(0).optional(), // start, seconds from t=0; default 0
-  dur: LevelSchema.optional(), // seconds or a dur token; default = the rest of the sound
   gain: LevelSchema.optional(), // 0..1 or a gain token name; default 1
+  echo: EchoSchema.optional(),
+  /**
+   * Why this voice breaks a rule the lint would otherwise name — a square or
+   * sawtooth with no filter, today. The voice's own `offBand`: written down,
+   * the exception is a decision somebody made rather than a warning everybody
+   * learns to scroll past.
+   */
+  why: z.string().min(8).optional(),
+};
+const voiceBase = {
+  ...placing,
+  dur: LevelSchema.optional(), // seconds or a dur token; default = the rest of the sound
 };
 
 /**
@@ -191,11 +239,32 @@ export const RepeatVoiceSchema = z.strictObject({
   }),
 });
 
-export const VoiceSchema = z.union([SourceVoiceSchema, UseVoiceSchema, RepeatVoiceSchema]);
+/**
+ * A figure: one instrument played at a row of pitches, one every `step`
+ * seconds. Each note is the `use` voice you would have written — `use`,
+ * `variant`, `pitch`, `dur`, this voice's `gain` — at `at + i·step`, so a
+ * fanfare is one voice and its tempo is one number. `null` is a rest. The
+ * instrument must declare a `root`, as it must for any `use` with a `pitch`.
+ * `repeat` scatters in time; this sequences in it. Both unroll here and leave
+ * the IR flat.
+ */
+export const PhraseVoiceSchema = z.strictObject({
+  ...placing,
+  phrase: z.strictObject({
+    use: soundId,
+    variant: z.string().optional(),
+    step: z.number().positive(), // seconds from one note's start to the next
+    dur: LevelSchema.optional(), // each note's length; default: the instrument's own
+    notes: z.array(z.union([PitchSchema, z.null()])).min(1),
+  }),
+});
+
+export const VoiceSchema = z.union([SourceVoiceSchema, UseVoiceSchema, RepeatVoiceSchema, PhraseVoiceSchema]);
 export type Voice = z.infer<typeof VoiceSchema>;
 export type SourceVoice = z.infer<typeof SourceVoiceSchema>;
 export type UseVoice = z.infer<typeof UseVoiceSchema>;
 export type RepeatVoice = z.infer<typeof RepeatVoiceSchema>;
+export type PhraseVoice = z.infer<typeof PhraseVoiceSchema>;
 
 /**
  * A variant is a declarative patch, same grammar as a visual variant. Where a
@@ -245,6 +314,15 @@ export const SoundSchema = z.strictObject({
    */
   root: PitchSchema.optional(),
   jitter: JitterSchema.optional(),
+  /**
+   * How many of this document to bake. A `hit` fires three hundred times a
+   * run, and on the buffer path it is one buffer with a rate roll — the same
+   * grain pattern every time, slightly transposed. Takes 2..N are the same
+   * document with every noise and scatter reseeded and its `jitter` rolled
+   * once and frozen, emitted as variants named `take-2`… for the engine to
+   * round-robin. Each one is a baseline like any other take.
+   */
+  takes: z.number().int().min(2).max(8).optional(),
   meta: z.record(z.string(), z.number()).optional(), // sim-facing hints (minInterval, …)
   /**
    * Why this document sits outside the set's level band, if it does.

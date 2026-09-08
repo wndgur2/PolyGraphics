@@ -94,6 +94,20 @@
       "blip": 0.09,
       "beat": 0.2,
       "tail": 0.35
+    },
+    "loudness": {
+      "anchor": -24,
+      "band": 4,
+      "phoneLoss": 6,
+      "impact": -3,
+      "weapon": -2,
+      "creature": 0,
+      "player": 3,
+      "pickup": -2,
+      "interface": -4,
+      "fanfare": 2,
+      "world": 0,
+      "field": 6
     }
   }
 }
