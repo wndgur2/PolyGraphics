@@ -1,38 +1,78 @@
 {
   "id": "ss.enemy.bat",
   "name": "Drifter",
-  "description": "Released from a vent to sweep for you. Two pale wings held back over a small dark body, with an organ underneath leaking the trail that tells the ground castes where you were. The wings carry the whole read — a wide bright horizontal against the Tracker's compact blob.",
+  "description": "Released from a vent to sweep for you. Two pale wings held back over a small dark body, with an organ underneath leaking the trail that tells the ground castes where you were. The wings carry the whole read — a wide bright horizontal against the Tracker's compact blob. Each wing has a joint now, root and tip, so the beat travels outward with a lag instead of one plate pivoting; the vein rides the near wing's root; the body rocks under the beat with the sting and snout on it; the wisp trails a beat behind and flickers. Gameplay radius 7.",
   "tags": ["ss-enemy", "flier"],
   "size": [36, 28],
-  "meta": { "radius": 7 },
+  "meta": {"radius": 7},
   "parts": [
-    { "id": "wisp", "use": "ss.lib.wisp", "at": [-13, 3.6], "rot": -104, "scale": 0.58 },
-    { "id": "wing_far", "at": [-3.6, 1.4], "rot": 12, "shape": { "kind": "ellipse", "rx": 10.4, "ry": 3 }, "fill": "$steel" },
-    { "id": "wing", "at": [-3.4, -3.4], "rot": -16, "shape": { "kind": "ellipse", "rx": 11.6, "ry": 3.6 }, "fill": "$husk", "stroke": { "color": "$ink", "width": "hair" } },
-    { "id": "vein", "at": [-3.4, -3.4], "rot": -16, "shape": { "kind": "rect", "w": 19, "h": 0.9 }, "fill": "$steel.dark" },
-    { "id": "body", "at": [1.6, 1.4], "shape": { "kind": "ellipse", "rx": 7.4, "ry": 4.6 }, "fill": "$chitin.dark", "stroke": { "color": "$ink", "width": "hair" } },
-    { "id": "shine", "at": [1.2, 0], "shape": { "kind": "ellipse", "rx": 4.6, "ry": 2 }, "fill": "$chitin" },
-    { "id": "sting", "at": [-9.4, 2.4], "shape": { "kind": "poly", "points": [[2.6, -2], [-3.6, 0.2], [2.6, 2]] }, "fill": "$husk" },
-    { "id": "snout", "at": [9.4, 2], "shape": { "kind": "poly", "points": [[0, -2], [5.6, 0.2], [0, 2.4]] }, "fill": "$husk.dark" },
-    { "id": "organ", "use": "ss.lib.organ", "at": [1.4, 4.6], "scale": [0.5, 0.4] }
+    {"id": "wisp", "use": "ss.lib.wisp", "at": [-11.56, 5.88], "rot": -104.0, "scale": 0.58},
+    {"id": "wing_far_root", "at": [-1.25, 3.47], "rot": 176.0, "shape": {"kind": "ellipse", "rx": 6.2, "ry": 3.0}, "fill": "$steel"},
+    {"id": "wing_far_tip", "at": [-6.75, 3.75], "rot": 178.0, "shape": {"kind": "ellipse", "rx": 6.0, "ry": 2.3}, "fill": "$steel"},
+    {"id": "wing_root", "at": [-1.15, -0.72], "rot": 196.0, "shape": {"kind": "ellipse", "rx": 6.8, "ry": 3.6}, "fill": "$husk", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "wing_tip", "at": [-6.94, -2.27], "rot": 194.0, "shape": {"kind": "ellipse", "rx": 6.6, "ry": 2.7}, "fill": "$husk", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "vein", "at": [-1.15, -0.72], "rot": 196.0, "shape": {"kind": "rect", "w": 10.4, "h": 0.9}, "fill": "$steel.dark"},
+    {"id": "vein_tip", "at": [-6.94, -2.27], "rot": 194.0, "shape": {"kind": "rect", "w": 11.2, "h": 0.8}, "fill": "$steel.dark"},
+    {"id": "body", "at": [3.04, 3.88], "rot": 0.0, "shape": {"kind": "ellipse", "rx": 7.4, "ry": 4.6}, "fill": "$chitin.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "shine", "at": [2.64, 2.48], "rot": 0.0, "shape": {"kind": "ellipse", "rx": 4.6, "ry": 2.0}, "fill": "$chitin"},
+    {"id": "sting", "at": [-7.96, 4.88], "rot": 0.0, "shape": {"kind": "poly", "points": [[2.6, -2.0], [-3.6, 0.2], [2.6, 2.0]]}, "fill": "$husk"},
+    {"id": "snout", "at": [10.84, 4.48], "rot": 0.0, "shape": {"kind": "poly", "points": [[0.0, -2.0], [5.6, 0.2], [0.0, 2.4]]}, "fill": "$husk.dark"},
+    {"id": "organ", "at": [2.84, 7.08], "use": "ss.lib.organ", "scale": [0.5, 0.4]}
   ],
   "variants": {
     "elite": {
       "description": "A marked scout: brighter membranes, a heavier sting and a fatter trail.",
       "scale": 1.25,
-      "set": { "wing.fill": "$bone.light", "wing_far.fill": "$husk.dark", "sting.scale": [1.4, 1.3], "organ.scale": [0.62, 0.5] }
+      "set": {
+        "wing_root.fill": "$bone.light",
+        "wing_tip.fill": "$bone.light",
+        "wing_far_root.fill": "$husk.dark",
+        "wing_far_tip.fill": "$husk.dark",
+        "sting.scale": [1.4, 1.3],
+        "organ.scale": [0.62, 0.5]
+      }
     }
   },
   "animations": {
     "flit": {
-      "description": "wings beat out of phase, body rocks under them",
+      "description": "wings beat out of phase with the tip a beat behind the root, body rocks under them, the trail flickers",
       "duration": 0.26,
       "tracks": [
-        { "part": "wing", "prop": "rot", "keys": [[0, 0], [0.5, 28], [1, 0]] },
-        { "part": "vein", "prop": "rot", "keys": [[0, 0], [0.5, 28], [1, 0]] },
-        { "part": "wing_far", "prop": "rot", "keys": [[0, 0], [0.5, -28], [1, 0]] },
-        { "part": "body", "prop": "y", "keys": [[0, 0], [0.5, 0.9], [1, 0]] },
-        { "part": "wisp", "prop": "opacity", "keys": [[0, 0.85], [0.5, 0.5], [1, 0.85]] }
+        {"part": "body", "prop": "y", "keys": [[0.0, 0.43], [0.1, 0.81], [0.2, 0.88], [0.3, 0.62], [0.4, 0.12], [0.5, -0.43], [0.6, -0.81], [0.7, -0.88], [0.8, -0.62], [0.9, -0.12], [1.0, 0.43]], "ease": "linear"},
+        {"part": "body", "prop": "rot", "keys": [[0.0, 0.0], [0.1, 2.35], [0.2, 3.8], [0.3, 3.8], [0.4, 2.35], [0.5, 0.0], [0.6, -2.35], [0.7, -3.8], [0.8, -3.8], [0.9, -2.35], [1.0, 0.0]], "ease": "linear"},
+        {"part": "shine", "prop": "x", "keys": [[0.0, 0.0], [0.1, 0.06], [0.2, 0.09], [0.3, 0.09], [0.4, 0.06], [0.5, 0.0], [0.6, -0.06], [0.7, -0.09], [0.8, -0.09], [0.9, -0.06], [1.0, 0.0]], "ease": "linear"},
+        {"part": "shine", "prop": "y", "keys": [[0.0, 0.43], [0.1, 0.8], [0.2, 0.86], [0.3, 0.59], [0.4, 0.1], [0.5, -0.43], [0.6, -0.8], [0.7, -0.85], [0.8, -0.59], [0.9, -0.1], [1.0, 0.43]], "ease": "linear"},
+        {"part": "shine", "prop": "rot", "keys": [[0.0, 0.0], [0.1, 2.35], [0.2, 3.8], [0.3, 3.8], [0.4, 2.35], [0.5, 0.0], [0.6, -2.35], [0.7, -3.8], [0.8, -3.8], [0.9, -2.35], [1.0, 0.0]], "ease": "linear"},
+        {"part": "organ", "prop": "x", "keys": [[0.0, 0.0], [0.1, -0.13], [0.2, -0.21], [0.3, -0.21], [0.4, -0.13], [0.5, 0.0], [0.6, 0.13], [0.7, 0.21], [0.8, 0.21], [0.9, 0.13], [1.0, 0.0]], "ease": "linear"},
+        {"part": "organ", "prop": "y", "keys": [[0.0, 0.43], [0.1, 0.8], [0.2, 0.86], [0.3, 0.6], [0.4, 0.1], [0.5, -0.43], [0.6, -0.81], [0.7, -0.88], [0.8, -0.61], [0.9, -0.11], [1.0, 0.43]], "ease": "linear"},
+        {"part": "sting", "prop": "x", "keys": [[0.0, 0.0], [0.1, -0.03], [0.2, -0.04], [0.3, -0.04], [0.4, -0.03], [0.5, 0.0], [0.6, 0.05], [0.7, 0.09], [0.8, 0.09], [0.9, 0.05], [1.0, 0.0]], "ease": "linear"},
+        {"part": "sting", "prop": "y", "keys": [[0.0, 0.43], [0.1, 0.36], [0.2, 0.15], [0.3, -0.11], [0.4, -0.34], [0.5, -0.43], [0.6, -0.36], [0.7, -0.16], [0.8, 0.11], [0.9, 0.34], [1.0, 0.43]], "ease": "linear"},
+        {"part": "sting", "prop": "rot", "keys": [[0.0, 5.35], [0.1, 8.28], [0.2, 8.04], [0.3, 4.74], [0.4, -0.38], [0.5, -5.35], [0.6, -8.28], [0.7, -8.04], [0.8, -4.74], [0.9, 0.38], [1.0, 5.35]], "ease": "linear"},
+        {"part": "snout", "prop": "x", "keys": [[0.0, 0.0], [0.1, -0.03], [0.2, -0.06], [0.3, -0.06], [0.4, -0.03], [0.5, 0.0], [0.6, 0.02], [0.7, 0.02], [0.8, 0.02], [0.9, 0.02], [1.0, 0.0]], "ease": "linear"},
+        {"part": "snout", "prop": "y", "keys": [[0.0, 0.43], [0.1, 1.13], [0.2, 1.4], [0.3, 1.13], [0.4, 0.43], [0.5, -0.43], [0.6, -1.13], [0.7, -1.4], [0.8, -1.14], [0.9, -0.44], [1.0, 0.43]], "ease": "linear"},
+        {"part": "snout", "prop": "rot", "keys": [[0.0, 0.89], [0.1, 4.75], [0.2, 6.8], [0.3, 6.26], [0.4, 3.32], [0.5, -0.89], [0.6, -4.75], [0.7, -6.8], [0.8, -6.26], [0.9, -3.32], [1.0, 0.89]], "ease": "linear"},
+        {"part": "wing_far_root", "prop": "x", "keys": [[0.0, 0.0], [0.1, 0.07], [0.2, 0.13], [0.3, 0.13], [0.4, 0.07], [0.5, 0.0], [0.6, -0.03], [0.7, -0.02], [0.8, -0.02], [0.9, -0.03], [1.0, 0.0]], "ease": "linear"},
+        {"part": "wing_far_root", "prop": "y", "keys": [[0.0, 0.43], [0.1, 1.06], [0.2, 1.28], [0.3, 1.02], [0.4, 0.36], [0.5, -0.43], [0.6, -1.06], [0.7, -1.29], [0.8, -1.02], [0.9, -0.36], [1.0, 0.43]], "ease": "linear"},
+        {"part": "wing_far_root", "prop": "rot", "keys": [[0.0, 0.0], [0.1, -6.7], [0.2, -10.84], [0.3, -10.84], [0.4, -6.7], [0.5, 0.0], [0.6, 6.7], [0.7, 10.84], [0.8, 10.84], [0.9, 6.7], [1.0, 0.0]], "ease": "linear"},
+        {"part": "wing_far_tip", "prop": "x", "keys": [[0.0, 0.03], [0.1, 0.11], [0.2, 0.32], [0.3, 0.43], [0.4, 0.3], [0.5, 0.07], [0.6, -0.03], [0.7, 0.05], [0.8, 0.14], [0.9, 0.1], [1.0, 0.03]], "ease": "linear"},
+        {"part": "wing_far_tip", "prop": "y", "keys": [[0.0, -0.09], [0.1, 1.47], [0.2, 2.46], [0.3, 2.5], [0.4, 1.6], [0.5, 0.09], [0.6, -1.48], [0.7, -2.48], [0.8, -2.53], [0.9, -1.62], [1.0, -0.09]], "ease": "linear"},
+        {"part": "wing_far_tip", "prop": "rot", "keys": [[0.0, 10.77], [0.1, -2.05], [0.2, -14.09], [0.3, -20.75], [0.4, -19.48], [0.5, -10.77], [0.6, 2.05], [0.7, 14.09], [0.8, 20.75], [0.9, 19.48], [1.0, 10.77]], "ease": "linear"},
+        {"part": "wing_root", "prop": "x", "keys": [[0.0, 0.0], [0.1, 0.37], [0.2, 0.65], [0.3, 0.65], [0.4, 0.37], [0.5, 0.0], [0.6, -0.26], [0.7, -0.36], [0.8, -0.36], [0.9, -0.26], [1.0, 0.0]], "ease": "linear"},
+        {"part": "wing_root", "prop": "y", "keys": [[0.0, 0.43], [0.1, 0.22], [0.2, -0.04], [0.3, -0.31], [0.4, -0.47], [0.5, -0.43], [0.6, -0.19], [0.7, 0.14], [0.8, 0.41], [0.9, 0.51], [1.0, 0.43]], "ease": "linear"},
+        {"part": "wing_root", "prop": "rot", "keys": [[0.0, 0.0], [0.1, 11.4], [0.2, 18.45], [0.3, 18.45], [0.4, 11.4], [0.5, 0.0], [0.6, -11.4], [0.7, -18.45], [0.8, -18.45], [0.9, -11.4], [1.0, 0.0]], "ease": "linear"},
+        {"part": "wing_tip", "prop": "x", "keys": [[0.0, -0.09], [0.1, 0.69], [0.2, 1.54], [0.3, 1.76], [0.4, 1.15], [0.5, 0.19], [0.6, -0.43], [0.7, -0.53], [0.8, -0.46], [0.9, -0.4], [1.0, -0.09]], "ease": "linear"},
+        {"part": "wing_tip", "prop": "y", "keys": [[0.0, 1.01], [0.1, -0.66], [0.2, -1.94], [0.3, -2.49], [0.4, -2.18], [0.5, -0.98], [0.6, 0.74], [0.7, 2.23], [0.8, 2.85], [0.9, 2.38], [1.0, 1.01]], "ease": "linear"},
+        {"part": "wing_tip", "prop": "rot", "keys": [[0.0, -10.77], [0.1, 6.75], [0.2, 21.7], [0.3, 28.36], [0.4, 24.18], [0.5, 10.77], [0.6, -6.75], [0.7, -21.7], [0.8, -28.36], [0.9, -24.18], [1.0, -10.77]], "ease": "linear"},
+        {"part": "vein", "prop": "x", "keys": [[0.0, 0.0], [0.1, 0.37], [0.2, 0.65], [0.3, 0.65], [0.4, 0.37], [0.5, 0.0], [0.6, -0.26], [0.7, -0.36], [0.8, -0.36], [0.9, -0.26], [1.0, 0.0]], "ease": "linear"},
+        {"part": "vein", "prop": "y", "keys": [[0.0, 0.43], [0.1, 0.22], [0.2, -0.04], [0.3, -0.31], [0.4, -0.47], [0.5, -0.43], [0.6, -0.19], [0.7, 0.14], [0.8, 0.41], [0.9, 0.51], [1.0, 0.43]], "ease": "linear"},
+        {"part": "vein", "prop": "rot", "keys": [[0.0, 0.0], [0.1, 11.4], [0.2, 18.45], [0.3, 18.45], [0.4, 11.4], [0.5, 0.0], [0.6, -11.4], [0.7, -18.45], [0.8, -18.45], [0.9, -11.4], [1.0, 0.0]], "ease": "linear"},
+        {"part": "vein_tip", "prop": "x", "keys": [[0.0, -0.09], [0.1, 0.69], [0.2, 1.54], [0.3, 1.76], [0.4, 1.15], [0.5, 0.19], [0.6, -0.43], [0.7, -0.53], [0.8, -0.46], [0.9, -0.4], [1.0, -0.09]], "ease": "linear"},
+        {"part": "vein_tip", "prop": "y", "keys": [[0.0, 1.01], [0.1, -0.66], [0.2, -1.94], [0.3, -2.49], [0.4, -2.18], [0.5, -0.98], [0.6, 0.74], [0.7, 2.23], [0.8, 2.85], [0.9, 2.38], [1.0, 1.01]], "ease": "linear"},
+        {"part": "vein_tip", "prop": "rot", "keys": [[0.0, -10.77], [0.1, 6.75], [0.2, 21.7], [0.3, 28.36], [0.4, 24.18], [0.5, 10.77], [0.6, -6.75], [0.7, -21.7], [0.8, -28.36], [0.9, -24.18], [1.0, -10.77]], "ease": "linear"},
+        {"part": "wisp", "prop": "x", "keys": [[0.0, 0.0], [0.1, -0.03], [0.2, -0.04], [0.3, -0.04], [0.4, -0.03], [0.5, 0.0], [0.6, 0.05], [0.7, 0.09], [0.8, 0.09], [0.9, 0.05], [1.0, 0.0]], "ease": "linear"},
+        {"part": "wisp", "prop": "y", "keys": [[0.0, 0.43], [0.1, 0.36], [0.2, 0.15], [0.3, -0.11], [0.4, -0.34], [0.5, -0.43], [0.6, -0.36], [0.7, -0.16], [0.8, 0.11], [0.9, 0.34], [1.0, 0.43]], "ease": "linear"},
+        {"part": "wisp", "prop": "rot", "keys": [[0.0, 8.0], [0.1, 6.33], [0.2, 2.25], [0.3, -2.69], [0.4, -6.61], [0.5, -8.0], [0.6, -6.33], [0.7, -2.25], [0.8, 2.69], [0.9, 6.61], [1.0, 8.0]], "ease": "linear"},
+        {"part": "wisp", "prop": "opacity", "keys": [[0.0, 0.68], [0.1, 0.57], [0.2, 0.51], [0.3, 0.51], [0.4, 0.57], [0.5, 0.67], [0.6, 0.78], [0.7, 0.84], [0.8, 0.84], [0.9, 0.78], [1.0, 0.68]], "ease": "linear"}
       ]
     }
   }
