@@ -13,7 +13,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { play, bake, rollJitter, type IRSound } from "../adapters/webaudio/polygraphics-webaudio.js";
 import { compileSound, type SoundRegistry } from "../src/sound-compile.js";
-import { renderPCM, describe, toWav, SAMPLE_RATE } from "../src/sound-render.js";
+import { renderPCM, describe, fromWav, spectrogram, toWav, SAMPLE_RATE } from "../src/sound-render.js";
 import { SoundSchema } from "../src/sound-schema.js";
 import { mulberry32 } from "../src/prng.js";
 import type { Tokens } from "../src/tokens.js";
@@ -329,6 +329,26 @@ check(
   "playing a document that declares no `root` is an error, not a guess",
   rootlessIssues.some((i) => i.level === "error" && i.msg.includes("no `root`")),
   rootlessIssues.map((i) => i.msg).join("; ") || "no issue raised",
+);
+
+/**
+ * The two pictures and the one reader that the listening loop leans on.
+ * Neither is a baseline — but a spectrogram that drew differently run to run
+ * would make "look at the spectrogram" a worse instruction than it already
+ * is, and a WAV that did not read back as itself would make `--against`
+ * compare a take to a cousin of it.
+ */
+const spec1 = spectrogram(pcm), spec2 = spectrogram(pcm);
+check("spectrogram is the same picture every run", Buffer.from(spec1.data).equals(Buffer.from(spec2.data)));
+check("spectrogram is 320 columns by 96 rows", spec1.width === 320 && spec1.height === 96, `${spec1.width}×${spec1.height}`);
+check("spectrogram peaks at 255", Math.max(...spec1.data) === 255);
+const tiny = spectrogram(pcm.subarray(0, 100));
+check("a take shorter than 320 samples gets one column per sample", tiny.width === 100, `${tiny.width}`);
+const back = fromWav(toWav(pcm));
+check(
+  "a bake reads back as itself",
+  back.sampleRate === SAMPLE_RATE && back.pcm.length === pcm.length && back.pcm.every((v, i) => Math.abs(v - pcm[i]) <= 1 / 32767),
+  `${back.pcm.length} samples at ${back.sampleRate}Hz`,
 );
 
 console.log(`\n${failures === 0 ? "✓ all checks passed" : `✖ ${failures} failed`}`);
