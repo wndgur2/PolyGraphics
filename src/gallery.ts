@@ -17,7 +17,7 @@ import type { Asset, Part } from "./schema.js";
 import type { Sound, Voice } from "./sound-schema.js";
 import { renderSVG, type Issue, type Registry } from "./render.js";
 import { compileSound, type SoundRegistry } from "./sound-compile.js";
-import { describe, renderPCM, waveformSvg } from "./sound-render.js";
+import { describe, renderPCM, waveformSvg, type Descriptors } from "./sound-render.js";
 import { applyTheme, resolveColor, type Theme, type Tokens } from "./tokens.js";
 
 const CATEGORY_ORDER = [
@@ -59,7 +59,7 @@ const fileOf = (a: Asset) => `assets/${slug(a.id)}.json`;
  * Sound families get their own tabs under their own heading, keyed apart from
  * the asset categories so a document tagged `lib` on both sides cannot collide.
  */
-const SOUND_ORDER = ["weapon", "impact", "creature", "player", "pickup", "world", "interface", "fanfare"];
+const SOUND_ORDER = ["weapon", "impact", "creature", "player", "pickup", "world", "field", "interface", "fanfare"];
 const soundCat = (sd: Sound) => `snd-${sd.tags[1] ?? sd.tags[0]}`;
 const soundFileOf = (sd: Sound) => `sounds/${slug(sd.id)}.json`;
 /**
@@ -300,7 +300,7 @@ function voiceRow(v: Voice): string {
 </tr>`;
 }
 
-interface Take { label: string; variant?: string; wav: string; spec: string; wave: string; peakDb: number; rmsDb: number; attackMs: number; dur: number; voices: number }
+interface Take { label: string; variant?: string; wav: string; spec: string; wave: string; d: Descriptors; dur: number; voices: number }
 
 function takesOf(sd: Sound, sreg: SoundRegistry, issues: Issue[]): Take[] {
   const { ir, issues: cissues } = compileSound(sd, sreg);
@@ -314,9 +314,7 @@ function takesOf(sd: Sound, sreg: SoundRegistry, issues: Issue[]): Take[] {
       wav: wavOf(sd.id, variant),
       spec: specOf(sd.id, variant),
       wave: waveformSvg(pcm, 640, 90),
-      peakDb: d.peakDb,
-      rmsDb: d.rmsDb,
-      attackMs: d.attackMs,
+      d,
       dur: d.duration,
       voices: (variant ? ir.variants[variant].voices : ir.voices).length,
     };
@@ -341,7 +339,7 @@ function takeCell(sd: Sound, t: Take): string {
   <figcaption>
     <span class="take">${esc(t.label)}</span>
     ${btn(1, "play")}${btn(8, "burst ×8")}
-    <span class="dim">${t.dur}s · ${t.voices} voices · peak ${t.peakDb} · rms ${t.rmsDb}</span>
+    <span class="dim">${t.dur}s · ${t.voices} voices · loud ${t.d.loudnessDb} · peak ${t.d.truePeakDb} · phone −${t.d.phoneLossDb}</span>
   </figcaption>
 </figure>`;
 }
@@ -368,9 +366,14 @@ function soundDetailBlock(sd: Sound, sreg: SoundRegistry, issues: Issue[]): stri
     ["file", `<code>${esc(soundFileOf(sd))}</code>`, "wide"],
     ["duration", `${sd.duration}s`],
     ["voices", String(sd.voices.length)],
-    ["peak", `${base.peakDb} dBFS`],
-    ["rms", `${base.rmsDb} dBFS`],
-    ["attack", `${base.attackMs} ms`],
+    ["loudness", `${base.d.loudnessDb} dB`],
+    ["true peak", `${base.d.truePeakDb} dBTP`],
+    ["rms", `${base.d.rmsDb} dBFS`],
+    ["attack", `${base.d.attackMs} ms`],
+    ["tail", `${base.d.tailS} s`],
+    ["phone loses", `${base.d.phoneLossDb} dB`],
+    ["centroid", `${base.d.centroidHz} Hz`],
+    ["low / mid / high", `${Math.round(base.d.bands.low * 100)} / ${Math.round(base.d.bands.mid * 100)} / ${Math.round(base.d.bands.high * 100)} %`],
     ...(sd.gain !== undefined ? [["gain", String(sd.gain)] as [string, string]] : []),
     ...(sd.jitter?.freq ? [["jitter", `×${sd.jitter.freq[0]}–${sd.jitter.freq[1]}`] as [string, string]] : []),
     ...(sd.offBand ? [["off-band", esc(sd.offBand), "wide"] as [string, string, string]] : []),
@@ -398,7 +401,7 @@ function soundDetailBlock(sd: Sound, sreg: SoundRegistry, issues: Issue[]): stri
   const brief = [
     `${sd.id} — ${sd.name} (${soundFileOf(sd)})`,
     sd.description,
-    `${sd.duration}s, peak ${base.peakDb}dBFS, rms ${base.rmsDb}dBFS`,
+    `${sd.duration}s, loudness ${base.d.loudnessDb}dB K-weighted, true peak ${base.d.truePeakDb}dBTP, attack ${base.d.attackMs}ms, phone loses ${base.d.phoneLossDb}dB, centroid ${base.d.centroidHz}Hz`,
     `voices: ${sd.voices.map((v) => v.id).join(", ")}`,
     ...(variants.length ? [`variants: ${variants.map(([n]) => n).join(", ")}`] : []),
   ].join("\n");
@@ -436,28 +439,32 @@ function soundDetailBlock(sd: Sound, sreg: SoundRegistry, issues: Issue[]): stri
  * it is answered by sorting twenty numbers and looking at the ends.
  */
 function soundSet(sreg: SoundRegistry, issues: Issue[]): string {
+  const L = sreg.tokens.audio?.loudness ?? {};
+  const anchor = L.anchor ?? -26, band = L.band ?? 4, phoneLoss = L.phoneLoss ?? 6;
   const rows = [...sreg.sounds.values()]
     .map((sd) => ({ sd, t: takesOf(sd, sreg, issues)[0] }))
-    .sort((a, b) => b.t.rmsDb - a.t.rmsDb);
+    .sort((a, b) => b.t.d.loudnessDb - a.t.d.loudnessDb);
   const inBand = (sd: Sound) => sd.tags[0] !== "lib" && !sd.offBand;
-  const triggered = rows.filter((r) => inBand(r.sd)).map((r) => r.t.rmsDb).sort((a, b) => a - b);
-  const median = triggered.length ? triggered[Math.floor(triggered.length / 2)] : 0;
+  const family = (sd: Sound) => sd.tags[1] ?? sd.tags[0];
+  const target = (sd: Sound) => anchor + (L[family(sd)] ?? 0);
   return `<table class="set">
-  <tr><th>sound</th><th>family</th><th></th><th>dur</th><th>peak</th><th>rms</th><th>vs median</th></tr>
+  <tr><th>sound</th><th>family</th><th></th><th>dur</th><th>loudness</th><th>sits at</th><th>vs</th><th>phone</th><th>centroid</th></tr>
   ${rows
     .map(({ sd, t }) => {
-      const off = !inBand(sd) ? "—" : `${t.rmsDb - median > 0 ? "+" : ""}${Math.round(t.rmsDb - median)}dB`;
-      const far = inBand(sd) && Math.abs(t.rmsDb - median) > 9;
+      const diff = t.d.loudnessDb - target(sd);
+      const off = !inBand(sd) ? "—" : `${diff > 0 ? "+" : ""}${Math.round(diff)}dB`;
+      const far = inBand(sd) && Math.abs(diff) > band;
+      const deaf = sd.tags[0] !== "lib" && t.d.phoneLossDb > phoneLoss;
       return `<tr${far ? ' class="far"' : ""}${sd.offBand ? ` title="off-band on purpose: ${esc(sd.offBand)}"` : ""}>
       <td><a href="#/${esc(sd.id)}">${esc(sd.id)}</a></td>
-      <td class="dim">${esc(sd.tags[1] ?? sd.tags[0])}</td>
+      <td class="dim">${esc(family(sd))}</td>
       <td><button data-play="${esc(t.wav)}" data-lo="1" data-hi="1" data-n="1">▸</button></td>
-      <td class="num">${t.dur}s</td><td class="num">${t.peakDb}</td><td class="num">${t.rmsDb}</td>
-      <td class="num">${off}</td></tr>`;
+      <td class="num">${t.dur}s</td><td class="num">${t.d.loudnessDb}</td><td class="num dim">${inBand(sd) ? target(sd) : "—"}</td>
+      <td class="num">${off}</td><td class="num${deaf ? " far" : ""}">−${t.d.phoneLossDb}</td><td class="num dim">${t.d.centroidHz}</td></tr>`;
     })
     .join("")}
 </table>
-<p class="hint dim">Median of the triggered set: ${median} dBFS. Library documents are material rather than sounds the game fires, so they sit outside it. Anything more than 9dB out is flagged here and by <code>npm run check</code>.</p>`;
+<p class="hint dim">Loudness is K-weighted over the sounding extent, in dBFS. Each family sits at the anchor (${anchor}) plus its offset in <code>audio.loudness</code>, ±${band}; library documents are material rather than sounds the game fires, so they sit outside it. <em>phone</em> is what the loudest instant loses through a small speaker — past ${phoneLoss}dB the low end is carrying the sound. Both are flagged here and by <code>npm run check</code>.</p>`;
 }
 
 function swatches(tokens: Tokens): string {
@@ -695,7 +702,7 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
   table.set td { padding:4px 16px 4px 0; border-bottom:1px solid #1b2030; }
   table.set td.num { text-align:right; color:#bce05a; font-variant-numeric:tabular-nums; }
   table.set tr:hover td { background:#171b28; }
-  table.set tr.far td, table.set tr.far td.num { color:#ff9b3d; }
+  table.set tr.far td, table.set tr.far td.num, table.set td.far { color:#ff9b3d; }
   table.set a { color:var(--acc); text-decoration:none; } table.set a:hover { text-decoration:underline; }
   table.set button { padding:0 8px; }
   .tok.pitch { min-width:150px; }

@@ -134,6 +134,13 @@ const voiceBase = {
   at: z.number().min(0).optional(), // start, seconds from t=0; default 0
   dur: LevelSchema.optional(), // seconds or a dur token; default = the rest of the sound
   gain: LevelSchema.optional(), // 0..1 or a gain token name; default 1
+  /**
+   * Why this voice breaks a rule the lint would otherwise name — a square or
+   * sawtooth with no filter, today. The voice's own `offBand`: written down,
+   * the exception is a decision somebody made rather than a warning everybody
+   * learns to scroll past.
+   */
+  why: z.string().min(8).optional(),
 };
 
 /**

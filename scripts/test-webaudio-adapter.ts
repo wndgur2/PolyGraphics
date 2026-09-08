@@ -351,5 +351,36 @@ check(
   `${back.pcm.length} samples at ${back.sampleRate}Hz`,
 );
 
+/**
+ * The measurements the lint holds the set on. Each is checked on a signal
+ * whose answer is known, so a wrong coefficient is a failed check rather
+ * than a set quietly held to the wrong number.
+ */
+const sine = (hz: number, secs = 0.5, amp = 1): Float32Array => {
+  const out = new Float32Array(Math.round(secs * SAMPLE_RATE));
+  for (let i = 0; i < out.length; i++) out[i] = amp * Math.sin((2 * Math.PI * hz * i) / SAMPLE_RATE);
+  return out;
+};
+const ref = describe(sine(1000));
+check("K-weighting is flat at 1kHz — a full-scale sine reads -3dB, as RMS does", Math.abs(ref.loudnessDb - ref.rmsDb) < 0.3 && Math.abs(ref.rmsDb + 3) < 0.2, `${ref.loudnessDb} vs ${ref.rmsDb}`);
+const high = describe(sine(8000));
+check("…and lifts the top by about 4dB", high.loudnessDb - high.rmsDb > 3 && high.loudnessDb - high.rmsDb < 4.5, `+${r(high.loudnessDb - high.rmsDb)}`);
+check("centroid of a 1kHz sine is 1kHz", Math.abs(ref.centroidHz - 1000) < 30, `${ref.centroidHz}Hz`);
+check("bands sum to one", Math.abs(ref.bands.low + ref.bands.mid + ref.bands.high - 1) < 0.01 && ref.bands.mid > 0.98, JSON.stringify(ref.bands));
+const low = describe(sine(80));
+check("a low sine loses everything on the phone", low.phoneLossDb > 15 && low.bands.low > 0.95, `-${low.phoneLossDb}dB, ${low.bands.low} low`);
+check("a 1kHz sine loses nothing on the phone", ref.phoneLossDb < 0.5, `-${ref.phoneLossDb}dB`);
+// A sine at a quarter of the sample rate sampled off its peaks: every sample
+// is ±0.707 while the wave itself reaches 1. The sample peak lies; the true
+// peak does not.
+const between = new Float32Array(4410);
+for (let i = 0; i < between.length; i++) between[i] = Math.sin(Math.PI / 2 * i + Math.PI / 4);
+const tp = describe(between);
+check("true peak sees between the samples", tp.peakDb < -2.9 && tp.truePeakDb > -0.5, `sample ${tp.peakDb}dBFS, true ${tp.truePeakDb}dBTP`);
+const stompD = describe(renderPCM(compileSound(all.get("ss.sfx.stomp")!, sreg).ir));
+const shootD = describe(renderPCM(compileSound(all.get("ss.sfx.shoot")!, sreg).ir));
+check("stomp loses far more on a phone than shoot", stompD.phoneLossDb > shootD.phoneLossDb + 5, `stomp -${stompD.phoneLossDb} vs shoot -${shootD.phoneLossDb}`);
+check("tail is inside the take and after the attack", ref.tailS <= 0.5 && ref.tailS > ref.attackMs / 1000, `${ref.tailS}s`);
+
 console.log(`\n${failures === 0 ? "✓ all checks passed" : `✖ ${failures} failed`}`);
 process.exit(failures ? 1 : 0);

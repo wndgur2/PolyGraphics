@@ -30,6 +30,15 @@ export interface AudioTokens {
   q: Record<string, number>;
   /** Named lengths in seconds. */
   dur: Record<string, number>;
+  /**
+   * Where each family of triggered sound should sit, in dB K-weighted:
+   * `anchor` is the level the set is held around, every other key is a
+   * family's offset from it (`tags[1]`), `band` the tolerance either side,
+   * and `phoneLoss` how much a sound may lose through a small speaker before
+   * the lint says its low end is carrying it. Sound's answer to `layers` —
+   * an order between things that share a frame.
+   */
+  loudness?: Record<string, number>;
 }
 
 export interface Tokens {
@@ -68,6 +77,7 @@ export function applyTheme(base: Tokens, theme?: Theme): Tokens {
       gain: { ...base.audio.gain, ...theme.audio?.gain },
       q: { ...base.audio.q, ...theme.audio?.q },
       dur: { ...base.audio.dur, ...theme.audio?.dur },
+      loudness: { ...base.audio.loudness, ...theme.audio?.loudness },
     },
   };
 }

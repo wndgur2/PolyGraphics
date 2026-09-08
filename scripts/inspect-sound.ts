@@ -79,11 +79,15 @@ function picture(pcm: Float32Array): string {
 /** The numbers, and beside each one how far it moved from the accepted take. */
 function measures(d: Descriptors, before?: Descriptors): string {
   const cell = (k: keyof Descriptors, unit: string) => {
-    const v = d[k], b = before?.[k];
+    const v = d[k] as number, b = before?.[k] as number | undefined;
     const moved = b !== undefined && v !== b ? ` <small>${v - b > 0 ? "+" : ""}${Math.round((v - b) * 10) / 10}</small>` : "";
-    return `<th>${k === "peakDb" ? "peak" : k === "rmsDb" ? "rms" : k === "attackMs" ? "attack" : k}</th><td>${v}${unit ? ` ${unit}` : ""}${moved}</td>`;
+    const names: Partial<Record<keyof Descriptors, string>> = { loudnessDb: "loudness", truePeakDb: "true peak", rmsDb: "rms", attackMs: "attack", tailS: "tail", phoneLossDb: "phone", centroidHz: "centroid" };
+    return `<th>${names[k] ?? k}</th><td>${v}${unit ? ` ${unit}` : ""}${moved}</td>`;
   };
-  return `<table><tr>${cell("peakDb", "dBFS")}${cell("rmsDb", "dBFS")}${cell("attackMs", "ms")}${cell("brightness", "zc/s")}${cell("clipped", "")}</tr></table>`;
+  return `<table>
+    <tr>${cell("loudnessDb", "dB")}${cell("truePeakDb", "dBTP")}${cell("rmsDb", "dBFS")}${cell("attackMs", "ms")}${cell("tailS", "s")}${cell("clipped", "")}</tr>
+    <tr>${cell("phoneLossDb", "dB lost on a phone")}${cell("centroidHz", "Hz")}${cell("brightness", "zc/s")}</tr>
+  </table>`;
 }
 
 function transport(uri: string, jitter: [number, number], label = "play"): string {
@@ -141,28 +145,32 @@ function take(sound: Sound, variant?: string): string {
  * and it sorts by level so the outlier is the top row or the bottom one.
  */
 function overview(): string {
+  const L = tokens.audio?.loudness ?? {};
+  const anchor = L.anchor ?? -26, band = L.band ?? 4, phoneLoss = L.phoneLoss ?? 6;
   const rows = picked
     .map((sd) => {
       const { ir } = compileSound(sd, sreg);
       return { sd, d: describe(renderPCM(ir)) };
     })
-    .sort((a, b) => b.d.rmsDb - a.d.rmsDb);
-  const triggered = rows.filter((r) => r.sd.tags[0] !== "lib").map((r) => r.d.rmsDb).sort((a, b) => a - b);
-  const median = triggered.length ? triggered[Math.floor(triggered.length / 2)] : 0;
+    .sort((a, b) => b.d.loudnessDb - a.d.loudnessDb);
+  const inBand = (sd: Sound) => sd.tags[0] !== "lib" && !sd.offBand;
+  const target = (sd: Sound) => anchor + (L[sd.tags[1] ?? sd.tags[0]] ?? 0);
   return `<table class="set">
-  <tr><th>sound</th><th>family</th><th>dur</th><th>peak</th><th>rms</th><th>vs median</th><th>attack</th><th>brightness</th></tr>
+  <tr><th>sound</th><th>family</th><th>dur</th><th>loudness</th><th>sits at</th><th>vs</th><th>phone</th><th>true peak</th><th>attack</th><th>centroid</th></tr>
   ${rows
     .map(({ sd, d }) => {
-      const off = sd.tags[0] === "lib" ? "—" : `${d.rmsDb - median > 0 ? "+" : ""}${Math.round(d.rmsDb - median)}dB`;
-      const far = sd.tags[0] !== "lib" && Math.abs(d.rmsDb - median) > 9;
+      const diff = d.loudnessDb - target(sd);
+      const off = !inBand(sd) ? "—" : `${diff > 0 ? "+" : ""}${Math.round(diff)}dB`;
+      const far = inBand(sd) && Math.abs(diff) > band;
+      const deaf = sd.tags[0] !== "lib" && d.phoneLossDb > phoneLoss;
       return `<tr${far ? ' class="far"' : ""}>
       <td><a href="#${esc(sd.id)}">${esc(sd.id)}</a></td><td class="dim">${esc(sd.tags[1] ?? sd.tags[0])}</td>
-      <td class="num">${d.duration}s</td><td class="num">${d.peakDb}</td><td class="num">${d.rmsDb}</td>
-      <td class="num">${off}</td><td class="num dim">${d.attackMs}ms</td><td class="num dim">${d.brightness}</td></tr>`;
+      <td class="num">${d.duration}s</td><td class="num">${d.loudnessDb}</td><td class="num dim">${inBand(sd) ? target(sd) : "—"}</td>
+      <td class="num">${off}</td><td class="num${deaf ? " hot" : ""}">−${d.phoneLossDb}</td><td class="num dim">${d.truePeakDb}</td><td class="num dim">${d.attackMs}ms</td><td class="num dim">${d.centroidHz}</td></tr>`;
     })
     .join("")}
 </table>
-<p class="dim">median of the triggered set: ${median} dBFS · library documents are material and sit outside it</p>`;
+<p class="dim">loudness is K-weighted over the sounding extent · each family sits at the anchor (${anchor}) plus its offset in audio.loudness, ±${band} · phone is what the loudest instant loses through a small speaker, flagged past ${phoneLoss}dB · library documents are material and sit outside the bands</p>`;
 }
 
 const body = picked
@@ -212,7 +220,7 @@ const html = `<!doctype html><meta charset="utf-8"><title>PolyGraphics — sound
   table.set td { padding:3px 20px 3px 0; color:#e6e1d3 }
   table.set td.num { color:#bce05a; text-align:right; padding-right:24px }
   table.set td.dim, p.dim { color:#55555f }
-  table.set tr.far td { color:#ff9b3d }
+  table.set tr.far td, table.set td.hot { color:#ff9b3d }
   table.set a { color:#58e8d8; text-decoration:none } table.set a:hover { text-decoration:underline }
   #phone { position:fixed; top:20px; right:28px; background:#161822; border:1px dashed #3a4a5c; border-radius:6px; padding:6px 12px; cursor:pointer; user-select:none; font-size:12px; color:#9aa4b2 }
   #phone.on { border-style:solid; border-color:#58e8d8; color:#58e8d8 }

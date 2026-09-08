@@ -145,6 +145,9 @@ function lintPalette(tokens: Tokens, issues: Issue[]): void {
  * happens is one sound sitting 20dB off the rest of the set.
  */
 function lintSounds(sreg: SoundRegistry, issues: Issue[]): void {
+  const L = sreg.tokens.audio?.loudness ?? {};
+  const anchor = L.anchor ?? -26, band = L.band ?? 4, phoneLoss = L.phoneLoss ?? 6;
+
   // Declaring a `root` says "this is an instrument, play me". One nobody plays
   // is drift waiting to happen — the same rule as an unused palette token, one
   // table over, and the same reason: it will be retuned by somebody who thinks
@@ -155,35 +158,56 @@ function lintSounds(sreg: SoundRegistry, issues: Issue[]): void {
     if (sd.root !== undefined && !played.has(sd.id))
       issues.push({ level: "warn", where: sd.id, msg: "declares a `root` but nothing composes it — an instrument nobody plays" });
 
-  const levels: { id: string; rmsDb: number }[] = [];
+  // A square or sawtooth with no filter is every harmonic to Nyquist: the one
+  // timbre this set has had, in two waveforms. Read off the document, not the
+  // bake, because the fix is a line in the document. `why` on the voice is the
+  // way to keep one on purpose.
+  for (const sd of sreg.sounds.values())
+    for (const v of sd.voices) {
+      const src = "source" in v ? v.source : "repeat" in v ? v.repeat.of : undefined;
+      if (src?.kind === "osc" && (src.wave === "square" || src.wave === "sawtooth") && !("use" in v) && !v.filter && !v.why)
+        issues.push({ level: "warn", where: `${sd.id}(${v.id})`, msg: `unfiltered ${src.wave} — every harmonic to Nyquist; add a lowpass, or say \`why\`` });
+    }
+
+  const unplaced = new Set<string>();
   for (const sound of sreg.sounds.values()) {
     const { ir, issues: cissues } = compileSound(sound, sreg);
     issues.push(...cissues);
-    if (cissues.some((i) => i.level === "error")) continue;
+    const family = sound.tags[1] ?? sound.tags[0];
+    const lib = sound.tags[0] === "lib";
     for (const variant of [undefined, ...Object.keys(ir.variants)]) {
+      const pcm = renderPCM(ir, { variant });
+      const d = describe(pcm);
       const where = variant ? `${ir.id}#${variant}` : ir.id;
-      const d = describe(renderPCM(ir, { variant }));
-      if (d.clipped)
-        issues.push({ level: "warn", where, msg: `clips on ${d.clipped} samples — lower a voice gain` });
-      if (d.peak < 0.01)
-        issues.push({ level: "warn", where, msg: `renders essentially silent (peak ${d.peakDb}dBFS)` });
+      if (d.clipped) issues.push({ level: "warn", where, msg: `clips on ${d.clipped} samples — lower a voice gain` });
+      else if (d.truePeakDb > -1)
+        issues.push({ level: "warn", where, msg: `true peak ${d.truePeakDb}dBTP — clips between the samples; lower a voice gain` });
+      if (d.peak < 0.02) issues.push({ level: "warn", where, msg: `renders essentially silent (peak ${d.peakDb}dBFS)` });
+      // 1.5ms is the renderer's declick. A sound that reaches its peak inside
+      // it has no onset of its own; an impact is allowed that, nothing else is.
+      if (family !== "impact" && d.attackMs <= 1.6)
+        issues.push({ level: "warn", where, msg: `attack is the declick (${d.attackMs}ms) — write one: \`adsr.attack\` in seconds` });
+      if (!lib && d.phoneLossDb > phoneLoss)
+        issues.push({ level: "warn", where, msg: `loses ${d.phoneLossDb}dB on a phone — the low end is carrying this; give it a mid layer` });
       // Library documents are material, not sounds the game triggers; they are
-      // still checked for clipping, but they have no business setting the level
-      // the triggered set is compared against. Nor does a document that has
-      // said in writing why it sits outside it.
-      if (!variant && sound.tags[0] !== "lib" && !sound.offBand) levels.push({ id: ir.id, rmsDb: d.rmsDb });
+      // checked for clipping and onset, but they have no business setting the
+      // level of the set. Variants are not a second sound, so only the base
+      // take is held to the family band.
+      if (variant || lib || sound.offBand) continue;
+      const offset = L[family];
+      if (offset === undefined) unplaced.add(family);
+      const target = anchor + (offset ?? 0);
+      const diff = d.loudnessDb - target;
+      if (Math.abs(diff) > band)
+        issues.push({
+          level: "warn",
+          where,
+          msg: `${d.loudnessDb}dB K-weighted; "${family}" sits at ${target} ±${band} — ${Math.round(Math.abs(diff))}dB ${diff > 0 ? "over" : "under"}`,
+        });
     }
   }
-  if (levels.length < 3) return; // a median of two says nothing
-  const sorted = [...levels].sort((a, b) => a.rmsDb - b.rmsDb);
-  const median = sorted[Math.floor(sorted.length / 2)].rmsDb;
-  for (const l of levels)
-    if (Math.abs(l.rmsDb - median) > 9)
-      issues.push({
-        level: "warn",
-        where: l.id,
-        msg: `${Math.round(l.rmsDb - median)}dB from the set median (${median}dBFS) — it will stand out`,
-      });
+  for (const f of unplaced)
+    issues.push({ level: "warn", where: "tokens/default.json", msg: `no audio.loudness offset for family "${f}" — held to the anchor` });
 }
 
 /** Render everything once (all variants, all themes) purely to harvest issues. */
@@ -461,7 +485,9 @@ if (cmd === "wav" || cmd === "check") {
     console.log(`✓ baked ${wavs.size} wav files → out/wav (${SAMPLE_RATE}Hz mono), ${specs} spectrograms → out/spec`);
     if (cmd === "wav")
       for (const [name, { d }] of wavs)
-        console.log(`  ${name.padEnd(28)} ${d.duration}s  peak ${String(d.peakDb).padStart(6)}dB  rms ${String(d.rmsDb).padStart(6)}dB  ${String(d.attackMs).padStart(6)}ms atk  ${d.brightness}Hz zc`);
+        console.log(
+          `  ${name.padEnd(28)} ${String(d.duration).padStart(5)}s  loud ${String(d.loudnessDb).padStart(6)}dB  rms ${String(d.rmsDb).padStart(6)}dB  peak ${String(d.truePeakDb).padStart(6)}dBTP  atk ${String(d.attackMs).padStart(6)}ms  phone -${String(d.phoneLossDb).padStart(4)}dB  ${String(d.centroidHz).padStart(5)}Hz`,
+        );
   } else if (cmd === "wav") {
     console.log("no sounds/ documents to bake");
   }

@@ -170,6 +170,171 @@ function renderVoice(v: IRVoice, out: Float32Array, sr: number, master: number):
   }
 }
 
+// ---------------------------------------------------------------- weighting
+
+/**
+ * A biquad with its coefficients handed in. The `Biquad` above is the IR's
+ * filter and speaks the IR's vocabulary; this one is for the measurements,
+ * which need shapes no document can ask for — a shelf, a fixed weighting.
+ */
+class Filt {
+  private x1 = 0; private x2 = 0; private y1 = 0; private y2 = 0;
+  constructor(private b0: number, private b1: number, private b2: number, private a1: number, private a2: number) {}
+  step(x: number): number {
+    const y = this.b0 * x + this.b1 * this.x1 + this.b2 * this.x2 - this.a1 * this.y1 - this.a2 * this.y2;
+    this.x2 = this.x1; this.x1 = x;
+    this.y2 = this.y1; this.y1 = y;
+    return y;
+  }
+}
+
+/** RBJ cookbook coefficients, so a measurement filter is the same shape at any rate. */
+function rbj(type: "lowpass" | "highpass" | "highshelf", f0: number, q: number, sr: number, gainDb = 0): Filt {
+  const A = Math.pow(10, gainDb / 40);
+  const w0 = (2 * Math.PI * f0) / sr;
+  const cos = Math.cos(w0), sin = Math.sin(w0);
+  const alpha = sin / (2 * q);
+  let b0: number, b1: number, b2: number, a0: number, a1: number, a2: number;
+  if (type === "highshelf") {
+    const s = 2 * Math.sqrt(A) * alpha;
+    b0 = A * (A + 1 + (A - 1) * cos + s); b1 = -2 * A * (A - 1 + (A + 1) * cos); b2 = A * (A + 1 + (A - 1) * cos - s);
+    a0 = A + 1 - (A - 1) * cos + s; a1 = 2 * (A - 1 - (A + 1) * cos); a2 = A + 1 - (A - 1) * cos - s;
+  } else if (type === "highpass") {
+    b0 = (1 + cos) / 2; b1 = -(1 + cos); b2 = b0; a0 = 1 + alpha; a1 = -2 * cos; a2 = 1 - alpha;
+  } else {
+    b0 = (1 - cos) / 2; b1 = 1 - cos; b2 = b0; a0 = 1 + alpha; a1 = -2 * cos; a2 = 1 - alpha;
+  }
+  return new Filt(b0 / a0, b1 / a0, b2 / a0, a1 / a0, a2 / a0);
+}
+
+function through(pcm: Float32Array, filts: Filt[]): Float32Array {
+  const out = new Float32Array(pcm.length);
+  for (let i = 0; i < pcm.length; i++) {
+    let s = pcm[i];
+    for (const f of filts) s = f.step(s);
+    out[i] = s;
+  }
+  return out;
+}
+
+/**
+ * ITU-R BS.1770 K-weighting: a +4dB shelf above 1.7kHz for the head, and a
+ * highpass under 40Hz for what nobody hears. RMS says how much signal there
+ * is; this says how loud it is, which is what the set has to hold together
+ * on. The shelf is written the way the standard derives it rather than from
+ * the cookbook, because the two disagree by half a dB in the octave that
+ * matters most; the highpass is the cookbook's and agrees to a hundredth.
+ */
+function kShelf(sr: number): Filt {
+  const G = 3.999843853973347, Q = 0.7071752369554196, f0 = 1681.974450955533;
+  const K = Math.tan((Math.PI * f0) / sr);
+  const Vh = Math.pow(10, G / 20);
+  const Vb = Math.pow(Vh, 0.4996667741545416);
+  const a0 = 1 + K / Q + K * K;
+  return new Filt((Vh + (Vb * K) / Q + K * K) / a0, (2 * (K * K - Vh)) / a0, (Vh - (Vb * K) / Q + K * K) / a0, (2 * (K * K - 1)) / a0, (1 - K / Q + K * K) / a0);
+}
+const kWeight = (pcm: Float32Array, sr: number): Float32Array =>
+  through(pcm, [kShelf(sr), rbj("highpass", 38.13547087602444, 0.5003270373238773, sr)]);
+/**
+ * The standard's constant: what the shelf adds at 1kHz, taken back off so a
+ * full-scale 1kHz sine reads -3dB the way its RMS does, and a loudness here is
+ * comparable to an LKFS figure anywhere else.
+ */
+const K_OFFSET_DB = 0.691;
+
+/**
+ * What a small speaker keeps: nothing under 250Hz, little over 8kHz. The
+ * same two filters the gallery's phone toggle puts in the way, so what the
+ * lint measures is what the toggle plays.
+ */
+export const PHONE_LO_HZ = 250;
+export const PHONE_HI_HZ = 8000;
+const phone = (pcm: Float32Array, sr: number): Float32Array =>
+  through(pcm, [rbj("highpass", PHONE_LO_HZ, 0.7071, sr), rbj("lowpass", PHONE_HI_HZ, 0.7071, sr)]);
+
+/** Loudest 50ms anywhere in [from, last]: the instant that reaches the ear. */
+function momentary(x: Float32Array, sr: number, from: number, last: number): number {
+  const n = Math.min(Math.round(0.05 * sr), last - from + 1);
+  if (n <= 0) return 0;
+  const hop = Math.max(1, n >> 2);
+  let best = 0;
+  for (let s = from; s + n - 1 <= last; s += hop) {
+    let e = 0;
+    for (let i = s; i < s + n; i++) e += x[i] * x[i];
+    best = Math.max(best, e / n);
+  }
+  return Math.sqrt(best);
+}
+
+/**
+ * Peak between the samples. A bake that reads -0.3dBFS sample by sample can
+ * pass 0dB in the DAC, and the buffer path resamples it again on top. Four
+ * times oversampled through a windowed sinc, the way the standard does it.
+ */
+function truePeak(pcm: Float32Array): number {
+  const H = 6;
+  const taps: number[][] = [];
+  for (let p = 1; p < 4; p++) {
+    const row: number[] = [];
+    for (let k = -H; k < H; k++) {
+      const t = k + p / 4;
+      const sinc = t === 0 ? 1 : Math.sin(Math.PI * t) / (Math.PI * t);
+      row.push(sinc * (0.5 + 0.5 * Math.cos((Math.PI * t) / H)));
+    }
+    taps.push(row);
+  }
+  let peak = 0;
+  for (let i = 0; i < pcm.length; i++) {
+    peak = Math.max(peak, Math.abs(pcm[i]));
+    for (const row of taps) {
+      let v = 0;
+      for (let k = -H; k < H; k++) {
+        const j = i - k;
+        if (j >= 0 && j < pcm.length) v += pcm[j] * row[k + H];
+      }
+      peak = Math.max(peak, Math.abs(v));
+    }
+  }
+  return peak;
+}
+
+/**
+ * Where the energy sits: the spectral centroid, and the share below 250Hz,
+ * between there and 2kHz, and above. Averaged power over the sounding extent
+ * in 2048-point frames. `brightness` (zero crossings) stays for continuity;
+ * this is the number that can see a low fundamental under a bright edge.
+ */
+function spectrum(pcm: Float32Array, sr: number, from: number, last: number): { centroidHz: number; bands: { low: number; mid: number; high: number } } {
+  const n = 2048;
+  const re = new Float64Array(n), im = new Float64Array(n);
+  const acc = new Float64Array(n / 2);
+  const win = new Float64Array(n);
+  for (let i = 0; i < n; i++) win[i] = 0.5 - 0.5 * Math.cos((2 * Math.PI * i) / (n - 1));
+  for (let s = from; s <= last; s += n / 2) {
+    for (let i = 0; i < n; i++) {
+      const j = s + i;
+      re[i] = (j <= last ? pcm[j] : 0) * win[i];
+      im[i] = 0;
+    }
+    fft(re, im);
+    for (let k = 1; k < n / 2; k++) acc[k] += re[k] * re[k] + im[k] * im[k];
+  }
+  let total = 0, weighted = 0, low = 0, mid = 0, high = 0;
+  for (let k = 1; k < n / 2; k++) {
+    const f = (k * sr) / n;
+    total += acc[k];
+    weighted += f * acc[k];
+    if (f < PHONE_LO_HZ) low += acc[k];
+    else if (f < 2000) mid += acc[k];
+    else high += acc[k];
+  }
+  const r3 = (x: number) => Math.round(x * 1000) / 1000;
+  return {
+    centroidHz: total > 0 ? Math.round(weighted / total) : 0,
+    bands: total > 0 ? { low: r3(low / total), mid: r3(mid / total), high: r3(high / total) } : { low: 0, mid: 0, high: 0 },
+  };
+}
+
 // ---------------------------------------------------------------- measurement
 
 export interface Descriptors {
@@ -193,9 +358,29 @@ export interface Descriptors {
    */
   attackMs: number;
   clipped: number;
+  /**
+   * K-weighted level over the sounding extent, dBFS — how loud, rather than
+   * how much. The number the family bands in `audio.loudness` are held on.
+   */
+  loudnessDb: number;
+  /** Loudest 50ms, K-weighted: the instant that reaches the ear. */
+  momentaryDb: number;
+  /** The same instant through what a phone speaker keeps (250Hz–8kHz). */
+  phoneDb: number;
+  /** `momentaryDb - phoneDb`: what the phone loses. Past a few dB, the low end is carrying the sound. */
+  phoneLossDb: number;
+  /** Peak between the samples, four times oversampled, dBTP. */
+  truePeakDb: number;
+  /** Spectral centroid, Hz. */
+  centroidHz: number;
+  /** Share of energy below 250Hz, 250Hz–2kHz, and above 2kHz. */
+  bands: { low: number; mid: number; high: number };
+  /** Seconds from onset to the last sample within 60dB of peak. */
+  tailS: number;
 }
 
 const db = (x: number) => (x <= 0 ? -Infinity : Math.round(20 * Math.log10(x) * 10) / 10);
+const r1 = (x: number) => Math.round(x * 10) / 10;
 
 export function describe(pcm: Float32Array, sr = SAMPLE_RATE): Descriptors {
   let peak = 0, cross = 0, clipped = 0;
@@ -222,6 +407,17 @@ export function describe(pcm: Float32Array, sr = SAMPLE_RATE): Descriptors {
 
   let rise = first;
   while (rise <= last && Math.abs(pcm[rise]) < peak * 0.9) rise++;
+
+  let tail = last;
+  while (tail > first && Math.abs(pcm[tail]) < peak * 0.001) tail--;
+
+  const k = kWeight(pcm, sr);
+  let ksum = 0;
+  for (let i = first; i <= last; i++) ksum += k[i] * k[i];
+  const loud = Math.sqrt(ksum / Math.max(1, last - first + 1));
+  const moment = momentary(k, sr, first, last);
+  const onPhone = momentary(kWeight(phone(pcm, sr), sr), sr, first, last);
+  const { centroidHz, bands } = spectrum(pcm, sr, first, last);
   return {
     duration: Math.round((pcm.length / sr) * 10000) / 10000,
     peak: Math.round(peak * 10000) / 10000,
@@ -231,6 +427,14 @@ export function describe(pcm: Float32Array, sr = SAMPLE_RATE): Descriptors {
     brightness: Math.round((cross / (pcm.length / sr)) * 10) / 10,
     attackMs: Math.round(((rise - first) / sr) * 10000) / 10,
     clipped,
+    loudnessDb: r1(db(loud) - K_OFFSET_DB),
+    momentaryDb: r1(db(moment) - K_OFFSET_DB),
+    phoneDb: r1(db(onPhone) - K_OFFSET_DB),
+    phoneLossDb: moment > 0 && onPhone > 0 ? Math.round((db(moment) - db(onPhone)) * 10) / 10 : 0,
+    truePeakDb: db(truePeak(pcm)),
+    centroidHz,
+    bands,
+    tailS: Math.round(((tail - first) / sr) * 10000) / 10000,
   };
 }
 
