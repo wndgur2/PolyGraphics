@@ -1,0 +1,276 @@
+{
+  "id": "ss.fx.footprint",
+  "name": "Footfall",
+  "description": "The print something too big to fit on screen leaves when it puts a foot down on the flats. This is a world of insects at insect scale, so the thing crossing it is an insect too, and an insect does not stand on a sole: it stands on a tarsus. What goes into the ground is therefore a chain of five segment pads tapering toward the front, a pair of hooked claws torn in past the last one, and two spurs off the sides where the leg's own bristles caught. Nothing here is a toe, and that is the whole point \u2014 a print made of one big pad and three round toes is a paw, and a paw belongs to an animal this world does not have. Drawn as holes and nothing else: no lip of turned soil around them, no outline. The game stamps this at a third of the screen's width, and at that size a rim reads as a drawn edge \u2014 as ink somebody put around a shape \u2014 rather than as ground that is missing. A silhouette that big carries its own form, and the one thing it has to say is that the floor is not there any more. What warmth there is comes from the crumbs thrown clear of it. The chain curves and the two claws sit at different angles and lengths, because this is the mark one animal left standing in one place rather than a symmetrical badge. Authored pointing up (-y) and filling the 72px canvas to its corners, so the game scales by r=36 and turns the whole sprite to the bearing the walker is on \u2014 see feelers' game/FootfallSystem.ts, which stamps it and leaves it in the dirt for the rest of the run.",
+  "tags": [
+    "ss-fx",
+    "ground"
+  ],
+  "size": [
+    72,
+    72
+  ],
+  "seed": 83,
+  "parts": [
+    {
+      "id": "claw_l",
+      "at": [
+        -11,
+        -19
+      ],
+      "rot": -58,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.6,
+            -11
+          ],
+          [
+            -2.6,
+            -4
+          ],
+          [
+            -2.4,
+            4
+          ],
+          [
+            -0.4,
+            8
+          ],
+          [
+            1.6,
+            3.5
+          ],
+          [
+            2.4,
+            -3
+          ],
+          [
+            0.4,
+            -9.5
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "claw_r",
+      "at": [
+        9,
+        -21
+      ],
+      "rot": 52,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.6,
+            -11
+          ],
+          [
+            2.6,
+            -4
+          ],
+          [
+            2.4,
+            4
+          ],
+          [
+            0.4,
+            8
+          ],
+          [
+            -1.6,
+            3.5
+          ],
+          [
+            -2.4,
+            -3
+          ],
+          [
+            -0.4,
+            -9.5
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "spur_l",
+      "at": [
+        -9,
+        14
+      ],
+      "rot": -122,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.0,
+            -7
+          ],
+          [
+            -1.8,
+            -2
+          ],
+          [
+            -1.6,
+            3
+          ],
+          [
+            -0.2,
+            5.5
+          ],
+          [
+            1.4,
+            2.5
+          ],
+          [
+            1.8,
+            -2
+          ],
+          [
+            0.2,
+            -6
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "spur_r",
+      "at": [
+        10,
+        16
+      ],
+      "rot": 116,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.0,
+            -7
+          ],
+          [
+            1.8,
+            -2
+          ],
+          [
+            1.6,
+            3
+          ],
+          [
+            0.2,
+            5.5
+          ],
+          [
+            -1.4,
+            2.5
+          ],
+          [
+            -1.8,
+            -2
+          ],
+          [
+            -0.2,
+            -6
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "seg1",
+      "at": [
+        3,
+        22
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 7.5
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "seg2",
+      "at": [
+        1.5,
+        11.5
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 6.6
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "seg3",
+      "at": [
+        0,
+        2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 5.6
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "seg4",
+      "at": [
+        -1.5,
+        -6.5
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 4.6
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "seg5",
+      "at": [
+        -2.5,
+        -14
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.6
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "deep",
+      "at": [
+        3,
+        22
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 4.2
+      },
+      "fill": "$ink.dark2"
+    },
+    {
+      "id": "crumbs",
+      "repeat": {
+        "of": {
+          "kind": "circle",
+          "r": 1.2
+        },
+        "count": 14,
+        "area": [
+          66,
+          66
+        ],
+        "seed": 83,
+        "scaleRange": [
+          0.4,
+          1.1
+        ]
+      },
+      "fill": "$rust"
+    }
+  ]
+}
