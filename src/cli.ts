@@ -153,7 +153,11 @@ function lintSounds(sreg: SoundRegistry, issues: Issue[]): void {
   // table over, and the same reason: it will be retuned by somebody who thinks
   // something depends on it, or left behind by somebody who thinks nothing does.
   const played = new Set<string>();
-  for (const sd of sreg.sounds.values()) for (const v of sd.voices) if ("use" in v) played.add(v.use);
+  for (const sd of sreg.sounds.values())
+    for (const v of sd.voices) {
+      if ("use" in v) played.add(v.use);
+      if ("phrase" in v) played.add(v.phrase.use);
+    }
   for (const sd of sreg.sounds.values())
     if (sd.root !== undefined && !played.has(sd.id))
       issues.push({ level: "warn", where: sd.id, msg: "declares a `root` but nothing composes it — an instrument nobody plays" });
@@ -165,7 +169,7 @@ function lintSounds(sreg: SoundRegistry, issues: Issue[]): void {
   for (const sd of sreg.sounds.values())
     for (const v of sd.voices) {
       const src = "source" in v ? v.source : "repeat" in v ? v.repeat.of : undefined;
-      if (src?.kind === "osc" && (src.wave === "square" || src.wave === "sawtooth") && !("use" in v) && !v.filter && !v.why)
+      if (src?.kind === "osc" && (src.wave === "square" || src.wave === "sawtooth") && !("filter" in v && v.filter) && !v.why)
         issues.push({ level: "warn", where: `${sd.id}(${v.id})`, msg: `unfiltered ${src.wave} — every harmonic to Nyquist; add a lowpass, or say \`why\`` });
     }
 

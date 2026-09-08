@@ -265,10 +265,12 @@ function voiceRow(v: Voice): string {
   const bits: string[] = [];
   if ("use" in v)
     bits.push(`use ${v.use}${v.variant ? `#${v.variant}` : ""}${v.pitch !== undefined ? ` @ ${v.pitch}` : ""}`);
+  else if ("phrase" in v)
+    bits.push(`phrase ${v.phrase.use}${v.phrase.variant ? `#${v.phrase.variant}` : ""} · ${v.phrase.notes.map((n) => n ?? "·").join(" ")} · step ${v.phrase.step}s`);
   else if ("repeat" in v)
     bits.push(`repeat ×${v.repeat.count} ${v.repeat.of.kind} · ${v.repeat.spread}s spread, ${v.repeat.grain} grain`);
   else if (v.source.kind === "osc")
-    bits.push(`${v.source.wave} ${v.source.freq}${v.source.to !== undefined ? ` → ${v.source.to}` : ""}`);
+    bits.push(`${v.source.wave} ${v.source.freq}${v.source.to !== undefined ? ` → ${v.source.to}` : ""}${v.source.unison ? ` ×${v.source.unison.count} ±${v.source.unison.detune}¢` : ""}`);
   else bits.push("noise");
 
   // The gain is this row's paint; everything else is a modifier and lives in
@@ -276,10 +278,11 @@ function voiceRow(v: Voice): string {
   // push a nowrap column off the page.
   const xf: string[] = [];
   if (v.at) xf.push(`at ${v.at}s`);
-  if (v.dur !== undefined) xf.push(`dur ${v.dur}`);
-  // A `use` voice carries no shaping of its own — the document it composes
-  // brings its own — so only the two that own a waveform have these columns.
-  if (!("use" in v)) {
+  if ("dur" in v && v.dur !== undefined) xf.push(`dur ${v.dur}`);
+  if (v.echo) xf.push(`echo ${v.echo.time}s ×${v.echo.feedback}`);
+  // A `use` or `phrase` voice carries no shaping of its own — the document it
+  // composes brings its own — so only the two that own a waveform have these.
+  if ("source" in v || "repeat" in v) {
     if (v.filter)
       xf.push(
         `${v.filter.type} ${v.filter.freq}${v.filter.to !== undefined ? `→${v.filter.to}` : ""}${v.filter.q !== undefined ? ` q ${v.filter.q}` : ""}`,

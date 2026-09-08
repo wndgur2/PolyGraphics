@@ -141,6 +141,8 @@ author a sound without learning a second system:
 | `repeat` — seeded scatter across an **area** | `repeat` — seeded scatter across a **span** (grains) |
 | `animations.tracks` — `[t, value]` per part per prop | `env` — `[t, value]` per voice per prop |
 | `variants` — declarative patches | `variants` — the same, plus `pitch` and `stretch` |
+| — | `phrase` — one instrument played at a row of pitches (no visual twin; see below) |
+| — | `unison`, `echo`, `takes` — width, space and variety, each compiled to plain voices |
 
 ```jsonc
 {
@@ -232,6 +234,39 @@ Retune the library and every figure built on it moves together — the exact
 `ss.lib.organ` argument, and `scripts/test-webaudio-adapter.ts` asserts it by
 retuning the note in memory and checking that both fanfares follow while the
 knell-based one does not.
+
+**Four more things compile away, and the IR never learns they existed.** Each
+is the relationship `to` has to a `freq` track: a shorthand for voices you could
+have written, so the renderer and all three adapters are untouched and the
+bundle stays `polygraphics-sounds@1`.
+
+- **`unison`** on an oscillator: `{ "count": 2, "detune": 7 }` is the voice
+  twice, seven cents either side of its pitch, each at 1/√2 of the level.
+  Width — what the game's own pad is made of. A glide detunes with each copy;
+  a filter stays where it was.
+- **`echo`** on any voice: `{ "time": 0.42, "feedback": 0.32 }` is the voice
+  again at `time`, `2·time`, `3·time`… each tap a third of the last, until one
+  would sit under −40dB or `taps` is reached. Space, flattened into voices —
+  the pluck's feedback delay without a bus in the IR. A tap that would start
+  past the canvas is dropped and said so; one that runs past it is cut there.
+- **`phrase`**: `{ "use": "ss.lib.note", "step": 0.09, "notes": ["$third",
+  "$fifth", "$seventh", "$third.up"] }` is the four `use` voices it stands for,
+  one every `step`, each at the pitch named; `null` is a rest, `dur` refits
+  each note. `ss.sfx.levelup` is that one voice; its tempo is one number. This
+  is the one construct with no twin on the visual side — time carries an
+  ordering space does not — and the schema header says so.
+- **`takes`** on a document: `"takes": 3` bakes it three times, every noise
+  and scatter reseeded and its `jitter` rolled once by a seeded rng and
+  frozen, as variants `take-2` and `take-3` for the engine to round-robin. A
+  `hit` on the buffer path is otherwise one buffer with a rate roll — the same
+  grain pattern three hundred times a run, slightly transposed. Each take is
+  a baseline like any other. A take that comes out identical to the base is
+  told so: nothing in the document was seeded or jittered.
+
+`meta` is an open record of sim-facing numbers, and two more hints ride there
+by convention: `polyphony`, how many of this may sound at once, and `duck`,
+the dB the score should drop while it plays. The engine reads them the way it
+reads `minInterval`.
 
 **Whole-sound behaviour belongs to the engine**, the same boundary the visual
 side draws at whole-body transforms. A document describes one trigger: rate
@@ -483,4 +518,4 @@ You are the intended primary author. Rules of the road:
 - Per-instance motion vectors for `repeat` scatter (true radial bursts instead of uniform scale)
 - Part libraries beyond `lib.face` (hands, crowns, telegraph markers); named particle-emitter presets
 - Palette lint: flag near-duplicate hex across tokens; gradient support in adapters (currently flat mid-color fallback)
-- ~~Sound: schema, offline bake, WebAudio adapter, the SFX set~~ → shipped; 20 documents in `sounds/`. Still to do: re-author the placeholder gestures now that they can be heard side by side, spectrograms and a sounds tab in the gallery, panning, a Godot path (offline WAV rather than a live graph), and the adaptive score's *materials* (the score itself is a scheduler and stays in the game)
+- ~~Sound: schema, offline bake, WebAudio adapter, the SFX set~~ → shipped; 22 documents in `sounds/`. ~~Spectrograms, before/after, a phone to listen through, K-weighted loudness and family bands, `unison` / `echo` / `phrase` / `takes`~~ → shipped, phases 1–3 of [docs/sound-quality-plan.md](docs/sound-quality-plan.md). Still to do, in that plan's order: re-author the placeholder gestures one family at a time with a listening record, fill the seam (new documents, variants and takes played, panning on the engine side), a Godot path (offline WAV rather than a live graph), and the adaptive score's *materials* (the score itself is a scheduler and stays in the game)

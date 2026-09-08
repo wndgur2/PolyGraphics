@@ -3,7 +3,7 @@
 *2026-09-09. The plan for making the sound set good, in the order the repository can afford it. Builds on
 [`sound-system-design.md`](sound-system-design.md) (PR #39) and reads the four open PRs as of today.*
 
-*Status: PRs #39, #42, #44 and #45 merged 2026-09-08/09. Phase 0 is done except the `stomp` crack; phases 1–3 are in progress.*
+*Status: phases 0–3 landed 2026-09-09 (#39, #51, #52, #53, and the idioms PR). Phase 4 — the re-author, one family per PR with a listening record — is next, and is the first phase that needs ears.*
 
 The shipped set is a faithful port of the game's placeholder `switch` (PR #32). That was the right first move:
 21 documents, 28 takes, byte-identical bakes, a lint, a gallery. Nothing below argues with it. It argues that the
@@ -227,7 +227,8 @@ built from exactly these four things and nothing else.
 *Needs: phase 0 (`adsr`, `root`). Gives: the vocabulary phase 4 authors in, and phase 6 needs. Invariant: every
 shipped take byte-identical, because no shipped document uses the new words until phase 4 — with the one
 exception that the three fanfares are rewritten on `phrase` and must bake identically, which is the test.
-`scripts/test-webaudio-adapter.ts` gains a check per idiom.*
+`scripts/test-webaudio-adapter.ts` gains a check per idiom. Landed as designed; the fanfares baked
+byte-identical on `phrase`, and the suite is at 69 checks.*
 
 ### Phase 4 — Re-author the set
 
