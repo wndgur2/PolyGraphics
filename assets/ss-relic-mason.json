@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.mason",
   "name": "Mason gland",
-  "description": "Three blocks of chewed earth stood up in an arc, the middle one tallest and set back, the outer two shorter and turned slightly outward — the cover the relic raises, with the gaps between them left wide on purpose, because never walling its owner in is half of what the relic does. Each block is a squared prism: a dark left facet and a foreshortened top face, deliberately not an elliptical cap, which read as a barrel in two earlier passes. The middle one has a wet run down it — the material is secreted mortar, not cut stone, and cut stone is the one vocabulary the ruins' own pillars and slabs already own. The gland itself is not drawn: a sac would have read as one more of the glands already on this shelf, and the arc is the only part of this that says what it does.",
+  "description": "Three blocks of chewed earth stood up in an arc, the middle one tallest and set back, the outer two shorter and turned slightly outward — the cover the relic raises, with the gaps between them left wide on purpose, because never walling its owner in is half of what the relic does. Each block is a squared prism: a dark left facet and a foreshortened top face, deliberately not an elliptical cap, which read as a barrel in two earlier passes. The middle one has a wet run down it — the material is secreted mortar, not cut stone, and cut stone is the one vocabulary the ruins' own pillars and slabs already own. The gland itself is not drawn: a sac would have read as one more of the glands already on this shelf, and the arc is the only part of this that says what it does. Polish: the ink underlays were quads while each block's silhouette has a shoulder where the top face meets the right side, so the ink there thinned to under half a pixel; each outline gained one point at that shoulder and the margin is now ~1.2 px all the way round. Facets, top faces, the run and the shadow are untouched.",
   "tags": [
     "ss-relic"
   ],
@@ -44,6 +44,10 @@
           [
             4.208,
             -10.5
+          ],
+          [
+            5.5,
+            -7.2
           ],
           [
             6.224,
@@ -180,6 +184,10 @@
             -8.1
           ],
           [
+            4.4,
+            -4.8
+          ],
+          [
             5.004,
             6.300000000000001
           ],
@@ -298,6 +306,10 @@
           [
             3.468,
             -8.1
+          ],
+          [
+            4.4,
+            -4.8
           ],
           [
             5.004,
