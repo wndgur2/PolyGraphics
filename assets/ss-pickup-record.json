@@ -1,0 +1,41 @@
+{
+  "id": "ss.pickup.record",
+  "name": "Field record",
+  "description": "A page of a predecessor's log, lying where the swarm dropped it. Paper is the one thing on the field with no smell, so the hive carries it about and never eats it — which is why it survives, and why it turns up scattered rather than filed. Bone-pale against everything else's chitin, because it is the only thing on the ground that was made somewhere else; the ink lines are drawn at the size they are read at, one short, so they read as writing rather than as a grille. A dog-eared corner (the flap folded inward over a cut that shows the outline ink) says 'page' the way the cap seam says 'cell', and the stain at the foot is the ground it has been lying on. The halo is the brood cell's trick, paler: a thing meant to be found gets a little light of its own.",
+  "tags": ["ss-pickup"],
+  "size": [24, 28],
+  "meta": { "radius": 9 },
+  "parts": [
+    { "id": "halo", "shape": { "kind": "ellipse", "rx": 11, "ry": 12.5 }, "fill": "$bone@ghost" },
+    { "id": "shadow", "at": [1.2, 1.8], "shape": { "kind": "rect", "w": 16, "h": 20, "corner": 1.5 }, "fill": "$ink@soft" },
+    { "id": "outline", "shape": { "kind": "rect", "w": 16, "h": 20, "corner": 1.5 }, "fill": "$ink" },
+    { "id": "sheet", "shape": { "kind": "rect", "w": 13, "h": 17, "corner": 1 }, "fill": "$bone" },
+    { "id": "stain", "at": [-2.6, 5.4], "rot": -18, "shape": { "kind": "ellipse", "rx": 3.2, "ry": 1.9 }, "fill": "$chitin.dark@soft" },
+    { "id": "line_1", "at": [-1, -5], "shape": { "kind": "rect", "w": 7, "h": 1.2 }, "fill": "$slate.dark" },
+    { "id": "line_2", "at": [-0.5, -2], "shape": { "kind": "rect", "w": 8, "h": 1.2 }, "fill": "$slate.dark" },
+    { "id": "line_3", "at": [-0.5, 1], "shape": { "kind": "rect", "w": 8, "h": 1.2 }, "fill": "$slate.dark" },
+    { "id": "line_4", "at": [-2, 4], "shape": { "kind": "rect", "w": 5, "h": 1.2 }, "fill": "$slate.dark" },
+    { "id": "fold_cut", "at": [4.5, -6.5], "shape": { "kind": "poly", "points": [[-2, -2], [2, -2], [2, 2]] }, "fill": "$ink" },
+    { "id": "fold", "at": [4.5, -6.5], "shape": { "kind": "poly", "points": [[-2, -2], [2, 2], [-2, 2]] }, "fill": "$bone.dark" }
+  ],
+  "animations": {
+    "lift": {
+      "description": "the wind gets under it: the page rises a little and settles, its shadow slips out from under it as it does, and the halo breathes with the lift",
+      "duration": 2.8,
+      "tracks": [
+        { "part": "outline", "prop": "y", "keys": [[0, 0], [0.5, -1.6], [1, 0]] },
+        { "part": "sheet", "prop": "y", "keys": [[0, 0], [0.5, -1.6], [1, 0]] },
+        { "part": "stain", "prop": "y", "keys": [[0, 0], [0.5, -1.6], [1, 0]] },
+        { "part": "line_1", "prop": "y", "keys": [[0, 0], [0.5, -1.6], [1, 0]] },
+        { "part": "line_2", "prop": "y", "keys": [[0, 0], [0.5, -1.6], [1, 0]] },
+        { "part": "line_3", "prop": "y", "keys": [[0, 0], [0.5, -1.6], [1, 0]] },
+        { "part": "line_4", "prop": "y", "keys": [[0, 0], [0.5, -1.6], [1, 0]] },
+        { "part": "fold_cut", "prop": "y", "keys": [[0, 0], [0.5, -1.6], [1, 0]] },
+        { "part": "fold", "prop": "y", "keys": [[0, 0], [0.5, -1.6], [1, 0]] },
+        { "part": "shadow", "prop": "x", "keys": [[0, 0], [0.5, 1], [1, 0]] },
+        { "part": "shadow", "prop": "opacity", "keys": [[0, 1], [0.5, 0.7], [1, 1]] },
+        { "part": "halo", "prop": "scale", "keys": [[0, 0.94], [0.5, 1.1], [1, 0.94]] }
+      ]
+    }
+  }
+}
