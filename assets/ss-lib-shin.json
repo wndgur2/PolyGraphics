@@ -1,0 +1,149 @@
+{
+  "id": "ss.lib.shin",
+  "name": "Suit shin",
+  "description": "Knee to sole of a survivor's exploration suit, hinged at the origin: the knee sits at [0,0], the shin hangs down +y, and the boot at the bottom points its toe forward (+x). Placed at the knee of `ss.lib.thigh` and swung with its own `rot` track, so a stride bends at the knee instead of swinging a straight leg. A shin guard over dark fabric, a hard boot with a lighter shell and a dark sole. `far` is the leg on the other side, a step darker.",
+  "tags": [
+    "ss-lib"
+  ],
+  "size": [
+    12,
+    14
+  ],
+  "anchor": [
+    0.5,
+    0.1
+  ],
+  "parts": [
+    {
+      "id": "shin",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.9,
+            -0.9
+          ],
+          [
+            1.9,
+            -0.9
+          ],
+          [
+            1.7,
+            7.8
+          ],
+          [
+            -1.5,
+            7.8
+          ]
+        ]
+      },
+      "fill": "$slate.light",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "guard",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.5,
+            0.2
+          ],
+          [
+            1.3,
+            0.2
+          ],
+          [
+            1.2,
+            7
+          ],
+          [
+            -1.2,
+            7
+          ]
+        ]
+      },
+      "fill": "$steel.dark"
+    },
+    {
+      "id": "boot",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.9,
+            7.4
+          ],
+          [
+            1.9,
+            7.4
+          ],
+          [
+            2.3,
+            9.2
+          ],
+          [
+            4.5,
+            10
+          ],
+          [
+            4.3,
+            11.1
+          ],
+          [
+            -2.1,
+            11.1
+          ],
+          [
+            -2.3,
+            8.8
+          ]
+        ]
+      },
+      "fill": "$steel",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "sole",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.1,
+            10.3
+          ],
+          [
+            4.4,
+            10.5
+          ],
+          [
+            4.3,
+            11.1
+          ],
+          [
+            -2.1,
+            11.1
+          ]
+        ]
+      },
+      "fill": "$steel"
+    }
+  ],
+  "variants": {
+    "far": {
+      "description": "The far shin, a step darker.",
+      "set": {
+        "shin.fill": "$slate",
+        "guard.fill": "$slate.light",
+        "boot.fill": "$steel.dark",
+        "sole.fill": "$slate"
+      }
+    }
+  }
+}

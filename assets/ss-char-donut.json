@@ -1,13 +1,13 @@
 {
   "id": "ss.char.donut",
   "name": "Donut",
-  "description": "The spine thrower: a rogue of the brood, hooded and masked. A dark red hood, a scarf drawn up over the nose, one brow raised over the eye that shows. The shell closed into a ring where the emitter chamber used to be, and Donut wears it as it is: a coral ring-plate over the chest with the hole open through it, the dead organ set on the rim off to one side, the way it always was. A dark leather jerkin under that, a bandolier of husk spines across the back rising over the far shoulder, a short red cloak, and in the near hand three wing blades fanned like a hand of cards: Drifter membranes on bone frames, thrown to bounce from body to body. The pouch on the belt is the jelly it hoards. The feelers rise from the hood and lie back along it. Drawn facing +x; the game flips it.",
+  "description": "The ring. The shell closed into a ring where the emitter chamber used to be, and the suit was built around what was left: a large hollow port in the middle of the chest, open straight through to the dark suit behind it, ringed in dark red, with the dead core moved out to the rim off to one side, the way it always was. A row of husk quills runs down the spine from the collar to the belt, standing off the back; a short cowl is drawn over the helmet; and on the near forearm a launcher bracket holds three wing blades loaded flat — Drifter membranes on bone frames, thrown to bounce from body to body — so the hands stay free. A pouch hangs at the far hip. Two dead feelers curve back from under the cowl. Drawn facing +x; the game flips it.",
   "tags": [
     "ss-char"
   ],
   "size": [
     40,
-    48
+    56
   ],
   "meta": {
     "radius": 11.5
@@ -18,13 +18,13 @@
       "use": "ss.lib.antenna",
       "variant": "dead",
       "at": [
-        0.2,
-        -19.6
+        -0.2,
+        -24.2
       ],
-      "rot": -102,
+      "rot": -122,
       "scale": [
-        0.5,
-        0.8
+        0.48,
+        0.86
       ]
     },
     {
@@ -32,207 +32,193 @@
       "use": "ss.lib.antenna",
       "variant": "dead",
       "at": [
-        2.4,
-        -20
+        1.6,
+        -24.6
       ],
-      "rot": -88,
+      "rot": -108,
       "scale": [
-        0.52,
-        0.84
+        0.5,
+        0.9
       ]
     },
     {
-      "id": "spines",
+      "id": "quills",
       "at": [
-        -6.2,
-        -11.6
+        -5,
+        -8.6
       ],
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -3.4,
-            2.6
+            -0.6,
+            -9.2
           ],
           [
             -2.6,
-            -1.6
+            -8.2
           ],
           [
-            -1.4,
-            1.4
+            -0.8,
+            -6.4
           ],
           [
-            0,
+            -2.8,
+            -4.6
+          ],
+          [
+            -0.9,
             -3
           ],
           [
-            1.4,
-            1
+            -2.7,
+            -1
           ],
           [
-            2.8,
-            -2.4
+            -0.9,
+            0.6
           ],
           [
-            3.8,
-            1.4
-          ],
-          [
-            4.2,
-            3
-          ]
-        ]
-      },
-      "fill": "$husk",
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "cape",
-      "at": [
-        -1,
-        -10.8
-      ],
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -4.8,
-            0.2
-          ],
-          [
-            4.2,
-            -0.2
-          ],
-          [
-            3.4,
-            6.8
-          ],
-          [
-            0.4,
-            14.2
-          ],
-          [
-            -5.4,
-            16.4
-          ],
-          [
-            -8,
-            10.8
-          ],
-          [
-            -6.6,
-            5.2
-          ]
-        ]
-      },
-      "fill": "$coral.dark",
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "cape_fold",
-      "at": [
-        -1,
-        -10.8
-      ],
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -3,
-            2.4
-          ],
-          [
-            0.2,
+            -2.6,
             2.6
           ],
           [
             -0.8,
-            8.8
+            4.2
           ],
           [
-            -3,
-            13.4
+            0.4,
+            4.4
           ],
           [
-            -5.4,
-            14.4
-          ],
-          [
-            -5.8,
-            9.4
-          ],
-          [
-            -4.6,
-            5.4
+            0.4,
+            -9.4
           ]
         ]
       },
-      "fill": "$coral.dark2"
+      "fill": "$husk.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
     },
     {
-      "id": "arm_far",
-      "use": "ss.lib.arm",
-      "variant": "far",
+      "id": "pouch",
       "at": [
-        -5.2,
-        -9.6
+        -4.8,
+        0.2
       ],
-      "rot": 14
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.7,
+        "ry": 1.9
+      },
+      "fill": "$slate.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
     },
     {
-      "id": "leg_far",
-      "use": "ss.lib.leg",
+      "id": "pouch_tie",
+      "at": [
+        -4.8,
+        -1.3
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1.8,
+        "h": 0.6,
+        "corner": 0.2
+      },
+      "fill": "$steel"
+    },
+    {
+      "id": "upperarm_far",
+      "use": "ss.lib.upperarm",
       "variant": "far",
       "at": [
-        -1.6,
-        2.6
+        -3.6,
+        -17.2
+      ],
+      "rot": 6
+    },
+    {
+      "id": "forearm_far",
+      "use": "ss.lib.forearm",
+      "variant": "far",
+      "at": [
+        -3.6,
+        -9.2
+      ],
+      "rot": -4
+    },
+    {
+      "id": "thigh_far",
+      "use": "ss.lib.thigh",
+      "variant": "far",
+      "at": [
+        -1.4,
+        -1.8
       ],
       "rot": 5
     },
     {
-      "id": "leg",
-      "use": "ss.lib.leg",
+      "id": "shin_far",
+      "use": "ss.lib.shin",
+      "variant": "far",
       "at": [
-        2.6,
-        2.2
+        -1.4,
+        8.2
       ],
-      "rot": -5
+      "rot": 0
     },
     {
-      "id": "skirt",
+      "id": "thigh",
+      "use": "ss.lib.thigh",
+      "at": [
+        2.2,
+        -2.0
+      ],
+      "rot": -8
+    },
+    {
+      "id": "shin",
+      "use": "ss.lib.shin",
+      "at": [
+        2.2,
+        8.0
+      ],
+      "rot": 8
+    },
+    {
+      "id": "pelvis",
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -5,
+            -4.2,
+            -4.4
+          ],
+          [
+            4.8,
+            -4.4
+          ],
+          [
+            4.6,
+            -0.2
+          ],
+          [
+            2.8,
+            1.4
+          ],
+          [
+            -1.6,
             1.6
           ],
           [
-            5.4,
-            1.6
-          ],
-          [
-            6,
-            5.6
-          ],
-          [
-            2.4,
-            6.6
-          ],
-          [
-            -2.2,
-            6.4
-          ],
-          [
-            -5.6,
-            5.4
+            -4.0,
+            -0.4
           ]
         ]
       },
@@ -248,28 +234,28 @@
         "kind": "poly",
         "points": [
           [
-            5.8,
-            -10.8
-          ],
-          [
-            -5.2,
-            -11
-          ],
-          [
-            -6,
-            -4.6
+            5.4,
+            -18.2
           ],
           [
             -4.6,
-            1.6
+            -18.4
           ],
           [
-            4.8,
-            1.8
+            -5.2,
+            -10.4
           ],
           [
-            6.8,
-            -4.2
+            -4.2,
+            -3.6
+          ],
+          [
+            4.4,
+            -3.4
+          ],
+          [
+            5.8,
+            -10.4
           ]
         ]
       },
@@ -280,33 +266,83 @@
       }
     },
     {
-      "id": "jerkin",
+      "id": "abd_a",
       "shape": {
         "kind": "poly",
         "points": [
           [
-            5.2,
-            -10
+            -4.6,
+            -8.2
           ],
+          [
+            5.0,
+            -8.2
+          ],
+          [
+            4.8,
+            -6.6
+          ],
+          [
+            -4.5,
+            -6.6
+          ]
+        ]
+      },
+      "fill": "$steel.dark"
+    },
+    {
+      "id": "abd_b",
+      "shape": {
+        "kind": "poly",
+        "points": [
           [
             -4.4,
-            -10.2
+            -5.4
           ],
           [
-            -5.2,
-            -4.4
+            4.7,
+            -5.4
+          ],
+          [
+            4.5,
+            -4
+          ],
+          [
+            -4.3,
+            -4
+          ]
+        ]
+      },
+      "fill": "$steel.dark"
+    },
+    {
+      "id": "chest",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            4.8,
+            -17.4
           ],
           [
             -3.8,
-            0.8
+            -17.6
           ],
           [
-            4,
-            1
+            -4.6,
+            -12.2
           ],
           [
-            6,
-            -4
+            -3.4,
+            -8.8
+          ],
+          [
+            3.8,
+            -8.6
+          ],
+          [
+            5.2,
+            -12.2
           ]
         ]
       },
@@ -317,77 +353,79 @@
       }
     },
     {
-      "id": "jerkin_shade",
+      "id": "chest_light",
       "shape": {
         "kind": "poly",
         "points": [
           [
-            4,
-            -2.6
+            -3.2,
+            -16.8
           ],
           [
-            -3,
-            -2.4
+            0.4,
+            -16.9
           ],
           [
-            -3.6,
-            0.6
-          ],
-          [
-            3.8,
-            0.8
-          ],
-          [
-            5.8,
-            -3.8
-          ]
-        ]
-      },
-      "fill": "$slate.light"
-    },
-    {
-      "id": "bandolier",
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -4.4,
+            -0.2,
             -9.6
           ],
           [
-            -2.6,
-            -9.8
+            -2.8,
+            -9.4
           ],
           [
-            5,
-            -0.4
-          ],
-          [
-            3.4,
-            0.2
+            -3.8,
+            -12.2
           ]
         ]
       },
-      "fill": "$timber.dark"
+      "fill": "$steel"
     },
     {
-      "id": "ring_plate",
+      "id": "chest_seam",
+      "at": [
+        0.6,
+        -13
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 0.5,
+        "h": 8.2
+      },
+      "fill": "$slate"
+    },
+    {
+      "id": "stripe",
+      "at": [
+        -3.4,
+        -13.2
+      ],
+      "rot": 4,
+      "shape": {
+        "kind": "rect",
+        "w": 0.8,
+        "h": 6.4
+      },
+      "fill": "$coral.dark2"
+    },
+    {
+      "id": "port_rim",
       "at": [
         0.8,
-        -5
+        -12.6
       ],
       "shape": {
         "kind": "ring",
-        "r": 3.4,
-        "width": 2.4
+        "r": 3.1,
+        "width": 2
       },
-      "fill": "$coral"
+      "fill": "$steel.dark"
     },
     {
-      "id": "ring_hole",
+      "id": "port_hole",
       "at": [
         0.8,
-        -5
+        -12.6
       ],
       "shape": {
         "kind": "circle",
@@ -396,25 +434,35 @@
       "fill": "$ink"
     },
     {
-      "id": "ring_light",
+      "id": "port_depth",
+      "at": [
+        0.5,
+        -12.3
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.5
+      },
+      "fill": "$coal"
+    },
+    {
+      "id": "port_accent",
       "at": [
         0.8,
-        -5
+        -12.6
       ],
       "shape": {
         "kind": "ring",
-        "r": 3.8,
-        "width": 1,
-        "from": 190,
-        "to": 300
+        "r": 4.3,
+        "width": 0.6
       },
-      "fill": "$coral.light2"
+      "fill": "$coral.dark2"
     },
     {
-      "id": "ring_shade",
+      "id": "port_shade",
       "at": [
         0.8,
-        -5
+        -12.6
       ],
       "shape": {
         "kind": "ring",
@@ -423,34 +471,59 @@
         "from": 20,
         "to": 130
       },
-      "fill": "$coral.dark"
+      "fill": "$slate.light"
     },
     {
-      "id": "ring_line",
+      "id": "port_light",
       "at": [
         0.8,
-        -5
+        -12.6
       ],
       "shape": {
         "kind": "ring",
-        "r": 4.6,
-        "width": 0.5
+        "r": 3.4,
+        "width": 0.8,
+        "from": 190,
+        "to": 290
       },
-      "fill": "$ink"
+      "fill": "$steel.light"
+    },
+    {
+      "id": "core_socket",
+      "at": [
+        0.6,
+        -13.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 1.9,
+        "width": 0.7
+      },
+      "fill": "$steel"
+    },
+    {
+      "id": "organ",
+      "use": "ss.lib.organ",
+      "variant": "dead",
+      "at": [
+        0.6,
+        -13.4
+      ],
+      "scale": 0.34
     },
     {
       "id": "belt",
       "at": [
-        0.6,
-        1.9
+        0.2,
+        -2.7
       ],
       "shape": {
         "kind": "rect",
-        "w": 12.6,
-        "h": 2.2,
+        "w": 10.4,
+        "h": 1.8,
         "corner": 0.3
       },
-      "fill": "$timber",
+      "fill": "$steel",
       "stroke": {
         "color": "$ink",
         "width": "hair"
@@ -459,411 +532,380 @@
     {
       "id": "buckle",
       "at": [
-        2.4,
-        1.9
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 2.6,
-        "h": 2,
-        "corner": 0.3
-      },
-      "fill": "$steel"
-    },
-    {
-      "id": "buckle_pin",
-      "at": [
-        2.4,
-        1.9
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 0.5,
-        "h": 1.4
-      },
-      "fill": "$steel.dark2"
-    },
-    {
-      "id": "pouch",
-      "at": [
-        -3.6,
-        3.6
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 1.9,
-        "ry": 1.7
-      },
-      "fill": "$timber",
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "pouch_tie",
-      "at": [
-        -3.6,
-        2.3
+        1.4,
+        -2.7
       ],
       "shape": {
         "kind": "rect",
         "w": 2,
-        "h": 0.7,
-        "corner": 0.3
+        "h": 1.4,
+        "corner": 0.2
       },
-      "fill": "$gold.dark"
+      "fill": "$steel"
     },
     {
-      "id": "organ",
-      "use": "ss.lib.organ",
-      "variant": "dead",
+      "id": "upperarm",
+      "use": "ss.lib.upperarm",
       "at": [
-        4.4,
-        -5.8
+        5.0,
+        -17.0
       ],
-      "scale": 0.38
+      "rot": 4
     },
     {
-      "id": "pauldron",
+      "id": "forearm",
+      "use": "ss.lib.forearm",
       "at": [
-        6.4,
-        -10.2
+        5.0,
+        -9.0
       ],
+      "rot": -18
+    },
+    {
+      "id": "bracket",
+      "at": [
+        5.4,
+        -6
+      ],
+      "rot": -8,
       "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -2.8,
-            -0.8
-          ],
-          [
-            0.4,
-            -2.2
-          ],
-          [
-            3.2,
-            -1
-          ],
-          [
-            3.4,
-            1.6
-          ],
-          [
-            1.4,
-            2.8
-          ],
-          [
-            -2,
-            2
-          ]
-        ]
+        "kind": "rect",
+        "w": 3.4,
+        "h": 4.6,
+        "corner": 0.5
       },
-      "fill": "$coral.dark",
+      "fill": "$steel",
       "stroke": {
         "color": "$ink",
         "width": "hair"
       }
     },
     {
-      "id": "pauldron_light",
+      "id": "blade_a",
       "at": [
-        6.4,
-        -10.2
+        5.2,
+        -7.3
       ],
+      "rot": -6,
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -1.8,
+            -2.4,
             -0.4
           ],
           [
-            0.4,
-            -1.4
+            2.6,
+            -0.5
           ],
           [
-            1.6,
-            -0.8
+            3.2,
+            0
           ],
           [
-            0,
-            0.2
+            2.6,
+            0.5
           ],
           [
-            -1.2,
-            0.8
+            -2.4,
+            0.4
           ]
         ]
       },
-      "fill": "$coral"
-    },
-    {
-      "id": "arm",
-      "use": "ss.lib.arm",
-      "at": [
-        6.2,
-        -9.4
-      ],
-      "rot": -34
-    },
-    {
-      "id": "blade_c",
-      "use": "ss.proj.card",
-      "at": [
-        13.6,
-        2.2
-      ],
-      "rot": 34,
-      "scale": 0.5
+      "fill": "$husk.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
     },
     {
       "id": "blade_b",
-      "use": "ss.proj.card",
       "at": [
-        14,
-        1
+        5.3,
+        -6
       ],
-      "rot": 10,
-      "scale": 0.5
+      "rot": -6,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.4,
+            -0.4
+          ],
+          [
+            2.6,
+            -0.5
+          ],
+          [
+            3.2,
+            0
+          ],
+          [
+            2.6,
+            0.5
+          ],
+          [
+            -2.4,
+            0.4
+          ]
+        ]
+      },
+      "fill": "$husk",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
     },
     {
-      "id": "blade_a",
-      "use": "ss.proj.card",
+      "id": "blade_c",
       "at": [
-        13.8,
-        -0.2
+        5.4,
+        -4.7
       ],
-      "rot": -14,
-      "scale": 0.5
+      "rot": -6,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.4,
+            -0.4
+          ],
+          [
+            2.6,
+            -0.5
+          ],
+          [
+            3.2,
+            0
+          ],
+          [
+            2.6,
+            0.5
+          ],
+          [
+            -2.4,
+            0.4
+          ]
+        ]
+      },
+      "fill": "$husk.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
     },
     {
       "id": "neck",
       "at": [
         1.1,
-        -11.6
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 3,
-        "h": 3.4,
-        "corner": 0.6
-      },
-      "fill": "$skin.dark"
-    },
-    {
-      "id": "head",
-      "at": [
-        1.4,
-        -15.6
+        -18.9
       ],
       "shape": {
         "kind": "ellipse",
-        "rx": 3.7,
-        "ry": 4
-      },
-      "fill": "$skin",
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "head_shade",
-      "at": [
-        -0.5,
-        -15.2
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 1.9,
-        "ry": 3.5
-      },
-      "fill": "$skin.dark@soft"
-    },
-    {
-      "id": "ear",
-      "at": [
-        -2.0,
-        -15.4
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 0.8,
+        "rx": 2.5,
         "ry": 1.1
       },
-      "fill": "$skin",
+      "fill": "$steel",
       "stroke": {
         "color": "$ink",
         "width": "hair"
       }
     },
     {
-      "id": "face",
-      "use": "ss.lib.face",
+      "id": "helmet",
       "at": [
-        1.4,
-        -15.6
-      ],
-      "variant": "wry"
-    },
-    {
-      "id": "mask",
-      "at": [
-        1.4,
-        -15.6
+        1.2,
+        -22.2
       ],
       "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -2.4,
-            0.6
-          ],
-          [
-            4.4,
-            0.4
-          ],
-          [
-            4.2,
-            3.2
-          ],
-          [
-            1.6,
-            4.2
-          ],
-          [
-            -2,
-            3.6
-          ]
-        ]
+        "kind": "ellipse",
+        "rx": 3,
+        "ry": 3.3
       },
-      "fill": "$coral.dark",
+      "fill": "$steel",
       "stroke": {
         "color": "$ink",
         "width": "hair"
       }
     },
     {
-      "id": "mask_fold",
+      "id": "helmet_shade",
       "at": [
-        1.4,
-        -15.6
+        -0.30000000000000004,
+        -22.0
       ],
       "shape": {
-        "kind": "rect",
-        "w": 6,
-        "h": 0.4
+        "kind": "ellipse",
+        "rx": 1.5,
+        "ry": 3
       },
-      "fill": "$coral.dark2"
+      "fill": "$steel.dark"
     },
     {
-      "id": "hood",
+      "id": "visor",
       "at": [
-        1.4,
-        -15.6
+        1.2,
+        -22.2
       ],
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -5.4,
-            3.6
+            -0.2,
+            -1.6
           ],
           [
-            -5.8,
-            -1.4
-          ],
-          [
-            -4,
-            -4.8
-          ],
-          [
-            -0.4,
-            -6.4
-          ],
-          [
-            3.4,
-            -5
-          ],
-          [
-            4.6,
-            -2
-          ],
-          [
-            3.8,
-            -2.6
-          ],
-          [
-            1.8,
-            -4.2
-          ],
-          [
-            -1,
-            -4.2
-          ],
-          [
-            -2.6,
-            -2
-          ],
-          [
-            -2.4,
-            3.8
-          ]
-        ]
-      },
-      "fill": "$coral.dark",
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "hood_light",
-      "at": [
-        1.4,
-        -15.6
-      ],
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -4.6,
+            2.9,
             -1.2
           ],
           [
-            -3.2,
-            -4
+            3.05,
+            0.9
           ],
           [
-            -0.4,
-            -5.4
-          ],
-          [
-            2.4,
-            -4.4
-          ],
-          [
-            1.4,
-            -4
-          ],
-          [
-            -1.2,
-            -3.6
-          ],
-          [
-            -2.8,
-            -1.6
+            -0.2,
+            1.3
           ]
         ]
       },
-      "fill": "$coral"
+      "fill": "$ink"
+    },
+    {
+      "id": "visor_glint",
+      "at": [
+        2.7,
+        -23.099999999999998
+      ],
+      "rot": 6,
+      "shape": {
+        "kind": "rect",
+        "w": 1.6,
+        "h": 0.4,
+        "corner": 0.15
+      },
+      "fill": "$coral.dark"
+    },
+    {
+      "id": "breather",
+      "at": [
+        3.3,
+        -20.099999999999998
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1.4,
+        "h": 1.1,
+        "corner": 0.3
+      },
+      "fill": "$steel"
+    },
+    {
+      "id": "cowl",
+      "at": [
+        1.2,
+        -22.2
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.6,
+            2.6
+          ],
+          [
+            -3.9,
+            -1.2
+          ],
+          [
+            -2.6,
+            -3.4
+          ],
+          [
+            0.2,
+            -4.2
+          ],
+          [
+            2.8,
+            -3.2
+          ],
+          [
+            3.6,
+            -1.4
+          ],
+          [
+            2.8,
+            -1.8
+          ],
+          [
+            1.2,
+            -3
+          ],
+          [
+            -0.8,
+            -3
+          ],
+          [
+            -2.2,
+            -1.6
+          ],
+          [
+            -2.2,
+            2.8
+          ]
+        ]
+      },
+      "fill": "$coral.dark2",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "cowl_light",
+      "at": [
+        1.2,
+        -22.2
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.2,
+            -1
+          ],
+          [
+            -2.2,
+            -2.8
+          ],
+          [
+            0,
+            -3.6
+          ],
+          [
+            1.8,
+            -2.8
+          ],
+          [
+            0.8,
+            -2.6
+          ],
+          [
+            -1,
+            -2.4
+          ],
+          [
+            -2.2,
+            -1.2
+          ]
+        ]
+      },
+      "fill": "$coral.dark"
     }
   ],
   "animations": {
     "idle": {
-      "description": "a thief's stance: a shallow breath, the cloak stirring, the spines on the back rising with the shoulders, and the fan of wing blades in the near hand opening and closing a few degrees — a gambler keeping the hand moving",
-      "duration": 1.4,
+      "description": "a thief's stance, weight forward: a shallow breath, the quills on the back rising with the shoulders, the loaded blades on the forearm glinting as the arm hangs and swings a little",
+      "duration": 1.6,
       "tracks": [
         {
           "part": "torso",
@@ -875,7 +917,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -884,7 +926,7 @@
           ]
         },
         {
-          "part": "jerkin",
+          "part": "abd_a",
           "prop": "y",
           "keys": [
             [
@@ -893,7 +935,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -902,7 +944,7 @@
           ]
         },
         {
-          "part": "jerkin_shade",
+          "part": "abd_b",
           "prop": "y",
           "keys": [
             [
@@ -911,7 +953,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -920,7 +962,7 @@
           ]
         },
         {
-          "part": "bandolier",
+          "part": "chest",
           "prop": "y",
           "keys": [
             [
@@ -929,7 +971,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -938,7 +980,7 @@
           ]
         },
         {
-          "part": "ring_plate",
+          "part": "chest_light",
           "prop": "y",
           "keys": [
             [
@@ -947,7 +989,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -956,7 +998,7 @@
           ]
         },
         {
-          "part": "ring_hole",
+          "part": "chest_seam",
           "prop": "y",
           "keys": [
             [
@@ -965,7 +1007,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -974,7 +1016,7 @@
           ]
         },
         {
-          "part": "ring_light",
+          "part": "stripe",
           "prop": "y",
           "keys": [
             [
@@ -983,7 +1025,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -992,7 +1034,7 @@
           ]
         },
         {
-          "part": "ring_shade",
+          "part": "core_socket",
           "prop": "y",
           "keys": [
             [
@@ -1001,115 +1043,7 @@
             ],
             [
               0.5,
-              -0.7
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "ring_line",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -0.7
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "belt",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -0.7
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "buckle",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -0.7
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "buckle_pin",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -0.7
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "pouch",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -0.7
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "pouch_tie",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -1127,7 +1061,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -1136,7 +1070,7 @@
           ]
         },
         {
-          "part": "pauldron",
+          "part": "upperarm",
           "prop": "y",
           "keys": [
             [
@@ -1145,7 +1079,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -1154,7 +1088,7 @@
           ]
         },
         {
-          "part": "pauldron_light",
+          "part": "forearm",
           "prop": "y",
           "keys": [
             [
@@ -1163,7 +1097,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -1172,7 +1106,7 @@
           ]
         },
         {
-          "part": "arm",
+          "part": "upperarm_far",
           "prop": "y",
           "keys": [
             [
@@ -1181,7 +1115,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -1190,7 +1124,7 @@
           ]
         },
         {
-          "part": "arm_far",
+          "part": "forearm_far",
           "prop": "y",
           "keys": [
             [
@@ -1199,7 +1133,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -1208,7 +1142,7 @@
           ]
         },
         {
-          "part": "spines",
+          "part": "quills",
           "prop": "y",
           "keys": [
             [
@@ -1217,7 +1151,169 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "pouch",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "pouch_tie",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "port_rim",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "port_hole",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "port_depth",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "port_accent",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "port_shade",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "port_light",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "bracket",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
             ],
             [
               1,
@@ -1235,7 +1331,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -1253,7 +1349,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -1271,7 +1367,7 @@
             ],
             [
               0.5,
-              -0.7
+              -0.5
             ],
             [
               1,
@@ -1288,12 +1384,12 @@
               0
             ],
             [
-              0.12,
+              0.14,
               0.1
             ],
             [
-              0.6,
-              -0.9
+              0.62,
+              -0.7
             ],
             [
               1,
@@ -1302,7 +1398,7 @@
           ]
         },
         {
-          "part": "head",
+          "part": "helmet",
           "prop": "y",
           "keys": [
             [
@@ -1310,12 +1406,12 @@
               0
             ],
             [
-              0.12,
+              0.14,
               0.1
             ],
             [
-              0.6,
-              -0.9
+              0.62,
+              -0.7
             ],
             [
               1,
@@ -1324,7 +1420,7 @@
           ]
         },
         {
-          "part": "head_shade",
+          "part": "helmet_shade",
           "prop": "y",
           "keys": [
             [
@@ -1332,12 +1428,12 @@
               0
             ],
             [
-              0.12,
+              0.14,
               0.1
             ],
             [
-              0.6,
-              -0.9
+              0.62,
+              -0.7
             ],
             [
               1,
@@ -1346,7 +1442,7 @@
           ]
         },
         {
-          "part": "ear",
+          "part": "visor",
           "prop": "y",
           "keys": [
             [
@@ -1354,12 +1450,12 @@
               0
             ],
             [
-              0.12,
+              0.14,
               0.1
             ],
             [
-              0.6,
-              -0.9
+              0.62,
+              -0.7
             ],
             [
               1,
@@ -1368,7 +1464,7 @@
           ]
         },
         {
-          "part": "face",
+          "part": "visor_glint",
           "prop": "y",
           "keys": [
             [
@@ -1376,12 +1472,12 @@
               0
             ],
             [
-              0.12,
+              0.14,
               0.1
             ],
             [
-              0.6,
-              -0.9
+              0.62,
+              -0.7
             ],
             [
               1,
@@ -1390,7 +1486,7 @@
           ]
         },
         {
-          "part": "mask",
+          "part": "breather",
           "prop": "y",
           "keys": [
             [
@@ -1398,12 +1494,12 @@
               0
             ],
             [
-              0.12,
+              0.14,
               0.1
             ],
             [
-              0.6,
-              -0.9
+              0.62,
+              -0.7
             ],
             [
               1,
@@ -1412,7 +1508,7 @@
           ]
         },
         {
-          "part": "mask_fold",
+          "part": "cowl",
           "prop": "y",
           "keys": [
             [
@@ -1420,12 +1516,12 @@
               0
             ],
             [
-              0.12,
+              0.14,
               0.1
             ],
             [
-              0.6,
-              -0.9
+              0.62,
+              -0.7
             ],
             [
               1,
@@ -1434,7 +1530,7 @@
           ]
         },
         {
-          "part": "hood",
+          "part": "cowl_light",
           "prop": "y",
           "keys": [
             [
@@ -1442,12 +1538,12 @@
               0
             ],
             [
-              0.12,
+              0.14,
               0.1
             ],
             [
-              0.6,
-              -0.9
+              0.62,
+              -0.7
             ],
             [
               1,
@@ -1456,73 +1552,7 @@
           ]
         },
         {
-          "part": "hood_light",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.12,
-              0.1
-            ],
-            [
-              0.6,
-              -0.9
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "antenna",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.16,
-              0.15
-            ],
-            [
-              0.64,
-              -1.1
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "antenna_far",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.16,
-              0.15
-            ],
-            [
-              0.64,
-              -1.1
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "arm_far",
+          "part": "upperarm",
           "prop": "rot",
           "keys": [
             [
@@ -1531,33 +1561,87 @@
             ],
             [
               0.5,
-              2.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "antenna",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              -6
-            ],
-            [
-              0.38,
-              7
-            ],
-            [
-              0.72,
               -2
             ],
             [
               1,
-              -6
+              0
+            ]
+          ]
+        },
+        {
+          "part": "upperarm_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              1.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "forearm",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -2
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "forearm_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              1.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "antenna",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -4
+            ],
+            [
+              0.4,
+              4
+            ],
+            [
+              0.75,
+              -1
+            ],
+            [
+              1,
+              -4
             ]
           ]
         },
@@ -1567,102 +1651,30 @@
           "keys": [
             [
               0,
-              5
+              3
             ],
             [
-              0.42,
-              -6
+              0.45,
+              -4
             ],
             [
-              0.78,
-              2
-            ],
-            [
-              1,
-              5
-            ]
-          ]
-        },
-        {
-          "part": "cape",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              -1.5
-            ],
-            [
-              0.5,
-              1.5
+              0.8,
+              1
             ],
             [
               1,
-              -1.5
-            ]
-          ]
-        },
-        {
-          "part": "cape_fold",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              -1.5
-            ],
-            [
-              0.5,
-              1.5
-            ],
-            [
-              1,
-              -1.5
-            ]
-          ]
-        },
-        {
-          "part": "blade_a",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -6
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "blade_c",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              6
-            ],
-            [
-              1,
-              0
+              3
             ]
           ]
         }
       ]
     },
     "walk": {
-      "description": "a quick stride with the near hand kept up and the fan held out of the way of the legs; the cloak snaps back, the pouch bounces on the belt",
-      "duration": 0.6,
+      "description": "a quick stride with the near arm swinging low and the loaded bracket riding it, the quills on the back rocking, the pouch bouncing at the hip",
+      "duration": 0.62,
       "tracks": [
         {
-          "part": "leg",
+          "part": "thigh",
           "prop": "rot",
           "keys": [
             [
@@ -1680,7 +1692,7 @@
           ]
         },
         {
-          "part": "leg_far",
+          "part": "thigh_far",
           "prop": "rot",
           "keys": [
             [
@@ -1698,12 +1710,240 @@
           ]
         },
         {
-          "part": "arm_far",
+          "part": "shin",
           "prop": "rot",
           "keys": [
             [
               0,
-              -18
+              -16
+            ],
+            [
+              0.25,
+              38
+            ],
+            [
+              0.5,
+              32
+            ],
+            [
+              0.75,
+              2
+            ],
+            [
+              1,
+              -16
+            ]
+          ]
+        },
+        {
+          "part": "shin",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              4.38
+            ],
+            [
+              0.5,
+              -4.38
+            ],
+            [
+              1,
+              4.38
+            ]
+          ]
+        },
+        {
+          "part": "shin",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -1.01
+            ],
+            [
+              0.25,
+              0
+            ],
+            [
+              0.5,
+              -1.01
+            ],
+            [
+              0.75,
+              0
+            ],
+            [
+              1,
+              -1.01
+            ]
+          ]
+        },
+        {
+          "part": "shin_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              32
+            ],
+            [
+              0.25,
+              2
+            ],
+            [
+              0.5,
+              -16
+            ],
+            [
+              0.75,
+              38
+            ],
+            [
+              1,
+              32
+            ]
+          ]
+        },
+        {
+          "part": "shin_far",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              -4.38
+            ],
+            [
+              0.5,
+              4.38
+            ],
+            [
+              1,
+              -4.38
+            ]
+          ]
+        },
+        {
+          "part": "shin_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -1.01
+            ],
+            [
+              0.25,
+              0
+            ],
+            [
+              0.5,
+              -1.01
+            ],
+            [
+              0.75,
+              0
+            ],
+            [
+              1,
+              -1.01
+            ]
+          ]
+        },
+        {
+          "part": "upperarm",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              16
+            ],
+            [
+              0.5,
+              -16
+            ],
+            [
+              1,
+              16
+            ]
+          ]
+        },
+        {
+          "part": "forearm",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              30
+            ],
+            [
+              0.25,
+              22
+            ],
+            [
+              0.5,
+              12
+            ],
+            [
+              0.75,
+              22
+            ],
+            [
+              1,
+              30
+            ]
+          ]
+        },
+        {
+          "part": "forearm",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              -2.21
+            ],
+            [
+              0.5,
+              2.21
+            ],
+            [
+              1,
+              -2.21
+            ]
+          ]
+        },
+        {
+          "part": "forearm",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -0.31
+            ],
+            [
+              0.25,
+              0
+            ],
+            [
+              0.5,
+              -0.31
+            ],
+            [
+              0.75,
+              0
+            ],
+            [
+              1,
+              -0.31
+            ]
+          ]
+        },
+        {
+          "part": "upperarm_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -16
             ],
             [
               0.5,
@@ -1711,7 +1951,103 @@
             ],
             [
               1,
-              -18
+              -16
+            ]
+          ]
+        },
+        {
+          "part": "forearm_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              12
+            ],
+            [
+              0.25,
+              22
+            ],
+            [
+              0.5,
+              30
+            ],
+            [
+              0.75,
+              22
+            ],
+            [
+              1,
+              12
+            ]
+          ]
+        },
+        {
+          "part": "forearm_far",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              2.21
+            ],
+            [
+              0.5,
+              -2.21
+            ],
+            [
+              1,
+              2.21
+            ]
+          ]
+        },
+        {
+          "part": "forearm_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -0.31
+            ],
+            [
+              0.25,
+              0
+            ],
+            [
+              0.5,
+              -0.31
+            ],
+            [
+              0.75,
+              0
+            ],
+            [
+              1,
+              -0.31
+            ]
+          ]
+        },
+        {
+          "part": "pelvis",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.9
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.9
+            ],
+            [
+              1,
+              0.2
             ]
           ]
         },
@@ -1725,7 +2061,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -1733,7 +2069,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -1742,7 +2078,7 @@
           ]
         },
         {
-          "part": "jerkin",
+          "part": "abd_a",
           "prop": "y",
           "keys": [
             [
@@ -1751,7 +2087,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -1759,7 +2095,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -1768,7 +2104,7 @@
           ]
         },
         {
-          "part": "jerkin_shade",
+          "part": "abd_b",
           "prop": "y",
           "keys": [
             [
@@ -1777,7 +2113,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -1785,7 +2121,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -1794,7 +2130,7 @@
           ]
         },
         {
-          "part": "bandolier",
+          "part": "chest",
           "prop": "y",
           "keys": [
             [
@@ -1803,7 +2139,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -1811,7 +2147,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -1820,7 +2156,7 @@
           ]
         },
         {
-          "part": "ring_plate",
+          "part": "chest_light",
           "prop": "y",
           "keys": [
             [
@@ -1829,7 +2165,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -1837,7 +2173,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -1846,7 +2182,7 @@
           ]
         },
         {
-          "part": "ring_hole",
+          "part": "chest_seam",
           "prop": "y",
           "keys": [
             [
@@ -1855,7 +2191,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -1863,7 +2199,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -1872,7 +2208,7 @@
           ]
         },
         {
-          "part": "ring_light",
+          "part": "stripe",
           "prop": "y",
           "keys": [
             [
@@ -1881,7 +2217,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -1889,7 +2225,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -1898,7 +2234,7 @@
           ]
         },
         {
-          "part": "ring_shade",
+          "part": "core_socket",
           "prop": "y",
           "keys": [
             [
@@ -1907,7 +2243,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -1915,163 +2251,7 @@
             ],
             [
               0.75,
-              -1.0
-            ],
-            [
-              1,
-              0.2
-            ]
-          ]
-        },
-        {
-          "part": "ring_line",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.2
-            ],
-            [
-              0.25,
-              -1.0
-            ],
-            [
-              0.5,
-              0.2
-            ],
-            [
-              0.75,
-              -1.0
-            ],
-            [
-              1,
-              0.2
-            ]
-          ]
-        },
-        {
-          "part": "belt",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.2
-            ],
-            [
-              0.25,
-              -1.0
-            ],
-            [
-              0.5,
-              0.2
-            ],
-            [
-              0.75,
-              -1.0
-            ],
-            [
-              1,
-              0.2
-            ]
-          ]
-        },
-        {
-          "part": "buckle",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.2
-            ],
-            [
-              0.25,
-              -1.0
-            ],
-            [
-              0.5,
-              0.2
-            ],
-            [
-              0.75,
-              -1.0
-            ],
-            [
-              1,
-              0.2
-            ]
-          ]
-        },
-        {
-          "part": "buckle_pin",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.2
-            ],
-            [
-              0.25,
-              -1.0
-            ],
-            [
-              0.5,
-              0.2
-            ],
-            [
-              0.75,
-              -1.0
-            ],
-            [
-              1,
-              0.2
-            ]
-          ]
-        },
-        {
-          "part": "pouch",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.2
-            ],
-            [
-              0.25,
-              -1.0
-            ],
-            [
-              0.5,
-              0.2
-            ],
-            [
-              0.75,
-              -1.0
-            ],
-            [
-              1,
-              0.2
-            ]
-          ]
-        },
-        {
-          "part": "pouch_tie",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0.2
-            ],
-            [
-              0.25,
-              -1.0
-            ],
-            [
-              0.5,
-              0.2
-            ],
-            [
-              0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -2089,7 +2269,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -2097,7 +2277,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -2106,7 +2286,7 @@
           ]
         },
         {
-          "part": "pauldron",
+          "part": "belt",
           "prop": "y",
           "keys": [
             [
@@ -2115,7 +2295,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -2123,7 +2303,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -2132,7 +2312,7 @@
           ]
         },
         {
-          "part": "pauldron_light",
+          "part": "buckle",
           "prop": "y",
           "keys": [
             [
@@ -2141,7 +2321,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -2149,7 +2329,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -2158,7 +2338,7 @@
           ]
         },
         {
-          "part": "arm",
+          "part": "upperarm",
           "prop": "y",
           "keys": [
             [
@@ -2167,7 +2347,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -2175,7 +2355,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -2184,7 +2364,7 @@
           ]
         },
         {
-          "part": "arm_far",
+          "part": "upperarm_far",
           "prop": "y",
           "keys": [
             [
@@ -2193,7 +2373,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -2201,7 +2381,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -2210,7 +2390,7 @@
           ]
         },
         {
-          "part": "spines",
+          "part": "quills",
           "prop": "y",
           "keys": [
             [
@@ -2219,7 +2399,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -2227,7 +2407,241 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "pouch",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.9
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.9
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "pouch_tie",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.9
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.9
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "port_rim",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.9
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.9
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "port_hole",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.9
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.9
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "port_depth",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.9
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.9
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "port_accent",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.9
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.9
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "port_shade",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.9
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.9
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "port_light",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.9
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.9
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "bracket",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.9
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.9
             ],
             [
               1,
@@ -2245,7 +2659,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -2253,7 +2667,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -2271,7 +2685,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -2279,7 +2693,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -2297,7 +2711,7 @@
             ],
             [
               0.25,
-              -1.0
+              -0.9
             ],
             [
               0.5,
@@ -2305,7 +2719,7 @@
             ],
             [
               0.75,
-              -1.0
+              -0.9
             ],
             [
               1,
@@ -2319,253 +2733,19 @@
           "keys": [
             [
               0,
-              0
-            ],
-            [
-              0.3,
-              -1.3
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.8,
-              -1.3
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "head",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.3,
-              -1.3
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.8,
-              -1.3
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "head_shade",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.3,
-              -1.3
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.8,
-              -1.3
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "ear",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.3,
-              -1.3
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.8,
-              -1.3
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "face",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.3,
-              -1.3
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.8,
-              -1.3
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "mask",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.3,
-              -1.3
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.8,
-              -1.3
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "mask_fold",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.3,
-              -1.3
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.8,
-              -1.3
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "hood",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.3,
-              -1.3
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.8,
-              -1.3
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "hood_light",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.3,
-              -1.3
-            ],
-            [
-              0.5,
-              0
-            ],
-            [
-              0.8,
-              -1.3
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "antenna",
-          "prop": "y",
-          "keys": [
-            [
-              0,
               0.1
             ],
             [
-              0.34,
-              -1.6
+              0.3,
+              -1.1
             ],
             [
               0.5,
               0.1
             ],
             [
-              0.84,
-              -1.6
+              0.8,
+              -1.1
             ],
             [
               1,
@@ -2574,7 +2754,7 @@
           ]
         },
         {
-          "part": "antenna_far",
+          "part": "helmet",
           "prop": "y",
           "keys": [
             [
@@ -2582,16 +2762,16 @@
               0.1
             ],
             [
-              0.34,
-              -1.6
+              0.3,
+              -1.1
             ],
             [
               0.5,
               0.1
             ],
             [
-              0.84,
-              -1.6
+              0.8,
+              -1.1
             ],
             [
               1,
@@ -2600,54 +2780,158 @@
           ]
         },
         {
-          "part": "cape",
-          "prop": "rot",
+          "part": "helmet_shade",
+          "prop": "y",
           "keys": [
             [
               0,
-              2
+              0.1
             ],
             [
-              0.25,
-              -5
+              0.3,
+              -1.1
             ],
             [
               0.5,
-              2
+              0.1
             ],
             [
-              0.75,
-              -5
+              0.8,
+              -1.1
             ],
             [
               1,
-              2
+              0.1
             ]
           ]
         },
         {
-          "part": "cape_fold",
-          "prop": "rot",
+          "part": "visor",
+          "prop": "y",
           "keys": [
             [
               0,
-              2
+              0.1
             ],
             [
-              0.25,
-              -5
+              0.3,
+              -1.1
             ],
             [
               0.5,
-              2
+              0.1
             ],
             [
-              0.75,
-              -5
+              0.8,
+              -1.1
             ],
             [
               1,
-              2
+              0.1
+            ]
+          ]
+        },
+        {
+          "part": "visor_glint",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.1
+            ],
+            [
+              0.3,
+              -1.1
+            ],
+            [
+              0.5,
+              0.1
+            ],
+            [
+              0.8,
+              -1.1
+            ],
+            [
+              1,
+              0.1
+            ]
+          ]
+        },
+        {
+          "part": "breather",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.1
+            ],
+            [
+              0.3,
+              -1.1
+            ],
+            [
+              0.5,
+              0.1
+            ],
+            [
+              0.8,
+              -1.1
+            ],
+            [
+              1,
+              0.1
+            ]
+          ]
+        },
+        {
+          "part": "cowl",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.1
+            ],
+            [
+              0.3,
+              -1.1
+            ],
+            [
+              0.5,
+              0.1
+            ],
+            [
+              0.8,
+              -1.1
+            ],
+            [
+              1,
+              0.1
+            ]
+          ]
+        },
+        {
+          "part": "cowl_light",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.1
+            ],
+            [
+              0.3,
+              -1.1
+            ],
+            [
+              0.5,
+              0.1
+            ],
+            [
+              0.8,
+              -1.1
+            ],
+            [
+              1,
+              0.1
             ]
           ]
         },
@@ -2657,23 +2941,23 @@
           "keys": [
             [
               0,
-              -4
+              -3
             ],
             [
               0.25,
-              5
+              4
             ],
             [
               0.5,
-              -4
+              -3
             ],
             [
               0.75,
-              5
+              4
             ],
             [
               1,
-              -4
+              -3
             ]
           ]
         },
@@ -2683,41 +2967,77 @@
           "keys": [
             [
               0,
-              4
+              3
             ],
             [
               0.25,
-              -4
+              -3
             ],
             [
               0.5,
-              4
+              3
             ],
             [
               0.75,
-              -4
+              -3
             ],
             [
               1,
-              4
+              3
             ]
           ]
         },
         {
-          "part": "arm",
+          "part": "bracket",
           "prop": "rot",
           "keys": [
             [
               0,
-              -30
+              16
             ],
             [
               0.5,
-              -42
+              -16
             ],
             [
               1,
-              -30
+              16
+            ]
+          ]
+        },
+        {
+          "part": "bracket",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              -2.2
+            ],
+            [
+              0.5,
+              2.2
+            ],
+            [
+              1,
+              -2.2
+            ]
+          ]
+        },
+        {
+          "part": "blade_a",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              16
+            ],
+            [
+              0.5,
+              -16
+            ],
+            [
+              1,
+              16
             ]
           ]
         },
@@ -2727,15 +3047,33 @@
           "keys": [
             [
               0,
-              -0.6
+              -1.9
             ],
             [
               0.5,
-              1.2
+              1.9
             ],
             [
               1,
-              -0.6
+              -1.9
+            ]
+          ]
+        },
+        {
+          "part": "blade_b",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              16
+            ],
+            [
+              0.5,
+              -16
+            ],
+            [
+              1,
+              16
             ]
           ]
         },
@@ -2745,15 +3083,33 @@
           "keys": [
             [
               0,
-              -0.6
+              -2.2
             ],
             [
               0.5,
-              1.2
+              2.2
             ],
             [
               1,
-              -0.6
+              -2.2
+            ]
+          ]
+        },
+        {
+          "part": "blade_c",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              16
+            ],
+            [
+              0.5,
+              -16
+            ],
+            [
+              1,
+              16
             ]
           ]
         },
@@ -2763,51 +3119,15 @@
           "keys": [
             [
               0,
-              -0.6
+              -2.6
             ],
             [
               0.5,
-              1.2
+              2.6
             ],
             [
               1,
-              -0.6
-            ]
-          ]
-        },
-        {
-          "part": "blade_a",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              4
-            ],
-            [
-              0.5,
-              -8
-            ],
-            [
-              1,
-              4
-            ]
-          ]
-        },
-        {
-          "part": "blade_c",
-          "prop": "rot",
-          "keys": [
-            [
-              0,
-              -4
-            ],
-            [
-              0.5,
-              8
-            ],
-            [
-              1,
-              -4
+              -2.6
             ]
           ]
         }

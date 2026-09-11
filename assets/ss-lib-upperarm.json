@@ -1,0 +1,87 @@
+{
+  "id": "ss.lib.upperarm",
+  "name": "Suit upper arm",
+  "description": "Shoulder to elbow of a survivor's exploration suit, hinged at the origin: the shoulder sits at [0,0] and the segment hangs down +y eight pixels to the elbow, where `ss.lib.forearm` is placed to follow it. A shoulder cap over dark fabric and an elbow cap at the bottom. `far` is the arm behind the body, a step darker.",
+  "tags": [
+    "ss-lib"
+  ],
+  "size": [
+    8,
+    12
+  ],
+  "anchor": [
+    0.5,
+    0.1
+  ],
+  "parts": [
+    {
+      "id": "upper",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.7,
+            -1
+          ],
+          [
+            1.7,
+            -1
+          ],
+          [
+            1.6,
+            7.8
+          ],
+          [
+            -1.5,
+            7.8
+          ]
+        ]
+      },
+      "fill": "$slate.light",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "cap",
+      "at": [
+        0,
+        0.3
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.2,
+        "ry": 1.7
+      },
+      "fill": "$steel",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "elbow",
+      "at": [
+        0,
+        7.9
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.7,
+        "ry": 1.2
+      },
+      "fill": "$steel"
+    }
+  ],
+  "variants": {
+    "far": {
+      "description": "The far upper arm, a step darker.",
+      "set": {
+        "upper.fill": "$slate",
+        "cap.fill": "$steel.dark",
+        "elbow.fill": "$steel.dark"
+      }
+    }
+  }
+}
