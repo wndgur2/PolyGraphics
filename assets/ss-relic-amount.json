@@ -1,13 +1,17 @@
 {
   "id": "ss.relic.amount",
   "name": "Paired shot",
-  "description": "Two thrown darts where a weapon sends one, composed from `ss.proj.bolt` so the slot shows the object the stat actually adds. The passive for this stat is two dots side by side; this is the same count in the same arrangement, made of the thing being counted.",
+  "description": "Two thrown darts where a weapon sends one, composed from `ss.proj.bolt` so the slot shows the object the stat actually adds. The passive for this stat is two dots side by side; this is the same count in the same arrangement, made of the thing being counted. Polish: each dart still composes `ss.proj.bolt`, but at 0.82× the bolt's own skin is barely half a pixel, so the relic draws a 1.4 px ink underlay beneath each and a darker underside facet over each; the pair's positions and tilts are unchanged.",
   "tags": ["ss-relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "shot_far_outline", "shape": {"kind": "poly", "points": [[-9.79, -5.04], [-10.41, -4.39], [-10.51, -3.51], [-10.05, -2.74], [-9.23, -2.4], [0.93, -1.76], [2.2, -1.91], [3.43, -2.54], [4.46, -3.5], [5.07, -4.76], [5.3, -6.09], [4.99, -7.58], [4.23, -8.7], [3.17, -9.6], [1.83, -10.06], [0.46, -10.14], [-0.77, -9.76]]}, "fill": "$ink"},
     {"id": "shot_far", "at": [-1.6, -5.4], "rot": -12, "scale": 0.82, "use": "ss.proj.bolt"},
-    {"id": "shot_near", "at": [0.8, 5.2], "rot": 12, "scale": 0.82, "use": "ss.proj.bolt"}
+    {"id": "shot_far_shade", "shape": {"kind": "poly", "points": [[-6.84, -3.87], [-2.65, -4.42], [0.59, -4.94], [2.56, -5.53], [3.67, -5.93], [3.53, -5.23], [3.17, -4.47], [2.54, -3.87], [1.74, -3.47], [0.9, -3.37]]}, "fill": "$bile.dark"},
+    {"id": "shot_near_outline", "shape": {"kind": "poly", "points": [[-6.83, 2.2], [-7.65, 2.54], [-8.11, 3.31], [-8.01, 4.19], [-7.39, 4.84], [1.63, 9.56], [2.86, 9.94], [4.23, 9.86], [5.57, 9.4], [6.63, 8.5], [7.39, 7.38], [7.7, 5.89], [7.47, 4.56], [6.86, 3.3], [5.83, 2.34], [4.6, 1.71], [3.33, 1.56]]}, "fill": "$ink"},
+    {"id": "shot_near", "at": [0.8, 5.2], "rot": 12, "scale": 0.82, "use": "ss.proj.bolt"},
+    {"id": "shot_near_shade", "shape": {"kind": "poly", "points": [[-4.61, 4.47], [-0.56, 5.67], [2.62, 6.51], [4.66, 6.77], [5.83, 6.86], [5.42, 7.44], [4.78, 7.99], [3.96, 8.28], [3.07, 8.32], [2.26, 8.07]]}, "fill": "$bile.dark"}
   ],
   "variants": {
     "glyph": {

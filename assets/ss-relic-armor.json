@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.armor",
   "name": "Beetle helm",
-  "description": "A beetle's head plate cut off and worn: a domed helm with the pronotum ridge running down it, a lit crown, the horn still standing on the front, and the hollow open under the rim where a head would go. Somebody else's armour, put on.",
+  "description": "A beetle's head plate cut off and worn: a domed helm with the pronotum ridge running down it, a lit crown, the horn still standing on the front, and the hollow open under the rim where a head would go. Somebody else's armour, put on. Polish: the dome now carries a dark facet down its right side and a lit strip beside the seam so the pronotum ridge stands proud instead of being a dark line on a flat dome, and the horn has a lit left face. Horn, seam, hollow and the helm's outline are untouched.",
   "tags": ["ss-relic"],
   "size": [32, 32],
   "parts": [
@@ -9,9 +9,12 @@
     {"id": "horn_outline", "at": [0, 1.1], "shape": {"kind": "poly", "points": [[-2.4, -6.6], [1.2, -13.4], [4.4, -6.4]]}, "fill": "$ink"},
     {"id": "helm_outline", "at": [0, 1.1], "shape": {"kind": "poly", "points": [[-10.4, -1.4], [-8, -7.2], [-2.6, -10.4], [3.4, -10.4], [8.8, -7.2], [11.2, -1.4], [10.4, 5], [6.6, 9.6], [0.4, 11], [-5.8, 9.6], [-9.6, 5]]}, "fill": "$ink"},
     {"id": "horn", "at": [0, 1.1], "shape": {"kind": "poly", "points": [[-1.6, -6.6], [1.2, -12.2], [3.4, -6.4]]}, "fill": "$chitin.dark"},
+    {"id": "horn_lit", "at": [0.0, 1.1], "shape": {"kind": "poly", "points": [[-1.6, -6.6], [1.2, -12.2], [0.7, -6.6]]}, "fill": "$chitin"},
     {"id": "helm", "at": [0, 1.1], "shape": {"kind": "poly", "points": [[-9.2, -1.2], [-7, -6.4], [-2.2, -9.2], [3, -9.2], [7.8, -6.4], [10, -1.2], [9.2, 4.6], [5.8, 8.6], [0.4, 9.8], [-5, 8.6], [-8.4, 4.6]]}, "fill": "$chitin.dark"},
     {"id": "crown", "at": [0.4, -1.5], "shape": {"kind": "ellipse", "rx": 8.6, "ry": 6}, "fill": "$chitin"},
+    {"id": "crown_shade", "shape": {"kind": "poly", "points": [[4.96, -6.59], [6.59, -5.67], [7.85, -4.5], [8.67, -3.15], [8.99, -1.71], [8.81, -0.25], [8.13, 1.13], [6.99, 2.36], [5.45, 3.35], [3.62, 4.06], [1.6, 4.44], [-0.5, 4.47], [-2.54, 4.14], [-2.96, 2.89], [-1.25, 3.17], [0.5, 3.15], [2.2, 2.83], [3.73, 2.23], [5.02, 1.38], [5.97, 0.34], [6.54, -0.84], [6.7, -2.08], [6.42, -3.31], [5.74, -4.45], [4.68, -5.44], [3.32, -6.23]]}, "fill": "$chitin.dark"},
     {"id": "crown_lit", "at": [-0.4, -4.3], "shape": {"kind": "ellipse", "rx": 6.2, "ry": 2.6}, "fill": "$chitin.light2"},
+    {"id": "ridge_lit", "at": [-0.9, -1.5], "shape": {"kind": "rect", "w": 1.4, "h": 12, "corner": 0.7}, "fill": "$chitin.light2"},
     {"id": "ridge", "at": [0.6, -1.5], "shape": {"kind": "rect", "w": 1.6, "h": 12}, "fill": "$chitin.dark2"},
     {"id": "hollow", "at": [0.4, 9.5], "shape": {"kind": "ellipse", "rx": 6.6, "ry": 2.8}, "fill": "$ink"}
   ],

@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.oxygen",
   "name": "Swollen spiracle",
-  "description": "A pair of lungs, drawn as the organ: blood-red, apexes rounded at the top, broad at the base, a pale cartilage windpipe forking into a bronchus for each, an oblique fissure across each lobe, and the cardiac notch cut into the left one — that notch is the single detail that stops two red beans reading as anything but lungs. Three cyan beads climb away off one shoulder, the only cold colour on the plate and the only thing on it that is air rather than tissue. Earlier passes drew the spiracle itself as a chitin ring around a dark throat (an orange eye, and nothing else) and then the lungs in desaturated blue-grey, which read as machinery.",
+  "description": "A pair of lungs, drawn as the organ: blood-red, apexes rounded at the top, broad at the base, a pale cartilage windpipe forking into a bronchus for each, an oblique fissure across each lobe, and the cardiac notch cut into the left one — that notch is the single detail that stops two red beans reading as anything but lungs. Three cyan beads climb away off one shoulder, the only cold colour on the plate and the only thing on it that is air rather than tissue. Earlier passes drew the spiracle itself as a chitin ring around a dark throat (an orange eye, and nothing else) and then the lungs in desaturated blue-grey, which read as machinery. Polish: the three cyan beads were the only parts on the plate without ink under them and the smallest was 1.5 px across, so it vanished at 1×; each bead now has an `$ink` underlay and the far one is 1.9 px. Nothing else moved — the lobes already had their ink, a lit face and a sheen.",
   "tags": [
     "ss-relic"
   ],
@@ -519,6 +519,42 @@
       "fill": "$husk.dark2"
     },
     {
+      "id": "bead_a_outline",
+      "at": [
+        2.6,
+        -11.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.5
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bead_b_outline",
+      "at": [
+        5.2,
+        -12.9
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.85
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bead_c_outline",
+      "at": [
+        7.0,
+        -14.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.6
+      },
+      "fill": "$ink"
+    },
+    {
       "id": "bead_a",
       "at": [
         2.6,
@@ -550,7 +586,7 @@
       ],
       "shape": {
         "kind": "circle",
-        "r": 0.75
+        "r": 0.95
       },
       "fill": "$spore.light2"
     }

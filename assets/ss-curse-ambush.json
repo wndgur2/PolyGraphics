@@ -1,7 +1,7 @@
 {
   "id": "ss.curse.ambush",
   "name": "Answering hive-head",
-  "description": "The face that comes when the ruins answer instead of pay: a hive-head lit from above, two hollow eyes, two fangs hanging past the jaw. Built on the relic plate's `curse` variant, so it is unmistakably the same kind of object as a find while being unmistakably not one — arcane where the finds are gold.",
+  "description": "The face that comes when the ruins answer instead of pay: a hive-head lit from above, two hollow eyes, two fangs hanging past the jaw. Built on the relic plate's `curse` variant, so it is unmistakably the same kind of object as a find while being unmistakably not one — arcane where the finds are gold. Polish: the head was one flat `$arcane.dark` disc; it is now a `$arcane.dark2` body with a `$arcane.dark` face offset up-left (a darker crescent along the jaw side) and a narrow `$arcane` brow under the existing `$arcane.light2` crown, so it is a lit dome at 1× rather than a violet coin. The brow is kept small on purpose: a wide `$arcane` facet made the head the same colour as the curse rim, and the head is meant to stay darker than its rim. The ink underlays under head and fangs, the two eye holes — they are the curse, and the point — the fangs and the plate variant are exactly as they were.",
   "tags": ["ss-curse"],
   "size": [32, 32],
   "parts": [
@@ -9,7 +9,9 @@
     {"id": "head_outline", "at": [0, -1.5], "shape": {"kind": "circle", "r": 9.4}, "fill": "$ink"},
     {"id": "fang_l_outline", "shape": {"kind": "poly", "points": [[-7.66, 3.22], [-2.81, 11.55], [-0.03, 3.22]]}, "fill": "$ink"},
     {"id": "fang_r_outline", "shape": {"kind": "poly", "points": [[0.03, 3.22], [2.81, 11.55], [7.66, 3.22]]}, "fill": "$ink"},
-    {"id": "head", "at": [0, -1.5], "shape": {"kind": "circle", "r": 8}, "fill": "$arcane.dark"},
+    {"id": "head", "at": [0, -1.5], "shape": {"kind": "circle", "r": 8}, "fill": "$arcane.dark2"},
+    {"id": "head_face", "at": [-0.5, -2.1], "shape": {"kind": "circle", "r": 7.2}, "fill": "$arcane.dark"},
+    {"id": "head_brow", "at": [-2.0, -4.1], "shape": {"kind": "circle", "r": 4.6}, "fill": "$arcane"},
     {"id": "crown", "at": [-2.6, -4.6], "shape": {"kind": "circle", "r": 3.4}, "fill": "$arcane.light2"},
     {"id": "fang_l", "shape": {"kind": "poly", "points": [[-6.5, 4], [-3, 10], [-1, 4]]}, "fill": "$arcane.dark"},
     {"id": "fang_r", "shape": {"kind": "poly", "points": [[1, 4], [3, 10], [6.5, 4]]}, "fill": "$arcane.dark"},

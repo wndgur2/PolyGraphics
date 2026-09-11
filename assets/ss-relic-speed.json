@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.speed",
   "name": "Streaking dart",
-  "description": "One thrown dart with the air it has already crossed behind it, three streaks tapering off to nothing. The stat is about how fast the thing you throw travels, so the icon is the thing you throw, travelling.",
+  "description": "One thrown dart with the air it has already crossed behind it, three streaks tapering off to nothing. The stat is about how fast the thing you throw travels, so the icon is the thing you throw, travelling. Polish: the dart still composes `ss.proj.bolt`, but the bolt's own skin is under a pixel wide, so the relic draws a 1.4 px ink underlay beneath it and a darker underside facet over it; the three streaks stay soft alpha — they are air, not an object.",
   "tags": ["ss-relic"],
   "size": [32, 32],
   "parts": [
@@ -9,7 +9,9 @@
     {"id": "trail_far", "at": [-9.4, 0], "shape": {"kind": "poly", "points": [[-3.6, -1], [3.6, -2.2], [3.6, 2.2], [-3.6, 1]]}, "fill": "$frost@0.22"},
     {"id": "trail_mid", "at": [-3.6, 0], "shape": {"kind": "poly", "points": [[-3.4, -1.8], [3.4, -3], [3.4, 3], [-3.4, 1.8]]}, "fill": "$frost@0.4"},
     {"id": "trail_near", "at": [1.6, 0], "shape": {"kind": "poly", "points": [[-3.2, -2.6], [3.2, -3.6], [3.2, 3.6], [-3.2, 2.6]]}, "fill": "$frost@0.62"},
-    {"id": "dart", "at": [4.6, 0], "scale": 1.02, "use": "ss.proj.bolt"}
+    {"id": "dart_outline", "shape": {"kind": "poly", "points": [[-5.37, -1.35], [-6.1, -0.85], [-6.39, -0.0], [-6.1, 0.85], [-5.37, 1.35], [6.79, 4.75], [8.29, 4.89], [9.85, 4.46], [11.26, 3.62], [12.25, 2.34], [12.83, 0.88], [12.83, -0.88], [12.25, -2.34], [11.26, -3.62], [9.85, -4.46], [8.29, -4.89], [6.79, -4.75]]}, "fill": "$ink"},
+    {"id": "dart", "at": [4.6, 0], "scale": 1.02, "use": "ss.proj.bolt"},
+    {"id": "dart_shade", "shape": {"kind": "poly", "points": [[-2.17, 0.51], [3.07, 0.92], [7.15, 1.12], [9.7, 0.92], [11.15, 0.71], [10.8, 1.53], [10.16, 2.37], [9.24, 2.93], [8.17, 3.21], [7.12, 3.11]]}, "fill": "$bile.dark"}
   ],
   "variants": {
     "glyph": {
