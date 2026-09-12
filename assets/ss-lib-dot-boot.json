@@ -1,0 +1,1135 @@
+{
+  "id": "ss.lib.dot-boot",
+  "name": "Dot's boot",
+  "description": "One of Dot's boots, drawn large on its own and composed into `ss.char.dot` by `use` at about two fifths of this size — once for each leg, the far one in the `far` variant. Hinged at the knee: the origin is where the knee sits, the boot hangs down +y to the sole and the toe points forward (+x), so it is placed at the knee and swung with the shin's own tracks. Worn leather in a radial gradient, the shaft creased where the ankle bends and scuffed pale on the outside, a seam down the front, a cuff folded down at the top and stitched, two buckled straps with their tails out, a stitched vamp seam, a toe cap, a stacked heel, a bone-coloured welt stitched along the sole, and the trouser leg showing tucked into the cuff. Nothing shines but the two buckles.",
+  "tags": [
+    "ss-lib"
+  ],
+  "size": [
+    28,
+    32
+  ],
+  "anchor": [
+    0.5,
+    0.1
+  ],
+  "parts": [
+    {
+      "id": "tuck",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.6,
+            -2
+          ],
+          [
+            4.6,
+            -2
+          ],
+          [
+            4.4,
+            3
+          ],
+          [
+            -4.4,
+            3
+          ]
+        ]
+      },
+      "fill": {
+        "gradient": "linear",
+        "from": [
+          0.2,
+          0
+        ],
+        "to": [
+          0.8,
+          1
+        ],
+        "stops": [
+          [
+            0,
+            "$steel.dark"
+          ],
+          [
+            1,
+            "$slate"
+          ]
+        ]
+      },
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "tuck_fold_a",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.4,
+            -1.6
+          ],
+          [
+            -0.6,
+            -1.6
+          ],
+          [
+            -1.2,
+            2.6
+          ],
+          [
+            -2,
+            2.6
+          ]
+        ]
+      },
+      "fill": "$slate.dark"
+    },
+    {
+      "id": "tuck_fold_b",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2,
+            -1.4
+          ],
+          [
+            2.8,
+            -1.4
+          ],
+          [
+            2.4,
+            2.6
+          ],
+          [
+            1.6,
+            2.6
+          ]
+        ]
+      },
+      "fill": "$slate.dark"
+    },
+    {
+      "id": "shaft",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.2,
+            1.6
+          ],
+          [
+            5.2,
+            1.6
+          ],
+          [
+            5.6,
+            10
+          ],
+          [
+            5.8,
+            18
+          ],
+          [
+            6.2,
+            21.2
+          ],
+          [
+            -5,
+            21.6
+          ],
+          [
+            -5.6,
+            17
+          ],
+          [
+            -5.6,
+            9
+          ]
+        ]
+      },
+      "fill": {
+        "gradient": "radial",
+        "from": [
+          0.35,
+          0.3
+        ],
+        "to": [
+          0.5,
+          1
+        ],
+        "stops": [
+          [
+            0,
+            "$timber.light2"
+          ],
+          [
+            0.5,
+            "$timber.light"
+          ],
+          [
+            1,
+            "$timber.dark"
+          ]
+        ]
+      },
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "shaft_shade",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.6,
+            2
+          ],
+          [
+            5.2,
+            1.8
+          ],
+          [
+            5.6,
+            10
+          ],
+          [
+            5.8,
+            18
+          ],
+          [
+            6,
+            21
+          ],
+          [
+            3.2,
+            21
+          ],
+          [
+            3.4,
+            12
+          ],
+          [
+            2.8,
+            6
+          ]
+        ]
+      },
+      "fill": "$timber.dark@soft"
+    },
+    {
+      "id": "shaft_crease_a",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.6,
+            12
+          ],
+          [
+            -3.4,
+            12.2
+          ],
+          [
+            -3.8,
+            17.6
+          ],
+          [
+            -5,
+            17.4
+          ]
+        ]
+      },
+      "fill": "$timber.dark2@soft"
+    },
+    {
+      "id": "shaft_crease_b",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1,
+            14
+          ],
+          [
+            2.2,
+            14.2
+          ],
+          [
+            1.6,
+            19.2
+          ],
+          [
+            0.4,
+            19
+          ]
+        ]
+      },
+      "fill": "$timber.dark2@soft"
+    },
+    {
+      "id": "shaft_scuff",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.2,
+            6
+          ],
+          [
+            -2.2,
+            5.8
+          ],
+          [
+            -2.6,
+            9.6
+          ],
+          [
+            -4.4,
+            9.8
+          ]
+        ]
+      },
+      "fill": "$timber.light@soft"
+    },
+    {
+      "id": "shaft_seam",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.2,
+            2
+          ],
+          [
+            0.8,
+            2
+          ],
+          [
+            0.8,
+            20.4
+          ],
+          [
+            0.2,
+            20.4
+          ]
+        ]
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "cuff",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.8,
+            0.6
+          ],
+          [
+            5.8,
+            0.4
+          ],
+          [
+            6.2,
+            4.8
+          ],
+          [
+            5.4,
+            6.2
+          ],
+          [
+            -5.2,
+            6.4
+          ],
+          [
+            -6.2,
+            4.8
+          ]
+        ]
+      },
+      "fill": {
+        "gradient": "linear",
+        "from": [
+          0.2,
+          0
+        ],
+        "to": [
+          0.8,
+          1
+        ],
+        "stops": [
+          [
+            0,
+            "$timber.light"
+          ],
+          [
+            1,
+            "$timber.dark2"
+          ]
+        ]
+      },
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "cuff_edge",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            6.2,
+            4.8
+          ],
+          [
+            5.4,
+            6.2
+          ],
+          [
+            -5.2,
+            6.4
+          ],
+          [
+            -6.2,
+            4.8
+          ],
+          [
+            -5.6,
+            4.6
+          ],
+          [
+            -4.8,
+            5.6
+          ],
+          [
+            5,
+            5.4
+          ],
+          [
+            5.6,
+            4.4
+          ]
+        ]
+      },
+      "fill": "$timber.light@soft"
+    },
+    {
+      "id": "cuff_stitch_a",
+      "at": [
+        -3.4,
+        5.5
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 0.4
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "cuff_stitch_b",
+      "at": [
+        0,
+        5.5
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 0.4
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "cuff_stitch_c",
+      "at": [
+        3.4,
+        5.4
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 0.4
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "strap_a",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.5,
+            9
+          ],
+          [
+            5.6,
+            8.8
+          ],
+          [
+            5.7,
+            10.6
+          ],
+          [
+            -5.5,
+            10.8
+          ]
+        ]
+      },
+      "fill": {
+        "gradient": "linear",
+        "from": [
+          0,
+          0
+        ],
+        "to": [
+          1,
+          0
+        ],
+        "stops": [
+          [
+            0,
+            "$timber.dark"
+          ],
+          [
+            1,
+            "$timber.dark2"
+          ]
+        ]
+      },
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "buckle_a",
+      "at": [
+        3.6,
+        9.7
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 2.2,
+        "h": 2.4,
+        "corner": 0.4
+      },
+      "fill": "$steel.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "buckle_a_pin",
+      "at": [
+        3.6,
+        9.7
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 0.5,
+        "h": 1.8
+      },
+      "fill": "$steel"
+    },
+    {
+      "id": "strap_a_tail",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            4.7,
+            9.2
+          ],
+          [
+            7.4,
+            9.4
+          ],
+          [
+            7.8,
+            10.2
+          ],
+          [
+            4.7,
+            10.4
+          ]
+        ]
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "strap_b",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.7,
+            15
+          ],
+          [
+            5.9,
+            14.8
+          ],
+          [
+            6,
+            16.6
+          ],
+          [
+            -5.7,
+            16.8
+          ]
+        ]
+      },
+      "fill": {
+        "gradient": "linear",
+        "from": [
+          0,
+          0
+        ],
+        "to": [
+          1,
+          0
+        ],
+        "stops": [
+          [
+            0,
+            "$timber.dark"
+          ],
+          [
+            1,
+            "$timber.dark2"
+          ]
+        ]
+      },
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "buckle_b",
+      "at": [
+        3.8,
+        15.7
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 2.2,
+        "h": 2.4,
+        "corner": 0.4
+      },
+      "fill": "$steel.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "buckle_b_pin",
+      "at": [
+        3.8,
+        15.7
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 0.5,
+        "h": 1.8
+      },
+      "fill": "$steel"
+    },
+    {
+      "id": "strap_b_tail",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            4.9,
+            15.2
+          ],
+          [
+            7.6,
+            15.4
+          ],
+          [
+            8,
+            16.2
+          ],
+          [
+            4.9,
+            16.4
+          ]
+        ]
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "vamp",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5,
+            21.2
+          ],
+          [
+            6.2,
+            20.8
+          ],
+          [
+            9.4,
+            22.2
+          ],
+          [
+            12.2,
+            23.6
+          ],
+          [
+            12.4,
+            25.2
+          ],
+          [
+            -5.4,
+            25.4
+          ]
+        ]
+      },
+      "fill": {
+        "gradient": "radial",
+        "from": [
+          0.35,
+          0.3
+        ],
+        "to": [
+          0.5,
+          1
+        ],
+        "stops": [
+          [
+            0,
+            "$timber.light2"
+          ],
+          [
+            0.5,
+            "$timber.light"
+          ],
+          [
+            1,
+            "$timber.dark"
+          ]
+        ]
+      },
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "vamp_shade",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3,
+            21
+          ],
+          [
+            6.2,
+            20.8
+          ],
+          [
+            9.4,
+            22.2
+          ],
+          [
+            12.2,
+            23.6
+          ],
+          [
+            12.4,
+            25
+          ],
+          [
+            3.4,
+            25
+          ]
+        ]
+      },
+      "fill": "$timber.dark@soft"
+    },
+    {
+      "id": "vamp_seam",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            5.6,
+            21.4
+          ],
+          [
+            6.4,
+            21.2
+          ],
+          [
+            9.6,
+            23.4
+          ],
+          [
+            9,
+            23.8
+          ]
+        ]
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "vamp_stitch_a",
+      "at": [
+        6.2,
+        22
+      ],
+      "rot": 32,
+      "shape": {
+        "kind": "rect",
+        "w": 0.9,
+        "h": 0.35
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "vamp_stitch_b",
+      "at": [
+        7.8,
+        23
+      ],
+      "rot": 32,
+      "shape": {
+        "kind": "rect",
+        "w": 0.9,
+        "h": 0.35
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "toe_cap",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            9.2,
+            22
+          ],
+          [
+            12.2,
+            23.6
+          ],
+          [
+            12.4,
+            25.2
+          ],
+          [
+            8.8,
+            25.2
+          ]
+        ]
+      },
+      "fill": {
+        "gradient": "linear",
+        "from": [
+          0.2,
+          0
+        ],
+        "to": [
+          0.8,
+          1
+        ],
+        "stops": [
+          [
+            0,
+            "$timber.light"
+          ],
+          [
+            1,
+            "$timber.dark"
+          ]
+        ]
+      },
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "heel",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.4,
+            23.2
+          ],
+          [
+            -2,
+            23.2
+          ],
+          [
+            -2,
+            27.6
+          ],
+          [
+            -5.6,
+            27.6
+          ]
+        ]
+      },
+      "fill": "$timber.dark2",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "welt",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.4,
+            25.2
+          ],
+          [
+            12.4,
+            25
+          ],
+          [
+            12.5,
+            25.9
+          ],
+          [
+            -5.5,
+            26.1
+          ]
+        ]
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "welt_stitch_a",
+      "at": [
+        -2.4,
+        25.6
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1,
+        "h": 0.3
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "welt_stitch_b",
+      "at": [
+        1.6,
+        25.55
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1,
+        "h": 0.3
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "welt_stitch_c",
+      "at": [
+        5.6,
+        25.5
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1,
+        "h": 0.3
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "welt_stitch_d",
+      "at": [
+        9.6,
+        25.45
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1,
+        "h": 0.3
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "sole",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.5,
+            26.1
+          ],
+          [
+            12.5,
+            25.9
+          ],
+          [
+            12.6,
+            27.4
+          ],
+          [
+            -2,
+            27.6
+          ],
+          [
+            -2,
+            27.6
+          ],
+          [
+            -5.6,
+            27.6
+          ]
+        ]
+      },
+      "fill": "$coal",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    }
+  ],
+  "variants": {
+    "far": {
+      "description": "The boot on the far leg, a step darker and without its scuff.",
+      "set": {
+        "shaft.fill": {
+          "gradient": "radial",
+          "from": [
+            0.35,
+            0.3
+          ],
+          "to": [
+            0.5,
+            1
+          ],
+          "stops": [
+            [
+              0,
+              "$timber.light"
+            ],
+            [
+              0.5,
+              "$timber"
+            ],
+            [
+              1,
+              "$timber.dark2"
+            ]
+          ]
+        },
+        "vamp.fill": {
+          "gradient": "radial",
+          "from": [
+            0.35,
+            0.3
+          ],
+          "to": [
+            0.5,
+            1
+          ],
+          "stops": [
+            [
+              0,
+              "$timber.light"
+            ],
+            [
+              0.5,
+              "$timber"
+            ],
+            [
+              1,
+              "$timber.dark2"
+            ]
+          ]
+        },
+        "cuff.fill": {
+          "gradient": "linear",
+          "from": [
+            0.2,
+            0
+          ],
+          "to": [
+            0.8,
+            1
+          ],
+          "stops": [
+            [
+              0,
+              "$timber"
+            ],
+            [
+              1,
+              "$timber.dark2"
+            ]
+          ]
+        },
+        "toe_cap.fill": {
+          "gradient": "linear",
+          "from": [
+            0.2,
+            0
+          ],
+          "to": [
+            0.8,
+            1
+          ],
+          "stops": [
+            [
+              0,
+              "$timber"
+            ],
+            [
+              1,
+              "$timber.dark2"
+            ]
+          ]
+        },
+        "tuck.fill": {
+          "gradient": "linear",
+          "from": [
+            0.2,
+            0
+          ],
+          "to": [
+            0.8,
+            1
+          ],
+          "stops": [
+            [
+              0,
+              "$slate.light"
+            ],
+            [
+              1,
+              "$slate.dark"
+            ]
+          ]
+        },
+        "shaft_scuff.fill": "$timber.dark@0",
+        "welt.fill": "$husk.dark2"
+      }
+    }
+  }
+}
