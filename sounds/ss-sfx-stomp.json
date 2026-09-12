@@ -1,35 +1,155 @@
 {
   "id": "ss.sfx.stomp",
   "name": "Footfall",
-  "description": "Something the size of the horizon putting a foot down nearby. A sine dropping most of an octave under the dirge pitch carries the mass — a sine because any edge on it would read as a hit landing on a body rather than on the ground — and a lowpassed noise slam a few milliseconds ahead of it is the surface giving. The grit comes last and scattered, because the debris arrives after the impact, not with it. Longest effect in the set at three quarters of a second: everything else in this game is a body being struck, and this is the field itself.",
-  "tags": ["sfx", "world"],
+  "description": "Something the size of the horizon putting a foot down nearby. A sine dropping most of an octave under the dirge pitch carries the mass — a sine because any edge on it would read as a hit landing on a body rather than on the ground — and a lowpassed noise slam a few milliseconds ahead of it is the surface giving. A crack of six bright grains inside the first thirty milliseconds is the crust breaking under the foot, and it is the one part of this a phone can play: everything else here sits below 250Hz, where a small speaker has nothing, so without it the footfall reached that player as the dust and not the foot. Its gain looks enormous beside the others for the reason the whoosh's does — a wide bandpass keeps a sliver of a noise burst. The grit comes last and scattered, because the debris arrives after the impact, not with it. Longest effect in the set at three quarters of a second: everything else in this game is a body being struck, and this is the field itself.",
+  "tags": [
+    "sfx",
+    "field"
+  ],
   "duration": 0.75,
-  "meta": { "minInterval": 400 },
+  "meta": {
+    "minInterval": 400
+  },
   "voices": [
     {
       "id": "slam",
       "dur": "beat",
       "gain": "soft",
-      "source": { "kind": "noise" },
-      "filter": { "type": "lowpass", "freq": "$shell.up", "to": "$bone", "q": "wide" },
-      "env": [{ "prop": "gain", "keys": [[0, 1], [0.25, 0.5], [1, 0]] }]
+      "source": {
+        "kind": "noise"
+      },
+      "filter": {
+        "type": "lowpass",
+        "freq": "$shell.up",
+        "to": "$bone",
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.25,
+              0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "crack",
+      "gain": 2.2,
+      "filter": {
+        "type": "bandpass",
+        "freq": "$grit",
+        "to": "$grit.down",
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        }
+      ],
+      "repeat": {
+        "of": {
+          "kind": "noise"
+        },
+        "count": 6,
+        "spread": 0.03,
+        "grain": 0.014,
+        "gainRange": [
+          0.6,
+          1
+        ]
+      }
     },
     {
       "id": "mass",
       "at": 0.008,
       "dur": 0.6,
       "gain": "mid",
-      "source": { "kind": "osc", "wave": "sine", "freq": "$dirge", "to": "$dirge.down" },
-      "env": [{ "prop": "gain", "keys": [[0, 1], [0.35, 0.7], [1, 0]] }]
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$dirge",
+        "to": "$dirge.down"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.35,
+              0.7
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
     },
     {
       "id": "grit",
       "at": 0.11,
       "dur": "tail",
       "gain": "faint",
-      "filter": { "type": "bandpass", "freq": "$grit", "to": "$grit.down2", "q": "band" },
-      "env": [{ "prop": "gain", "keys": [[0, 0.9], [1, 0]] }],
-      "repeat": { "of": { "kind": "noise" }, "count": 9, "spread": 0.3, "grain": 0.016, "gainRange": [0.35, 1] }
+      "filter": {
+        "type": "bandpass",
+        "freq": "$grit",
+        "to": "$grit.down2",
+        "q": "band"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "repeat": {
+        "of": {
+          "kind": "noise"
+        },
+        "count": 9,
+        "spread": 0.3,
+        "grain": 0.016,
+        "gainRange": [
+          0.35,
+          1
+        ]
+      }
     }
   ]
 }
