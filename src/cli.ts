@@ -6,6 +6,7 @@
  *   npm run gallery    out/gallery.html
  *   npm run wav        out/wav/*.wav — the sound bake, and what `regress` hashes
  *   npm run dist       dist/assets.json + dist/sounds.json — the bundles consumers import
+ *   npm run png        out/png/*.png at 4x   (--only <asset id>, --size <px>)
  */
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, basename } from "node:path";
@@ -361,6 +362,9 @@ function writeManifest(reg: Registry, sreg: SoundRegistry): void {
 
 const [cmd = "check", ...rest] = process.argv.slice(2);
 const themeFlag = rest.includes("--theme") ? rest[rest.indexOf("--theme") + 1] : undefined;
+const onlyFlag = rest.includes("--only") ? rest[rest.indexOf("--only") + 1] : undefined;
+const sizeFlag = rest.includes("--size") ? Number(rest[rest.indexOf("--size") + 1]) : undefined;
+if (sizeFlag !== undefined && !Number.isFinite(sizeFlag)) fail("--size takes a pixel width, e.g. --size 512");
 
 const { reg, sreg, themes, issues } = loadAll();
 
@@ -499,16 +503,27 @@ if (cmd === "wav" || cmd === "check") {
 
 // ---- png / baseline / regress (rasterization is optional tooling, deps loaded lazily)
 
-async function renderAllPngs(): Promise<Map<string, Buffer>> {
+/**
+ * `only` bakes a single document (and its variants) instead of the library, and
+ * `size` bakes it to an exact pixel width rather than the fixed 4x — which is
+ * what an app icon needs, since a launcher asks for 512 and 192 and not for
+ * "four times whatever the document was authored at". Both are `png` only: the
+ * baselines are a hash of the whole library at one scale, so neither flag is
+ * ever in a position to move them.
+ */
+async function renderAllPngs(opts: { only?: string; size?: number } = {}): Promise<Map<string, Buffer>> {
   const { Resvg } = await import("@resvg/resvg-js");
   const pngs = new Map<string, Buffer>();
+  if (opts.only && !reg.assets.has(opts.only)) fail(`--only "${opts.only}": no such asset`);
   for (const asset of reg.assets.values()) {
+    if (opts.only && asset.id !== opts.only) continue;
     const fileId = asset.id.replace(/\./g, "-");
     const variants: (string | undefined)[] = [undefined, ...Object.keys(asset.variants ?? {})];
     for (const v of variants) {
       const { svg } = renderSVG(asset, reg, { variant: v });
       const scale = 4;
-      const png = new Resvg(svg, { fitTo: { mode: "zoom", value: scale } }).render().asPng();
+      const fitTo = opts.size ? { mode: "width" as const, value: opts.size } : { mode: "zoom" as const, value: scale };
+      const png = new Resvg(svg, { fitTo }).render().asPng();
       pngs.set(`${fileId}${v ? `--${v}` : ""}.png`, Buffer.from(png));
     }
   }
@@ -516,7 +531,7 @@ async function renderAllPngs(): Promise<Map<string, Buffer>> {
 }
 
 if (cmd === "png" || cmd === "baseline" || cmd === "regress") {
-  const pngs = await renderAllPngs();
+  const pngs = await renderAllPngs(cmd === "png" ? { only: onlyFlag, size: sizeFlag } : {});
   // Sound rides the same rails: a bake is bytes, and bytes compare.
   if (cmd !== "png")
     for (const [name, { wav }] of renderAllWavs(sreg)) pngs.set(join("sounds", name), wav);
