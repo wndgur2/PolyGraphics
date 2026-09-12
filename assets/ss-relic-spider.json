@@ -1,0 +1,24 @@
+{
+  "id": "ss.relic.spider",
+  "name": "Eighth Leg",
+  "description": "Four arms where the hand has three, and the one that was added is the amber one reaching past the rest — the find gives +1 arm and 20% more reach, so it is drawn as the leg you can see was put there rather than as a plate you have to read. Same knuckle and the same ss.lib.spider-arm as the slot icon; only the count and that one arm's colour differ, which is the whole of what the find does.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "arm_0", "at": [-6.0, 8.0], "rot": -82.0, "use": "ss.lib.spider-arm", "scale": 0.95},
+    {"id": "arm_1", "at": [-6.0, 8.0], "rot": -57.0, "use": "ss.lib.spider-arm", "scale": 1.05},
+    {"id": "arm_2", "at": [-6.0, 8.0], "rot": -32.0, "use": "ss.lib.spider-arm", "scale": 0.95, "variant": "evolved"},
+    {"id": "arm_3", "at": [-6.0, 8.0], "rot": -8.0, "use": "ss.lib.spider-arm", "scale": 0.8},
+    {"id": "knuckle_shadow", "at": [-6.0, 8.0], "shape": {"kind": "circle", "r": 5.0}, "fill": "$ink"},
+    {"id": "knuckle", "at": [-6.0, 8.0], "shape": {"kind": "circle", "r": 3.4}, "fill": "$steel.dark"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "ss.lib.spider-arm",
+  "name": "Spider arm",
+  "description": "One jointed arm of the spider hand, rooted at the origin and reaching out along +x: a femur up to a raised knee, a tibia back down to the claw, and the claw split into a pair of fangs. Every plate the weapon owns composes this — the slot icon fans three of them off one knuckle, Eighth Leg fans four, Hauling Arms mirrors two of them inward — so the arm is drawn once and the finds are arrangements of it. Bones darken outward from the body the way the Scolopend's fringe does, which is depth rather than light: a limb the parent turns to any angle cannot carry a lit edge without the light turning with it. The weapon's own arms on the field are geometry solved per frame against a live target, so this is the same animal in a pose rather than the sprite that is drawn there.",
+  "tags": ["ss-lib"],
+  "size": [32, 20],
+  "anchor": [0.125, 0.7],
+  "parts": [
+    {"id": "femur_shadow", "at": [5.25, -4.0], "rot": -37.3, "shape": {"kind": "rect", "w": 13.2, "h": 5.6, "corner": 1.4}, "fill": "$ink"},
+    {"id": "tibia_shadow", "at": [14.75, -4.75], "rot": 37.41, "shape": {"kind": "rect", "w": 10.7, "h": 4.4, "corner": 1.0}, "fill": "$ink"},
+    {"id": "fang_over_shadow", "at": [21.76, -1.04], "rot": 9.41, "shape": {"kind": "rect", "w": 5.6, "h": 2.9, "corner": 0.7}, "fill": "$ink"},
+    {"id": "fang_under_shadow", "at": [20.17, 1.05], "rot": 65.41, "shape": {"kind": "rect", "w": 5.6, "h": 2.9, "corner": 0.7}, "fill": "$ink"},
+    {"id": "femur", "at": [5.25, -4.0], "rot": -37.3, "shape": {"kind": "rect", "w": 13.2, "h": 3.6, "corner": 1.4}, "fill": "$steel"},
+    {"id": "tibia", "at": [14.75, -4.75], "rot": 37.41, "shape": {"kind": "rect", "w": 10.7, "h": 2.6, "corner": 1.0}, "fill": "$steel.dark"},
+    {"id": "fang_over", "at": [21.76, -1.04], "rot": 9.41, "shape": {"kind": "rect", "w": 5.6, "h": 1.5, "corner": 0.7}, "fill": "$silent"},
+    {"id": "fang_under", "at": [20.17, 1.05], "rot": 65.41, "shape": {"kind": "rect", "w": 5.6, "h": 1.5, "corner": 0.7}, "fill": "$silent"},
+    {"id": "socket_shadow", "shape": {"kind": "circle", "r": 3.2}, "fill": "$ink"},
+    {"id": "socket", "shape": {"kind": "circle", "r": 2.0}, "fill": "$steel.dark"},
+    {"id": "knee_shadow", "at": [10.5, -8.0], "shape": {"kind": "circle", "r": 3.0}, "fill": "$ink"},
+    {"id": "knee", "at": [10.5, -8.0], "shape": {"kind": "circle", "r": 1.8}, "fill": "$steel.light"}
+  ],
+  "variants": {
+    "evolved": {
+      "description": "Widow's Grip: the same arm in the amber every evolved weapon in the roster wears, claws gilded.",
+      "set": {
+        "femur.fill": "$timber.light",
+        "tibia.fill": "$timber",
+        "socket.fill": "$timber",
+        "knee.fill": "$chitin",
+        "fang_over.fill": "$gold.light",
+        "fang_under.fill": "$gold.light"
+      }
+    }
+  }
+}
