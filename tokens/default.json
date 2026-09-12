@@ -29,8 +29,7 @@
     "carapace": "#6a5170",
     "husk": "#ded5c6",
     "silent": "#eaf4ff",
-    "dead": "#191521",
-    "skin": "#f7c9a3"
+    "dead": "#191521"
   },
   "ramps": {
     "light": 0.22,
