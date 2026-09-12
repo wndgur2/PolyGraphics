@@ -70,15 +70,15 @@
         "stops": [
           [
             0,
-            "$slate.light"
+            "$steel"
           ],
           [
             0.55,
-            "$slate"
+            "$steel.dark"
           ],
           [
             1,
-            "$slate.dark2"
+            "$slate"
           ]
         ]
       },
@@ -181,15 +181,15 @@
         "stops": [
           [
             0,
-            "$slate.light"
+            "$steel"
           ],
           [
             0.5,
-            "$slate"
+            "$steel.dark"
           ],
           [
             1,
-            "$slate.dark"
+            "$slate"
           ]
         ]
       },
@@ -640,15 +640,15 @@
         "stops": [
           [
             0,
-            "$timber"
+            "$timber.light2"
           ],
           [
             0.5,
-            "$timber.dark"
+            "$timber.light"
           ],
           [
             1,
-            "$timber.dark2"
+            "$timber.dark"
           ]
         ]
       },
@@ -1281,15 +1281,15 @@
         "stops": [
           [
             0,
-            "$slate.light"
+            "$steel"
           ],
           [
             0.5,
-            "$slate"
+            "$steel.dark"
           ],
           [
             1,
-            "$slate.dark2"
+            "$slate"
           ]
         ]
       },
@@ -1783,15 +1783,15 @@
         "stops": [
           [
             0,
-            "$timber"
+            "$timber.light2"
           ],
           [
             0.5,
-            "$timber.dark"
+            "$timber.light"
           ],
           [
             1,
-            "$timber.dark2"
+            "$timber.dark"
           ]
         ]
       },
@@ -1862,15 +1862,15 @@
         "stops": [
           [
             0,
-            "$timber"
+            "$timber.light2"
           ],
           [
             0.5,
-            "$timber.dark"
+            "$timber.light"
           ],
           [
             1,
-            "$timber.dark2"
+            "$timber.dark"
           ]
         ]
       },
