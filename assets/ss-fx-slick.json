@@ -1,0 +1,21 @@
+{
+  "id": "ss.fx.slick",
+  "name": "Slick mark",
+  "description": "One mark of Slick Trail: a lumpy smear of slime about forty long and eighteen wide, laid every fourteen pixels of walking and turned by the game to the heading it was laid on, so a walk leaves a ribbon. Dark wet rim, a mid body, a paler wash down the middle where it is thickest, and two gloss marks on the spine \u2014 on the spine and nowhere else, because the sprite rotates and a light on one edge would go round with it; a wet ridge catching light from above does not care which way it points. Three beads off the edge break the capsule. No ink: slime has no edge, only a darker one.",
+  "tags": ["ss-fx", "relic"],
+  "size": [48, 32],
+  "meta": {"radius": 22},
+  "parts": [
+    {"id": "rim", "scale": 1.1, "shape": {"kind": "poly", "points": [[-19, 0], [-17.5, -4.5], [-13, -7.5], [-8, -8.6], [-3, -7.8], [1, -9.2], [6, -8.4], [11, -8.8], [16, -6.2], [19.5, -2], [19, 2.4], [16.5, 6.4], [11.5, 8.2], [6, 7.4], [1, 9.0], [-4, 8.0], [-9, 8.8], [-14, 7.0], [-18, 3.6]]}, "fill": "$venom.dark2"},
+    {"id": "body", "shape": {"kind": "poly", "points": [[-19, 0], [-17.5, -4.5], [-13, -7.5], [-8, -8.6], [-3, -7.8], [1, -9.2], [6, -8.4], [11, -8.8], [16, -6.2], [19.5, -2], [19, 2.4], [16.5, 6.4], [11.5, 8.2], [6, 7.4], [1, 9.0], [-4, 8.0], [-9, 8.8], [-14, 7.0], [-18, 3.6]]}, "fill": "$venom.dark"},
+    {"id": "wash", "shape": {"kind": "poly", "points": [[-13, 0], [-11, -3], [-6, -4.6], [0, -4.2], [6, -5.0], [11, -3.6], [13.5, -0.5], [12, 2.8], [6, 4.4], [0, 4.0], [-6, 4.8], [-11, 3.2]]}, "fill": "$venom"},
+    {"id": "gloss_a", "at": [-6, -1.2], "rot": -6, "shape": {"kind": "ellipse", "rx": 4.2, "ry": 1.3}, "fill": "$venom.light2"},
+    {"id": "gloss_b", "at": [7, 0.8], "rot": 8, "shape": {"kind": "ellipse", "rx": 2.6, "ry": 1.0}, "fill": "$venom.light2"},
+    {"id": "bead_a_rim", "at": [-12.5, -10.2], "shape": {"kind": "circle", "r": 1.7}, "fill": "$venom.dark2"},
+    {"id": "bead_a", "at": [-12.5, -10.2], "shape": {"kind": "circle", "r": 1.1}, "fill": "$venom.dark"},
+    {"id": "bead_b_rim", "at": [9.5, 10.8], "shape": {"kind": "circle", "r": 1.5}, "fill": "$venom.dark2"},
+    {"id": "bead_b", "at": [9.5, 10.8], "shape": {"kind": "circle", "r": 0.95}, "fill": "$venom.dark"},
+    {"id": "bead_c_rim", "at": [18, -7.6], "shape": {"kind": "circle", "r": 1.3}, "fill": "$venom.dark2"},
+    {"id": "bead_c", "at": [18, -7.6], "shape": {"kind": "circle", "r": 0.8}, "fill": "$venom"}
+  ]
+}
