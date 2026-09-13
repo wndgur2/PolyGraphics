@@ -1,0 +1,18 @@
+{
+  "id": "ss.fx.dripmark",
+  "name": "Blood spot",
+  "description": "Where one ss.fx.drip landed: a small dark spot with three beads thrown clear of it. The same event ss.fx.spatter draws for a body coming apart, at the size one drop earns — a spot rather than a burst, so it never competes with the spatter for the eye on a field where both can be on the ground at once. No ring, no flash, nothing thrown far: a drop falling a few pixels off a claw has no force in it, and the only thing this has to say is that something wet is on the floor here. The outline is a lumpy ring rather than a circle because blood on ground has no straight edge and no circle in it either, and the wobble is baked so the document renders the same way every time instead of shimmering between builds. Three tones stacked inward — a wet dark rim, the body, a paler middle where it pooled deepest — and no ink: a spot with a line round it is a berry on the floor. The game fades it over a second or two; nothing here is authored to move.",
+  "tags": ["ss-fx", "blood", "ground"],
+  "size": [16, 12],
+  "meta": {"radius": 7},
+  "parts": [
+    {"id": "stain", "shape": {"kind": "poly", "points": [[3.12, 0.0], [2.95, 1.55], [1.3, 2.34], [-0.55, 3.13], [-2.7, 2.55], [-3.92, 0.94], [-3.19, -0.77], [-2.23, -2.11], [-0.51, -2.91], [1.51, -2.71], [3.67, -1.93]]}, "fill": "$blood.dark2@heavy"},
+    {"id": "body", "shape": {"kind": "poly", "points": [[3.37, 0.0], [2.56, 1.31], [1.21, 2.12], [-0.46, 2.54], [-1.71, 1.58], [-2.89, 0.68], [-2.14, -0.5], [-2.27, -2.09], [-0.4, -2.23], [1.47, -2.57], [2.46, -1.26]]}, "fill": "$blood.dark"},
+    {"id": "wash", "shape": {"kind": "poly", "points": [[1.45, 0.0], [1.33, 0.46], [1.04, 0.9], [0.54, 1.3], [-0.16, 1.15], [-0.79, 1.06], [-1.14, 0.65], [-1.69, 0.28], [-1.4, -0.23], [-1.43, -0.81], [-0.76, -1.02], [-0.18, -1.32], [0.54, -1.29], [0.94, -0.81], [1.35, -0.47]]}, "fill": "$blood@0.7"},
+    {"id": "bead_a_shade", "at": [4.9, -2.4], "shape": {"kind": "circle", "r": 1.25}, "fill": "$blood.dark2@heavy"},
+    {"id": "bead_a", "at": [4.9, -2.4], "shape": {"kind": "circle", "r": 0.8}, "fill": "$blood.dark"},
+    {"id": "bead_b_shade", "at": [-4.4, 2.1], "shape": {"kind": "circle", "r": 1.0}, "fill": "$blood.dark2@heavy"},
+    {"id": "bead_b", "at": [-4.4, 2.1], "shape": {"kind": "circle", "r": 0.62}, "fill": "$blood.dark"},
+    {"id": "bead_c", "at": [-2.0, -4.0], "shape": {"kind": "circle", "r": 0.5}, "fill": "$blood.dark2"}
+  ]
+}
