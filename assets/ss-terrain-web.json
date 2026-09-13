@@ -1,0 +1,3437 @@
+{
+  "id": "ss.terrain.web",
+  "name": "Silk (SS)",
+  "description": "The Spider Cave's set silk, drawn from above like everything else on that floor and built in the order a spider builds one: a frame slung between eight anchor points, no two of them the same distance out, sixteen radii that each stop ON a frame line rather than in mid-air, a hub with a free zone round it the spider keeps clear to turn in, and then one capture thread wound outward \u2014 drawn as the straight chords it is really made of, which is why a web is a polygon spiral and not a stack of circles. Beaded with glue along the sticky courses, broken through in three places with the cut ends curled back on the radii that held, and behind all of it the ghost of an older web at another angle. Caught in it: a wing, a husk, a leg and a scatter of dew. Cold white (`$silent`) on cave stone, because silk is the one thing down there brighter than anything alive. `torn` is the state after somebody has walked through it; `sheet` is the same patch spun by something that does not build orbs \u2014 a tangled mat whose every line runs home to a funnel \u2014 and `sheet_torn` is that walked through. The game scales all four to whatever radius the patch rolled.",
+  "tags": [
+    "ss-terrain",
+    "web"
+  ],
+  "size": [
+    128,
+    128
+  ],
+  "meta": {
+    "radius": 60
+  },
+  "parts": [
+    {
+      "id": "ghost_0",
+      "at": [
+        20.58,
+        4.39
+      ],
+      "rot": -66.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 40.0,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_b_0",
+      "at": [
+        -28.75,
+        -17.58
+      ],
+      "rot": -246.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 36.0,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_1",
+      "at": [
+        10.75,
+        22.0
+      ],
+      "rot": -28.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 50.0,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_b_1",
+      "at": [
+        -19.31,
+        -33.36
+      ],
+      "rot": -208.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 44.0,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_2",
+      "at": [
+        -9.38,
+        20.66
+      ],
+      "rot": 9.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 40.0,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_b_2",
+      "at": [
+        -0.93,
+        -32.68
+      ],
+      "rot": -171.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 36.0,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_3",
+      "at": [
+        -28.94,
+        15.72
+      ],
+      "rot": 46.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 50.0,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_b_3",
+      "at": [
+        16.76,
+        -27.65
+      ],
+      "rot": -133.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 44.0,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_4",
+      "at": [
+        -32.85,
+        -4.07
+      ],
+      "rot": 84.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 40.0,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_b_4",
+      "at": [
+        20.86,
+        -9.72
+      ],
+      "rot": -96.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 36.0,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "haze",
+      "at": [
+        -2.0,
+        -2.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 55
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "frame_0",
+      "at": [
+        43.97,
+        -3.44
+      ],
+      "rot": 23.76,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 49.65,
+        "corner": 0.75
+      },
+      "fill": "$silent@0.34"
+    },
+    {
+      "id": "frame_1",
+      "at": [
+        16.61,
+        36.57
+      ],
+      "rot": 45.12,
+      "shape": {
+        "kind": "rect",
+        "w": 1.3,
+        "h": 48.99,
+        "corner": 0.65
+      },
+      "fill": "$silent@0.34"
+    },
+    {
+      "id": "frame_2",
+      "at": [
+        -19.5,
+        44.7
+      ],
+      "rot": -243.99,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 41.73,
+        "corner": 0.75
+      },
+      "fill": "$silent@0.34"
+    },
+    {
+      "id": "frame_3",
+      "at": [
+        -52.82,
+        18.66
+      ],
+      "rot": -220.78,
+      "shape": {
+        "kind": "rect",
+        "w": 1.3,
+        "h": 44.62,
+        "corner": 0.65
+      },
+      "fill": "$silent@0.34"
+    },
+    {
+      "id": "frame_4",
+      "at": [
+        -52.91,
+        -17.67
+      ],
+      "rot": -143.33,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 48.47,
+        "corner": 0.75
+      },
+      "fill": "$silent@0.34"
+    },
+    {
+      "id": "frame_5",
+      "at": [
+        -22.73,
+        -51.04
+      ],
+      "rot": -131.56,
+      "shape": {
+        "kind": "rect",
+        "w": 1.3,
+        "h": 41.99,
+        "corner": 0.65
+      },
+      "fill": "$silent@0.34"
+    },
+    {
+      "id": "frame_6",
+      "at": [
+        11.05,
+        -54.93
+      ],
+      "rot": -60.97,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 41.34,
+        "corner": 0.75
+      },
+      "fill": "$silent@0.34"
+    },
+    {
+      "id": "frame_7",
+      "at": [
+        41.55,
+        -35.53
+      ],
+      "rot": -52.97,
+      "shape": {
+        "kind": "rect",
+        "w": 1.3,
+        "h": 31.12,
+        "corner": 0.65
+      },
+      "fill": "$silent@0.34"
+    },
+    {
+      "id": "anchor_0",
+      "at": [
+        56.0,
+        -30.61
+      ],
+      "rot": -155.44,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 9.79,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.22"
+    },
+    {
+      "id": "anchor_1",
+      "at": [
+        36.75,
+        25.49
+      ],
+      "rot": -24.12,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 13.61,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.22"
+    },
+    {
+      "id": "anchor_2",
+      "at": [
+        3.47,
+        59.37
+      ],
+      "rot": -37.34,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 13.88,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.22"
+    },
+    {
+      "id": "anchor_3",
+      "at": [
+        -43.19,
+        35.84
+      ],
+      "rot": 86.64,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 9.9,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.22"
+    },
+    {
+      "id": "anchor_4",
+      "at": [
+        -72.58,
+        6.46
+      ],
+      "rot": 47.92,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 13.99,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.22"
+    },
+    {
+      "id": "anchor_5",
+      "at": [
+        -40.42,
+        -43.56
+      ],
+      "rot": -197.03,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 13.5,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.22"
+    },
+    {
+      "id": "anchor_6",
+      "at": [
+        -10.54,
+        -68.17
+      ],
+      "rot": -227.64,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 9.5,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.22"
+    },
+    {
+      "id": "anchor_7",
+      "at": [
+        35.84,
+        -46.62
+      ],
+      "rot": -104.34,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 13.85,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.22"
+    },
+    {
+      "id": "radius_0",
+      "at": [
+        20.83,
+        -4.51
+      ],
+      "rot": -84.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.45,
+        "h": 45.5,
+        "corner": 0.72
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_1",
+      "at": [
+        18.63,
+        0.68
+      ],
+      "rot": -72.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.15,
+        "h": 43.29,
+        "corner": 0.57
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_2",
+      "at": [
+        12.07,
+        10.8
+      ],
+      "rot": -43.8,
+      "shape": {
+        "kind": "rect",
+        "w": 1.3,
+        "h": 42.93,
+        "corner": 0.65
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_3",
+      "at": [
+        3.1,
+        19.48
+      ],
+      "rot": -17.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 48.98,
+        "corner": 0.55
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_4",
+      "at": [
+        -2.5,
+        24.77
+      ],
+      "rot": -4.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.45,
+        "h": 57.34,
+        "corner": 0.72
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_5",
+      "at": [
+        -16.27,
+        18.67
+      ],
+      "rot": 23.7,
+      "shape": {
+        "kind": "rect",
+        "w": 1.15,
+        "h": 49.66,
+        "corner": 0.57
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_6",
+      "at": [
+        -26.68,
+        10.87
+      ],
+      "rot": 50.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.3,
+        "h": 49.78,
+        "corner": 0.65
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_7",
+      "at": [
+        -30.72,
+        6.11
+      ],
+      "rot": 63.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 51.34,
+        "corner": 0.55
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_8",
+      "at": [
+        -34.1,
+        -7.61
+      ],
+      "rot": -268.8,
+      "shape": {
+        "kind": "rect",
+        "w": 1.45,
+        "h": 51.81,
+        "corner": 0.72
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_9",
+      "at": [
+        -26.42,
+        -18.39
+      ],
+      "rot": -242.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.15,
+        "h": 42.12,
+        "corner": 0.57
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_10",
+      "at": [
+        -23.29,
+        -22.62
+      ],
+      "rot": -229.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.3,
+        "h": 41.71,
+        "corner": 0.65
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_11",
+      "at": [
+        -14.24,
+        -30.7
+      ],
+      "rot": -201.3,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 44.46,
+        "corner": 0.55
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_12",
+      "at": [
+        -2.25,
+        -35.57
+      ],
+      "rot": -174.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.45,
+        "h": 51.01,
+        "corner": 0.72
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_13",
+      "at": [
+        3.32,
+        -32.6
+      ],
+      "rot": -162.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.15,
+        "h": 47.43,
+        "corner": 0.57
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_14",
+      "at": [
+        14.73,
+        -25.92
+      ],
+      "rot": -133.8,
+      "shape": {
+        "kind": "rect",
+        "w": 1.3,
+        "h": 48.27,
+        "corner": 0.65
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_15",
+      "at": [
+        25.73,
+        -16.39
+      ],
+      "rot": -107.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 57.86,
+        "corner": 0.55
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_0",
+      "at": [
+        9.66,
+        -3.94
+      ],
+      "rot": 9.39,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 3.28,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.47"
+    },
+    {
+      "id": "spiral_1",
+      "at": [
+        7.49,
+        0.86
+      ],
+      "rot": 30.93,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 7.41,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.47"
+    },
+    {
+      "id": "spiral_2",
+      "at": [
+        2.57,
+        5.96
+      ],
+      "rot": 57.56,
+      "shape": {
+        "kind": "rect",
+        "w": 1.19,
+        "h": 7.15,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.47"
+    },
+    {
+      "id": "bead_2",
+      "at": [
+        2.57,
+        5.96
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.49
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_3",
+      "at": [
+        -2.1,
+        8.39
+      ],
+      "rot": 72.78,
+      "shape": {
+        "kind": "rect",
+        "w": 1.19,
+        "h": 3.45,
+        "corner": 0.59
+      },
+      "fill": "$silent@0.47"
+    },
+    {
+      "id": "spiral_4",
+      "at": [
+        -7.59,
+        8.27
+      ],
+      "rot": -260.8,
+      "shape": {
+        "kind": "rect",
+        "w": 1.18,
+        "h": 7.78,
+        "corner": 0.59
+      },
+      "fill": "$silent@0.47"
+    },
+    {
+      "id": "spiral_5",
+      "at": [
+        -14.48,
+        5.49
+      ],
+      "rot": -234.62,
+      "shape": {
+        "kind": "rect",
+        "w": 1.18,
+        "h": 7.47,
+        "corner": 0.59
+      },
+      "fill": "$silent@0.46"
+    },
+    {
+      "id": "spiral_6",
+      "at": [
+        -18.63,
+        1.91
+      ],
+      "rot": -217.95,
+      "shape": {
+        "kind": "rect",
+        "w": 1.18,
+        "h": 3.58,
+        "corner": 0.59
+      },
+      "fill": "$silent@0.46"
+    },
+    {
+      "id": "spiral_7",
+      "at": [
+        -20.76,
+        -3.42
+      ],
+      "rot": -194.74,
+      "shape": {
+        "kind": "rect",
+        "w": 1.17,
+        "h": 8.12,
+        "corner": 0.59
+      },
+      "fill": "$silent@0.46"
+    },
+    {
+      "id": "bead_7",
+      "at": [
+        -20.76,
+        -3.42
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.46
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_8",
+      "at": [
+        -20.69,
+        -11.06
+      ],
+      "rot": -163.49,
+      "shape": {
+        "kind": "rect",
+        "w": 1.17,
+        "h": 7.73,
+        "corner": 0.58
+      },
+      "fill": "$silent@0.46"
+    },
+    {
+      "id": "spiral_9",
+      "at": [
+        -18.65,
+        -16.3
+      ],
+      "rot": -148.37,
+      "shape": {
+        "kind": "rect",
+        "w": 1.16,
+        "h": 3.62,
+        "corner": 0.58
+      },
+      "fill": "$silent@0.46"
+    },
+    {
+      "id": "spiral_10",
+      "at": [
+        -14.45,
+        -20.38
+      ],
+      "rot": -127.94,
+      "shape": {
+        "kind": "rect",
+        "w": 1.16,
+        "h": 8.24,
+        "corner": 0.58
+      },
+      "fill": "$silent@0.46"
+    },
+    {
+      "id": "spiral_11",
+      "at": [
+        -7.25,
+        -23.8
+      ],
+      "rot": -102.68,
+      "shape": {
+        "kind": "rect",
+        "w": 1.16,
+        "h": 8.1,
+        "corner": 0.58
+      },
+      "fill": "$silent@0.46"
+    },
+    {
+      "id": "spiral_12",
+      "at": [
+        -1.41,
+        -24.28
+      ],
+      "rot": -77.83,
+      "shape": {
+        "kind": "rect",
+        "w": 1.15,
+        "h": 3.87,
+        "corner": 0.58
+      },
+      "fill": "$silent@0.46"
+    },
+    {
+      "id": "bead_12",
+      "at": [
+        -1.41,
+        -24.28
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.44
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_13",
+      "at": [
+        4.26,
+        -21.68
+      ],
+      "rot": -59.87,
+      "shape": {
+        "kind": "rect",
+        "w": 1.15,
+        "h": 8.72,
+        "corner": 0.57
+      },
+      "fill": "$silent@0.45"
+    },
+    {
+      "id": "spiral_14",
+      "at": [
+        10.7,
+        -16.05
+      ],
+      "rot": -37.8,
+      "shape": {
+        "kind": "rect",
+        "w": 1.14,
+        "h": 8.71,
+        "corner": 0.57
+      },
+      "fill": "$silent@0.45"
+    },
+    {
+      "id": "spiral_15",
+      "at": [
+        13.27,
+        -8.93
+      ],
+      "rot": 1.46,
+      "shape": {
+        "kind": "rect",
+        "w": 1.14,
+        "h": 7.37,
+        "corner": 0.57
+      },
+      "fill": "$silent@0.45"
+    },
+    {
+      "id": "spiral_16",
+      "at": [
+        12.77,
+        -3.31
+      ],
+      "rot": 11.93,
+      "shape": {
+        "kind": "rect",
+        "w": 1.14,
+        "h": 3.97,
+        "corner": 0.57
+      },
+      "fill": "$silent@0.45"
+    },
+    {
+      "id": "spiral_17",
+      "at": [
+        10.05,
+        2.47
+      ],
+      "rot": 31.02,
+      "shape": {
+        "kind": "rect",
+        "w": 1.13,
+        "h": 8.94,
+        "corner": 0.57
+      },
+      "fill": "$silent@0.45"
+    },
+    {
+      "id": "bead_17",
+      "at": [
+        10.05,
+        2.47
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.41
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_18",
+      "at": [
+        4.21,
+        8.92
+      ],
+      "rot": 53.51,
+      "shape": {
+        "kind": "rect",
+        "w": 1.13,
+        "h": 8.81,
+        "corner": 0.56
+      },
+      "fill": "$silent@0.45"
+    },
+    {
+      "id": "spiral_19",
+      "at": [
+        -1.35,
+        12.6
+      ],
+      "rot": 62.13,
+      "shape": {
+        "kind": "rect",
+        "w": 1.12,
+        "h": 4.57,
+        "corner": 0.56
+      },
+      "fill": "$silent@0.45"
+    },
+    {
+      "id": "spiral_20",
+      "at": [
+        -8.21,
+        12.49
+      ],
+      "rot": -256.27,
+      "shape": {
+        "kind": "rect",
+        "w": 1.12,
+        "h": 9.95,
+        "corner": 0.56
+      },
+      "fill": "$silent@0.45"
+    },
+    {
+      "id": "spiral_21",
+      "at": [
+        -16.84,
+        8.61
+      ],
+      "rot": -234.6,
+      "shape": {
+        "kind": "rect",
+        "w": 1.12,
+        "h": 9.34,
+        "corner": 0.56
+      },
+      "fill": "$silent@0.45"
+    },
+    {
+      "id": "spiral_22",
+      "at": [
+        -22.09,
+        4.17
+      ],
+      "rot": -219.69,
+      "shape": {
+        "kind": "rect",
+        "w": 1.11,
+        "h": 4.5,
+        "corner": 0.56
+      },
+      "fill": "$silent@0.44"
+    },
+    {
+      "id": "bead_22",
+      "at": [
+        -22.09,
+        4.17
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.38
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_23",
+      "at": [
+        -24.83,
+        -2.5
+      ],
+      "rot": -194.85,
+      "shape": {
+        "kind": "rect",
+        "w": 1.11,
+        "h": 10.22,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.44"
+    },
+    {
+      "id": "spiral_24",
+      "at": [
+        -24.32,
+        -11.87
+      ],
+      "rot": -157.59,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 9.58,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.44"
+    },
+    {
+      "id": "spiral_25",
+      "at": [
+        -21.33,
+        -18.13
+      ],
+      "rot": -147.63,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 4.33,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.44"
+    },
+    {
+      "id": "spiral_26",
+      "at": [
+        -16.34,
+        -23.11
+      ],
+      "rot": -129.43,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 9.92,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.44"
+    },
+    {
+      "id": "spiral_27",
+      "at": [
+        -7.69,
+        -27.65
+      ],
+      "rot": -106.17,
+      "shape": {
+        "kind": "rect",
+        "w": 1.09,
+        "h": 10.03,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.44"
+    },
+    {
+      "id": "bead_27",
+      "at": [
+        -7.69,
+        -27.65
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.36
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_28",
+      "at": [
+        -0.58,
+        -28.36
+      ],
+      "rot": -73.24,
+      "shape": {
+        "kind": "rect",
+        "w": 1.09,
+        "h": 4.8,
+        "corner": 0.54
+      },
+      "fill": "$silent@0.44"
+    },
+    {
+      "id": "spiral_29",
+      "at": [
+        6.36,
+        -25.0
+      ],
+      "rot": -60.14,
+      "shape": {
+        "kind": "rect",
+        "w": 1.08,
+        "h": 10.7,
+        "corner": 0.54
+      },
+      "fill": "$silent@0.44"
+    },
+    {
+      "id": "spiral_30",
+      "at": [
+        14.7,
+        -18.25
+      ],
+      "rot": -42.17,
+      "shape": {
+        "kind": "rect",
+        "w": 1.08,
+        "h": 11.04,
+        "corner": 0.54
+      },
+      "fill": "$silent@0.44"
+    },
+    {
+      "id": "spiral_31",
+      "at": [
+        17.7,
+        -9.52
+      ],
+      "rot": 8.72,
+      "shape": {
+        "kind": "rect",
+        "w": 1.08,
+        "h": 9.38,
+        "corner": 0.54
+      },
+      "fill": "$silent@0.43"
+    },
+    {
+      "id": "spiral_32",
+      "at": [
+        16.37,
+        -2.57
+      ],
+      "rot": 14.83,
+      "shape": {
+        "kind": "rect",
+        "w": 1.07,
+        "h": 4.79,
+        "corner": 0.54
+      },
+      "fill": "$silent@0.43"
+    },
+    {
+      "id": "bead_32",
+      "at": [
+        16.37,
+        -2.57
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.33
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_33",
+      "at": [
+        12.99,
+        4.3
+      ],
+      "rot": 31.33,
+      "shape": {
+        "kind": "rect",
+        "w": 1.07,
+        "h": 10.67,
+        "corner": 0.53
+      },
+      "fill": "$silent@0.43"
+    },
+    {
+      "id": "spiral_44",
+      "at": [
+        0.31,
+        -32.74
+      ],
+      "rot": -69.85,
+      "shape": {
+        "kind": "rect",
+        "w": 1.02,
+        "h": 5.82,
+        "corner": 0.51
+      },
+      "fill": "$silent@0.42"
+    },
+    {
+      "id": "spiral_45",
+      "at": [
+        8.6,
+        -28.56
+      ],
+      "rot": -60.29,
+      "shape": {
+        "kind": "rect",
+        "w": 1.02,
+        "h": 12.82,
+        "corner": 0.51
+      },
+      "fill": "$silent@0.42"
+    },
+    {
+      "id": "spiral_46",
+      "at": [
+        18.98,
+        -20.59
+      ],
+      "rot": -45.12,
+      "shape": {
+        "kind": "rect",
+        "w": 1.02,
+        "h": 13.58,
+        "corner": 0.51
+      },
+      "fill": "$silent@0.42"
+    },
+    {
+      "id": "spiral_47",
+      "at": [
+        22.42,
+        -10.15
+      ],
+      "rot": 13.66,
+      "shape": {
+        "kind": "rect",
+        "w": 1.01,
+        "h": 11.64,
+        "corner": 0.51
+      },
+      "fill": "$silent@0.42"
+    },
+    {
+      "id": "bead_47",
+      "at": [
+        22.42,
+        -10.15
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.25
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_48",
+      "at": [
+        20.21,
+        -1.79
+      ],
+      "rot": 17.09,
+      "shape": {
+        "kind": "rect",
+        "w": 1.01,
+        "h": 5.66,
+        "corner": 0.5
+      },
+      "fill": "$silent@0.41"
+    },
+    {
+      "id": "spiral_49",
+      "at": [
+        16.1,
+        6.25
+      ],
+      "rot": 31.6,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 12.52,
+        "corner": 0.5
+      },
+      "fill": "$silent@0.41"
+    },
+    {
+      "id": "spiral_50",
+      "at": [
+        8.04,
+        15.79
+      ],
+      "rot": 48.61,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 12.74,
+        "corner": 0.5
+      },
+      "fill": "$silent@0.41"
+    },
+    {
+      "id": "spiral_51",
+      "at": [
+        0.37,
+        22.32
+      ],
+      "rot": 51.33,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 7.39,
+        "corner": 0.5
+      },
+      "fill": "$silent@0.41"
+    },
+    {
+      "id": "spiral_52",
+      "at": [
+        -9.6,
+        22.13
+      ],
+      "rot": -250.63,
+      "shape": {
+        "kind": "rect",
+        "w": 0.99,
+        "h": 15.03,
+        "corner": 0.5
+      },
+      "fill": "$silent@0.41"
+    },
+    {
+      "id": "bead_52",
+      "at": [
+        -9.6,
+        22.13
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.22
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_53",
+      "at": [
+        -22.2,
+        15.68
+      ],
+      "rot": -234.31,
+      "shape": {
+        "kind": "rect",
+        "w": 0.99,
+        "h": 13.57,
+        "corner": 0.49
+      },
+      "fill": "$silent@0.41"
+    },
+    {
+      "id": "spiral_54",
+      "at": [
+        -29.89,
+        9.26
+      ],
+      "rot": -221.34,
+      "shape": {
+        "kind": "rect",
+        "w": 0.98,
+        "h": 6.58,
+        "corner": 0.49
+      },
+      "fill": "$silent@0.41"
+    },
+    {
+      "id": "spiral_55",
+      "at": [
+        -33.97,
+        -0.43
+      ],
+      "rot": -194.8,
+      "shape": {
+        "kind": "rect",
+        "w": 0.98,
+        "h": 14.93,
+        "corner": 0.49
+      },
+      "fill": "$silent@0.41"
+    },
+    {
+      "id": "spiral_56",
+      "at": [
+        -32.4,
+        -13.69
+      ],
+      "rot": -150.11,
+      "shape": {
+        "kind": "rect",
+        "w": 0.97,
+        "h": 13.93,
+        "corner": 0.49
+      },
+      "fill": "$silent@0.4"
+    },
+    {
+      "id": "spiral_57",
+      "at": [
+        -27.29,
+        -22.18
+      ],
+      "rot": -146.31,
+      "shape": {
+        "kind": "rect",
+        "w": 0.97,
+        "h": 5.91,
+        "corner": 0.49
+      },
+      "fill": "$silent@0.4"
+    },
+    {
+      "id": "bead_57",
+      "at": [
+        -27.29,
+        -22.18
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.19
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_58",
+      "at": [
+        -20.52,
+        -29.15
+      ],
+      "rot": -131.29,
+      "shape": {
+        "kind": "rect",
+        "w": 0.97,
+        "h": 13.66,
+        "corner": 0.48
+      },
+      "fill": "$silent@0.4"
+    },
+    {
+      "id": "spiral_59",
+      "at": [
+        -8.67,
+        -36.15
+      ],
+      "rot": -110.38,
+      "shape": {
+        "kind": "rect",
+        "w": 0.96,
+        "h": 14.34,
+        "corner": 0.48
+      },
+      "fill": "$silent@0.4"
+    },
+    {
+      "id": "spiral_60",
+      "at": [
+        1.23,
+        -37.32
+      ],
+      "rot": -67.34,
+      "shape": {
+        "kind": "rect",
+        "w": 0.96,
+        "h": 6.9,
+        "corner": 0.48
+      },
+      "fill": "$silent@0.4"
+    },
+    {
+      "id": "spiral_61",
+      "at": [
+        10.95,
+        -32.27
+      ],
+      "rot": -60.38,
+      "shape": {
+        "kind": "rect",
+        "w": 0.95,
+        "h": 15.03,
+        "corner": 0.48
+      },
+      "fill": "$silent@0.4"
+    },
+    {
+      "id": "spiral_62",
+      "at": [
+        23.44,
+        -23.04
+      ],
+      "rot": -47.19,
+      "shape": {
+        "kind": "rect",
+        "w": 0.95,
+        "h": 16.25,
+        "corner": 0.48
+      },
+      "fill": "$silent@0.4"
+    },
+    {
+      "id": "bead_62",
+      "at": [
+        23.44,
+        -23.04
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.17
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_63",
+      "at": [
+        27.33,
+        -10.8
+      ],
+      "rot": 17.12,
+      "shape": {
+        "kind": "rect",
+        "w": 0.95,
+        "h": 14.05,
+        "corner": 0.47
+      },
+      "fill": "$silent@0.4"
+    },
+    {
+      "id": "spiral_64",
+      "at": [
+        24.2,
+        -0.97
+      ],
+      "rot": 18.82,
+      "shape": {
+        "kind": "rect",
+        "w": 0.94,
+        "h": 6.58,
+        "corner": 0.47
+      },
+      "fill": "$silent@0.4"
+    },
+    {
+      "id": "spiral_65",
+      "at": [
+        19.34,
+        8.28
+      ],
+      "rot": 31.82,
+      "shape": {
+        "kind": "rect",
+        "w": 0.94,
+        "h": 14.44,
+        "corner": 0.47
+      },
+      "fill": "$silent@0.39"
+    },
+    {
+      "id": "spiral_66",
+      "at": [
+        10.09,
+        19.47
+      ],
+      "rot": 47.09,
+      "shape": {
+        "kind": "rect",
+        "w": 0.93,
+        "h": 14.87,
+        "corner": 0.47
+      },
+      "fill": "$silent@0.39"
+    },
+    {
+      "id": "spiral_67",
+      "at": [
+        1.29,
+        27.5
+      ],
+      "rot": 48.44,
+      "shape": {
+        "kind": "rect",
+        "w": 0.93,
+        "h": 8.94,
+        "corner": 0.47
+      },
+      "fill": "$silent@0.39"
+    },
+    {
+      "id": "bead_67",
+      "at": [
+        1.29,
+        27.5
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.14
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_68",
+      "at": [
+        -10.35,
+        27.27
+      ],
+      "rot": -248.93,
+      "shape": {
+        "kind": "rect",
+        "w": 0.93,
+        "h": 17.78,
+        "corner": 0.46
+      },
+      "fill": "$silent@0.39"
+    },
+    {
+      "id": "spiral_69",
+      "at": [
+        -25.06,
+        19.45
+      ],
+      "rot": -234.2,
+      "shape": {
+        "kind": "rect",
+        "w": 0.92,
+        "h": 15.82,
+        "corner": 0.46
+      },
+      "fill": "$silent@0.39"
+    },
+    {
+      "id": "spiral_70",
+      "at": [
+        -34.03,
+        11.96
+      ],
+      "rot": -221.81,
+      "shape": {
+        "kind": "rect",
+        "w": 0.92,
+        "h": 7.68,
+        "corner": 0.46
+      },
+      "fill": "$silent@0.39"
+    },
+    {
+      "id": "spiral_80",
+      "at": [
+        28.32,
+        -0.13
+      ],
+      "rot": 20.18,
+      "shape": {
+        "kind": "rect",
+        "w": 0.88,
+        "h": 7.53,
+        "corner": 0.44
+      },
+      "fill": "$silent@0.38"
+    },
+    {
+      "id": "spiral_81",
+      "at": [
+        22.67,
+        10.36
+      ],
+      "rot": 32.0,
+      "shape": {
+        "kind": "rect",
+        "w": 0.87,
+        "h": 16.41,
+        "corner": 0.44
+      },
+      "fill": "$silent@0.38"
+    },
+    {
+      "id": "spiral_82",
+      "at": [
+        12.19,
+        23.26
+      ],
+      "rot": 45.92,
+      "shape": {
+        "kind": "rect",
+        "w": 0.87,
+        "h": 17.06,
+        "corner": 0.44
+      },
+      "fill": "$silent@0.37"
+    },
+    {
+      "id": "bead_82",
+      "at": [
+        12.19,
+        23.26
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.06
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_83",
+      "at": [
+        2.24,
+        32.84
+      ],
+      "rot": 46.38,
+      "shape": {
+        "kind": "rect",
+        "w": 0.87,
+        "h": 10.56,
+        "corner": 0.43
+      },
+      "fill": "$silent@0.37"
+    },
+    {
+      "id": "spiral_84",
+      "at": [
+        -11.11,
+        32.56
+      ],
+      "rot": -247.64,
+      "shape": {
+        "kind": "rect",
+        "w": 0.86,
+        "h": 20.61,
+        "corner": 0.43
+      },
+      "fill": "$silent@0.37"
+    },
+    {
+      "id": "spiral_85",
+      "at": [
+        -27.99,
+        23.32
+      ],
+      "rot": -234.11,
+      "shape": {
+        "kind": "rect",
+        "w": 0.86,
+        "h": 18.13,
+        "corner": 0.43
+      },
+      "fill": "$silent@0.37"
+    },
+    {
+      "id": "spiral_86",
+      "at": [
+        -38.29,
+        14.74
+      ],
+      "rot": -222.15,
+      "shape": {
+        "kind": "rect",
+        "w": 0.85,
+        "h": 8.82,
+        "corner": 0.43
+      },
+      "fill": "$silent@0.37"
+    },
+    {
+      "id": "spiral_87",
+      "at": [
+        -43.79,
+        1.8
+      ],
+      "rot": -194.73,
+      "shape": {
+        "kind": "rect",
+        "w": 0.85,
+        "h": 19.99,
+        "corner": 0.43
+      },
+      "fill": "$silent@0.37"
+    },
+    {
+      "id": "bead_87",
+      "at": [
+        -43.79,
+        1.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.03
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_88",
+      "at": [
+        -41.09,
+        -15.63
+      ],
+      "rot": -145.98,
+      "shape": {
+        "kind": "rect",
+        "w": 0.85,
+        "h": 18.74,
+        "corner": 0.42
+      },
+      "fill": "$silent@0.37"
+    },
+    {
+      "id": "spiral_89",
+      "at": [
+        -33.69,
+        -26.53
+      ],
+      "rot": -145.43,
+      "shape": {
+        "kind": "rect",
+        "w": 0.84,
+        "h": 7.6,
+        "corner": 0.42
+      },
+      "fill": "$silent@0.37"
+    },
+    {
+      "id": "spiral_90",
+      "at": [
+        -25.01,
+        -35.62
+      ],
+      "rot": -132.38,
+      "shape": {
+        "kind": "rect",
+        "w": 0.84,
+        "h": 17.67,
+        "corner": 0.42
+      },
+      "fill": "$silent@0.37"
+    },
+    {
+      "id": "spiral_91",
+      "at": [
+        -9.72,
+        -45.24
+      ],
+      "rot": -112.73,
+      "shape": {
+        "kind": "rect",
+        "w": 0.83,
+        "h": 18.99,
+        "corner": 0.42
+      },
+      "fill": "$silent@0.36"
+    },
+    {
+      "id": "spiral_92",
+      "at": [
+        3.17,
+        -46.89
+      ],
+      "rot": -63.99,
+      "shape": {
+        "kind": "rect",
+        "w": 0.83,
+        "h": 9.2,
+        "corner": 0.42
+      },
+      "fill": "$silent@0.36"
+    },
+    {
+      "id": "bead_92",
+      "at": [
+        3.17,
+        -46.89
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.01
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_93",
+      "at": [
+        15.86,
+        -40.04
+      ],
+      "rot": -60.49,
+      "shape": {
+        "kind": "rect",
+        "w": 0.83,
+        "h": 19.65,
+        "corner": 0.41
+      },
+      "fill": "$silent@0.36"
+    },
+    {
+      "id": "spiral_94",
+      "at": [
+        32.76,
+        -28.15
+      ],
+      "rot": -49.85,
+      "shape": {
+        "kind": "rect",
+        "w": 0.82,
+        "h": 21.87,
+        "corner": 0.41
+      },
+      "fill": "$silent@0.36"
+    },
+    {
+      "id": "spiral_95",
+      "at": [
+        37.6,
+        -12.17
+      ],
+      "rot": 21.51,
+      "shape": {
+        "kind": "rect",
+        "w": 0.82,
+        "h": 19.2,
+        "corner": 0.41
+      },
+      "fill": "$silent@0.36"
+    },
+    {
+      "id": "spiral_96",
+      "at": [
+        32.54,
+        0.73
+      ],
+      "rot": 21.26,
+      "shape": {
+        "kind": "rect",
+        "w": 0.81,
+        "h": 8.51,
+        "corner": 0.41
+      },
+      "fill": "$silent@0.36"
+    },
+    {
+      "id": "spiral_105",
+      "at": [
+        -37.0,
+        -28.78
+      ],
+      "rot": -145.1,
+      "shape": {
+        "kind": "rect",
+        "w": 0.78,
+        "h": 8.48,
+        "corner": 0.39
+      },
+      "fill": "$silent@0.35"
+    },
+    {
+      "id": "spiral_106",
+      "at": [
+        -27.33,
+        -38.97
+      ],
+      "rot": -132.77,
+      "shape": {
+        "kind": "rect",
+        "w": 0.77,
+        "h": 19.75,
+        "corner": 0.39
+      },
+      "fill": "$silent@0.35"
+    },
+    {
+      "id": "spiral_107",
+      "at": [
+        -10.27,
+        -49.95
+      ],
+      "rot": -113.54,
+      "shape": {
+        "kind": "rect",
+        "w": 0.77,
+        "h": 21.4,
+        "corner": 0.39
+      },
+      "fill": "$silent@0.35"
+    },
+    {
+      "id": "bead_107",
+      "at": [
+        -10.27,
+        -49.95
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.93
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "spiral_108",
+      "at": [
+        4.17,
+        -51.84
+      ],
+      "rot": -62.83,
+      "shape": {
+        "kind": "rect",
+        "w": 0.77,
+        "h": 10.4,
+        "corner": 0.38
+      },
+      "fill": "$silent@0.34"
+    },
+    {
+      "id": "spiral_109",
+      "at": [
+        18.39,
+        -44.05
+      ],
+      "rot": -60.52,
+      "shape": {
+        "kind": "rect",
+        "w": 0.76,
+        "h": 22.03,
+        "corner": 0.38
+      },
+      "fill": "$silent@0.34"
+    },
+    {
+      "id": "spiral_110",
+      "at": [
+        37.57,
+        -30.79
+      ],
+      "rot": -50.75,
+      "shape": {
+        "kind": "rect",
+        "w": 0.76,
+        "h": 24.78,
+        "corner": 0.38
+      },
+      "fill": "$silent@0.34"
+    },
+    {
+      "id": "spiral_111",
+      "at": [
+        42.9,
+        -12.87
+      ],
+      "rot": 22.96,
+      "shape": {
+        "kind": "rect",
+        "w": 0.75,
+        "h": 21.89,
+        "corner": 0.38
+      },
+      "fill": "$silent@0.34"
+    },
+    {
+      "id": "break_0",
+      "at": [
+        15.26,
+        9.86
+      ],
+      "rot": -78.83,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 10.3,
+        "corner": 0.5
+      },
+      "fill": "$silent@0.3"
+    },
+    {
+      "id": "break_1",
+      "at": [
+        -40.51,
+        7.45
+      ],
+      "rot": -247.25,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 8.5,
+        "corner": 0.5
+      },
+      "fill": "$silent@0.3"
+    },
+    {
+      "id": "break_2",
+      "at": [
+        34.76,
+        1.52
+      ],
+      "rot": -130.16,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 9.85,
+        "corner": 0.5
+      },
+      "fill": "$silent@0.3"
+    },
+    {
+      "id": "hub",
+      "at": [
+        -5.0,
+        -7.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 8.2
+      },
+      "fill": "$silent@0.3"
+    },
+    {
+      "id": "hub_ring_a",
+      "shape": {
+        "kind": "ring",
+        "r": 7.2,
+        "width": 1.1,
+        "from": -160.0,
+        "to": 140.0
+      },
+      "fill": "$silent@0.45",
+      "at": [
+        -5.0,
+        -7.0
+      ]
+    },
+    {
+      "id": "hub_ring_b",
+      "shape": {
+        "kind": "ring",
+        "r": 5.0,
+        "width": 1.0,
+        "from": -20.0,
+        "to": 300.0
+      },
+      "fill": "$silent@0.4",
+      "at": [
+        -5.0,
+        -7.0
+      ]
+    },
+    {
+      "id": "hub_core",
+      "at": [
+        -5.0,
+        -7.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.0
+      },
+      "fill": "$silent@heavy"
+    },
+    {
+      "id": "caught_wing",
+      "at": [
+        26,
+        -22
+      ],
+      "rot": -28,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.4,
+        "ry": 2.2
+      },
+      "fill": "$husk.dark@heavy"
+    },
+    {
+      "id": "caught_husk",
+      "at": [
+        -30,
+        20
+      ],
+      "rot": 40,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.2,
+        "ry": 3.0
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "caught_leg",
+      "at": [
+        -30.5,
+        29.5
+      ],
+      "rot": -45.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 9.9,
+        "corner": 0.6
+      },
+      "fill": "$carapace.dark2"
+    },
+    {
+      "id": "caught_speck",
+      "at": [
+        12,
+        34
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.8
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "dew",
+      "at": [
+        0,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "circle",
+          "r": 1.1
+        },
+        "count": 14,
+        "area": [
+          104,
+          104
+        ],
+        "seed": 23,
+        "scaleRange": [
+          0.55,
+          1.4
+        ]
+      },
+      "fill": "$silent@0.5"
+    }
+  ],
+  "variants": {
+    "torn": {
+      "description": "Walked through: the sticky spiral is mostly gone, its beads with it, and what is left hangs off the frame and the radii \u2014 the only parts built to hold anything. Still silk; it just does not hold you.",
+      "set": {
+        "haze.fill": "$silent@0.08",
+        "hub.fill": "$silent@0.12",
+        "hub_core.fill": "$silent@soft",
+        "hub_ring_a.fill": "$silent@0.2",
+        "dew.fill": "$silent@ghost",
+        "caught_wing.fill": "$husk.dark@soft",
+        "caught_husk.fill": "$carapace.dark2",
+        "frame_0.fill": "$silent@0.28",
+        "frame_1.fill": "$silent@0.28",
+        "frame_2.fill": "$silent@0.28",
+        "frame_3.fill": "$silent@0.28",
+        "frame_4.fill": "$silent@0.28",
+        "frame_5.fill": "$silent@0.28",
+        "frame_6.fill": "$silent@0.28",
+        "frame_7.fill": "$silent@0.28",
+        "radius_0.fill": "$silent@ghost",
+        "radius_3.fill": "$silent@ghost",
+        "radius_5.fill": "$silent@ghost",
+        "radius_6.fill": "$silent@ghost",
+        "radius_9.fill": "$silent@ghost",
+        "radius_11.fill": "$silent@ghost",
+        "radius_14.fill": "$silent@ghost",
+        "radius_15.fill": "$silent@ghost",
+        "spiral_1.fill": "$silent@0.16",
+        "spiral_4.fill": "$silent@0.16",
+        "spiral_7.fill": "$silent@0.16",
+        "spiral_10.fill": "$silent@0.16",
+        "spiral_13.fill": "$silent@0.16",
+        "spiral_16.fill": "$silent@0.16",
+        "spiral_19.fill": "$silent@0.16",
+        "spiral_22.fill": "$silent@0.16",
+        "spiral_25.fill": "$silent@0.16",
+        "spiral_28.fill": "$silent@0.16",
+        "spiral_31.fill": "$silent@0.16",
+        "spiral_44.fill": "$silent@0.16",
+        "spiral_47.fill": "$silent@0.16",
+        "spiral_50.fill": "$silent@0.16",
+        "spiral_53.fill": "$silent@0.16",
+        "spiral_56.fill": "$silent@0.16",
+        "spiral_59.fill": "$silent@0.16",
+        "spiral_62.fill": "$silent@0.16",
+        "spiral_65.fill": "$silent@0.16",
+        "spiral_68.fill": "$silent@0.16",
+        "spiral_80.fill": "$silent@0.16",
+        "spiral_83.fill": "$silent@0.16",
+        "spiral_86.fill": "$silent@0.16",
+        "spiral_89.fill": "$silent@0.16",
+        "spiral_92.fill": "$silent@0.16",
+        "spiral_95.fill": "$silent@0.16",
+        "spiral_106.fill": "$silent@0.16",
+        "spiral_109.fill": "$silent@0.16"
+      },
+      "remove": [
+        "spiral_0",
+        "spiral_2",
+        "spiral_3",
+        "spiral_5",
+        "spiral_6",
+        "spiral_8",
+        "spiral_9",
+        "spiral_11",
+        "spiral_12",
+        "spiral_14",
+        "spiral_15",
+        "spiral_17",
+        "spiral_18",
+        "spiral_20",
+        "spiral_21",
+        "spiral_23",
+        "spiral_24",
+        "spiral_26",
+        "spiral_27",
+        "spiral_29",
+        "spiral_30",
+        "spiral_32",
+        "spiral_33",
+        "spiral_45",
+        "spiral_46",
+        "spiral_48",
+        "spiral_49",
+        "spiral_51",
+        "spiral_52",
+        "spiral_54",
+        "spiral_55",
+        "spiral_57",
+        "spiral_58",
+        "spiral_60",
+        "spiral_61",
+        "spiral_63",
+        "spiral_64",
+        "spiral_66",
+        "spiral_67",
+        "spiral_69",
+        "spiral_70",
+        "spiral_81",
+        "spiral_82",
+        "spiral_84",
+        "spiral_85",
+        "spiral_87",
+        "spiral_88",
+        "spiral_90",
+        "spiral_91",
+        "spiral_93",
+        "spiral_94",
+        "spiral_96",
+        "spiral_105",
+        "spiral_107",
+        "spiral_108",
+        "spiral_110",
+        "spiral_111",
+        "bead_2",
+        "bead_7",
+        "bead_17",
+        "bead_22",
+        "bead_27",
+        "bead_47",
+        "bead_52",
+        "bead_57",
+        "bead_67",
+        "bead_82",
+        "bead_87",
+        "bead_107",
+        "radius_2",
+        "radius_8",
+        "radius_12",
+        "hub_ring_b",
+        "anchor_2",
+        "anchor_5",
+        "caught_speck"
+      ],
+      "add": [
+        {
+          "id": "loose_a",
+          "at": [
+            23.0,
+            -18.0
+          ],
+          "rot": -34.99,
+          "shape": {
+            "kind": "rect",
+            "w": 1.2,
+            "h": 24.41,
+            "corner": 0.6
+          },
+          "fill": "$silent@soft"
+        },
+        {
+          "id": "loose_b",
+          "at": [
+            -32.0,
+            26.0
+          ],
+          "rot": 36.87,
+          "shape": {
+            "kind": "rect",
+            "w": 1.0,
+            "h": 20.0,
+            "corner": 0.5
+          },
+          "fill": "$silent@0.3"
+        },
+        {
+          "id": "loose_c",
+          "at": [
+            9.0,
+            47.0
+          ],
+          "rot": -35.54,
+          "shape": {
+            "kind": "rect",
+            "w": 1.0,
+            "h": 17.2,
+            "corner": 0.5
+          },
+          "fill": "$silent@0.25"
+        }
+      ]
+    },
+    "sheet": {
+      "description": "A funnel-weaver's mat: no hub, no radii, no spiral \u2014 layered tangle with drag lines running back to a throat, so a step anywhere on it is felt at home. Same drag, nothing in common to look at.",
+      "set": {
+        "haze.fill": "$silent@0.1",
+        "dew.fill": "$silent@0.3",
+        "frame_0.fill": "$silent@0.2",
+        "frame_1.fill": "$silent@0.2",
+        "frame_2.fill": "$silent@0.2",
+        "frame_3.fill": "$silent@0.2",
+        "frame_4.fill": "$silent@0.2",
+        "frame_5.fill": "$silent@0.2",
+        "frame_6.fill": "$silent@0.2",
+        "frame_7.fill": "$silent@0.2",
+        "anchor_0.fill": "$silent@0.16",
+        "anchor_1.fill": "$silent@0.16",
+        "anchor_2.fill": "$silent@0.16",
+        "anchor_3.fill": "$silent@0.16",
+        "anchor_4.fill": "$silent@0.16",
+        "anchor_5.fill": "$silent@0.16",
+        "anchor_6.fill": "$silent@0.16",
+        "anchor_7.fill": "$silent@0.16"
+      },
+      "remove": [
+        "hub",
+        "hub_core",
+        "hub_ring_a",
+        "hub_ring_b",
+        "caught_speck",
+        "radius_0",
+        "radius_1",
+        "radius_2",
+        "radius_3",
+        "radius_4",
+        "radius_5",
+        "radius_6",
+        "radius_7",
+        "radius_8",
+        "radius_9",
+        "radius_10",
+        "radius_11",
+        "radius_12",
+        "radius_13",
+        "radius_14",
+        "radius_15",
+        "break_0",
+        "break_1",
+        "break_2",
+        "spiral_0",
+        "spiral_1",
+        "spiral_2",
+        "spiral_3",
+        "spiral_4",
+        "spiral_5",
+        "spiral_6",
+        "spiral_7",
+        "spiral_8",
+        "spiral_9",
+        "spiral_10",
+        "spiral_11",
+        "spiral_12",
+        "spiral_13",
+        "spiral_14",
+        "spiral_15",
+        "spiral_16",
+        "spiral_17",
+        "spiral_18",
+        "spiral_19",
+        "spiral_20",
+        "spiral_21",
+        "spiral_22",
+        "spiral_23",
+        "spiral_24",
+        "spiral_25",
+        "spiral_26",
+        "spiral_27",
+        "spiral_28",
+        "spiral_29",
+        "spiral_30",
+        "spiral_31",
+        "spiral_32",
+        "spiral_33",
+        "spiral_44",
+        "spiral_45",
+        "spiral_46",
+        "spiral_47",
+        "spiral_48",
+        "spiral_49",
+        "spiral_50",
+        "spiral_51",
+        "spiral_52",
+        "spiral_53",
+        "spiral_54",
+        "spiral_55",
+        "spiral_56",
+        "spiral_57",
+        "spiral_58",
+        "spiral_59",
+        "spiral_60",
+        "spiral_61",
+        "spiral_62",
+        "spiral_63",
+        "spiral_64",
+        "spiral_65",
+        "spiral_66",
+        "spiral_67",
+        "spiral_68",
+        "spiral_69",
+        "spiral_70",
+        "spiral_80",
+        "spiral_81",
+        "spiral_82",
+        "spiral_83",
+        "spiral_84",
+        "spiral_85",
+        "spiral_86",
+        "spiral_87",
+        "spiral_88",
+        "spiral_89",
+        "spiral_90",
+        "spiral_91",
+        "spiral_92",
+        "spiral_93",
+        "spiral_94",
+        "spiral_95",
+        "spiral_96",
+        "spiral_105",
+        "spiral_106",
+        "spiral_107",
+        "spiral_108",
+        "spiral_109",
+        "spiral_110",
+        "spiral_111",
+        "bead_2",
+        "bead_7",
+        "bead_12",
+        "bead_17",
+        "bead_22",
+        "bead_27",
+        "bead_32",
+        "bead_47",
+        "bead_52",
+        "bead_57",
+        "bead_62",
+        "bead_67",
+        "bead_82",
+        "bead_87",
+        "bead_92",
+        "bead_107"
+      ],
+      "add": [
+        {
+          "id": "mat",
+          "at": [
+            2,
+            3
+          ],
+          "shape": {
+            "kind": "circle",
+            "r": 52
+          },
+          "fill": "$silent@0.11"
+        },
+        {
+          "id": "mat_b",
+          "at": [
+            -14,
+            -10
+          ],
+          "shape": {
+            "kind": "circle",
+            "r": 38
+          },
+          "fill": "$silent@0.09"
+        },
+        {
+          "id": "mat_c",
+          "at": [
+            -16,
+            10
+          ],
+          "shape": {
+            "kind": "circle",
+            "r": 26
+          },
+          "fill": "$silent@0.12"
+        },
+        {
+          "id": "weave",
+          "at": [
+            0,
+            0
+          ],
+          "repeat": {
+            "of": {
+              "kind": "rect",
+              "w": 0.8,
+              "h": 11,
+              "corner": 0.4
+            },
+            "count": 118,
+            "area": [
+              102,
+              102
+            ],
+            "seed": 5,
+            "jitterRot": true,
+            "scaleRange": [
+              0.45,
+              1.25
+            ]
+          },
+          "fill": "$silent@0.22"
+        },
+        {
+          "id": "weave_fine",
+          "at": [
+            0,
+            0
+          ],
+          "repeat": {
+            "of": {
+              "kind": "rect",
+              "w": 0.7,
+              "h": 7,
+              "corner": 0.35
+            },
+            "count": 118,
+            "area": [
+              94,
+              94
+            ],
+            "seed": 61,
+            "jitterRot": true,
+            "scaleRange": [
+              0.5,
+              1.15
+            ]
+          },
+          "fill": "$silent@0.18"
+        },
+        {
+          "id": "drag_0",
+          "at": [
+            -5.92,
+            -8.67
+          ],
+          "rot": -154.0,
+          "shape": {
+            "kind": "rect",
+            "w": 1.3,
+            "h": 46.0,
+            "corner": 0.65
+          },
+          "fill": "$silent@0.36"
+        },
+        {
+          "id": "drag_tie_0",
+          "at": [
+            -7.92,
+            -11.17
+          ],
+          "rot": -218.66,
+          "shape": {
+            "kind": "rect",
+            "w": 0.85,
+            "h": 6.4,
+            "corner": 0.42
+          },
+          "fill": "$silent@0.26"
+        },
+        {
+          "id": "drag_1",
+          "at": [
+            11.58,
+            3.04
+          ],
+          "rot": -108.0,
+          "shape": {
+            "kind": "rect",
+            "w": 1.05,
+            "h": 58.0,
+            "corner": 0.53
+          },
+          "fill": "$silent@0.36"
+        },
+        {
+          "id": "drag_tie_1",
+          "at": [
+            14.08,
+            6.04
+          ],
+          "rot": -39.81,
+          "shape": {
+            "kind": "rect",
+            "w": 0.85,
+            "h": 7.81,
+            "corner": 0.42
+          },
+          "fill": "$silent@0.26"
+        },
+        {
+          "id": "drag_2",
+          "at": [
+            14.08,
+            19.5
+          ],
+          "rot": -76.0,
+          "shape": {
+            "kind": "rect",
+            "w": 1.3,
+            "h": 62.0,
+            "corner": 0.65
+          },
+          "fill": "$silent@0.36"
+        },
+        {
+          "id": "drag_tie_2",
+          "at": [
+            12.08,
+            22.5
+          ],
+          "rot": 33.69,
+          "shape": {
+            "kind": "rect",
+            "w": 0.85,
+            "h": 7.21,
+            "corner": 0.42
+          },
+          "fill": "$silent@0.26"
+        },
+        {
+          "id": "drag_3",
+          "at": [
+            3.42,
+            30.76
+          ],
+          "rot": -46.0,
+          "shape": {
+            "kind": "rect",
+            "w": 1.05,
+            "h": 54.0,
+            "corner": 0.53
+          },
+          "fill": "$silent@0.36"
+        },
+        {
+          "id": "drag_tie_3",
+          "at": [
+            5.92,
+            28.26
+          ],
+          "rot": -135.0,
+          "shape": {
+            "kind": "rect",
+            "w": 0.85,
+            "h": 7.07,
+            "corner": 0.42
+          },
+          "fill": "$silent@0.26"
+        },
+        {
+          "id": "drag_4",
+          "at": [
+            -10.68,
+            33.35
+          ],
+          "rot": -14.0,
+          "shape": {
+            "kind": "rect",
+            "w": 1.3,
+            "h": 44.0,
+            "corner": 0.65
+          },
+          "fill": "$silent@0.36"
+        },
+        {
+          "id": "drag_tie_4",
+          "at": [
+            -12.68,
+            36.35
+          ],
+          "rot": 33.69,
+          "shape": {
+            "kind": "rect",
+            "w": 0.85,
+            "h": 7.21,
+            "corner": 0.42
+          },
+          "fill": "$silent@0.26"
+        },
+        {
+          "id": "drag_5",
+          "at": [
+            -24.45,
+            27.89
+          ],
+          "rot": 28.0,
+          "shape": {
+            "kind": "rect",
+            "w": 1.05,
+            "h": 36.0,
+            "corner": 0.53
+          },
+          "fill": "$silent@0.36"
+        },
+        {
+          "id": "drag_tie_5",
+          "at": [
+            -21.95,
+            30.89
+          ],
+          "rot": -39.81,
+          "shape": {
+            "kind": "rect",
+            "w": 0.85,
+            "h": 7.81,
+            "corner": 0.42
+          },
+          "fill": "$silent@0.26"
+        },
+        {
+          "id": "drag_6",
+          "at": [
+            -30.1,
+            6.87
+          ],
+          "rot": -250.0,
+          "shape": {
+            "kind": "rect",
+            "w": 1.3,
+            "h": 30.0,
+            "corner": 0.65
+          },
+          "fill": "$silent@0.36"
+        },
+        {
+          "id": "drag_tie_6",
+          "at": [
+            -32.1,
+            4.37
+          ],
+          "rot": -218.66,
+          "shape": {
+            "kind": "rect",
+            "w": 0.85,
+            "h": 6.4,
+            "corner": 0.42
+          },
+          "fill": "$silent@0.26"
+        },
+        {
+          "id": "drag_7",
+          "at": [
+            -21.81,
+            -3.97
+          ],
+          "rot": -200.0,
+          "shape": {
+            "kind": "rect",
+            "w": 1.05,
+            "h": 34.0,
+            "corner": 0.53
+          },
+          "fill": "$silent@0.36"
+        },
+        {
+          "id": "drag_tie_7",
+          "at": [
+            -19.31,
+            -0.97
+          ],
+          "rot": -39.81,
+          "shape": {
+            "kind": "rect",
+            "w": 0.85,
+            "h": 7.81,
+            "corner": 0.42
+          },
+          "fill": "$silent@0.26"
+        },
+        {
+          "id": "guy_a",
+          "at": [
+            -17.0,
+            -28.0
+          ],
+          "rot": -101.69,
+          "shape": {
+            "kind": "rect",
+            "w": 1.1,
+            "h": 59.23,
+            "corner": 0.55
+          },
+          "fill": "$silent@0.3"
+        },
+        {
+          "id": "guy_b",
+          "at": [
+            40.0,
+            4.0
+          ],
+          "rot": -14.04,
+          "shape": {
+            "kind": "rect",
+            "w": 1.0,
+            "h": 49.48,
+            "corner": 0.5
+          },
+          "fill": "$silent@0.26"
+        },
+        {
+          "id": "guy_c",
+          "at": [
+            -9.0,
+            37.0
+          ],
+          "rot": -77.28,
+          "shape": {
+            "kind": "rect",
+            "w": 1.0,
+            "h": 63.56,
+            "corner": 0.5
+          },
+          "fill": "$silent@0.24"
+        },
+        {
+          "id": "knock_a",
+          "at": [
+            -2.0,
+            -26.0
+          ],
+          "rot": -15.95,
+          "shape": {
+            "kind": "rect",
+            "w": 0.9,
+            "h": 29.12,
+            "corner": 0.45
+          },
+          "fill": "$silent@0.2"
+        },
+        {
+          "id": "knock_b",
+          "at": [
+            19.0,
+            -20.0
+          ],
+          "rot": 12.09,
+          "shape": {
+            "kind": "rect",
+            "w": 0.9,
+            "h": 28.64,
+            "corner": 0.45
+          },
+          "fill": "$silent@0.18"
+        },
+        {
+          "id": "knock_c",
+          "at": [
+            33.0,
+            14.0
+          ],
+          "rot": 49.4,
+          "shape": {
+            "kind": "rect",
+            "w": 0.9,
+            "h": 18.44,
+            "corner": 0.45
+          },
+          "fill": "$silent@0.18"
+        },
+        {
+          "id": "sheet_debris",
+          "at": [
+            24,
+            -6
+          ],
+          "rot": 24,
+          "shape": {
+            "kind": "ellipse",
+            "rx": 3.2,
+            "ry": 1.8
+          },
+          "fill": "$husk.dark@soft"
+        },
+        {
+          "id": "funnel_rim",
+          "at": [
+            -16.0,
+            12.0
+          ],
+          "rot": -18,
+          "shape": {
+            "kind": "ellipse",
+            "rx": 12.5,
+            "ry": 9
+          },
+          "fill": "$silent@0.46"
+        },
+        {
+          "id": "funnel_mouth",
+          "at": [
+            -16.0,
+            13.0
+          ],
+          "rot": -18,
+          "shape": {
+            "kind": "ellipse",
+            "rx": 8,
+            "ry": 5.4
+          },
+          "fill": "$ink@heavy"
+        },
+        {
+          "id": "funnel_throat",
+          "at": [
+            -16.0,
+            14.0
+          ],
+          "rot": -18,
+          "shape": {
+            "kind": "ellipse",
+            "rx": 4.2,
+            "ry": 2.6
+          },
+          "fill": "$ink"
+        }
+      ]
+    },
+    "sheet_torn": {
+      "description": "The mat, walked through: the tangle pulled open, the drag lines snapped back, the funnel's rim collapsed and the throat under it showing.",
+      "set": {
+        "haze.fill": "$silent@0.06",
+        "dew.fill": "$silent@ghost",
+        "frame_0.fill": "$silent@0.12",
+        "frame_1.fill": "$silent@0.12",
+        "frame_2.fill": "$silent@0.12",
+        "frame_3.fill": "$silent@0.12",
+        "frame_4.fill": "$silent@0.12",
+        "frame_5.fill": "$silent@0.12",
+        "frame_6.fill": "$silent@0.12",
+        "frame_7.fill": "$silent@0.12",
+        "anchor_0.fill": "$silent@0.1",
+        "anchor_1.fill": "$silent@0.1",
+        "anchor_2.fill": "$silent@0.1",
+        "anchor_3.fill": "$silent@0.1",
+        "anchor_4.fill": "$silent@0.1",
+        "anchor_5.fill": "$silent@0.1",
+        "anchor_6.fill": "$silent@0.1",
+        "anchor_7.fill": "$silent@0.1"
+      },
+      "remove": [
+        "hub",
+        "hub_core",
+        "hub_ring_a",
+        "hub_ring_b",
+        "caught_speck",
+        "radius_0",
+        "radius_1",
+        "radius_2",
+        "radius_3",
+        "radius_4",
+        "radius_5",
+        "radius_6",
+        "radius_7",
+        "radius_8",
+        "radius_9",
+        "radius_10",
+        "radius_11",
+        "radius_12",
+        "radius_13",
+        "radius_14",
+        "radius_15",
+        "break_0",
+        "break_1",
+        "break_2",
+        "spiral_0",
+        "spiral_1",
+        "spiral_2",
+        "spiral_3",
+        "spiral_4",
+        "spiral_5",
+        "spiral_6",
+        "spiral_7",
+        "spiral_8",
+        "spiral_9",
+        "spiral_10",
+        "spiral_11",
+        "spiral_12",
+        "spiral_13",
+        "spiral_14",
+        "spiral_15",
+        "spiral_16",
+        "spiral_17",
+        "spiral_18",
+        "spiral_19",
+        "spiral_20",
+        "spiral_21",
+        "spiral_22",
+        "spiral_23",
+        "spiral_24",
+        "spiral_25",
+        "spiral_26",
+        "spiral_27",
+        "spiral_28",
+        "spiral_29",
+        "spiral_30",
+        "spiral_31",
+        "spiral_32",
+        "spiral_33",
+        "spiral_44",
+        "spiral_45",
+        "spiral_46",
+        "spiral_47",
+        "spiral_48",
+        "spiral_49",
+        "spiral_50",
+        "spiral_51",
+        "spiral_52",
+        "spiral_53",
+        "spiral_54",
+        "spiral_55",
+        "spiral_56",
+        "spiral_57",
+        "spiral_58",
+        "spiral_59",
+        "spiral_60",
+        "spiral_61",
+        "spiral_62",
+        "spiral_63",
+        "spiral_64",
+        "spiral_65",
+        "spiral_66",
+        "spiral_67",
+        "spiral_68",
+        "spiral_69",
+        "spiral_70",
+        "spiral_80",
+        "spiral_81",
+        "spiral_82",
+        "spiral_83",
+        "spiral_84",
+        "spiral_85",
+        "spiral_86",
+        "spiral_87",
+        "spiral_88",
+        "spiral_89",
+        "spiral_90",
+        "spiral_91",
+        "spiral_92",
+        "spiral_93",
+        "spiral_94",
+        "spiral_95",
+        "spiral_96",
+        "spiral_105",
+        "spiral_106",
+        "spiral_107",
+        "spiral_108",
+        "spiral_109",
+        "spiral_110",
+        "spiral_111",
+        "bead_2",
+        "bead_7",
+        "bead_12",
+        "bead_17",
+        "bead_22",
+        "bead_27",
+        "bead_32",
+        "bead_47",
+        "bead_52",
+        "bead_57",
+        "bead_62",
+        "bead_67",
+        "bead_82",
+        "bead_87",
+        "bead_92",
+        "bead_107"
+      ],
+      "add": [
+        {
+          "id": "mat",
+          "at": [
+            4,
+            5
+          ],
+          "shape": {
+            "kind": "circle",
+            "r": 46
+          },
+          "fill": "$silent@0.07"
+        },
+        {
+          "id": "mat_c",
+          "at": [
+            -15,
+            11
+          ],
+          "shape": {
+            "kind": "circle",
+            "r": 22
+          },
+          "fill": "$silent@0.09"
+        },
+        {
+          "id": "weave",
+          "at": [
+            0,
+            0
+          ],
+          "repeat": {
+            "of": {
+              "kind": "rect",
+              "w": 0.8,
+              "h": 10,
+              "corner": 0.4
+            },
+            "count": 44,
+            "area": [
+              102,
+              102
+            ],
+            "seed": 5,
+            "jitterRot": true,
+            "scaleRange": [
+              0.45,
+              1.15
+            ]
+          },
+          "fill": "$silent@0.1"
+        },
+        {
+          "id": "drag_1",
+          "at": [
+            11.5,
+            3.0
+          ],
+          "rot": -108.12,
+          "shape": {
+            "kind": "rect",
+            "w": 0.9,
+            "h": 57.87,
+            "corner": 0.45
+          },
+          "fill": "$silent@0.16"
+        },
+        {
+          "id": "drag_4",
+          "at": [
+            -10.5,
+            33.5
+          ],
+          "rot": -14.35,
+          "shape": {
+            "kind": "rect",
+            "w": 0.9,
+            "h": 44.38,
+            "corner": 0.45
+          },
+          "fill": "$silent@0.14"
+        },
+        {
+          "id": "guy_a",
+          "at": [
+            -17.0,
+            -26.0
+          ],
+          "rot": -102.53,
+          "shape": {
+            "kind": "rect",
+            "w": 1.0,
+            "h": 55.32,
+            "corner": 0.5
+          },
+          "fill": "$silent@0.2"
+        },
+        {
+          "id": "guy_c",
+          "at": [
+            -9.0,
+            35.0
+          ],
+          "rot": -76.43,
+          "shape": {
+            "kind": "rect",
+            "w": 1.0,
+            "h": 59.67,
+            "corner": 0.5
+          },
+          "fill": "$silent@0.16"
+        },
+        {
+          "id": "funnel_rim",
+          "at": [
+            -16.0,
+            12.0
+          ],
+          "rot": -18,
+          "shape": {
+            "kind": "ellipse",
+            "rx": 13,
+            "ry": 7
+          },
+          "fill": "$silent@0.2"
+        },
+        {
+          "id": "funnel_mouth",
+          "at": [
+            -15.0,
+            13.0
+          ],
+          "rot": -18,
+          "shape": {
+            "kind": "ellipse",
+            "rx": 9,
+            "ry": 4.6
+          },
+          "fill": "$ink@heavy"
+        },
+        {
+          "id": "mat_loose_a",
+          "at": [
+            -22.0,
+            -28.0
+          ],
+          "rot": -126.87,
+          "shape": {
+            "kind": "rect",
+            "w": 1.1,
+            "h": 20.0,
+            "corner": 0.55
+          },
+          "fill": "$silent@0.28"
+        },
+        {
+          "id": "mat_loose_b",
+          "at": [
+            32.0,
+            30.0
+          ],
+          "rot": -45.0,
+          "shape": {
+            "kind": "rect",
+            "w": 1.0,
+            "h": 16.97,
+            "corner": 0.5
+          },
+          "fill": "$silent@0.24"
+        }
+      ]
+    }
+  }
+}

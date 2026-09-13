@@ -1,0 +1,402 @@
+{
+  "id": "ss.env.ground-cave",
+  "name": "Cave floor (SS)",
+  "description": "The Spider Cave's 128px floor tile: cold wet limestone, a good two steps colder than the den's iron-red dirt and the burrow's turned earth, because this hollow is the one ground in the game nothing dug \u2014 it was already here. Angular chips with a lit lip, four short hairline cracks and a scatter of grit and pale flecks, all hand-placed so the tile is identical every render and none of it reads as a grid at 128px repeated across a screen. Dark enough that cold-white silk and cream bodies are the brightest things on it, which is the whole read of the stage.",
+  "tags": [
+    "ss-env",
+    "tile"
+  ],
+  "size": [
+    128,
+    128
+  ],
+  "parts": [
+    {
+      "id": "base",
+      "shape": {
+        "kind": "rect",
+        "w": 128,
+        "h": 128
+      },
+      "fill": "$slate.dark2"
+    },
+    {
+      "id": "crack_0",
+      "at": [
+        -54,
+        -10
+      ],
+      "rot": 12,
+      "shape": {
+        "kind": "rect",
+        "w": 1.3,
+        "h": 30,
+        "corner": 0.65
+      },
+      "fill": "$ink@soft"
+    },
+    {
+      "id": "crack_1",
+      "at": [
+        14,
+        36
+      ],
+      "rot": -68,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 24,
+        "corner": 0.55
+      },
+      "fill": "$ink@soft"
+    },
+    {
+      "id": "crack_2",
+      "at": [
+        36,
+        -46
+      ],
+      "rot": 28,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 20,
+        "corner": 0.5
+      },
+      "fill": "$ink@soft"
+    },
+    {
+      "id": "crack_3",
+      "at": [
+        -20,
+        54
+      ],
+      "rot": 52,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 18,
+        "corner": 0.5
+      },
+      "fill": "$ink@soft"
+    },
+    {
+      "id": "chip_0",
+      "at": [
+        -46,
+        -38
+      ],
+      "rot": 18,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.5,
+        "ry": 4.0
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "lip_0",
+      "at": [
+        -46,
+        -39.6
+      ],
+      "rot": 18,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.0,
+        "ry": 2.0
+      },
+      "fill": "$slate.dark@0.25"
+    },
+    {
+      "id": "chip_1",
+      "at": [
+        12,
+        -50
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.5,
+        "ry": 3.0
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "lip_1",
+      "at": [
+        12,
+        -51.6
+      ],
+      "rot": -32,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.4,
+        "ry": 1.5
+      },
+      "fill": "$slate.dark@0.25"
+    },
+    {
+      "id": "chip_2",
+      "at": [
+        44,
+        -30
+      ],
+      "rot": 8,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 8.5,
+        "ry": 4.5
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "lip_2",
+      "at": [
+        44,
+        -31.6
+      ],
+      "rot": 8,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.800000000000001,
+        "ry": 2.25
+      },
+      "fill": "$slate.dark@0.25"
+    },
+    {
+      "id": "chip_3",
+      "at": [
+        -20,
+        -14
+      ],
+      "rot": 62,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.0,
+        "ry": 3.2
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "lip_3",
+      "at": [
+        -20,
+        -15.6
+      ],
+      "rot": 62,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.800000000000001,
+        "ry": 1.6
+      },
+      "fill": "$slate.dark@0.25"
+    },
+    {
+      "id": "chip_4",
+      "at": [
+        30,
+        6
+      ],
+      "rot": -14,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.0,
+        "ry": 3.6
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "lip_4",
+      "at": [
+        30,
+        4.4
+      ],
+      "rot": -14,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.6000000000000005,
+        "ry": 1.8
+      },
+      "fill": "$slate.dark@0.25"
+    },
+    {
+      "id": "chip_5",
+      "at": [
+        -52,
+        14
+      ],
+      "rot": 40,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.0,
+        "ry": 2.8
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "lip_5",
+      "at": [
+        -52,
+        12.4
+      ],
+      "rot": 40,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.0,
+        "ry": 1.4
+      },
+      "fill": "$slate.dark@0.25"
+    },
+    {
+      "id": "chip_6",
+      "at": [
+        -8,
+        28
+      ],
+      "rot": -24,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 8.0,
+        "ry": 4.2
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "lip_6",
+      "at": [
+        -8,
+        26.4
+      ],
+      "rot": -24,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.4,
+        "ry": 2.1
+      },
+      "fill": "$slate.dark@0.25"
+    },
+    {
+      "id": "chip_7",
+      "at": [
+        36,
+        40
+      ],
+      "rot": 74,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.0,
+        "ry": 3.0
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "lip_7",
+      "at": [
+        36,
+        38.4
+      ],
+      "rot": 74,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.800000000000001,
+        "ry": 1.5
+      },
+      "fill": "$slate.dark@0.25"
+    },
+    {
+      "id": "chip_8",
+      "at": [
+        -38,
+        48
+      ],
+      "rot": -8,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.0,
+        "ry": 3.4
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "lip_8",
+      "at": [
+        -38,
+        46.4
+      ],
+      "rot": -8,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.6000000000000005,
+        "ry": 1.7
+      },
+      "fill": "$slate.dark@0.25"
+    },
+    {
+      "id": "chip_9",
+      "at": [
+        54,
+        -6
+      ],
+      "rot": 52,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.5,
+        "ry": 2.4
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "lip_9",
+      "at": [
+        54,
+        -7.6
+      ],
+      "rot": 52,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.6,
+        "ry": 1.2
+      },
+      "fill": "$slate.dark@0.25"
+    },
+    {
+      "id": "grit",
+      "repeat": {
+        "of": {
+          "kind": "rect",
+          "w": 2.2,
+          "h": 2.2
+        },
+        "count": 26,
+        "area": [
+          124,
+          124
+        ],
+        "seed": 77,
+        "jitterRot": true,
+        "scaleRange": [
+          0.5,
+          1.3
+        ]
+      },
+      "fill": "$steel@0.2"
+    },
+    {
+      "id": "flecks",
+      "repeat": {
+        "of": {
+          "kind": "circle",
+          "r": 1.2
+        },
+        "count": 13,
+        "area": [
+          120,
+          120
+        ],
+        "seed": 12
+      },
+      "fill": "$silent@ghost"
+    }
+  ]
+}
