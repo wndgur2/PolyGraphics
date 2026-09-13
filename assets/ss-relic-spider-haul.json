@@ -1,0 +1,22 @@
+{
+  "id": "ss.relic.spider-haul",
+  "name": "Hauling Arms",
+  "description": "Two arms curled inward with a body caught between them, still being pulled. The find turns the bite's shove around — everything a claw closes on is dragged in toward you — so the plate closes where Eighth Leg's fans open, which is how the two are told apart in silhouette before either is read. One `mirrorX` part draws the pair, so the two arms cannot drift out of symmetry.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "hauled_shadow", "at": [0.0, 8.4], "shape": {"kind": "circle", "r": 6.4}, "fill": "$ink"},
+    {"id": "hauled", "at": [0.0, 8.4], "shape": {"kind": "circle", "r": 5.0}, "fill": "$chitin.dark"},
+    {"id": "hauled_mark", "at": [0.0, 6.8], "shape": {"kind": "ellipse", "rx": 2.1, "ry": 1.1}, "fill": "$chitin.light"},
+    {"id": "arm", "at": [-11.0, -6.0], "rot": 55.0, "mirrorX": true, "use": "ss.lib.spider-arm", "scale": 0.72}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}
