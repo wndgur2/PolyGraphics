@@ -1,0 +1,257 @@
+{
+  "id": "ss.terrain.cocoon",
+  "name": "Cocoon (SS)",
+  "description": "The larder, full: something wrapped head to foot in silk and hung on a thread, with what is inside showing through where the wrapping went thin, three bands pulled tight across it, and one leg that did not get wrapped with the rest. Used twice by the Spider Cave \u2014 standing on the floor as a blocking prop, and hung at the middle of a span, which is where a real one would be. `open` is the same bundle after whatever was in it left.",
+  "tags": [
+    "ss-terrain",
+    "cocoon"
+  ],
+  "size": [
+    40,
+    64
+  ],
+  "meta": {
+    "radius": 11
+  },
+  "parts": [
+    {
+      "id": "line",
+      "at": [
+        1,
+        -26
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1.4,
+        "h": 22,
+        "corner": 0.7
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "shadow",
+      "at": [
+        0,
+        27
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 11,
+        "ry": 3.6
+      },
+      "fill": "$ink@0.5"
+    },
+    {
+      "id": "body",
+      "at": [
+        0,
+        2
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 12,
+        "ry": 22
+      },
+      "fill": "$silent@heavy",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "inside",
+      "at": [
+        -1,
+        4
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7,
+        "ry": 13
+      },
+      "fill": "$carapace.dark@soft"
+    },
+    {
+      "id": "band_a",
+      "at": [
+        0,
+        -9
+      ],
+      "rot": 8,
+      "shape": {
+        "kind": "rect",
+        "w": 23,
+        "h": 3.4,
+        "corner": 1.6
+      },
+      "fill": "$white@soft"
+    },
+    {
+      "id": "band_b",
+      "at": [
+        0,
+        1
+      ],
+      "rot": -5,
+      "shape": {
+        "kind": "rect",
+        "w": 25,
+        "h": 3.8,
+        "corner": 1.8
+      },
+      "fill": "$white@0.3"
+    },
+    {
+      "id": "band_c",
+      "at": [
+        0,
+        11
+      ],
+      "rot": 6,
+      "shape": {
+        "kind": "rect",
+        "w": 22,
+        "h": 3.2,
+        "corner": 1.5
+      },
+      "fill": "$white@soft"
+    },
+    {
+      "id": "leg_a",
+      "at": [
+        11,
+        14
+      ],
+      "rot": -38,
+      "shape": {
+        "kind": "rect",
+        "w": 2.2,
+        "h": 11,
+        "corner": 1.1
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "leg_b",
+      "at": [
+        15,
+        19
+      ],
+      "rot": -8,
+      "shape": {
+        "kind": "rect",
+        "w": 1.8,
+        "h": 8,
+        "corner": 0.9
+      },
+      "fill": "$carapace.dark2"
+    },
+    {
+      "id": "fray",
+      "at": [
+        0,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "rect",
+          "w": 1.0,
+          "h": 6,
+          "corner": 0.5
+        },
+        "count": 12,
+        "area": [
+          28,
+          46
+        ],
+        "seed": 33,
+        "jitterRot": true,
+        "scaleRange": [
+          0.6,
+          1.3
+        ]
+      },
+      "fill": "$silent@0.3"
+    }
+  ],
+  "variants": {
+    "open": {
+      "description": "Split from the inside and empty: the bands slack, the wrapping torn open at the foot, and nothing showing through it any more.",
+      "set": {
+        "body.fill": "$silent@0.45",
+        "inside.fill": "$ink@heavy",
+        "band_b.fill": "$white@ghost",
+        "fray.fill": "$silent@soft"
+      },
+      "remove": [
+        "leg_a",
+        "leg_b"
+      ],
+      "add": [
+        {
+          "id": "split",
+          "at": [
+            1,
+            13
+          ],
+          "shape": {
+            "kind": "poly",
+            "points": [
+              [
+                -6,
+                -8
+              ],
+              [
+                6,
+                -6
+              ],
+              [
+                4,
+                9
+              ],
+              [
+                0,
+                12
+              ],
+              [
+                -5,
+                8
+              ]
+            ]
+          },
+          "fill": "$ink"
+        },
+        {
+          "id": "split_lip_a",
+          "at": [
+            -7.5,
+            13.0
+          ],
+          "rot": 12.09,
+          "shape": {
+            "kind": "rect",
+            "w": 1.3,
+            "h": 14.32,
+            "corner": 0.65
+          },
+          "fill": "$silent@heavy"
+        },
+        {
+          "id": "split_lip_b",
+          "at": [
+            8.0,
+            14.5
+          ],
+          "rot": -17.1,
+          "shape": {
+            "kind": "rect",
+            "w": 1.2,
+            "h": 13.6,
+            "corner": 0.6
+          },
+          "fill": "$silent@soft"
+        }
+      ]
+    }
+  }
+}

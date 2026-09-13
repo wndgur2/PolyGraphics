@@ -1,0 +1,322 @@
+{
+  "id": "ss.terrain.tree-stalk",
+  "name": "Cave stalk (SS)",
+  "description": "The Spider Cave's thin tree: a fungal stalk with one wide cap, the shape a player reads as a tree at a glance without anything on it having leaves \u2014 nothing with leaves grows under a roof. Banded up the stem where it has grown in courses, gilled under the cap, and lit along the cap's rim with the same spore-teal the cave's glowing fungi carry, so a grove of these is what light there is down there. The cap is the `crown` half, which the game draws over whatever walks under it; the stem is the `trunk` half, which is what stops you.",
+  "tags": [
+    "ss-terrain",
+    "tree-stalk"
+  ],
+  "size": [
+    96,
+    136
+  ],
+  "anchor": [
+    0.5,
+    0.88
+  ],
+  "meta": {
+    "radius": 11,
+    "crownRadius": 36
+  },
+  "parts": [
+    {
+      "id": "shadow",
+      "at": [
+        0,
+        3
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 19,
+        "ry": 6
+      },
+      "fill": "$ink@0.5"
+    },
+    {
+      "id": "foot",
+      "at": [
+        0,
+        -3
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -13,
+            4
+          ],
+          [
+            -6,
+            -14
+          ],
+          [
+            6,
+            -14
+          ],
+          [
+            13,
+            4
+          ]
+        ]
+      },
+      "fill": "$husk.dark2",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "stem",
+      "at": [
+        0,
+        -42
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -7,
+            40
+          ],
+          [
+            -4.5,
+            -38
+          ],
+          [
+            4.5,
+            -38
+          ],
+          [
+            7,
+            40
+          ]
+        ]
+      },
+      "fill": "$husk.dark2",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "stem_lit",
+      "at": [
+        -2.6,
+        -42
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.4,
+            39
+          ],
+          [
+            -1.6,
+            -37
+          ],
+          [
+            1.2,
+            -37
+          ],
+          [
+            0.6,
+            39
+          ]
+        ]
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "ring_a",
+      "at": [
+        0.0,
+        -28.0
+      ],
+      "rot": -3.0,
+      "shape": {
+        "kind": "rect",
+        "w": 13.0,
+        "h": 2.6,
+        "corner": 1.17
+      },
+      "fill": "$husk@soft"
+    },
+    {
+      "id": "ring_b",
+      "at": [
+        -0.4,
+        -50.0
+      ],
+      "rot": 2.0,
+      "shape": {
+        "kind": "rect",
+        "w": 11.0,
+        "h": 2.2,
+        "corner": 0.99
+      },
+      "fill": "$husk@0.3"
+    },
+    {
+      "id": "ring_c",
+      "at": [
+        -0.6,
+        -68.0
+      ],
+      "rot": -2.0,
+      "shape": {
+        "kind": "rect",
+        "w": 9.5,
+        "h": 1.8,
+        "corner": 0.81
+      },
+      "fill": "$husk@0.25"
+    },
+    {
+      "id": "scar",
+      "at": [
+        3,
+        -38
+      ],
+      "rot": 18,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.8,
+        "ry": 4
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "cap_under",
+      "at": [
+        0,
+        -80
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 33,
+        "ry": 10
+      },
+      "fill": "$carapace.dark2"
+    },
+    {
+      "id": "gills",
+      "at": [
+        0,
+        -80
+      ],
+      "repeat": {
+        "of": {
+          "kind": "rect",
+          "w": 1.4,
+          "h": 12,
+          "corner": 0.7
+        },
+        "count": 13,
+        "area": [
+          54,
+          6
+        ],
+        "seed": 7,
+        "scaleRange": [
+          0.7,
+          1.15
+        ]
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "cap",
+      "at": [
+        0,
+        -88
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 36,
+        "ry": 19
+      },
+      "fill": "$carapace.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "cap_lit",
+      "at": [
+        -8,
+        -94
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 22,
+        "ry": 10
+      },
+      "fill": "$carapace"
+    },
+    {
+      "id": "spots",
+      "at": [
+        0,
+        -90
+      ],
+      "repeat": {
+        "of": {
+          "kind": "circle",
+          "r": 2.6
+        },
+        "count": 9,
+        "area": [
+          56,
+          22
+        ],
+        "seed": 13,
+        "scaleRange": [
+          0.5,
+          1.3
+        ]
+      },
+      "fill": "$spore@soft"
+    },
+    {
+      "id": "glow",
+      "at": [
+        0,
+        -77
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 26,
+        "ry": 6
+      },
+      "fill": "$spore@ghost"
+    }
+  ],
+  "variants": {
+    "trunk": {
+      "description": "The half that stands on the floor and stops you: everything from the ground to where the head begins. Drawn under the actors.",
+      "remove": [
+        "cap_under",
+        "gills",
+        "cap",
+        "cap_lit",
+        "spots",
+        "glow"
+      ]
+    },
+    "crown": {
+      "description": "The half that hangs over the floor and hides what walks under it. Drawn over the actors, at the same place as the trunk \u2014 one canvas, so the two cannot come apart.",
+      "remove": [
+        "shadow",
+        "foot",
+        "stem",
+        "stem_lit",
+        "ring_a",
+        "ring_b",
+        "ring_c",
+        "scar"
+      ]
+    }
+  }
+}

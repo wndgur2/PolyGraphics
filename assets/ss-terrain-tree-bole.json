@@ -1,0 +1,553 @@
+{
+  "id": "ss.terrain.tree-bole",
+  "name": "Cave bole (SS)",
+  "description": "The Spider Cave's heavy tree: a buttressed trunk with a knot in it, a broken stub where a branch went, and a canopy of three overlapping masses wide enough to lose a body under. Silk hangs off it in two places before the game strings any \u2014 this is the tree the spans are tied to, and the drawing should say so standing on its own. `crown` is what the game draws over the actors; `trunk` is the half with the collider under it.",
+  "tags": [
+    "ss-terrain",
+    "tree-bole"
+  ],
+  "size": [
+    128,
+    152
+  ],
+  "anchor": [
+    0.5,
+    0.88
+  ],
+  "meta": {
+    "radius": 17,
+    "crownRadius": 44
+  },
+  "parts": [
+    {
+      "id": "shadow",
+      "at": [
+        0,
+        4
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 27,
+        "ry": 8
+      },
+      "fill": "$ink@0.5"
+    },
+    {
+      "id": "buttress",
+      "at": [
+        0,
+        -6
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -22,
+            6
+          ],
+          [
+            -13,
+            -20
+          ],
+          [
+            -4,
+            -26
+          ],
+          [
+            7,
+            -24
+          ],
+          [
+            16,
+            -14
+          ],
+          [
+            22,
+            6
+          ]
+        ]
+      },
+      "fill": "$husk.dark2",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "bole",
+      "at": [
+        0,
+        -44
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -15,
+            32
+          ],
+          [
+            -12,
+            2
+          ],
+          [
+            -14,
+            -22
+          ],
+          [
+            -9,
+            -38
+          ],
+          [
+            10,
+            -38
+          ],
+          [
+            13,
+            -20
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            16,
+            32
+          ]
+        ]
+      },
+      "fill": "$husk.dark2",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "bole_lit",
+      "at": [
+        -6,
+        -44
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -7.5,
+            31
+          ],
+          [
+            -5.5,
+            3
+          ],
+          [
+            -7,
+            -21
+          ],
+          [
+            -3.5,
+            -36
+          ],
+          [
+            1.5,
+            -36
+          ],
+          [
+            0.5,
+            -20
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2.5,
+            31
+          ]
+        ]
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "knot",
+      "at": [
+        4,
+        -28
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5,
+        "ry": 6.5
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "knot_core",
+      "at": [
+        4,
+        -28
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.4,
+        "ry": 3.2
+      },
+      "fill": "$carapace.dark2"
+    },
+    {
+      "id": "stub",
+      "at": [
+        18.0,
+        -50.0
+      ],
+      "rot": -28.0,
+      "shape": {
+        "kind": "rect",
+        "w": 17.0,
+        "h": 5.4,
+        "corner": 2.43
+      },
+      "fill": "$husk.dark2"
+    },
+    {
+      "id": "bark_a",
+      "at": [
+        -2.0,
+        -14.0
+      ],
+      "rot": 4.0,
+      "shape": {
+        "kind": "rect",
+        "w": 26.0,
+        "h": 2.4,
+        "corner": 1.08
+      },
+      "fill": "$husk@0.22"
+    },
+    {
+      "id": "bark_b",
+      "at": [
+        -1.0,
+        -34.0
+      ],
+      "rot": -3.0,
+      "shape": {
+        "kind": "rect",
+        "w": 24.0,
+        "h": 2.2,
+        "corner": 0.99
+      },
+      "fill": "$husk@0.2"
+    },
+    {
+      "id": "hang_a",
+      "at": [
+        -20.0,
+        -16.0
+      ],
+      "rot": 6.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.4,
+        "h": 28.0,
+        "corner": 0.63
+      },
+      "fill": "$silent@0.3"
+    },
+    {
+      "id": "hang_b",
+      "at": [
+        22.0,
+        -10.0
+      ],
+      "rot": -8.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 20.0,
+        "corner": 0.54
+      },
+      "fill": "$silent@0.22"
+    },
+    {
+      "id": "crown_back",
+      "at": [
+        10,
+        -84
+      ],
+      "rot": 8,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -34,
+            -6
+          ],
+          [
+            -18,
+            -21
+          ],
+          [
+            12,
+            -24
+          ],
+          [
+            33,
+            -12
+          ],
+          [
+            36,
+            6
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            -14,
+            15
+          ],
+          [
+            -33,
+            6
+          ]
+        ]
+      },
+      "fill": "$carapace.dark2"
+    },
+    {
+      "id": "crown_left",
+      "at": [
+        -30,
+        -76
+      ],
+      "rot": -10,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -26,
+            -3
+          ],
+          [
+            -13,
+            -16
+          ],
+          [
+            10,
+            -18
+          ],
+          [
+            24,
+            -7
+          ],
+          [
+            22,
+            8
+          ],
+          [
+            4,
+            15
+          ],
+          [
+            -16,
+            12
+          ]
+        ]
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "crown_main",
+      "at": [
+        -2,
+        -92
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -44,
+            -2
+          ],
+          [
+            -30,
+            -19
+          ],
+          [
+            -6,
+            -27
+          ],
+          [
+            22,
+            -24
+          ],
+          [
+            41,
+            -11
+          ],
+          [
+            43,
+            5
+          ],
+          [
+            24,
+            18
+          ],
+          [
+            -6,
+            21
+          ],
+          [
+            -30,
+            14
+          ]
+        ]
+      },
+      "fill": "$carapace.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "crown_lit",
+      "at": [
+        -14,
+        -100
+      ],
+      "rot": -6,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -24,
+            -2
+          ],
+          [
+            -12,
+            -11
+          ],
+          [
+            8,
+            -12
+          ],
+          [
+            20,
+            -4
+          ],
+          [
+            14,
+            7
+          ],
+          [
+            -6,
+            9
+          ],
+          [
+            -20,
+            5
+          ]
+        ]
+      },
+      "fill": "$carapace"
+    },
+    {
+      "id": "crown_spots",
+      "at": [
+        -2,
+        -92
+      ],
+      "repeat": {
+        "of": {
+          "kind": "circle",
+          "r": 3
+        },
+        "count": 11,
+        "area": [
+          68,
+          30
+        ],
+        "seed": 29,
+        "scaleRange": [
+          0.5,
+          1.4
+        ]
+      },
+      "fill": "$spore@soft"
+    },
+    {
+      "id": "crown_glow",
+      "at": [
+        0,
+        -74
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 32,
+        "ry": 7
+      },
+      "fill": "$spore@ghost"
+    },
+    {
+      "id": "crown_hang_a",
+      "at": [
+        -34.0,
+        -66.0
+      ],
+      "rot": 4.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.3,
+        "h": 24.0,
+        "corner": 0.59
+      },
+      "fill": "$silent@0.3"
+    },
+    {
+      "id": "crown_hang_b",
+      "at": [
+        30.0,
+        -70.0
+      ],
+      "rot": -5.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 18.0,
+        "corner": 0.54
+      },
+      "fill": "$silent@0.24"
+    }
+  ],
+  "variants": {
+    "trunk": {
+      "description": "The half that stands on the floor and stops you: everything from the ground to where the head begins. Drawn under the actors.",
+      "remove": [
+        "crown_back",
+        "crown_left",
+        "crown_main",
+        "crown_lit",
+        "crown_spots",
+        "crown_glow",
+        "crown_hang_a",
+        "crown_hang_b"
+      ]
+    },
+    "crown": {
+      "description": "The half that hangs over the floor and hides what walks under it. Drawn over the actors, at the same place as the trunk \u2014 one canvas, so the two cannot come apart.",
+      "remove": [
+        "shadow",
+        "buttress",
+        "bole",
+        "bole_lit",
+        "knot",
+        "knot_core",
+        "stub",
+        "bark_a",
+        "bark_b",
+        "hang_a",
+        "hang_b"
+      ]
+    }
+  }
+}
