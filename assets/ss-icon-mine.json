@@ -1,13 +1,13 @@
 {
   "id": "ss.icon.mine",
   "name": "Spore pod icon",
-  "description": "UI slot icon for the spore pod. Composes `ss.proj.mine` itself via `use` — the cache the icon promises is the cache the ground shows — replacing the old hand-drawn i_mine (grey disc, red core). Rim keeps that original's red: the slot color the HUD taught players to read as 'trap'.",
+  "description": "UI slot icon for the lure cup. Composes `ss.proj.mine` itself via `use` — the thing the icon promises is the thing on the ground — at 0.82 rather than 1.15, because that document grew a post, a halo and trip-hairs when it stopped being a hollow pod. Rim is `$pink`, the cap: the one colour the arsenal is otherwise not allowed, worn by the one weapon whose whole job is to be noticed. `$pheromone` would have been the truer token for a signal and is 15.3 from the Wing's `$arcane`, where `$pink` is 21.3 — the rims have to stay eight colours.",
   "tags": ["ss-icon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$coral" },
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$pink" },
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
-    { "id": "glyph", "use": "ss.proj.mine", "scale": 1.15 }
+    { "id": "glyph", "use": "ss.proj.mine", "scale": 0.82 }
   ],
   "variants": {
     "evolved": {

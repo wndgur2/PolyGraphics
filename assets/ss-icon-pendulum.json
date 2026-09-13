@@ -1,11 +1,11 @@
 {
   "id": "ss.icon.pendulum",
   "name": "Chained head icon",
-  "description": "UI slot icon for the chained head. Composes `ss.proj.ball` via `use` so the slot shows the actual packed head-plate, replacing the old hand-drawn i_pendulum (grey line and ball). Rim keeps the original's steel.",
+  "description": "UI slot icon for the chained head. Composes `ss.proj.ball` via `use` so the slot shows the actual packed head-plate, replacing the old hand-drawn i_pendulum (grey line and ball). Rim is `$timber` \u2014 the packed head-plate's own brown, unlightened: the base token is dark enough to hold clear of the Mandibles' chitin, and the two ramps of it are not.",
   "tags": ["ss-icon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$steel" },
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$timber" },
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
     { "id": "glyph", "use": "ss.proj.ball", "scale": 0.82 }
   ],
