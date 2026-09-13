@@ -60,7 +60,7 @@
       },
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -187,7 +187,7 @@
       },
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -389,7 +389,7 @@
       },
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -518,7 +518,7 @@
       },
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -536,7 +536,7 @@
       "fill": "$steel.dark",
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -623,7 +623,7 @@
       },
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -641,7 +641,7 @@
       "fill": "$steel.dark",
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -740,7 +740,7 @@
       },
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -875,7 +875,7 @@
       },
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -904,7 +904,7 @@
       "fill": "$timber.dark2",
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -1018,7 +1018,7 @@
       "fill": "$coal",
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     }
   ],
