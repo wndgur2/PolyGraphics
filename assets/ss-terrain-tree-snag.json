@@ -1,0 +1,276 @@
+{
+  "id": "ss.terrain.tree-snag",
+  "name": "Cave snag (SS)",
+  "description": "A tree the cave is done with: the trunk snapped off head-height, split into two points, rotted through in bands and holed where something lives in it now. Dead grey against the other two's dusk, and the one tree in the set with no crown at all \u2014 it stops you and it hides nothing, which is what gives a grove a shape that is not all the same shape. A span can still be tied to it.",
+  "tags": [
+    "ss-terrain",
+    "tree-snag"
+  ],
+  "size": [
+    80,
+    128
+  ],
+  "anchor": [
+    0.5,
+    0.88
+  ],
+  "meta": {
+    "radius": 11
+  },
+  "parts": [
+    {
+      "id": "shadow",
+      "at": [
+        0,
+        3
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 18,
+        "ry": 6
+      },
+      "fill": "$ink@0.5"
+    },
+    {
+      "id": "foot",
+      "at": [
+        0,
+        -4
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -15,
+            5
+          ],
+          [
+            -8,
+            -16
+          ],
+          [
+            7,
+            -16
+          ],
+          [
+            14,
+            5
+          ]
+        ]
+      },
+      "fill": "$dead",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "shaft",
+      "at": [
+        1,
+        -38
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -10,
+            26
+          ],
+          [
+            -8,
+            -16
+          ],
+          [
+            -3,
+            -30
+          ],
+          [
+            4,
+            -28
+          ],
+          [
+            7,
+            -8
+          ],
+          [
+            10,
+            26
+          ]
+        ]
+      },
+      "fill": "$dead",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "shaft_lit",
+      "at": [
+        -3.5,
+        -38
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.5,
+            25
+          ],
+          [
+            -3.5,
+            -15
+          ],
+          [
+            -0.5,
+            -28
+          ],
+          [
+            1.5,
+            -27
+          ],
+          [
+            1,
+            -9
+          ],
+          [
+            1.5,
+            25
+          ]
+        ]
+      },
+      "fill": "$smoke"
+    },
+    {
+      "id": "split_a",
+      "at": [
+        -2,
+        -66
+      ],
+      "rot": 8,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.5,
+            10
+          ],
+          [
+            -1.5,
+            -13
+          ],
+          [
+            0.5,
+            -6
+          ],
+          [
+            2.5,
+            -14
+          ],
+          [
+            4,
+            10
+          ]
+        ]
+      },
+      "fill": "$dead",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "split_b",
+      "at": [
+        5,
+        -62
+      ],
+      "rot": -14,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.5,
+            8
+          ],
+          [
+            -0.5,
+            -11
+          ],
+          [
+            1.5,
+            -4
+          ],
+          [
+            3,
+            -9
+          ],
+          [
+            3.5,
+            8
+          ]
+        ]
+      },
+      "fill": "$dead"
+    },
+    {
+      "id": "rot_a",
+      "at": [
+        -1.0,
+        -24.0
+      ],
+      "rot": 5.0,
+      "shape": {
+        "kind": "rect",
+        "w": 19.0,
+        "h": 2.4,
+        "corner": 1.08
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "rot_b",
+      "at": [
+        0.0,
+        -46.0
+      ],
+      "rot": -4.0,
+      "shape": {
+        "kind": "rect",
+        "w": 15.0,
+        "h": 2.0,
+        "corner": 0.9
+      },
+      "fill": "$ink@soft"
+    },
+    {
+      "id": "hole",
+      "at": [
+        -3,
+        -34
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.6,
+        "ry": 4.6
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "hang",
+      "at": [
+        12.0,
+        -30.0
+      ],
+      "rot": -6.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 24.0,
+        "corner": 0.54
+      },
+      "fill": "$silent@0.22"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "id": "ss.terrain.web",
   "name": "Silk (SS)",
-  "description": "One patch of the Spider Cave's set silk, lying on the floor and drawn from above: eleven radii out of a bright hub, four courses of spiral with a gap in each, a haze of loose thread over the lot and dew scattered through it. Cold white (`$silent`) against cave stone, because silk is the one thing down there that is brighter than anything alive. The game scales this to whatever radius the patch rolled and swaps in `torn` once a body has cut most of the way through it, so a hole in the web is a hole you made.",
+  "description": "The Spider Cave's set silk, drawn from above like everything else on that floor, in the order an orb weaver actually builds one: four frame lines slung across the patch, fifteen radii out of a hub that sits off centre because a real one does, then six courses of sticky spiral, each broken somewhere different so a field of them never repeats. Behind it, five faint threads at another angle \u2014 the corner has been spun before. Caught in it: a wing, a husk, a leg and a scatter of dew, which is what says this floor has already worked. Cold white (`$silent`) on cave stone, because silk is the one thing down there brighter than anything alive. `torn` is the state after somebody has walked through it; `sheet` is the same patch spun by something that does not build orbs \u2014 a mat of short threads with a funnel going down through it \u2014 and `sheet_torn` is that walked through. The game scales all four to whatever radius the patch rolled.",
   "tags": [
     "ss-terrain",
     "web"
@@ -15,175 +15,449 @@
   },
   "parts": [
     {
+      "id": "ghost_0",
+      "at": [
+        25.58,
+        11.39
+      ],
+      "rot": -66.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 40.0,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_b_0",
+      "at": [
+        -23.75,
+        -10.58
+      ],
+      "rot": -246.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 36.0,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_1",
+      "at": [
+        15.75,
+        29.0
+      ],
+      "rot": -28.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 50.0,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_b_1",
+      "at": [
+        -14.31,
+        -26.36
+      ],
+      "rot": -208.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 44.0,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_2",
+      "at": [
+        -4.38,
+        27.66
+      ],
+      "rot": 9.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 40.0,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_b_2",
+      "at": [
+        4.07,
+        -25.68
+      ],
+      "rot": -171.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 36.0,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_3",
+      "at": [
+        -23.94,
+        22.72
+      ],
+      "rot": 46.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 50.0,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_b_3",
+      "at": [
+        21.76,
+        -20.65
+      ],
+      "rot": -133.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 44.0,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_4",
+      "at": [
+        -27.85,
+        2.93
+      ],
+      "rot": 84.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 40.0,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "ghost_b_4",
+      "at": [
+        25.86,
+        -2.72
+      ],
+      "rot": -96.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 36.0,
+        "corner": 0.55
+      },
+      "fill": "$silent@0.1"
+    },
+    {
+      "id": "frame_a",
+      "at": [
+        -2.0,
+        -30.0
+      ],
+      "rot": -97.13,
+      "shape": {
+        "kind": "rect",
+        "w": 1.7,
+        "h": 96.75,
+        "corner": 0.85
+      },
+      "fill": "$silent@0.34"
+    },
+    {
+      "id": "frame_b",
+      "at": [
+        40.0,
+        7.0
+      ],
+      "rot": 11.59,
+      "shape": {
+        "kind": "rect",
+        "w": 1.6,
+        "h": 79.62,
+        "corner": 0.8
+      },
+      "fill": "$silent@0.34"
+    },
+    {
+      "id": "frame_c",
+      "at": [
+        -5.0,
+        38.0
+      ],
+      "rot": -78.96,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 83.55,
+        "corner": 0.75
+      },
+      "fill": "$silent@0.28"
+    },
+    {
+      "id": "frame_d",
+      "at": [
+        -44.0,
+        6.0
+      ],
+      "rot": -8.75,
+      "shape": {
+        "kind": "rect",
+        "w": 1.4,
+        "h": 52.61,
+        "corner": 0.7
+      },
+      "fill": "$silent@0.24"
+    },
+    {
       "id": "haze",
+      "at": [
+        -2.0,
+        -2.8
+      ],
       "shape": {
         "kind": "circle",
-        "r": 58
+        "r": 55
       },
-      "fill": "$silent@ghost"
+      "fill": "$silent@0.1"
     },
     {
       "id": "radius_0",
       "at": [
-        27.3,
-        3.35
+        22.85,
+        -4.07
       ],
-      "rot": -83.0,
+      "rot": -84.0,
       "shape": {
         "kind": "rect",
-        "w": 1.3,
-        "h": 49.0,
-        "corner": 0.65
+        "w": 1.5,
+        "h": 56.0,
+        "corner": 0.75
       },
       "fill": "$silent@soft"
     },
     {
       "id": "radius_1",
       "at": [
-        28.5,
-        15.62
+        17.22,
+        0.65
       ],
-      "rot": -61.27,
+      "rot": -71.0,
       "shape": {
         "kind": "rect",
-        "w": 1.6,
-        "h": 59.0,
-        "corner": 0.8
+        "w": 1.2,
+        "h": 47.0,
+        "corner": 0.6
       },
       "fill": "$silent@soft"
     },
     {
       "id": "radius_2",
       "at": [
-        12.98,
-        29.79
+        11.89,
+        12.77
       ],
-      "rot": -23.55,
+      "rot": -40.5,
       "shape": {
         "kind": "rect",
-        "w": 1.3,
-        "h": 59.0,
-        "corner": 0.65
+        "w": 1.35,
+        "h": 52.0,
+        "corner": 0.68
       },
       "fill": "$silent@soft"
     },
     {
       "id": "radius_3",
       "at": [
-        -8.51,
-        31.37
+        -0.53,
+        14.03
       ],
-      "rot": 15.18,
+      "rot": -12.0,
       "shape": {
         "kind": "rect",
-        "w": 1.6,
-        "h": 59.0,
-        "corner": 0.8
+        "w": 1.15,
+        "h": 43.0,
+        "corner": 0.57
       },
       "fill": "$silent@soft"
     },
     {
       "id": "radius_4",
       "at": [
-        -16.52,
-        21.99
+        -5.49,
+        21.0
       ],
-      "rot": 36.91,
+      "rot": 1.0,
       "shape": {
         "kind": "rect",
-        "w": 1.3,
-        "h": 49.0,
-        "corner": 0.65
+        "w": 1.5,
+        "h": 56.0,
+        "corner": 0.75
       },
       "fill": "$silent@soft"
     },
     {
       "id": "radius_5",
       "at": [
-        -31.34,
-        8.61
+        -17.28,
+        13.04
       ],
-      "rot": 74.64,
+      "rot": 31.5,
       "shape": {
         "kind": "rect",
-        "w": 1.6,
-        "h": 59.0,
-        "corner": 0.8
+        "w": 1.2,
+        "h": 47.0,
+        "corner": 0.6
       },
       "fill": "$silent@soft"
     },
     {
       "id": "radius_6",
       "at": [
-        -29.84,
-        -12.89
+        -27.52,
+        6.0
       ],
-      "rot": 113.36,
+      "rot": 60.0,
       "shape": {
         "kind": "rect",
-        "w": 1.3,
-        "h": 59.0,
-        "corner": 0.65
+        "w": 1.35,
+        "h": 52.0,
+        "corner": 0.68
       },
       "fill": "$silent@soft"
     },
     {
       "id": "radius_7",
       "at": [
-        -22.94,
-        -23.02
+        -25.56,
+        -0.71
       ],
-      "rot": 135.09,
+      "rot": 73.0,
       "shape": {
         "kind": "rect",
-        "w": 1.6,
-        "h": 59.0,
-        "corner": 0.8
+        "w": 1.15,
+        "h": 43.0,
+        "corner": 0.57
       },
       "fill": "$silent@soft"
     },
     {
       "id": "radius_8",
       "at": [
-        -3.44,
-        -27.28
+        -32.23,
+        -13.54
       ],
-      "rot": 172.82,
+      "rot": -256.5,
       "shape": {
         "kind": "rect",
-        "w": 1.3,
-        "h": 49.0,
-        "corner": 0.65
+        "w": 1.5,
+        "h": 56.0,
+        "corner": 0.75
       },
       "fill": "$silent@soft"
     },
     {
       "id": "radius_9",
       "at": [
-        17.0,
-        -27.7
+        -22.46,
+        -22.72
       ],
-      "rot": 211.55,
+      "rot": -228.0,
       "shape": {
         "kind": "rect",
-        "w": 1.6,
-        "h": 59.0,
-        "corner": 0.8
+        "w": 1.2,
+        "h": 47.0,
+        "corner": 0.6
       },
       "fill": "$silent@soft"
     },
     {
       "id": "radius_10",
       "at": [
-        26.05,
-        -19.44
+        -19.91,
+        -28.3
       ],
-      "rot": 233.27,
+      "rot": -215.0,
       "shape": {
         "kind": "rect",
-        "w": 1.3,
-        "h": 59.0,
-        "corner": 0.65
+        "w": 1.35,
+        "h": 52.0,
+        "corner": 0.68
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_11",
+      "at": [
+        -6.69,
+        -28.43
+      ],
+      "rot": -184.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.15,
+        "h": 43.0,
+        "corner": 0.57
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_12",
+      "at": [
+        6.39,
+        -32.58
+      ],
+      "rot": -156.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 56.0,
+        "corner": 0.75
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_13",
+      "at": [
+        9.14,
+        -25.77
+      ],
+      "rot": -143.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 47.0,
+        "corner": 0.6
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "radius_14",
+      "at": [
+        19.02,
+        -16.95
+      ],
+      "rot": -112.5,
+      "shape": {
+        "kind": "rect",
+        "w": 1.35,
+        "h": 52.0,
+        "corner": 0.68
       },
       "fill": "$silent@soft"
     },
@@ -191,116 +465,290 @@
       "id": "course_0_0",
       "shape": {
         "kind": "ring",
-        "r": 16.0,
+        "r": 14.0,
         "width": 1.5,
-        "from": 8.0,
-        "to": 168.0
+        "from": 6.0,
+        "to": 150.0
       },
-      "fill": "$silent@0.42"
+      "fill": "$silent@0.42",
+      "at": [
+        -5.0,
+        -7.0
+      ]
     },
     {
       "id": "course_0_1",
       "shape": {
         "kind": "ring",
-        "r": 16.0,
+        "r": 14.0,
         "width": 1.5,
-        "from": 196.0,
-        "to": 350.0
+        "from": 178.0,
+        "to": 352.0
       },
-      "fill": "$silent@0.42"
+      "fill": "$silent@0.42",
+      "at": [
+        -5.0,
+        -7.0
+      ]
     },
     {
       "id": "course_1_0",
       "shape": {
         "kind": "ring",
-        "r": 29.0,
+        "r": 22.0,
         "width": 1.4,
-        "from": -26.0,
-        "to": 122.0
+        "from": -30.0,
+        "to": 110.0
       },
-      "fill": "$silent@0.42"
+      "fill": "$silent@0.42",
+      "at": [
+        -5.0,
+        -7.0
+      ]
     },
     {
       "id": "course_1_1",
       "shape": {
         "kind": "ring",
-        "r": 29.0,
+        "r": 22.0,
         "width": 1.4,
-        "from": 150.0,
+        "from": 134.0,
         "to": 300.0
       },
-      "fill": "$silent@0.42"
+      "fill": "$silent@0.42",
+      "at": [
+        -5.0,
+        -7.0
+      ]
     },
     {
       "id": "course_2_0",
       "shape": {
         "kind": "ring",
-        "r": 42.0,
+        "r": 31.0,
         "width": 1.3,
-        "from": 20.0,
-        "to": 190.0
+        "from": 18.0,
+        "to": 172.0
       },
-      "fill": "$silent@0.42"
+      "fill": "$silent@0.42",
+      "at": [
+        -5.0,
+        -7.0
+      ]
     },
     {
       "id": "course_2_1",
       "shape": {
         "kind": "ring",
-        "r": 42.0,
+        "r": 31.0,
         "width": 1.3,
-        "from": 214.0,
-        "to": 348.0
+        "from": 196.0,
+        "to": 346.0
       },
-      "fill": "$silent@0.42"
+      "fill": "$silent@0.42",
+      "at": [
+        -5.0,
+        -7.0
+      ]
     },
     {
       "id": "course_3_0",
       "shape": {
         "kind": "ring",
-        "r": 54.0,
-        "width": 1.1,
-        "from": -8.0,
+        "r": 40.0,
+        "width": 1.2,
+        "from": -14.0,
         "to": 96.0
       },
-      "fill": "$silent@0.42"
+      "fill": "$silent@0.42",
+      "at": [
+        -5.0,
+        -7.0
+      ]
     },
     {
       "id": "course_3_1",
       "shape": {
         "kind": "ring",
-        "r": 54.0,
-        "width": 1.1,
-        "from": 128.0,
-        "to": 250.0
+        "r": 40.0,
+        "width": 1.2,
+        "from": 120.0,
+        "to": 256.0
       },
-      "fill": "$silent@0.42"
+      "fill": "$silent@0.42",
+      "at": [
+        -5.0,
+        -7.0
+      ]
     },
     {
       "id": "course_3_2",
       "shape": {
         "kind": "ring",
-        "r": 54.0,
-        "width": 1.1,
-        "from": 272.0,
-        "to": 330.0
+        "r": 40.0,
+        "width": 1.2,
+        "from": 276.0,
+        "to": 340.0
       },
-      "fill": "$silent@0.42"
+      "fill": "$silent@0.42",
+      "at": [
+        -5.0,
+        -7.0
+      ]
+    },
+    {
+      "id": "course_4_0",
+      "shape": {
+        "kind": "ring",
+        "r": 49.0,
+        "width": 1.05,
+        "from": 26.0,
+        "to": 188.0
+      },
+      "fill": "$silent@0.42",
+      "at": [
+        -5.0,
+        -7.0
+      ]
+    },
+    {
+      "id": "course_4_1",
+      "shape": {
+        "kind": "ring",
+        "r": 49.0,
+        "width": 1.05,
+        "from": 212.0,
+        "to": 350.0
+      },
+      "fill": "$silent@0.42",
+      "at": [
+        -5.0,
+        -7.0
+      ]
+    },
+    {
+      "id": "course_5_0",
+      "shape": {
+        "kind": "ring",
+        "r": 55.0,
+        "width": 0.9,
+        "from": -6.0,
+        "to": 84.0
+      },
+      "fill": "$silent@0.42",
+      "at": [
+        -5.0,
+        -7.0
+      ]
+    },
+    {
+      "id": "course_5_1",
+      "shape": {
+        "kind": "ring",
+        "r": 55.0,
+        "width": 0.9,
+        "from": 110.0,
+        "to": 232.0
+      },
+      "fill": "$silent@0.42",
+      "at": [
+        -5.0,
+        -7.0
+      ]
+    },
+    {
+      "id": "course_5_2",
+      "shape": {
+        "kind": "ring",
+        "r": 55.0,
+        "width": 0.9,
+        "from": 252.0,
+        "to": 328.0
+      },
+      "fill": "$silent@0.42",
+      "at": [
+        -5.0,
+        -7.0
+      ]
     },
     {
       "id": "hub",
+      "at": [
+        -5.0,
+        -7.0
+      ],
       "shape": {
         "kind": "circle",
-        "r": 6.5
+        "r": 6.8
       },
-      "fill": "$silent@0.55"
+      "fill": "$silent@0.5"
     },
     {
       "id": "hub_core",
+      "at": [
+        -5.0,
+        -7.0
+      ],
       "shape": {
         "kind": "circle",
-        "r": 3.2
+        "r": 3.4
       },
       "fill": "$silent@heavy"
+    },
+    {
+      "id": "caught_wing",
+      "at": [
+        26,
+        -22
+      ],
+      "rot": -28,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.4,
+        "ry": 2.2
+      },
+      "fill": "$husk.dark@heavy"
+    },
+    {
+      "id": "caught_husk",
+      "at": [
+        -30,
+        20
+      ],
+      "rot": 40,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.2,
+        "ry": 3.0
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "caught_leg",
+      "at": [
+        -30.5,
+        29.5
+      ],
+      "rot": -45.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 9.9,
+        "corner": 0.6
+      },
+      "fill": "$carapace.dark2"
+    },
+    {
+      "id": "caught_speck",
+      "at": [
+        12,
+        34
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.8
+      },
+      "fill": "$ink@heavy"
     },
     {
       "id": "dew",
@@ -311,17 +759,17 @@
       "repeat": {
         "of": {
           "kind": "circle",
-          "r": 1.5
+          "r": 1.4
         },
-        "count": 14,
+        "count": 18,
         "area": [
-          96,
-          96
+          104,
+          104
         ],
         "seed": 23,
         "scaleRange": [
-          0.6,
-          1.4
+          0.55,
+          1.5
         ]
       },
       "fill": "$silent@soft"
@@ -329,44 +777,57 @@
   ],
   "variants": {
     "torn": {
-      "description": "Walked through: the hub is gone, most of the spiral with it, and what is left hangs off the radii that held. Still silk \u2014 it just does not hold anything.",
+      "description": "Walked through: the hub is bare, most of the spiral is gone with it, and what is left hangs off the radii that held. Still silk \u2014 it just does not hold anything.",
       "set": {
         "haze.fill": "$silent@0.08",
-        "hub.fill": "$silent@0.2",
+        "hub.fill": "$silent@0.18",
         "hub_core.fill": "$silent@soft",
         "dew.fill": "$silent@ghost",
+        "frame_a.fill": "$silent@0.3",
+        "frame_b.fill": "$silent@0.3",
+        "caught_wing.fill": "$husk.dark@soft",
+        "caught_husk.fill": "$carapace.dark2",
         "radius_0.fill": "$silent@ghost",
-        "radius_2.fill": "$silent@ghost",
-        "radius_4.fill": "$silent@ghost",
+        "radius_3.fill": "$silent@ghost",
+        "radius_5.fill": "$silent@ghost",
         "radius_6.fill": "$silent@ghost",
-        "radius_8.fill": "$silent@ghost",
-        "radius_10.fill": "$silent@ghost",
-        "course_0_0.fill": "$silent@0.16",
-        "course_0_1.fill": "$silent@0.16",
-        "course_1_1.fill": "$silent@0.16",
-        "course_2_0.fill": "$silent@0.16",
-        "course_3_1.fill": "$silent@0.16"
+        "radius_9.fill": "$silent@ghost",
+        "radius_11.fill": "$silent@ghost",
+        "radius_14.fill": "$silent@ghost",
+        "course_0_1.fill": "$silent@0.15",
+        "course_1_0.fill": "$silent@0.15",
+        "course_2_1.fill": "$silent@0.15",
+        "course_3_0.fill": "$silent@0.15",
+        "course_3_2.fill": "$silent@0.15",
+        "course_4_1.fill": "$silent@0.15",
+        "course_5_0.fill": "$silent@0.15"
       },
       "remove": [
-        "course_1_0",
-        "course_2_1",
-        "course_3_0",
-        "course_3_2",
-        "radius_3",
-        "radius_7"
+        "course_0_0",
+        "course_1_1",
+        "course_2_0",
+        "course_3_1",
+        "course_4_0",
+        "course_5_1",
+        "course_5_2",
+        "radius_2",
+        "radius_8",
+        "radius_12",
+        "frame_c",
+        "caught_speck"
       ],
       "add": [
         {
           "id": "loose_a",
           "at": [
-            18,
-            -26
+            23.0,
+            -18.0
           ],
-          "rot": 34,
+          "rot": -34.99,
           "shape": {
             "kind": "rect",
             "w": 1.2,
-            "h": 22,
+            "h": 24.41,
             "corner": 0.6
           },
           "fill": "$silent@soft"
@@ -374,17 +835,442 @@
         {
           "id": "loose_b",
           "at": [
-            -24,
-            20
+            -32.0,
+            26.0
           ],
-          "rot": -52,
+          "rot": 36.87,
           "shape": {
             "kind": "rect",
             "w": 1.0,
-            "h": 17,
+            "h": 20.0,
             "corner": 0.5
           },
           "fill": "$silent@0.3"
+        },
+        {
+          "id": "loose_c",
+          "at": [
+            9.0,
+            47.0
+          ],
+          "rot": -35.54,
+          "shape": {
+            "kind": "rect",
+            "w": 1.0,
+            "h": 17.2,
+            "corner": 0.5
+          },
+          "fill": "$silent@0.25"
+        }
+      ]
+    },
+    "sheet": {
+      "description": "A funnel-weaver's mat: no hub, no radii, no spiral \u2014 layered wool with a throat going down through it. Same drag, nothing in common to look at.",
+      "set": {
+        "haze.fill": "$silent@0.1",
+        "dew.fill": "$silent@0.3",
+        "frame_a.fill": "$silent@0.22",
+        "frame_b.fill": "$silent@0.22",
+        "frame_c.fill": "$silent@0.2",
+        "frame_d.fill": "$silent@0.2"
+      },
+      "remove": [
+        "hub",
+        "hub_core",
+        "caught_speck",
+        "radius_0",
+        "radius_1",
+        "radius_2",
+        "radius_3",
+        "radius_4",
+        "radius_5",
+        "radius_6",
+        "radius_7",
+        "radius_8",
+        "radius_9",
+        "radius_10",
+        "radius_11",
+        "radius_12",
+        "radius_13",
+        "radius_14",
+        "course_0_0",
+        "course_0_1",
+        "course_1_0",
+        "course_1_1",
+        "course_2_0",
+        "course_2_1",
+        "course_3_0",
+        "course_3_1",
+        "course_3_2",
+        "course_4_0",
+        "course_4_1",
+        "course_5_0",
+        "course_5_1",
+        "course_5_2"
+      ],
+      "add": [
+        {
+          "id": "mat",
+          "at": [
+            2,
+            3
+          ],
+          "shape": {
+            "kind": "circle",
+            "r": 52
+          },
+          "fill": "$silent@0.16"
+        },
+        {
+          "id": "mat_b",
+          "at": [
+            -14,
+            -10
+          ],
+          "shape": {
+            "kind": "circle",
+            "r": 38
+          },
+          "fill": "$silent@0.14"
+        },
+        {
+          "id": "mat_c",
+          "at": [
+            20,
+            16
+          ],
+          "shape": {
+            "kind": "circle",
+            "r": 30
+          },
+          "fill": "$silent@0.12"
+        },
+        {
+          "id": "weave",
+          "at": [
+            0,
+            0
+          ],
+          "repeat": {
+            "of": {
+              "kind": "rect",
+              "w": 0.8,
+              "h": 11,
+              "corner": 0.4
+            },
+            "count": 96,
+            "area": [
+              102,
+              102
+            ],
+            "seed": 5,
+            "jitterRot": true,
+            "scaleRange": [
+              0.45,
+              1.2
+            ]
+          },
+          "fill": "$silent@0.14"
+        },
+        {
+          "id": "weave_fine",
+          "at": [
+            0,
+            0
+          ],
+          "repeat": {
+            "of": {
+              "kind": "rect",
+              "w": 0.7,
+              "h": 7,
+              "corner": 0.35
+            },
+            "count": 90,
+            "area": [
+              94,
+              94
+            ],
+            "seed": 61,
+            "jitterRot": true,
+            "scaleRange": [
+              0.5,
+              1.1
+            ]
+          },
+          "fill": "$silent@0.12"
+        },
+        {
+          "id": "guy_a",
+          "at": [
+            -17.0,
+            -28.0
+          ],
+          "rot": -101.69,
+          "shape": {
+            "kind": "rect",
+            "w": 1.1,
+            "h": 59.23,
+            "corner": 0.55
+          },
+          "fill": "$silent@0.3"
+        },
+        {
+          "id": "guy_b",
+          "at": [
+            40.0,
+            4.0
+          ],
+          "rot": -14.04,
+          "shape": {
+            "kind": "rect",
+            "w": 1.0,
+            "h": 49.48,
+            "corner": 0.5
+          },
+          "fill": "$silent@0.26"
+        },
+        {
+          "id": "guy_c",
+          "at": [
+            -9.0,
+            37.0
+          ],
+          "rot": -77.28,
+          "shape": {
+            "kind": "rect",
+            "w": 1.0,
+            "h": 63.56,
+            "corner": 0.5
+          },
+          "fill": "$silent@0.24"
+        },
+        {
+          "id": "funnel_rim",
+          "at": [
+            -16,
+            12
+          ],
+          "rot": -18,
+          "shape": {
+            "kind": "ellipse",
+            "rx": 12,
+            "ry": 8.5
+          },
+          "fill": "$silent@0.42"
+        },
+        {
+          "id": "funnel_mouth",
+          "at": [
+            -16,
+            13
+          ],
+          "rot": -18,
+          "shape": {
+            "kind": "ellipse",
+            "rx": 8,
+            "ry": 5.4
+          },
+          "fill": "$ink@heavy"
+        },
+        {
+          "id": "funnel_throat",
+          "at": [
+            -16,
+            14
+          ],
+          "rot": -18,
+          "shape": {
+            "kind": "ellipse",
+            "rx": 4.2,
+            "ry": 2.6
+          },
+          "fill": "$ink"
+        }
+      ]
+    },
+    "sheet_torn": {
+      "description": "The mat, walked through: the wool pulled open, the funnel's rim collapsed, and the throat under it showing.",
+      "set": {
+        "haze.fill": "$silent@0.06",
+        "dew.fill": "$silent@ghost",
+        "frame_a.fill": "$silent@0.14",
+        "frame_b.fill": "$silent@0.14",
+        "frame_c.fill": "$silent@0.12",
+        "frame_d.fill": "$silent@0.12"
+      },
+      "remove": [
+        "hub",
+        "hub_core",
+        "caught_speck",
+        "radius_0",
+        "radius_1",
+        "radius_2",
+        "radius_3",
+        "radius_4",
+        "radius_5",
+        "radius_6",
+        "radius_7",
+        "radius_8",
+        "radius_9",
+        "radius_10",
+        "radius_11",
+        "radius_12",
+        "radius_13",
+        "radius_14",
+        "course_0_0",
+        "course_0_1",
+        "course_1_0",
+        "course_1_1",
+        "course_2_0",
+        "course_2_1",
+        "course_3_0",
+        "course_3_1",
+        "course_3_2",
+        "course_4_0",
+        "course_4_1",
+        "course_5_0",
+        "course_5_1",
+        "course_5_2"
+      ],
+      "add": [
+        {
+          "id": "mat",
+          "at": [
+            4,
+            5
+          ],
+          "shape": {
+            "kind": "circle",
+            "r": 46
+          },
+          "fill": "$silent@0.08"
+        },
+        {
+          "id": "mat_c",
+          "at": [
+            22,
+            18
+          ],
+          "shape": {
+            "kind": "circle",
+            "r": 26
+          },
+          "fill": "$silent@0.07"
+        },
+        {
+          "id": "weave",
+          "at": [
+            0,
+            0
+          ],
+          "repeat": {
+            "of": {
+              "kind": "rect",
+              "w": 0.8,
+              "h": 10,
+              "corner": 0.4
+            },
+            "count": 44,
+            "area": [
+              102,
+              102
+            ],
+            "seed": 5,
+            "jitterRot": true,
+            "scaleRange": [
+              0.45,
+              1.15
+            ]
+          },
+          "fill": "$silent@0.1"
+        },
+        {
+          "id": "guy_a",
+          "at": [
+            -17.0,
+            -26.0
+          ],
+          "rot": -102.53,
+          "shape": {
+            "kind": "rect",
+            "w": 1.0,
+            "h": 55.32,
+            "corner": 0.5
+          },
+          "fill": "$silent@0.2"
+        },
+        {
+          "id": "guy_c",
+          "at": [
+            -9.0,
+            35.0
+          ],
+          "rot": -76.43,
+          "shape": {
+            "kind": "rect",
+            "w": 1.0,
+            "h": 59.67,
+            "corner": 0.5
+          },
+          "fill": "$silent@0.16"
+        },
+        {
+          "id": "funnel_rim",
+          "at": [
+            -16,
+            12
+          ],
+          "rot": -18,
+          "shape": {
+            "kind": "ellipse",
+            "rx": 13,
+            "ry": 7
+          },
+          "fill": "$silent@0.2"
+        },
+        {
+          "id": "funnel_mouth",
+          "at": [
+            -15,
+            13
+          ],
+          "rot": -18,
+          "shape": {
+            "kind": "ellipse",
+            "rx": 9,
+            "ry": 4.6
+          },
+          "fill": "$ink@heavy"
+        },
+        {
+          "id": "mat_loose_a",
+          "at": [
+            -22.0,
+            -28.0
+          ],
+          "rot": -126.87,
+          "shape": {
+            "kind": "rect",
+            "w": 1.1,
+            "h": 20.0,
+            "corner": 0.55
+          },
+          "fill": "$silent@0.28"
+        },
+        {
+          "id": "mat_loose_b",
+          "at": [
+            32.0,
+            30.0
+          ],
+          "rot": -45.0,
+          "shape": {
+            "kind": "rect",
+            "w": 1.0,
+            "h": 16.97,
+            "corner": 0.5
+          },
+          "fill": "$silent@0.24"
         }
       ]
     }

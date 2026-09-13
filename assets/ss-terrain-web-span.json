@@ -1,0 +1,509 @@
+{
+  "id": "ss.terrain.web-span",
+  "name": "Silk span (SS)",
+  "description": "A curtain of silk strung between two trunks, authored along +x and stretched to whatever gap the game found one in. Six threads in three segments each so they droop, the middle pair hanging lowest, with cross threads between them \u2014 one catenary is a line, six at different depths is a curtain, and the crosses are what stop it reading as a fence. It thickens at both ends where it is tied on, which is the part that says anchored rather than floating. `torn` is what is left after a body has been through the middle of it.",
+  "tags": [
+    "ss-terrain",
+    "web-span"
+  ],
+  "size": [
+    256,
+    96
+  ],
+  "meta": {
+    "radius": 34
+  },
+  "parts": [
+    {
+      "id": "line_0_a",
+      "at": [
+        -81.74,
+        -25.5
+      ],
+      "rot": -83.62,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 81.02,
+        "corner": 0.75
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "line_0_b",
+      "at": [
+        0.0,
+        -21.0
+      ],
+      "rot": -90.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 82.96,
+        "corner": 0.75
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "line_0_c",
+      "at": [
+        81.74,
+        -24.5
+      ],
+      "rot": -94.97,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 80.82,
+        "corner": 0.75
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "line_1_a",
+      "at": [
+        -81.74,
+        -11.5
+      ],
+      "rot": -79.45,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 81.91,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.38"
+    },
+    {
+      "id": "line_1_b",
+      "at": [
+        0.0,
+        -4.0
+      ],
+      "rot": -90.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 82.96,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.38"
+    },
+    {
+      "id": "line_1_c",
+      "at": [
+        81.74,
+        -10.5
+      ],
+      "rot": -99.17,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 81.56,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.38"
+    },
+    {
+      "id": "line_2_a",
+      "at": [
+        -81.74,
+        3.5
+      ],
+      "rot": -74.06,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 83.74,
+        "corner": 0.75
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "line_2_b",
+      "at": [
+        0.0,
+        15.0
+      ],
+      "rot": -90.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 82.96,
+        "corner": 0.75
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "line_2_c",
+      "at": [
+        81.74,
+        4.5
+      ],
+      "rot": -104.62,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 83.21,
+        "corner": 0.75
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "line_3_a",
+      "at": [
+        -81.74,
+        18.0
+      ],
+      "rot": -69.57,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 85.93,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.38"
+    },
+    {
+      "id": "line_3_b",
+      "at": [
+        0.0,
+        33.0
+      ],
+      "rot": -90.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 82.96,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.38"
+    },
+    {
+      "id": "line_3_c",
+      "at": [
+        81.74,
+        19.0
+      ],
+      "rot": -109.17,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 85.25,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.38"
+    },
+    {
+      "id": "line_4_a",
+      "at": [
+        -81.74,
+        24.0
+      ],
+      "rot": -76.05,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 82.97,
+        "corner": 0.75
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "line_4_b",
+      "at": [
+        0.0,
+        34.0
+      ],
+      "rot": -90.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 82.96,
+        "corner": 0.75
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "line_4_c",
+      "at": [
+        81.74,
+        25.0
+      ],
+      "rot": -102.6,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 82.51,
+        "corner": 0.75
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "line_5_a",
+      "at": [
+        -81.74,
+        31.0
+      ],
+      "rot": -81.52,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 81.41,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.38"
+    },
+    {
+      "id": "line_5_b",
+      "at": [
+        0.0,
+        37.0
+      ],
+      "rot": -90.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 82.96,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.38"
+    },
+    {
+      "id": "line_5_c",
+      "at": [
+        81.74,
+        32.0
+      ],
+      "rot": -97.08,
+      "shape": {
+        "kind": "rect",
+        "w": 1.2,
+        "h": 81.14,
+        "corner": 0.6
+      },
+      "fill": "$silent@0.38"
+    },
+    {
+      "id": "cross_0",
+      "at": [
+        -89.5,
+        -12.0
+      ],
+      "rot": 14.04,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 28.86,
+        "corner": 0.5
+      },
+      "fill": "$silent@0.3"
+    },
+    {
+      "id": "cross_1",
+      "at": [
+        -40.5,
+        3.0
+      ],
+      "rot": -11.63,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 34.71,
+        "corner": 0.5
+      },
+      "fill": "$silent@0.3"
+    },
+    {
+      "id": "cross_2",
+      "at": [
+        -11.5,
+        12.0
+      ],
+      "rot": 11.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 36.67,
+        "corner": 0.5
+      },
+      "fill": "$silent@0.3"
+    },
+    {
+      "id": "cross_3",
+      "at": [
+        29.5,
+        16.0
+      ],
+      "rot": -11.0,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 36.67,
+        "corner": 0.5
+      },
+      "fill": "$silent@0.3"
+    },
+    {
+      "id": "cross_4",
+      "at": [
+        58.5,
+        6.0
+      ],
+      "rot": 12.34,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 32.76,
+        "corner": 0.5
+      },
+      "fill": "$silent@0.3"
+    },
+    {
+      "id": "cross_5",
+      "at": [
+        101.5,
+        -8.0
+      ],
+      "rot": -14.04,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 28.86,
+        "corner": 0.5
+      },
+      "fill": "$silent@0.3"
+    },
+    {
+      "id": "tie_l",
+      "at": [
+        -122.0,
+        -6
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.4,
+        "ry": 20
+      },
+      "fill": "$silent@0.2"
+    },
+    {
+      "id": "tie_r",
+      "at": [
+        122.0,
+        -4
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.4,
+        "ry": 18
+      },
+      "fill": "$silent@0.2"
+    },
+    {
+      "id": "dew",
+      "at": [
+        0,
+        6
+      ],
+      "repeat": {
+        "of": {
+          "kind": "circle",
+          "r": 1.3
+        },
+        "count": 16,
+        "area": [
+          230,
+          58
+        ],
+        "seed": 17,
+        "scaleRange": [
+          0.6,
+          1.3
+        ]
+      },
+      "fill": "$silent@soft"
+    },
+    {
+      "id": "caught",
+      "at": [
+        44,
+        26
+      ],
+      "rot": 16,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.6,
+        "ry": 2.4
+      },
+      "fill": "$husk.dark@heavy"
+    }
+  ],
+  "variants": {
+    "torn": {
+      "description": "Walked through: the middle is out of it, the threads that held have snapped back to their ties, and two loose ends hang where the gap is.",
+      "set": {
+        "tie_l.fill": "$silent@0.22",
+        "tie_r.fill": "$silent@0.22",
+        "dew.fill": "$silent@ghost",
+        "caught.fill": "$husk.dark@soft",
+        "line_0_a.fill": "$silent@0.2",
+        "line_1_a.fill": "$silent@0.2",
+        "line_2_a.fill": "$silent@0.2",
+        "line_3_a.fill": "$silent@0.2",
+        "line_4_a.fill": "$silent@0.2",
+        "line_5_a.fill": "$silent@0.2",
+        "line_0_c.fill": "$silent@0.2",
+        "line_1_c.fill": "$silent@0.2",
+        "line_2_c.fill": "$silent@0.2",
+        "line_3_c.fill": "$silent@0.2",
+        "line_4_c.fill": "$silent@0.2",
+        "line_5_c.fill": "$silent@0.2"
+      },
+      "remove": [
+        "line_0_b",
+        "line_1_b",
+        "line_2_b",
+        "line_3_b",
+        "line_4_b",
+        "line_5_b",
+        "cross_1",
+        "cross_2",
+        "cross_3",
+        "cross_4"
+      ],
+      "add": [
+        {
+          "id": "hang_a",
+          "at": [
+            -26.0,
+            20.0
+          ],
+          "rot": -15.95,
+          "shape": {
+            "kind": "rect",
+            "w": 1.2,
+            "h": 29.12,
+            "corner": 0.6
+          },
+          "fill": "$silent@soft"
+        },
+        {
+          "id": "hang_b",
+          "at": [
+            27.0,
+            25.0
+          ],
+          "rot": -18.43,
+          "shape": {
+            "kind": "rect",
+            "w": 1.1,
+            "h": 31.62,
+            "corner": 0.55
+          },
+          "fill": "$silent@0.4"
+        }
+      ]
+    }
+  }
+}
