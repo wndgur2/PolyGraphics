@@ -1,0 +1,28 @@
+{
+  "id": "ss.icon.spider",
+  "name": "Spider hand icon",
+  "description": "UI slot icon for the spider hand: three arms fanned off one knuckle, caught mid-reach. Composes ss.lib.spider-arm three times rather than drawing a leg three times, so the slot, the two finds and the evolution all show the same limb. The rim is bile, the one colour no other slot in the game wears — a venom green for the only weapon that gets hold of things.",
+  "tags": ["ss-icon"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$bile"},
+    {"id": "inner", "shape": {"kind": "rect", "w": 28, "h": 28, "corner": 5}, "fill": "$coal.dark"},
+    {"id": "arm_0", "at": [-6.0, 8.0], "rot": -78.0, "use": "ss.lib.spider-arm"},
+    {"id": "arm_1", "at": [-6.0, 8.0], "rot": -45.0, "use": "ss.lib.spider-arm"},
+    {"id": "arm_2", "at": [-6.0, 8.0], "rot": -12.0, "use": "ss.lib.spider-arm", "scale": 0.8},
+    {"id": "knuckle_shadow", "at": [-6.0, 8.0], "shape": {"kind": "circle", "r": 5.0}, "fill": "$ink"},
+    {"id": "knuckle", "at": [-6.0, 8.0], "shape": {"kind": "circle", "r": 3.4}, "fill": "$steel.dark"}
+  ],
+  "variants": {
+    "evolved": {
+      "description": "Gold-rimmed evolved twin. Takes the arm's own evolved variant with it, so the slot shows the amber limbs Widow's Grip actually reaches with.",
+      "set": {
+        "tile.fill": "$gold",
+        "arm_0.variant": "evolved",
+        "arm_1.variant": "evolved",
+        "arm_2.variant": "evolved",
+        "knuckle.fill": "$timber"
+      }
+    }
+  }
+}
