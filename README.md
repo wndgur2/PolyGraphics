@@ -33,7 +33,8 @@ adapters/phaser|godot  one drop-in file per engine, consuming compiled IR
 adapters/webaudio      the same, for sound
 src/                   schema (zod) · token resolver · SVG renderer · compiler · gallery · cli
                        sound-schema · sound-compile · sound-render (PCM/WAV/measurement)
-scripts/               watch (rebuild on save) · inspect · inspect-sound · compare · adapter tests
+scripts/               watch (rebuild on save) · inspect · filmstrip · inspect-sound
+                       compare · adapter tests
 dist/assets.json       committed: the bundle consumers import as `polygraphics/assets`
 dist/sounds.json       likewise, as `polygraphics/sounds`
 out/                   generated, ignored: svg/, compiled/, png/, wav/, gallery.html, manifest.json
@@ -122,7 +123,23 @@ Patched parts are re-validated, so a variant can never silently produce an inval
 
 Props: `x` `y` (px) · `rot` (deg) · `scale` (factor) · `opacity`. A part may animate several of them at once but each at most once, which is the guarantee that actually mattered: transform channels never collide, so the `scale.x`-is-also-facing bug class stays structurally impossible while a part can still gather and swell in the same breath. CSS gets one transform and one timing function per rule, so tracks that disagree on key times are sampled onto a shared timeline through each track's own ease; tracks that agree emit exactly what they always did. The gallery plays them as CSS; engine adapters read the same keys as tweens.
 
+**A hinge is not a prop.** The schema turns a part about its own origin, which is the right primitive and the wrong verb for a leg: a femur and a tibia each turned thirty degrees about their own centres stay parallel and drift apart, so the leg comes to pieces instead of folding. A chain turned about one joint is equal `rot` down the chain *plus* the `x`/`y` each link's offset from that joint sweeps — `ss.enemy.trapjaw`'s `latch` is the worked example, and every `death` clip in the roster is built the same way.
+
 **Scope: animations move parts within a body, never the body itself.** A part's `rot` turns it about its own origin, so a whole-asset spin cannot be written as one track per part — and shouldn't be. Whole-body transforms (spin, facing flip, knockback, hit-flash tint) belong to the engine, which already owns them; `ss.proj.boom` therefore declares no spin animation, because the weapon code does `sprite.rotation += spin * dt`. Keep the two layers separate and neither can fight the other.
+
+### `death` — a clip name the roster agrees on
+
+Every `ss.enemy.*` document that is a body carries one — `ss.enemy.shot` is a bolt, not a body, and carries no animation at all — so a consumer can ask for a creature's death without a table mapping creature to clip name. It is a one-shot rather than a loop, and three things follow from that:
+
+- **Nothing moves after `t = 0.85`.** A sheet's last frame is sampled a frame short of the end (`bakeSheet` walks `f / frames`, so the loop closes), and a clip still travelling there is a clip the engine cuts off mid-gesture. Arrive, then hold.
+- **The body is the engine's.** A death fades, sinks and stops colliding in the game; what the document owns is the *coming apart* — limbs folding, a shell deflating, a lit organ going out.
+- **One grammar, nineteen readings.** The seize (a kick, an organ flaring) through the give (limbs in, jaws hanging, the light going) to the settle. A hive that loses nineteen bodies should not look like nineteen effects — so what differs between them is what each creature *is*: the Gland's sac goes before the animal does, the Trapjaw's latch fires once on nothing, the Chorus runs the light round the ring one last time, and the Bristle — the one body down there that is not hive — dies like an insect rather than like a light going out.
+
+```bash
+npx tsx scripts/filmstrip.ts ss.enemy.imp death --frames 8 --scale 4   # → out/strip/…png
+```
+
+The gallery plays a clip as CSS, which is the right loop for a loop — you watch it breathe. It is the wrong one for a one-shot: a death is judged on whether frame 3 still reads as the same creature and whether frame 9 has stopped moving, and both questions want the frames side by side and still. `filmstrip` bakes them that way, on the ground colour, sampled exactly where the spritesheet will sample them. `--variant elite` checks the state the game actually spawns.
 
 ## Sound document
 
