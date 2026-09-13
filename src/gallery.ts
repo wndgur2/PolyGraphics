@@ -206,6 +206,9 @@ ${a.description ? `<p>${esc(a.description)}</p>` : ""}<ul><li><code>${esc(tracks
 </section>`;
 }
 
+/** The roster-wide one-shot; a state never takes it off the base row. */
+const DEATH_CLIP = "death";
+
 function assetCard(asset: Asset, reg: Registry, issues: Issue[]): string {
   const anims = Object.keys(asset.animations ?? {});
   const firstAnim = anims[0];
@@ -222,7 +225,12 @@ function assetCard(asset: Asset, reg: Registry, issues: Issue[]): string {
    * which is every clip in every other document.
    */
   const claimed = new Set(
-    Object.values(asset.variants ?? {}).flatMap((v) => v.animations ?? []),
+    Object.values(asset.variants ?? {})
+      .flatMap((v) => v.animations ?? [])
+      // `death` is the one clip a state and its base both play — the Porter's
+      // load dies on its own and so does the hauler carrying it — so claiming
+      // it would take a body's death off its own row. See the README.
+      .filter((name) => name !== DEATH_CLIP),
   );
   const onBase = anims.filter((name) => !claimed.has(name));
   const cells: string[] = onBase.length
