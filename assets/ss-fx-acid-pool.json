@@ -1,0 +1,36 @@
+{
+  "id": "ss.fx.acid-pool",
+  "name": "Acid puddle",
+  "description": "Where the evolved spit comes down. The weapon lays one of these per cast at the far end of the arc, scaled by `r / 64` the way every ground wash in this game is, so the canvas is 128 and the radius it promises is 64. The one rule the drawing had to break is the one the blast disc keeps: this is not a circle. A puddle that lands on uneven ground spreads where the ground lets it and stops where it does not, so every outline here is a low-frequency lobe with noise on top, each ring offset from the last — the thin spill reaching furthest, the body sitting off-centre inside it, and the deep pool off-centre again, which is what makes it read as something poured rather than stamped. The grit that rode out in the pour settles here: chunks sink to the bottom and show through the bile. It simmers rather than sits — blisters rise and go under on their own beats, and the thin edge creeps out as the whole thing eats down. It carries its own colour, so unlike the shared disc nothing tints it.",
+  "tags": ["ss-fx", "aoe", "liquid"],
+  "size": [128, 128],
+  "meta": { "radius": 64 },
+  "parts": [
+    { "id": "spill", "shape": { "kind": "poly", "points": [[61.3, 2.0], [70.5, 13.2], [70.6, 25.6], [56.2, 32.8], [41.6, 37.0], [26.0, 36.6], [14.9, 38.2], [4.5, 40.8], [-6.9, 43.7], [-19.1, 43.3], [-29.3, 38.2], [-39.5, 33.7], [-49.0, 27.8], [-59.4, 21.2], [-67.0, 12.4], [-61.9, 2.0], [-53.5, -6.3], [-47.5, -13.3], [-44.5, -21.4], [-42.2, -31.9], [-37.2, -44.4], [-23.2, -48.6], [-7.9, -46.9], [5.2, -41.8], [16.8, -38.4], [26.5, -33.2], [36.5, -28.8], [41.1, -20.7], [45.0, -13.2], [50.7, -6.1]] }, "scale": 0.9, "fill": "$bile.dark2@0.5" },
+    { "id": "body", "shape": { "kind": "poly", "points": [[55.1, -1.5], [46.6, 6.3], [40.6, 12.9], [35.5, 19.5], [27.3, 24.4], [17.0, 26.1], [7.3, 27.1], [-2.5, 28.1], [-14.4, 30.5], [-26.6, 28.9], [-34.3, 22.0], [-32.5, 11.7], [-32.6, 4.7], [-37.7, -1.5], [-42.8, -9.5], [-42.3, -18.4], [-34.8, -25.3], [-24.9, -30.0], [-13.8, -32.5], [-3.0, -34.2], [7.5, -31.1], [15.1, -25.4], [22.4, -22.2], [32.9, -20.9], [46.3, -18.0], [55.1, -10.8]] }, "fill": { "gradient": "radial", "from": [0.56, 0.4], "stops": [[0, "$bile.light@0.88"], [0.55, "$bile@0.8"], [1, "$bile.dark2@0.62"]] } },
+    { "id": "grit", "at": [2.0, -2.0], "repeat": { "of": { "kind": "ngon", "sides": 5, "r": 3.2 }, "count": 11, "area": [74, 50], "seed": 63, "jitterRot": true, "scaleRange": [0.5, 1.4] }, "fill": "$husk.dark@heavy" },
+    { "id": "deep", "shape": { "kind": "poly", "points": [[36.6, -3.0], [30.7, 2.9], [23.0, 6.2], [18.5, 10.0], [14.2, 16.7], [5.0, 19.1], [-3.2, 14.6], [-10.2, 11.6], [-15.9, 7.6], [-21.8, 3.1], [-20.2, -3.0], [-22.8, -9.3], [-20.0, -15.7], [-12.3, -19.7], [-1.8, -17.6], [5.0, -18.1], [13.2, -20.8], [22.9, -20.3], [28.7, -15.0], [35.1, -9.8]] }, "fill": { "gradient": "radial", "from": [0.44, 0.36], "stops": [[0, "$bile.light2@0.7"], [1, "$bile.light@0.42"]] } },
+    { "id": "blister_a", "at": [12.0, -6.0], "shape": { "kind": "circle", "r": 5.0 }, "fill": "$bile.light2@soft" },
+    { "id": "blister_b", "at": [-14.0, 9.0], "shape": { "kind": "circle", "r": 3.6 }, "fill": "$bile.light2@soft" },
+    { "id": "blister_c", "at": [24.0, 12.0], "shape": { "kind": "circle", "r": 2.8 }, "fill": "$bile.light2@soft" },
+    { "id": "gloss", "at": [20.0, -12.0], "rot": -18, "shape": { "kind": "ellipse", "rx": 8.0, "ry": 2.6 }, "fill": "$silent@soft" }
+  ],
+  "animations": {
+    "simmer": {
+      "description": "the puddle eats — blisters rise and go under on their own beats, the thin edge creeps, the deep pool turns over",
+      "duration": 1.4,
+      "tracks": [
+        { "part": "blister_a", "prop": "scale", "keys": [[0, 0.2], [0.45, 1.15], [0.8, 0.2], [1, 0.2]] },
+        { "part": "blister_a", "prop": "opacity", "keys": [[0, 0], [0.4, 0.9], [0.8, 0], [1, 0]] },
+        { "part": "blister_b", "prop": "scale", "keys": [[0, 0.9], [0.3, 0.15], [0.75, 1.1], [1, 0.9]] },
+        { "part": "blister_b", "prop": "opacity", "keys": [[0, 0.7], [0.3, 0], [0.75, 0.85], [1, 0.7]] },
+        { "part": "blister_c", "prop": "scale", "keys": [[0, 1.0], [0.5, 0.2], [1, 1.0]] },
+        { "part": "blister_c", "prop": "opacity", "keys": [[0, 0.8], [0.55, 0], [1, 0.8]] },
+        { "part": "spill", "prop": "scale", "keys": [[0, 0.94], [0.5, 1.0], [1, 0.94]] },
+        { "part": "deep", "prop": "rot", "keys": [[0, -2.5], [0.5, 2.5], [1, -2.5]] },
+        { "part": "grit", "prop": "y", "keys": [[0, -0.8], [0.5, 0.8], [1, -0.8]] },
+        { "part": "gloss", "prop": "opacity", "keys": [[0, 0.5], [0.5, 0.85], [1, 0.5]] }
+      ]
+    }
+  }
+}
