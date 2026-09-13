@@ -198,15 +198,15 @@
         "stops": [
           [
             0,
-            "$moss.light2"
-          ],
-          [
-            0.5,
             "$moss.light"
           ],
           [
+            0.5,
+            "$moss"
+          ],
+          [
             1,
-            "$moss.dark"
+            "$moss.dark2"
           ]
         ]
       },
@@ -1119,11 +1119,11 @@
         "stops": [
           [
             0,
-            "$timber.light"
+            "$timber"
           ],
           [
             1,
-            "$timber.dark"
+            "$timber.dark2"
           ]
         ]
       },
@@ -1299,15 +1299,15 @@
         "stops": [
           [
             0,
-            "$moss.light2"
-          ],
-          [
-            0.5,
             "$moss.light"
           ],
           [
+            0.5,
+            "$moss"
+          ],
+          [
             1,
-            "$moss.dark"
+            "$moss.dark2"
           ]
         ]
       },
@@ -1360,11 +1360,11 @@
         "stops": [
           [
             0,
-            "$moss.light"
+            "$moss"
           ],
           [
             1,
-            "$moss.dark"
+            "$moss.dark2"
           ]
         ]
       }
@@ -1537,15 +1537,15 @@
         "stops": [
           [
             0,
-            "$timber.light2"
-          ],
-          [
-            0.5,
             "$timber.light"
           ],
           [
-            1,
+            0.5,
             "$timber.dark"
+          ],
+          [
+            1,
+            "$timber.dark2"
           ]
         ]
       },
@@ -1922,15 +1922,15 @@
         "stops": [
           [
             0,
-            "$timber.light2"
-          ],
-          [
-            0.5,
             "$timber.light"
           ],
           [
-            1,
+            0.5,
             "$timber.dark"
+          ],
+          [
+            1,
+            "$timber.dark2"
           ]
         ]
       },
@@ -2097,11 +2097,11 @@
         "stops": [
           [
             0,
-            "$moss.light"
+            "$moss"
           ],
           [
             1,
-            "$moss.dark"
+            "$moss.dark2"
           ]
         ]
       },
@@ -2134,11 +2134,11 @@
         "stops": [
           [
             0,
-            "$moss.light"
+            "$moss"
           ],
           [
             1,
-            "$moss.dark"
+            "$moss.dark2"
           ]
         ]
       },
@@ -2235,11 +2235,11 @@
         "stops": [
           [
             0,
-            "$moss.light"
+            "$moss"
           ],
           [
             1,
-            "$moss.dark"
+            "$moss.dark2"
           ]
         ]
       }
@@ -2285,15 +2285,15 @@
         "stops": [
           [
             0,
-            "$timber.light2"
-          ],
-          [
-            0.5,
             "$timber.light"
           ],
           [
-            1,
+            0.5,
             "$timber.dark"
+          ],
+          [
+            1,
+            "$timber.dark2"
           ]
         ]
       },
@@ -2407,11 +2407,11 @@
         "stops": [
           [
             0,
-            "$timber.light"
+            "$timber"
           ],
           [
             1,
-            "$timber.dark"
+            "$timber.dark2"
           ]
         ]
       },
@@ -2514,15 +2514,15 @@
         "stops": [
           [
             0,
-            "$moss.light2"
-          ],
-          [
-            0.5,
             "$moss.light"
           ],
           [
+            0.5,
+            "$moss"
+          ],
+          [
             1,
-            "$moss.dark"
+            "$moss.dark2"
           ]
         ]
       },
