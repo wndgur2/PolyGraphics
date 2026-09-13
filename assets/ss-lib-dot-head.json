@@ -1,7 +1,7 @@
 {
   "id": "ss.lib.dot-head",
   "name": "Dot's head",
-  "description": "Dot's head, drawn on its own and large, to be composed into `ss.char.dot` by `use` at about a fifth of this size. Leather and cloth, nothing that shines but one buckle: Dot is the plain survivor, the one whose weapon is its own feelers, and it dresses like someone who walks a long way. From the neck up: the top of the mantle collar bound in leather and stitched; a wool scarf wound twice round the throat with its tail hanging frayed over the collar. A close leather coif over the skull, seamed and stitched across the crown, showing at the temple and the cheek, held by a chin strap with the buckle. The face is a shadow under the hood — a cloth wrap pulled up over it from the nose down, two folds in it, a lighter edge — with two cold glints where the eyes are and no skin anywhere. Over all of it a deep hood of heavy wool in a gradient from light at the crown to near-black at the hem, its opening bound in leather and stitched, worn pale along one crease, lined dark inside so the face sits back in it, the point trailing behind; a bone bead hangs on a cord from the rim. At the crown, two leather grommets that the feelers come through — the first inch of each is here; the long dead arcs that hang from them belong to the character document, where they can be animated.",
+  "description": "Dot's head, drawn on its own and large, to be composed into `ss.char.dot` by `use` at about a fifth of this size. It is built from the skull out. A three-quarter head turned to the viewer — forehead at the upper right, the back of the skull at the left, a jaw that runs from the hinge under the ear down to a chin at the lower right — drawn first in a muted skin, and everything on it shaped to that skull: a close leather coif whose front edge runs from the forehead down the temple to the jaw hinge, seamed and stitched over the crown and held by a chin strap with the one buckle on the whole head; a cloth wrap wound round the lower face along the jaw to the chin, so the chin's line reads through it; a deep wool hood whose opening is cut along the coif's edge and bound in leather, so the face sits framed in it rather than lost in it; a scarf wound twice at the throat under the chin, its tail frayed over the collar. The face shows from the brow to the top of the wrap: the near eye on the cheek turned to the viewer is a full almond with a heavy lid and a lash, the far eye is foreshortened beside the bridge of the nose, the brows taper, the nose is a straight bridge with a shadow on its far side and a nostril at the tip, a cheekbone is lit with a hollow under it, and the temple, the far side and the jaw sit in shadow. A bone bead hangs on a cord from the hood's rim. Two leather grommets at the crown take the feelers — the first inch of each is here; the long dead arcs belong to the character document, where they can be animated.",
   "tags": [
     "ss-lib"
   ],
@@ -16,44 +16,44 @@
         "kind": "poly",
         "points": [
           [
-            -12.2,
-            -13.6
-          ],
-          [
-            -8.2,
-            -18.6
-          ],
-          [
-            -11.6,
-            -20.4
-          ],
-          [
-            -15.4,
-            -17
-          ],
-          [
-            -17.6,
+            -13.4,
             -9
           ],
           [
-            -18.2,
-            0
+            -9.6,
+            -18
           ],
           [
-            -17.2,
-            6.2
+            -13.2,
+            -21.6
           ],
           [
-            -15.6,
-            4.4
+            -18.4,
+            -19.2
+          ],
+          [
+            -22.4,
+            -12
+          ],
+          [
+            -22.6,
+            -3.6
+          ],
+          [
+            -20,
+            0.6
+          ],
+          [
+            -17.6,
+            -2.4
+          ],
+          [
+            -16.6,
+            -7.6
           ],
           [
             -15.2,
-            -3.2
-          ],
-          [
-            -14,
-            -9.6
+            -9.8
           ]
         ]
       },
@@ -70,15 +70,15 @@
         "stops": [
           [
             0,
-            "$moss.light2"
-          ],
-          [
-            0.55,
             "$moss.light"
           ],
           [
+            0.55,
+            "$moss"
+          ],
+          [
             1,
-            "$moss.dark"
+            "$moss.dark2"
           ]
         ]
       },
@@ -93,57 +93,102 @@
         "kind": "poly",
         "points": [
           [
-            -10.6,
-            -18.8
+            -11.6,
+            -18.4
           ],
           [
-            -15.6,
-            -12.6
+            -19.2,
+            -13.6
           ],
           [
-            -16.6,
-            -2
+            -21,
+            -5
           ],
           [
-            -15.8,
-            -2
+            -20,
+            -5
           ],
           [
-            -14.8,
-            -12
+            -18.4,
+            -13
           ],
           [
-            -11,
-            -18.2
+            -12,
+            -17.8
           ]
         ]
       },
       "fill": "$moss.dark2"
     },
     {
-      "id": "hood_point_fold_b",
+      "id": "neck",
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -13.8,
-            -8.2
+            -4.6,
+            6
           ],
           [
-            -17.4,
-            -8
+            8.2,
+            6.4
           ],
           [
-            -17.4,
-            -7.4
+            9.4,
+            15.6
           ],
           [
-            -13.9,
-            -7.6
+            -4.8,
+            16
           ]
         ]
       },
-      "fill": "$ink@ghost"
+      "fill": {
+        "gradient": "linear",
+        "from": [
+          0.3,
+          0
+        ],
+        "to": [
+          0.8,
+          1
+        ],
+        "stops": [
+          [
+            0,
+            "$skin.dark"
+          ],
+          [
+            1,
+            "$skin.dark2"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "neck_shade",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.6,
+            6
+          ],
+          [
+            8.2,
+            6.4
+          ],
+          [
+            8.4,
+            9.6
+          ],
+          [
+            -4.6,
+            9.6
+          ]
+        ]
+      },
+      "fill": "$ink@soft"
     },
     {
       "id": "collar",
@@ -296,40 +341,32 @@
       "fill": "$husk.dark"
     },
     {
-      "id": "scarf_under",
+      "id": "scarf_wrap_a",
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -6.8,
-            5
+            -7,
+            9.4
           ],
           [
-            11.2,
-            4.6
+            10.6,
+            9.2
           ],
           [
-            12,
-            10.2
+            11,
+            12.6
           ],
           [
-            10.8,
-            15.6
-          ],
-          [
-            -6,
-            16
-          ],
-          [
-            -7.6,
-            10
+            -7.2,
+            13
           ]
         ]
       },
       "fill": {
         "gradient": "linear",
         "from": [
-          0.3,
+          0.2,
           0
         ],
         "to": [
@@ -339,11 +376,15 @@
         "stops": [
           [
             0,
-            "$moss.dark"
+            "$moss.light"
+          ],
+          [
+            0.6,
+            "$moss"
           ],
           [
             1,
-            "$moss.dark2"
+            "$moss.dark"
           ]
         ]
       },
@@ -353,25 +394,25 @@
       }
     },
     {
-      "id": "scarf_wrap_a",
+      "id": "scarf_wrap_b",
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -7.4,
-            7.8
+            -7.2,
+            13.2
           ],
           [
-            11.8,
-            7.3
+            11,
+            12.8
           ],
           [
-            12,
-            10
+            10.6,
+            16.4
           ],
           [
-            -7.6,
-            10.5
+            -6.8,
+            16.8
           ]
         ]
       },
@@ -393,59 +434,6 @@
           [
             0.6,
             "$moss.dark"
-          ],
-          [
-            1,
-            "$moss.dark2"
-          ]
-        ]
-      },
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "scarf_wrap_b",
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -7.6,
-            11
-          ],
-          [
-            11.9,
-            10.5
-          ],
-          [
-            11.6,
-            13.8
-          ],
-          [
-            -7.2,
-            14.3
-          ]
-        ]
-      },
-      "fill": {
-        "gradient": "linear",
-        "from": [
-          0.2,
-          0
-        ],
-        "to": [
-          0.8,
-          1
-        ],
-        "stops": [
-          [
-            0,
-            "$moss.dark"
-          ],
-          [
-            0.6,
-            "$moss.dark2"
           ],
           [
             1,
@@ -464,20 +452,20 @@
         "kind": "poly",
         "points": [
           [
-            -2,
-            7.4
+            -1.4,
+            9.4
           ],
           [
-            0.4,
-            7.4
+            1,
+            9.4
           ],
           [
-            -1.2,
-            11
+            -0.6,
+            13
           ],
           [
-            -3.4,
-            11
+            -2.8,
+            13
           ]
         ]
       },
@@ -489,20 +477,20 @@
         "kind": "poly",
         "points": [
           [
-            6,
-            7.2
+            6.2,
+            9.2
           ],
           [
-            8.2,
-            7.2
+            8.4,
+            9.2
           ],
           [
-            7.4,
-            10.6
+            7.6,
+            12.6
           ],
           [
-            5,
-            10.6
+            5.2,
+            12.6
           ]
         ]
       },
@@ -514,28 +502,28 @@
         "kind": "poly",
         "points": [
           [
-            9.4,
-            12.4
+            8.6,
+            14.6
           ],
           [
-            13.6,
-            12.8
+            12.8,
+            14.4
           ],
           [
-            14.8,
-            19.2
+            14.2,
+            19.4
           ],
           [
-            13.8,
+            13.2,
             25
           ],
           [
-            10.4,
+            9.8,
             25
           ],
           [
-            9.6,
-            19
+            9,
+            19.4
           ]
         ]
       },
@@ -552,11 +540,11 @@
         "stops": [
           [
             0,
-            "$moss"
+            "$moss.light"
           ],
           [
             1,
-            "$moss.dark2"
+            "$moss.dark"
           ]
         ]
       },
@@ -571,19 +559,19 @@
         "kind": "poly",
         "points": [
           [
-            11.4,
-            13.4
-          ],
-          [
-            12.4,
-            13.6
-          ],
-          [
-            12.6,
-            24
+            10.6,
+            15.4
           ],
           [
             11.6,
+            15.4
+          ],
+          [
+            11.8,
+            24
+          ],
+          [
+            10.8,
             24
           ]
         ]
@@ -593,7 +581,7 @@
     {
       "id": "scarf_fray_a",
       "at": [
-        11,
+        10.4,
         25
       ],
       "shape": {
@@ -601,12 +589,12 @@
         "w": 0.6,
         "h": 1.6
       },
-      "fill": "$moss.dark2"
+      "fill": "$moss.dark"
     },
     {
       "id": "scarf_fray_b",
       "at": [
-        13,
+        12.4,
         25.2
       ],
       "shape": {
@@ -614,209 +602,7 @@
         "w": 0.6,
         "h": 1.4
       },
-      "fill": "$moss.dark2"
-    },
-    {
-      "id": "coif",
-      "at": [
-        2,
-        -6
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 11.8,
-        "ry": 14
-      },
-      "fill": {
-        "gradient": "radial",
-        "from": [
-          0.35,
-          0.3
-        ],
-        "to": [
-          0.5,
-          1
-        ],
-        "stops": [
-          [
-            0,
-            "$timber.light"
-          ],
-          [
-            0.5,
-            "$timber.dark"
-          ],
-          [
-            1,
-            "$timber.dark2"
-          ]
-        ]
-      },
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "coif_seam",
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -4,
-            -19.2
-          ],
-          [
-            2,
-            -19.9
-          ],
-          [
-            8,
-            -18.2
-          ],
-          [
-            12,
-            -14.6
-          ],
-          [
-            11.4,
-            -14.1
-          ],
-          [
-            7.6,
-            -17.5
-          ],
-          [
-            2,
-            -19.1
-          ],
-          [
-            -3.8,
-            -18.4
-          ]
-        ]
-      },
-      "fill": "$timber.dark2"
-    },
-    {
-      "id": "coif_stitch_a",
-      "at": [
-        -1,
-        -19.4
-      ],
-      "rot": -6,
-      "shape": {
-        "kind": "rect",
-        "w": 1.4,
-        "h": 0.45
-      },
-      "fill": "$husk.dark"
-    },
-    {
-      "id": "coif_stitch_b",
-      "at": [
-        4.6,
-        -19.1
-      ],
-      "rot": 10,
-      "shape": {
-        "kind": "rect",
-        "w": 1.4,
-        "h": 0.45
-      },
-      "fill": "$husk.dark"
-    },
-    {
-      "id": "coif_stitch_c",
-      "at": [
-        9.6,
-        -16.6
-      ],
-      "rot": 38,
-      "shape": {
-        "kind": "rect",
-        "w": 1.4,
-        "h": 0.45
-      },
-      "fill": "$husk.dark"
-    },
-    {
-      "id": "coif_cheek",
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            6,
-            -2
-          ],
-          [
-            13.6,
-            -4
-          ],
-          [
-            14.6,
-            2.6
-          ],
-          [
-            12,
-            6.8
-          ],
-          [
-            6.2,
-            7.2
-          ]
-        ]
-      },
-      "fill": {
-        "gradient": "linear",
-        "from": [
-          0.2,
-          0
-        ],
-        "to": [
-          0.8,
-          1
-        ],
-        "stops": [
-          [
-            0,
-            "$timber"
-          ],
-          [
-            1,
-            "$timber.dark2"
-          ]
-        ]
-      },
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "coif_cheek_stitch",
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            6.4,
-            -1.4
-          ],
-          [
-            13,
-            -3.3
-          ],
-          [
-            13.2,
-            -2.7
-          ],
-          [
-            6.6,
-            -0.8
-          ]
-        ]
-      },
-      "fill": "$husk.dark@heavy"
+      "fill": "$moss.dark"
     },
     {
       "id": "face",
@@ -824,44 +610,68 @@
         "kind": "poly",
         "points": [
           [
-            0.2,
-            -11.6
+            -2,
+            -19.5
           ],
           [
-            9.6,
-            -11.2
+            6,
+            -19.2
+          ],
+          [
+            11,
+            -15.6
           ],
           [
             13.6,
-            -6.6
+            -10
           ],
           [
-            13.7,
-            -2.2
+            14,
+            -4
           ],
           [
-            12.6,
-            1.8
+            13.2,
+            0.5
           ],
           [
-            9.8,
-            3.6
+            11.6,
+            4.2
           ],
           [
-            4.4,
-            3.8
+            9.4,
+            7.2
           ],
           [
-            1.2,
-            2
+            6.4,
+            9
           ],
           [
-            -0.6,
-            -1.6
+            1.6,
+            9
           ],
           [
-            -1.2,
+            -3,
+            7.6
+          ],
+          [
+            -7,
+            4.2
+          ],
+          [
+            -10,
+            0.2
+          ],
+          [
+            -11,
             -6
+          ],
+          [
+            -9,
+            -13
+          ],
+          [
+            -5,
+            -17.6
           ]
         ]
       },
@@ -889,108 +699,68 @@
             "$skin.dark2"
           ]
         ]
+      },
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
       }
     },
     {
-      "id": "temple_shade",
+      "id": "face_far_shade",
       "shape": {
         "kind": "poly",
         "points": [
           [
-            0.2,
-            -11.6
+            6,
+            -19.2
           ],
           [
-            2.6,
-            -11.4
-          ],
-          [
-            1.6,
-            -3
-          ],
-          [
-            0.4,
-            1
-          ],
-          [
-            -0.6,
-            -1.6
-          ],
-          [
-            -1.2,
-            -6
-          ]
-        ]
-      },
-      "fill": "$ink@soft"
-    },
-    {
-      "id": "brow_shadow",
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            0.2,
-            -11.6
-          ],
-          [
-            9.6,
-            -11.2
+            11,
+            -15.6
           ],
           [
             13.6,
-            -6.6
+            -10
+          ],
+          [
+            14,
+            -4
+          ],
+          [
+            13.2,
+            0.5
+          ],
+          [
+            11.6,
+            4.2
+          ],
+          [
+            9.4,
+            7.2
+          ],
+          [
+            8.4,
+            7.2
+          ],
+          [
+            10.6,
+            3.2
+          ],
+          [
+            12,
+            -1
           ],
           [
             12.4,
-            -6.3
+            -6
           ],
           [
-            9,
-            -9.2
+            11.2,
+            -11.4
           ],
           [
-            0.6,
-            -9.4
-          ]
-        ]
-      },
-      "fill": "$ink@heavy"
-    },
-    {
-      "id": "cheekbone",
-      "at": [
-        3.8,
-        -2.4
-      ],
-      "rot": -14,
-      "shape": {
-        "kind": "ellipse",
-        "rx": 2.2,
-        "ry": 0.9
-      },
-      "fill": "$skin.light@soft"
-    },
-    {
-      "id": "cheek_hollow",
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            2.2,
-            -1.2
-          ],
-          [
-            6.2,
-            -0.6
-          ],
-          [
-            6.6,
-            1.6
-          ],
-          [
-            3,
-            1.8
+            8.6,
+            -15.4
           ]
         ]
       },
@@ -1002,32 +772,132 @@
         "kind": "poly",
         "points": [
           [
-            12.6,
-            -2.6
+            -7,
+            4.2
           ],
           [
-            13.7,
-            -2.2
+            -3,
+            7.6
           ],
           [
-            12.6,
-            1.8
+            1.6,
+            9
           ],
           [
-            9.8,
-            3.6
+            6.4,
+            9
           ],
           [
-            9.6,
-            2.6
+            9.4,
+            7.2
           ],
           [
-            12,
-            0.4
+            8.2,
+            6.2
+          ],
+          [
+            5.6,
+            7.6
+          ],
+          [
+            1.6,
+            7.6
+          ],
+          [
+            -2.4,
+            6.4
+          ],
+          [
+            -6,
+            3
           ]
         ]
       },
       "fill": "$skin.dark2@heavy"
+    },
+    {
+      "id": "cheekbone",
+      "at": [
+        4.2,
+        -1.4
+      ],
+      "rot": -14,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.6,
+        "ry": 1.1
+      },
+      "fill": "$skin.light@soft"
+    },
+    {
+      "id": "cheek_hollow",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.6,
+            0.2
+          ],
+          [
+            6.6,
+            1.0
+          ],
+          [
+            7.2,
+            3.2
+          ],
+          [
+            2.2,
+            3.6
+          ]
+        ]
+      },
+      "fill": "$skin.dark2@soft"
+    },
+    {
+      "id": "temple_shade",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -9,
+            -13
+          ],
+          [
+            -5,
+            -17.6
+          ],
+          [
+            -2,
+            -19.5
+          ],
+          [
+            0,
+            -13.2
+          ],
+          [
+            -4,
+            -10
+          ],
+          [
+            -6.4,
+            -5
+          ],
+          [
+            -7.6,
+            0
+          ],
+          [
+            -10,
+            0.2
+          ],
+          [
+            -11,
+            -6
+          ]
+        ]
+      },
+      "fill": "$ink@soft"
     },
     {
       "id": "brow",
@@ -1035,40 +905,40 @@
         "kind": "poly",
         "points": [
           [
-            1.4,
-            -6.9
+            -0.8,
+            -8.0
+          ],
+          [
+            0.6,
+            -9.0
           ],
           [
             2.8,
-            -7.9
+            -9.3
           ],
           [
-            4.8,
-            -8.2
+            5.0,
+            -8.8
           ],
           [
-            6.8,
+            5.6,
+            -8.3
+          ],
+          [
+            5.0,
+            -8.3
+          ],
+          [
+            2.8,
+            -8.6
+          ],
+          [
+            0.8,
+            -8.4
+          ],
+          [
+            -0.6,
             -7.7
-          ],
-          [
-            7.3,
-            -7.2
-          ],
-          [
-            6.8,
-            -7.2
-          ],
-          [
-            4.8,
-            -7.5
-          ],
-          [
-            3,
-            -7.3
-          ],
-          [
-            1.6,
-            -6.6
           ]
         ]
       },
@@ -1080,36 +950,36 @@
         "kind": "poly",
         "points": [
           [
-            8.4,
-            -7.4
+            8.8,
+            -8.7
           ],
           [
-            9.4,
-            -8.0
+            9.8,
+            -9.3
           ],
           [
-            10.8,
-            -8.0
+            11.2,
+            -9.3
           ],
           [
-            11.6,
-            -7.5
+            12,
+            -8.8
           ],
           [
-            11.6,
-            -7.2
+            12,
+            -8.5
           ],
           [
-            10.8,
-            -7.4
+            11.2,
+            -8.7
           ],
           [
-            9.6,
-            -7.3
+            10,
+            -8.6
           ],
           [
-            8.6,
-            -7.0
+            9,
+            -8.3
           ]
         ]
       },
@@ -1118,49 +988,49 @@
     {
       "id": "eye_white",
       "at": [
-        4.3,
-        -5.1
+        2.6,
+        -5.2
       ],
       "shape": {
         "kind": "ellipse",
-        "rx": 2.0,
-        "ry": 0.88
+        "rx": 2.1,
+        "ry": 0.92
       },
       "fill": "$husk"
     },
     {
       "id": "eye_iris",
       "at": [
-        4.6,
-        -5.05
+        2.9,
+        -5.15
       ],
       "shape": {
         "kind": "circle",
-        "r": 0.82
+        "r": 0.86
       },
       "fill": "$moss.dark2"
     },
     {
       "id": "eye_pupil",
       "at": [
-        4.65,
-        -5.0
+        2.95,
+        -5.1
       ],
       "shape": {
         "kind": "circle",
-        "r": 0.4
+        "r": 0.42
       },
       "fill": "$ink"
     },
     {
       "id": "eye_glint",
       "at": [
-        4.25,
-        -5.35
+        2.55,
+        -5.45
       ],
       "shape": {
         "kind": "circle",
-        "r": 0.28
+        "r": 0.3
       },
       "fill": "$white"
     },
@@ -1170,36 +1040,36 @@
         "kind": "poly",
         "points": [
           [
-            2.2,
-            -5.0
+            0.4,
+            -5.1
           ],
           [
-            2.9,
-            -5.95
+            1.1,
+            -6.1
           ],
           [
-            4.3,
-            -6.35
+            2.6,
+            -6.5
           ],
           [
-            5.8,
-            -6.05
+            4.2,
+            -6.2
           ],
           [
-            6.5,
-            -5.2
-          ],
-          [
-            6.0,
-            -5.35
+            4.9,
+            -5.3
           ],
           [
             4.4,
-            -5.8
+            -5.45
           ],
           [
-            3.0,
-            -5.5
+            2.7,
+            -5.9
+          ],
+          [
+            1.2,
+            -5.6
           ]
         ]
       },
@@ -1211,16 +1081,16 @@
         "kind": "poly",
         "points": [
           [
-            1.7,
+            -0.1,
+            -5.4
+          ],
+          [
+            0.6,
+            -6.3
+          ],
+          [
+            0.8,
             -5.3
-          ],
-          [
-            2.4,
-            -6.2
-          ],
-          [
-            2.6,
-            -5.2
           ]
         ]
       },
@@ -1232,28 +1102,28 @@
         "kind": "poly",
         "points": [
           [
-            2.6,
-            -4.4
-          ],
-          [
-            4.3,
-            -4.1
-          ],
-          [
-            6.1,
+            0.9,
             -4.5
           ],
           [
-            6.0,
-            -4.25
-          ],
-          [
-            4.3,
-            -3.85
-          ],
-          [
-            2.7,
+            2.6,
             -4.2
+          ],
+          [
+            4.5,
+            -4.6
+          ],
+          [
+            4.4,
+            -4.35
+          ],
+          [
+            2.6,
+            -3.95
+          ],
+          [
+            1.0,
+            -4.3
           ]
         ]
       },
@@ -1265,28 +1135,28 @@
         "kind": "poly",
         "points": [
           [
-            2.8,
-            -6.6
+            1.1,
+            -6.8
+          ],
+          [
+            2.6,
+            -7.2
           ],
           [
             4.3,
-            -7.0
+            -6.8
           ],
           [
-            5.9,
+            4.2,
             -6.6
           ],
           [
-            5.8,
-            -6.4
+            2.6,
+            -6.95
           ],
           [
-            4.3,
-            -6.75
-          ],
-          [
-            2.9,
-            -6.4
+            1.2,
+            -6.6
           ]
         ]
       },
@@ -1295,8 +1165,8 @@
     {
       "id": "eye_far_white",
       "at": [
-        9.5,
-        -5.3
+        10.3,
+        -5.5
       ],
       "shape": {
         "kind": "ellipse",
@@ -1308,8 +1178,8 @@
     {
       "id": "eye_far_iris",
       "at": [
-        9.8,
-        -5.25
+        10.6,
+        -5.45
       ],
       "shape": {
         "kind": "circle",
@@ -1320,8 +1190,8 @@
     {
       "id": "eye_far_pupil",
       "at": [
-        9.85,
-        -5.2
+        10.65,
+        -5.4
       ],
       "shape": {
         "kind": "circle",
@@ -1332,8 +1202,8 @@
     {
       "id": "eye_far_glint",
       "at": [
-        9.55,
-        -5.5
+        10.35,
+        -5.7
       ],
       "shape": {
         "kind": "circle",
@@ -1347,36 +1217,36 @@
         "kind": "poly",
         "points": [
           [
-            8.2,
-            -5.3
+            9,
+            -5.5
           ],
           [
-            8.7,
+            9.5,
+            -6.15
+          ],
+          [
+            10.4,
+            -6.35
+          ],
+          [
+            11.3,
+            -6.1
+          ],
+          [
+            11.7,
+            -5.5
+          ],
+          [
+            11.3,
+            -5.65
+          ],
+          [
+            10.4,
             -5.95
           ],
           [
             9.6,
-            -6.15
-          ],
-          [
-            10.5,
-            -5.9
-          ],
-          [
-            10.9,
-            -5.3
-          ],
-          [
-            10.5,
-            -5.45
-          ],
-          [
-            9.6,
-            -5.75
-          ],
-          [
-            8.8,
-            -5.6
+            -5.8
           ]
         ]
       },
@@ -1388,28 +1258,28 @@
         "kind": "poly",
         "points": [
           [
-            8.5,
+            9.3,
+            -5.0
+          ],
+          [
+            10.3,
+            -4.75
+          ],
+          [
+            11.5,
+            -5.0
+          ],
+          [
+            11.4,
             -4.8
           ],
           [
-            9.5,
-            -4.55
+            10.3,
+            -4.5
           ],
           [
-            10.7,
+            9.4,
             -4.8
-          ],
-          [
-            10.6,
-            -4.6
-          ],
-          [
-            9.5,
-            -4.3
-          ],
-          [
-            8.6,
-            -4.6
           ]
         ]
       },
@@ -1421,24 +1291,24 @@
         "kind": "poly",
         "points": [
           [
-            9.6,
-            -6.6
-          ],
-          [
-            10.4,
-            -6.8
-          ],
-          [
-            12.6,
-            -2.4
-          ],
-          [
-            11.4,
-            -2.0
-          ],
-          [
             10.2,
-            -4.2
+            -7.4
+          ],
+          [
+            11,
+            -7.6
+          ],
+          [
+            13.6,
+            1.0
+          ],
+          [
+            12.2,
+            1.4
+          ],
+          [
+            10.9,
+            -3.6
           ]
         ]
       },
@@ -1450,20 +1320,20 @@
         "kind": "poly",
         "points": [
           [
-            10.2,
-            -6.9
-          ],
-          [
             10.8,
-            -6.9
+            -7.7
           ],
           [
-            13.3,
-            -2.5
+            11.4,
+            -7.7
           ],
           [
-            12.7,
-            -2.3
+            14.2,
+            0.9
+          ],
+          [
+            13.5,
+            1.1
           ]
         ]
       },
@@ -1475,24 +1345,50 @@
         "kind": "poly",
         "points": [
           [
-            10.9,
-            -6.5
+            11.5,
+            -7.3
           ],
           [
-            11.4,
-            -6.5
+            12,
+            -7.3
           ],
           [
-            13.6,
-            -2.8
+            14.5,
+            0.4
           ],
           [
-            13.2,
-            -2.7
+            14.1,
+            0.5
           ]
         ]
       },
       "fill": "$skin.light@soft"
+    },
+    {
+      "id": "nose_tip",
+      "at": [
+        13.4,
+        1.4
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.1,
+        "ry": 0.8
+      },
+      "fill": "$skin.dark@soft"
+    },
+    {
+      "id": "nostril",
+      "at": [
+        12.6,
+        1.9
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 0.55,
+        "ry": 0.32
+      },
+      "fill": "$skin.dark2"
     },
     {
       "id": "wrap",
@@ -1500,36 +1396,52 @@
         "kind": "poly",
         "points": [
           [
-            -1.6,
-            -1.8
+            -8.2,
+            4.2
           ],
           [
-            8.4,
-            -2.3
+            -2,
+            2.8
           ],
           [
-            14,
-            -1.2
+            4.6,
+            2.2
           ],
           [
-            13.6,
+            10,
             2.4
           ],
           [
-            11,
-            5.0
+            13.6,
+            2.8
           ],
           [
-            5.4,
-            5.6
+            13,
+            4.6
           ],
           [
-            0.2,
-            4.4
+            11.8,
+            6.6
           ],
           [
-            -2.2,
-            1.6
+            9.4,
+            8.8
+          ],
+          [
+            6.4,
+            10.2
+          ],
+          [
+            1.6,
+            10.4
+          ],
+          [
+            -3,
+            9
+          ],
+          [
+            -7.4,
+            6.6
           ]
         ]
       },
@@ -1569,20 +1481,20 @@
         "kind": "poly",
         "points": [
           [
-            0.4,
-            -1.2
+            -5.4,
+            4.6
           ],
           [
-            13.4,
-            -0.6
+            12.4,
+            4.0
           ],
           [
-            13.3,
-            0.2
+            12.2,
+            4.9
           ],
           [
-            0.2,
-            -0.4
+            -5.2,
+            5.5
           ]
         ]
       },
@@ -1594,20 +1506,20 @@
         "kind": "poly",
         "points": [
           [
-            -0.4,
-            2
+            -4.4,
+            7
           ],
           [
-            12.6,
-            2.2
+            10.4,
+            6.6
           ],
           [
-            11.8,
-            3.4
+            9.2,
+            7.8
           ],
           [
-            -0.6,
-            2.8
+            -4,
+            8.2
           ]
         ]
       },
@@ -1619,32 +1531,305 @@
         "kind": "poly",
         "points": [
           [
-            -1.6,
-            -1.8
+            -8.2,
+            4.2
           ],
           [
-            8.4,
-            -2.3
+            -2,
+            2.8
           ],
           [
-            14,
-            -1.2
+            4.6,
+            2.2
           ],
           [
-            13.9,
-            -0.4
+            10,
+            2.4
           ],
           [
-            8.3,
-            -1.5
+            13.6,
+            2.8
           ],
           [
-            -1.5,
-            -1.0
+            13.5,
+            3.6
+          ],
+          [
+            10,
+            3.2
+          ],
+          [
+            4.6,
+            3.1
+          ],
+          [
+            -1.9,
+            3.7
+          ],
+          [
+            -8,
+            5.0
           ]
         ]
       },
       "fill": "$moss"
+    },
+    {
+      "id": "coif",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            6.6,
+            -18.6
+          ],
+          [
+            11,
+            -15.6
+          ],
+          [
+            12.6,
+            -12.6
+          ],
+          [
+            9.6,
+            -13.6
+          ],
+          [
+            5,
+            -14.4
+          ],
+          [
+            0,
+            -13.2
+          ],
+          [
+            -4,
+            -10
+          ],
+          [
+            -6.4,
+            -5
+          ],
+          [
+            -7.6,
+            0
+          ],
+          [
+            -8.4,
+            3.6
+          ],
+          [
+            -10,
+            0.2
+          ],
+          [
+            -11,
+            -6
+          ],
+          [
+            -9,
+            -13
+          ],
+          [
+            -5,
+            -17.6
+          ],
+          [
+            -2,
+            -19.5
+          ],
+          [
+            6,
+            -19.2
+          ]
+        ]
+      },
+      "fill": {
+        "gradient": "radial",
+        "from": [
+          0.35,
+          0.3
+        ],
+        "to": [
+          0.5,
+          1
+        ],
+        "stops": [
+          [
+            0,
+            "$timber.light"
+          ],
+          [
+            0.5,
+            "$timber.dark"
+          ],
+          [
+            1,
+            "$timber.dark2"
+          ]
+        ]
+      },
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "coif_edge",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            12.6,
+            -12.6
+          ],
+          [
+            9.6,
+            -13.6
+          ],
+          [
+            5,
+            -14.4
+          ],
+          [
+            0,
+            -13.2
+          ],
+          [
+            -4,
+            -10
+          ],
+          [
+            -6.4,
+            -5
+          ],
+          [
+            -7.6,
+            0
+          ],
+          [
+            -8.4,
+            3.6
+          ],
+          [
+            -7.6,
+            3.4
+          ],
+          [
+            -6.8,
+            -0.2
+          ],
+          [
+            -5.6,
+            -4.8
+          ],
+          [
+            -3.4,
+            -9.4
+          ],
+          [
+            0.4,
+            -12.4
+          ],
+          [
+            5,
+            -13.6
+          ],
+          [
+            9.6,
+            -12.8
+          ],
+          [
+            12.2,
+            -11.9
+          ]
+        ]
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "coif_seam",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4,
+            -19
+          ],
+          [
+            2,
+            -19.8
+          ],
+          [
+            8,
+            -18.4
+          ],
+          [
+            11,
+            -15.8
+          ],
+          [
+            10.4,
+            -15.4
+          ],
+          [
+            7.6,
+            -17.7
+          ],
+          [
+            2,
+            -19.0
+          ],
+          [
+            -3.8,
+            -18.2
+          ]
+        ]
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "coif_stitch_a",
+      "at": [
+        -1,
+        -19.3
+      ],
+      "rot": -6,
+      "shape": {
+        "kind": "rect",
+        "w": 1.4,
+        "h": 0.45
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "coif_stitch_b",
+      "at": [
+        4.6,
+        -19
+      ],
+      "rot": 10,
+      "shape": {
+        "kind": "rect",
+        "w": 1.4,
+        "h": 0.45
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "coif_stitch_c",
+      "at": [
+        9.4,
+        -16.6
+      ],
+      "rot": 38,
+      "shape": {
+        "kind": "rect",
+        "w": 1.4,
+        "h": 0.45
+      },
+      "fill": "$husk.dark"
     },
     {
       "id": "strap",
@@ -1652,32 +1837,32 @@
         "kind": "poly",
         "points": [
           [
-            -8,
-            2
+            -8.4,
+            3.6
           ],
           [
-            -5.6,
-            1.2
-          ],
-          [
-            2,
-            6.8
-          ],
-          [
-            10,
-            7.4
-          ],
-          [
-            10,
-            9
-          ],
-          [
-            1.4,
-            8.6
-          ],
-          [
-            -6.6,
+            -7.2,
             3.2
+          ],
+          [
+            -1.4,
+            9.6
+          ],
+          [
+            8,
+            10.6
+          ],
+          [
+            8,
+            12.2
+          ],
+          [
+            -2,
+            11.4
+          ],
+          [
+            -8.2,
+            5.2
           ]
         ]
       },
@@ -1710,10 +1895,10 @@
     {
       "id": "strap_stitch_a",
       "at": [
-        -3,
-        4.2
+        -4.4,
+        6.6
       ],
-      "rot": 34,
+      "rot": 44,
       "shape": {
         "kind": "rect",
         "w": 1.2,
@@ -1724,10 +1909,10 @@
     {
       "id": "strap_stitch_b",
       "at": [
-        5,
-        7.6
+        3,
+        10.6
       ],
-      "rot": 4,
+      "rot": 6,
       "shape": {
         "kind": "rect",
         "w": 1.2,
@@ -1738,8 +1923,8 @@
     {
       "id": "buckle",
       "at": [
-        9.4,
-        8.2
+        7.6,
+        11.4
       ],
       "shape": {
         "kind": "rect",
@@ -1756,8 +1941,8 @@
     {
       "id": "buckle_pin",
       "at": [
-        9.4,
-        8.2
+        7.6,
+        11.4
       ],
       "shape": {
         "kind": "rect",
@@ -1784,67 +1969,79 @@
             2
           ],
           [
-            -14.2,
+            -14.4,
             -6
           ],
           [
-            -12.6,
-            -12.8
+            -13,
+            -13
           ],
           [
-            -9,
-            -18.6
+            -10,
+            -19
           ],
           [
-            -4.4,
-            -22
+            -5.6,
+            -22.8
           ],
           [
-            0.8,
-            -23.4
+            0.6,
+            -24.2
           ],
           [
-            6,
-            -22.4
+            6.6,
+            -23
           ],
           [
-            10.2,
-            -19.4
+            11.4,
+            -19.8
           ],
           [
-            13.2,
-            -15.6
+            14.6,
+            -15.4
           ],
           [
-            15,
+            15.8,
             -12.2
           ],
           [
-            12.4,
+            13.4,
             -13.6
           ],
           [
-            8.2,
-            -17.2
+            9.6,
+            -15.4
           ],
           [
-            0.4,
-            -18.4
+            4.6,
+            -16
           ],
           [
-            -5.4,
-            -15.6
+            -0.6,
+            -14.8
           ],
           [
-            -9,
-            -9
+            -4.8,
+            -11.2
           ],
           [
-            -10.2,
-            1.6
+            -7.4,
+            -6
           ],
           [
-            -9,
+            -8.8,
+            0
+          ],
+          [
+            -9.6,
+            6
+          ],
+          [
+            -9.8,
+            12
+          ],
+          [
+            -9.2,
             18
           ]
         ]
@@ -1885,63 +2082,87 @@
         "kind": "poly",
         "points": [
           [
-            15,
+            15.8,
             -12.2
           ],
           [
-            12.4,
+            13.4,
             -13.6
           ],
           [
-            8.2,
-            -17.2
+            9.6,
+            -15.4
           ],
           [
-            0.4,
-            -18.4
+            4.6,
+            -16
           ],
           [
-            -5.4,
-            -15.6
-          ],
-          [
-            -9,
-            -9
-          ],
-          [
-            -10.2,
-            1.6
-          ],
-          [
-            -9,
-            18
-          ],
-          [
-            -6.6,
-            18
-          ],
-          [
-            -7.8,
-            1.8
-          ],
-          [
-            -6.8,
-            -8
-          ],
-          [
-            -3.6,
-            -13.6
-          ],
-          [
-            1.2,
-            -15.8
-          ],
-          [
-            7.4,
+            -0.6,
             -14.8
           ],
           [
-            11.4,
+            -4.8,
+            -11.2
+          ],
+          [
+            -7.4,
+            -6
+          ],
+          [
+            -8.8,
+            0
+          ],
+          [
+            -9.6,
+            6
+          ],
+          [
+            -9.8,
+            12
+          ],
+          [
+            -9.2,
+            18
+          ],
+          [
+            -6.8,
+            18
+          ],
+          [
+            -7.4,
+            12
+          ],
+          [
+            -7.2,
+            6
+          ],
+          [
+            -6.4,
+            0.2
+          ],
+          [
+            -5.2,
+            -5.2
+          ],
+          [
+            -2.8,
+            -9.8
+          ],
+          [
+            0.6,
+            -13
+          ],
+          [
+            4.6,
+            -13.8
+          ],
+          [
+            9.2,
+            -13.2
+          ],
+          [
+            12.4,
             -11.4
           ]
         ]
@@ -1954,67 +2175,91 @@
         "kind": "poly",
         "points": [
           [
-            15,
+            15.8,
             -12.2
           ],
           [
-            12.4,
+            13.4,
             -13.6
           ],
           [
-            8.2,
-            -17.2
+            9.6,
+            -15.4
           ],
           [
-            0.4,
-            -18.4
+            4.6,
+            -16
           ],
           [
-            -5.4,
-            -15.6
-          ],
-          [
-            -9,
-            -9
-          ],
-          [
-            -10.2,
-            1.6
-          ],
-          [
-            -9,
-            18
-          ],
-          [
-            -7.7,
-            18
-          ],
-          [
-            -8.9,
-            1.7
-          ],
-          [
-            -7.8,
-            -8.4
+            -0.6,
+            -14.8
           ],
           [
             -4.8,
-            -14.4
+            -11.2
           ],
           [
-            0.4,
-            -17
+            -7.4,
+            -6
           ],
           [
-            7.8,
-            -15.9
+            -8.8,
+            0
           ],
           [
-            11.8,
-            -12.6
+            -9.6,
+            6
           ],
           [
-            14.4,
+            -9.8,
+            12
+          ],
+          [
+            -9.2,
+            18
+          ],
+          [
+            -7.9,
+            18
+          ],
+          [
+            -8.5,
+            12
+          ],
+          [
+            -8.3,
+            6
+          ],
+          [
+            -7.5,
+            0.2
+          ],
+          [
+            -6.2,
+            -5.6
+          ],
+          [
+            -3.8,
+            -10.4
+          ],
+          [
+            0,
+            -13.8
+          ],
+          [
+            4.6,
+            -14.8
+          ],
+          [
+            9.4,
+            -14.2
+          ],
+          [
+            12.8,
+            -12.4
+          ],
+          [
+            15.2,
             -11.4
           ]
         ]
@@ -2044,7 +2289,7 @@
     {
       "id": "hood_stitch_a",
       "at": [
-        -8.4,
+        -8.6,
         12
       ],
       "rot": 84,
@@ -2059,7 +2304,7 @@
       "id": "hood_stitch_b",
       "at": [
         -8.7,
-        6.4
+        6.2
       ],
       "rot": 84,
       "shape": {
@@ -2072,10 +2317,10 @@
     {
       "id": "hood_stitch_c",
       "at": [
-        -8.8,
-        0.4
+        -8.0,
+        0.2
       ],
-      "rot": 84,
+      "rot": 80,
       "shape": {
         "kind": "rect",
         "w": 1.3,
@@ -2086,10 +2331,10 @@
     {
       "id": "hood_stitch_d",
       "at": [
-        -7.9,
-        -6.2
+        -6.6,
+        -5.6
       ],
-      "rot": 72,
+      "rot": 64,
       "shape": {
         "kind": "rect",
         "w": 1.3,
@@ -2100,10 +2345,10 @@
     {
       "id": "hood_stitch_e",
       "at": [
-        -5.8,
-        -12.2
+        -4.2,
+        -10.4
       ],
-      "rot": 52,
+      "rot": 48,
       "shape": {
         "kind": "rect",
         "w": 1.3,
@@ -2114,8 +2359,8 @@
     {
       "id": "hood_stitch_f",
       "at": [
-        -1.6,
-        -16.4
+        0.2,
+        -13.9
       ],
       "rot": 18,
       "shape": {
@@ -2128,10 +2373,10 @@
     {
       "id": "hood_stitch_g",
       "at": [
-        5,
-        -16.6
+        5.4,
+        -14.8
       ],
-      "rot": -10,
+      "rot": -4,
       "shape": {
         "kind": "rect",
         "w": 1.3,
@@ -2142,10 +2387,10 @@
     {
       "id": "hood_stitch_h",
       "at": [
-        10.4,
-        -14
+        10.6,
+        -13.6
       ],
-      "rot": -42,
+      "rot": -28,
       "shape": {
         "kind": "rect",
         "w": 1.3,
@@ -2159,7 +2404,7 @@
         "kind": "poly",
         "points": [
           [
-            -11.6,
+            -11.8,
             -3
           ],
           [
@@ -2171,7 +2416,7 @@
             -12.2
           ],
           [
-            -11,
+            -11.2,
             -2.8
           ]
         ]
@@ -2184,19 +2429,19 @@
         "kind": "poly",
         "points": [
           [
-            -12.6,
+            -12.8,
             12
           ],
           [
-            -12,
+            -12.2,
             0.6
           ],
           [
-            -11.4,
+            -11.6,
             0.7
           ],
           [
-            -12,
+            -12.2,
             12.1
           ]
         ]
@@ -2209,20 +2454,20 @@
         "kind": "poly",
         "points": [
           [
-            -7.2,
-            -14.2
+            -7.6,
+            -15.2
+          ],
+          [
+            -2.2,
+            -20.6
           ],
           [
             -1.8,
-            -19.8
+            -20.2
           ],
           [
-            -1.4,
-            -19.4
-          ],
-          [
-            -6.6,
-            -13.8
+            -7,
+            -14.8
           ]
         ]
       },
@@ -2235,19 +2480,19 @@
         "points": [
           [
             -4,
-            -20.6
+            -21.4
           ],
           [
             3.6,
-            -21
+            -21.8
           ],
           [
             3.6,
-            -20.4
+            -21.2
           ],
           [
             -4,
-            -20
+            -20.8
           ]
         ]
       },
@@ -2344,7 +2589,7 @@
       "id": "grommet_far",
       "at": [
         -3.8,
-        -21.6
+        -22.2
       ],
       "shape": {
         "kind": "ellipse",
@@ -2385,7 +2630,7 @@
       "id": "grommet_far_hole",
       "at": [
         -3.8,
-        -21.6
+        -22.2
       ],
       "shape": {
         "kind": "ellipse",
@@ -2401,19 +2646,19 @@
         "points": [
           [
             -4.6,
-            -21.8
+            -22.4
           ],
           [
             -3,
-            -21.8
+            -22.4
           ],
           [
             -2.4,
-            -25.6
+            -26
           ],
           [
             -4,
-            -25.8
+            -26.2
           ]
         ]
       },
@@ -2423,7 +2668,7 @@
       "id": "grommet",
       "at": [
         2.6,
-        -22.6
+        -23.2
       ],
       "shape": {
         "kind": "ellipse",
@@ -2464,7 +2709,7 @@
       "id": "grommet_hole",
       "at": [
         2.6,
-        -22.6
+        -23.2
       ],
       "shape": {
         "kind": "ellipse",
@@ -2477,7 +2722,7 @@
       "id": "grommet_stitch_a",
       "at": [
         0.6,
-        -23.4
+        -24
       ],
       "rot": -30,
       "shape": {
@@ -2491,7 +2736,7 @@
       "id": "grommet_stitch_b",
       "at": [
         4.6,
-        -23.4
+        -24
       ],
       "rot": 30,
       "shape": {
@@ -2508,19 +2753,19 @@
         "points": [
           [
             1.7,
-            -22.8
+            -23.4
           ],
           [
             3.5,
-            -22.8
+            -23.4
           ],
           [
             4.6,
-            -26.4
+            -26.8
           ],
           [
             2.8,
-            -26.6
+            -27
           ]
         ]
       },
