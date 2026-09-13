@@ -1,7 +1,7 @@
 {
   "id": "ss.icon.mine",
   "name": "Spore pod icon",
-  "description": "UI slot icon for the lure cap. Composes `ss.proj.mine` itself via `use` — the thing the icon promises is the thing on the ground — at 0.82 rather than 1.15, because that document grew a stem and a plume of scent when it stopped being a hollow pod. Rim is `$pink`, the cap: the one colour the arsenal is otherwise not allowed, worn by the one weapon whose whole job is to be noticed. `$pheromone` would have been the truer token for a signal and is 15.3 from the Wing's `$arcane`, where `$pink` is 21.3 — the rims have to stay eight colours.",
+  "description": "UI slot icon for the lure cup. Composes `ss.proj.mine` itself via `use` — the thing the icon promises is the thing on the ground — at 0.82 rather than 1.15, because that document grew a post, a halo and trip-hairs when it stopped being a hollow pod. Rim is `$pink`, the cap: the one colour the arsenal is otherwise not allowed, worn by the one weapon whose whole job is to be noticed. `$pheromone` would have been the truer token for a signal and is 15.3 from the Wing's `$arcane`, where `$pink` is 21.3 — the rims have to stay eight colours.",
   "tags": ["ss-icon"],
   "size": [32, 32],
   "parts": [
