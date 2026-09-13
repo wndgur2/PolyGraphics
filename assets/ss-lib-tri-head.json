@@ -1,7 +1,7 @@
 {
   "id": "ss.lib.tri-head",
   "name": "Tri's head",
-  "description": "Tri's head, drawn on its own and large, to be composed into `ss.char.tri` by `use` at about a fifth of this size, the way Dot's is. Tri is the spitter: a survivor that let the hive's work be done on it so it could throw acid, and the head says so before the belly does. Under the jaw the throat has swollen into a pouch — the gland, veined, with a faint bile light in it — over a short teal scarf and the collar. The mouth and nose are under a leather muzzle strapped round the jaw, seamed and stitched, with a brass spout at the front stained where the acid comes out and a drop hanging from it. Above it the face shows from the brow to the muzzle on the same three-quarter skull as Dot's, a little rounder in the cheek: brows up, a near eye a touch wider than Dot's glancing forward, the far one foreshortened at the far edge, both with a bile-yellow iris. A close leather cap covers the skull with a pair of goggles pushed up on it, their teal glass catching a glint, and two dead feelers lie back along the cap — the roots are here; the rest belongs to the character document, where they can be animated. No skin anywhere but the face and the throat.",
+  "description": "Tri's head, drawn on its own and large, to be composed into `ss.char.tri` by `use` at about a fifth of this size, the way Dot's is. Tri is the spitter: a survivor that let the hive's work be done on it so it could throw acid, and the head says so before the belly does. Under the jaw the throat has swollen into a pouch — the gland, veined, with a faint bile light in it — over a short teal scarf and the collar. The mouth and nose are under a leather muzzle strapped round the jaw, seamed and stitched, with a brass spout at the front stained where the acid comes out and a drop hanging from it. Above it the face shows from the brow to the muzzle on the same three-quarter skull as Dot's, a little rounder in the cheek: brows up, a near eye a touch wider than Dot's glancing forward, the far one foreshortened at the far edge, both with a bile-yellow iris. A close leather cap covers the skull with a pair of goggles pushed up on it, their teal glass catching a glint. No feelers: those are Dot's weapon, and Tri never had them. No skin anywhere but the face and the throat.",
   "tags": [
     "ss-lib"
   ],
@@ -10,56 +10,6 @@
     56
   ],
   "parts": [
-    {
-      "id": "feeler_far_root",
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -6.6,
-            -15.2
-          ],
-          [
-            -5.2,
-            -15.8
-          ],
-          [
-            -7.6,
-            -19.4
-          ],
-          [
-            -8.8,
-            -18.6
-          ]
-        ]
-      },
-      "fill": "$slate.dark"
-    },
-    {
-      "id": "feeler_root",
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -1.0,
-            -19.0
-          ],
-          [
-            0.6,
-            -19.4
-          ],
-          [
-            -1.6,
-            -23.0
-          ],
-          [
-            -3.0,
-            -22.4
-          ]
-        ]
-      },
-      "fill": "$slate"
-    },
     {
       "id": "neck",
       "shape": {
