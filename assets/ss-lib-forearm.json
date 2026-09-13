@@ -1,0 +1,104 @@
+{
+  "id": "ss.lib.forearm",
+  "name": "Suit forearm",
+  "description": "Elbow to fingertips of a survivor's exploration suit, hinged at the origin: the elbow sits at [0,0] and the forearm hangs down +y into a sealed glove. Placed at the elbow of `ss.lib.upperarm` and swung with its own `rot` track, so an arm bends at the elbow instead of swinging straight. A cuff ring where the glove seals. `far` is the arm behind the body, a step darker.",
+  "tags": [
+    "ss-lib"
+  ],
+  "size": [
+    8,
+    12
+  ],
+  "anchor": [
+    0.5,
+    0.1
+  ],
+  "parts": [
+    {
+      "id": "fore",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.5,
+            -0.7
+          ],
+          [
+            1.5,
+            -0.7
+          ],
+          [
+            1.4,
+            6.6
+          ],
+          [
+            -1.3,
+            6.6
+          ]
+        ]
+      },
+      "fill": "$slate.light",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "cuff",
+      "at": [
+        0.05,
+        6.4
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 3.3,
+        "h": 1.2,
+        "corner": 0.3
+      },
+      "fill": "$steel"
+    },
+    {
+      "id": "glove",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.5,
+            6.8
+          ],
+          [
+            1.6,
+            6.8
+          ],
+          [
+            1.9,
+            9.4
+          ],
+          [
+            0.4,
+            10.2
+          ],
+          [
+            -1.5,
+            9.6
+          ]
+        ]
+      },
+      "fill": "$steel",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    }
+  ],
+  "variants": {
+    "far": {
+      "description": "The far forearm, a step darker.",
+      "set": {
+        "fore.fill": "$slate",
+        "cuff.fill": "$steel",
+        "glove.fill": "$steel.dark"
+      }
+    }
+  }
+}

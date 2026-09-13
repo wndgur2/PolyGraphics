@@ -1,35 +1,3091 @@
 {
   "id": "ss.char.hourglass",
   "name": "Hourglass",
-  "description": "Sealed survivor pinched at the waist — two chambers joined by a throat that nothing passes through any more. Same dead organ, same dead feelers as the other seven.",
-  "tags": ["ss-char"],
-  "size": [32, 32],
-  "meta": { "radius": 12 },
+  "description": "The wasp. The same sealed suit, tailored: the chest shell drawn in to nothing at the waist and flaring again into a skirt of segmented abdomen plates banded in dark green and black — the hourglass it used to be, worn as a silhouette — and two long membrane panels folded down the back from the shoulders, veined, that lift a hair when she breathes: a wing-cape. On the near hip rides a tether drum with the counterweight wound on it, a Soldier's head-plate packed solid, which is what she swings when the hive closes; it is stowed, not carried. She stands with the near hand set on that hip. Two dead feelers curve back from the crown in the same dark green as the bands. Same dead core in the chest. Drawn facing +x; the game flips it.",
+  "tags": [
+    "ss-char"
+  ],
+  "size": [
+    40,
+    56
+  ],
+  "meta": {
+    "radius": 11.5
+  },
   "parts": [
-    { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [2.2, -10.4], "rot": -38, "scale": 0.52 },
-    { "id": "shell_top", "shape": { "kind": "poly", "points": [[-11.4, -12], [11.4, -12], [1.8, -0.6], [-1.8, -0.6]] }, "fill": "$venom", "stroke": { "color": "$ink", "width": "thin" } },
-    { "id": "shell_bot", "shape": { "kind": "poly", "points": [[-11.4, 12], [11.4, 12], [1.8, 0.6], [-1.8, 0.6]] }, "fill": "$venom", "stroke": { "color": "$ink", "width": "thin" } },
-    { "id": "core_top", "shape": { "kind": "poly", "points": [[-8.4, -9.8], [8.4, -9.8], [1.3, -1.4], [-1.3, -1.4]] }, "fill": "$venom.light2" },
-    { "id": "core_bot", "shape": { "kind": "poly", "points": [[-8.4, 9.8], [8.4, 9.8], [1.3, 1.4], [-1.3, 1.4]] }, "fill": "$venom.light2" },
-    { "id": "throat", "shape": { "kind": "rect", "w": 4.4, "h": 2.4, "corner": 1 }, "fill": "$venom.dark2" },
-    { "id": "gloss", "at": [-4.4, -7.6], "shape": { "kind": "ellipse", "rx": 2.8, "ry": 1.2 }, "fill": "$silent@soft" },
-    { "id": "antenna", "use": "ss.lib.antenna", "variant": "dead", "at": [5.4, -11.4], "rot": -6, "scale": 0.72 },
-    { "id": "organ", "use": "ss.lib.organ", "variant": "dead", "at": [4.2, -6], "scale": 0.58 }
+    {
+      "id": "antenna_far",
+      "use": "ss.lib.antenna",
+      "variant": "dead",
+      "at": [
+        0,
+        -24.6
+      ],
+      "rot": -118,
+      "scale": [
+        0.48,
+        0.92
+      ]
+    },
+    {
+      "id": "antenna",
+      "use": "ss.lib.antenna",
+      "variant": "dead",
+      "at": [
+        1.8,
+        -25
+      ],
+      "rot": -104,
+      "scale": [
+        0.5,
+        0.98
+      ]
+    },
+    {
+      "id": "wing_far",
+      "at": [
+        -3.4,
+        -16.8
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            -2.6,
+            2.4
+          ],
+          [
+            -5,
+            10
+          ],
+          [
+            -5.4,
+            20
+          ],
+          [
+            -3.6,
+            17
+          ],
+          [
+            -1.8,
+            8
+          ],
+          [
+            0.4,
+            2
+          ]
+        ]
+      },
+      "fill": "$slate.light@soft"
+    },
+    {
+      "id": "wing",
+      "at": [
+        -2.6,
+        -17.4
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            -2.2,
+            2.6
+          ],
+          [
+            -4.6,
+            11
+          ],
+          [
+            -5.2,
+            22
+          ],
+          [
+            -3,
+            18.4
+          ],
+          [
+            -1.2,
+            9
+          ],
+          [
+            0.6,
+            2.2
+          ]
+        ]
+      },
+      "fill": "$steel.dark@heavy",
+      "stroke": {
+        "color": "$steel",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "vein",
+      "at": [
+        -2.6,
+        -17.4
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.2,
+            0.4
+          ],
+          [
+            -2.6,
+            9
+          ],
+          [
+            -4.2,
+            20
+          ],
+          [
+            -3.8,
+            20.1
+          ],
+          [
+            -2.2,
+            9.2
+          ],
+          [
+            0.2,
+            0.6
+          ]
+        ]
+      },
+      "fill": "$steel"
+    },
+    {
+      "id": "upperarm_far",
+      "use": "ss.lib.upperarm",
+      "variant": "far",
+      "at": [
+        -3.6,
+        -17.2
+      ],
+      "rot": 6
+    },
+    {
+      "id": "forearm_far",
+      "use": "ss.lib.forearm",
+      "variant": "far",
+      "at": [
+        -3.6,
+        -9.2
+      ],
+      "rot": -4
+    },
+    {
+      "id": "thigh_far",
+      "use": "ss.lib.thigh",
+      "variant": "far",
+      "at": [
+        -1.4,
+        -1.8
+      ],
+      "rot": 6
+    },
+    {
+      "id": "shin_far",
+      "use": "ss.lib.shin",
+      "variant": "far",
+      "at": [
+        -1.4,
+        8.2
+      ],
+      "rot": 0
+    },
+    {
+      "id": "thigh",
+      "use": "ss.lib.thigh",
+      "at": [
+        2.2,
+        -2.0
+      ],
+      "rot": -5
+    },
+    {
+      "id": "shin",
+      "use": "ss.lib.shin",
+      "at": [
+        2.2,
+        8.0
+      ],
+      "rot": 3
+    },
+    {
+      "id": "tasset_far",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.4,
+            -1.6
+          ],
+          [
+            -0.6,
+            -1.4
+          ],
+          [
+            -1.4,
+            5.6
+          ],
+          [
+            -5.6,
+            4.4
+          ]
+        ]
+      },
+      "fill": "$slate",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "tasset",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.8,
+            -1.4
+          ],
+          [
+            4.8,
+            -1.6
+          ],
+          [
+            6.2,
+            4.6
+          ],
+          [
+            0,
+            5.8
+          ]
+        ]
+      },
+      "fill": "$slate.light",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "tasset_band",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.6,
+            2.4
+          ],
+          [
+            5.6,
+            2.2
+          ],
+          [
+            5.9,
+            3.4
+          ],
+          [
+            -0.4,
+            3.6
+          ]
+        ]
+      },
+      "fill": "$venom.dark2"
+    },
+    {
+      "id": "tasset_far_band",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.2,
+            2.2
+          ],
+          [
+            -1,
+            2.4
+          ],
+          [
+            -1.2,
+            3.6
+          ],
+          [
+            -5.5,
+            3.4
+          ]
+        ]
+      },
+      "fill": "$venom.dark2"
+    },
+    {
+      "id": "pelvis",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.2,
+            -4.4
+          ],
+          [
+            4.8,
+            -4.4
+          ],
+          [
+            4.6,
+            -0.2
+          ],
+          [
+            2.8,
+            1.4
+          ],
+          [
+            -1.6,
+            1.6
+          ],
+          [
+            -4.0,
+            -0.4
+          ]
+        ]
+      },
+      "fill": "$slate.light",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "torso",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            5.4,
+            -18.2
+          ],
+          [
+            -4.6,
+            -18.4
+          ],
+          [
+            -5.2,
+            -10.4
+          ],
+          [
+            -4.2,
+            -3.6
+          ],
+          [
+            4.4,
+            -3.4
+          ],
+          [
+            5.8,
+            -10.4
+          ]
+        ]
+      },
+      "fill": "$slate.light",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "abd_a",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.6,
+            -8.2
+          ],
+          [
+            5.0,
+            -8.2
+          ],
+          [
+            4.8,
+            -6.6
+          ],
+          [
+            -4.5,
+            -6.6
+          ]
+        ]
+      },
+      "fill": "$steel.dark"
+    },
+    {
+      "id": "abd_b",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.4,
+            -5.4
+          ],
+          [
+            4.7,
+            -5.4
+          ],
+          [
+            4.5,
+            -4
+          ],
+          [
+            -4.3,
+            -4
+          ]
+        ]
+      },
+      "fill": "$steel.dark"
+    },
+    {
+      "id": "chest",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            4.8,
+            -17.4
+          ],
+          [
+            -3.8,
+            -17.6
+          ],
+          [
+            -4.6,
+            -12.2
+          ],
+          [
+            -3.4,
+            -8.8
+          ],
+          [
+            3.8,
+            -8.6
+          ],
+          [
+            5.2,
+            -12.2
+          ]
+        ]
+      },
+      "fill": "$steel.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "chest_light",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.2,
+            -16.8
+          ],
+          [
+            0.4,
+            -16.9
+          ],
+          [
+            -0.2,
+            -9.6
+          ],
+          [
+            -2.8,
+            -9.4
+          ],
+          [
+            -3.8,
+            -12.2
+          ]
+        ]
+      },
+      "fill": "$steel"
+    },
+    {
+      "id": "chest_seam",
+      "at": [
+        0.6,
+        -13
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 0.5,
+        "h": 8.2
+      },
+      "fill": "$slate"
+    },
+    {
+      "id": "stripe",
+      "at": [
+        -3.4,
+        -13.2
+      ],
+      "rot": 4,
+      "shape": {
+        "kind": "rect",
+        "w": 0.8,
+        "h": 6.4
+      },
+      "fill": "$venom.dark2"
+    },
+    {
+      "id": "waist_l",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.6,
+            -9.4
+          ],
+          [
+            -2.2,
+            -9.2
+          ],
+          [
+            -2.8,
+            -4.2
+          ],
+          [
+            -4.4,
+            -4
+          ]
+        ]
+      },
+      "fill": "$slate.dark"
+    },
+    {
+      "id": "waist_r",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            4.8,
+            -9.2
+          ],
+          [
+            2.6,
+            -9
+          ],
+          [
+            3.2,
+            -4.1
+          ],
+          [
+            4.6,
+            -3.9
+          ]
+        ]
+      },
+      "fill": "$slate.dark"
+    },
+    {
+      "id": "band_a",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.5,
+            -8.2
+          ],
+          [
+            4.9,
+            -8.2
+          ],
+          [
+            4.7,
+            -7.4
+          ],
+          [
+            -4.4,
+            -7.4
+          ]
+        ]
+      },
+      "fill": "$venom.dark2"
+    },
+    {
+      "id": "band_b",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.3,
+            -5.4
+          ],
+          [
+            4.6,
+            -5.4
+          ],
+          [
+            4.5,
+            -4.6
+          ],
+          [
+            -4.3,
+            -4.6
+          ]
+        ]
+      },
+      "fill": "$venom.dark2"
+    },
+    {
+      "id": "core_socket",
+      "at": [
+        0.6,
+        -13.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 1.9,
+        "width": 0.7
+      },
+      "fill": "$steel"
+    },
+    {
+      "id": "organ",
+      "use": "ss.lib.organ",
+      "variant": "dead",
+      "at": [
+        0.6,
+        -13.4
+      ],
+      "scale": 0.34
+    },
+    {
+      "id": "belt",
+      "at": [
+        0.2,
+        -2.7
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 10.4,
+        "h": 1.8,
+        "corner": 0.3
+      },
+      "fill": "$steel",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "buckle",
+      "at": [
+        1.4,
+        -2.7
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 2,
+        "h": 1.4,
+        "corner": 0.2
+      },
+      "fill": "$steel"
+    },
+    {
+      "id": "drum",
+      "at": [
+        6,
+        -1
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.6,
+        "ry": 2.2
+      },
+      "fill": "$steel",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "drum_chain",
+      "at": [
+        6,
+        -1
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 1.7,
+        "width": 0.6
+      },
+      "fill": "$steel.light"
+    },
+    {
+      "id": "drum_hub",
+      "at": [
+        6,
+        -1
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.7
+      },
+      "fill": "$steel"
+    },
+    {
+      "id": "weight",
+      "at": [
+        7.4,
+        4.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.1
+      },
+      "fill": "$steel.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "weight_band",
+      "at": [
+        7.4,
+        4.2
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 1.4,
+        "width": 0.6
+      },
+      "fill": "$venom.dark2"
+    },
+    {
+      "id": "weight_light",
+      "at": [
+        6.7,
+        3.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.5
+      },
+      "fill": "$steel.light"
+    },
+    {
+      "id": "upperarm",
+      "use": "ss.lib.upperarm",
+      "at": [
+        5.0,
+        -17.0
+      ],
+      "rot": -6
+    },
+    {
+      "id": "forearm",
+      "use": "ss.lib.forearm",
+      "at": [
+        5.0,
+        -9.0
+      ],
+      "rot": 44
+    },
+    {
+      "id": "neck",
+      "at": [
+        1.1,
+        -18.9
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.5,
+        "ry": 1.1
+      },
+      "fill": "$steel",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "helmet",
+      "at": [
+        1.2,
+        -22.2
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3,
+        "ry": 3.3
+      },
+      "fill": "$steel",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "helmet_shade",
+      "at": [
+        -0.30000000000000004,
+        -22.0
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.5,
+        "ry": 3
+      },
+      "fill": "$steel.dark"
+    },
+    {
+      "id": "visor",
+      "at": [
+        1.2,
+        -22.2
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.2,
+            -1.6
+          ],
+          [
+            2.9,
+            -1.2
+          ],
+          [
+            3.05,
+            0.9
+          ],
+          [
+            -0.2,
+            1.3
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "visor_glint",
+      "at": [
+        2.7,
+        -23.099999999999998
+      ],
+      "rot": 6,
+      "shape": {
+        "kind": "rect",
+        "w": 1.6,
+        "h": 0.4,
+        "corner": 0.15
+      },
+      "fill": "$venom.dark"
+    },
+    {
+      "id": "breather",
+      "at": [
+        3.3,
+        -20.099999999999998
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1.4,
+        "h": 1.1,
+        "corner": 0.3
+      },
+      "fill": "$steel"
+    }
   ],
   "animations": {
     "idle": {
-      "description": "the shell holds its breath; the dead feelers keep sweeping for a signal that never comes",
-      "duration": 1.15,
+      "description": "a stance with the weight on one hip and the near hand set on it: a breath through the drawn-in chest, the folded wing panels lifting a hair on the rise, the feelers curving back and sweeping slow",
+      "duration": 2.0,
       "tracks": [
-        { "part": "shell_top", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
-        { "part": "shell_bot", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
-        { "part": "core_top", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
-        { "part": "core_bot", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
-        { "part": "throat", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
-        { "part": "gloss", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
-        { "part": "organ", "prop": "y", "keys": [[0, 0], [0.5, -1.4], [1, 0]] },
-        { "part": "antenna", "prop": "rot", "keys": [[0, -13], [0.35, 17], [0.7, -4], [1, -13]] },
-        { "part": "antenna_far", "prop": "rot", "keys": [[0, 14], [0.4, -12], [0.75, 6], [1, 14]] }
+        {
+          "part": "torso",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "abd_a",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "abd_b",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chest",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chest_light",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chest_seam",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "stripe",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "core_socket",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "organ",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "upperarm",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "forearm",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "upperarm_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "forearm_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "wing",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "vein",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "wing_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "waist_l",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "waist_r",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_a",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_b",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "drum",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "drum_chain",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "drum_hub",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "weight",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "weight_band",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "weight_light",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "neck",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.14,
+              0.1
+            ],
+            [
+              0.62,
+              -0.7
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "helmet",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.14,
+              0.1
+            ],
+            [
+              0.62,
+              -0.7
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "helmet_shade",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.14,
+              0.1
+            ],
+            [
+              0.62,
+              -0.7
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "visor",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.14,
+              0.1
+            ],
+            [
+              0.62,
+              -0.7
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "visor_glint",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.14,
+              0.1
+            ],
+            [
+              0.62,
+              -0.7
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "breather",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.14,
+              0.1
+            ],
+            [
+              0.62,
+              -0.7
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "upperarm_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              1.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "forearm_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              1.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "antenna",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -4
+            ],
+            [
+              0.4,
+              4
+            ],
+            [
+              0.75,
+              -1
+            ],
+            [
+              1,
+              -4
+            ]
+          ]
+        },
+        {
+          "part": "antenna_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              3
+            ],
+            [
+              0.45,
+              -4
+            ],
+            [
+              0.8,
+              1
+            ],
+            [
+              1,
+              3
+            ]
+          ]
+        },
+        {
+          "part": "wing",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -3
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "vein",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -3
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "wing_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -2.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "walk": {
+      "description": "a stride the hips lead: the tassets swing over the thighs, the wing panels tilt off the back with each step, the stowed weight rides the hip, and the near arm keeps its hand at the drum",
+      "duration": 0.74,
+      "tracks": [
+        {
+          "part": "thigh",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -22
+            ],
+            [
+              0.5,
+              22
+            ],
+            [
+              1,
+              -22
+            ]
+          ]
+        },
+        {
+          "part": "thigh_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              22
+            ],
+            [
+              0.5,
+              -22
+            ],
+            [
+              1,
+              22
+            ]
+          ]
+        },
+        {
+          "part": "shin",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -12
+            ],
+            [
+              0.25,
+              38
+            ],
+            [
+              0.5,
+              28
+            ],
+            [
+              0.75,
+              2
+            ],
+            [
+              1,
+              -12
+            ]
+          ]
+        },
+        {
+          "part": "shin",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              3.75
+            ],
+            [
+              0.5,
+              -3.75
+            ],
+            [
+              1,
+              3.75
+            ]
+          ]
+        },
+        {
+          "part": "shin",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -0.73
+            ],
+            [
+              0.25,
+              0
+            ],
+            [
+              0.5,
+              -0.73
+            ],
+            [
+              0.75,
+              0
+            ],
+            [
+              1,
+              -0.73
+            ]
+          ]
+        },
+        {
+          "part": "shin_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              28
+            ],
+            [
+              0.25,
+              2
+            ],
+            [
+              0.5,
+              -12
+            ],
+            [
+              0.75,
+              38
+            ],
+            [
+              1,
+              28
+            ]
+          ]
+        },
+        {
+          "part": "shin_far",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              -3.75
+            ],
+            [
+              0.5,
+              3.75
+            ],
+            [
+              1,
+              -3.75
+            ]
+          ]
+        },
+        {
+          "part": "shin_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -0.73
+            ],
+            [
+              0.25,
+              0
+            ],
+            [
+              0.5,
+              -0.73
+            ],
+            [
+              0.75,
+              0
+            ],
+            [
+              1,
+              -0.73
+            ]
+          ]
+        },
+        {
+          "part": "upperarm_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -14
+            ],
+            [
+              0.5,
+              14
+            ],
+            [
+              1,
+              -14
+            ]
+          ]
+        },
+        {
+          "part": "forearm_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              14
+            ],
+            [
+              0.25,
+              22
+            ],
+            [
+              0.5,
+              28
+            ],
+            [
+              0.75,
+              22
+            ],
+            [
+              1,
+              14
+            ]
+          ]
+        },
+        {
+          "part": "forearm_far",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              1.94
+            ],
+            [
+              0.5,
+              -1.94
+            ],
+            [
+              1,
+              1.94
+            ]
+          ]
+        },
+        {
+          "part": "forearm_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -0.24
+            ],
+            [
+              0.25,
+              0
+            ],
+            [
+              0.5,
+              -0.24
+            ],
+            [
+              0.75,
+              0
+            ],
+            [
+              1,
+              -0.24
+            ]
+          ]
+        },
+        {
+          "part": "pelvis",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "torso",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "abd_a",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "abd_b",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "chest",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "chest_light",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "chest_seam",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "stripe",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "core_socket",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "organ",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "belt",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "buckle",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "upperarm",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "upperarm_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "wing",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "vein",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "wing_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "waist_l",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "waist_r",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "band_a",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "band_b",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "drum",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "drum_chain",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "drum_hub",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "weight",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "weight_band",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "weight_light",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              0.25,
+              -0.8
+            ],
+            [
+              0.5,
+              0.2
+            ],
+            [
+              0.75,
+              -0.8
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "neck",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.1
+            ],
+            [
+              0.3,
+              -1.0
+            ],
+            [
+              0.5,
+              0.1
+            ],
+            [
+              0.8,
+              -1.0
+            ],
+            [
+              1,
+              0.1
+            ]
+          ]
+        },
+        {
+          "part": "helmet",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.1
+            ],
+            [
+              0.3,
+              -1.0
+            ],
+            [
+              0.5,
+              0.1
+            ],
+            [
+              0.8,
+              -1.0
+            ],
+            [
+              1,
+              0.1
+            ]
+          ]
+        },
+        {
+          "part": "helmet_shade",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.1
+            ],
+            [
+              0.3,
+              -1.0
+            ],
+            [
+              0.5,
+              0.1
+            ],
+            [
+              0.8,
+              -1.0
+            ],
+            [
+              1,
+              0.1
+            ]
+          ]
+        },
+        {
+          "part": "visor",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.1
+            ],
+            [
+              0.3,
+              -1.0
+            ],
+            [
+              0.5,
+              0.1
+            ],
+            [
+              0.8,
+              -1.0
+            ],
+            [
+              1,
+              0.1
+            ]
+          ]
+        },
+        {
+          "part": "visor_glint",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.1
+            ],
+            [
+              0.3,
+              -1.0
+            ],
+            [
+              0.5,
+              0.1
+            ],
+            [
+              0.8,
+              -1.0
+            ],
+            [
+              1,
+              0.1
+            ]
+          ]
+        },
+        {
+          "part": "breather",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.1
+            ],
+            [
+              0.3,
+              -1.0
+            ],
+            [
+              0.5,
+              0.1
+            ],
+            [
+              0.8,
+              -1.0
+            ],
+            [
+              1,
+              0.1
+            ]
+          ]
+        },
+        {
+          "part": "antenna",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -3
+            ],
+            [
+              0.25,
+              4
+            ],
+            [
+              0.5,
+              -3
+            ],
+            [
+              0.75,
+              4
+            ],
+            [
+              1,
+              -3
+            ]
+          ]
+        },
+        {
+          "part": "antenna_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              3
+            ],
+            [
+              0.25,
+              -3
+            ],
+            [
+              0.5,
+              3
+            ],
+            [
+              0.75,
+              -3
+            ],
+            [
+              1,
+              3
+            ]
+          ]
+        },
+        {
+          "part": "upperarm",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              4
+            ],
+            [
+              0.5,
+              -4
+            ],
+            [
+              1,
+              4
+            ]
+          ]
+        },
+        {
+          "part": "forearm",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              3
+            ],
+            [
+              0.5,
+              -3
+            ],
+            [
+              1,
+              3
+            ]
+          ]
+        },
+        {
+          "part": "forearm",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              -0.5
+            ],
+            [
+              0.5,
+              0.5
+            ],
+            [
+              1,
+              -0.5
+            ]
+          ]
+        },
+        {
+          "part": "wing",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              2
+            ],
+            [
+              0.25,
+              -5
+            ],
+            [
+              0.5,
+              2
+            ],
+            [
+              0.75,
+              -5
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        },
+        {
+          "part": "vein",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              2
+            ],
+            [
+              0.25,
+              -5
+            ],
+            [
+              0.5,
+              2
+            ],
+            [
+              0.75,
+              -5
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        },
+        {
+          "part": "wing_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -2
+            ],
+            [
+              0.25,
+              4
+            ],
+            [
+              0.5,
+              -2
+            ],
+            [
+              0.75,
+              4
+            ],
+            [
+              1,
+              -2
+            ]
+          ]
+        },
+        {
+          "part": "tasset",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -8
+            ],
+            [
+              0.5,
+              8
+            ],
+            [
+              1,
+              -8
+            ]
+          ]
+        },
+        {
+          "part": "tasset_band",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -8
+            ],
+            [
+              0.5,
+              8
+            ],
+            [
+              1,
+              -8
+            ]
+          ]
+        },
+        {
+          "part": "tasset_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              8
+            ],
+            [
+              0.5,
+              -8
+            ],
+            [
+              1,
+              8
+            ]
+          ]
+        },
+        {
+          "part": "tasset_far_band",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              8
+            ],
+            [
+              0.5,
+              -8
+            ],
+            [
+              1,
+              8
+            ]
+          ]
+        },
+        {
+          "part": "weight",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.5
+            ],
+            [
+              0.5,
+              -0.6
+            ],
+            [
+              1,
+              0.5
+            ]
+          ]
+        },
+        {
+          "part": "weight_band",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.5
+            ],
+            [
+              0.5,
+              -0.6
+            ],
+            [
+              1,
+              0.5
+            ]
+          ]
+        },
+        {
+          "part": "weight_light",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.5
+            ],
+            [
+              0.5,
+              -0.6
+            ],
+            [
+              1,
+              0.5
+            ]
+          ]
+        }
       ]
     }
   }
