@@ -1,11 +1,11 @@
 {
   "id": "ss.icon.card",
   "name": "Wing blade icon",
-  "description": "UI slot icon for the wing blade. Composes `ss.proj.card` via `use`, tilted the way the wand icon tilts its dart, so the slot shows the wing membrane itself instead of the old hand-drawn i_card (white rounded rect, red pip).",
+  "description": "UI slot icon for the wing blade. Composes `ss.proj.card` via `use`, tilted the way the wand icon tilts its dart, so the slot shows the wing membrane itself instead of the old hand-drawn i_card (white rounded rect, red pip). Rim is `$arcane` \u2014 ahead of the art on purpose: this is being redrawn as a grenade thorn and going purple, and the rim is where that lands first.",
   "tags": ["ss-icon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$silent" },
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$arcane" },
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
     { "id": "glyph", "use": "ss.proj.card", "rot": -20, "scale": 1.4 }
   ],

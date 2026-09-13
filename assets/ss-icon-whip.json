@@ -1,7 +1,7 @@
 {
   "id": "ss.icon.whip",
   "name": "Lash icon",
-  "description": "UI slot icon for the mandible lash. Composes the real `ss.proj.slash` arc via `use` at a quarter scale, so retuning the weapon's sweep restyles its icon in the same edit.",
+  "description": "UI slot icon for the mandible lash. Composes the real `ss.proj.slash` arc via `use` at a quarter scale, so retuning the weapon's sweep restyles its icon in the same edit. Rim is `$husk` \u2014 the bone the mandible is, and three quarters of what this icon draws.",
   "tags": ["ss-icon"],
   "size": [32, 32],
   "parts": [
