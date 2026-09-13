@@ -15,13 +15,14 @@
   ],
   "variants": {
     "evolved": {
-      "description": "Gold-rimmed evolved twin. Takes the arm's own evolved variant with it, so the slot shows the amber limbs Widow's Grip actually reaches with.",
+      "description": "Widow's Grip. The rim goes gold the way every evolved slot in the roster does, but the three limbs are swapped out for ss.lib.spider-arm-widow \u2014 banded, spurred, hooked on three toes, bruised purple carrying blood \u2014 rather than recoloured, because the evolution changes what the arm is and not just what colour it is. Same fan, same knuckle, same three angles, so the two slots read as one weapon at two ages.",
       "set": {
         "tile.fill": "$gold",
-        "arm_0.variant": "evolved",
-        "arm_1.variant": "evolved",
-        "arm_2.variant": "evolved",
-        "knuckle.fill": "$timber"
+        "arm_0.use": "ss.lib.spider-arm-widow",
+        "arm_1.use": "ss.lib.spider-arm-widow",
+        "arm_2.use": "ss.lib.spider-arm-widow",
+        "knuckle.fill": "$carapace.dark",
+        "knuckle_shadow.fill": "$ink"
       }
     }
   }
