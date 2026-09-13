@@ -1,0 +1,30 @@
+{
+  "id": "ss.fx.acid-jet",
+  "name": "Acid pour",
+  "description": "One length of the evolved spit's pour, drawn pointing +x. The weapon does not draw a stream as one long shape — it throws this bead every few pixels down the arc and lets them overlap, because a rope stretched between two ends stretches its texture with it, and acid that stretches reads as rubber. It also carries no outline of its own, which is the one thing a drawing stamped over itself cannot have: a rim baked into the bead prints a seam everywhere the next bead lands on it, and a green tube ruled into segments reads as a grub rather than as liquid. The weapon draws the whole rope's silhouette in a pass of its own underneath and lets these blend into one mass on top. It also carries no outline of its own, which is the one thing a drawing stamped over itself cannot have: a rim baked into the bead prints a seam everywhere the next bead lands on it, and a green tube ruled into segments reads as a grub rather than as liquid. The weapon draws the whole rope's silhouette as a pass of its own underneath and lets these blend into one mass on top. So the drawing has to work at any spacing: a teardrop with the mass at the front where the air holds it, drawn out behind into the bead in front of it, and no clean curve anywhere on the outline. The chunks are the point of the thing. This is not a clear liquid — it is a gut full of half-digested matter, so the grit rides visibly inside the bile and drifts backward through it as the pour flies, which is what sells the acid as moving rather than as a shape being slid across the ground. Two greens keep it apart from the Gland's teal bolt: bile, which is venom pulled toward gold, against that one's spore. One hard white gloss on the shoulder is the whole wet read.",
+  "tags": ["ss-fx", "liquid"],
+  "size": [48, 28],
+  "meta": { "halfHeight": 10.3 },
+  "parts": [
+    { "id": "body", "shape": { "kind": "poly", "points": [[21.7, 0.0], [20.7, 2.6], [20.0, 5.2], [16.4, 7.0], [13.4, 8.7], [9.5, 9.5], [5.8, 9.9], [2.4, 10.1], [-1.1, 8.7], [-3.6, 7.9], [-5.5, 6.6], [-6.8, 5.3], [-7.9, 4.3], [-7.8, 3.0], [-8.0, 2.1], [-7.8, 1.2], [-7.8, 0.6], [-7.6, 0.0], [-7.5, -0.6], [-7.8, -1.3], [-7.9, -2.0], [-8.1, -3.1], [-7.6, -4.2], [-6.8, -5.3], [-5.6, -6.8], [-3.6, -7.8], [-1.0, -9.0], [2.1, -9.5], [5.8, -9.9], [10.0, -9.8], [13.4, -8.7], [17.2, -7.3], [19.9, -5.2], [21.2, -2.7]] }, "fill": { "gradient": "radial", "from": [0.74, 0.3], "stops": [[0, "$bile.light"], [0.45, "$bile"], [1, "$bile.dark2"]] } },
+    { "id": "grit", "at": [4.0, 0.2], "repeat": { "of": { "kind": "ngon", "sides": 5, "r": 2.0 }, "count": 8, "area": [26, 13], "seed": 41, "jitterRot": true, "scaleRange": [0.55, 1.35] }, "fill": "$soil@heavy" },
+    { "id": "seed", "at": [7.0, -0.6], "repeat": { "of": { "kind": "ngon", "sides": 6, "r": 1.7 }, "count": 4, "area": [22, 11], "seed": 17, "jitterRot": true, "scaleRange": [0.6, 1.2] }, "fill": "$bile.dark2" },
+    { "id": "sheen", "at": [6.0, -4.4], "rot": -14, "shape": { "kind": "ellipse", "rx": 5.2, "ry": 2.0 }, "fill": "$bile.light2@soft" },
+    { "id": "gloss", "at": [10.2, -4.2], "shape": { "kind": "circle", "r": 1.5 }, "fill": "$silent" }
+  ],
+  "animations": {
+    "flow": {
+      "description": "the pour works as it flies — the grit rides backward through the bile, the surface swells, the gloss walks the shoulder",
+      "duration": 0.36,
+      "tracks": [
+        { "part": "grit", "prop": "x", "keys": [[0, 5.0], [1, -6.0]], "ease": "linear" },
+        { "part": "grit", "prop": "opacity", "keys": [[0, 0.2], [0.25, 1], [0.8, 1], [1, 0.15]] },
+        { "part": "seed", "prop": "x", "keys": [[0, 3.0], [1, -5.0]], "ease": "linear" },
+        { "part": "seed", "prop": "opacity", "keys": [[0, 0.3], [0.3, 0.95], [1, 0.2]] },
+        { "part": "body", "prop": "scale", "keys": [[0, 1.0], [0.5, 1.05], [1, 1.0]] },
+        { "part": "sheen", "prop": "x", "keys": [[0, -1.4], [0.5, 1.4], [1, -1.4]] },
+        { "part": "gloss", "prop": "opacity", "keys": [[0, 0.85], [0.5, 1], [1, 0.85]] }
+      ]
+    }
+  }
+}

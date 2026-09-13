@@ -1,7 +1,7 @@
 {
   "id": "ss.icon.drone",
   "name": "Brood vent icon",
-  "description": "UI slot icon for the broodling. Composes `ss.proj.drone` via `use`, so the thing in the slot is the thing orbiting you \u2014 when that document stopped being a cold shell plate and became a red-brown vent, this followed with no edit here. Rim keeps the original i_drone's aqua.",
+  "description": "UI slot icon for the broodling. Composes `ss.proj.drone` via `use`, so the thing in the slot is the thing orbiting you \u2014 when that document stopped being a cold shell plate and became a red-brown vent, this followed with no edit here. Rim is `$blood` \u2014 the vent, which is the one red thing the player carries.",
   "tags": [
     "ss-icon"
   ],
@@ -18,7 +18,7 @@
         "h": 32,
         "corner": 6
       },
-      "fill": "$aqua"
+      "fill": "$blood"
     },
     {
       "id": "inner",

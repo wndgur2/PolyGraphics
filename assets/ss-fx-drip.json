@@ -1,0 +1,16 @@
+{
+  "id": "ss.fx.drip",
+  "name": "Blood drip",
+  "description": "One bead of blood coming off the widow's claw as the arm folds back — what the hand bit out of something and did not keep. Drawn as a teardrop with the round end leading and the tail trailing behind it, which is the shape a falling drop actually holds: the air piles up under the head and draws the back out to a point, and a drop drawn round is a berry. The sides are the tangents from the tip to the head rather than a curve guessed between them, so they meet the head flush instead of crossing it. One small fleck rides further back up the tail, because a drop that has just torn away from something leaves a little of itself behind and a single bead alone reads as a thrown pellet. The gloss is one short bar on the head and nowhere else: the game turns this sprite to whatever bearing the drop is falling on, and a highlight on an edge would roll round with it. Authored falling along +y with the tip at the top, filling a 12×16 canvas, so the game points it down the fall and scales by r=6. Blood and not ember, not venom: this is the evolution's own colour, the same $blood the limb's banding and talons wear.",
+  "tags": ["ss-fx", "blood"],
+  "size": [12, 16],
+  "meta": {"radius": 6},
+  "parts": [
+    {"id": "shade", "shape": {"kind": "poly", "points": [[0.0, -6.1], [2.28, -1.02], [2.48, -0.34], [2.47, 0.37], [2.27, 1.05], [1.89, 1.64], [1.35, 2.11], [0.7, 2.4], [0.0, 2.5], [-0.7, 2.4], [-1.35, 2.11], [-1.89, 1.64], [-2.27, 1.05], [-2.47, 0.37], [-2.48, -0.34], [-2.28, -1.02]]}, "fill": "$ink@heavy"},
+    {"id": "body", "shape": {"kind": "poly", "points": [[0.0, -5.4], [1.82, -0.7], [1.94, -0.18], [1.92, 0.36], [1.75, 0.87], [1.44, 1.31], [1.03, 1.66], [0.53, 1.88], [-0.0, 1.95], [-0.53, 1.88], [-1.03, 1.66], [-1.44, 1.31], [-1.75, 0.87], [-1.92, 0.36], [-1.94, -0.18], [-1.82, -0.7]]}, "fill": "$blood.dark"},
+    {"id": "wash", "shape": {"kind": "poly", "points": [[0.0, -3.21], [1.11, -0.03], [1.17, 0.28], [1.14, 0.59], [1.04, 0.89], [0.85, 1.15], [0.61, 1.35], [0.31, 1.48], [0.0, 1.52], [-0.31, 1.48], [-0.61, 1.35], [-0.85, 1.15], [-1.04, 0.89], [-1.14, 0.59], [-1.17, 0.28], [-1.11, -0.03]]}, "fill": "$blood"},
+    {"id": "gloss", "at": [-0.6, -0.35], "shape": {"kind": "ellipse", "rx": 0.62, "ry": 0.95}, "fill": "$blood.light"},
+    {"id": "fleck_shade", "at": [0.8, -7.6], "shape": {"kind": "circle", "r": 1.05}, "fill": "$ink@heavy"},
+    {"id": "fleck", "at": [0.8, -7.6], "shape": {"kind": "circle", "r": 0.7}, "fill": "$blood.dark"}
+  ]
+}

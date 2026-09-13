@@ -8,7 +8,7 @@
     {"id": "plate", "use": "ss.lib.relic-plate"},
     {"id": "arm_0", "at": [-6.0, 8.0], "rot": -82.0, "use": "ss.lib.spider-arm", "scale": 0.95},
     {"id": "arm_1", "at": [-6.0, 8.0], "rot": -57.0, "use": "ss.lib.spider-arm", "scale": 1.05},
-    {"id": "arm_2", "at": [-6.0, 8.0], "rot": -32.0, "use": "ss.lib.spider-arm", "scale": 0.95, "variant": "evolved"},
+    {"id": "arm_2", "at": [-6.0, 8.0], "rot": -32.0, "use": "ss.lib.spider-arm", "scale": 0.95, "variant": "added"},
     {"id": "arm_3", "at": [-6.0, 8.0], "rot": -8.0, "use": "ss.lib.spider-arm", "scale": 0.8},
     {"id": "knuckle_shadow", "at": [-6.0, 8.0], "shape": {"kind": "circle", "r": 5.0}, "fill": "$ink"},
     {"id": "knuckle", "at": [-6.0, 8.0], "shape": {"kind": "circle", "r": 3.4}, "fill": "$steel.dark"}
