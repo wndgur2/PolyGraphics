@@ -13,7 +13,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { play, bake, rollJitter, type IRSound } from "../adapters/webaudio/polygraphics-webaudio.js";
 import { compileSound, type SoundRegistry } from "../src/sound-compile.js";
-import { renderPCM, describe, toWav, SAMPLE_RATE } from "../src/sound-render.js";
+import { renderPCM, describe, fromWav, spectrogram, toWav, SAMPLE_RATE } from "../src/sound-render.js";
 import { SoundSchema } from "../src/sound-schema.js";
 import { mulberry32 } from "../src/prng.js";
 import type { Tokens } from "../src/tokens.js";
@@ -27,6 +27,7 @@ function check(name: string, cond: boolean, detail = ""): void {
   if (!cond) failures++;
 }
 const close = (a: number, b: number, eps = 1e-4) => Math.abs(a - b) <= eps;
+const r = (n: number) => Math.round(n * 10000) / 10000;
 
 // ---------------------------------------------------------------- mock context
 
@@ -227,6 +228,203 @@ check(
 
 const victory = compileSound(all.get("ss.sfx.victory")!, sreg).ir;
 check("a use voice's `dur` refits the composed document", victory.voices.every((v) => close(v.dur, 0.16)), `${victory.voices[0].dur}s`);
+
+/**
+ * The claim `root` exists to make: a library document is written at one pitch
+ * and played at another, so the degree lives at the call site with the melody
+ * instead of as a variant inside the instrument. The four rungs of the level-up
+ * figure have to come out as the four scale tokens themselves.
+ */
+const freqs = (id: string) =>
+  compileSound(all.get(id)!, sreg).ir.voices.map((v) => (v.source as { freq: number }).freq);
+check(
+  "playing an instrument at a pitch transposes it to exactly that pitch",
+  JSON.stringify(freqs("ss.sfx.levelup")) === JSON.stringify([523.25, 659.25, 784, 1046.5]),
+  freqs("ss.sfx.levelup").join(", "),
+);
+check(
+  "…and the same instrument walks the other way down for the loss figure",
+  JSON.stringify(freqs("ss.sfx.gameover")) === JSON.stringify([392, 329.63, 261.63, 196]),
+  freqs("ss.sfx.gameover").join(", "),
+);
+check(
+  "an instrument played at its own root is the instrument unchanged",
+  freqs("ss.sfx.levelup")[0] === freqs("ss.lib.note")[0],
+  `${freqs("ss.sfx.levelup")[0]} vs ${freqs("ss.lib.note")[0]}Hz`,
+);
+
+// A document with no `root` has not said what pitch it is written at, so there
+// is nothing to measure a requested pitch against. Guessing one would make every
+// figure built on it quietly wrong; saying so is the whole value of the field.
+/**
+ * The claim `adsr` exists to make: an attack written in seconds is that many
+ * seconds at every length the voice is played at. Two voices three times apart,
+ * one envelope — the compiled keys have to put the peak at the same instant,
+ * which means the two normalized positions have to differ. That difference is
+ * the division `ss.sfx.chime` used to do by hand.
+ */
+const struck = SoundSchema.parse({
+  id: "test.struck",
+  name: "Struck",
+  description: "One attack, written once, at two different lengths.",
+  tags: ["sfx"],
+  duration: 1,
+  voices: [
+    { id: "short", dur: 0.3, source: { kind: "osc", wave: "sine", freq: "$tonic" }, env: [{ prop: "gain", adsr: { attack: 0.012 } }] },
+    { id: "long", dur: 0.9, source: { kind: "osc", wave: "sine", freq: "$tonic" }, env: [{ prop: "gain", adsr: { attack: 0.012 } }] },
+  ],
+});
+const struckVoices = compileSound(struck, { sounds: new Map(all).set(struck.id, struck), tokens }).ir.voices;
+const peakAt = (v: (typeof struckVoices)[number]) => v.env[0].keys[1][0] * v.dur;
+check(
+  "an adsr attack is the same seconds however long the voice is",
+  struckVoices.every((v) => close(peakAt(v), 0.012, 1e-3)),
+  struckVoices.map((v) => `${v.dur}s → ${r(peakAt(v))}s`).join(", "),
+);
+check(
+  "…which it can only be by landing on different fractions of each span",
+  struckVoices[0].env[0].keys[1][0] !== struckVoices[1].env[0].keys[1][0],
+  struckVoices.map((v) => v.env[0].keys[1][0]).join(" vs "),
+);
+
+const chime = compileSound(all.get("ss.sfx.chime")!, sreg).ir.voices;
+check(
+  "chime's two voices now peak at the same instant, not at the same fraction",
+  close(peakAt(chime[0]), peakAt(chime[1]), 1e-3),
+  chime.map((v) => `${v.id} ${r(peakAt(v))}s`).join(", "),
+);
+
+// An envelope longer than the voice it is written on is compressed rather than
+// truncated — a hurried version of the shape, not the shape with its tail cut.
+const crammed = SoundSchema.parse({
+  id: "test.crammed",
+  name: "Crammed",
+  description: "An envelope that does not fit the voice it is written on.",
+  tags: ["sfx"],
+  duration: 0.1,
+  voices: [{ id: "v", dur: 0.05, source: { kind: "osc", wave: "sine", freq: "$tonic" }, env: [{ prop: "gain", adsr: { attack: 0.04, decay: 0.04, release: 0.04 } }] }],
+});
+const crammedOut = compileSound(crammed, { sounds: new Map(all).set(crammed.id, crammed), tokens });
+check(
+  "an adsr too long for its voice is compressed, and says so",
+  crammedOut.issues.some((i) => i.level === "warn" && i.msg.includes("compressed to fit")) &&
+    crammedOut.ir.voices[0].env[0].keys.every((k) => k[0] <= 1),
+  crammedOut.issues.map((i) => i.msg).join("; ") || "no issue raised",
+);
+
+const rootless = structuredClone(all.get("ss.sfx.select")!);
+const caller = SoundSchema.parse({
+  id: "test.caller",
+  name: "Caller",
+  description: "Plays a document that never said what pitch it was written at.",
+  tags: ["sfx"],
+  duration: 0.2,
+  voices: [{ id: "n", use: rootless.id, pitch: "$fifth" }],
+});
+const rootlessIssues = compileSound(caller, {
+  sounds: new Map(all).set(caller.id, caller),
+  tokens,
+}).issues;
+check(
+  "playing a document that declares no `root` is an error, not a guess",
+  rootlessIssues.some((i) => i.level === "error" && i.msg.includes("no `root`")),
+  rootlessIssues.map((i) => i.msg).join("; ") || "no issue raised",
+);
+
+/**
+ * The two pictures and the one reader that the listening loop leans on.
+ * Neither is a baseline — but a spectrogram that drew differently run to run
+ * would make "look at the spectrogram" a worse instruction than it already
+ * is, and a WAV that did not read back as itself would make `--against`
+ * compare a take to a cousin of it.
+ */
+const spec1 = spectrogram(pcm), spec2 = spectrogram(pcm);
+check("spectrogram is the same picture every run", Buffer.from(spec1.data).equals(Buffer.from(spec2.data)));
+check("spectrogram is 320 columns by 96 rows", spec1.width === 320 && spec1.height === 96, `${spec1.width}×${spec1.height}`);
+check("spectrogram peaks at 255", Math.max(...spec1.data) === 255);
+const tiny = spectrogram(pcm.subarray(0, 100));
+check("a take shorter than 320 samples gets one column per sample", tiny.width === 100, `${tiny.width}`);
+const back = fromWav(toWav(pcm));
+check(
+  "a bake reads back as itself",
+  back.sampleRate === SAMPLE_RATE && back.pcm.length === pcm.length && back.pcm.every((v, i) => Math.abs(v - pcm[i]) <= 1 / 32767),
+  `${back.pcm.length} samples at ${back.sampleRate}Hz`,
+);
+
+/**
+ * The measurements the lint holds the set on. Each is checked on a signal
+ * whose answer is known, so a wrong coefficient is a failed check rather
+ * than a set quietly held to the wrong number.
+ */
+const sine = (hz: number, secs = 0.5, amp = 1): Float32Array => {
+  const out = new Float32Array(Math.round(secs * SAMPLE_RATE));
+  for (let i = 0; i < out.length; i++) out[i] = amp * Math.sin((2 * Math.PI * hz * i) / SAMPLE_RATE);
+  return out;
+};
+const ref = describe(sine(1000));
+check("K-weighting is flat at 1kHz — a full-scale sine reads -3dB, as RMS does", Math.abs(ref.loudnessDb - ref.rmsDb) < 0.3 && Math.abs(ref.rmsDb + 3) < 0.2, `${ref.loudnessDb} vs ${ref.rmsDb}`);
+const high = describe(sine(8000));
+check("…and lifts the top by about 4dB", high.loudnessDb - high.rmsDb > 3 && high.loudnessDb - high.rmsDb < 4.5, `+${r(high.loudnessDb - high.rmsDb)}`);
+check("centroid of a 1kHz sine is 1kHz", Math.abs(ref.centroidHz - 1000) < 30, `${ref.centroidHz}Hz`);
+check("bands sum to one", Math.abs(ref.bands.low + ref.bands.mid + ref.bands.high - 1) < 0.01 && ref.bands.mid > 0.98, JSON.stringify(ref.bands));
+const low = describe(sine(80));
+check("a low sine loses everything on the phone", low.phoneLossDb > 15 && low.bands.low > 0.95, `-${low.phoneLossDb}dB, ${low.bands.low} low`);
+check("a 1kHz sine loses nothing on the phone", ref.phoneLossDb < 0.5, `-${ref.phoneLossDb}dB`);
+// A sine at a quarter of the sample rate sampled off its peaks: every sample
+// is ±0.707 while the wave itself reaches 1. The sample peak lies; the true
+// peak does not.
+const between = new Float32Array(4410);
+for (let i = 0; i < between.length; i++) between[i] = Math.sin(Math.PI / 2 * i + Math.PI / 4);
+const tp = describe(between);
+check("true peak sees between the samples", tp.peakDb < -2.9 && tp.truePeakDb > -0.5, `sample ${tp.peakDb}dBFS, true ${tp.truePeakDb}dBTP`);
+const stompD = describe(renderPCM(compileSound(all.get("ss.sfx.stomp")!, sreg).ir));
+const shootD = describe(renderPCM(compileSound(all.get("ss.sfx.shoot")!, sreg).ir));
+check("stomp loses far more on a phone than shoot", stompD.phoneLossDb > shootD.phoneLossDb + 5, `stomp -${stompD.phoneLossDb} vs shoot -${shootD.phoneLossDb}`);
+check("tail is inside the take and after the attack", ref.tailS <= 0.5 && ref.tailS > ref.attackMs / 1000, `${ref.tailS}s`);
+
+/**
+ * The four idioms. Each compiles to voices the IR already knows, so the claim
+ * to check is that the voices are the ones the author would have written by
+ * hand — and, for `phrase`, that the three fanfares came out exactly as they
+ * were when they were hand-written, which the baselines also enforce.
+ */
+const probeDoc = (id: string, voices: unknown[], extra: Record<string, unknown> = {}) =>
+  SoundSchema.parse({ id, name: id, description: `A probe document for ${id}.`, tags: ["sfx", "probe"], duration: 1, voices, ...extra });
+const probe = (sd: ReturnType<typeof SoundSchema.parse>) => compileSound(sd, { sounds: new Map(all).set(sd.id, sd), tokens });
+
+const wide = probe(probeDoc("test.wide", [{ id: "pad", source: { kind: "osc", wave: "triangle", freq: "$tonic", to: "$tonic.up", unison: { count: 2, detune: 7 } }, gain: "mid" }]));
+const uf = wide.ir.voices.map((v) => (v.source as { freq: number }).freq);
+check("unison is the voice twice, spread either side of its pitch", wide.ir.voices.length === 2 && uf[0] < 880 && uf[1] > 880 && close(uf[1] / uf[0], Math.pow(2, 14 / 1200), 1e-4), uf.join(", "));
+check("…each at 1/√2 of the level", wide.ir.voices.every((v) => close(v.gain, 0.28 / Math.SQRT2)), `${wide.ir.voices[0].gain}`);
+const glides = wide.ir.voices.map((v) => v.env.find((t) => t.prop === "freq")!.keys[1][1]);
+check("…and a glide detunes with each copy", glides[0] < 1760 && glides[1] > 1760, glides.join(", "));
+
+const room = probe(probeDoc("test.room", [{ id: "pluck", at: 0.1, dur: 0.2, source: { kind: "osc", wave: "sine", freq: "$tonic" }, echo: { time: 0.25, feedback: 0.5 } }]));
+const taps = room.ir.voices;
+check("echo is the voice again at each multiple of time", taps.length === 4 && taps.map((v) => v.at).join() === "0.1,0.35,0.6,0.85", taps.map((v) => v.at).join(", "));
+check("…each tap feedback times quieter", close(taps[1].gain, 0.5) && close(taps[2].gain, 0.25) && close(taps[3].gain, 0.125), taps.map((v) => v.gain).join(", "));
+check("…cut at the canvas rather than run past it", taps[3].dur === 0.15 && !room.issues.some((i) => i.msg.includes("cut short")), `${taps[3].dur}s`);
+const far = probe(probeDoc("test.far", [{ id: "pluck", dur: 0.2, source: { kind: "osc", wave: "sine", freq: "$tonic" }, echo: { time: 0.6, feedback: 0.9, taps: 3 } }]));
+check("a tap that would start past the canvas is dropped, and said so", far.ir.voices.length === 2 && far.issues.some((i) => i.level === "warn" && i.msg.includes("dropped")), far.issues.map((i) => i.msg).join("; "));
+
+const byHand = [0, 0.09, 0.18, 0.27];
+const climb = compileSound(all.get("ss.sfx.levelup")!, sreg).ir;
+check("a phrase unrolls to the use voices somebody would have written", climb.voices.length === 4 && climb.voices.map((v) => v.at).join() === byHand.join() && freqs("ss.sfx.levelup").join() === "523.25,659.25,784,1046.5", climb.voices.map((v) => `${v.id}@${v.at}`).join(", "));
+const rest = probe(probeDoc("test.rest", [{ id: "f", phrase: { use: "ss.lib.note", step: 0.1, notes: ["$third", null, "$fifth"] } }]));
+check("null in a phrase is a rest", rest.ir.voices.length === 2 && rest.ir.voices[1].at === 0.2, rest.ir.voices.map((v) => v.at).join(", "));
+
+const alts = probe(probeDoc("test.alts", [{ id: "grit", filter: { type: "bandpass", freq: "$grit", q: "band" }, repeat: { of: { kind: "noise" }, count: 3, spread: 0.05, grain: 0.01 } }], { takes: 3, jitter: { freq: [0.9, 1.1] } }));
+const t2 = alts.ir.variants["take-2"], t3 = alts.ir.variants["take-3"];
+check("takes are variants take-2… of the same length", !!t2 && !!t3 && t2.duration === 1 && Object.keys(alts.ir.variants).length === 2, Object.keys(alts.ir.variants).join(", "));
+const seeds = (vs: typeof t2.voices) => vs.map((v) => (v.source as { seed: number }).seed).join();
+check("…with every scatter reseeded", seeds(alts.ir.voices) !== seeds(t2.voices) && seeds(t2.voices) !== seeds(t3.voices) && alts.ir.voices.map((v) => v.at).join() !== t2.voices.map((v) => v.at).join());
+const plain = probe(probeDoc("test.alts", [{ id: "grit", filter: { type: "bandpass", freq: "$grit", q: "band" }, repeat: { of: { kind: "noise" }, count: 3, spread: 0.05, grain: 0.01 } }]));
+check("…and the base take exactly what it was without takes", JSON.stringify(plain.ir.voices) === JSON.stringify(alts.ir.voices));
+const jt = probe(probeDoc("test.jt", [{ id: "t", source: { kind: "osc", wave: "sine", freq: "$tonic" } }], { takes: 2, jitter: { freq: [0.9, 1.1] } }));
+const jf = (jt.ir.variants["take-2"].voices[0].source as { freq: number }).freq;
+check("…and its jitter rolled once, inside the range, and frozen", jf !== 880 && jf >= 880 * 0.9 && jf <= 880 * 1.1 && jf === (probe(probeDoc("test.jt", [{ id: "t", source: { kind: "osc", wave: "sine", freq: "$tonic" } }], { takes: 2, jitter: { freq: [0.9, 1.1] } })).ir.variants["take-2"].voices[0].source as { freq: number }).freq, `${jf}Hz`);
+const still = probe(probeDoc("test.still", [{ id: "t", source: { kind: "osc", wave: "sine", freq: "$tonic" } }], { takes: 2 }));
+check("a take with nothing to vary says so", still.issues.some((i) => i.level === "warn" && i.msg.includes("identical to the base")), still.issues.map((i) => i.msg).join("; ") || "no issue raised");
 
 console.log(`\n${failures === 0 ? "✓ all checks passed" : `✖ ${failures} failed`}`);
 process.exit(failures ? 1 : 0);

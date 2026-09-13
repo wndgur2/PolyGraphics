@@ -1,0 +1,526 @@
+{
+  "id": "ss.relic.doubleyolk",
+  "name": "Double yolk",
+  "description": "An egg cracked open and set down, the lower shell a pale cup with a jagged rim, the inside of the far wall showing bone-white behind, and the white filling it lit rather than shadowed. Two orange yolks sit in it side by side, the left one a size bigger than the right, both riding up above the broken rim so the silhouette is a cup with two domes. Elites leave two chests with this relic, and two yolks in one shell is the same luck said with a kitchen. The front rim is drawn after the yolks so they sit in the cup instead of on it; nothing inside is dark, because a dark hollow behind a bright rim is a hole.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "egg_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -11.33,
+            -1.58
+          ],
+          [
+            -8.4,
+            -3.92
+          ],
+          [
+            -4.14,
+            -4.99
+          ],
+          [
+            1.01,
+            -5.3
+          ],
+          [
+            6.16,
+            -4.89
+          ],
+          [
+            10.27,
+            -3.76
+          ],
+          [
+            10.98,
+            -2.98
+          ],
+          [
+            11.6,
+            0.47
+          ],
+          [
+            10.29,
+            5.66
+          ],
+          [
+            6.74,
+            9.64
+          ],
+          [
+            1.11,
+            11.59
+          ],
+          [
+            -4.92,
+            10.95
+          ],
+          [
+            -9.34,
+            8.07
+          ],
+          [
+            -11.58,
+            3.6
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "back_wall",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -10.4,
+            -1.2
+          ],
+          [
+            -8.0,
+            -3.0
+          ],
+          [
+            -4.0,
+            -4.0
+          ],
+          [
+            1.0,
+            -4.3
+          ],
+          [
+            6.0,
+            -3.9
+          ],
+          [
+            10.0,
+            -2.8
+          ],
+          [
+            10.6,
+            0.4
+          ],
+          [
+            0.0,
+            1.4
+          ],
+          [
+            -10.6,
+            3.4
+          ]
+        ]
+      },
+      "fill": "$bone.dark"
+    },
+    {
+      "id": "white",
+      "at": [
+        0.2,
+        -1.2
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 9.0,
+        "ry": 2.6
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "yolk_a_outline",
+      "at": [
+        -3.4,
+        -4.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 5.2
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "yolk_b_outline",
+      "at": [
+        4.8,
+        -3.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 4.3
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "yolk_a",
+      "at": [
+        -3.4,
+        -4.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 4.3
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "yolk_b",
+      "at": [
+        4.8,
+        -3.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.4
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "yolk_a_shade",
+      "at": [
+        -2.7,
+        -3.7
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.3
+      },
+      "fill": "$ember.dark@0.45"
+    },
+    {
+      "id": "yolk_b_shade",
+      "at": [
+        5.3,
+        -3.1
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.6
+      },
+      "fill": "$ember.dark@0.45"
+    },
+    {
+      "id": "yolk_a_sheen",
+      "at": [
+        -4.7,
+        -6.2
+      ],
+      "rot": -25,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.7,
+        "ry": 1.2
+      },
+      "fill": "$gold.light"
+    },
+    {
+      "id": "yolk_b_sheen",
+      "at": [
+        3.8,
+        -5.0
+      ],
+      "rot": -25,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.3,
+        "ry": 0.9
+      },
+      "fill": "$gold.light"
+    },
+    {
+      "id": "front_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -11.35,
+            -1.5
+          ],
+          [
+            -8.54,
+            -4.0
+          ],
+          [
+            -7.16,
+            -1.99
+          ],
+          [
+            -5.16,
+            -4.59
+          ],
+          [
+            -3.3,
+            -2.59
+          ],
+          [
+            -1.15,
+            -4.2
+          ],
+          [
+            0.65,
+            -2.39
+          ],
+          [
+            2.7,
+            -4.79
+          ],
+          [
+            4.7,
+            -2.79
+          ],
+          [
+            6.7,
+            -4.39
+          ],
+          [
+            8.57,
+            -2.38
+          ],
+          [
+            10.63,
+            -3.57
+          ],
+          [
+            11.6,
+            0.47
+          ],
+          [
+            10.29,
+            5.66
+          ],
+          [
+            6.74,
+            9.64
+          ],
+          [
+            1.11,
+            11.59
+          ],
+          [
+            -4.92,
+            10.95
+          ],
+          [
+            -9.34,
+            8.07
+          ],
+          [
+            -11.58,
+            3.6
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "opacity": 1
+    },
+    {
+      "id": "front",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -10.4,
+            -1.2
+          ],
+          [
+            -8.6,
+            -3.0
+          ],
+          [
+            -7.0,
+            -1.0
+          ],
+          [
+            -5.0,
+            -3.6
+          ],
+          [
+            -3.4,
+            -1.6
+          ],
+          [
+            -1.2,
+            -3.2
+          ],
+          [
+            0.8,
+            -1.4
+          ],
+          [
+            2.8,
+            -3.8
+          ],
+          [
+            4.6,
+            -1.8
+          ],
+          [
+            6.6,
+            -3.4
+          ],
+          [
+            8.4,
+            -1.4
+          ],
+          [
+            10.0,
+            -2.8
+          ],
+          [
+            10.6,
+            0.4
+          ],
+          [
+            9.4,
+            5.2
+          ],
+          [
+            6.2,
+            8.8
+          ],
+          [
+            1.0,
+            10.6
+          ],
+          [
+            -4.6,
+            10.0
+          ],
+          [
+            -8.6,
+            7.4
+          ],
+          [
+            -10.6,
+            3.4
+          ]
+        ]
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "front_shade",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -10.6,
+            3.4
+          ],
+          [
+            -8.6,
+            7.4
+          ],
+          [
+            -4.6,
+            10.0
+          ],
+          [
+            1.0,
+            10.6
+          ],
+          [
+            6.2,
+            8.8
+          ],
+          [
+            9.4,
+            5.2
+          ],
+          [
+            10.6,
+            0.4
+          ],
+          [
+            8.8,
+            1.8
+          ],
+          [
+            6.0,
+            6.2
+          ],
+          [
+            1.2,
+            8.2
+          ],
+          [
+            -4.0,
+            7.8
+          ],
+          [
+            -7.8,
+            5.6
+          ],
+          [
+            -9.4,
+            2.2
+          ]
+        ]
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "front_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -9.2,
+            0.6
+          ],
+          [
+            -5.6,
+            1.8
+          ],
+          [
+            -1.0,
+            2.4
+          ],
+          [
+            3.6,
+            2.2
+          ],
+          [
+            7.8,
+            1.2
+          ],
+          [
+            6.8,
+            3.2
+          ],
+          [
+            2.0,
+            4.4
+          ],
+          [
+            -3.4,
+            4.2
+          ],
+          [
+            -7.6,
+            3.0
+          ]
+        ]
+      },
+      "fill": "$husk.light2"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

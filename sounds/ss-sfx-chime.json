@@ -1,7 +1,7 @@
 {
   "id": "ss.sfx.chime",
   "name": "Chime",
-  "description": "Two soft sine notes, the second entering under the first and landing a fourth above it, on the tonic \u2014 something completed rather than something wanting attention. It sits on the bottom rung of the level ladder on purpose: it shares a frame with louder cues and is only the reason to look at them.",
+  "description": "Two soft sine notes, the second entering under the first and landing a fourth above it, on the tonic \u2014 something completed rather than something wanting attention. Both are struck the same way, and now say so: one `adsr` of 12ms rather than the two different fractions it took to mean 12ms at two different lengths. It sits on the bottom rung of the level ladder on purpose: it shares a frame with louder cues and is only the reason to look at them.",
   "tags": [
     "sfx",
     "interface"
@@ -24,20 +24,9 @@
       "env": [
         {
           "prop": "gain",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.017,
-              1
-            ],
-            [
-              1,
-              0
-            ]
-          ]
+          "adsr": {
+            "attack": 0.012
+          }
         }
       ]
     },
@@ -54,20 +43,10 @@
       "env": [
         {
           "prop": "gain",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.013,
-              0.8
-            ],
-            [
-              1,
-              0
-            ]
-          ]
+          "adsr": {
+            "attack": 0.012,
+            "peak": 0.8
+          }
         }
       ]
     }

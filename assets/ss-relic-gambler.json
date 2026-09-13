@@ -1,0 +1,32 @@
+{
+  "id": "ss.relic.gambler",
+  "name": "Gambler's spore",
+  "description": "A die grown out of spore matter, seen from a corner and tilted a few degrees: a pale top face, a mid left face, a dark right face, with the three edges that meet at the near corner drawn as darker seams. The pips are mushroom caps rather than pits — pale domes with a darker gill under each, two on top, three down the left, one on the right, laid along the diagonals — because a dark pip on a bright face is a hole and six of them is a face of eyes. A die says rerolls, skips and banishes in one glance. It is the only cube on the shelf: ss.relic.mason's prisms are three, brown and standing.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "cube_outline", "shape": {"kind": "poly", "points": [[-1.33, -10.08], [8.85, -5.96], [10.38, 4.92], [1.73, 11.68], [-8.45, 7.56], [-9.98, -3.32]]}, "fill": "$ink"},
+    {"id": "face_top", "shape": {"kind": "poly", "points": [[-1.14, -8.71], [7.76, -5.11], [0.2, 0.8], [-8.7, -2.8]]}, "fill": "$venom.light"},
+    {"id": "face_left", "shape": {"kind": "poly", "points": [[-8.7, -2.8], [0.2, 0.8], [1.54, 10.31], [-7.36, 6.71]]}, "fill": "$venom"},
+    {"id": "face_right", "shape": {"kind": "poly", "points": [[0.2, 0.8], [7.76, -5.11], [9.1, 4.4], [1.54, 10.31]]}, "fill": "$venom.dark2"},
+    {"id": "edge_front", "shape": {"kind": "poly", "points": [[-0.15, 0.85], [1.19, 10.36], [1.88, 10.26], [0.55, 0.75]]}, "fill": "$venom.dark"},
+    {"id": "edge_top_l", "shape": {"kind": "poly", "points": [[-8.83, -2.47], [0.07, 1.12], [0.34, 0.48], [-8.57, -3.12]]}, "fill": "$venom.dark"},
+    {"id": "edge_top_r", "shape": {"kind": "poly", "points": [[0.42, 1.07], [7.98, -4.84], [7.55, -5.38], [-0.01, 0.53]]}, "fill": "$venom.dark"},
+    {"id": "pip_top_a_gill", "at": [-2.93, -3.98], "shape": {"kind": "ellipse", "rx": 1.52, "ry": 0.95}, "fill": "$venom.dark", "rot": -8},
+    {"id": "pip_top_a", "at": [-3.18, -4.58], "shape": {"kind": "ellipse", "rx": 1.6, "ry": 1}, "fill": "$bone", "rot": -8},
+    {"id": "pip_top_b_gill", "at": [2.35, -2.3], "shape": {"kind": "ellipse", "rx": 1.28, "ry": 0.81}, "fill": "$venom.dark", "rot": -8},
+    {"id": "pip_top_b", "at": [2.1, -2.9], "shape": {"kind": "ellipse", "rx": 1.35, "ry": 0.85}, "fill": "$bone", "rot": -8},
+    {"id": "pip_left_a_gill", "at": [-5.29, 0.79], "shape": {"kind": "ellipse", "rx": 1, "ry": 1.28}, "fill": "$venom.dark", "rot": 22},
+    {"id": "pip_left_a", "at": [-5.54, 0.19], "shape": {"kind": "ellipse", "rx": 1.05, "ry": 1.35}, "fill": "$bone", "rot": 22},
+    {"id": "pip_left_b_gill", "at": [-3.18, 4.33], "shape": {"kind": "ellipse", "rx": 1.14, "ry": 1.42}, "fill": "$venom.dark", "rot": 22},
+    {"id": "pip_left_b", "at": [-3.43, 3.73], "shape": {"kind": "ellipse", "rx": 1.2, "ry": 1.5}, "fill": "$bone", "rot": 22},
+    {"id": "pip_left_c_gill", "at": [-0.89, 7.65], "shape": {"kind": "ellipse", "rx": 1, "ry": 1.28}, "fill": "$venom.dark", "rot": 22},
+    {"id": "pip_left_c", "at": [-1.14, 7.05], "shape": {"kind": "ellipse", "rx": 1.05, "ry": 1.35}, "fill": "$bone", "rot": 22},
+    {"id": "pip_right_gill", "at": [5.11, 2.97], "shape": {"kind": "ellipse", "rx": 1.09, "ry": 1.38}, "fill": "$venom.dark2", "rot": -38},
+    {"id": "pip_right", "at": [4.86, 2.37], "shape": {"kind": "ellipse", "rx": 1.15, "ry": 1.45}, "fill": "$husk", "rot": -38}
+  ],
+  "variants": {
+    "glyph": {"description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.", "remove": ["plate"]}
+  }
+}

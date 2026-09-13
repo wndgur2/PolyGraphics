@@ -6,6 +6,7 @@
  *   npm run gallery    out/gallery.html
  *   npm run wav        out/wav/*.wav — the sound bake, and what `regress` hashes
  *   npm run dist       dist/assets.json + dist/sounds.json — the bundles consumers import
+ *   npm run png        out/png/*.png at 4x   (--only <asset id>, --size <px>)
  */
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, basename } from "node:path";
@@ -16,7 +17,7 @@ import { buildGallery } from "./gallery.js";
 import { compileAsset } from "./compile.js";
 import { SoundSchema, type Sound } from "./sound-schema.js";
 import { compileSound, type SoundRegistry } from "./sound-compile.js";
-import { describe, renderPCM, SAMPLE_RATE, toWav } from "./sound-render.js";
+import { describe, renderPCM, SAMPLE_RATE, spectrogram, spectrogramRGBA, toWav } from "./sound-render.js";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const dir = (...p: string[]) => join(ROOT, ...p);
@@ -145,35 +146,73 @@ function lintPalette(tokens: Tokens, issues: Issue[]): void {
  * happens is one sound sitting 20dB off the rest of the set.
  */
 function lintSounds(sreg: SoundRegistry, issues: Issue[]): void {
-  const levels: { id: string; rmsDb: number }[] = [];
+  const L = sreg.tokens.audio?.loudness ?? {};
+  const anchor = L.anchor ?? -26, band = L.band ?? 4, phoneLoss = L.phoneLoss ?? 6;
+
+  // Declaring a `root` says "this is an instrument, play me". One nobody plays
+  // is drift waiting to happen — the same rule as an unused palette token, one
+  // table over, and the same reason: it will be retuned by somebody who thinks
+  // something depends on it, or left behind by somebody who thinks nothing does.
+  const played = new Set<string>();
+  for (const sd of sreg.sounds.values())
+    for (const v of sd.voices) {
+      if ("use" in v) played.add(v.use);
+      if ("phrase" in v) played.add(v.phrase.use);
+    }
+  for (const sd of sreg.sounds.values())
+    if (sd.root !== undefined && !played.has(sd.id))
+      issues.push({ level: "warn", where: sd.id, msg: "declares a `root` but nothing composes it — an instrument nobody plays" });
+
+  // A square or sawtooth with no filter is every harmonic to Nyquist: the one
+  // timbre this set has had, in two waveforms. Read off the document, not the
+  // bake, because the fix is a line in the document. `why` on the voice is the
+  // way to keep one on purpose.
+  for (const sd of sreg.sounds.values())
+    for (const v of sd.voices) {
+      const src = "source" in v ? v.source : "repeat" in v ? v.repeat.of : undefined;
+      if (src?.kind === "osc" && (src.wave === "square" || src.wave === "sawtooth") && !("filter" in v && v.filter) && !v.why)
+        issues.push({ level: "warn", where: `${sd.id}(${v.id})`, msg: `unfiltered ${src.wave} — every harmonic to Nyquist; add a lowpass, or say \`why\`` });
+    }
+
+  const unplaced = new Set<string>();
   for (const sound of sreg.sounds.values()) {
     const { ir, issues: cissues } = compileSound(sound, sreg);
     issues.push(...cissues);
-    if (cissues.some((i) => i.level === "error")) continue;
+    const family = sound.tags[1] ?? sound.tags[0];
+    const lib = sound.tags[0] === "lib";
     for (const variant of [undefined, ...Object.keys(ir.variants)]) {
+      const pcm = renderPCM(ir, { variant });
+      const d = describe(pcm);
       const where = variant ? `${ir.id}#${variant}` : ir.id;
-      const d = describe(renderPCM(ir, { variant }));
-      if (d.clipped)
-        issues.push({ level: "warn", where, msg: `clips on ${d.clipped} samples — lower a voice gain` });
-      if (d.peak < 0.01)
-        issues.push({ level: "warn", where, msg: `renders essentially silent (peak ${d.peakDb}dBFS)` });
+      if (d.clipped) issues.push({ level: "warn", where, msg: `clips on ${d.clipped} samples — lower a voice gain` });
+      else if (d.truePeakDb > -1)
+        issues.push({ level: "warn", where, msg: `true peak ${d.truePeakDb}dBTP — clips between the samples; lower a voice gain` });
+      if (d.peak < 0.02) issues.push({ level: "warn", where, msg: `renders essentially silent (peak ${d.peakDb}dBFS)` });
+      // 1.5ms is the renderer's declick. A sound that reaches its peak inside
+      // it has no onset of its own; an impact is allowed that, nothing else is.
+      if (family !== "impact" && d.attackMs <= 1.6)
+        issues.push({ level: "warn", where, msg: `attack is the declick (${d.attackMs}ms) — write one: \`adsr.attack\` in seconds` });
+      if (!lib && d.phoneLossDb > phoneLoss)
+        issues.push({ level: "warn", where, msg: `loses ${d.phoneLossDb}dB on a phone — the low end is carrying this; give it a mid layer` });
       // Library documents are material, not sounds the game triggers; they are
-      // still checked for clipping, but they have no business setting the level
-      // the triggered set is compared against. Nor does a document that has
-      // said in writing why it sits outside it.
-      if (!variant && sound.tags[0] !== "lib" && !sound.offBand) levels.push({ id: ir.id, rmsDb: d.rmsDb });
+      // checked for clipping and onset, but they have no business setting the
+      // level of the set. Variants are not a second sound, so only the base
+      // take is held to the family band.
+      if (variant || lib || sound.offBand) continue;
+      const offset = L[family];
+      if (offset === undefined) unplaced.add(family);
+      const target = anchor + (offset ?? 0);
+      const diff = d.loudnessDb - target;
+      if (Math.abs(diff) > band)
+        issues.push({
+          level: "warn",
+          where,
+          msg: `${d.loudnessDb}dB K-weighted; "${family}" sits at ${target} ±${band} — ${Math.round(Math.abs(diff))}dB ${diff > 0 ? "over" : "under"}`,
+        });
     }
   }
-  if (levels.length < 3) return; // a median of two says nothing
-  const sorted = [...levels].sort((a, b) => a.rmsDb - b.rmsDb);
-  const median = sorted[Math.floor(sorted.length / 2)].rmsDb;
-  for (const l of levels)
-    if (Math.abs(l.rmsDb - median) > 9)
-      issues.push({
-        level: "warn",
-        where: l.id,
-        msg: `${Math.round(l.rmsDb - median)}dB from the set median (${median}dBFS) — it will stand out`,
-      });
+  for (const f of unplaced)
+    issues.push({ level: "warn", where: "tokens/default.json", msg: `no audio.loudness offset for family "${f}" — held to the anchor` });
 }
 
 /** Render everything once (all variants, all themes) purely to harvest issues. */
@@ -253,17 +292,35 @@ function writeSoundIR(sreg: SoundRegistry): number {
 }
 
 /** Every sound, every variant, baked — keyed the way the PNG bake is. */
-function renderAllWavs(sreg: SoundRegistry): Map<string, { wav: Buffer; d: ReturnType<typeof describe> }> {
-  const out = new Map<string, { wav: Buffer; d: ReturnType<typeof describe> }>();
+type Take = { wav: Buffer; d: ReturnType<typeof describe>; pcm: Float32Array };
+function renderAllWavs(sreg: SoundRegistry): Map<string, Take> {
+  const out = new Map<string, Take>();
   for (const sound of sreg.sounds.values()) {
     const { ir } = compileSound(sound, sreg);
     const fileId = sound.id.replace(/\./g, "-");
     for (const variant of [undefined, ...Object.keys(ir.variants)]) {
       const pcm = renderPCM(ir, { variant });
-      out.set(`${fileId}${variant ? `--${variant}` : ""}.wav`, { wav: toWav(pcm), d: describe(pcm) });
+      out.set(`${fileId}${variant ? `--${variant}` : ""}.wav`, { wav: toWav(pcm), d: describe(pcm), pcm });
     }
   }
   return out;
+}
+
+/**
+ * One spectrogram per take, beside the WAV. The gallery draws it under the
+ * waveform and the manifest points at it: the one picture that shows whether
+ * a voice is a comb or a wash, and whether its top half is empty.
+ */
+async function writeSpectrograms(takes: Map<string, Take>): Promise<number> {
+  const { PNG } = await import("pngjs");
+  mkdirSync(dir("out", "spec"), { recursive: true });
+  for (const [name, { pcm }] of takes) {
+    const s = spectrogram(pcm);
+    const png = new PNG({ width: s.width, height: s.height });
+    png.data = Buffer.from(spectrogramRGBA(s));
+    writeFileSync(dir("out", "spec", name.replace(/\.wav$/, ".png")), PNG.sync.write(png));
+  }
+  return takes.size;
 }
 
 function writeManifest(reg: Registry, sreg: SoundRegistry): void {
@@ -287,6 +344,7 @@ function writeManifest(reg: Registry, sreg: SoundRegistry): void {
     return {
       id: sd.id,
       file: `wav/${sd.id.replace(/\./g, "-")}.wav`,
+      spec: `spec/${sd.id.replace(/\./g, "-")}.png`,
       name: sd.name,
       description: sd.description,
       tags: sd.tags,
@@ -304,6 +362,9 @@ function writeManifest(reg: Registry, sreg: SoundRegistry): void {
 
 const [cmd = "check", ...rest] = process.argv.slice(2);
 const themeFlag = rest.includes("--theme") ? rest[rest.indexOf("--theme") + 1] : undefined;
+const onlyFlag = rest.includes("--only") ? rest[rest.indexOf("--only") + 1] : undefined;
+const sizeFlag = rest.includes("--size") ? Number(rest[rest.indexOf("--size") + 1]) : undefined;
+if (sizeFlag !== undefined && !Number.isFinite(sizeFlag)) fail("--size takes a pixel width, e.g. --size 512");
 
 const { reg, sreg, themes, issues } = loadAll();
 
@@ -428,10 +489,13 @@ if (cmd === "wav" || cmd === "check") {
     const wavs = renderAllWavs(sreg);
     mkdirSync(dir("out", "wav"), { recursive: true });
     for (const [name, { wav }] of wavs) writeFileSync(dir("out", "wav", name), wav);
-    console.log(`✓ baked ${wavs.size} wav files → out/wav (${SAMPLE_RATE}Hz mono)`);
+    const specs = await writeSpectrograms(wavs);
+    console.log(`✓ baked ${wavs.size} wav files → out/wav (${SAMPLE_RATE}Hz mono), ${specs} spectrograms → out/spec`);
     if (cmd === "wav")
       for (const [name, { d }] of wavs)
-        console.log(`  ${name.padEnd(28)} ${d.duration}s  peak ${String(d.peakDb).padStart(6)}dB  rms ${String(d.rmsDb).padStart(6)}dB  ${d.brightness}Hz zc`);
+        console.log(
+          `  ${name.padEnd(28)} ${String(d.duration).padStart(5)}s  loud ${String(d.loudnessDb).padStart(6)}dB  rms ${String(d.rmsDb).padStart(6)}dB  peak ${String(d.truePeakDb).padStart(6)}dBTP  atk ${String(d.attackMs).padStart(6)}ms  phone -${String(d.phoneLossDb).padStart(4)}dB  ${String(d.centroidHz).padStart(5)}Hz`,
+        );
   } else if (cmd === "wav") {
     console.log("no sounds/ documents to bake");
   }
@@ -439,16 +503,27 @@ if (cmd === "wav" || cmd === "check") {
 
 // ---- png / baseline / regress (rasterization is optional tooling, deps loaded lazily)
 
-async function renderAllPngs(): Promise<Map<string, Buffer>> {
+/**
+ * `only` bakes a single document (and its variants) instead of the library, and
+ * `size` bakes it to an exact pixel width rather than the fixed 4x — which is
+ * what an app icon needs, since a launcher asks for 512 and 192 and not for
+ * "four times whatever the document was authored at". Both are `png` only: the
+ * baselines are a hash of the whole library at one scale, so neither flag is
+ * ever in a position to move them.
+ */
+async function renderAllPngs(opts: { only?: string; size?: number } = {}): Promise<Map<string, Buffer>> {
   const { Resvg } = await import("@resvg/resvg-js");
   const pngs = new Map<string, Buffer>();
+  if (opts.only && !reg.assets.has(opts.only)) fail(`--only "${opts.only}": no such asset`);
   for (const asset of reg.assets.values()) {
+    if (opts.only && asset.id !== opts.only) continue;
     const fileId = asset.id.replace(/\./g, "-");
     const variants: (string | undefined)[] = [undefined, ...Object.keys(asset.variants ?? {})];
     for (const v of variants) {
       const { svg } = renderSVG(asset, reg, { variant: v });
       const scale = 4;
-      const png = new Resvg(svg, { fitTo: { mode: "zoom", value: scale } }).render().asPng();
+      const fitTo = opts.size ? { mode: "width" as const, value: opts.size } : { mode: "zoom" as const, value: scale };
+      const png = new Resvg(svg, { fitTo }).render().asPng();
       pngs.set(`${fileId}${v ? `--${v}` : ""}.png`, Buffer.from(png));
     }
   }
@@ -456,7 +531,7 @@ async function renderAllPngs(): Promise<Map<string, Buffer>> {
 }
 
 if (cmd === "png" || cmd === "baseline" || cmd === "regress") {
-  const pngs = await renderAllPngs();
+  const pngs = await renderAllPngs(cmd === "png" ? { only: onlyFlag, size: sizeFlag } : {});
   // Sound rides the same rails: a bake is bytes, and bytes compare.
   if (cmd !== "png")
     for (const [name, { wav }] of renderAllWavs(sreg)) pngs.set(join("sounds", name), wav);

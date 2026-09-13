@@ -144,6 +144,8 @@ author a sound without learning a second system:
 | `repeat` — seeded scatter across an **area** | `repeat` — seeded scatter across a **span** (grains) |
 | `animations.tracks` — `[t, value]` per part per prop | `env` — `[t, value]` per voice per prop |
 | `variants` — declarative patches | `variants` — the same, plus `pitch` and `stretch` |
+| — | `phrase` — one instrument played at a row of pitches (no visual twin; see below) |
+| — | `unison`, `echo`, `takes` — width, space and variety, each compiled to plain voices |
 
 ```jsonc
 {
@@ -199,20 +201,75 @@ by editing four numbers.
 you would have written, and nothing downstream knows it existed. Same on a
 filter, where it sweeps the cutoff. It is the relationship `ngon` has to `poly`.
 
+**`adsr` is the one envelope written in seconds.** Keys are fractions of a span,
+which is right for a trajectory — a slide between two pitches is the same slide
+however long it takes — and wrong for an attack. A struck note reaches its peak
+in about ten milliseconds whether it lasts a tenth of a second or two, so an
+instrument written with a proportional attack stops being that instrument the
+moment somebody plays it longer. `{ "prop": "gain", "adsr": { "attack": 0.012 } }`
+is expanded into the keys you would have written once the voice's final length
+is known, so the IR never learns it existed. Before it did, `ss.sfx.chime` said
+`0.017` in one voice and `0.013` in the other to mean 12ms in both.
+
 **An envelope on a scatter belongs to the gesture, not to each grain.** A dry
 crack is bright grains first and dull grains last — one sweep across the whole
 scatter, not the same sweep five times. The compiler cuts the envelope into
 per-grain windows so the IR stays a flat list of voices and no adapter has to
 learn what a bus is.
 
-**Library documents are instruments.** `ss.lib.note` is one note of the flat
-square voice; `ss.sfx.levelup` and `ss.sfx.victory` are that document composed
-four and six times with a `variant` picking the degree, and `dur` on the use
-voice refitting it to a slower step. `ss.lib.knell` is its low sawtooth twin and
-`ss.sfx.gameover` walks the same ladder down it. Retune the library and every
-figure built on it moves together — the exact `ss.lib.organ` argument, and
-`scripts/test-webaudio-adapter.ts` asserts it by retuning the note in memory and
-checking that both fanfares follow while the knell-based one does not.
+**Library documents are instruments, and `root` is what says so.** `ss.lib.note`
+is one note of the flat square voice, written at `$third` and saying as much;
+`ss.sfx.levelup` and `ss.sfx.victory` are that document composed four and six
+times with a `pitch` on each use voice picking the degree, and `dur` refitting it
+to a slower step. `ss.lib.knell` is its low sawtooth twin and `ss.sfx.gameover`
+walks the same ladder down it.
+
+The degree therefore lives at the call site, next to the melody, rather than as a
+named variant inside the instrument — a fanfare can reach a note nobody
+anticipated without editing the thing that plays it. `pitch` is an absolute
+pitch and not a ratio, for the same reason every other slot takes a token:
+`"pitch": 1.26` is a bare number nobody can read, and `"pitch": "$fifth"` is the
+note it plays. Playing a document that declares no `root` is an error rather
+than a guess, and a `root` nothing composes is a warning, exactly as an unused
+palette token is.
+
+Retune the library and every figure built on it moves together — the exact
+`ss.lib.organ` argument, and `scripts/test-webaudio-adapter.ts` asserts it by
+retuning the note in memory and checking that both fanfares follow while the
+knell-based one does not.
+
+**Four more things compile away, and the IR never learns they existed.** Each
+is the relationship `to` has to a `freq` track: a shorthand for voices you could
+have written, so the renderer and all three adapters are untouched and the
+bundle stays `polygraphics-sounds@1`.
+
+- **`unison`** on an oscillator: `{ "count": 2, "detune": 7 }` is the voice
+  twice, seven cents either side of its pitch, each at 1/√2 of the level.
+  Width — what the game's own pad is made of. A glide detunes with each copy;
+  a filter stays where it was.
+- **`echo`** on any voice: `{ "time": 0.42, "feedback": 0.32 }` is the voice
+  again at `time`, `2·time`, `3·time`… each tap a third of the last, until one
+  would sit under −40dB or `taps` is reached. Space, flattened into voices —
+  the pluck's feedback delay without a bus in the IR. A tap that would start
+  past the canvas is dropped and said so; one that runs past it is cut there.
+- **`phrase`**: `{ "use": "ss.lib.note", "step": 0.09, "notes": ["$third",
+  "$fifth", "$seventh", "$third.up"] }` is the four `use` voices it stands for,
+  one every `step`, each at the pitch named; `null` is a rest, `dur` refits
+  each note. `ss.sfx.levelup` is that one voice; its tempo is one number. This
+  is the one construct with no twin on the visual side — time carries an
+  ordering space does not — and the schema header says so.
+- **`takes`** on a document: `"takes": 3` bakes it three times, every noise
+  and scatter reseeded and its `jitter` rolled once by a seeded rng and
+  frozen, as variants `take-2` and `take-3` for the engine to round-robin. A
+  `hit` on the buffer path is otherwise one buffer with a rate roll — the same
+  grain pattern three hundred times a run, slightly transposed. Each take is
+  a baseline like any other. A take that comes out identical to the base is
+  told so: nothing in the document was seeded or jittered.
+
+`meta` is an open record of sim-facing numbers, and two more hints ride there
+by convention: `polyphony`, how many of this may sound at once, and `duck`,
+the dB the score should drop while it plays. The engine reads them the way it
+reads `minInterval`.
 
 **Whole-sound behaviour belongs to the engine**, the same boundary the visual
 side draws at whole-body transforms. A document describes one trigger: rate
@@ -234,35 +291,75 @@ measurements. Two things are sound-specific:
   Clipping is a per-sound question the cards answer; *does this hold together*
   is a question about the set, and it is answered by looking at the two ends of
   one sorted list.
+- **the spectrogram** under every waveform — log frequency, 60Hz to 16kHz, an
+  octave the same height everywhere — is the picture the waveform cannot draw:
+  a pitched voice is a comb, noise is a wash, and an empty top half is what a
+  phone will hear of it. `out/spec/*.png`, one per take, and the manifest
+  points at them.
+- **phone**, a toggle beside the sound tabs, puts a 250Hz highpass and an 8kHz
+  lowpass between every transport and the output — roughly what a small
+  speaker keeps. Most of what is wrong with a sound in this set is only wrong
+  there.
 
 The gallery links `out/wav/` rather than embedding it — twenty-seven takes of
 base64 would add ~3MB to a page that reloads itself on every rebuild — so every
 command that writes the gallery writes the bake too.
 
 ```bash
-npm run check                        # everything, gallery and bake included
-npm run wav                          # just the bake, and print what it measures
-npx tsx scripts/inspect-sound.ts     # a standalone, self-contained page to send someone
+npm run check                                          # everything, gallery and bake included
+npm run wav                                            # just the bake, and print what it measures
+npx tsx scripts/inspect-sound.ts                       # a standalone, self-contained page to send someone
+npx tsx scripts/inspect-sound.ts --against baselines   # …with every take beside its accepted one
 ```
 
-That last one is the shareable export: takes embedded, no server, opens
-anywhere. Pass ids to narrow it (`… ss.sfx.hit ss.sfx.creak`).
+The inspect page is the shareable export: takes embedded, no server, opens
+anywhere. Pass ids to narrow it (`… ss.sfx.hit ss.sfx.creak`). With
+`--against baselines` each take sits beside the WAV in `baselines/sounds/`
+with one transport for both and an **A/B** button that plays them back to
+back, so a re-author is judged against what it replaces at the same level,
+and the numbers beside it say what moved. That page, and the four questions
+in [docs/listening.md](docs/listening.md), are how a change gets listened to.
 
 That page exists because the rest of the system leans on rendering something and
 looking at it, and **an agent authoring these documents cannot listen**. So the
-bake is also the instrument: `npm run check` measures every sound and reports
-clipping, near-silence, and any sound sitting more than 9dB off the set's median
-level. RMS is measured over the sounding extent rather than the canvas, because
-a sound that ends early is shorter, not quieter, and a lint that confuses the two
-sends you to raise the gain on the wrong thing.
+bake is also the instrument. `describe()` measures every take, and `npm run
+check` lints on what it finds:
 
-A document may state, in writing, why it belongs outside that band —
-`offBand` — for the cue whose whole job is to sit under the cues it shares a
-frame with. The exception then reads as a decision somebody made rather than a
-warning everybody learns to scroll past.
+- **loudness** — K-weighted (ITU-R BS.1770) level over the sounding extent, not
+  the canvas, because a sound that ends early is shorter, not quieter. RMS says
+  how much signal there is; this says how loud it is.
+- **family bands** — `audio.loudness` in the tokens names an `anchor` and an
+  offset per family (`tags[1]`): a `field` sound sits above an `impact` sound
+  and the lint knows it, rather than being told per document. Anything more
+  than `band` dB off its family's place is flagged. `offBand` is for the one
+  document that is off *its family's* band on purpose.
+- **the phone** — the loudest 50ms, before and after the same 250Hz–8kHz
+  filter the gallery toggle plays through. Past `phoneLoss` dB the low end is
+  carrying the sound and a small speaker gets nothing.
+- **true peak** — four times oversampled; a bake that reads −0.3dBFS sample by
+  sample can pass 0dB in the DAC.
+- **attack** — milliseconds from the onset to 90% of peak. Anything but an
+  impact that reaches its peak inside the renderer's 1.5ms declick has no onset
+  of its own, and is told to write one.
+- **unfiltered square or sawtooth** — every harmonic to Nyquist, the one
+  timbre this set had in two waveforms. Read off the document; a voice keeps
+  one on purpose by saying `why`.
+- plus clipping, near-silence, the spectral centroid and the low / mid / high
+  split, and the −60dB tail, all in the manifest for an agent to read before
+  it writes.
 
-It earns its keep immediately: porting the sibling project's set, the lint put
-`whoosh` 17dB under the median. Not a transcription slip — the original gave a
+Attack is measured from the onset rather than from t=0, so a voice that starts
+late reads as fast rather than as slow; it is the one property an instrument has
+to hold while it is played at four different lengths, and the property a
+proportional envelope cannot hold.
+
+A document may state, in writing, why it belongs outside its band — `offBand`
+— for the cue whose whole job is to sit under the cues it shares a frame with,
+and a voice may say `why` it keeps a raw sawtooth. The exception then reads as
+a decision somebody made rather than a warning everybody learns to scroll past.
+
+It earns its keep immediately: porting the sibling project's set, the first
+version of the lint put `whoosh` 17dB under the median. Not a transcription slip — the original gave a
 noise burst the same gain number it gave its oscillators, and a wide bandpass
 throws most of a noise burst away. (Its own `creak` comment says exactly this
 about a different sound; the lint is that comment, applied to all of them.)
@@ -299,7 +396,7 @@ The system has one source of truth and four compiled outputs:
 | **compiled IR** | `out/compiled/*.json` (+ per-theme) | **game engines** — tokens resolved to `[r,g,b,a]` floats, variants pre-applied, `use` inlined, `mirrorX`/`repeat` expanded, ngon/star → concrete points. Engine adapters are dumb interpreters; no token/grammar/PRNG logic ships to the game |
 | **the bundle** | `dist/assets.json` via `npm run dist` | the same IR as one file keyed by asset id — what a consuming game imports as `polygraphics/assets`. Committed, unlike `out/`, because it is the thing that leaves the repo |
 | **previews** | `out/svg/*.svg`, `out/gallery.html` | humans and AI agents (inspect/iterate; CSS animations play in the gallery) |
-| **bakes** | `out/png/*.png` (4×) via `npm run png`, `out/wav/*.wav` via `npm run wav` | any engine as plain images or audio files; also the regression baseline |
+| **bakes** | `out/png/*.png` (4×) via `npm run png`, `out/wav/*.wav` via `npm run wav` | any engine as plain images or audio files; also the regression baseline. `npm run png -- --only <id> --size <px>` bakes one document at an exact pixel width instead — for the places outside an engine that want a file at a size they name, a web app manifest's icon plates being the first of them |
 | **manifest** | `out/manifest.json` | engines/AI index: description, tags, named parts, variants, animations, **derived bounding radius** (art and collision can't silently desync), and per sound its **measured peak, RMS and brightness** |
 
 ## Using it from a game
@@ -391,6 +488,7 @@ What the system contributed that imperative draw code could not:
 - **`themes/ice.json`** restyles the entire redesigned roster — chitin to blue-grey, pheromone to a cold signal — without touching a silhouette.
 - **The arsenal follows a second rule**: player weapons are hive material with the signal stripped out — chitin, husk bone, molt shell, honed to a cold frost edge, and never magenta. A lash is a Soldier's mandible on a cord; the orbiting drone is a hexagonal plate cut from a Molt; the thrown card is a Drifter's wing on a bone frame. The one place the hive's colour touches the player is `ss.fx.pickup`, the half-second of borrowed voice when a lump of pulp is absorbed.
 - **Weapon icons compose their weapons.** `ss.icon.wand/whip/boomerang` `use` `ss.proj.bolt/slash/boom` directly, so the original's five-shapes-authored-twice problem cannot recur; `evolved` is a rim-colour patch, not a second drawing.
+- **The home screen is authored here too.** `ss.app.icon` is the game's installed icon: the player's body — `use: ss.char.dot`, so it is always the character they are actually given — sealed and pale in the middle of a frame washed pink by everyone else's scent. Its `maskable` variant pulls the body inside a round mask's safe zone, because a launcher crops what it likes and a feeler is the first thing a circle takes off. It is the one asset that leaves as a *plate* rather than as IR: `npm run png -- --only ss.app.icon --size 512` (and 192, and 180), baked into the consumer's `public/icons/`, since a web app manifest wants files at sizes it names.
 - **The game draws nothing of its own any more.** Every icon, terrain prop and creature it once drew in `BootScene.ts` is a document here; what stayed behind is the handful of things that were never art — a runtime-tinted particle, procedural noise canvases, damage digits. It consumes this repo as a package and keeps only the map from its texture keys to these ids.
 - **One direction was drawn and declined.** `ss.draught.*`, `ss.lib.vial`, `ss.lib.vial-cap` and `ss.char.survivor` are a proposal: the eight playable shapes folded into a single body, with what a run varies moved into a draught drunk on the way in. The game kept its eight shells, so none of it is drawn anywhere. It stays in the repo, described and rendering, because a drawing is the only place an idea like that survives intact — and because nothing asks for those ids, nothing breaks by their staying. The eight `ss.char.*` shells are the live roster; **do not delete them to tidy the survivor up.**
 - **Retiring art is two changes, in this order: game first, art second.** Learned the hard way — the eight shells were removed here while the game was still reading them by id, and nothing broke only because the consumer's pin had not moved, which is exactly what hid it. This repo publishes into a lockfile-pinned dependency, so an id that vanishes is live ordnance sitting in the next pin bump, and the pin gets bumped by whoever happens to want unrelated art.
@@ -415,7 +513,7 @@ You are the intended primary author. Rules of the road:
 4. Prefer `use` over copying parts between assets; prefer a variant over a near-duplicate asset; prefer a theme over recoloring assets one by one.
 5. After every edit: `npm run check`. It either passes or tells you exactly what to fix (with suggestions). Then read the SVG or screenshot the gallery to judge the result visually before declaring it good.
 6. Add jitter only via `repeat.seed` — never invent randomness elsewhere; renders must stay diffable. In a sound, per-trigger variation is `jitter`, which the engine rolls and the bake ignores; everything else stays seeded.
-7. Sounds follow the same rules one table over: author pitches from `tokens.audio.pitch`, name voices for what they are, prefer `use` over copying, prefer a variant over a near-duplicate. You cannot hear what you wrote — read the measurements `npm run check` prints, and get a human to listen before declaring it good.
+7. Sounds follow the same rules one table over: author pitches from `tokens.audio.pitch`, name voices for what they are, prefer `use` over copying, prefer a variant over a near-duplicate. You cannot hear what you wrote — read the measurements `npm run check` prints, look at the spectrogram, and get a human to listen before declaring it good. [docs/listening.md](docs/listening.md) says how, and what to ask them.
 
 ## Roadmap (v0.x)
 
@@ -425,4 +523,4 @@ You are the intended primary author. Rules of the road:
 - Per-instance motion vectors for `repeat` scatter (true radial bursts instead of uniform scale)
 - ~~Part libraries beyond `lib.face`~~ → hinged limb segments (`ss.lib.thigh` / `shin` / `upperarm` / `forearm`) shipped with the survivors; still to come: crowns, telegraph markers, named particle-emitter presets
 - Palette lint: flag near-duplicate hex across tokens; gradient support in adapters (currently flat mid-color fallback)
-- ~~Sound: schema, offline bake, WebAudio adapter, the SFX set~~ → shipped; 20 documents in `sounds/`. Still to do: re-author the placeholder gestures now that they can be heard side by side, spectrograms and a sounds tab in the gallery, panning, a Godot path (offline WAV rather than a live graph), and the adaptive score's *materials* (the score itself is a scheduler and stays in the game)
+- ~~Sound: schema, offline bake, WebAudio adapter, the SFX set~~ → shipped; 22 documents in `sounds/`. ~~Spectrograms, before/after, a phone to listen through, K-weighted loudness and family bands, `unison` / `echo` / `phrase` / `takes`~~ → shipped, phases 1–3 of [docs/sound-quality-plan.md](docs/sound-quality-plan.md). Still to do, in that plan's order: re-author the placeholder gestures one family at a time with a listening record, fill the seam (new documents, variants and takes played, panning on the engine side), a Godot path (offline WAV rather than a live graph), and the adaptive score's *materials* (the score itself is a scheduler and stays in the game)

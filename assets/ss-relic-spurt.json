@@ -1,0 +1,222 @@
+{
+  "id": "ss.relic.spurt",
+  "name": "Growth spurt",
+  "description": "The same pale grub twice: a small one low on the left and, laid over it and offset up-right, the same body at twice the size, same tilt, same segment bands, so the two read as before-and-after rather than as a pair. A short green sprout curls off the crown of the big one — the relic heals a quarter of the bar at every level-up, and a body that puts on size and then puts out new growth is the healing drawn as the growing. No eyes and no legs on either body: two ovals with faces would be two creatures, and legs at this size are arrows.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "small_outline",
+      "at": [
+        -6.6,
+        6.6
+      ],
+      "rot": 25,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.7,
+        "ry": 4.8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "big_outline",
+      "at": [
+        2.6,
+        -0.6
+      ],
+      "rot": 25,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.3,
+        "ry": 8.7
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "sprout_outline",
+      "at": [
+        8.4,
+        -7.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 2.6,
+        "width": 2.9,
+        "from": 178,
+        "to": 272
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bud_outline",
+      "at": [
+        9.5,
+        -10.3
+      ],
+      "rot": -30,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.7,
+        "ry": 2.0
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "small_body",
+      "at": [
+        -6.6,
+        6.6
+      ],
+      "rot": 25,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.7,
+        "ry": 3.8
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "small_lit",
+      "at": [
+        -7.3,
+        5.7
+      ],
+      "rot": 25,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.5,
+        "ry": 2.3
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "small_band",
+      "at": [
+        -6.1,
+        5.6
+      ],
+      "rot": 25,
+      "shape": {
+        "kind": "rect",
+        "w": 5.2,
+        "h": 0.7
+      },
+      "fill": "$husk.dark2"
+    },
+    {
+      "id": "big_body",
+      "at": [
+        2.6,
+        -0.6
+      ],
+      "rot": 25,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.3,
+        "ry": 7.7
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "big_lit",
+      "at": [
+        1.3,
+        -2.3
+      ],
+      "rot": 25,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.4,
+        "ry": 5.0
+      },
+      "fill": "$husk.light2"
+    },
+    {
+      "id": "big_band_0",
+      "at": [
+        3.74,
+        -3.05
+      ],
+      "rot": 25,
+      "shape": {
+        "kind": "rect",
+        "w": 10.0,
+        "h": 0.8
+      },
+      "fill": "$husk.dark2"
+    },
+    {
+      "id": "big_band_1",
+      "at": [
+        1.59,
+        1.58
+      ],
+      "rot": 25,
+      "shape": {
+        "kind": "rect",
+        "w": 10.0,
+        "h": 0.8
+      },
+      "fill": "$husk.dark2"
+    },
+    {
+      "id": "sprout",
+      "at": [
+        8.4,
+        -7.4
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 2.6,
+        "width": 1.3,
+        "from": 178,
+        "to": 272
+      },
+      "fill": "$venom"
+    },
+    {
+      "id": "bud",
+      "at": [
+        9.5,
+        -10.3
+      ],
+      "rot": -30,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.9,
+        "ry": 1.2
+      },
+      "fill": "$venom.light"
+    },
+    {
+      "id": "bud_gleam",
+      "at": [
+        9.0,
+        -10.7
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.55
+      },
+      "fill": "$venom.light2"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

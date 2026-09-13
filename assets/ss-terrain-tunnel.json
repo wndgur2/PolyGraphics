@@ -1,0 +1,356 @@
+{
+  "id": "ss.terrain.tunnel",
+  "name": "Tunnel mouth (SS)",
+  "description": "Shape Survivors set dressing: a hole dug up through the field from below, and the same hole caved in. The spoil is heaped highest on the near lip where it was pushed out, and it is warm turned earth rather than the ruins' purple stone — the one ring on this ground that means dug, not built. Drawn at the crater tilt the pheromone vent uses, so a mouth cut into open flats and one cut into a burrow chamber read as the same object. The `filled` variant is what a spent tunnel leaves: the heap gone back down the hole, domed and paler than the ground it came out of, broken into clods on top and sunk away from the lip where it settled.",
+  "tags": ["ss-terrain"],
+  "size": [76, 44],
+  "meta": { "radiusX": 26, "radiusY": 12 },
+  "parts": [
+    {
+      "id": "spoil_rim",
+      "at": [0, 1],
+      "shape": { "kind": "ellipse", "rx": 34, "ry": 17 },
+      "fill": "$ink"
+    },
+    {
+      "id": "spoil",
+      "at": [0, 0],
+      "shape": { "kind": "ellipse", "rx": 32, "ry": 15.5 },
+      "fill": "$rust"
+    },
+    {
+      "id": "heap",
+      "at": [0, -3],
+      "shape": { "kind": "ellipse", "rx": 30, "ry": 11 },
+      "fill": "$rust.light"
+    },
+    {
+      "id": "grit",
+      "at": [0, -3],
+      "repeat": {
+        "of": { "kind": "rect", "w": 2.2, "h": 2.2 },
+        "count": 22,
+        "area": [44, 13],
+        "seed": 811,
+        "jitterRot": true,
+        "scaleRange": [0.5, 1.4]
+      },
+      "fill": "$rust.light2"
+    },
+    {
+      "id": "lip",
+      "at": [0, 1],
+      "shape": { "kind": "ellipse", "rx": 27, "ry": 12.5 },
+      "fill": "$ink"
+    },
+    {
+      "id": "throat",
+      "at": [0, 1],
+      "shape": { "kind": "ellipse", "rx": 26, "ry": 12 },
+      "fill": {
+        "gradient": "radial",
+        "from": [0.5, 0.34],
+        "stops": [[0, "$ink"], [0.5, "$soil"], [1, "$rust"]]
+      }
+    },
+    {
+      "id": "dark",
+      "at": [0, 3.5],
+      "shape": { "kind": "ellipse", "rx": 18, "ry": 7 },
+      "fill": "$ink"
+    }
+  ],
+  "variants": {
+    "filled": {
+      "description": "Spent: the tunnel caved in. What blocks it is not a lid over the hole and not one lump either — it is a heap of loose spoil packed right out to the lip and piled past it, seven courses of clods narrowing as they climb, the big ones bedded in the crater and small pale pieces perched on the crest. A course is one seeded scatter drawn three times at that seed, so every clod carries its own rim, body and crown for three parts rather than thirty; each course is sparse enough to keep those rims, stepped far enough apart in y that it cannot climb over the one behind and bury it, and drawn over that one so its rims cut into it — which is what stacks them instead of laying them side by side. Angular rather than round, because earth breaks and does not bubble. The ring survives into this state on purpose: the digging happened, and filling it in does not put the ground back.",
+      "remove": ["throat", "dark"],
+      "add": [
+        {
+          "id": "fill_rim",
+          "at": [0, 1],
+          "shape": { "kind": "ellipse", "rx": 27, "ry": 12.5 },
+          "fill": "$ink"
+        },
+        {
+          "id": "fill",
+          "at": [0, 1],
+          "shape": { "kind": "ellipse", "rx": 26, "ry": 11.5 },
+          "fill": "$rust.light"
+        },
+        {
+          "id": "c1_rim",
+          "at": [0.5, -15.5],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 4.3 },
+            "count": 5,
+            "area": [20, 2.5],
+            "seed": 8201,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$ink"
+        },
+        {
+          "id": "c1_body",
+          "at": [0.5, -15.5],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 3.4 },
+            "count": 5,
+            "area": [20, 2.5],
+            "seed": 8201,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$rust.light2"
+        },
+        {
+          "id": "c1_crown",
+          "at": [-0.7, -17.1],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 1.5 },
+            "count": 5,
+            "area": [20, 2.5],
+            "seed": 8201,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$husk@ghost"
+        },
+        {
+          "id": "c2_rim",
+          "at": [-1.0, -11.2],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 4.7 },
+            "count": 7,
+            "area": [30, 2.5],
+            "seed": 8202,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$ink"
+        },
+        {
+          "id": "c2_body",
+          "at": [-1.0, -11.2],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 3.8 },
+            "count": 7,
+            "area": [30, 2.5],
+            "seed": 8202,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$rust.light2"
+        },
+        {
+          "id": "c2_crown",
+          "at": [-2.2, -12.8],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 1.67 },
+            "count": 7,
+            "area": [30, 2.5],
+            "seed": 8202,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$husk@ghost"
+        },
+        {
+          "id": "c3_rim",
+          "at": [1.0, -6.9],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 5.1 },
+            "count": 8,
+            "area": [40, 3.0],
+            "seed": 8203,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$ink"
+        },
+        {
+          "id": "c3_body",
+          "at": [1.0, -6.9],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 4.2 },
+            "count": 8,
+            "area": [40, 3.0],
+            "seed": 8203,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$rust.light2"
+        },
+        {
+          "id": "c3_crown",
+          "at": [-0.2, -8.5],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 1.85 },
+            "count": 8,
+            "area": [40, 3.0],
+            "seed": 8203,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$husk@ghost"
+        },
+        {
+          "id": "c4_rim",
+          "at": [-1.0, -2.6],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 5.4 },
+            "count": 9,
+            "area": [48, 3.0],
+            "seed": 8204,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$ink"
+        },
+        {
+          "id": "c4_body",
+          "at": [-1.0, -2.6],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 4.5 },
+            "count": 9,
+            "area": [48, 3.0],
+            "seed": 8204,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$rust.light"
+        },
+        {
+          "id": "c4_crown",
+          "at": [-2.2, -4.2],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 1.98 },
+            "count": 9,
+            "area": [48, 3.0],
+            "seed": 8204,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$rust.light2@soft"
+        },
+        {
+          "id": "c5_rim",
+          "at": [1.0, 1.7],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 5.4 },
+            "count": 10,
+            "area": [53, 3.0],
+            "seed": 8205,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$ink"
+        },
+        {
+          "id": "c5_body",
+          "at": [1.0, 1.7],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 4.5 },
+            "count": 10,
+            "area": [53, 3.0],
+            "seed": 8205,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$rust.light"
+        },
+        {
+          "id": "c5_crown",
+          "at": [-0.2, 0.1],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 1.98 },
+            "count": 10,
+            "area": [53, 3.0],
+            "seed": 8205,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$rust.light2@soft"
+        },
+        {
+          "id": "c6_rim",
+          "at": [-1.0, 6.0],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 5.3 },
+            "count": 9,
+            "area": [51, 3.0],
+            "seed": 8206,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$ink"
+        },
+        {
+          "id": "c6_body",
+          "at": [-1.0, 6.0],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 4.4 },
+            "count": 9,
+            "area": [51, 3.0],
+            "seed": 8206,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$rust.light"
+        },
+        {
+          "id": "c6_crown",
+          "at": [-2.2, 4.4],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 1.94 },
+            "count": 9,
+            "area": [51, 3.0],
+            "seed": 8206,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$rust.light2@ghost"
+        },
+        {
+          "id": "c7_rim",
+          "at": [0.0, 10.3],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 5.0 },
+            "count": 9,
+            "area": [45, 2.5],
+            "seed": 8207,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$ink"
+        },
+        {
+          "id": "c7_body",
+          "at": [0.0, 10.3],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 4.1 },
+            "count": 9,
+            "area": [45, 2.5],
+            "seed": 8207,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$rust.light"
+        },
+        {
+          "id": "c7_crown",
+          "at": [-1.2, 8.7],
+          "repeat": {
+            "of": { "kind": "ngon", "sides": 7, "r": 1.8 },
+            "count": 9,
+            "area": [45, 2.5],
+            "seed": 8207,
+            "jitterRot": true,
+            "scaleRange": [0.7, 1.15]
+          },
+          "fill": "$rust.light2@ghost"
+        }
+      ]
+    }
+  }
+}

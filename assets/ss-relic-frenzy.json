@@ -1,0 +1,902 @@
+{
+  "id": "ss.relic.frenzy",
+  "name": "Feeding frenzy",
+  "description": "A maw a little wider than it is tall, lips lumpy rather than true, set with nine pale teeth that all lean the same way — every tooth's point is swung forty degrees clockwise off the line to the centre, so the ring turns as you look at it. The middle is not a throat: a red tongue with a coral crown fills it to the roots of the teeth, because a dark hole inside a ring of anything bright is an eye or a pit and this is a mouth still full. Kills that follow one another quickly are what stack the damage, and a whirl of teeth is a mouth that is not stopping. The teeth vary in size and three of them stand proud of the lip so the silhouette is spiky and turning, not a coin.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "maw_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            12.26,
+            2.4
+          ],
+          [
+            9.05,
+            5.45
+          ],
+          [
+            7.26,
+            9.42
+          ],
+          [
+            2.31,
+            9.67
+          ],
+          [
+            -2.12,
+            10.48
+          ],
+          [
+            -5.41,
+            7.86
+          ],
+          [
+            -10.06,
+            6.53
+          ],
+          [
+            -10.99,
+            2.08
+          ],
+          [
+            -10.14,
+            -1.39
+          ],
+          [
+            -10.16,
+            -5.68
+          ],
+          [
+            -5.79,
+            -7.59
+          ],
+          [
+            -2.11,
+            -10
+          ],
+          [
+            2.14,
+            -8.45
+          ],
+          [
+            6.42,
+            -8.35
+          ],
+          [
+            10.65,
+            -5.79
+          ],
+          [
+            10.93,
+            -1.6
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "maw",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            11.23,
+            2.15
+          ],
+          [
+            8.31,
+            4.92
+          ],
+          [
+            6.66,
+            8.55
+          ],
+          [
+            2.2,
+            8.78
+          ],
+          [
+            -1.88,
+            9.52
+          ],
+          [
+            -4.99,
+            7.05
+          ],
+          [
+            -9.29,
+            5.81
+          ],
+          [
+            -10.07,
+            2.1
+          ],
+          [
+            -9.24,
+            -1.28
+          ],
+          [
+            -9.26,
+            -5.09
+          ],
+          [
+            -5.36,
+            -6.79
+          ],
+          [
+            -2,
+            -9
+          ],
+          [
+            1.97,
+            -7.55
+          ],
+          [
+            6.16,
+            -7.46
+          ],
+          [
+            9.78,
+            -5.26
+          ],
+          [
+            10.04,
+            -1.42
+          ]
+        ]
+      },
+      "fill": "$blood.dark2"
+    },
+    {
+      "id": "maw_inner",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            9.02,
+            1.78
+          ],
+          [
+            6.68,
+            4
+          ],
+          [
+            5.37,
+            6.9
+          ],
+          [
+            1.8,
+            7.08
+          ],
+          [
+            -1.47,
+            7.68
+          ],
+          [
+            -3.95,
+            5.7
+          ],
+          [
+            -7.39,
+            4.71
+          ],
+          [
+            -8.01,
+            1.74
+          ],
+          [
+            -7.35,
+            -0.96
+          ],
+          [
+            -7.37,
+            -4.01
+          ],
+          [
+            -4.24,
+            -5.37
+          ],
+          [
+            -1.56,
+            -7.14
+          ],
+          [
+            1.62,
+            -5.98
+          ],
+          [
+            4.97,
+            -5.9
+          ],
+          [
+            7.86,
+            -4.15
+          ],
+          [
+            8.07,
+            -1.08
+          ]
+        ]
+      },
+      "fill": "$blood.dark"
+    },
+    {
+      "id": "tongue",
+      "at": [
+        0.6,
+        0.9
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 6.4
+      },
+      "fill": "$blood"
+    },
+    {
+      "id": "tongue_lit",
+      "at": [
+        -0.9,
+        -0.7
+      ],
+      "rot": -25,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3,
+        "ry": 2.3
+      },
+      "fill": "$coral"
+    },
+    {
+      "id": "tongue_gleam",
+      "at": [
+        -2,
+        -1.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.9
+      },
+      "fill": "$coral.light2"
+    },
+    {
+      "id": "tooth0_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.01,
+            -10.77
+          ],
+          [
+            -1.08,
+            -11.6
+          ],
+          [
+            -0.29,
+            -11.88
+          ],
+          [
+            4.19,
+            -11.47
+          ],
+          [
+            4.91,
+            -3.06
+          ],
+          [
+            4.41,
+            -2.17
+          ],
+          [
+            3.51,
+            -2.63
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth1_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            5.77,
+            -6.12
+          ],
+          [
+            6.27,
+            -6.78
+          ],
+          [
+            7.04,
+            -6.47
+          ],
+          [
+            9.44,
+            -4.01
+          ],
+          [
+            5.65,
+            0.77
+          ],
+          [
+            4.69,
+            1.08
+          ],
+          [
+            4.33,
+            0.13
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth2_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            9.39,
+            -1.67
+          ],
+          [
+            10.18,
+            -1.7
+          ],
+          [
+            10.44,
+            -0.96
+          ],
+          [
+            10.29,
+            2.9
+          ],
+          [
+            2.61,
+            2.92
+          ],
+          [
+            1.76,
+            2.35
+          ],
+          [
+            2.3,
+            1.48
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth3_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            10.75,
+            6.59
+          ],
+          [
+            11.5,
+            7.07
+          ],
+          [
+            11.18,
+            7.89
+          ],
+          [
+            8.9,
+            9.93
+          ],
+          [
+            0.68,
+            7.02
+          ],
+          [
+            0.09,
+            6.12
+          ],
+          [
+            1.01,
+            5.57
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth4_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3.75,
+            7.62
+          ],
+          [
+            4.03,
+            8.44
+          ],
+          [
+            3.31,
+            8.9
+          ],
+          [
+            -0.72,
+            9.39
+          ],
+          [
+            -2.58,
+            3.36
+          ],
+          [
+            -2.31,
+            2.4
+          ],
+          [
+            -1.33,
+            2.61
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth5_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.41,
+            7.66
+          ],
+          [
+            -3.74,
+            8.43
+          ],
+          [
+            -4.56,
+            8.31
+          ],
+          [
+            -7.56,
+            6.43
+          ],
+          [
+            -4.98,
+            0.95
+          ],
+          [
+            -4.13,
+            0.42
+          ],
+          [
+            -3.56,
+            1.25
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth6_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -12.49,
+            5.95
+          ],
+          [
+            -13.94,
+            0.95
+          ],
+          [
+            -4.61,
+            -2.32
+          ],
+          [
+            -3.61,
+            -2.04
+          ],
+          [
+            -3.89,
+            -1.03
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth7_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -8.69,
+            -1.79
+          ],
+          [
+            -9.54,
+            -2.03
+          ],
+          [
+            -9.47,
+            -2.92
+          ],
+          [
+            -7.96,
+            -5.37
+          ],
+          [
+            -1.7,
+            -4.67
+          ],
+          [
+            -0.92,
+            -3.96
+          ],
+          [
+            -1.64,
+            -3.19
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth8_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.96,
+            -6.26
+          ],
+          [
+            -5.41,
+            -7
+          ],
+          [
+            -4.78,
+            -7.61
+          ],
+          [
+            -1.21,
+            -8.73
+          ],
+          [
+            2.23,
+            -3.43
+          ],
+          [
+            2.22,
+            -2.42
+          ],
+          [
+            1.2,
+            -2.39
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth0",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.35,
+            -11.13
+          ],
+          [
+            3.5,
+            -10.78
+          ],
+          [
+            4.16,
+            -2.99
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "tooth1",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            6.5,
+            -5.95
+          ],
+          [
+            8.44,
+            -3.96
+          ],
+          [
+            5.06,
+            0.3
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "tooth2",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            9.7,
+            -0.99
+          ],
+          [
+            9.57,
+            2.15
+          ],
+          [
+            2.61,
+            2.17
+          ]
+        ]
+      },
+      "fill": "$bone.dark"
+    },
+    {
+      "id": "tooth3",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            10.68,
+            7.33
+          ],
+          [
+            8.73,
+            9.07
+          ],
+          [
+            0.93,
+            6.31
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "tooth4",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3.22,
+            8.16
+          ],
+          [
+            -0.19,
+            8.57
+          ],
+          [
+            -1.86,
+            3.14
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "tooth5",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.16,
+            7.68
+          ],
+          [
+            -6.6,
+            6.15
+          ],
+          [
+            -4.31,
+            1.27
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "tooth6",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -12.08,
+            4.66
+          ],
+          [
+            -13.02,
+            1.42
+          ],
+          [
+            -4.36,
+            -1.62
+          ]
+        ]
+      },
+      "fill": "$bone.dark"
+    },
+    {
+      "id": "tooth7",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -8.84,
+            -2.52
+          ],
+          [
+            -7.57,
+            -4.57
+          ],
+          [
+            -1.78,
+            -3.93
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "tooth8",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.56,
+            -6.89
+          ],
+          [
+            -1.53,
+            -7.84
+          ],
+          [
+            1.6,
+            -3.02
+          ]
+        ]
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "tooth0_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.35,
+            -11.13
+          ],
+          [
+            1.57,
+            -10.95
+          ],
+          [
+            2.13,
+            -6.66
+          ]
+        ]
+      },
+      "fill": "$bone.light2"
+    },
+    {
+      "id": "tooth2_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            9.7,
+            -0.99
+          ],
+          [
+            9.63,
+            0.58
+          ],
+          [
+            5.8,
+            0.75
+          ]
+        ]
+      },
+      "fill": "$bone.light2"
+    },
+    {
+      "id": "tooth4_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3.22,
+            8.16
+          ],
+          [
+            1.52,
+            8.36
+          ],
+          [
+            0.43,
+            5.4
+          ]
+        ]
+      },
+      "fill": "$bone.light2"
+    },
+    {
+      "id": "tooth6_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -12.08,
+            4.66
+          ],
+          [
+            -12.55,
+            3.04
+          ],
+          [
+            -7.84,
+            1.21
+          ]
+        ]
+      },
+      "fill": "$bone.light2"
+    },
+    {
+      "id": "tooth8_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.56,
+            -6.89
+          ],
+          [
+            -3.04,
+            -7.37
+          ],
+          [
+            -1.17,
+            -4.76
+          ]
+        ]
+      },
+      "fill": "$bone.light2"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

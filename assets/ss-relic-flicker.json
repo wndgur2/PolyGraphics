@@ -1,0 +1,124 @@
+{
+  "id": "ss.relic.flicker",
+  "name": "Flicker",
+  "description": "The same small body drawn twice, half a body apart along the diagonal: the one behind in a cold dark blue, the one in front warm and lit, both solid. A body that is not quite where it stands — which is the relic, fifteen percent of hits landing on where you were. The copies are whole shapes in two tokens rather than one shape and a translucent ghost, because at this size a translucent object is a blurry object. Kept to plain tilted ovals with no markings so nothing on either reads as a face, and made two equal bodies so it stays clear of ss.relic.molt, where a small body leaves a large husk. A pair of motion ticks off the back copy was tried and read as a small bird.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "rear_outline",
+      "at": [
+        -3.6,
+        -3.4
+      ],
+      "rot": -28,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.4,
+        "ry": 6.5
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "rear",
+      "at": [
+        -3.6,
+        -3.4
+      ],
+      "rot": -28,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.2,
+        "ry": 5.3
+      },
+      "fill": "$frost.dark2"
+    },
+    {
+      "id": "rear_lit",
+      "at": [
+        -4.8,
+        -4.7
+      ],
+      "rot": -28,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.8,
+        "ry": 3.1
+      },
+      "fill": "$frost.dark"
+    },
+    {
+      "id": "front_outline",
+      "at": [
+        3.2,
+        3.2
+      ],
+      "rot": -28,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.4,
+        "ry": 6.5
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "front",
+      "at": [
+        3.2,
+        3.2
+      ],
+      "rot": -28,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.2,
+        "ry": 5.3
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "front_lit",
+      "at": [
+        2.4,
+        2.2
+      ],
+      "rot": -28,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.8,
+        "ry": 3.9
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "front_gleam",
+      "at": [
+        0.6,
+        0.8
+      ],
+      "rot": -28,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.6,
+        "ry": 1
+      },
+      "fill": "$silent"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

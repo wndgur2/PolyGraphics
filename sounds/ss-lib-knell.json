@@ -7,6 +7,7 @@
     "interface"
   ],
   "duration": 0.28,
+  "root": "$seventh.down",
   "voices": [
     {
       "id": "tone",
@@ -32,25 +33,5 @@
         }
       ]
     }
-  ],
-  "variants": {
-    "fifth": {
-      "description": "A step down the descent.",
-      "set": {
-        "tone.source.freq": "$fifth.down"
-      }
-    },
-    "third": {
-      "description": "Another step down.",
-      "set": {
-        "tone.source.freq": "$third.down"
-      }
-    },
-    "low": {
-      "description": "The bottom of the fall, an octave under where it started.",
-      "set": {
-        "tone.source.freq": "$seventh.down2"
-      }
-    }
-  }
+  ]
 }

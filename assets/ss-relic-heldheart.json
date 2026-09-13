@@ -1,0 +1,587 @@
+{
+  "id": "ss.relic.heldheart",
+  "name": "Held heart",
+  "description": "A heart as the organ and not the card suit: a lumpy blood-red bulb, wider at one shoulder than the other, a pale vessel cut short off the top, a groove down the front, and one frost-blue crack running straight across it with two ice crystals grown where the crack is widest. The relic stops the whole field dead every so often, and a heart with ice across it is that held beat. The vessel's cut end is a light ellipse rather than a dark lumen, and the crystals are solid stars with a near-white centre, so nothing on the plate is a hole. The red is the same blood ramp ss.relic.oxygen's lungs use, and the two are told apart by count and by the cold: those are a pair and breathing, this is one and stopped.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "vessel_outline",
+      "at": [
+        2.6,
+        -8.6
+      ],
+      "rot": 14.0,
+      "shape": {
+        "kind": "rect",
+        "w": 4.4,
+        "h": 5.6,
+        "corner": 1.8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "vessel",
+      "at": [
+        2.6,
+        -8.6
+      ],
+      "rot": 14.0,
+      "shape": {
+        "kind": "rect",
+        "w": 3.0,
+        "h": 4.8,
+        "corner": 1.2
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "vessel_lumen",
+      "at": [
+        3.1,
+        -10.6
+      ],
+      "rot": 14.0,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.3,
+        "ry": 0.7
+      },
+      "fill": "$husk.light"
+    },
+    {
+      "id": "heart_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -7.45,
+            -4.72
+          ],
+          [
+            -5.21,
+            -8.09
+          ],
+          [
+            -1.27,
+            -8.95
+          ],
+          [
+            1.0,
+            -7.82
+          ],
+          [
+            3.3,
+            -8.01
+          ],
+          [
+            6.63,
+            -7.06
+          ],
+          [
+            8.91,
+            -3.59
+          ],
+          [
+            8.8,
+            1.43
+          ],
+          [
+            6.84,
+            5.76
+          ],
+          [
+            3.76,
+            9.06
+          ],
+          [
+            -0.24,
+            10.47
+          ],
+          [
+            -4.01,
+            8.83
+          ],
+          [
+            -7.08,
+            5.32
+          ],
+          [
+            -8.71,
+            0.76
+          ],
+          [
+            -8.59,
+            -2.67
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "heart",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -6.6,
+            -4.2
+          ],
+          [
+            -4.6,
+            -7.2
+          ],
+          [
+            -1.4,
+            -7.9
+          ],
+          [
+            0.8,
+            -6.8
+          ],
+          [
+            3.2,
+            -7.0
+          ],
+          [
+            6.0,
+            -6.2
+          ],
+          [
+            7.9,
+            -3.3
+          ],
+          [
+            7.8,
+            1.2
+          ],
+          [
+            6.0,
+            5.2
+          ],
+          [
+            3.2,
+            8.2
+          ],
+          [
+            -0.2,
+            9.4
+          ],
+          [
+            -3.4,
+            8.0
+          ],
+          [
+            -6.2,
+            4.8
+          ],
+          [
+            -7.7,
+            0.6
+          ],
+          [
+            -7.6,
+            -2.4
+          ]
+        ]
+      },
+      "fill": "$blood.dark"
+    },
+    {
+      "id": "heart_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -5.83,
+            -4.07
+          ],
+          [
+            -4.23,
+            -6.48
+          ],
+          [
+            -2.21,
+            -6.92
+          ],
+          [
+            -0.11,
+            -5.87
+          ],
+          [
+            2.44,
+            -6.08
+          ],
+          [
+            4.39,
+            -5.53
+          ],
+          [
+            5.69,
+            -3.54
+          ],
+          [
+            5.61,
+            0.14
+          ],
+          [
+            4.05,
+            3.6
+          ],
+          [
+            1.7,
+            6.12
+          ],
+          [
+            -0.74,
+            6.98
+          ],
+          [
+            -3.03,
+            5.98
+          ],
+          [
+            -5.4,
+            3.28
+          ],
+          [
+            -6.69,
+            -0.35
+          ],
+          [
+            -6.61,
+            -2.66
+          ]
+        ]
+      },
+      "fill": "$blood"
+    },
+    {
+      "id": "sheen",
+      "at": [
+        -3.6,
+        -3.4
+      ],
+      "rot": -28.0,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.7,
+        "ry": 2.6
+      },
+      "fill": "$blood.light@0.55"
+    },
+    {
+      "id": "groove",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.61,
+            -5.69
+          ],
+          [
+            -0.2,
+            -2.21
+          ],
+          [
+            0.42,
+            1.73
+          ],
+          [
+            2.05,
+            4.79
+          ],
+          [
+            2.75,
+            4.41
+          ],
+          [
+            1.18,
+            1.47
+          ],
+          [
+            0.6,
+            -2.19
+          ],
+          [
+            1.39,
+            -5.51
+          ]
+        ]
+      },
+      "fill": "$blood.dark2"
+    },
+    {
+      "id": "crack_outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -8.07,
+            0.76
+          ],
+          [
+            -4.29,
+            2.15
+          ],
+          [
+            -1.82,
+            0.44
+          ],
+          [
+            0.85,
+            2.94
+          ],
+          [
+            3.8,
+            1.35
+          ],
+          [
+            6.13,
+            3.24
+          ],
+          [
+            8.48,
+            2.46
+          ],
+          [
+            7.52,
+            0.14
+          ],
+          [
+            6.47,
+            0.76
+          ],
+          [
+            4.0,
+            -1.15
+          ],
+          [
+            1.15,
+            0.46
+          ],
+          [
+            -1.58,
+            -2.04
+          ],
+          [
+            -4.51,
+            -0.35
+          ],
+          [
+            -7.13,
+            -1.56
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "crack",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -7.84,
+            0.2
+          ],
+          [
+            -4.34,
+            1.55
+          ],
+          [
+            -1.76,
+            -0.15
+          ],
+          [
+            0.92,
+            2.35
+          ],
+          [
+            3.85,
+            0.75
+          ],
+          [
+            6.21,
+            2.64
+          ],
+          [
+            8.25,
+            1.9
+          ],
+          [
+            7.75,
+            0.7
+          ],
+          [
+            6.39,
+            1.36
+          ],
+          [
+            3.95,
+            -0.55
+          ],
+          [
+            1.08,
+            1.05
+          ],
+          [
+            -1.64,
+            -1.45
+          ],
+          [
+            -4.46,
+            0.25
+          ],
+          [
+            -7.36,
+            -1.0
+          ]
+        ]
+      },
+      "fill": "$frost"
+    },
+    {
+      "id": "crack_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.27,
+            1.11
+          ],
+          [
+            -1.72,
+            -0.55
+          ],
+          [
+            0.97,
+            1.95
+          ],
+          [
+            4.02,
+            0.32
+          ],
+          [
+            3.78,
+            -0.12
+          ],
+          [
+            1.03,
+            1.45
+          ],
+          [
+            -1.68,
+            -1.05
+          ],
+          [
+            -4.53,
+            0.69
+          ]
+        ]
+      },
+      "fill": "$frost.light2"
+    },
+    {
+      "id": "crystal_a_outline",
+      "at": [
+        -2.8,
+        -0.1
+      ],
+      "rot": 14.0,
+      "shape": {
+        "kind": "star",
+        "points": 4,
+        "r": 3.3,
+        "r2": 1.15
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "crystal_b_outline",
+      "at": [
+        4.4,
+        0.9
+      ],
+      "rot": -22.0,
+      "shape": {
+        "kind": "star",
+        "points": 4,
+        "r": 2.5,
+        "r2": 0.95
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "crystal_a",
+      "at": [
+        -2.8,
+        -0.1
+      ],
+      "rot": 14.0,
+      "shape": {
+        "kind": "star",
+        "points": 4,
+        "r": 2.6,
+        "r2": 0.75
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "crystal_b",
+      "at": [
+        4.4,
+        0.9
+      ],
+      "rot": -22.0,
+      "shape": {
+        "kind": "star",
+        "points": 4,
+        "r": 1.9,
+        "r2": 0.6
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "crystal_a_core",
+      "at": [
+        -2.8,
+        -0.1
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.55
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "rime",
+      "at": [
+        -6.3,
+        1.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.5
+      },
+      "fill": "$frost.light"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

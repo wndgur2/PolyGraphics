@@ -1,257 +1,314 @@
 {
   "id": "ss.relic.shrink",
   "name": "Runt instar",
-  "description": "A brood egg at full size with far too little in it: a steel-grey shell, the hollow inside left dark and mostly empty, and one small white grub curled at the bottom of it, eye still shut, its head a size down from the segment behind it rather than the widest ring on the body. The egg is the ruler — it is the size the occupant was supposed to grow to fill, and the gap between the two is the whole reading. Deliberately not ss.relic.drone, which is the same idea inverted: a yellow cell packed so tight that three young had to interlock. Yellow and full there, grey and empty here.",
+  "description": "A brood egg at full size with far too little in it: a steel-grey shell, the hollow inside left dark and mostly empty, and one small white grub curled at the bottom of it, eye still shut, its head a size down from the segment behind it rather than the widest ring on the body. The egg is the ruler — it is the size the occupant was supposed to grow to fill, and the gap between the two is the whole reading. Deliberately not ss.relic.drone, which is the same idea inverted: a yellow cell packed so tight that three young had to interlock. Yellow and full there, grey and empty here. Polish: the inside used to be the panel's own `$coal.dark`, which made the egg a dark hole with a grub in it — it is now a quiet `$slate.dark` with the far wall a shade lighter (`$slate`, offset down-right, the way light from up-left falls inside a cup), so the runt sits on something. The shell is now a real ring — an `$ink` ring under a `$steel.dark` ring, lit from the upper-left by a tapered `$steel` crescent (a poly, because an arc's flat ends showed) — so the rim is outlined on both edges instead of the old stack of filled discs. The runt keeps its per-segment ink but each segment gained a `$husk.dark` base under a slightly smaller pale face offset up-left, so it is a curl of beads rather than a flat pale blot. Ring size, runt position and the gleam are unchanged.",
   "tags": [
     "ss-relic"
   ],
-  "size": [
-    32,
-    32
-  ],
+  "size": [32, 32],
   "parts": [
     {
       "id": "plate",
       "use": "ss.lib.relic-plate"
     },
     {
-      "id": "shell_outline",
-      "at": [
-        0,
-        0.2
-      ],
+      "id": "interior",
+      "at": [0, 0.2],
       "shape": {
         "kind": "ellipse",
-        "rx": 10.5,
-        "ry": 12.5
+        "rx": 8.4,
+        "ry": 10.3
+      },
+      "fill": "$slate.dark"
+    },
+    {
+      "id": "interior_wall",
+      "at": [0.7, 1.1],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.6,
+        "ry": 8.3
+      },
+      "fill": "$slate"
+    },
+    {
+      "id": "shell_outline",
+      "at": [0, 0.2],
+      "scale": [0.83, 1.02],
+      "shape": {
+        "kind": "ring",
+        "r": 10,
+        "width": 5.0
       },
       "fill": "$ink"
     },
     {
       "id": "shell",
-      "at": [
-        0,
-        0.2
-      ],
+      "at": [0, 0.2],
+      "scale": [0.83, 1.02],
       "shape": {
-        "kind": "ellipse",
-        "rx": 9.3,
-        "ry": 11.3
+        "kind": "ring",
+        "r": 10,
+        "width": 2.4
       },
       "fill": "$steel.dark"
     },
     {
       "id": "shell_lit",
-      "at": [
-        -0.4,
-        -0.6
-      ],
       "shape": {
-        "kind": "ellipse",
-        "rx": 8.5,
-        "ry": 10.4
+        "kind": "poly",
+        "points": [
+          [-0.25, 9.07],
+          [-1.74, 8.82],
+          [-3.16, 8.18],
+          [-4.43, 7.2],
+          [-5.52, 5.91],
+          [-6.36, 4.37],
+          [-6.92, 2.65],
+          [-7.18, 0.82],
+          [-7.13, -1.04],
+          [-6.77, -2.84],
+          [-6.11, -4.51],
+          [-5.18, -5.97],
+          [-4.03, -7.16],
+          [-2.7, -8.03],
+          [-1.25, -8.55],
+          [0.25, -8.67],
+          [1.74, -8.42],
+          [3.16, -7.78],
+          [4.43, -6.8],
+          [5.52, -5.51],
+          [6.36, -3.97],
+          [6.92, -2.25],
+          [7.18, -0.42],
+          [7.54, -0.45],
+          [7.44, -2.43],
+          [7.01, -4.39],
+          [6.25, -6.25],
+          [5.16, -7.92],
+          [3.77, -9.29],
+          [2.13, -10.28],
+          [0.31, -10.81],
+          [-1.58, -10.82],
+          [-3.45, -10.29],
+          [-5.15, -9.18],
+          [-6.63, -7.66],
+          [-7.82, -5.8],
+          [-8.65, -3.67],
+          [-9.0, -1.35],
+          [-8.92, 0.97],
+          [-8.42, 3.17],
+          [-7.56, 5.14],
+          [-6.39, 6.8],
+          [-5.0, 8.08],
+          [-3.47, 8.95],
+          [-1.87, 9.41],
+          [-0.26, 9.48]
+        ]
       },
       "fill": "$steel"
     },
     {
-      "id": "hollow",
-      "at": [
-        0,
-        0.6
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 7.3,
-        "ry": 9.3
-      },
-      "fill": "$coal.dark"
-    },
-    {
       "id": "seg_o0",
-      "at": [
-        2.13,
-        1.7
-      ],
+      "at": [2.13, 1.7],
       "shape": {
         "kind": "circle",
-        "r": 1.75
+        "r": 1.85
       },
       "fill": "$ink"
     },
     {
       "id": "seg_o1",
-      "at": [
-        3.07,
-        3.14
-      ],
+      "at": [3.07, 3.14],
       "shape": {
         "kind": "circle",
-        "r": 1.97
+        "r": 2.07
       },
       "fill": "$ink"
     },
     {
       "id": "seg_o2",
-      "at": [
-        3.07,
-        4.86
-      ],
+      "at": [3.07, 4.86],
       "shape": {
         "kind": "circle",
-        "r": 2.18
+        "r": 2.28
       },
       "fill": "$ink"
     },
     {
       "id": "seg_o3",
-      "at": [
-        2.13,
-        6.3
-      ],
+      "at": [2.13, 6.3],
       "shape": {
         "kind": "circle",
-        "r": 2.4
+        "r": 2.5
       },
       "fill": "$ink"
     },
     {
       "id": "seg_o4",
-      "at": [
-        0.55,
-        6.98
-      ],
+      "at": [0.55, 6.98],
       "shape": {
         "kind": "circle",
-        "r": 2.62
+        "r": 2.72
       },
       "fill": "$ink"
     },
     {
       "id": "seg_o5",
-      "at": [
-        -1.15,
-        6.68
-      ],
+      "at": [-1.15, 6.68],
       "shape": {
         "kind": "circle",
-        "r": 2.83
+        "r": 2.93
       },
       "fill": "$ink"
     },
     {
       "id": "seg_o6",
-      "at": [
-        -2.4,
-        5.5
-      ],
+      "at": [-2.4, 5.5],
       "shape": {
         "kind": "circle",
-        "r": 2.6
+        "r": 2.7
       },
       "fill": "$ink"
     },
     {
-      "id": "seg0",
-      "at": [
-        2.13,
-        1.7
-      ],
+      "id": "seg0_base",
+      "at": [2.13, 1.7],
       "shape": {
         "kind": "circle",
         "r": 0.95
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "seg1_base",
+      "at": [3.07, 3.14],
+      "shape": {
+        "kind": "circle",
+        "r": 1.17
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "seg2_base",
+      "at": [3.07, 4.86],
+      "shape": {
+        "kind": "circle",
+        "r": 1.38
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "seg3_base",
+      "at": [2.13, 6.3],
+      "shape": {
+        "kind": "circle",
+        "r": 1.6
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "seg4_base",
+      "at": [0.55, 6.98],
+      "shape": {
+        "kind": "circle",
+        "r": 1.82
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "seg5_base",
+      "at": [-1.15, 6.68],
+      "shape": {
+        "kind": "circle",
+        "r": 2.03
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "seg6_base",
+      "at": [-2.4, 5.5],
+      "shape": {
+        "kind": "circle",
+        "r": 1.8
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "seg0",
+      "at": [1.95, 1.48],
+      "shape": {
+        "kind": "circle",
+        "r": 0.7
       },
       "fill": "$husk.light"
     },
     {
       "id": "seg1",
-      "at": [
-        3.07,
-        3.14
-      ],
+      "at": [2.87, 2.9],
       "shape": {
         "kind": "circle",
-        "r": 1.17
+        "r": 0.9
       },
       "fill": "$silent"
     },
     {
       "id": "seg2",
-      "at": [
-        3.07,
-        4.86
-      ],
+      "at": [2.87, 4.62],
       "shape": {
         "kind": "circle",
-        "r": 1.38
+        "r": 1.1
       },
       "fill": "$husk.light"
     },
     {
       "id": "seg3",
-      "at": [
-        2.13,
-        6.3
-      ],
+      "at": [1.93, 6.05],
       "shape": {
         "kind": "circle",
-        "r": 1.6
+        "r": 1.3
       },
       "fill": "$silent"
     },
     {
       "id": "seg4",
-      "at": [
-        0.55,
-        6.98
-      ],
+      "at": [0.35, 6.72],
       "shape": {
         "kind": "circle",
-        "r": 1.82
+        "r": 1.5
       },
       "fill": "$husk.light"
     },
     {
       "id": "seg5",
-      "at": [
-        -1.15,
-        6.68
-      ],
+      "at": [-1.35, 6.42],
       "shape": {
         "kind": "circle",
-        "r": 2.03
+        "r": 1.7
       },
       "fill": "$silent"
     },
     {
       "id": "seg6",
-      "at": [
-        -2.4,
-        5.5
-      ],
+      "at": [-2.6, 5.25],
       "shape": {
         "kind": "circle",
-        "r": 1.8
+        "r": 1.5
       },
       "fill": "$husk.light"
     },
     {
       "id": "head",
-      "at": [
-        -2.4,
-        5.5
-      ],
+      "at": [-2.6, 5.25],
       "shape": {
         "kind": "circle",
-        "r": 1.8
+        "r": 1.5
       },
       "fill": "$silent"
     },
     {
       "id": "eye",
-      "at": [
-        -2.7,
-        4.98
-      ],
+      "at": [-2.7, 4.98],
       "rot": 150,
       "shape": {
         "kind": "rect",
@@ -263,10 +320,7 @@
     },
     {
       "id": "gleam",
-      "at": [
-        -5.4,
-        -6.2
-      ],
+      "at": [-5.4, -6.2],
       "rot": -26,
       "shape": {
         "kind": "ellipse",
