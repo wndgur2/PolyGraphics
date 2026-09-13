@@ -1,11 +1,11 @@
 {
   "id": "ss.icon.mine",
   "name": "Spore pod icon",
-  "description": "UI slot icon for the spore pod. Composes `ss.proj.mine` itself via `use` — the cache the icon promises is the cache the ground shows — replacing the old hand-drawn i_mine (grey disc, red core). Rim keeps that original's red: the slot color the HUD taught players to read as 'trap'.",
+  "description": "UI slot icon for the spore pod. Composes `ss.proj.mine` itself via `use` — the cache the icon promises is the cache the ground shows — replacing the old hand-drawn i_mine (grey disc, red core). Rim is `$soul` — the pod is four browns and one cold fuse light, and the fuse is the only part of it that is not every other weapon's colour.",
   "tags": ["ss-icon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$coral" },
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$soul" },
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
     { "id": "glyph", "use": "ss.proj.mine", "scale": 1.15 }
   ],
