@@ -70,15 +70,15 @@
         "stops": [
           [
             0,
-            "$steel"
+            "$moss.light2"
           ],
           [
             0.55,
-            "$steel.dark"
+            "$moss.light"
           ],
           [
             1,
-            "$slate"
+            "$moss.dark"
           ]
         ]
       },
@@ -118,7 +118,7 @@
           ]
         ]
       },
-      "fill": "$slate.dark2"
+      "fill": "$moss.dark2"
     },
     {
       "id": "hood_point_fold_b",
@@ -181,15 +181,15 @@
         "stops": [
           [
             0,
-            "$steel"
+            "$moss.light2"
           ],
           [
             0.5,
-            "$steel.dark"
+            "$moss.light"
           ],
           [
             1,
-            "$slate"
+            "$moss.dark"
           ]
         ]
       },
@@ -339,11 +339,11 @@
         "stops": [
           [
             0,
-            "$slate"
+            "$moss.dark"
           ],
           [
             1,
-            "$slate.dark2"
+            "$moss.dark2"
           ]
         ]
       },
@@ -388,15 +388,15 @@
         "stops": [
           [
             0,
-            "$slate.light"
+            "$moss"
           ],
           [
             0.6,
-            "$slate"
+            "$moss.dark"
           ],
           [
             1,
-            "$slate.dark"
+            "$moss.dark2"
           ]
         ]
       },
@@ -441,15 +441,15 @@
         "stops": [
           [
             0,
-            "$slate"
+            "$moss.dark"
           ],
           [
             0.6,
-            "$slate.dark"
+            "$moss.dark2"
           ],
           [
             1,
-            "$slate.dark2"
+            "$moss.dark2"
           ]
         ]
       },
@@ -552,11 +552,11 @@
         "stops": [
           [
             0,
-            "$slate.light"
+            "$moss"
           ],
           [
             1,
-            "$slate.dark"
+            "$moss.dark2"
           ]
         ]
       },
@@ -601,7 +601,7 @@
         "w": 0.6,
         "h": 1.6
       },
-      "fill": "$slate.dark"
+      "fill": "$moss.dark2"
     },
     {
       "id": "scarf_fray_b",
@@ -614,7 +614,7 @@
         "w": 0.6,
         "h": 1.4
       },
-      "fill": "$slate.dark"
+      "fill": "$moss.dark2"
     },
     {
       "id": "coif",
@@ -866,7 +866,7 @@
         "stops": [
           [
             0,
-            "$slate.dark2"
+            "$moss.dark2"
           ],
           [
             0.6,
@@ -965,15 +965,15 @@
         "stops": [
           [
             0,
-            "$slate"
+            "$moss.dark"
           ],
           [
             0.6,
-            "$slate.dark"
+            "$moss.dark2"
           ],
           [
             1,
-            "$slate.dark2"
+            "$moss.dark2"
           ]
         ]
       },
@@ -1063,7 +1063,7 @@
           ]
         ]
       },
-      "fill": "$slate.light"
+      "fill": "$moss"
     },
     {
       "id": "strap",
@@ -1281,15 +1281,15 @@
         "stops": [
           [
             0,
-            "$steel"
+            "$moss.light2"
           ],
           [
             0.5,
-            "$steel.dark"
+            "$moss.light"
           ],
           [
             1,
-            "$slate"
+            "$moss.dark"
           ]
         ]
       },
@@ -1595,7 +1595,7 @@
           ]
         ]
       },
-      "fill": "$slate.dark2"
+      "fill": "$moss.dark2"
     },
     {
       "id": "hood_crease_b",
@@ -1620,7 +1620,7 @@
           ]
         ]
       },
-      "fill": "$slate.dark2"
+      "fill": "$moss.dark2"
     },
     {
       "id": "hood_crease_c",
@@ -1645,7 +1645,7 @@
           ]
         ]
       },
-      "fill": "$slate.dark2"
+      "fill": "$moss.dark2"
     },
     {
       "id": "hood_crease_d",
@@ -1670,7 +1670,7 @@
           ]
         ]
       },
-      "fill": "$slate.dark2"
+      "fill": "$moss.dark2"
     },
     {
       "id": "hood_worn",
@@ -1695,7 +1695,7 @@
           ]
         ]
       },
-      "fill": "$slate.light@soft"
+      "fill": "$moss.light2@soft"
     },
     {
       "id": "cord",

@@ -50,11 +50,11 @@
         "stops": [
           [
             0,
-            "$steel.dark"
+            "$moss.light"
           ],
           [
             1,
-            "$slate"
+            "$moss.dark"
           ]
         ]
       },
@@ -86,7 +86,7 @@
           ]
         ]
       },
-      "fill": "$slate.dark"
+      "fill": "$moss.dark2"
     },
     {
       "id": "tuck_fold_b",
@@ -111,7 +111,7 @@
           ]
         ]
       },
-      "fill": "$slate.dark"
+      "fill": "$moss.dark2"
     },
     {
       "id": "shaft",
@@ -1131,11 +1131,11 @@
           "stops": [
             [
               0,
-              "$slate.light"
+              "$moss"
             ],
             [
               1,
-              "$slate.dark"
+              "$moss.dark2"
             ]
           ]
         },
