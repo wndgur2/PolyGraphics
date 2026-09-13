@@ -46,9 +46,12 @@ docs/                  reference-analysis.md — why this exists
 
 ```bash
 npx tsx scripts/inspect.ts ss.enemy.imp ss.enemy.bat --anim   # open out/inspect.html
+npx tsx scripts/sheet.ts ss.figure.dot --anim walk            # out/sheet/ss-figure-dot--walk.png
 ```
 
 Renders each asset **big** (judge the form), **at true game scale on the real ground color** (judge whether it survives the size it is actually seen at), and **as a flat silhouette** (if two enemies are indistinguishable in black, colour is doing work that shape should be doing). This is the loop the Shape Survivors redesign was built in — it caught a chaser that read as facing backwards, two antennae that overlapped into one, and two creatures that were the same cream colour.
+
+`sheet.ts` is the same loop for a clip: one PNG per asset with the base render, the silhouette, two game-scale copies, and then the animation **posed frame by frame the way the engine adapters pose it** — offsets in the parent frame, rotation about the part's own origin — so a leg hinged at the hip or a ball on a chain can be judged without a browser. It also prints the rendered bounds against the canvas, because a feeler that crosses the edge is invisible in the SVG and a hard cut in the bake. It is how the survivors' walk cycles were tuned, and it caught a chain that let go of the hand mid-stride.
 
 ## Asset document
 
@@ -496,6 +499,7 @@ Because rendering is deterministic, a one-digit token drift (the `ff9b3d` vs `ff
 What the system contributed that imperative draw code could not:
 
 - **`ss.lib.organ`** is the premise as a single document. Enemies compose it lit; the eight player characters compose the *same document* with `variant: "dead"` — cracked, unlit, silent. Change that one file and every creature in the game changes together. Verified to diverge correctly in both the Phaser and Godot adapters.
+- **Two survivors drawn as people, alongside the shells.** The eight `ss.char.*` shells are the game's characters and are untouched. `ss.figure.dot` and `ss.figure.tri` are a second set, drawn one at a time as the same survivors seen up close: not eight geometric shells but bodies with clothes and a story on them, each its own document rather than a template, with the head authored large in its own document (`ss.lib.dot-head`, `ss.lib.tri-head`; Dot's boot in `ss.lib.dot-boot`) — gradients for the materials, sixty to eighty parts each — and composed in by `use` at a fraction of its size, so a component can be judged at the size it was drawn and still land at the figure's. Dot is a hooded figure in dark leather and wool, no skin showing, with two dead feelers hanging from the crown of the hood to the belt. Tri is what the hive's work costs: a belly grown into a sac that hangs like a drop under a white gown stained with acid, the jaw and throat ballooned into one mass, tumours through the skin, bare swollen feet in sandals, the whole upper body thrown back at the hips to carry it. Both animate through a joint chain from the hips out — a rock of the upper body carries shoulders, arms and head with it, and the knee bend keeps the shin on the thigh — and both were tuned with `scripts/sheet.ts`. They are not wired into the game; that is a separate decision, starting with size (Dot is 47 px tall against the shell's 28 and the game's hit circle of 11).
 - **Silhouettes carry identity**, so the roster survives the flat-silhouette test: a low six-legged Tracker, a swept-wing Drifter, a lopsided Husk, a split-open Molt, a plated Soldier. In the original, all seven were the same convex blob in different hues.
 - **Variants are real states**, not scale × tint: `ss.enemy.brazier#spent` is the destroyed relay, `ss.enemy.boss#enraged` splits the shell open, `ss.pickup.chest#cursed` puts something awake inside.
 - **`themes/ice.json`** restyles the entire redesigned roster — chitin to blue-grey, pheromone to a cold signal — without touching a silhouette.
