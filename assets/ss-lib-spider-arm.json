@@ -1,34 +1,35 @@
 {
   "id": "ss.lib.spider-arm",
   "name": "Spider arm",
-  "description": "One jointed arm of the spider hand, rooted at the origin and reaching out along +x: a femur up to a raised knee, a tibia back down to the claw, and the claw split into a pair of fangs. Every plate the weapon owns composes this — the slot icon fans three of them off one knuckle, Eighth Leg fans four, Hauling Arms mirrors two of them inward — so the arm is drawn once and the finds are arrangements of it. Bones darken outward from the body the way the Scolopend's fringe does, which is depth rather than light: a limb the parent turns to any angle cannot carry a lit edge without the light turning with it. The weapon's own arms on the field are geometry solved per frame against a live target, so this is the same animal in a pose rather than the sprite that is drawn there.",
+  "description": "One jointed arm of the spider hand, rooted at the origin and reaching out along +x: a femur up to a raised knee, a tibia back down to the claw, and a hooked tarsus at the end of it. Every plate the weapon owns composes this — the slot icon fans three of them off one knuckle, Eighth Leg fans four, Hauling Arms mirrors two of them inward — so the arm is drawn once and the finds are arrangements of it. What keeps it an animal's leg rather than an armature: the bones are swept along opposite bows so a shallow S runs through the limb, they taper hard instead of stepping down, the tibia carries bristles raked back toward the body, and the foot is a long hook with a short barb opposing it — a grab has a long side and a short one. Bones darken outward the way the Scolopend's fringe does, which is depth rather than light: a limb the parent turns to any angle cannot carry a lit edge without the light turning with it. The weapon's own arms on the field are the same curves solved per frame against a live target, so this is that animal in a pose rather than the sprite drawn there.",
   "tags": ["ss-lib"],
   "size": [32, 20],
   "anchor": [0.125, 0.7],
   "parts": [
-    {"id": "femur_shadow", "at": [5.25, -4.0], "rot": -37.3, "shape": {"kind": "rect", "w": 13.2, "h": 5.6, "corner": 1.4}, "fill": "$ink"},
-    {"id": "tibia_shadow", "at": [14.75, -4.75], "rot": 37.41, "shape": {"kind": "rect", "w": 10.7, "h": 4.4, "corner": 1.0}, "fill": "$ink"},
-    {"id": "fang_over_shadow", "at": [21.76, -1.04], "rot": 9.41, "shape": {"kind": "rect", "w": 5.6, "h": 2.9, "corner": 0.7}, "fill": "$ink"},
-    {"id": "fang_under_shadow", "at": [20.17, 1.05], "rot": 65.41, "shape": {"kind": "rect", "w": 5.6, "h": 2.9, "corner": 0.7}, "fill": "$ink"},
-    {"id": "femur", "at": [5.25, -4.0], "rot": -37.3, "shape": {"kind": "rect", "w": 13.2, "h": 3.6, "corner": 1.4}, "fill": "$steel"},
-    {"id": "tibia", "at": [14.75, -4.75], "rot": 37.41, "shape": {"kind": "rect", "w": 10.7, "h": 2.6, "corner": 1.0}, "fill": "$steel.dark"},
-    {"id": "fang_over", "at": [21.76, -1.04], "rot": 9.41, "shape": {"kind": "rect", "w": 5.6, "h": 1.5, "corner": 0.7}, "fill": "$silent"},
-    {"id": "fang_under", "at": [20.17, 1.05], "rot": 65.41, "shape": {"kind": "rect", "w": 5.6, "h": 1.5, "corner": 0.7}, "fill": "$silent"},
-    {"id": "socket_shadow", "shape": {"kind": "circle", "r": 3.2}, "fill": "$ink"},
-    {"id": "socket", "shape": {"kind": "circle", "r": 2.0}, "fill": "$steel.dark"},
-    {"id": "knee_shadow", "at": [10.5, -8.0], "shape": {"kind": "circle", "r": 3.0}, "fill": "$ink"},
-    {"id": "knee", "at": [10.5, -8.0], "shape": {"kind": "circle", "r": 1.8}, "fill": "$steel.light"}
+    {"id": "femur_shadow", "shape": {"kind": "poly", "points": [[-1.93, -1.51], [-0.21, -3.27], [1.6, -4.86], [3.51, -6.28], [5.51, -7.56], [7.61, -8.68], [9.8, -9.66], [11.2, -6.34], [9.31, -5.42], [7.56, -4.32], [5.95, -3.08], [4.48, -1.69], [3.14, -0.16], [1.93, 1.51]]}, "fill": "$ink"},
+    {"id": "tibia_shadow", "shape": {"kind": "poly", "points": [[11.79, -9.13], [12.83, -7.77], [13.96, -6.5], [15.18, -5.32], [16.51, -4.24], [17.93, -3.27], [19.45, -2.42], [18.55, -0.58], [16.88, -1.43], [15.25, -2.34], [13.67, -3.33], [12.13, -4.41], [10.65, -5.59], [9.21, -6.87]]}, "fill": "$ink"},
+    {"id": "claw_long_shadow", "shape": {"kind": "poly", "points": [[18.41, -0.76], [20.2, 0.31], [21.71, 2.06], [22.01, 1.9], [21.25, -0.57], [19.59, -2.24]]}, "fill": "$ink"},
+    {"id": "claw_short_shadow", "shape": {"kind": "poly", "points": [[18.9, -0.71], [20.41, -0.76], [21.66, -1.86], [21.52, -2.12], [20.21, -1.9], [19.1, -2.29]]}, "fill": "$ink"},
+    {"id": "bristle_0", "at": [11.66, -5.8], "rot": 185.22, "shape": {"kind": "rect", "w": 2.25, "h": 0.75, "corner": 0.3}, "fill": "$steel.dark"},
+    {"id": "bristle_1", "at": [13.97, -3.93], "rot": 179.27, "shape": {"kind": "rect", "w": 1.94, "h": 0.75, "corner": 0.3}, "fill": "$steel.dark"},
+    {"id": "bristle_2", "at": [16.46, -2.32], "rot": 173.35, "shape": {"kind": "rect", "w": 1.64, "h": 0.75, "corner": 0.3}, "fill": "$steel.dark"},
+    {"id": "femur", "shape": {"kind": "poly", "points": [[-1.46, -1.14], [0.23, -2.86], [2.0, -4.41], [3.87, -5.81], [5.84, -7.05], [7.89, -8.14], [10.04, -9.11], [10.96, -6.89], [9.03, -5.95], [7.24, -4.83], [5.59, -3.56], [4.07, -2.13], [2.7, -0.57], [1.46, 1.14]]}, "fill": "$steel"},
+    {"id": "tibia", "shape": {"kind": "poly", "points": [[11.34, -8.74], [12.4, -7.35], [13.56, -6.05], [14.82, -4.84], [16.18, -3.74], [17.63, -2.75], [19.18, -1.88], [18.82, -1.12], [17.17, -1.95], [15.58, -2.84], [14.03, -3.81], [12.53, -4.86], [11.07, -6.01], [9.66, -7.26]]}, "fill": "$steel.dark"},
+    {"id": "claw_long", "shape": {"kind": "poly", "points": [[18.66, -1.07], [20.42, 0.12], [21.77, 2.03], [21.95, 1.93], [21.02, -0.38], [19.34, -1.93]]}, "fill": "$silent"},
+    {"id": "claw_short", "shape": {"kind": "poly", "points": [[18.95, -1.08], [20.36, -1.03], [21.62, -1.92], [21.56, -2.05], [20.26, -1.63], [19.05, -1.92]]}, "fill": "$silent"},
+    {"id": "socket", "shape": {"kind": "circle", "r": 1.7}, "fill": "$steel.dark"},
+    {"id": "knee", "at": [10.5, -8.0], "rot": -37.3, "shape": {"kind": "rect", "w": 1.5, "h": 2.4, "corner": 0.6}, "fill": "$steel.light"}
   ],
   "variants": {
     "evolved": {
-      "description": "Widow's Grip: the same arm in the amber every evolved weapon in the roster wears, claws gilded.",
+      "description": "Widow's Grip: the same leg in the amber every evolved weapon in the roster wears, hooks gilded.",
       "set": {
         "femur.fill": "$timber.light",
         "tibia.fill": "$timber",
         "socket.fill": "$timber",
         "knee.fill": "$chitin",
-        "fang_over.fill": "$gold.light",
-        "fang_under.fill": "$gold.light"
+        "claw_long.fill": "$gold.light",
+        "claw_short.fill": "$gold.light"
       }
     }
   }
