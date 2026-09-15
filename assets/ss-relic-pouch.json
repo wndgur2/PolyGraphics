@@ -1,0 +1,34 @@
+{
+  "id": "ss.relic.pouch",
+  "name": "Forager's crop",
+  "description": "A forager's pouch with its mouth rolled open and three finds riding up out of it. The bag is warm hide in two values, a dark base under a lit face pushed up-left, so the shaded side is the base showing rather than a shadow laid over it; three values were tried and the even offsets turned the body into concentric ellipses, which at this size is a target. The rolled rim is drawn last so the three sit in the pouch rather than on it. The finds are stones cut as hexagons at three sizes and three tilts, two husk and one bone so they read as three things and not one thing repeated. The count is the ability, so they are counted rather than suggested. They were gold for a pass and had to be pulled: $gold is this game's currency — ss.pickup.coin and ss.icon.greed are both a gold disc — so a bag of it says jelly, which is the one other relic on the shelf this must not be mistaken for. They were pale spheres with a bright speck before that and read as three eyes; faceting them is what made them objects. Nothing on the plate is a hole: the far wall inside the open mouth is a lit husk tone and not the panel, since a dark ellipse above a bright body is a mouth at this size, and the vertical creases a full bag gathers were drawn and cut because two dark lines under a round body are legs. Two open containers already sit on this shelf and both stay clear: ss.relic.doubleyolk is the same trick — domes above a rim — but a cracked white eggshell holding two orange yolks, and ss.relic.tithe is a shallow dish of red with nothing standing out of it, where this is a deep round-bottomed bag of grey hexagons. The hide is the only $skin in the library, which keeps a pouch this size clear of the amber crowd (ss.relic.mine, ss.relic.digest).",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "bag_outline", "at": [0, 4.2], "shape": {"kind": "ellipse", "rx": 10.0, "ry": 8.2}, "fill": "$ink"},
+    {"id": "bag", "at": [0, 4.2], "shape": {"kind": "ellipse", "rx": 9.0, "ry": 7.2}, "fill": "$skin.dark2"},
+    {"id": "bag_lit", "at": [-1.5, 3.0], "shape": {"kind": "ellipse", "rx": 7.5, "ry": 5.9}, "fill": "$skin"},
+    {"id": "bag_sheen", "at": [-4.6, 1.6], "rot": -32, "shape": {"kind": "ellipse", "rx": 1.3, "ry": 2.3}, "fill": "$silent@0.4"},
+    {"id": "mouth_outline", "at": [0, -2.6], "shape": {"kind": "ellipse", "rx": 8.5, "ry": 3.3}, "fill": "$ink"},
+    {"id": "mouth_back", "at": [0, -2.6], "shape": {"kind": "ellipse", "rx": 7.6, "ry": 2.6}, "fill": "$husk.dark"},
+    {"id": "find_a_outline", "at": [-5.2, -3.2], "rot": 14, "shape": {"kind": "ngon", "sides": 6, "r": 4.3}, "fill": "$ink"},
+    {"id": "find_b_outline", "at": [0.6, -5.0], "rot": -8, "shape": {"kind": "ngon", "sides": 6, "r": 4.8}, "fill": "$ink"},
+    {"id": "find_c_outline", "at": [5.5, -2.6], "rot": 26, "shape": {"kind": "ngon", "sides": 6, "r": 4.0}, "fill": "$ink"},
+    {"id": "find_a", "at": [-5.2, -3.2], "rot": 14, "shape": {"kind": "ngon", "sides": 6, "r": 3.3}, "fill": "$steel.dark"},
+    {"id": "find_a_face", "at": [-5.7, -3.75], "rot": 14, "shape": {"kind": "ngon", "sides": 6, "r": 2.4}, "fill": "$husk"},
+    {"id": "find_a_facet", "at": [-6.5200000000000005, -4.784], "rot": 14, "shape": {"kind": "ngon", "sides": 6, "r": 1.32}, "fill": "$husk.light"},
+    {"id": "find_b", "at": [0.6, -5.0], "rot": -8, "shape": {"kind": "ngon", "sides": 6, "r": 3.8}, "fill": "$slate"},
+    {"id": "find_b_face", "at": [0.09999999999999998, -5.55], "rot": -8, "shape": {"kind": "ngon", "sides": 6, "r": 2.9}, "fill": "$bone"},
+    {"id": "find_b_facet", "at": [-0.92, -6.824], "rot": -8, "shape": {"kind": "ngon", "sides": 6, "r": 1.52}, "fill": "$silent"},
+    {"id": "find_c", "at": [5.5, -2.6], "rot": 26, "shape": {"kind": "ngon", "sides": 6, "r": 3.0}, "fill": "$steel.dark"},
+    {"id": "find_c_face", "at": [5.0, -3.1500000000000004], "rot": 26, "shape": {"kind": "ngon", "sides": 6, "r": 2.1}, "fill": "$husk"},
+    {"id": "find_c_facet", "at": [4.3, -4.04], "rot": 26, "shape": {"kind": "ngon", "sides": 6, "r": 1.2000000000000002}, "fill": "$husk.light"},
+    {"id": "collar_outline", "at": [0, -0.8], "shape": {"kind": "ellipse", "rx": 9.4, "ry": 3.1}, "fill": "$ink"},
+    {"id": "collar", "at": [0, -0.8], "shape": {"kind": "ellipse", "rx": 8.6, "ry": 2.4}, "fill": "$skin.dark"},
+    {"id": "collar_lit", "at": [-0.4, -1.8], "shape": {"kind": "ellipse", "rx": 7.6, "ry": 1.1}, "fill": "$skin.light"}
+  ],
+  "variants": {
+    "glyph": {"description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.", "remove": ["plate"]}
+  }
+}
