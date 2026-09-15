@@ -240,6 +240,55 @@ export function bakeFlat(scene: SceneLike, ir: IRAsset, opts: BakeOptions = {}):
   return key;
 }
 
+// ---------------------------------------------------------------- draw
+
+export interface DrawOptions {
+  /** Where the document's origin lands, in the Graphics' own space. */
+  x?: number;
+  y?: number;
+  /** World units per authored unit — the number a bake would have to be scaled by. */
+  scale?: number;
+  /** Radians about that origin (Phaser's own convention, not the IR's degrees). */
+  rotation?: number;
+  variant?: string;
+  /** A clip to pose before drawing, and how far through it (0..1). */
+  animation?: string;
+  progress?: number;
+  /** Multiplied into every part's own opacity. */
+  alpha?: number;
+}
+
+/**
+ * Draw an asset straight into a Graphics the caller owns — the path `bakeFlat`
+ * takes, stopping one step short of the texture.
+ *
+ * This is the level between a flat bake and a rig, and it is here for the one
+ * thing neither does: an effect whose size is not known until it happens. A
+ * bake is a picture at one resolution, so a burst drawn at eleven times the
+ * size it was baked at is eleven times the blur; a rig has the same pixels
+ * plus a display object per part. Here the document is re-solved every frame
+ * at the size it is actually drawn, so it is as sharp at r=400 as at r=30 and
+ * costs one Graphics per effect.
+ *
+ * Hot-path objects still want `bakeFlat`: a texture is drawn by the GPU from a
+ * quad, and this is geometry every frame. One expanding burst is worth it; two
+ * hundred projectiles are not.
+ *
+ * The caller clears and redraws — a Graphics holds a display list, not a canvas.
+ */
+export function drawAsset(g: GraphicsLike, ir: IRAsset, opts: DrawOptions = {}): void {
+  const { nodes, vScale } = nodesOf(ir, opts.variant);
+  let posed = nodes;
+  if (opts.animation) {
+    const anim = ir.animations[opts.animation];
+    if (!anim) throw new Error(`polygraphics: asset "${ir.id}" has no animation "${opts.animation}"`);
+    posed = poseNodes(nodes, anim, opts.progress ?? 0);
+  }
+  const deg = ((opts.rotation ?? 0) * 180) / Math.PI;
+  const root = trs([opts.x ?? 0, opts.y ?? 0], deg, [(opts.scale ?? 1) * vScale, (opts.scale ?? 1) * vScale]);
+  for (const n of posed) drawNode(g, n, root, opts.alpha ?? 1);
+}
+
 // ---------------------------------------------------------------- rig
 
 function nodeBounds(node: IRNode, parent: Mat, box: { minX: number; minY: number; maxX: number; maxY: number }): void {

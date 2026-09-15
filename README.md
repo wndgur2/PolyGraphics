@@ -470,6 +470,14 @@ rig.play("idle");
 // in update(): rig.tick(dt)
 ```
 
+**Level 1½ — drawn live (Phaser).** The document solved as geometry into a `Graphics` every frame, for an effect whose size is not known until it happens — a burst scaled off a radius the run decides. A bake is a picture at one resolution and blurs when it is blown up; this is re-solved at the size it is actually drawn:
+
+```ts
+import { drawAsset } from "polygraphics/phaser";
+g.clear();
+drawAsset(g, burstIR, { x, y, scale: r / 30, rotation, animation: "play", progress: t / 0.36 });
+```
+
 **Godot** mirrors the same two levels with one file (`adapters/godot/polygraphics.gd`):
 
 ```gdscript
