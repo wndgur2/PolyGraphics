@@ -1,0 +1,62 @@
+{
+  "id": "ss.proj.dung",
+  "name": "Rolling dung",
+  "description": "The ball the player shoves ahead of them: field muck packed round, with chaff and shell chips trodden into it and a green bloom of rot down one side. It replaces the chained head this weapon used to swing, so the cord and the plate are gone and what is left is the only hive material that carries no signal at all — which is why the arsenal is allowed to touch it. Its geometry is load-bearing: the weapon code scales this sprite by `r / 14`, and the ball packs up from r=14 to better than three times that, so the 32px canvas and the 14 body radius must stay as they are. The `roll` clip is the whole reason it is a sheet rather than a plate — see there for why a turned sprite is not enough.",
+  "tags": ["ss-proj", "melee"],
+  "size": [32, 32],
+  "meta": { "radius": 14 },
+  "parts": [
+    { "id": "rim", "shape": { "kind": "circle", "r": 14 }, "fill": "$ink" },
+    { "id": "body", "shape": { "kind": "circle", "r": 12.4 }, "fill": { "gradient": "radial", "from": [0.36, 0.32], "stops": [[0, "$timber"], [0.5, "$timber.dark"], [1, "$timber.dark2"]] } },
+    { "id": "bloom", "at": [3.6, 3.2], "rot": -24, "shape": { "kind": "ellipse", "rx": 6.4, "ry": 4.6 }, "fill": "$moss.dark@soft" },
+    { "id": "clump_a", "at": [-4.6, -5.2], "shape": { "kind": "poly", "points": [[-3.2, -1.4], [-0.6, -2.6], [2.4, -1.8], [3.2, 0.4], [1.2, 2.2], [-1.8, 2.0], [-3.4, 0.6]] }, "fill": "$timber.dark2" },
+    { "id": "clump_b", "at": [-1.8, 4.4], "shape": { "kind": "poly", "points": [[-2.8, -1.2], [0.2, -2.2], [2.8, -0.8], [2.4, 1.4], [-0.4, 2.2], [-2.6, 1.0]] }, "fill": "$soil.light" },
+    { "id": "clump_c", "at": [4.4, -2.2], "shape": { "kind": "ellipse", "rx": 3.0, "ry": 2.2 }, "fill": "$timber" },
+    { "id": "clump_d", "at": [1.4, -0.4], "shape": { "kind": "ellipse", "rx": 2.4, "ry": 3.0 }, "fill": "$moss.dark" },
+    { "id": "chaff_a", "at": [-2.0, -2.6], "rot": 28, "shape": { "kind": "rect", "w": 7.2, "h": 0.9, "corner": 0.45 }, "fill": "$husk.dark2" },
+    { "id": "chaff_b", "at": [2.6, 5.0], "rot": -52, "shape": { "kind": "rect", "w": 5.6, "h": 0.9, "corner": 0.45 }, "fill": "$husk.dark2" },
+    { "id": "grit", "repeat": { "of": { "kind": "circle", "r": 0.9 }, "count": 14, "area": [20, 20], "seed": 23, "scaleRange": [0.6, 1.5] }, "fill": "$soil@heavy" },
+    { "id": "shade", "shape": { "kind": "ring", "r": 10.6, "width": 3.4, "from": 10, "to": 128 }, "fill": "$ink@soft" },
+    { "id": "gleam", "at": [-5.2, -5.6], "rot": -34, "shape": { "kind": "ellipse", "rx": 2.6, "ry": 1.2 }, "fill": "$husk.light@0.28" }
+  ],
+  "animations": {
+    "roll": {
+      "description": "A ball rolling is read from above by what crosses its face, not by its outline: a turned sprite of a round thing is the same picture at every angle, so the surface has to travel instead. Everything trodden into the ball — clumps, chaff, grit — slides from the leading edge to the trailing one and fades off it, while the light and the shadow stay where the light and the ground are. The muck is in two groups half a turn apart so the skin is never all gone at once, and each group's return leg runs while it is invisible. The weapon code turns the sprite to its heading, so +x here is wherever the ball happens to be going. Half a second is one turn at a walking shove; the ball rolls faster than that when it is driven hard, and a loop stepped a little slow reads as weight rather than as a mistake.",
+      "duration": 0.5,
+      "tracks": [
+        { "part": "clump_a", "prop": "x", "keys": [[0, -9], [0.62, 9], [1, -9]], "ease": "linear" },
+        { "part": "clump_a", "prop": "opacity", "keys": [[0, 0], [0.08, 1], [0.54, 1], [0.62, 0], [1, 0]], "ease": "linear" },
+        { "part": "clump_c", "prop": "x", "keys": [[0, -9], [0.62, 9], [1, -9]], "ease": "linear" },
+        { "part": "clump_c", "prop": "opacity", "keys": [[0, 0], [0.08, 1], [0.54, 1], [0.62, 0], [1, 0]], "ease": "linear" },
+        { "part": "chaff_a", "prop": "x", "keys": [[0, -9], [0.62, 9], [1, -9]], "ease": "linear" },
+        { "part": "chaff_a", "prop": "opacity", "keys": [[0, 0], [0.08, 1], [0.54, 1], [0.62, 0], [1, 0]], "ease": "linear" },
+        { "part": "grit", "prop": "x", "keys": [[0, -9], [0.62, 9], [1, -9]], "ease": "linear" },
+        { "part": "grit", "prop": "opacity", "keys": [[0, 0], [0.08, 0.9], [0.54, 0.9], [0.62, 0], [1, 0]], "ease": "linear" },
+        { "part": "clump_b", "prop": "x", "keys": [[0, 9], [0.38, -9], [1, 9]], "ease": "linear" },
+        { "part": "clump_b", "prop": "opacity", "keys": [[0, 0], [0.38, 0], [0.46, 1], [0.92, 1], [1, 0]], "ease": "linear" },
+        { "part": "clump_d", "prop": "x", "keys": [[0, 9], [0.38, -9], [1, 9]], "ease": "linear" },
+        { "part": "clump_d", "prop": "opacity", "keys": [[0, 0], [0.38, 0], [0.46, 1], [0.92, 1], [1, 0]], "ease": "linear" },
+        { "part": "chaff_b", "prop": "x", "keys": [[0, 9], [0.38, -9], [1, 9]], "ease": "linear" },
+        { "part": "chaff_b", "prop": "opacity", "keys": [[0, 0], [0.38, 0], [0.46, 1], [0.92, 1], [1, 0]], "ease": "linear" },
+        { "part": "bloom", "prop": "x", "keys": [[0, 9], [0.38, -9], [1, 9]], "ease": "linear" },
+        { "part": "bloom", "prop": "opacity", "keys": [[0, 0], [0.38, 0], [0.46, 0.35], [0.92, 0.35], [1, 0]], "ease": "linear" }
+      ]
+    }
+  },
+  "variants": {
+    "evolved": {
+      "description": "What the ball has become by the time the weapon has: an avalanche's worth of field packed into one mass — shell chips and bone through the muck instead of chaff, lit chitin amber where the base runs timber brown, and the rot gone from green to a hot bile. It has to read as a different weapon from the ball it grew out of at the size a projectile actually gets on screen, so the change is up the whole ramp rather than a tint on top.",
+      "set": {
+        "body.fill": { "gradient": "radial", "from": [0.36, 0.32], "stops": [[0, "$chitin"], [0.5, "$chitin.dark"], [1, "$rust"]] },
+        "bloom.fill": "$bile.dark@soft",
+        "clump_a.fill": "$rust",
+        "clump_b.fill": "$husk.dark2",
+        "clump_c.fill": "$husk",
+        "clump_d.fill": "$chitin.dark2",
+        "chaff_a.fill": "$husk.light",
+        "chaff_b.fill": "$husk",
+        "gleam.fill": "$silent@0.45"
+      }
+    }
+  }
+}

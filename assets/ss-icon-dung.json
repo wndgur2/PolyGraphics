@@ -1,0 +1,113 @@
+{
+  "id": "ss.icon.dung",
+  "name": "Rolling dung icon",
+  "description": "UI slot icon for the dung the player shoves ahead of them. Composes `ss.proj.dung` via `use` so the slot shows the actual ball, sat up in the top right with the rut it has just come down running away under it to the bottom left — the track is what tells this slot from a picture of a round brown thing, and it is the whole weapon: the ball is only dangerous while it is rolling. Three ridges are pressed across the rut, spaced wider the further back they are, so the track reads as something that came *this* way rather than as a shadow. Rim is `$timber` — the muck's own brown, unlightened, which is the one ramp of it that holds clear of the Mandibles' chitin.",
+  "tags": [
+    "ss-icon"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "tile",
+      "shape": {
+        "kind": "rect",
+        "w": 32,
+        "h": 32,
+        "corner": 6
+      },
+      "fill": "$timber"
+    },
+    {
+      "id": "inner",
+      "shape": {
+        "kind": "rect",
+        "w": 28,
+        "h": 28,
+        "corner": 5
+      },
+      "fill": "$coal.dark"
+    },
+    {
+      "id": "rut",
+      "at": [
+        -2.0,
+        1.8
+      ],
+      "rot": 139,
+      "shape": {
+        "kind": "rect",
+        "w": 13,
+        "h": 8.6,
+        "corner": 2.6
+      },
+      "fill": "$timber.dark2@0.75"
+    },
+    {
+      "id": "ridge_a",
+      "at": [
+        1.0,
+        -0.8
+      ],
+      "rot": 49,
+      "shape": {
+        "kind": "rect",
+        "w": 1.5,
+        "h": 7.4,
+        "corner": 0.75
+      },
+      "fill": "$timber.dark@0.9"
+    },
+    {
+      "id": "ridge_b",
+      "at": [
+        -2.6,
+        2.4
+      ],
+      "rot": 49,
+      "shape": {
+        "kind": "rect",
+        "w": 1.4,
+        "h": 6.6,
+        "corner": 0.7
+      },
+      "fill": "$timber.dark@0.65"
+    },
+    {
+      "id": "ridge_c",
+      "at": [
+        -6.2,
+        5.6
+      ],
+      "rot": 49,
+      "shape": {
+        "kind": "rect",
+        "w": 1.3,
+        "h": 5.4,
+        "corner": 0.65
+      },
+      "fill": "$timber.dark@0.4"
+    },
+    {
+      "id": "glyph",
+      "at": [
+        4.8,
+        -4.2
+      ],
+      "use": "ss.proj.dung",
+      "scale": 0.66
+    }
+  ],
+  "variants": {
+    "evolved": {
+      "description": "Gold-rimmed evolved twin, derived rather than drawn again. Takes the ball's own evolved variant with it, so the slot shows the packed amber mass the evolved weapon actually rolls rather than the base brown one, and the rut under it is cut deeper for the weight.",
+      "set": {
+        "tile.fill": "$gold",
+        "glyph.variant": "evolved",
+        "rut.fill": "$timber.dark2"
+      }
+    }
+  }
+}

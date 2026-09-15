@@ -1,0 +1,1628 @@
+{
+  "id": "ss.fx.dung-burst",
+  "name": "Dung burst",
+  "description": "A packed ball meeting stone, seen from above. Authored so the shock arc reaches r=30, which is the number the game scales by — a 90px burst draws this at 90/30 — the same contract as the barb burst and the spatter. +x is the way the ball was going: the game turns this to the ball's heading, so the mass comes back off the stone rather than through it — long throws into the two rear quarters, stubs forward, and the wet mark and the dust sitting a little behind the point of contact. Everything in it is muck and what was trodden into the muck: seven uneven lobes with a chunk riding each tip and carrying past it, chaff tumbling off, a low dun puff of the dry part going up, eighteen scattered specks and a mark that stays after the air has stopped. Nothing is fire and nothing is frost — a mine's crater is tinted ember and frost-white is what the player's own weapons break shell with, so the one weapon that bursts by being driven into a rock reads as a mess rather than as a detonation. The lobes are uneven in length, width, root and heading and clustered rather than spaced, because seven even spokes through a ring is a compass rose; the one green lobe is the rot in the ball, and without it the whole thing comes out as a stain rather than as a thing coming apart. Spawn it where the ball was standing.",
+  "tags": [
+    "ss-fx",
+    "hit"
+  ],
+  "size": [
+    80,
+    80
+  ],
+  "meta": {
+    "radius": 30
+  },
+  "seed": 19,
+  "parts": [
+    {
+      "id": "splat",
+      "at": [
+        -3.5,
+        0
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 14,
+        "ry": 11.5
+      },
+      "fill": "$timber.dark2@heavy"
+    },
+    {
+      "id": "spray",
+      "at": [
+        -4,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "circle",
+          "r": 1.9
+        },
+        "count": 18,
+        "area": [
+          54,
+          50
+        ],
+        "seed": 19,
+        "scaleRange": [
+          0.45,
+          1.6
+        ]
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "dust",
+      "at": [
+        -2,
+        0
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 19,
+        "ry": 16
+      },
+      "fill": "$husk.dark@0.2"
+    },
+    {
+      "id": "ring",
+      "shape": {
+        "kind": "ring",
+        "r": 26,
+        "width": 2.4,
+        "from": 104,
+        "to": 208
+      },
+      "fill": "$husk.dark@0.65"
+    },
+    {
+      "id": "ring_b",
+      "shape": {
+        "kind": "ring",
+        "r": 24,
+        "width": 2.0,
+        "from": 236,
+        "to": 300
+      },
+      "fill": "$husk.dark@0.5"
+    },
+    {
+      "id": "lobe_0",
+      "at": [
+        -4.47,
+        6.63
+      ],
+      "rot": 115,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.0,
+            -4.93
+          ],
+          [
+            6.3,
+            -4.44
+          ],
+          [
+            12.0,
+            -2.03
+          ],
+          [
+            15.0,
+            0.0
+          ],
+          [
+            12.0,
+            2.03
+          ],
+          [
+            6.3,
+            4.44
+          ],
+          [
+            0.0,
+            4.93
+          ]
+        ]
+      },
+      "fill": "$timber.dark"
+    },
+    {
+      "id": "chunk_0",
+      "at": [
+        -14.54,
+        21.55
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.0
+      },
+      "fill": "$timber"
+    },
+    {
+      "id": "lobe_1",
+      "at": [
+        -9.14,
+        4.07
+      ],
+      "rot": 162,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.0,
+            -6.0
+          ],
+          [
+            7.95,
+            -5.4
+          ],
+          [
+            15.14,
+            -2.1
+          ],
+          [
+            18.92,
+            0.0
+          ],
+          [
+            15.14,
+            2.1
+          ],
+          [
+            7.95,
+            5.4
+          ],
+          [
+            0.0,
+            6.0
+          ]
+        ]
+      },
+      "fill": "$timber"
+    },
+    {
+      "id": "chunk_1",
+      "at": [
+        -31.97,
+        14.24
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.75
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "lobe_2",
+      "at": [
+        -6.93,
+        -0.97
+      ],
+      "rot": 174,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.0,
+            -3.9
+          ],
+          [
+            4.62,
+            -3.51
+          ],
+          [
+            8.8,
+            -2.1
+          ],
+          [
+            11.0,
+            0.0
+          ],
+          [
+            8.8,
+            2.1
+          ],
+          [
+            4.62,
+            3.51
+          ],
+          [
+            0.0,
+            3.9
+          ]
+        ]
+      },
+      "fill": "$moss.dark"
+    },
+    {
+      "id": "chunk_2",
+      "at": [
+        -20.8,
+        -2.92
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.25
+      },
+      "fill": "$moss.dark"
+    },
+    {
+      "id": "lobe_3",
+      "at": [
+        -8.49,
+        -6.17
+      ],
+      "rot": 227,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.0,
+            -5.7
+          ],
+          [
+            8.57,
+            -5.13
+          ],
+          [
+            16.32,
+            -2.1
+          ],
+          [
+            20.4,
+            0.0
+          ],
+          [
+            16.32,
+            2.1
+          ],
+          [
+            8.57,
+            5.13
+          ],
+          [
+            0.0,
+            5.7
+          ]
+        ]
+      },
+      "fill": "$timber.dark"
+    },
+    {
+      "id": "chunk_3",
+      "at": [
+        -30.34,
+        -22.04
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.5
+      },
+      "fill": "$timber"
+    },
+    {
+      "id": "lobe_4",
+      "at": [
+        -3.32,
+        -7.82
+      ],
+      "rot": 240,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.0,
+            -4.35
+          ],
+          [
+            6.18,
+            -3.92
+          ],
+          [
+            11.78,
+            -2.03
+          ],
+          [
+            14.72,
+            0.0
+          ],
+          [
+            11.78,
+            2.03
+          ],
+          [
+            6.18,
+            3.92
+          ],
+          [
+            0.0,
+            4.35
+          ]
+        ]
+      },
+      "fill": "$timber"
+    },
+    {
+      "id": "chunk_4",
+      "at": [
+        -10.75,
+        -25.31
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.62
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "lobe_5",
+      "at": [
+        4.35,
+        -4.83
+      ],
+      "rot": 327,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.0,
+            -3.08
+          ],
+          [
+            3.36,
+            -2.77
+          ],
+          [
+            6.4,
+            -1.96
+          ],
+          [
+            8.0,
+            0.0
+          ],
+          [
+            6.4,
+            1.96
+          ],
+          [
+            3.36,
+            2.77
+          ],
+          [
+            0.0,
+            3.08
+          ]
+        ]
+      },
+      "fill": "$timber.dark2"
+    },
+    {
+      "id": "chunk_5",
+      "at": [
+        11.71,
+        -13.01
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.0
+      },
+      "fill": "$timber.dark"
+    },
+    {
+      "id": "lobe_6",
+      "at": [
+        4.73,
+        3.69
+      ],
+      "rot": 26,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.0,
+            -2.8
+          ],
+          [
+            2.73,
+            -2.52
+          ],
+          [
+            5.2,
+            -1.96
+          ],
+          [
+            6.5,
+            0.0
+          ],
+          [
+            5.2,
+            1.96
+          ],
+          [
+            2.73,
+            2.52
+          ],
+          [
+            0.0,
+            2.8
+          ]
+        ]
+      },
+      "fill": "$timber.dark"
+    },
+    {
+      "id": "chunk_6",
+      "at": [
+        12.21,
+        9.54
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.75
+      },
+      "fill": "$timber"
+    },
+    {
+      "id": "scrap_a",
+      "at": [
+        -8.0,
+        -6.5
+      ],
+      "rot": 24,
+      "shape": {
+        "kind": "rect",
+        "w": 6.4,
+        "h": 1.1,
+        "corner": 0.55
+      },
+      "fill": "$husk.dark2"
+    },
+    {
+      "id": "scrap_b",
+      "at": [
+        -9.5,
+        4.0
+      ],
+      "rot": -68,
+      "shape": {
+        "kind": "rect",
+        "w": 6.4,
+        "h": 1.1,
+        "corner": 0.55
+      },
+      "fill": "$husk.dark2"
+    },
+    {
+      "id": "scrap_c",
+      "at": [
+        -2.0,
+        9.0
+      ],
+      "rot": 128,
+      "shape": {
+        "kind": "rect",
+        "w": 6.4,
+        "h": 1.1,
+        "corner": 0.55
+      },
+      "fill": "$husk.dark2"
+    },
+    {
+      "id": "core",
+      "at": [
+        -1.5,
+        0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 8
+      },
+      "fill": "$husk.dark@heavy"
+    },
+    {
+      "id": "core_gas",
+      "at": [
+        -1.5,
+        0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.4
+      },
+      "fill": "$husk.light@0.75"
+    }
+  ],
+  "animations": {
+    "play": {
+      "description": "A third of a second, in the order a burst is read in: the gas and the arc first because they are what says how far it went, the lobes and the chunks over the middle of it, and the mark and the specks last — the ground should still be saying something happened there after the air has stopped saying it. Nothing moves after 0.85 of the clip, because the sheet's last frame is sampled a frame short of the end and a burst still travelling there is one the engine cuts off.",
+      "duration": 0.36,
+      "tracks": [
+        {
+          "part": "core",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.3
+            ],
+            [
+              0.25,
+              1.05
+            ],
+            [
+              1,
+              0.75
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "core",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0.9
+            ],
+            [
+              0.2,
+              0.7
+            ],
+            [
+              0.45,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "core_gas",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.3
+            ],
+            [
+              0.2,
+              1.15
+            ],
+            [
+              1,
+              0.6
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "core_gas",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.12,
+              0.85
+            ],
+            [
+              0.3,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "ring",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              1,
+              1.12
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "ring",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0.85
+            ],
+            [
+              0.6,
+              0.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "ring_b",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.2
+            ],
+            [
+              1,
+              1.08
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "ring_b",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0.8
+            ],
+            [
+              0.6,
+              0.4
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "dust",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.45
+            ],
+            [
+              1,
+              1.35
+            ]
+          ]
+        },
+        {
+          "part": "dust",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0.7
+            ],
+            [
+              0.5,
+              0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "splat",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.4
+            ],
+            [
+              0.5,
+              1.05
+            ],
+            [
+              1,
+              1.15
+            ]
+          ]
+        },
+        {
+          "part": "splat",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0.85
+            ],
+            [
+              0.7,
+              0.6
+            ],
+            [
+              1,
+              0.35
+            ]
+          ]
+        },
+        {
+          "part": "spray",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.3
+            ],
+            [
+              0.6,
+              1
+            ],
+            [
+              1,
+              1.08
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "spray",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.25,
+              1
+            ],
+            [
+              1,
+              0.45
+            ]
+          ]
+        },
+        {
+          "part": "lobe_0",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.15
+            ],
+            [
+              0.5,
+              1
+            ],
+            [
+              1,
+              1.05
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "lobe_0",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chunk_0",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              11.184
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              -2.796
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "chunk_0",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -16.581
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              4.145
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "chunk_0",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "lobe_1",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.15
+            ],
+            [
+              0.5,
+              1
+            ],
+            [
+              1,
+              1.05
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "lobe_1",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chunk_1",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              26.493
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              -4.568
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "chunk_1",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -11.795
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              2.034
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "chunk_1",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "lobe_2",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.15
+            ],
+            [
+              0.5,
+              1
+            ],
+            [
+              1,
+              1.05
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "lobe_2",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chunk_2",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              14.854
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              -4.951
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "chunk_2",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              2.088
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              -0.696
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "chunk_2",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "lobe_3",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.15
+            ],
+            [
+              0.5,
+              1
+            ],
+            [
+              1,
+              1.05
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "lobe_3",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chunk_3",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              25.484
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              -4.045
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "chunk_3",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              18.515
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              -2.939
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "chunk_3",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "lobe_4",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.15
+            ],
+            [
+              0.5,
+              1
+            ],
+            [
+              1,
+              1.05
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "lobe_4",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chunk_4",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              8.401
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              -1.954
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "chunk_4",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              19.791
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              -4.603
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "chunk_4",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "lobe_5",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.15
+            ],
+            [
+              0.5,
+              1
+            ],
+            [
+              1,
+              1.05
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "lobe_5",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chunk_5",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              -7.695
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              3.346
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "chunk_5",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              8.546
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              -3.716
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "chunk_5",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "lobe_6",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.15
+            ],
+            [
+              0.5,
+              1
+            ],
+            [
+              1,
+              1.05
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "lobe_6",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chunk_6",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              -7.486
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              3.94
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "chunk_6",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -5.849
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              1,
+              3.078
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "chunk_6",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "scrap_a",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              -7.2
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "scrap_a",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              -5.85
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "scrap_a",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              110
+            ]
+          ]
+        },
+        {
+          "part": "scrap_a",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "scrap_b",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              -8.55
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "scrap_b",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              3.6
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "scrap_b",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              -110
+            ]
+          ]
+        },
+        {
+          "part": "scrap_b",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "scrap_c",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              -1.8
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "scrap_c",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              8.1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "scrap_c",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              110
+            ]
+          ]
+        },
+        {
+          "part": "scrap_c",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.7,
+              0.9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}
