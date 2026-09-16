@@ -1,0 +1,25 @@
+{
+  "id": "ss.relic.venom-recipe",
+  "name": "Distilled Venom",
+  "description": "A flask that went in as poison and came out as twice the poison: the fluid is the midden green every venom on this shelf is drawn in, and settled at the bottom of the bulb are three lumps of the concentrate — what the boiling left behind, and the only part of the picture that is brighter than the liquid holding it. The find doubles what a poison does rather than adding a poison of its own, so it is drawn as a *quantity* of the same substance, not as a new one: same green as the claw and the acid, more of it, and heavier. This is the first thing in the game to compose `ss.lib.vial`, which was drawn for a roster of draughts the game decided against; a recipe is the one find that is honestly a thing in a flask, so the flask finally has a use. Stopper and glass highlight come from `ss.lib.vial-cap` last, over the sediment, which is the order that library pair exists to enforce.",
+  "tags": ["ss-relic"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "plate", "use": "ss.lib.relic-plate" },
+    { "id": "flask", "use": "ss.lib.vial", "variant": "midden", "scale": 0.82 },
+    { "id": "sediment_a", "at": [-2.2, 6.4], "shape": { "kind": "ngon", "sides": 5, "r": 1.9, "rot": 12 }, "fill": "$venom" },
+    { "id": "sediment_b", "at": [1.4, 7.2], "shape": { "kind": "ngon", "sides": 6, "r": 2.3, "rot": -20 }, "fill": "$venom.light" },
+    { "id": "sediment_c", "at": [3.8, 5.2], "shape": { "kind": "ngon", "sides": 5, "r": 1.4, "rot": 40 }, "fill": "$venom" },
+    { "id": "bubble_a", "at": [-1.6, 1.8], "shape": { "kind": "circle", "r": 1.1 }, "fill": "$venom.light2" },
+    { "id": "bubble_b", "at": [2.6, 0.2], "shape": { "kind": "circle", "r": 0.8 }, "fill": "$venom.light2" },
+    { "id": "cap", "use": "ss.lib.vial-cap", "scale": 0.82 },
+    { "id": "fume_a", "at": [-3.4, -11.4], "shape": { "kind": "circle", "r": 1.3 }, "fill": "$venom@0.55" },
+    { "id": "fume_b", "at": [3.6, -12.2], "shape": { "kind": "circle", "r": 0.9 }, "fill": "$venom@0.4" }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}
