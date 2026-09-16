@@ -1,0 +1,128 @@
+{
+  "id": "ss.enemy.glassbolt",
+  "name": "Forerunner bolt",
+  "description": "What a Forerunner spits in the stop: a shard of fused glass, the pan's own cold colour \u2014 aqua over an ink edge with a bright facet \u2014 cut long and pointed. Three to five leave in a fan. Drawn pointing +x.",
+  "tags": [
+    "ss-enemy",
+    "projectile"
+  ],
+  "size": [
+    18,
+    8
+  ],
+  "parts": [
+    {
+      "id": "streak",
+      "at": [
+        -3.0,
+        0.0
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 12.0,
+        "h": 2.0,
+        "corner": 1.0
+      },
+      "fill": "$aqua@soft"
+    },
+    {
+      "id": "outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -8.0,
+            -1.4
+          ],
+          [
+            -4.0,
+            -3.4
+          ],
+          [
+            6.0,
+            -1.8
+          ],
+          [
+            9.0,
+            0.0
+          ],
+          [
+            6.0,
+            1.8
+          ],
+          [
+            -4.0,
+            3.4
+          ],
+          [
+            -8.0,
+            1.4
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "body",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -7.0,
+            -0.9
+          ],
+          [
+            -3.8,
+            -2.4
+          ],
+          [
+            5.4,
+            -1.2
+          ],
+          [
+            7.8,
+            0.0
+          ],
+          [
+            5.4,
+            1.2
+          ],
+          [
+            -3.8,
+            2.4
+          ],
+          [
+            -7.0,
+            0.9
+          ]
+        ]
+      },
+      "fill": "$aqua"
+    },
+    {
+      "id": "facet",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.0,
+            -1.6
+          ],
+          [
+            3.0,
+            -0.8
+          ],
+          [
+            4.5,
+            0.0
+          ],
+          [
+            -2.0,
+            -0.2
+          ]
+        ]
+      },
+      "fill": "$silent"
+    }
+  ]
+}
