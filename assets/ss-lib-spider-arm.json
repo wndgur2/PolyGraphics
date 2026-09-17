@@ -21,6 +21,16 @@
     {"id": "knee", "at": [10.5, -8.0], "rot": -37.3, "shape": {"kind": "rect", "w": 1.5, "h": 2.4, "corner": 0.6}, "fill": "$steel.light"}
   ],
   "variants": {
+    "venomed": {
+      "description": "The same leg with the hook loaded: both claws and the bristles nearest them stained the venom green, and the knee wet with it. For Venomed Claw, which puts poison on the hand's bite. The bones keep their own colour on purpose — a limb recoloured end to end stops reading as a limb, and what the find adds is *on* the arm rather than part of it.",
+      "set": {
+        "bristle_1.fill": "$venom.dark",
+        "bristle_2.fill": "$venom.dark",
+        "claw_0.fill": "$venom.light",
+        "claw_1.fill": "$venom.light",
+        "knee.fill": "$venom"
+      }
+    },
     "added": {
       "description": "The same leg in amber, for the one arm a find puts there that was not there before — Eighth Leg draws three of these plain and the fourth like this, so the +1 is visible in the plate rather than something you have to count. Nothing to do with the evolution, which has a limb of its own.",
       "set": {
