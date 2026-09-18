@@ -1,0 +1,124 @@
+{
+  "id": "ss.relic.open-country",
+  "name": "Open country",
+  "description": "One body alone on a flat horizon with two structures far off at the very edges of the plate, small enough to be nowhere near. The pale disc around the body is the reach the find asks to be empty, and it is empty: the whole object is composed as negative space with the subject in the middle of it, which is the one thing on this shelf that is drawn by what is *not* there.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "clear",
+      "shape": {
+        "kind": "circle",
+        "r": 12.4
+      },
+      "fill": "$frost@0.14"
+    },
+    {
+      "id": "far_l",
+      "at": [
+        -11.6,
+        3.2
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1.8,
+        "h": 5,
+        "corner": 0.7
+      },
+      "fill": "$steel.dark"
+    },
+    {
+      "id": "far_r",
+      "at": [
+        11.6,
+        2.6
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1.6,
+        "h": 4,
+        "corner": 0.6
+      },
+      "fill": "$steel.dark"
+    },
+    {
+      "id": "ground",
+      "at": [
+        0,
+        7
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 22,
+        "h": 3.6
+      },
+      "fill": "$moss.dark"
+    },
+    {
+      "id": "horizon",
+      "at": [
+        0,
+        5
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 22,
+        "h": 1.2
+      },
+      "fill": "$moss.light"
+    },
+    {
+      "id": "body_o",
+      "at": [
+        0,
+        0.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 4.6
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "body",
+      "at": [
+        0,
+        0.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.3
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "eye",
+      "at": [
+        -0.9,
+        -0.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.2
+      },
+      "fill": "$coral"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

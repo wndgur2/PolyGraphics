@@ -1,0 +1,132 @@
+{
+  "id": "ss.relic.seam",
+  "name": "Seam runner",
+  "description": "A body pressed along a wall, with two dashes behind it saying which way it is going. The wall runs the full height of the plate and is cut off by both edges, so it reads as a length of something continuous rather than as a block standing in a field \u2014 down there a wall is not an obstacle, it is the shape of the room. The body is touching it. That is the condition the find pays for, so nothing about the drawing is allowed to leave a gap.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "wall_o",
+      "at": [
+        8.6,
+        0
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 10.0,
+        "h": 29.6,
+        "corner": 2.9
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "wall",
+      "at": [
+        8.6,
+        0
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 7.4,
+        "h": 27,
+        "corner": 1.6
+      },
+      "fill": "$rust"
+    },
+    {
+      "id": "wall_lit",
+      "at": [
+        6.6,
+        0
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 2.4,
+        "h": 22,
+        "corner": 1.2
+      },
+      "fill": "$rust.light"
+    },
+    {
+      "id": "body_o",
+      "at": [
+        0.4,
+        1
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 5.5
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "body",
+      "at": [
+        0.4,
+        1
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 4.2
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "eye",
+      "at": [
+        1.6,
+        0.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.3
+      },
+      "fill": "$coral"
+    },
+    {
+      "id": "dash_a",
+      "at": [
+        -8.4,
+        -3.6
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 7,
+        "h": 1.8,
+        "corner": 0.9
+      },
+      "fill": "$silent@0.55"
+    },
+    {
+      "id": "dash_b",
+      "at": [
+        -9.6,
+        2.6
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 5,
+        "h": 1.6,
+        "corner": 0.8
+      },
+      "fill": "$silent@0.35"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

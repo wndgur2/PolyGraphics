@@ -1,0 +1,92 @@
+{
+  "id": "ss.relic.lean",
+  "name": "Lean season",
+  "description": "An empty husk with one coin in it. The husk is drawn as an open ring with its mouth turned to the viewer and nothing but the plate's dark inside, so the emptiness is the object and the coin is the exception \u2014 the find takes the field's food away and pays in trade instead. One coin, sitting low, because a heap would have read as a good year.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "husk_o",
+      "shape": {
+        "kind": "ring",
+        "r": 9.4,
+        "width": 5.0,
+        "from": 30,
+        "to": 330
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "husk",
+      "shape": {
+        "kind": "ring",
+        "r": 9.4,
+        "width": 3,
+        "from": 30,
+        "to": 330
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "hollow",
+      "shape": {
+        "kind": "circle",
+        "r": 6.6
+      },
+      "fill": "$coal.dark"
+    },
+    {
+      "id": "coin_o",
+      "at": [
+        3.6,
+        4.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 5.2
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "coin",
+      "at": [
+        3.6,
+        4.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 4
+      },
+      "fill": "$gold"
+    },
+    {
+      "id": "coin_face",
+      "at": [
+        3.2,
+        4.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.1
+      },
+      "fill": "$gold.light"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

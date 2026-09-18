@@ -1,0 +1,167 @@
+{
+  "id": "ss.relic.brittle",
+  "name": "Brittle",
+  "description": "A frost-blue shell with three cracks run out of one point, none of them meeting the rim. Blue rather than the carapace violet the other shell plates wear, because what the find reads off a body is that it has been slowed \u2014 and slow is the colour the game already washes a dazed body in. The cracks run off one bright point up-left \u2014 where it was struck \u2014 at three different lengths and three unrelated angles, so it reads as something that gave way under a blow rather than as a snowflake or, worse, as the three visible faces of a drawn box.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "shell_o",
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 11.7
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "shell",
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 10.4
+      },
+      "fill": "$frost.dark"
+    },
+    {
+      "id": "face",
+      "shape": {
+        "kind": "ngon",
+        "sides": 6,
+        "r": 7.6
+      },
+      "fill": "$frost"
+    },
+    {
+      "id": "crack_a_o",
+      "at": [
+        0.4,
+        -1.4
+      ],
+      "rot": -18,
+      "shape": {
+        "kind": "rect",
+        "w": 12.7,
+        "h": 2.6,
+        "corner": 1.3
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "crack_a",
+      "at": [
+        0.4,
+        -1.4
+      ],
+      "rot": -18,
+      "shape": {
+        "kind": "rect",
+        "w": 11.5,
+        "h": 1.4,
+        "corner": 0.7
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "crack_b_o",
+      "at": [
+        -1.4,
+        2.6
+      ],
+      "rot": 58,
+      "shape": {
+        "kind": "rect",
+        "w": 7.6,
+        "h": 2.4,
+        "corner": 1.2
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "crack_b",
+      "at": [
+        -1.4,
+        2.6
+      ],
+      "rot": 58,
+      "shape": {
+        "kind": "rect",
+        "w": 6.4,
+        "h": 1.2,
+        "corner": 0.6
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "crack_c_o",
+      "at": [
+        3.6,
+        2.8
+      ],
+      "rot": -64,
+      "shape": {
+        "kind": "rect",
+        "w": 5.8,
+        "h": 2.3,
+        "corner": 1.15
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "crack_c",
+      "at": [
+        3.6,
+        2.8
+      ],
+      "rot": -64,
+      "shape": {
+        "kind": "rect",
+        "w": 4.6,
+        "h": 1.1,
+        "corner": 0.55
+      },
+      "fill": "$silent.dark"
+    },
+    {
+      "id": "struck_o",
+      "at": [
+        -3.4,
+        -3.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.2
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "struck",
+      "at": [
+        -3.4,
+        -3.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.5
+      },
+      "fill": "$white"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

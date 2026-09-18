@@ -1,0 +1,137 @@
+{
+  "id": "ss.relic.shortfuse",
+  "name": "Short fuse",
+  "description": "A charge with almost no fuse left on it, already lit. The stub is barely longer than it is thick and the spark sits right on top of the casing, which is the whole find in one proportion: everything goes off before it is ready. The casing wears one blood band so it reads as something made to go off rather than as a jar.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "casing_o",
+      "at": [
+        -1,
+        5
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 13.6,
+        "h": 14.1,
+        "corner": 3.5
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "casing",
+      "at": [
+        -1,
+        5
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 11,
+        "h": 11.5,
+        "corner": 2.2
+      },
+      "fill": "$timber.dark"
+    },
+    {
+      "id": "band",
+      "at": [
+        -1,
+        4.6
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 11.2,
+        "h": 2.6
+      },
+      "fill": "$blood.dark"
+    },
+    {
+      "id": "fuse_o",
+      "at": [
+        -1.4,
+        -2.4
+      ],
+      "rot": -12,
+      "shape": {
+        "kind": "rect",
+        "w": 4.1,
+        "h": 7.0,
+        "corner": 2.05
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "fuse",
+      "at": [
+        -1.4,
+        -2.4
+      ],
+      "rot": -12,
+      "shape": {
+        "kind": "rect",
+        "w": 2.1,
+        "h": 5,
+        "corner": 1.05
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "spark_o",
+      "at": [
+        -2,
+        -7.6
+      ],
+      "shape": {
+        "kind": "star",
+        "points": 6,
+        "r": 6.5,
+        "r2": 3.1
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "spark",
+      "at": [
+        -2,
+        -7.6
+      ],
+      "shape": {
+        "kind": "star",
+        "points": 6,
+        "r": 5.4,
+        "r2": 2
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "core",
+      "at": [
+        -2,
+        -7.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.8
+      },
+      "fill": "$gold.light2"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "id": "ss.relic.arc",
+  "name": "Arc sting",
+  "description": "Two bodies and the sting going between them: the near one already hit and dark, the far one about to be, with a soul-cyan zigzag crossing the gap and a spark where it is still in the air. The jump is drawn as a single line and not a fan, because what the find does is carry one hit to one more body \u2014 the near one is bigger and lower, the far one smaller and higher, so the line reads as travelling rather than joining.",
+  "tags": [
+    "ss-relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "near_o",
+      "at": [
+        -8.4,
+        6.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 5.8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "near",
+      "at": [
+        -8.4,
+        6.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 4.6
+      },
+      "fill": "$chitin.dark"
+    },
+    {
+      "id": "far_o",
+      "at": [
+        8.4,
+        -5.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 5.0
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "far",
+      "at": [
+        8.4,
+        -5.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.8
+      },
+      "fill": "$chitin"
+    },
+    {
+      "id": "bolt_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -7.95,
+            5.63
+          ],
+          [
+            0.94,
+            2.92
+          ],
+          [
+            -2.76,
+            -1.03
+          ],
+          [
+            8.35,
+            -5.23
+          ],
+          [
+            -0.54,
+            -2.52
+          ],
+          [
+            3.16,
+            1.43
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bolt",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -6.4,
+            4.6
+          ],
+          [
+            0.8,
+            2.4
+          ],
+          [
+            -2.2,
+            -0.8
+          ],
+          [
+            6.8,
+            -4.2
+          ],
+          [
+            -0.4,
+            -2
+          ],
+          [
+            2.6,
+            1.2
+          ]
+        ]
+      },
+      "fill": "$soul"
+    },
+    {
+      "id": "spark",
+      "at": [
+        0.2,
+        0.2
+      ],
+      "shape": {
+        "kind": "star",
+        "points": 4,
+        "r": 4.4,
+        "r2": 1.5
+      },
+      "fill": "$soul.light2"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}
