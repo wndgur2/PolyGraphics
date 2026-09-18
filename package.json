@@ -26,6 +26,7 @@
     "render": "tsx src/cli.ts render",
     "compile": "tsx src/cli.ts compile",
     "gallery": "tsx src/cli.ts gallery",
+    "site": "npm run check && tsx scripts/site.ts",
     "watch": "tsx scripts/watch.ts",
     "dist": "tsx src/cli.ts dist",
     "wav": "tsx src/cli.ts wav",

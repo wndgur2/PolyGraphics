@@ -1,0 +1,194 @@
+{
+  "id": "ss.terrain.fissure",
+  "name": "Fissure (SS)",
+  "description": "Salt Pan set dressing, decor: a crack in the crust, a long dark poly with a pale upper lip where the salt dried on the edge and an ink throat down the middle, a few grains of salt along it. Drawn under the actors and never collided with. The ground is dry, and this says so.",
+  "tags": [
+    "ss-terrain"
+  ],
+  "size": [
+    64,
+    16
+  ],
+  "parts": [
+    {
+      "id": "dark",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -30.0,
+            -2.0
+          ],
+          [
+            -18.0,
+            -5.0
+          ],
+          [
+            -6.0,
+            -1.0
+          ],
+          [
+            4.0,
+            -6.0
+          ],
+          [
+            14.0,
+            -2.0
+          ],
+          [
+            26.0,
+            -4.0
+          ],
+          [
+            31.0,
+            0.0
+          ],
+          [
+            24.0,
+            3.0
+          ],
+          [
+            12.0,
+            2.0
+          ],
+          [
+            4.0,
+            6.0
+          ],
+          [
+            -6.0,
+            3.0
+          ],
+          [
+            -18.0,
+            5.0
+          ],
+          [
+            -29.0,
+            2.0
+          ]
+        ]
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "edge_top",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -30.0,
+            -3.0
+          ],
+          [
+            -18.0,
+            -6.5
+          ],
+          [
+            -6.0,
+            -2.5
+          ],
+          [
+            4.0,
+            -7.5
+          ],
+          [
+            14.0,
+            -3.5
+          ],
+          [
+            26.0,
+            -5.5
+          ],
+          [
+            31.0,
+            -1.0
+          ],
+          [
+            26.0,
+            -3.5
+          ],
+          [
+            14.0,
+            -1.5
+          ],
+          [
+            4.0,
+            -5.0
+          ],
+          [
+            -6.0,
+            0.0
+          ],
+          [
+            -18.0,
+            -4.0
+          ],
+          [
+            -29.0,
+            -1.5
+          ]
+        ]
+      },
+      "fill": "$husk.dark@soft"
+    },
+    {
+      "id": "throat",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -16.0,
+            -2.0
+          ],
+          [
+            -6.0,
+            0.0
+          ],
+          [
+            4.0,
+            -3.0
+          ],
+          [
+            12.0,
+            0.0
+          ],
+          [
+            20.0,
+            -2.0
+          ],
+          [
+            13.0,
+            1.0
+          ],
+          [
+            4.0,
+            3.0
+          ],
+          [
+            -6.0,
+            1.5
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "salt",
+      "repeat": {
+        "of": {
+          "kind": "rect",
+          "w": 1.6,
+          "h": 1.6
+        },
+        "count": 6,
+        "area": [
+          56,
+          6
+        ],
+        "seed": 13
+      },
+      "fill": "$husk.dark@heavy"
+    }
+  ]
+}
