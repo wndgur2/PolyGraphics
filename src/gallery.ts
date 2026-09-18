@@ -929,9 +929,14 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
   if (sessionStorage.scroll && !location.hash) window.scrollTo(0, +sessionStorage.scroll);
   addEventListener('scroll', () => sessionStorage.scroll = window.scrollY, { passive: true });
 
-  // ---- reload when the file is rebuilt, keeping tab/search/open asset
+  // ---- reload when the file is rebuilt, keeping tab/search/open asset.
+  // Only where a rebuild can reach the tab: the file on disk, or a server on
+  // this machine. A hosted copy never changes underneath the page, and a HEAD
+  // a second from every open tab would be a bill for nothing.
+  const local = ['', 'localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+  if (!local) $('#live').style.display = 'none';
   let stamp = null;
-  setInterval(async () => {
+  if (local) setInterval(async () => {
     try {
       const r = await fetch(location.pathname, { method: 'HEAD', cache: 'no-store' });
       const lm = r.headers.get('last-modified') || r.headers.get('etag');

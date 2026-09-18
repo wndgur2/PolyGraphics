@@ -10,6 +10,8 @@ open out/gallery.html
 
 Working on art? Leave the gallery open and run `npm run watch`: a save rebuilds, and the page reloads itself without losing the tab, the search or the asset you had open.
 
+The same gallery is hosted: Vercel runs `npm run site` on every push (`vercel.json`), so `main` serves the current library and every pull request gets a preview link of its own — the place to look at a new document from a phone, or to send someone a card.
+
 ## The loop
 
 1. Write/edit an asset document in `assets/<id-with-dashes>.json` (or a sound in `sounds/`)
@@ -33,11 +35,12 @@ adapters/phaser|godot  one drop-in file per engine, consuming compiled IR
 adapters/webaudio      the same, for sound
 src/                   schema (zod) · token resolver · SVG renderer · compiler · gallery · cli
                        sound-schema · sound-compile · sound-render (PCM/WAV/measurement)
-scripts/               watch (rebuild on save) · inspect · filmstrip · inspect-sound
+scripts/               watch (rebuild on save) · site (the gallery as a static site) · inspect · filmstrip · inspect-sound
                        compare · adapter tests
 dist/assets.json       committed: the bundle consumers import as `polygraphics/assets`
 dist/sounds.json       likewise, as `polygraphics/sounds`
 out/                   generated, ignored: svg/, compiled/, png/, wav/, gallery.html, manifest.json
+site/                  generated, ignored: the gallery as Vercel serves it (index.html + wav/ + spec/)
 baselines/             accepted PNG and WAV bakes; `npm run regress` diffs against these
 docs/                  reference-analysis.md — why this exists
 ```
