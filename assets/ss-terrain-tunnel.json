@@ -1,7 +1,7 @@
 {
   "id": "ss.terrain.tunnel",
   "name": "Tunnel mouth (SS)",
-  "description": "Shape Survivors set dressing: a hole dug up through the field from below, and the same hole caved in. The spoil is heaped highest on the near lip where it was pushed out, and it is warm turned earth rather than the ruins' purple stone — the one ring on this ground that means dug, not built. Drawn at the crater tilt the pheromone vent uses, so a mouth cut into open flats and one cut into a burrow chamber read as the same object. The `filled` variant is what a spent tunnel leaves: the heap gone back down the hole, domed and paler than the ground it came out of, broken into clods on top and sunk away from the lip where it settled.",
+  "description": "Shape Survivors set dressing: a hole dug up through the field from below, and the same hole caved in. The spoil is heaped highest on the near lip where it was pushed out, and it is warm turned earth rather than the ruins' purple stone — the one ring on this ground that means dug, not built. Drawn at the crater tilt the pheromone vent uses, so a mouth cut into open flats and one cut into a burrow chamber read as the same object. Set into the lip is a ring of fourteen husk teeth leaning in over the throat, each hooked the same way round and each sized by one fixed roll, so fourteen of them read as grown rather than cut. They are laid out on the un-tilted circle and projected with it, which is what foreshortens them: the pair at the sides stand at full length while the ones on the near and far lips are seen nearly end-on, the same way the hole itself is. And they are the warning the thing otherwise has no room for \u2014 nothing announces a tunnel, so a mouth that takes a bite out of whoever drops through it has to say so before they do. The `filled` variant is what a spent tunnel leaves: the heap gone back down the hole, domed and paler than the ground it came out of, broken into clods on top and sunk away from the lip where it settled.",
   "tags": ["ss-terrain"],
   "size": [76, 44],
   "meta": { "radiusX": 26, "radiusY": 12 },
@@ -58,12 +58,158 @@
       "at": [0, 3.5],
       "shape": { "kind": "ellipse", "rx": 18, "ry": 7 },
       "fill": "$ink"
+    },
+    {
+      "id": "gum_0",
+      "shape": { "kind": "poly", "points": [[25.74, -0.68], [18.68, 1.39], [25.74, 2.68]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_1",
+      "shape": { "kind": "poly", "points": [[24.86, 4.5], [15.4, 4.85], [21.45, 7.77]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_2",
+      "shape": { "kind": "poly", "points": [[19, 9.17], [10.64, 7.77], [13.08, 11.34]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_3",
+      "shape": { "kind": "poly", "points": [[9.61, 12.12], [3.01, 8.84], [1.82, 12.94]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_4",
+      "shape": { "kind": "poly", "points": [[-2.22, 12.92], [-5.03, 9.4], [-9.24, 12.19]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_5",
+      "shape": { "kind": "poly", "points": [[-13.01, 11.36], [-11.77, 7.17], [-19.05, 9.15]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_6",
+      "shape": { "kind": "poly", "points": [[-21.56, 7.69], [-16.91, 4.32], [-24.8, 4.59]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_7",
+      "shape": { "kind": "poly", "points": [[-25.7, 2.82], [-17.42, 0.61], [-25.7, -0.82]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_8",
+      "shape": { "kind": "poly", "points": [[-24.77, -2.63], [-16.54, -3.1], [-21.62, -5.65]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_9",
+      "shape": { "kind": "poly", "points": [[-19.02, -7.16], [-10.54, -5.71], [-13.04, -9.35]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_10",
+      "shape": { "kind": "poly", "points": [[-9.63, -10.12], [-2.99, -6.8], [-1.8, -10.94]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_11",
+      "shape": { "kind": "poly", "points": [[2.13, -10.93], [4.95, -7.23], [9.33, -10.17]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_12",
+      "shape": { "kind": "poly", "points": [[12.98, -9.37], [11.68, -5.11], [19.08, -7.13]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_13",
+      "shape": { "kind": "poly", "points": [[21.55, -5.69], [16.84, -2.3], [24.81, -2.58]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth_0",
+      "shape": { "kind": "poly", "points": [[25.06, -0.24], [19.05, 1.3], [25.06, 2.24]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_1",
+      "shape": { "kind": "poly", "points": [[23.81, 4.79], [15.98, 4.88], [21.29, 7.2]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_2",
+      "shape": { "kind": "poly", "points": [[17.8, 9.21], [11.07, 7.88], [13.43, 10.82]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_3",
+      "shape": { "kind": "poly", "points": [[8.44, 11.93], [3.32, 9.08], [2.7, 12.53]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_4",
+      "shape": { "kind": "poly", "points": [[-2.99, 12.52], [-4.92, 9.57], [-8.16, 11.97]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_5",
+      "shape": { "kind": "poly", "points": [[-13.38, 10.83], [-11.94, 7.4], [-17.84, 9.19]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_6",
+      "shape": { "kind": "poly", "points": [[-21.37, 7.14], [-17.21, 4.48], [-23.76, 4.86]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_7",
+      "shape": { "kind": "poly", "points": [[-25.03, 2.34], [-17.99, 0.69], [-25.03, -0.34]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_8",
+      "shape": { "kind": "poly", "points": [[-23.74, -2.89], [-16.94, -3.09], [-21.41, -5.12]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_9",
+      "shape": { "kind": "poly", "points": [[-17.82, -7.2], [-10.99, -5.83], [-13.41, -8.82]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_10",
+      "shape": { "kind": "poly", "points": [[-8.46, -9.93], [-3.31, -7.05], [-2.68, -10.53]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_11",
+      "shape": { "kind": "poly", "points": [[2.92, -10.52], [4.85, -7.42], [8.23, -9.96]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_12",
+      "shape": { "kind": "poly", "points": [[13.36, -8.84], [11.86, -5.36], [17.86, -7.18]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_13",
+      "shape": { "kind": "poly", "points": [[21.37, -5.15], [17.15, -2.47], [23.77, -2.86]] },
+      "fill": "$husk"
     }
   ],
   "variants": {
     "filled": {
-      "description": "Spent: the tunnel caved in. What blocks it is not a lid over the hole and not one lump either — it is a heap of loose spoil packed right out to the lip and piled past it, seven courses of clods narrowing as they climb, the big ones bedded in the crater and small pale pieces perched on the crest. A course is one seeded scatter drawn three times at that seed, so every clod carries its own rim, body and crown for three parts rather than thirty; each course is sparse enough to keep those rims, stepped far enough apart in y that it cannot climb over the one behind and bury it, and drawn over that one so its rims cut into it — which is what stacks them instead of laying them side by side. Angular rather than round, because earth breaks and does not bubble. The ring survives into this state on purpose: the digging happened, and filling it in does not put the ground back.",
-      "remove": ["throat", "dark"],
+      "description": "Spent: the tunnel caved in. What blocks it is not a lid over the hole and not one lump either — it is a heap of loose spoil packed right out to the lip and piled past it, seven courses of clods narrowing as they climb, the big ones bedded in the crater and small pale pieces perched on the crest. A course is one seeded scatter drawn three times at that seed, so every clod carries its own rim, body and crown for three parts rather than thirty; each course is sparse enough to keep those rims, stepped far enough apart in y that it cannot climb over the one behind and bury it, and drawn over that one so its rims cut into it — which is what stacks them instead of laying them side by side. Angular rather than round, because earth breaks and does not bubble. The ring survives into this state on purpose: the digging happened, and filling it in does not put the ground back. The teeth go down with the throat: a caved-in mouth cannot take anything from anybody, and a ring of them left standing over a plug would say it still could.",
+      "remove": [
+        "throat", "dark",
+        "gum_0", "gum_1", "gum_2", "gum_3", "gum_4", "gum_5", "gum_6",
+        "gum_7", "gum_8", "gum_9", "gum_10", "gum_11", "gum_12", "gum_13",
+        "tooth_0", "tooth_1", "tooth_2", "tooth_3", "tooth_4", "tooth_5", "tooth_6",
+        "tooth_7", "tooth_8", "tooth_9", "tooth_10", "tooth_11", "tooth_12", "tooth_13"
+      ],
       "add": [
         {
           "id": "fill_rim",
