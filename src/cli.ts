@@ -14,9 +14,9 @@
  */
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
-import { allAssets, allSounds, loadLibrary, owners, slug, themeNamed, ROOT, type Library, type Owner } from "./apps.js";
+import { allAssets, allSounds, appFlag, appNamed, loadLibrary, owners, slug, themeNamed, ROOT, type Library, type Owner } from "./apps.js";
 import { lintNamespace, lintPalette, lintSounds } from "./lint.js";
-import { lintRules } from "./rules.js";
+import { layerOf, lintRules } from "./rules.js";
 import { applyVariant, derivedRadius, renderSVG, type Issue } from "./render.js";
 import { applyTheme, type Tokens } from "./tokens.js";
 import { buildGallery } from "./gallery.js";
@@ -156,25 +156,35 @@ async function writeSpectrograms(takes: Map<string, Take>): Promise<number> {
 }
 
 function writeManifest(lib: Library): void {
-  const entries = allAssets(lib).map(([o, a]) => ({
-    id: a.id,
-    file: `svg/${slug(a.id)}.svg`,
-    name: a.name,
-    description: a.description,
-    tags: a.tags,
-    size: a.size,
-    anchor: a.anchor ?? [0.5, 0.5],
-    meta: { ...a.meta, radius: derivedRadius(a, o.reg) },
-    parts: a.parts.map((p) => p.id),
-    variants: Object.keys(a.variants ?? {}),
-    animations: Object.keys(a.animations ?? {}),
-  }));
+  const entries = allAssets(lib).map(([o, a]) => {
+    // What a document draws over, by its app's `layers` rule: the name, and
+    // the depth `tokens.layers` gives it. The first thing that reads the
+    // layer table — a game may set a rig's depth from it, or not; that is
+    // the game's decision.
+    const layer = layerOf(o.manifest, a);
+    return {
+      id: a.id,
+      app: o.id,
+      file: `svg/${slug(a.id)}.svg`,
+      name: a.name,
+      description: a.description,
+      tags: a.tags,
+      size: a.size,
+      anchor: a.anchor ?? [0.5, 0.5],
+      meta: { ...a.meta, radius: derivedRadius(a, o.reg) },
+      ...(layer ? { layer, depth: o.tokens.layers[layer] } : {}),
+      parts: a.parts.map((p) => p.id),
+      variants: Object.keys(a.variants ?? {}),
+      animations: Object.keys(a.animations ?? {}),
+    };
+  });
   // Sounds carry their measurements: an index an agent can read is the closest
   // thing to listening it has.
   const sounds = allSounds(lib).map(([o, sd]) => {
     const { ir } = compileSound(sd, o.sreg);
     return {
       id: sd.id,
+      app: o.id,
       file: `wav/${slug(sd.id)}.wav`,
       spec: `spec/${slug(sd.id)}.png`,
       name: sd.name,
@@ -197,6 +207,8 @@ const themeFlag = rest.includes("--theme") ? rest[rest.indexOf("--theme") + 1] :
 const onlyFlag = rest.includes("--only") ? rest[rest.indexOf("--only") + 1] : undefined;
 const sizeFlag = rest.includes("--size") ? Number(rest[rest.indexOf("--size") + 1]) : undefined;
 if (sizeFlag !== undefined && !Number.isFinite(sizeFlag)) fail("--size takes a pixel width, e.g. --size 512");
+/** `--app <id>` narrows a bake — png, baseline, regress — to one app. Checks and bundles always cover the library. */
+const appOnly = appFlag(rest);
 
 const lib = loadLibrary();
 const { issues } = lib;
@@ -304,30 +316,35 @@ function stripProse(value: unknown): unknown {
   return value;
 }
 
-if (cmd === "dist" || cmd === "check") {
-  mkdirSync(dir("dist"), { recursive: true });
-  // Sorted and timestamp-free, so the same documents always produce the same
-  // bytes; one line per asset, so a committed re-bundle diffs as the handful of
-  // assets that actually changed rather than as one 300KB line.
-  const rows = allAssets(lib)
-    .sort(([, a], [, b]) => a.id.localeCompare(b.id))
-    .map(([o, a]) => `${JSON.stringify(a.id)}:${JSON.stringify(stripProse(compileAsset(a, o.reg).ir))}`);
-  writeFileSync(
-    dir("dist", "assets.json"),
-    `{"format":${JSON.stringify(BUNDLE_FORMAT)},"assets":{\n${rows.join(",\n")}\n}}\n`,
-  );
-  console.log(`✓ ${rows.length} assets → dist/assets.json (${BUNDLE_FORMAT})`);
+/**
+ * Sorted and timestamp-free, so the same documents always produce the same
+ * bytes; one line per document, so a committed re-bundle diffs as the handful
+ * that actually changed rather than as one 300KB line.
+ */
+function writeBundle(path: string, format: string, key: "assets" | "sounds", rows: [string, unknown][]): number {
+  const lines = rows.sort(([a], [b]) => a.localeCompare(b)).map(([id, ir]) => `${JSON.stringify(id)}:${JSON.stringify(stripProse(ir))}`);
+  writeFileSync(dir(path), `{"format":${JSON.stringify(format)},"${key}":{\n${lines.join(",\n")}\n}}\n`);
+  return lines.length;
+}
 
-  if (nSounds) {
-    const srows = allSounds(lib)
-      .sort(([, a], [, b]) => a.id.localeCompare(b.id))
-      .map(([o, sd]) => `${JSON.stringify(sd.id)}:${JSON.stringify(stripProse(compileSound(sd, o.sreg).ir))}`);
-    writeFileSync(
-      dir("dist", "sounds.json"),
-      `{"format":${JSON.stringify(SOUND_FORMAT)},"sounds":{\n${srows.join(",\n")}\n}}\n`,
-    );
-    console.log(`✓ ${srows.length} sounds → dist/sounds.json (${SOUND_FORMAT})`);
+if (cmd === "dist" || cmd === "check") {
+  // One bundle per app — `polygraphics/apps/<id>/assets` — because an app
+  // imports its own art and nobody else's. The union at dist/assets.json is
+  // what today's consumer imports and keeps building until it has moved;
+  // dropping it is a change the game makes first.
+  const assetRows = (o: Owner): [string, unknown][] => [...o.assets.values()].map((a) => [a.id, compileAsset(a, o.reg).ir]);
+  const soundRows = (o: Owner): [string, unknown][] => [...o.sounds.values()].map((sd) => [sd.id, compileSound(sd, o.sreg).ir]);
+  const written: string[] = [];
+  for (const o of all) {
+    mkdirSync(dir("dist", o.id), { recursive: true });
+    const n = writeBundle(`dist/${o.id}/assets.json`, BUNDLE_FORMAT, "assets", assetRows(o));
+    written.push(`dist/${o.id}/assets.json (${n})`);
+    if (o.sounds.size) written.push(`dist/${o.id}/sounds.json (${writeBundle(`dist/${o.id}/sounds.json`, SOUND_FORMAT, "sounds", soundRows(o))})`);
   }
+  const n = writeBundle("dist/assets.json", BUNDLE_FORMAT, "assets", all.flatMap(assetRows));
+  console.log(`✓ ${n} assets → dist/assets.json, the union (${BUNDLE_FORMAT})`);
+  if (nSounds) console.log(`✓ ${writeBundle("dist/sounds.json", SOUND_FORMAT, "sounds", all.flatMap(soundRows))} sounds → dist/sounds.json, the union (${SOUND_FORMAT})`);
+  console.log(`✓ per app: ${written.join(", ")}`);
 }
 
 if (cmd === "wav" || cmd === "check") {
@@ -363,7 +380,7 @@ async function renderAllPngs(opts: { only?: string; size?: number } = {}): Promi
   const { Resvg } = await import("@resvg/resvg-js");
   const out = new Map<Owner, Map<string, Buffer>>();
   if (opts.only && !allAssets(lib).some(([, a]) => a.id === opts.only)) fail(`--only "${opts.only}": no such asset`);
-  for (const o of all) {
+  for (const o of baked) {
     const pngs = new Map<string, Buffer>();
     for (const asset of o.assets.values()) {
       if (opts.only && asset.id !== opts.only) continue;
@@ -382,11 +399,13 @@ async function renderAllPngs(opts: { only?: string; size?: number } = {}): Promi
   return out;
 }
 
+const baked: Owner[] = appOnly ? [appNamed(lib, appOnly) ?? fail(`--app "${appOnly}": no such app — apps are ${lib.apps.map((a) => a.id).join(", ")}`)] : all;
+
 if (cmd === "png" || cmd === "baseline" || cmd === "regress") {
   const bakes = await renderAllPngs(cmd === "png" ? { only: onlyFlag, size: sizeFlag } : {});
   // Sound rides the same rails: a bake is bytes, and bytes compare.
   if (cmd !== "png")
-    for (const o of all) for (const [name, { wav }] of renderAllWavs(o.sreg, o.sounds)) bakes.get(o)!.set(join("sounds", name), wav);
+    for (const o of baked) for (const [name, { wav }] of renderAllWavs(o.sreg, o.sounds)) bakes.get(o)!.set(join("sounds", name), wav);
   if (cmd === "png") {
     mkdirSync(dir("out", "png"), { recursive: true });
     let n = 0;
@@ -419,7 +438,7 @@ if (cmd === "png" || cmd === "baseline" || cmd === "regress") {
           changed++;
         }
       }
-    console.log(`\nregression: ${pass} unchanged, ${changed} changed, ${missing} new`);
+    console.log(`\nregression${appOnly ? ` (${appOnly})` : ""}: ${pass} unchanged, ${changed} changed, ${missing} new`);
     if (changed) process.exit(1);
   }
 }

@@ -10,7 +10,9 @@
     "./godot": "./adapters/godot/polygraphics.gd",
     "./package.json": "./package.json",
     "./webaudio": "./adapters/webaudio/polygraphics-webaudio.ts",
-    "./sounds": "./dist/sounds.json"
+    "./sounds": "./dist/sounds.json",
+    "./apps/*/assets": "./dist/*/assets.json",
+    "./apps/*/sounds": "./dist/*/sounds.json"
   },
   "files": [
     "adapters",

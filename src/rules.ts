@@ -267,6 +267,9 @@ export function evaluateRules(o: Owner): RuleReport[] {
 export function lintRules(o: Owner, issues: Issue[]): void {
   for (const rep of evaluateRules(o))
     for (const b of rep.broken) issues.push({ level: rep.level, where: b.id, msg: b.msg });
+  for (const rule of o.manifest?.rules?.layers ?? [])
+    if (!(rule.layer in o.tokens.layers))
+      issues.push({ level: "error", where: `${o.dir}/app.json`, msg: `rules.layers names "${rule.layer}", and tokens.layers has no such layer — layers are ${Object.keys(o.tokens.layers).join(", ") || "none"}` });
 }
 
 /** Which `tokens.layers` entry a document draws on, by the manifest's `layers` rule; first match wins. */
