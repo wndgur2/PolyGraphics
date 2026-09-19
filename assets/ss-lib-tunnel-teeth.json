@@ -1,0 +1,149 @@
+{
+  "id": "ss.lib.tunnel-teeth",
+  "name": "Tunnel teeth (SS)",
+  "description": "The ring of teeth in a tunnel mouth, drawn on its own so the mouth can move all fourteen as one part — which is what the breath, the flare and the bite are (`ss.terrain.tunnel`, animations `idle`, `sense`, `swallow`). Fourteen husk points on an ink backing, each hooked the same way round and each sized by one fixed roll so a ring of them reads as grown rather than cut. They are laid out on the un-tilted circle the mouth is a projection of and projected with it, so the foreshortening is the hole's own: the pair at the sides stand at full length while the ones on the near and far lips are seen nearly end-on. Centred on its own origin rather than on the mouth's, so the consumer places it with one `at` and scaling it about that point closes it like a jaw.",
+  "tags": ["ss-lib"],
+  "size": [56, 28],
+  "parts": [
+    {
+      "id": "gum_0",
+      "shape": { "kind": "poly", "points": [[25.74, -1.68], [18.68, 0.39], [25.74, 1.68]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_1",
+      "shape": { "kind": "poly", "points": [[24.86, 3.5], [15.4, 3.85], [21.45, 6.77]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_2",
+      "shape": { "kind": "poly", "points": [[19, 8.17], [10.64, 6.77], [13.08, 10.34]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_3",
+      "shape": { "kind": "poly", "points": [[9.61, 11.12], [3.01, 7.84], [1.82, 11.94]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_4",
+      "shape": { "kind": "poly", "points": [[-2.22, 11.92], [-5.03, 8.4], [-9.24, 11.19]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_5",
+      "shape": { "kind": "poly", "points": [[-13.01, 10.36], [-11.77, 6.17], [-19.05, 8.15]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_6",
+      "shape": { "kind": "poly", "points": [[-21.56, 6.69], [-16.91, 3.32], [-24.8, 3.59]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_7",
+      "shape": { "kind": "poly", "points": [[-25.7, 1.82], [-17.42, -0.39], [-25.7, -1.82]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_8",
+      "shape": { "kind": "poly", "points": [[-24.77, -3.63], [-16.54, -4.1], [-21.62, -6.65]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_9",
+      "shape": { "kind": "poly", "points": [[-19.02, -8.16], [-10.54, -6.71], [-13.04, -10.35]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_10",
+      "shape": { "kind": "poly", "points": [[-9.63, -11.12], [-2.99, -7.8], [-1.8, -11.94]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_11",
+      "shape": { "kind": "poly", "points": [[2.13, -11.93], [4.95, -8.23], [9.33, -11.17]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_12",
+      "shape": { "kind": "poly", "points": [[12.98, -10.37], [11.68, -6.11], [19.08, -8.13]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "gum_13",
+      "shape": { "kind": "poly", "points": [[21.55, -6.69], [16.84, -3.3], [24.81, -3.58]] },
+      "fill": "$ink"
+    },
+    {
+      "id": "tooth_0",
+      "shape": { "kind": "poly", "points": [[25.06, -1.24], [19.05, 0.3], [25.06, 1.24]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_1",
+      "shape": { "kind": "poly", "points": [[23.81, 3.79], [15.98, 3.88], [21.29, 6.2]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_2",
+      "shape": { "kind": "poly", "points": [[17.8, 8.21], [11.07, 6.88], [13.43, 9.82]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_3",
+      "shape": { "kind": "poly", "points": [[8.44, 10.93], [3.32, 8.08], [2.7, 11.53]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_4",
+      "shape": { "kind": "poly", "points": [[-2.99, 11.52], [-4.92, 8.57], [-8.16, 10.97]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_5",
+      "shape": { "kind": "poly", "points": [[-13.38, 9.83], [-11.94, 6.4], [-17.84, 8.19]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_6",
+      "shape": { "kind": "poly", "points": [[-21.37, 6.14], [-17.21, 3.48], [-23.76, 3.86]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_7",
+      "shape": { "kind": "poly", "points": [[-25.03, 1.34], [-17.99, -0.31], [-25.03, -1.34]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_8",
+      "shape": { "kind": "poly", "points": [[-23.74, -3.89], [-16.94, -4.09], [-21.41, -6.12]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_9",
+      "shape": { "kind": "poly", "points": [[-17.82, -8.2], [-10.99, -6.83], [-13.41, -9.82]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_10",
+      "shape": { "kind": "poly", "points": [[-8.46, -10.93], [-3.31, -8.05], [-2.68, -11.53]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_11",
+      "shape": { "kind": "poly", "points": [[2.92, -11.52], [4.85, -8.42], [8.23, -10.96]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_12",
+      "shape": { "kind": "poly", "points": [[13.36, -9.84], [11.86, -6.36], [17.86, -8.18]] },
+      "fill": "$husk"
+    },
+    {
+      "id": "tooth_13",
+      "shape": { "kind": "poly", "points": [[21.37, -6.15], [17.15, -3.47], [23.77, -3.86]] },
+      "fill": "$husk"
+    }
+  ]
+}
