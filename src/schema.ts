@@ -151,5 +151,13 @@ export const AssetSchema = z.strictObject({
   parts: z.array(PartSchema).min(1),
   variants: z.record(z.string(), VariantSchema).optional(),
   animations: z.record(z.string(), AnimSchema).optional(),
+  /**
+   * Why this document steps outside one of its app's rules, keyed by the
+   * rule's name (`size`, `grid`, `distinct`, …). A rule a document names here
+   * is not applied to it, and the gallery lists the exception with its reason.
+   * The exception then reads as a decision somebody made rather than a warning
+   * everybody learns to scroll past — `offBand` on a sound, generalised.
+   */
+  why: z.record(z.string(), z.string().min(1)).optional(),
 });
 export type Asset = z.infer<typeof AssetSchema>;

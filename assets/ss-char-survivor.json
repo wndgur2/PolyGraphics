@@ -5,6 +5,7 @@
   "tags": ["ss-char"],
   "size": [36, 36],
   "meta": { "radius": 11.5 },
+  "why": { "size": "A proposal the game declined, kept as the drawn record; authored at 36 so the feelers the title names clear the canvas. The eight shells the game reads are 32." },
   "parts": [
     { "id": "antenna_far", "use": "ss.lib.antenna", "variant": "dead", "at": [3.4, -9.8], "rot": -94, "scale": [0.56, 1.46] },
     { "id": "shell", "shape": { "kind": "circle", "r": 11.5 }, "fill": "$frost", "stroke": { "color": "$ink", "width": "thin" } },

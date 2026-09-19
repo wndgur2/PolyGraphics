@@ -3,7 +3,8 @@
   "name": "Rolling dung icon",
   "description": "UI slot icon for the dung the player shoves ahead of them. Composes `ss.proj.dung` via `use` so the slot shows the actual ball, sat up in the top right with the rut it has just come down running away under it to the bottom left — the track is what tells this slot from a picture of a round brown thing, and it is the whole weapon: the ball is only dangerous while it is rolling. Three ridges are pressed across the rut, spaced wider the further back they are, so the track reads as something that came *this* way rather than as a shadow. Rim is `$timber` — the muck's own brown, unlightened, which is the one ramp of it that holds clear of the Mandibles' chitin.",
   "tags": [
-    "ss-icon"
+    "ss-icon",
+    "weapon"
   ],
   "size": [
     32,
