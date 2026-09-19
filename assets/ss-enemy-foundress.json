@@ -1,7 +1,7 @@
 {
   "id": "ss.enemy.foundress",
   "name": "Foundress",
-  "description": "The queen who dug this. Every wall the run has bounced off today was her instruction, and she is still laying while she walks toward you. Drawn as an actual queen rather than a chamber: a long banded gaster, a thorax carrying the two pale stubs where she tore her own wings off the day she founded the colony, and a head big enough to be in charge — three masses in a line, where the Matriarch is one circle with a crown. Her gaster is a file of overlapping tergites over a membrane being forced apart from inside, so the pheromone reads as pressure escaping between plates rather than as a sac you look into. The gaster is a chain rooted at the petiole, so the laying wave actually travels it: each plate slides open a beat after the one ahead, the membrane behind it brightens as the wave passes, and the egg at the tip swells, brightens and drops. The thorax heaves, the head dips on its own joint, the antennae whip, the mandibles work, and two-link legs take the weight late. She does not hold a distance the way the Matriarch does — in a burrow the earth already stands between the two of you — so nothing about this body is drawn retreating. Drawn facing +x, the game flips her. Gameplay radius 44. The `death` clip is the laying wave running out instead of round: the egg rolls out unplaced, the seams go dark a plate at a time down the gaster, and the rest follows it down.",
+  "description": "The queen who dug this. Every wall the run has bounced off today was her instruction, and she is still laying while she walks toward you. Drawn as an actual queen rather than a chamber: a long banded gaster, a thorax carrying the two pale stubs where she tore her own wings off the day she founded the colony, and a head big enough to be in charge — three masses in a line, where the Matriarch is one circle with a crown. Her gaster is a file of overlapping tergites over a membrane being forced apart from inside, so the pheromone reads as pressure escaping between plates rather than as a sac you look into. The gaster is a chain rooted at the petiole, so the laying wave actually travels it: each plate slides open a beat after the one ahead, the membrane behind it brightens as the wave passes, and the egg at the tip swells, brightens and drops. The thorax heaves, the head dips on its own joint, the antennae whip, the mandibles work, and two-link legs take the weight late. She does not hold a distance the way the Matriarch does — in a burrow the earth already stands between the two of you — so nothing about this body is drawn retreating. Drawn facing +x, the game flips her. Gameplay radius 44. The `death` clip is the laying wave running out instead of round: the egg rolls out unplaced, the seams go dark a plate at a time down the gaster, and the rest follows it down.\n\n`dig` is the clip the codex line was owed: the head drives in, the mandibles scissor twice, the front pair rakes half a cycle apart and the gaster braces against the work by compressing toward the petiole. The game plays it where she puts earth back into the passage she is walking down.",
   "tags": ["ss-enemy", "boss"],
   "size": [120, 112],
   "meta": {"radius": 44},
@@ -82,6 +82,34 @@
       "add": [
         {"id": "clutch", "at": [-26.35, -7.83], "rot": -8, "repeat": {"of": {"kind": "circle", "r": 5.76}, "count": 8, "area": [44.17, 32.64], "seed": 11, "scaleRange": [0.7, 1.15]}, "fill": "$white@heavy"}
       ]
+    },
+    "final": {
+      "description": "Phase three: the gaster is spent. She has laid it into the passage behind her and what is left is a file of dry tergites with the membrane between them burning white — pressure with nothing behind it — and no egg at the tip. The thorax and the head are the only parts of her that have not changed, because they are the parts that were never for laying.",
+      "scale": 1.1,
+      "set": {
+        "gaster.fill": "$dead.dark",
+        "gloss.opacity": 0.0,
+        "egg.opacity": 0.0,
+        "egg_core.opacity": 0.0,
+        "scar_a.fill": "$bone",
+        "scar_b.fill": "$bone.dark",
+        "terg_0.fill": "$dead.dark",
+        "terg_1.fill": "$dead",
+        "terg_2.fill": "$dead.dark",
+        "terg_3.fill": "$dead",
+        "terg_4.fill": "$dead.dark",
+        "terg_5.fill": "$dead",
+        "terg_6.fill": "$dead.dark",
+        "terg_7.fill": "$dead",
+        "seam_0.fill": "$white",
+        "seam_1.fill": "$white",
+        "seam_2.fill": "$white",
+        "seam_3.fill": "$white",
+        "seam_4.fill": "$white",
+        "seam_5.fill": "$white",
+        "seam_6.fill": "$white",
+        "seam_7.fill": "$white"
+      }
     }
   },
   "animations": {
@@ -300,6 +328,46 @@
         {"part": "leg_f_far_tibia", "prop": "rot", "keys": [[0, 0], [0.1, -12.6], [0.55, 28], [0.85, 30.8], [1, 30.8]]},
         {"part": "leg_f_far_tibia", "prop": "x", "keys": [[0, 0], [0.1, 3.56], [0.55, -8.44], [0.85, -9.27], [1, -9.27]]},
         {"part": "leg_f_far_tibia", "prop": "y", "keys": [[0, 0], [0.1, -1.19], [0.55, 1.53], [0.85, 2.03], [1, 2.03]]}
+      ]
+    },
+    "dig": {
+      "description": "Cutting the passage she is walking down. The head drives in and the mandibles scissor, the front legs rake alternately, and the gaster braces against the work — which is the whole of what her codex line has been claiming and the drawing never did: every wall the run has bounced off today was her instruction.",
+      "duration": 0.95,
+      "tracks": [
+        {"part": "head", "prop": "rot", "keys": [[0, 0.0], [0.24, 14.0], [0.55, -6.0], [1, 0.0]]},
+        {"part": "head", "prop": "x", "keys": [[0, 35.1], [0.24, 38.1], [0.6, 33.9], [1, 35.1]]},
+        {"part": "brow", "prop": "rot", "keys": [[0, 0.0], [0.24, 14.0], [0.55, -6.0], [1, 0.0]]},
+        {"part": "brow", "prop": "x", "keys": [[0, 35.1], [0.24, 38.1], [0.6, 33.9], [1, 35.1]]},
+        {"part": "maw", "prop": "x", "keys": [[0, 44.7], [0.24, 48.1], [0.6, 43.7], [1, 44.7]]},
+        {"part": "mand_up", "prop": "rot", "keys": [[0, 0.0], [0.18, -34.0], [0.4, 10.0], [0.7, -22.0], [1, 0.0]]},
+        {"part": "mand_dn", "prop": "rot", "keys": [[0, 0.0], [0.18, 33.0], [0.4, -9.0], [0.7, 21.0], [1, 0.0]]},
+        {"part": "ant_0", "prop": "rot", "keys": [[0, -142.0], [0.2, -120.0], [0.6, -134.0], [1, -142.0]]},
+        {"part": "ant_1", "prop": "rot", "keys": [[0, -104.0], [0.2, -82.0], [0.6, -96.0], [1, -104.0]]},
+        {"part": "leg_f_femur", "prop": "rot", "keys": [[0, -28.0], [0.2, -48.0], [0.6, -18.0], [1, -28.0]]},
+        {"part": "leg_f_tibia", "prop": "rot", "keys": [[0, -2.0], [0.2, -28.0], [0.6, 11.0], [1, -2.0]]},
+        {"part": "leg_m_femur", "prop": "rot", "keys": [[0, 4.0], [0.7, -16.0], [0.1, 14.0], [1, 4.0]]},
+        {"part": "leg_m_tibia", "prop": "rot", "keys": [[0, 2.0], [0.7, -24.0], [0.1, 15.0], [1, 2.0]]},
+        {"part": "leg_b_femur", "prop": "rot", "keys": [[0, 30.0], [0.3, 37.0], [0.7, 26.0], [1, 30.0]]},
+        {"part": "leg_b_tibia", "prop": "rot", "keys": [[0, 8.0], [0.3, 15.0], [0.7, 4.0], [1, 8.0]]},
+        {"part": "terg_0", "prop": "x", "keys": [[0, 6.3], [0.28, 5.1], [0.68, 6.7], [1, 6.3]]},
+        {"part": "seam_0", "prop": "opacity", "keys": [[0, 1.0], [0.28, 0.55], [0.68, 1.0], [1, 1.0]]},
+        {"part": "terg_1", "prop": "x", "keys": [[0, -0.62], [0.28, -2.17], [0.68, -0.1], [1, -0.62]]},
+        {"part": "seam_1", "prop": "opacity", "keys": [[0, 1.0], [0.28, 0.55], [0.68, 1.0], [1, 1.0]]},
+        {"part": "terg_2", "prop": "x", "keys": [[0, -7.53], [0.28, -9.43], [0.68, -6.89], [1, -7.53]]},
+        {"part": "seam_2", "prop": "opacity", "keys": [[0, 1.0], [0.28, 0.55], [0.68, 1.0], [1, 1.0]]},
+        {"part": "terg_3", "prop": "x", "keys": [[0, -14.44], [0.28, -16.69], [0.68, -13.68], [1, -14.44]]},
+        {"part": "seam_3", "prop": "opacity", "keys": [[0, 1.0], [0.28, 0.55], [0.68, 1.0], [1, 1.0]]},
+        {"part": "terg_4", "prop": "x", "keys": [[0, -21.36], [0.28, -23.96], [0.68, -20.48], [1, -21.36]]},
+        {"part": "seam_4", "prop": "opacity", "keys": [[0, 1.0], [0.28, 0.55], [0.68, 1.0], [1, 1.0]]},
+        {"part": "terg_5", "prop": "x", "keys": [[0, -28.27], [0.28, -31.22], [0.68, -27.27], [1, -28.27]]},
+        {"part": "seam_5", "prop": "opacity", "keys": [[0, 1.0], [0.28, 0.55], [0.68, 1.0], [1, 1.0]]},
+        {"part": "terg_6", "prop": "x", "keys": [[0, -35.18], [0.28, -38.48], [0.68, -34.06], [1, -35.18]]},
+        {"part": "seam_6", "prop": "opacity", "keys": [[0, 1.0], [0.28, 0.55], [0.68, 1.0], [1, 1.0]]},
+        {"part": "terg_7", "prop": "x", "keys": [[0, -42.1], [0.28, -45.75], [0.68, -40.86], [1, -42.1]]},
+        {"part": "seam_7", "prop": "opacity", "keys": [[0, 1.0], [0.28, 0.55], [0.68, 1.0], [1, 1.0]]},
+        {"part": "thorax", "prop": "x", "keys": [[0, 21.66], [0.26, 20.06], [0.66, 22.26], [1, 21.66]]},
+        {"part": "node_a", "prop": "x", "keys": [[0, 9.18], [0.26, 7.58], [0.66, 9.78], [1, 9.18]]},
+        {"part": "node_b", "prop": "x", "keys": [[0, 14.94], [0.26, 13.34], [0.66, 15.54], [1, 14.94]]}
       ]
     }
   }
