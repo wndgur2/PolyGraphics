@@ -18,13 +18,8 @@ import type { Sound, Voice } from "./sound-schema.js";
 import { renderSVG, type Issue, type Registry } from "./render.js";
 import { compileSound, type SoundRegistry } from "./sound-compile.js";
 import { describe, renderPCM, waveformSvg, type Descriptors } from "./sound-render.js";
-import { applyTheme, resolveColor, type Theme, type Tokens } from "./tokens.js";
-
-const CATEGORY_ORDER = [
-  "ss-char", "ss-enemy", "ss-proj", "ss-fx", "ss-pickup", "ss-terrain", "ss-env", "ss-icon", "ss-relic",
-  "ss-curse", "ss-lib",
-  "char", "enemy", "boss", "weapon", "icon", "pickup", "fx", "tile", "env", "lib",
-];
+import { applyTheme, resolveColor, type Tokens } from "./tokens.js";
+import { assetPath, owners, soundPath, type Library, type Owner } from "./apps.js";
 
 /**
  * The longest side a cell may occupy. 128 × 1.25 is exactly this, so the
@@ -53,15 +48,16 @@ function esc(s: string): string {
 }
 
 const slug = (id: string) => id.replace(/\./g, "-");
-const fileOf = (a: Asset) => `assets/${slug(a.id)}.json`;
+const fileOf = (o: Owner, a: Asset) => assetPath(o, a);
+/** A panel's name: the owner, then the category — `ss/enemy`. Unique across apps. */
+const panelOf = (o: Owner, cat: string) => `${o.id}/${cat}`;
 
 /**
  * Sound families get their own tabs under their own heading, keyed apart from
  * the asset categories so a document tagged `lib` on both sides cannot collide.
  */
-const SOUND_ORDER = ["weapon", "impact", "creature", "player", "pickup", "world", "field", "interface", "fanfare"];
 const soundCat = (sd: Sound) => `snd-${sd.tags[1] ?? sd.tags[0]}`;
-const soundFileOf = (sd: Sound) => `sounds/${slug(sd.id)}.json`;
+const soundFileOf = (o: Owner, sd: Sound) => soundPath(o, sd);
 /**
  * The bake, referenced rather than embedded. Twenty-seven takes inline would
  * add ~3MB of base64 to a page that reloads itself on every rebuild; `out/wav`
@@ -115,14 +111,14 @@ function partRow(p: Part): string {
 }
 
 /** Everything about one asset that a conversation about changing it would need. */
-function detailBlock(asset: Asset, reg: Registry): string {
+function detailBlock(o: Owner, asset: Asset): string {
   const variants = Object.entries(asset.variants ?? {});
   const anims = Object.entries(asset.animations ?? {});
   const radius = asset.meta?.radius;
 
   const facts = ([
     ["id", `<code>${esc(asset.id)}</code>`],
-    ["file", `<code>${esc(fileOf(asset))}</code>`, "wide"],
+    ["file", `<code>${esc(fileOf(o, asset))}</code>`, "wide"],
     ["size", `${asset.size[0]}×${asset.size[1]}`],
     ["anchor", (asset.anchor ?? [0.5, 0.5]).join(", ")],
     ["parts", String(asset.parts.length)],
@@ -160,7 +156,7 @@ ${a.description ? `<p>${esc(a.description)}</p>` : ""}<ul><li><code>${esc(tracks
   // What you paste into a chat to ask for a change. Keeps ids exact, so a
   // reply can name a part instead of describing where it is on screen.
   const brief = [
-    `${asset.id} — ${asset.name} (${fileOf(asset)})`,
+    `${asset.id} — ${asset.name} (${fileOf(o, asset)})`,
     asset.description,
     `size ${asset.size[0]}×${asset.size[1]}${radius !== undefined ? `, radius ${radius}` : ""}`,
     `parts: ${asset.parts.map((p) => p.id).join(", ")}`,
@@ -175,7 +171,7 @@ ${a.description ? `<p>${esc(a.description)}</p>` : ""}<ul><li><code>${esc(tracks
     <code class="big-id">${esc(asset.id)}</code>
     <div class="spacer"></div>
     <button data-copy="${esc(asset.id)}">copy id</button>
-    <button data-copy="${esc(fileOf(asset))}">copy path</button>
+    <button data-copy="${esc(fileOf(o, asset))}">copy path</button>
     <button data-copy="${esc(brief)}" class="primary">copy brief</button>
   </div>
   <div class="detail-body">
@@ -209,7 +205,8 @@ ${a.description ? `<p>${esc(a.description)}</p>` : ""}<ul><li><code>${esc(tracks
 /** The roster-wide one-shot; a state never takes it off the base row. */
 const DEATH_CLIP = "death";
 
-function assetCard(asset: Asset, reg: Registry, issues: Issue[]): string {
+function assetCard(o: Owner, asset: Asset, issues: Issue[]): string {
+  const reg = o.reg;
   const anims = Object.keys(asset.animations ?? {});
   const firstAnim = anims[0];
   // A cell per animation, not just the first. A document may carry a walk and
@@ -260,7 +257,7 @@ function assetCard(asset: Asset, reg: Registry, issues: Issue[]): string {
   const meta: string[] = [`${asset.size[0]}×${asset.size[1]}`];
   if (anims.length) meta.push(`anim: ${anims.join(", ")}`);
   const hay = `${asset.id} ${asset.name} ${asset.description} ${asset.tags.join(" ")} ${asset.parts.map((p) => p.id).join(" ")}`;
-  return `<article class="card" id="c-${slug(asset.id)}" role="button" tabindex="0" data-id="${esc(asset.id)}" data-cat="${esc(asset.tags[0])}" data-hay="${esc(hay.toLowerCase())}">
+  return `<article class="card" id="c-${slug(asset.id)}" role="button" tabindex="0" data-id="${esc(asset.id)}" data-cat="${esc(panelOf(o, asset.tags[0]))}" data-hay="${esc(hay.toLowerCase())}">
   <header><h3>${esc(asset.name)}</h3><code>${esc(asset.id)}</code></header>
   <p class="desc">${esc(asset.description)}</p>
   <div class="tags">${asset.tags.map((t) => `<span>${esc(t)}</span>`).join("")}<span class="dim">${meta.join(" · ")}</span></div>
@@ -355,12 +352,12 @@ function takeCell(sd: Sound, t: Take): string {
 </figure>`;
 }
 
-function soundCard(sd: Sound, sreg: SoundRegistry, issues: Issue[]): string {
-  const takes = takesOf(sd, sreg, issues);
+function soundCard(o: Owner, sd: Sound, issues: Issue[]): string {
+  const takes = takesOf(sd, o.sreg, issues);
   const meta = [`${sd.duration}s`, `${sd.voices.length} voices`];
   if (sd.meta?.minInterval) meta.push(`min ${sd.meta.minInterval}ms`);
   const hay = `${sd.id} ${sd.name} ${sd.description} ${sd.tags.join(" ")} ${sd.voices.map((v) => v.id).join(" ")}`;
-  return `<article class="card" id="c-${slug(sd.id)}" role="button" tabindex="0" data-id="${esc(sd.id)}" data-cat="${esc(soundCat(sd))}" data-hay="${esc(hay.toLowerCase())}">
+  return `<article class="card" id="c-${slug(sd.id)}" role="button" tabindex="0" data-id="${esc(sd.id)}" data-cat="${esc(panelOf(o, soundCat(sd)))}" data-hay="${esc(hay.toLowerCase())}">
   <header><h3>${esc(sd.name)}</h3><code>${esc(sd.id)}</code></header>
   <p class="desc">${esc(sd.description)}</p>
   <div class="tags">${sd.tags.map((t) => `<span>${esc(t)}</span>`).join("")}<span class="dim">${meta.join(" · ")}</span></div>
@@ -368,13 +365,13 @@ function soundCard(sd: Sound, sreg: SoundRegistry, issues: Issue[]): string {
 </article>`;
 }
 
-function soundDetailBlock(sd: Sound, sreg: SoundRegistry, issues: Issue[]): string {
+function soundDetailBlock(o: Owner, sd: Sound, issues: Issue[]): string {
   const variants = Object.entries(sd.variants ?? {});
-  const base = takesOf(sd, sreg, issues)[0];
+  const base = takesOf(sd, o.sreg, issues)[0];
 
   const facts = ([
     ["id", `<code>${esc(sd.id)}</code>`],
-    ["file", `<code>${esc(soundFileOf(sd))}</code>`, "wide"],
+    ["file", `<code>${esc(soundFileOf(o, sd))}</code>`, "wide"],
     ["duration", `${sd.duration}s`],
     ["voices", String(sd.voices.length)],
     ["loudness", `${base.d.loudnessDb} dB`],
@@ -410,7 +407,7 @@ function soundDetailBlock(sd: Sound, sreg: SoundRegistry, issues: Issue[]): stri
     : "";
 
   const brief = [
-    `${sd.id} — ${sd.name} (${soundFileOf(sd)})`,
+    `${sd.id} — ${sd.name} (${soundFileOf(o, sd)})`,
     sd.description,
     `${sd.duration}s, loudness ${base.d.loudnessDb}dB K-weighted, true peak ${base.d.truePeakDb}dBTP, attack ${base.d.attackMs}ms, phone loses ${base.d.phoneLossDb}dB, centroid ${base.d.centroidHz}Hz`,
     `voices: ${sd.voices.map((v) => v.id).join(", ")}`,
@@ -424,7 +421,7 @@ function soundDetailBlock(sd: Sound, sreg: SoundRegistry, issues: Issue[]): stri
     <code class="big-id">${esc(sd.id)}</code>
     <div class="spacer"></div>
     <button data-copy="${esc(sd.id)}">copy id</button>
-    <button data-copy="${esc(soundFileOf(sd))}">copy path</button>
+    <button data-copy="${esc(soundFileOf(o, sd))}">copy path</button>
     <button data-copy="${esc(brief)}" class="primary">copy brief</button>
   </div>
   <div class="detail-body snd">
@@ -511,11 +508,23 @@ function swatches(tokens: Tokens): string {
 ${audio}`;
 }
 
-export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[], issues: Issue[]): string {
+/**
+ * One page for the whole library, one app at a time: an app picker at the top
+ * of the sidebar, and under it that app's tokens, themes, categories and sound
+ * families in the order its manifest states. Search and `#/<id>` routing are
+ * global — an id is unique across the library — so a card found from any app
+ * opens the same way.
+ */
+function appSection(o: Owner, issues: Issue[]): { tabs: string; panels: string; details: string; first: string } {
+  const categories = o.manifest?.categories ?? [];
+  const families = o.manifest?.audio?.families ?? [];
   const byCat = new Map<string, Asset[]>();
-  for (const a of reg.assets.values()) byCat.set(a.tags[0], [...(byCat.get(a.tags[0]) ?? []), a]);
+  for (const a of o.assets.values()) byCat.set(a.tags[0], [...(byCat.get(a.tags[0]) ?? []), a]);
+  // A category ranks where the manifest lists it. An app prefix on the tag
+  // (`ss-enemy`, the convention before the namespace lived in the directory)
+  // ranks as the bare name until the documents drop it.
   const rank = (c: string) => {
-    const i = CATEGORY_ORDER.indexOf(c);
+    const i = categories.indexOf(c.startsWith(`${o.id}-`) ? c.slice(o.id.length + 1) : c);
     return i < 0 ? 999 : i;
   };
   const cats = [...byCat.keys()].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
@@ -523,9 +532,9 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
   const panels = cats
     .map(
       (cat) =>
-        `<section class="panel" data-panel="${esc(cat)}" hidden><div class="grid">${byCat
+        `<section class="panel" data-panel="${esc(panelOf(o, cat))}" hidden><div class="grid">${byCat
           .get(cat)!
-          .map((a) => assetCard(a, reg, issues))
+          .map((a) => assetCard(o, a, issues))
           .join("\n")}</div></section>`,
     )
     .join("\n");
@@ -534,9 +543,9 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
   // the same search index. A workbench with the art in it and the audio in a
   // second file is two workbenches.
   const soundsByCat = new Map<string, Sound[]>();
-  for (const sd of sreg.sounds.values()) soundsByCat.set(soundCat(sd), [...(soundsByCat.get(soundCat(sd)) ?? []), sd]);
+  for (const sd of o.sounds.values()) soundsByCat.set(soundCat(sd), [...(soundsByCat.get(soundCat(sd)) ?? []), sd]);
   const srank = (c: string) => {
-    const i = SOUND_ORDER.indexOf(c.replace(/^snd-/, ""));
+    const i = families.indexOf(c.replace(/^snd-/, ""));
     return i < 0 ? 999 : i;
   };
   const scats = [...soundsByCat.keys()].sort((a, b) => srank(a) - srank(b) || a.localeCompare(b));
@@ -544,23 +553,23 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
   const soundPanels = scats
     .map(
       (cat) =>
-        `<section class="panel" data-panel="${esc(cat)}" hidden><div class="grid snd">${soundsByCat
+        `<section class="panel" data-panel="${esc(panelOf(o, cat))}" hidden><div class="grid snd">${soundsByCat
           .get(cat)!
-          .map((sd) => soundCard(sd, sreg, issues))
+          .map((sd) => soundCard(o, sd, issues))
           .join("\n")}</div></section>`,
     )
     .join("\n");
 
   const details = [
-    ...[...reg.assets.values()].map((a) => detailBlock(a, reg)),
-    ...[...sreg.sounds.values()].map((sd) => soundDetailBlock(sd, sreg, issues)),
+    ...[...o.assets.values()].map((a) => detailBlock(o, a)),
+    ...[...o.sounds.values()].map((sd) => soundDetailBlock(o, sd, issues)),
   ].join("\n");
 
-  const themeSections = themes
+  const themeSections = o.themes
     .map((theme) => {
-      const treg: Registry = { assets: reg.assets, tokens: applyTheme(reg.tokens, theme) };
-      const cellsHtml = [...reg.assets.values()]
-        .filter((a) => a.tags[0] !== "lib")
+      const treg: Registry = { assets: o.reg.assets, tokens: applyTheme(o.tokens, theme) };
+      const cellsHtml = [...o.assets.values()]
+        .filter((a) => !/(^|-)lib$/.test(a.tags[0]))
         .map((a) => cell(a, treg, issues, a.name))
         .join("");
       return `<h3>theme: ${esc(theme.name)}</h3><p class="desc">${esc(theme.description ?? "")}</p><div class="strip">${cellsHtml}</div>`;
@@ -568,24 +577,48 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
     .join("\n");
 
   const tabs = [
-    `<button data-tab="tokens">tokens</button>`,
-    `<button data-tab="themes">themes</button>`,
+    `<div class="group">${esc(o.manifest?.name ?? "core")}</div>`,
+    `<button data-tab="${esc(panelOf(o, "tokens"))}">tokens</button>`,
+    ...(o.themes.length ? [`<button data-tab="${esc(panelOf(o, "themes"))}">themes</button>`] : []),
     `<div class="group">assets</div>`,
     // The landing tab is named here rather than inferred from position: the
     // sidebar's order is a reading order, and it has already changed once.
-    ...cats.map((c, i) => `<button data-tab="${esc(c)}"${i === 0 ? " data-first" : ""}><span>${esc(c)}</span><i>${byCat.get(c)!.length}</i></button>`),
+    ...cats.map((c, i) => `<button data-tab="${esc(panelOf(o, c))}"${i === 0 ? " data-first" : ""}><span>${esc(c)}</span><i>${byCat.get(c)!.length}</i></button>`),
     ...(scats.length
       ? [
           `<div class="group">sounds</div>`,
-          `<button data-tab="snd-set"><span>the set</span><i>${sreg.sounds.size}</i></button>`,
+          `<button data-tab="${esc(panelOf(o, "snd-set"))}"><span>the set</span><i>${o.sounds.size}</i></button>`,
           // What a small speaker keeps: a 250Hz highpass and an 8kHz lowpass
           // between every transport and the output. Most of what is wrong with
           // a sound in this set is only wrong here.
           `<button data-phone title="Play everything through what a phone speaker keeps — a 250Hz highpass and an 8kHz lowpass"><span>phone</span></button>`,
         ]
       : []),
-    ...scats.map((c) => `<button data-tab="${esc(c)}"><span>${esc(c.replace(/^snd-/, ""))}</span><i>${soundsByCat.get(c)!.length}</i></button>`),
+    ...scats.map((c) => `<button data-tab="${esc(panelOf(o, c))}"><span>${esc(c.replace(/^snd-/, ""))}</span><i>${soundsByCat.get(c)!.length}</i></button>`),
   ].join("");
+
+  const allPanels = [
+    `<section class="panel" data-panel="${esc(panelOf(o, "tokens"))}" hidden>${swatches(o.tokens)}</section>`,
+    panels,
+    o.sounds.size ? `<section class="panel" data-panel="${esc(panelOf(o, "snd-set"))}" hidden>${soundSet(o.sreg, issues)}</section>` : "",
+    soundPanels,
+    o.themes.length ? `<section class="panel" data-panel="${esc(panelOf(o, "themes"))}" hidden>${themeSections}</section>` : "",
+  ].join("\n");
+
+  return { tabs, panels: allPanels, details, first: cats.length ? panelOf(o, cats[0]) : panelOf(o, "tokens") };
+}
+
+export function buildGallery(lib: Library, issues: Issue[]): string {
+  const all = owners(lib);
+  const sections = all.map((o) => ({ o, ...appSection(o, issues) }));
+  const nAssets = all.reduce((n, o) => n + o.assets.size, 0);
+  const nSounds = all.reduce((n, o) => n + o.sounds.size, 0);
+  const picker = sections
+    .map(({ o }) => `<button data-app-pick="${esc(o.id)}"><span>${esc(o.id)}</span><i>${o.assets.size + o.sounds.size}</i></button>`)
+    .join("");
+  const navs = sections.map(({ o, tabs, first }) => `<nav data-app="${esc(o.id)}" data-first="${esc(first)}" hidden>${tabs}</nav>`).join("\n");
+  const panels = sections.map((s) => s.panels).join("\n");
+  const details = sections.map((s) => s.details).join("\n");
 
   return `<!doctype html>
 <meta charset="utf-8">
@@ -614,6 +647,10 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
     display:flex; justify-content:space-between; align-items:center; gap:8px; color:var(--mut); }
   .side nav button:hover { background:#161b28; color:#e6ecf5; }
   .side nav button.on { background:#22304a; color:#fff; }
+  .apps { display:flex; gap:4px; flex-wrap:wrap; }
+  .apps button { display:flex; align-items:center; gap:6px; padding:3px 9px; font-size:12px; }
+  .apps button i { font-style:normal; color:var(--dim); font-size:10px; }
+  .apps button.on { border-color:var(--acc); color:var(--acc); }
   .side nav i { color:var(--dim); font-style:normal; font-size:11px; font-variant-numeric:tabular-nums; }
   .side nav button.on i { color:#9fc4ea; }
   .group { font-size:10px; text-transform:uppercase; letter-spacing:.1em; color:var(--dim); padding:10px 8px 2px; }
@@ -724,18 +761,15 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
 </style>
 
 <aside class="side">
-  <div class="brand"><h1>PolyGraphics</h1><div class="sub">${reg.assets.size} assets · ${sreg.sounds.size} sounds</div></div>
+  <div class="brand"><h1>PolyGraphics</h1><div class="sub">${nAssets} assets · ${nSounds} sounds · ${lib.apps.length} apps</div></div>
   <input id="q" type="search" placeholder="search…  ( / )">
-  <nav>${tabs}</nav>
+  <div class="apps">${picker}</div>
+  ${navs}
   <span id="live"><b></b> live · reloads on rebuild</span>
 </aside>
 
 <main>
-  <section class="panel" data-panel="tokens" hidden>${swatches(reg.tokens)}</section>
   ${panels}
-  ${sreg.sounds.size ? `<section class="panel" data-panel="snd-set" hidden>${soundSet(sreg, issues)}</section>` : ""}
-  ${soundPanels}
-  <section class="panel" data-panel="themes" hidden>${themeSections}</section>
   <section class="panel" data-panel="__search" hidden><div class="grid" id="results"></div><p class="empty" id="noresults" hidden>nothing matches.</p></section>
   ${details}
 </main>
@@ -746,13 +780,28 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const panels = $$('.panel'), tabs = $$('.side nav button'), details = $$('.detail');
   const q = $('#q'), results = $('#results');
-  const firstTab = $('.side nav button[data-first]')?.dataset.tab || 'tokens';
+  const navs = $$('.side nav[data-app]'), appBtns = $$('[data-app-pick]');
+  const firstTab = navs[0]?.dataset.first || '';
 
+  // One app's sidebar at a time. A panel name is '<app>/<tab>', so the app
+  // to show is read off whatever is being shown — a tab, a card's category,
+  // a restored session — and never tracked separately.
+  const pickApp = (id) => {
+    if (!navs.some(n => n.dataset.app === id)) return;
+    appBtns.forEach(b => b.classList.toggle('on', b.dataset.appPick === id));
+    navs.forEach(n => n.hidden = n.dataset.app !== id);
+  };
   const show = (name) => {
     panels.forEach(p => p.hidden = p.dataset.panel !== name);
     tabs.forEach(t => t.classList.toggle('on', t.dataset.tab === name));
+    pickApp(name.split('/')[0]);
     if (name !== '__search') sessionStorage.tab = name;
   };
+  appBtns.forEach(b => b.onclick = () => {
+    q.value = ''; sessionStorage.search = ''; restoreCards();
+    if (location.hash) { history.replaceState(null, '', location.pathname); closeDetail(); }
+    show($('.side nav[data-app="' + CSS.escape(b.dataset.appPick) + '"]').dataset.first);
+  });
 
   // ---- detail routing: #/<asset id>
   let openId = null;
@@ -778,6 +827,7 @@ export function buildGallery(reg: Registry, sreg: SoundRegistry, themes: Theme[]
     d.hidden = false;
     openId = id;
     tabs.forEach(t => t.classList.toggle('on', t.dataset.tab === card?.dataset.cat));
+    if (card) pickApp(card.dataset.cat.split('/')[0]);
     window.scrollTo(0, 0);
     return true;
   };

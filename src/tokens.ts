@@ -51,9 +51,15 @@ export interface Tokens {
   audio?: AudioTokens;
 }
 
-export interface Theme {
-  name: string;
-  description?: string;
+/**
+ * A partial token set laid over another. Tokens resolve base ⊕ app ⊕ theme:
+ * `tokens/base.json` is what is physics rather than identity (ramps, stroke
+ * widths, alpha, the structural greys, the audio ladders), `apps/<id>/tokens.json`
+ * is the app's palette, grid, layers and loudness families over it, and a
+ * theme is an overlay over that. The same merge does all three steps.
+ */
+export interface TokenOverlay {
+  grid?: number;
   colors?: Record<string, string>;
   ramps?: Record<string, number>;
   strokes?: Record<string, number>;
@@ -62,24 +68,35 @@ export interface Theme {
   audio?: Partial<AudioTokens>;
 }
 
-export function applyTheme(base: Tokens, theme?: Theme): Tokens {
-  if (!theme) return base;
+export interface Theme extends TokenOverlay {
+  name: string;
+  description?: string;
+}
+
+export function overlayTokens(base: Tokens, over?: TokenOverlay): Tokens {
+  if (!over) return base;
   return {
-    grid: base.grid,
-    colors: { ...base.colors, ...theme.colors },
-    ramps: { ...base.ramps, ...theme.ramps },
-    strokes: { ...base.strokes, ...theme.strokes },
-    alpha: { ...base.alpha, ...theme.alpha },
-    layers: { ...base.layers, ...theme.layers },
+    grid: over.grid ?? base.grid,
+    colors: { ...base.colors, ...over.colors },
+    ramps: { ...base.ramps, ...over.ramps },
+    strokes: { ...base.strokes, ...over.strokes },
+    alpha: { ...base.alpha, ...over.alpha },
+    layers: { ...base.layers, ...over.layers },
     audio: base.audio && {
-      pitch: { ...base.audio.pitch, ...theme.audio?.pitch },
-      ramps: { ...base.audio.ramps, ...theme.audio?.ramps },
-      gain: { ...base.audio.gain, ...theme.audio?.gain },
-      q: { ...base.audio.q, ...theme.audio?.q },
-      dur: { ...base.audio.dur, ...theme.audio?.dur },
-      loudness: { ...base.audio.loudness, ...theme.audio?.loudness },
+      pitch: { ...base.audio.pitch, ...over.audio?.pitch },
+      ramps: { ...base.audio.ramps, ...over.audio?.ramps },
+      gain: { ...base.audio.gain, ...over.audio?.gain },
+      q: { ...base.audio.q, ...over.audio?.q },
+      dur: { ...base.audio.dur, ...over.audio?.dur },
+      loudness: { ...base.audio.loudness, ...over.audio?.loudness },
     },
   };
+}
+
+/** A theme may only override what the app resolves — it never introduces a token. A theme's grid is ignored. */
+export function applyTheme(base: Tokens, theme?: Theme): Tokens {
+  if (!theme) return base;
+  return overlayTokens(base, { ...theme, grid: undefined });
 }
 
 export type Resolved<T> =

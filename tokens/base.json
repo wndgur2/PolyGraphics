@@ -1,0 +1,54 @@
+{
+  "grid": 4,
+  "colors": {
+    "ink": "#10121a",
+    "slate": "#3a4a5c",
+    "steel": "#9aa4b2",
+    "bone": "#e6e1d3",
+    "white": "#ffffff",
+    "coal": "#2a2a34",
+    "smoke": "#55555f"
+  },
+  "ramps": {
+    "light": 0.22,
+    "dark": 0.28
+  },
+  "strokes": {
+    "hair": 1,
+    "thin": 2,
+    "bold": 3,
+    "heavy": 4
+  },
+  "alpha": {
+    "ghost": 0.15,
+    "soft": 0.35,
+    "heavy": 0.7
+  },
+  "layers": {},
+  "audio": {
+    "pitch": {},
+    "ramps": {
+      "up": 2,
+      "down": 0.5
+    },
+    "gain": {
+      "hush": 0.07,
+      "faint": 0.14,
+      "soft": 0.2,
+      "mid": 0.28,
+      "loud": 0.4,
+      "peak": 0.5
+    },
+    "q": {
+      "wide": 0.8,
+      "band": 2.6,
+      "sharp": 6
+    },
+    "dur": {
+      "tick": 0.045,
+      "blip": 0.09,
+      "beat": 0.2,
+      "tail": 0.35
+    }
+  }
+}

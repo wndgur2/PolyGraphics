@@ -15,10 +15,9 @@
   "files": [
     "adapters",
     "dist",
-    "assets",
-    "sounds",
-    "tokens",
-    "themes"
+    "apps",
+    "core",
+    "tokens"
   ],
   "scripts": {
     "check": "tsx src/cli.ts check",
