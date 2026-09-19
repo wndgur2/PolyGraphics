@@ -112,7 +112,25 @@ function partRow(p: Part): string {
 }
 
 /** Everything about one asset that a conversation about changing it would need. */
-function detailBlock(o: Owner, asset: Asset): string {
+/** A floor the manifest names, rendered once and tiled behind every sprite of the app. */
+interface Ground { name: string; id: string; cls: string; w: number; h: number; css: string }
+
+function groundsOf(o: Owner, issues: Issue[]): Ground[] {
+  return Object.entries(o.manifest?.reference?.ground ?? {}).flatMap(([name, id]) => {
+    const a = o.reg.assets.get(id);
+    if (!a) {
+      issues.push({ level: "warn", where: `${o.dir}/app.json`, msg: `reference.ground.${name} names ${id}, which does not exist` });
+      return [];
+    }
+    const r = renderSVG(a, o.reg, { uid: `ground-${o.id}-${name}` });
+    issues.push(...r.issues);
+    const cls = `bg-${o.id}-${name}`;
+    const uri = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(r.svg)}`;
+    return [{ name, id, cls, w: a.size[0], h: a.size[1], css: `.viewer-stage.${cls} { background-image:url("${uri}"); background-size:${a.size[0] * 2}px ${a.size[1] * 2}px; }` }];
+  });
+}
+
+function detailBlock(o: Owner, asset: Asset, grounds: Ground[]): string {
   const variants = Object.entries(asset.variants ?? {});
   const anims = Object.entries(asset.animations ?? {});
   const radius = asset.meta?.radius;
@@ -185,12 +203,14 @@ ${a.description ? `<p>${esc(a.description)}</p>` : ""}<ul><li><code>${esc(tracks
         <label><input type="checkbox" data-silhouette> silhouette</label>
         <span class="bgs">bg
           <button data-bg="checker" class="on"></button>
-          <button data-bg="ground" style="background:#1a1420"></button>
+          ${grounds.length
+            ? grounds.map((g) => `<button data-bg="${esc(g.cls.slice(3))}" data-w="${g.w}" data-h="${g.h}" class="${esc(g.cls)}" title="${esc(g.name)}: ${esc(g.id)}, tiled"></button>`).join("")
+            : `<button data-bg="ground" style="background:#1a1420"></button>`}
           <button data-bg="ink" style="background:#10121a"></button>
           <button data-bg="light" style="background:#e6e1d3"></button>
         </span>
       </div>
-      <p class="hint dim">Silhouette is the flat-shape test: if two assets are the same in black, colour is doing work shape should be doing.</p>
+      <p class="hint dim">Silhouette is the flat-shape test: if two assets are the same in black, colour is doing work shape should be doing.${grounds.length ? ` The ground buttons tile the floor this app names — ${esc(grounds.map((g) => `${g.name} (${g.id})`).join(", "))} — behind the sprite at the same zoom.` : ""}</p>
     </div>
     <div class="facts">
       <p class="desc big">${esc(asset.description)}</p>
@@ -513,17 +533,27 @@ function rulesPage(o: Owner): string {
 ${roles ? `<h4>roles — the palette as decisions</h4><div class="tokrow">${roles}</div>` : ""}`;
 }
 
-function swatches(tokens: Tokens): string {
-  const rows = Object.entries(tokens.colors)
-    .map(([name, hex]) => {
-      const light = resolveColor(`$${name}.light`, tokens);
-      const dark = resolveColor(`$${name}.dark`, tokens);
-      return `<div class="swatch">
+/**
+ * The palette, grouped by role where the manifest names roles — so it reads as
+ * decisions ("these are the hive's") rather than as thirty-two swatches — and
+ * the rest after, under their own heading.
+ */
+function swatches(tokens: Tokens, roles: Record<string, string[]> = {}): string {
+  const swatch = (name: string) => {
+    const hex = tokens.colors[name];
+    if (!hex) return "";
+    const light = resolveColor(`$${name}.light`, tokens);
+    const dark = resolveColor(`$${name}.dark`, tokens);
+    return `<div class="swatch">
   <div class="chips"><i style="background:${light.ok ? light.value : "#000"}"></i><i class="main" style="background:${hex}"></i><i style="background:${dark.ok ? dark.value : "#000"}"></i></div>
   <code>$${esc(name)}</code><span class="dim">${esc(hex)}</span>
 </div>`;
-    })
-    .join("");
+  };
+  const placed = new Set(Object.values(roles).flat());
+  const groups = Object.entries(roles).map(([role, names]) => `<h4>${esc(role)}</h4><div class="swatches">${names.map(swatch).join("")}</div>`);
+  const rest = Object.keys(tokens.colors).filter((n) => !placed.has(n));
+  if (rest.length) groups.push(`${groups.length ? `<h4>${placed.size ? "the rest" : "colors"}</h4>` : ""}<div class="swatches">${rest.map(swatch).join("")}</div>`);
+  const rows = groups.join("");
   const table = (title: string, obj: Record<string, number>) =>
     `<div class="tok"><h4>${title}</h4>${Object.entries(obj)
       .map(([k, v]) => `<div><code>${esc(k)}</code><span>${v}</span></div>`)
@@ -541,7 +571,7 @@ function swatches(tokens: Tokens): string {
         .join("")}</div>
 <div class="tokrow">${table("gain", tokens.audio.gain)}${table("q", tokens.audio.q)}${table("dur (s)", tokens.audio.dur)}${table("ramps (×)", tokens.audio.ramps)}</div>`
     : "";
-  return `<div class="swatches">${rows}</div>
+  return `${rows}
 <div class="tokrow">${table("strokes", tokens.strokes)}${table("alpha", tokens.alpha)}${table("layers", tokens.layers)}<div class="tok"><h4>grid</h4><div><code>unit</code><span>${tokens.grid}px</span></div></div></div>
 ${audio}`;
 }
@@ -553,8 +583,9 @@ ${audio}`;
  * global — an id is unique across the library — so a card found from any app
  * opens the same way.
  */
-function appSection(o: Owner, issues: Issue[]): { tabs: string; panels: string; details: string; first: string } {
+function appSection(o: Owner, issues: Issue[]): { tabs: string; panels: string; details: string; first: string; css: string } {
   const categories = o.manifest?.categories ?? [];
+  const grounds = groundsOf(o, issues);
   const families = o.manifest?.audio?.families ?? [];
   const byCat = new Map<string, Asset[]>();
   for (const a of o.assets.values()) byCat.set(a.tags[0], [...(byCat.get(a.tags[0]) ?? []), a]);
@@ -599,7 +630,7 @@ function appSection(o: Owner, issues: Issue[]): { tabs: string; panels: string; 
     .join("\n");
 
   const details = [
-    ...[...o.assets.values()].map((a) => detailBlock(o, a)),
+    ...[...o.assets.values()].map((a) => detailBlock(o, a, grounds)),
     ...[...o.sounds.values()].map((sd) => soundDetailBlock(o, sd, issues)),
   ].join("\n");
 
@@ -637,7 +668,7 @@ function appSection(o: Owner, issues: Issue[]): { tabs: string; panels: string; 
   ].join("");
 
   const allPanels = [
-    `<section class="panel" data-panel="${esc(panelOf(o, "tokens"))}" hidden>${o.manifest ? `<p class="premise">${esc(o.manifest.premise)}</p>` : ""}${swatches(o.tokens)}</section>`,
+    `<section class="panel" data-panel="${esc(panelOf(o, "tokens"))}" hidden>${o.manifest ? `<p class="premise">${esc(o.manifest.premise)}</p>` : ""}${swatches(o.tokens, o.manifest?.rules?.roles)}</section>`,
     o.manifest ? `<section class="panel" data-panel="${esc(panelOf(o, "rules"))}" hidden>${rulesPage(o)}</section>` : "",
     panels,
     o.sounds.size ? `<section class="panel" data-panel="${esc(panelOf(o, "snd-set"))}" hidden>${soundSet(o.sreg, issues)}</section>` : "",
@@ -645,7 +676,7 @@ function appSection(o: Owner, issues: Issue[]): { tabs: string; panels: string; 
     o.themes.length ? `<section class="panel" data-panel="${esc(panelOf(o, "themes"))}" hidden>${themeSections}</section>` : "",
   ].join("\n");
 
-  return { tabs, panels: allPanels, details, first: cats.length ? panelOf(o, cats[0]) : panelOf(o, "tokens") };
+  return { tabs, panels: allPanels, details, first: cats.length ? panelOf(o, cats[0]) : panelOf(o, "tokens"), css: grounds.map((g) => g.css).join("\n") };
 }
 
 export function buildGallery(lib: Library, issues: Issue[]): string {
@@ -659,6 +690,7 @@ export function buildGallery(lib: Library, issues: Issue[]): string {
   const navs = sections.map(({ o, tabs, first }) => `<nav data-app="${esc(o.id)}" data-first="${esc(first)}" hidden>${tabs}</nav>`).join("\n");
   const panels = sections.map((s) => s.panels).join("\n");
   const details = sections.map((s) => s.details).join("\n");
+  const groundCss = sections.map((s) => s.css).filter(Boolean).join("\n");
 
   return `<!doctype html>
 <meta charset="utf-8">
@@ -733,6 +765,8 @@ export function buildGallery(lib: Library, issues: Issue[]): string {
     align-items:safe center; justify-content:safe center; overflow:auto; max-height:72vh;
     background: repeating-conic-gradient(#181c28 0% 25%, #141824 0% 50%) 0 0/16px 16px; }
   .viewer-stage.bg-ground { background:#1a1420; } .viewer-stage.bg-ink { background:#10121a; } .viewer-stage.bg-light { background:#e6e1d3; }
+  .bgs button[data-w] { background-size:cover; }
+  ${groundCss}
   .viewer-stage.sil svg { filter: brightness(0) saturate(0); }
   .viewer-stage.sil.bg-ink svg, .viewer-stage.sil.bg-ground svg { filter: brightness(0) invert(1); }
   .viewer-stage .stage { background:none; padding:0; }
@@ -882,7 +916,14 @@ export function buildGallery(lib: Library, issues: Issue[]): string {
   // back rendered at 2x and reflows the grid until the next reload.
   // Sound details borrow the same viewer plumbing but have no zoom control —
   // there is nothing to look closer at.
-  const applyZoom = (d) => { const z = $('[data-zoom]', d); if (z) $('[data-zoomer]', d).style.zoom = z.value; };
+  const applyZoom = (d) => {
+    const z = $('[data-zoom]', d); if (!z) return;
+    $('[data-zoomer]', d).style.zoom = z.value;
+    // A tiled floor is drawn at the sprite's zoom, so a body reads on the
+    // ground at the size the two actually meet.
+    const g = $('.bgs button.on[data-w]', d), stage = $('[data-stage]', d);
+    stage.style.backgroundSize = g ? (g.dataset.w * z.value) + 'px ' + (g.dataset.h * z.value) + 'px' : '';
+  };
 
   const route = () => {
     const m = location.hash.match(/^#\\/(.+)$/);
@@ -937,6 +978,7 @@ export function buildGallery(lib: Library, issues: Issue[]): string {
       b.classList.add('on');
       stage.className = 'viewer-stage' + (b.dataset.bg === 'checker' ? '' : ' bg-' + b.dataset.bg) +
         (stage.classList.contains('sil') ? ' sil' : '');
+      applyZoom(d);
     });
   });
 

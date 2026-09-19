@@ -13,6 +13,7 @@ import type { AppManifest } from "../src/app-schema.js";
 import { overlayTokens } from "../src/tokens.js";
 import type { Issue } from "../src/render.js";
 import type { Asset } from "../src/schema.js";
+import type { Sound } from "../src/sound-schema.js";
 
 let failed = 0;
 const check = (name: string, ok: boolean, detail = "") => {
@@ -30,15 +31,16 @@ const real = loadLibrary();
 const base = real.base;
 
 /** An owner made by hand: enough of one for the lints to read. */
-function owner(id: string, assets: Asset[], categories: string[] | undefined, core?: Owner, rules?: AppManifest["rules"]): Owner {
-  const tokens = overlayTokens(base, { colors: { blood: "#d63756" } });
+function owner(id: string, assets: Asset[], categories: string[] | undefined, core?: Owner, rules?: AppManifest["rules"], extra: { sounds?: Sound[]; audio?: AppManifest["audio"] } = {}): Owner {
+  const tokens = overlayTokens(base, { colors: { blood: "#d63756", bile: "#bce05a", frost: "#8fd0ff" }, audio: { pitch: { third: 523.25, fifth: 659.25, grit: 1100 } } });
   const own = new Map(assets.map((a) => [a.id, a]));
+  const sounds = new Map((extra.sounds ?? []).map((sd) => [sd.id, sd]));
   return {
     id, dir: id === "core" ? "core" : `apps/${id}`,
-    manifest: categories ? { id, name: id, premise: "a fixture premise", categories, rules } : undefined,
-    own: {}, tokens, themes: [], assets: own, sounds: new Map(),
+    manifest: categories ? { id, name: id, premise: "a fixture premise", categories, rules, audio: extra.audio } : undefined,
+    own: {}, tokens, themes: [], assets: own, sounds,
     reg: { assets: new Map([...(core?.assets ?? []), ...own]), tokens },
-    sreg: { sounds: new Map(), tokens },
+    sreg: { sounds, tokens },
   };
 }
 
@@ -112,6 +114,50 @@ check("states catches the state nobody listed", brokenIds("states") === "rr.body
 check("contracts catches the broken promise and the promise to nothing", brokenIds("contracts") === "rr.proj.gone rr.proj.ring", brokenIds("contracts"));
 check("…at the level the manifest set", reports.filter((r) => r.rule === "contracts").every((r) => r.level === "error") && reports.find((r) => r.rule === "grid")!.level === "warn");
 check("a rule reports how many it reaches", reports.find((r) => r.rule === "grid")!.scope.length === 8);
+
+// ---- paint, distinct and key, on an app built to break each
+const painted = (id: string, cat: string, fill: string, extra: Partial<Asset> = {}) =>
+  doc(id, cat, { parts: [{ id: "tile", shape: { kind: "rect", w: 8, h: 8 }, fill }], ...extra });
+const fanfare = (id: string, notes: string[]): Sound =>
+  ({ id, name: id, description: "a fixture fanfare", tags: ["sfx", "fanfare"], duration: 0.5,
+     voices: [{ id: "run", phrase: { use: "pp.lib.note", step: 0.1, notes } }] }) as unknown as Sound;
+const pp = owner(
+  "pp",
+  [
+    painted("pp.proj.red", "proj", "$blood"),                                                 // paints the banned role
+    painted("pp.proj.ok", "proj", "$blood"),                                                  // …but the manifest excepts it
+    painted("pp.proj.via", "proj", "$ink", { parts: [{ id: "tile", shape: { kind: "rect", w: 8, h: 8 }, fill: "$ink" }, { id: "load", use: "pp.lib.blob" }] }),  // through what it composes
+    painted("pp.proj.state", "proj", "$ink", { variants: { hot: { description: "goes red", set: { "tile.fill": "$blood" } } } }),          // in a state
+    painted("pp.proj.clean", "proj", "$frost"),
+    painted("pp.lib.blob", "lib", "$blood"),
+    painted("pp.icon.a", "icon", "$bile", { tags: ["icon", "weapon"] }),
+    painted("pp.icon.b", "icon", "$bile", { tags: ["icon", "weapon"] }),                        // same rim as a
+    painted("pp.icon.c", "icon", "$frost", { tags: ["icon", "weapon"] }),
+    doc("pp.icon.d", "icon", { tags: ["icon", "weapon"] }),                                    // no tile at all
+    painted("pp.icon.e", "icon", "$bile", { tags: ["icon", "weapon"], why: { distinct: "shares the wand's rim until it is redrawn" } }),
+  ],
+  ["proj", "lib", "icon"],
+  undefined,
+  {
+    roles: { hive: ["blood"] },
+    paint: [{ in: ["proj"], forbid: "hive", except: ["pp.proj.ok"], because: "the arsenal is hive material with the signal stripped out" }],
+    distinct: [{ in: ["icon"], tagged: ["weapon"], part: "tile", minDeltaE: 13 }],
+  },
+  { sounds: [fanfare("pp.sfx.win", ["$third", "$fifth", "$third.up"]), fanfare("pp.sfx.lose", ["$third", "$grit"])], audio: { key: ["third", "fifth"], inKey: ["fanfare"] } },
+);
+const prep = evaluateRules(pp);
+const pbroke = (rule: string, id: string) => prep.find((r) => r.rule === rule)!.broken.find((b) => b.id === id);
+const pids = (rule: string) => prep.filter((r) => r.rule === rule).flatMap((r) => r.broken.map((b) => b.id)).sort().join(" ");
+console.log("\npaint, distinct and key");
+check("paint catches the document painting the banned role", !!pbroke("paint", "pp.proj.red") && /paints \$blood — hive is \$blood, and the arsenal/.test(pbroke("paint", "pp.proj.red")!.msg), pbroke("paint", "pp.proj.red")?.msg);
+check("…through what it composes, and says through what", /through pp\.lib\.blob/.test(pbroke("paint", "pp.proj.via")?.msg ?? ""), pbroke("paint", "pp.proj.via")?.msg);
+check("…and in a state the document declares", !!pbroke("paint", "pp.proj.state"));
+check("…not the one the manifest excepts, nor the clean one", pids("paint") === "pp.proj.red pp.proj.state pp.proj.via", pids("paint"));
+check("the manifest's exception is on the record", prep.find((r) => r.rule === "paint")!.excepted.some((e) => e.id === "pp.proj.ok"));
+check("distinct catches the two rims that are the same colour, once, as a pair", pids("distinct") === "pp.icon.a pp.icon.d" && /vs pp\.icon\.b \$bile: ΔE 0\.0 < 13/.test(pbroke("distinct", "pp.icon.a")!.msg), pids("distinct"));
+check("…and the icon with no rim to measure", /has no part "tile"/.test(pbroke("distinct", "pp.icon.d")!.msg));
+check("…and a why keeps a document out of the pairing, on the record", prep.find((r) => r.rule === "distinct")!.excepted.some((e) => e.id === "pp.icon.e") && !pbroke("distinct", "pp.icon.e"));
+check("key catches the fanfare that leaves the key, and not the one in it", pids("key") === "pp.sfx.lose" && /plays \$grit/.test(pbroke("key", "pp.sfx.lose")!.msg), pids("key"));
 
 // ---- the real one
 const realIssues: Issue[] = [];

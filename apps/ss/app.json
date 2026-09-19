@@ -34,8 +34,8 @@
       "evolved": ["gold"]
     },
     "paint": [
-      { "in": ["proj"], "forbid": "hive", "except": ["ss.proj.mine"] },
-      { "in": ["icon"], "tagged": ["weapon"], "forbid": "hive", "except": ["ss.icon.mine"] }
+      { "in": ["proj"], "forbid": "hive", "except": ["ss.proj.mine"], "because": "the arsenal is hive material with the signal stripped out" },
+      { "in": ["icon"], "tagged": ["weapon"], "forbid": "hive", "except": ["ss.icon.mine"], "because": "the arsenal is hive material with the signal stripped out" }
     ],
     "distinct": [{ "in": ["icon"], "tagged": ["weapon"], "part": "tile", "minDeltaE": 13 }],
     "contracts": {
@@ -59,6 +59,7 @@
 
   "audio": {
     "key": ["tonic", "third", "fifth", "seventh"],
+    "inKey": ["fanfare"],
     "families": ["weapon", "impact", "creature", "player", "pickup", "world", "field", "interface", "fanfare"]
   }
 }

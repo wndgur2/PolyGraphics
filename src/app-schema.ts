@@ -49,7 +49,15 @@ export const RulesSchema = z.strictObject({
   roles: z.record(z.string(), z.array(z.string())).optional(),
   /** A role a category may not paint with, through everything it composes. */
   paint: z
-    .array(z.strictObject({ ...ScopeFields, forbid: z.string(), except: z.array(assetId).optional() }))
+    .array(
+      z.strictObject({
+        ...ScopeFields,
+        forbid: z.string(),
+        except: z.array(assetId).optional(),
+        /** The sentence the ban serves, said back when it is broken. */
+        because: z.string().optional(),
+      }),
+    )
     .optional(),
   /** A named part whose colour must stay apart across a category, in ΔE2000. */
   distinct: z.array(z.strictObject({ ...ScopeFields, part: z.string(), minDeltaE: z.number().positive() })).optional(),
@@ -83,8 +91,10 @@ export const AppManifestSchema = z.strictObject({
   rules: RulesSchema.optional(),
   audio: z
     .strictObject({
-      /** The pitch tokens a fanfare may play — the score's own degrees. */
+      /** The pitch tokens the score is written in — the degrees a figure may play. */
       key: z.array(z.string()).optional(),
+      /** The families held to the key: every note they play is one of its degrees. */
+      inKey: z.array(z.string()).optional(),
       /** Family tab order in the gallery; offsets live in `tokens.audio.loudness`. */
       families: z.array(z.string()).optional(),
     })
