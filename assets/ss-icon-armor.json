@@ -9,5 +9,23 @@
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
     { "id": "plate", "at": [0, -4.5], "shape": { "kind": "rect", "w": 18, "h": 7 }, "fill": "$steel.light" },
     { "id": "point", "shape": { "kind": "poly", "points": [[-9, -2], [9, -2], [0, 10]] }, "fill": "$steel.light" }
-  ]
+  ],
+  "variants": {
+    "evolved": {
+      "description": "Quicklime: the awakened Shell, and the first trait awakening there has been one of. The shield is the base icon's, barely pulled in, because an awakening has to read as the thing it grew out of — what is new is four arcs standing clear of it, the blow the plate stopped going outward instead of in. Arcs and not a closed ring: a ring reads as a badge drawn around a shield, where four marks with gaps between them read as something leaving. They sit on the cardinals, clear of the shield's own top corners at 222°, and at r 11 rather than the 12 drawn first, which hugged the rim instead of standing off the plate. Blood and not ember, which is the obvious colour for a blast and was drawn first: at 32px an ember arc sits a shade off the gold rim every awakening wears and the two merge into one warm blob, where red separates from gold at the only size this icon is ever actually seen.",
+      "set": {
+        "tile.fill": "$gold",
+        "plate.at": [0, -3.8],
+        "plate.shape.w": 15,
+        "plate.shape.h": 6,
+        "point.shape.points": [[-7.5, -2], [7.5, -2], [0, 8.5]]
+      },
+      "add": [
+        { "id": "vent_0", "shape": { "kind": "ring", "r": 11, "width": 2.5, "from": 62, "to": 118 }, "fill": "$blood" },
+        { "id": "vent_1", "shape": { "kind": "ring", "r": 11, "width": 2.5, "from": 152, "to": 208 }, "fill": "$blood" },
+        { "id": "vent_2", "shape": { "kind": "ring", "r": 11, "width": 2.5, "from": 242, "to": 298 }, "fill": "$blood" },
+        { "id": "vent_3", "shape": { "kind": "ring", "r": 11, "width": 2.5, "from": 332, "to": 388 }, "fill": "$blood" }
+      ]
+    }
+  }
 }
