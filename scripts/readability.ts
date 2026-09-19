@@ -5,8 +5,10 @@
  *
  *   npx tsx scripts/readability.ts            # all in-world ss.* assets
  *   npx tsx scripts/readability.ts ss.enemy.imp ss.char.dot
+ *   npx tsx scripts/readability.ts --ground ss.env.pan   # judged on the pan's floor
  *
- * Reports, against the mean colour of the ground tile:
+ * Reports, against the mean colour of the ground tile (`--ground <id>`, the
+ * field's by default):
  *   contrast  WCAG-style ratio of mean sprite luminance vs mean ground luminance
  *   bright%   share of opaque pixels above 0.18 luminance — the focal points
  *   cover%    share of the canvas the sprite actually fills
@@ -66,15 +68,23 @@ function measure(id: string): Stats | null {
   };
 }
 
-const ground = measure("ss.env.ground");
-if (!ground) throw new Error("ss.env.ground failed to render");
+// Which floor to judge against. The field's is the default because most of the
+// roster stands on it, but a body is only readable on the ground it spawns on:
+// the pan's household never sees `ss.env.ground`, and the pan's floor is the
+// bright one, so measuring it there is the only measurement that means anything.
+//   npx tsx scripts/readability.ts --ground ss.env.pan ss.enemy.antlion
+const argv = process.argv.slice(2);
+const gi = argv.indexOf("--ground");
+const groundId = gi >= 0 ? argv[gi + 1] : "ss.env.ground";
+const ground = measure(groundId);
+if (!ground) throw new Error(`${groundId} failed to render`);
 
-const ids = process.argv.slice(2).filter((a) => !a.startsWith("--"));
+const ids = argv.filter((a, i) => !a.startsWith("--") && i !== gi + 1);
 const targets = ids.length
   ? ids
   : [...assets.keys()].filter((id) => /^ss\.(char|enemy|pickup)\./.test(id)).sort();
 
-console.log(`ground mean rgb(${ground.mean.map((v) => Math.round(v)).join(",")}) luminance ${ground.lum.toFixed(4)}\n`);
+console.log(`${groundId} mean rgb(${ground.mean.map((v) => Math.round(v)).join(",")}) luminance ${ground.lum.toFixed(4)}\n`);
 console.log("asset                 contrast  bright%  cover%   mean");
 console.log("─".repeat(64));
 
