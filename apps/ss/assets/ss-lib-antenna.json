@@ -2,7 +2,7 @@
   "id": "ss.lib.antenna",
   "name": "Scent antenna",
   "description": "Tapered feeler rooted at the origin, curving up and forward (+x), tipped with a sensing nub. The hive reads the world with these instead of eyes — which is why nothing in the enemy roster has any. Deliberately unlit: in this world a glow means emission, never sensing, so only organs light up and an antenna can never be mistaken for an eye.",
-  "tags": ["ss-lib"],
+  "tags": ["lib"],
   "size": [16, 24],
   "anchor": [0.5, 0.8],
   "parts": [

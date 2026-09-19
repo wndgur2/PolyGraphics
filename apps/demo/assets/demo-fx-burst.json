@@ -1,5 +1,5 @@
 {
-  "id": "fx.burst",
+  "id": "demo.fx.burst",
   "name": "Death burst",
   "description": "Radial debris burst for kills and pickups: seeded gold shard scatter over an ember core. Port of Cellspire's Glob.burst verb.",
   "tags": ["fx", "death"],

@@ -3,7 +3,7 @@
   "name": "Rolling dung",
   "description": "The ball the player shoves ahead of them: field muck packed round, with chaff and shell chips trodden into it and a green bloom of rot down one side. It replaces the chained head this weapon used to swing, so the cord and the plate are gone and what is left is the only hive material that carries no signal at all — which is why the arsenal is allowed to touch it. Its geometry is load-bearing: the weapon code scales this sprite by `r / 14`, and the ball packs up from r=14 to better than three times that, so the 32px canvas and the 14 body radius must stay as they are. The `roll` clip is the whole reason it is a sheet rather than a plate — see there for why a turned sprite is not enough.",
   "tags": [
-    "ss-proj",
+    "proj",
     "melee"
   ],
   "size": [

@@ -2,7 +2,7 @@
   "id": "ss.enemy.boss",
   "name": "Chorus",
   "description": "Not the biggest thing in the hive — the loudest. A seated mass of carapace ringed by six organs that fire in sequence, so the light travels around it like a voice going round a room; that rotation is the whole read. Under the plates is a ring of husk teeth around a vent that has never eaten anything, only shouted. It has no limbs and does not walk, so the rig is in what it does instead: each spine flexes outward as the organ beside it fires and settles as the next takes over, so the sequence runs through the body as well as the light; the plate rings counter-rotate; the teeth turn; the vent breathes. The mass carries pits between the spines and a second course of plate seams, and each spine a bone edge. Gameplay slot unchanged (5:00 boss); body radius still ~38. The `death` clip ends the voice the way the body states it: the light runs the ring once more, faster than it ever did alive, and then all six go out in the same beat.",
-  "tags": ["ss-enemy", "boss"],
+  "tags": ["enemy", "boss"],
   "size": [96, 96],
   "meta": {"radius": 38},
   "parts": [

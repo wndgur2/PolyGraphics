@@ -2,7 +2,7 @@
   "id": "ss.enemy.replete",
   "name": "Replete",
   "description": "A worker the nest filled up and stopped sending anywhere — the honeypot caste, kept as a larder until something needs feeding. One round sac would sit in a silhouette the Mite and the Bulwark already own, so it is a chain: four swellings of falling size, pinched between, hauled by a front end that still has legs. The rear half has none, because that half is not walking, it is being dragged. Pale shell with the amber it is holding showing through each bead. In a 130px passage a body this long across the floor is not an obstacle you get past. The chain is a real one: the beads hang off the waist joint, so a sway that starts at the front arrives late and larger at the tail, the pinches ride the joints between beads, and each bead's shell, crop and gloss ride the bead. The swell runs the other way, tail to front — the load working its way forward. Legs are two links with a knee; the front end bobs on the step and the head nods off it. Drawn facing +x, the game flips it. Gameplay radius 13. The `death` clip empties it the way it was filled, one swelling at a time from the far end inward, and only then folds the small animal carrying them.",
-  "tags": ["ss-enemy", "replete"],
+  "tags": ["enemy", "replete"],
   "size": [48, 32],
   "meta": {"radius": 13},
   "parts": [

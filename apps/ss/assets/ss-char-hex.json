@@ -2,7 +2,7 @@
   "id": "ss.char.hex",
   "name": "Hex",
   "description": "Sealed survivor in cell-shaped plating — the same hexagon the hive builds with, worn by something the hive no longer counts. Dead organ, dead feelers, six flat sides that fit nowhere any more.",
-  "tags": ["ss-char"],
+  "tags": ["char"],
   "size": [32, 32],
   "meta": { "radius": 11.5 },
   "parts": [

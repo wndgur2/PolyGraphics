@@ -2,7 +2,7 @@
   "id": "ss.lib.spider-arm",
   "name": "Spider arm",
   "description": "One jointed arm of the spider hand, rooted at the origin and reaching out along +x: a femur up to a raised knee, a tibia back down to a hooked tarsus, with bristles raked back toward the body. Every plate the weapon owns composes this — the slot icon fans three of them off one knuckle, Eighth Leg fans four, Hauling Arms mirrors two of them inward — so the arm is drawn once and the finds are arrangements of it. The bones are swept along opposite bows so a shallow S runs through the limb the way it does on a leg that arches out of the body and settles back onto its foot; they taper along that curve rather than stepping down at the joint; the knee is a narrow hinge rather than a bearing; and the foot is a hook with a shorter barb opposing it, because what closes on a body here is a grab and a grab has a long side and a short one. Bones darken outward the way the Scolopend's fringe does, which is depth rather than light: a limb the parent turns to any angle cannot carry a lit edge without the light turning with it. Widow's Grip does not recolour this one — the evolution's limb is a document of its own, ss.lib.spider-arm-widow, because what it adds is geometry rather than fills.",
-  "tags": ["ss-lib"],
+  "tags": ["lib"],
   "size": [32, 20],
   "anchor": [0.125, 0.7],
   "parts": [

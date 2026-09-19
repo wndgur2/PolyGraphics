@@ -2,7 +2,7 @@
   "id": "ss.lib.wisp",
   "name": "Scent wisp",
   "description": "Pheromone leaking upward — three blobs thinning as they rise. Marks anything that is broadcasting: stalks, vents, and the trail a flier leaves behind. The player never has one.",
-  "tags": ["ss-lib"],
+  "tags": ["lib"],
   "size": [12, 20],
   "anchor": [0.5, 0.9],
   "parts": [

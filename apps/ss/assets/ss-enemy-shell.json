@@ -3,7 +3,7 @@
   "name": "Bombardier shell",
   "description": "What a Bombardier lobs: a hot bead of its own chemistry, ember over an ink rim with a glow round it, and a short dark tail so it reads as thrown rather than floating. Drawn pointing +x; the game rotates it along its arc and draws `ss.fx.shadow` under it on the ground track.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "projectile"
   ],
   "size": [

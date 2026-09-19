@@ -2,7 +2,7 @@
   "id": "ss.lib.relic-plate",
   "name": "Relic plate",
   "description": "The ground a ruins find is shown on: a rim, a dark panel, and an old light bleeding out of the middle. Every find composes this via `use`, so the twenty-odd of them share one definition and the plate can be lifted off in one line — the `glyph` variant each of them declares removes this part and nothing else, which is what an unmet collection entry shows. The `curse` variant swaps gold for arcane, the two colours the ruins outcome already switches between.",
-  "tags": ["ss-lib"],
+  "tags": ["lib"],
   "size": [32, 32],
   "parts": [
     {"id": "rim", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$gold"},

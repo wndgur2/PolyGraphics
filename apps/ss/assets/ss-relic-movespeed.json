@@ -2,7 +2,7 @@
   "id": "ss.relic.movespeed",
   "name": "Cricket leg",
   "description": "The back leg of a cricket, folded the way it waits: a broad femur banded across the grain, a thin tibia falling away from the knee at a hard angle, four curved spines hooking back off its outer edge and the tarsus still on the end. Dark carapace rather than bright chitin — this one came off something that had stopped moving. Polish: the tibia's ink underlay was a fraction of a pixel wider than the tibia itself and the spines had none, so both now sit on real ink; the spines and the tarsus are two pixels thick, the tibia is lifted one step so it separates from its own outline, and the femur bands are a touch heavier. The pose is unchanged.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

@@ -3,7 +3,7 @@
   "name": "Echo hum",
   "description": "Three hollow rings walking off up and to the right: the chirp itself largest and near-white at the lower left, then a smaller plain-frost ring, then a smaller darker one, each a step further along and none of them sharing a centre. The relic answers every chirp with one more hum, so the rings are the sound and its answers, drawn as repeats that get smaller and quieter by token rather than by alpha — nothing here is translucent. The smaller rings are drawn in front of the larger, so the three read as steps across the plate and not as a tunnel receding into it. Every ring sits on a ring outline, never on a disc, so the middles stay panel and never turn into holes. It stays off ss.relic.frost by never being concentric: that one is one sound going far, this is one sound coming back.",
   "tags": [
-    "ss-relic"
+    "relic"
   ],
   "size": [
     32,

@@ -3,7 +3,7 @@
   "name": "Lash sweep",
   "description": "The whip is a Soldier's mandible on a cord, and this is the path its tip takes \u2014 drawn as it happens rather than as a finished mark. The arc is cut into six bands from one end of the stroke to the other, and each lights a frame or two after the one before it \u2014 the whole arc is down inside the first third of the clip, because a stroke that takes its time arriving reads as a fade rather than a crack, with a frost edge that flashes as the tip passes and dies behind it. That is the whole point: a single crescent, however well tapered, is a photograph of a swing, and the swing is what the weapon is. The evolved lash already works this way in code \u2014 seven bands trailing a bright leading edge \u2014 and this is the same idea cut into frames a sprite sheet can carry. There is no second drawing for the stroke coming back: it is this clip played in reverse, which is what a lash returning actually is. Nothing glows \u2014 hive material with the signal stripped out. Canvas and anchor unchanged from the original `slash` texture so the weapon code's spawn offsets still land. Bands never dim once they arrive: they overlap so the joins do not show, and any partial opacity turns exactly those overlaps into seams \u2014 whatever draws this should fade the whole sprite instead. Bake as a sheet and play ONCE; looped, the lash re-cracks forever.",
   "tags": [
-    "ss-proj",
+    "proj",
     "melee"
   ],
   "size": [

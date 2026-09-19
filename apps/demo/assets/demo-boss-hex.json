@@ -1,5 +1,5 @@
 {
-  "id": "boss.hex",
+  "id": "demo.boss.hex",
   "name": "Hex Warden",
   "description": "Arcane hexagonal boss: spiked crystal shell around a slowly rotating facet plate, a radial-gradient soul core, and angry ember eyes inside an orbit ring. Enraged variant goes blood-red, gold-cored, and grows horns.",
   "tags": ["boss", "enemy"],

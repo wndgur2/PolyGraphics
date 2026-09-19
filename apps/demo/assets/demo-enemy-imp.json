@@ -1,5 +1,5 @@
 {
-  "id": "enemy.imp",
+  "id": "demo.enemy.imp",
   "name": "Imp",
   "description": "Small aggressive melee chaser: round crimson body, bone horns, whipping tail, gold eyes. Elite variant turns arcane, grows a third eye and 25% size.",
   "tags": ["enemy", "melee", "small"],

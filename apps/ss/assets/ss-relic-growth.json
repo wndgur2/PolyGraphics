@@ -2,7 +2,7 @@
   "id": "ss.relic.growth",
   "name": "Rootstock",
   "description": "A cut trunk and everything under it: five primary roots off the collar, six finer ones splitting away from those, and the grain still showing on the shaft. All of the body is below the line — which is the half of taking root that a spore or a leaf never shows. Polish: every root now sits on its own ink underlay — the six finer ones had none and were a pixel wide, so they are half again as thick — the stock has a lit left face and a shaded right side in place of the hairline grain lines, and each primary root carries a dark underside. The ink in the root zone is deliberately lighter than on the stock: the roots sit three to five pixels apart, and full-weight ink fused the fingers into a skirt in silhouette. Five roots, six branches, the same spread.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

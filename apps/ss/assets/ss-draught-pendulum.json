@@ -2,7 +2,7 @@
   "id": "ss.draught.pendulum",
   "name": "Midden Steep",
   "description": "Steeped from the heap and never strained. A brown film has come up to sit under the stopper and the coarse half of it is still on the bottom, which is the whole character of the thing.",
-  "tags": ["ss-draught"],
+  "tags": ["draught"],
   "size": [32, 32],
   "parts": [
     { "id": "vial", "use": "ss.lib.vial", "variant": "midden" },

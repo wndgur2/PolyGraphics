@@ -3,7 +3,7 @@
   "name": "Hail stone",
   "description": "One stone of a Hail's ring: a lumpy steel-grey nodule with a pale frost face and an ink rim, no direction to it because a ring has none. Twelve to sixteen of these leave at once and travel slowly outward, which is the pattern to step between.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "projectile"
   ],
   "size": [

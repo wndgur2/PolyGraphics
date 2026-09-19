@@ -1,5 +1,5 @@
 {
-  "id": "fx.ring",
+  "id": "demo.fx.ring",
   "name": "AoE ring",
   "description": "Expanding area-of-effect telegraph ring with a soft inner wash. Port of Cellspire's Glob.ring verb; tintable by swapping the fill token.",
   "tags": ["fx", "aoe"],

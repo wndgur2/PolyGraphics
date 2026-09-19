@@ -1,5 +1,5 @@
 {
-  "id": "tile.ground",
+  "id": "demo.tile.ground",
   "name": "Ground tile",
   "description": "Tileable 32px floor: two-tone checker with seeded pebble and speck scatter. Deterministic — the same seed always yields the same scatter, so renders are diffable.",
   "tags": ["tile", "env"],

@@ -2,7 +2,7 @@
   "id": "ss.terrain.spire",
   "name": "Pheromone spire (SS)",
   "description": "Shape Survivors set dressing: crystallized pheromone trail — a pink crystal cluster with glow tip and ground shadow. Port of t_spire (BootScene.ts:217-229).",
-  "tags": ["ss-terrain"],
+  "tags": ["terrain"],
   "size": [36, 46],
   "parts": [
     { "id": "shadow", "at": [0, 20], "shape": { "kind": "ellipse", "rx": 15, "ry": 4.5 }, "fill": "$ink@0.5" },

@@ -3,7 +3,7 @@
   "name": "Sower",
   "description": "The other turn of the Gland's slot: a wasp seen side-on, arcane purple banded in orchid, thin at the waist, with a bone ovipositor trailing back under the abdomen and three of its young \u2014 `use: ss.enemy.tick`, the very shot it fires \u2014 clinging beneath it. The wings blur over the back as pale washes. It does not aim (EnemyType.shotTurn: what it lets go turns toward the player on its own), so nothing on it points; the read is a body carrying live cargo, and the cargo is the threat. Purple, because nothing else on the pan is, and because the tick is. No `elite` variant: a squad body is never marked. Drawn facing +x, mirrored by the game. Gameplay radius 11. The `death` clip drops the young off the abdomen and folds the wings.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "sower"
   ],
   "size": [

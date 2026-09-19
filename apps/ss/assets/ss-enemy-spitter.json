@@ -2,7 +2,7 @@
   "id": "ss.enemy.spitter",
   "name": "Gland",
   "description": "Ranged sac that holds the far edge of your reach and spits where you're going to be. A bulbous teal body with a firing snout on the right — that read is the Gland and is kept as drawn. It has the rest of what every body here has now: a lit organ on its back, because it is hive; two short two-link legs under it, because a thing that holds a distance has to be able to hold it; and a `spit` cycle on the cadence it fires at — the sac draws in and swells, the snout lifts and opens, a bead builds at the lip and goes, and the sac drops. No `elite` variant on purpose: a standoff body is never marked. Drawn facing +x, the game flips it. Gameplay radius 11. The `death` clip is the sac going first: one swell against its own wall, a held beat, then the body drops and pulls its spout back in, and the loaded bead falls out of the snout.",
-  "tags": ["ss-enemy", "gland"],
+  "tags": ["enemy", "gland"],
   "size": [32, 32],
   "meta": {"radius": 11},
   "parts": [

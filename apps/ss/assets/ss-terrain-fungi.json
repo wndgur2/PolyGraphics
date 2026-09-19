@@ -2,7 +2,7 @@
   "id": "ss.terrain.fungi",
   "name": "Glow fungi (SS)",
   "description": "Shape Survivors set dressing: three glowing mushroom caps on pale stems. Port of t_fungi (BootScene.ts:277-290) — the original's shroom() closure becomes three part clusters.",
-  "tags": ["ss-terrain"],
+  "tags": ["terrain"],
   "size": [34, 28],
   "parts": [
     { "id": "s1_stem", "at": [-8, 4], "shape": { "kind": "rect", "w": 3, "h": 6 }, "fill": "$steel.light" },

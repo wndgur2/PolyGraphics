@@ -3,7 +3,7 @@
   "name": "Dead leaf",
   "description": "A dead leaf with legs: a whole brown leaf — rib, veins, stalk — with three short limbs tucked so far under one side that only a stub of each clears the outline. The camouflage is carried by the joke rather than by the drawing coming apart: it is a leaf until you notice it has legs, which is exactly what the relic does to the swarm. Limbs drawn in full turned the icon into something carrying a leaf instead, so they are deliberately barely there — at 32px this reads as a plain brown leaf and the joke only lands at modal and codex size, which is the trade taken on purpose. Shapes tried and rejected: shin bent back up, which met the thigh at a narrow angle and became an arrowhead aimed at the leaf; shin dropped straight, which hid the bend and left three parallel bars reading as motion lines; and arcs instead of jointed bars, which disappeared under the leaf altogether. Four passes before those drew the leaf itself half-there, fading or giving out into a contour, on the idea that not-being-found should be an unfinished object — but a leaf that stops being a leaf is a broken drawing before it is a clever one, and at 32px every soft end was mud.",
   "tags": [
-    "ss-relic"
+    "relic"
   ],
   "size": [
     32,

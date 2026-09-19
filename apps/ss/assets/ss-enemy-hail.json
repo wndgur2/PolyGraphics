@@ -3,7 +3,7 @@
   "name": "Hail",
   "description": "The pan's first arrival: it has noticed you, and says so in every direction at once. A boss seen from above, a slate mass on eight thick legs with twelve steel-grey stones stuck round its rim, each with a frost face \u2014 the ring it throws (EnemyType.shotFan, a full turn of `ss.enemy.hailstone`) drawn as the body's own edge, so the lumpy outline is the attack. A pit at +x with three frost eyes in it, and the organ large in the middle. The `churn` clip creeps the ring one stone round the body every cycle, seamlessly, and is authored at the game's 2.6s cadence. `enraged` cracks the mass, turns the eyes ember and lights the stones frost. Never mirrored: a ring has no side. Gameplay radius 40. The `death` clip throws every stone at once and cracks the mass under them.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "boss"
   ],
   "size": [

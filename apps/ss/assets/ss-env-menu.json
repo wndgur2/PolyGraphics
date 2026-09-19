@@ -2,7 +2,7 @@
   "id": "ss.env.menu",
   "name": "Home screen — under the soil",
   "description": "Not a view of the hive but a place inside it: packed earth seen from within. Six sedimentary bands settle from the top of the frame to the bottom, and every one is a translucent wash over a single dark base rather than its own colour — that is what keeps them a whisper apart instead of stripes. Scent is the only thing moving through the ground: pheromone bleeding along the seams where one layer met another, pooling under the denser bands, threading down old root channels, and rising in slow motes. No creatures, no structures, no horizon; the picture is the ground itself. The middle bands are the flattest and quietest because the title, cast row and buttons sit there. Authored at 1280x720 so the menu's cover-scale does not magnify it.",
-  "tags": ["ss-env", "menu"],
+  "tags": ["env", "menu"],
   "size": [1280, 720],
   "parts": [
     { "id": "deep", "shape": { "kind": "rect", "w": 1280, "h": 720 }, "fill": { "gradient": "linear", "from": [0.5, 0], "to": [0.5, 1], "stops": [[0, "$soil.dark2"], [0.42, "$soil"], [1, "$rust.dark2"]] } },

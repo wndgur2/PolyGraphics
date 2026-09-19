@@ -3,7 +3,7 @@
   "name": "Locust",
   "description": "The pan's fast chaff, and the one body in the game that moves by leaping: the game runs it as 0.3s at 265 and half a second at almost nothing (EnemyType.hopSpeed), drawn as height with `ss.fx.shadow` under it. So the silhouette is the leg \u2014 one enormous hind femur cocked up and back with the tibia folded under it, a wedge of a body in front, wings laid flat along the back. Bile-green, the arsenal's acid colour turned into an animal, and nothing else on the pan is green but the Forerunner, which is a boss and four times the size. Drawn side-on facing +x, mirrored by the game. The `hop` clip is the leap: the leg kicks straight and the body pitches up, then folds back; it plays at its own rate rather than in step with the game's hops, which is fine for a loop whose whole read is a leg going in and out. Gameplay radius 7. No `elite` variant: a Locust is never the sturdiest thing on its stage. The `death` clip kicks once into nothing and then draws the leg up under the body while the wing falls open.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "locust"
   ],
   "size": [

@@ -2,7 +2,7 @@
   "id": "ss.relic.spider-haul",
   "name": "Hauling Arms",
   "description": "Two arms curled inward with a body caught between them, still being pulled. The find turns the bite's shove around — everything a claw closes on is dragged in toward you — so the plate closes where Eighth Leg's fans open, which is how the two are told apart in silhouette before either is read. One `mirrorX` part draws the pair, so the two arms cannot drift out of symmetry.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

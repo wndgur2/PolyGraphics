@@ -2,7 +2,7 @@
   "id": "ss.char.dot",
   "name": "Dot",
   "description": "A survivor of the same brood as everything hunting you — same antennae, same organ, same socket in the shell. The organ is `dead`: no halo, no bloom, a hairline crack across cold grey. That silence is the entire premise, and every one of the eight characters wears it in the same place. Dot is the sealed sphere: nothing leaks out of it at all.",
-  "tags": ["ss-char"],
+  "tags": ["char"],
   "size": [32, 32],
   "meta": { "radius": 11.5 },
   "parts": [

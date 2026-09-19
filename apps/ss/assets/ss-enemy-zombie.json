@@ -2,7 +2,7 @@
   "id": "ss.enemy.zombie",
   "name": "Husk",
   "description": "A drone that ran out of scent and stopped being anybody — the hive grafted an organ onto its chest and it walks again. Bleached bone, slumped forward, one arm hanging longer than the other. Tall and pale where the Tracker is low and amber: at a glance you are reading height and value, not detail. The shamble has a skeleton now: the torso sways on its own joint and lurches on the step, the head hangs off it and lolls with a jaw that works, the arms are two links off the shoulders with the long one dragging a beat behind, and the legs are two links with one of them stiff — which is what makes a gait lopsided rather than merely slow. Gameplay radius 11. The `death` clip is the grafts letting go of a body that was already nobody: both organs blow, the crack down the chest opens, and the frame folds under itself.",
-  "tags": ["ss-enemy", "shambler"],
+  "tags": ["enemy", "shambler"],
   "size": [32, 36],
   "meta": {"radius": 11},
   "parts": [

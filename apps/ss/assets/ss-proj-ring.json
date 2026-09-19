@@ -3,7 +3,7 @@
   "name": "Frost nova",
   "description": "The one thing in the arsenal that isn't scavenged — cold thrown outward in a ring, the survivor's own answer to being surrounded. Three concentric bands and nothing else: the weapon code scales this sprite by `wave.r / 62`, so anything with a shape of its own is blown up with it, and the studs that used to sit on the rim arrived on screen as gems stuck to a hoop. Geometry is load-bearing — the 128px canvas and the 60px rim radius must not move. Kept near-white so any runtime tint still reads.",
   "tags": [
-    "ss-proj",
+    "proj",
     "aoe"
   ],
   "size": [

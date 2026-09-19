@@ -2,7 +2,7 @@
   "id": "ss.relic.gambler",
   "name": "Gambler's spore",
   "description": "A die grown out of spore matter, seen from a corner and tilted a few degrees: a pale top face, a mid left face, a dark right face, with the three edges that meet at the near corner drawn as darker seams. The pips are mushroom caps rather than pits — pale domes with a darker gill under each, two on top, three down the left, one on the right, laid along the diagonals — because a dark pip on a bright face is a hole and six of them is a face of eyes. A die says rerolls, skips and banishes in one glance. It is the only cube on the shelf: ss.relic.mason's prisms are three, brown and standing.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

@@ -2,7 +2,7 @@
   "id": "ss.icon.magnet",
   "name": "Magnet icon (SS)",
   "description": "Shape Survivors passive icon: pink horseshoe magnet — an arc arch with two leg rects. Port of i_magnet (BootScene.ts:607-613).",
-  "tags": ["ss-icon"],
+  "tags": ["icon"],
   "size": [32, 32],
   "parts": [
     { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$pink" },

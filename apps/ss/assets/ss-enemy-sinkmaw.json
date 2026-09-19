@@ -3,7 +3,7 @@
   "name": "Sinkmaw",
   "description": "The pan's last arrival: it answers you by opening. Not a body on the ground but a hole in it, seen from above \u2014 four rings of sand stepping down from a pale rim to a dark throat, grains sliding inward on the slopes, and in the throat two jaws, husk sickles the width of the pit, hinged at the centre and curving out toward +x with the organ lit between them and two ember eyes above it. The game pulls the player toward it (EnemyType.pull) and every few seconds gulps; `gulp` is that beat, played once over it \u2014 the jaws clap and the whole funnel contracts and rebounds. The idle `yawn` is the pit breathing, the sand going down. `enraged` puts six legs out of the pit around the rim, cracks the slopes and lights the jaw edges: it comes off the floor and crawls. Never mirrored: a hole has no side, and the jaws face +x only so it has a front for the codex. Gameplay radius 46. The `death` clip clap the jaws open and fills the pit.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "boss"
   ],
   "size": [

@@ -1,5 +1,5 @@
 {
-  "id": "fx.muzzle",
+  "id": "demo.fx.muzzle",
   "name": "Muzzle flash",
   "description": "Ranged-attack muzzle cone: gold outer wedge, ember inner wedge, anchored at the barrel (left edge) so it points +x. Port of Cellspire's Glob.muzzle verb.",
   "tags": ["fx", "ranged"],

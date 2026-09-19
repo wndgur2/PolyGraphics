@@ -3,7 +3,7 @@
   "name": "Watcher antenna",
   "description": "A feeler the size of the screen, meant to stand just off the corner of the home screen and sweep the air over it. Everything else in the roster wears antennae at body scale; this one is drawn at menu scale, so whatever is carrying it is enormous and off-frame — which is the point on a title screen for a run about being hunted by smell. Silhouette only, and unlit like every antenna in this world, because a glow would mean emission and an antenna only ever receives. The root sits on the document origin, so a scene places it by saying where it comes out of the floor.",
   "tags": [
-    "ss-env"
+    "env"
   ],
   "size": [
     304,

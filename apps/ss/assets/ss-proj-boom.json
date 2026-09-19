@@ -3,7 +3,7 @@
   "name": "Paired mandibles",
   "description": "Two Soldier mandibles bound at the elbow so they come back to you. Each jaw is what a jaw actually is: thick at the hinge, curving as it tapers, hooking back toward its partner at the tip, and toothed down the inside edge where it would close on something. Only the right jaw is drawn \u2014 `mirrorX` supplies the left, which is also why the pair can never drift out of symmetry. The old silhouette was the thrown chevron this weapon started life as, kept because it read at any rotation; a pair of jaws costs some of that and buys back the thing the weapon is named after. No spin animation is declared here on purpose \u2014 whole-body rotation is the engine's job (the weapon code already does `sprite.rotation += spin * dt`), and a document animation can only move parts within the body.",
   "tags": [
-    "ss-proj",
+    "proj",
     "ranged"
   ],
   "size": [

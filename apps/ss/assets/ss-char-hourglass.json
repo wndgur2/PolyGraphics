@@ -2,7 +2,7 @@
   "id": "ss.char.hourglass",
   "name": "Hourglass",
   "description": "Sealed survivor pinched at the waist — two chambers joined by a throat that nothing passes through any more. Same dead organ, same dead feelers as the other seven.",
-  "tags": ["ss-char"],
+  "tags": ["char"],
   "size": [32, 32],
   "meta": { "radius": 12 },
   "parts": [

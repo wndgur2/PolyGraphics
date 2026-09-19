@@ -2,7 +2,7 @@
   "id": "ss.fx.spatter",
   "name": "Burst Sac spatter",
   "description": "What Burst Sac makes of an overkill: the leftover force leaving the body it landed in, as a radial spatter over the corpse. A dark wet stain and sixteen scattered drops of it on the ground, a broken shock ring at r=26 that says how far the spill reached \u2014 the game scales the document so that r=30 is the burst radius, the same contract as the barb burst \u2014 seven lobes of blood thrown out at uneven angles, lengths and widths \u2014 lobes, wide at the root and rounded at the end, because a spatter is thick and a needle is a spark \u2014 each with a drop that rides its tip out and carries on a little past it, three curled scraps of dark sac wall flung off with a turn, and a flat coral flash with a white point at the middle that is gone first. Blood rather than the badge's ember: on the field ember is what a mine's crater is tinted, and this has to read as a body coming apart, not a detonation \u2014 so nothing here is fire, nothing is frost (the player's weapon breaking shell) and nothing is magenta (the hive). The ring is two arcs, not one, and the lobes are seven uneven ones, because a closed ring with even spokes through it is a compass rose. Spawn it on the body that burst.",
-  "tags": ["ss-fx", "relic"],
+  "tags": ["fx", "relic"],
   "size": [80, 80],
   "meta": {"radius": 30},
   "parts": [

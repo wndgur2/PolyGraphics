@@ -3,7 +3,7 @@
   "name": "Dung burst",
   "description": "A packed ball meeting stone, seen from above. Authored so the shock arc reaches r=30, which is the number the game scales by — a 90px burst draws this at 90/30 — the same contract as the barb burst and the spatter. +x is the way the ball was going: the game turns this to the ball's heading, so the mass comes back off the stone rather than through it — long throws into the two rear quarters, stubs forward, and the wet mark and the dust sitting a little behind the point of contact. Everything in it is muck and what was trodden into the muck: seven uneven lobes with a chunk riding each tip and carrying past it, chaff tumbling off, a low dun puff of the dry part going up, eighteen scattered specks and a mark that stays after the air has stopped. Nothing is fire and nothing is frost — a mine's crater is tinted ember and frost-white is what the player's own weapons break shell with, so the one weapon that bursts by being driven into a rock reads as a mess rather than as a detonation. The lobes are uneven in length, width, root and heading and clustered rather than spaced, because seven even spokes through a ring is a compass rose; the one green lobe is the rot in the ball, and without it the whole thing comes out as a stain rather than as a thing coming apart. Spawn it where the ball was standing.",
   "tags": [
-    "ss-fx",
+    "fx",
     "hit"
   ],
   "size": [

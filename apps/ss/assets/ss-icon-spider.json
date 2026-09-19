@@ -2,7 +2,7 @@
   "id": "ss.icon.spider",
   "name": "Spider hand icon",
   "description": "UI slot icon for the spider hand: three arms fanned off one knuckle, caught mid-reach. Composes ss.lib.spider-arm three times rather than drawing a leg three times, so the slot, the two finds and the evolution all show the same limb. The rim is bile, the one colour no other slot in the game wears — a venom green for the only weapon that gets hold of things.",
-  "tags": ["ss-icon", "weapon"],
+  "tags": ["icon", "weapon"],
   "size": [32, 32],
   "parts": [
     {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$bile"},

@@ -2,7 +2,7 @@
   "id": "ss.enemy.shot",
   "name": "Gland bolt",
   "description": "The Gland's spit — an acidic teal bolt with a soft glow, drawn pointing +x and rotated by the game to its heading. Faithful port of the hand-drawn e_shot (canvas grew 14→16 wide for the grid; geometry unchanged).",
-  "tags": ["ss-enemy", "projectile"],
+  "tags": ["enemy", "projectile"],
   "size": [16, 12],
   "parts": [
     { "id": "glow", "shape": { "kind": "circle", "r": 6 }, "fill": "$spore.light@soft" },

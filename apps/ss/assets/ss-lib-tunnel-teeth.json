@@ -2,7 +2,7 @@
   "id": "ss.lib.tunnel-teeth",
   "name": "Tunnel teeth (SS)",
   "description": "The ring of teeth in a tunnel mouth, drawn on its own so the mouth can move all fourteen as one part — which is what the breath, the flare and the bite are (`ss.terrain.tunnel`, animations `idle`, `sense`, `swallow`). Fourteen husk points on an ink backing, each hooked the same way round and each sized by one fixed roll so a ring of them reads as grown rather than cut. They are laid out on the un-tilted circle the mouth is a projection of and projected with it, so the foreshortening is the hole's own: the pair at the sides stand at full length while the ones on the near and far lips are seen nearly end-on. Centred on its own origin rather than on the mouth's, so the consumer places it with one `at` and scaling it about that point closes it like a jaw.",
-  "tags": ["ss-lib"],
+  "tags": ["lib"],
   "size": [56, 28],
   "parts": [
     {

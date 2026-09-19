@@ -3,7 +3,7 @@
   "name": "Third crack",
   "description": "Three lash sweeps one behind the other, each the shape of the weapon's own `ss.proj.slash` — a long thin crescent with a cold leading edge — each smaller, whiter and further forward than the one behind it and turned a few degrees further round, with a hard four-point spark past the third's edge where it has landed. The relic adds a third beat to every cast, so the icon is the beat count: three sweeps and the last one still arriving. They sit apart with panel between them so three counts as three, they fan rather than nest so the set is a swing and not a signal-strength mark, and they climb in brightness by token (husk.dark, husk, husk.light2) rather than by alpha, so nothing on the plate is translucent. An earlier pass drew them thick and touching and got a claw. It stays off ss.relic.whip by having no shaft at all: that one is the feeler, this is the swing.",
   "tags": [
-    "ss-relic"
+    "relic"
   ],
   "size": [
     32,

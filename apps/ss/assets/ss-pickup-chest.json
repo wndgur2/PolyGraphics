@@ -2,7 +2,7 @@
   "id": "ss.pickup.chest",
   "name": "Brood cell",
   "description": "A sealed hexagonal cell the hive built and forgot. Prying one open is the only time in the run you are the thing doing the opening. Capped with wax, ribbed with chitin, and faintly lit from inside — something in there is still signalling. The cell is stretched along its flat axis, which is what separates it from the coin: the coin is the one other hexagon on the floor, and it is regular. Stretching rather than scaling keeps every slanted edge at its comb angle, so the shape still belongs to the hive's architecture.",
-  "tags": ["ss-pickup"],
+  "tags": ["pickup"],
   "size": [34, 24],
   "parts": [
     { "id": "glow", "at": [0, -1], "shape": { "kind": "ellipse", "rx": 14, "ry": 11 }, "fill": "$gold@ghost" },

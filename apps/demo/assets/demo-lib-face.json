@@ -1,5 +1,5 @@
 {
-  "id": "lib.face",
+  "id": "demo.lib.face",
   "name": "Face",
   "description": "Shared friendly face: two ink eyes and soft blush cheeks. Composed into characters via `use` so every character shares one face definition.",
   "tags": ["lib"],

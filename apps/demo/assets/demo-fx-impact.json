@@ -1,5 +1,5 @@
 {
-  "id": "fx.impact",
+  "id": "demo.fx.impact",
   "name": "Impact flash",
   "description": "Hit feedback: a four-point bone sliver star popping over a frost flash. Port of Cellspire's Glob.impact verb.",
   "tags": ["fx", "hit"],

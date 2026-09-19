@@ -2,7 +2,7 @@
   "id": "ss.icon.banish",
   "name": "Banish icon",
   "description": "Shop icon: coral X, two heavy crossed strokes. Port of the hand-drawn i_banish from Feelers' BootScene.",
-  "tags": ["ss-icon"],
+  "tags": ["icon"],
   "size": [32, 32],
   "parts": [
     { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$coral" },

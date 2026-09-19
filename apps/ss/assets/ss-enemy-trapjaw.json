@@ -2,7 +2,7 @@
   "id": "ss.enemy.trapjaw",
   "name": "Trapjaw",
   "description": "The burrow's charger, and the jaws are what throws it. Drawn from the side and mirrored by the game; the gape opens up and down rather than across, the way the Soldier's mandibles already do, because a horizontal gape seen side-on is one blade and no V at all. Almost all of it is jaw: two long calipers hinged into sockets cut in a head shrunk to hold them, everything behind the hinge tapering away, so the silhouette is an open mouth travelling. The body is a chain — gaster, petiole, thorax, head — and sways as one animal on the step. Each jaw is two links off its socket, base and blade, and the V shivers against its catch rather than swinging; the trigger hairs quiver on their own joints and the antennae whip. Two-link legs walk it into range. The only ember is the two tips and the trigger hairs between them: the bright part is the part that is cocked. No `elite` variant on purpose — the marking only lands on wave-table bodies, and this one arrives in squads. Gameplay radius 10. The `death` clip fires the latch one more time into nothing before anything else moves, and then lets the jaws hang open for good.",
-  "tags": ["ss-enemy", "trapjaw"],
+  "tags": ["enemy", "trapjaw"],
   "size": [48, 32],
   "meta": {"radius": 10},
   "parts": [

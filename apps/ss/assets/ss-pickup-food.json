@@ -2,7 +2,7 @@
   "id": "ss.pickup.food",
   "name": "Gland",
   "description": "A nutrient sac cut out of something that stopped needing it. Warm, soft-shelled and slightly translucent against everything else's chitin — the only round soft thing in the level, which is exactly why it reads as heal at a glance.",
-  "tags": ["ss-pickup"],
+  "tags": ["pickup"],
   "size": [20, 20],
   "parts": [
     { "id": "sac", "at": [-0.6, 0.4], "shape": { "kind": "ellipse", "rx": 7.4, "ry": 6.6 }, "fill": "$ember.dark", "stroke": { "color": "$ink", "width": "thin" } },

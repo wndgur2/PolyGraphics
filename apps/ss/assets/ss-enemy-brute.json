@@ -2,7 +2,7 @@
   "id": "ss.enemy.brute",
   "name": "Soldier",
   "description": "The caste that gets sent when a Tracker's call is answered. One heavy plated dome, two shearing mandibles and a pair of organs broadcasting the kill order. Big, bright and almost featureless on purpose — the tank has to read as mass from across the screen, so it is a slab of chitin rather than a study of one. There is weight under it now: the legs are two heavy links with a clawed foot and stomp in an alternating pair, the shell settles onto each step with the plate and ridge a beat behind, the mandibles shear on sockets at the maw, and the organs pulse in turn. Gameplay radius 16. The `death` clip is mass arriving on the ground: the kill order stops broadcasting rear organ first, the mandibles fly wide and lock, and the dome settles onto buckled legs.",
-  "tags": ["ss-enemy", "tank"],
+  "tags": ["enemy", "tank"],
   "size": [44, 44],
   "meta": {"radius": 16},
   "parts": [

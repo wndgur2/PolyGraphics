@@ -3,7 +3,7 @@
   "name": "Forerunner bolt",
   "description": "What a Forerunner spits in the stop: a shard of fused glass, the pan's own cold colour \u2014 aqua over an ink edge with a bright facet \u2014 cut long and pointed. Three to five leave in a fan. Drawn pointing +x.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "projectile"
   ],
   "size": [

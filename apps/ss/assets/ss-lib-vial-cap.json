@@ -2,7 +2,7 @@
   "id": "ss.lib.vial-cap",
   "name": "Draught stopper",
   "description": "The chitin stopper and the glass highlight, split off from `ss.lib.vial` because they are the only two parts of the flask that must be drawn *over* whatever is suspended inside it. Compose the vial, then the emblem, then this.",
-  "tags": ["ss-lib"],
+  "tags": ["lib"],
   "size": [32, 32],
   "parts": [
     { "id": "shine", "at": [-4, 1.6], "rot": -20, "shape": { "kind": "ellipse", "rx": 1.1, "ry": 3.4 }, "fill": "$silent@soft" },

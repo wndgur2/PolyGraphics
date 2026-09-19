@@ -2,7 +2,7 @@
   "id": "ss.draught.boomerang",
   "name": "Soldier's Marrow",
   "description": "Rendered, so it separated: a pale layer of fat standing on top of the dark, and bone grit too heavy to stay in either. It is the only draught you would have to shake.",
-  "tags": ["ss-draught"],
+  "tags": ["draught"],
   "size": [32, 32],
   "parts": [
     { "id": "vial", "use": "ss.lib.vial", "variant": "marrow" },

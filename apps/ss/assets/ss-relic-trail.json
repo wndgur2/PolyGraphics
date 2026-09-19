@@ -2,7 +2,7 @@
   "id": "ss.relic.trail",
   "name": "Slick trail",
   "description": "A wide S of slime laid from the bottom-left corner up to the top-right, darker and narrower where it was laid first and paler and wider at its head, lit along its upper edge with two solid gloss marks on it. Three small dark footprints are pressed into the slick, the last one at its blunt head — where whatever laid it is now. The trail is what the relic leaves behind and what slows whoever crosses it, so the slick is the object and the walker is only implied. An earlier pass drew the prints as pale dots in ink rings, and a ringed pale dot at the round head of a band is an eye on a snake; plain dark prints in a line and a flat-ended head keep it a trail. It shares green with ss.relic.venom and ss.relic.luck but neither of those is a band.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

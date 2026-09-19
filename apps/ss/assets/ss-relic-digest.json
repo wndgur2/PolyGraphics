@@ -2,7 +2,7 @@
   "id": "ss.relic.digest",
   "name": "Full belly",
   "description": "A grub's abdomen from the side, swollen past what it can use: amber chitin in three segments with a lit ridge along the back, and a paler translucent belly window low on the body with three pink pulp lumps showing through it at different depths, the smallest sinking. The pulp is drawn in the pickup's own pheromone pink so the icon says what is being kept rather than merely 'fed'. A tiny head nub with one antenna at the left keeps it a body and not a sack. No mouth, no eye, no dark cavity — the window is lighter than the shell, never darker, so nothing on the plate reads as a hole.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

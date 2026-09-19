@@ -3,7 +3,7 @@
   "name": "Runt instar",
   "description": "A brood egg at full size with far too little in it: a steel-grey shell, the hollow inside left dark and mostly empty, and one small white grub curled at the bottom of it, eye still shut, its head a size down from the segment behind it rather than the widest ring on the body. The egg is the ruler — it is the size the occupant was supposed to grow to fill, and the gap between the two is the whole reading. Deliberately not ss.relic.drone, which is the same idea inverted: a yellow cell packed so tight that three young had to interlock. Yellow and full there, grey and empty here. Polish: the inside used to be the panel's own `$coal.dark`, which made the egg a dark hole with a grub in it — it is now a quiet `$slate.dark` with the far wall a shade lighter (`$slate`, offset down-right, the way light from up-left falls inside a cup), so the runt sits on something. The shell is now a real ring — an `$ink` ring under a `$steel.dark` ring, lit from the upper-left by a tapered `$steel` crescent (a poly, because an arc's flat ends showed) — so the rim is outlined on both edges instead of the old stack of filled discs. The runt keeps its per-segment ink but each segment gained a `$husk.dark` base under a slightly smaller pale face offset up-left, so it is a curl of beads rather than a flat pale blot. Ring size, runt position and the gleam are unchanged.",
   "tags": [
-    "ss-relic"
+    "relic"
   ],
   "size": [32, 32],
   "parts": [

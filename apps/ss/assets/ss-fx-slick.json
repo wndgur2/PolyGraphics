@@ -2,7 +2,7 @@
   "id": "ss.fx.slick",
   "name": "Slick mark",
   "description": "One mark of Slick Trail: a lumpy smear of slime about forty long and eighteen wide, laid every fourteen pixels of walking and turned by the game to the heading it was laid on, so a walk leaves a ribbon. Dark wet rim, a mid body, a paler wash down the middle where it is thickest, and two gloss marks on the spine \u2014 on the spine and nowhere else, because the sprite rotates and a light on one edge would go round with it; a wet ridge catching light from above does not care which way it points. Three beads off the edge break the capsule. No ink: slime has no edge, only a darker one.",
-  "tags": ["ss-fx", "relic"],
+  "tags": ["fx", "relic"],
   "size": [48, 32],
   "meta": {"radius": 22},
   "parts": [

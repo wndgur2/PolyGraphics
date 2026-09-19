@@ -2,7 +2,7 @@
   "id": "ss.enemy.brazier",
   "name": "Signal stalk",
   "description": "Not a creature — a relay. The hive grows these to repeat a scent across a level, which is why smashing one buys you quiet ground. A chitin stalk on a splayed root, a bulb organ at the top, and wisps going up where everything can smell them. The `spent` variant is the destroyed state: cracked stalk, dead bulb, no wisp. The `death` clip is the smash itself — the bulb blows and sinks, the scent going up is cut at the source, and the rings slip — where `spent` is the wreck it leaves standing.",
-  "tags": ["ss-enemy", "prop"],
+  "tags": ["enemy", "prop"],
   "size": [32, 36],
   "meta": { "radius": 12 },
   "parts": [

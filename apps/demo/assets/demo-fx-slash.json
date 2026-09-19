@@ -1,5 +1,5 @@
 {
-  "id": "fx.slash",
+  "id": "demo.fx.slash",
   "name": "Slash arc",
   "description": "Melee slash feedback: a bone arc blade with a frost leading edge, fading out. Port of Cellspire's Glob.slash verb as a document.",
   "tags": ["fx", "melee"],

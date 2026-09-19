@@ -3,7 +3,7 @@
   "name": "Antlion",
   "description": "The pan's heavy wave body, and the one that hides. A fat timber-coloured grub seen from above, banded in rust, with six stubs and a head at +x that is almost entirely jaw: two long husk sickles curving in on each other, each with a lit ember tip, because the tips are the only part of it that shows when it is under. Which it usually is \u2014 the game spawns it in the `buried` state (EnemyType.ambush) and swaps to this drawing when it comes up: `buried` removes the body and leaves a mound of paler sand with a ripple breathing round it and the two tips standing out of the top, playing `creep`. `elite_buried` is the elite patch and the buried patch in one, because a variant is a patch on the base and the game cannot stack two. Drawn facing +x, mirrored by the game. Gameplay radius 11. The `death` clip snaps the jaws once on nothing and lets them fall open; a body killed while buried comes up to play it.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "antlion"
   ],
   "size": [

@@ -3,7 +3,7 @@
   "name": "Burr spine",
   "description": "What a Burr sheds when it dies: one of its own spines, a thin husk-coloured spike with a dark base, thrown outward. Short-lived and slow, so the picture is a sliver leaving a corpse. Drawn pointing +x.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "projectile"
   ],
   "size": [

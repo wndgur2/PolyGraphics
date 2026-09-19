@@ -13,7 +13,7 @@ export const Vec2 = z.tuple([z.number(), z.number()]);
 const partId = z.string().regex(/^[a-z][a-z0-9_]*$/, "part ids are snake_case");
 const assetId = z
   .string()
-  .regex(/^[a-z][a-z0-9-]*(\.[a-z][a-z0-9-]*)+$/, 'asset ids are dotted, e.g. "enemy.imp"');
+  .regex(/^[a-z][a-z0-9-]*(\.[a-z][a-z0-9-]*)+$/, 'asset ids are dotted and app-first, e.g. "demo.enemy.imp"');
 
 export const ShapeSchema = z.discriminatedUnion("kind", [
   z.strictObject({ kind: z.literal("circle"), r: z.number().positive() }),

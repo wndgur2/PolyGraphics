@@ -3,7 +3,7 @@
   "name": "Sower tick",
   "description": "What a Sower lets go: a tick, alive \u2014 a small arcane body with six stub legs and a pale head, and the faint bloom of the organ it is following the silence with. The one enemy shot that is a creature, which is why it turns. Drawn pointing +x; the game rotates it to its heading as it bends.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "projectile"
   ],
   "size": [

@@ -2,7 +2,7 @@
   "id": "ss.relic.meat",
   "name": "Meat scent",
   "description": "The game's own food pickup — the warm soft-shelled gland, composed here by `use` so it can never drift from what actually drops — with three solid pheromone scent curls rising off it, each a different height, wobble and lean, and the tallest one paler. The relic makes kills drop food again, and the way the hive knows a thing is food is by its smell, so the smell is drawn as the event: the curls are the ability and the gland is what they come off. They are drawn solid and outlined rather than faded, because a translucent wisp at this size is only a smear.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

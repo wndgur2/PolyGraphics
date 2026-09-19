@@ -3,7 +3,7 @@
   "name": "Dot's boot",
   "description": "One of Dot's boots, drawn large on its own and composed into `ss.figure.dot` by `use` at about two fifths of this size — once for each leg, the far one in the `far` variant. Hinged at the knee: the origin is where the knee sits, the boot hangs down +y to the sole and the toe points forward (+x), so it is placed at the knee and swung with the shin's own tracks. Worn leather in a radial gradient, the shaft creased where the ankle bends and scuffed pale on the outside, a seam down the front, a cuff folded down at the top and stitched, two buckled straps with their tails out, a stitched vamp seam, a toe cap, a stacked heel, a bone-coloured welt stitched along the sole, and the trouser leg showing tucked into the cuff. Nothing shines but the two buckles.",
   "tags": [
-    "ss-lib"
+    "lib"
   ],
   "size": [
     28,

@@ -2,7 +2,7 @@
   "id": "ss.relic.breath",
   "name": "Deep breath",
   "description": "A single rounded thorax plate — an amber dome with a keel down its middle, shaded toward its lower rim — and three solid pale arrowheads coming at it from three sides, up-left, right and below, each a different size and a different distance out, with a small pink lump of pulp riding in at the tip of the right-hand one. Every so often everything on the floor comes to you, so the object is the pull itself: arrows converging on a body, and the pulp is what they carry. The spacing is deliberately uneven — three even arrows on a disc is a recycling badge — and the dome is one plate rather than a whole body so it does not become a bug with a face. An earlier pass put a seam across the dome at mid-height, which made it a bun.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

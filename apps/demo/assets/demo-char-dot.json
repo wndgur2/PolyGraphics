@@ -1,5 +1,5 @@
 {
-  "id": "char.dot",
+  "id": "demo.char.dot",
   "name": "Dot",
   "description": "Round frost-blue starter character: glowing aura, circular body with a highlight, shared library face. Bobs gently at idle.",
   "tags": ["char", "player"],
@@ -9,7 +9,7 @@
     { "id": "aura", "shape": { "kind": "circle", "r": 12.5 }, "fill": "$frost@ghost" },
     { "id": "body", "shape": { "kind": "circle", "r": 10 }, "fill": "$frost", "stroke": { "color": "$ink", "width": "thin" } },
     { "id": "shine", "at": [-3.5, -4], "shape": { "kind": "circle", "r": 2.6 }, "fill": "$bone@soft" },
-    { "id": "face", "use": "lib.face", "at": [0, 1] }
+    { "id": "face", "use": "demo.lib.face", "at": [0, 1] }
   ],
   "animations": {
     "idle": {

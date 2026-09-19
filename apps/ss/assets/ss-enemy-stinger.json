@@ -3,7 +3,7 @@
   "name": "Stinger",
   "description": "A scorpion, the other turn of the Lance's slot and the furthest thing from you on the pan. Seen side-on: a low plated body in pale husk with two claws forward, six of its legs, and a five-jointed tail curling up and over the back to an ember bulb and a bone sting \u2014 the arch of the tail is the silhouette, and it is the one shape in the roster that stands taller than it is long. The game plays `aim` once over its 1.2s hold (EnemyType.aimTime): the tail rises and straightens until the sting points along +x, exactly the line the game draws from it, and `sting` once at the shot, the tail snapping forward and recoiling. `ss.enemy.sting` is what leaves. No `elite` variant: a squad body is never marked. Drawn facing +x, mirrored by the game. Gameplay radius 13. The `death` clip strikes once into nothing and then lets the tail fall out flat behind.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "stinger"
   ],
   "size": [

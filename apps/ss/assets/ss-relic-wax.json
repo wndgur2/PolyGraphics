@@ -2,7 +2,7 @@
   "id": "ss.relic.wax",
   "name": "Wax seal",
   "description": "A blob of sealing wax, lumpy at the edge, dark red with a lit top and one sheen, stamped with a honeycomb cell: a hexagon raised as a ridge, its lit edge up-left and its shadow edge down-right, and the same red on the floor inside it so it is a ridge and not a hole. A short pale ribbon end is tucked under the lower-right of the blob. A seal is what closes a chest, and a hive's own cell pressed into it is the mark of the hive's stores — one more thing in every chest. The reds are ss.relic.oxygen's lungs' family, but that is two lobes and a windpipe; this is one round blob with a tail.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

@@ -2,7 +2,7 @@
   "id": "ss.terrain.boulder",
   "name": "Spore boulder (SS)",
   "description": "Shape Survivors set dressing: mossy boulder with glowing soul-green spore pits. Port of t_boulder (BootScene.ts:230-239).",
-  "tags": ["ss-terrain"],
+  "tags": ["terrain"],
   "size": [44, 38],
   "parts": [
     { "id": "shadow", "at": [0, 14], "shape": { "kind": "ellipse", "rx": 19, "ry": 4.5 }, "fill": "$ink@0.5" },

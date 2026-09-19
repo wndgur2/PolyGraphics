@@ -2,7 +2,7 @@
   "id": "ss.enemy.foundress",
   "name": "Foundress",
   "description": "The queen who dug this. Every wall the run has bounced off today was her instruction, and she is still laying while she walks toward you. Drawn as an actual queen rather than a chamber: a long banded gaster, a thorax carrying the two pale stubs where she tore her own wings off the day she founded the colony, and a head big enough to be in charge — three masses in a line, where the Matriarch is one circle with a crown. Her gaster is a file of overlapping tergites over a membrane being forced apart from inside, so the pheromone reads as pressure escaping between plates rather than as a sac you look into. The gaster is a chain rooted at the petiole, so the laying wave actually travels it: each plate slides open a beat after the one ahead, the membrane behind it brightens as the wave passes, and the egg at the tip swells, brightens and drops. The thorax heaves, the head dips on its own joint, the antennae whip, the mandibles work, and two-link legs take the weight late. She does not hold a distance the way the Matriarch does — in a burrow the earth already stands between the two of you — so nothing about this body is drawn retreating. Drawn facing +x, the game flips her. Gameplay radius 44. The `death` clip is the laying wave running out instead of round: the egg rolls out unplaced, the seams go dark a plate at a time down the gaster, and the rest follows it down.",
-  "tags": ["ss-enemy", "boss"],
+  "tags": ["enemy", "boss"],
   "size": [120, 112],
   "meta": {"radius": 44},
   "parts": [

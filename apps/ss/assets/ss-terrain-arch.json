@@ -2,7 +2,7 @@
   "id": "ss.terrain.arch",
   "name": "Broken arch (SS)",
   "description": "Shape Survivors set dressing: a standing gateway with its keystone gone — two jambs and the broken springing stones where the arch used to close. Symmetric, so each side is one part mirrored. Port of t_arch from Feelers' BootScene.",
-  "tags": ["ss-terrain"],
+  "tags": ["terrain"],
   "size": [52, 50],
   "parts": [
     { "id": "shadow", "at": [0, 20], "shape": { "kind": "ellipse", "rx": 23, "ry": 4.5 }, "fill": "$ink@0.5" },

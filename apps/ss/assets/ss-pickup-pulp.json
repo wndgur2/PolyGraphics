@@ -2,7 +2,7 @@
   "id": "ss.pickup.pulp",
   "name": "Pulp",
   "description": "What a hive creature leaves behind when it dies: a torn lump of soft tissue, still wet. You pick them up because the hive grows on what it reclaims — which is why they count as experience. The silhouette is a lobed horizontal chunk — three soft bulges along the top, two along the bottom, no spike and no single bite — because the draft that leaned on one notch and a hanging drip read as a speech bubble at 16px. Lumpiness is what keeps it off the Gland's clean round sac, and it is what carries the flat-silhouette test. Interior detail is deliberately single and off-centre — one sheen up the left, one torn pit down the right — because a second highlight plus a crease across the middle turned the whole thing into a face. The fill is kept near-white and neutral: the game tints this sprite per XP tier at runtime, so any hue baked in here would fight the tint.",
-  "tags": ["ss-pickup"],
+  "tags": ["pickup"],
   "size": [16, 16],
   "parts": [
     { "id": "halo", "shape": { "kind": "circle", "r": 6.4 }, "fill": "$white@0.12" },

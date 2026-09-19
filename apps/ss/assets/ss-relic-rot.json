@@ -3,7 +3,7 @@
   "name": "Rot",
   "description": "A dead body — a low, humped, segmented abdomen in dusky violet with a small head at its left end — collapsed along the bottom of the plate, with three solid green tendrils of vapour snaking off it and bending outward — the left one into a small body at the left, the right one toward a smaller body up at the right, the middle one rising and leaning. The relic passes a poisoned body's poison to whatever touches it after it dies, so the husk is the source and the two live bodies are the ones about to catch it. The tendrils are drawn whole in venom green with a paler core down each rather than as a fade, and their outlines are offset copies, so they stay wisps and not a blur at one pixel per unit. The bodies are plain ovals with a lit crown and nothing else on them, so none of the three become a face.",
   "tags": [
-    "ss-relic"
+    "relic"
   ],
   "size": [
     32,

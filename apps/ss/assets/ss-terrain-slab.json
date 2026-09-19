@@ -2,7 +2,7 @@
   "id": "ss.terrain.slab",
   "name": "Toppled slab (SS)",
   "description": "Shape Survivors set dressing: a toppled wall block or altar stone — lit top face, two block seams cut through it. Port of t_slab from Feelers' BootScene.",
-  "tags": ["ss-terrain"],
+  "tags": ["terrain"],
   "size": [48, 30],
   "parts": [
     { "id": "shadow", "at": [0, 11], "shape": { "kind": "ellipse", "rx": 22, "ry": 4.5 }, "fill": "$ink@0.5" },

@@ -1,5 +1,5 @@
 {
-  "id": "enemy.grunt",
+  "id": "demo.enemy.grunt",
   "name": "Grunt",
   "description": "Armored walker: dark-plum torso, steel pauldrons, ember scarf, gold visor eye, swinging fists. The Cellspire grunt rebuilt with an actual silhouette.",
   "tags": ["enemy", "walker"],

@@ -2,7 +2,7 @@
   "id": "ss.draught.mine",
   "name": "Fungal Must",
   "description": "Pressed rather than drained, so it never went clear: pulp on the bottom, a haze through the middle, and spores small enough to still be drifting.",
-  "tags": ["ss-draught"],
+  "tags": ["draught"],
   "size": [32, 32],
   "parts": [
     { "id": "vial", "use": "ss.lib.vial", "variant": "must" },

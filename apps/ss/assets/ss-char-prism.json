@@ -2,7 +2,7 @@
   "id": "ss.char.prism",
   "name": "Prism",
   "description": "Sealed survivor cut to a hard facet — the only one of the eight whose shell catches light on two planes at once. Underneath it is the same dead organ as the rest.",
-  "tags": ["ss-char"],
+  "tags": ["char"],
   "size": [32, 32],
   "meta": { "radius": 12 },
   "parts": [

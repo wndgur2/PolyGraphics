@@ -2,7 +2,7 @@
   "id": "ss.relic.lamp",
   "name": "Lamp moth",
   "description": "One tall flame leaning a little to the right, orange outside, gold inside, and a pale gold core — lit from the middle out, since a dark core in a flame is a wick-hole and an eye — standing on a short grey brazier bowl with a foot. A small moth, wings spread, hangs just to the right of the flame and is tilted in toward it. Braziers turning up twice as often is the relic, and a moth drawn to a lamp is the oldest way to say that a light is being found. The flame is kept off the plate's gold rim by its ink outline and by being mostly ember; the moth is the only pale thing on the plate so it does not get lost in the light.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

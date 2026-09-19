@@ -2,7 +2,7 @@
   "id": "ss.fx.husk",
   "name": "Shed husk",
   "description": "What Shed Husk leaves standing where you were: an empty exoskeleton seen from above, head to +x so the game's facing flip lands it the way the body was facing, in the pale of a thing that has nothing inside it \u2014 a lit back and a shaded back, six leg stubs kept short and mostly under the body, and the moult split running down the spine, open at the head over a warm interior that is deliberately not black. A small pheromone S rises off the open head: that scent is why the swarm hunts the husk and not you, and magenta is the hive's colour, so the husk broadcasting it is the one place the player's side wears it. Authored at the player's own scale (radius 11 on a 32 canvas); the game bakes it at 2\u00d7 like the characters it stands in for.",
-  "tags": ["ss-fx", "relic"],
+  "tags": ["fx", "relic"],
   "size": [32, 32],
   "meta": {"radius": 12},
   "parts": [

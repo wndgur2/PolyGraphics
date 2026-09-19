@@ -2,7 +2,7 @@
   "id": "ss.draught.wand",
   "name": "Gland's Bile",
   "description": "Still working. The bubbles are the tell — this is the only draught that is doing something to the bottle while you decide, and it climbs in a stream rather than sitting in a haze.",
-  "tags": ["ss-draught"],
+  "tags": ["draught"],
   "size": [32, 32],
   "parts": [
     { "id": "vial", "use": "ss.lib.vial", "variant": "bile" },

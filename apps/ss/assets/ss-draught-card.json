@@ -2,7 +2,7 @@
   "id": "ss.draught.card",
   "name": "Drifter's Wingblood",
   "description": "Thin enough to still be moving, and full of the scales that come off a wing when you take it apart. Nothing has settled — the flakes hang wherever the bottle last stopped.",
-  "tags": ["ss-draught"],
+  "tags": ["draught"],
   "size": [32, 32],
   "parts": [
     { "id": "vial", "use": "ss.lib.vial", "variant": "wingblood" },

@@ -2,7 +2,7 @@
   "id": "ss.draught.drone",
   "name": "Matriarch's Milk",
   "description": "Taken from the Matriarch, who was not asked, and it came away with brood still in it. Four of them, and two are far enough along to have something looking back.",
-  "tags": ["ss-draught"],
+  "tags": ["draught"],
   "size": [32, 32],
   "parts": [
     { "id": "vial", "use": "ss.lib.vial", "variant": "milk" },

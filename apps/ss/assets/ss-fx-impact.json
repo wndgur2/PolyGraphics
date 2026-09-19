@@ -2,7 +2,7 @@
   "id": "ss.fx.impact",
   "name": "Shell break",
   "description": "What it looks like when your weapon lands: chitin splitting, not blood. A hard cold flash and four shell chips thrown outward — deliberately frost-white so player damage never gets confused with the hive's magenta broadcast. Spawn it at the contact point.",
-  "tags": ["ss-fx", "hit"],
+  "tags": ["fx", "hit"],
   "size": [32, 32],
   "parts": [
     { "id": "flash", "shape": { "kind": "circle", "r": 6.4 }, "fill": "$frost@heavy" },

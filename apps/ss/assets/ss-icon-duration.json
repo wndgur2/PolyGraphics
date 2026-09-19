@@ -2,7 +2,7 @@
   "id": "ss.icon.duration",
   "name": "Duration icon",
   "description": "Passive icon: a lavender clock face, hands at ten past. The hands are thin rects standing in for the original's line strokes. Port of the hand-drawn i_duration from Feelers' BootScene.",
-  "tags": ["ss-icon"],
+  "tags": ["icon"],
   "size": [32, 32],
   "parts": [
     { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$arcane.light2" },

@@ -2,7 +2,7 @@
   "id": "ss.terrain.pillar",
   "name": "Broken pillar (SS)",
   "description": "Shape Survivors set dressing: a broken column of cut stone — lit down one side, two drum joints, a snapped capital riding the top. Masonry maps to the $smoke ramp (the ruins' standing stones keep $carapace; this stone is cut, not grown). Port of t_pillar from Feelers' BootScene.",
-  "tags": ["ss-terrain"],
+  "tags": ["terrain"],
   "size": [30, 46],
   "parts": [
     { "id": "shadow", "at": [0, 18], "shape": { "kind": "ellipse", "rx": 13, "ry": 4 }, "fill": "$ink@0.5" },

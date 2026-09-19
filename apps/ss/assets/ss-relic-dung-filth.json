@@ -2,7 +2,7 @@
   "id": "ss.relic.dung-filth",
   "name": "Seeping Muck",
   "description": "The ball packed so wet it cannot hold itself together: it is drawn at the head of its own trail, with three lumps of it shed behind on the ground it has already crossed, each smaller and further gone than the last. The find leaves filth on the ground the ball rolls over and that filth keeps eating, so the trail is the event and the ball is only what made it — which is why the lumps take the diagonal and the ball sits at the end of it rather than in the middle of the plate. Leaden Heart is the other ball on the shelf and it is one object, centred, with a stone in it; this one is a comet, and the two are told apart in silhouette before either is read. The bile-green beads are what the muck is doing to the ground, drawn bright on the dark lump rather than as pits in it — a dark centre ringed in a bright colour is an eye, the lesson ss.relic.venom paid for twice.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     { "id": "plate", "use": "ss.lib.relic-plate" },

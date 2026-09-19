@@ -2,7 +2,7 @@
   "id": "ss.icon.maxhp",
   "name": "Max HP icon",
   "description": "Passive icon: coral heart built the classic way, two lobes over a point. Port of the hand-drawn i_maxhp from Feelers' BootScene.",
-  "tags": ["ss-icon"],
+  "tags": ["icon"],
   "size": [32, 32],
   "parts": [
     { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$coral" },

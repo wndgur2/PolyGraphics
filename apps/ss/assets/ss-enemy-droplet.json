@@ -3,7 +3,7 @@
   "name": "Blister droplet",
   "description": "One of the four a Blister empties itself in: a small blood-red drop with a dark rim and a highlight, teardrop-shaped so a fan of them reads as spray. Drawn pointing +x.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "projectile"
   ],
   "size": [

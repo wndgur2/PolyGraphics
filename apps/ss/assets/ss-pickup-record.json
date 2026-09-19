@@ -2,7 +2,7 @@
   "id": "ss.pickup.record",
   "name": "Field record",
   "description": "A page of a predecessor's log, lying where the swarm dropped it. Paper is the one thing on the field with no smell, so the hive carries it about and never eats it — which is why it survives, and why it turns up scattered rather than filed. Drawn lying on the ground the way the ground is seen: the field is an oblique view, the tunnel mouth and the body shadow are ellipses at half height, and a sheet on it is a sheet at half height too — turned eight degrees in the ground plane first, because a dropped page never lands square, and every shape baked to its projected polygon so the tilt and the lay-down are one transform. It is a page that has been through the field: torn off along the top (the teeth on the outline are the tear), a nick out of one edge, folded once across the middle and opened again (the crease and the lit ridge under it), a crumple running in from the tear. The near-right corner has curled up off the ground — the one part of the drawing that leaves the plane: hinged on the cut, turned out of it, so its underside faces the viewer and its tip stands above the near edge; the dark under it is the ground, and the paper falls into shade toward it. The writing is rows of hand rather than rules, a darker line at the head where the date goes, the last row short, nothing running under the curl. The ground has marked it: a ring where something wet stood, a smear of soil at the foot, grit, and a faint trace of the hive that carried it. Bone-pale, with the brood cell's halo, paler: a thing meant to be found gets a little light of its own.",
-  "tags": ["ss-pickup"],
+  "tags": ["pickup"],
   "size": [32, 20],
   "meta": { "radius": 9 },
   "parts": [

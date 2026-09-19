@@ -2,7 +2,7 @@
   "id": "ss.enemy.skeleton",
   "name": "Molt",
   "description": "Nobody is inside. A shed carapace split down the front, held upright only by the signal rattling around in it. Cold pale grey where the Husk is warm bone, and the split is the whole silhouette — but it is a front, so it points where the shell is walking: the big blank back half trails, a narrow lit plate leads, and the hood juts out over the seam. One bright shell with a dark seam of nothing lit from within, aimed. Both halves hang off a hinge under the hood now and breathe apart by swinging rather than sliding, the ribs riding their halves; the hood nods the way it is going; the light in the seam swells; the legs are two links each and shuffle, because nobody is driving them. Gameplay radius 10. The `death` clip is the only honest one in the roster: nothing dies, the signal just stops, and the shell it was rattling around in swings open along the seam and drops.",
-  "tags": ["ss-enemy", "shell"],
+  "tags": ["enemy", "shell"],
   "size": [32, 32],
   "meta": {"radius": 10},
   "parts": [

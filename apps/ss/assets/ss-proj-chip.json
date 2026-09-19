@@ -3,7 +3,7 @@
   "name": "Grub",
   "description": "What a broodling drops: a pale larva that crawls at whatever it was aimed at. It is seven pixels on screen, so the drawing is two decisions \u2014 one body that is round at the front and drawn out to a tail, and one segment line. Front-ness lives entirely in the silhouette now: flatten this to black and it still points. That matters because the weapon code already wags this sprite sixteen degrees either side of its heading at twenty-six hertz and lurches the pace with it \u2014 the hexagon that used to be here was symmetric, so all of that scuttle landed on a shape with no front and read as nothing. Kept near-white so the fed one, which is amber, is the one that draws the eye.",
   "tags": [
-    "ss-proj",
+    "proj",
     "orbital"
   ],
   "size": [

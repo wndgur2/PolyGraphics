@@ -2,7 +2,7 @@
   "id": "ss.lib.tunnel-gullet",
   "name": "Tunnel gullet (SS)",
   "description": "The inside of a tunnel mouth: the throat, the dark it pools into, and four rings of muscle down it. Its own document because the mouth moves all of it as one part — a breath, a flare and a bite are one track each here instead of ten (`ss.terrain.tunnel`). Each fold is a pair of foreshortened arcs at the crater's own tilt: a crease, and a thinner ridge set one pixel above it so the fold catches the light on its upper face, the way everything else on this object does. They step down as they narrow — lower on screen is deeper, which is the reading the throat's gradient and the dark at the bottom of it already set — and they fade as they go, because a fold you can still count at the fourth ring is a funnel with the lights on.",
-  "tags": ["ss-lib"],
+  "tags": ["lib"],
   "size": [56, 28],
   "parts": [
     {

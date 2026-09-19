@@ -2,7 +2,7 @@
   "id": "ss.fx.cocoon",
   "name": "Cocoon shell",
   "description": "The shell Cocoon spins round a body that has gone six seconds unhurt, drawn as the thing it is: a band of old silk wound round the player at a radius of 20 \u2014 the number the game scales by, body radius plus eight \u2014 on a dark band over an ink ring \u2014 a 64 canvas so the burst has somewhere to go \u2014 with the thread as seven uneven lengths of pale silk and nine diagonal wraps across it, the same wraps that make the relic's badge silk and not a seed. The light does not live on the thread: a gleam upper-left and a shade lower-right are static overlays, so the `spin` loop can carry the thread round the shell while the light stays where the world's light is. Drawn under the player, so the body reads as inside it.",
-  "tags": ["ss-fx", "relic"],
+  "tags": ["fx", "relic"],
   "size": [64, 64],
   "meta": {"radius": 20},
   "parts": [

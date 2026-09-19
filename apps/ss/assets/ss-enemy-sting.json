@@ -3,7 +3,7 @@
   "name": "Stinger bolt",
   "description": "What a Stinger fires down the line it showed: a bone needle with an ember tip, long and thin because it is fast \u2014 at 560 the shape is the streak. Drawn pointing +x.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "projectile"
   ],
   "size": [

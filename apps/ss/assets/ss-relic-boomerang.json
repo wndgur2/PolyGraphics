@@ -2,7 +2,7 @@
   "id": "ss.relic.boomerang",
   "name": "Blown seed",
   "description": "A husk seed under a pappus of seven bristles, tipped over and travelling. The plume is the whole argument — it is what carries the thing, and it needs no weather drawn around it to say so. Polish: the bristles were 1.1 px of translucent white on 0.75 px of ink and blurred to a smear at 1×; they are now 1.5 px of solid `$silent` on 0.9 px of ink each side, same seven, same fan, same length. The stalk is thickened to 1.8 px, the seed and stalk underlays widened to ~1.3 px, and the seed split into a `$husk.dark` base with a `$husk` face offset up-left so it rounds instead of sitting flat. Still no wind drawn.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

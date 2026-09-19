@@ -2,7 +2,7 @@
   "id": "ss.lib.organ",
   "name": "Pheromone organ",
   "description": "The premise of the game in one part. Every creature in the hive carries this scent organ, lit — it is how they announce themselves and how they are recognized. The player carries the same organ in the same place, `dead`: cracked, unlit, silent. That is why they are hunted. Composed everywhere via `use`, so the whole roster shares one definition.",
-  "tags": ["ss-lib"],
+  "tags": ["lib"],
   "size": [16, 16],
   "parts": [
     { "id": "halo", "shape": { "kind": "circle", "r": 6.5 }, "fill": "$pheromone@ghost" },

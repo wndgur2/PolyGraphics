@@ -2,7 +2,7 @@
   "id": "ss.enemy.warden",
   "name": "Warden",
   "description": "A soldier bred as a door. One tapering keystone — a flat face of packed earth at the front, narrowing to nothing behind — so the silhouette is a cork, and nothing else in the game is a straight-edged wedge. The face is read in horizontal strata and is the colour of the ground it spent its life filling, which is a problem solved with a bone rim right round it rather than avoided. Under it is the acid vent, teal because what leaves it is `ss.enemy.shot`. Nothing on the body moves. The nine horns along the back are separate parts set on the keystone's own top edge, static, as is the face and everything on it — holding still is what lets `enraged` split the face along its strata without the split lines sliding off. The walking is done underneath, by legs that are four-link chains — coxa, femur, tibia, tarsus, and a claw — each link swinging about the joint above it in an alternating tripod. The three organs fire round the body in turn and the vent breathes between shots. The wedge carries two courses of plates with rivet pits along their seams, the horns a bone edge, and the rim is chipped. Drawn facing +x, the game flips it. Gameplay radius 42. The `death` clip brings the door down rather than killing an animal: the face slumps stratum into stratum, three chips leave it entirely, and the legs fold out from under the wedge.",
-  "tags": ["ss-enemy", "boss"],
+  "tags": ["enemy", "boss"],
   "size": [104, 96],
   "meta": {"radius": 42},
   "parts": [

@@ -2,7 +2,7 @@
   "id": "ss.terrain.rubble",
   "name": "Masonry rubble (SS)",
   "description": "Shape Survivors set dressing: three scattered chips of the same cut masonry as the pillar and slab. Port of t_rubble from Feelers' BootScene.",
-  "tags": ["ss-terrain"],
+  "tags": ["terrain"],
   "size": [26, 20],
   "parts": [
     { "id": "chip_a_outline", "at": [-6, 3], "shape": { "kind": "circle", "r": 5.5 }, "fill": "$ink" },

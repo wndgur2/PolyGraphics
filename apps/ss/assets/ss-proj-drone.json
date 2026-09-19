@@ -3,7 +3,7 @@
   "name": "Brood vent",
   "description": "The thing that follows you and pushes out grubs \u2014 an orifice, drawn as one. The geometry is unchanged from the shell plate this used to be, because the plate was already three hexagons inside each other and that is exactly a pucker; only the colours moved. They step inward from a red-brown rim through burnt ochre flesh to a deep maroon ring and then to soil, and the last of those is the hole. The reds are held back on purpose: a saturated `$blood` face read as an alarm on a screen where red means something is wrong, and this thing is yours. Yellow in the flesh takes the edge off without giving up the one thing that has to survive eighteen pixels, which is dark centre inside light ring.",
   "tags": [
-    "ss-proj",
+    "proj",
     "orbital"
   ],
   "size": [

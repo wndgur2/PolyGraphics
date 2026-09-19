@@ -3,7 +3,7 @@
   "name": "Forerunner",
   "description": "The pan's second arrival, the one that comes for you: a tiger beetle, the fastest thing on legs, which runs so fast it goes blind and has to stop to see \u2014 the game runs it as a sprint and a rest (EnemyType.hopSpeed) and it fires only in the rest. Seen from above along +x and turned by the game rather than mirrored, like the Courser: a long moss-green body with cream spots on the elytra, a narrow thorax, a big head with two frost eyes, six very long legs at full stride, and jaws \u2014 two husk sickles longer than the head, the read at any distance, and the mouth the glass fan leaves from (`ss.enemy.glassbolt`; the `spit` clip flares an aqua glint there). Green, the pan's one green besides the Locust, which is chaff. `enraged` lifts the elytra to show venom-green hind wings, lights the spots ember and lengthens the jaws. Gameplay radius 42. The `death` clip splays the long legs flat and opens the elytra.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "boss"
   ],
   "size": [

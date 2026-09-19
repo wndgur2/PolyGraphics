@@ -2,7 +2,7 @@
   "id": "ss.relic.feast",
   "name": "Larval feast",
   "description": "Three fat pale grubs piled on one another — one lying across the bottom, one wedged against it at a steeper angle, and the biggest sprawled over both — each a soft curved sausage of bone-white with a shaded belly, four segment creases, and a small brown head capsule at one end. The sizes, curves and angles all differ so it is a heap someone tipped out, not a pattern. The relic is three levels swallowed at once, so it draws three meals at once; ss.relic.husk is one upright empty shell and this is three full ones lying down.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

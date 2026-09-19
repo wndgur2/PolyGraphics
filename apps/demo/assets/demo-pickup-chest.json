@@ -1,5 +1,5 @@
 {
-  "id": "pickup.chest",
+  "id": "demo.pickup.chest",
   "name": "Treasure chest",
   "description": "Timber chest with iron bands, gold latch and a warm glow; the lid rattles. Cursed variant recolors to arcane wood with soul-lit eyes peeking from under the lid.",
   "tags": ["pickup", "loot"],

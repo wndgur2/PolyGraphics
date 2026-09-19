@@ -2,7 +2,7 @@
   "id": "ss.char.egg",
   "name": "Egg",
   "description": "Sealed survivor, and the one the fiction is least kind to — an unhatched shell that was never given a signal to lose. Same dead organ, same dead feelers; on this one they were dead from the start.",
-  "tags": ["ss-char"],
+  "tags": ["char"],
   "size": [32, 32],
   "meta": { "radius": 12 },
   "parts": [

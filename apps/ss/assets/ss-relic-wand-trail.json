@@ -3,7 +3,7 @@
   "name": "Caustic trail",
   "description": "One acid glob — the weapon's own `ss.proj.bolt`, head down — arriving on the near end of a wide flat spill that lies low across the plate, lumpy along both ends, its far rim lit and its middle darker and wet, with a bead of it kicked up where the glob meets it and a froth of three hollow bubbles of three sizes working a little way off from the strike. The relic leaves a burning pool wherever a glob dies, so the pool is the subject and the glob only explains where it came from. Corrosion is drawn as bubbles again — the hollow ones are rings over ring outlines, never a disc behind a ring — because a pit or a dark centre in a green field is a hole and then an eye; and the hollow bubbles are a cluster of three unequal rings rather than a pair or a single one, because a pair of rings across a green lump under a falling drop was a frog in a hat, and one ring at the round end of a spill with a pointed tail was a fish. It stays off ss.relic.wand by having no mouth: that one is the spitter, this is what the spit leaves behind.",
   "tags": [
-    "ss-relic"
+    "relic"
   ],
   "size": [
     32,

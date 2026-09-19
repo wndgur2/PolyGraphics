@@ -2,7 +2,7 @@
   "id": "ss.relic.card",
   "name": "Marked spines",
   "description": "Three wing-blades in the air where the weapon throws one, fanned the way they leave the hand. The stat adds bounces, and a spine that bounces more is a spine you see in more places at once. Polish: each blade now sits on an ink rounded-rect of its own, drawn in the relic's own pixels rather than scaled with the blade, so the three separate from each other and from the panel at 1× instead of merging into one pale lozenge; on top of each, a dark strip along the bone-spine side and a thicker frost strip along the cutting edge give the blade a back and an edge without touching the projectile document.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

@@ -2,7 +2,7 @@
   "id": "ss.enemy.porter",
   "name": "Porter",
   "description": "The nest's traffic, carrying. A low dark body under a pale grub slung the whole length of its back, and the silhouette is the cargo — an amber ant beside the Mite's amber blob would be two creatures competing for one read, so this one is defined by what it holds. It also earns the number it carries in the game: this is the body that barely moves when you hit it, and a creature with both jaws locked around brood it will not put down is a better account of that than any amount of shell. The load has its own physics. The grub is a chain rooted where the jaws hold it, at the head end, and running up and over the back, so the held end is still and the free tail sways late and larger — the way a heavy thing carried by one end does. The hauler walks on two-link legs and bobs on the step; the grub answers a beat behind; the head stays down, looking at the floor in front of the next step. Brood pale against #372d3f earth, hauler dark under it. Drawn facing +x, the game flips it. Gameplay radius 10. The `death` clip carries both halves: the hauler folding under its cargo, and — all that is left once `grub` strips the hauler away — the load's own writhe and slack.",
-  "tags": ["ss-enemy", "porter"],
+  "tags": ["enemy", "porter"],
   "size": [40, 36],
   "meta": {"radius": 10},
   "parts": [

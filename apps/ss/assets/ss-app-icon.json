@@ -2,7 +2,7 @@
   "id": "ss.app.icon",
   "name": "App icon — the silent one",
   "description": "The game's emblem, for a home screen: the player's own body seen against the soil a run happens in. Everything in this world announces itself by scent, so the frame is washed pink from behind — a bloom of pheromone rising out of the earth, seams of it along the strata, a pool of it on the ground — and the one object in the middle of all that is sealed, pale and silent, with a dead organ in its socket. That is the premise in a single picture, and it is also what makes the icon read at 48px: a bright sphere against a dim pink haze, with two dark feelers up where nothing else in the frame has any. The body is composed rather than redrawn (`use: ss.char.dot`), so the icon is always the character the player is actually given. Authored at 512 so the 512 plate bakes 1:1; the `maskable` variant pulls the body in for a round mask.",
-  "tags": ["ss-app", "icon"],
+  "tags": ["app", "icon"],
   "size": [512, 512],
   "parts": [
     { "id": "deep", "shape": { "kind": "rect", "w": 512, "h": 512 }, "fill": { "gradient": "linear", "from": [0.5, 0], "to": [0.5, 1], "stops": [[0, "$soil.dark2"], [0.44, "$soil"], [1, "$rust.dark2"]] } },

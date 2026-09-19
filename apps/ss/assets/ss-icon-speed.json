@@ -2,7 +2,7 @@
   "id": "ss.icon.speed",
   "name": "Attack speed icon",
   "description": "Passive icon: double chevron pointing right, venom green. Port of the hand-drawn i_speed from Feelers' BootScene.",
-  "tags": ["ss-icon"],
+  "tags": ["icon"],
   "size": [32, 32],
   "parts": [
     { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$venom" },

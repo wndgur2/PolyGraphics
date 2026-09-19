@@ -3,7 +3,7 @@
   "name": "Burr",
   "description": "The pan's mid-tier wave body, and the one that is ranged by dying: the game throws five of its spines outward when it is killed within reach of the player (EnemyType.deathShots). So it is drawn as the thing it sheds \u2014 a dark chitin ball with ten husk spines radiating off it on their own roots, a plate of lighter shell and a lit organ on the back, a small head at +x with mandibles, six stubs under. The silhouette is a star, and nothing else in the roster is one. Seen from above, facing +x, mirrored by the game. Gameplay radius 10. `elite` is the bleached, heavier version the stage-6 marking wears, with longer bone spines. The `death` clip is the mechanic drawn: every spine travels out along its own root and fades while the ball deflates under them.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "burr"
   ],
   "size": [

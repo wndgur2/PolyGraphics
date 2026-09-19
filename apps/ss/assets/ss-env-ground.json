@@ -3,7 +3,7 @@
   "name": "Hive ground (SS)",
   "description": "Feelers' 128px ground tile: dark iron-red dirt. Warm enough to read as earth rather than void, dark enough that the hive's magenta still has somewhere to go \u2014 the ambient screen stays calm and event pulses do the shouting. No checker: the 32px grid read as tiling rather than as ground, so the floor is now plain dirt with burrow pits and rust flecks where old scent trails dried. Hand-listed pit and fleck coordinates are kept verbatim from the original makeGround, so the tile stays pixel-stable.",
   "tags": [
-    "ss-env",
+    "env",
     "tile"
   ],
   "size": [128, 128],

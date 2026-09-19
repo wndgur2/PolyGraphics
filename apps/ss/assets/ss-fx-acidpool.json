@@ -2,7 +2,7 @@
   "id": "ss.fx.acidpool",
   "name": "Acid pool",
   "description": "The pool Caustic Trail leaves where an acid glob spends itself: an irregular puddle, fourteen lumpy vertices between r=22 and r=30 \u2014 thirty is the number the game scales by, as it does the barb burst \u2014 with a dark wet rim, a body that runs bile at the middle out to venom-dark at the edge because the middle is where it is burning, a paler sheen across it, five hollow bubbles of three sizes and two solid beads. No frost and no magenta: this is the player's weapon, but it is acid rather than cold, so it borrows the glob's own greens and nothing else's. The canvas is 80 for the same reason the blast's is \u2014 the spread at full scale lands on a 64 boundary.",
-  "tags": ["ss-fx", "relic"],
+  "tags": ["fx", "relic"],
   "size": [80, 80],
   "meta": {"radius": 30},
   "parts": [

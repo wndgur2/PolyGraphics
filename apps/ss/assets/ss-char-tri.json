@@ -2,7 +2,7 @@
   "id": "ss.char.tri",
   "name": "Tri",
   "description": "Sealed survivor, wedge-shelled and pointed the way it runs. Same dead organ and dead feelers as the rest of the eight — the shape is the only thing that tells them apart, because none of them has anything to say.",
-  "tags": ["ss-char"],
+  "tags": ["char"],
   "size": [32, 32],
   "meta": { "radius": 11.5 },
   "parts": [

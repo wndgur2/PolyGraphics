@@ -2,7 +2,7 @@
   "id": "ss.char.blok",
   "name": "Blok",
   "description": "Sealed survivor in a squared-off shell with a riveted seam — the heaviest plating of the eight, and the same dead organ under it. Nothing about the armour helps: the hive isn't looking for a shape, it's listening for a signal that never comes.",
-  "tags": ["ss-char"],
+  "tags": ["char"],
   "size": [32, 32],
   "meta": { "radius": 12 },
   "parts": [

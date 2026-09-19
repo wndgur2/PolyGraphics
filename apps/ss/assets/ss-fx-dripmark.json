@@ -2,7 +2,7 @@
   "id": "ss.fx.dripmark",
   "name": "Blood spot",
   "description": "Where one ss.fx.drip landed: a small dark spot with three beads thrown clear of it. The same event ss.fx.spatter draws for a body coming apart, at the size one drop earns — a spot rather than a burst, so it never competes with the spatter for the eye on a field where both can be on the ground at once. No ring, no flash, nothing thrown far: a drop falling a few pixels off a claw has no force in it, and the only thing this has to say is that something wet is on the floor here. The outline is a lumpy ring rather than a circle because blood on ground has no straight edge and no circle in it either, and the wobble is baked so the document renders the same way every time instead of shimmering between builds. Three tones stacked inward — a wet dark rim, the body, a paler middle where it pooled deepest — and no ink: a spot with a line round it is a berry on the floor. The game fades it over a second or two; nothing here is authored to move.",
-  "tags": ["ss-fx", "blood", "ground"],
+  "tags": ["fx", "blood", "ground"],
   "size": [16, 12],
   "meta": {"radius": 7},
   "parts": [

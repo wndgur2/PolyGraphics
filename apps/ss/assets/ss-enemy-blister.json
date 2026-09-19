@@ -3,7 +3,7 @@
   "name": "Blister",
   "description": "A blister beetle, in the Gland's slot by turns, and the one shooter on the pan that comes inside your reach. Seen from above, facing +x: a soft blood-red abdomen with four pale coral glands swelling along its sides \u2014 what the fan is made of \u2014 under two coal elytra held permanently open in a V, because it is already spraying; a small coal pronotum, a dark head with mandibles, long antennae. Red-and-black, the warning colours the real animal wears, and nothing else on the pan is red. `ss.enemy.droplet` is what it throws, four at a time. No `elite` variant: a squad body is never marked. Mirrored by the game. Gameplay radius 10. The `death` clip flares the elytra fully open and bursts the four glands outward.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "blister"
   ],
   "size": [

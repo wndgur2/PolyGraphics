@@ -2,7 +2,7 @@
   "id": "ss.enemy.imp",
   "name": "Tracker",
   "description": "The hive's first responder — the one that found you. One bright chitin body, a dark maw at the front, two thick feelers and a lit organ on its back. Deliberately not an insect: at four hundred on screen you read a shape and a glow, not anatomy, so head and thorax are fused and the legs are three stubs. Under that read there is a rig now — the stubs are two links with a knee so the scuttle has a step in it, the feelers are two-link whips that lag down their length, the maw works on its own joint with the fang riding it, and the back plate follows the body's bob a beat behind. Gameplay slot unchanged (fast, weak melee chaser); body radius still 8.5. The `death` clip is the same rig losing what drove it — one kick, then the legs draw in under the body, the feelers lie back dead and the organ flares out.",
-  "tags": ["ss-enemy", "tracker"],
+  "tags": ["enemy", "tracker"],
   "size": [32, 32],
   "meta": {"radius": 8.5},
   "parts": [

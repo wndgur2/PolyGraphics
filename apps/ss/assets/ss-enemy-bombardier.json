@@ -3,7 +3,7 @@
   "name": "Bombardier",
   "description": "Artillery, in the Lance's slot by turns. A bombardier beetle seen side-on: rust body, coal elytra, and over the back a mortar \u2014 a round chamber at the rear, ember and glowing, with a coal barrel off it at forty-five degrees pointing up and forward over the head, so the whole silhouette is a wedge with a tube on it. That is the read at a squad's distance and it is nothing like the Sprayer's raised sac, which is the other body that fires over its own head. Ember, because what it lobs is `ss.enemy.shell`. The one clip is `pump`, authored at the game's own 3.4s cadence (EnemyType.fireCue): the chamber swells and its glow builds, the barrel kicks with a muzzle flash where the shell leaves, and the body squats on braced legs \u2014 the cycle is the shot, the way a Gland's is. No `elite` variant: a squad body is never marked. Drawn facing +x, mirrored by the game. Gameplay radius 12. The `death` clip bursts the chamber first.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "bombardier"
   ],
   "size": [

@@ -34,7 +34,7 @@ import { z } from "zod";
 const voiceId = z.string().regex(/^[a-z][a-z0-9_]*$/, "voice ids are snake_case");
 const soundId = z
   .string()
-  .regex(/^[a-z][a-z0-9-]*(\.[a-z][a-z0-9-]*)+$/, 'sound ids are dotted, e.g. "sfx.hit"');
+  .regex(/^[a-z][a-z0-9-]*(\.[a-z][a-z0-9-]*)+$/, 'sound ids are dotted and app-first, e.g. "ss.sfx.hit"');
 
 /** Hz, or a pitch token reference ("$tap", "$tap.down2"). */
 export const PitchSchema = z.union([z.number().positive(), z.string()]);

@@ -3,7 +3,7 @@
   "name": "Hurler",
   "description": "The pan's heavy: the Bulwark's slot, and where the Bulwark is a wall this is a catapult. A horned dome seen side-on \u2014 carapace purple with a split elytron and a rhinoceros horn off the head \u2014 with two long arms reaching up and back over its own body to hold a Mite (`use: ss.enemy.imp`, at two thirds) above it. The load is the silhouette: nothing else in the game carries something above itself, and the thing it carries is what it throws (EnemyType.shotSpawn \u2014 the game lobs a live Mite and stands it up where it lands). The `heave` clip is the throw, played once over the shot: the arms whip forward, the load leaves at the top of the swing, and a new one is in the claws by the end. Drawn facing +x, mirrored by the game. Gameplay radius 16. `elite` is the bleached, bigger-horned version the late marking wears. The `death` clip drops the arms forward and rolls the load off them onto the ground, where it dims.",
   "tags": [
-    "ss-enemy",
+    "enemy",
     "hurler"
   ],
   "size": [

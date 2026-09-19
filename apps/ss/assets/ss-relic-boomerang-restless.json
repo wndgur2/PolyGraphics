@@ -3,7 +3,7 @@
   "name": "Restless jaw",
   "description": "The weapon's paired mandibles (`ss.proj.boom`) sitting inside one loop of their own path: a ribbon that starts thin at the upper left, thickens as it goes round the right and under, and ends in an arrowhead already heading back out the way it came. The relic throws a returned mandible straight back out, so the path never closes — it comes round and leaves again, which is the whole sentence. The ribbon is a hollow ring drawn over a ring outline, in steel so it is neither the bone of the jaws nor the gold of the rim, and its width changes along its length so it reads as a thing moving and not as a badge. It stays off ss.relic.boomerang by containing no seed and no plume at all.",
   "tags": [
-    "ss-relic"
+    "relic"
   ],
   "size": [
     32,

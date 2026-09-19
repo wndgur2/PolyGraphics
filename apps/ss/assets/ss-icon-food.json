@@ -2,7 +2,7 @@
   "id": "ss.icon.food",
   "name": "Food icon",
   "description": "Shop icon: chitin-brown loaf with a pale bone crumb at its edge. A separate drawing from the `ss.pickup.food` world pickup — this is the shop's shorthand, not the item. Port of the hand-drawn i_food from Feelers' BootScene.",
-  "tags": ["ss-icon"],
+  "tags": ["icon"],
   "size": [32, 32],
   "parts": [
     { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$chitin" },

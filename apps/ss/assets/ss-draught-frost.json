@@ -2,7 +2,7 @@
   "id": "ss.draught.frost",
   "name": "Tymbal Brine",
   "description": "Clear, salt already crystallising out on the bottom, and two standing rings on the surface that have not stopped since it was drawn. It came out of the organ a Chorus shouts with and it has not finished shouting.",
-  "tags": ["ss-draught"],
+  "tags": ["draught"],
   "size": [32, 32],
   "parts": [
     { "id": "vial", "use": "ss.lib.vial", "variant": "brine" },

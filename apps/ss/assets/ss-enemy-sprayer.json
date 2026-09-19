@@ -2,7 +2,7 @@
   "id": "ss.enemy.sprayer",
   "name": "Sprayer",
   "description": "The burrow's ranged caste: it turns its own gaster over its back and points the acidopore down the passage. That posture is the entire silhouette and the entire tell — a sac carried high with a spout aimed forward, so a body holding still at the far end of a corridor still reads as loaded. Teal for the same reason the Gland is: the bolt it fires is `ss.enemy.shot`, and a shooter should be the colour of what it throws. The gaster is a three-link chain off the petiole, curling up and forward, so it can pump: the curl tightens and the sac swells as pressure builds, the nozzle on the end of the chain lifts with it, and the drip at the tip grows and drops. The body crouches onto two-link legs while it loads; the head scans on its own joint and the antenna whips off it. No `elite` variant on purpose — the marking only lands on wave-table bodies, and this one arrives in squads. Drawn facing +x, the game flips it. Gameplay radius 10. The `death` clip vents it: pressure leaves at the spout, the three sacs go nozzle-first, and the raised gaster — the whole tell — sinks onto the body it was carried over.",
-  "tags": ["ss-enemy", "sprayer"],
+  "tags": ["enemy", "sprayer"],
   "size": [36, 32],
   "meta": {"radius": 10},
   "parts": [

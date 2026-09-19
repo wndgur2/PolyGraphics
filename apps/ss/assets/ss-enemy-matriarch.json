@@ -2,7 +2,7 @@
   "id": "ss.enemy.matriarch",
   "name": "Matriarch",
   "description": "The hive itself, arriving. Almost all of her is the brood chamber — one round translucent mass with the next wave already drifting inside it and a crown of spines standing off the shell, dragged by an amber head barely big enough to steer, drawn behind the body because it is not what is in charge. Round where the Courser is a dart, and the only body on the roster whose inside is the thing you look at: the pink is the brood, and it is the only pink here that is not an organ. She carries the largest organ anyway, because she is what all the others were announcing. The chamber breathes as one thing now — its swell is a scale the whole rig is placed off, so spines, shell, sac, rim and organ grow with it and nothing rides rigid on a body expanding under it; the eggs drift inside on a slow orbit; the legs are two links and take the weight late; the head nods on the neck and the maw works. Drawn facing +x, the game flips her. Gameplay radius 46. The `death` clip kills the chamber, not the animal: the core burns up white, the brood goes dark, the sac drops to half its held size and the shell's splits open the rest of the way.",
-  "tags": ["ss-enemy", "boss"],
+  "tags": ["enemy", "boss"],
   "size": [120, 112],
   "meta": {"radius": 46},
   "parts": [

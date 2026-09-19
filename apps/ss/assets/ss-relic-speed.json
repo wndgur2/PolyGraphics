@@ -2,7 +2,7 @@
   "id": "ss.relic.speed",
   "name": "Streaking dart",
   "description": "One thrown dart with the air it has already crossed behind it, three streaks tapering off to nothing. The stat is about how fast the thing you throw travels, so the icon is the thing you throw, travelling. Polish: the dart still composes `ss.proj.bolt`, but the bolt's own skin is under a pixel wide, so the relic draws a 1.4 px ink underlay beneath it and a darker underside facet over it; the three streaks stay soft alpha — they are air, not an object.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

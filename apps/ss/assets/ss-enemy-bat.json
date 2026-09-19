@@ -2,7 +2,7 @@
   "id": "ss.enemy.bat",
   "name": "Drifter",
   "description": "Released from a vent to sweep for you. Two pale wings held back over a small dark body, with an organ underneath leaking the trail that tells the ground castes where you were. The wings carry the whole read — a wide bright horizontal against the Tracker's compact blob. Each wing has a joint now, root and tip, so the beat travels outward with a lag instead of one plate pivoting; the vein rides the near wing's root; the body rocks under the beat with the sting and snout on it; the wisp trails a beat behind and flickers. Gameplay radius 7. The `death` clip is the beat failing: one snap of both wings, then they fold down off the shoulder, the trail scatters and the organ underneath goes out.",
-  "tags": ["ss-enemy", "flier"],
+  "tags": ["enemy", "flier"],
   "size": [36, 28],
   "meta": {"radius": 7},
   "parts": [

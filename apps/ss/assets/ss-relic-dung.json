@@ -2,7 +2,7 @@
   "id": "ss.relic.dung",
   "name": "Leaden heart",
   "description": "The find that makes the ball heavy: the muck is the same muck, and there is a stone at the middle of it. Drawn as the ball from above with a split opened down the right of it — packed brown outside, and through the gap a violet core lit where a facet catches, with the muck's own rim of ink still round the whole thing so it reads as one object rather than as a gem on a lump. Every other weapon relic puts the weapon's own material on the plate; this one puts something that is not the weapon *inside* it, which is the only honest picture of a find whose whole effect is weight the ball did not have.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     { "id": "plate", "use": "ss.lib.relic-plate" },

@@ -2,7 +2,7 @@
   "id": "ss.fx.drip",
   "name": "Blood drip",
   "description": "One bead of blood coming off the widow's claw as the arm folds back — what the hand bit out of something and did not keep. Drawn as a teardrop with the round end leading and the tail trailing behind it, which is the shape a falling drop actually holds: the air piles up under the head and draws the back out to a point, and a drop drawn round is a berry. The sides are the tangents from the tip to the head rather than a curve guessed between them, so they meet the head flush instead of crossing it. One small fleck rides further back up the tail, because a drop that has just torn away from something leaves a little of itself behind and a single bead alone reads as a thrown pellet. The gloss is one short bar on the head and nowhere else: the game turns this sprite to whatever bearing the drop is falling on, and a highlight on an edge would roll round with it. Authored falling along +y with the tip at the top, filling a 12×16 canvas, so the game points it down the fall and scales by r=6. Blood and not ember, not venom: this is the evolution's own colour, the same $blood the limb's banding and talons wear.",
-  "tags": ["ss-fx", "blood"],
+  "tags": ["fx", "blood"],
   "size": [12, 16],
   "meta": {"radius": 6},
   "parts": [

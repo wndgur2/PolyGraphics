@@ -2,7 +2,7 @@
   "id": "ss.char.donut",
   "name": "Donut",
   "description": "Sealed survivor built around a hole — the shell closed into a ring where the emitter chamber used to be, so this one didn't just go quiet, it grew over the wound. The dead organ sits on the rim, off to one side.",
-  "tags": ["ss-char"],
+  "tags": ["char"],
   "size": [32, 32],
   "meta": { "radius": 11.5 },
   "parts": [

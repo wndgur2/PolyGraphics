@@ -2,7 +2,7 @@
   "id": "ss.relic.whip",
   "name": "Barbed feeler",
   "description": "A feeler grown wrong: the same tapered shaft the hive reads the world with, thick at the root and thinning to the sensing nub, with four thorns leaning back along it the way a thorn actually sits on a stem. The stat is damage and knockback, and a feeler that has become a weapon is both. Polish: the shaft gained a dark lower facet opposite its lit stripe so it turns like a rod instead of lying flat, the thorns went from near-ink to the shaft's own violet so they stand off their ink underlay at 1×, the segment lines were thickened from a hairline, and the sensing nub was split into a lit face and a small gleam.",
-  "tags": ["ss-relic"],
+  "tags": ["relic"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},
