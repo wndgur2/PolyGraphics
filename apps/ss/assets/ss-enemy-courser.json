@@ -55,6 +55,34 @@
         "organ.scale": 0.78,
         "gorge.fill": {"gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$white"], [1, "$pheromone@soft"]]}
       }
+    },
+    "final": {
+      "description": "Phase three: it has been crossing the field on a body that cannot take it. The rings have pulled apart down the length of the animal and what shows between them is bone rather than light — a line that has been run too hard and is coming apart along its own segmentation, head still up and still reading the air.\n\nThe second phase is the shell splitting; this is the split having travelled. It goes the other way from every other `final` on the roster on purpose: there is no organ on this body to burn out and no chamber to empty, so what escalates is the one thing it is — a line — failing as a line.",
+      "scale": 1.12,
+      "set": {
+        "collar.fill": "$bone.light",
+        "head.fill": "$dead",
+        "mouth_ring.fill": "$bone.light",
+        "gullet.fill": "$ink",
+        "teeth.fill": "$white",
+        "gorge.fill": "$blood.dark",
+        "organ.scale": 1.25,
+        "ring_0.fill": "$bone.dark",
+        "ring_1.fill": "$dead.dark",
+        "ring_2.fill": "$bone.dark",
+        "ring_3.fill": "$dead.dark",
+        "ring_4.fill": "$bone.dark",
+        "ring_5.fill": "$dead.dark",
+        "ring_6.fill": "$bone.dark",
+        "ring_7.fill": "$dead.dark",
+        "ring_8.fill": "$bone.dark",
+        "ring_9.fill": "$dead.dark",
+        "ring_10.fill": "$bone.dark",
+        "ring_11.fill": "$dead.dark",
+        "ring_12.fill": "$bone.dark",
+        "ring_13.fill": "$dead.dark",
+        "ring_14.fill": "$bone.dark"
+      }
     }
   },
   "animations": {
