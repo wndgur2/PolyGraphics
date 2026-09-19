@@ -42,7 +42,7 @@ dist/sounds.json       likewise, as `polygraphics/sounds`
 out/                   generated, ignored: svg/, compiled/, png/, wav/, gallery.html, manifest.json
 site/                  generated, ignored: the gallery as Vercel serves it (index.html + wav/ + spec/)
 baselines/             accepted PNG and WAV bakes; `npm run regress` diffs against these
-docs/                  reference-analysis.md — why this exists
+docs/                  reference-analysis.md — why this exists · app-design-systems-plan.md — one grammar, a convention per app
 ```
 
 ## Design loop
@@ -554,4 +554,5 @@ You are the intended primary author. Rules of the road:
 - Per-instance motion vectors for `repeat` scatter (true radial bursts instead of uniform scale)
 - Part libraries beyond `lib.face` (hands, crowns, telegraph markers); named particle-emitter presets
 - Palette lint: flag near-duplicate hex across tokens; gradient support in adapters (currently flat mid-color fallback)
+- App design systems: an `apps/<id>/` per consuming game with its own tokens over a shared base, and a manifest whose rules `check` reads — the roster's conventions (the arsenal rule, `death` on every body, 32×32 icons, the rims' ΔE) as data instead of README sentences, so a second app inherits the grammar and none of the hive. Planned in [docs/app-design-systems-plan.md](docs/app-design-systems-plan.md); phase 0 is writing `apps/ss/app.json`
 - ~~Sound: schema, offline bake, WebAudio adapter, the SFX set~~ → shipped; 22 documents in `sounds/`. ~~Spectrograms, before/after, a phone to listen through, K-weighted loudness and family bands, `unison` / `echo` / `phrase` / `takes`~~ → shipped, phases 1–3 of [docs/sound-quality-plan.md](docs/sound-quality-plan.md). Still to do, in that plan's order: re-author the placeholder gestures one family at a time with a listening record, fill the seam (new documents, variants and takes played, panning on the engine side), a Godot path (offline WAV rather than a live graph), and the adaptive score's *materials* (the score itself is a scheduler and stays in the game)
