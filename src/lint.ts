@@ -112,13 +112,6 @@ export function lintNamespace(lib: Library, o: Owner, issues: Issue[]): void {
           issues.push({ level: "error", where: a.id, msg: `paints $${m[1]} — core documents use base tokens only` });
 }
 
-/** The one grid rule the loader used to apply everywhere; an app's rules refine it. */
-export function lintGrid(o: Owner, issues: Issue[]): void {
-  for (const a of o.assets.values())
-    if (a.size[0] % o.tokens.grid || a.size[1] % o.tokens.grid)
-      issues.push({ level: "warn", where: a.id, msg: `size ${a.size[0]}×${a.size[1]} is not a multiple of grid ${o.tokens.grid}` });
-}
-
 /**
  * What `describe()` is for: the author of these documents cannot hear them, so
  * the properties an ear would catch are asserted instead. Clipping and silence

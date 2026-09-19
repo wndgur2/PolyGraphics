@@ -15,7 +15,8 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { allAssets, allSounds, loadLibrary, owners, slug, themeNamed, ROOT, type Library, type Owner } from "./apps.js";
-import { lintGrid, lintNamespace, lintPalette, lintSounds } from "./lint.js";
+import { lintNamespace, lintPalette, lintSounds } from "./lint.js";
+import { lintRules } from "./rules.js";
 import { applyVariant, derivedRadius, renderSVG, type Issue } from "./render.js";
 import { applyTheme, type Tokens } from "./tokens.js";
 import { buildGallery } from "./gallery.js";
@@ -207,7 +208,7 @@ const nThemes = all.reduce((n, o) => n + o.themes.length, 0);
 if (cmd === "validate" || cmd === "check") {
   for (const o of all) {
     lintNamespace(lib, o, issues);
-    lintGrid(o, issues);
+    lintRules(o, issues);
     dryRun(o, issues);
     lintSounds(o, issues);
   }

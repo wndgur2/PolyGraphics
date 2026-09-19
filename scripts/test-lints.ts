@@ -8,6 +8,8 @@
  */
 import { loadLibrary, owners, type Library, type Owner } from "../src/apps.js";
 import { lintNamespace } from "../src/lint.js";
+import { evaluateRules } from "../src/rules.js";
+import type { AppManifest } from "../src/app-schema.js";
 import { overlayTokens } from "../src/tokens.js";
 import type { Issue } from "../src/render.js";
 import type { Asset } from "../src/schema.js";
@@ -28,12 +30,12 @@ const real = loadLibrary();
 const base = real.base;
 
 /** An owner made by hand: enough of one for the lints to read. */
-function owner(id: string, assets: Asset[], categories: string[] | undefined, core?: Owner): Owner {
+function owner(id: string, assets: Asset[], categories: string[] | undefined, core?: Owner, rules?: AppManifest["rules"]): Owner {
   const tokens = overlayTokens(base, { colors: { blood: "#d63756" } });
   const own = new Map(assets.map((a) => [a.id, a]));
   return {
     id, dir: id === "core" ? "core" : `apps/${id}`,
-    manifest: categories ? { id, name: id, premise: "a fixture premise", categories } : undefined,
+    manifest: categories ? { id, name: id, premise: "a fixture premise", categories, rules } : undefined,
     own: {}, tokens, themes: [], assets: own, sounds: new Map(),
     reg: { assets: new Map([...(core?.assets ?? []), ...own]), tokens },
     sreg: { sounds: new Map(), tokens },
@@ -68,11 +70,56 @@ check("…also when a variant patch sets the use", has(/bb\.thing\.five: uses aa
 check("a document in its own app, composing its own, passes", !issues.some((i) => /aa\.thing\.one/.test(i.where)));
 check("nothing else fires", issues.length === 5, `${issues.length} issues: ${issues.map((i) => i.msg).join(" | ")}`);
 
+// ---- the rules, on an app built to break each one
+const clip = (keys: [number, number][]) => ({ duration: 1, tracks: [{ part: "body", prop: "y" as const, keys }] });
+const rr = owner(
+  "rr",
+  [
+    doc("rr.body.sits", "body", { size: [18, 18], meta: { radius: 5 }, animations: { death: clip([[0, 0], [0.8, 4], [1, 4]]) } }),  // off the grid
+    doc("rr.body.holds", "body", { size: [16, 16], meta: { radius: 5 }, animations: { death: clip([[0, 0], [0.8, 4], [1, 4]]) } }),
+    doc("rr.body.late", "body", { size: [16, 16], meta: { radius: 5 }, animations: { death: clip([[0, 0], [1, 4]]) } }),  // still moving at 1
+    doc("rr.body.bare", "body", { size: [16, 16] }),                                              // no radius, no death
+    doc("rr.body.shot", "body", { size: [16, 16], tags: ["body", "projectile"] }),                 // a shot: exempt
+    doc("rr.body.odd", "body", { size: [16, 16], meta: { radius: 5 }, animations: { death: clip([[0, 0], [0.5, 4], [1, 4]]) }, variants: { toxic: { description: "a state nobody listed" } } }),
+    doc("rr.icon.big", "icon", { size: [32, 32] }),                                               // icons are 16
+    doc("rr.icon.why", "icon", { size: [32, 32], why: { size: "drawn big on purpose, for this test" } }),
+    doc("rr.proj.ring", "proj", { meta: { radius: 60 } }),                                        // promised 62
+  ],
+  ["body", "icon", "proj"],
+  undefined,
+  {
+    grid: { applies: ["body", "icon"] },
+    size: { icon: [16, 16] },
+    meta: [{ in: ["body"], unless: ["projectile"], require: ["radius"] }],
+    clips: [{ in: ["body"], unless: ["projectile"], require: ["death"] }],
+    oneShot: { death: { settleBy: 0.85 } },
+    states: { body: ["elite"] },
+    contracts: { "rr.proj.ring": { "meta.radius": 62 }, "rr.proj.gone": { "meta.radius": 1 } },
+    levels: { contracts: "error" },
+  },
+);
+const reports = evaluateRules(rr);
+const broke = (rule: string, id: string) => reports.some((r) => r.rule === rule && r.broken.some((b) => b.id === id));
+const brokenIds = (rule: string) => reports.filter((r) => r.rule === rule).flatMap((r) => r.broken.map((b) => b.id)).sort().join(" ");
+console.log("\nthe rules");
+check("grid catches the canvas off it", broke("grid", "rr.body.sits") && brokenIds("grid") === "rr.body.sits", brokenIds("grid"));
+check("size catches the icon that is not 16", broke("size", "rr.icon.big") && !broke("size", "rr.icon.why"), brokenIds("size"));
+check("…and a why steps a document outside the rule, on the record", reports.some((r) => r.rule === "size" && r.excepted.some((e) => e.id === "rr.icon.why" && /on purpose/.test(e.why))));
+check("meta catches the body with no radius, and not the shot", brokenIds("meta") === "rr.body.bare", brokenIds("meta"));
+check("clips catches the body with no death, and not the shot", brokenIds("clips") === "rr.body.bare", brokenIds("clips"));
+check("oneShot catches the clip still moving at the end, and not the one that holds", brokenIds("oneShot") === "rr.body.late", brokenIds("oneShot"));
+check("states catches the state nobody listed", brokenIds("states") === "rr.body.odd", brokenIds("states"));
+check("contracts catches the broken promise and the promise to nothing", brokenIds("contracts") === "rr.proj.gone rr.proj.ring", brokenIds("contracts"));
+check("…at the level the manifest set", reports.filter((r) => r.rule === "contracts").every((r) => r.level === "error") && reports.find((r) => r.rule === "grid")!.level === "warn");
+check("a rule reports how many it reaches", reports.find((r) => r.rule === "grid")!.scope.length === 8);
+
 // ---- the real one
 const realIssues: Issue[] = [];
 for (const o of owners(real)) lintNamespace(real, o, realIssues);
 console.log("\nthe real library");
 check("the namespace lints are quiet on every app", realIssues.length === 0, realIssues.map((i) => `${i.where}: ${i.msg}`).join(" | "));
+const realBreaks = owners(real).flatMap((o) => evaluateRules(o).flatMap((r) => r.broken.map((b) => `${o.id} ${r.rule} ${b.id}: ${b.msg}`)));
+check("every rule an app states holds over its roster, or is stepped outside in writing", realBreaks.length === 0, realBreaks.join(" | "));
 
 console.log(failed ? `\n✖ ${failed} failed` : "\n✓ lints hold");
 process.exit(failed ? 1 : 0);

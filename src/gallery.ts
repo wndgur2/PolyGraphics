@@ -20,6 +20,7 @@ import { compileSound, type SoundRegistry } from "./sound-compile.js";
 import { describe, renderPCM, waveformSvg, type Descriptors } from "./sound-render.js";
 import { applyTheme, resolveColor, type Tokens } from "./tokens.js";
 import { assetPath, owners, soundPath, type Library, type Owner } from "./apps.js";
+import { evaluateRules } from "./rules.js";
 
 /**
  * The longest side a cell may occupy. 128 × 1.25 is exactly this, so the
@@ -124,6 +125,8 @@ function detailBlock(o: Owner, asset: Asset): string {
     ["parts", String(asset.parts.length)],
     ...(radius !== undefined ? [["radius", String(radius)] as [string, string]] : []),
     ...(asset.seed !== undefined ? [["seed", String(asset.seed)] as [string, string]] : []),
+    // An exception a document wrote for itself: the rule it steps outside, and why.
+    ...Object.entries(asset.why ?? {}).map(([rule, why]) => [`why · ${esc(rule)}`, esc(why), "wide"] as [string, string, string]),
   ] as [string, string, string?][])
     .map(([k, v, cls]) => `<div${cls ? ` class="${cls}"` : ""}><span class="dim">${k}</span>${v}</div>`)
     .join("");
@@ -475,6 +478,41 @@ function soundSet(sreg: SoundRegistry, issues: Issue[]): string {
 <p class="hint dim">Loudness is K-weighted over the sounding extent, in dBFS. Each family sits at the anchor (${anchor}) plus its offset in <code>audio.loudness</code>, ±${band}; library documents are material rather than sounds the game fires, so they sit outside it. <em>phone</em> is what the loudest instant loses through a small speaker — past ${phoneLoss}dB the low end is carrying the sound. Both are flagged here and by <code>npm run check</code>.</p>`;
 }
 
+/**
+ * The app's rules, each with how many documents it holds over, the ones that
+ * break it, and the ones that stepped outside it in writing. This is the page
+ * a designer reads to see whether the app is one thing, and the page a session
+ * reads before it draws.
+ */
+function rulesPage(o: Owner): string {
+  const m = o.manifest!;
+  const reports = evaluateRules(o);
+  const link = (id: string) => `<a href="#/${esc(id)}">${esc(id)}</a>`;
+  const rows = reports
+    .map((r) => {
+      const holds = r.scope.length - r.broken.length - r.excepted.length;
+      const state = r.broken.length ? `<td class="num far">${r.broken.length} broken</td>` : `<td class="num">holds</td>`;
+      const detail = [
+        ...r.broken.map((b) => `<li class="far">${link(b.id)} — ${esc(b.msg)}</li>`),
+        ...r.excepted.map((e) => `<li>${link(e.id)} <span class="dim">steps outside it:</span> ${esc(e.why)}</li>`),
+      ];
+      return `<tr><td><code>${esc(r.rule)}</code></td><td>${esc(r.what)}</td><td class="num dim">${holds} of ${r.scope.length}</td>${state}</tr>${
+        detail.length ? `<tr><td></td><td colspan="3"><ul class="rule-detail">${detail.join("")}</ul></td></tr>` : ""
+      }`;
+    })
+    .join("");
+  const roles = Object.entries(m.rules?.roles ?? {})
+    .map(([role, names]) => `<div class="tok"><h4>${esc(role)}</h4>${names.map((n) => `<div><code>$${esc(n)}</code><span style="background:${esc(o.tokens.colors[n] ?? "#000")}" class="chip"></span></div>`).join("")}</div>`)
+    .join("");
+  return `<p class="premise">${esc(m.premise)}</p>
+<table class="set rules">
+  <tr><th>rule</th><th>what it says</th><th>holds over</th><th></th></tr>
+  ${rows || `<tr><td colspan="4" class="dim">this app states no rules yet</td></tr>`}
+</table>
+<p class="hint dim">A rule holds over the documents it reaches; one that breaks it is listed, and one that stepped outside it says why in its own <code>why</code>. <code>npm run check</code> reports the breaks at the level the manifest sets.</p>
+${roles ? `<h4>roles — the palette as decisions</h4><div class="tokrow">${roles}</div>` : ""}`;
+}
+
 function swatches(tokens: Tokens): string {
   const rows = Object.entries(tokens.colors)
     .map(([name, hex]) => {
@@ -579,6 +617,7 @@ function appSection(o: Owner, issues: Issue[]): { tabs: string; panels: string; 
   const tabs = [
     `<div class="group">${esc(o.manifest?.name ?? "core")}</div>`,
     `<button data-tab="${esc(panelOf(o, "tokens"))}">tokens</button>`,
+    ...(o.manifest ? [`<button data-tab="${esc(panelOf(o, "rules"))}">rules</button>`] : []),
     ...(o.themes.length ? [`<button data-tab="${esc(panelOf(o, "themes"))}">themes</button>`] : []),
     `<div class="group">assets</div>`,
     // The landing tab is named here rather than inferred from position: the
@@ -598,7 +637,8 @@ function appSection(o: Owner, issues: Issue[]): { tabs: string; panels: string; 
   ].join("");
 
   const allPanels = [
-    `<section class="panel" data-panel="${esc(panelOf(o, "tokens"))}" hidden>${swatches(o.tokens)}</section>`,
+    `<section class="panel" data-panel="${esc(panelOf(o, "tokens"))}" hidden>${o.manifest ? `<p class="premise">${esc(o.manifest.premise)}</p>` : ""}${swatches(o.tokens)}</section>`,
+    o.manifest ? `<section class="panel" data-panel="${esc(panelOf(o, "rules"))}" hidden>${rulesPage(o)}</section>` : "",
     panels,
     o.sounds.size ? `<section class="panel" data-panel="${esc(panelOf(o, "snd-set"))}" hidden>${soundSet(o.sreg, issues)}</section>` : "",
     soundPanels,
@@ -756,6 +796,12 @@ export function buildGallery(lib: Library, issues: Issue[]): string {
   .tok.pitch { min-width:150px; }
   .tok.pitch code { display:block; margin-bottom:4px; }
   .empty { color:var(--dim); padding:40px 0; }
+  .premise { font-size:15px; color:#e6ecf5; max-width:70ch; margin:0 0 18px; font-style:italic; }
+  table.rules td { vertical-align:top; }
+  table.rules ul.rule-detail { margin:2px 0 8px; padding-left:18px; color:var(--mut); }
+  table.rules ul.rule-detail li { margin:2px 0; }
+  table.rules a { color:var(--acc); text-decoration:none; }
+  .chip { display:inline-block; width:14px; height:14px; border-radius:3px; vertical-align:middle; }
   @media (max-width: 1000px) { .detail-body { grid-template-columns:1fr; } .viewer { position:static; } }
   @media (max-width: 760px) { body { grid-template-columns:1fr; } .side { position:static; height:auto; border-right:none; border-bottom:1px solid var(--line); } }
 </style>

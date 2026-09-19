@@ -18,7 +18,7 @@
     "clips": [{ "in": ["enemy"], "unless": ["projectile"], "require": ["death"] }],
     "oneShot": { "death": { "settleBy": 0.85 } },
     "states": {
-      "enemy": ["elite", "enraged", "buried", "elite_buried", "spent", "grub", "loosed", "planted"],
+      "enemy": ["elite", "enraged", "final", "buried", "elite_buried", "spent", "grub", "loosed", "planted"],
       "proj": ["evolved", "worn", "muck", "evolved-worn", "evolved-muck"],
       "icon": ["evolved"],
       "relic": ["glyph"],
