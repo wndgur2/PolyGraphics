@@ -3,7 +3,21 @@
 *2026-09-19. The plan for letting each app that draws from this repo state its own design conventions as
 data, and for making `npm run check` hold that app's art to them. Reads the repository at #76.*
 
-*Status: proposed. Nothing below has landed; phase 0 is the first PR.*
+*Status: phases 0–4 landed 2026-09-19, on the same branch as this plan, one commit per phase. Phase 5 has
+not: the second app needs a game, and Cellspire's source is not in the repository. What landed differently
+from what is written below, and why:*
+
+- *`audio.gain` sits in `tokens/base.json` beside `alpha`, not in the app's tokens — it is the level ladder
+  the README already calls "sound's answer to alpha", and the analogy decided it.*
+- *`core/` is empty. Phase 1b meant to seed it with `lib.face`, and the core rule is why it could not: the
+  face's blush is `$blood`, an app colour, so the face is the demo's material (`demo.lib.face`). A library
+  part whose identity needs an accent is not shared material under this design.*
+- *Rule strength is `rules.levels: { "<rule>": "error" }` in the manifest rather than a `level` on each rule,
+  since half the rule kinds are records with nowhere to put one.*
+- *`readability` read the manifest from phase 1a, because the script was being ported anyway.*
+- *The `distinct` rule found the spider hand's tile sitting on the wand's `$bile` exactly (ΔE 0 where 13 is
+  the floor); it says so in a `why` until it is given a colour, which is an art decision. The `states` rule
+  found the `final` state the six bosses gained on main while this branch was open; the vocabulary lists it.*
 
 The repo is one design system that happens to hold one app's art. 242 of 254 asset documents and 22 of 22
 sounds are `ss.*`; the other twelve are the README's worked examples from before there was an app at all. The

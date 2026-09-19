@@ -14,7 +14,7 @@ The same gallery is hosted: Vercel runs `npm run site` on every push (`vercel.js
 
 ## The loop
 
-1. Write/edit an asset document in `assets/<id-with-dashes>.json` (or a sound in `sounds/`)
+1. Write/edit an asset document in `apps/<app>/assets/<id-with-dashes>.json` (or a sound in `apps/<app>/sounds/`)
 2. `npm run check` — errors come back with suggestions ("unknown color token `$bloood` — did you mean `$blood`?"), or `npm run watch` to have that happen on save
 3. Inspect `out/gallery.html` — tabs per category, search across all of them, and a page per asset. Sounds are in the same page under their own heading: cards you can play, a detail view per document, and a "the set" tab that puts every level side by side
 4. Iterate
@@ -26,24 +26,78 @@ Renders are **byte-identical across runs** (seeded scatter, no wall-clock anywhe
 ## Layout
 
 ```
-tokens/default.json    design tokens: THE source for colors/strokes/alpha/layers/grid,
-                       and under `audio`, for pitches/gains/resonances/lengths
-themes/*.json          partial token overlays (e.g. ice.json) — restyle everything at once
-assets/*.json          asset documents, one per asset, filename = id with dots→dashes
-sounds/*.json          sound documents, same naming rule
-adapters/phaser|godot  one drop-in file per engine, consuming compiled IR
-adapters/webaudio      the same, for sound
-src/                   schema (zod) · token resolver · SVG renderer · compiler · gallery · cli
-                       sound-schema · sound-compile · sound-render (PCM/WAV/measurement)
-scripts/               watch (rebuild on save) · site (the gallery as a static site) · inspect · filmstrip · inspect-sound
-                       compare · adapter tests
-dist/assets.json       committed: the bundle consumers import as `polygraphics/assets`
-dist/sounds.json       likewise, as `polygraphics/sounds`
-out/                   generated, ignored: svg/, compiled/, png/, wav/, gallery.html, manifest.json
-site/                  generated, ignored: the gallery as Vercel serves it (index.html + wav/ + spec/)
-baselines/             accepted PNG and WAV bakes; `npm run regress` diffs against these
-docs/                  reference-analysis.md — why this exists · app-design-systems-plan.md — one grammar, a convention per app
+tokens/base.json          what is physics rather than identity: ramps, stroke widths, alpha, the
+                          structural greys, and under `audio` the ladders every app shares
+apps/<id>/app.json        the app's manifest: its premise, categories, reference floors, and the
+                          RULES its art is held to (see "Apps" below)
+apps/<id>/tokens.json     the app's palette, grid, layers, pitch palette and loudness families,
+                          laid over base; a theme lays over that
+apps/<id>/themes/*.json   partial token overlays (e.g. ice.json) — restyle the app at once
+apps/<id>/assets/*.json   asset documents, one per asset, id `<id>.<category>.<name>`,
+                          filename = id with dots→dashes
+apps/<id>/sounds/*.json   sound documents, same naming rule
+apps/<id>/baselines/      accepted PNG and WAV bakes; `npm run regress` diffs against these
+core/assets/*.json        shared library documents, base tokens only (none yet)
+adapters/phaser|godot     one drop-in file per engine, consuming compiled IR
+adapters/webaudio         the same, for sound
+src/                      schema (zod) · app-schema · apps (the loader) · token resolver · SVG renderer
+                          compiler · lint · rules · gallery · cli · sound-schema/compile/render
+scripts/                  watch (rebuild on save) · site (the gallery as a static site) · inspect · filmstrip
+                          inspect-sound · readability · compare · adapter and lint tests
+dist/<id>/assets.json     committed: the app's bundle, imported as `polygraphics/apps/<id>/assets`
+dist/<id>/sounds.json     likewise, as `polygraphics/apps/<id>/sounds`
+dist/assets.json          the union of every app, `polygraphics/assets` — what the current consumer imports
+out/                      generated, ignored: svg/, compiled/, png/, wav/, gallery.html, manifest.json
+site/                     generated, ignored: the gallery as Vercel serves it (index.html + wav/ + spec/)
+docs/                     reference-analysis.md — why this exists · app-design-systems-plan.md — one grammar, a convention per app
 ```
+
+## Apps
+
+An **app** is whatever consumes a bundle: one game, one launcher, one screen. It is a directory under
+`apps/`, and the directory is the namespace — every document it holds has an id starting with `<id>.`, and
+its bundle is `dist/<id>/`. `apps/ss/` is the Shape Survivors roster; `apps/demo/` is the worked examples
+this README draws on, and the template for the next app.
+
+An app owns its **palette** (`tokens.json`, over `tokens/base.json`), its **categories**, the **floor** its
+art is judged on and the **scale** it is seen at, its **clip and state vocabulary**, its **sound families**
+and its **key**. It does not own the grammar: the schema, the shapes, the renderer and the adapters are the
+repo's, and an app narrows them and never extends them — whoever can author for one app can author for the
+next.
+
+The manifest is where a convention stops being a README sentence. `apps/ss/app.json` states, as `rules`:
+
+| rule | what it says for `ss` | how `check` holds it |
+|---|---|---|
+| `grid` | canvases in these categories sit on the 4px grid | a warning on the ones that don't; terrain props and shots are placed, not tiled, so the rule does not reach them |
+| `size` | icons, relics, characters and draughts are 32×32 | a warning on any other size |
+| `meta` | every enemy body, character and figure carries `meta.radius` (a shot, tagged `projectile`, does not) | a warning on the one that forgot |
+| `clips` | every enemy body carries a `death` clip | a warning on the one that forgot |
+| `oneShot` | nothing in a `death` moves after `t = 0.85` — arrive, then hold | a warning naming the track still moving |
+| `states` | the variant vocabulary per category: `elite`, `enraged`, `final`… on an enemy, `evolved` on an icon, `glyph` on a relic | a warning on a state nobody listed |
+| `roles` / `paint` | `hive` is `$pheromone` and `$pink`; projectiles and weapon icons never paint with it, but the lure | a warning naming the token and the document it came through |
+| `distinct` | the weapon icons' tiles sit at least ΔE2000 13 apart | a warning naming the pair |
+| `contracts` | `ss.proj.ring` keeps `meta.radius` 62, and three more the game divides by | an **error** — the game cannot see a broken one |
+| `layers` | which `tokens.layers` depth each category draws on | `out/manifest.json` carries `layer` and `depth` per entry |
+| `audio.key` | fanfares play only the score's degrees | a warning on the note outside them |
+
+A document steps outside a rule *in writing*: `"why": { "size": "…" }` on the document, keyed by the rule,
+and the rule leaves it alone while the gallery lists the exception with its reason. That is `offBand` on a
+sound, generalised — the exception reads as a decision somebody made rather than a warning everybody learns
+to scroll past. Rules are warnings unless the manifest's `levels` says `error`; the app decides how hard
+its own rules are.
+
+The gallery has a page per app for this: the premise, then every rule with how many documents it holds
+over, who breaks it, and who stepped outside it and why; the palette grouped by role; and every sprite
+viewable on the floor the manifest names, tiled behind it at the sprite's zoom. The rule kinds are a closed
+set with a schema (`src/app-schema.ts`); a new *kind* is a PR to `src/rules.ts` with a lint and a message
+that names the fix, a new *instance* is a line in a manifest. `scripts/test-lints.ts` fires every rule on
+an app built to break it and checks that each one holds over the roster.
+
+Adding an app is `apps/<id>/app.json`, `apps/<id>/tokens.json` and one document; `npm run check` renders
+it, lints it against its own rules and nobody else's, and writes `dist/<id>/assets.json`, with no edit to
+`src/` or `scripts/`. The plan this came from, and the decisions still open, are in
+[docs/app-design-systems-plan.md](docs/app-design-systems-plan.md).
 
 ## Design loop
 
@@ -60,7 +114,7 @@ Renders each asset **big** (judge the form), **at true game scale on the real gr
 
 ```jsonc
 {
-  "id": "enemy.imp",                  // dotted, category-first
+  "id": "demo.enemy.imp",             // dotted: app, then category, then name
   "name": "Imp",
   "description": "Small aggressive melee chaser: …",   // REQUIRED — legibility is the point
   "tags": ["enemy", "melee", "small"],// tags[0] = gallery category
@@ -82,7 +136,7 @@ Every part has an `id` (snake_case — variants and animations address parts by 
 | form | keys | meaning |
 |---|---|---|
 | shape part | `shape`, `fill?`, `stroke?` | draw a primitive |
-| use part | `use: "lib.face"`, `variant?` | compose another asset document in place (shared parts, single-source icons; cycle-guarded, depth ≤ 4). `variant` picks a state of the used document, so one library part can appear in several conditions across the roster |
+| use part | `use: "demo.lib.face"`, `variant?` | compose another asset document in place (shared parts, single-source icons; cycle-guarded, depth ≤ 4). `variant` picks a state of the used document, so one library part can appear in several conditions across the roster |
 | repeat part | `repeat: { of, count, area, seed?, jitterRot?, scaleRange? }`, `fill?` | deterministic seeded scatter (pebbles, specks) |
 
 ### Shapes
@@ -98,7 +152,7 @@ Every part has an `id` (snake_case — variants and animations address parts by 
 { "gradient": "linear"|"radial", "from"?, "to"?, "stops": [[0,"$soul.light"],[1,"$soul.dark"]] }
 ```
 
-Stroke widths and opacities likewise take token names (`"width": "thin"`, `"opacity": "soft"`). Raw `#hex` renders but warns with the nearest token. **A theme is just a token overlay** — `themes/ice.json` swaps warm hues for cold and every asset restyles coherently, silhouettes untouched.
+Stroke widths and opacities likewise take token names (`"width": "thin"`, `"opacity": "soft"`). Raw `#hex` renders but warns with the nearest token. **A theme is just a token overlay** — `apps/ss/themes/ice.json` swaps warm hues for cold and every asset restyles coherently, silhouettes untouched.
 
 ### Variants — patches, not redraws
 
@@ -204,7 +258,7 @@ same deal raw `#hex` gets, for the same reason, and only in the slots that carry
 identity: a keyframe or a `to` target is a trajectory and passes silently, the
 way an animation track's `y` is plain px while a `fill` must be a token. Gain, Q
 and length take a number or a token name, exactly as stroke widths and opacities
-do. `themes/*.json` may overlay the `audio` section too, so one overlay restyles
+do. `apps/<id>/themes/*.json` may overlay the `audio` section too, so one overlay restyles
 how the roster looks *and* how it sounds.
 
 **The palette is split the way the fiction is.** Half of it is the hive's body —
@@ -334,7 +388,7 @@ npx tsx scripts/inspect-sound.ts --against baselines   # …with every take besi
 
 The inspect page is the shareable export: takes embedded, no server, opens
 anywhere. Pass ids to narrow it (`… ss.sfx.hit ss.sfx.creak`). With
-`--against baselines` each take sits beside the WAV in `baselines/sounds/`
+`--against baselines` each take sits beside the WAV in `apps/<id>/baselines/sounds/`
 with one transport for both and an **A/B** button that plays them back to
 back, so a re-author is judged against what it replaces at the same level,
 and the numbers beside it say what moved. That page, and the four questions
@@ -412,9 +466,9 @@ The system has one source of truth and four compiled outputs:
 
 | form | where | who consumes it |
 |---|---|---|
-| **authoring documents** | `assets/*.json` + `tokens/` + `themes/` | humans and AI agents (the only thing you edit) |
+| **authoring documents** | `apps/<id>/assets/*.json` + `app.json` + `tokens.json` + `themes/`, over `tokens/base.json` | humans and AI agents (the only thing you edit) |
 | **compiled IR** | `out/compiled/*.json` (+ per-theme) | **game engines** — tokens resolved to `[r,g,b,a]` floats, variants pre-applied, `use` inlined, `mirrorX`/`repeat` expanded, ngon/star → concrete points. Engine adapters are dumb interpreters; no token/grammar/PRNG logic ships to the game |
-| **the bundle** | `dist/assets.json` via `npm run dist` | the same IR as one file keyed by asset id — what a consuming game imports as `polygraphics/assets`. Committed, unlike `out/`, because it is the thing that leaves the repo |
+| **the bundle** | `dist/<id>/assets.json` per app, and `dist/assets.json` the union, via `npm run dist` | the same IR as one file keyed by asset id — what a consuming game imports as `polygraphics/assets`. Committed, unlike `out/`, because it is the thing that leaves the repo |
 | **previews** | `out/svg/*.svg`, `out/gallery.html` | humans and AI agents (inspect/iterate; CSS animations play in the gallery) |
 | **bakes** | `out/png/*.png` (4×) via `npm run png`, `out/wav/*.wav` via `npm run wav` | any engine as plain images or audio files; also the regression baseline. `npm run png -- --only <id> --size <px>` bakes one document at an exact pixel width instead — for the places outside an engine that want a file at a size they name, a web app manifest's icon plates being the first of them |
 | **manifest** | `out/manifest.json` | engines/AI index: description, tags, named parts, variants, animations, **derived bounding radius** (art and collision can't silently desync), and per sound its **measured peak, RMS and brightness** |
@@ -435,9 +489,13 @@ A git dependency, not a path: CI and deploy builds clone only the consuming repo
 The lockfile pins the exact commit, which is what makes a build reproducible; `npm update polygraphics` is how you take new art.
 
 ```ts
-import { bakeFlat } from "polygraphics/phaser";   // the adapter: zero deps, zero engine imports
-import bundle from "polygraphics/assets";         // { format, assets: { "ss.enemy.imp": IR, … } }
+import { bakeFlat } from "polygraphics/phaser";     // the adapter: zero deps, zero engine imports
+import bundle from "polygraphics/apps/ss/assets";   // { format, assets: { "ss.enemy.imp": IR, … } } — one app's art
+import all from "polygraphics/assets";              // the union of every app, which is what the game imports today
 ```
+
+An app imports its own bundle. The union stays until the consumer has switched — and it switches first, then
+the union goes; never the other way round.
 
 Nothing is generated into the consuming repo and nothing is copied across repos. To try art before it lands, point the dependency at a branch (`npm i github:wndgur2/polygraphics#my-branch`) or at a local working copy (`npm i file:../polygraphics`) — the latter only for local work, never committed.
 
@@ -495,7 +553,7 @@ Both adapters are verified: the Phaser one by a mock-scene smoke test (`npx tsx 
 ## Visual regression
 
 ```bash
-npm run baseline   # accept current bakes as reference (commit baselines/)
+npm run baseline   # accept current bakes as reference (commit apps/<id>/baselines/); --app <id> for one app
 npm run regress    # byte-compare current PNGs and WAVs against baselines; exits 1 on change
 ```
 
@@ -505,7 +563,7 @@ Because rendering is deterministic, a one-digit token drift (the `ff9b3d` vs `ff
 
 ## Worked example: the Shape Survivors roster
 
-`assets/ss.*` is the full roster of the sibling project, first transcribed 1:1 from its `BootScene.ts`, then re-authored around one sentence of fiction: **the protagonist has lost their pheromone transmitter, and the hive hunts them for the silence.** `npx tsx scripts/compare.ts` builds `out/compare.html` — 39 before/after pairs.
+`apps/ss/assets/` is the full roster of the sibling project, first transcribed 1:1 from its `BootScene.ts`, then re-authored around one sentence of fiction: **the protagonist has lost their pheromone transmitter, and the hive hunts them for the silence.** `npx tsx scripts/compare.ts` builds `out/compare.html` — 39 before/after pairs.
 
 What the system contributed that imperative draw code could not:
 
@@ -515,7 +573,7 @@ What the system contributed that imperative draw code could not:
 - **The Salt Pan's household is eleven bodies, and each is the shape of what it does.** The game's third stage is open ground where most of the roster does not need to reach you, so every document there is drawn around its one verb: a Locust is a hind leg, an Antlion is two jaws standing out of a mound (`buried`, and `elite_buried` because a variant is a patch on the base and the game cannot stack two), a Burr is a star of spines that leave it when it dies, a Hurler carries a Mite over its back (`use: ss.enemy.imp` — the load is the shot), a Bombardier is a wedge with a mortar on it, a Stinger is a tail arched over the body that `aim` straightens along +x, a Blister holds its elytra open, a Sower carries three `ss.enemy.tick` under its abdomen, and the bosses are a ring of stones (Hail), a tiger beetle at full stride (Forerunner) and a hole in the ground with jaws in it (Sinkmaw). Seven shots for seven verbs, and a floor (`ss.env.pan`, on a new `$sand` token) with salt plates, a ribcage, fissures and fused glass to stand on it. All of it generated from a script of two-link legs and hinged chains, which is why the walk cycles agree with each other.
 - **The pan's floor is sand now, and the tile stopped showing.** The first `ss.env.pan` was dark umber under a lattice of salt cracks, which is a fine drawing and a bad tile: the cracks met at the edges and the four black pits repeated, so 128px of it read as a hex grid the moment the game laid it end to end. The rework is the same ground with the sun on it — `$sand` lifted about a stop and a half, and the surface rebuilt as fine sand: five seeded grain passes under wind ripples (shallow arcs banded at -13 degrees, each a wide lee band with the lit face inside it), dune swells in concentric steps because the Phaser bake flattens a gradient, salt bloom where the crust still shows, and two shallow antlion dishes instead of the pits. It tiles on a torus: every part whose bounds cross an edge is emitted again 128px over, so nothing is clipped away at a seam and no grain-free margin frames the tile. Where it stops being brighter is a number, not a taste — `scripts/readability.ts` against `ss.env.pan` rather than the field: past this the pan's own mid-brown roster starts to sit at the floor's tone, and the survivor falls under 3:1 against it.
 - **Variants are real states**, not scale × tint: `ss.enemy.brazier#spent` is the destroyed relay, `ss.enemy.boss#enraged` splits the shell open, `ss.pickup.chest#cursed` puts something awake inside.
-- **`themes/ice.json`** restyles the entire redesigned roster — chitin to blue-grey, pheromone to a cold signal — without touching a silhouette.
+- **`apps/ss/themes/ice.json`** restyles the entire redesigned roster — chitin to blue-grey, pheromone to a cold signal — without touching a silhouette.
 - **The arsenal follows a second rule**: player weapons are hive material with the signal stripped out — chitin, husk bone, molt shell, honed to a cold frost edge, and never magenta. A lash is a Soldier's mandible on a cord; the orbiting drone is a hexagonal plate cut from a Molt; the thrown card is a Drifter's wing on a bone frame. The one place the hive's colour touches the player is `ss.fx.pickup`, the half-second of borrowed voice when a lump of pulp is absorbed. The one weapon that breaks it breaks it on purpose: `ss.proj.mine` is a lure, a pink fruiting body calling the hive to the spot it is about to detonate, and a trap that nothing walks near does nothing. It is bait in the player's hand rather than the player's voice, which is why it sits on the ground instead of being carried.
 - **Weapon icons compose their weapons.** `ss.icon.wand/whip/boomerang` `use` `ss.proj.bolt/slash/boom` directly, so the original's five-shapes-authored-twice problem cannot recur; `evolved` is a rim-colour patch, not a second drawing.
 - **A weapon icon's rim is that weapon's own colour.** Lash `$husk` (bone), Glob `$bile` (acid), Mandibles `$chitin` (jaw amber), Lure `$pink` (cap), Broodling `$blood` (vent), Chirp `$frost`, Dung `$timber`, Wing `$arcane`. The rims had drifted — three documents claimed to keep a hand-drawn original's colour, and two of those originals no longer existed — so each now takes a colour that is actually in the art it wraps. The arsenal is deliberately four shades of one material, which fights this: Lash, Mandibles, Pod and Dung are all bone or chitin or timber, and a rim drawn from the dominant colour of each would put four slots within ΔE2000 13 of one another. So two of them take the part of their art that nothing else owns rather than the part there is most of — the jaw's amber over the husk it is mostly drawn in, the muck's unlightened timber, which is the only ramp of it that clears chitin. The worst pair is 20.2, Mandibles against Dung, and it is the arsenal's own palette that sets that ceiling. `$arcane` on the Wing is ahead of its art on purpose: that weapon is being redrawn as a grenade thorn and going purple. `evolved` overrides all eight with `$gold`, the one rim that means a state rather than a weapon. `$pheromone` would be the truer token for a signal, and is the one the scent tokens in that art come from, but it lands 15.3 from the Wing's `$arcane` where `$pink` lands 21.3; the rim takes the cap's colour and the plume keeps the meaning.
@@ -524,7 +582,7 @@ What the system contributed that imperative draw code could not:
 - **One direction was drawn and declined.** `ss.draught.*`, `ss.lib.vial`, `ss.lib.vial-cap` and `ss.char.survivor` are a proposal: the eight playable shapes folded into a single body, with what a run varies moved into a draught drunk on the way in. The game kept its eight shells, so none of it is drawn anywhere. It stays in the repo, described and rendering, because a drawing is the only place an idea like that survives intact — and because nothing asks for those ids, nothing breaks by their staying. The eight `ss.char.*` shells are the live roster; **do not delete them to tidy the survivor up.**
 - **Retiring art is two changes, in this order: game first, art second.** Learned the hard way — the eight shells were removed here while the game was still reading them by id, and nothing broke only because the consumer's pin had not moved, which is exactly what hid it. This repo publishes into a lockfile-pinned dependency, so an id that vanishes is live ordnance sitting in the next pin bump, and the pin gets bumped by whoever happens to want unrelated art.
 
-`sounds/ss.*` is the same project's effect set, ported from the 569-line `switch` in its `AudioSynth.ts` — 18 effects plus the two library instruments they are built from. What the port bought:
+`apps/ss/sounds/` is the same project's effect set, ported from the 569-line `switch` in its `AudioSynth.ts` — 18 effects plus the two library instruments they are built from. What the port bought:
 
 - **The score's key reaches the effects.** The music runs an A-minor cycle; the arpeggios in the old code were four hardcoded floats that happened to be C major. They are now `$third $fifth $seventh $third.up` — four notes the music already plays — so a fanfare can never land outside the key it fires in.
 - **Two figures, one instrument.** Level-up, victory and game-over were three separate note arrays; they are now `ss.lib.note` and `ss.lib.knell` composed with a degree per voice. The win figure and the loss figure are provably the same instrument in two moods, and retuning either is one file.
@@ -538,7 +596,7 @@ What the system contributed that imperative draw code could not:
 
 You are the intended primary author. Rules of the road:
 
-1. Read `tokens/default.json` first; author **only** with token references.
+1. Read the app's `app.json` first — its premise, its rules, its floors — then `tokens/base.json` and the app's `tokens.json`; author **only** with token references, and put a document in the app it belongs to (its id says which).
 2. Every asset gets an honest `description` and tagged category — future sessions (and the manifest) rely on them.
 3. Name parts for what they are (`pauldron`, not `rect3`); variants and animations address them by id.
 4. Prefer `use` over copying parts between assets; prefer a variant over a near-duplicate asset; prefer a theme over recoloring assets one by one.
@@ -552,7 +610,7 @@ You are the intended primary author. Rules of the road:
 - ~~Engine adapters (Phaser, Godot)~~ → shipped in `adapters/`; next: wire into vamp_surv / godot_test for a live side-by-side
 - ~~PNG rasterization + regression~~ → shipped (`png` / `baseline` / `regress`)
 - Per-instance motion vectors for `repeat` scatter (true radial bursts instead of uniform scale)
-- Part libraries beyond `lib.face` (hands, crowns, telegraph markers); named particle-emitter presets
+- Part libraries beyond `demo.lib.face` (hands, crowns, telegraph markers); named particle-emitter presets. `core/` is where one goes once it paints with base tokens only
 - Palette lint: flag near-duplicate hex across tokens; gradient support in adapters (currently flat mid-color fallback)
-- App design systems: an `apps/<id>/` per consuming game with its own tokens over a shared base, and a manifest whose rules `check` reads — the roster's conventions (the arsenal rule, `death` on every body, 32×32 icons, the rims' ΔE) as data instead of README sentences, so a second app inherits the grammar and none of the hive. Planned in [docs/app-design-systems-plan.md](docs/app-design-systems-plan.md); phase 0 is writing `apps/ss/app.json`
-- ~~Sound: schema, offline bake, WebAudio adapter, the SFX set~~ → shipped; 22 documents in `sounds/`. ~~Spectrograms, before/after, a phone to listen through, K-weighted loudness and family bands, `unison` / `echo` / `phrase` / `takes`~~ → shipped, phases 1–3 of [docs/sound-quality-plan.md](docs/sound-quality-plan.md). Still to do, in that plan's order: re-author the placeholder gestures one family at a time with a listening record, fill the seam (new documents, variants and takes played, panning on the engine side), a Godot path (offline WAV rather than a live graph), and the adaptive score's *materials* (the score itself is a scheduler and stays in the game)
+- ~~App design systems~~ → shipped, phases 0–4 of [docs/app-design-systems-plan.md](docs/app-design-systems-plan.md): `apps/<id>/` per app, a manifest whose rules `check` reads, per-app bundles. Still to do: the second real app (Cellspire is the candidate) with no edit to `src/`; the spider hand's own rim colour; dropping the union bundle once the game imports `polygraphics/apps/ss/assets`
+- ~~Sound: schema, offline bake, WebAudio adapter, the SFX set~~ → shipped; 22 documents in `apps/ss/sounds/`. ~~Spectrograms, before/after, a phone to listen through, K-weighted loudness and family bands, `unison` / `echo` / `phrase` / `takes`~~ → shipped, phases 1–3 of [docs/sound-quality-plan.md](docs/sound-quality-plan.md). Still to do, in that plan's order: re-author the placeholder gestures one family at a time with a listening record, fill the seam (new documents, variants and takes played, panning on the engine side), a Godot path (offline WAV rather than a live graph), and the adaptive score's *materials* (the score itself is a scheduler and stays in the game)
