@@ -9,16 +9,16 @@
  * that fires it the way the game will, jitter rolled per trigger, so you can
  * hear whether a hundred of them in a row read as a swarm or as a machine gun.
  *
- * `--against baselines` puts the accepted take from `baselines/sounds/` beside
+ * `--against baselines` puts the accepted take from `apps/<id>/baselines/sounds/` beside
  * each current one, with one transport for both and an A/B button that plays
  * them back to back, so a re-author is judged against what it replaces at the
  * same level. The numbers beside it say what moved. `docs/listening.md` says
  * what to ask of the person holding the headphones.
  */
-import { existsSync, readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, relative, resolve } from "node:path";
 import { PNG } from "pngjs";
-import { SoundSchema, type Sound } from "../src/sound-schema.js";
+import { type Sound } from "../src/sound-schema.js";
 import { compileSound, type SoundRegistry } from "../src/sound-compile.js";
 import {
   describe,
@@ -31,34 +31,41 @@ import {
   type Descriptors,
 } from "../src/sound-render.js";
 import type { Tokens } from "../src/tokens.js";
+import { appNamed, loadLibrary, ownerOf, ROOT } from "../src/apps.js";
 
-const ROOT = new URL("..", import.meta.url).pathname;
 const dir = (...p: string[]) => join(ROOT, ...p);
 
-const tokens = JSON.parse(readFileSync(dir("tokens", "default.json"), "utf8")) as Tokens;
-const sounds = new Map<string, Sound>();
-for (const f of readdirSync(dir("sounds")).filter((f) => f.endsWith(".json"))) {
-  const sd = SoundSchema.parse(JSON.parse(readFileSync(dir("sounds", f), "utf8")));
-  sounds.set(sd.id, sd);
-}
-const sreg: SoundRegistry = { sounds, tokens };
-
-const argv = process.argv.slice(2);
-let against: string | undefined;
-const want: string[] = [];
-for (let i = 0; i < argv.length; i++) {
-  if (argv[i] === "--against") {
-    const a = argv[++i] ?? fail("--against needs a directory, e.g. `--against baselines`");
-    against = a === "baselines" ? dir("baselines", "sounds") : resolve(a);
-    if (!existsSync(against)) fail(`--against: no such directory "${against}"`);
-  } else want.push(argv[i]);
-}
-const picked = want.length ? want.map((id) => sounds.get(id) ?? fail(`unknown sound "${id}"`)) : [...sounds.values()];
-
 function fail(msg: string): never {
-  console.error(`✖ ${msg} — have: ${[...sounds.keys()].join(", ")}`);
+  console.error(`✖ ${msg}`);
   process.exit(1);
 }
+
+const argv = process.argv.slice(2);
+let againstArg: string | undefined;
+let appArg: string | undefined;
+const want: string[] = [];
+for (let i = 0; i < argv.length; i++) {
+  if (argv[i] === "--against") againstArg = argv[++i] ?? fail("--against needs a directory, e.g. `--against baselines`");
+  else if (argv[i] === "--app") appArg = argv[++i] ?? fail("--app needs an app id");
+  else want.push(argv[i]);
+}
+
+// Which app's set: named, or the one that owns the first id given, or the first that has sounds.
+const lib = loadLibrary();
+const app = appNamed(lib, appArg) ?? (want.length ? ownerOf(lib, want[0]) : undefined) ?? lib.apps.find((a) => a.sounds.size);
+if (!app) fail(`no app with sounds${appArg ? ` named "${appArg}"` : ""} — apps are ${lib.apps.map((a) => a.id).join(", ")}`);
+const tokens: Tokens = app.tokens;
+const sounds: Map<string, Sound> = app.sounds;
+const sreg: SoundRegistry = app.sreg;
+
+let against: string | undefined;
+if (againstArg) {
+  against = againstArg === "baselines" ? dir(app.dir, "baselines", "sounds") : resolve(againstArg);
+  if (!existsSync(against)) fail(`--against: no such directory "${against}"`);
+}
+const picked = want.length
+  ? want.map((id) => sounds.get(id) ?? fail(`unknown sound "${id}" — ${app.id} has: ${[...sounds.keys()].join(", ")}`))
+  : [...sounds.values()];
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const slug = (id: string) => id.replace(/\./g, "-");

@@ -13,23 +13,17 @@
  * Writes out/sheet/<id>--<anim>.png: the base render at 8×, the silhouette,
  * two game-scale copies, then the frames at 4×.
  */
-import { readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync } from "node:fs";
 import { Resvg } from "@resvg/resvg-js";
-import { AssetSchema, type Asset, type Anim } from "../src/schema.js";
-import { renderSVG, type Registry } from "../src/render.js";
-import type { Tokens } from "../src/tokens.js";
+import type { Asset, Anim } from "../src/schema.js";
+import { renderSVG } from "../src/render.js";
+import { loadLibrary, ownerOf, type Owner } from "../src/apps.js";
 
 const root = new URL("..", import.meta.url).pathname;
 const outDir = root + "out/sheet";
 mkdirSync(outDir, { recursive: true });
-const tokens = JSON.parse(readFileSync(root + "tokens/default.json", "utf8")) as Tokens;
-const assets = new Map<string, Asset>();
-for (const f of readdirSync(root + "assets/").filter((f) => f.endsWith(".json"))) {
-  const parsed = AssetSchema.safeParse(JSON.parse(readFileSync(root + "assets/" + f, "utf8")));
-  if (parsed.success) assets.set(parsed.data.id, parsed.data);
-  else console.log("✖", f, parsed.error.issues[0]?.path.join("."), parsed.error.issues[0]?.message);
-}
-const reg: Registry = { assets, tokens };
+const lib = loadLibrary();
+for (const i of lib.issues) if (i.level === "error") console.log("✖", i.where, i.msg);
 
 const EASE: Record<string, (t: number) => number> = {
   linear: (t) => t,
@@ -45,7 +39,7 @@ function evalTrack(tr: Anim["tracks"][number], p: number): number {
   }
   return keys[keys.length - 1][1];
 }
-function posed(a: Asset, anim: Anim, p: number): Asset {
+function posed(owner: Owner, a: Asset, anim: Anim, p: number): Asset {
   const parts = structuredClone(a.parts);
   for (const tr of anim.tracks) {
     const v = evalTrack(tr, p);
@@ -57,7 +51,7 @@ function posed(a: Asset, anim: Anim, p: number): Asset {
         case "y": part.at = [at[0], at[1] + v]; break;
         case "rot": part.rot = (part.rot ?? 0) + v; break;
         case "scale": { const s = part.scale ?? 1; part.scale = typeof s === "number" ? s * v : [s[0] * v, s[1] * v]; break; }
-        case "opacity": { const o = typeof part.opacity === "number" ? part.opacity : part.opacity === undefined ? 1 : (tokens.alpha as any)[part.opacity] ?? 1; part.opacity = Math.max(0, Math.min(1, o * v)); break; }
+        case "opacity": { const o = typeof part.opacity === "number" ? part.opacity : part.opacity === undefined ? 1 : owner.tokens.alpha[part.opacity] ?? 1; part.opacity = Math.max(0, Math.min(1, o * v)); break; }
       }
     }
   }
@@ -68,16 +62,16 @@ const args = process.argv.slice(2);
 const animFlag = args.includes("--anim") ? args[args.indexOf("--anim") + 1] : undefined;
 const frames = args.includes("--frames") ? Number(args[args.indexOf("--frames") + 1]) : 8;
 const ids = args.filter((x, i) => !x.startsWith("--") && args[i - 1] !== "--anim" && args[i - 1] !== "--frames");
-const GROUND = tokens.colors.soil;
-
-function png(svg: string, zoom: number): { buf: Buffer; w: number; h: number } {
-  const r = new Resvg(svg, { fitTo: { mode: "zoom", value: zoom }, background: GROUND }).render();
+function png(svg: string, zoom: number, ground: string): { buf: Buffer; w: number; h: number } {
+  const r = new Resvg(svg, { fitTo: { mode: "zoom", value: zoom }, background: ground }).render();
   return { buf: Buffer.from(r.asPng()), w: r.width, h: r.height };
 }
 
 for (const id of ids) {
-  const a = assets.get(id);
-  if (!a) { console.log("unknown", id); continue; }
+  const o = ownerOf(lib, id);
+  const a = o?.assets.get(id);
+  if (!o || !a) { console.log("unknown", id); continue; }
+  const reg = o.reg;
   const animName = animFlag ?? Object.keys(a.animations ?? {})[0];
   const anim = animName ? a.animations?.[animName] : undefined;
   const [w, h] = a.size;
@@ -105,7 +99,7 @@ for (const id of ids) {
     let fx = 0;
     for (let f = 0; f < frames; f++) {
       const p = f / frames;
-      const svg = renderSVG(posed(a, anim, p), reg, {}).svg;
+      const svg = renderSVG(posed(o, a, anim, p), reg, {}).svg;
       items.push(strip(svg, x + fx + ax * cellFrame, ay * cellFrame, cellFrame));
       items.push(`<text x="${x + fx + 2}" y="${h * cellFrame + 12}" fill="#8fa" font-size="10" font-family="monospace">${p.toFixed(2)}</text>`);
       fx += w * cellFrame + 4;
@@ -122,7 +116,7 @@ for (const id of ids) {
   const bl = minX / 4 - ax, bt = minY / 4 - ay, br = (maxX + 1) / 4 - ax, bb = (maxY + 1) / 4 - ay;
   const touches = [bl <= -ax + 0.3 && "left", bt <= -ay + 0.3 && "top", br >= w - ax - 0.3 && "right", bb >= h - ay - 0.3 && "bottom"].filter(Boolean);
   console.log(`  bounds x ${bl.toFixed(1)}..${br.toFixed(1)} y ${bt.toFixed(1)}..${bb.toFixed(1)} on ${w}×${h}${touches.length ? ` — ▲ touches ${touches.join(", ")}` : ""}`);
-  const out = png(sheet, 1);
+  const out = png(sheet, 1, o.tokens.colors.soil ?? "#131019");
   const file = `${outDir}/${id.replace(/\./g, "-")}${animName ? "--" + animName : ""}.png`;
   writeFileSync(file, out.buf);
   console.log(`✓ ${file} ${out.w}×${out.h}${animName ? ` anim=${animName}` : ""}`);

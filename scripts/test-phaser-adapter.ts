@@ -54,10 +54,10 @@ function check(name: string, cond: boolean, detail = ""): void {
 
 // ---------------- bakeFlat
 {
-  const imp = load("enemy-imp");
+  const imp = load("demo-enemy-imp");
   const { scene, rec } = mockScene();
   const key = bakeFlat(scene, imp);
-  check("bakeFlat returns namespaced key", key === "pg:enemy.imp");
+  check("bakeFlat returns namespaced key", key === "pg:demo.enemy.imp");
   check("bakeFlat texture is canvas-sized 32×32", String(rec.textures.get(key)) === "32,32");
   const fills = rec.cmds.filter((c) => c[0] === "fillPoints").length;
   check("bakeFlat draws every node (9 nodes → ≥9 fills)", fills >= 9, `got ${fills}`);
@@ -76,7 +76,7 @@ function check(name: string, cond: boolean, detail = ""): void {
 
 // ---------------- buildRig + animation
 {
-  const imp = load("enemy-imp");
+  const imp = load("demo-enemy-imp");
   const { scene, images } = mockScene();
   const rig = buildRig(scene, imp);
   check("rig makes one image per IR node (9)", images.length === 9, `got ${images.length}`);
@@ -99,7 +99,7 @@ function check(name: string, cond: boolean, detail = ""): void {
 
 // ---------------- fx one-shot
 {
-  const impact = load("fx-impact");
+  const impact = load("demo-fx-impact");
   const { scene } = mockScene();
   const rig = buildRig(scene, impact);
   let done = false;
@@ -112,7 +112,7 @@ function check(name: string, cond: boolean, detail = ""): void {
 
 // ---------------- every compiled asset bakes without throwing
 {
-  const files = ["boss-hex", "char-dot", "enemy-grunt", "fx-slash", "fx-ring", "fx-burst", "fx-muzzle", "icon-boomerang", "pickup-chest", "tile-ground", "weapon-boomerang", "lib-face"];
+  const files = ["demo-boss-hex", "demo-char-dot", "demo-enemy-grunt", "demo-enemy-imp", "demo-fx-slash", "demo-fx-ring", "demo-fx-burst", "demo-fx-impact", "demo-fx-muzzle", "demo-pickup-chest", "demo-tile-ground", "demo-lib-face"];
   let ok = true;
   for (const f of files) {
     try {
@@ -126,7 +126,7 @@ function check(name: string, cond: boolean, detail = ""): void {
       console.log(`  ✖ ${f}: ${(e as Error).message}`);
     }
   }
-  check("all 12 remaining assets bake + rig cleanly", ok);
+  check("the demo and core documents bake + rig cleanly", ok);
 }
 
 console.log(failures ? `\n${failures} FAILED` : "\nALL PASS");

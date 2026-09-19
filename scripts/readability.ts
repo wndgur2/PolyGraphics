@@ -3,30 +3,34 @@
  * minute 13 is judged by its contrast against the floor, not by how nice it
  * looks alone — so measure that, per asset, the same way every time.
  *
- *   npx tsx scripts/readability.ts            # all in-world ss.* assets
+ *   npx tsx scripts/readability.ts                    # every body of the first app, on its floor
+ *   npx tsx scripts/readability.ts --app ss           # …of a named app
  *   npx tsx scripts/readability.ts ss.enemy.imp ss.char.dot
  *   npx tsx scripts/readability.ts --ground ss.env.pan   # judged on the pan's floor
  *
- * Reports, against the mean colour of the ground tile (`--ground <id>`, the
- * field's by default):
+ * Reports, against the mean colour of the ground tile (`--ground <id>`; by
+ * default the first floor the app's manifest names under `reference.ground`,
+ * with the thresholds `reference.contrast` states):
  *   contrast  WCAG-style ratio of mean sprite luminance vs mean ground luminance
  *   bright%   share of opaque pixels above 0.18 luminance — the focal points
  *   cover%    share of the canvas the sprite actually fills
  */
-import { readdirSync, readFileSync } from "node:fs";
 import { Resvg } from "@resvg/resvg-js";
-import { AssetSchema, type Asset } from "../src/schema.js";
-import { renderSVG, type Registry } from "../src/render.js";
-import type { Tokens } from "../src/tokens.js";
+import { renderSVG } from "../src/render.js";
+import { appFlag, appNamed, loadLibrary, ownerOf } from "../src/apps.js";
+import { categoryOf } from "../src/app-schema.js";
 
-const root = new URL("..", import.meta.url);
-const tokens = JSON.parse(readFileSync(new URL("tokens/default.json", root), "utf8")) as Tokens;
-const assets = new Map<string, Asset>();
-for (const f of readdirSync(new URL("assets/", root)).filter((f) => f.endsWith(".json"))) {
-  const parsed = AssetSchema.safeParse(JSON.parse(readFileSync(new URL(`assets/${f}`, root), "utf8")));
-  if (parsed.success) assets.set(parsed.data.id, parsed.data);
-}
-const reg: Registry = { assets, tokens };
+const lib = loadLibrary();
+const argv = process.argv.slice(2);
+const gi = argv.indexOf("--ground");
+const ai = argv.indexOf("--app");
+const positional = argv.filter((a, i) => !a.startsWith("--") && i !== gi + 1 && i !== ai + 1);
+// Which app: named, or the one that owns the first id given, or the first there is.
+const app = appNamed(lib, appFlag(argv)) ?? (positional.length ? ownerOf(lib, positional[0]) : undefined) ?? lib.apps[0];
+if (!app) throw new Error("no app to judge");
+const reg = app.reg;
+const assets = reg.assets;
+const ref = app.manifest?.reference;
 
 /** sRGB → relative luminance, per WCAG. */
 function luminance(r: number, g: number, b: number): number {
@@ -73,16 +77,18 @@ function measure(id: string): Stats | null {
 // the pan's household never sees `ss.env.ground`, and the pan's floor is the
 // bright one, so measuring it there is the only measurement that means anything.
 //   npx tsx scripts/readability.ts --ground ss.env.pan ss.enemy.antlion
-const argv = process.argv.slice(2);
-const gi = argv.indexOf("--ground");
-const groundId = gi >= 0 ? argv[gi + 1] : "ss.env.ground";
+const groundId = gi >= 0 ? argv[gi + 1] : Object.values(ref?.ground ?? {})[0];
+if (!groundId) throw new Error(`${app.id} names no reference.ground in its manifest — pass --ground <id>`);
 const ground = measure(groundId);
 if (!ground) throw new Error(`${groundId} failed to render`);
+const sinks = ref?.contrast?.sinks ?? 2.5, thin = ref?.contrast?.thin ?? 3.5;
 
-const ids = argv.filter((a, i) => !a.startsWith("--") && i !== gi + 1);
-const targets = ids.length
-  ? ids
-  : [...assets.keys()].filter((id) => /^ss\.(char|enemy|pickup)\./.test(id)).sort();
+// The bodies the floor has to carry: what stands on it and what is picked up off it.
+const BODIES = new Set(["char", "enemy", "pickup"]);
+const bare = (cat: string) => (cat.startsWith(`${app.id}-`) ? cat.slice(app.id.length + 1) : cat);
+const targets = positional.length
+  ? positional
+  : [...app.assets.values()].filter((a) => BODIES.has(bare(categoryOf(a)))).map((a) => a.id).sort();
 
 console.log(`${groundId} mean rgb(${ground.mean.map((v) => Math.round(v)).join(",")}) luminance ${ground.lum.toFixed(4)}\n`);
 console.log("asset                 contrast  bright%  cover%   mean");
@@ -94,16 +100,16 @@ for (const id of targets) {
   if (!s) { console.log(`${id.padEnd(21)} — no opaque pixels`); continue; }
   const c = contrast(s.lum, ground.lum);
   rows.push({ id, c });
-  const flag = c < 2.5 ? "  ← sinks into the floor" : c < 3.5 ? "  ← thin" : "";
+  const flag = c < sinks ? "  ← sinks into the floor" : c < thin ? "  ← thin" : "";
   console.log(
     `${id.padEnd(21)} ${c.toFixed(2).padStart(7)}  ${(s.bright * 100).toFixed(0).padStart(6)}%  ` +
       `${(s.cover * 100).toFixed(0).padStart(5)}%   rgb(${s.mean.map((v) => Math.round(v)).join(",")})${flag}`,
   );
 }
 
-const weak = rows.filter((r) => r.c < 2.5);
+const weak = rows.filter((r) => r.c < sinks);
 console.log(
   `\n${rows.length} assets · median contrast ${rows.map((r) => r.c).sort((a, b) => a - b)[Math.floor(rows.length / 2)].toFixed(2)}` +
-    ` · ${weak.length} below 2.5`,
+    ` · ${weak.length} below ${sinks}`,
 );
 if (weak.length) console.log(`weak: ${weak.map((r) => r.id).join(", ")}`);

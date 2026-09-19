@@ -1,0 +1,26 @@
+{
+  "id": "ss.relic.spider-venom",
+  "name": "Venomed Claw",
+  "description": "One arm, held up, with the hook wet and three drops coming off it — the biggest still hanging under the claw, the next mid-fall, the last already small. The find puts poison on the hand's bite, so what is drawn is the claw *loaded* rather than the claw closing: a single limb on the diagonal with a string of green falling away from the tip, which is a silhouette neither of the other two hand plates has. Eighth Leg fans four arms off a knuckle and Hauling Arms mirrors two of them inward; this is one. The green is the same venom token the acid finds wear, so the two poisons on the shelf read as one substance — this is the heavier dose, and the drawing says so by hanging a fat drop off the tip rather than by inventing a colour for it. `ss.lib.spider-arm`'s `venomed` variant does the staining and leaves the bones alone: a limb recoloured end to end stops reading as a limb.",
+  "tags": ["relic"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "plate", "use": "ss.lib.relic-plate"},
+    {"id": "arm", "at": [-9.5, 8.5], "rot": -40.0, "use": "ss.lib.spider-arm", "variant": "venomed", "scale": 1.05},
+    {"id": "knuckle_shadow", "at": [-9.5, 8.5], "shape": {"kind": "circle", "r": 4.6}, "fill": "$ink"},
+    {"id": "knuckle", "at": [-9.5, 8.5], "shape": {"kind": "circle", "r": 3.1}, "fill": "$steel.dark"},
+    {"id": "drop_a_outline", "at": [7.6, -1.4], "shape": {"kind": "ellipse", "rx": 2.9, "ry": 3.8}, "fill": "$ink"},
+    {"id": "drop_a", "at": [7.6, -1.4], "shape": {"kind": "ellipse", "rx": 2.1, "ry": 3.0}, "fill": "$venom.dark"},
+    {"id": "drop_a_lit", "at": [6.9, -2.2], "shape": {"kind": "ellipse", "rx": 1.0, "ry": 1.5}, "fill": "$venom.light"},
+    {"id": "drop_b_outline", "at": [5.4, 4.6], "shape": {"kind": "ellipse", "rx": 2.1, "ry": 2.7}, "fill": "$ink"},
+    {"id": "drop_b", "at": [5.4, 4.6], "shape": {"kind": "ellipse", "rx": 1.4, "ry": 2.0}, "fill": "$venom"},
+    {"id": "drop_c_outline", "at": [8.4, 8.8], "shape": {"kind": "circle", "r": 1.8}, "fill": "$ink"},
+    {"id": "drop_c", "at": [8.4, 8.8], "shape": {"kind": "circle", "r": 1.1}, "fill": "$venom"}
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "remove": ["plate"]
+    }
+  }
+}
