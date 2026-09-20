@@ -107,7 +107,7 @@
         "h": 7.0,
         "corner": 1.2
       },
-      "fill": "$frost.dark",
+      "fill": "$steel.dark",
       "rot": -6
     },
     {
@@ -195,7 +195,7 @@
           ]
         ]
       },
-      "fill": "$frost",
+      "fill": "$steel",
       "stroke": {
         "color": "$ink",
         "width": "thin"
@@ -278,7 +278,7 @@
         "h": 7.6,
         "corner": 1.4
       },
-      "fill": "$frost",
+      "fill": "$steel",
       "rot": 4,
       "stroke": {
         "color": "$ink",
@@ -314,7 +314,7 @@
         "h": 10.0,
         "corner": 3.2
       },
-      "fill": "$frost.light2",
+      "fill": "$steel.light2",
       "rot": -6,
       "stroke": {
         "color": "$ink",

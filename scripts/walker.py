@@ -56,15 +56,25 @@ BASE_SKELETON = {
 }
 BASE_POSE = {"coat_lean": 2, "arm_hang": 6, "arm_far_hang": -8, "visor_turn": -5}
 BASE = {
-    "coat": "bell", "cloak_sx": 1.0, "hem": 0.0, "coat_fill": "$frost", "cape": True, "cape_fill": "$frost.light",
-    "head": "egg", "head_r": (5.3, 5.8), "head_fill": "$frost.light2", "visor_w": 6.6, "visor_h": 2.6,
-    "arm_len": 7.6, "arm_w": 3.0, "arm_fill": "$frost", "arm_far_len": 7.0, "arm_far_w": 2.6,
+    # the suit's colour: a cold-family token and a level. The coat is the tint, the
+    # mantle one step lighter, the far arm one darker, the helmet two lighter —
+    # cold on a warm field is what makes the player the one thing found at a glance
+    "tint": ("frost", 0),
+    "coat": "bell", "cloak_sx": 1.0, "hem": 0.0, "coat_fill": None, "cape": True, "cape_fill": None,
+    "head": "egg", "head_r": (5.3, 5.8), "head_fill": None, "visor_w": 6.6, "visor_h": 2.6,
+    "arm_len": 7.6, "arm_w": 3.0, "arm_fill": None, "arm_far_len": 7.0, "arm_far_w": 2.6,
     "hand_r": (1.7, 1.9), "hand_far_r": (1.4, 1.6), "hand_fill": "$slate.dark", "hand_far_fill": "$slate",
     "legs": False, "foot_w": 4.8, "foot_h": 2.7, "foot_far_w": 4.2, "foot_far_h": 2.4,
     "pack": False, "pack_w": 4.2, "pack_h": 4.4, "pack_fill": "$slate.light", "feelers": False,
     "walk": {"duration": 0.56, "stride": 2.6, "lift": 1.2, "bob": 1.4, "sway": 3.0, "arm_swing": 14, "lurch": 0.0, "leg_swing": 22},
     "idle": {"duration": 1.15, "feelers": "sweep", "march": False},
 }
+
+def shade(tint, delta):
+    """A token in the tint's family, `delta` steps lighter (+) or darker (-) than its base, clamped to the ramp."""
+    base, level = tint
+    lv = max(-2, min(2, level + delta))
+    return f"${base}" + {-2: ".dark2", -1: ".dark", 0: "", 1: ".light", 2: ".light2"}[lv]
 
 def hang(joint, length, angle):
     return (joint[0] - length / 2 * math.sin(R(angle)), joint[1] + length / 2 * math.cos(R(angle)))
@@ -150,6 +160,10 @@ def build(name, row):
     I = dict(BASE["idle"]); I.update(row.get("idle", {}))
     sn, sf = S["shoulder_near"], S["shoulder_far"]
     sx = C["cloak_sx"]
+    T = C["tint"]
+    for key, delta in (("coat_fill", 0), ("cape_fill", 1), ("head_fill", 2), ("arm_fill", 0)):
+        if C[key] is None: C[key] = shade(T, delta)
+    C["arm_far_fill"] = shade(T, -1); C["leg_fill"] = shade(T, 0); C["leg_far_fill"] = shade(T, -1)
 
     heads = head_parts(C["head"], S, C, P)
     cloak = {"id": "cloak", "at": [0, 0], "rot": P["coat_lean"] - 2, "shape": poly([(x * sx, y) for x, y in coat_points(C["coat"], sn, sf, C["hem"])]), "fill": C["coat_fill"], "stroke": thin}
@@ -159,14 +173,14 @@ def build(name, row):
     foot_far = P_("foot_far", S["foot_far"], rect(C["foot_far_w"], C["foot_far_h"], 1.1), "$slate")
     legs = []
     if C["legs"]:
-        for pid, hip, ft, w, fill in (("leg_far", S["hip_far"], S["foot_far"], 2.6, "$frost.dark"), ("leg", S["hip_near"], S["foot_near"], 3.0, "$frost")):
+        for pid, hip, ft, w, fill in (("leg_far", S["hip_far"], S["foot_far"], 2.6, C["leg_far_fill"]), ("leg", S["hip_near"], S["foot_near"], 3.0, C["leg_fill"])):
             L = math.hypot(ft[0] - hip[0], ft[1] - hip[1]); ang = -math.degrees(math.atan2(ft[0] - hip[0], ft[1] - hip[1]))
             legs.append(P_(pid, hang(hip, L, ang), rect(w, L + 1.0, 1.2), fill, rot=ang, stroke=hair if pid == "leg" else None))
     a_c = hang(sn, C["arm_len"], P["arm_hang"]); h_c = below(sn, C["arm_len"] + 0.9, P["arm_hang"])
     arm = P_("arm", a_c, rect(C["arm_w"], C["arm_len"], 1.4), C["arm_fill"], rot=P["arm_hang"], stroke=hair)
     hand = P_("hand", h_c, ell(*C["hand_r"]), C["hand_fill"], stroke=hair)
     af_c = hang(sf, C["arm_far_len"], P["arm_far_hang"]); hf_c = below(sf, C["arm_far_len"] + 0.9, P["arm_far_hang"])
-    arm_far = P_("arm_far", af_c, rect(C["arm_far_w"], C["arm_far_len"], 1.2), "$frost.dark", rot=P["arm_far_hang"])
+    arm_far = P_("arm_far", af_c, rect(C["arm_far_w"], C["arm_far_len"], 1.2), C["arm_far_fill"], rot=P["arm_far_hang"])
     hand_far = P_("hand_far", hf_c, ell(*C["hand_far_r"]), C["hand_far_fill"])
     pack = P_("pack", S["pack"], rect(C["pack_w"], C["pack_h"], 1.0), C["pack_fill"], stroke=hair) if C["pack"] else None
     feelers = []
@@ -174,7 +188,7 @@ def build(name, row):
         feelers = [{"id": "feeler_far", "at": [*S["feeler_far_root"]], "rot": -54, "scale": [0.55, 0.85], "use": "ss.lib.antenna", "variant": "dead"},
                    {"id": "feeler", "at": [*S["feeler_root"]], "rot": -40, "scale": [0.55, 0.85], "use": "ss.lib.antenna", "variant": "dead"}]
 
-    ctx = {"S": S, "P": P, "C": C, "sn": sn, "sf": sf, "hand": h_c, "hand_far": hf_c, "head": S["head"], "foot": S["foot_near"], "foot_far": S["foot_far"]}
+    ctx = {"S": S, "P": P, "C": C, "T": T, "sn": sn, "sf": sf, "hand": h_c, "hand_far": hf_c, "head": S["head"], "foot": S["foot_near"], "foot_far": S["foot_far"]}
     layers = {k: [] for k in ("behind", "feet_over", "over_coat", "over_cape", "in_hand", "over_head")}
     follow = {}
     for layer, part, fol in row.get("extras", lambda c: [])(ctx):
@@ -276,13 +290,13 @@ SHARED = " Drawn from one skeleton and one facing (docs/character-rig-guide.md) 
 
 CHARACTERS = {
     "arin": {
-        "pack": True, "pack_w": 5.0, "pack_h": 5.2, "feelers": True,
+        "tint": ("frost", 0), "pack": True, "pack_w": 5.0, "pack_h": 5.2, "feelers": True,
         "extras": lambda c: [("behind", P_("rack", (c["S"]["pack"][0] - 3.3, c["S"]["pack"][1] + 0.8), rect(2.2, 4.0), "$steel.light", stroke=hair), "head")],
         "idle_desc": "the body breathes under the coat; the dead feelers keep sweeping for a signal that never comes",
         "description": "A circle. The first expedition, on the day the last cartridge went in (A047): the bell coat, the egg helmet, and the prototype emitter — the biggest box any of the eight carries, its cartridge rack beside it, and the two dead feelers rising from its lid, swept back past the helmet as the crown of the silhouette. Arin is the only one of the eight with feelers: the antennae were the prototype's design (A004), and every mark after it vents through a tube. The hands have gone dark and hard — the saw does not mark them (A052), the Molt's slate, the first of the body to lose its blood." + SHARED,
     },
     "sol": {
-        "coat": "jacket", "cloak_sx": 0.9, "legs": True, "cape": False, "coat_fill": "$frost.light",
+        "tint": ("frost", 1), "coat": "jacket", "cloak_sx": 0.9, "legs": True, "cape": False,
         "head": "bare", "head_r": (4.6, 5.0),
         "skeleton": {"hip_near": (-2.2, 6.4), "hip_far": (3.2, 5.8), "foot_near": (-1.8, 13.4), "foot_far": (4.0, 12.8), "head": (2.6, -8.4)},
         "pose": {"coat_lean": 10, "arm_hang": 14, "arm_far_hang": -16}, "arm_w": 2.6, "arm_far_w": 2.2, "hand_r": (1.5, 1.7), "foot_w": 4.2, "foot_h": 2.2, "foot_far_w": 3.8, "foot_far_h": 2.0,
@@ -299,7 +313,7 @@ CHARACTERS = {
         "description": "A triangle, leaning. The scout sent out alone: a short jacket over long legs, the body pitched ten degrees into the run, the arms swinging high, a scarf flying back from the neck. The one bare head of the eight — the helmet came off on day two (S002) and hangs from the hip now, found and not put on (S009). The issued emitter was dead on day one and was never carried (S004); a pouch of fungi with a pink cap showing is what gets Sol past the swarm (S003). Faster than they are (S009), and short of health for it." + SHARED,
     },
     "haram": {
-        "coat": "slab", "head": "box", "head_r": (5.4, 5.0), "visor_w": 7.4, "cape": False,
+        "tint": ("steel", 0), "coat": "slab", "head": "box", "head_r": (5.4, 5.0), "visor_w": 7.4, "cape": False,
         "skeleton": {"shoulder_near": (-6.2, -3.4), "shoulder_far": (7.0, -4.6), "head": (1.6, -8.6), "foot_near": (-2.6, 13.2), "foot_far": (4.4, 12.6)},
         "pose": {"coat_lean": 3, "arm_hang": 4, "arm_far_hang": -6}, "arm_w": 3.6, "arm_far_w": 3.2, "foot_w": 5.4, "foot_h": 2.8, "foot_far_w": 4.8, "foot_far_h": 2.6,
         "pack": True, "pack_w": 4.4, "pack_h": 4.6, "skeleton_pack": None,
@@ -317,7 +331,7 @@ CHARACTERS = {
         "description": "A square. The survey: a slab of a body with squared shoulders, the widest of the eight, under a box of a helmet. The husk shell scraped into the mark II emitter (H027) is coming through as bone: a chest plate and a pauldron on each shoulder, bleached, over the coat. On the back, the benchmark stakes (H001) and the map tube — twenty-three drafts (H051). Four kilos up on the same ration, pulse thirty-eight (H043): armour, a lurch in the walk, and slower for it." + SHARED,
     },
     "mir": {
-        "coat": "hump", "cloak_sx": 1.02,
+        "tint": ("aqua", -1), "coat": "hump", "cloak_sx": 1.02,
         "skeleton": {"head": (3.6, -5.6), "head_tilt": -4, "shoulder_near": (-4.0, -2.0), "shoulder_far": (6.0, -3.6), "foot_near": (-2.8, 13.1), "foot_far": (4.6, 12.5), "hip_near": (-2.8, 12.0), "hip_far": (4.4, 11.2)},
         "head_r": (5.0, 5.4), "pose": {"coat_lean": 7, "arm_hang": 10, "arm_far_hang": -4},
         "walk": {"duration": 0.62, "bob": 0.0, "lift": 0.8, "sway": 1.4, "arm_swing": 8},
@@ -325,13 +339,13 @@ CHARACTERS = {
             ("over_coat", P_("wall", (-7.4, -6.6), poly([(-2.4, -2.0), (2.4, -2.6), (2.8, 2.0), (-2.2, 2.4)]), "$rust", rot=-14, stroke=hair), "body"),
             ("over_coat", P_("wall_crack", (-7.4, -6.4), rect(3.0, 0.6, 0.2), "$rust.dark", rot=22), "body"),
             ("over_cape", P_("cord", (0.2, -0.6), rect(1.1, 9.4, 0.4), "$bone", rot=-32), "body"),
-            ("over_coat", P_("hump_shade", (-7.6, 1.2), ell(2.2, 5.0), "$frost.dark", rot=-10), "body"),
+            ("over_coat", P_("hump_shade", (-7.6, 1.2), ell(2.2, 5.0), shade(c["T"], -1), rot=-10), "body"),
         ],
         "walk_desc": "the haul: no bounce at all, short flat steps, the load riding still on the back",
         "description": "A hump. The burrow, walked from the inside down to the queen: the coat rises over the piece of its wall carried on the back where the emitter used to be, warm half a month on, chewing inside it at night (M038, M042), corded across the chest, the rust of it showing at the top of the hump. The head sits low and forward with almost no neck, the stance is wide, and the walk has no bounce in it — the Porter's haul, twenty-nine levels of it (M035)." + SHARED,
     },
     "kano": {
-        "coat": "column", "cloak_sx": 1.0, "hem": 0.0, "head": "hood", "head_r": (4.8, 6.0), "visor_w": 5.8,
+        "tint": ("silent", 0), "coat": "column", "cloak_sx": 1.0, "hem": 0.0, "head": "hood", "head_r": (4.8, 6.0), "visor_w": 5.8,
         "skeleton": {"head": (1.8, -7.3), "shoulder_near": (-4.2, -3.2), "shoulder_far": (5.0, -4.4), "foot_near": (-1.4, 14.0), "foot_far": (3.2, 13.4), "hip_near": (-1.6, 12.6), "hip_far": (3.0, 12.0)},
         "pose": {"coat_lean": 4, "arm_hang": 4, "arm_far_hang": -4}, "arm_far_len": 7.4, "foot_h": 2.4, "foot_far_h": 2.2,
         "walk": {"duration": 0.5, "stride": 3.0, "bob": 1.0, "arm_swing": 8, "sway": 2.0}, "idle": {"duration": 0.7, "march": True},
@@ -345,7 +359,7 @@ CHARACTERS = {
         "description": "A column. The patrols, and the rules that came out of them: do not stop (K033). A narrow coat, long to the boots, under a peaked hood-helmet, and a staff in the far hand taller than the head — the twelfth emitter was dropped where it broke, as the rules say (K030, K033), so nothing rides on the back. Gaitered boots, the longest stride of the eight, and no idle at all: standing still, Kano marches on the spot." + SHARED,
     },
     "eden": {
-        "coat": "round", "head": "brim", "head_r": (5.0, 5.4),
+        "tint": ("aqua", 0), "coat": "round", "head": "brim", "head_r": (5.0, 5.4),
         "skeleton": {"head": (2.2, -7.2), "shoulder_near": (-5.2, -2.6), "shoulder_far": (6.0, -3.8)},
         "pack": True, "pack_w": 3.8, "pack_h": 4.0, "pose": {"coat_lean": 1, "arm_hang": 8, "arm_far_hang": -10},
         "walk": {"duration": 0.62, "bob": 1.0, "sway": 3.6, "arm_swing": 10}, "idle": {"duration": 1.7},
@@ -362,7 +376,7 @@ CHARACTERS = {
         "description": "A mushroom. The long station: a round coat under the wide flat brim on the helmet, the shape of six years beside the fungi (E009) and of the Gland's dome to come. A fingertip of royal jelly in place of the last cartridge (E093), and the throat under the helmet has begun to swell teal — the queen's smell on its way out as spit. The specimen jar on the coat holds number twelve, the seed that came up as two joints of crystal (E140); the coat is patched with moss where six years wore through it. The slowest breath of the eight." + SHARED,
     },
     "rowan": {
-        "coat": "wedge", "hem": -0.6, "head_r": (5.2, 5.4),
+        "tint": ("steel", 1), "coat": "wedge", "hem": -0.6, "head_r": (5.2, 5.4),
         "skeleton": {"head": (2.4, -6.8), "shoulder_near": (-6.0, -2.2), "shoulder_far": (6.4, -3.8), "foot_near": (-3.0, 13.0), "foot_far": (5.0, 12.4), "hip_near": (-3.0, 12.0), "hip_far": (4.8, 11.2)},
         "arm_len": 8.2, "arm_w": 5.0, "arm_fill": "$carapace", "hand_r": (3.3, 3.5), "hand_fill": "$carapace", "foot_w": 5.6, "foot_h": 2.9, "foot_far_w": 5.0, "foot_far_h": 2.6,
         "pack": True, "pack_w": 4.4, "pack_h": 4.4, "pack_fill": "$sand", "pose": {"coat_lean": 0, "arm_hang": 12, "arm_far_hang": -8},
@@ -377,7 +391,7 @@ CHARACTERS = {
         "description": "A wedge. The ruins, and who built them: broad and low, widest at the hem, the last of the eight to be moved by anything. The whole near arm is plated in carapace, the colour of the Soldier, ending in a fist the size of the head — since the stone bowl the right arm is stronger (R015), and the little finger folded to fit the grooves does not straighten (R053). A stone sits on that shoulder, and the emitter on the back has turned to stone from the inside (R048), warm at the ruin's temperature. A chisel at the coat." + SHARED,
     },
     "teo": {
-        "coat": "small", "cloak_sx": 0.92, "head": "mask", "head_r": (4.6, 5.0),
+        "tint": ("frost", 2), "coat": "small", "cloak_sx": 0.92, "head": "mask", "head_r": (4.6, 5.0),
         "skeleton": {"head": (2.0, -6.6), "shoulder_near": (-4.0, -2.2), "shoulder_far": (4.8, -3.4), "hip_near": (-1.6, 10.6), "hip_far": (3.0, 10.0), "foot_near": (-1.4, 12.0), "foot_far": (3.2, 11.5), "pack": (-5.0, -2.6)},
         "arm_len": 6.4, "arm_w": 2.6, "arm_far_len": 6.0, "arm_far_w": 2.2, "hand_r": (1.5, 1.6), "hand_fill": "$chitin", "hand_far_fill": "$chitin.dark",
         "foot_w": 4.0, "foot_h": 2.3, "foot_far_w": 3.6, "foot_far_h": 2.1, "pack": True, "pack_w": 3.4, "pack_h": 3.6,

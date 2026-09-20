@@ -63,7 +63,7 @@
         "h": 7.0,
         "corner": 1.2
       },
-      "fill": "$frost.dark",
+      "fill": "$frost",
       "rot": -16
     },
     {
@@ -91,7 +91,7 @@
         "h": 8.045565981523415,
         "corner": 1.2
       },
-      "fill": "$frost.dark",
+      "fill": "$frost",
       "rot": -6.519801751656984
     },
     {
@@ -106,7 +106,7 @@
         "h": 8.011419257183242,
         "corner": 1.2
       },
-      "fill": "$frost",
+      "fill": "$frost.light",
       "rot": -3.2704879231835666,
       "stroke": {
         "color": "$ink",
@@ -274,7 +274,7 @@
         "h": 7.6,
         "corner": 1.4
       },
-      "fill": "$frost",
+      "fill": "$frost.light",
       "rot": 14,
       "stroke": {
         "color": "$ink",

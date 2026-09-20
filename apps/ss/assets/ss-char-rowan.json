@@ -43,7 +43,7 @@
         "h": 7.0,
         "corner": 1.2
       },
-      "fill": "$frost.dark",
+      "fill": "$steel",
       "rot": -8
     },
     {
@@ -139,7 +139,7 @@
           ]
         ]
       },
-      "fill": "$frost",
+      "fill": "$steel.light",
       "stroke": {
         "color": "$ink",
         "width": "thin"
@@ -203,7 +203,7 @@
           ]
         ]
       },
-      "fill": "$frost.light"
+      "fill": "$steel.light2"
     },
     {
       "id": "organ",
@@ -331,7 +331,7 @@
         "rx": 5.2,
         "ry": 5.4
       },
-      "fill": "$frost.light2",
+      "fill": "$steel.light2",
       "rot": -10,
       "stroke": {
         "color": "$ink",
