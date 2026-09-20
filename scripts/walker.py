@@ -385,15 +385,14 @@ CHARACTERS = {
         "pack": True, "pack_w": 3.8, "pack_h": 4.0, "pose": {"coat_lean": 1, "arm_hang": 8, "arm_far_hang": -10},
         "walk": {"duration": 0.62, "bob": 1.0, "sway": 3.6, "arm_swing": 10}, "idle": {"duration": 1.7},
         "extras": lambda c: [
-            ("over_cape", P_("throat", (6.2, -0.2), ell(3.6, 2.5), "$spore", rot=-12, stroke=hair), "body"),
             ("in_hand", P_("lock", (c["head"][0] - 4.6, c["head"][1] + 3.6), ell(1.5, 3.6), "$husk.dark", rot=10, stroke=hair), "head"),
             ("in_hand", P_("lock_back", (c["head"][0] - 1.6, c["head"][1] + 4.4), ell(1.3, 3.0), "$husk.dark", rot=-6), "head"),
-            ("over_head", P_("mandible", (c["head"][0] + 4.6, c["head"][1] + 4.2), poly([(-1.4, -1.6), (1.6, -0.6), (3.6, 1.4), (2.2, 2.2), (0.2, 0.8), (-1.6, 0.2)]), "$chitin", stroke=hair), "head"),
-            ("over_head", P_("mandible_far", (c["head"][0] + 1.2, c["head"][1] + 4.6), poly([(-2.6, -0.4), (0.4, -1.4), (2.4, 0.6), (1.2, 1.8), (-1.2, 1.2)]), "$chitin.dark", stroke=hair), "head"),
+            ("over_coat", P_("jar", (5.6, 7.6), rect(3.0, 3.8, 0.9), "$silent", stroke=hair), "body"),
+            ("over_coat", P_("jar_lid", (5.6, 5.5), rect(3.4, 1.2, 0.4), "$slate", stroke=hair), "body"),
         ],
         "walk_desc": "an unhurried walk, the hem swinging wide, the brim steady",
         "idle_desc": "the slowest breath of the eight: six years of standing still and watching",
-        "description": "A mushroom. The long station: a round coat under the wide flat brim on the helmet, the shape of six years beside the fungi (E009) and of the Gland's dome to come. A fingertip of royal jelly in place of the last cartridge (E093), and the throat under the helmet has begun to swell teal — the queen's smell on its way out as spit. A pair of amber mandibles at the jaw, under the brim. The slowest breath of the eight." + SHARED,
+        "description": "A mushroom. The long station: a round coat under the wide flat brim on the helmet, the shape of six years beside the fungi (E009) and of the Gland's dome to come. A fingertip of royal jelly in place of the last cartridge (E093), carried in the one specimen jar at the coat front — the collector's jar, the brightest thing on the body. Two locks of hair under the brim. Nothing of the Gland shows yet: the body is still within its own range. The slowest breath of the eight." + SHARED,
     },
     "rowan": {
         "sex": "m", "tint": ("heather", 0), "coat": "wedge", "hem": -0.6, "cape": False, "head_r": (5.8, 4.8), "visor_w": 7.2, "visor_h": 2.2,
