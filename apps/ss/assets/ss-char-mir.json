@@ -25,7 +25,7 @@
         "h": 7.0,
         "corner": 1.2
       },
-      "fill": "$aqua.dark2",
+      "fill": "$timber.light",
       "rot": -4
     },
     {
@@ -88,16 +88,16 @@
             -3.8
           ],
           [
-            7.65,
+            7.96,
             1.6
           ],
           [
-            7.85,
-            6.0
+            9.18,
+            5.8
           ],
           [
-            6.94,
-            10.6
+            8.16,
+            10.2
           ],
           [
             4.49,
@@ -133,7 +133,7 @@
           ]
         ]
       },
-      "fill": "$aqua.dark",
+      "fill": "$timber.light2",
       "stroke": {
         "color": "$ink",
         "width": "thin"
@@ -199,7 +199,7 @@
         "rx": 2.2,
         "ry": 5.0
       },
-      "fill": "$aqua.dark2",
+      "fill": "$timber.light",
       "rot": -10
     },
     {
@@ -241,7 +241,7 @@
           ]
         ]
       },
-      "fill": "$aqua"
+      "fill": "$timber.light2"
     },
     {
       "id": "organ",
@@ -280,7 +280,7 @@
         "h": 7.6,
         "corner": 1.4
       },
-      "fill": "$aqua.dark",
+      "fill": "$timber.light2",
       "rot": 10,
       "stroke": {
         "color": "$ink",
@@ -315,7 +315,7 @@
         "rx": 5.0,
         "ry": 5.4
       },
-      "fill": "$aqua.light",
+      "fill": "$timber.light2",
       "rot": -4,
       "stroke": {
         "color": "$ink",
