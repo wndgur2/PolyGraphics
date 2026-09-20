@@ -1,0 +1,155 @@
+{
+  "id": "ss.terrain.glass",
+  "name": "Fused glass (SS)",
+  "description": "Salt Pan set dressing, decor: sand fused to glass where something hot went off \u2014 a scorch, a pool of dark aqua with a lighter sheen across it, two glints and a scatter of shards. The game pulses it the way it pulses the vents, so the glint reads as the light catching. The pan's one cold colour, and the same one the Forerunner's bolt is cut from.",
+  "tags": [
+    "terrain"
+  ],
+  "size": [
+    36,
+    24
+  ],
+  "parts": [
+    {
+      "id": "scorch",
+      "at": [
+        0.0,
+        1.0
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 17.0,
+        "ry": 9.0
+      },
+      "fill": "$ink@soft"
+    },
+    {
+      "id": "pool",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -15.0,
+            1.0
+          ],
+          [
+            -10.0,
+            -6.0
+          ],
+          [
+            -1.0,
+            -8.0
+          ],
+          [
+            9.0,
+            -6.0
+          ],
+          [
+            15.0,
+            0.0
+          ],
+          [
+            11.0,
+            6.0
+          ],
+          [
+            2.0,
+            8.0
+          ],
+          [
+            -8.0,
+            6.0
+          ]
+        ]
+      },
+      "fill": "$aqua.dark@heavy"
+    },
+    {
+      "id": "sheen",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -9.0,
+            0.0
+          ],
+          [
+            -5.0,
+            -4.0
+          ],
+          [
+            3.0,
+            -5.0
+          ],
+          [
+            8.0,
+            -2.0
+          ],
+          [
+            4.0,
+            2.0
+          ],
+          [
+            -3.0,
+            3.0
+          ]
+        ]
+      },
+      "fill": "$aqua@soft"
+    },
+    {
+      "id": "glint",
+      "at": [
+        -3.0,
+        -3.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.6
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "glint2",
+      "at": [
+        6.0,
+        1.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.0
+      },
+      "fill": "$silent@heavy"
+    },
+    {
+      "id": "shards",
+      "repeat": {
+        "of": {
+          "kind": "poly",
+          "points": [
+            [
+              -1.4,
+              0.8
+            ],
+            [
+              0.0,
+              -1.6
+            ],
+            [
+              1.4,
+              0.8
+            ]
+          ]
+        },
+        "count": 5,
+        "area": [
+          30,
+          14
+        ],
+        "seed": 29,
+        "jitterRot": true
+      },
+      "fill": "$aqua.light@heavy"
+    }
+  ]
+}

@@ -51,9 +51,15 @@ export interface Tokens {
   audio?: AudioTokens;
 }
 
-export interface Theme {
-  name: string;
-  description?: string;
+/**
+ * A partial token set laid over another. Tokens resolve base ⊕ app ⊕ theme:
+ * `tokens/base.json` is what is physics rather than identity (ramps, stroke
+ * widths, alpha, the structural greys, the audio ladders), `apps/<id>/tokens.json`
+ * is the app's palette, grid, layers and loudness families over it, and a
+ * theme is an overlay over that. The same merge does all three steps.
+ */
+export interface TokenOverlay {
+  grid?: number;
   colors?: Record<string, string>;
   ramps?: Record<string, number>;
   strokes?: Record<string, number>;
@@ -62,24 +68,35 @@ export interface Theme {
   audio?: Partial<AudioTokens>;
 }
 
-export function applyTheme(base: Tokens, theme?: Theme): Tokens {
-  if (!theme) return base;
+export interface Theme extends TokenOverlay {
+  name: string;
+  description?: string;
+}
+
+export function overlayTokens(base: Tokens, over?: TokenOverlay): Tokens {
+  if (!over) return base;
   return {
-    grid: base.grid,
-    colors: { ...base.colors, ...theme.colors },
-    ramps: { ...base.ramps, ...theme.ramps },
-    strokes: { ...base.strokes, ...theme.strokes },
-    alpha: { ...base.alpha, ...theme.alpha },
-    layers: { ...base.layers, ...theme.layers },
+    grid: over.grid ?? base.grid,
+    colors: { ...base.colors, ...over.colors },
+    ramps: { ...base.ramps, ...over.ramps },
+    strokes: { ...base.strokes, ...over.strokes },
+    alpha: { ...base.alpha, ...over.alpha },
+    layers: { ...base.layers, ...over.layers },
     audio: base.audio && {
-      pitch: { ...base.audio.pitch, ...theme.audio?.pitch },
-      ramps: { ...base.audio.ramps, ...theme.audio?.ramps },
-      gain: { ...base.audio.gain, ...theme.audio?.gain },
-      q: { ...base.audio.q, ...theme.audio?.q },
-      dur: { ...base.audio.dur, ...theme.audio?.dur },
-      loudness: { ...base.audio.loudness, ...theme.audio?.loudness },
+      pitch: { ...base.audio.pitch, ...over.audio?.pitch },
+      ramps: { ...base.audio.ramps, ...over.audio?.ramps },
+      gain: { ...base.audio.gain, ...over.audio?.gain },
+      q: { ...base.audio.q, ...over.audio?.q },
+      dur: { ...base.audio.dur, ...over.audio?.dur },
+      loudness: { ...base.audio.loudness, ...over.audio?.loudness },
     },
   };
+}
+
+/** A theme may only override what the app resolves — it never introduces a token. A theme's grid is ignored. */
+export function applyTheme(base: Tokens, theme?: Theme): Tokens {
+  if (!theme) return base;
+  return overlayTokens(base, { ...theme, grid: undefined });
 }
 
 export type Resolved<T> =
@@ -225,4 +242,74 @@ function nearestPitch(hz: number, a: AudioTokens): string {
     if (d < bestD) { bestD = d; best = name; }
   }
   return best || "?";
+}
+
+// ---------------------------------------------------------------- measuring colour
+
+/** A colour reference as 0–255 sRGB, for measuring rather than painting. */
+export function resolveRgb255(ref: string, t: Tokens): [number, number, number] | undefined {
+  const r = resolveColorRgba(ref, t);
+  if (!r.ok) return undefined;
+  return [r.value[0] * 255, r.value[1] * 255, r.value[2] * 255];
+}
+
+function labOf([r, g, b]: [number, number, number]): [number, number, number] {
+  const lin = (v: number) => {
+    const c = v / 255;
+    return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  };
+  const [R, G, B] = [lin(r), lin(g), lin(b)];
+  // sRGB → XYZ (D65), then CIE L*a*b* against the D65 white.
+  const X = (R * 0.4124564 + G * 0.3575761 + B * 0.1804375) / 0.95047;
+  const Y = R * 0.2126729 + G * 0.7151522 + B * 0.072175;
+  const Z = (R * 0.0193339 + G * 0.119192 + B * 0.9503041) / 1.08883;
+  const f = (t: number) => (t > 216 / 24389 ? Math.cbrt(t) : (841 / 108) * t + 4 / 29);
+  const [fx, fy, fz] = [f(X), f(Y), f(Z)];
+  return [116 * fy - 16, 500 * (fx - fy), 200 * (fy - fz)];
+}
+
+/**
+ * CIEDE2000 between two sRGB colours: how far apart two colours *look*, on a
+ * scale where 1 is about the smallest difference an eye catches and 13 is
+ * "these are different colours" for a rim you have to tell apart at a glance.
+ * Used by the `distinct` rule, and by nothing that paints — a render never
+ * depends on a perceptual model.
+ */
+export function deltaE2000(c1: [number, number, number], c2: [number, number, number]): number {
+  const [L1, a1, b1] = labOf(c1), [L2, a2, b2] = labOf(c2);
+  const rad = Math.PI / 180, deg = 180 / Math.PI;
+  const C1 = Math.hypot(a1, b1), C2 = Math.hypot(a2, b2);
+  const Cbar = (C1 + C2) / 2;
+  const G = 0.5 * (1 - Math.sqrt(Cbar ** 7 / (Cbar ** 7 + 25 ** 7)));
+  const a1p = a1 * (1 + G), a2p = a2 * (1 + G);
+  const C1p = Math.hypot(a1p, b1), C2p = Math.hypot(a2p, b2);
+  const hue = (a: number, b: number) => {
+    if (a === 0 && b === 0) return 0;
+    const d = Math.atan2(b, a) * deg;
+    return d < 0 ? d + 360 : d;
+  };
+  const h1p = hue(a1p, b1), h2p = hue(a2p, b2);
+  const dLp = L2 - L1, dCp = C2p - C1p;
+  let dhp = 0;
+  if (C1p * C2p !== 0) {
+    dhp = h2p - h1p;
+    if (dhp > 180) dhp -= 360;
+    else if (dhp < -180) dhp += 360;
+  }
+  const dHp = 2 * Math.sqrt(C1p * C2p) * Math.sin((dhp / 2) * rad);
+  const Lbp = (L1 + L2) / 2, Cbp = (C1p + C2p) / 2;
+  let hbp = h1p + h2p;
+  if (C1p * C2p !== 0) {
+    if (Math.abs(h1p - h2p) <= 180) hbp = (h1p + h2p) / 2;
+    else hbp = h1p + h2p < 360 ? (h1p + h2p + 360) / 2 : (h1p + h2p - 360) / 2;
+  }
+  const T =
+    1 - 0.17 * Math.cos((hbp - 30) * rad) + 0.24 * Math.cos(2 * hbp * rad) + 0.32 * Math.cos((3 * hbp + 6) * rad) - 0.2 * Math.cos((4 * hbp - 63) * rad);
+  const dTheta = 30 * Math.exp(-(((hbp - 275) / 25) ** 2));
+  const RC = 2 * Math.sqrt(Cbp ** 7 / (Cbp ** 7 + 25 ** 7));
+  const SL = 1 + (0.015 * (Lbp - 50) ** 2) / Math.sqrt(20 + (Lbp - 50) ** 2);
+  const SC = 1 + 0.045 * Cbp;
+  const SH = 1 + 0.015 * Cbp * T;
+  const RT = -Math.sin(2 * dTheta * rad) * RC;
+  return Math.sqrt((dLp / SL) ** 2 + (dCp / SC) ** 2 + (dHp / SH) ** 2 + RT * (dCp / SC) * (dHp / SH));
 }

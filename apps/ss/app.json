@@ -1,0 +1,65 @@
+{
+  "id": "ss",
+  "name": "Shape Survivors",
+  "premise": "The protagonist has lost their pheromone transmitter, and the hive hunts them for the silence.",
+  "engines": ["phaser"],
+  "categories": ["char", "figure", "enemy", "proj", "fx", "pickup", "terrain", "env", "icon", "relic", "curse", "draught", "app", "lib"],
+
+  "reference": {
+    "ground": { "field": "ss.env.ground", "pan": "ss.env.pan" },
+    "scale": 1.35,
+    "contrast": { "sinks": 2.5, "thin": 3.5 }
+  },
+
+  "rules": {
+    "grid": { "applies": ["char", "figure", "icon", "relic", "draught", "curse", "env", "app", "fx", "lib"] },
+    "size": { "char": [32, 32], "icon": [32, 32], "relic": [32, 32], "draught": [32, 32] },
+    "meta": [{ "in": ["enemy", "char", "figure"], "unless": ["projectile"], "require": ["radius"] }],
+    "clips": [{ "in": ["enemy"], "unless": ["projectile"], "require": ["death"] }],
+    "oneShot": { "death": { "settleBy": 0.85 } },
+    "states": {
+      "enemy": ["elite", "enraged", "final", "buried", "elite_buried", "spent", "grub", "loosed", "planted"],
+      "proj": ["evolved", "worn", "muck", "evolved-worn", "evolved-muck"],
+      "icon": ["evolved"],
+      "relic": ["glyph"],
+      "curse": ["glyph"],
+      "pickup": ["cursed"],
+      "terrain": ["filled"],
+      "app": ["maskable"],
+      "lib": "*"
+    },
+    "roles": {
+      "hive": ["pheromone", "pink"],
+      "arsenal": ["husk", "bone", "chitin", "timber", "frost"],
+      "evolved": ["gold"]
+    },
+    "paint": [
+      { "in": ["proj"], "forbid": "hive", "except": ["ss.proj.mine"], "because": "the arsenal is hive material with the signal stripped out" },
+      { "in": ["icon"], "tagged": ["weapon"], "forbid": "hive", "except": ["ss.icon.mine"], "because": "the arsenal is hive material with the signal stripped out" }
+    ],
+    "distinct": [{ "in": ["icon"], "tagged": ["weapon"], "part": "tile", "minDeltaE": 13 }],
+    "contracts": {
+      "ss.proj.ring": { "meta.radius": 62 },
+      "ss.proj.dung": { "meta.radius": 14 },
+      "ss.proj.aura": { "meta.radius": 64 },
+      "ss.fx.dung-burst": { "meta.radius": 30 }
+    },
+    "layers": [
+      { "in": ["env"], "layer": "bg" },
+      { "in": ["terrain"], "layer": "ground" },
+      { "in": ["pickup"], "layer": "pickup" },
+      { "in": ["enemy"], "tagged": ["boss"], "layer": "boss" },
+      { "in": ["enemy"], "layer": "enemy" },
+      { "in": ["proj", "fx"], "layer": "fx" },
+      { "in": ["char", "figure"], "layer": "player" },
+      { "in": ["icon", "relic", "curse", "draught", "app"], "layer": "ui" }
+    ],
+    "levels": { "contracts": "error", "namespace": "error" }
+  },
+
+  "audio": {
+    "key": ["tonic", "third", "fifth", "seventh"],
+    "inKey": ["fanfare"],
+    "families": ["weapon", "impact", "creature", "player", "pickup", "world", "field", "interface", "fanfare"]
+  }
+}

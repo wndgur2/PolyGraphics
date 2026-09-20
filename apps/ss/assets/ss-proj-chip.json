@@ -1,0 +1,161 @@
+{
+  "id": "ss.proj.chip",
+  "name": "Grub",
+  "description": "What a broodling drops: a pale larva that crawls at whatever it was aimed at. It is seven pixels on screen, so the drawing is two decisions \u2014 one body that is round at the front and drawn out to a tail, and one segment line. Front-ness lives entirely in the silhouette now: flatten this to black and it still points. That matters because the weapon code already wags this sprite sixteen degrees either side of its heading at twenty-six hertz and lurches the pace with it \u2014 the hexagon that used to be here was symmetric, so all of that scuttle landed on a shape with no front and read as nothing. Kept near-white so the fed one, which is amber, is the one that draws the eye.",
+  "tags": [
+    "proj",
+    "orbital"
+  ],
+  "size": [
+    10,
+    10
+  ],
+  "parts": [
+    {
+      "id": "body",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.5,
+            0.0
+          ],
+          [
+            0.42,
+            2.19
+          ],
+          [
+            1.46,
+            2.4
+          ],
+          [
+            2.48,
+            2.14
+          ],
+          [
+            3.29,
+            1.48
+          ],
+          [
+            3.74,
+            0.53
+          ],
+          [
+            3.74,
+            -0.53
+          ],
+          [
+            3.29,
+            -1.48
+          ],
+          [
+            2.48,
+            -2.14
+          ],
+          [
+            1.46,
+            -2.4
+          ],
+          [
+            0.42,
+            -2.19
+          ]
+        ]
+      },
+      "fill": "$silent",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "seg",
+      "at": [
+        -1.5,
+        0
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 0.5,
+        "h": 2.6
+      },
+      "fill": "$steel@soft"
+    }
+  ],
+  "variants": {
+    "evolved": {
+      "description": "A Brood Swarm grub: the same larva, fed. It carries the head the plain one gave up \u2014 a near-black rust dot at the front \u2014 over an amber body, and it is authored a third larger. The 1.3 is a texel budget and not a size: a consumer folds it into the texture and divides it back out when it asks for a world scale, so this variant is drawn at thirteen pixels in order to be sharp at whatever size it is asked for, and how big it actually lands is the game's call, not this document's. What the extra detail buys is that the head survives \u2014 at seven pixels a bigger, darker head was invisible next to the plain grub, which is why hue was carrying the whole distinction. This one does not spend itself on one hit: it latches, bites three times, and is thrown off backwards between bites still facing its mark, which is a thing only a drawing with a front can do.",
+      "set": {
+        "body.fill": "$chitin",
+        "seg.fill": "$chitin.dark"
+      },
+      "add": [
+        {
+          "id": "head",
+          "at": [
+            1.85,
+            0
+          ],
+          "shape": {
+            "kind": "circle",
+            "r": 1.55
+          },
+          "fill": "$rust"
+        },
+        {
+          "id": "jaw",
+          "at": [
+            3.3,
+            -0.75
+          ],
+          "rot": -20,
+          "shape": {
+            "kind": "poly",
+            "points": [
+              [
+                1.1,
+                0
+              ],
+              [
+                -0.7,
+                -0.5
+              ],
+              [
+                -0.7,
+                0.5
+              ]
+            ]
+          },
+          "fill": "$husk.light"
+        },
+        {
+          "id": "jaw_low",
+          "at": [
+            3.3,
+            0.75
+          ],
+          "rot": 20,
+          "shape": {
+            "kind": "poly",
+            "points": [
+              [
+                1.1,
+                0
+              ],
+              [
+                -0.7,
+                -0.5
+              ],
+              [
+                -0.7,
+                0.5
+              ]
+            ]
+          },
+          "fill": "$husk.light"
+        }
+      ],
+      "scale": 1.3
+    }
+  }
+}

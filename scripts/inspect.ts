@@ -5,30 +5,28 @@
  * indistinguishable in black, color is doing the work again.
  *
  *   npx tsx scripts/inspect.ts ss.enemy.imp ss.enemy.bat --anim
+ *   npx tsx scripts/inspect.ts --app demo                    # every document of an app
  */
-import { readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { AssetSchema, type Asset } from "../src/schema.js";
-import { renderSVG, type Registry } from "../src/render.js";
-import type { Tokens } from "../src/tokens.js";
+import { writeFileSync } from "node:fs";
+import type { Asset } from "../src/schema.js";
+import { renderSVG } from "../src/render.js";
+import { appFlag, appNamed, loadLibrary, ownerOf, type Owner } from "../src/apps.js";
 
 const root = new URL("..", import.meta.url);
-const tokens = JSON.parse(readFileSync(new URL("tokens/default.json", root), "utf8")) as Tokens;
-const assets = new Map<string, Asset>();
-for (const f of readdirSync(new URL("assets/", root)).filter((f) => f.endsWith(".json"))) {
-  const parsed = AssetSchema.safeParse(JSON.parse(readFileSync(new URL(`assets/${f}`, root), "utf8")));
-  if (parsed.success) assets.set(parsed.data.id, parsed.data);
-}
-const reg: Registry = { assets, tokens };
+const lib = loadLibrary();
 
 const args = process.argv.slice(2);
 const withAnim = args.includes("--anim");
-const ids = args.filter((a) => !a.startsWith("--"));
-const targets = ids.length ? ids : [...assets.keys()].filter((id) => id.startsWith("ss."));
+const ids = args.filter((a, i) => !a.startsWith("--") && args[i - 1] !== "--app");
+const app = appNamed(lib, appFlag(args)) ?? (ids.length ? ownerOf(lib, ids[0]) : undefined) ?? lib.apps[0];
+if (!app) throw new Error("no app to inspect");
+const targets = ids.length ? ids : [...app.assets.keys()];
 
-const GROUND = tokens.colors.soil ?? "#131019";
+const scale = app.manifest?.reference?.scale ?? 1;
+const GROUND = app.tokens.colors.soil ?? "#131019";
 
-function svgOf(a: Asset, scale: number, variant?: string, anim?: string, uid?: string): string {
-  const { svg, issues } = renderSVG(a, reg, { variant, animation: anim, displayScale: scale, uid });
+function svgOf(o: Owner, a: Asset, displayScale: number, variant?: string, anim?: string, uid?: string): string {
+  const { svg, issues } = renderSVG(a, o.reg, { variant, animation: anim, displayScale, uid });
   for (const i of issues) console.log(`${i.level === "error" ? "✖" : "▲"} ${i.where}: ${i.msg}`);
   return svg;
 }
@@ -36,15 +34,16 @@ function svgOf(a: Asset, scale: number, variant?: string, anim?: string, uid?: s
 let uid = 0;
 const rows = targets
   .map((id) => {
-    const a = assets.get(id);
-    if (!a) return `<p style="color:#ff6b6b">unknown asset ${id}</p>`;
+    const o = ownerOf(lib, id);
+    const a = o?.assets.get(id);
+    if (!o || !a) return `<p style="color:#ff6b6b">unknown asset ${id}</p>`;
     const anim = withAnim ? Object.keys(a.animations ?? {})[0] : undefined;
     const variants = [undefined, ...Object.keys(a.variants ?? {})];
     const big = variants
-      .map((v) => `<figure><div class=stage>${svgOf(a, 6, v, anim, `i${uid++}`)}</div><figcaption>${v ?? "base"}</figcaption></figure>`)
+      .map((v) => `<figure><div class=stage>${svgOf(o, a, 6, v, anim, `i${uid++}`)}</div><figcaption>${v ?? "base"}</figcaption></figure>`)
       .join("");
-    const gameScale = `<figure><div class="stage tiny">${svgOf(a, 1.35, undefined, anim, `i${uid++}`)}</div><figcaption>game 1.35×</figcaption></figure>`;
-    const silo = `<figure><div class="stage silo">${svgOf(a, 3, undefined, undefined, `i${uid++}`)}</div><figcaption>silhouette</figcaption></figure>`;
+    const gameScale = `<figure><div class="stage tiny">${svgOf(o, a, scale, undefined, anim, `i${uid++}`)}</div><figcaption>game ${scale}×</figcaption></figure>`;
+    const silo = `<figure><div class="stage silo">${svgOf(o, a, 3, undefined, undefined, `i${uid++}`)}</div><figcaption>silhouette</figcaption></figure>`;
     return `<section>
   <h2>${a.name} <code>${a.id}</code>${anim ? ` <em>▸ ${anim}</em>` : ""}</h2>
   <p>${a.description}</p>
