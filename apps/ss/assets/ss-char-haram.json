@@ -1,7 +1,7 @@
 {
   "id": "ss.char.haram",
   "name": "Haram",
-  "description": "A square. The survey: a slab of a body with squared shoulders, the widest of the eight, under a box of a helmet. The husk shell scraped into the mark II emitter (H027) is coming through as bone: a chest plate and a pauldron on each shoulder, bleached, over the coat. On the back, the benchmark stakes (H001) and the map tube \u2014 twenty-three drafts (H051). Four kilos up on the same ration, pulse thirty-eight (H043): armour, a lurch in the walk, and slower for it. Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
+  "description": "A square. The survey: a slab of a body with squared shoulders, the widest of the eight, under a box of a helmet. The husk shell scraped into the mark II emitter (H027) is coming through as bone: one bleached pauldron over the near shoulder. On the back, the benchmark stakes (H001); on the far shoulder, the one pink spore pod the lure grows from. Four kilos up on the same ration, pulse thirty-eight (H043): armour, a lurch in the walk, and slower for it. Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
   "tags": [
     "char"
   ],
@@ -34,12 +34,12 @@
     {
       "id": "stake_a",
       "at": [
-        -9.6,
+        -9.4,
         -9.0
       ],
       "shape": {
         "kind": "rect",
-        "w": 1.1,
+        "w": 1.2,
         "h": 9.4,
         "corner": 0.3
       },
@@ -49,51 +49,17 @@
     {
       "id": "stake_b",
       "at": [
-        -8.2,
+        -8.0,
         -9.8
       ],
       "shape": {
         "kind": "rect",
-        "w": 1.1,
+        "w": 1.2,
         "h": 8.8,
         "corner": 0.3
       },
       "fill": "$timber.dark",
       "rot": -16
-    },
-    {
-      "id": "stake_c",
-      "at": [
-        -10.8,
-        -7.8
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 1.1,
-        "h": 8.2,
-        "corner": 0.3
-      },
-      "fill": "$timber",
-      "rot": -36
-    },
-    {
-      "id": "tube",
-      "at": [
-        -10.2,
-        2.0
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 2.4,
-        "h": 7.0,
-        "corner": 1.1
-      },
-      "fill": "$bone",
-      "rot": -6,
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
     },
     {
       "id": "arm_far",
@@ -202,25 +168,6 @@
       }
     },
     {
-      "id": "chestplate",
-      "at": [
-        2.8,
-        4.6
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 6.0,
-        "h": 6.4,
-        "corner": 1.2
-      },
-      "fill": "$husk",
-      "rot": -4,
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
       "id": "pauldron",
       "at": [
         -5.4,
@@ -228,29 +175,11 @@
       ],
       "shape": {
         "kind": "ellipse",
-        "rx": 3.6,
-        "ry": 2.2
+        "rx": 3.8,
+        "ry": 2.3
       },
       "fill": "$husk",
       "rot": -10,
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "pauldron_far",
-      "at": [
-        6.4,
-        -4.2
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 3.2,
-        "ry": 2.0
-      },
-      "fill": "$husk",
-      "rot": 12,
       "stroke": {
         "color": "$ink",
         "width": "hair"
@@ -267,48 +196,16 @@
       "scale": 0.72
     },
     {
-      "id": "pod_a",
+      "id": "pod",
       "at": [
-        7.4,
-        -6.2
+        7.6,
+        -5.8
       ],
       "shape": {
         "kind": "circle",
-        "r": 1.6
+        "r": 2.0
       },
       "fill": "$pink",
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "pod_b",
-      "at": [
-        9.6,
-        -4.0
-      ],
-      "shape": {
-        "kind": "circle",
-        "r": 1.3
-      },
-      "fill": "$pink",
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "pod_c",
-      "at": [
-        5.6,
-        -4.8
-      ],
-      "shape": {
-        "kind": "circle",
-        "r": 1.1
-      },
-      "fill": "$pink.light",
       "stroke": {
         "color": "$ink",
         "width": "hair"
@@ -571,24 +468,6 @@
           ]
         },
         {
-          "part": "stake_c",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.0
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
           "part": "cloak",
           "prop": "y",
           "keys": [
@@ -625,42 +504,6 @@
           ]
         },
         {
-          "part": "tube",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -0.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "chestplate",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -0.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
           "part": "pauldron",
           "prop": "y",
           "keys": [
@@ -679,61 +522,7 @@
           ]
         },
         {
-          "part": "pauldron_far",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -0.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "pod_a",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -0.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "pod_b",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -0.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "pod_c",
+          "part": "pod",
           "prop": "y",
           "keys": [
             [
@@ -1124,65 +913,6 @@
           "ease": "linear"
         },
         {
-          "part": "stake_c",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              -0.22
-            ],
-            [
-              0.17,
-              -0.67
-            ],
-            [
-              0.25,
-              -0.9
-            ],
-            [
-              0.33,
-              -0.68
-            ],
-            [
-              0.42,
-              -0.22
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              -0.23
-            ],
-            [
-              0.67,
-              -0.67
-            ],
-            [
-              0.75,
-              -0.9
-            ],
-            [
-              0.83,
-              -0.67
-            ],
-            [
-              0.92,
-              -0.23
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
           "part": "cloak",
           "prop": "y",
           "keys": [
@@ -1301,124 +1031,6 @@
           "ease": "linear"
         },
         {
-          "part": "tube",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              -0.13
-            ],
-            [
-              0.17,
-              -0.4
-            ],
-            [
-              0.25,
-              -0.54
-            ],
-            [
-              0.33,
-              -0.41
-            ],
-            [
-              0.42,
-              -0.13
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              -0.14
-            ],
-            [
-              0.67,
-              -0.4
-            ],
-            [
-              0.75,
-              -0.54
-            ],
-            [
-              0.83,
-              -0.4
-            ],
-            [
-              0.92,
-              -0.14
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "chestplate",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              -0.13
-            ],
-            [
-              0.17,
-              -0.4
-            ],
-            [
-              0.25,
-              -0.54
-            ],
-            [
-              0.33,
-              -0.41
-            ],
-            [
-              0.42,
-              -0.13
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              -0.14
-            ],
-            [
-              0.67,
-              -0.4
-            ],
-            [
-              0.75,
-              -0.54
-            ],
-            [
-              0.83,
-              -0.4
-            ],
-            [
-              0.92,
-              -0.14
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
           "part": "pauldron",
           "prop": "y",
           "keys": [
@@ -1478,184 +1090,7 @@
           "ease": "linear"
         },
         {
-          "part": "pauldron_far",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              -0.13
-            ],
-            [
-              0.17,
-              -0.4
-            ],
-            [
-              0.25,
-              -0.54
-            ],
-            [
-              0.33,
-              -0.41
-            ],
-            [
-              0.42,
-              -0.13
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              -0.14
-            ],
-            [
-              0.67,
-              -0.4
-            ],
-            [
-              0.75,
-              -0.54
-            ],
-            [
-              0.83,
-              -0.4
-            ],
-            [
-              0.92,
-              -0.14
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "pod_a",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              -0.13
-            ],
-            [
-              0.17,
-              -0.4
-            ],
-            [
-              0.25,
-              -0.54
-            ],
-            [
-              0.33,
-              -0.41
-            ],
-            [
-              0.42,
-              -0.13
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              -0.14
-            ],
-            [
-              0.67,
-              -0.4
-            ],
-            [
-              0.75,
-              -0.54
-            ],
-            [
-              0.83,
-              -0.4
-            ],
-            [
-              0.92,
-              -0.14
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "pod_b",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              -0.13
-            ],
-            [
-              0.17,
-              -0.4
-            ],
-            [
-              0.25,
-              -0.54
-            ],
-            [
-              0.33,
-              -0.41
-            ],
-            [
-              0.42,
-              -0.13
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              -0.14
-            ],
-            [
-              0.67,
-              -0.4
-            ],
-            [
-              0.75,
-              -0.54
-            ],
-            [
-              0.83,
-              -0.4
-            ],
-            [
-              0.92,
-              -0.14
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "pod_c",
+          "part": "pod",
           "prop": "y",
           "keys": [
             [
