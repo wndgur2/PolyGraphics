@@ -1,0 +1,196 @@
+{
+  "id": "ss.relic.glasswing",
+  "name": "Glass wing",
+  "description": "A wing thin enough to see the plate's light through, with its veins drawn in white and one coral break running across it. Glass is the whole trade \u2014 it cuts and it goes \u2014 so the membrane is the only translucent fill on this shelf and the break is the only thing on it that is not the wing. It is a forewing at the same angle ss.relic.wingbeat's is, root low-left, so the two read as the same anatomy put to opposite uses.",
+  "tags": [
+    "relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "wing_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -10.92,
+            9.87
+          ],
+          [
+            -5.9,
+            -1.08
+          ],
+          [
+            2.09,
+            -9.75
+          ],
+          [
+            10.3,
+            -10.9
+          ],
+          [
+            11.22,
+            -4.28
+          ],
+          [
+            5.51,
+            3.71
+          ],
+          [
+            -2.7,
+            9.64
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "wing",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -9.4,
+            8.6
+          ],
+          [
+            -5,
+            -1
+          ],
+          [
+            2,
+            -8.6
+          ],
+          [
+            9.2,
+            -9.6
+          ],
+          [
+            10,
+            -3.8
+          ],
+          [
+            5,
+            3.2
+          ],
+          [
+            -2.2,
+            8.4
+          ]
+        ]
+      },
+      "fill": "$frost@0.55"
+    },
+    {
+      "id": "vein_a",
+      "at": [
+        0.4,
+        -1.6
+      ],
+      "rot": -34,
+      "shape": {
+        "kind": "rect",
+        "w": 15,
+        "h": 1.1,
+        "corner": 0.55
+      },
+      "fill": "$white@0.75"
+    },
+    {
+      "id": "vein_b",
+      "at": [
+        1.6,
+        2.4
+      ],
+      "rot": -26,
+      "shape": {
+        "kind": "rect",
+        "w": 10,
+        "h": 1,
+        "corner": 0.5
+      },
+      "fill": "$white@0.5"
+    },
+    {
+      "id": "break_o",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.35,
+            7.61
+          ],
+          [
+            1.19,
+            1.82
+          ],
+          [
+            -0.74,
+            0.85
+          ],
+          [
+            6.26,
+            -6.62
+          ],
+          [
+            1.68,
+            -0.83
+          ],
+          [
+            3.36,
+            0.37
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "break",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.4,
+            6.4
+          ],
+          [
+            1.2,
+            1.6
+          ],
+          [
+            -0.4,
+            0.8
+          ],
+          [
+            5.4,
+            -5.4
+          ],
+          [
+            1.6,
+            -0.6
+          ],
+          [
+            3,
+            0.4
+          ]
+        ]
+      },
+      "fill": "$coral"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}

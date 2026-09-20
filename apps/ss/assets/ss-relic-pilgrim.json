@@ -1,0 +1,163 @@
+{
+  "id": "ss.relic.pilgrim",
+  "name": "Pilgrim's debt",
+  "description": "A walking staff leaning across the plate with three gold beads strung down it, one for each ruin already paid for, and the cord knotted at the head. Leaning rather than upright, because a staff standing up is a marker and a staff at an angle is one being carried. The beads climb the shaft unevenly \u2014 the debt is counted, not measured.",
+  "tags": [
+    "relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "staff_o",
+      "rot": 14,
+      "shape": {
+        "kind": "rect",
+        "w": 5.3,
+        "h": 25.4,
+        "corner": 2.65
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "staff",
+      "rot": 14,
+      "shape": {
+        "kind": "rect",
+        "w": 2.9,
+        "h": 23,
+        "corner": 1.45
+      },
+      "fill": "$timber"
+    },
+    {
+      "id": "grain",
+      "at": [
+        -0.4,
+        0
+      ],
+      "rot": 14,
+      "shape": {
+        "kind": "rect",
+        "w": 1.1,
+        "h": 17,
+        "corner": 0.55
+      },
+      "fill": "$timber.light"
+    },
+    {
+      "id": "knot_o",
+      "at": [
+        -2.9,
+        -10.2
+      ],
+      "rot": 14,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.3,
+        "ry": 3.2
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "knot",
+      "at": [
+        -2.9,
+        -10.2
+      ],
+      "rot": 14,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.2,
+        "ry": 2.1
+      },
+      "fill": "$timber.dark"
+    },
+    {
+      "id": "bead_a_o",
+      "at": [
+        -4.6,
+        -2.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.2
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bead_a",
+      "at": [
+        -4.6,
+        -2.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.2
+      },
+      "fill": "$gold"
+    },
+    {
+      "id": "bead_b_o",
+      "at": [
+        -6,
+        3
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.0
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bead_b",
+      "at": [
+        -6,
+        3
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2
+      },
+      "fill": "$gold.light"
+    },
+    {
+      "id": "bead_c_o",
+      "at": [
+        -7.4,
+        8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.3
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "bead_c",
+      "at": [
+        -7.4,
+        8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.3
+      },
+      "fill": "$gold.dark"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}
