@@ -1,7 +1,7 @@
 {
   "id": "ss.char.mir",
   "name": "Mir",
-  "description": "A hump. The burrow, walked from the inside down to the queen: the coat rises over the piece of its wall carried on the back where the emitter used to be, warm half a month on, chewing inside it at night (M038, M042), corded across the chest, the rust of it showing at the top of the hump. The head sits low and forward with almost no neck, the stance is wide, and the walk has no bounce in it \u2014 the Porter's haul, twenty-nine levels of it (M035). Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
+  "description": "A dome. The burrow, walked from the inside down to the queen: the back of the coat rises over the piece of its wall carried where the emitter used to be, higher than the head, warm half a month on, chewing inside it at night (M038, M042), corded across the chest, the rust of it showing at the top of the hump. The head sits low and forward with almost no neck, the stance is wide, and the walk has no bounce in it \u2014 the Porter's haul, twenty-nine levels of it (M035). Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
   "tags": [
     "char"
   ],
@@ -80,8 +80,8 @@
         "kind": "poly",
         "points": [
           [
-            -4.24,
-            -2.6
+            -0.42,
+            -7.6
           ],
           [
             6.15,
@@ -116,20 +116,28 @@
             10.6
           ],
           [
-            -8.77,
+            -8.98,
             6.0
           ],
           [
-            -10.4,
-            0.4
+            -10.82,
+            0.2
           ],
           [
-            -10.18,
-            -4.4
+            -11.03,
+            -5.4
           ],
           [
-            -8.06,
-            -7.2
+            -9.34,
+            -9.2
+          ],
+          [
+            -5.94,
+            -10.6
+          ],
+          [
+            -3.18,
+            -9.8
           ]
         ]
       },
@@ -142,8 +150,8 @@
     {
       "id": "wall",
       "at": [
-        -7.4,
-        -6.6
+        -6.4,
+        -9.6
       ],
       "shape": {
         "kind": "poly",
@@ -176,8 +184,8 @@
     {
       "id": "wall_crack",
       "at": [
-        -7.4,
-        -6.4
+        -6.4,
+        -9.4
       ],
       "shape": {
         "kind": "rect",
@@ -191,16 +199,16 @@
     {
       "id": "hump_shade",
       "at": [
-        -7.6,
-        1.2
+        -8.0,
+        -1.6
       ],
       "shape": {
         "kind": "ellipse",
-        "rx": 2.2,
-        "ry": 5.0
+        "rx": 2.4,
+        "ry": 6.4
       },
       "fill": "$timber.light",
-      "rot": -10
+      "rot": -8
     },
     {
       "id": "cape",
@@ -307,8 +315,8 @@
     {
       "id": "head",
       "at": [
-        3.6,
-        -5.6
+        4.0,
+        -5.4
       ],
       "shape": {
         "kind": "ellipse",
@@ -325,8 +333,8 @@
     {
       "id": "visor",
       "at": [
-        5.2,
-        -4.4
+        5.6,
+        -4.2
       ],
       "shape": {
         "kind": "rect",
@@ -341,8 +349,8 @@
   "skeleton": {
     "joints": {
       "head": [
-        3.6,
-        -5.6
+        4.0,
+        -5.4
       ],
       "neck": [
         1.0,

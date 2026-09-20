@@ -116,14 +116,14 @@ def coat_points(kind, sn, sf, hem):
         return top + [[7.4, 0.8], [9.4, 3.8], [9.2, 7.0], [6.4, 8.6 + hem], [1.0, 9.0 + hem], [-3.8, 8.2 + hem], [-6.4, 6.8 + hem], [-6.9, 1.0]]
     if kind == "slab":      # squared shoulders, straight sides, a flat hem
         return [[sn[0] - 1.6, sn[1] - 0.6], [sf[0] + 1.8, sf[1] - 0.6], [8.6, 0.6], [8.8, 10.8 + hem], [6.8, 12.2 + hem], [-6.4, 12.2 + hem], [-8.6, 10.8 + hem], [-8.4, 0.4]]
-    if kind == "hump":      # a bell whose back rises over the load, and whose front rounds over a gut
-        return [[sn[0] + 0.4, sn[1] - 0.6], [sf[0] - 0.6, sf[1] - 0.2], [7.8, 1.6], [9.0, 5.8], [8.0, 10.2 + hem], [4.4, 11.9 + hem], [0.2, 12.3 + hem], [-4.2, 11.9 + hem], [-7.0, 10.6 + hem], [-8.6, 6.0], [-9.8, 0.4], [-9.6, -4.4], [-7.6, -7.2]]
+    if kind == "hump":      # a dome: the back rises over the load and above the head, the front rounds over a gut; the head sits in front of it, low
+        return [[-0.4, -7.6], [sf[0] - 0.6, sf[1] - 0.2], [7.8, 1.6], [9.0, 5.8], [8.0, 10.2 + hem], [4.4, 11.9 + hem], [0.2, 12.3 + hem], [-4.2, 11.9 + hem], [-7.0, 10.6 + hem], [-8.8, 6.0], [-10.2, 0.2], [-10.4, -5.4], [-8.8, -9.2], [-5.6, -10.6], [-3.0, -9.8]]
     if kind == "column":    # narrow and long
         return top + [[6.4, 1.6], [6.6, 7.0], [6.0, 12.6 + hem], [3.8, 13.4 + hem], [-3.4, 13.4 + hem], [-5.6, 12.6 + hem], [-6.2, 7.0], [-6.0, 1.2]]
     if kind == "round":     # wide and soft, the hem tucked in
         return top + [[8.2, 2.4], [8.6, 7.2], [7.0, 11.0 + hem], [3.6, 12.2 + hem], [-3.4, 12.2 + hem], [-6.8, 11.0 + hem], [-8.6, 7.2], [-8.2, 2.2]]
-    if kind == "wedge":     # broad and low, widest at the hem
-        return top + [[8.0, 1.6], [9.4, 7.0], [9.0, 11.2 + hem], [5.0, 12.2 + hem], [-4.8, 12.2 + hem], [-8.8, 11.2 + hem], [-9.4, 7.0], [-7.8, 1.4]]
+    if kind == "wedge":     # a wedge point-down: squared, widest across the shoulders, straight sides drawing in to the hem
+        return [[sn[0] - 2.6, sn[1] - 1.2], [sf[0] + 2.8, sf[1] - 1.2], [10.6, 0.6], [8.6, 10.6 + hem], [5.8, 12.0 + hem], [-5.4, 12.0 + hem], [-8.2, 10.6 + hem], [-10.4, 0.4]]
     if kind == "small":     # a short bell for a short body
         return top + [[6.6, 1.4], [6.8, 5.4], [6.0, 9.4 + hem], [3.8, 10.6 + hem], [0.2, 11.0 + hem], [-3.6, 10.6 + hem], [-5.8, 9.4 + hem], [-6.6, 5.4], [-6.2, 1.0]]
     raise KeyError(kind)
@@ -311,7 +311,6 @@ CHARACTERS = {
         "sex": "f", "tint": ("frost", 0), "pack": True, "pack_w": 5.0, "pack_h": 5.2, "feelers": True,
         "extras": lambda c: [
             ("behind", P_("rack", (c["S"]["pack"][0] - 3.3, c["S"]["pack"][1] + 0.8), rect(2.2, 4.0), "$steel.light", stroke=hair), "head"),
-            ("in_hand", P_("tail", (c["head"][0] - 5.2, c["head"][1] + 4.6), poly([(1.6, -3.0), (2.8, -1.4), (0.6, 4.2), (-1.6, 4.4), (-1.2, 0.2)]), "$timber.dark", rot=-8, stroke=hair), "head"),
         ],
         "idle_desc": "the body breathes under the coat; the dead feelers keep sweeping for a signal that never comes",
         "description": "A circle. The first expedition, on the day the last cartridge went in (A047): the bell coat, the egg helmet, and the prototype emitter — the biggest box any of the eight carries, its cartridge rack beside it, and the two dead feelers rising from its lid, swept back past the helmet as the crown of the silhouette. Arin is the only one of the eight with feelers: the antennae were the prototype's design (A004), and every mark after it vents through a tube — and they are the lash. Grown long and thin into two whips that trail back past the helmet and crack forward, the weapon is the feelers themselves, which is what the game is named for. The hands have gone dark and hard — the saw does not mark them (A052), the Molt's slate, the first of the body to lose its blood." + SHARED,
@@ -352,17 +351,17 @@ CHARACTERS = {
     },
     "mir": {
         "sex": "m", "tint": ("timber", 2), "coat": "hump", "cloak_sx": 1.02,
-        "skeleton": {"head": (3.6, -5.6), "head_tilt": -4, "shoulder_near": (-4.0, -2.0), "shoulder_far": (6.0, -3.6), "foot_near": (-2.8, 13.1), "foot_far": (4.6, 12.5), "hip_near": (-2.8, 12.0), "hip_far": (4.4, 11.2)},
+        "skeleton": {"head": (4.0, -5.4), "head_tilt": -4, "shoulder_near": (-4.0, -2.0), "shoulder_far": (6.0, -3.6), "foot_near": (-2.8, 13.1), "foot_far": (4.6, 12.5), "hip_near": (-2.8, 12.0), "hip_far": (4.4, 11.2)},
         "head_r": (5.0, 5.4), "pose": {"coat_lean": 7, "arm_hang": 10, "arm_far_hang": -4},
         "walk": {"duration": 0.62, "bob": 0.0, "lift": 0.8, "sway": 1.4, "arm_swing": 8},
         "extras": lambda c: [
-            ("over_coat", P_("wall", (-7.4, -6.6), poly([(-2.4, -2.0), (2.4, -2.6), (2.8, 2.0), (-2.2, 2.4)]), "$rust", rot=-14, stroke=hair), "body"),
-            ("over_coat", P_("wall_crack", (-7.4, -6.4), rect(3.0, 0.6, 0.2), "$rust.dark", rot=22), "body"),
+            ("over_coat", P_("wall", (-6.4, -9.6), poly([(-2.4, -2.0), (2.4, -2.6), (2.8, 2.0), (-2.2, 2.4)]), "$rust", rot=-14, stroke=hair), "body"),
+            ("over_coat", P_("wall_crack", (-6.4, -9.4), rect(3.0, 0.6, 0.2), "$rust.dark", rot=22), "body"),
             ("over_cape", P_("cord", (0.2, -0.6), rect(1.1, 9.4, 0.4), "$bone", rot=-32), "body"),
-            ("over_coat", P_("hump_shade", (-7.6, 1.2), ell(2.2, 5.0), shade(c["T"], -1), rot=-10), "body"),
+            ("over_coat", P_("hump_shade", (-8.0, -1.6), ell(2.4, 6.4), shade(c["T"], -1), rot=-8), "body"),
         ],
         "walk_desc": "the haul: no bounce at all, short flat steps, the load riding still on the back",
-        "description": "A hump. The burrow, walked from the inside down to the queen: the coat rises over the piece of its wall carried on the back where the emitter used to be, warm half a month on, chewing inside it at night (M038, M042), corded across the chest, the rust of it showing at the top of the hump. The head sits low and forward with almost no neck, the stance is wide, and the walk has no bounce in it — the Porter's haul, twenty-nine levels of it (M035)." + SHARED,
+        "description": "A dome. The burrow, walked from the inside down to the queen: the back of the coat rises over the piece of its wall carried where the emitter used to be, higher than the head, warm half a month on, chewing inside it at night (M038, M042), corded across the chest, the rust of it showing at the top of the hump. The head sits low and forward with almost no neck, the stance is wide, and the walk has no bounce in it — the Porter's haul, twenty-nine levels of it (M035)." + SHARED,
     },
     "kano": {
         "sex": "m", "tint": ("silent", 0), "coat": "column", "cloak_sx": 1.0, "hem": 0.0, "head": "hood", "head_r": (4.8, 6.0), "visor_w": 5.8,
@@ -397,20 +396,19 @@ CHARACTERS = {
         "description": "A mushroom. The long station: a round coat under the wide flat brim on the helmet, the shape of six years beside the fungi (E009) and of the Gland's dome to come. A fingertip of royal jelly in place of the last cartridge (E093), and the throat under the helmet has begun to swell teal — the queen's smell on its way out as spit. A pair of amber mandibles at the jaw, under the brim. The slowest breath of the eight." + SHARED,
     },
     "rowan": {
-        "sex": "m", "tint": ("heather", 0), "coat": "wedge", "hem": -0.6, "head_r": (5.2, 5.4),
-        "skeleton": {"head": (2.4, -6.8), "shoulder_near": (-6.0, -2.2), "shoulder_far": (6.4, -3.8), "foot_near": (-3.0, 13.0), "foot_far": (5.0, 12.4), "hip_near": (-3.0, 12.0), "hip_far": (4.8, 11.2)},
+        "sex": "m", "tint": ("heather", 0), "coat": "wedge", "hem": -0.6, "cape": False, "head_r": (5.8, 4.8), "visor_w": 7.2, "visor_h": 2.2,
+        "skeleton": {"head": (2.6, -9.0), "head_tilt": 0, "shoulder_near": (-7.0, -3.0), "shoulder_far": (7.2, -4.6), "foot_near": (-3.0, 13.0), "foot_far": (5.0, 12.4), "hip_near": (-3.0, 12.0), "hip_far": (4.8, 11.2)},
         "arm_len": 8.2, "arm_w": 5.0, "arm_fill": "$carapace.light", "hand_r": (3.3, 3.5), "hand_fill": "$carapace.light", "foot_w": 5.6, "foot_h": 2.9, "foot_far_w": 5.0, "foot_far_h": 2.6,
-        "pack": True, "pack_w": 4.4, "pack_h": 4.4, "pack_fill": "$sand", "pose": {"coat_lean": 0, "arm_hang": 12, "arm_far_hang": -8},
+        "pose": {"coat_lean": 0, "arm_hang": 16, "arm_far_hang": -8},
         "walk": {"duration": 0.7, "bob": 0.8, "arm_swing": 7, "sway": 1.6, "lurch": 1.0},
         "extras": lambda c: [
-            ("over_cape", P_("shoulder_stone", (c["sn"][0] + 0.6, c["sn"][1] + 0.4), poly([(-3.6, -1.4), (0.6, -2.8), (3.8, -0.6), (2.6, 2.4), (-2.8, 2.2)]), "$sand", stroke=hair), "body"),
             ("in_hand", P_("claw_a", (c["hand"][0] + 2.8, c["hand"][1] + 1.8), poly([(-1.2, -1.2), (1.2, -0.4), (3.2, 2.0), (1.6, 2.2), (-0.4, 0.6)]), "$carapace.dark", stroke=hair), "arm"),
             ("in_hand", P_("claw_b", (c["hand"][0] + 0.8, c["hand"][1] + 3.2), poly([(-1.0, -1.4), (0.8, -0.8), (1.6, 2.4), (0.0, 2.4), (-1.2, 0.2)]), "$carapace.dark", stroke=hair), "arm"),
             ("in_hand", P_("claw_c", (c["hand"][0] - 1.8, c["hand"][1] + 2.8), poly([(0.8, -1.4), (-0.8, -0.6), (-2.2, 1.8), (-0.6, 2.0), (0.6, 0.4)]), "$carapace.dark", stroke=hair), "arm"),
             ("over_coat", P_("chisel", (6.6, 8.4), rect(1.2, 4.6, 0.3), "$steel", rot=16, stroke=hair), "body"),
         ],
         "walk_desc": "a heavy, planted walk: low bob, the big arm barely swinging, the whole wedge of a body leaning into each step",
-        "description": "A wedge. The ruins, and who built them: broad and low, widest at the hem, the last of the eight to be moved by anything. The whole near arm is plated in carapace, the colour of the Soldier, ending in a fist the size of the head — since the stone bowl the right arm is stronger (R015), and the little finger folded to fit the grooves does not straighten (R053). A stone sits on that shoulder, and the emitter on the back has turned to stone from the inside (R048), warm at the ruin's temperature. A chisel at the coat." + SHARED,
+        "description": "A wedge, point down. The ruins, and who built them: squared and widest across the shoulders, the low wide helmet set straight on top of them, the last of the eight to be moved by anything. The whole near arm is plated in carapace, the colour of the Soldier, ending in a fist the size of the head — since the stone bowl the right arm is stronger (R015), and the little finger folded to fit the grooves does not straighten (R053). The emitter has turned to stone from the inside (R048), warm at the ruin's temperature, and is worn as the clasp like the others'. A chisel at the coat." + SHARED,
     },
     "teo": {
         "sex": "f", "tint": ("frost", 2), "coat": "small", "cloak_sx": 0.92, "head": "mask", "head_r": (4.6, 5.0),
