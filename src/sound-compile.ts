@@ -116,7 +116,7 @@ function sliceEnv(env: IREnvTrack[], from: number, to: number): IREnvTrack[] {
 
 function audioTokens(t: Tokens, issues: Issue[], where: string): AudioTokens {
   if (t.audio) return t.audio;
-  issues.push({ level: "error", where, msg: "tokens/default.json has no `audio` section" });
+  issues.push({ level: "error", where, msg: "the app's tokens have no `audio` section — sounds need one" });
   return { pitch: {}, ramps: {}, gain: {}, q: {}, dur: {} };
 }
 

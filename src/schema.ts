@@ -13,7 +13,7 @@ export const Vec2 = z.tuple([z.number(), z.number()]);
 const partId = z.string().regex(/^[a-z][a-z0-9_]*$/, "part ids are snake_case");
 const assetId = z
   .string()
-  .regex(/^[a-z][a-z0-9-]*(\.[a-z][a-z0-9-]*)+$/, 'asset ids are dotted, e.g. "enemy.imp"');
+  .regex(/^[a-z][a-z0-9-]*(\.[a-z][a-z0-9-]*)+$/, 'asset ids are dotted and app-first, e.g. "demo.enemy.imp"');
 
 export const ShapeSchema = z.discriminatedUnion("kind", [
   z.strictObject({ kind: z.literal("circle"), r: z.number().positive() }),
@@ -151,5 +151,13 @@ export const AssetSchema = z.strictObject({
   parts: z.array(PartSchema).min(1),
   variants: z.record(z.string(), VariantSchema).optional(),
   animations: z.record(z.string(), AnimSchema).optional(),
+  /**
+   * Why this document steps outside one of its app's rules, keyed by the
+   * rule's name (`size`, `grid`, `distinct`, …). A rule a document names here
+   * is not applied to it, and the gallery lists the exception with its reason.
+   * The exception then reads as a decision somebody made rather than a warning
+   * everybody learns to scroll past — `offBand` on a sound, generalised.
+   */
+  why: z.record(z.string(), z.string().min(1)).optional(),
 });
 export type Asset = z.infer<typeof AssetSchema>;

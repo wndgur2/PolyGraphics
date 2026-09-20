@@ -17,6 +17,7 @@ import { renderPCM, describe, fromWav, spectrogram, toWav, SAMPLE_RATE } from ".
 import { SoundSchema } from "../src/sound-schema.js";
 import { mulberry32 } from "../src/prng.js";
 import type { Tokens } from "../src/tokens.js";
+import { loadLibrary } from "../src/apps.js";
 
 const root = (p: string) => new URL(`../${p}`, import.meta.url);
 const readJson = (p: string) => JSON.parse(readFileSync(root(p), "utf8"));
@@ -70,12 +71,11 @@ const opsKey = (ops: Op[]) =>
 
 // ---------------------------------------------------------------- fixture
 
-const tokens = readJson("tokens/default.json") as Tokens;
-const all = new Map<string, ReturnType<typeof SoundSchema.parse>>();
-for (const f of readdirSync(new URL("../sounds", import.meta.url)).filter((f) => f.endsWith(".json"))) {
-  const sd = SoundSchema.parse(readJson(`sounds/${f}`));
-  all.set(sd.id, sd);
-}
+// The ss set is the fixture: a test may name a document; a tool may not.
+const ss = loadLibrary().apps.find((a) => a.id === "ss");
+if (!ss) throw new Error("apps/ss is the fixture set and is missing");
+const tokens: Tokens = ss.tokens;
+const all = new Map(ss.sounds);
 const sreg: SoundRegistry = { sounds: all, tokens };
 const doc = all.get("ss.sfx.hit")!;
 const { ir, issues } = compileSound(doc, sreg);

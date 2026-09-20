@@ -34,7 +34,7 @@ func _root_dir() -> String:
 func _init() -> void:
 	var PG := load(_root_dir().path_join("adapters/godot/polygraphics.gd"))
 
-	imp = PG.load_ir(_root_dir().path_join("out/compiled/enemy-imp.json"))
+	imp = PG.load_ir(_root_dir().path_join("out/compiled/demo-enemy-imp.json"))
 	check("load_ir reads IR", not imp.is_empty())
 
 	rig = PG.build(imp)
@@ -61,7 +61,7 @@ func _init() -> void:
 	check("elite root scaled 1.25", is_equal_approx(elite.scale.x, 1.25))
 	elite.free()
 
-	var chest: Dictionary = PG.load_ir(_root_dir().path_join("out/compiled/pickup-chest.json"))
+	var chest: Dictionary = PG.load_ir(_root_dir().path_join("out/compiled/demo-pickup-chest.json"))
 	var chest_rig: Node2D = PG.build(chest, "cursed")
 	check("cursed chest builds", chest_rig.get_child_count() > 0)
 	chest_rig.free()

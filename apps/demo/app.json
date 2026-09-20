@@ -1,0 +1,14 @@
+{
+  "id": "demo",
+  "name": "Demo",
+  "premise": "The README's worked examples: the grammar shown one document at a time, with no game behind them.",
+  "categories": [
+    "char",
+    "enemy",
+    "boss",
+    "fx",
+    "pickup",
+    "tile",
+    "lib"
+  ]
+}

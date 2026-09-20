@@ -11,20 +11,14 @@
  *   npx tsx scripts/filmstrip.ts ss.enemy.imp death            → out/strip/ss.enemy.imp.death.png
  *   npx tsx scripts/filmstrip.ts ss.enemy.imp death --frames 8 --scale 4 --variant elite
  */
-import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { Resvg } from "@resvg/resvg-js";
-import { AssetSchema, type Anim, type Asset, type Part } from "../src/schema.js";
-import { renderSVG, type Registry } from "../src/render.js";
-import type { Tokens } from "../src/tokens.js";
+import type { Anim, Asset, Part } from "../src/schema.js";
+import { renderSVG } from "../src/render.js";
+import { loadLibrary, ownerOf } from "../src/apps.js";
 
 const root = new URL("..", import.meta.url);
-const tokens = JSON.parse(readFileSync(new URL("tokens/default.json", root), "utf8")) as Tokens;
-const assets = new Map<string, Asset>();
-for (const f of readdirSync(new URL("assets/", root)).filter((f) => f.endsWith(".json"))) {
-  const parsed = AssetSchema.safeParse(JSON.parse(readFileSync(new URL(`assets/${f}`, root), "utf8")));
-  if (parsed.success) assets.set(parsed.data.id, parsed.data);
-}
-const reg: Registry = { assets, tokens };
+const lib = loadLibrary();
 
 const args = process.argv.slice(2);
 const flag = (name: string, fallback: string): string => {
@@ -38,8 +32,11 @@ const frames = Number(flag("frames", "10"));
 const scale = Number(flag("scale", "3"));
 const variant = args.includes("--variant") ? flag("variant", "") : undefined;
 
-const asset = assets.get(id);
-if (!asset) throw new Error(`unknown asset ${id}`);
+const owner = ownerOf(lib, id);
+const asset = owner?.assets.get(id);
+if (!owner || !asset) throw new Error(`unknown asset ${id}`);
+const reg = owner.reg;
+const tokens = owner.tokens;
 const anim = asset.animations?.[clip];
 if (!anim) throw new Error(`${id} has no animation "${clip}"`);
 
