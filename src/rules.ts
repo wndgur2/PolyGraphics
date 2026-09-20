@@ -28,7 +28,7 @@ export interface RuleReport {
 }
 
 const listOf = (xs: string[]) => xs.join(", ");
-const scopeText = (s: Scope) =>
+export const scopeText = (s: Scope) =>
   `${listOf(s.in)}${s.tagged?.length ? ` tagged ${listOf(s.tagged)}` : ""}${s.unless?.length ? ` unless ${listOf(s.unless)}` : ""}`;
 
 /** The moment a track last changes value. */

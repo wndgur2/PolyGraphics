@@ -87,9 +87,22 @@ sound, generalised — the exception reads as a decision somebody made rather th
 to scroll past. Rules are warnings unless the manifest's `levels` says `error`; the app decides how hard
 its own rules are.
 
-The gallery has a page per app for this: the premise, then every rule with how many documents it holds
-over, who breaks it, and who stepped outside it and why; the palette grouped by role; and every sprite
-viewable on the floor the manifest names, tiled behind it at the sprite's zoom. The rule kinds are a closed
+A rule holds only what a lint can measure. The rest of how an app is drawn — what its world is made of,
+what a body is the shape of, where the light is, how a death moves, what a colour means, what it never
+does — is the manifest's **`voice`**: short, quotable sentences under fixed headings (`world`, `form`,
+`material`, `light`, `motion`, `scale`, `sound`, `never`, `study`, `judge`), written so that whoever draws
+next, a person or a session, draws with the same hand. Beside it, **`instructions`** say how each
+category is built — scoped like a rule (`in`, `tagged`, `unless`), a list of sentences, and the documents
+that show it done — and are considered whether or not they show: "the body is head, thorax and abdomen with
+six legs" holds for a creature that is all head, whose thorax and abdomen are drawn small behind it. Nothing
+in either is enforced except `study`, the documents to open before drawing anything, which must exist. `npm run brief -- --app ss` prints the
+premise, the voice, the palette by role, the floors, the rules with their counts and the exemplars with
+the first lines of their descriptions: the text to give a session before asking it for a document.
+
+The gallery has two pages per app for this: **voice**, the sentences above with the exemplars linked, and
+**rules**, every rule with how many documents it holds over, who breaks it, and who stepped outside it and
+why; plus the palette grouped by role, and every sprite viewable on the floor the manifest names, tiled
+behind it at the sprite's zoom. The rule kinds are a closed
 set with a schema (`src/app-schema.ts`); a new *kind* is a PR to `src/rules.ts` with a lint and a message
 that names the fix, a new *instance* is a line in a manifest. `scripts/test-lints.ts` fires every rule on
 an app built to break it and checks that each one holds over the roster.
@@ -596,7 +609,7 @@ What the system contributed that imperative draw code could not:
 
 You are the intended primary author. Rules of the road:
 
-1. Read the app's `app.json` first — its premise, its rules, its floors — then `tokens/base.json` and the app's `tokens.json`; author **only** with token references, and put a document in the app it belongs to (its id says which).
+1. Read the app's brief first — `npm run brief -- --app <id>`, or `app.json` itself: the premise, the `voice`, the rules, the floors — and open the documents its `study` names before drawing. Then `tokens/base.json` and the app's `tokens.json`; author **only** with token references, and put a document in the app it belongs to (its id says which).
 2. Every asset gets an honest `description` and tagged category — future sessions (and the manifest) rely on them.
 3. Name parts for what they are (`pauldron`, not `rect3`); variants and animations address them by id.
 4. Prefer `use` over copying parts between assets; prefer a variant over a near-duplicate asset; prefer a theme over recoloring assets one by one.

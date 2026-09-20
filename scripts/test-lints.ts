@@ -7,7 +7,7 @@
  *   npx tsx scripts/test-lints.ts
  */
 import { loadLibrary, owners, type Library, type Owner } from "../src/apps.js";
-import { lintNamespace } from "../src/lint.js";
+import { lintNamespace, lintVoice } from "../src/lint.js";
 import { evaluateRules } from "../src/rules.js";
 import type { AppManifest } from "../src/app-schema.js";
 import { overlayTokens } from "../src/tokens.js";
@@ -31,13 +31,13 @@ const real = loadLibrary();
 const base = real.base;
 
 /** An owner made by hand: enough of one for the lints to read. */
-function owner(id: string, assets: Asset[], categories: string[] | undefined, core?: Owner, rules?: AppManifest["rules"], extra: { sounds?: Sound[]; audio?: AppManifest["audio"] } = {}): Owner {
+function owner(id: string, assets: Asset[], categories: string[] | undefined, core?: Owner, rules?: AppManifest["rules"], extra: { sounds?: Sound[]; audio?: AppManifest["audio"]; voice?: AppManifest["voice"]; instructions?: AppManifest["instructions"] } = {}): Owner {
   const tokens = overlayTokens(base, { colors: { blood: "#d63756", bile: "#bce05a", frost: "#8fd0ff" }, audio: { pitch: { third: 523.25, fifth: 659.25, grit: 1100 } } });
   const own = new Map(assets.map((a) => [a.id, a]));
   const sounds = new Map((extra.sounds ?? []).map((sd) => [sd.id, sd]));
   return {
     id, dir: id === "core" ? "core" : `apps/${id}`,
-    manifest: categories ? { id, name: id, premise: "a fixture premise", categories, rules, audio: extra.audio } : undefined,
+    manifest: categories ? { id, name: id, premise: "a fixture premise", categories, rules, audio: extra.audio, voice: extra.voice, instructions: extra.instructions } : undefined,
     own: {}, tokens, themes: [], assets: own, sounds,
     reg: { assets: new Map([...(core?.assets ?? []), ...own]), tokens },
     sreg: { sounds, tokens },
@@ -159,11 +159,21 @@ check("…and the icon with no rim to measure", /has no part "tile"/.test(pbroke
 check("…and a why keeps a document out of the pairing, on the record", prep.find((r) => r.rule === "distinct")!.excepted.some((e) => e.id === "pp.icon.e") && !pbroke("distinct", "pp.icon.e"));
 check("key catches the fanfare that leaves the key, and not the one in it", pids("key") === "pp.sfx.lose" && /plays \$grit/.test(pbroke("key", "pp.sfx.lose")!.msg), pids("key"));
 
+// ---- the voice: only its exemplars are checked
+const vv = owner("vv", [doc("vv.thing.one", "thing")], ["thing"], undefined, undefined, {
+  voice: { world: "a fixture world, eight chars", study: ["vv.thing.one", "vv.thing.gone"] },
+  instructions: [{ in: ["thing"], what: ["built like this"], study: ["vv.thing.one", "vv.thing.lost"] }],
+});
+const vIssues: Issue[] = [];
+lintVoice(vv, vIssues);
+console.log("\nthe voice");
+check("an exemplar that does not exist is caught, and one that does is not", vIssues.length === 2 && /vv\.thing\.gone, which does not exist/.test(vIssues[0].msg) && /instructions for thing study vv\.thing\.lost/.test(vIssues[1].msg), vIssues.map((i) => i.msg).join(" | "));
+
 // ---- the real one
 const realIssues: Issue[] = [];
-for (const o of owners(real)) lintNamespace(real, o, realIssues);
+for (const o of owners(real)) { lintNamespace(real, o, realIssues); lintVoice(o, realIssues); }
 console.log("\nthe real library");
-check("the namespace lints are quiet on every app", realIssues.length === 0, realIssues.map((i) => `${i.where}: ${i.msg}`).join(" | "));
+check("the namespace and voice lints are quiet on every app", realIssues.length === 0, realIssues.map((i) => `${i.where}: ${i.msg}`).join(" | "));
 const realBreaks = owners(real).flatMap((o) => evaluateRules(o).flatMap((r) => r.broken.map((b) => `${o.id} ${r.rule} ${b.id}: ${b.msg}`)));
 check("every rule an app states holds over its roster, or is stepped outside in writing", realBreaks.length === 0, realBreaks.join(" | "));
 

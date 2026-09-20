@@ -20,7 +20,7 @@ import { compileSound, type SoundRegistry } from "./sound-compile.js";
 import { describe, renderPCM, waveformSvg, type Descriptors } from "./sound-render.js";
 import { applyTheme, resolveColor, type Tokens } from "./tokens.js";
 import { assetPath, owners, soundPath, type Library, type Owner } from "./apps.js";
-import { evaluateRules } from "./rules.js";
+import { evaluateRules, scopeText } from "./rules.js";
 
 /**
  * The longest side a cell may occupy. 128 × 1.25 is exactly this, so the
@@ -504,6 +504,29 @@ function soundSet(sreg: SoundRegistry, issues: Issue[]): string {
  * a designer reads to see whether the app is one thing, and the page a session
  * reads before it draws.
  */
+/**
+ * How the app is drawn, for whoever draws next: the premise, the world, and
+ * the voice's sentences under their headings, with the exemplars linked. Not
+ * a rule page — nothing here is enforced — but the page a session reads before
+ * it opens a document.
+ */
+function voicePage(o: Owner): string {
+  const m = o.manifest!;
+  const v = m.voice ?? {};
+  const section = (title: string, items?: string[]) =>
+    items?.length ? `<h4>${esc(title)}</h4><ul class="voice">${items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>` : "";
+  const links = (ids?: string[]) => (ids?.length ? `<p class="voice-study">${ids.map((id) => `<a href="#/${esc(id)}">${esc(id)}</a>`).join(" · ")}</p>` : "");
+  const study = v.study?.length ? `<h4>study first</h4>${links(v.study)}` : "";
+  // How each category is built: considered whether or not it shows.
+  const instructions = (m.instructions ?? [])
+    .map((ins) => `<h4>instructions · ${esc(scopeText(ins))}</h4><ul class="voice">${ins.what.map((w) => `<li>${esc(w)}</li>`).join("")}</ul>${links(ins.study)}`)
+    .join("");
+  return `<p class="premise">${esc(m.premise)}</p>
+${v.world ? `<p class="world">${esc(v.world)}</p>` : ""}
+${section("form", v.form)}${section("material and colour", v.material)}${section("light", v.light)}${section("motion", v.motion)}${section("scale", v.scale)}${section("sound", v.sound)}${section("never", v.never)}${instructions}${study}${section("how to judge it", v.judge)}
+<p class="hint dim">This is how the app is drawn — what a session reads before it draws, and what the rules page holds it to wherever a sentence can be a rule. Instructions are how a category is built, considered whether or not they show. It lives in <code>${esc(o.dir)}/app.json</code> under <code>voice</code> and <code>instructions</code>; <code>npm run brief -- --app ${esc(o.id)}</code> prints it as text.</p>`;
+}
+
 function rulesPage(o: Owner): string {
   const m = o.manifest!;
   const reports = evaluateRules(o);
@@ -648,7 +671,7 @@ function appSection(o: Owner, issues: Issue[]): { tabs: string; panels: string; 
   const tabs = [
     `<div class="group">${esc(o.manifest?.name ?? "core")}</div>`,
     `<button data-tab="${esc(panelOf(o, "tokens"))}">tokens</button>`,
-    ...(o.manifest ? [`<button data-tab="${esc(panelOf(o, "rules"))}">rules</button>`] : []),
+    ...(o.manifest ? [`<button data-tab="${esc(panelOf(o, "voice"))}">voice</button>`, `<button data-tab="${esc(panelOf(o, "rules"))}">rules</button>`] : []),
     ...(o.themes.length ? [`<button data-tab="${esc(panelOf(o, "themes"))}">themes</button>`] : []),
     `<div class="group">assets</div>`,
     // The landing tab is named here rather than inferred from position: the
@@ -669,6 +692,7 @@ function appSection(o: Owner, issues: Issue[]): { tabs: string; panels: string; 
 
   const allPanels = [
     `<section class="panel" data-panel="${esc(panelOf(o, "tokens"))}" hidden>${o.manifest ? `<p class="premise">${esc(o.manifest.premise)}</p>` : ""}${swatches(o.tokens, o.manifest?.rules?.roles)}</section>`,
+    o.manifest ? `<section class="panel" data-panel="${esc(panelOf(o, "voice"))}" hidden>${voicePage(o)}</section>` : "",
     o.manifest ? `<section class="panel" data-panel="${esc(panelOf(o, "rules"))}" hidden>${rulesPage(o)}</section>` : "",
     panels,
     o.sounds.size ? `<section class="panel" data-panel="${esc(panelOf(o, "snd-set"))}" hidden>${soundSet(o.sreg, issues)}</section>` : "",
@@ -831,6 +855,10 @@ export function buildGallery(lib: Library, issues: Issue[]): string {
   .tok.pitch code { display:block; margin-bottom:4px; }
   .empty { color:var(--dim); padding:40px 0; }
   .premise { font-size:15px; color:#e6ecf5; max-width:70ch; margin:0 0 18px; font-style:italic; }
+  .world { max-width:72ch; color:var(--mut); margin:0 0 16px; line-height:1.6; }
+  ul.voice { max-width:80ch; padding-left:20px; margin:0 0 6px; color:#e6ecf5; line-height:1.55; }
+  ul.voice li { margin:4px 0; }
+  .voice-study a { color:var(--acc); text-decoration:none; } .voice-study a:hover { text-decoration:underline; }
   table.rules td { vertical-align:top; }
   table.rules ul.rule-detail { margin:2px 0 8px; padding-left:18px; color:var(--mut); }
   table.rules ul.rule-detail li { margin:2px 0; }

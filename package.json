@@ -32,6 +32,7 @@
     "dist": "tsx src/cli.ts dist",
     "wav": "tsx src/cli.ts wav",
     "sound": "tsx scripts/inspect-sound.ts",
+    "brief": "tsx scripts/brief.ts",
     "png": "tsx src/cli.ts png",
     "baseline": "tsx src/cli.ts baseline",
     "regress": "tsx src/cli.ts regress",

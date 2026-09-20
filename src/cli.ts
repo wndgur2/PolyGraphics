@@ -15,7 +15,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { allAssets, allSounds, appFlag, appNamed, loadLibrary, owners, slug, themeNamed, ROOT, type Library, type Owner } from "./apps.js";
-import { lintNamespace, lintPalette, lintSounds } from "./lint.js";
+import { lintNamespace, lintPalette, lintSounds, lintVoice } from "./lint.js";
 import { layerOf, lintRules } from "./rules.js";
 import { applyVariant, derivedRadius, renderSVG, type Issue } from "./render.js";
 import { applyTheme, type Tokens } from "./tokens.js";
@@ -197,7 +197,14 @@ function writeManifest(lib: Library): void {
       measured: describe(renderPCM(ir)),
     };
   });
-  writeFileSync(dir("out", "manifest.json"), JSON.stringify({ generated: "polygraphics v0", entries, sounds }, null, 2));
+  // Each app's premise, voice and reference floors ride at the top, so an
+  // agent that reads the manifest before it draws reads how to draw first.
+  const apps = Object.fromEntries(
+    lib.apps
+      .filter((o) => o.manifest)
+      .map((o) => [o.id, { name: o.manifest!.name, premise: o.manifest!.premise, voice: o.manifest!.voice, instructions: o.manifest!.instructions, reference: o.manifest!.reference }]),
+  );
+  writeFileSync(dir("out", "manifest.json"), JSON.stringify({ generated: "polygraphics v0", apps, entries, sounds }, null, 2));
 }
 
 // ------------------------------------------------------------------ main
@@ -220,6 +227,7 @@ const nThemes = all.reduce((n, o) => n + o.themes.length, 0);
 if (cmd === "validate" || cmd === "check") {
   for (const o of all) {
     lintNamespace(lib, o, issues);
+    lintVoice(o, issues);
     lintRules(o, issues);
     dryRun(o, issues);
     lintSounds(o, issues);

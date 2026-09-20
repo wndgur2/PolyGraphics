@@ -70,11 +70,62 @@ export const RulesSchema = z.strictObject({
 });
 export type Rules = z.infer<typeof RulesSchema>;
 
+/**
+ * How the app is drawn: the design voice, in sentences a session reads before
+ * it draws so that what it draws smells of the same hand. Where a sentence can
+ * be a rule, it is one (in `rules`); the rest lives here and is not enforced —
+ * except `study`, whose documents must exist, because an exemplar list that
+ * has rotted teaches the wrong thing. Every field is a list of short,
+ * quotable sentences; `world` is the one paragraph the rest hang off.
+ */
+export const VoiceSchema = z.strictObject({
+  /** What this world is made of and why it looks the way it does. */
+  world: z.string().min(8).optional(),
+  /** Silhouette, proportion, what a body is the shape of. */
+  form: z.array(z.string().min(1)).optional(),
+  /** What things are made of and what each colour means. */
+  material: z.array(z.string().min(1)).optional(),
+  /** Where the light is and how a surface takes it. */
+  light: z.array(z.string().min(1)).optional(),
+  /** How things move, and what the document owns versus the engine. */
+  motion: z.array(z.string().min(1)).optional(),
+  /** The size things are authored at, seen at, and judged at. */
+  scale: z.array(z.string().min(1)).optional(),
+  /** The sound's voice: palette, key, level, what a trigger is. */
+  sound: z.array(z.string().min(1)).optional(),
+  /** What this app never does. Short. */
+  never: z.array(z.string().min(1)).optional(),
+  /** Documents to open before drawing anything: the exemplars. Must exist. */
+  study: z.array(assetId).optional(),
+  /** How a change is judged — the loop, by command. */
+  judge: z.array(z.string().min(1)).optional(),
+});
+export type Voice = z.infer<typeof VoiceSchema>;
+
+/**
+ * How a category is built: the instructions a document in scope is drawn to
+ * consider, whether or not they show. "The body is head, thorax and abdomen
+ * with six legs" holds for a creature that is all head — the thorax and
+ * abdomen are there behind it, small, and the legs are counted. Not enforced
+ * (a rule is, and lives in `rules`); read before drawing, with `study` the
+ * documents that show it done. `study` must exist.
+ */
+export const InstructionSchema = z.strictObject({
+  ...ScopeFields,
+  what: z.array(z.string().min(1)).min(1),
+  study: z.array(assetId).optional(),
+});
+export type Instruction = z.infer<typeof InstructionSchema>;
+
 export const AppManifestSchema = z.strictObject({
   id: appId,
   name: z.string().min(1),
   /** The sentence the rules serve. The gallery puts it above the palette. */
   premise: z.string().min(8),
+  /** How the app is drawn — see VoiceSchema. */
+  voice: VoiceSchema.optional(),
+  /** How each category is built — see InstructionSchema. */
+  instructions: z.array(InstructionSchema).optional(),
   engines: z.array(z.enum(["phaser", "godot", "web"])).optional(),
   /** Tab order, and the closed set `tags[0]` must come from. */
   categories: z.array(category).min(1),

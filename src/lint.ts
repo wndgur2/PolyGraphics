@@ -189,3 +189,19 @@ export function lintSounds(o: Owner, issues: Issue[]): void {
     issues.push({ level: "warn", where: `${o.dir}/tokens.json`, msg: `no audio.loudness offset for family "${f}" — held to the anchor` });
 }
 
+
+/**
+ * The voice is not enforced — it is how the app is drawn, for whoever draws
+ * next — except that the documents it says to study must exist. An exemplar
+ * list that has rotted teaches the wrong thing, quietly.
+ */
+export function lintVoice(o: Owner, issues: Issue[]): void {
+  const exists = (id: string) => o.reg.assets.has(id) || o.sreg.sounds.has(id);
+  for (const id of o.manifest?.voice?.study ?? [])
+    if (!exists(id))
+      issues.push({ level: "warn", where: `${o.dir}/app.json`, msg: `voice.study names ${id}, which does not exist — an exemplar that has gone teaches the wrong thing` });
+  for (const ins of o.manifest?.instructions ?? [])
+    for (const id of ins.study ?? [])
+      if (!exists(id))
+        issues.push({ level: "warn", where: `${o.dir}/app.json`, msg: `instructions for ${ins.in.join(", ")} study ${id}, which does not exist` });
+}

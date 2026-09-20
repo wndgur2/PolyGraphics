@@ -5,10 +5,183 @@
   "engines": ["phaser"],
   "categories": ["char", "figure", "enemy", "proj", "fx", "pickup", "terrain", "env", "icon", "relic", "curse", "draught", "app", "lib"],
 
+  "instructions": [
+    {
+      "in": [
+        "enemy"
+      ],
+      "unless": [
+        "projectile"
+      ],
+      "study": [
+        "ss.enemy.imp",
+        "ss.enemy.antlion",
+        "ss.enemy.boss",
+        "ss.lib.organ"
+      ],
+      "what": [
+        "The face is angular, takes a gradient, and has compound eyes.",
+        "The body is head, thorax and abdomen, with six legs. Not all of it has to show: a creature that is all head keeps its thorax and abdomen behind it, small, and its six legs may be three stubs mirrored — but it is all drawn, and the walk and the death fold on it.",
+        "Every body carries the lit pheromone organ (`use: ss.lib.organ`), where the hive can see it.",
+        "Legs are two links with a knee; feelers are two-link whips that lag down their length. The dark maw is at the front and works on its own joint, with the fang riding it.",
+        "Draw the verb first — what this body does to the player — then the body around it. A body that reaches has an arm; a body that hides is a mound with jaws in it."
+      ]
+    },
+    {
+      "in": [
+        "enemy"
+      ],
+      "tagged": [
+        "projectile"
+      ],
+      "study": [
+        "ss.enemy.shot",
+        "ss.enemy.tick"
+      ],
+      "what": [
+        "A shot is not a body: no organ, no death, no radius. It is the shape of the harm it carries, at the size it is thrown."
+      ]
+    },
+    {
+      "in": [
+        "char",
+        "figure"
+      ],
+      "study": [
+        "ss.char.dot",
+        "ss.figure.dot"
+      ],
+      "what": [
+        "The player carries the same organ every creature carries, `dead`: no halo, no bloom, a hairline crack across cold grey. That silence is the premise.",
+        "The feelers are the feature the title names. Draw them to be picked out."
+      ]
+    },
+    {
+      "in": [
+        "icon"
+      ],
+      "tagged": [
+        "weapon"
+      ],
+      "study": [
+        "ss.icon.whip",
+        "ss.icon.dung"
+      ],
+      "what": [
+        "A weapon icon composes its weapon (`use` the projectile), so the slot shows the thing itself and the weapon is drawn once.",
+        "The tile is that weapon's own colour — the part of its art nothing else owns. `evolved` is the tile going gold, not a second drawing."
+      ]
+    },
+    {
+      "in": [
+        "proj"
+      ],
+      "study": [
+        "ss.proj.mine",
+        "ss.proj.ring"
+      ],
+      "what": [
+        "Hive material with the signal stripped out, unless it is bait.",
+        "`meta.radius` is a contract the game divides by; the art may change, the number may not."
+      ]
+    },
+    {
+      "in": [
+        "env"
+      ],
+      "study": [
+        "ss.env.pan"
+      ],
+      "what": [
+        "A floor tiles on a torus: every part that crosses an edge is emitted again a tile over, so no seam and no grain-free margin survive.",
+        "Shade in steps, not gradients, because the bake flattens a gradient. Grain is seeded `repeat`, never noise."
+      ]
+    },
+    {
+      "in": [
+        "lib"
+      ],
+      "study": [
+        "ss.lib.organ",
+        "ss.lib.dot-head"
+      ],
+      "what": [
+        "Author a library part large in its own document and compose it in at a fraction, so it can be judged at the size it was drawn.",
+        "A state on a library part is the callers' vocabulary: `dead`, `faint`, `venomed` mean what the documents that use them need."
+      ]
+    }
+  ],
+
   "reference": {
     "ground": { "field": "ss.env.ground", "pan": "ss.env.pan" },
     "scale": 1.35,
     "contrast": { "sinks": 2.5, "thin": 3.5 }
+  },
+
+  "voice": {
+    "world": "A hive that announces itself by scent, and one body that cannot. Everything in the hive is chitin, husk and carapace with a lit pheromone organ on it; the survivor carries the same organ dead, and is hunted for the silence. It is seen four hundred bodies at a time, on soil and on the salt pan under the sun. What the game says, it says with a shape and a glow.",
+    "form": [
+      "Silhouettes carry identity. If two bodies are the same in black, colour is doing work shape should be doing.",
+      "Each body is the shape of the one thing it does: a Locust is a hind leg, an Antlion is two jaws standing out of a mound, a Hurler carries its shot on its back.",
+      "At game scale you read a shape and a glow, not anatomy — so a head and thorax may fuse, and six legs may be three stubs mirrored — but the anatomy is drawn underneath, and the rig hinges on it.",
+      "Concave and asymmetric on purpose — `poly` exists for it. A convex blob in a different hue is the failure this roster was redrawn to escape.",
+      "The feature the fiction names is drawn large enough to pick out: the feelers, the organ, the jaws."
+    ],
+    "material": [
+      "The hive is chitin, husk and carapace, lit by its signal — pheromone and pink.",
+      "The arsenal is hive material with the signal stripped out: chitin, husk bone, molt shell, honed to a cold frost edge, and never magenta. The one weapon that breaks it is bait, and breaks it on purpose.",
+      "A weapon icon's rim is that weapon's own colour — the part of its art nothing else owns, not the part there is most of.",
+      "Gold means a state (evolved), never a material. Pheromone is the hive's colour, never the player's.",
+      "Paint with tokens. A raw hex is a number nobody can read, and a theme cannot restyle it."
+    ],
+    "light": [
+      "One light, up-screen. A rim bands off it; inside a tilted hole the rim reverses, because the wall you see into it is the far one.",
+      "The Phaser bake flattens a gradient, so anything that must read in the game steps its shading rather than blending it.",
+      "A glow is a halo, a bloom and a socket — ghost, soft, full — never one flat disc."
+    ],
+    "motion": [
+      "A hinge is not a prop. A leg folds as equal rot down the chain plus the x/y each link's offset sweeps: two links with a knee, feelers as two-link whips that lag down their length.",
+      "Animations move parts within a body, never the body. Spin, facing, knockback and hit-flash belong to the engine.",
+      "Every death is one grammar in many readings: the seize, the give, the settle. What differs is what each creature is. Arrive by 0.85, then hold.",
+      "A loop is judged breathing in the gallery; a one-shot is judged still, frame by frame, on a filmstrip."
+    ],
+    "scale": [
+      "Authored at 32 on a 4px grid, seen at 1.35×, on the floor it spawns on. Judge it big for form, at game scale for survival, in black for identity.",
+      "A body holds at least 2.5:1 against its floor; below that it sinks. The pan's household is judged on the pan, not the field.",
+      "Library parts are authored large in their own document and composed in at a fraction, so a head can be judged at the size it was drawn."
+    ],
+    "sound": [
+      "The palette is split the way the fiction is: half the hive's body — tap, shell, bone, grit — and half its voice, the A-minor degrees the score already plays, so an effect cannot clash with the music.",
+      "Hit is the smallest sound in the set, because it plays hundreds of times a run. Levels come off a five-rung ladder, not sixteen floats.",
+      "A square or sawtooth carries a filter, or says why it does not. Per-trigger variation is jitter the engine rolls; everything else is seeded."
+    ],
+    "never": [
+      "Magenta on the arsenal.",
+      "Two creatures the same cream, or the same convex blob.",
+      "A second drawing of a thing that exists: compose it with `use`; a state is a patch, not a redraw.",
+      "A number where a token carries identity.",
+      "A one-shot still moving at its last frame.",
+      "Randomness anywhere but a seeded `repeat`.",
+      "Retiring an id before the game has stopped asking for it."
+    ],
+    "study": [
+      "ss.lib.organ",
+      "ss.enemy.imp",
+      "ss.enemy.antlion",
+      "ss.enemy.boss",
+      "ss.icon.whip",
+      "ss.proj.mine",
+      "ss.env.pan",
+      "ss.figure.dot",
+      "ss.sfx.hit"
+    ],
+    "judge": [
+      "npm run check, then look: the SVG, the gallery, the rules page.",
+      "npx tsx scripts/inspect.ts <id> — big, at game scale, in black.",
+      "npx tsx scripts/readability.ts --app ss [--ground ss.env.pan] — against the floor it stands on.",
+      "npx tsx scripts/sheet.ts <id> --anim <clip>, and scripts/filmstrip.ts <id> death — a clip posed the way the adapters pose it.",
+      "A human listens before a sound is declared good; the bake's measurements stand in until then."
+    ]
   },
 
   "rules": {

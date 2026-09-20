@@ -10,5 +10,22 @@
     "pickup",
     "tile",
     "lib"
-  ]
+  ],
+  "voice": {
+    "world": "The README's worked examples: the grammar shown one construct at a time, with no game behind them. Nothing here has to be true to a fiction, only to the schema.",
+    "form": [
+      "One construct per document, as plainly as it can be shown."
+    ],
+    "never": [
+      "A convention that belongs to a game. This app is the template, and a template carries no taste."
+    ],
+    "study": [
+      "demo.enemy.imp",
+      "demo.lib.face",
+      "demo.fx.burst"
+    ],
+    "judge": [
+      "npm run check, then read the SVG."
+    ]
+  }
 }
