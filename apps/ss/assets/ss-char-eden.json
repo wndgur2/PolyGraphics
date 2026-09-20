@@ -43,7 +43,7 @@
         "h": 7.0,
         "corner": 1.2
       },
-      "fill": "$venom.dark",
+      "fill": "$sage.dark",
       "rot": -10
     },
     {
@@ -139,7 +139,7 @@
           ]
         ]
       },
-      "fill": "$venom",
+      "fill": "$sage",
       "stroke": {
         "color": "$ink",
         "width": "thin"
@@ -275,7 +275,7 @@
           ]
         ]
       },
-      "fill": "$venom.light"
+      "fill": "$sage.light"
     },
     {
       "id": "organ",
@@ -317,7 +317,7 @@
         "h": 7.6,
         "corner": 1.4
       },
-      "fill": "$venom",
+      "fill": "$sage",
       "rot": 8,
       "stroke": {
         "color": "$ink",
@@ -352,7 +352,7 @@
         "rx": 5.0,
         "ry": 5.4
       },
-      "fill": "$venom.light2",
+      "fill": "$sage.light2",
       "rot": -10,
       "stroke": {
         "color": "$ink",

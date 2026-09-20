@@ -303,7 +303,7 @@ CHARACTERS = {
         "description": "A circle. The first expedition, on the day the last cartridge went in (A047): the bell coat, the egg helmet, and the prototype emitter — the biggest box any of the eight carries, its cartridge rack beside it, and the two dead feelers rising from its lid, swept back past the helmet as the crown of the silhouette. Arin is the only one of the eight with feelers: the antennae were the prototype's design (A004), and every mark after it vents through a tube — and they are the lash. Grown long and thin into two whips that trail back past the helmet and crack forward, the weapon is the feelers themselves, which is what the game is named for. The hands have gone dark and hard — the saw does not mark them (A052), the Molt's slate, the first of the body to lose its blood." + SHARED,
     },
     "sol": {
-        "tint": ("bile", 0), "coat": "jacket_belly", "cloak_sx": 0.9, "legs": True, "cape": False,
+        "tint": ("lichen", 0), "coat": "jacket_belly", "cloak_sx": 0.9, "legs": True, "cape": False,
         "head": "bare", "head_r": (4.6, 5.0),
         "skeleton": {"hip_near": (-2.2, 6.4), "hip_far": (3.2, 5.8), "foot_near": (-1.8, 13.4), "foot_far": (4.0, 12.8), "head": (2.6, -8.4)},
         "pose": {"coat_lean": 10, "arm_hang": 14, "arm_far_hang": -16}, "arm_w": 2.6, "arm_far_w": 2.2, "hand_r": (1.5, 1.7), "foot_w": 4.2, "foot_h": 2.2, "foot_far_w": 3.8, "foot_far_h": 2.0,
@@ -321,7 +321,7 @@ CHARACTERS = {
         "description": "A triangle, leaning. The scout sent out alone: a short jacket over long legs, the body pitched ten degrees into the run, the arms swinging high, a scarf flying back from the neck. The one bare head of the eight — the helmet came off on day two (S002) and hangs from the hip now, found and not put on (S009). The issued emitter was dead on day one and was never carried (S004); a pouch of fungi with a pink cap showing is what gets Sol past the swarm (S003). Faster than they are (S009), and short of health for it." + SHARED,
     },
     "haram": {
-        "tint": ("gold", 0), "coat": "slab", "head": "box", "head_r": (5.4, 5.0), "visor_w": 7.4, "cape": False,
+        "tint": ("ochre", 0), "coat": "slab", "head": "box", "head_r": (5.4, 5.0), "visor_w": 7.4, "cape": False,
         "skeleton": {"shoulder_near": (-6.2, -3.4), "shoulder_far": (7.0, -4.6), "head": (1.6, -8.6), "foot_near": (-2.6, 13.2), "foot_far": (4.4, 12.6)},
         "pose": {"coat_lean": 3, "arm_hang": 4, "arm_far_hang": -6}, "arm_w": 3.6, "arm_far_w": 3.2, "foot_w": 5.4, "foot_h": 2.8, "foot_far_w": 4.8, "foot_far_h": 2.6,
         "pack": True, "pack_w": 4.4, "pack_h": 4.6, "skeleton_pack": None,
@@ -371,7 +371,7 @@ CHARACTERS = {
         "description": "A column. The patrols, and the rules that came out of them: do not stop (K033). A narrow coat, long to the boots, under a peaked hood-helmet, and a staff in the far hand taller than the head — the twelfth emitter was dropped where it broke, as the rules say (K030, K033), so nothing rides on the back. Gaitered boots, and a walk that is the coat's: a slow glide with the staff planted, no bounce and no hurry — the one who does not stop does not rush either." + SHARED,
     },
     "eden": {
-        "tint": ("venom", 0), "coat": "round", "head": "brim", "head_r": (5.0, 5.4),
+        "tint": ("sage", 0), "coat": "round", "head": "brim", "head_r": (5.0, 5.4),
         "skeleton": {"head": (2.2, -7.2), "shoulder_near": (-5.2, -2.6), "shoulder_far": (6.0, -3.8)},
         "pack": True, "pack_w": 3.8, "pack_h": 4.0, "pose": {"coat_lean": 1, "arm_hang": 8, "arm_far_hang": -10},
         "walk": {"duration": 0.62, "bob": 1.0, "sway": 3.6, "arm_swing": 10}, "idle": {"duration": 1.7},
@@ -390,7 +390,7 @@ CHARACTERS = {
         "description": "A mushroom. The long station: a round coat under the wide flat brim on the helmet, the shape of six years beside the fungi (E009) and of the Gland's dome to come. A fingertip of royal jelly in place of the last cartridge (E093), and the throat under the helmet has begun to swell teal — the queen's smell on its way out as spit. The specimen jar on the coat holds number twelve, the seed that came up as two joints of crystal (E140); the coat is patched with moss where six years wore through it. The slowest breath of the eight." + SHARED,
     },
     "rowan": {
-        "tint": ("arcane", 2), "coat": "wedge", "hem": -0.6, "head_r": (5.2, 5.4),
+        "tint": ("heather", 0), "coat": "wedge", "hem": -0.6, "head_r": (5.2, 5.4),
         "skeleton": {"head": (2.4, -6.8), "shoulder_near": (-6.0, -2.2), "shoulder_far": (6.4, -3.8), "foot_near": (-3.0, 13.0), "foot_far": (5.0, 12.4), "hip_near": (-3.0, 12.0), "hip_far": (4.8, 11.2)},
         "arm_len": 8.2, "arm_w": 5.0, "arm_fill": "$carapace.light", "hand_r": (3.3, 3.5), "hand_fill": "$carapace.light", "foot_w": 5.6, "foot_h": 2.9, "foot_far_w": 5.0, "foot_far_h": 2.6,
         "pack": True, "pack_w": 4.4, "pack_h": 4.4, "pack_fill": "$sand", "pose": {"coat_lean": 0, "arm_hang": 12, "arm_far_hang": -8},

@@ -43,7 +43,7 @@
         "h": 7.0,
         "corner": 1.2
       },
-      "fill": "$arcane.light",
+      "fill": "$heather.dark",
       "rot": -8
     },
     {
@@ -139,7 +139,7 @@
           ]
         ]
       },
-      "fill": "$arcane.light2",
+      "fill": "$heather",
       "stroke": {
         "color": "$ink",
         "width": "thin"
@@ -203,7 +203,7 @@
           ]
         ]
       },
-      "fill": "$arcane.light2"
+      "fill": "$heather.light"
     },
     {
       "id": "organ",
@@ -410,7 +410,7 @@
         "rx": 5.2,
         "ry": 5.4
       },
-      "fill": "$arcane.light2",
+      "fill": "$heather.light2",
       "rot": -10,
       "stroke": {
         "color": "$ink",

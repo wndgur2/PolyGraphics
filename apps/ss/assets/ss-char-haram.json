@@ -107,7 +107,7 @@
         "h": 7.0,
         "corner": 1.2
       },
-      "fill": "$gold.dark",
+      "fill": "$ochre.dark",
       "rot": -6
     },
     {
@@ -195,7 +195,7 @@
           ]
         ]
       },
-      "fill": "$gold",
+      "fill": "$ochre",
       "stroke": {
         "color": "$ink",
         "width": "thin"
@@ -326,7 +326,7 @@
         "h": 7.6,
         "corner": 1.4
       },
-      "fill": "$gold",
+      "fill": "$ochre",
       "rot": 4,
       "stroke": {
         "color": "$ink",
@@ -362,7 +362,7 @@
         "h": 10.0,
         "corner": 3.2
       },
-      "fill": "$gold.light2",
+      "fill": "$ochre.light2",
       "rot": -6,
       "stroke": {
         "color": "$ink",
