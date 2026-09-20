@@ -1,7 +1,7 @@
 {
   "id": "ss.char.mir",
   "name": "Mir",
-  "description": "A dome. The burrow, walked from the inside down to the queen: the back of the coat rises over the piece of its wall carried where the emitter used to be, higher than the head, warm half a month on, chewing inside it at night (M038, M042), corded across the chest, the rust of it showing at the top of the hump. The head sits low and forward with almost no neck, the stance is wide, and the walk has no bounce in it \u2014 the Porter's haul, twenty-nine levels of it (M035). Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
+  "description": "A hump. The burrow, walked from the inside down to the queen: a stocky bell of a coat whose back rounds up over the piece of its wall carried high on the back where the emitter used to be, warm half a month on, chewing inside it at night (M038, M042), corded across the chest, the rust of it showing over the near shoulder. A head lamp on the helmet, the one light the eight carry \u2014 the burrow is where the compass stopped (M005). The head sits a little low and forward, the stance is wide, and the walk has no bounce in it \u2014 the Porter's haul, twenty-nine levels of it (M035). Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
   "tags": [
     "char"
   ],
@@ -14,10 +14,59 @@
   },
   "parts": [
     {
+      "id": "wall",
+      "at": [
+        -6.8,
+        -8.0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -2.8,
+            -2.4
+          ],
+          [
+            2.6,
+            -2.8
+          ],
+          [
+            3.0,
+            2.4
+          ],
+          [
+            -2.6,
+            2.6
+          ]
+        ]
+      },
+      "fill": "$rust",
+      "rot": -12,
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "wall_crack",
+      "at": [
+        -6.6,
+        -8.6
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 3.2,
+        "h": 0.6,
+        "corner": 0.2
+      },
+      "fill": "$rust.dark",
+      "rot": 24
+    },
+    {
       "id": "arm_far",
       "at": [
         6.64,
-        -0.11
+        -0.31
       ],
       "shape": {
         "kind": "rect",
@@ -32,7 +81,7 @@
       "id": "hand_far",
       "at": [
         6.95,
-        4.28
+        4.08
       ],
       "shape": {
         "kind": "ellipse",
@@ -75,17 +124,17 @@
         0,
         0
       ],
-      "rot": 5,
+      "rot": 3,
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -0.42,
-            -7.6
+            -4.67,
+            -3.0
           ],
           [
             6.15,
-            -3.8
+            -4.0
           ],
           [
             8.27,
@@ -116,28 +165,20 @@
             10.6
           ],
           [
-            -8.98,
+            -8.77,
             6.0
           ],
           [
-            -10.82,
-            0.2
+            -10.4,
+            0.4
           ],
           [
-            -11.03,
-            -5.4
+            -10.18,
+            -4.4
           ],
           [
-            -9.34,
-            -9.2
-          ],
-          [
-            -5.94,
-            -10.6
-          ],
-          [
-            -3.18,
-            -9.8
+            -8.06,
+            -7.2
           ]
         ]
       },
@@ -148,67 +189,18 @@
       }
     },
     {
-      "id": "wall",
-      "at": [
-        -6.4,
-        -9.6
-      ],
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -2.4,
-            -2.0
-          ],
-          [
-            2.4,
-            -2.6
-          ],
-          [
-            2.8,
-            2.0
-          ],
-          [
-            -2.2,
-            2.4
-          ]
-        ]
-      },
-      "fill": "$rust",
-      "rot": -14,
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "wall_crack",
-      "at": [
-        -6.4,
-        -9.4
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 3.0,
-        "h": 0.6,
-        "corner": 0.2
-      },
-      "fill": "$rust.dark",
-      "rot": 22
-    },
-    {
       "id": "hump_shade",
       "at": [
-        -8.0,
-        -1.6
+        -7.6,
+        1.2
       ],
       "shape": {
         "kind": "ellipse",
-        "rx": 2.4,
-        "ry": 6.4
+        "rx": 2.2,
+        "ry": 5.0
       },
       "fill": "$timber.light",
-      "rot": -8
+      "rot": -10
     },
     {
       "id": "cape",
@@ -220,12 +212,12 @@
         "kind": "poly",
         "points": [
           [
-            -4.49,
-            -2.2
+            -4.9,
+            -2.6
           ],
           [
             6.53,
-            -3.8
+            -4.0
           ],
           [
             7.45,
@@ -279,8 +271,8 @@
     {
       "id": "arm",
       "at": [
-        -5.06,
-        1.74
+        -5.46,
+        1.34
       ],
       "shape": {
         "kind": "rect",
@@ -298,8 +290,8 @@
     {
       "id": "hand",
       "at": [
-        -5.88,
-        6.37
+        -6.28,
+        5.97
       ],
       "shape": {
         "kind": "ellipse",
@@ -315,16 +307,16 @@
     {
       "id": "head",
       "at": [
-        4.0,
-        -5.4
+        2.6,
+        -7.2
       ],
       "shape": {
         "kind": "ellipse",
-        "rx": 5.0,
-        "ry": 5.4
+        "rx": 5.2,
+        "ry": 5.6
       },
       "fill": "$timber.light2",
-      "rot": -4,
+      "rot": -6,
       "stroke": {
         "color": "$ink",
         "width": "thin"
@@ -333,8 +325,8 @@
     {
       "id": "visor",
       "at": [
-        5.6,
-        -4.2
+        4.2,
+        -6.0
       ],
       "shape": {
         "kind": "rect",
@@ -344,37 +336,65 @@
       },
       "fill": "$ink",
       "rot": -5
+    },
+    {
+      "id": "lamp_ring",
+      "at": [
+        5.0,
+        -10.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.9
+      },
+      "fill": "$slate.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "lamp",
+      "at": [
+        5.0,
+        -10.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.2
+      },
+      "fill": "$silent"
     }
   ],
   "skeleton": {
     "joints": {
       "head": [
-        4.0,
-        -5.4
+        2.6,
+        -7.2
       ],
       "neck": [
-        1.0,
-        -2.8
+        0.8,
+        -3.1
       ],
       "pelvis": [
         0.8,
         11.6
       ],
       "shoulder_near": [
-        -4.4,
-        -2.0
+        -4.8,
+        -2.4
       ],
       "shoulder_far": [
         6.4,
-        -3.6
+        -3.8
       ],
       "hand_near": [
-        -5.88,
-        6.37
+        -6.28,
+        5.97
       ],
       "hand_far": [
         6.95,
-        4.28
+        4.08
       ],
       "hip_near": [
         -2.8,
@@ -453,6 +473,42 @@
         },
         {
           "part": "visor",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "lamp_ring",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "lamp",
           "prop": "y",
           "keys": [
             [
@@ -734,6 +790,124 @@
         },
         {
           "part": "visor",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.0
+            ],
+            [
+              0.17,
+              -0.0
+            ],
+            [
+              0.25,
+              -0.0
+            ],
+            [
+              0.33,
+              -0.0
+            ],
+            [
+              0.42,
+              -0.0
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              -0.0
+            ],
+            [
+              0.67,
+              -0.0
+            ],
+            [
+              0.75,
+              -0.0
+            ],
+            [
+              0.83,
+              -0.0
+            ],
+            [
+              0.92,
+              -0.0
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "lamp_ring",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.0
+            ],
+            [
+              0.17,
+              -0.0
+            ],
+            [
+              0.25,
+              -0.0
+            ],
+            [
+              0.33,
+              -0.0
+            ],
+            [
+              0.42,
+              -0.0
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              -0.0
+            ],
+            [
+              0.67,
+              -0.0
+            ],
+            [
+              0.75,
+              -0.0
+            ],
+            [
+              0.83,
+              -0.0
+            ],
+            [
+              0.92,
+              -0.0
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "lamp",
           "prop": "y",
           "keys": [
             [
