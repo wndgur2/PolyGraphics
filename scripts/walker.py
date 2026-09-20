@@ -27,29 +27,31 @@ def add(a, b): return (a[0] + b[0], a[1] + b[1])
 
 # ============================================================== 1. skeleton and pose
 # Canvas 32×32, origin at the centre, +x right, +y down. The body faces the
-# viewer's FRONT-RIGHT (a three-quarter view from a little above), so the near
-# side is the right side of the picture and the far side is the left. The engine
-# mirrors the whole frame to walk left.
+# viewer's FRONT-RIGHT (a three-quarter view from a little above). A body facing
+# you has its right hand on your left, so here the RIGHT shoulder is the near
+# one, low and on the LEFT of the picture, and the LEFT shoulder is the far one,
+# high and on the RIGHT, behind the body. The engine mirrors the whole frame to
+# walk left.
 SKELETON = {
-    # the shoulder line: far shoulder up and left, near shoulder down and right,
-    # tilted about 6° because the near side is closer to the camera
-    "shoulder_far":  (-5.6, -4.4),
-    "shoulder_near": (6.2, -3.2),
+    # the shoulder line: near (right) shoulder down and LEFT, far (left) shoulder
+    # up and RIGHT, tilted about 7° because the near side is closer to the camera
+    "shoulder_near": (-4.8, -3.0),
+    "shoulder_far":  (5.6, -4.4),
     # the hip line, under the coat, less tilted than the shoulders
-    "hip_far":  (-2.0, 11.0),
-    "hip_near": (3.6, 12.0),
+    "hip_near": (-2.0, 12.0),
+    "hip_far":  (3.4, 11.2),
     # the head: centre and the tilt of the helmet's long axis (leaning back a touch)
     "head": (2.0, -8.0), "head_tilt": -10,
     # where each foot meets the ground
-    "foot_far": (-1.9, 12.7), "foot_near": (3.6, 13.1),
+    "foot_near": (-1.6, 13.1), "foot_far": (3.6, 12.5),
     # the kit: the emitter box behind the far shoulder, and the two feelers rooted in its lid
     "pack": (-6.0, -3.6),
     "feeler_root": (-5.4, -5.9), "feeler_far_root": (-6.8, -5.5),
 }
 S = SKELETON
 # the pose: the coat leans a little into the walk, the arms hang a few degrees off
-# vertical (the near one forward, the far one out from the body)
-POSE = {"coat_lean": 2, "arm_hang": -4, "arm_far_hang": 10, "visor_turn": -5}
+# vertical, each OUT from the body (positive angle = toward -x)
+POSE = {"coat_lean": 2, "arm_hang": 6, "arm_far_hang": -8, "visor_turn": -5}
 
 # proportions, in px: the head is a third of the height
 HEAD_R = (5.3, 5.8)
@@ -76,12 +78,12 @@ visor = {"id": "visor", "at": [r2(S["head"][0] + 1.6), r2(S["head"][1] + 1.2)], 
 # rounded hem past the hips. The single mass of the body.
 sf, sn = S["shoulder_far"], S["shoulder_near"]
 cloak = {"id": "cloak", "at": [0, 0], "rot": POSE["coat_lean"] - 2, "shape": {"kind": "poly", "points": [
-    [r2(sf[0] + 0.8), r2(sf[1] - 0.2)], [r2(sn[0] - 0.8), r2(sn[1] - 0.2)],
+    [r2(sn[0] + 0.6), r2(sn[1] - 0.2)], [r2(sf[0] - 0.6), r2(sf[1] - 0.2)],
     [7.5, 1.6], [7.7, 6.0], [6.8, 10.6], [4.4, 11.9], [0.2, 12.3], [-4.2, 11.9], [-6.8, 10.6], [-7.6, 6.0], [-7.2, 1.2]]},
     "fill": "$frost", "stroke": thin}
 # the mantle over the shoulders: its top edge IS the shoulder line, its hem falls in two lobes
 cape = {"id": "cape", "at": [0, 0], "shape": {"kind": "poly", "points": [
-    [r2(sf[0]), r2(sf[1] - 0.2)], [r2(sn[0]), r2(sn[1] - 0.2)], [7.3, 0.9], [3.4, 2.4], [0.2, 1.3], [-3.4, 2.2], [-7.0, 0.2]]},
+    [r2(sn[0]), r2(sn[1] - 0.2)], [r2(sf[0]), r2(sf[1] - 0.2)], [7.3, 0.9], [3.4, 2.4], [0.2, 1.3], [-3.4, 2.2], [-7.0, 0.2]]},
     "fill": "$frost.light"}
 # the dead organ, worn as the mantle's clasp — the same place on all eight
 organ = {"id": "organ", "at": [1.0, 1.0], "use": "ss.lib.organ", "variant": "dead", "scale": 0.72}
@@ -91,8 +93,9 @@ foot = {"id": "foot", "at": [*S["foot_near"]], "shape": {"kind": "rect", "w": 4.
 foot_far = {"id": "foot_far", "at": [*S["foot_far"]], "shape": {"kind": "rect", "w": 4.2, "h": 2.4, "corner": 1.1}, "fill": "$slate"}
 
 # the arms: a sleeve and a hand each, hanging from the ENDS of the shoulder line.
-# Near arm at the right flank, half over the coat's outline; far arm at the left
-# flank behind the coat, a sliver of sleeve and hand past the edge.
+# Near (right) arm at the LEFT flank, in front of the coat, half over its outline;
+# far (left) arm at the RIGHT flank behind the coat, a sliver of sleeve and hand
+# past the front edge.
 a_c = hang(sn, UPPER["arm_len"], POSE["arm_hang"])
 arm = {"id": "arm", "at": [r2(a_c[0]), r2(a_c[1])], "rot": POSE["arm_hang"], "shape": {"kind": "rect", "w": UPPER["arm_w"], "h": UPPER["arm_len"], "corner": 1.4}, "fill": "$frost", "stroke": hair}
 h_c = below(sn, UPPER["arm_len"] + 0.9, POSE["arm_hang"])
@@ -112,9 +115,10 @@ feeler_far = {"id": "feeler_far", "at": [*S["feeler_far_root"]], "rot": -54, "sc
 rack = {"id": "rack", "at": [r2(S["pack"][0] - 3.3), r2(S["pack"][1] + 0.8)], "shape": {"kind": "rect", "w": 2.2, "h": 4.0, "corner": 0.5}, "fill": "$steel.light", "stroke": hair}
 
 # ============================================================== 4. depth = draw order
-# far to near, for a body facing front-right: feelers and the pack behind the far
-# shoulder, the far arm, the feet under the hem, the coat, the mantle and its
-# clasp, the near arm, the head over the shoulders.
+# far to near, for a body facing front-right: feelers and the pack on the back
+# (up and left), the far arm behind the right flank, the feet under the hem, the
+# coat, the mantle and its clasp, the near arm on the left flank, the head over
+# the shoulders.
 parts = [feeler_far, feeler, pack, rack, arm_far, hand_far, foot_far, foot, cloak, cape, organ, arm, hand, head, visor]
 
 # ============================================================== 5. motion: turn joints
@@ -172,14 +176,37 @@ def idle():
     tr.append({"part": "feeler_far", "prop": "rot", "keys": [[0, 0], [0.4, -10], [0.75, 7], [1, 0]]})
     return {"description": "the body breathes under the coat; the dead feelers keep sweeping for a signal that never comes", "duration": 1.15, "tracks": tr}
 
+# ============================================================== 6. the skeleton, on the document
+# Every joint by name, in the asset's coordinates, and the bones between them —
+# so a change can be asked for by joint name and the gallery can show the
+# scaffold over the drawing (its "skeleton" toggle; `inspect.ts --skeleton`).
+neck = ((sn[0] + sf[0]) / 2, (sn[1] + sf[1]) / 2)
+pelvis = ((S["hip_near"][0] + S["hip_far"][0]) / 2, (S["hip_near"][1] + S["hip_far"][1]) / 2)
+JOINTS = {
+    "head": S["head"], "neck": neck, "pelvis": pelvis,
+    "shoulder_near": sn, "shoulder_far": sf,
+    "hand_near": h_c, "hand_far": hf_c,
+    "hip_near": S["hip_near"], "hip_far": S["hip_far"],
+    "foot_near": S["foot_near"], "foot_far": S["foot_far"],
+    "pack": S["pack"], "feeler_root": S["feeler_root"], "feeler_far_root": S["feeler_far_root"],
+}
+BONES = [
+    ["shoulder_near", "shoulder_far"], ["neck", "head"], ["neck", "pelvis"], ["hip_near", "hip_far"],
+    ["shoulder_near", "hand_near"], ["shoulder_far", "hand_far"],
+    ["hip_near", "foot_near"], ["hip_far", "foot_far"],
+    ["neck", "pack"], ["pack", "feeler_root"], ["pack", "feeler_far_root"],
+]
+skeleton = {"joints": {k: [r2(v[0]), r2(v[1])] for k, v in JOINTS.items()}, "bones": BONES}
+
 doc = {
     "id": "ss.char.arin",
     "name": "Arin",
-    "description": "The first expedition, on the day the last cartridge went in (A047), drawn the way small characters in well-made games are drawn: one mass and a big head, on a skeleton laid down first (docs/character-rig-guide.md). The body faces the viewer's front-right, so a shoulder line runs from the far shoulder, up and left, to the near one, down and right, and everything hangs from it: the programme's sealed coat — a bell of cold frost chitin-cloth to a rounded hem — with a lighter mantle whose top edge is that line, the dead organ worn as its clasp, `ss.lib.organ#dead`, in the same place on all eight; the near (right) arm at the right flank, half over the coat's outline; the far (left) arm at the left flank behind the coat, a sliver of sleeve and hand past the edge. The head is a helmet a third of the height, a pale egg with one dark visor band turned toward the viewer and no face, overlapping the shoulders the way a top-down head does. Behind the far shoulder sits the prototype emitter, the biggest box any of the eight carries, with its cartridge rack beside it, and out of its lid rise the two dead feelers, swept back past the helmet as the crown of the silhouette — the feature the game is named for. Two feet under the hem. What the log has already measured shows in one place: the hands, gone dark and hard, the saw does not mark them (A052) — the Molt's slate, the first of the body to lose its blood. Three values: the palest helmet, the frost coat with a lighter mantle, dark feet, hands, visor and organ — the brightest cold thing on either floor. Fifteen parts on a 32px canvas, flat token fills. Gameplay radius 11. Second sketch of the roster redesign — see the game's docs/character-redesign-plan.md.",
+    "description": "The first expedition, on the day the last cartridge went in (A047), drawn the way small characters in well-made games are drawn: one mass and a big head, on a skeleton laid down first (docs/character-rig-guide.md). The body faces the viewer's front-right — a body facing you has its right hand on your left — so a shoulder line runs from the near (right) shoulder, down and left, to the far (left) one, up and right, and everything hangs from it: the programme's sealed coat — a bell of cold frost chitin-cloth to a rounded hem — with a lighter mantle whose top edge is that line, the dead organ worn as its clasp, `ss.lib.organ#dead`, in the same place on all eight; the near (right) arm at the left flank, in front of the coat and half over its outline; the far (left) arm at the right flank behind the coat, a sliver of sleeve and hand past the front edge. The head is a helmet a third of the height, a pale egg with one dark visor band turned toward the viewer and no face, overlapping the shoulders the way a top-down head does. Behind the far shoulder sits the prototype emitter, the biggest box any of the eight carries, with its cartridge rack beside it, and out of its lid rise the two dead feelers, swept back past the helmet as the crown of the silhouette — the feature the game is named for. Two feet under the hem. What the log has already measured shows in one place: the hands, gone dark and hard, the saw does not mark them (A052) — the Molt's slate, the first of the body to lose its blood. Three values: the palest helmet, the frost coat with a lighter mantle, dark feet, hands, visor and organ — the brightest cold thing on either floor. Fifteen parts on a 32px canvas, flat token fills. Gameplay radius 11. Second sketch of the roster redesign — see the game's docs/character-redesign-plan.md.",
     "tags": ["char"],
     "size": [32, 32],
     "meta": {"radius": 11},
     "parts": parts,
+    "skeleton": skeleton,
     "animations": {"idle": idle(), "walk": walk()},
 }
 out = sys.argv[1] if len(sys.argv) > 1 else "/home/user/PolyGraphics/apps/ss/assets/ss-char-arin.json"

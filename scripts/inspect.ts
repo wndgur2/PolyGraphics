@@ -5,6 +5,7 @@
  * indistinguishable in black, color is doing the work again.
  *
  *   npx tsx scripts/inspect.ts ss.enemy.imp ss.enemy.bat --anim
+ *   npx tsx scripts/inspect.ts ss.char.arin --skeleton        # joints and bones over the drawing
  *   npx tsx scripts/inspect.ts --app demo                    # every document of an app
  */
 import { writeFileSync } from "node:fs";
@@ -17,6 +18,7 @@ const lib = loadLibrary();
 
 const args = process.argv.slice(2);
 const withAnim = args.includes("--anim");
+const withSkeleton = args.includes("--skeleton");
 const ids = args.filter((a, i) => !a.startsWith("--") && args[i - 1] !== "--app");
 const app = appNamed(lib, appFlag(args)) ?? (ids.length ? ownerOf(lib, ids[0]) : undefined) ?? lib.apps[0];
 if (!app) throw new Error("no app to inspect");
@@ -26,7 +28,7 @@ const scale = app.manifest?.reference?.scale ?? 1;
 const GROUND = app.tokens.colors.soil ?? "#131019";
 
 function svgOf(o: Owner, a: Asset, displayScale: number, variant?: string, anim?: string, uid?: string): string {
-  const { svg, issues } = renderSVG(a, o.reg, { variant, animation: anim, displayScale, uid });
+  const { svg, issues } = renderSVG(a, o.reg, { variant, animation: anim, displayScale, uid, skeleton: withSkeleton });
   for (const i of issues) console.log(`${i.level === "error" ? "✖" : "▲"} ${i.where}: ${i.msg}`);
   return svg;
 }

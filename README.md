@@ -108,6 +108,8 @@ npx tsx scripts/sheet.ts ss.figure.dot --anim walk            # out/sheet/ss-fig
 
 Renders each asset **big** (judge the form), **at true game scale on the real ground color** (judge whether it survives the size it is actually seen at), and **as a flat silhouette** (if two enemies are indistinguishable in black, colour is doing work that shape should be doing). This is the loop the Shape Survivors redesign was built in — it caught a chaser that read as facing backwards, two antennae that overlapped into one, and two creatures that were the same cream colour.
 
+A body drawn on a skeleton carries it (`skeleton`: named joints and the bones between them — see `docs/character-rig-guide.md`), and the gallery's detail view has a **skeleton** toggle beside *silhouette* that draws the joints, by name, over the parts; `inspect.ts --skeleton` does the same on the inspect page. It is the scaffold the parts were placed from and never reaches a bake, and it is what a change is asked for in: "`shoulder_near` a pixel lower", not "the sleeve".
+
 `sheet.ts` is the same loop for a clip: one PNG per asset with the base render, the silhouette, two game-scale copies, and then the animation **posed frame by frame the way the engine adapters pose it** — offsets in the parent frame, rotation about the part's own origin — so a leg hinged at the hip or a ball on a chain can be judged without a browser. It also prints the rendered bounds against the canvas, because a feeler that crosses the edge is invisible in the SVG and a hard cut in the bake. It is how the survivors' walk cycles were tuned, and it caught a chain that let go of the hand mid-stride.
 
 ## Asset document
@@ -123,7 +125,8 @@ Renders each asset **big** (judge the form), **at true game scale on the real gr
   "meta": { "radius": 9 },            // optional sim-facing hints; manifest adds derived radius
   "parts": [ … ],                     // NAMED parts, array order = draw order
   "variants": { "elite": … },         // declarative patches
-  "animations": { "idle": … }         // keyframe tracks per part
+  "animations": { "idle": … },        // keyframe tracks per part
+  "skeleton": { "joints": { "shoulder_near": [-4.8, -3] }, "bones": [[…]] }  // optional: what the parts hang from (bodies)
 }
 ```
 
