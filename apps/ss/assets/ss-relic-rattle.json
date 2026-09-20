@@ -1,0 +1,104 @@
+{
+  "id": "ss.relic.rattle",
+  "name": "Death rattle",
+  "description": "A husk gone still, and two rings going out of it \u2014 the near one bright, the far one nearly spent. The rings are drawn open at the bottom, so the pair reads as sound leaving rather than as a target. The husk keeps its two dark eye pits because a body that has stopped is the only thing on this shelf that can afford a face: everything the find does happens to what is standing around it.",
+  "tags": [
+    "relic"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "plate",
+      "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "ring_far",
+      "shape": {
+        "kind": "ring",
+        "r": 11.2,
+        "width": 1.4,
+        "from": 200,
+        "to": 520
+      },
+      "fill": "$silent@0.3"
+    },
+    {
+      "id": "ring_near",
+      "shape": {
+        "kind": "ring",
+        "r": 8,
+        "width": 1.7,
+        "from": 200,
+        "to": 520
+      },
+      "fill": "$silent@0.62"
+    },
+    {
+      "id": "husk_o",
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.9,
+        "ry": 6.5
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "husk",
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.6,
+        "ry": 5.2
+      },
+      "fill": "$bone"
+    },
+    {
+      "id": "eye_l",
+      "at": [
+        -1.8,
+        -1.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.15
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "eye_r",
+      "at": [
+        1.8,
+        -1.4
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.15
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "jaw",
+      "at": [
+        0,
+        2.8
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 4.6,
+        "h": 1.4,
+        "corner": 0.7
+      },
+      "fill": "$husk.dark"
+    }
+  ],
+  "variants": {
+    "glyph": {
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
+      "remove": [
+        "plate"
+      ]
+    }
+  }
+}
