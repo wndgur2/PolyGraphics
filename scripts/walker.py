@@ -12,8 +12,7 @@ as the eight shells did.
 
 The body is built the way small characters in well-made games are built, and
 for the reasons they give (see the game's docs/character-redesign-plan.md §2.5):
-one mass for the body — a sealed cloak-coat, so there are no arms to draw a
-thousand times — a helmet that is a third of the height and overlaps the
+one mass for the body — a sealed cloak-coat with one sleeve each side — a helmet that is a third of the height and overlaps the
 shoulders the way a top-down head does, two feet under the hem, and the two
 dead feelers rising behind the helmet as the crown of the silhouette. Three
 values: light helmet, mid cloak, dark feet/visor/organ. Second sketch; the
@@ -44,7 +43,7 @@ cloak = {"id": "cloak", "at": [0, 0], "shape": {"kind": "poly",
          "fill": "$frost", "stroke": thin}
 cape = {"id": "cape", "at": [0, 0], "shape": {"kind": "poly",
         "points": [[-4.6, -4.8], [5.2, -4.8], [7.0, 0.2], [3.4, 2.0], [0.2, 0.9], [-3.4, 2.1], [-7.0, 0.4]]}, "fill": "$frost.light"}
-organ = {"id": "organ", "at": [2.0, 1.0], "use": "ss.lib.organ", "variant": "dead", "scale": 0.72}
+organ = {"id": "organ", "at": [1.0, 1.0], "use": "ss.lib.organ", "variant": "dead", "scale": 0.72}
 foot = {"id": "foot", "at": [3.6, 13.1], "shape": {"kind": "rect", "w": 4.8, "h": 2.7, "corner": 1.2}, "fill": "$slate.dark"}
 foot_far = {"id": "foot_far", "at": [-1.9, 12.7], "shape": {"kind": "rect", "w": 4.2, "h": 2.4, "corner": 1.1}, "fill": "$slate"}
 # the emitter: a box behind the neck, the feelers rooted in its lid
@@ -54,10 +53,23 @@ feeler_far = {"id": "feeler_far", "at": [-6.8, -5.5], "rot": -54, "scale": [0.55
 
 # ---------------------------------------------------------------- Arin's own
 rack = {"id": "rack", "at": [-9.3, -2.8], "shape": {"kind": "rect", "w": 2.2, "h": 4.0, "corner": 0.5}, "fill": "$steel.light", "stroke": hair}
-hand = {"id": "hand", "at": [7.5, 6.4], "shape": {"kind": "rect", "w": 2.8, "h": 3.6, "corner": 1.2}, "fill": "$slate.dark", "stroke": hair}
-hand_far = {"id": "hand_far", "at": [-7.4, 6.0], "shape": {"kind": "rect", "w": 2.5, "h": 3.2, "corner": 1.1}, "fill": "$slate"}
+# arms: one sleeve and a hand each, hinged at the shoulder. Facing +x, the near
+# (right) arm hangs in front of the coat from the shoulder; the far (left) arm is
+# behind the coat and only its hand shows past the front edge.
+SHO_N = (5.0, -2.6)
+arm = {"id": "arm", "at": [5.2, 1.1], "rot": -6, "shape": {"kind": "rect", "w": 3.0, "h": 7.4, "corner": 1.4}, "fill": "$frost", "stroke": hair}
+hand = {"id": "hand", "at": [5.6, 5.6], "shape": {"kind": "ellipse", "rx": 1.7, "ry": 1.9}, "fill": "$slate.dark", "stroke": hair}
+SHO_F = (6.6, -1.4)
+arm_far = {"id": "arm_far", "at": [7.2, 2.1], "rot": -8, "shape": {"kind": "rect", "w": 2.6, "h": 7.0, "corner": 1.2}, "fill": "$frost.dark"}
+hand_far = {"id": "hand_far", "at": [7.9, 6.1], "shape": {"kind": "ellipse", "rx": 1.5, "ry": 1.7}, "fill": "$slate"}
 
-parts = [feeler_far, feeler, pack, rack, foot_far, foot, hand_far, cloak, cape, organ, hand, head, visor]
+def swing(joint, center, theta):
+    """A part hanging from `joint`, turned by theta about it: the x/y its centre sweeps, and the rot."""
+    dx, dy = center[0] - joint[0], center[1] - joint[1]
+    c, sn = math.cos(R(theta)), math.sin(R(theta))
+    return (dx * c - dy * sn - dx, dx * sn + dy * c - dy, theta)
+
+parts = [feeler_far, feeler, pack, rack, foot_far, foot, arm_far, hand_far, cloak, cape, organ, arm, hand, head, visor]
 
 # ---------------------------------------------------------------- clips
 def walk(stride=2.6, lift=1.2, bob=1.4, sway=3.0):
@@ -67,7 +79,7 @@ def walk(stride=2.6, lift=1.2, bob=1.4, sway=3.0):
     up = [-bob * (0.5 - 0.5 * math.cos(4 * math.pi * t)) for t in TS]       # highest at the passing poses
     for pid in ["head", "visor", "pack", "rack", "feeler", "feeler_far"]:
         tr.append(track(pid, "y", up))
-    for pid in ["cloak", "cape", "organ", "hand", "hand_far"]:
+    for pid in ["cloak", "cape", "organ"]:
         tr.append(track(pid, "y", [u * 0.6 for u in up]))
     def foot_tracks(pid, phase):
         xs = [stride * math.sin(2 * math.pi * (t + phase)) for t in TS]
@@ -76,17 +88,26 @@ def walk(stride=2.6, lift=1.2, bob=1.4, sway=3.0):
     foot_tracks("foot", 0.0)
     foot_tracks("foot_far", 0.5)
     tr.append(track("cloak", "rot", [sway * math.sin(2 * math.pi * t) for t in TS]))
-    tr.append(track("hand", "x", [-1.2 * math.sin(2 * math.pi * t) for t in TS]))
-    tr.append(track("hand_far", "x", [1.0 * math.sin(2 * math.pi * t) for t in TS]))
+    def arm_tracks(joint, pieces, sign, amp=14):
+        cols = {pid: ([], [], []) for pid, _ in pieces}
+        for t, u in zip(TS, up):
+            th = sign * amp * math.sin(2 * math.pi * t)
+            for pid, centre in pieces:
+                dx, dy, rot = swing(joint, centre, th)
+                cols[pid][0].append(dx); cols[pid][1].append(dy + u * 0.6); cols[pid][2].append(rot)
+        for pid, (xs, ys, rs) in cols.items():
+            tr.extend([track(pid, "x", xs), track(pid, "y", ys), track(pid, "rot", rs)])
+    arm_tracks(SHO_N, [("arm", tuple(arm["at"])), ("hand", tuple(hand["at"]))], +1)     # back while the near foot is forward
+    arm_tracks(SHO_F, [("arm_far", tuple(arm_far["at"])), ("hand_far", tuple(hand_far["at"]))], -1)
     tr.append(track("head", "rot", [2.5 * math.sin(4 * math.pi * t + 0.8) for t in TS]))
     tr.append(track("feeler", "rot", [-8 * math.sin(4 * math.pi * t - 0.9) for t in TS]))
     tr.append(track("feeler_far", "rot", [7 * math.sin(4 * math.pi * t - 0.9) for t in TS]))
-    return {"description": "contact and passing, twice: the helmet carries the bob, the feet swing under the hem and lift on the swing, the hem sways, the hands show at the cloak's edge a beat behind, and the dead feelers lag behind the box they are rooted in",
+    return {"description": "contact and passing, twice: the helmet carries the bob, the feet swing under the hem and lift on the swing, the hem sways, the arms swing from the shoulder against the foot on their side, and the dead feelers lag behind the box they are rooted in",
             "duration": 0.56, "tracks": tr}
 
 def idle():
     tr = [key3(p, "y", 0, -1.0) for p in ["head", "visor", "pack", "rack", "feeler", "feeler_far"]]
-    tr += [key3(p, "y", 0, -0.5) for p in ["cloak", "cape", "organ", "hand", "hand_far"]]
+    tr += [key3(p, "y", 0, -0.5) for p in ["cloak", "cape", "organ", "arm", "hand", "arm_far", "hand_far"]]
     tr.append({"part": "feeler", "prop": "rot", "keys": [[0, 0], [0.35, 12], [0.7, -8], [1, 0]]})
     tr.append({"part": "feeler_far", "prop": "rot", "keys": [[0, 0], [0.4, -10], [0.75, 7], [1, 0]]})
     return {"description": "the body breathes under the cloak; the dead feelers keep sweeping for a signal that never comes", "duration": 1.15, "tracks": tr}
@@ -94,7 +115,7 @@ def idle():
 doc = {
     "id": "ss.char.arin",
     "name": "Arin",
-    "description": "The first expedition, on the day the last cartridge went in (A047), drawn the way small characters in well-made games are drawn: one mass and a big head. The mass is the programme's sealed coat — a bell of cold frost chitin-cloth from the shoulders to the hem, no arms to see — with a lighter cape over the shoulders and the dead organ worn on the chest, `ss.lib.organ#dead`, in the same place on all eight. The head is a helmet a third of the height, a pale dome with one dark visor band and no face, overlapping the shoulders the way a top-down head does. Behind the neck sits the prototype emitter, the biggest box any of the eight carries, with its cartridge rack beside it, and out of its lid rise the two dead feelers, swept back past the helmet as the crown of the silhouette — the feature the game is named for. Two feet under the hem. What the log has already measured shows in one place: the hands at the coat's edge, gone dark and hard, the saw does not mark them (A052) — the Molt's slate, the first of the body to lose its blood. Three values: the palest helmet, the frost cloak with a lighter mantle, dark feet, hands, visor and organ — the brightest cold thing on either floor. Thirteen parts on a 32px canvas, flat token fills. Gameplay radius 11. Second sketch of the roster redesign — see the game's docs/character-redesign-plan.md.",
+    "description": "The first expedition, on the day the last cartridge went in (A047), drawn the way small characters in well-made games are drawn: one mass and a big head. The mass is the programme's sealed coat — a bell of cold frost chitin-cloth from the shoulders to the hem, no arms to see — with a lighter cape over the shoulders and the dead organ worn on the chest, `ss.lib.organ#dead`, in the same place on all eight. The head is a helmet a third of the height, a pale dome with one dark visor band and no face, overlapping the shoulders the way a top-down head does. Behind the neck sits the prototype emitter, the biggest box any of the eight carries, with its cartridge rack beside it, and out of its lid rise the two dead feelers, swept back past the helmet as the crown of the silhouette — the feature the game is named for. Two feet under the hem, and an arm each side: the near one hangs from the shoulder in front of the coat, the far one is behind it with only its hand showing past the front edge. What the log has already measured shows in one place: the hands, gone dark and hard, the saw does not mark them (A052) — the Molt's slate, the first of the body to lose its blood. Three values: the palest helmet, the frost cloak with a lighter mantle, dark feet, hands, visor and organ — the brightest cold thing on either floor. Fifteen parts on a 32px canvas, flat token fills. Gameplay radius 11. Second sketch of the roster redesign — see the game's docs/character-redesign-plan.md.",
     "tags": ["char"],
     "size": [32, 32],
     "meta": {"radius": 11},
