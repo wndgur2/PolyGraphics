@@ -332,9 +332,9 @@ CHARACTERS = {
     },
     "kano": {
         "coat": "column", "cloak_sx": 1.0, "hem": 0.0, "head": "hood", "head_r": (4.8, 6.0), "visor_w": 5.8,
-        "skeleton": {"head": (1.8, -7.6), "shoulder_near": (-4.2, -3.2), "shoulder_far": (5.0, -4.4), "foot_near": (-1.4, 14.0), "foot_far": (3.2, 13.4), "hip_near": (-1.6, 12.6), "hip_far": (3.0, 12.0)},
+        "skeleton": {"head": (1.8, -7.3), "shoulder_near": (-4.2, -3.2), "shoulder_far": (5.0, -4.4), "foot_near": (-1.4, 14.0), "foot_far": (3.2, 13.4), "hip_near": (-1.6, 12.6), "hip_far": (3.0, 12.0)},
         "pose": {"coat_lean": 4, "arm_hang": 4, "arm_far_hang": -4}, "arm_far_len": 7.4, "foot_h": 2.4, "foot_far_h": 2.2,
-        "walk": {"duration": 0.5, "stride": 3.0, "arm_swing": 8, "sway": 2.0}, "idle": {"duration": 0.7, "march": True},
+        "walk": {"duration": 0.5, "stride": 3.0, "bob": 1.0, "arm_swing": 8, "sway": 2.0}, "idle": {"duration": 0.7, "march": True},
         "extras": lambda c: [
             ("behind", P_("staff", (c["hand_far"][0] + 0.6, c["hand_far"][1] - 7.4), rect(1.3, 20.0, 0.5), "$timber", rot=3, stroke=hair), "arm_far"),
             ("behind", P_("staff_cap", (c["hand_far"][0] + 1.1, c["hand_far"][1] - 17.4), circ(1.2), "$steel.light", stroke=hair), "arm_far"),
