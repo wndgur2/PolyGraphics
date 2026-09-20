@@ -1,7 +1,7 @@
 {
   "id": "ss.char.arin",
   "name": "Arin",
-  "description": "The first expedition, on the day the last cartridge went in (A047). A walker in the programme's issue suit \u2014 cold frost chitin-cloth, a helmet with one dark visor slit and no face \u2014 wearing the prototype emitter: the biggest box any of the eight carries, strapped to the back with its cartridge rack beside it, and two dead feelers rooted in its lid, sweeping a band with nothing on it. The dead organ is the emitter's bulb, worn on the harness strap across the chest, `ss.lib.organ#dead`, in the same place on all eight. What the log has already measured shows in one place: the hands. Dark and hard, and the saw does not mark them (A052) \u2014 the Molt's slate, the first of the body to lose its blood. Drawn at the roster's own density, not above it: twenty parts on a 32px canvas, three and a half heads tall, flat token fills, and nothing on it that would vanish at game scale. Gameplay radius 11. First sketch of the roster redesign \u2014 see the game's docs/character-redesign-plan.md.",
+  "description": "The first expedition, on the day the last cartridge went in (A047), drawn the way small characters in well-made games are drawn: one mass and a big head. The mass is the programme's sealed coat \u2014 a bell of cold frost chitin-cloth from the shoulders to the hem, no arms to see \u2014 with a lighter cape over the shoulders and the dead organ worn on the chest, `ss.lib.organ#dead`, in the same place on all eight. The head is a helmet a third of the height, a pale dome with one dark visor band and no face, overlapping the shoulders the way a top-down head does. Behind the neck sits the prototype emitter, the biggest box any of the eight carries, with its cartridge rack beside it, and out of its lid rise the two dead feelers, swept back past the helmet as the crown of the silhouette \u2014 the feature the game is named for. Two feet under the hem. What the log has already measured shows in one place: the hands at the coat's edge, gone dark and hard, the saw does not mark them (A052) \u2014 the Molt's slate, the first of the body to lose its blood. Three values: the palest helmet, the frost cloak with a lighter mantle, dark feet, hands, visor and organ \u2014 the brightest cold thing on either floor. Thirteen parts on a 32px canvas, flat token fills. Gameplay radius 11. Second sketch of the roster redesign \u2014 see the game's docs/character-redesign-plan.md.",
   "tags": [
     "char"
   ],
@@ -16,13 +16,27 @@
     {
       "id": "feeler_far",
       "at": [
-        -7.9,
-        -4.2
+        -6.8,
+        -5.5
       ],
-      "rot": -50,
+      "rot": -54,
       "scale": [
-        0.6,
-        0.78
+        0.55,
+        0.85
+      ],
+      "use": "ss.lib.antenna",
+      "variant": "dead"
+    },
+    {
+      "id": "feeler",
+      "at": [
+        -5.4,
+        -5.9
+      ],
+      "rot": -40,
+      "scale": [
+        0.55,
+        0.85
       ],
       "use": "ss.lib.antenna",
       "variant": "dead"
@@ -30,16 +44,16 @@
     {
       "id": "pack",
       "at": [
-        -6.9,
-        -0.6
+        -6.0,
+        -3.6
       ],
       "shape": {
         "kind": "rect",
-        "w": 4.4,
-        "h": 8.6,
+        "w": 5.0,
+        "h": 5.2,
         "corner": 1.0
       },
-      "fill": "$slate",
+      "fill": "$slate.light",
       "stroke": {
         "color": "$ink",
         "width": "hair"
@@ -48,13 +62,13 @@
     {
       "id": "rack",
       "at": [
-        -9.9,
-        0.9
+        -9.3,
+        -2.8
       ],
       "shape": {
         "kind": "rect",
         "w": 2.2,
-        "h": 5.4,
+        "h": 4.0,
         "corner": 0.5
       },
       "fill": "$steel.light",
@@ -64,180 +78,99 @@
       }
     },
     {
-      "id": "arm_far_upper",
+      "id": "foot_far",
       "at": [
-        -3.7,
-        -1.8
+        -1.9,
+        12.7
       ],
       "shape": {
         "kind": "rect",
-        "w": 3.0,
-        "h": 5.2,
-        "corner": 1.25
+        "w": 4.2,
+        "h": 2.4,
+        "corner": 1.1
       },
-      "fill": "$frost.dark"
+      "fill": "$slate"
     },
     {
-      "id": "arm_far_fore",
+      "id": "foot",
       "at": [
-        -3.7,
-        3.3
+        3.6,
+        13.1
       ],
       "shape": {
         "kind": "rect",
-        "w": 2.7,
-        "h": 5.0,
-        "corner": 1.13
-      },
-      "fill": "$frost.dark"
-    },
-    {
-      "id": "hand_far",
-      "at": [
-        -3.7,
-        6.6
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 1.5,
-        "ry": 1.7
+        "w": 4.8,
+        "h": 2.7,
+        "corner": 1.2
       },
       "fill": "$slate.dark"
     },
     {
-      "id": "leg_far_thigh",
+      "id": "hand_far",
       "at": [
-        -1.5,
-        6.5
+        -7.4,
+        6.0
       ],
       "shape": {
         "kind": "rect",
-        "w": 3.5,
-        "h": 5.0,
-        "corner": 1.46
+        "w": 2.5,
+        "h": 3.2,
+        "corner": 1.1
       },
-      "fill": "$frost.dark"
+      "fill": "$slate"
     },
     {
-      "id": "leg_far_shin",
+      "id": "cloak",
       "at": [
-        -1.5,
-        11.6
+        0,
+        0
       ],
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -1.55,
-            -2.6
+            -4.4,
+            -4.8
           ],
           [
-            1.55,
-            -2.6
+            5.0,
+            -4.8
           ],
           [
-            1.55,
-            1.0
+            7.4,
+            1.4
           ],
           [
-            3.1500000000000004,
-            2.6
+            7.6,
+            6.0
           ],
           [
-            -1.55,
-            2.6
-          ]
-        ]
-      },
-      "fill": "$frost.dark"
-    },
-    {
-      "id": "leg_thigh",
-      "at": [
-        2.9,
-        6.8
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 3.9,
-        "h": 5.0,
-        "corner": 1.62
-      },
-      "fill": "$frost",
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "leg_shin",
-      "at": [
-        2.9,
-        11.9
-      ],
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -1.75,
-            -2.6
+            6.8,
+            10.6
           ],
           [
-            1.75,
-            -2.6
+            4.4,
+            11.9
           ],
           [
-            1.75,
-            1.0
+            0.2,
+            12.3
           ],
           [
-            3.35,
-            2.6
+            -4.2,
+            11.9
           ],
           [
-            -1.75,
-            2.6
-          ]
-        ]
-      },
-      "fill": "$frost",
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "torso",
-      "at": [
-        0.4,
-        -0.6
-      ],
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            5.2,
-            -5.4
+            -6.8,
+            10.6
           ],
           [
-            -4.6,
-            -5.6
+            -7.6,
+            6.0
           ],
           [
-            -6.0,
-            -0.4
-          ],
-          [
-            -4.8,
-            4.8
-          ],
-          [
-            4.6,
-            5.0
-          ],
-          [
-            6.2,
-            -0.2
+            -7.4,
+            1.6
           ]
         ]
       },
@@ -248,121 +181,67 @@
       }
     },
     {
-      "id": "strap",
+      "id": "cape",
       "at": [
-        -1.4,
-        -2.4
-      ],
-      "rot": 28,
-      "shape": {
-        "kind": "rect",
-        "w": 1.3,
-        "h": 10.8,
-        "corner": 0.4
-      },
-      "fill": "$slate"
-    },
-    {
-      "id": "belt",
-      "at": [
-        0.5,
-        3.2
+        0,
+        0
       ],
       "shape": {
-        "kind": "rect",
-        "w": 10.6,
-        "h": 1.4,
-        "corner": 0.4
+        "kind": "poly",
+        "points": [
+          [
+            -4.6,
+            -4.8
+          ],
+          [
+            5.2,
+            -4.8
+          ],
+          [
+            7.0,
+            0.2
+          ],
+          [
+            3.4,
+            2.0
+          ],
+          [
+            0.2,
+            0.9
+          ],
+          [
+            -3.4,
+            2.1
+          ],
+          [
+            -7.0,
+            0.4
+          ]
+        ]
       },
-      "fill": "$slate"
+      "fill": "$frost.light"
     },
     {
       "id": "organ",
       "at": [
-        0.5,
-        -2.6
+        2.0,
+        1.0
       ],
       "use": "ss.lib.organ",
       "variant": "dead",
-      "scale": 0.62
-    },
-    {
-      "id": "head",
-      "at": [
-        1.6,
-        -10.1
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 4.6,
-        "ry": 4.3
-      },
-      "fill": "$frost.light",
-      "stroke": {
-        "color": "$ink",
-        "width": "thin"
-      }
-    },
-    {
-      "id": "visor",
-      "at": [
-        3.9,
-        -10.3
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 4.0,
-        "h": 1.8,
-        "corner": 0.7
-      },
-      "fill": "$ink"
-    },
-    {
-      "id": "arm_upper",
-      "at": [
-        4.3,
-        -1.6
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 3.3,
-        "h": 5.2,
-        "corner": 1.38
-      },
-      "fill": "$frost",
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
-    },
-    {
-      "id": "arm_fore",
-      "at": [
-        4.3,
-        3.5
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 3.0,
-        "h": 5.0,
-        "corner": 1.25
-      },
-      "fill": "$frost",
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
+      "scale": 0.72
     },
     {
       "id": "hand",
       "at": [
-        4.3,
-        6.9
+        7.5,
+        6.4
       ],
       "shape": {
-        "kind": "ellipse",
-        "rx": 1.8,
-        "ry": 2.0
+        "kind": "rect",
+        "w": 2.8,
+        "h": 3.6,
+        "corner": 1.2
       },
       "fill": "$slate.dark",
       "stroke": {
@@ -371,79 +250,44 @@
       }
     },
     {
-      "id": "feeler",
+      "id": "head",
       "at": [
-        -5.8,
-        -4.4
+        2.0,
+        -8.0
       ],
-      "rot": -24,
-      "scale": [
-        0.6,
-        0.78
+      "rot": -10,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.3,
+        "ry": 5.8
+      },
+      "fill": "$frost.light2",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "visor",
+      "at": [
+        4.4,
+        -6.6
       ],
-      "use": "ss.lib.antenna",
-      "variant": "dead"
+      "rot": -6,
+      "shape": {
+        "kind": "rect",
+        "w": 5.4,
+        "h": 2.6,
+        "corner": 1.3
+      },
+      "fill": "$ink"
     }
   ],
   "animations": {
     "idle": {
-      "description": "the body breathes; the dead feelers keep sweeping for a signal that never comes",
+      "description": "the body breathes under the cloak; the dead feelers keep sweeping for a signal that never comes",
       "duration": 1.15,
       "tracks": [
-        {
-          "part": "torso",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.0
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "strap",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.0
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "belt",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.0
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
         {
           "part": "head",
           "prop": "y",
@@ -464,24 +308,6 @@
         },
         {
           "part": "visor",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.0
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "organ",
           "prop": "y",
           "keys": [
             [
@@ -535,114 +361,6 @@
           ]
         },
         {
-          "part": "arm_upper",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.0
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "arm_fore",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.0
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "hand",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.0
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "arm_far_upper",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.0
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "arm_far_fore",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.0
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "hand_far",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.0
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
           "part": "feeler",
           "prop": "y",
           "keys": [
@@ -671,6 +389,96 @@
             [
               0.5,
               -1.0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "cloak",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "cape",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "organ",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "hand",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "hand_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
             ],
             [
               1,
@@ -688,11 +496,11 @@
             ],
             [
               0.35,
-              13
+              12
             ],
             [
               0.7,
-              -9
+              -8
             ],
             [
               1,
@@ -710,11 +518,11 @@
             ],
             [
               0.4,
-              -11
+              -10
             ],
             [
               0.75,
-              8
+              7
             ],
             [
               1,
@@ -725,1956 +533,9 @@
       ]
     },
     "walk": {
-      "description": "a walk: two-link legs hinged at the hip with the knee folding through the forward swing, arms opposite, the body rising as each leg passes under it, and the dead feelers lagging a beat behind the pack they are rooted in",
-      "duration": 0.6,
+      "description": "contact and passing, twice: the helmet carries the bob, the feet swing under the hem and lift on the swing, the hem sways, the hands show at the cloak's edge a beat behind, and the dead feelers lag behind the box they are rooted in",
+      "duration": 0.56,
       "tracks": [
-        {
-          "part": "leg_thigh",
-          "prop": "x",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              0.52
-            ],
-            [
-              0.17,
-              0.89
-            ],
-            [
-              0.25,
-              1.02
-            ],
-            [
-              0.33,
-              0.89
-            ],
-            [
-              0.42,
-              0.52
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              -0.52
-            ],
-            [
-              0.67,
-              -0.89
-            ],
-            [
-              0.75,
-              -1.02
-            ],
-            [
-              0.83,
-              -0.89
-            ],
-            [
-              0.92,
-              -0.52
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "leg_thigh",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              -0.2
-            ],
-            [
-              0.17,
-              -0.61
-            ],
-            [
-              0.25,
-              -0.82
-            ],
-            [
-              0.33,
-              -0.61
-            ],
-            [
-              0.42,
-              -0.2
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              -0.2
-            ],
-            [
-              0.67,
-              -0.61
-            ],
-            [
-              0.75,
-              -0.82
-            ],
-            [
-              0.83,
-              -0.61
-            ],
-            [
-              0.92,
-              -0.2
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "leg_thigh",
-          "prop": "rot",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              -12.0
-            ],
-            [
-              0.17,
-              -20.78
-            ],
-            [
-              0.25,
-              -24.0
-            ],
-            [
-              0.33,
-              -20.78
-            ],
-            [
-              0.42,
-              -12.0
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              12.0
-            ],
-            [
-              0.67,
-              20.78
-            ],
-            [
-              0.75,
-              24.0
-            ],
-            [
-              0.83,
-              20.78
-            ],
-            [
-              0.92,
-              12.0
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "leg_shin",
-          "prop": "x",
-          "keys": [
-            [
-              0.0,
-              -1.45
-            ],
-            [
-              0.08,
-              0.25
-            ],
-            [
-              0.17,
-              1.85
-            ],
-            [
-              0.25,
-              2.73
-            ],
-            [
-              0.33,
-              2.61
-            ],
-            [
-              0.42,
-              1.57
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              -1.59
-            ],
-            [
-              0.67,
-              -2.79
-            ],
-            [
-              0.75,
-              -3.43
-            ],
-            [
-              0.83,
-              -3.44
-            ],
-            [
-              0.92,
-              -2.77
-            ],
-            [
-              1.0,
-              -1.45
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "leg_shin",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.44
-            ],
-            [
-              0.08,
-              -0.38
-            ],
-            [
-              0.17,
-              -0.78
-            ],
-            [
-              0.25,
-              -1.13
-            ],
-            [
-              0.33,
-              -0.91
-            ],
-            [
-              0.42,
-              -0.31
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              -0.32
-            ],
-            [
-              0.67,
-              -0.98
-            ],
-            [
-              0.75,
-              -1.44
-            ],
-            [
-              0.83,
-              -1.38
-            ],
-            [
-              0.92,
-              -0.91
-            ],
-            [
-              1.0,
-              -0.44
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "leg_shin",
-          "prop": "rot",
-          "keys": [
-            [
-              0.0,
-              34.0
-            ],
-            [
-              0.08,
-              17.6
-            ],
-            [
-              0.17,
-              -1.66
-            ],
-            [
-              0.25,
-              -15.5
-            ],
-            [
-              0.33,
-              -18.66
-            ],
-            [
-              0.42,
-              -11.85
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              12.15
-            ],
-            [
-              0.67,
-              22.91
-            ],
-            [
-              0.75,
-              32.5
-            ],
-            [
-              0.83,
-              39.91
-            ],
-            [
-              0.92,
-              41.6
-            ],
-            [
-              1.0,
-              34.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "leg_far_thigh",
-          "prop": "x",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              -0.52
-            ],
-            [
-              0.17,
-              -0.89
-            ],
-            [
-              0.25,
-              -1.02
-            ],
-            [
-              0.33,
-              -0.89
-            ],
-            [
-              0.42,
-              -0.52
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              0.52
-            ],
-            [
-              0.67,
-              0.89
-            ],
-            [
-              0.75,
-              1.02
-            ],
-            [
-              0.83,
-              0.89
-            ],
-            [
-              0.92,
-              0.52
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "leg_far_thigh",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              -0.2
-            ],
-            [
-              0.17,
-              -0.61
-            ],
-            [
-              0.25,
-              -0.82
-            ],
-            [
-              0.33,
-              -0.61
-            ],
-            [
-              0.42,
-              -0.2
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              -0.2
-            ],
-            [
-              0.67,
-              -0.61
-            ],
-            [
-              0.75,
-              -0.82
-            ],
-            [
-              0.83,
-              -0.61
-            ],
-            [
-              0.92,
-              -0.2
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "leg_far_thigh",
-          "prop": "rot",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              12.0
-            ],
-            [
-              0.17,
-              20.78
-            ],
-            [
-              0.25,
-              24.0
-            ],
-            [
-              0.33,
-              20.78
-            ],
-            [
-              0.42,
-              12.0
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              -12.0
-            ],
-            [
-              0.67,
-              -20.78
-            ],
-            [
-              0.75,
-              -24.0
-            ],
-            [
-              0.83,
-              -20.78
-            ],
-            [
-              0.92,
-              -12.0
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "leg_far_shin",
-          "prop": "x",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              -1.59
-            ],
-            [
-              0.17,
-              -2.79
-            ],
-            [
-              0.25,
-              -3.43
-            ],
-            [
-              0.33,
-              -3.44
-            ],
-            [
-              0.42,
-              -2.77
-            ],
-            [
-              0.5,
-              -1.45
-            ],
-            [
-              0.58,
-              0.25
-            ],
-            [
-              0.67,
-              1.85
-            ],
-            [
-              0.75,
-              2.73
-            ],
-            [
-              0.83,
-              2.61
-            ],
-            [
-              0.92,
-              1.57
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "leg_far_shin",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              -0.32
-            ],
-            [
-              0.17,
-              -0.98
-            ],
-            [
-              0.25,
-              -1.44
-            ],
-            [
-              0.33,
-              -1.38
-            ],
-            [
-              0.42,
-              -0.91
-            ],
-            [
-              0.5,
-              -0.44
-            ],
-            [
-              0.58,
-              -0.38
-            ],
-            [
-              0.67,
-              -0.78
-            ],
-            [
-              0.75,
-              -1.13
-            ],
-            [
-              0.83,
-              -0.91
-            ],
-            [
-              0.92,
-              -0.31
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "leg_far_shin",
-          "prop": "rot",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              12.15
-            ],
-            [
-              0.17,
-              22.91
-            ],
-            [
-              0.25,
-              32.5
-            ],
-            [
-              0.33,
-              39.91
-            ],
-            [
-              0.42,
-              41.6
-            ],
-            [
-              0.5,
-              34.0
-            ],
-            [
-              0.58,
-              17.6
-            ],
-            [
-              0.67,
-              -1.66
-            ],
-            [
-              0.75,
-              -15.5
-            ],
-            [
-              0.83,
-              -18.66
-            ],
-            [
-              0.92,
-              -11.85
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm_upper",
-          "prop": "x",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              0.38
-            ],
-            [
-              0.17,
-              0.66
-            ],
-            [
-              0.25,
-              0.76
-            ],
-            [
-              0.33,
-              0.66
-            ],
-            [
-              0.42,
-              0.38
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              -0.38
-            ],
-            [
-              0.67,
-              -0.66
-            ],
-            [
-              0.75,
-              -0.76
-            ],
-            [
-              0.83,
-              -0.66
-            ],
-            [
-              0.92,
-              -0.38
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm_upper",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              -0.33
-            ],
-            [
-              0.17,
-              -0.99
-            ],
-            [
-              0.25,
-              -1.31
-            ],
-            [
-              0.33,
-              -0.99
-            ],
-            [
-              0.42,
-              -0.33
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              -0.33
-            ],
-            [
-              0.67,
-              -0.99
-            ],
-            [
-              0.75,
-              -1.31
-            ],
-            [
-              0.83,
-              -0.99
-            ],
-            [
-              0.92,
-              -0.33
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm_upper",
-          "prop": "rot",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              -8.5
-            ],
-            [
-              0.17,
-              -14.72
-            ],
-            [
-              0.25,
-              -17.0
-            ],
-            [
-              0.33,
-              -14.72
-            ],
-            [
-              0.42,
-              -8.5
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              8.5
-            ],
-            [
-              0.67,
-              14.72
-            ],
-            [
-              0.75,
-              17.0
-            ],
-            [
-              0.83,
-              14.72
-            ],
-            [
-              0.92,
-              8.5
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm_fore",
-          "prop": "x",
-          "keys": [
-            [
-              0.0,
-              0.52
-            ],
-            [
-              0.08,
-              1.44
-            ],
-            [
-              0.17,
-              2.1
-            ],
-            [
-              0.25,
-              2.34
-            ],
-            [
-              0.33,
-              2.1
-            ],
-            [
-              0.42,
-              1.44
-            ],
-            [
-              0.5,
-              0.52
-            ],
-            [
-              0.58,
-              -0.4
-            ],
-            [
-              0.67,
-              -1.06
-            ],
-            [
-              0.75,
-              -1.3
-            ],
-            [
-              0.83,
-              -1.06
-            ],
-            [
-              0.92,
-              -0.4
-            ],
-            [
-              1.0,
-              0.52
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm_fore",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.06
-            ],
-            [
-              0.08,
-              -0.45
-            ],
-            [
-              0.17,
-              -1.2
-            ],
-            [
-              0.25,
-              -1.57
-            ],
-            [
-              0.33,
-              -1.2
-            ],
-            [
-              0.42,
-              -0.45
-            ],
-            [
-              0.5,
-              -0.06
-            ],
-            [
-              0.58,
-              -0.38
-            ],
-            [
-              0.67,
-              -1.08
-            ],
-            [
-              0.75,
-              -1.44
-            ],
-            [
-              0.83,
-              -1.08
-            ],
-            [
-              0.92,
-              -0.38
-            ],
-            [
-              1.0,
-              -0.06
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm_fore",
-          "prop": "rot",
-          "keys": [
-            [
-              0.0,
-              -12.1
-            ],
-            [
-              0.08,
-              -15.65
-            ],
-            [
-              0.17,
-              -18.25
-            ],
-            [
-              0.25,
-              -19.2
-            ],
-            [
-              0.33,
-              -18.25
-            ],
-            [
-              0.42,
-              -15.65
-            ],
-            [
-              0.5,
-              -12.1
-            ],
-            [
-              0.58,
-              -8.55
-            ],
-            [
-              0.67,
-              -5.95
-            ],
-            [
-              0.75,
-              -5.0
-            ],
-            [
-              0.83,
-              -5.95
-            ],
-            [
-              0.92,
-              -8.55
-            ],
-            [
-              1.0,
-              -12.1
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "hand",
-          "prop": "x",
-          "keys": [
-            [
-              0.0,
-              1.24
-            ],
-            [
-              0.08,
-              2.36
-            ],
-            [
-              0.17,
-              3.17
-            ],
-            [
-              0.25,
-              3.46
-            ],
-            [
-              0.33,
-              3.17
-            ],
-            [
-              0.42,
-              2.36
-            ],
-            [
-              0.5,
-              1.24
-            ],
-            [
-              0.58,
-              0.11
-            ],
-            [
-              0.67,
-              -0.71
-            ],
-            [
-              0.75,
-              -1.01
-            ],
-            [
-              0.83,
-              -0.71
-            ],
-            [
-              0.92,
-              0.11
-            ],
-            [
-              1.0,
-              1.24
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "hand",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.13
-            ],
-            [
-              0.08,
-              -0.58
-            ],
-            [
-              0.17,
-              -1.37
-            ],
-            [
-              0.25,
-              -1.76
-            ],
-            [
-              0.33,
-              -1.37
-            ],
-            [
-              0.42,
-              -0.58
-            ],
-            [
-              0.5,
-              -0.13
-            ],
-            [
-              0.58,
-              -0.42
-            ],
-            [
-              0.67,
-              -1.1
-            ],
-            [
-              0.75,
-              -1.45
-            ],
-            [
-              0.83,
-              -1.1
-            ],
-            [
-              0.92,
-              -0.42
-            ],
-            [
-              1.0,
-              -0.13
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "hand",
-          "prop": "rot",
-          "keys": [
-            [
-              0.0,
-              -12.1
-            ],
-            [
-              0.08,
-              -15.65
-            ],
-            [
-              0.17,
-              -18.25
-            ],
-            [
-              0.25,
-              -19.2
-            ],
-            [
-              0.33,
-              -18.25
-            ],
-            [
-              0.42,
-              -15.65
-            ],
-            [
-              0.5,
-              -12.1
-            ],
-            [
-              0.58,
-              -8.55
-            ],
-            [
-              0.67,
-              -5.95
-            ],
-            [
-              0.75,
-              -5.0
-            ],
-            [
-              0.83,
-              -5.95
-            ],
-            [
-              0.92,
-              -8.55
-            ],
-            [
-              1.0,
-              -12.1
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm_far_upper",
-          "prop": "x",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              -0.38
-            ],
-            [
-              0.17,
-              -0.66
-            ],
-            [
-              0.25,
-              -0.76
-            ],
-            [
-              0.33,
-              -0.66
-            ],
-            [
-              0.42,
-              -0.38
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              0.38
-            ],
-            [
-              0.67,
-              0.66
-            ],
-            [
-              0.75,
-              0.76
-            ],
-            [
-              0.83,
-              0.66
-            ],
-            [
-              0.92,
-              0.38
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm_far_upper",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              -0.33
-            ],
-            [
-              0.17,
-              -0.99
-            ],
-            [
-              0.25,
-              -1.31
-            ],
-            [
-              0.33,
-              -0.99
-            ],
-            [
-              0.42,
-              -0.33
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              -0.33
-            ],
-            [
-              0.67,
-              -0.99
-            ],
-            [
-              0.75,
-              -1.31
-            ],
-            [
-              0.83,
-              -0.99
-            ],
-            [
-              0.92,
-              -0.33
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm_far_upper",
-          "prop": "rot",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              8.5
-            ],
-            [
-              0.17,
-              14.72
-            ],
-            [
-              0.25,
-              17.0
-            ],
-            [
-              0.33,
-              14.72
-            ],
-            [
-              0.42,
-              8.5
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              -8.5
-            ],
-            [
-              0.67,
-              -14.72
-            ],
-            [
-              0.75,
-              -17.0
-            ],
-            [
-              0.83,
-              -14.72
-            ],
-            [
-              0.92,
-              -8.5
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm_far_fore",
-          "prop": "x",
-          "keys": [
-            [
-              0.0,
-              0.52
-            ],
-            [
-              0.08,
-              -0.4
-            ],
-            [
-              0.17,
-              -1.06
-            ],
-            [
-              0.25,
-              -1.3
-            ],
-            [
-              0.33,
-              -1.06
-            ],
-            [
-              0.42,
-              -0.4
-            ],
-            [
-              0.5,
-              0.52
-            ],
-            [
-              0.58,
-              1.44
-            ],
-            [
-              0.67,
-              2.1
-            ],
-            [
-              0.75,
-              2.34
-            ],
-            [
-              0.83,
-              2.1
-            ],
-            [
-              0.92,
-              1.44
-            ],
-            [
-              1.0,
-              0.52
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm_far_fore",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.06
-            ],
-            [
-              0.08,
-              -0.38
-            ],
-            [
-              0.17,
-              -1.08
-            ],
-            [
-              0.25,
-              -1.44
-            ],
-            [
-              0.33,
-              -1.08
-            ],
-            [
-              0.42,
-              -0.38
-            ],
-            [
-              0.5,
-              -0.06
-            ],
-            [
-              0.58,
-              -0.45
-            ],
-            [
-              0.67,
-              -1.2
-            ],
-            [
-              0.75,
-              -1.57
-            ],
-            [
-              0.83,
-              -1.2
-            ],
-            [
-              0.92,
-              -0.45
-            ],
-            [
-              1.0,
-              -0.06
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm_far_fore",
-          "prop": "rot",
-          "keys": [
-            [
-              0.0,
-              -12.1
-            ],
-            [
-              0.08,
-              -8.55
-            ],
-            [
-              0.17,
-              -5.95
-            ],
-            [
-              0.25,
-              -5.0
-            ],
-            [
-              0.33,
-              -5.95
-            ],
-            [
-              0.42,
-              -8.55
-            ],
-            [
-              0.5,
-              -12.1
-            ],
-            [
-              0.58,
-              -15.65
-            ],
-            [
-              0.67,
-              -18.25
-            ],
-            [
-              0.75,
-              -19.2
-            ],
-            [
-              0.83,
-              -18.25
-            ],
-            [
-              0.92,
-              -15.65
-            ],
-            [
-              1.0,
-              -12.1
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "hand_far",
-          "prop": "x",
-          "keys": [
-            [
-              0.0,
-              1.22
-            ],
-            [
-              0.08,
-              0.09
-            ],
-            [
-              0.17,
-              -0.72
-            ],
-            [
-              0.25,
-              -1.01
-            ],
-            [
-              0.33,
-              -0.72
-            ],
-            [
-              0.42,
-              0.09
-            ],
-            [
-              0.5,
-              1.22
-            ],
-            [
-              0.58,
-              2.33
-            ],
-            [
-              0.67,
-              3.14
-            ],
-            [
-              0.75,
-              3.43
-            ],
-            [
-              0.83,
-              3.14
-            ],
-            [
-              0.92,
-              2.33
-            ],
-            [
-              1.0,
-              1.22
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "hand_far",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.13
-            ],
-            [
-              0.08,
-              -0.42
-            ],
-            [
-              0.17,
-              -1.1
-            ],
-            [
-              0.25,
-              -1.45
-            ],
-            [
-              0.33,
-              -1.1
-            ],
-            [
-              0.42,
-              -0.42
-            ],
-            [
-              0.5,
-              -0.13
-            ],
-            [
-              0.58,
-              -0.57
-            ],
-            [
-              0.67,
-              -1.36
-            ],
-            [
-              0.75,
-              -1.75
-            ],
-            [
-              0.83,
-              -1.36
-            ],
-            [
-              0.92,
-              -0.57
-            ],
-            [
-              1.0,
-              -0.13
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "hand_far",
-          "prop": "rot",
-          "keys": [
-            [
-              0.0,
-              -12.1
-            ],
-            [
-              0.08,
-              -8.55
-            ],
-            [
-              0.17,
-              -5.95
-            ],
-            [
-              0.25,
-              -5.0
-            ],
-            [
-              0.33,
-              -5.95
-            ],
-            [
-              0.42,
-              -8.55
-            ],
-            [
-              0.5,
-              -12.1
-            ],
-            [
-              0.58,
-              -15.65
-            ],
-            [
-              0.67,
-              -18.25
-            ],
-            [
-              0.75,
-              -19.2
-            ],
-            [
-              0.83,
-              -18.25
-            ],
-            [
-              0.92,
-              -15.65
-            ],
-            [
-              1.0,
-              -12.1
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "torso",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              -0.3
-            ],
-            [
-              0.17,
-              -0.9
-            ],
-            [
-              0.25,
-              -1.2
-            ],
-            [
-              0.33,
-              -0.9
-            ],
-            [
-              0.42,
-              -0.3
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              -0.3
-            ],
-            [
-              0.67,
-              -0.9
-            ],
-            [
-              0.75,
-              -1.2
-            ],
-            [
-              0.83,
-              -0.9
-            ],
-            [
-              0.92,
-              -0.3
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "strap",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              -0.3
-            ],
-            [
-              0.17,
-              -0.9
-            ],
-            [
-              0.25,
-              -1.2
-            ],
-            [
-              0.33,
-              -0.9
-            ],
-            [
-              0.42,
-              -0.3
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              -0.3
-            ],
-            [
-              0.67,
-              -0.9
-            ],
-            [
-              0.75,
-              -1.2
-            ],
-            [
-              0.83,
-              -0.9
-            ],
-            [
-              0.92,
-              -0.3
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "belt",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              -0.3
-            ],
-            [
-              0.17,
-              -0.9
-            ],
-            [
-              0.25,
-              -1.2
-            ],
-            [
-              0.33,
-              -0.9
-            ],
-            [
-              0.42,
-              -0.3
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              -0.3
-            ],
-            [
-              0.67,
-              -0.9
-            ],
-            [
-              0.75,
-              -1.2
-            ],
-            [
-              0.83,
-              -0.9
-            ],
-            [
-              0.92,
-              -0.3
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
         {
           "part": "head",
           "prop": "y",
@@ -2685,23 +546,23 @@
             ],
             [
               0.08,
-              -0.3
+              -0.35
             ],
             [
               0.17,
-              -0.9
+              -1.05
             ],
             [
               0.25,
-              -1.2
+              -1.4
             ],
             [
               0.33,
-              -0.9
+              -1.05
             ],
             [
               0.42,
-              -0.3
+              -0.35
             ],
             [
               0.5,
@@ -2709,23 +570,23 @@
             ],
             [
               0.58,
-              -0.3
+              -0.35
             ],
             [
               0.67,
-              -0.9
+              -1.05
             ],
             [
               0.75,
-              -1.2
+              -1.4
             ],
             [
               0.83,
-              -0.9
+              -1.05
             ],
             [
               0.92,
-              -0.3
+              -0.35
             ],
             [
               1.0,
@@ -2744,23 +605,23 @@
             ],
             [
               0.08,
-              -0.3
+              -0.35
             ],
             [
               0.17,
-              -0.9
+              -1.05
             ],
             [
               0.25,
-              -1.2
+              -1.4
             ],
             [
               0.33,
-              -0.9
+              -1.05
             ],
             [
               0.42,
-              -0.3
+              -0.35
             ],
             [
               0.5,
@@ -2768,82 +629,23 @@
             ],
             [
               0.58,
-              -0.3
+              -0.35
             ],
             [
               0.67,
-              -0.9
+              -1.05
             ],
             [
               0.75,
-              -1.2
+              -1.4
             ],
             [
               0.83,
-              -0.9
+              -1.05
             ],
             [
               0.92,
-              -0.3
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "organ",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              -0.3
-            ],
-            [
-              0.17,
-              -0.9
-            ],
-            [
-              0.25,
-              -1.2
-            ],
-            [
-              0.33,
-              -0.9
-            ],
-            [
-              0.42,
-              -0.3
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              -0.3
-            ],
-            [
-              0.67,
-              -0.9
-            ],
-            [
-              0.75,
-              -1.2
-            ],
-            [
-              0.83,
-              -0.9
-            ],
-            [
-              0.92,
-              -0.3
+              -0.35
             ],
             [
               1.0,
@@ -2862,23 +664,23 @@
             ],
             [
               0.08,
-              -0.3
+              -0.35
             ],
             [
               0.17,
-              -0.9
+              -1.05
             ],
             [
               0.25,
-              -1.2
+              -1.4
             ],
             [
               0.33,
-              -0.9
+              -1.05
             ],
             [
               0.42,
-              -0.3
+              -0.35
             ],
             [
               0.5,
@@ -2886,23 +688,23 @@
             ],
             [
               0.58,
-              -0.3
+              -0.35
             ],
             [
               0.67,
-              -0.9
+              -1.05
             ],
             [
               0.75,
-              -1.2
+              -1.4
             ],
             [
               0.83,
-              -0.9
+              -1.05
             ],
             [
               0.92,
-              -0.3
+              -0.35
             ],
             [
               1.0,
@@ -2921,23 +723,23 @@
             ],
             [
               0.08,
-              -0.3
+              -0.35
             ],
             [
               0.17,
-              -0.9
+              -1.05
             ],
             [
               0.25,
-              -1.2
+              -1.4
             ],
             [
               0.33,
-              -0.9
+              -1.05
             ],
             [
               0.42,
-              -0.3
+              -0.35
             ],
             [
               0.5,
@@ -2945,23 +747,23 @@
             ],
             [
               0.58,
-              -0.3
+              -0.35
             ],
             [
               0.67,
-              -0.9
+              -1.05
             ],
             [
               0.75,
-              -1.2
+              -1.4
             ],
             [
               0.83,
-              -0.9
+              -1.05
             ],
             [
               0.92,
-              -0.3
+              -0.35
             ],
             [
               1.0,
@@ -2980,23 +782,23 @@
             ],
             [
               0.08,
-              -0.3
+              -0.35
             ],
             [
               0.17,
-              -0.9
+              -1.05
             ],
             [
               0.25,
-              -1.2
+              -1.4
             ],
             [
               0.33,
-              -0.9
+              -1.05
             ],
             [
               0.42,
-              -0.3
+              -0.35
             ],
             [
               0.5,
@@ -3004,23 +806,23 @@
             ],
             [
               0.58,
-              -0.3
+              -0.35
             ],
             [
               0.67,
-              -0.9
+              -1.05
             ],
             [
               0.75,
-              -1.2
+              -1.4
             ],
             [
               0.83,
-              -0.9
+              -1.05
             ],
             [
               0.92,
-              -0.3
+              -0.35
             ],
             [
               1.0,
@@ -3039,23 +841,23 @@
             ],
             [
               0.08,
-              -0.3
+              -0.35
             ],
             [
               0.17,
-              -0.9
+              -1.05
             ],
             [
               0.25,
-              -1.2
+              -1.4
             ],
             [
               0.33,
-              -0.9
+              -1.05
             ],
             [
               0.42,
-              -0.3
+              -0.35
             ],
             [
               0.5,
@@ -3063,23 +865,731 @@
             ],
             [
               0.58,
-              -0.3
+              -0.35
             ],
             [
               0.67,
-              -0.9
+              -1.05
             ],
             [
               0.75,
-              -1.2
+              -1.4
             ],
             [
               0.83,
-              -0.9
+              -1.05
             ],
             [
               0.92,
-              -0.3
+              -0.35
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "cloak",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.21
+            ],
+            [
+              0.17,
+              -0.63
+            ],
+            [
+              0.25,
+              -0.84
+            ],
+            [
+              0.33,
+              -0.63
+            ],
+            [
+              0.42,
+              -0.21
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              -0.21
+            ],
+            [
+              0.67,
+              -0.63
+            ],
+            [
+              0.75,
+              -0.84
+            ],
+            [
+              0.83,
+              -0.63
+            ],
+            [
+              0.92,
+              -0.21
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "cape",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.21
+            ],
+            [
+              0.17,
+              -0.63
+            ],
+            [
+              0.25,
+              -0.84
+            ],
+            [
+              0.33,
+              -0.63
+            ],
+            [
+              0.42,
+              -0.21
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              -0.21
+            ],
+            [
+              0.67,
+              -0.63
+            ],
+            [
+              0.75,
+              -0.84
+            ],
+            [
+              0.83,
+              -0.63
+            ],
+            [
+              0.92,
+              -0.21
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "organ",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.21
+            ],
+            [
+              0.17,
+              -0.63
+            ],
+            [
+              0.25,
+              -0.84
+            ],
+            [
+              0.33,
+              -0.63
+            ],
+            [
+              0.42,
+              -0.21
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              -0.21
+            ],
+            [
+              0.67,
+              -0.63
+            ],
+            [
+              0.75,
+              -0.84
+            ],
+            [
+              0.83,
+              -0.63
+            ],
+            [
+              0.92,
+              -0.21
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "hand",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.21
+            ],
+            [
+              0.17,
+              -0.63
+            ],
+            [
+              0.25,
+              -0.84
+            ],
+            [
+              0.33,
+              -0.63
+            ],
+            [
+              0.42,
+              -0.21
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              -0.21
+            ],
+            [
+              0.67,
+              -0.63
+            ],
+            [
+              0.75,
+              -0.84
+            ],
+            [
+              0.83,
+              -0.63
+            ],
+            [
+              0.92,
+              -0.21
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "hand_far",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.21
+            ],
+            [
+              0.17,
+              -0.63
+            ],
+            [
+              0.25,
+              -0.84
+            ],
+            [
+              0.33,
+              -0.63
+            ],
+            [
+              0.42,
+              -0.21
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              -0.21
+            ],
+            [
+              0.67,
+              -0.63
+            ],
+            [
+              0.75,
+              -0.84
+            ],
+            [
+              0.83,
+              -0.63
+            ],
+            [
+              0.92,
+              -0.21
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "foot",
+          "prop": "x",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.08,
+              1.3
+            ],
+            [
+              0.17,
+              2.25
+            ],
+            [
+              0.25,
+              2.6
+            ],
+            [
+              0.33,
+              2.25
+            ],
+            [
+              0.42,
+              1.3
+            ],
+            [
+              0.5,
+              0.0
+            ],
+            [
+              0.58,
+              -1.3
+            ],
+            [
+              0.67,
+              -2.25
+            ],
+            [
+              0.75,
+              -2.6
+            ],
+            [
+              0.83,
+              -2.25
+            ],
+            [
+              0.92,
+              -1.3
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "foot",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -1.2
+            ],
+            [
+              0.08,
+              -0.97
+            ],
+            [
+              0.17,
+              -0.42
+            ],
+            [
+              0.25,
+              -0.0
+            ],
+            [
+              0.33,
+              -0.0
+            ],
+            [
+              0.42,
+              -0.0
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              -0.0
+            ],
+            [
+              0.67,
+              -0.0
+            ],
+            [
+              0.75,
+              -0.0
+            ],
+            [
+              0.83,
+              -0.42
+            ],
+            [
+              0.92,
+              -0.97
+            ],
+            [
+              1.0,
+              -1.2
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "foot_far",
+          "prop": "x",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.08,
+              -1.3
+            ],
+            [
+              0.17,
+              -2.25
+            ],
+            [
+              0.25,
+              -2.6
+            ],
+            [
+              0.33,
+              -2.25
+            ],
+            [
+              0.42,
+              -1.3
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              1.3
+            ],
+            [
+              0.67,
+              2.25
+            ],
+            [
+              0.75,
+              2.6
+            ],
+            [
+              0.83,
+              2.25
+            ],
+            [
+              0.92,
+              1.3
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "foot_far",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.0
+            ],
+            [
+              0.17,
+              -0.0
+            ],
+            [
+              0.25,
+              -0.0
+            ],
+            [
+              0.33,
+              -0.42
+            ],
+            [
+              0.42,
+              -0.97
+            ],
+            [
+              0.5,
+              -1.2
+            ],
+            [
+              0.58,
+              -0.97
+            ],
+            [
+              0.67,
+              -0.42
+            ],
+            [
+              0.75,
+              -0.0
+            ],
+            [
+              0.83,
+              -0.0
+            ],
+            [
+              0.92,
+              -0.0
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "cloak",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.08,
+              1.5
+            ],
+            [
+              0.17,
+              2.6
+            ],
+            [
+              0.25,
+              3.0
+            ],
+            [
+              0.33,
+              2.6
+            ],
+            [
+              0.42,
+              1.5
+            ],
+            [
+              0.5,
+              0.0
+            ],
+            [
+              0.58,
+              -1.5
+            ],
+            [
+              0.67,
+              -2.6
+            ],
+            [
+              0.75,
+              -3.0
+            ],
+            [
+              0.83,
+              -2.6
+            ],
+            [
+              0.92,
+              -1.5
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "hand",
+          "prop": "x",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.6
+            ],
+            [
+              0.17,
+              -1.04
+            ],
+            [
+              0.25,
+              -1.2
+            ],
+            [
+              0.33,
+              -1.04
+            ],
+            [
+              0.42,
+              -0.6
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              0.6
+            ],
+            [
+              0.67,
+              1.04
+            ],
+            [
+              0.75,
+              1.2
+            ],
+            [
+              0.83,
+              1.04
+            ],
+            [
+              0.92,
+              0.6
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "hand_far",
+          "prop": "x",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.08,
+              0.5
+            ],
+            [
+              0.17,
+              0.87
+            ],
+            [
+              0.25,
+              1.0
+            ],
+            [
+              0.33,
+              0.87
+            ],
+            [
+              0.42,
+              0.5
+            ],
+            [
+              0.5,
+              0.0
+            ],
+            [
+              0.58,
+              -0.5
+            ],
+            [
+              0.67,
+              -0.87
+            ],
+            [
+              0.75,
+              -1.0
+            ],
+            [
+              0.83,
+              -0.87
+            ],
+            [
+              0.92,
+              -0.5
             ],
             [
               1.0,
@@ -3094,55 +1604,55 @@
           "keys": [
             [
               0.0,
-              0.0
+              1.79
             ],
             [
               0.08,
-              2.6
+              2.41
             ],
             [
               0.17,
-              2.6
+              0.61
             ],
             [
               0.25,
-              0.0
+              -1.79
             ],
             [
               0.33,
-              -2.6
+              -2.41
             ],
             [
               0.42,
-              -2.6
+              -0.61
             ],
             [
               0.5,
-              -0.0
+              1.79
             ],
             [
               0.58,
-              2.6
+              2.41
             ],
             [
               0.67,
-              2.6
+              0.61
             ],
             [
               0.75,
-              0.0
+              -1.79
             ],
             [
               0.83,
-              -2.6
+              -2.41
             ],
             [
               0.92,
-              -2.6
+              -0.61
             ],
             [
               1.0,
-              -0.0
+              1.79
             ]
           ],
           "ease": "linear"
@@ -3153,55 +1663,55 @@
           "keys": [
             [
               0.0,
-              -3.95
+              6.27
             ],
             [
               0.08,
-              -6.98
+              -1.17
             ],
             [
               0.17,
-              -3.03
+              -7.44
             ],
             [
               0.25,
-              3.95
+              -6.27
             ],
             [
               0.33,
-              6.98
+              1.17
             ],
             [
               0.42,
-              3.03
+              7.44
             ],
             [
               0.5,
-              -3.95
+              6.27
             ],
             [
               0.58,
-              -6.98
+              -1.17
             ],
             [
               0.67,
-              -3.03
+              -7.44
             ],
             [
               0.75,
-              3.95
+              -6.27
             ],
             [
               0.83,
-              6.98
+              1.17
             ],
             [
               0.92,
-              3.03
+              7.44
             ],
             [
               1.0,
-              -3.95
+              6.27
             ]
           ],
           "ease": "linear"
@@ -3212,55 +1722,55 @@
           "keys": [
             [
               0.0,
-              3.39
+              -5.48
             ],
             [
               0.08,
-              5.98
+              1.03
             ],
             [
               0.17,
-              2.59
+              6.51
             ],
             [
               0.25,
-              -3.39
+              5.48
             ],
             [
               0.33,
-              -5.98
+              -1.03
             ],
             [
               0.42,
-              -2.59
+              -6.51
             ],
             [
               0.5,
-              3.39
+              -5.48
             ],
             [
               0.58,
-              5.98
+              1.03
             ],
             [
               0.67,
-              2.59
+              6.51
             ],
             [
               0.75,
-              -3.39
+              5.48
             ],
             [
               0.83,
-              -5.98
+              -1.03
             ],
             [
               0.92,
-              -2.59
+              -6.51
             ],
             [
               1.0,
-              3.39
+              -5.48
             ]
           ],
           "ease": "linear"
