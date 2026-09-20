@@ -336,8 +336,8 @@ CHARACTERS = {
         "pose": {"coat_lean": 4, "arm_hang": 4, "arm_far_hang": -4}, "arm_far_len": 7.4, "foot_h": 2.4, "foot_far_h": 2.2,
         "walk": {"duration": 0.5, "stride": 3.0, "bob": 1.0, "arm_swing": 8, "sway": 2.0}, "idle": {"duration": 0.7, "march": True},
         "extras": lambda c: [
-            ("behind", P_("staff", (c["hand_far"][0] + 0.6, c["hand_far"][1] - 7.4), rect(1.3, 20.0, 0.5), "$timber", rot=3, stroke=hair), "arm_far"),
-            ("behind", P_("staff_cap", (c["hand_far"][0] + 1.1, c["hand_far"][1] - 17.4), circ(1.2), "$steel.light", stroke=hair), "arm_far"),
+            ("behind", P_("staff", (c["hand_far"][0] + 2.2, c["hand_far"][1] - 7.4), rect(1.6, 20.0, 0.6), "$timber", rot=3, stroke=hair), "arm_far"),
+            ("behind", P_("staff_cap", (c["hand_far"][0] + 2.7, c["hand_far"][1] - 17.4), circ(1.4), "$steel.light", stroke=hair), "arm_far"),
             ("feet_over", P_("gaiter", (c["foot"][0], c["foot"][1] - 0.9), rect(4.8, 1.0, 0.3), "$steel"), "foot"),
             ("feet_over", P_("gaiter_far", (c["foot_far"][0], c["foot_far"][1] - 0.8), rect(4.2, 0.9, 0.3), "$steel"), "foot_far"),
         ],
