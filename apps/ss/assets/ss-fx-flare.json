@@ -1,0 +1,61 @@
+{
+  "id": "ss.fx.flare",
+  "name": "Scent flare ring",
+  "description": "Scent Flare: the ring of fire that goes out of the player every thirty seconds. It was drawn with ss.proj.aura — the neutral disc — tinted orange and blown up, which is a filled disc and not a ring, so the one find in the game whose whole sentence is 'a ring of fire goes out of you' was the one thing on screen that did not show a ring. This is the ring: an open middle — genuinely open, nothing painted inside r=47, because a wash across the inside is how the disc got away with calling itself a ring the first time — a warm wake just behind the front, a body of flame, and a hot gold crest at r=64, which is the radius the game divides by, so the line you see is the line that hurt. Ten tongues lick past the crest, and six sparks past those, because fire overshoots its own front. Drawn in ember and gold at nearly full alpha and nothing dark anywhere: the game blends this additively, where a dark pixel is simply an invisible one, and a document with ink in it would come out full of holes. It is brighter than it looks like it should be for the same reason: the game fades the sprite from 0.55 down to nothing across the 1.6 seconds, so whatever is written here is seen at half of it at best, and the first draft — written at the alphas that looked right on their own — arrived on the field as a brown hoop. It carries its own colour rather than taking a tint, for the same reason the acid pool does — tinting something already the right colour only greys it.",
+  "tags": ["fx", "relic"],
+  "size": [144, 144],
+  "meta": {"radius": 64},
+  "why": {"grid": "144 rather than 128 so the tongues and sparks that overshoot the r=64 crest have canvas to land on; a clipped flame is a hard straight cut in the bake. The crest itself stays at 64, which is what the game scales by."},
+  "parts": [
+    {"id": "wake", "shape": {"kind": "ring", "r": 52, "width": 9}, "fill": "$ember@0.3"},
+    {"id": "haze", "shape": {"kind": "ring", "r": 58, "width": 12}, "fill": "$ember@0.72"},
+    {"id": "front", "shape": {"kind": "ring", "r": 61, "width": 7}, "fill": "$ember.light"},
+    {"id": "crest", "shape": {"kind": "ring", "r": 63.5, "width": 2.5}, "fill": "$gold.light"},
+
+    {"id": "tongue_0", "at": [62.0, 0.0], "rot": 0, "scale": 1.12, "shape": {"kind": "poly", "points": [[0, -3.6], [8, 0], [0, 3.6]]}, "fill": "$ember.light@0.95"},
+    {"id": "tongue_1", "at": [50.16, 36.44], "rot": 36, "scale": 0.88, "shape": {"kind": "poly", "points": [[0, -3.6], [8, 0], [0, 3.6]]}, "fill": "$ember.light@0.95"},
+    {"id": "tongue_2", "at": [19.16, 58.96], "rot": 72, "scale": 1.05, "shape": {"kind": "poly", "points": [[0, -3.6], [8, 0], [0, 3.6]]}, "fill": "$ember.light@0.95"},
+    {"id": "tongue_3", "at": [-19.16, 58.96], "rot": 108, "scale": 0.94, "shape": {"kind": "poly", "points": [[0, -3.6], [8, 0], [0, 3.6]]}, "fill": "$ember.light@0.95"},
+    {"id": "tongue_4", "at": [-50.16, 36.44], "rot": 144, "scale": 1.15, "shape": {"kind": "poly", "points": [[0, -3.6], [8, 0], [0, 3.6]]}, "fill": "$ember.light@0.95"},
+    {"id": "tongue_5", "at": [-62.0, 0.0], "rot": 180, "scale": 0.92, "shape": {"kind": "poly", "points": [[0, -3.6], [8, 0], [0, 3.6]]}, "fill": "$ember.light@0.95"},
+    {"id": "tongue_6", "at": [-50.16, -36.44], "rot": 216, "scale": 1.08, "shape": {"kind": "poly", "points": [[0, -3.6], [8, 0], [0, 3.6]]}, "fill": "$ember.light@0.95"},
+    {"id": "tongue_7", "at": [-19.16, -58.96], "rot": 252, "scale": 0.86, "shape": {"kind": "poly", "points": [[0, -3.6], [8, 0], [0, 3.6]]}, "fill": "$ember.light@0.95"},
+    {"id": "tongue_8", "at": [19.16, -58.96], "rot": 288, "scale": 1.1, "shape": {"kind": "poly", "points": [[0, -3.6], [8, 0], [0, 3.6]]}, "fill": "$ember.light@0.95"},
+    {"id": "tongue_9", "at": [50.16, -36.44], "rot": 324, "scale": 0.96, "shape": {"kind": "poly", "points": [[0, -3.6], [8, 0], [0, 3.6]]}, "fill": "$ember.light@0.95"},
+
+    {"id": "spark_a", "at": [64.68, 21.01], "shape": {"kind": "circle", "r": 2.2}, "fill": "$gold.light"},
+    {"id": "spark_b", "at": [0, 68], "shape": {"kind": "circle", "r": 1.6}, "fill": "$gold@0.92"},
+    {"id": "spark_c", "at": [-64.68, 21.01], "shape": {"kind": "circle", "r": 2.0}, "fill": "$gold.light@0.95"},
+    {"id": "spark_d", "at": [-39.97, -55.01], "shape": {"kind": "circle", "r": 1.5}, "fill": "$gold@0.92"},
+    {"id": "spark_e", "at": [39.97, -55.01], "shape": {"kind": "circle", "r": 2.1}, "fill": "$gold.light"},
+    {"id": "spark_f", "at": [64.68, -21.01], "shape": {"kind": "circle", "r": 1.4}, "fill": "$gold@0.88"}
+  ],
+  "animations": {
+    "play": {
+      "description": "Half a second of burning, looped — the flare lives 1.6s, so it turns over about three times. Nothing here travels outward: the going-out is the game's, which grows the sprite from nothing to the reach and fades it as it goes. What this owns is the fire being fire — tongues lengthening and dropping back out of phase with each other, the crest rippling, the wake breathing, the sparks guttering. Out of phase is the whole trick: ten tongues on one clock is a spinning rosette, not a flame front.",
+      "duration": 0.5,
+      "tracks": [
+        {"part": "crest", "prop": "opacity", "keys": [[0, 1], [0.35, 0.72], [0.7, 1], [1, 1]]},
+        {"part": "front", "prop": "opacity", "keys": [[0, 0.9], [0.5, 1], [1, 0.9]]},
+        {"part": "haze", "prop": "scale", "keys": [[0, 1], [0.5, 1.03], [1, 1]]},
+        {"part": "wake", "prop": "opacity", "keys": [[0, 1], [0.5, 0.6], [1, 1]]},
+        {"part": "tongue_0", "prop": "scale", "keys": [[0, 1.12], [0.4, 0.78], [1, 1.12]]},
+        {"part": "tongue_1", "prop": "scale", "keys": [[0, 0.88], [0.55, 1.2], [1, 0.88]]},
+        {"part": "tongue_2", "prop": "scale", "keys": [[0, 1.05], [0.25, 0.8], [1, 1.05]]},
+        {"part": "tongue_3", "prop": "scale", "keys": [[0, 0.94], [0.7, 1.18], [1, 0.94]]},
+        {"part": "tongue_4", "prop": "scale", "keys": [[0, 1.15], [0.45, 0.82], [1, 1.15]]},
+        {"part": "tongue_5", "prop": "scale", "keys": [[0, 0.92], [0.3, 1.16], [1, 0.92]]},
+        {"part": "tongue_6", "prop": "scale", "keys": [[0, 1.08], [0.6, 0.8], [1, 1.08]]},
+        {"part": "tongue_7", "prop": "scale", "keys": [[0, 0.86], [0.5, 1.14], [1, 0.86]]},
+        {"part": "tongue_8", "prop": "scale", "keys": [[0, 1.1], [0.35, 0.84], [1, 1.1]]},
+        {"part": "tongue_9", "prop": "scale", "keys": [[0, 0.96], [0.65, 1.2], [1, 0.96]]},
+        {"part": "spark_a", "prop": "opacity", "keys": [[0, 1], [0.4, 0.3], [1, 1]]},
+        {"part": "spark_b", "prop": "opacity", "keys": [[0, 0.4], [0.5, 1], [1, 0.4]]},
+        {"part": "spark_c", "prop": "opacity", "keys": [[0, 1], [0.6, 0.35], [1, 1]]},
+        {"part": "spark_d", "prop": "opacity", "keys": [[0, 0.5], [0.3, 1], [1, 0.5]]},
+        {"part": "spark_e", "prop": "opacity", "keys": [[0, 0.9], [0.7, 0.3], [1, 0.9]]},
+        {"part": "spark_f", "prop": "opacity", "keys": [[0, 0.35], [0.45, 1], [1, 0.35]]}
+      ]
+    }
+  }
+}
