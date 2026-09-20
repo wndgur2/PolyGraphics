@@ -1,0 +1,32 @@
+{
+  "id": "ss.fx.filth",
+  "name": "Filth patch",
+  "description": "What the Seeping Muck leaves: one patch of the ball's own matter, shed every twenty-six pixels of roll and eating for three seconds. It used to be drawn with ss.proj.aura — the neutral disc every explosive tints — which is a circle with a hard concentric falloff, so ten of them laid round the body at a forty-two pixel orbit read as a ring of targets rather than as anything the ball had dropped. This is that patch drawn instead, and drawn twice: the first attempt swapped the target for a scone, because a full rust rim all the way round with a glazed highlight in the middle makes a discrete little object, and a ring of ten identical little objects is decor. So there is no rim part here. The body is a splat of thirteen lumpy vertices out to r=30 — the number the game scales by — filled with a gradient that ends transparent, so the silhouette dissolves into the floor instead of ending on a line, which is the only defence a stamp repeated ten times has. Two darker clots and a scatter of grain carry the matter; the sheen is a fifth of what it was. Two flecks of moss and bile and no more than two, because rot is what makes this brown rather than another green: the acid already owns green on this floor and the muck must not be mistaken for it. The ball above the patch is the same timber, which is the point of the find — you are looking at the ball coming apart, on the ground, behind you.",
+  "tags": ["fx", "relic"],
+  "size": [64, 64],
+  "meta": {"radius": 30},
+  "parts": [
+    {"id": "seep", "shape": {"kind": "ellipse", "rx": 29, "ry": 27}, "fill": {"gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$rust@0.5"], [0.55, "$rust@0.34"], [1, "$rust@0"]]}},
+    {"id": "body", "shape": {"kind": "poly", "points": [[27.0, 1.4], [18.8, 12.9], [12.2, 22.7], [1.1, 25.0], [-11.0, 20.5], [-20.4, 14.2], [-25.5, 2.9], [-22.9, -9.1], [-14.1, -18.9], [-3.2, -24.1], [8.9, -22.4], [19.9, -15.1], [25.3, -6.9]]}, "fill": {"gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$timber.dark"], [0.5, "$timber.dark"], [0.82, "$sand"], [1, "$rust@0"]]}},
+    {"id": "clot_a", "at": [-6.5, -4.2], "rot": -14, "shape": {"kind": "ellipse", "rx": 10.4, "ry": 7.2}, "fill": "$timber.dark2"},
+    {"id": "clot_b", "at": [9.8, 7.6], "rot": 22, "shape": {"kind": "ellipse", "rx": 7.6, "ry": 5.4}, "fill": "$timber.dark2"},
+    {"id": "sheen", "at": [-4.0, -6.8], "rot": -12, "shape": {"kind": "ellipse", "rx": 5.2, "ry": 2.0}, "fill": "$timber.light@0.16"},
+    {"id": "grain", "fill": "$sand.dark", "repeat": {"of": {"kind": "circle", "r": 1.5}, "count": 9, "area": [40, 38], "seed": 74, "scaleRange": [0.6, 1.25]}},
+    {"id": "rot_a", "at": [13.4, -9.0], "shape": {"kind": "circle", "r": 2.1}, "fill": "$moss.dark"},
+    {"id": "rot_b", "at": [-13.8, 10.4], "shape": {"kind": "circle", "r": 1.5}, "fill": "$bile.dark2"}
+  ],
+  "animations": {
+    "play": {
+      "description": "A loop, because the game loops it for as long as the patch is eating. Nothing travels: what moves is the patch working on itself — the two clots swelling and subsiding out of phase, the seep breathing at its soft edge, the sheen creeping, one rot fleck opening. The spread on landing and the fade at the end both belong to the game, which scales and fades the sprite already; a clip that also arrived would arrive twice.",
+      "duration": 1.5,
+      "tracks": [
+        {"part": "seep", "prop": "scale", "keys": [[0, 1.0], [0.5, 1.05], [1, 1.0]]},
+        {"part": "clot_a", "prop": "scale", "keys": [[0, 1.0], [0.5, 1.09], [1, 1.0]]},
+        {"part": "clot_b", "prop": "scale", "keys": [[0, 1.07], [0.5, 0.97], [1, 1.07]]},
+        {"part": "clot_b", "prop": "rot", "keys": [[0, 22], [0.5, 27], [1, 22]]},
+        {"part": "sheen", "prop": "x", "keys": [[0, 0], [0.5, 2.2], [1, 0]]},
+        {"part": "rot_a", "prop": "scale", "keys": [[0, 0.9], [0.5, 1.15], [1, 0.9]]}
+      ]
+    }
+  }
+}
