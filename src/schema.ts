@@ -139,6 +139,21 @@ export const VariantSchema = z.strictObject({
 });
 export type Variant = z.infer<typeof VariantSchema>;
 
+/**
+ * The internal skeleton a body was drawn on: named joints in the asset's own
+ * coordinates, and the bones between them. Not drawn in a bake — it is the
+ * scaffold the parts were placed from (a part hangs from a joint plus a length
+ * and an angle), kept in the document so a change can be asked for by joint
+ * name ("shoulder_near a pixel lower") and the gallery can show it over the
+ * drawing. See docs/character-rig-guide.md.
+ */
+const jointName = z.string().regex(/^[a-z][a-z0-9_]*$/, "joint names are snake_case");
+export const SkeletonSchema = z.strictObject({
+  joints: z.record(jointName, Vec2),
+  bones: z.array(z.tuple([jointName, jointName])).optional(),
+});
+export type Skeleton = z.infer<typeof SkeletonSchema>;
+
 export const AssetSchema = z.strictObject({
   id: assetId,
   name: z.string().min(1),
@@ -159,5 +174,6 @@ export const AssetSchema = z.strictObject({
    * everybody learns to scroll past — `offBand` on a sound, generalised.
    */
   why: z.record(z.string(), z.string().min(1)).optional(),
+  skeleton: SkeletonSchema.optional(),
 });
 export type Asset = z.infer<typeof AssetSchema>;

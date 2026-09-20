@@ -23,6 +23,7 @@ export interface RenderOptions {
   animation?: string; // animation name to embed as CSS (gallery use)
   displayScale?: number; // width/height attrs = size * displayScale
   uid?: string; // unique prefix so multiple inline SVGs never collide
+  skeleton?: boolean; // draw the document's skeleton over the parts (gallery / inspect use; never a bake)
 }
 
 const FALLBACK = "#ff00ff"; // loud placeholder for unresolvable paints
@@ -466,6 +467,17 @@ export function renderSVG(
 
   const body = asset.parts.map((p, i) => renderPart(p, ctx, `${where}.parts[${i}](${p.id})`, asset)).join("\n    ");
 
+  // The skeleton is checked whenever the document is rendered and drawn only
+  // when asked: a bone naming a joint that is not there is a rig that drifted
+  // from its own scaffold, which is the thing this block exists to catch.
+  let bones = "";
+  if (asset.skeleton) {
+    const j = asset.skeleton.joints;
+    for (const [a, b] of asset.skeleton.bones ?? [])
+      for (const n of [a, b]) if (!j[n]) issues.push({ level: "error", where, msg: `skeleton: bone names no joint "${n}"` });
+    if (opts.skeleton) bones = skeletonOverlay(asset.skeleton, uid);
+  }
+
   const [w, h] = asset.size;
   const [ax, ay] = asset.anchor ?? [0.5, 0.5];
   const ds = opts.displayScale ?? 1;
@@ -484,12 +496,46 @@ export function renderSVG(
     `    ${body}`,
     scaleWrap ? `  </g>` : "",
     `  </g>`,
+    bones,
     `</svg>`,
   ]
     .filter(Boolean)
     .join("\n");
 
   return { svg, issues };
+}
+
+// ---------------------------------------------------------------- skeleton overlay
+
+/**
+ * Joints as dots, bones as lines, every joint named — in the asset's own
+ * coordinates, over the drawing. Deliberately not in the palette: this is
+ * scaffolding to judge a pose by, not art, and it must read on any fill.
+ */
+function skeletonOverlay(sk: NonNullable<Asset["skeleton"]>, uid: string): string {
+  const J = sk.joints;
+  const lines = (sk.bones ?? [])
+    .filter(([a, b]) => J[a] && J[b])
+    .map(([a, b]) => `<line x1="${fmt(J[a][0])}" y1="${fmt(J[a][1])}" x2="${fmt(J[b][0])}" y2="${fmt(J[b][1])}"/>`);
+  const dots = Object.entries(J).map(([n, [x, y]]) => `<circle cx="${fmt(x)}" cy="${fmt(y)}" r="0.55"><title>${n}</title></circle>`);
+  // A label sits on the side of the picture its joint is on, so the names of
+  // the near side and the far side fan out instead of piling into the middle;
+  // joints that share a column are stepped down by their order in the table.
+  const seen = new Map<string, number>();
+  const labels = Object.entries(J).map(([n, [x, y]]) => {
+    const col = fmt(Math.round(x / 3));
+    const k = seen.get(col) ?? 0;
+    seen.set(col, k + 1);
+    const right = x >= 0;
+    return `<text x="${fmt(x + (right ? 0.9 : -0.9))}" y="${fmt(y - 0.5 + k * 0.4)}" text-anchor="${right ? "start" : "end"}">${n}</text>`;
+  });
+  return [
+    `  <g class="skeleton" id="${uid}-skeleton" fill="none" stroke="#ff3fa0" stroke-width="0.3" stroke-linecap="round" opacity="0.95">`,
+    `    ${lines.join("")}`,
+    `    <g fill="#ff3fa0" stroke="none">${dots.join("")}</g>`,
+    `    <g fill="#ffffff" stroke="#000000" stroke-width="0.22" paint-order="stroke" font-family="ui-monospace, monospace" font-size="1.15">${labels.join("")}</g>`,
+    `  </g>`,
+  ].join("\n");
 }
 
 // ---------------------------------------------------------------- derived meta

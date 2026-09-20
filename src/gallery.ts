@@ -70,7 +70,9 @@ const specOf = (id: string, variant?: string) => `spec/${slug(id)}${variant ? `-
 let uidCounter = 0;
 function cell(asset: Asset, reg: Registry, issues: Issue[], caption: string, opts: { variant?: string; animation?: string } = {}): string {
   const vs = opts.variant ? (asset.variants?.[opts.variant]?.scale ?? 1) : 1;
-  const r = renderSVG(asset, reg, { ...opts, displayScale: displayScale(asset, vs), uid: `u${uidCounter++}` });
+  // The skeleton rides along in every cell and stays hidden until the viewer's
+  // toggle shows it — the toggle is a class, not a re-render.
+  const r = renderSVG(asset, reg, { ...opts, displayScale: displayScale(asset, vs), uid: `u${uidCounter++}`, skeleton: true });
   issues.push(...r.issues);
   return `<figure class="cell"><div class="stage">${r.svg}</div><figcaption>${esc(caption)}</figcaption></figure>`;
 }
@@ -200,7 +202,8 @@ ${a.description ? `<p>${esc(a.description)}</p>` : ""}<ul><li><code>${esc(tracks
       <div class="viewer-stage" data-stage><div class="zoomer" data-zoomer></div></div>
       <div class="viewer-controls">
         <label>zoom <input type="range" min="1" max="6" step="0.5" value="2" data-zoom></label>
-        <label><input type="checkbox" data-silhouette> silhouette</label>
+        <label><input type="checkbox" data-silhouette> silhouette</label>${asset.skeleton ? `
+        <label><input type="checkbox" data-skeleton> skeleton</label>` : ""}
         <span class="bgs">bg
           <button data-bg="checker" class="on"></button>
           ${grounds.length
@@ -210,7 +213,7 @@ ${a.description ? `<p>${esc(a.description)}</p>` : ""}<ul><li><code>${esc(tracks
           <button data-bg="light" style="background:#e6e1d3"></button>
         </span>
       </div>
-      <p class="hint dim">Silhouette is the flat-shape test: if two assets are the same in black, colour is doing work shape should be doing.${grounds.length ? ` The ground buttons tile the floor this app names — ${esc(grounds.map((g) => `${g.name} (${g.id})`).join(", "))} — behind the sprite at the same zoom.` : ""}</p>
+      <p class="hint dim">Silhouette is the flat-shape test: if two assets are the same in black, colour is doing work shape should be doing.${asset.skeleton ? ` Skeleton shows the joints this body was drawn from, by name (${Object.keys(asset.skeleton.joints).length} joints) — the rest pose, over whatever the parts are doing; a change is asked for by joint name.` : ""}${grounds.length ? ` The ground buttons tile the floor this app names — ${esc(grounds.map((g) => `${g.name} (${g.id})`).join(", "))} — behind the sprite at the same zoom.` : ""}</p>
     </div>
     <div class="facts">
       <p class="desc big">${esc(asset.description)}</p>
@@ -767,6 +770,8 @@ export function buildGallery(lib: Library, issues: Issue[]): string {
   .viewer-stage.bg-ground { background:#1a1420; } .viewer-stage.bg-ink { background:#10121a; } .viewer-stage.bg-light { background:#e6e1d3; }
   .bgs button[data-w] { background-size:cover; }
   ${groundCss}
+  .skeleton { display:none; }
+  .viewer-stage.skel .skeleton { display:block; }
   .viewer-stage.sil svg { filter: brightness(0) saturate(0); }
   .viewer-stage.sil.bg-ink svg, .viewer-stage.sil.bg-ground svg { filter: brightness(0) invert(1); }
   .viewer-stage .stage { background:none; padding:0; }
@@ -973,6 +978,7 @@ export function buildGallery(lib: Library, issues: Issue[]): string {
     $('[data-zoom]', d).oninput = () => applyZoom(d);
     const stage = $('[data-stage]', d);
     $('[data-silhouette]', d).onchange = (e) => stage.classList.toggle('sil', e.target.checked);
+    const sk = $('[data-skeleton]', d); if (sk) sk.onchange = (e) => stage.classList.toggle('skel', e.target.checked);
     $$('[data-bg]', d).forEach(b => b.onclick = () => {
       $$('[data-bg]', d).forEach(x => x.classList.remove('on'));
       b.classList.add('on');
