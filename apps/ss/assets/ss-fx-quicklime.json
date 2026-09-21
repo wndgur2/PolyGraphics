@@ -1,0 +1,26 @@
+{
+  "id": "ss.fx.quicklime",
+  "name": "Quicklime vent",
+  "description": "The awakened Shell letting go of a blow it just stopped: one grey ring going out from the body, and nothing else. Authored so the rim's outer edge lands at r=30 at full expansion, which is the number the game scales by — a 90px vent draws this at 90/30 — on a 72 canvas, which leaves the stroke six pixels of air rather than the hard cut a ring takes when it fits its box exactly. It is deliberately the plainest thing in the set. The barb burst it used to borrow is a detonation — gold core, six-point flare, chips, spatter left on the ground — and this goes off every single time the player is touched, so in a crowd that bang lands two or three times a second and the screen stops meaning anything. What is left is the one thing the effect has to say, which is how far the damage reached: a wash that gives the circle a body, the rim that marks its edge, and a thinner brighter line that snaps out ahead of the rim and is gone before the eye can settle on it — the ting. Steel and not blood, because the vent is the shell's own doing and the shell is grey wherever else it is drawn (ss.icon.armor, ss.icon.thorns); red on this field is damage arriving at the player, not damage leaving.",
+  "tags": ["fx", "hit"],
+  "size": [72, 72],
+  "parts": [
+    { "id": "wash", "shape": { "kind": "circle", "r": 29 }, "fill": "$steel@ghost" },
+    { "id": "rim", "shape": { "kind": "ring", "r": 29, "width": 2 }, "fill": "$steel.light" },
+    { "id": "ting", "shape": { "kind": "ring", "r": 29, "width": 1 }, "fill": "$steel.light2" }
+  ],
+  "animations": {
+    "play": {
+      "description": "A shade over a quarter of a second, which is shorter than the burst it replaces, because the whole point is that it does not hold the screen. The ting is out first and gone by the halfway mark — that is what makes this read as a note struck rather than a thing exploding; the rim arrives behind it and settles exactly on the radius that hurt, so what was seen and what died are the same circle; the wash is only ever there to stop the ring reading as an empty hoop, and it goes out under both.",
+      "duration": 0.26,
+      "tracks": [
+        { "part": "ting", "prop": "scale", "keys": [[0, 0.3], [0.45, 1], [1, 1.04]], "ease": "backOut" },
+        { "part": "ting", "prop": "opacity", "keys": [[0, 1], [0.3, 0.6], [0.55, 0]] },
+        { "part": "rim", "prop": "scale", "keys": [[0, 0.22], [1, 1]], "ease": "backOut" },
+        { "part": "rim", "prop": "opacity", "keys": [[0, 0.9], [0.55, 0.8], [1, 0]] },
+        { "part": "wash", "prop": "scale", "keys": [[0, 0.22], [0.85, 1], [1, 1]], "ease": "backOut" },
+        { "part": "wash", "prop": "opacity", "keys": [[0, 1], [0.5, 0.75], [1, 0]] }
+      ]
+    }
+  }
+}
