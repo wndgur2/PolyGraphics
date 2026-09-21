@@ -1,11 +1,11 @@
 {
   "id": "ss.icon.recovery",
   "name": "Recovery icon",
-  "description": "Passive icon: venom green plus sign, two crossed bars. Port of the hand-drawn i_recovery from Feelers' BootScene.",
+  "description": "Passive icon: venom green plus sign, two crossed bars, inside the pale steel border the defensive traits share. Port of the hand-drawn i_recovery from Feelers' BootScene. The tile was venom, matching the bars the way most icons here match their own glyph; it is $steel.light now — the border ss.icon.armor and ss.icon.thorns already wear — because Scab is the trait that finishes the Shell into Quicklime, and the two halves of a recipe have to read as the same shelf before the player is told they are. The cross stays green: it is the heal, and it is the only thing on the tile that carries a meaning colour can say faster than shape.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$venom" },
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$steel.light" },
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
     { "id": "bar_v", "shape": { "kind": "rect", "w": 6, "h": 18 }, "fill": "$venom" },
     { "id": "bar_h", "shape": { "kind": "rect", "w": 18, "h": 6 }, "fill": "$venom" }
