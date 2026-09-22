@@ -1,7 +1,7 @@
 {
   "id": "ss.proj.vine",
   "name": "Coiling vine",
-  "description": "A vine winding out across the floor, seen from above. Three runners off one point, each spiralling a different way and a different distance, because three copies of one spiral at 120 degrees is a pinwheel and this has to read as something that grew. Every radius is squashed to 0.86, the camera's own angle. `meta.radius` is the coil's own reach and the game scales the sprite by `grabR / radius`, so the circle drawn and the circle that catches are the same circle.\n\nDark all through: `$moss.dark2` cord with a `$moss` lit edge and `$blood.dark2` thorns, a dark red against a dark green, which is the one pairing that keeps a barb readable at this size without lightening the plant. No leaves \u2014 a coil hung with foliage stops being a cord.\n\n`coil` is the arrival and it is one gesture: something screws up out of the floor and then unrolls across it. The first third of the clip is the growing tip alone \u2014 a fiddlehead, the tight curl a vine carries at its end, small because at that moment almost all of the plant is still underneath. It arrives sunk seven pixels below the ground and turned a hundred and fifty degrees back on itself, and climbs and unwinds into place. Only then do the runners come, one segment at a time, each doing the same three things: rising from under the floor, turning on its own joint, and growing from nothing.\n\nRotation is the part that makes it an unroll rather than an extrusion, and it is about each segment's own start \u2014 which is the end of the segment before it \u2014 so a turning segment sweeps out of the one that made it. The windows are sequenced rather than overlapped for exactly that reason: a segment finishes its turn before the next one exists, and the chain is never drawn broken. Thorns are hung on their segment's frame and turn with it, because a barb that stayed put while the cord under it swung would detach.\n\nAn earlier pass tried to say all this with scenery \u2014 a mound of soil and three clods thrown up at the centre \u2014 and it did not work, because a drawing of disturbed earth is a fact about the ground rather than a thing the vine is doing. What says a vine came from underneath is the vine climbing. The soil is gone and the motion carries it.",
+  "description": "A vine winding out across the floor, seen from above. Three runners off one point, each spiralling a different way and a different distance, because three copies of one spiral at 120 degrees is a pinwheel and this has to read as something that grew. Every radius is squashed to 0.86, the camera's own angle. `meta.radius` is the coil's own reach and the game scales the sprite by `grabR / radius`, so the circle drawn and the circle that catches are the same circle.\n\nDark all through: `$moss.dark2` cord with a `$moss` lit edge and `$blood.dark2` thorns, a dark red against a dark green, which is the one pairing that keeps a barb readable at this size without lightening the plant. No leaves \u2014 a coil hung with foliage stops being a cord.\n\n`coil` is the arrival and it is one gesture: something screws up out of the floor and then unrolls across it. The first third of the clip is the growing tip alone \u2014 a fiddlehead, the tight curl a vine carries at its end, small because at that moment almost all of the plant is still underneath. It arrives sunk twelve pixels below the ground and turned a hundred and fifty degrees back on itself, and climbs and unwinds into place. Only then do the runners come, one segment at a time, each doing the same three things: rising from under the floor, turning on its own joint, and growing from nothing.\n\nRotation is the part that makes it an unroll rather than an extrusion, and it is about each segment's own start \u2014 which is the end of the segment before it \u2014 so a turning segment sweeps out of the one that made it. The windows are sequenced rather than overlapped for exactly that reason: a segment finishes its turn before the next one exists, and the chain is never drawn broken. Thorns are hung on their segment's frame and turn with it, because a barb that stayed put while the cord under it swung would detach.\n\nAn earlier pass tried to say all this with scenery \u2014 a mound of soil and three clods thrown up at the centre \u2014 and it did not work, because a drawing of disturbed earth is a fact about the ground rather than a thing the vine is doing. What says a vine came from underneath is the vine climbing. The soil is gone and the motion carries it.",
   "tags": [
     "proj",
     "melee"
@@ -51,11 +51,11 @@
           "keys": [
             [
               0,
-              7.0
+              12.0
             ],
             [
               0.04,
-              7.0
+              12.0
             ],
             [
               0.3,
@@ -146,11 +146,11 @@
           "keys": [
             [
               0,
-              7.0
+              12.0
             ],
             [
               0.04,
-              7.0
+              12.0
             ],
             [
               0.3,
@@ -241,11 +241,11 @@
           "keys": [
             [
               0,
-              7.0
+              12.0
             ],
             [
               0.04,
-              7.0
+              12.0
             ],
             [
               0.3,
@@ -336,11 +336,11 @@
           "keys": [
             [
               0,
-              7.0
+              12.0
             ],
             [
               0.34,
-              7.0
+              12.0
             ],
             [
               0.452,
@@ -431,11 +431,11 @@
           "keys": [
             [
               0,
-              7.0
+              12.0
             ],
             [
               0.34,
-              7.0
+              12.0
             ],
             [
               0.452,
@@ -526,11 +526,11 @@
           "keys": [
             [
               0,
-              7.0
+              12.0
             ],
             [
               0.34,
-              7.0
+              12.0
             ],
             [
               0.452,
@@ -621,11 +621,11 @@
           "keys": [
             [
               0,
-              6.16
+              10.56
             ],
             [
               0.458,
-              6.16
+              10.56
             ],
             [
               0.57,
@@ -716,11 +716,11 @@
           "keys": [
             [
               0,
-              6.16
+              10.56
             ],
             [
               0.458,
-              6.16
+              10.56
             ],
             [
               0.57,
@@ -811,11 +811,11 @@
           "keys": [
             [
               0,
-              6.16
+              10.56
             ],
             [
               0.458,
-              6.16
+              10.56
             ],
             [
               0.57,
@@ -906,11 +906,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -1001,11 +1001,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -1096,11 +1096,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -1191,11 +1191,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -1286,11 +1286,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -1381,11 +1381,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -1476,11 +1476,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
@@ -1571,11 +1571,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
@@ -1666,11 +1666,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
@@ -1761,11 +1761,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -1856,11 +1856,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -1951,11 +1951,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -2046,11 +2046,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -2141,11 +2141,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
@@ -2236,11 +2236,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
@@ -2331,11 +2331,11 @@
           "keys": [
             [
               0,
-              7.0
+              12.0
             ],
             [
               0.34,
-              7.0
+              12.0
             ],
             [
               0.452,
@@ -2426,11 +2426,11 @@
           "keys": [
             [
               0,
-              7.0
+              12.0
             ],
             [
               0.34,
-              7.0
+              12.0
             ],
             [
               0.452,
@@ -2521,11 +2521,11 @@
           "keys": [
             [
               0,
-              7.0
+              12.0
             ],
             [
               0.34,
-              7.0
+              12.0
             ],
             [
               0.452,
@@ -2616,11 +2616,11 @@
           "keys": [
             [
               0,
-              6.16
+              10.56
             ],
             [
               0.458,
-              6.16
+              10.56
             ],
             [
               0.57,
@@ -2711,11 +2711,11 @@
           "keys": [
             [
               0,
-              6.16
+              10.56
             ],
             [
               0.458,
-              6.16
+              10.56
             ],
             [
               0.57,
@@ -2806,11 +2806,11 @@
           "keys": [
             [
               0,
-              6.16
+              10.56
             ],
             [
               0.458,
-              6.16
+              10.56
             ],
             [
               0.57,
@@ -2901,11 +2901,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -2996,11 +2996,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -3091,11 +3091,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -3186,11 +3186,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -3281,11 +3281,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -3376,11 +3376,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -3471,11 +3471,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
@@ -3566,11 +3566,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
@@ -3661,11 +3661,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
@@ -3756,11 +3756,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -3851,11 +3851,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -3946,11 +3946,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -4041,11 +4041,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -4136,11 +4136,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
@@ -4231,11 +4231,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
@@ -4326,11 +4326,11 @@
           "keys": [
             [
               0,
-              7.0
+              12.0
             ],
             [
               0.34,
-              7.0
+              12.0
             ],
             [
               0.452,
@@ -4421,11 +4421,11 @@
           "keys": [
             [
               0,
-              7.0
+              12.0
             ],
             [
               0.34,
-              7.0
+              12.0
             ],
             [
               0.452,
@@ -4516,11 +4516,11 @@
           "keys": [
             [
               0,
-              7.0
+              12.0
             ],
             [
               0.34,
-              7.0
+              12.0
             ],
             [
               0.452,
@@ -4611,11 +4611,11 @@
           "keys": [
             [
               0,
-              6.16
+              10.56
             ],
             [
               0.458,
-              6.16
+              10.56
             ],
             [
               0.57,
@@ -4706,11 +4706,11 @@
           "keys": [
             [
               0,
-              6.16
+              10.56
             ],
             [
               0.458,
-              6.16
+              10.56
             ],
             [
               0.57,
@@ -4801,11 +4801,11 @@
           "keys": [
             [
               0,
-              6.16
+              10.56
             ],
             [
               0.458,
-              6.16
+              10.56
             ],
             [
               0.57,
@@ -4896,11 +4896,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -4991,11 +4991,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -5086,11 +5086,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -5181,11 +5181,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -5276,11 +5276,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -5371,11 +5371,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -5466,11 +5466,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
@@ -5561,11 +5561,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
@@ -5656,11 +5656,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
@@ -5751,11 +5751,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -5846,11 +5846,11 @@
           "keys": [
             [
               0,
-              5.32
+              9.12
             ],
             [
               0.576,
-              5.32
+              9.12
             ],
             [
               0.688,
@@ -5941,11 +5941,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -6036,11 +6036,11 @@
           "keys": [
             [
               0,
-              4.48
+              7.68
             ],
             [
               0.694,
-              4.48
+              7.68
             ],
             [
               0.806,
@@ -6131,11 +6131,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
@@ -6226,11 +6226,11 @@
           "keys": [
             [
               0,
-              3.64
+              6.24
             ],
             [
               0.811,
-              3.64
+              6.24
             ],
             [
               0.923,
