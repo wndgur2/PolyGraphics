@@ -1,0 +1,3015 @@
+{
+  "id": "ss.env.stage-burrow",
+  "name": "Ant Burrow stage card (SS)",
+  "description": "The picture on the Ant Burrow card in Feelers' map select. The card used to photograph the real generator into a dynamic texture on every resize; this is the same burrow drawn once, and chosen rather than rolled.\n\nA burrow is a lattice \u2014 chambers with a way out of each side and masses of earth left standing between them \u2014 and that is what the picture is: twelve hand-placed lattice corners, all but two of them off the canvas so the chambers carry on past the frame, legs of earth between them with a doorway cut through each, and two walls missing altogether, which is the other way through a burrow and the reason a chamber never reads as a box. The earth is drawn in the run's own two passes \u2014 every contour, then every fill \u2014 so no mass outlines the one beside it, and its surface is laid inside the masses from the middle out, sized to the room left where each patch lands, so nothing hangs over a contour. $carapace.dark for the earth and $ink.dark for its contour are the run's EARTH_INK and EARTH_RIM_INK to within a value or two; the floor is $dead.dark under the gouges the digging left.\n\nIt stands where the run stands. A desktop sees about 1070 world px of a 600px lattice, which is a chamber and its neighbours' walls; the first draft of this card stood three cells back and came out a floor plan \u2014 rooms small enough to read as cells in a grid rather than as places, and earth with no room on it for a surface. Two cells across the frame is the run's own distance, and it is what buys the earth its grain, the doorways their width and the fungi a size you can see them at.\n\nAuthored 3:2; the card covers its strip with this and crops off the middle, so the lattice reads at any shape the card can give it. The husks the burrow also carries are on the floor as chips instead: whole, at a size that reads on a card this small, $husk is the brightest ink in a picture whose subject is earth.",
+  "tags": [
+    "env",
+    "card",
+    "stage"
+  ],
+  "size": [
+    384,
+    256
+  ],
+  "parts": [
+    {
+      "id": "floor",
+      "shape": {
+        "kind": "rect",
+        "w": 384,
+        "h": 256
+      },
+      "fill": "$dead.dark"
+    },
+    {
+      "id": "floor_grain",
+      "at": [
+        0,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "ellipse",
+          "rx": 9,
+          "ry": 6
+        },
+        "count": 110,
+        "area": [
+          400,
+          272
+        ],
+        "seed": 5101,
+        "scaleRange": [
+          0.4,
+          1.6
+        ],
+        "jitterRot": true
+      },
+      "fill": "$carapace@0.07"
+    },
+    {
+      "id": "floor_dark",
+      "at": [
+        0,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "ellipse",
+          "rx": 8,
+          "ry": 5
+        },
+        "count": 90,
+        "area": [
+          400,
+          272
+        ],
+        "seed": 5102,
+        "scaleRange": [
+          0.4,
+          1.5
+        ],
+        "jitterRot": true
+      },
+      "fill": "$ink@0.22"
+    },
+    {
+      "id": "gouge_0_cut",
+      "at": [
+        -26,
+        10
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 42,
+        "width": 6,
+        "from": 20,
+        "to": 120
+      },
+      "fill": "$ink@0.55"
+    },
+    {
+      "id": "gouge_0_lip",
+      "at": [
+        -26,
+        7
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 42,
+        "width": 3,
+        "from": 30,
+        "to": 110
+      },
+      "fill": "$carapace.dark2@0.35"
+    },
+    {
+      "id": "gouge_1_cut",
+      "at": [
+        34,
+        -34
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 34,
+        "width": 6,
+        "from": 160,
+        "to": 255
+      },
+      "fill": "$ink@0.55"
+    },
+    {
+      "id": "gouge_1_lip",
+      "at": [
+        34,
+        -37
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 34,
+        "width": 3,
+        "from": 170,
+        "to": 245
+      },
+      "fill": "$carapace.dark2@0.35"
+    },
+    {
+      "id": "gouge_2_cut",
+      "at": [
+        10,
+        52
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 30,
+        "width": 6,
+        "from": 250,
+        "to": 340
+      },
+      "fill": "$ink@0.55"
+    },
+    {
+      "id": "gouge_2_lip",
+      "at": [
+        10,
+        49
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 30,
+        "width": 3,
+        "from": 260,
+        "to": 330
+      },
+      "fill": "$carapace.dark2@0.35"
+    },
+    {
+      "id": "gouge_3_cut",
+      "at": [
+        -168,
+        -30
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 36,
+        "width": 6,
+        "from": 30,
+        "to": 130
+      },
+      "fill": "$ink@0.55"
+    },
+    {
+      "id": "gouge_3_lip",
+      "at": [
+        -168,
+        -33
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 36,
+        "width": 3,
+        "from": 40,
+        "to": 120
+      },
+      "fill": "$carapace.dark2@0.35"
+    },
+    {
+      "id": "gouge_4_cut",
+      "at": [
+        172,
+        46
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 38,
+        "width": 6,
+        "from": 200,
+        "to": 300
+      },
+      "fill": "$ink@0.55"
+    },
+    {
+      "id": "gouge_4_lip",
+      "at": [
+        172,
+        43
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 38,
+        "width": 3,
+        "from": 210,
+        "to": 290
+      },
+      "fill": "$carapace.dark2@0.35"
+    },
+    {
+      "id": "gouge_5_cut",
+      "at": [
+        -160,
+        96
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 30,
+        "width": 6,
+        "from": 110,
+        "to": 200
+      },
+      "fill": "$ink@0.55"
+    },
+    {
+      "id": "gouge_5_lip",
+      "at": [
+        -160,
+        93
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 30,
+        "width": 3,
+        "from": 120,
+        "to": 190
+      },
+      "fill": "$carapace.dark2@0.35"
+    },
+    {
+      "id": "floor_grit",
+      "at": [
+        0,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "rect",
+          "w": 4,
+          "h": 4
+        },
+        "count": 64,
+        "area": [
+          400,
+          272
+        ],
+        "seed": 5103,
+        "scaleRange": [
+          0.5,
+          1.4
+        ]
+      },
+      "fill": "$carapace.dark@0.7"
+    },
+    {
+      "id": "floor_rust",
+      "at": [
+        0,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "rect",
+          "w": 4,
+          "h": 4
+        },
+        "count": 22,
+        "area": [
+          400,
+          272
+        ],
+        "seed": 5104,
+        "scaleRange": [
+          0.5,
+          1.4
+        ]
+      },
+      "fill": "$rust@0.8"
+    },
+    {
+      "id": "floor_shell",
+      "at": [
+        0,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "rect",
+          "w": 4,
+          "h": 3
+        },
+        "count": 30,
+        "area": [
+          400,
+          272
+        ],
+        "seed": 5107,
+        "scaleRange": [
+          0.5,
+          1.5
+        ],
+        "jitterRot": true
+      },
+      "fill": "$husk@0.45"
+    },
+    {
+      "id": "rim_h00_0",
+      "at": [
+        -237.1,
+        -275.1
+      ],
+      "rot": 3.5,
+      "shape": {
+        "kind": "rect",
+        "w": 151.9,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h00_1",
+      "at": [
+        -119.2,
+        -267.9
+      ],
+      "rot": 3.5,
+      "shape": {
+        "kind": "rect",
+        "w": 120.5,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h01_0",
+      "at": [
+        -260.7,
+        -93.7
+      ],
+      "rot": 4.17,
+      "shape": {
+        "kind": "rect",
+        "w": 120.7,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h01_1",
+      "at": [
+        -142.8,
+        -85.1
+      ],
+      "rot": 4.17,
+      "shape": {
+        "kind": "rect",
+        "w": 143.8,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h02_0",
+      "at": [
+        -239.0,
+        96.3
+      ],
+      "rot": 3.61,
+      "shape": {
+        "kind": "rect",
+        "w": 132.2,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h02_1",
+      "at": [
+        -123.0,
+        103.7
+      ],
+      "rot": 3.61,
+      "shape": {
+        "kind": "rect",
+        "w": 132.2,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h03_0",
+      "at": [
+        -249.5,
+        278.4
+      ],
+      "rot": 3.54,
+      "shape": {
+        "kind": "rect",
+        "w": 135.2,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h03_1",
+      "at": [
+        -132.5,
+        285.6
+      ],
+      "rot": 3.54,
+      "shape": {
+        "kind": "rect",
+        "w": 135.2,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h10_0",
+      "at": [
+        -58.0,
+        -268.9
+      ],
+      "rot": -5.53,
+      "shape": {
+        "kind": "rect",
+        "w": 118.2,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h10_1",
+      "at": [
+        56.9,
+        -280.0
+      ],
+      "rot": -5.53,
+      "shape": {
+        "kind": "rect",
+        "w": 140.6,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h11_0",
+      "at": [
+        -78.0,
+        -83.9
+      ],
+      "rot": -4.92,
+      "shape": {
+        "kind": "rect",
+        "w": 102.2,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h11_1",
+      "at": [
+        37.9,
+        -93.9
+      ],
+      "rot": -4.92,
+      "shape": {
+        "kind": "rect",
+        "w": 154.5,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h12_0",
+      "at": [
+        -39.8,
+        102.5
+      ],
+      "rot": -4.3,
+      "shape": {
+        "kind": "rect",
+        "w": 150.6,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h12_1",
+      "at": [
+        76.1,
+        93.8
+      ],
+      "rot": -4.3,
+      "shape": {
+        "kind": "rect",
+        "w": 105.9,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h13_0",
+      "at": [
+        -58.0,
+        284.9
+      ],
+      "rot": -4.92,
+      "shape": {
+        "kind": "rect",
+        "w": 130.3,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h13_1",
+      "at": [
+        56.0,
+        275.1
+      ],
+      "rot": -4.92,
+      "shape": {
+        "kind": "rect",
+        "w": 130.3,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h20_0",
+      "at": [
+        133.5,
+        -281.3
+      ],
+      "rot": 4.4,
+      "shape": {
+        "kind": "rect",
+        "w": 129.3,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h20_1",
+      "at": [
+        244.5,
+        -272.7
+      ],
+      "rot": 4.4,
+      "shape": {
+        "kind": "rect",
+        "w": 129.3,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h21_0",
+      "at": [
+        131.3,
+        -95.1
+      ],
+      "rot": 3.69,
+      "shape": {
+        "kind": "rect",
+        "w": 148.8,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h21_1",
+      "at": [
+        245.3,
+        -87.7
+      ],
+      "rot": 3.69,
+      "shape": {
+        "kind": "rect",
+        "w": 111.6,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h22_0",
+      "at": [
+        127.7,
+        93.8
+      ],
+      "rot": 3.73,
+      "shape": {
+        "kind": "rect",
+        "w": 113.4,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h22_1",
+      "at": [
+        241.6,
+        101.2
+      ],
+      "rot": 3.73,
+      "shape": {
+        "kind": "rect",
+        "w": 142.9,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h23_0",
+      "at": [
+        128.0,
+        274.3
+      ],
+      "rot": 3.73,
+      "shape": {
+        "kind": "rect",
+        "w": 130.2,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h23_1",
+      "at": [
+        240.0,
+        281.7
+      ],
+      "rot": 3.73,
+      "shape": {
+        "kind": "rect",
+        "w": 130.2,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v00_0",
+      "at": [
+        -285.5,
+        -243.0
+      ],
+      "rot": 92.52,
+      "shape": {
+        "kind": "rect",
+        "w": 128.1,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v00_1",
+      "at": [
+        -290.5,
+        -131.0
+      ],
+      "rot": 92.52,
+      "shape": {
+        "kind": "rect",
+        "w": 128.1,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v01_0",
+      "at": [
+        -289.3,
+        -63.8
+      ],
+      "rot": 85.19,
+      "shape": {
+        "kind": "rect",
+        "w": 122.7,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v01_1",
+      "at": [
+        -279.4,
+        54.2
+      ],
+      "rot": 85.19,
+      "shape": {
+        "kind": "rect",
+        "w": 138.0,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v10_0",
+      "at": [
+        -90.9,
+        -221.8
+      ],
+      "rot": 93.73,
+      "shape": {
+        "kind": "rect",
+        "w": 146.6,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v10_1",
+      "at": [
+        -98.3,
+        -107.8
+      ],
+      "rot": 93.73,
+      "shape": {
+        "kind": "rect",
+        "w": 109.8,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v11_0",
+      "at": [
+        -96.8,
+        -38.9
+      ],
+      "rot": 85.74,
+      "shape": {
+        "kind": "rect",
+        "w": 144.3,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v11_1",
+      "at": [
+        -88.1,
+        78.0
+      ],
+      "rot": 85.74,
+      "shape": {
+        "kind": "rect",
+        "w": 114.2,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v12_0",
+      "at": [
+        -87.5,
+        141.0
+      ],
+      "rot": 92.52,
+      "shape": {
+        "kind": "rect",
+        "w": 128.1,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v12_1",
+      "at": [
+        -92.5,
+        253.0
+      ],
+      "rot": 92.52,
+      "shape": {
+        "kind": "rect",
+        "w": 128.1,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v20_0",
+      "at": [
+        96.1,
+        -254.9
+      ],
+      "rot": 93.69,
+      "shape": {
+        "kind": "rect",
+        "w": 116.3,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v20_1",
+      "at": [
+        88.8,
+        -142.0
+      ],
+      "rot": 93.69,
+      "shape": {
+        "kind": "rect",
+        "w": 146.1,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v21_0",
+      "at": [
+        87.6,
+        -76.7
+      ],
+      "rot": 85.79,
+      "shape": {
+        "kind": "rect",
+        "w": 100.8,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v21_1",
+      "at": [
+        96.2,
+        40.3
+      ],
+      "rot": 85.79,
+      "shape": {
+        "kind": "rect",
+        "w": 161.7,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v22_0",
+      "at": [
+        98.2,
+        131.4
+      ],
+      "rot": 92.54,
+      "shape": {
+        "kind": "rect",
+        "w": 136.9,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v22_1",
+      "at": [
+        93.3,
+        243.4
+      ],
+      "rot": 92.54,
+      "shape": {
+        "kind": "rect",
+        "w": 115.3,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v30_0",
+      "at": [
+        278.5,
+        -234.5
+      ],
+      "rot": 92.49,
+      "shape": {
+        "kind": "rect",
+        "w": 129.1,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v30_1",
+      "at": [
+        273.5,
+        -121.5
+      ],
+      "rot": 92.49,
+      "shape": {
+        "kind": "rect",
+        "w": 129.1,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v31_0",
+      "at": [
+        274.3,
+        -49.5
+      ],
+      "rot": 86.39,
+      "shape": {
+        "kind": "rect",
+        "w": 131.2,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v31_1",
+      "at": [
+        281.7,
+        67.5
+      ],
+      "rot": 86.39,
+      "shape": {
+        "kind": "rect",
+        "w": 131.2,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v32_0",
+      "at": [
+        282.7,
+        133.1
+      ],
+      "rot": 92.54,
+      "shape": {
+        "kind": "rect",
+        "w": 116.3,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v32_1",
+      "at": [
+        277.8,
+        244.1
+      ],
+      "rot": 92.54,
+      "shape": {
+        "kind": "rect",
+        "w": 137.9,
+        "h": 58,
+        "corner": 29
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n00",
+      "at": [
+        -284,
+        -278
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n01",
+      "at": [
+        -292,
+        -96
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n02",
+      "at": [
+        -276,
+        94
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n03",
+      "at": [
+        -288,
+        276
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n10",
+      "at": [
+        -88,
+        -266
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n11",
+      "at": [
+        -100,
+        -82
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n12",
+      "at": [
+        -86,
+        106
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n13",
+      "at": [
+        -94,
+        288
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n20",
+      "at": [
+        98,
+        -284
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n21",
+      "at": [
+        86,
+        -98
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n22",
+      "at": [
+        100,
+        92
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n23",
+      "at": [
+        92,
+        272
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n30",
+      "at": [
+        280,
+        -270
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n31",
+      "at": [
+        272,
+        -86
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n32",
+      "at": [
+        284,
+        104
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n33",
+      "at": [
+        276,
+        284
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 39
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "earth_h00_0",
+      "at": [
+        -237.1,
+        -275.1
+      ],
+      "rot": 3.5,
+      "shape": {
+        "kind": "rect",
+        "w": 143.9,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h00_1",
+      "at": [
+        -119.2,
+        -267.9
+      ],
+      "rot": 3.5,
+      "shape": {
+        "kind": "rect",
+        "w": 112.5,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h01_0",
+      "at": [
+        -260.7,
+        -93.7
+      ],
+      "rot": 4.17,
+      "shape": {
+        "kind": "rect",
+        "w": 112.7,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h01_1",
+      "at": [
+        -142.8,
+        -85.1
+      ],
+      "rot": 4.17,
+      "shape": {
+        "kind": "rect",
+        "w": 135.8,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h02_0",
+      "at": [
+        -239.0,
+        96.3
+      ],
+      "rot": 3.61,
+      "shape": {
+        "kind": "rect",
+        "w": 124.2,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h02_1",
+      "at": [
+        -123.0,
+        103.7
+      ],
+      "rot": 3.61,
+      "shape": {
+        "kind": "rect",
+        "w": 124.2,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h03_0",
+      "at": [
+        -249.5,
+        278.4
+      ],
+      "rot": 3.54,
+      "shape": {
+        "kind": "rect",
+        "w": 127.2,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h03_1",
+      "at": [
+        -132.5,
+        285.6
+      ],
+      "rot": 3.54,
+      "shape": {
+        "kind": "rect",
+        "w": 127.2,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h10_0",
+      "at": [
+        -58.0,
+        -268.9
+      ],
+      "rot": -5.53,
+      "shape": {
+        "kind": "rect",
+        "w": 110.2,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h10_1",
+      "at": [
+        56.9,
+        -280.0
+      ],
+      "rot": -5.53,
+      "shape": {
+        "kind": "rect",
+        "w": 132.6,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h11_0",
+      "at": [
+        -78.0,
+        -83.9
+      ],
+      "rot": -4.92,
+      "shape": {
+        "kind": "rect",
+        "w": 94.2,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h11_1",
+      "at": [
+        37.9,
+        -93.9
+      ],
+      "rot": -4.92,
+      "shape": {
+        "kind": "rect",
+        "w": 146.5,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h12_0",
+      "at": [
+        -39.8,
+        102.5
+      ],
+      "rot": -4.3,
+      "shape": {
+        "kind": "rect",
+        "w": 142.6,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h12_1",
+      "at": [
+        76.1,
+        93.8
+      ],
+      "rot": -4.3,
+      "shape": {
+        "kind": "rect",
+        "w": 97.9,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h13_0",
+      "at": [
+        -58.0,
+        284.9
+      ],
+      "rot": -4.92,
+      "shape": {
+        "kind": "rect",
+        "w": 122.3,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h13_1",
+      "at": [
+        56.0,
+        275.1
+      ],
+      "rot": -4.92,
+      "shape": {
+        "kind": "rect",
+        "w": 122.3,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h20_0",
+      "at": [
+        133.5,
+        -281.3
+      ],
+      "rot": 4.4,
+      "shape": {
+        "kind": "rect",
+        "w": 121.3,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h20_1",
+      "at": [
+        244.5,
+        -272.7
+      ],
+      "rot": 4.4,
+      "shape": {
+        "kind": "rect",
+        "w": 121.3,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h21_0",
+      "at": [
+        131.3,
+        -95.1
+      ],
+      "rot": 3.69,
+      "shape": {
+        "kind": "rect",
+        "w": 140.8,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h21_1",
+      "at": [
+        245.3,
+        -87.7
+      ],
+      "rot": 3.69,
+      "shape": {
+        "kind": "rect",
+        "w": 103.6,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h22_0",
+      "at": [
+        127.7,
+        93.8
+      ],
+      "rot": 3.73,
+      "shape": {
+        "kind": "rect",
+        "w": 105.4,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h22_1",
+      "at": [
+        241.6,
+        101.2
+      ],
+      "rot": 3.73,
+      "shape": {
+        "kind": "rect",
+        "w": 134.9,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h23_0",
+      "at": [
+        128.0,
+        274.3
+      ],
+      "rot": 3.73,
+      "shape": {
+        "kind": "rect",
+        "w": 122.2,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h23_1",
+      "at": [
+        240.0,
+        281.7
+      ],
+      "rot": 3.73,
+      "shape": {
+        "kind": "rect",
+        "w": 122.2,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v00_0",
+      "at": [
+        -285.5,
+        -243.0
+      ],
+      "rot": 92.52,
+      "shape": {
+        "kind": "rect",
+        "w": 120.1,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v00_1",
+      "at": [
+        -290.5,
+        -131.0
+      ],
+      "rot": 92.52,
+      "shape": {
+        "kind": "rect",
+        "w": 120.1,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v01_0",
+      "at": [
+        -289.3,
+        -63.8
+      ],
+      "rot": 85.19,
+      "shape": {
+        "kind": "rect",
+        "w": 114.7,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v01_1",
+      "at": [
+        -279.4,
+        54.2
+      ],
+      "rot": 85.19,
+      "shape": {
+        "kind": "rect",
+        "w": 130.0,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v10_0",
+      "at": [
+        -90.9,
+        -221.8
+      ],
+      "rot": 93.73,
+      "shape": {
+        "kind": "rect",
+        "w": 138.6,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v10_1",
+      "at": [
+        -98.3,
+        -107.8
+      ],
+      "rot": 93.73,
+      "shape": {
+        "kind": "rect",
+        "w": 101.8,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v11_0",
+      "at": [
+        -96.8,
+        -38.9
+      ],
+      "rot": 85.74,
+      "shape": {
+        "kind": "rect",
+        "w": 136.3,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v11_1",
+      "at": [
+        -88.1,
+        78.0
+      ],
+      "rot": 85.74,
+      "shape": {
+        "kind": "rect",
+        "w": 106.2,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v12_0",
+      "at": [
+        -87.5,
+        141.0
+      ],
+      "rot": 92.52,
+      "shape": {
+        "kind": "rect",
+        "w": 120.1,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v12_1",
+      "at": [
+        -92.5,
+        253.0
+      ],
+      "rot": 92.52,
+      "shape": {
+        "kind": "rect",
+        "w": 120.1,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v20_0",
+      "at": [
+        96.1,
+        -254.9
+      ],
+      "rot": 93.69,
+      "shape": {
+        "kind": "rect",
+        "w": 108.3,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v20_1",
+      "at": [
+        88.8,
+        -142.0
+      ],
+      "rot": 93.69,
+      "shape": {
+        "kind": "rect",
+        "w": 138.1,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v21_0",
+      "at": [
+        87.6,
+        -76.7
+      ],
+      "rot": 85.79,
+      "shape": {
+        "kind": "rect",
+        "w": 92.8,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v21_1",
+      "at": [
+        96.2,
+        40.3
+      ],
+      "rot": 85.79,
+      "shape": {
+        "kind": "rect",
+        "w": 153.7,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v22_0",
+      "at": [
+        98.2,
+        131.4
+      ],
+      "rot": 92.54,
+      "shape": {
+        "kind": "rect",
+        "w": 128.9,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v22_1",
+      "at": [
+        93.3,
+        243.4
+      ],
+      "rot": 92.54,
+      "shape": {
+        "kind": "rect",
+        "w": 107.3,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v30_0",
+      "at": [
+        278.5,
+        -234.5
+      ],
+      "rot": 92.49,
+      "shape": {
+        "kind": "rect",
+        "w": 121.1,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v30_1",
+      "at": [
+        273.5,
+        -121.5
+      ],
+      "rot": 92.49,
+      "shape": {
+        "kind": "rect",
+        "w": 121.1,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v31_0",
+      "at": [
+        274.3,
+        -49.5
+      ],
+      "rot": 86.39,
+      "shape": {
+        "kind": "rect",
+        "w": 123.2,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v31_1",
+      "at": [
+        281.7,
+        67.5
+      ],
+      "rot": 86.39,
+      "shape": {
+        "kind": "rect",
+        "w": 123.2,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v32_0",
+      "at": [
+        282.7,
+        133.1
+      ],
+      "rot": 92.54,
+      "shape": {
+        "kind": "rect",
+        "w": 108.3,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v32_1",
+      "at": [
+        277.8,
+        244.1
+      ],
+      "rot": 92.54,
+      "shape": {
+        "kind": "rect",
+        "w": 129.9,
+        "h": 50,
+        "corner": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n00",
+      "at": [
+        -284,
+        -278
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n01",
+      "at": [
+        -292,
+        -96
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n02",
+      "at": [
+        -276,
+        94
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n03",
+      "at": [
+        -288,
+        276
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n10",
+      "at": [
+        -88,
+        -266
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n11",
+      "at": [
+        -100,
+        -82
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n12",
+      "at": [
+        -86,
+        106
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n13",
+      "at": [
+        -94,
+        288
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n20",
+      "at": [
+        98,
+        -284
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n21",
+      "at": [
+        86,
+        -98
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n22",
+      "at": [
+        100,
+        92
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n23",
+      "at": [
+        92,
+        272
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n30",
+      "at": [
+        280,
+        -270
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n31",
+      "at": [
+        272,
+        -86
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n32",
+      "at": [
+        284,
+        104
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n33",
+      "at": [
+        276,
+        284
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 35
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_face_0",
+      "at": [
+        -203.7,
+        -286.7
+      ],
+      "rot": 240,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.9,
+        "ry": 2.0
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_1",
+      "at": [
+        -101.1,
+        -273.1
+      ],
+      "rot": 220,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.4,
+        "ry": 5.0
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_2",
+      "at": [
+        -268.6,
+        -102.9
+      ],
+      "rot": 127,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.2,
+        "ry": 4.2
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_3",
+      "at": [
+        -128.4,
+        -74.7
+      ],
+      "rot": 95,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.5,
+        "ry": 3.7
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_4",
+      "at": [
+        -103.0,
+        114.9
+      ],
+      "rot": 100,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.1,
+        "ry": 2.1
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_5",
+      "at": [
+        -103.2,
+        287.9
+      ],
+      "rot": 35,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.8,
+        "ry": 2.6
+      },
+      "fill": "$carapace.dark2@0.5"
+    },
+    {
+      "id": "earth_face_6",
+      "at": [
+        -35.5,
+        -260.7
+      ],
+      "rot": 321,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.8,
+        "ry": 4.6
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_7",
+      "at": [
+        32.4,
+        -288.7
+      ],
+      "rot": 87,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.2,
+        "ry": 2.9
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_8",
+      "at": [
+        74.4,
+        -294.3
+      ],
+      "rot": 188,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.1,
+        "ry": 2.8
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_9",
+      "at": [
+        -56.1,
+        -85.5
+      ],
+      "rot": 318,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.9,
+        "ry": 3.3
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_10",
+      "at": [
+        54.5,
+        -110.8
+      ],
+      "rot": 30,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.1,
+        "ry": 1.4
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_11",
+      "at": [
+        46.3,
+        -91.9
+      ],
+      "rot": 145,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.6,
+        "ry": 2.5
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_12",
+      "at": [
+        -4.9,
+        103.5
+      ],
+      "rot": 17,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.6,
+        "ry": 3.1
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_13",
+      "at": [
+        -83.4,
+        107.9
+      ],
+      "rot": 249,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.2,
+        "ry": 4.2
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_14",
+      "at": [
+        64.4,
+        89.0
+      ],
+      "rot": 24,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.4,
+        "ry": 2.3
+      },
+      "fill": "$carapace.dark2@0.5"
+    },
+    {
+      "id": "earth_face_15",
+      "at": [
+        -84.2,
+        284.1
+      ],
+      "rot": 338,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.6,
+        "ry": 3.8
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_16",
+      "at": [
+        279.1,
+        -275.0
+      ],
+      "rot": 344,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.7,
+        "ry": 2.5
+      },
+      "fill": "$carapace.dark2@0.5"
+    },
+    {
+      "id": "earth_face_17",
+      "at": [
+        133.3,
+        -90.2
+      ],
+      "rot": 161,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.1,
+        "ry": 2.1
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_18",
+      "at": [
+        170.1,
+        -88.4
+      ],
+      "rot": 12,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.2,
+        "ry": 4.9
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_19",
+      "at": [
+        252.0,
+        -90.4
+      ],
+      "rot": 165,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.9,
+        "ry": 4.7
+      },
+      "fill": "$carapace.dark2@0.5"
+    },
+    {
+      "id": "earth_face_20",
+      "at": [
+        125.0,
+        89.9
+      ],
+      "rot": 322,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.2,
+        "ry": 2.2
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_21",
+      "at": [
+        198.5,
+        96.2
+      ],
+      "rot": 218,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.7,
+        "ry": 2.5
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_22",
+      "at": [
+        236.4,
+        102.4
+      ],
+      "rot": 275,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.6,
+        "ry": 3.1
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_23",
+      "at": [
+        156.8,
+        263.2
+      ],
+      "rot": 105,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.9,
+        "ry": 2.6
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_24",
+      "at": [
+        244.2,
+        268.9
+      ],
+      "rot": 26,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.0,
+        "ry": 2.0
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_25",
+      "at": [
+        -286.4,
+        -241.7
+      ],
+      "rot": 257,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.1,
+        "ry": 2.1
+      },
+      "fill": "$carapace.dark2@0.5"
+    },
+    {
+      "id": "earth_face_26",
+      "at": [
+        -279.9,
+        -144.7
+      ],
+      "rot": 309,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.7,
+        "ry": 5.2
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_27",
+      "at": [
+        -286.3,
+        -29.4
+      ],
+      "rot": 316,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.7,
+        "ry": 3.2
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_28",
+      "at": [
+        -288.1,
+        26.6
+      ],
+      "rot": 127,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.5,
+        "ry": 3.7
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_29",
+      "at": [
+        -79.9,
+        -193.6
+      ],
+      "rot": 297,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.9,
+        "ry": 2.0
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_30",
+      "at": [
+        -90.7,
+        -120.6
+      ],
+      "rot": 70,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.1,
+        "ry": 4.2
+      },
+      "fill": "$carapace.dark2@0.5"
+    },
+    {
+      "id": "earth_face_31",
+      "at": [
+        -89.9,
+        -14.0
+      ],
+      "rot": 71,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.7,
+        "ry": 3.2
+      },
+      "fill": "$carapace.dark2@0.5"
+    },
+    {
+      "id": "earth_face_32",
+      "at": [
+        -93.9,
+        44.9
+      ],
+      "rot": 50,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.6,
+        "ry": 3.2
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_33",
+      "at": [
+        -76.8,
+        120.9
+      ],
+      "rot": 3,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.3,
+        "ry": 3.6
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_34",
+      "at": [
+        -81.5,
+        252.9
+      ],
+      "rot": 211,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.5,
+        "ry": 1.7
+      },
+      "fill": "$carapace.dark2@0.5"
+    },
+    {
+      "id": "earth_face_35",
+      "at": [
+        79.9,
+        -135.5
+      ],
+      "rot": 271,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.9,
+        "ry": 3.3
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_36",
+      "at": [
+        98.4,
+        -174.6
+      ],
+      "rot": 246,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.6,
+        "ry": 3.8
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_37",
+      "at": [
+        86.6,
+        -95.9
+      ],
+      "rot": 68,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.6,
+        "ry": 2.5
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_38",
+      "at": [
+        99.4,
+        39.8
+      ],
+      "rot": 6,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.8,
+        "ry": 5.3
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_39",
+      "at": [
+        105.0,
+        91.5
+      ],
+      "rot": 239,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.3,
+        "ry": 4.3
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_40",
+      "at": [
+        102.3,
+        126.0
+      ],
+      "rot": 92,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.4,
+        "ry": 5.0
+      },
+      "fill": "$carapace.dark2@0.5"
+    },
+    {
+      "id": "earth_face_41",
+      "at": [
+        93.6,
+        230.5
+      ],
+      "rot": 358,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.9,
+        "ry": 5.4
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_42",
+      "at": [
+        283.5,
+        -112.2
+      ],
+      "rot": 321,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.9,
+        "ry": 2.6
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_43",
+      "at": [
+        272.4,
+        -41.3
+      ],
+      "rot": 167,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.6,
+        "ry": 3.1
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_44",
+      "at": [
+        286.7,
+        80.1
+      ],
+      "rot": 210,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.9,
+        "ry": 1.9
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_45",
+      "at": [
+        289.5,
+        126.9
+      ],
+      "rot": 25,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.0,
+        "ry": 2.7
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_46",
+      "at": [
+        291.6,
+        265.2
+      ],
+      "rot": 53,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.6,
+        "ry": 1.8
+      },
+      "fill": "$carapace.dark2@0.5"
+    },
+    {
+      "id": "earth_face_47",
+      "at": [
+        280.9,
+        243.4
+      ],
+      "rot": 313,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.2,
+        "ry": 3.5
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_48",
+      "at": [
+        -282.6,
+        -260.0
+      ],
+      "rot": 207,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.7,
+        "ry": 4.5
+      },
+      "fill": "$carapace.dark2@0.5"
+    },
+    {
+      "id": "earth_face_49",
+      "at": [
+        -276.0,
+        -83.7
+      ],
+      "rot": 150,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.4,
+        "ry": 2.3
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_50",
+      "at": [
+        -284.6,
+        266.9
+      ],
+      "rot": 248,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.5,
+        "ry": 4.4
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_51",
+      "at": [
+        -103.5,
+        -277.4
+      ],
+      "rot": 246,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.9,
+        "ry": 5.4
+      },
+      "fill": "$carapace.dark2@0.5"
+    },
+    {
+      "id": "earth_face_52",
+      "at": [
+        -105.5,
+        -73.9
+      ],
+      "rot": 46,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.2,
+        "ry": 4.9
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_53",
+      "at": [
+        -109.3,
+        97.4
+      ],
+      "rot": 257,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.2,
+        "ry": 2.2
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_54",
+      "at": [
+        -106.2,
+        280.8
+      ],
+      "rot": 282,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.9,
+        "ry": 3.3
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_55",
+      "at": [
+        90.0,
+        -285.4
+      ],
+      "rot": 324,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.3,
+        "ry": 5.0
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_56",
+      "at": [
+        102.4,
+        -83.5
+      ],
+      "rot": 196,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.1,
+        "ry": 2.8
+      },
+      "fill": "$carapace.dark2@0.5"
+    },
+    {
+      "id": "earth_face_57",
+      "at": [
+        85.7,
+        82.6
+      ],
+      "rot": 247,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.5,
+        "ry": 3.7
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_58",
+      "at": [
+        110.8,
+        267.4
+      ],
+      "rot": 195,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.2,
+        "ry": 2.2
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_59",
+      "at": [
+        264.4,
+        -267.3
+      ],
+      "rot": 298,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 7.4,
+        "ry": 5.0
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_60",
+      "at": [
+        270.4,
+        -104.0
+      ],
+      "rot": 351,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.3,
+        "ry": 4.3
+      },
+      "fill": "$carapace@0.16"
+    },
+    {
+      "id": "earth_face_61",
+      "at": [
+        283.5,
+        123.3
+      ],
+      "rot": 89,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.1,
+        "ry": 2.1
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "earth_face_62",
+      "at": [
+        266.0,
+        299.7
+      ],
+      "rot": 359,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.4,
+        "ry": 3.0
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "fungi_room_n",
+      "at": [
+        40,
+        -44
+      ],
+      "use": "ss.terrain.fungi",
+      "scale": 0.9
+    },
+    {
+      "id": "fungi_room_s",
+      "at": [
+        -44,
+        56
+      ],
+      "use": "ss.terrain.fungi",
+      "scale": 0.8
+    },
+    {
+      "id": "fungi_w",
+      "at": [
+        -166,
+        24
+      ],
+      "use": "ss.terrain.fungi",
+      "scale": 0.82
+    },
+    {
+      "id": "fungi_e",
+      "at": [
+        158,
+        -52
+      ],
+      "use": "ss.terrain.fungi",
+      "scale": 0.76
+    }
+  ]
+}
