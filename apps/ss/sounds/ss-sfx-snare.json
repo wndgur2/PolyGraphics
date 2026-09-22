@@ -1,7 +1,7 @@
 {
   "id": "ss.sfx.snare",
   "name": "Snare",
-  "description": "A leather strap pulled tight, which is stick-slip friction and nothing else: the cord grips, tears free, grips again, faster and tighter as the tension climbs. So there is no oscillator anywhere in this document. The first version had a filtered sawtooth sliding up underneath for body and it was the whole problem \u2014 a tone under a creak is a hum, and what came out was a low boom with some grit on top rather than a strap. Every voice here is noise cut into grains, and the sound is entirely in how those grains are spaced.\n\nThree layers, and the shape is an acceleration. `grip` is the strap taking the strain: eight slow grains over thirteen hundredths, wide apart, in the low-mid band where leather has its body. `slip` arrives on top of it a tenth in with twice the grains in the same space and half the length each, bandpassed higher and with a sharp Q, which is the run of fast ticks the ear reads as *drrr* \u2014 and it is what the whole cue is named for. `bite` is three grains at the end, low and close together, where it stops moving. Nothing fades out: a strap that goes quiet has been let go, and this one is still tight when the sound ends.\n\nThe grains are jittered rather than evenly spaced, and that is load-bearing. Evenly spaced clicks are a ratchet, a ratchet is a machine, and there is no machinery anywhere in this game.",
+  "description": "A leather strap pulled tight. Two versions of this were wrong in opposite directions and both are worth writing down, because the fix for one caused the other.\n\nThe first had a filtered sawtooth under the grains for body, and a tone under a creak is a hum: it came out a low boom with grit on top. Taking the oscillator out fixed that and exposed the second problem, which was the grains themselves. They were nine to sixteen milliseconds long, bandpassed with a sharp Q, and the filter swept upward across each voice \u2014 so every grain was a short resonant ping and each was higher than the last. A rising sequence of resonant pings is a chirp. It whistled.\n\nSo: nothing sweeps, nothing resonates, and nothing is short. Every filter here is fixed \u2014 a strap does not change pitch as it tightens, it changes *rate* \u2014 and every Q is `wide`, because friction is broadband and a narrow Q turns broadband noise into a pitch. The grains are twenty-two to forty milliseconds, which is long enough to be a scrape rather than a tick. Nothing goes above `$shell.up`: leather is a dull sound and everything that made this bright was the part that was wrong.\n\nThree layers, and the shape is a rate rather than a pitch. `drag` is the strap under load, six long dull scrapes under a lowpass. `catch` is the stick-slip on top of it, twelve shorter ones in the same span at twice the density, which is the stutter the cue is named for. `set` is two at the end, lowest of all, where it stops moving. Jittered rather than evenly spaced: evenly spaced clicks are a ratchet, and a ratchet is a machine.",
   "tags": [
     "sfx",
     "weapon"
@@ -12,19 +12,100 @@
   },
   "jitter": {
     "freq": [
-      0.93,
-      1.1
+      0.95,
+      1.07
     ]
   },
   "voices": [
     {
-      "id": "grip",
-      "gain": 1.28,
+      "id": "drag",
+      "gain": 0.84,
+      "filter": {
+        "type": "lowpass",
+        "freq": "$shell",
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              0.85
+            ],
+            [
+              0.5,
+              1
+            ],
+            [
+              1,
+              0.4
+            ]
+          ]
+        }
+      ],
+      "repeat": {
+        "of": {
+          "kind": "noise"
+        },
+        "count": 6,
+        "spread": 0.19,
+        "grain": 0.04,
+        "gainRange": [
+          0.6,
+          1
+        ]
+      }
+    },
+    {
+      "id": "catch",
+      "at": 0.06,
+      "gain": 0.76,
       "filter": {
         "type": "bandpass",
-        "freq": "$tap",
-        "to": "$shell",
-        "q": "band"
+        "freq": "$shell",
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              0.5
+            ],
+            [
+              0.6,
+              1
+            ],
+            [
+              1,
+              0.55
+            ]
+          ]
+        }
+      ],
+      "repeat": {
+        "of": {
+          "kind": "noise"
+        },
+        "count": 12,
+        "spread": 0.18,
+        "grain": 0.022,
+        "gainRange": [
+          0.45,
+          1
+        ]
+      }
+    },
+    {
+      "id": "set",
+      "at": 0.21,
+      "gain": 0.62,
+      "filter": {
+        "type": "lowpass",
+        "freq": "$swarm",
+        "q": "wide"
       },
       "env": [
         {
@@ -33,10 +114,6 @@
             [
               0,
               1
-            ],
-            [
-              0.6,
-              0.8
             ],
             [
               1,
@@ -49,91 +126,11 @@
         "of": {
           "kind": "noise"
         },
-        "count": 8,
-        "spread": 0.13,
-        "grain": 0.016,
+        "count": 2,
+        "spread": 0.04,
+        "grain": 0.034,
         "gainRange": [
-          0.55,
-          1
-        ]
-      }
-    },
-    {
-      "id": "slip",
-      "at": 0.1,
-      "gain": 1.6,
-      "filter": {
-        "type": "bandpass",
-        "freq": "$shell.up",
-        "to": "$grit",
-        "q": "band"
-      },
-      "env": [
-        {
-          "prop": "gain",
-          "keys": [
-            [
-              0,
-              0.45
-            ],
-            [
-              0.55,
-              1
-            ],
-            [
-              1,
-              0.5
-            ]
-          ]
-        }
-      ],
-      "repeat": {
-        "of": {
-          "kind": "noise"
-        },
-        "count": 17,
-        "spread": 0.16,
-        "grain": 0.009,
-        "gainRange": [
-          0.4,
-          1
-        ]
-      }
-    },
-    {
-      "id": "bite",
-      "at": 0.25,
-      "gain": 0.96,
-      "filter": {
-        "type": "bandpass",
-        "freq": "$swarm",
-        "to": "$tap",
-        "q": "band"
-      },
-      "env": [
-        {
-          "prop": "gain",
-          "keys": [
-            [
-              0,
-              1
-            ],
-            [
-              1,
-              0.35
-            ]
-          ]
-        }
-      ],
-      "repeat": {
-        "of": {
-          "kind": "noise"
-        },
-        "count": 3,
-        "spread": 0.035,
-        "grain": 0.02,
-        "gainRange": [
-          0.7,
+          0.8,
           1
         ]
       }

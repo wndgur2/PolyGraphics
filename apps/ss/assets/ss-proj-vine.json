@@ -1,7 +1,7 @@
 {
   "id": "ss.proj.vine",
   "name": "Coiling vine",
-  "description": "A vine winding out across the floor, seen from above. Three runners off one point, each spiralling a different way and a different distance, because three copies of one spiral at 120 degrees is a pinwheel and this has to read as something that grew. The whole thing lies flat \u2014 every radius is squashed to 0.86, the camera's own angle \u2014 which is the difference between this and the sapling it replaces: that one stood up out of a hole and was most of a body tall, and what the weapon actually does happens on the ground. `meta.radius` is the coil's own reach and the game scales the sprite by `grabR / radius`, so the circle drawn and the circle that catches are now literally the same circle rather than two numbers held in agreement.\n\nDark all through: `$moss.dark2` for the cord with `$moss` along its lit edge, and the thorns `$blood.dark2` \u2014 a dark red against a dark green, which is the one pairing that keeps a barb readable at this size without lightening the plant. They lean back down the runner they sit on, because a barb pointing the way the vine grew is a spike and one pointing back is a hook, and this weapon holds things. Two leaves and no more: a coil hung with foliage stops being a cord.\n\n`coil` is the arrival, and the reason the parts are cut into five segments a runner rather than drawn as one ribbon each. Each segment's points are held relative to its own start, so scaling it from nothing grows it out of where the last one ended instead of out of the middle of the picture; staggered along the runner with a `backOut` that throws each a little past full and settles it, that is an uncoil. Thorns and leaves ride the segment they grow on, so nothing appears before the vine under it. The clip is 0.3s, which is the weapon's own `riseS` \u2014 the two have to agree or the plant is still growing when it starts biting.",
+  "description": "A vine winding out across the floor, seen from above. Three runners off one point, each spiralling a different way and a different distance, because three copies of one spiral at 120 degrees is a pinwheel and this has to read as something that grew. Every radius is squashed to 0.86, the camera's own angle. `meta.radius` is the coil's own reach and the game scales the sprite by `grabR / radius`, so the circle drawn and the circle that catches are the same circle.\n\nDark all through: `$moss.dark2` cord with a `$moss` lit edge and `$blood.dark2` thorns, a dark red against a dark green, which is the one pairing that keeps a barb readable at this size without lightening the plant. No leaves \u2014 a coil hung with foliage stops being a cord.\n\n`coil` is the arrival and it is one gesture: something screws up out of the floor and then unrolls across it. The first third of the clip is the growing tip alone \u2014 a fiddlehead, the tight curl a vine carries at its end, small because at that moment almost all of the plant is still underneath. It arrives sunk seven pixels below the ground and turned a hundred and fifty degrees back on itself, and climbs and unwinds into place. Only then do the runners come, one segment at a time, each doing the same three things: rising from under the floor, turning on its own joint, and growing from nothing.\n\nRotation is the part that makes it an unroll rather than an extrusion, and it is about each segment's own start \u2014 which is the end of the segment before it \u2014 so a turning segment sweeps out of the one that made it. The windows are sequenced rather than overlapped for exactly that reason: a segment finishes its turn before the next one exists, and the chain is never drawn broken. Thorns are hung on their segment's frame and turn with it, because a barb that stayed put while the cord under it swung would detach.\n\nAn earlier pass tried to say all this with scenery \u2014 a mound of soil and three clods thrown up at the centre \u2014 and it did not work, because a drawing of disturbed earth is a fact about the ground rather than a thing the vine is doing. What says a vine came from underneath is the vine climbing. The soil is gone and the motion carries it.",
   "tags": [
     "proj",
     "melee"
@@ -15,229 +15,291 @@
   },
   "animations": {
     "coil": {
-      "description": "coil \u2014 the ground breaks, the runners come up through it and wind out",
+      "description": "coil \u2014 the tip screws up out of the ground and the runners unroll after it",
       "duration": 0.3,
       "tracks": [
         {
-          "part": "mound",
+          "part": "head_ink",
           "prop": "scale",
           "keys": [
             [
               0,
-              0.3
+              0.001
             ],
             [
-              0.16,
-              1.12
+              0.04,
+              0.001
             ],
             [
-              0.4,
-              1
-            ],
-            [
-              1,
-              1
-            ]
-          ],
-          "ease": "backOut"
-        },
-        {
-          "part": "mound_lip",
-          "prop": "scale",
-          "keys": [
-            [
-              0,
-              0.3
-            ],
-            [
-              0.16,
-              1.12
-            ],
-            [
-              0.4,
-              1
-            ],
-            [
-              1,
-              1
-            ]
-          ],
-          "ease": "backOut"
-        },
-        {
-          "part": "clod_a",
-          "prop": "scale",
-          "keys": [
-            [
-              0,
-              0.3
-            ],
-            [
-              0.16,
-              1.12
-            ],
-            [
-              0.4,
-              1
-            ],
-            [
-              1,
-              1
-            ]
-          ],
-          "ease": "backOut"
-        },
-        {
-          "part": "clod_b",
-          "prop": "scale",
-          "keys": [
-            [
-              0,
-              0.3
-            ],
-            [
-              0.16,
-              1.12
-            ],
-            [
-              0.4,
-              1
-            ],
-            [
-              1,
-              1
-            ]
-          ],
-          "ease": "backOut"
-        },
-        {
-          "part": "clod_c",
-          "prop": "scale",
-          "keys": [
-            [
-              0,
-              0.3
-            ],
-            [
-              0.16,
-              1.12
-            ],
-            [
-              0.4,
-              1
-            ],
-            [
-              1,
-              1
-            ]
-          ],
-          "ease": "backOut"
-        },
-        {
-          "part": "clod_a",
-          "prop": "x",
-          "keys": [
-            [
-              0,
-              0
+              0.26,
+              1.1
             ],
             [
               0.34,
-              -2.2
+              1
             ],
             [
               1,
-              -2.2
+              1
             ]
-          ]
+          ],
+          "ease": "backOut"
         },
         {
-          "part": "clod_a",
+          "part": "head_ink",
           "prop": "y",
           "keys": [
             [
               0,
+              7.0
+            ],
+            [
+              0.04,
+              7.0
+            ],
+            [
+              0.3,
               0
             ],
             [
-              0.34,
-              1.0
+              1,
+              0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "head_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -150
+            ],
+            [
+              0.04,
+              -150
+            ],
+            [
+              0.32,
+              0
             ],
             [
               1,
-              1.0
+              0
             ]
-          ]
+          ],
+          "ease": "sine"
         },
         {
-          "part": "clod_b",
-          "prop": "x",
+          "part": "head_ink",
+          "prop": "opacity",
           "keys": [
             [
               0,
               0
             ],
             [
-              0.34,
-              2.0
+              0.04,
+              0
+            ],
+            [
+              0.08,
+              1
             ],
             [
               1,
-              2.0
+              1
             ]
           ]
         },
         {
-          "part": "clod_b",
+          "part": "head",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.04,
+              0.001
+            ],
+            [
+              0.26,
+              1.1
+            ],
+            [
+              0.34,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "head",
           "prop": "y",
           "keys": [
             [
               0,
+              7.0
+            ],
+            [
+              0.04,
+              7.0
+            ],
+            [
+              0.3,
               0
             ],
             [
-              0.34,
-              1.2
+              1,
+              0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "head",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -150
+            ],
+            [
+              0.04,
+              -150
+            ],
+            [
+              0.32,
+              0
             ],
             [
               1,
-              1.2
+              0
             ]
-          ]
+          ],
+          "ease": "sine"
         },
         {
-          "part": "clod_c",
-          "prop": "x",
+          "part": "head",
+          "prop": "opacity",
           "keys": [
             [
               0,
               0
             ],
             [
-              0.34,
-              0.6
+              0.04,
+              0
+            ],
+            [
+              0.08,
+              1
             ],
             [
               1,
-              0.6
+              1
             ]
           ]
         },
         {
-          "part": "clod_c",
+          "part": "head_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.04,
+              0.001
+            ],
+            [
+              0.26,
+              1.1
+            ],
+            [
+              0.34,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "head_lit",
           "prop": "y",
           "keys": [
             [
               0,
+              7.0
+            ],
+            [
+              0.04,
+              7.0
+            ],
+            [
+              0.3,
               0
             ],
             [
-              0.34,
-              -1.6
+              1,
+              0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "head_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -150
+            ],
+            [
+              0.04,
+              -150
+            ],
+            [
+              0.32,
+              0
             ],
             [
               1,
-              -1.6
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "head_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.04,
+              0
+            ],
+            [
+              0.08,
+              1
+            ],
+            [
+              1,
+              1
             ]
           ]
         },
@@ -250,12 +312,16 @@
               0.001
             ],
             [
-              0.0,
+              0.34,
               0.001
             ],
             [
-              0.3,
-              1.08
+              0.452,
+              1.05
+            ],
+            [
+              0.482,
+              1
             ],
             [
               1,
@@ -270,14 +336,14 @@
           "keys": [
             [
               0,
-              5.0
+              7.0
             ],
             [
-              0.0,
-              5.0
+              0.34,
+              7.0
             ],
             [
-              0.26,
+              0.452,
               0
             ],
             [
@@ -289,6 +355,29 @@
         },
         {
           "part": "r0s0_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.34,
+              -58
+            ],
+            [
+              0.452,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s0_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -296,19 +385,18 @@
               0
             ],
             [
-              0.0,
+              0.34,
               0
             ],
             [
-              0.07,
+              0.38,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0s0",
@@ -319,12 +407,16 @@
               0.001
             ],
             [
-              0.0,
+              0.34,
               0.001
             ],
             [
-              0.3,
-              1.08
+              0.452,
+              1.05
+            ],
+            [
+              0.482,
+              1
             ],
             [
               1,
@@ -339,14 +431,14 @@
           "keys": [
             [
               0,
-              5.0
+              7.0
             ],
             [
-              0.0,
-              5.0
+              0.34,
+              7.0
             ],
             [
-              0.26,
+              0.452,
               0
             ],
             [
@@ -358,6 +450,29 @@
         },
         {
           "part": "r0s0",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.34,
+              -58
+            ],
+            [
+              0.452,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s0",
           "prop": "opacity",
           "keys": [
             [
@@ -365,19 +480,18 @@
               0
             ],
             [
-              0.0,
+              0.34,
               0
             ],
             [
-              0.07,
+              0.38,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0s0_lit",
@@ -388,12 +502,16 @@
               0.001
             ],
             [
-              0.0,
+              0.34,
               0.001
             ],
             [
-              0.3,
-              1.08
+              0.452,
+              1.05
+            ],
+            [
+              0.482,
+              1
             ],
             [
               1,
@@ -408,14 +526,14 @@
           "keys": [
             [
               0,
-              5.0
+              7.0
             ],
             [
-              0.0,
-              5.0
+              0.34,
+              7.0
             ],
             [
-              0.26,
+              0.452,
               0
             ],
             [
@@ -427,6 +545,29 @@
         },
         {
           "part": "r0s0_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.34,
+              -58
+            ],
+            [
+              0.452,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s0_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -434,19 +575,18 @@
               0
             ],
             [
-              0.0,
+              0.34,
               0
             ],
             [
-              0.07,
+              0.38,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0s1_ink",
@@ -457,12 +597,16 @@
               0.001
             ],
             [
-              0.116,
+              0.458,
               0.001
             ],
             [
-              0.416,
-              1.08
+              0.57,
+              1.05
+            ],
+            [
+              0.6,
+              1
             ],
             [
               1,
@@ -477,14 +621,14 @@
           "keys": [
             [
               0,
-              4.45
+              6.16
             ],
             [
-              0.116,
-              4.45
+              0.458,
+              6.16
             ],
             [
-              0.376,
+              0.57,
               0
             ],
             [
@@ -496,6 +640,29 @@
         },
         {
           "part": "r0s1_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.458,
+              -58
+            ],
+            [
+              0.57,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s1_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -503,19 +670,18 @@
               0
             ],
             [
-              0.116,
+              0.458,
               0
             ],
             [
-              0.186,
+              0.498,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0s1",
@@ -526,12 +692,16 @@
               0.001
             ],
             [
-              0.116,
+              0.458,
               0.001
             ],
             [
-              0.416,
-              1.08
+              0.57,
+              1.05
+            ],
+            [
+              0.6,
+              1
             ],
             [
               1,
@@ -546,14 +716,14 @@
           "keys": [
             [
               0,
-              4.45
+              6.16
             ],
             [
-              0.116,
-              4.45
+              0.458,
+              6.16
             ],
             [
-              0.376,
+              0.57,
               0
             ],
             [
@@ -565,6 +735,29 @@
         },
         {
           "part": "r0s1",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.458,
+              -58
+            ],
+            [
+              0.57,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s1",
           "prop": "opacity",
           "keys": [
             [
@@ -572,19 +765,18 @@
               0
             ],
             [
-              0.116,
+              0.458,
               0
             ],
             [
-              0.186,
+              0.498,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0s1_lit",
@@ -595,12 +787,16 @@
               0.001
             ],
             [
-              0.116,
+              0.458,
               0.001
             ],
             [
-              0.416,
-              1.08
+              0.57,
+              1.05
+            ],
+            [
+              0.6,
+              1
             ],
             [
               1,
@@ -615,14 +811,14 @@
           "keys": [
             [
               0,
-              4.45
+              6.16
             ],
             [
-              0.116,
-              4.45
+              0.458,
+              6.16
             ],
             [
-              0.376,
+              0.57,
               0
             ],
             [
@@ -634,6 +830,29 @@
         },
         {
           "part": "r0s1_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.458,
+              -58
+            ],
+            [
+              0.57,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s1_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -641,19 +860,18 @@
               0
             ],
             [
-              0.116,
+              0.458,
               0
             ],
             [
-              0.186,
+              0.498,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0s2_ink",
@@ -664,12 +882,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -684,14 +906,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -703,6 +925,29 @@
         },
         {
           "part": "r0s2_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.576,
+              -58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s2_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -710,19 +955,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0s2",
@@ -733,12 +977,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -753,14 +1001,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -772,6 +1020,29 @@
         },
         {
           "part": "r0s2",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.576,
+              -58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s2",
           "prop": "opacity",
           "keys": [
             [
@@ -779,19 +1050,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0s2_lit",
@@ -802,12 +1072,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -822,14 +1096,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -841,6 +1115,29 @@
         },
         {
           "part": "r0s2_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.576,
+              -58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s2_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -848,19 +1145,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0s3_ink",
@@ -871,12 +1167,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -891,14 +1191,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -910,6 +1210,29 @@
         },
         {
           "part": "r0s3_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.694,
+              -58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s3_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -917,19 +1240,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0s3",
@@ -940,12 +1262,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -960,14 +1286,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -979,6 +1305,29 @@
         },
         {
           "part": "r0s3",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.694,
+              -58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s3",
           "prop": "opacity",
           "keys": [
             [
@@ -986,19 +1335,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0s3_lit",
@@ -1009,12 +1357,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -1029,14 +1381,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -1048,6 +1400,29 @@
         },
         {
           "part": "r0s3_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.694,
+              -58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s3_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -1055,19 +1430,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0s4_ink",
@@ -1078,12 +1452,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -1098,14 +1476,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -1117,6 +1495,29 @@
         },
         {
           "part": "r0s4_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.811,
+              -58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s4_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -1124,19 +1525,18 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0s4",
@@ -1147,12 +1547,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -1167,14 +1571,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -1186,6 +1590,29 @@
         },
         {
           "part": "r0s4",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.811,
+              -58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s4",
           "prop": "opacity",
           "keys": [
             [
@@ -1193,19 +1620,18 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0s4_lit",
@@ -1216,12 +1642,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -1236,14 +1666,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -1255,6 +1685,29 @@
         },
         {
           "part": "r0s4_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.811,
+              -58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0s4_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -1262,19 +1715,18 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0b0_ink",
@@ -1285,12 +1737,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -1305,14 +1761,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -1324,6 +1780,29 @@
         },
         {
           "part": "r0b0_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.576,
+              -58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0b0_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -1331,19 +1810,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0b0",
@@ -1354,12 +1832,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -1374,14 +1856,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -1393,6 +1875,29 @@
         },
         {
           "part": "r0b0",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.576,
+              -58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0b0",
           "prop": "opacity",
           "keys": [
             [
@@ -1400,19 +1905,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0b1_ink",
@@ -1423,12 +1927,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -1443,14 +1951,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -1462,6 +1970,29 @@
         },
         {
           "part": "r0b1_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.694,
+              -58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0b1_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -1469,19 +2000,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0b1",
@@ -1492,12 +2022,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -1512,14 +2046,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -1531,6 +2065,29 @@
         },
         {
           "part": "r0b1",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.694,
+              -58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0b1",
           "prop": "opacity",
           "keys": [
             [
@@ -1538,19 +2095,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0b2_ink",
@@ -1561,12 +2117,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -1581,14 +2141,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -1600,6 +2160,29 @@
         },
         {
           "part": "r0b2_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.811,
+              -58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0b2_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -1607,19 +2190,18 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r0b2",
@@ -1630,12 +2212,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -1650,14 +2236,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -1669,6 +2255,29 @@
         },
         {
           "part": "r0b2",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.811,
+              -58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r0b2",
           "prop": "opacity",
           "keys": [
             [
@@ -1676,19 +2285,18 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s0_ink",
@@ -1699,12 +2307,16 @@
               0.001
             ],
             [
-              0.0,
+              0.34,
               0.001
             ],
             [
-              0.3,
-              1.08
+              0.452,
+              1.05
+            ],
+            [
+              0.482,
+              1
             ],
             [
               1,
@@ -1719,14 +2331,14 @@
           "keys": [
             [
               0,
-              5.0
+              7.0
             ],
             [
-              0.0,
-              5.0
+              0.34,
+              7.0
             ],
             [
-              0.26,
+              0.452,
               0
             ],
             [
@@ -1738,6 +2350,29 @@
         },
         {
           "part": "r1s0_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.34,
+              58
+            ],
+            [
+              0.452,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s0_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -1745,19 +2380,18 @@
               0
             ],
             [
-              0.0,
+              0.34,
               0
             ],
             [
-              0.07,
+              0.38,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s0",
@@ -1768,12 +2402,16 @@
               0.001
             ],
             [
-              0.0,
+              0.34,
               0.001
             ],
             [
-              0.3,
-              1.08
+              0.452,
+              1.05
+            ],
+            [
+              0.482,
+              1
             ],
             [
               1,
@@ -1788,14 +2426,14 @@
           "keys": [
             [
               0,
-              5.0
+              7.0
             ],
             [
-              0.0,
-              5.0
+              0.34,
+              7.0
             ],
             [
-              0.26,
+              0.452,
               0
             ],
             [
@@ -1807,6 +2445,29 @@
         },
         {
           "part": "r1s0",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.34,
+              58
+            ],
+            [
+              0.452,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s0",
           "prop": "opacity",
           "keys": [
             [
@@ -1814,19 +2475,18 @@
               0
             ],
             [
-              0.0,
+              0.34,
               0
             ],
             [
-              0.07,
+              0.38,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s0_lit",
@@ -1837,12 +2497,16 @@
               0.001
             ],
             [
-              0.0,
+              0.34,
               0.001
             ],
             [
-              0.3,
-              1.08
+              0.452,
+              1.05
+            ],
+            [
+              0.482,
+              1
             ],
             [
               1,
@@ -1857,14 +2521,14 @@
           "keys": [
             [
               0,
-              5.0
+              7.0
             ],
             [
-              0.0,
-              5.0
+              0.34,
+              7.0
             ],
             [
-              0.26,
+              0.452,
               0
             ],
             [
@@ -1876,6 +2540,29 @@
         },
         {
           "part": "r1s0_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.34,
+              58
+            ],
+            [
+              0.452,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s0_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -1883,19 +2570,18 @@
               0
             ],
             [
-              0.0,
+              0.34,
               0
             ],
             [
-              0.07,
+              0.38,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s1_ink",
@@ -1906,12 +2592,16 @@
               0.001
             ],
             [
-              0.116,
+              0.458,
               0.001
             ],
             [
-              0.416,
-              1.08
+              0.57,
+              1.05
+            ],
+            [
+              0.6,
+              1
             ],
             [
               1,
@@ -1926,14 +2616,14 @@
           "keys": [
             [
               0,
-              4.45
+              6.16
             ],
             [
-              0.116,
-              4.45
+              0.458,
+              6.16
             ],
             [
-              0.376,
+              0.57,
               0
             ],
             [
@@ -1945,6 +2635,29 @@
         },
         {
           "part": "r1s1_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.458,
+              58
+            ],
+            [
+              0.57,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s1_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -1952,19 +2665,18 @@
               0
             ],
             [
-              0.116,
+              0.458,
               0
             ],
             [
-              0.186,
+              0.498,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s1",
@@ -1975,12 +2687,16 @@
               0.001
             ],
             [
-              0.116,
+              0.458,
               0.001
             ],
             [
-              0.416,
-              1.08
+              0.57,
+              1.05
+            ],
+            [
+              0.6,
+              1
             ],
             [
               1,
@@ -1995,14 +2711,14 @@
           "keys": [
             [
               0,
-              4.45
+              6.16
             ],
             [
-              0.116,
-              4.45
+              0.458,
+              6.16
             ],
             [
-              0.376,
+              0.57,
               0
             ],
             [
@@ -2014,6 +2730,29 @@
         },
         {
           "part": "r1s1",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.458,
+              58
+            ],
+            [
+              0.57,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s1",
           "prop": "opacity",
           "keys": [
             [
@@ -2021,19 +2760,18 @@
               0
             ],
             [
-              0.116,
+              0.458,
               0
             ],
             [
-              0.186,
+              0.498,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s1_lit",
@@ -2044,12 +2782,16 @@
               0.001
             ],
             [
-              0.116,
+              0.458,
               0.001
             ],
             [
-              0.416,
-              1.08
+              0.57,
+              1.05
+            ],
+            [
+              0.6,
+              1
             ],
             [
               1,
@@ -2064,14 +2806,14 @@
           "keys": [
             [
               0,
-              4.45
+              6.16
             ],
             [
-              0.116,
-              4.45
+              0.458,
+              6.16
             ],
             [
-              0.376,
+              0.57,
               0
             ],
             [
@@ -2083,6 +2825,29 @@
         },
         {
           "part": "r1s1_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.458,
+              58
+            ],
+            [
+              0.57,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s1_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -2090,19 +2855,18 @@
               0
             ],
             [
-              0.116,
+              0.458,
               0
             ],
             [
-              0.186,
+              0.498,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s2_ink",
@@ -2113,12 +2877,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -2133,14 +2901,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -2152,6 +2920,29 @@
         },
         {
           "part": "r1s2_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.576,
+              58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s2_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -2159,19 +2950,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s2",
@@ -2182,12 +2972,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -2202,14 +2996,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -2221,6 +3015,29 @@
         },
         {
           "part": "r1s2",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.576,
+              58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s2",
           "prop": "opacity",
           "keys": [
             [
@@ -2228,19 +3045,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s2_lit",
@@ -2251,12 +3067,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -2271,14 +3091,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -2290,6 +3110,29 @@
         },
         {
           "part": "r1s2_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.576,
+              58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s2_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -2297,19 +3140,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s3_ink",
@@ -2320,12 +3162,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -2340,14 +3186,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -2359,6 +3205,29 @@
         },
         {
           "part": "r1s3_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.694,
+              58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s3_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -2366,19 +3235,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s3",
@@ -2389,12 +3257,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -2409,14 +3281,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -2428,6 +3300,29 @@
         },
         {
           "part": "r1s3",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.694,
+              58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s3",
           "prop": "opacity",
           "keys": [
             [
@@ -2435,19 +3330,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s3_lit",
@@ -2458,12 +3352,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -2478,14 +3376,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -2497,6 +3395,29 @@
         },
         {
           "part": "r1s3_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.694,
+              58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s3_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -2504,19 +3425,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s4_ink",
@@ -2527,12 +3447,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -2547,14 +3471,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -2566,6 +3490,29 @@
         },
         {
           "part": "r1s4_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.811,
+              58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s4_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -2573,19 +3520,18 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s4",
@@ -2596,12 +3542,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -2616,14 +3566,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -2635,6 +3585,29 @@
         },
         {
           "part": "r1s4",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.811,
+              58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s4",
           "prop": "opacity",
           "keys": [
             [
@@ -2642,19 +3615,18 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1s4_lit",
@@ -2665,12 +3637,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -2685,14 +3661,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -2704,6 +3680,29 @@
         },
         {
           "part": "r1s4_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.811,
+              58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1s4_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -2711,19 +3710,18 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1b0_ink",
@@ -2734,12 +3732,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -2754,14 +3756,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -2773,6 +3775,29 @@
         },
         {
           "part": "r1b0_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.576,
+              58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1b0_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -2780,19 +3805,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1b0",
@@ -2803,12 +3827,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -2823,14 +3851,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -2842,6 +3870,29 @@
         },
         {
           "part": "r1b0",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.576,
+              58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1b0",
           "prop": "opacity",
           "keys": [
             [
@@ -2849,19 +3900,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1b1_ink",
@@ -2872,12 +3922,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -2892,14 +3946,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -2911,6 +3965,29 @@
         },
         {
           "part": "r1b1_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.694,
+              58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1b1_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -2918,19 +3995,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1b1",
@@ -2941,12 +4017,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -2961,14 +4041,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -2980,6 +4060,29 @@
         },
         {
           "part": "r1b1",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.694,
+              58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1b1",
           "prop": "opacity",
           "keys": [
             [
@@ -2987,19 +4090,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1b2_ink",
@@ -3010,12 +4112,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -3030,14 +4136,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -3049,6 +4155,29 @@
         },
         {
           "part": "r1b2_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.811,
+              58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1b2_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -3056,19 +4185,18 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r1b2",
@@ -3079,12 +4207,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -3099,14 +4231,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -3118,6 +4250,29 @@
         },
         {
           "part": "r1b2",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              58
+            ],
+            [
+              0.811,
+              58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r1b2",
           "prop": "opacity",
           "keys": [
             [
@@ -3125,19 +4280,18 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s0_ink",
@@ -3148,12 +4302,16 @@
               0.001
             ],
             [
-              0.0,
+              0.34,
               0.001
             ],
             [
-              0.3,
-              1.08
+              0.452,
+              1.05
+            ],
+            [
+              0.482,
+              1
             ],
             [
               1,
@@ -3168,14 +4326,14 @@
           "keys": [
             [
               0,
-              5.0
+              7.0
             ],
             [
-              0.0,
-              5.0
+              0.34,
+              7.0
             ],
             [
-              0.26,
+              0.452,
               0
             ],
             [
@@ -3187,6 +4345,29 @@
         },
         {
           "part": "r2s0_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.34,
+              -58
+            ],
+            [
+              0.452,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s0_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -3194,19 +4375,18 @@
               0
             ],
             [
-              0.0,
+              0.34,
               0
             ],
             [
-              0.07,
+              0.38,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s0",
@@ -3217,12 +4397,16 @@
               0.001
             ],
             [
-              0.0,
+              0.34,
               0.001
             ],
             [
-              0.3,
-              1.08
+              0.452,
+              1.05
+            ],
+            [
+              0.482,
+              1
             ],
             [
               1,
@@ -3237,14 +4421,14 @@
           "keys": [
             [
               0,
-              5.0
+              7.0
             ],
             [
-              0.0,
-              5.0
+              0.34,
+              7.0
             ],
             [
-              0.26,
+              0.452,
               0
             ],
             [
@@ -3256,6 +4440,29 @@
         },
         {
           "part": "r2s0",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.34,
+              -58
+            ],
+            [
+              0.452,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s0",
           "prop": "opacity",
           "keys": [
             [
@@ -3263,19 +4470,18 @@
               0
             ],
             [
-              0.0,
+              0.34,
               0
             ],
             [
-              0.07,
+              0.38,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s0_lit",
@@ -3286,12 +4492,16 @@
               0.001
             ],
             [
-              0.0,
+              0.34,
               0.001
             ],
             [
-              0.3,
-              1.08
+              0.452,
+              1.05
+            ],
+            [
+              0.482,
+              1
             ],
             [
               1,
@@ -3306,14 +4516,14 @@
           "keys": [
             [
               0,
-              5.0
+              7.0
             ],
             [
-              0.0,
-              5.0
+              0.34,
+              7.0
             ],
             [
-              0.26,
+              0.452,
               0
             ],
             [
@@ -3325,6 +4535,29 @@
         },
         {
           "part": "r2s0_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.34,
+              -58
+            ],
+            [
+              0.452,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s0_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -3332,19 +4565,18 @@
               0
             ],
             [
-              0.0,
+              0.34,
               0
             ],
             [
-              0.07,
+              0.38,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s1_ink",
@@ -3355,12 +4587,16 @@
               0.001
             ],
             [
-              0.116,
+              0.458,
               0.001
             ],
             [
-              0.416,
-              1.08
+              0.57,
+              1.05
+            ],
+            [
+              0.6,
+              1
             ],
             [
               1,
@@ -3375,14 +4611,14 @@
           "keys": [
             [
               0,
-              4.45
+              6.16
             ],
             [
-              0.116,
-              4.45
+              0.458,
+              6.16
             ],
             [
-              0.376,
+              0.57,
               0
             ],
             [
@@ -3394,6 +4630,29 @@
         },
         {
           "part": "r2s1_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.458,
+              -58
+            ],
+            [
+              0.57,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s1_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -3401,19 +4660,18 @@
               0
             ],
             [
-              0.116,
+              0.458,
               0
             ],
             [
-              0.186,
+              0.498,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s1",
@@ -3424,12 +4682,16 @@
               0.001
             ],
             [
-              0.116,
+              0.458,
               0.001
             ],
             [
-              0.416,
-              1.08
+              0.57,
+              1.05
+            ],
+            [
+              0.6,
+              1
             ],
             [
               1,
@@ -3444,14 +4706,14 @@
           "keys": [
             [
               0,
-              4.45
+              6.16
             ],
             [
-              0.116,
-              4.45
+              0.458,
+              6.16
             ],
             [
-              0.376,
+              0.57,
               0
             ],
             [
@@ -3463,6 +4725,29 @@
         },
         {
           "part": "r2s1",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.458,
+              -58
+            ],
+            [
+              0.57,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s1",
           "prop": "opacity",
           "keys": [
             [
@@ -3470,19 +4755,18 @@
               0
             ],
             [
-              0.116,
+              0.458,
               0
             ],
             [
-              0.186,
+              0.498,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s1_lit",
@@ -3493,12 +4777,16 @@
               0.001
             ],
             [
-              0.116,
+              0.458,
               0.001
             ],
             [
-              0.416,
-              1.08
+              0.57,
+              1.05
+            ],
+            [
+              0.6,
+              1
             ],
             [
               1,
@@ -3513,14 +4801,14 @@
           "keys": [
             [
               0,
-              4.45
+              6.16
             ],
             [
-              0.116,
-              4.45
+              0.458,
+              6.16
             ],
             [
-              0.376,
+              0.57,
               0
             ],
             [
@@ -3532,6 +4820,29 @@
         },
         {
           "part": "r2s1_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.458,
+              -58
+            ],
+            [
+              0.57,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s1_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -3539,19 +4850,18 @@
               0
             ],
             [
-              0.116,
+              0.458,
               0
             ],
             [
-              0.186,
+              0.498,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s2_ink",
@@ -3562,12 +4872,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -3582,14 +4896,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -3601,6 +4915,29 @@
         },
         {
           "part": "r2s2_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.576,
+              -58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s2_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -3608,19 +4945,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s2",
@@ -3631,12 +4967,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -3651,14 +4991,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -3670,6 +5010,29 @@
         },
         {
           "part": "r2s2",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.576,
+              -58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s2",
           "prop": "opacity",
           "keys": [
             [
@@ -3677,19 +5040,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s2_lit",
@@ -3700,12 +5062,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -3720,14 +5086,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -3739,6 +5105,29 @@
         },
         {
           "part": "r2s2_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.576,
+              -58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s2_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -3746,19 +5135,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s3_ink",
@@ -3769,12 +5157,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -3789,14 +5181,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -3808,6 +5200,29 @@
         },
         {
           "part": "r2s3_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.694,
+              -58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s3_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -3815,19 +5230,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s3",
@@ -3838,12 +5252,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -3858,14 +5276,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -3877,6 +5295,29 @@
         },
         {
           "part": "r2s3",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.694,
+              -58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s3",
           "prop": "opacity",
           "keys": [
             [
@@ -3884,19 +5325,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s3_lit",
@@ -3907,12 +5347,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -3927,14 +5371,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -3946,6 +5390,29 @@
         },
         {
           "part": "r2s3_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.694,
+              -58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s3_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -3953,19 +5420,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s4_ink",
@@ -3976,12 +5442,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -3996,14 +5466,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -4015,6 +5485,29 @@
         },
         {
           "part": "r2s4_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.811,
+              -58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s4_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -4022,19 +5515,18 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s4",
@@ -4045,12 +5537,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -4065,14 +5561,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -4084,6 +5580,29 @@
         },
         {
           "part": "r2s4",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.811,
+              -58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s4",
           "prop": "opacity",
           "keys": [
             [
@@ -4091,19 +5610,18 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2s4_lit",
@@ -4114,12 +5632,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -4134,14 +5656,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -4153,6 +5675,29 @@
         },
         {
           "part": "r2s4_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.811,
+              -58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2s4_lit",
           "prop": "opacity",
           "keys": [
             [
@@ -4160,19 +5705,18 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2b0_ink",
@@ -4183,12 +5727,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -4203,14 +5751,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -4222,6 +5770,29 @@
         },
         {
           "part": "r2b0_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.576,
+              -58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2b0_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -4229,19 +5800,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2b0",
@@ -4252,12 +5822,16 @@
               0.001
             ],
             [
-              0.232,
+              0.576,
               0.001
             ],
             [
-              0.532,
-              1.08
+              0.688,
+              1.05
+            ],
+            [
+              0.718,
+              1
             ],
             [
               1,
@@ -4272,14 +5846,14 @@
           "keys": [
             [
               0,
-              3.9
+              5.32
             ],
             [
-              0.232,
-              3.9
+              0.576,
+              5.32
             ],
             [
-              0.492,
+              0.688,
               0
             ],
             [
@@ -4291,6 +5865,29 @@
         },
         {
           "part": "r2b0",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.576,
+              -58
+            ],
+            [
+              0.688,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2b0",
           "prop": "opacity",
           "keys": [
             [
@@ -4298,19 +5895,18 @@
               0
             ],
             [
-              0.232,
+              0.576,
               0
             ],
             [
-              0.302,
+              0.616,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2b1_ink",
@@ -4321,12 +5917,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -4341,14 +5941,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -4360,6 +5960,29 @@
         },
         {
           "part": "r2b1_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.694,
+              -58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2b1_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -4367,19 +5990,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2b1",
@@ -4390,12 +6012,16 @@
               0.001
             ],
             [
-              0.348,
+              0.694,
               0.001
             ],
             [
-              0.648,
-              1.08
+              0.806,
+              1.05
+            ],
+            [
+              0.8360000000000001,
+              1
             ],
             [
               1,
@@ -4410,14 +6036,14 @@
           "keys": [
             [
               0,
-              3.35
+              4.48
             ],
             [
-              0.348,
-              3.35
+              0.694,
+              4.48
             ],
             [
-              0.608,
+              0.806,
               0
             ],
             [
@@ -4429,6 +6055,29 @@
         },
         {
           "part": "r2b1",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.694,
+              -58
+            ],
+            [
+              0.806,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2b1",
           "prop": "opacity",
           "keys": [
             [
@@ -4436,19 +6085,18 @@
               0
             ],
             [
-              0.348,
+              0.694,
               0
             ],
             [
-              0.418,
+              0.734,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2b2_ink",
@@ -4459,12 +6107,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -4479,14 +6131,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -4498,6 +6150,29 @@
         },
         {
           "part": "r2b2_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.811,
+              -58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2b2_ink",
           "prop": "opacity",
           "keys": [
             [
@@ -4505,19 +6180,18 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         },
         {
           "part": "r2b2",
@@ -4528,12 +6202,16 @@
               0.001
             ],
             [
-              0.464,
+              0.811,
               0.001
             ],
             [
-              0.764,
-              1.08
+              0.923,
+              1.05
+            ],
+            [
+              0.9530000000000001,
+              1
             ],
             [
               1,
@@ -4548,14 +6226,14 @@
           "keys": [
             [
               0,
-              2.8
+              3.64
             ],
             [
-              0.464,
-              2.8
+              0.811,
+              3.64
             ],
             [
-              0.724,
+              0.923,
               0
             ],
             [
@@ -4567,6 +6245,29 @@
         },
         {
           "part": "r2b2",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -58
+            ],
+            [
+              0.811,
+              -58
+            ],
+            [
+              0.923,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "r2b2",
           "prop": "opacity",
           "keys": [
             [
@@ -4574,24 +6275,506 @@
               0
             ],
             [
-              0.464,
+              0.811,
               0
             ],
             [
-              0.534,
+              0.851,
               1
             ],
             [
               1,
               1
             ]
-          ],
-          "ease": "linear"
+          ]
         }
       ]
     }
   },
   "parts": [
+    {
+      "id": "head_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.74,
+            0.86
+          ],
+          [
+            0.45,
+            0.89
+          ],
+          [
+            0.31,
+            0.81
+          ],
+          [
+            0.2,
+            0.62
+          ],
+          [
+            0.2,
+            0.35
+          ],
+          [
+            0.23,
+            0.33
+          ],
+          [
+            -0.08,
+            0.55
+          ],
+          [
+            -0.75,
+            0.62
+          ],
+          [
+            -1.45,
+            0.37
+          ],
+          [
+            -1.86,
+            -0.1
+          ],
+          [
+            -1.92,
+            -0.68
+          ],
+          [
+            -1.48,
+            -1.43
+          ],
+          [
+            -0.34,
+            -2.06
+          ],
+          [
+            1.25,
+            -2.12
+          ],
+          [
+            2.72,
+            -1.46
+          ],
+          [
+            3.58,
+            -0.28
+          ],
+          [
+            3.62,
+            1.14
+          ],
+          [
+            2.67,
+            2.59
+          ],
+          [
+            0.71,
+            3.59
+          ],
+          [
+            1.38,
+            6.57
+          ],
+          [
+            4.71,
+            4.97
+          ],
+          [
+            6.69,
+            2.09
+          ],
+          [
+            6.73,
+            -1.28
+          ],
+          [
+            4.9,
+            -4.05
+          ],
+          [
+            1.98,
+            -5.51
+          ],
+          [
+            -1.21,
+            -5.5
+          ],
+          [
+            -3.93,
+            -4.12
+          ],
+          [
+            -5.51,
+            -1.64
+          ],
+          [
+            -5.43,
+            1.21
+          ],
+          [
+            -3.83,
+            3.44
+          ],
+          [
+            -1.43,
+            4.53
+          ],
+          [
+            1.1,
+            4.42
+          ],
+          [
+            3.21,
+            3.2
+          ],
+          [
+            4.35,
+            1.08
+          ],
+          [
+            4.07,
+            -1.26
+          ],
+          [
+            2.62,
+            -2.92
+          ],
+          [
+            0.69,
+            -3.57
+          ],
+          [
+            -1.23,
+            -3.24
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "head",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.49,
+            0.35
+          ],
+          [
+            0.48,
+            0.32
+          ],
+          [
+            0.61,
+            0.32
+          ],
+          [
+            0.72,
+            0.37
+          ],
+          [
+            0.77,
+            0.45
+          ],
+          [
+            0.65,
+            0.73
+          ],
+          [
+            0.09,
+            1.1
+          ],
+          [
+            -0.85,
+            1.19
+          ],
+          [
+            -1.8,
+            0.82
+          ],
+          [
+            -2.4,
+            0.1
+          ],
+          [
+            -2.48,
+            -0.83
+          ],
+          [
+            -1.87,
+            -1.86
+          ],
+          [
+            -0.48,
+            -2.62
+          ],
+          [
+            1.37,
+            -2.68
+          ],
+          [
+            3.09,
+            -1.9
+          ],
+          [
+            4.13,
+            -0.46
+          ],
+          [
+            4.17,
+            1.31
+          ],
+          [
+            3.05,
+            3.03
+          ],
+          [
+            0.83,
+            4.15
+          ],
+          [
+            1.25,
+            6.01
+          ],
+          [
+            4.34,
+            4.54
+          ],
+          [
+            6.14,
+            1.92
+          ],
+          [
+            6.18,
+            -1.11
+          ],
+          [
+            4.53,
+            -3.61
+          ],
+          [
+            1.86,
+            -4.95
+          ],
+          [
+            -1.07,
+            -4.95
+          ],
+          [
+            -3.54,
+            -3.69
+          ],
+          [
+            -4.96,
+            -1.5
+          ],
+          [
+            -4.89,
+            1.01
+          ],
+          [
+            -3.47,
+            2.99
+          ],
+          [
+            -1.33,
+            3.97
+          ],
+          [
+            0.93,
+            3.87
+          ],
+          [
+            2.79,
+            2.8
+          ],
+          [
+            3.79,
+            0.98
+          ],
+          [
+            3.55,
+            -1.01
+          ],
+          [
+            2.31,
+            -2.43
+          ],
+          [
+            0.66,
+            -2.99
+          ],
+          [
+            -0.98,
+            -2.72
+          ]
+        ]
+      },
+      "fill": "$moss.dark2"
+    },
+    {
+      "id": "head_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.22,
+            -1.14
+          ],
+          [
+            0.56,
+            -1.29
+          ],
+          [
+            1.44,
+            -1.02
+          ],
+          [
+            2.1,
+            -0.3
+          ],
+          [
+            2.24,
+            0.71
+          ],
+          [
+            1.69,
+            1.74
+          ],
+          [
+            0.5,
+            2.45
+          ],
+          [
+            -1.08,
+            2.54
+          ],
+          [
+            -2.62,
+            1.87
+          ],
+          [
+            -3.61,
+            0.54
+          ],
+          [
+            -3.68,
+            -1.15
+          ],
+          [
+            -2.68,
+            -2.75
+          ],
+          [
+            -0.77,
+            -3.75
+          ],
+          [
+            1.61,
+            -3.79
+          ],
+          [
+            3.79,
+            -2.73
+          ],
+          [
+            5.13,
+            -0.77
+          ],
+          [
+            5.13,
+            1.61
+          ],
+          [
+            3.67,
+            3.76
+          ],
+          [
+            1.04,
+            5.06
+          ],
+          [
+            1.18,
+            5.69
+          ],
+          [
+            4.11,
+            4.28
+          ],
+          [
+            5.8,
+            1.81
+          ],
+          [
+            5.82,
+            -0.99
+          ],
+          [
+            4.28,
+            -3.31
+          ],
+          [
+            1.77,
+            -4.56
+          ],
+          [
+            -0.97,
+            -4.54
+          ],
+          [
+            -3.25,
+            -3.37
+          ],
+          [
+            -4.53,
+            -1.38
+          ],
+          [
+            -4.46,
+            0.85
+          ],
+          [
+            -3.18,
+            2.61
+          ],
+          [
+            -1.25,
+            3.48
+          ],
+          [
+            0.78,
+            3.39
+          ],
+          [
+            2.42,
+            2.44
+          ],
+          [
+            3.26,
+            0.89
+          ],
+          [
+            3.06,
+            -0.77
+          ],
+          [
+            2.02,
+            -1.95
+          ],
+          [
+            0.62,
+            -2.42
+          ],
+          [
+            -0.72,
+            -2.19
+          ]
+        ]
+      },
+      "fill": "$moss"
+    },
     {
       "id": "r0s0_ink",
       "shape": {
@@ -8063,23 +10246,23 @@
         "kind": "poly",
         "points": [
           [
-            4.76,
-            9.01
+            0.57,
+            -0.28
           ],
           [
-            2.07,
-            10.75
+            -2.12,
+            1.46
           ],
           [
-            0.59,
-            5.51
+            -3.6,
+            -3.78
           ]
         ]
       },
       "fill": "$ink",
       "at": [
-        0,
-        0
+        4.19,
+        9.29
       ]
     },
     {
@@ -8088,23 +10271,23 @@
         "kind": "poly",
         "points": [
           [
-            4.47,
-            9.2
+            0.28,
+            -0.09
           ],
           [
-            2.37,
-            10.56
+            -1.82,
+            1.27
           ],
           [
-            1.03,
-            6.18
+            -3.16,
+            -3.11
           ]
         ]
       },
       "fill": "$blood.dark2",
       "at": [
-        0,
-        0
+        4.19,
+        9.29
       ]
     },
     {
@@ -8113,23 +10296,23 @@
         "kind": "poly",
         "points": [
           [
-            -13.15,
-            9.98
+            -6.6,
+            -1.99
           ],
           [
-            -10.08,
-            10.89
+            -3.53,
+            -1.08
           ],
           [
-            -13.09,
-            15.42
+            -6.54,
+            3.45
           ]
         ]
       },
       "fill": "$ink",
       "at": [
-        0,
-        0
+        -6.55,
+        11.97
       ]
     },
     {
@@ -8138,23 +10321,23 @@
         "kind": "poly",
         "points": [
           [
-            -12.81,
-            10.08
+            -6.26,
+            -1.89
           ],
           [
-            -10.42,
-            10.79
+            -3.87,
+            -1.18
           ],
           [
-            -12.87,
-            14.65
+            -6.32,
+            2.68
           ]
         ]
       },
       "fill": "$blood.dark2",
       "at": [
-        0,
-        0
+        -6.55,
+        11.97
       ]
     },
     {
@@ -8163,23 +10346,23 @@
         "kind": "poly",
         "points": [
           [
-            -20.22,
-            0.12
+            -2.36,
+            -4.99
           ],
           [
-            -20.51,
-            -3.06
+            -2.65,
+            -8.17
           ],
           [
-            -15.19,
-            -1.95
+            2.67,
+            -7.06
           ]
         ]
       },
       "fill": "$ink",
       "at": [
-        0,
-        0
+        -17.86,
+        5.11
       ]
     },
     {
@@ -8188,23 +10371,23 @@
         "kind": "poly",
         "points": [
           [
-            -20.25,
-            -0.23
+            -2.39,
+            -5.34
           ],
           [
-            -20.48,
-            -2.72
+            -2.62,
+            -7.83
           ],
           [
-            -15.98,
-            -1.87
+            1.88,
+            -6.98
           ]
         ]
       },
       "fill": "$blood.dark2",
       "at": [
-        0,
-        0
+        -17.86,
+        5.11
       ]
     },
     {
@@ -8213,23 +10396,23 @@
         "kind": "poly",
         "points": [
           [
-            10.08,
-            3.91
+            2.06,
+            -1.17
           ],
           [
-            7.34,
-            5.57
+            -0.68,
+            0.49
           ],
           [
-            6.01,
-            0.29
+            -2.01,
+            -4.79
           ]
         ]
       },
       "fill": "$ink",
       "at": [
-        0,
-        0
+        8.02,
+        5.08
       ]
     },
     {
@@ -8238,23 +10421,23 @@
         "kind": "poly",
         "points": [
           [
-            9.78,
-            4.09
+            1.76,
+            -0.99
           ],
           [
-            7.64,
-            5.39
+            -0.38,
+            0.31
           ],
           [
-            6.43,
-            0.98
+            -1.59,
+            -4.1
           ]
         ]
       },
       "fill": "$blood.dark2",
       "at": [
-        0,
-        0
+        8.02,
+        5.08
       ]
     },
     {
@@ -8263,23 +10446,23 @@
         "kind": "poly",
         "points": [
           [
-            13.38,
-            -2.8
+            0.19,
+            -1.93
           ],
           [
-            13.64,
-            -5.99
+            0.45,
+            -5.12
           ],
           [
-            18.69,
-            -3.98
+            5.5,
+            -3.11
           ]
         ]
       },
       "fill": "$ink",
       "at": [
-        0,
-        0
+        13.19,
+        -0.87
       ]
     },
     {
@@ -8288,23 +10471,23 @@
         "kind": "poly",
         "points": [
           [
-            13.41,
-            -3.15
+            0.22,
+            -2.28
           ],
           [
-            13.61,
-            -5.64
+            0.42,
+            -4.77
           ],
           [
-            17.9,
-            -4.04
+            4.71,
+            -3.17
           ]
         ]
       },
       "fill": "$blood.dark2",
       "at": [
-        0,
-        0
+        13.19,
+        -0.87
       ]
     },
     {
@@ -8313,23 +10496,23 @@
         "kind": "poly",
         "points": [
           [
-            5.87,
-            -14.56
+            -5.53,
+            -4.68
           ],
           [
-            8.65,
-            -12.97
+            -2.75,
+            -3.09
           ],
           [
-            4.68,
-            -9.25
+            -6.72,
+            0.63
           ]
         ]
       },
       "fill": "$ink",
       "at": [
-        0,
-        0
+        11.4,
+        -9.88
       ]
     },
     {
@@ -8338,23 +10521,23 @@
         "kind": "poly",
         "points": [
           [
-            6.18,
-            -14.39
+            -5.22,
+            -4.51
           ],
           [
-            8.35,
-            -13.14
+            -3.05,
+            -3.26
           ],
           [
-            5.07,
-            -9.95
+            -6.33,
+            -0.07
           ]
         ]
       },
       "fill": "$blood.dark2",
       "at": [
-        0,
-        0
+        11.4,
+        -9.88
       ]
     },
     {
@@ -8363,23 +10546,23 @@
         "kind": "poly",
         "points": [
           [
-            6.73,
-            -7.17
+            -0.72,
+            -0.34
           ],
           [
-            9.74,
-            -6.06
+            2.29,
+            0.77
           ],
           [
-            6.44,
-            -1.73
+            -1.01,
+            5.1
           ]
         ]
       },
       "fill": "$ink",
       "at": [
-        0,
-        0
+        7.45,
+        -6.83
       ]
     },
     {
@@ -8388,23 +10571,23 @@
         "kind": "poly",
         "points": [
           [
-            7.06,
-            -7.04
+            -0.39,
+            -0.21
           ],
           [
-            9.41,
-            -6.18
+            1.96,
+            0.65
           ],
           [
-            6.72,
-            -2.48
+            -0.73,
+            4.35
           ]
         ]
       },
       "fill": "$blood.dark2",
       "at": [
-        0,
-        0
+        7.45,
+        -6.83
       ]
     },
     {
@@ -8413,23 +10596,23 @@
         "kind": "poly",
         "points": [
           [
-            16.33,
-            2.85
+            2.05,
+            4.84
           ],
           [
-            15.08,
-            -0.09
+            0.8,
+            1.9
           ],
           [
-            20.49,
-            -0.65
+            6.21,
+            1.34
           ]
         ]
       },
       "fill": "$ink",
       "at": [
-        0,
-        0
+        14.28,
+        -1.99
       ]
     },
     {
@@ -8438,23 +10621,23 @@
         "kind": "poly",
         "points": [
           [
-            16.19,
-            2.53
+            1.91,
+            4.52
           ],
           [
-            15.22,
-            0.23
+            0.94,
+            2.22
           ],
           [
-            19.75,
-            -0.34
+            5.47,
+            1.65
           ]
         ]
       },
       "fill": "$blood.dark2",
       "at": [
-        0,
-        0
+        14.28,
+        -1.99
       ]
     },
     {
@@ -8463,23 +10646,23 @@
         "kind": "poly",
         "points": [
           [
-            14.1,
-            10.91
+            -1.46,
+            3.67
           ],
           [
-            12.01,
-            13.33
+            -3.55,
+            6.09
           ],
           [
-            9.11,
-            8.73
+            -6.45,
+            1.49
           ]
         ]
       },
       "fill": "$ink",
       "at": [
-        0,
-        0
+        15.56,
+        7.24
       ]
     },
     {
@@ -8488,92 +10671,24 @@
         "kind": "poly",
         "points": [
           [
-            13.87,
-            11.17
+            -1.69,
+            3.93
           ],
           [
-            12.24,
-            13.07
+            -3.32,
+            5.83
           ],
           [
-            9.72,
-            9.25
+            -5.84,
+            2.01
           ]
         ]
       },
       "fill": "$blood.dark2",
       "at": [
-        0,
-        0
+        15.56,
+        7.24
       ]
-    },
-    {
-      "id": "mound",
-      "at": [
-        0,
-        1.2
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 9.4,
-        "ry": 5.6
-      },
-      "fill": "$soil@0.85"
-    },
-    {
-      "id": "mound_lip",
-      "at": [
-        -0.6,
-        -0.4
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 7.2,
-        "ry": 4.0
-      },
-      "fill": "$soil.light@0.5"
-    },
-    {
-      "id": "clod_a",
-      "at": [
-        -8.4,
-        3.4
-      ],
-      "rot": -18,
-      "shape": {
-        "kind": "ellipse",
-        "rx": 3.0,
-        "ry": 1.5
-      },
-      "fill": "$soil.light@0.8"
-    },
-    {
-      "id": "clod_b",
-      "at": [
-        7.6,
-        4.2
-      ],
-      "rot": 14,
-      "shape": {
-        "kind": "ellipse",
-        "rx": 2.4,
-        "ry": 1.2
-      },
-      "fill": "$soil.light@0.7"
-    },
-    {
-      "id": "clod_c",
-      "at": [
-        1.2,
-        -5.8
-      ],
-      "rot": 5,
-      "shape": {
-        "kind": "ellipse",
-        "rx": 2.1,
-        "ry": 1.05
-      },
-      "fill": "$soil.light@0.6"
     }
   ],
   "variants": {
@@ -8595,6 +10710,7 @@
         "r2s2_lit.fill": "$gold.dark",
         "r2s3_lit.fill": "$gold.dark",
         "r2s4_lit.fill": "$gold.dark",
+        "head_lit.fill": "$gold.dark",
         "r0b0.fill": "$gold.dark2",
         "r0b1.fill": "$gold.dark2",
         "r0b2.fill": "$gold.dark2",
