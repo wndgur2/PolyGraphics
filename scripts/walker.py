@@ -20,8 +20,8 @@ body is built to that shape from its own skeleton row:
          chest plate, a box helmet, the survey on the back — the wall
   mir    a stem (and she is Mina — the id is the handle the game pins, the name
          is `display`): a waist the coat closes at and flares from, a bare
-         chest with no clasp on it, a helmet cut to a profile with the lamp on
-         a mount off its visor, and the piece of burrow wall at the hip with the vine
+         chest with no clasp on it, a helmet cut to a profile with a lamp and a
+         slit on it and nothing between them, and the piece of burrow wall at the hip with the vine
          that is her weapon run out of it and round her — the one who left the
          emitter in the burrow, and the one the weapon is still holding
   kano   a column: a narrow long coat, a peaked hood, a staff taller than the
@@ -221,31 +221,31 @@ def head_parts(kind, S, C, P):
     if kind == "brim":      # the egg helmet under a wide flat brim
         return [P_("head", h, ell(rx, ry), C["head_fill"], rot=tilt, stroke=thin), visor,
                 P_("brim", (h[0] + 0.4, h[1] - 2.4), ell(rx + 3.6, 1.7), "$husk", rot=-8, stroke=hair)]
-    if kind == "lamp":      # a caving helmet: a dome, and the lamp on a mount off the visor
-        # The lamp was a ring and a disc parked beside the ear, which is a torch
-        # taped to a head. Here a mount rises off the visor and the lamp sits on
-        # it, so the two marks on the face are one fitting rather than two
-        # unrelated stripes, and the visor is a slit rather than the roster's
-        # full band — the one who went down twenty-nine levels wanted the light,
-        # not the view.
+    if kind == "lamp":      # a caving helmet: a dome, a lamp and a visor slit — and nothing joining them
+        # Three marks, no fourth. There was a mount bridging the lamp down to the
+        # visor, and a bar running down the centre of a helmet between the eyes is
+        # a Corinthian nose guard before it is a lamp bracket — one vertical line
+        # in that one place carries a whole other helmet with it. The lamp sits
+        # against the rim on its own instead, which is also the truth of the
+        # object: it is clipped on, not built in.
         #
-        # Fair warning for whoever moves these three next: at a big zoom a round
-        # light over a dark bar reads as an eye over a mouth, and the mount
-        # between them reads as a nose. That reading was chased out once — the
+        # For whoever moves these next: at a big zoom a round light over a dark
+        # bar reads as an eye over a mouth. That reading was chased out once — the
         # visor redrawn as a wrapped pane and the lamp as a lit strip along its
         # rim, which does not do it — and this arrangement was picked over it
-        # anyway. So it is a choice and not an oversight; if you set out to fix
-        # it, change the *shapes* of the two marks rather than where they sit,
-        # because every placement of a disc and a bar on an oval is a face.
+        # anyway. So it is a choice, not an oversight; if you set out to fix it,
+        # change the *shapes* of the two marks rather than where they sit,
+        # because every placement of a disc and a bar on an oval is a face. What
+        # is not on the table is a third mark between them.
         #
         # The dome is a profile rather than an ellipse, and in the same number of
         # parts: an ellipse has no front and no back, so three of the eight were
         # wearing the same egg and telling them apart came down to what was stuck
         # on it. This one cuts in over the visor at the front and lets out into a
         # nape at the back, in units of the head radius so it scales with
-        # `head_r`.
+        # `head_r`. The visor is a slit rather than the roster's full band: the
+        # one who went down twenty-nine levels wanted the light, not the view.
         return [P_("head", h, poly(dome_points(rx, ry)), C["head_fill"], rot=tilt, stroke=thin),
-                P_("mount", (h[0] + 2.0, h[1] - 1.1), rect(1.5, 3.2, 0.5), "$slate.dark", rot=tilt + 4),
                 P_("lamp", (h[0] + 2.2, h[1] - 2.7), circ(1.25), "$silent", stroke=hair),
                 P_("visor", (h[0] + 1.3, h[1] + 1.4), rect(C["visor_w"], C["visor_h"], 0.9), "$ink", rot=P["visor_turn"])]
     if kind == "mask":      # goggles and a filter can — the most sealed head
@@ -489,7 +489,7 @@ CHARACTERS = {
         ],
         "walk_desc": "a long even walk with the weight kept off what she carries: the hem swings wider than anybody's and the bob stays small — twenty-nine levels taught her not to bounce it (M035)",
         "idle_desc": "the body breathes under the coat; the hair and the runner hang still",
-        "description": "A stem. The burrow, walked from the inside down to the queen: the narrowest waist of the eight, a coat that closes at it and flares again over the hip to a hem the feet show under, and the smallest helmet. The game has called this texture `ch_hourglass` since before there was a body in it, and that is now what the body is. **What she took in place of the emitter has put out a runner, and the runner is the weapon.** The piece of burrow wall hangs at the near hip, palm-sized — the record\'s own word (M038) — still warm half a month on, with something chewing inside it and a crack where it comes out (M042); from there the runner goes up, once round the waist, then down over the hip and off the hem, on its way back into the floor the vines come up out of in a run (M041: she buried the piece behind base, and by morning there was a hole going down). `$moss` with a `$moss.light2` edge and one `$blood.dark2` barb, which is the cord, taper and barb of `ss.proj.vine` and `ss.proj.vine-snare` exactly — the weapon holds what it catches, and this is the body it never let go of. **She is the one of the eight with no clasp and no mantle**, and it is the same sentence twice: M042 says she went back down with the piece of wall *in place of the emitter*, so the dead organ every other walker wears on the coat is not on this one — it stayed where it burned out, beside the queen (M031). Her chest is the plainest of the eight and it is the point. The helmet is the `lamp` kind and the one head in the set that is not an egg with something stuck on it: the dome is a profile, cut in over the visor at the front and let out into a nape at the back, the visor is a slit rather than the roster\'s full band, and the one light the eight carry sits on a mount off that slit rather than floating beside the ear — the burrow is where the compass stopped and this is the head that went down there (M005). The three read as an eye, a nose and a mouth at a big zoom; the alternative that does not — the visor redrawn as a wrapped pane with the lamp as a lit strip along its rim — was drawn, compared and turned down, so the face in it is a choice. Her coat is the one warm tint of the eight and a slim body spends more of itself on outline, so the helmet comes off the warm ramp into `$husk` to keep her off the floor: 3.3 : 1 against `ss.env.ground`, over Sol\'s 3.0." + SHARED,
+        "description": "A stem. The burrow, walked from the inside down to the queen: the narrowest waist of the eight, a coat that closes at it and flares again over the hip to a hem the feet show under, and the smallest helmet. The game has called this texture `ch_hourglass` since before there was a body in it, and that is now what the body is. **What she took in place of the emitter has put out a runner, and the runner is the weapon.** The piece of burrow wall hangs at the near hip, palm-sized — the record\'s own word (M038) — still warm half a month on, with something chewing inside it and a crack where it comes out (M042); from there the runner goes up, once round the waist, then down over the hip and off the hem, on its way back into the floor the vines come up out of in a run (M041: she buried the piece behind base, and by morning there was a hole going down). `$moss` with a `$moss.light2` edge and one `$blood.dark2` barb, which is the cord, taper and barb of `ss.proj.vine` and `ss.proj.vine-snare` exactly — the weapon holds what it catches, and this is the body it never let go of. **She is the one of the eight with no clasp and no mantle**, and it is the same sentence twice: M042 says she went back down with the piece of wall *in place of the emitter*, so the dead organ every other walker wears on the coat is not on this one — it stayed where it burned out, beside the queen (M031). Her chest is the plainest of the eight and it is the point. The helmet is the `lamp` kind and the one head in the set that is not an egg with something stuck on it: the dome is a profile, cut in over the visor at the front and let out into a nape at the back, the visor is a slit rather than the roster\'s full band, and the one light the eight carry is clipped against the rim above it — the burrow is where the compass stopped and this is the head that went down there (M005). **Three marks and nothing joining them.** A mount once bridged the lamp down to the slit and it turned the helmet Corinthian: one vertical line between the eyes is a nose guard before it is a bracket. Her coat is the one warm tint of the eight and a slim body spends more of itself on outline, so the helmet comes off the warm ramp into `$husk` to keep her off the floor: 3.4 : 1 against `ss.env.ground`, over Sol\'s 3.0." + SHARED,
     },
     "kano": {
         "sex": "m", "tint": ("silent", 0), "coat": "column", "cloak_sx": 1.0, "hem": 0.0, "head": "hood", "head_r": (4.8, 6.0), "visor_w": 5.8,
