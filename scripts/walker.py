@@ -20,10 +20,10 @@ body is built to that shape from its own skeleton row:
          chest plate, a box helmet, the survey on the back — the wall
   mir    a stem (and she is Mina — the id is the handle the game pins, the name
          is `display`): a waist the coat closes at and flares from, a bare
-         chest with no clasp on it, the piece of burrow wall at the hip with
-         the vine that is her weapon run out of it and round her — the one
-         who left the emitter in the burrow, and the one the weapon is still
-         holding
+         chest with no clasp on it, a lamped helmet cut to a profile rather
+         than an egg, and the piece of burrow wall at the hip with the vine
+         that is her weapon run out of it and round her — the one who left the
+         emitter in the burrow, and the one the weapon is still holding
   kano   a column: a narrow long coat, a peaked hood, a staff taller than the
          head — the one who does not stop
   eden   a mushroom: a round coat under a wide hat brim, the throat swelling
@@ -42,6 +42,16 @@ import json, math, sys
 R = lambda d: math.radians(d)
 def r2(x): return round(x, 2)
 
+# Two outline weights and one rule for which is which, because a body whose
+# sleeve is outlined at half the weight of the coat it hangs on reads as a
+# sleeve drawn by somebody else. **`thin` is the silhouette, `hair` is
+# everything laid on top of it.** The coat, the helmet and the near arm and
+# hand are the line the eye traces round the body — the near sleeve is half
+# inside the coat's outline and half outside it (docs/character-rig-guide.md
+# §2), so it is silhouette and takes the same weight. Packs, stakes, jars,
+# loads and lamp rings sit inside that line and take `hair`. Parts dark enough
+# to be their own edge — the feet, the visor, the far arm behind the body —
+# take none at all.
 hair = {"color": "$ink", "width": "hair"}
 thin = {"color": "$ink", "width": "thin"}
 
@@ -74,7 +84,7 @@ BASE = {
     # on by default and should stay on — a walker without one has to say in its
     # own description where theirs went.
     "coat": "bell", "cloak_sx": 1.0, "hem": 0.0, "coat_fill": None, "cape": True, "cape_fill": None, "organ": True,
-    "head": "egg", "head_r": (5.3, 5.8), "head_fill": None, "visor_w": 6.6, "visor_h": 2.6,
+    "head": "egg", "head_r": (5.3, 5.8), "head_fill": None, "head_dark": None, "visor_w": 6.6, "visor_h": 2.6,
     "arm_len": 7.6, "arm_w": 3.0, "arm_fill": None, "arm_far_len": 7.0, "arm_far_w": 2.6,
     "hand_r": (1.7, 1.9), "hand_far_r": (1.4, 1.6), "hand_fill": "$slate.dark", "hand_far_fill": "$slate",
     "legs": False, "foot_w": 4.8, "foot_h": 2.7, "foot_far_w": 4.2, "foot_far_h": 2.4,
@@ -174,6 +184,23 @@ def cape_points(sn, sf, sx):
     pts = [[sn[0], sn[1] - 0.2], [sf[0], sf[1] - 0.2], [7.3, 0.9], [3.4, 2.4], [0.2, 1.3], [-3.4, 2.2], [-7.0, 0.2]]
     return [[x * sx, y] for x, y in pts]
 
+def dome_points(rx, ry, n=24):
+    """A helmet's outline: the head ellipse with the front-lower quarter cut in
+    over the visor and the back-lower quarter let out into a nape. Both are
+    smooth functions of the angle rather than moved corners, because a corner
+    moved by hand on a 9px head is a facet and reads as a gem — and `n` is 24
+    for the same reason, since the renderer draws a polygon with straight
+    edges and nothing rounds them for you. Both numbers are small on purpose:
+    at 0.26 the front cut pulled the shell in behind its own visor."""
+    pts = []
+    for i in range(n):
+        a = 2 * math.pi * i / n - math.pi / 2
+        c, s_ = math.cos(a), math.sin(a)
+        front, back = max(0.0, c) * max(0.0, s_), max(0.0, -c) * max(0.0, s_)
+        r = 1.0 - 0.10 * front + 0.15 * back
+        pts.append((rx * r * c, ry * r * s_))
+    return pts
+
 # ============================================================== 3. the heads — the second shape
 def head_parts(kind, S, C, P):
     h = S["head"]; rx, ry = C["head_r"]; tilt = S["head_tilt"]
@@ -194,6 +221,25 @@ def head_parts(kind, S, C, P):
     if kind == "brim":      # the egg helmet under a wide flat brim
         return [P_("head", h, ell(rx, ry), C["head_fill"], rot=tilt, stroke=thin), visor,
                 P_("brim", (h[0] + 0.4, h[1] - 2.4), ell(rx + 3.6, 1.7), "$husk", rot=-8, stroke=hair)]
+    if kind == "lamp":      # a caving helmet: a dome with a nape guard, and the lamp set into its brow band
+        # The lamp used to be a ring and a disc stuck on the side of an egg, which
+        # is a torch taped to a head. Here the helmet is built round it: a mount
+        # rises off the visor and the lamp sits on top of it, so the two dark
+        # marks on the face are one fitting rather than two stripes.
+        #
+        # The dome is a profile rather than an ellipse, and in the same number of
+        # parts: an ellipse has no front and no back, so three of the eight were
+        # wearing the same egg and telling them apart was down to what was stuck
+        # on it. This one cuts in over the visor at the front and drops into a
+        # nape at the back (the `-0.54, 0.88` corner), which is a helmet from the
+        # outline alone. Written in units of the head radius so it scales with
+        # `head_r` like the ellipse did. The visor is a slit rather than the
+        # roster's full band: the one who went down twenty-nine levels wanted the
+        # light, not the view.
+        return [P_("head", h, poly(dome_points(rx, ry)), C["head_fill"], rot=tilt, stroke=thin),
+                P_("mount", (h[0] + 2.0, h[1] - 1.1), rect(1.5, 3.2, 0.5), "$slate.dark", rot=tilt + 4),
+                P_("lamp", (h[0] + 2.2, h[1] - 2.7), circ(1.25), "$silent", stroke=hair),
+                P_("visor", (h[0] + 1.3, h[1] + 1.4), rect(C["visor_w"], C["visor_h"], 0.9), "$ink", rot=P["visor_turn"])]
     if kind == "mask":      # goggles and a filter can — the most sealed head
         return [P_("head", h, ell(rx, ry), C["head_fill"], rot=tilt, stroke=thin),
                 P_("goggle", (h[0] + 2.4, h[1] + 0.6), circ(2.6), "$slate.dark", stroke=hair),
@@ -234,10 +280,10 @@ def build(name, row):
     if C["legs"]:
         for pid, hip, ft, w, fill in (("leg_far", S["hip_far"], S["foot_far"], 2.6, C["leg_far_fill"]), ("leg", S["hip_near"], S["foot_near"], 3.0, C["leg_fill"])):
             L = math.hypot(ft[0] - hip[0], ft[1] - hip[1]); ang = -math.degrees(math.atan2(ft[0] - hip[0], ft[1] - hip[1]))
-            legs.append(P_(pid, hang(hip, L, ang), rect(w, L + 1.0, 1.2), fill, rot=ang, stroke=hair if pid == "leg" else None))
+            legs.append(P_(pid, hang(hip, L, ang), rect(w, L + 1.0, 1.2), fill, rot=ang, stroke=thin if pid == "leg" else None))
     a_c = hang(sn, C["arm_len"], P["arm_hang"]); h_c = below(sn, C["arm_len"] + 0.9, P["arm_hang"])
-    arm = P_("arm", a_c, rect(C["arm_w"], C["arm_len"], 1.4), C["arm_fill"], rot=P["arm_hang"], stroke=hair)
-    hand = P_("hand", h_c, ell(*C["hand_r"]), C["hand_fill"], stroke=hair)
+    arm = P_("arm", a_c, rect(C["arm_w"], C["arm_len"], 1.4), C["arm_fill"], rot=P["arm_hang"], stroke=thin)
+    hand = P_("hand", h_c, ell(*C["hand_r"]), C["hand_fill"], stroke=thin)
     af_c = hang(sf, C["arm_far_len"], P["arm_far_hang"]); hf_c = below(sf, C["arm_far_len"] + 0.9, P["arm_far_hang"])
     arm_far = P_("arm_far", af_c, rect(C["arm_far_w"], C["arm_far_len"], 1.2), C["arm_far_fill"], rot=P["arm_far_hang"])
     hand_far = P_("hand_far", hf_c, ell(*C["hand_far_r"]), C["hand_far_fill"])
@@ -412,7 +458,7 @@ CHARACTERS = {
         "display": "Mina",
         "sex": "f", "tint": ("timber", 2), "coat": "stem", "cloak_sx": 0.96, "cape": False, "organ": False,
         "skeleton": {"head": (2.2, -8.2), "head_tilt": -8, "shoulder_near": (-4.6, -2.8), "shoulder_far": (5.2, -4.2), "foot_near": (-1.8, 13.4), "foot_far": (3.6, 12.8), "hip_near": (-2.0, 11.8), "hip_far": (3.2, 11.0), "pack": (-5.6, -5.4)},
-        "head_r": (4.4, 4.8), "visor_w": 5.4, "visor_h": 2.4, "head_fill": "$husk", "pose": {"coat_lean": 1, "arm_hang": 6, "arm_far_hang": -3, "visor_turn": -6},
+        "head": "lamp", "head_r": (4.4, 4.8), "visor_w": 4.4, "visor_h": 1.8, "head_fill": "$husk", "head_dark": "$husk.dark", "pose": {"coat_lean": 1, "arm_hang": 6, "arm_far_hang": -3, "visor_turn": -6},
         "arm_len": 7.4, "arm_w": 2.4, "arm_far_len": 6.6, "arm_far_w": 2.0, "hand_r": (1.4, 1.6), "hand_far_r": (1.2, 1.4),
         "walk": {"duration": 0.66, "stride": 2.3, "lift": 1.0, "bob": 0.7, "sway": 4.6, "arm_swing": 11},
         "idle": {"duration": 1.3},
@@ -432,12 +478,10 @@ CHARACTERS = {
             ("over_cape", P_("runner", (0, 0), stem(RUNNER, 2.3, 0.7), "$moss"), "body"),
             ("over_cape", P_("runner_lit", (0, 0), stem(RUNNER, 0.8, 0.3, off=-0.62), "$moss.light2"), "body"),
             ("over_cape", P_("barb", (1.6, 4.2), poly([(-1.0, 0.9), (1.0, 0.9), (0.1, -1.4)]), "$blood.dark2", rot=12), "body"),
-            ("over_head", P_("lamp_ring", (c["head"][0] + 2.2, c["head"][1] - 3.4), circ(1.8), "$slate.dark", stroke=hair), "head"),
-            ("over_head", P_("lamp", (c["head"][0] + 2.2, c["head"][1] - 3.4), circ(1.1), "$silent"), "head"),
         ],
         "walk_desc": "a long even walk with the weight kept off what she carries: the hem swings wider than anybody's and the bob stays small — twenty-nine levels taught her not to bounce it (M035)",
         "idle_desc": "the body breathes under the coat; the hair and the runner hang still",
-        "description": "A stem. The burrow, walked from the inside down to the queen: the narrowest waist of the eight, a coat that closes at it and flares again over the hip to a hem the feet show under, and the smallest helmet. The game has called this texture `ch_hourglass` since before there was a body in it, and that is now what the body is. **What she took in place of the emitter has put out a runner, and the runner is the weapon.** The piece of burrow wall hangs at the near hip, palm-sized — the record's own word (M038) — still warm half a month on, with something chewing inside it and a crack where it comes out (M042); from there the runner goes up, once round the waist, then down over the hip and off the hem, on its way back into the floor the vines come up out of in a run (M041: she buried the piece behind base, and by morning there was a hole going down). `$moss` with a `$moss.light2` edge and one `$blood.dark2` barb, which is the cord, taper and barb of `ss.proj.vine` and `ss.proj.vine-snare` exactly — the weapon holds what it catches, and this is the body it never let go of. **She is the one of the eight with no clasp and no mantle**, and it is the same sentence twice: M042 says she went back down with the piece of wall *in place of the emitter*, so the dead organ every other walker wears on the coat is not on this one — it stayed where it burned out, beside the queen (M031). Her chest is the plainest of the eight and it is the point. Her coat is the one warm tint of the eight and a slim body spends more of itself on outline, so the helmet comes off the warm ramp into `$husk` to keep her off the floor: 3.4 : 1 against `ss.env.ground`, over Sol\'s 3.3. A head lamp on it, the one light the eight carry — the burrow is where the compass stopped (M005)." + SHARED,
+        "description": "A stem. The burrow, walked from the inside down to the queen: the narrowest waist of the eight, a coat that closes at it and flares again over the hip to a hem the feet show under, and the smallest helmet. The game has called this texture `ch_hourglass` since before there was a body in it, and that is now what the body is. **What she took in place of the emitter has put out a runner, and the runner is the weapon.** The piece of burrow wall hangs at the near hip, palm-sized — the record\'s own word (M038) — still warm half a month on, with something chewing inside it and a crack where it comes out (M042); from there the runner goes up, once round the waist, then down over the hip and off the hem, on its way back into the floor the vines come up out of in a run (M041: she buried the piece behind base, and by morning there was a hole going down). `$moss` with a `$moss.light2` edge and one `$blood.dark2` barb, which is the cord, taper and barb of `ss.proj.vine` and `ss.proj.vine-snare` exactly — the weapon holds what it catches, and this is the body it never let go of. **She is the one of the eight with no clasp and no mantle**, and it is the same sentence twice: M042 says she went back down with the piece of wall *in place of the emitter*, so the dead organ every other walker wears on the coat is not on this one — it stayed where it burned out, beside the queen (M031). Her chest is the plainest of the eight and it is the point. The helmet is the `lamp` kind, the only one in the set that is not somebody else\'s shell with a thing stuck on it: the dome is a profile — cut in over the visor at the front, let out into a nape at the back — and the one light the eight carry sits on a mount off the visor instead of floating beside the ear, because the burrow is where the compass stopped and this is the head that went down there (M005). Her coat is the one warm tint of the eight and a slim body spends more of itself on outline, so the helmet comes off the warm ramp into `$husk` to keep her off the floor: 3.4 : 1 against `ss.env.ground`, over Sol\'s 3.0." + SHARED,
     },
     "kano": {
         "sex": "m", "tint": ("silent", 0), "coat": "column", "cloak_sx": 1.0, "hem": 0.0, "head": "hood", "head_r": (4.8, 6.0), "visor_w": 5.8,

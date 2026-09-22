@@ -292,7 +292,7 @@
       "rot": 8,
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -309,7 +309,7 @@
       "fill": "$chitin",
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {

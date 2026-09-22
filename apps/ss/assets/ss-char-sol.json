@@ -110,7 +110,7 @@
       "rot": -3.2704879231835666,
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -300,7 +300,7 @@
       "rot": 14,
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -317,7 +317,7 @@
       "fill": "$slate.dark",
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {

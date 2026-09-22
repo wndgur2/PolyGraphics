@@ -1,7 +1,7 @@
 {
   "id": "ss.char.mir",
   "name": "Mina",
-  "description": "A stem. The burrow, walked from the inside down to the queen: the narrowest waist of the eight, a coat that closes at it and flares again over the hip to a hem the feet show under, and the smallest helmet. The game has called this texture `ch_hourglass` since before there was a body in it, and that is now what the body is. **What she took in place of the emitter has put out a runner, and the runner is the weapon.** The piece of burrow wall hangs at the near hip, palm-sized \u2014 the record's own word (M038) \u2014 still warm half a month on, with something chewing inside it and a crack where it comes out (M042); from there the runner goes up, once round the waist, then down over the hip and off the hem, on its way back into the floor the vines come up out of in a run (M041: she buried the piece behind base, and by morning there was a hole going down). `$moss` with a `$moss.light2` edge and one `$blood.dark2` barb, which is the cord, taper and barb of `ss.proj.vine` and `ss.proj.vine-snare` exactly \u2014 the weapon holds what it catches, and this is the body it never let go of. **She is the one of the eight with no clasp and no mantle**, and it is the same sentence twice: M042 says she went back down with the piece of wall *in place of the emitter*, so the dead organ every other walker wears on the coat is not on this one \u2014 it stayed where it burned out, beside the queen (M031). Her chest is the plainest of the eight and it is the point. Her coat is the one warm tint of the eight and a slim body spends more of itself on outline, so the helmet comes off the warm ramp into `$husk` to keep her off the floor: 3.4 : 1 against `ss.env.ground`, over Sol's 3.3. A head lamp on it, the one light the eight carry \u2014 the burrow is where the compass stopped (M005). Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat, in the same place on everyone still carrying one; flat token fills; radius 11.",
+  "description": "A stem. The burrow, walked from the inside down to the queen: the narrowest waist of the eight, a coat that closes at it and flares again over the hip to a hem the feet show under, and the smallest helmet. The game has called this texture `ch_hourglass` since before there was a body in it, and that is now what the body is. **What she took in place of the emitter has put out a runner, and the runner is the weapon.** The piece of burrow wall hangs at the near hip, palm-sized \u2014 the record's own word (M038) \u2014 still warm half a month on, with something chewing inside it and a crack where it comes out (M042); from there the runner goes up, once round the waist, then down over the hip and off the hem, on its way back into the floor the vines come up out of in a run (M041: she buried the piece behind base, and by morning there was a hole going down). `$moss` with a `$moss.light2` edge and one `$blood.dark2` barb, which is the cord, taper and barb of `ss.proj.vine` and `ss.proj.vine-snare` exactly \u2014 the weapon holds what it catches, and this is the body it never let go of. **She is the one of the eight with no clasp and no mantle**, and it is the same sentence twice: M042 says she went back down with the piece of wall *in place of the emitter*, so the dead organ every other walker wears on the coat is not on this one \u2014 it stayed where it burned out, beside the queen (M031). Her chest is the plainest of the eight and it is the point. The helmet is the `lamp` kind, the only one in the set that is not somebody else's shell with a thing stuck on it: the dome is a profile \u2014 cut in over the visor at the front, let out into a nape at the back \u2014 and the one light the eight carry sits on a mount off the visor instead of floating beside the ear, because the burrow is where the compass stopped and this is the head that went down there (M005). Her coat is the one warm tint of the eight and a slim body spends more of itself on outline, so the helmet comes off the warm ramp into `$husk` to keep her off the floor: 3.4 : 1 against `ss.env.ground`, over Sol's 3.0. Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat, in the same place on everyone still carrying one; flat token fills; radius 11.",
   "tags": [
     "char"
   ],
@@ -389,7 +389,7 @@
       "rot": 6,
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -406,7 +406,7 @@
       "fill": "$slate.dark",
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -416,9 +416,105 @@
         -8.2
       ],
       "shape": {
-        "kind": "ellipse",
-        "rx": 4.4,
-        "ry": 4.8
+        "kind": "poly",
+        "points": [
+          [
+            0.0,
+            -4.8
+          ],
+          [
+            1.14,
+            -4.64
+          ],
+          [
+            2.2,
+            -4.16
+          ],
+          [
+            3.11,
+            -3.39
+          ],
+          [
+            3.81,
+            -2.4
+          ],
+          [
+            4.25,
+            -1.24
+          ],
+          [
+            4.4,
+            0.0
+          ],
+          [
+            4.14,
+            1.21
+          ],
+          [
+            3.65,
+            2.3
+          ],
+          [
+            2.96,
+            3.22
+          ],
+          [
+            2.1,
+            3.98
+          ],
+          [
+            1.11,
+            4.52
+          ],
+          [
+            0.0,
+            4.8
+          ],
+          [
+            -1.18,
+            4.81
+          ],
+          [
+            -2.34,
+            4.43
+          ],
+          [
+            -3.34,
+            3.65
+          ],
+          [
+            -4.06,
+            2.56
+          ],
+          [
+            -4.41,
+            1.29
+          ],
+          [
+            -4.4,
+            0.0
+          ],
+          [
+            -4.25,
+            -1.24
+          ],
+          [
+            -3.81,
+            -2.4
+          ],
+          [
+            -3.11,
+            -3.39
+          ],
+          [
+            -2.2,
+            -4.16
+          ],
+          [
+            -1.14,
+            -4.64
+          ]
+        ]
       },
       "fill": "$husk",
       "rot": -8,
@@ -428,47 +524,50 @@
       }
     },
     {
-      "id": "visor",
+      "id": "mount",
       "at": [
-        3.8,
-        -7.0
+        4.2,
+        -9.3
       ],
       "shape": {
         "kind": "rect",
-        "w": 5.4,
-        "h": 2.4,
-        "corner": 1.3
+        "w": 1.5,
+        "h": 3.2,
+        "corner": 0.5
       },
-      "fill": "$ink",
-      "rot": -6
+      "fill": "$slate.dark",
+      "rot": -4
     },
     {
-      "id": "lamp_ring",
+      "id": "lamp",
       "at": [
         4.4,
-        -11.6
+        -10.9
       ],
       "shape": {
         "kind": "circle",
-        "r": 1.8
+        "r": 1.25
       },
-      "fill": "$slate.dark",
+      "fill": "$silent",
       "stroke": {
         "color": "$ink",
         "width": "hair"
       }
     },
     {
-      "id": "lamp",
+      "id": "visor",
       "at": [
-        4.4,
-        -11.6
+        3.5,
+        -6.8
       ],
       "shape": {
-        "kind": "circle",
-        "r": 1.1
+        "kind": "rect",
+        "w": 4.4,
+        "h": 1.8,
+        "corner": 0.9
       },
-      "fill": "$silent"
+      "fill": "$ink",
+      "rot": -6
     }
   ],
   "skeleton": {
@@ -577,25 +676,7 @@
           ]
         },
         {
-          "part": "visor",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -1.0
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "lamp_ring",
+          "part": "mount",
           "prop": "y",
           "keys": [
             [
@@ -614,6 +695,24 @@
         },
         {
           "part": "lamp",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "visor",
           "prop": "y",
           "keys": [
             [
@@ -894,66 +993,7 @@
           "ease": "linear"
         },
         {
-          "part": "visor",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              -0.17
-            ],
-            [
-              0.17,
-              -0.52
-            ],
-            [
-              0.25,
-              -0.7
-            ],
-            [
-              0.33,
-              -0.53
-            ],
-            [
-              0.42,
-              -0.17
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              -0.18
-            ],
-            [
-              0.67,
-              -0.52
-            ],
-            [
-              0.75,
-              -0.7
-            ],
-            [
-              0.83,
-              -0.52
-            ],
-            [
-              0.92,
-              -0.18
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "lamp_ring",
+          "part": "mount",
           "prop": "y",
           "keys": [
             [
@@ -1013,6 +1053,65 @@
         },
         {
           "part": "lamp",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.17
+            ],
+            [
+              0.17,
+              -0.52
+            ],
+            [
+              0.25,
+              -0.7
+            ],
+            [
+              0.33,
+              -0.53
+            ],
+            [
+              0.42,
+              -0.17
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              -0.18
+            ],
+            [
+              0.67,
+              -0.52
+            ],
+            [
+              0.75,
+              -0.7
+            ],
+            [
+              0.83,
+              -0.52
+            ],
+            [
+              0.92,
+              -0.18
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "visor",
           "prop": "y",
           "keys": [
             [

@@ -262,7 +262,7 @@
       "rot": 6,
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -279,7 +279,7 @@
       "fill": "$slate.dark",
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
