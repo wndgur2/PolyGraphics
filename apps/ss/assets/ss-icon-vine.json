@@ -1,0 +1,81 @@
+{
+  "id": "ss.icon.vine",
+  "name": "Vine icon",
+  "description": "UI slot for the vine. Composes `ss.proj.vine` through `use` so the slot shows the plant the weapon actually puts on the field rather than a second drawing of one that can drift from it \u2014 the same rule the dung slot it replaces was built on. The hole comes with it, and the hole is the weapon: this is the one thing in the arsenal that arrives from under the floor, and a picture of a leafy stem with no ground in it would be a picture of a plant. Tile is `$moss`, the stem's own green at full strength, which is the one ramp of it that holds clear of the Spit's bile and the Lash's husk. A ground line is pressed across the tile behind the plant so the hole reads as a hole rather than as a dark blot, and it sits low, because everything this weapon does happens at the player's feet.",
+  "tags": [
+    "icon",
+    "weapon"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "tile",
+      "shape": {
+        "kind": "rect",
+        "w": 32,
+        "h": 32,
+        "corner": 6
+      },
+      "fill": "$moss"
+    },
+    {
+      "id": "inner",
+      "shape": {
+        "kind": "rect",
+        "w": 28,
+        "h": 28,
+        "corner": 5
+      },
+      "fill": "$coal.dark"
+    },
+    {
+      "id": "ground",
+      "at": [
+        0,
+        8.6
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 26,
+        "h": 7.4,
+        "corner": 1.2
+      },
+      "fill": "$soil@0.9"
+    },
+    {
+      "id": "ground_lip",
+      "at": [
+        0,
+        5.2
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 26,
+        "h": 1.1,
+        "corner": 0.55
+      },
+      "fill": "$soil.light@0.7"
+    },
+    {
+      "id": "glyph",
+      "at": [
+        0.4,
+        -0.6
+      ],
+      "use": "ss.proj.vine",
+      "scale": 0.44
+    }
+  ],
+  "variants": {
+    "evolved": {
+      "description": "Gold-rimmed evolved twin, derived rather than drawn again. It takes the plant's own evolved variant with it, so the slot shows the gilded wood the evolved weapon actually grows.",
+      "set": {
+        "tile.fill": "$gold",
+        "glyph.variant": "evolved"
+      }
+    }
+  }
+}
