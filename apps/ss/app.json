@@ -40,9 +40,10 @@
     "distinct": [{ "in": ["icon"], "tagged": ["weapon"], "part": "tile", "minDeltaE": 13 }],
     "contracts": {
       "ss.proj.ring": { "meta.radius": 62 },
-      "ss.proj.dung": { "meta.radius": 14 },
       "ss.proj.aura": { "meta.radius": 64 },
-      "ss.fx.dung-burst": { "meta.radius": 30 }
+      "ss.proj.vine": { "meta.radius": 22 },
+      "ss.proj.vine-thicket": { "meta.radius": 7.8 },
+      "ss.fx.vine-lash": { "meta.radius": 30 }
     },
     "layers": [
       { "in": ["env"], "layer": "bg" },

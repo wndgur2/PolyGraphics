@@ -1,0 +1,9414 @@
+{
+  "id": "ss.proj.vine",
+  "name": "Coiling vine",
+  "description": "One cord that left one point and wound twice round the circle the weapon catches in. It is a helix seen from above: the radius opens as it climbs, because a coil of even radius is a hoop and a hoop is not something that grew, and the far end sits nine pixels above the near one so the two turns do not print on top of each other. It thins from four and a half to under one along its length and ends in a fiddlehead, the tight curl a vine carries at its growing end. One short branch leaves it just past halfway and winds the other way \u2014 short, because a branch that rivals its own trunk is two plants.\n\n**The shape is the path it grew along, and that is the whole point of this document.** Three earlier versions had a shape that simply sat there and an arrival bolted on afterwards: a mound of soil thrown up at the centre, then a longer climb, then a neck grafted on to give the thing somewhere to come up from. Every fix made the drawing worse, because the drawing was never the problem \u2014 a plant whose shape is not the path it grew along has no animation in it to find. Here the cord is cut into nine segments in the order it travels \u2014 one per frame of the baked sheet, which is the only ratio at which every step of the growth is a picture somebody actually sees, each one held relative to its own start, which is the end of the one before it. So `coil` is nothing more than revealing them in that order: root first, tip last, each rising out of the floor while turning on its own joint. Because that joint is its parent's end, a turning segment sweeps out of the segment that made it rather than appearing beside it, and the windows are sequenced rather than overlapped so the chain is never drawn broken. The root comes up furthest \u2014 it is the part actually leaving the ground \u2014 and by the tip the cord is winding rather than climbing.\n\nDark all through: `$moss.dark2` with a `$moss` lit edge and `$blood.dark2` thorns, a dark red against a dark green, which is the one pairing that keeps a barb readable at this size without lightening the plant. Thorns hang on the segment they grow from and turn with it. No leaves \u2014 a coil hung with foliage stops being a cord. `meta.radius` is the circle the cord winds round, which is the circle the weapon catches in.",
+  "tags": [
+    "proj",
+    "melee"
+  ],
+  "size": [
+    56,
+    56
+  ],
+  "meta": {
+    "radius": 22.0
+  },
+  "animations": {
+    "coil": {
+      "description": "coil \u2014 the cord comes up at the root and winds round, segment by segment",
+      "duration": 0.3,
+      "tracks": [
+        {
+          "part": "m0_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.0,
+              0.001
+            ],
+            [
+              0.2,
+              1.04
+            ],
+            [
+              0.23,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m0_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              21.0
+            ],
+            [
+              0.0,
+              21.0
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m0_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.0,
+              -64
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m0_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0,
+              0
+            ],
+            [
+              0.035,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m0",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.0,
+              0.001
+            ],
+            [
+              0.2,
+              1.04
+            ],
+            [
+              0.23,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m0",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              21.0
+            ],
+            [
+              0.0,
+              21.0
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m0",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.0,
+              -64
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m0",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0,
+              0
+            ],
+            [
+              0.035,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m0_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.0,
+              0.001
+            ],
+            [
+              0.2,
+              1.04
+            ],
+            [
+              0.23,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m0_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              21.0
+            ],
+            [
+              0.0,
+              21.0
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m0_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.0,
+              -64
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m0_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0,
+              0
+            ],
+            [
+              0.035,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m1_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.2,
+              0.001
+            ],
+            [
+              0.28,
+              1.04
+            ],
+            [
+              0.31000000000000005,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m1_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.28,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m1_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.2,
+              -64
+            ],
+            [
+              0.28,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m1_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.235,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m1",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.2,
+              0.001
+            ],
+            [
+              0.28,
+              1.04
+            ],
+            [
+              0.31000000000000005,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m1",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.28,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m1",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.2,
+              -64
+            ],
+            [
+              0.28,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m1",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.235,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m1_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.2,
+              0.001
+            ],
+            [
+              0.28,
+              1.04
+            ],
+            [
+              0.31000000000000005,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m1_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.28,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m1_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.2,
+              -64
+            ],
+            [
+              0.28,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m1_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.235,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m2_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.285,
+              0.001
+            ],
+            [
+              0.365,
+              1.04
+            ],
+            [
+              0.395,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m2_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.285,
+              0
+            ],
+            [
+              0.365,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m2_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.285,
+              -64
+            ],
+            [
+              0.365,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m2_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.285,
+              0
+            ],
+            [
+              0.32,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m2",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.285,
+              0.001
+            ],
+            [
+              0.365,
+              1.04
+            ],
+            [
+              0.395,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m2",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.285,
+              0
+            ],
+            [
+              0.365,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m2",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.285,
+              -64
+            ],
+            [
+              0.365,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m2",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.285,
+              0
+            ],
+            [
+              0.32,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m2_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.285,
+              0.001
+            ],
+            [
+              0.365,
+              1.04
+            ],
+            [
+              0.395,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m2_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.285,
+              0
+            ],
+            [
+              0.365,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m2_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.285,
+              -64
+            ],
+            [
+              0.365,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m2_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.285,
+              0
+            ],
+            [
+              0.32,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m3_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.37,
+              0.001
+            ],
+            [
+              0.45,
+              1.04
+            ],
+            [
+              0.48,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m3_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.37,
+              0
+            ],
+            [
+              0.45,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m3_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.37,
+              -64
+            ],
+            [
+              0.45,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m3_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.37,
+              0
+            ],
+            [
+              0.405,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m3",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.37,
+              0.001
+            ],
+            [
+              0.45,
+              1.04
+            ],
+            [
+              0.48,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m3",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.37,
+              0
+            ],
+            [
+              0.45,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m3",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.37,
+              -64
+            ],
+            [
+              0.45,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m3",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.37,
+              0
+            ],
+            [
+              0.405,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m3_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.37,
+              0.001
+            ],
+            [
+              0.45,
+              1.04
+            ],
+            [
+              0.48,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m3_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.37,
+              0
+            ],
+            [
+              0.45,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m3_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.37,
+              -64
+            ],
+            [
+              0.45,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m3_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.37,
+              0
+            ],
+            [
+              0.405,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m4_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.455,
+              0.001
+            ],
+            [
+              0.535,
+              1.04
+            ],
+            [
+              0.5650000000000001,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m4_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.455,
+              0
+            ],
+            [
+              0.535,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m4_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.455,
+              -64
+            ],
+            [
+              0.535,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m4_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.455,
+              0
+            ],
+            [
+              0.49,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m4",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.455,
+              0.001
+            ],
+            [
+              0.535,
+              1.04
+            ],
+            [
+              0.5650000000000001,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m4",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.455,
+              0
+            ],
+            [
+              0.535,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m4",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.455,
+              -64
+            ],
+            [
+              0.535,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m4",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.455,
+              0
+            ],
+            [
+              0.49,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m4_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.455,
+              0.001
+            ],
+            [
+              0.535,
+              1.04
+            ],
+            [
+              0.5650000000000001,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m4_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.455,
+              0
+            ],
+            [
+              0.535,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m4_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.455,
+              -64
+            ],
+            [
+              0.535,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m4_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.455,
+              0
+            ],
+            [
+              0.49,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m5_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.54,
+              0.001
+            ],
+            [
+              0.62,
+              1.04
+            ],
+            [
+              0.65,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m5_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.54,
+              0
+            ],
+            [
+              0.62,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m5_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.54,
+              -64
+            ],
+            [
+              0.62,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m5_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.54,
+              0
+            ],
+            [
+              0.575,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m5",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.54,
+              0.001
+            ],
+            [
+              0.62,
+              1.04
+            ],
+            [
+              0.65,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m5",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.54,
+              0
+            ],
+            [
+              0.62,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m5",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.54,
+              -64
+            ],
+            [
+              0.62,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m5",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.54,
+              0
+            ],
+            [
+              0.575,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m5_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.54,
+              0.001
+            ],
+            [
+              0.62,
+              1.04
+            ],
+            [
+              0.65,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m5_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.54,
+              0
+            ],
+            [
+              0.62,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m5_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.54,
+              -64
+            ],
+            [
+              0.62,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m5_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.54,
+              0
+            ],
+            [
+              0.575,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m6_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.625,
+              0.001
+            ],
+            [
+              0.705,
+              1.04
+            ],
+            [
+              0.735,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m6_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.625,
+              0
+            ],
+            [
+              0.705,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m6_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.625,
+              -64
+            ],
+            [
+              0.705,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m6_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.625,
+              0
+            ],
+            [
+              0.66,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m6",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.625,
+              0.001
+            ],
+            [
+              0.705,
+              1.04
+            ],
+            [
+              0.735,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m6",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.625,
+              0
+            ],
+            [
+              0.705,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m6",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.625,
+              -64
+            ],
+            [
+              0.705,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m6",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.625,
+              0
+            ],
+            [
+              0.66,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m6_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.625,
+              0.001
+            ],
+            [
+              0.705,
+              1.04
+            ],
+            [
+              0.735,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m6_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.625,
+              0
+            ],
+            [
+              0.705,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m6_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.625,
+              -64
+            ],
+            [
+              0.705,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m6_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.625,
+              0
+            ],
+            [
+              0.66,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m7_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.71,
+              0.001
+            ],
+            [
+              0.79,
+              1.04
+            ],
+            [
+              0.8200000000000001,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m7_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.71,
+              0
+            ],
+            [
+              0.79,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m7_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.71,
+              -64
+            ],
+            [
+              0.79,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m7_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.71,
+              0
+            ],
+            [
+              0.745,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m7",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.71,
+              0.001
+            ],
+            [
+              0.79,
+              1.04
+            ],
+            [
+              0.8200000000000001,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m7",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.71,
+              0
+            ],
+            [
+              0.79,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m7",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.71,
+              -64
+            ],
+            [
+              0.79,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m7",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.71,
+              0
+            ],
+            [
+              0.745,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m7_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.71,
+              0.001
+            ],
+            [
+              0.79,
+              1.04
+            ],
+            [
+              0.8200000000000001,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m7_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.71,
+              0
+            ],
+            [
+              0.79,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m7_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.71,
+              -64
+            ],
+            [
+              0.79,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m7_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.71,
+              0
+            ],
+            [
+              0.745,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m8_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.795,
+              0.001
+            ],
+            [
+              0.875,
+              1.04
+            ],
+            [
+              0.905,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m8_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.795,
+              0
+            ],
+            [
+              0.875,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m8_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.795,
+              -64
+            ],
+            [
+              0.875,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m8_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.795,
+              0
+            ],
+            [
+              0.83,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m8",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.795,
+              0.001
+            ],
+            [
+              0.875,
+              1.04
+            ],
+            [
+              0.905,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m8",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.795,
+              0
+            ],
+            [
+              0.875,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m8",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.795,
+              -64
+            ],
+            [
+              0.875,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m8",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.795,
+              0
+            ],
+            [
+              0.83,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "m8_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.795,
+              0.001
+            ],
+            [
+              0.875,
+              1.04
+            ],
+            [
+              0.905,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "m8_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.795,
+              0
+            ],
+            [
+              0.875,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m8_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.795,
+              -64
+            ],
+            [
+              0.875,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "m8_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.795,
+              0
+            ],
+            [
+              0.83,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "t0_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.285,
+              0.001
+            ],
+            [
+              0.365,
+              1.04
+            ],
+            [
+              0.395,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "t0_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.285,
+              0
+            ],
+            [
+              0.365,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t0_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.285,
+              -64
+            ],
+            [
+              0.365,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t0_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.285,
+              0
+            ],
+            [
+              0.32,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "t0",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.285,
+              0.001
+            ],
+            [
+              0.365,
+              1.04
+            ],
+            [
+              0.395,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "t0",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.285,
+              0
+            ],
+            [
+              0.365,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t0",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.285,
+              -64
+            ],
+            [
+              0.365,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t0",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.285,
+              0
+            ],
+            [
+              0.32,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "t1_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.455,
+              0.001
+            ],
+            [
+              0.535,
+              1.04
+            ],
+            [
+              0.5650000000000001,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "t1_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.455,
+              0
+            ],
+            [
+              0.535,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t1_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.455,
+              -64
+            ],
+            [
+              0.535,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t1_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.455,
+              0
+            ],
+            [
+              0.49,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "t1",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.455,
+              0.001
+            ],
+            [
+              0.535,
+              1.04
+            ],
+            [
+              0.5650000000000001,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "t1",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.455,
+              0
+            ],
+            [
+              0.535,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t1",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.455,
+              -64
+            ],
+            [
+              0.535,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t1",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.455,
+              0
+            ],
+            [
+              0.49,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "t2_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.54,
+              0.001
+            ],
+            [
+              0.62,
+              1.04
+            ],
+            [
+              0.65,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "t2_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.54,
+              0
+            ],
+            [
+              0.62,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t2_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.54,
+              -64
+            ],
+            [
+              0.62,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t2_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.54,
+              0
+            ],
+            [
+              0.575,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "t2",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.54,
+              0.001
+            ],
+            [
+              0.62,
+              1.04
+            ],
+            [
+              0.65,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "t2",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.54,
+              0
+            ],
+            [
+              0.62,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t2",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.54,
+              -64
+            ],
+            [
+              0.62,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t2",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.54,
+              0
+            ],
+            [
+              0.575,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "t3_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.71,
+              0.001
+            ],
+            [
+              0.79,
+              1.04
+            ],
+            [
+              0.8200000000000001,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "t3_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.71,
+              0
+            ],
+            [
+              0.79,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t3_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.71,
+              -64
+            ],
+            [
+              0.79,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t3_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.71,
+              0
+            ],
+            [
+              0.745,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "t3",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.71,
+              0.001
+            ],
+            [
+              0.79,
+              1.04
+            ],
+            [
+              0.8200000000000001,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "t3",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.71,
+              0
+            ],
+            [
+              0.79,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t3",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.71,
+              -64
+            ],
+            [
+              0.79,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t3",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.71,
+              0
+            ],
+            [
+              0.745,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "t4_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.795,
+              0.001
+            ],
+            [
+              0.875,
+              1.04
+            ],
+            [
+              0.905,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "t4_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.795,
+              0
+            ],
+            [
+              0.875,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t4_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.795,
+              -64
+            ],
+            [
+              0.875,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t4_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.795,
+              0
+            ],
+            [
+              0.83,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "t4",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.795,
+              0.001
+            ],
+            [
+              0.875,
+              1.04
+            ],
+            [
+              0.905,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "t4",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.795,
+              0
+            ],
+            [
+              0.875,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t4",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.795,
+              -64
+            ],
+            [
+              0.875,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "t4",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.795,
+              0
+            ],
+            [
+              0.83,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b0_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.554,
+              0.001
+            ],
+            [
+              0.621,
+              1.04
+            ],
+            [
+              0.651,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b0_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.554,
+              0
+            ],
+            [
+              0.621,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b0_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.554,
+              64
+            ],
+            [
+              0.621,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b0_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.554,
+              0
+            ],
+            [
+              0.589,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b0",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.554,
+              0.001
+            ],
+            [
+              0.621,
+              1.04
+            ],
+            [
+              0.651,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b0",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.554,
+              0
+            ],
+            [
+              0.621,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b0",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.554,
+              64
+            ],
+            [
+              0.621,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b0",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.554,
+              0
+            ],
+            [
+              0.589,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b0_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.554,
+              0.001
+            ],
+            [
+              0.621,
+              1.04
+            ],
+            [
+              0.651,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b0_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.554,
+              0
+            ],
+            [
+              0.621,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b0_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.554,
+              64
+            ],
+            [
+              0.621,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b0_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.554,
+              0
+            ],
+            [
+              0.589,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b1_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.626,
+              0.001
+            ],
+            [
+              0.693,
+              1.04
+            ],
+            [
+              0.723,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b1_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.626,
+              0
+            ],
+            [
+              0.693,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b1_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.626,
+              64
+            ],
+            [
+              0.693,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b1_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.626,
+              0
+            ],
+            [
+              0.661,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b1",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.626,
+              0.001
+            ],
+            [
+              0.693,
+              1.04
+            ],
+            [
+              0.723,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b1",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.626,
+              0
+            ],
+            [
+              0.693,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b1",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.626,
+              64
+            ],
+            [
+              0.693,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b1",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.626,
+              0
+            ],
+            [
+              0.661,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b1_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.626,
+              0.001
+            ],
+            [
+              0.693,
+              1.04
+            ],
+            [
+              0.723,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b1_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.626,
+              0
+            ],
+            [
+              0.693,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b1_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.626,
+              64
+            ],
+            [
+              0.693,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b1_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.626,
+              0
+            ],
+            [
+              0.661,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b2_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.698,
+              0.001
+            ],
+            [
+              0.765,
+              1.04
+            ],
+            [
+              0.795,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b2_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.698,
+              0
+            ],
+            [
+              0.765,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b2_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.698,
+              64
+            ],
+            [
+              0.765,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b2_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.698,
+              0
+            ],
+            [
+              0.733,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b2",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.698,
+              0.001
+            ],
+            [
+              0.765,
+              1.04
+            ],
+            [
+              0.795,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b2",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.698,
+              0
+            ],
+            [
+              0.765,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b2",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.698,
+              64
+            ],
+            [
+              0.765,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b2",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.698,
+              0
+            ],
+            [
+              0.733,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b2_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.698,
+              0.001
+            ],
+            [
+              0.765,
+              1.04
+            ],
+            [
+              0.795,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b2_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.698,
+              0
+            ],
+            [
+              0.765,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b2_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.698,
+              64
+            ],
+            [
+              0.765,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b2_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.698,
+              0
+            ],
+            [
+              0.733,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b3_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.77,
+              0.001
+            ],
+            [
+              0.837,
+              1.04
+            ],
+            [
+              0.867,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b3_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.77,
+              0
+            ],
+            [
+              0.837,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b3_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.77,
+              64
+            ],
+            [
+              0.837,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b3_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.77,
+              0
+            ],
+            [
+              0.805,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b3",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.77,
+              0.001
+            ],
+            [
+              0.837,
+              1.04
+            ],
+            [
+              0.867,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b3",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.77,
+              0
+            ],
+            [
+              0.837,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b3",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.77,
+              64
+            ],
+            [
+              0.837,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b3",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.77,
+              0
+            ],
+            [
+              0.805,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b3_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.77,
+              0.001
+            ],
+            [
+              0.837,
+              1.04
+            ],
+            [
+              0.867,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b3_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.77,
+              0
+            ],
+            [
+              0.837,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b3_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.77,
+              64
+            ],
+            [
+              0.837,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b3_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.77,
+              0
+            ],
+            [
+              0.805,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b4_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.842,
+              0.001
+            ],
+            [
+              0.909,
+              1.04
+            ],
+            [
+              0.9390000000000001,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b4_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.842,
+              0
+            ],
+            [
+              0.909,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b4_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.842,
+              64
+            ],
+            [
+              0.909,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b4_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.842,
+              0
+            ],
+            [
+              0.877,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b4",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.842,
+              0.001
+            ],
+            [
+              0.909,
+              1.04
+            ],
+            [
+              0.9390000000000001,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b4",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.842,
+              0
+            ],
+            [
+              0.909,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b4",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.842,
+              64
+            ],
+            [
+              0.909,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b4",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.842,
+              0
+            ],
+            [
+              0.877,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "b4_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.842,
+              0.001
+            ],
+            [
+              0.909,
+              1.04
+            ],
+            [
+              0.9390000000000001,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "b4_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.842,
+              0
+            ],
+            [
+              0.909,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b4_lit",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.842,
+              64
+            ],
+            [
+              0.909,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "b4_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.842,
+              0
+            ],
+            [
+              0.877,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "u0_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.698,
+              0.001
+            ],
+            [
+              0.765,
+              1.04
+            ],
+            [
+              0.795,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "u0_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.698,
+              0
+            ],
+            [
+              0.765,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "u0_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.698,
+              64
+            ],
+            [
+              0.765,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "u0_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.698,
+              0
+            ],
+            [
+              0.733,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "u0",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.698,
+              0.001
+            ],
+            [
+              0.765,
+              1.04
+            ],
+            [
+              0.795,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "u0",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.698,
+              0
+            ],
+            [
+              0.765,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "u0",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.698,
+              64
+            ],
+            [
+              0.765,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "u0",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.698,
+              0
+            ],
+            [
+              0.733,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "u1_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.77,
+              0.001
+            ],
+            [
+              0.837,
+              1.04
+            ],
+            [
+              0.867,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "u1_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.77,
+              0
+            ],
+            [
+              0.837,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "u1_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.77,
+              64
+            ],
+            [
+              0.837,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "u1_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.77,
+              0
+            ],
+            [
+              0.805,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "u1",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.77,
+              0.001
+            ],
+            [
+              0.837,
+              1.04
+            ],
+            [
+              0.867,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "u1",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.77,
+              0
+            ],
+            [
+              0.837,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "u1",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              64
+            ],
+            [
+              0.77,
+              64
+            ],
+            [
+              0.837,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "u1",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.77,
+              0
+            ],
+            [
+              0.805,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "tip_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.795,
+              0.001
+            ],
+            [
+              0.99,
+              1.04
+            ],
+            [
+              0.995,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "tip_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.795,
+              0
+            ],
+            [
+              0.99,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "tip_ink",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.795,
+              -64
+            ],
+            [
+              0.99,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "tip_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.795,
+              0
+            ],
+            [
+              0.83,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "tip",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.001
+            ],
+            [
+              0.795,
+              0.001
+            ],
+            [
+              0.99,
+              1.04
+            ],
+            [
+              0.995,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "ease": "backOut"
+        },
+        {
+          "part": "tip",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.795,
+              0
+            ],
+            [
+              0.99,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "tip",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -64
+            ],
+            [
+              0.795,
+              -64
+            ],
+            [
+              0.99,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "ease": "sine"
+        },
+        {
+          "part": "tip",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.795,
+              0
+            ],
+            [
+              0.83,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "id": "m0_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            4.12,
+            7.0
+          ],
+          [
+            3.29,
+            9.42
+          ],
+          [
+            4.61,
+            9.21
+          ],
+          [
+            6.09,
+            9.22
+          ],
+          [
+            7.52,
+            9.44
+          ],
+          [
+            8.75,
+            9.84
+          ],
+          [
+            9.65,
+            10.32
+          ],
+          [
+            10.14,
+            10.75
+          ],
+          [
+            14.95,
+            6.93
+          ],
+          [
+            13.28,
+            5.32
+          ],
+          [
+            11.28,
+            4.15
+          ],
+          [
+            9.06,
+            3.36
+          ],
+          [
+            6.69,
+            2.93
+          ],
+          [
+            4.25,
+            2.86
+          ],
+          [
+            1.78,
+            3.2
+          ],
+          [
+            -2.33,
+            7.19
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        -0.78,
+        -4.31
+      ]
+    },
+    {
+      "id": "m0",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3.52,
+            7.02
+          ],
+          [
+            3.15,
+            8.84
+          ],
+          [
+            4.58,
+            8.62
+          ],
+          [
+            6.15,
+            8.62
+          ],
+          [
+            7.67,
+            8.86
+          ],
+          [
+            8.99,
+            9.29
+          ],
+          [
+            10.0,
+            9.83
+          ],
+          [
+            10.61,
+            10.37
+          ],
+          [
+            14.48,
+            7.3
+          ],
+          [
+            12.93,
+            5.81
+          ],
+          [
+            11.04,
+            4.7
+          ],
+          [
+            8.91,
+            3.95
+          ],
+          [
+            6.64,
+            3.53
+          ],
+          [
+            4.29,
+            3.46
+          ],
+          [
+            1.92,
+            3.78
+          ],
+          [
+            -1.73,
+            7.18
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        -0.78,
+        -4.31
+      ]
+    },
+    {
+      "id": "m0_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.97,
+            7.09
+          ],
+          [
+            2.55,
+            6.38
+          ],
+          [
+            4.44,
+            6.11
+          ],
+          [
+            6.39,
+            6.15
+          ],
+          [
+            8.28,
+            6.47
+          ],
+          [
+            9.99,
+            7.06
+          ],
+          [
+            11.42,
+            7.87
+          ],
+          [
+            12.49,
+            8.88
+          ],
+          [
+            13.81,
+            7.84
+          ],
+          [
+            12.42,
+            6.51
+          ],
+          [
+            10.68,
+            5.5
+          ],
+          [
+            8.7,
+            4.8
+          ],
+          [
+            6.55,
+            4.42
+          ],
+          [
+            4.34,
+            4.36
+          ],
+          [
+            2.14,
+            4.66
+          ],
+          [
+            -0.81,
+            7.15
+          ]
+        ]
+      },
+      "fill": "$moss",
+      "at": [
+        -0.78,
+        -4.31
+      ]
+    },
+    {
+      "id": "m1_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.51,
+            9.01
+          ],
+          [
+            -1.35,
+            9.23
+          ],
+          [
+            -1.32,
+            9.27
+          ],
+          [
+            -1.35,
+            9.44
+          ],
+          [
+            -1.69,
+            9.93
+          ],
+          [
+            -2.53,
+            10.63
+          ],
+          [
+            -3.89,
+            11.34
+          ],
+          [
+            -5.71,
+            11.95
+          ],
+          [
+            -4.35,
+            17.59
+          ],
+          [
+            -1.69,
+            16.76
+          ],
+          [
+            0.64,
+            15.6
+          ],
+          [
+            2.58,
+            14.07
+          ],
+          [
+            4.02,
+            12.11
+          ],
+          [
+            4.71,
+            9.75
+          ],
+          [
+            4.43,
+            7.29
+          ],
+          [
+            3.3,
+            5.19
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        10.87,
+        -2.57
+      ]
+    },
+    {
+      "id": "m1",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.04,
+            8.63
+          ],
+          [
+            -0.78,
+            9.04
+          ],
+          [
+            -0.72,
+            9.32
+          ],
+          [
+            -0.81,
+            9.71
+          ],
+          [
+            -1.26,
+            10.35
+          ],
+          [
+            -2.2,
+            11.13
+          ],
+          [
+            -3.66,
+            11.9
+          ],
+          [
+            -5.57,
+            12.53
+          ],
+          [
+            -4.49,
+            17.0
+          ],
+          [
+            -1.91,
+            16.21
+          ],
+          [
+            0.32,
+            15.1
+          ],
+          [
+            2.15,
+            13.65
+          ],
+          [
+            3.48,
+            11.84
+          ],
+          [
+            4.11,
+            9.7
+          ],
+          [
+            3.86,
+            7.48
+          ],
+          [
+            2.83,
+            5.56
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        10.87,
+        -2.57
+      ]
+    },
+    {
+      "id": "m1_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.84,
+            7.14
+          ],
+          [
+            1.48,
+            8.28
+          ],
+          [
+            1.63,
+            9.5
+          ],
+          [
+            1.27,
+            10.75
+          ],
+          [
+            0.4,
+            11.96
+          ],
+          [
+            -0.98,
+            13.06
+          ],
+          [
+            -2.81,
+            14.0
+          ],
+          [
+            -5.04,
+            14.7
+          ],
+          [
+            -4.68,
+            16.23
+          ],
+          [
+            -2.22,
+            15.46
+          ],
+          [
+            -0.12,
+            14.41
+          ],
+          [
+            1.56,
+            13.08
+          ],
+          [
+            2.73,
+            11.47
+          ],
+          [
+            3.27,
+            9.63
+          ],
+          [
+            3.05,
+            7.75
+          ],
+          [
+            2.16,
+            6.1
+          ]
+        ]
+      },
+      "fill": "$moss",
+      "at": [
+        10.87,
+        -2.57
+      ]
+    },
+    {
+      "id": "m2_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.22,
+            4.28
+          ],
+          [
+            -1.94,
+            4.67
+          ],
+          [
+            -4.34,
+            4.8
+          ],
+          [
+            -6.82,
+            4.64
+          ],
+          [
+            -9.27,
+            4.17
+          ],
+          [
+            -11.53,
+            3.43
+          ],
+          [
+            -13.48,
+            2.45
+          ],
+          [
+            -15.01,
+            1.32
+          ],
+          [
+            -18.75,
+            5.28
+          ],
+          [
+            -16.41,
+            7.11
+          ],
+          [
+            -13.69,
+            8.54
+          ],
+          [
+            -10.71,
+            9.59
+          ],
+          [
+            -7.59,
+            10.24
+          ],
+          [
+            -4.43,
+            10.5
+          ],
+          [
+            -1.34,
+            10.39
+          ],
+          [
+            1.58,
+            9.92
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        4.94,
+        5.1
+      ]
+    },
+    {
+      "id": "m2",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.36,
+            4.86
+          ],
+          [
+            -1.88,
+            5.27
+          ],
+          [
+            -4.35,
+            5.4
+          ],
+          [
+            -6.91,
+            5.23
+          ],
+          [
+            -9.42,
+            4.75
+          ],
+          [
+            -11.76,
+            3.98
+          ],
+          [
+            -13.8,
+            2.96
+          ],
+          [
+            -15.43,
+            1.75
+          ],
+          [
+            -18.34,
+            4.85
+          ],
+          [
+            -16.09,
+            6.6
+          ],
+          [
+            -13.46,
+            7.99
+          ],
+          [
+            -10.56,
+            9.01
+          ],
+          [
+            -7.51,
+            9.64
+          ],
+          [
+            -4.42,
+            9.9
+          ],
+          [
+            -1.4,
+            9.79
+          ],
+          [
+            1.44,
+            9.33
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        4.94,
+        5.1
+      ]
+    },
+    {
+      "id": "m2_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.89,
+            7.03
+          ],
+          [
+            -1.65,
+            7.47
+          ],
+          [
+            -4.38,
+            7.59
+          ],
+          [
+            -7.2,
+            7.38
+          ],
+          [
+            -9.98,
+            6.82
+          ],
+          [
+            -12.59,
+            5.93
+          ],
+          [
+            -14.91,
+            4.73
+          ],
+          [
+            -16.84,
+            3.26
+          ],
+          [
+            -17.83,
+            4.31
+          ],
+          [
+            -15.69,
+            5.97
+          ],
+          [
+            -13.16,
+            7.3
+          ],
+          [
+            -10.36,
+            8.27
+          ],
+          [
+            -7.4,
+            8.88
+          ],
+          [
+            -4.4,
+            9.12
+          ],
+          [
+            -1.48,
+            9.01
+          ],
+          [
+            1.25,
+            8.56
+          ]
+        ]
+      },
+      "fill": "$moss",
+      "at": [
+        4.94,
+        5.1
+      ]
+    },
+    {
+      "id": "m3_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.77,
+            5.12
+          ],
+          [
+            1.72,
+            3.92
+          ],
+          [
+            1.15,
+            2.77
+          ],
+          [
+            0.98,
+            1.67
+          ],
+          [
+            1.2,
+            0.51
+          ],
+          [
+            1.89,
+            -0.77
+          ],
+          [
+            3.14,
+            -2.12
+          ],
+          [
+            4.98,
+            -3.43
+          ],
+          [
+            2.48,
+            -7.84
+          ],
+          [
+            -0.17,
+            -6.04
+          ],
+          [
+            -2.28,
+            -3.86
+          ],
+          [
+            -3.71,
+            -1.33
+          ],
+          [
+            -4.3,
+            1.46
+          ],
+          [
+            -3.98,
+            4.28
+          ],
+          [
+            -2.81,
+            6.86
+          ],
+          [
+            -0.97,
+            9.08
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        -12.84,
+        1.3
+      ]
+    },
+    {
+      "id": "m3",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.35,
+            5.55
+          ],
+          [
+            1.22,
+            4.25
+          ],
+          [
+            0.58,
+            2.94
+          ],
+          [
+            0.39,
+            1.65
+          ],
+          [
+            0.64,
+            0.3
+          ],
+          [
+            1.4,
+            -1.13
+          ],
+          [
+            2.75,
+            -2.58
+          ],
+          [
+            4.68,
+            -3.95
+          ],
+          [
+            2.77,
+            -7.32
+          ],
+          [
+            0.21,
+            -5.58
+          ],
+          [
+            -1.79,
+            -3.5
+          ],
+          [
+            -3.14,
+            -1.12
+          ],
+          [
+            -3.7,
+            1.49
+          ],
+          [
+            -3.4,
+            4.11
+          ],
+          [
+            -2.3,
+            6.54
+          ],
+          [
+            -0.56,
+            8.65
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        -12.84,
+        1.3
+      ]
+    },
+    {
+      "id": "m3_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.94,
+            7.06
+          ],
+          [
+            -0.5,
+            5.36
+          ],
+          [
+            -1.36,
+            3.51
+          ],
+          [
+            -1.6,
+            1.57
+          ],
+          [
+            -1.2,
+            -0.39
+          ],
+          [
+            -0.15,
+            -2.28
+          ],
+          [
+            1.52,
+            -4.04
+          ],
+          [
+            3.75,
+            -5.59
+          ],
+          [
+            3.1,
+            -6.73
+          ],
+          [
+            0.66,
+            -5.06
+          ],
+          [
+            -1.24,
+            -3.09
+          ],
+          [
+            -2.49,
+            -0.87
+          ],
+          [
+            -2.99,
+            1.51
+          ],
+          [
+            -2.71,
+            3.91
+          ],
+          [
+            -1.69,
+            6.14
+          ],
+          [
+            -0.05,
+            8.11
+          ]
+        ]
+      },
+      "fill": "$moss",
+      "at": [
+        -12.84,
+        1.3
+      ]
+    },
+    {
+      "id": "m4_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.15,
+            9.3
+          ],
+          [
+            4.51,
+            8.18
+          ],
+          [
+            7.28,
+            7.32
+          ],
+          [
+            10.32,
+            6.79
+          ],
+          [
+            13.49,
+            6.63
+          ],
+          [
+            16.62,
+            6.85
+          ],
+          [
+            19.56,
+            7.43
+          ],
+          [
+            22.15,
+            8.33
+          ],
+          [
+            24.08,
+            4.07
+          ],
+          [
+            20.84,
+            2.87
+          ],
+          [
+            17.29,
+            2.1
+          ],
+          [
+            13.57,
+            1.78
+          ],
+          [
+            9.82,
+            1.91
+          ],
+          [
+            6.17,
+            2.48
+          ],
+          [
+            2.74,
+            3.48
+          ],
+          [
+            -0.35,
+            4.89
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        -10.01,
+        -11.43
+      ]
+    },
+    {
+      "id": "m4",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.85,
+            8.78
+          ],
+          [
+            4.3,
+            7.62
+          ],
+          [
+            7.14,
+            6.73
+          ],
+          [
+            10.26,
+            6.19
+          ],
+          [
+            13.5,
+            6.03
+          ],
+          [
+            16.7,
+            6.25
+          ],
+          [
+            19.72,
+            6.85
+          ],
+          [
+            22.39,
+            7.78
+          ],
+          [
+            23.83,
+            4.62
+          ],
+          [
+            20.67,
+            3.45
+          ],
+          [
+            17.21,
+            2.7
+          ],
+          [
+            13.56,
+            2.38
+          ],
+          [
+            9.88,
+            2.51
+          ],
+          [
+            6.3,
+            3.07
+          ],
+          [
+            2.95,
+            4.04
+          ],
+          [
+            -0.06,
+            5.41
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        -10.01,
+        -11.43
+      ]
+    },
+    {
+      "id": "m4_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.92,
+            7.14
+          ],
+          [
+            3.64,
+            5.88
+          ],
+          [
+            6.73,
+            4.95
+          ],
+          [
+            10.08,
+            4.4
+          ],
+          [
+            13.53,
+            4.25
+          ],
+          [
+            16.95,
+            4.52
+          ],
+          [
+            20.18,
+            5.19
+          ],
+          [
+            23.09,
+            6.24
+          ],
+          [
+            23.58,
+            5.17
+          ],
+          [
+            20.51,
+            4.04
+          ],
+          [
+            17.12,
+            3.31
+          ],
+          [
+            13.55,
+            3.01
+          ],
+          [
+            9.95,
+            3.15
+          ],
+          [
+            6.45,
+            3.7
+          ],
+          [
+            3.18,
+            4.66
+          ],
+          [
+            0.27,
+            6.0
+          ]
+        ]
+      },
+      "fill": "$moss",
+      "at": [
+        -10.01,
+        -11.43
+      ]
+    },
+    {
+      "id": "m5_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.06,
+            9.23
+          ],
+          [
+            2.04,
+            10.38
+          ],
+          [
+            3.54,
+            11.66
+          ],
+          [
+            4.42,
+            12.94
+          ],
+          [
+            4.76,
+            14.14
+          ],
+          [
+            4.62,
+            15.37
+          ],
+          [
+            3.93,
+            16.73
+          ],
+          [
+            2.56,
+            18.19
+          ],
+          [
+            5.22,
+            21.47
+          ],
+          [
+            7.38,
+            19.29
+          ],
+          [
+            8.77,
+            16.72
+          ],
+          [
+            9.17,
+            13.89
+          ],
+          [
+            8.52,
+            11.11
+          ],
+          [
+            6.95,
+            8.65
+          ],
+          [
+            4.69,
+            6.6
+          ],
+          [
+            1.87,
+            4.97
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        12.2,
+        -12.33
+      ]
+    },
+    {
+      "id": "m5",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.18,
+            8.68
+          ],
+          [
+            2.38,
+            9.89
+          ],
+          [
+            3.99,
+            11.26
+          ],
+          [
+            4.97,
+            12.69
+          ],
+          [
+            5.35,
+            14.11
+          ],
+          [
+            5.19,
+            15.55
+          ],
+          [
+            4.41,
+            17.09
+          ],
+          [
+            2.94,
+            18.65
+          ],
+          [
+            4.84,
+            21.01
+          ],
+          [
+            6.9,
+            18.93
+          ],
+          [
+            8.2,
+            16.53
+          ],
+          [
+            8.57,
+            13.93
+          ],
+          [
+            7.97,
+            11.36
+          ],
+          [
+            6.5,
+            9.05
+          ],
+          [
+            4.34,
+            7.09
+          ],
+          [
+            1.62,
+            5.52
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        12.2,
+        -12.33
+      ]
+    },
+    {
+      "id": "m5_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.88,
+            7.14
+          ],
+          [
+            3.33,
+            8.53
+          ],
+          [
+            5.21,
+            10.19
+          ],
+          [
+            6.43,
+            12.04
+          ],
+          [
+            6.92,
+            14.02
+          ],
+          [
+            6.65,
+            16.03
+          ],
+          [
+            5.62,
+            17.99
+          ],
+          [
+            3.86,
+            19.8
+          ],
+          [
+            4.51,
+            20.6
+          ],
+          [
+            6.47,
+            18.61
+          ],
+          [
+            7.67,
+            16.36
+          ],
+          [
+            8.01,
+            13.96
+          ],
+          [
+            7.45,
+            11.59
+          ],
+          [
+            6.07,
+            9.43
+          ],
+          [
+            4.0,
+            7.58
+          ],
+          [
+            1.37,
+            6.07
+          ]
+        ]
+      },
+      "fill": "$moss",
+      "at": [
+        12.2,
+        -12.33
+      ]
+    },
+    {
+      "id": "m6_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.43,
+            5.46
+          ],
+          [
+            -2.51,
+            6.84
+          ],
+          [
+            -5.22,
+            8.01
+          ],
+          [
+            -8.43,
+            8.87
+          ],
+          [
+            -11.99,
+            9.34
+          ],
+          [
+            -15.74,
+            9.38
+          ],
+          [
+            -19.49,
+            8.97
+          ],
+          [
+            -23.07,
+            8.12
+          ],
+          [
+            -24.2,
+            11.67
+          ],
+          [
+            -20.17,
+            12.71
+          ],
+          [
+            -15.96,
+            13.24
+          ],
+          [
+            -11.76,
+            13.28
+          ],
+          [
+            -7.69,
+            12.82
+          ],
+          [
+            -3.93,
+            11.89
+          ],
+          [
+            -0.58,
+            10.53
+          ],
+          [
+            2.23,
+            8.74
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        15.19,
+        0.4
+      ]
+    },
+    {
+      "id": "m6",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.05,
+            5.92
+          ],
+          [
+            -2.23,
+            7.37
+          ],
+          [
+            -5.03,
+            8.58
+          ],
+          [
+            -8.32,
+            9.46
+          ],
+          [
+            -11.96,
+            9.94
+          ],
+          [
+            -15.77,
+            9.98
+          ],
+          [
+            -19.6,
+            9.56
+          ],
+          [
+            -23.25,
+            8.69
+          ],
+          [
+            -24.02,
+            11.09
+          ],
+          [
+            -20.06,
+            12.11
+          ],
+          [
+            -15.93,
+            12.65
+          ],
+          [
+            -11.79,
+            12.68
+          ],
+          [
+            -7.8,
+            12.23
+          ],
+          [
+            -4.12,
+            11.33
+          ],
+          [
+            -0.86,
+            9.99
+          ],
+          [
+            1.85,
+            8.28
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        15.19,
+        0.4
+      ]
+    },
+    {
+      "id": "m6_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.87,
+            7.07
+          ],
+          [
+            -1.57,
+            8.65
+          ],
+          [
+            -4.59,
+            9.92
+          ],
+          [
+            -8.07,
+            10.81
+          ],
+          [
+            -11.88,
+            11.27
+          ],
+          [
+            -15.85,
+            11.27
+          ],
+          [
+            -19.82,
+            10.8
+          ],
+          [
+            -23.62,
+            9.86
+          ],
+          [
+            -23.89,
+            10.68
+          ],
+          [
+            -19.98,
+            11.67
+          ],
+          [
+            -15.9,
+            12.18
+          ],
+          [
+            -11.82,
+            12.2
+          ],
+          [
+            -7.89,
+            11.75
+          ],
+          [
+            -4.28,
+            10.85
+          ],
+          [
+            -1.1,
+            9.54
+          ],
+          [
+            1.52,
+            7.87
+          ]
+        ]
+      },
+      "fill": "$moss",
+      "at": [
+        15.19,
+        0.4
+      ]
+    },
+    {
+      "id": "m7_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.46,
+            5.33
+          ],
+          [
+            -1.78,
+            4.08
+          ],
+          [
+            -4.52,
+            2.5
+          ],
+          [
+            -6.64,
+            0.66
+          ],
+          [
+            -8.06,
+            -1.31
+          ],
+          [
+            -8.77,
+            -3.34
+          ],
+          [
+            -8.79,
+            -5.41
+          ],
+          [
+            -8.1,
+            -7.53
+          ],
+          [
+            -10.84,
+            -8.98
+          ],
+          [
+            -11.95,
+            -5.97
+          ],
+          [
+            -12.03,
+            -2.83
+          ],
+          [
+            -11.08,
+            0.21
+          ],
+          [
+            -9.23,
+            2.98
+          ],
+          [
+            -6.61,
+            5.37
+          ],
+          [
+            -3.38,
+            7.35
+          ],
+          [
+            0.33,
+            8.88
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        -9.34,
+        3.19
+      ]
+    },
+    {
+      "id": "m7",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.28,
+            5.9
+          ],
+          [
+            -2.04,
+            4.62
+          ],
+          [
+            -4.87,
+            2.98
+          ],
+          [
+            -7.09,
+            1.06
+          ],
+          [
+            -8.59,
+            -1.04
+          ],
+          [
+            -9.36,
+            -3.25
+          ],
+          [
+            -9.38,
+            -5.51
+          ],
+          [
+            -8.63,
+            -7.81
+          ],
+          [
+            -10.31,
+            -8.7
+          ],
+          [
+            -11.36,
+            -5.86
+          ],
+          [
+            -11.44,
+            -2.93
+          ],
+          [
+            -10.55,
+            -0.06
+          ],
+          [
+            -8.78,
+            2.58
+          ],
+          [
+            -6.26,
+            4.89
+          ],
+          [
+            -3.12,
+            6.81
+          ],
+          [
+            0.51,
+            8.3
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        -9.34,
+        3.19
+      ]
+    },
+    {
+      "id": "m7_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.91,
+            7.07
+          ],
+          [
+            -2.56,
+            5.69
+          ],
+          [
+            -5.55,
+            3.91
+          ],
+          [
+            -7.91,
+            1.8
+          ],
+          [
+            -9.55,
+            -0.57
+          ],
+          [
+            -10.37,
+            -3.09
+          ],
+          [
+            -10.34,
+            -5.68
+          ],
+          [
+            -9.45,
+            -8.24
+          ],
+          [
+            -10.02,
+            -8.54
+          ],
+          [
+            -11.01,
+            -5.8
+          ],
+          [
+            -11.08,
+            -2.98
+          ],
+          [
+            -10.21,
+            -0.23
+          ],
+          [
+            -8.49,
+            2.31
+          ],
+          [
+            -6.02,
+            4.56
+          ],
+          [
+            -2.93,
+            6.43
+          ],
+          [
+            0.64,
+            7.89
+          ]
+        ]
+      },
+      "fill": "$moss",
+      "at": [
+        -9.34,
+        3.19
+      ]
+    },
+    {
+      "id": "m8_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.27,
+            7.82
+          ],
+          [
+            3.74,
+            5.69
+          ],
+          [
+            5.99,
+            3.67
+          ],
+          [
+            8.96,
+            1.89
+          ],
+          [
+            12.52,
+            0.44
+          ],
+          [
+            16.52,
+            -0.58
+          ],
+          [
+            20.77,
+            -1.13
+          ],
+          [
+            25.11,
+            -1.25
+          ],
+          [
+            25.25,
+            -3.19
+          ],
+          [
+            20.66,
+            -3.42
+          ],
+          [
+            16.1,
+            -3.02
+          ],
+          [
+            11.75,
+            -2.07
+          ],
+          [
+            7.77,
+            -0.61
+          ],
+          [
+            4.33,
+            1.31
+          ],
+          [
+            1.54,
+            3.66
+          ],
+          [
+            -0.47,
+            6.37
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        -19.71,
+        -12.16
+      ]
+    },
+    {
+      "id": "m8",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.74,
+            7.54
+          ],
+          [
+            3.3,
+            5.29
+          ],
+          [
+            5.65,
+            3.18
+          ],
+          [
+            8.7,
+            1.34
+          ],
+          [
+            12.34,
+            -0.13
+          ],
+          [
+            16.42,
+            -1.17
+          ],
+          [
+            20.75,
+            -1.73
+          ],
+          [
+            25.16,
+            -1.85
+          ],
+          [
+            25.21,
+            -2.6
+          ],
+          [
+            20.69,
+            -2.82
+          ],
+          [
+            16.2,
+            -2.43
+          ],
+          [
+            11.92,
+            -1.5
+          ],
+          [
+            8.03,
+            -0.07
+          ],
+          [
+            4.67,
+            1.8
+          ],
+          [
+            1.98,
+            4.07
+          ],
+          [
+            0.06,
+            6.65
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        -19.71,
+        -12.16
+      ]
+    },
+    {
+      "id": "m8_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.92,
+            7.11
+          ],
+          [
+            2.66,
+            4.69
+          ],
+          [
+            5.17,
+            2.51
+          ],
+          [
+            8.38,
+            0.66
+          ],
+          [
+            12.14,
+            -0.8
+          ],
+          [
+            16.31,
+            -1.78
+          ],
+          [
+            20.72,
+            -2.26
+          ],
+          [
+            25.18,
+            -2.21
+          ],
+          [
+            25.2,
+            -2.47
+          ],
+          [
+            20.7,
+            -2.63
+          ],
+          [
+            16.24,
+            -2.21
+          ],
+          [
+            12.0,
+            -1.26
+          ],
+          [
+            8.15,
+            0.17
+          ],
+          [
+            4.84,
+            2.04
+          ],
+          [
+            2.21,
+            4.28
+          ],
+          [
+            0.35,
+            6.81
+          ]
+        ]
+      },
+      "fill": "$moss",
+      "at": [
+        -19.71,
+        -12.16
+      ]
+    },
+    {
+      "id": "b0_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.75,
+            8.09
+          ],
+          [
+            3.19,
+            6.51
+          ],
+          [
+            3.06,
+            5.34
+          ],
+          [
+            2.66,
+            4.39
+          ],
+          [
+            2.09,
+            3.63
+          ],
+          [
+            1.44,
+            3.03
+          ],
+          [
+            0.72,
+            2.56
+          ],
+          [
+            -0.04,
+            2.2
+          ],
+          [
+            -1.6,
+            5.76
+          ],
+          [
+            -1.29,
+            5.94
+          ],
+          [
+            -1.06,
+            6.12
+          ],
+          [
+            -0.94,
+            6.28
+          ],
+          [
+            -0.9,
+            6.36
+          ],
+          [
+            -0.93,
+            6.34
+          ],
+          [
+            -0.96,
+            6.23
+          ],
+          [
+            -0.95,
+            6.11
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        5.23,
+        -14.16
+      ]
+    },
+    {
+      "id": "b0",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.23,
+            7.81
+          ],
+          [
+            2.59,
+            6.47
+          ],
+          [
+            2.48,
+            5.49
+          ],
+          [
+            2.13,
+            4.68
+          ],
+          [
+            1.64,
+            4.02
+          ],
+          [
+            1.06,
+            3.5
+          ],
+          [
+            0.41,
+            3.08
+          ],
+          [
+            -0.28,
+            2.75
+          ],
+          [
+            -1.36,
+            5.21
+          ],
+          [
+            -0.98,
+            5.43
+          ],
+          [
+            -0.69,
+            5.66
+          ],
+          [
+            -0.48,
+            5.88
+          ],
+          [
+            -0.38,
+            6.07
+          ],
+          [
+            -0.35,
+            6.2
+          ],
+          [
+            -0.36,
+            6.27
+          ],
+          [
+            -0.42,
+            6.39
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        5.23,
+        -14.16
+      ]
+    },
+    {
+      "id": "b0_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.94,
+            7.12
+          ],
+          [
+            1.15,
+            6.37
+          ],
+          [
+            1.1,
+            5.83
+          ],
+          [
+            0.91,
+            5.36
+          ],
+          [
+            0.61,
+            4.93
+          ],
+          [
+            0.21,
+            4.55
+          ],
+          [
+            -0.27,
+            4.22
+          ],
+          [
+            -0.81,
+            3.94
+          ],
+          [
+            -1.18,
+            4.78
+          ],
+          [
+            -0.74,
+            5.02
+          ],
+          [
+            -0.38,
+            5.28
+          ],
+          [
+            -0.11,
+            5.56
+          ],
+          [
+            0.06,
+            5.83
+          ],
+          [
+            0.14,
+            6.07
+          ],
+          [
+            0.15,
+            6.31
+          ],
+          [
+            0.04,
+            6.64
+          ]
+        ]
+      },
+      "fill": "$moss",
+      "at": [
+        5.23,
+        -14.16
+      ]
+    },
+    {
+      "id": "b1_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.68,
+            5.32
+          ],
+          [
+            0.88,
+            5.04
+          ],
+          [
+            0.07,
+            4.86
+          ],
+          [
+            -0.76,
+            4.75
+          ],
+          [
+            -1.59,
+            4.72
+          ],
+          [
+            -2.41,
+            4.77
+          ],
+          [
+            -3.21,
+            4.9
+          ],
+          [
+            -3.99,
+            5.11
+          ],
+          [
+            -2.99,
+            8.5
+          ],
+          [
+            -2.58,
+            8.44
+          ],
+          [
+            -2.13,
+            8.4
+          ],
+          [
+            -1.65,
+            8.42
+          ],
+          [
+            -1.17,
+            8.47
+          ],
+          [
+            -0.7,
+            8.57
+          ],
+          [
+            -0.27,
+            8.71
+          ],
+          [
+            0.12,
+            8.88
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        3.51,
+        -17.28
+      ]
+    },
+    {
+      "id": "b1",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.44,
+            5.87
+          ],
+          [
+            0.7,
+            5.62
+          ],
+          [
+            -0.05,
+            5.44
+          ],
+          [
+            -0.83,
+            5.35
+          ],
+          [
+            -1.6,
+            5.32
+          ],
+          [
+            -2.37,
+            5.37
+          ],
+          [
+            -3.11,
+            5.49
+          ],
+          [
+            -3.82,
+            5.68
+          ],
+          [
+            -3.16,
+            7.93
+          ],
+          [
+            -2.69,
+            7.85
+          ],
+          [
+            -2.18,
+            7.81
+          ],
+          [
+            -1.64,
+            7.82
+          ],
+          [
+            -1.11,
+            7.87
+          ],
+          [
+            -0.58,
+            7.98
+          ],
+          [
+            -0.09,
+            8.13
+          ],
+          [
+            0.36,
+            8.33
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        3.51,
+        -17.28
+      ]
+    },
+    {
+      "id": "b1_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.91,
+            7.06
+          ],
+          [
+            0.32,
+            6.84
+          ],
+          [
+            -0.31,
+            6.68
+          ],
+          [
+            -0.96,
+            6.58
+          ],
+          [
+            -1.62,
+            6.54
+          ],
+          [
+            -2.27,
+            6.56
+          ],
+          [
+            -2.9,
+            6.64
+          ],
+          [
+            -3.5,
+            6.78
+          ],
+          [
+            -3.27,
+            7.54
+          ],
+          [
+            -2.76,
+            7.44
+          ],
+          [
+            -2.21,
+            7.38
+          ],
+          [
+            -1.64,
+            7.38
+          ],
+          [
+            -1.06,
+            7.44
+          ],
+          [
+            -0.49,
+            7.54
+          ],
+          [
+            0.05,
+            7.7
+          ],
+          [
+            0.54,
+            7.9
+          ]
+        ]
+      },
+      "fill": "$moss",
+      "at": [
+        3.51,
+        -17.28
+      ]
+    },
+    {
+      "id": "b2_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.4,
+            5.4
+          ],
+          [
+            -0.33,
+            5.69
+          ],
+          [
+            -1.01,
+            6.07
+          ],
+          [
+            -1.63,
+            6.56
+          ],
+          [
+            -2.15,
+            7.17
+          ],
+          [
+            -2.54,
+            7.9
+          ],
+          [
+            -2.73,
+            8.74
+          ],
+          [
+            -2.69,
+            9.6
+          ],
+          [
+            0.42,
+            9.1
+          ],
+          [
+            0.45,
+            9.12
+          ],
+          [
+            0.47,
+            9.16
+          ],
+          [
+            0.51,
+            9.16
+          ],
+          [
+            0.6,
+            9.1
+          ],
+          [
+            0.79,
+            9.0
+          ],
+          [
+            1.05,
+            8.89
+          ],
+          [
+            1.4,
+            8.79
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        -0.88,
+        -17.57
+      ]
+    },
+    {
+      "id": "b2",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.57,
+            5.97
+          ],
+          [
+            -0.09,
+            6.24
+          ],
+          [
+            -0.7,
+            6.58
+          ],
+          [
+            -1.23,
+            7.01
+          ],
+          [
+            -1.67,
+            7.53
+          ],
+          [
+            -1.99,
+            8.14
+          ],
+          [
+            -2.14,
+            8.81
+          ],
+          [
+            -2.09,
+            9.5
+          ],
+          [
+            -0.17,
+            9.2
+          ],
+          [
+            -0.15,
+            9.05
+          ],
+          [
+            -0.08,
+            8.93
+          ],
+          [
+            0.03,
+            8.8
+          ],
+          [
+            0.21,
+            8.65
+          ],
+          [
+            0.47,
+            8.49
+          ],
+          [
+            0.82,
+            8.34
+          ],
+          [
+            1.23,
+            8.22
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        -0.88,
+        -17.57
+      ]
+    },
+    {
+      "id": "b2_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.89,
+            7.07
+          ],
+          [
+            0.35,
+            7.26
+          ],
+          [
+            -0.13,
+            7.51
+          ],
+          [
+            -0.53,
+            7.81
+          ],
+          [
+            -0.85,
+            8.15
+          ],
+          [
+            -1.06,
+            8.52
+          ],
+          [
+            -1.17,
+            8.93
+          ],
+          [
+            -1.16,
+            9.35
+          ],
+          [
+            -0.51,
+            9.25
+          ],
+          [
+            -0.49,
+            9.01
+          ],
+          [
+            -0.42,
+            8.79
+          ],
+          [
+            -0.27,
+            8.58
+          ],
+          [
+            -0.04,
+            8.36
+          ],
+          [
+            0.27,
+            8.16
+          ],
+          [
+            0.66,
+            7.98
+          ],
+          [
+            1.12,
+            7.83
+          ]
+        ]
+      },
+      "fill": "$moss",
+      "at": [
+        -0.88,
+        -17.57
+      ]
+    },
+    {
+      "id": "b3_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.66,
+            7.35
+          ],
+          [
+            -0.38,
+            8.15
+          ],
+          [
+            0.06,
+            8.85
+          ],
+          [
+            0.64,
+            9.45
+          ],
+          [
+            1.33,
+            9.97
+          ],
+          [
+            2.12,
+            10.42
+          ],
+          [
+            3.01,
+            10.8
+          ],
+          [
+            4.0,
+            11.11
+          ],
+          [
+            4.79,
+            8.58
+          ],
+          [
+            4.06,
+            8.27
+          ],
+          [
+            3.45,
+            7.95
+          ],
+          [
+            2.99,
+            7.62
+          ],
+          [
+            2.67,
+            7.32
+          ],
+          [
+            2.49,
+            7.07
+          ],
+          [
+            2.43,
+            6.91
+          ],
+          [
+            2.45,
+            6.85
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        -2.91,
+        -15.32
+      ]
+    },
+    {
+      "id": "b3",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.06,
+            7.25
+          ],
+          [
+            0.16,
+            7.91
+          ],
+          [
+            0.54,
+            8.5
+          ],
+          [
+            1.05,
+            9.02
+          ],
+          [
+            1.68,
+            9.48
+          ],
+          [
+            2.41,
+            9.89
+          ],
+          [
+            3.24,
+            10.24
+          ],
+          [
+            4.18,
+            10.54
+          ],
+          [
+            4.61,
+            9.15
+          ],
+          [
+            3.83,
+            8.83
+          ],
+          [
+            3.17,
+            8.48
+          ],
+          [
+            2.64,
+            8.11
+          ],
+          [
+            2.26,
+            7.75
+          ],
+          [
+            2.01,
+            7.42
+          ],
+          [
+            1.89,
+            7.15
+          ],
+          [
+            1.86,
+            6.94
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        -2.91,
+        -15.32
+      ]
+    },
+    {
+      "id": "b3_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.87,
+            7.1
+          ],
+          [
+            1.0,
+            7.54
+          ],
+          [
+            1.26,
+            7.97
+          ],
+          [
+            1.64,
+            8.4
+          ],
+          [
+            2.15,
+            8.82
+          ],
+          [
+            2.78,
+            9.2
+          ],
+          [
+            3.53,
+            9.56
+          ],
+          [
+            4.39,
+            9.87
+          ],
+          [
+            4.54,
+            9.39
+          ],
+          [
+            3.73,
+            9.07
+          ],
+          [
+            3.04,
+            8.72
+          ],
+          [
+            2.48,
+            8.35
+          ],
+          [
+            2.05,
+            7.97
+          ],
+          [
+            1.76,
+            7.61
+          ],
+          [
+            1.59,
+            7.28
+          ],
+          [
+            1.52,
+            7.0
+          ]
+        ]
+      },
+      "fill": "$moss",
+      "at": [
+        -2.91,
+        -15.32
+      ]
+    },
+    {
+      "id": "b4_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.5,
+            8.36
+          ],
+          [
+            1.58,
+            8.61
+          ],
+          [
+            2.74,
+            8.78
+          ],
+          [
+            3.98,
+            8.87
+          ],
+          [
+            5.28,
+            8.88
+          ],
+          [
+            6.63,
+            8.8
+          ],
+          [
+            8.01,
+            8.62
+          ],
+          [
+            9.39,
+            8.27
+          ],
+          [
+            9.1,
+            6.6
+          ],
+          [
+            7.79,
+            6.63
+          ],
+          [
+            6.53,
+            6.66
+          ],
+          [
+            5.32,
+            6.61
+          ],
+          [
+            4.18,
+            6.5
+          ],
+          [
+            3.11,
+            6.33
+          ],
+          [
+            2.15,
+            6.1
+          ],
+          [
+            1.29,
+            5.83
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        0.59,
+        -12.57
+      ]
+    },
+    {
+      "id": "b4",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.68,
+            7.79
+          ],
+          [
+            1.71,
+            8.02
+          ],
+          [
+            2.83,
+            8.19
+          ],
+          [
+            4.03,
+            8.28
+          ],
+          [
+            5.29,
+            8.28
+          ],
+          [
+            6.6,
+            8.2
+          ],
+          [
+            7.95,
+            8.02
+          ],
+          [
+            9.29,
+            7.68
+          ],
+          [
+            9.21,
+            7.19
+          ],
+          [
+            7.86,
+            7.23
+          ],
+          [
+            6.56,
+            7.25
+          ],
+          [
+            5.31,
+            7.21
+          ],
+          [
+            4.13,
+            7.1
+          ],
+          [
+            3.03,
+            6.92
+          ],
+          [
+            2.02,
+            6.69
+          ],
+          [
+            1.11,
+            6.4
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        0.59,
+        -12.57
+      ]
+    },
+    {
+      "id": "b4_lit",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.89,
+            7.12
+          ],
+          [
+            1.86,
+            7.37
+          ],
+          [
+            2.93,
+            7.57
+          ],
+          [
+            4.08,
+            7.7
+          ],
+          [
+            5.3,
+            7.76
+          ],
+          [
+            6.58,
+            7.74
+          ],
+          [
+            7.9,
+            7.64
+          ],
+          [
+            9.25,
+            7.44
+          ],
+          [
+            9.22,
+            7.27
+          ],
+          [
+            7.87,
+            7.37
+          ],
+          [
+            6.57,
+            7.42
+          ],
+          [
+            5.31,
+            7.4
+          ],
+          [
+            4.11,
+            7.3
+          ],
+          [
+            2.99,
+            7.14
+          ],
+          [
+            1.96,
+            6.92
+          ],
+          [
+            1.04,
+            6.64
+          ]
+        ]
+      },
+      "fill": "$moss",
+      "at": [
+        0.59,
+        -12.57
+      ]
+    },
+    {
+      "id": "tip_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            24.27,
+            -1.0
+          ],
+          [
+            24.43,
+            -0.92
+          ],
+          [
+            24.47,
+            -1.09
+          ],
+          [
+            24.01,
+            -0.76
+          ],
+          [
+            22.96,
+            -0.52
+          ],
+          [
+            21.9,
+            -0.61
+          ],
+          [
+            21.36,
+            -0.84
+          ],
+          [
+            21.36,
+            -0.65
+          ],
+          [
+            21.28,
+            -0.44
+          ],
+          [
+            21.62,
+            -0.65
+          ],
+          [
+            22.3,
+            -0.77
+          ],
+          [
+            22.88,
+            -0.69
+          ],
+          [
+            23.02,
+            -0.67
+          ],
+          [
+            22.97,
+            -1.12
+          ],
+          [
+            23.12,
+            -1.33
+          ],
+          [
+            24.35,
+            0.44
+          ],
+          [
+            25.13,
+            -0.6
+          ],
+          [
+            24.83,
+            -2.05
+          ],
+          [
+            23.75,
+            -2.87
+          ],
+          [
+            22.38,
+            -3.18
+          ],
+          [
+            20.89,
+            -3.01
+          ],
+          [
+            19.5,
+            -2.26
+          ],
+          [
+            18.76,
+            -0.61
+          ],
+          [
+            19.53,
+            1.1
+          ],
+          [
+            21.12,
+            2.01
+          ],
+          [
+            23.07,
+            2.28
+          ],
+          [
+            25.07,
+            1.89
+          ],
+          [
+            26.78,
+            0.7
+          ],
+          [
+            27.36,
+            -1.51
+          ],
+          [
+            26.1,
+            -3.44
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        -19.71,
+        -12.16
+      ]
+    },
+    {
+      "id": "tip",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            24.61,
+            -1.46
+          ],
+          [
+            24.99,
+            -1.03
+          ],
+          [
+            24.93,
+            -0.74
+          ],
+          [
+            24.22,
+            -0.22
+          ],
+          [
+            22.98,
+            0.06
+          ],
+          [
+            21.74,
+            -0.06
+          ],
+          [
+            20.96,
+            -0.42
+          ],
+          [
+            20.79,
+            -0.64
+          ],
+          [
+            20.87,
+            -0.85
+          ],
+          [
+            21.45,
+            -1.2
+          ],
+          [
+            22.32,
+            -1.34
+          ],
+          [
+            23.1,
+            -1.23
+          ],
+          [
+            23.48,
+            -1.02
+          ],
+          [
+            23.53,
+            -0.99
+          ],
+          [
+            23.45,
+            -0.86
+          ],
+          [
+            24.02,
+            -0.04
+          ],
+          [
+            24.57,
+            -0.74
+          ],
+          [
+            24.38,
+            -1.7
+          ],
+          [
+            23.54,
+            -2.33
+          ],
+          [
+            22.36,
+            -2.6
+          ],
+          [
+            21.06,
+            -2.46
+          ],
+          [
+            19.91,
+            -1.84
+          ],
+          [
+            19.34,
+            -0.62
+          ],
+          [
+            19.92,
+            0.68
+          ],
+          [
+            21.28,
+            1.46
+          ],
+          [
+            23.04,
+            1.7
+          ],
+          [
+            24.86,
+            1.36
+          ],
+          [
+            26.32,
+            0.35
+          ],
+          [
+            26.79,
+            -1.4
+          ],
+          [
+            25.76,
+            -2.98
+          ]
+        ]
+      },
+      "fill": "$moss.dark2",
+      "at": [
+        -19.71,
+        -12.16
+      ]
+    },
+    {
+      "id": "t0_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.9,
+            7.7
+          ],
+          [
+            -7.0,
+            7.52
+          ],
+          [
+            -5.1,
+            1.32
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        4.94,
+        5.1
+      ]
+    },
+    {
+      "id": "t0",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.25,
+            7.68
+          ],
+          [
+            -6.65,
+            7.54
+          ],
+          [
+            -5.15,
+            2.22
+          ]
+        ]
+      },
+      "fill": "$blood.dark2",
+      "at": [
+        4.94,
+        5.1
+      ]
+    },
+    {
+      "id": "t1_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3.05,
+            5.7
+          ],
+          [
+            0.55,
+            7.54
+          ],
+          [
+            -1.69,
+            1.87
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        -10.01,
+        -11.43
+      ]
+    },
+    {
+      "id": "t1",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.77,
+            5.91
+          ],
+          [
+            0.84,
+            7.33
+          ],
+          [
+            -1.16,
+            2.59
+          ]
+        ]
+      },
+      "fill": "$blood.dark2",
+      "at": [
+        -10.01,
+        -11.43
+      ]
+    },
+    {
+      "id": "t2_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            6.92,
+            13.87
+          ],
+          [
+            6.8,
+            16.97
+          ],
+          [
+            1.36,
+            15.22
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        12.2,
+        -12.33
+      ]
+    },
+    {
+      "id": "t2",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            6.9,
+            14.22
+          ],
+          [
+            6.82,
+            16.62
+          ],
+          [
+            2.26,
+            15.25
+          ]
+        ]
+      },
+      "fill": "$blood.dark2",
+      "at": [
+        12.2,
+        -12.33
+      ]
+    },
+    {
+      "id": "t3_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.14,
+            6.67
+          ],
+          [
+            1.91,
+            7.2
+          ],
+          [
+            -0.5,
+            11.96
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        -9.34,
+        3.19
+      ]
+    },
+    {
+      "id": "t3",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.8,
+            6.73
+          ],
+          [
+            1.57,
+            7.14
+          ],
+          [
+            -0.34,
+            11.07
+          ]
+        ]
+      },
+      "fill": "$blood.dark2",
+      "at": [
+        -9.34,
+        3.19
+      ]
+    },
+    {
+      "id": "t4_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3.84,
+            3.55
+          ],
+          [
+            6.25,
+            1.6
+          ],
+          [
+            8.0,
+            6.23
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        -19.71,
+        -12.16
+      ]
+    },
+    {
+      "id": "t4",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            4.11,
+            3.33
+          ],
+          [
+            5.98,
+            1.82
+          ],
+          [
+            7.44,
+            5.53
+          ]
+        ]
+      },
+      "fill": "$blood.dark2",
+      "at": [
+        -19.71,
+        -12.16
+      ]
+    },
+    {
+      "id": "u0_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.39,
+            7.49
+          ],
+          [
+            2.19,
+            6.7
+          ],
+          [
+            2.19,
+            11.3
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        -0.88,
+        -17.57
+      ]
+    },
+    {
+      "id": "u0",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -0.1,
+            7.4
+          ],
+          [
+            1.91,
+            6.79
+          ],
+          [
+            1.98,
+            10.63
+          ]
+        ]
+      },
+      "fill": "$blood.dark2",
+      "at": [
+        -0.88,
+        -17.57
+      ]
+    },
+    {
+      "id": "u1_ink",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.85,
+            8.52
+          ],
+          [
+            4.08,
+            10.03
+          ],
+          [
+            0.5,
+            12.92
+          ]
+        ]
+      },
+      "fill": "$ink",
+      "at": [
+        -2.91,
+        -15.32
+      ]
+    },
+    {
+      "id": "u1",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.09,
+            8.69
+          ],
+          [
+            3.83,
+            9.86
+          ],
+          [
+            0.89,
+            12.34
+          ]
+        ]
+      },
+      "fill": "$blood.dark2",
+      "at": [
+        -2.91,
+        -15.32
+      ]
+    }
+  ],
+  "variants": {
+    "evolved": {
+      "description": "Gold along the cord's lit edge and on the thorns, the mark every evolution in this arsenal wears. The body stays dark: a coil gilded through stops reading as a growing thing, and what the evolution changed is the grip, not the plant.",
+      "set": {
+        "m0_lit.fill": "$gold.dark",
+        "m1_lit.fill": "$gold.dark",
+        "m2_lit.fill": "$gold.dark",
+        "m3_lit.fill": "$gold.dark",
+        "m4_lit.fill": "$gold.dark",
+        "m5_lit.fill": "$gold.dark",
+        "m6_lit.fill": "$gold.dark",
+        "m7_lit.fill": "$gold.dark",
+        "m8_lit.fill": "$gold.dark",
+        "b0_lit.fill": "$gold.dark",
+        "b1_lit.fill": "$gold.dark",
+        "b2_lit.fill": "$gold.dark",
+        "b3_lit.fill": "$gold.dark",
+        "b4_lit.fill": "$gold.dark",
+        "t0.fill": "$gold.dark2",
+        "t1.fill": "$gold.dark2",
+        "t2.fill": "$gold.dark2",
+        "t3.fill": "$gold.dark2",
+        "t4.fill": "$gold.dark2",
+        "u0.fill": "$gold.dark2",
+        "u1.fill": "$gold.dark2"
+      }
+    }
+  }
+}
