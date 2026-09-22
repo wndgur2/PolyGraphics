@@ -1,7 +1,7 @@
 {
   "id": "ss.icon.drone",
   "name": "Brood vent icon",
-  "description": "UI slot icon for the broodling. Composes `ss.proj.drone` via `use`, so the thing in the slot is the thing orbiting you \u2014 when that document stopped being a cold shell plate and became a red-brown vent, this followed with no edit here. Rim is `$blood` \u2014 the vent, which is the one red thing the player carries.",
+  "description": "UI slot icon for the broodling. Composes `ss.proj.drone` via `use`, so the thing in the slot is the thing the player is carrying \u2014 when that document stopped being a cold shell plate and became a vent, and again when the vent was redrawn as a body with a pucker in it, this followed with no edit here. Rim is `$blood` \u2014 the vent, which is the one red thing the player carries.",
   "tags": [
     "icon",
     "weapon"

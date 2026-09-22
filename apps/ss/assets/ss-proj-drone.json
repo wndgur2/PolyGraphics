@@ -1,152 +1,3650 @@
 {
   "id": "ss.proj.drone",
   "name": "Brood vent",
-  "description": "The thing that follows you and pushes out grubs \u2014 an orifice, drawn as one. The geometry is unchanged from the shell plate this used to be, because the plate was already three hexagons inside each other and that is exactly a pucker; only the colours moved. They step inward from a red-brown rim through burnt ochre flesh to a deep maroon ring and then to soil, and the last of those is the hole. The reds are held back on purpose: a saturated `$blood` face read as an alarm on a screen where red means something is wrong, and this thing is yours. Yellow in the flesh takes the edge off without giving up the one thing that has to survive eighteen pixels, which is dark centre inside light ring.",
+  "description": "The thing that follows you and pushes out grubs \u2014 an orifice, and now a body with an orifice in it rather than a plate with a hole through it. What was here was three hexagons inside each other, which is a pucker the way a bolt head is one: the geometry never stopped being the shell plate it was cut from and only the colours had moved, so nothing about it could be animated except turning the middle one, and a cut cell revolving inside a plate that does not is a mechanism's motion.\n\nThis is built out from the closure instead. A mound of skin \u2014 a forty-point outline off three harmonics, so no run of the edge repeats, lit along the top and shaded under \u2014 with a socket sunk into it, the everted flesh standing in that socket, ten folds swirling out of the closure across the flesh and on over the skin, and the closure itself: a soft eight-point star of `$soil.dark` inside a ring of `$blood.dark2` that always opens wider than the star does, so the wet reads as a rim and never as a face. The gut the grubs come out of hangs under all of it, drawn in the same skin shaded rather than in a darker colour, because a darker mass there reads as a second object.\n\nNothing about it is centred or even. The opening sits up and left of the mound's middle; the folds are unevenly spaced, unevenly long and unevenly wide, and they all swirl the same way round, because a ring of straight wedges at even angles is a parasol. A vent centred in its own mound is a badge, and this is meant to be part of something.\n\nThe reds are still held back on purpose: a saturated `$blood` face reads as an alarm on a screen where red means something is wrong, and this thing is yours. The ramp steps `$rust.light2` skin \u2192 `$ember.dark` flesh \u2192 `$blood.dark2` \u2192 `$soil.dark`, and what it is built to protect is the one thing that has to survive eighteen pixels: dark centre inside light ring. The folds are what keep that from reading as an iris: struck at `$soil@0.55` and running in to the closure, they stripe the flesh instead of leaving a clean bright disc round a dark dot, which is most of the difference between a pucker and an eye. Against the field's floor `scripts/readability.ts` reads 2.50 where the old plate read 2.03 \u2014 exactly the line this app draws under a body, and where it stays, held there by the two things the drawing will not give up: a hair of `$ink` all the way round and a centre that has to be a hole.\n\nTwo clips, because it does two things. `hum` is the idle: the pucker works round rather than all at once \u2014 each fold on its own beat of the same two seconds \u2014 the gut fills and settles, and the closure breathes against it. `lay` is one grub leaving, and the consumer plays it once per grub: it draws in, throws the closure wide, the pale bead crests the lip and is gone, the clench comes down behind it, and the next one rises in the throat while the folds settle. `meta.layCue` 0.33 is the contract that goes with it \u2014 the share of the clip at which the vent is widest and the bead leaves, so the game can release the real grub (`ss.proj.chip`) on that frame instead of on the frame the strain starts. The bead is the grub and the grub is the bead; they are never both on screen.\n\nIt does not spin and it no longer travels: the weapon that carries this stopped walking it round the player, so every motion in the document is the body's own.",
   "tags": [
     "proj",
-    "orbital"
+    "carried"
   ],
   "size": [
-    18,
-    18
+    24,
+    24
   ],
+  "meta": {
+    "layCue": 0.33
+  },
   "parts": [
     {
-      "id": "fin_a",
+      "id": "sac_ink",
       "at": [
-        -7.4,
-        0
+        1.3,
+        3.6
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.1,
+        "ry": 4.9
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "sac",
+      "at": [
+        1.3,
+        3.4
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.4,
+        "ry": 4.2
+      },
+      "fill": "$rust.light2"
+    },
+    {
+      "id": "sac_shade",
+      "at": [
+        1.9,
+        4.9
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.9,
+        "ry": 2.6
+      },
+      "fill": "$soil@0.4"
+    },
+    {
+      "id": "sac_lit",
+      "at": [
+        -1.3,
+        1.9
+      ],
+      "rot": -24,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.2,
+        "ry": 1.05
+      },
+      "fill": "$rust.light2@soft"
+    },
+    {
+      "id": "mound_ink",
+      "at": [
+        -0.3,
+        -0.75
       ],
       "shape": {
         "kind": "poly",
         "points": [
           [
-            2.4,
-            -2.2
+            8.74,
+            0.0
           ],
           [
-            -2.6,
-            -0.8
+            8.63,
+            1.27
           ],
           [
-            -2.6,
-            0.8
+            8.33,
+            2.52
           ],
           [
-            2.4,
-            2.2
+            7.65,
+            3.62
+          ],
+          [
+            6.63,
+            4.48
+          ],
+          [
+            5.63,
+            5.23
+          ],
+          [
+            4.76,
+            6.09
+          ],
+          [
+            3.79,
+            6.93
+          ],
+          [
+            2.56,
+            7.32
+          ],
+          [
+            1.22,
+            7.16
+          ],
+          [
+            0.0,
+            6.85
+          ],
+          [
+            -1.17,
+            6.87
+          ],
+          [
+            -2.5,
+            7.15
+          ],
+          [
+            -3.94,
+            7.19
+          ],
+          [
+            -5.26,
+            6.73
+          ],
+          [
+            -6.36,
+            5.91
+          ],
+          [
+            -7.28,
+            4.92
+          ],
+          [
+            -7.91,
+            3.75
+          ],
+          [
+            -8.0,
+            2.42
+          ],
+          [
+            -7.62,
+            1.12
+          ],
+          [
+            -7.29,
+            0.0
+          ],
+          [
+            -7.38,
+            -1.09
+          ],
+          [
+            -7.64,
+            -2.31
+          ],
+          [
+            -7.48,
+            -3.54
+          ],
+          [
+            -6.72,
+            -4.54
+          ],
+          [
+            -5.71,
+            -5.31
+          ],
+          [
+            -4.77,
+            -6.1
+          ],
+          [
+            -3.83,
+            -6.99
+          ],
+          [
+            -2.69,
+            -7.69
+          ],
+          [
+            -1.36,
+            -8.0
+          ],
+          [
+            -0.0,
+            -8.06
+          ],
+          [
+            1.37,
+            -8.02
+          ],
+          [
+            2.69,
+            -7.7
+          ],
+          [
+            3.76,
+            -6.87
+          ],
+          [
+            4.44,
+            -5.68
+          ],
+          [
+            4.98,
+            -4.63
+          ],
+          [
+            5.84,
+            -3.94
+          ],
+          [
+            7.05,
+            -3.34
+          ],
+          [
+            8.14,
+            -2.46
+          ],
+          [
+            8.67,
+            -1.28
           ]
         ]
       },
-      "fill": "$rust.light"
+      "fill": "$ink"
     },
     {
-      "id": "fin_b",
+      "id": "mound",
       "at": [
-        7.4,
-        0
+        -0.3,
+        -0.75
       ],
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -2.4,
-            -2.2
+            7.95,
+            0.0
           ],
           [
-            2.6,
-            -0.8
+            7.85,
+            1.16
           ],
           [
-            2.6,
-            0.8
+            7.58,
+            2.29
           ],
           [
-            -2.4,
+            6.95,
+            3.29
+          ],
+          [
+            6.03,
+            4.07
+          ],
+          [
+            5.12,
+            4.76
+          ],
+          [
+            4.33,
+            5.54
+          ],
+          [
+            3.45,
+            6.3
+          ],
+          [
+            2.33,
+            6.66
+          ],
+          [
+            1.11,
+            6.51
+          ],
+          [
+            0.0,
+            6.23
+          ],
+          [
+            -1.06,
+            6.25
+          ],
+          [
+            -2.27,
+            6.5
+          ],
+          [
+            -3.58,
+            6.54
+          ],
+          [
+            -4.78,
+            6.12
+          ],
+          [
+            -5.78,
+            5.37
+          ],
+          [
+            -6.62,
+            4.47
+          ],
+          [
+            -7.19,
+            3.41
+          ],
+          [
+            -7.28,
             2.2
+          ],
+          [
+            -6.93,
+            1.02
+          ],
+          [
+            -6.62,
+            0.0
+          ],
+          [
+            -6.71,
+            -0.99
+          ],
+          [
+            -6.94,
+            -2.1
+          ],
+          [
+            -6.8,
+            -3.22
+          ],
+          [
+            -6.1,
+            -4.12
+          ],
+          [
+            -5.19,
+            -4.82
+          ],
+          [
+            -4.34,
+            -5.55
+          ],
+          [
+            -3.48,
+            -6.35
+          ],
+          [
+            -2.44,
+            -6.99
+          ],
+          [
+            -1.24,
+            -7.27
+          ],
+          [
+            -0.0,
+            -7.33
+          ],
+          [
+            1.24,
+            -7.29
+          ],
+          [
+            2.45,
+            -7.0
+          ],
+          [
+            3.42,
+            -6.25
+          ],
+          [
+            4.03,
+            -5.16
+          ],
+          [
+            4.53,
+            -4.21
+          ],
+          [
+            5.31,
+            -3.58
+          ],
+          [
+            6.41,
+            -3.04
+          ],
+          [
+            7.4,
+            -2.24
+          ],
+          [
+            7.88,
+            -1.16
           ]
         ]
       },
-      "fill": "$rust.light"
+      "fill": "$rust.light2"
     },
     {
-      "id": "plate",
+      "id": "mound_lit",
+      "at": [
+        -0.3,
+        -0.75
+      ],
       "shape": {
-        "kind": "ngon",
-        "sides": 6,
-        "r": 8.2,
-        "rot": 30
+        "kind": "ring",
+        "r": 6.05,
+        "width": 2.6,
+        "from": 194,
+        "to": 346
       },
-      "fill": "$rust",
-      "stroke": {
-        "color": "$ink",
-        "width": "hair"
-      }
+      "fill": "$husk.dark@0.7"
     },
     {
-      "id": "face",
+      "id": "mound_rim",
+      "at": [
+        -0.3,
+        -0.75
+      ],
       "shape": {
-        "kind": "ngon",
-        "sides": 6,
-        "r": 6.2,
-        "rot": 30
+        "kind": "ring",
+        "r": 7.15,
+        "width": 0.9,
+        "from": 208,
+        "to": 332
+      },
+      "fill": "$husk.dark2@0.5"
+    },
+    {
+      "id": "mound_shade",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 6.15,
+        "width": 2.3,
+        "from": 20,
+        "to": 160
+      },
+      "fill": "$rust.dark@0.4"
+    },
+    {
+      "id": "socket",
+      "at": [
+        -0.3,
+        -0.6
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.85,
+        "ry": 4.5
+      },
+      "fill": "$soil@0.4"
+    },
+    {
+      "id": "areola",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.95,
+        "ry": 4.6
       },
       "fill": "$ember.dark"
     },
     {
-      "id": "cell",
+      "id": "areola_edge",
+      "at": [
+        -0.3,
+        -0.75
+      ],
       "shape": {
-        "kind": "ngon",
-        "sides": 6,
-        "r": 3.2,
-        "rot": 30
+        "kind": "ring",
+        "r": 4.55,
+        "width": 1.0
+      },
+      "fill": "$rust.dark@0.5"
+    },
+    {
+      "id": "areola_lit",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 4.0,
+        "width": 1.7,
+        "from": 200,
+        "to": 340
+      },
+      "fill": "$chitin@0.7"
+    },
+    {
+      "id": "fold_0",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "rot": -90.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.95,
+            -0.33
+          ],
+          [
+            2.4,
+            -0.49
+          ],
+          [
+            2.86,
+            -0.5
+          ],
+          [
+            3.3,
+            -0.35
+          ],
+          [
+            3.72,
+            -0.05
+          ],
+          [
+            4.09,
+            0.41
+          ],
+          [
+            4.42,
+            0.94
+          ],
+          [
+            4.79,
+            1.2
+          ],
+          [
+            5.15,
+            1.48
+          ],
+          [
+            5.15,
+            1.48
+          ],
+          [
+            4.79,
+            1.2
+          ],
+          [
+            4.42,
+            0.94
+          ],
+          [
+            3.97,
+            1.01
+          ],
+          [
+            3.54,
+            1.07
+          ],
+          [
+            3.14,
+            1.02
+          ],
+          [
+            2.75,
+            0.89
+          ],
+          [
+            2.36,
+            0.66
+          ],
+          [
+            1.95,
+            0.33
+          ]
+        ]
+      },
+      "fill": "$soil@0.4"
+    },
+    {
+      "id": "fold_1",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "rot": -50.3,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.95,
+            -0.33
+          ],
+          [
+            2.43,
+            -0.5
+          ],
+          [
+            2.91,
+            -0.5
+          ],
+          [
+            3.38,
+            -0.34
+          ],
+          [
+            3.82,
+            -0.04
+          ],
+          [
+            4.21,
+            0.43
+          ],
+          [
+            4.57,
+            0.97
+          ],
+          [
+            4.96,
+            1.24
+          ],
+          [
+            5.35,
+            1.54
+          ],
+          [
+            5.35,
+            1.54
+          ],
+          [
+            4.96,
+            1.24
+          ],
+          [
+            4.57,
+            0.97
+          ],
+          [
+            4.09,
+            1.03
+          ],
+          [
+            3.64,
+            1.08
+          ],
+          [
+            3.21,
+            1.03
+          ],
+          [
+            2.8,
+            0.89
+          ],
+          [
+            2.38,
+            0.66
+          ],
+          [
+            1.95,
+            0.33
+          ]
+        ]
+      },
+      "fill": "$soil@0.4"
+    },
+    {
+      "id": "fold_2",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "rot": -23.0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.95,
+            -0.28
+          ],
+          [
+            2.34,
+            -0.41
+          ],
+          [
+            2.74,
+            -0.4
+          ],
+          [
+            3.13,
+            -0.26
+          ],
+          [
+            3.5,
+            0.0
+          ],
+          [
+            3.82,
+            0.41
+          ],
+          [
+            4.11,
+            0.87
+          ],
+          [
+            4.43,
+            1.11
+          ],
+          [
+            4.75,
+            1.36
+          ],
+          [
+            4.75,
+            1.36
+          ],
+          [
+            4.43,
+            1.11
+          ],
+          [
+            4.11,
+            0.87
+          ],
+          [
+            3.72,
+            0.92
+          ],
+          [
+            3.34,
+            0.96
+          ],
+          [
+            2.99,
+            0.91
+          ],
+          [
+            2.65,
+            0.78
+          ],
+          [
+            2.31,
+            0.57
+          ],
+          [
+            1.95,
+            0.28
+          ]
+        ]
+      },
+      "fill": "$soil@0.4"
+    },
+    {
+      "id": "fold_3",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "rot": 20.9,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.95,
+            -0.22
+          ],
+          [
+            2.34,
+            -0.3
+          ],
+          [
+            2.72,
+            -0.27
+          ],
+          [
+            3.1,
+            -0.13
+          ],
+          [
+            3.46,
+            0.11
+          ],
+          [
+            3.78,
+            0.46
+          ],
+          [
+            4.08,
+            0.87
+          ],
+          [
+            4.4,
+            1.1
+          ],
+          [
+            4.71,
+            1.35
+          ],
+          [
+            4.71,
+            1.35
+          ],
+          [
+            4.4,
+            1.1
+          ],
+          [
+            4.08,
+            0.87
+          ],
+          [
+            3.7,
+            0.86
+          ],
+          [
+            3.34,
+            0.85
+          ],
+          [
+            2.99,
+            0.77
+          ],
+          [
+            2.65,
+            0.64
+          ],
+          [
+            2.31,
+            0.46
+          ],
+          [
+            1.95,
+            0.22
+          ]
+        ]
+      },
+      "fill": "$soil@0.4"
+    },
+    {
+      "id": "fold_4",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "rot": 55.1,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.95,
+            -0.19
+          ],
+          [
+            2.41,
+            -0.25
+          ],
+          [
+            2.88,
+            -0.2
+          ],
+          [
+            3.33,
+            -0.05
+          ],
+          [
+            3.77,
+            0.2
+          ],
+          [
+            4.17,
+            0.56
+          ],
+          [
+            4.54,
+            0.97
+          ],
+          [
+            4.94,
+            1.23
+          ],
+          [
+            5.32,
+            1.53
+          ],
+          [
+            5.32,
+            1.53
+          ],
+          [
+            4.94,
+            1.23
+          ],
+          [
+            4.54,
+            0.97
+          ],
+          [
+            4.1,
+            0.9
+          ],
+          [
+            3.66,
+            0.84
+          ],
+          [
+            3.24,
+            0.74
+          ],
+          [
+            2.81,
+            0.59
+          ],
+          [
+            2.39,
+            0.41
+          ],
+          [
+            1.95,
+            0.19
+          ]
+        ]
+      },
+      "fill": "$soil@0.4"
+    },
+    {
+      "id": "fold_5",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "rot": 85.6,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.95,
+            -0.22
+          ],
+          [
+            2.4,
+            -0.3
+          ],
+          [
+            2.85,
+            -0.26
+          ],
+          [
+            3.29,
+            -0.11
+          ],
+          [
+            3.71,
+            0.15
+          ],
+          [
+            4.1,
+            0.52
+          ],
+          [
+            4.45,
+            0.95
+          ],
+          [
+            4.83,
+            1.21
+          ],
+          [
+            5.2,
+            1.49
+          ],
+          [
+            5.2,
+            1.49
+          ],
+          [
+            4.83,
+            1.21
+          ],
+          [
+            4.45,
+            0.95
+          ],
+          [
+            4.02,
+            0.91
+          ],
+          [
+            3.6,
+            0.88
+          ],
+          [
+            3.18,
+            0.79
+          ],
+          [
+            2.78,
+            0.65
+          ],
+          [
+            2.37,
+            0.46
+          ],
+          [
+            1.95,
+            0.22
+          ]
+        ]
+      },
+      "fill": "$soil@0.4"
+    },
+    {
+      "id": "fold_6",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "rot": 130.7,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.95,
+            -0.28
+          ],
+          [
+            2.33,
+            -0.41
+          ],
+          [
+            2.71,
+            -0.4
+          ],
+          [
+            3.08,
+            -0.26
+          ],
+          [
+            3.43,
+            -0.0
+          ],
+          [
+            3.74,
+            0.4
+          ],
+          [
+            4.01,
+            0.85
+          ],
+          [
+            4.32,
+            1.08
+          ],
+          [
+            4.62,
+            1.33
+          ],
+          [
+            4.62,
+            1.33
+          ],
+          [
+            4.32,
+            1.08
+          ],
+          [
+            4.01,
+            0.85
+          ],
+          [
+            3.64,
+            0.9
+          ],
+          [
+            3.28,
+            0.94
+          ],
+          [
+            2.94,
+            0.9
+          ],
+          [
+            2.62,
+            0.77
+          ],
+          [
+            2.29,
+            0.57
+          ],
+          [
+            1.95,
+            0.28
+          ]
+        ]
+      },
+      "fill": "$soil@0.4"
+    },
+    {
+      "id": "fold_7",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "rot": 160.1,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.95,
+            -0.33
+          ],
+          [
+            2.37,
+            -0.5
+          ],
+          [
+            2.79,
+            -0.5
+          ],
+          [
+            3.2,
+            -0.36
+          ],
+          [
+            3.58,
+            -0.07
+          ],
+          [
+            3.92,
+            0.38
+          ],
+          [
+            4.22,
+            0.9
+          ],
+          [
+            4.56,
+            1.14
+          ],
+          [
+            4.89,
+            1.41
+          ],
+          [
+            4.89,
+            1.41
+          ],
+          [
+            4.56,
+            1.14
+          ],
+          [
+            4.22,
+            0.9
+          ],
+          [
+            3.8,
+            0.98
+          ],
+          [
+            3.4,
+            1.05
+          ],
+          [
+            3.04,
+            1.01
+          ],
+          [
+            2.68,
+            0.88
+          ],
+          [
+            2.32,
+            0.66
+          ],
+          [
+            1.95,
+            0.33
+          ]
+        ]
+      },
+      "fill": "$soil@0.4"
+    },
+    {
+      "id": "fold_8",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "rot": 195.8,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.95,
+            -0.33
+          ],
+          [
+            2.43,
+            -0.49
+          ],
+          [
+            2.92,
+            -0.49
+          ],
+          [
+            3.4,
+            -0.34
+          ],
+          [
+            3.85,
+            -0.03
+          ],
+          [
+            4.25,
+            0.44
+          ],
+          [
+            4.61,
+            0.98
+          ],
+          [
+            5.01,
+            1.25
+          ],
+          [
+            5.4,
+            1.55
+          ],
+          [
+            5.4,
+            1.55
+          ],
+          [
+            5.01,
+            1.25
+          ],
+          [
+            4.61,
+            0.98
+          ],
+          [
+            4.13,
+            1.04
+          ],
+          [
+            3.67,
+            1.09
+          ],
+          [
+            3.23,
+            1.03
+          ],
+          [
+            2.81,
+            0.89
+          ],
+          [
+            2.39,
+            0.66
+          ],
+          [
+            1.95,
+            0.33
+          ]
+        ]
+      },
+      "fill": "$soil@0.4"
+    },
+    {
+      "id": "fold_9",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "rot": 238.8,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            1.95,
+            -0.28
+          ],
+          [
+            2.38,
+            -0.41
+          ],
+          [
+            2.81,
+            -0.39
+          ],
+          [
+            3.23,
+            -0.25
+          ],
+          [
+            3.63,
+            0.03
+          ],
+          [
+            3.98,
+            0.44
+          ],
+          [
+            4.3,
+            0.91
+          ],
+          [
+            4.66,
+            1.16
+          ],
+          [
+            5.0,
+            1.44
+          ],
+          [
+            5.0,
+            1.44
+          ],
+          [
+            4.66,
+            1.16
+          ],
+          [
+            4.3,
+            0.91
+          ],
+          [
+            3.88,
+            0.95
+          ],
+          [
+            3.47,
+            0.97
+          ],
+          [
+            3.09,
+            0.91
+          ],
+          [
+            2.72,
+            0.78
+          ],
+          [
+            2.34,
+            0.57
+          ],
+          [
+            1.95,
+            0.28
+          ]
+        ]
+      },
+      "fill": "$soil@0.4"
+    },
+    {
+      "id": "throat_shade",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 2.95,
+        "width": 1.35
+      },
+      "fill": "$soil@0.45"
+    },
+    {
+      "id": "mouth",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.3,
+        "ry": 2.1
       },
       "fill": "$blood.dark2"
     },
     {
-      "id": "core",
+      "id": "hole",
+      "at": [
+        -0.3,
+        -0.75
+      ],
+      "rot": 12,
       "shape": {
-        "kind": "circle",
-        "r": 1.8
+        "kind": "star",
+        "points": 8,
+        "r": 1.95,
+        "r2": 1.18
       },
-      "fill": "$soil"
+      "fill": "$soil.dark"
+    },
+    {
+      "id": "brood",
+      "at": [
+        -0.2,
+        -0.35
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 0.32,
+        "ry": 0.27
+      },
+      "fill": "$silent.dark2"
+    },
+    {
+      "id": "gleam",
+      "at": [
+        -2.6,
+        -3.2
+      ],
+      "rot": -36,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.05,
+        "ry": 0.42
+      },
+      "fill": "$ember.light@0.3"
     }
   ],
   "animations": {
     "hum": {
-      "description": "the cut cell turns inside a plate that does not",
-      "duration": 2,
+      "description": "a body idling: the pucker works round, the gut fills and settles",
+      "duration": 2.0,
       "tracks": [
         {
-          "part": "cell",
-          "prop": "rot",
+          "part": "sac",
+          "prop": "scale",
           "keys": [
             [
-              0,
-              0
+              0.0,
+              1.014
             ],
             [
-              1,
-              60
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "core",
-          "prop": "opacity",
-          "keys": [
-            [
-              0,
-              0.7
+              0.25,
+              1.043
             ],
             [
               0.5,
-              1
+              0.986
             ],
             [
-              1,
+              0.75,
+              0.957
+            ],
+            [
+              1.0,
+              1.014
+            ]
+          ]
+        },
+        {
+          "part": "sac",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              0.17
+            ],
+            [
+              0.25,
+              0.523
+            ],
+            [
+              0.5,
+              -0.17
+            ],
+            [
+              0.75,
+              -0.523
+            ],
+            [
+              1.0,
+              0.17
+            ]
+          ]
+        },
+        {
+          "part": "sac_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.014
+            ],
+            [
+              0.25,
+              1.043
+            ],
+            [
+              0.5,
+              0.986
+            ],
+            [
+              0.75,
+              0.957
+            ],
+            [
+              1.0,
+              1.014
+            ]
+          ]
+        },
+        {
+          "part": "sac_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              0.17
+            ],
+            [
+              0.25,
+              0.523
+            ],
+            [
+              0.5,
+              -0.17
+            ],
+            [
+              0.75,
+              -0.523
+            ],
+            [
+              1.0,
+              0.17
+            ]
+          ]
+        },
+        {
+          "part": "sac_shade",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.014
+            ],
+            [
+              0.25,
+              1.043
+            ],
+            [
+              0.5,
+              0.986
+            ],
+            [
+              0.75,
+              0.957
+            ],
+            [
+              1.0,
+              1.014
+            ]
+          ]
+        },
+        {
+          "part": "sac_shade",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              0.17
+            ],
+            [
+              0.25,
+              0.523
+            ],
+            [
+              0.5,
+              -0.17
+            ],
+            [
+              0.75,
+              -0.523
+            ],
+            [
+              1.0,
+              0.17
+            ]
+          ]
+        },
+        {
+          "part": "sac_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              0.139
+            ],
+            [
+              0.25,
+              0.428
+            ],
+            [
+              0.5,
+              -0.139
+            ],
+            [
+              0.75,
+              -0.428
+            ],
+            [
+              1.0,
+              0.139
+            ]
+          ]
+        },
+        {
+          "part": "mound",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.024
+            ],
+            [
+              0.25,
+              0.992
+            ],
+            [
+              0.5,
+              0.976
+            ],
+            [
+              0.75,
+              1.008
+            ],
+            [
+              1.0,
+              1.024
+            ]
+          ]
+        },
+        {
+          "part": "mound_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.024
+            ],
+            [
+              0.25,
+              0.992
+            ],
+            [
+              0.5,
+              0.976
+            ],
+            [
+              0.75,
+              1.008
+            ],
+            [
+              1.0,
+              1.024
+            ]
+          ]
+        },
+        {
+          "part": "mound_rim",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.024
+            ],
+            [
+              0.25,
+              0.992
+            ],
+            [
+              0.5,
+              0.976
+            ],
+            [
+              0.75,
+              1.008
+            ],
+            [
+              1.0,
+              1.024
+            ]
+          ]
+        },
+        {
+          "part": "socket",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.25,
+              0.955
+            ],
+            [
+              0.5,
+              1.0
+            ],
+            [
+              0.75,
+              1.045
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "areola",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.25,
+              0.955
+            ],
+            [
+              0.5,
+              1.0
+            ],
+            [
+              0.75,
+              1.045
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "areola_edge",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.25,
+              0.955
+            ],
+            [
+              0.5,
+              1.0
+            ],
+            [
+              0.75,
+              1.045
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "areola_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.25,
+              0.955
+            ],
+            [
+              0.5,
+              1.0
+            ],
+            [
+              0.75,
+              1.045
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_0",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.25,
+              1.06
+            ],
+            [
+              0.5,
+              1.0
+            ],
+            [
+              0.75,
+              0.94
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_0",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.25,
+              3.0
+            ],
+            [
+              0.5,
+              0.0
+            ],
+            [
+              0.75,
+              -3.0
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_1",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.035
+            ],
+            [
+              0.25,
+              1.049
+            ],
+            [
+              0.5,
+              0.965
+            ],
+            [
+              0.75,
+              0.951
+            ],
+            [
+              1.0,
+              1.035
+            ]
+          ]
+        },
+        {
+          "part": "fold_1",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              1.763
+            ],
+            [
+              0.25,
+              2.427
+            ],
+            [
+              0.5,
+              -1.763
+            ],
+            [
+              0.75,
+              -2.427
+            ],
+            [
+              1.0,
+              1.763
+            ]
+          ]
+        },
+        {
+          "part": "fold_2",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.057
+            ],
+            [
+              0.25,
+              1.019
+            ],
+            [
+              0.5,
+              0.943
+            ],
+            [
+              0.75,
+              0.981
+            ],
+            [
+              1.0,
+              1.057
+            ]
+          ]
+        },
+        {
+          "part": "fold_2",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              2.853
+            ],
+            [
+              0.25,
+              0.927
+            ],
+            [
+              0.5,
+              -2.853
+            ],
+            [
+              0.75,
+              -0.927
+            ],
+            [
+              1.0,
+              2.853
+            ]
+          ]
+        },
+        {
+          "part": "fold_3",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.057
+            ],
+            [
+              0.25,
+              0.981
+            ],
+            [
+              0.5,
+              0.943
+            ],
+            [
+              0.75,
+              1.019
+            ],
+            [
+              1.0,
+              1.057
+            ]
+          ]
+        },
+        {
+          "part": "fold_3",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              2.853
+            ],
+            [
+              0.25,
+              -0.927
+            ],
+            [
+              0.5,
+              -2.853
+            ],
+            [
+              0.75,
+              0.927
+            ],
+            [
+              1.0,
+              2.853
+            ]
+          ]
+        },
+        {
+          "part": "fold_4",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.035
+            ],
+            [
+              0.25,
+              0.951
+            ],
+            [
+              0.5,
+              0.965
+            ],
+            [
+              0.75,
+              1.049
+            ],
+            [
+              1.0,
+              1.035
+            ]
+          ]
+        },
+        {
+          "part": "fold_4",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              1.763
+            ],
+            [
+              0.25,
+              -2.427
+            ],
+            [
+              0.5,
+              -1.763
+            ],
+            [
+              0.75,
+              2.427
+            ],
+            [
+              1.0,
+              1.763
+            ]
+          ]
+        },
+        {
+          "part": "fold_5",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.25,
+              0.94
+            ],
+            [
+              0.5,
+              1.0
+            ],
+            [
+              0.75,
+              1.06
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_5",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.25,
+              -3.0
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.75,
+              3.0
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_6",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              0.965
+            ],
+            [
+              0.25,
+              0.951
+            ],
+            [
+              0.5,
+              1.035
+            ],
+            [
+              0.75,
+              1.049
+            ],
+            [
+              1.0,
+              0.965
+            ]
+          ]
+        },
+        {
+          "part": "fold_6",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              -1.763
+            ],
+            [
+              0.25,
+              -2.427
+            ],
+            [
+              0.5,
+              1.763
+            ],
+            [
+              0.75,
+              2.427
+            ],
+            [
+              1.0,
+              -1.763
+            ]
+          ]
+        },
+        {
+          "part": "fold_7",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              0.943
+            ],
+            [
+              0.25,
+              0.981
+            ],
+            [
+              0.5,
+              1.057
+            ],
+            [
+              0.75,
+              1.019
+            ],
+            [
+              1.0,
+              0.943
+            ]
+          ]
+        },
+        {
+          "part": "fold_7",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              -2.853
+            ],
+            [
+              0.25,
+              -0.927
+            ],
+            [
+              0.5,
+              2.853
+            ],
+            [
+              0.75,
+              0.927
+            ],
+            [
+              1.0,
+              -2.853
+            ]
+          ]
+        },
+        {
+          "part": "fold_8",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              0.943
+            ],
+            [
+              0.25,
+              1.019
+            ],
+            [
+              0.5,
+              1.057
+            ],
+            [
+              0.75,
+              0.981
+            ],
+            [
+              1.0,
+              0.943
+            ]
+          ]
+        },
+        {
+          "part": "fold_8",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              -2.853
+            ],
+            [
+              0.25,
+              0.927
+            ],
+            [
+              0.5,
+              2.853
+            ],
+            [
+              0.75,
+              -0.927
+            ],
+            [
+              1.0,
+              -2.853
+            ]
+          ]
+        },
+        {
+          "part": "fold_9",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              0.965
+            ],
+            [
+              0.25,
+              1.049
+            ],
+            [
+              0.5,
+              1.035
+            ],
+            [
+              0.75,
+              0.951
+            ],
+            [
+              1.0,
+              0.965
+            ]
+          ]
+        },
+        {
+          "part": "fold_9",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              -1.763
+            ],
+            [
+              0.25,
+              2.427
+            ],
+            [
+              0.5,
+              1.763
+            ],
+            [
+              0.75,
+              -2.427
+            ],
+            [
+              1.0,
+              -1.763
+            ]
+          ]
+        },
+        {
+          "part": "throat_shade",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              0.906
+            ],
+            [
+              0.25,
+              0.871
+            ],
+            [
+              0.5,
+              1.094
+            ],
+            [
+              0.75,
+              1.129
+            ],
+            [
+              1.0,
+              0.906
+            ]
+          ]
+        },
+        {
+          "part": "mouth",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              0.906
+            ],
+            [
+              0.25,
+              0.871
+            ],
+            [
+              0.5,
+              1.094
+            ],
+            [
+              0.75,
+              1.129
+            ],
+            [
+              1.0,
+              0.906
+            ]
+          ]
+        },
+        {
+          "part": "hole",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              0.912
+            ],
+            [
+              0.25,
+              0.879
+            ],
+            [
+              0.5,
+              1.088
+            ],
+            [
+              0.75,
+              1.121
+            ],
+            [
+              1.0,
+              0.912
+            ]
+          ]
+        },
+        {
+          "part": "hole",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              -2.939
+            ],
+            [
+              0.25,
+              -4.045
+            ],
+            [
+              0.5,
+              2.939
+            ],
+            [
+              0.75,
+              4.045
+            ],
+            [
+              1.0,
+              -2.939
+            ]
+          ]
+        },
+        {
+          "part": "gleam",
+          "prop": "opacity",
+          "keys": [
+            [
+              0.0,
+              0.99
+            ],
+            [
+              0.25,
+              0.738
+            ],
+            [
+              0.5,
+              0.61
+            ],
+            [
+              0.75,
+              0.862
+            ],
+            [
+              1.0,
+              0.99
+            ]
+          ]
+        }
+      ]
+    },
+    "lay": {
+      "description": "one grub out \u2014 draw in, throw wide, the grub over the lip, the clench behind it, the next one rising",
+      "duration": 0.36,
+      "tracks": [
+        {
+          "part": "sac",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              1.12
+            ],
+            [
+              0.33,
+              1.05
+            ],
+            [
+              0.62,
+              0.86
+            ],
+            [
+              0.82,
+              1.03
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "sac",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              -1.1
+            ],
+            [
+              0.33,
+              -0.35
+            ],
+            [
+              0.62,
+              1.1
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "sac_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              1.12
+            ],
+            [
+              0.33,
+              1.05
+            ],
+            [
+              0.62,
+              0.86
+            ],
+            [
+              0.82,
+              1.03
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "sac_ink",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              -1.1
+            ],
+            [
+              0.33,
+              -0.35
+            ],
+            [
+              0.62,
+              1.1
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "sac_shade",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              1.12
+            ],
+            [
+              0.33,
+              1.05
+            ],
+            [
+              0.62,
+              0.86
+            ],
+            [
+              0.82,
+              1.03
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "sac_shade",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              -1.1
+            ],
+            [
+              0.33,
+              -0.35
+            ],
+            [
+              0.62,
+              1.1
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "sac_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              -1.0
+            ],
+            [
+              0.33,
+              -0.3
+            ],
+            [
+              0.62,
+              1.0
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "mound",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.97
+            ],
+            [
+              0.33,
+              1.05
+            ],
+            [
+              0.62,
+              0.98
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "mound_ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.97
+            ],
+            [
+              0.33,
+              1.05
+            ],
+            [
+              0.62,
+              0.98
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "mound_rim",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.97
+            ],
+            [
+              0.33,
+              1.05
+            ],
+            [
+              0.62,
+              0.98
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "socket",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.93
+            ],
+            [
+              0.33,
+              1.17
+            ],
+            [
+              0.62,
+              0.89
+            ],
+            [
+              0.82,
+              1.04
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "areola",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.93
+            ],
+            [
+              0.33,
+              1.17
+            ],
+            [
+              0.62,
+              0.89
+            ],
+            [
+              0.82,
+              1.04
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "areola_edge",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.93
+            ],
+            [
+              0.33,
+              1.17
+            ],
+            [
+              0.62,
+              0.89
+            ],
+            [
+              0.82,
+              1.04
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "areola_lit",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.93
+            ],
+            [
+              0.33,
+              1.17
+            ],
+            [
+              0.62,
+              0.89
+            ],
+            [
+              0.82,
+              1.04
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_0",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.88
+            ],
+            [
+              0.33,
+              1.26
+            ],
+            [
+              0.62,
+              0.88
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_0",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              6.0
+            ],
+            [
+              0.33,
+              -11.0
+            ],
+            [
+              0.62,
+              5.0
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_1",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.88
+            ],
+            [
+              0.33,
+              1.26
+            ],
+            [
+              0.62,
+              0.88
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_1",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              6.0
+            ],
+            [
+              0.33,
+              -11.0
+            ],
+            [
+              0.62,
+              5.0
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_2",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.88
+            ],
+            [
+              0.33,
+              1.26
+            ],
+            [
+              0.62,
+              0.88
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_2",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              6.0
+            ],
+            [
+              0.33,
+              -11.0
+            ],
+            [
+              0.62,
+              5.0
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_3",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.88
+            ],
+            [
+              0.33,
+              1.26
+            ],
+            [
+              0.62,
+              0.88
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_3",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              6.0
+            ],
+            [
+              0.33,
+              -11.0
+            ],
+            [
+              0.62,
+              5.0
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_4",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.88
+            ],
+            [
+              0.33,
+              1.26
+            ],
+            [
+              0.62,
+              0.88
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_4",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              6.0
+            ],
+            [
+              0.33,
+              -11.0
+            ],
+            [
+              0.62,
+              5.0
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_5",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.88
+            ],
+            [
+              0.33,
+              1.26
+            ],
+            [
+              0.62,
+              0.88
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_5",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              6.0
+            ],
+            [
+              0.33,
+              -11.0
+            ],
+            [
+              0.62,
+              5.0
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_6",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.88
+            ],
+            [
+              0.33,
+              1.26
+            ],
+            [
+              0.62,
+              0.88
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_6",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              6.0
+            ],
+            [
+              0.33,
+              -11.0
+            ],
+            [
+              0.62,
+              5.0
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_7",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.88
+            ],
+            [
+              0.33,
+              1.26
+            ],
+            [
+              0.62,
+              0.88
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_7",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              6.0
+            ],
+            [
+              0.33,
+              -11.0
+            ],
+            [
+              0.62,
+              5.0
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_8",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.88
+            ],
+            [
+              0.33,
+              1.26
+            ],
+            [
+              0.62,
+              0.88
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_8",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              6.0
+            ],
+            [
+              0.33,
+              -11.0
+            ],
+            [
+              0.62,
+              5.0
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_9",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.88
+            ],
+            [
+              0.33,
+              1.26
+            ],
+            [
+              0.62,
+              0.88
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "fold_9",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              6.0
+            ],
+            [
+              0.33,
+              -11.0
+            ],
+            [
+              0.62,
+              5.0
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "throat_shade",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.76
+            ],
+            [
+              0.33,
+              1.72
+            ],
+            [
+              0.46,
+              1.52
+            ],
+            [
+              0.62,
               0.7
+            ],
+            [
+              0.82,
+              1.12
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "mouth",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.76
+            ],
+            [
+              0.33,
+              1.72
+            ],
+            [
+              0.46,
+              1.52
+            ],
+            [
+              0.62,
+              0.7
+            ],
+            [
+              0.82,
+              1.12
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "hole",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              0.66
+            ],
+            [
+              0.33,
+              2.05
+            ],
+            [
+              0.46,
+              1.78
+            ],
+            [
+              0.62,
+              0.46
+            ],
+            [
+              0.82,
+              1.14
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "hole",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.33,
+              -13.0
+            ],
+            [
+              0.62,
+              8.0
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "brood",
+          "prop": "scale",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.17,
+              1.8
+            ],
+            [
+              0.33,
+              3.2
+            ],
+            [
+              0.44,
+              3.6
+            ],
+            [
+              0.52,
+              1.0
+            ],
+            [
+              0.62,
+              1.0
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "brood",
+          "prop": "x",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              -0.1
+            ],
+            [
+              0.33,
+              -0.45
+            ],
+            [
+              0.44,
+              -0.75
+            ],
+            [
+              0.52,
+              0.2
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "brood",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.17,
+              -0.3
+            ],
+            [
+              0.33,
+              -1.15
+            ],
+            [
+              0.44,
+              -1.75
+            ],
+            [
+              0.52,
+              0.5
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "brood",
+          "prop": "opacity",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.4,
+              1.0
+            ],
+            [
+              0.48,
+              0.0
+            ],
+            [
+              0.6,
+              0.0
+            ],
+            [
+              0.82,
+              1.0
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "gleam",
+          "prop": "opacity",
+          "keys": [
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.33,
+              0.25
+            ],
+            [
+              0.62,
+              0.5
+            ],
+            [
+              1.0,
+              1.0
             ]
           ]
         }
