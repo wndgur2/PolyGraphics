@@ -1,0 +1,83 @@
+{
+  "id": "ss.sfx.quicklime",
+  "name": "Quicklime vent",
+  "description": "The awakened Shell letting go of a blow: a struck plate, and nothing after it. Its picture (ss.fx.quicklime) is one grey ring going out and was drawn plain on purpose — this fires every time the player is touched, up to five times a second, so the barb detonation it used to wear made the field unreadable. The cue is held to the same rule. Three voices and 0.26s, the length of the clip it plays under: a bandpass grain of noise for the strike, a sine at $grit that is the note, and a quieter partial at $gust.up over it. The partial is the whole of why this reads as metal — 2.5x the fundamental is not a note in any scale, and two sines an interval apart would have come out a chime. Under ss.sfx.hurt by 6dB, which is the point: the wound is what happened, and this is the shell answering it.",
+  "tags": [
+    "sfx",
+    "impact"
+  ],
+  "duration": 0.26,
+  "meta": {
+    "minInterval": 90
+  },
+  "voices": [
+    {
+      "id": "strike",
+      "dur": 0.018,
+      "gain": "hush",
+      "source": {
+        "kind": "noise",
+        "seed": 47
+      },
+      "filter": {
+        "type": "bandpass",
+        "freq": "$grit.up",
+        "q": "band"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "note",
+      "dur": 0.24,
+      "gain": "faint",
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$grit"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.004,
+            "decay": 0.22
+          }
+        }
+      ]
+    },
+    {
+      "id": "partial",
+      "at": 0.002,
+      "dur": 0.1,
+      "gain": "hush",
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$gust.up"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.003,
+            "decay": 0.09
+          }
+        }
+      ]
+    }
+  ]
+}
