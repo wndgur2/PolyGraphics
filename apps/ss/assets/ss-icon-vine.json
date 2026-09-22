@@ -1,7 +1,7 @@
 {
   "id": "ss.icon.vine",
   "name": "Vine icon",
-  "description": "UI slot for the vine. Composes `ss.proj.vine` through `use`, so the slot shows the coil the weapon actually lays rather than a second drawing of one that can drift from it. A patch of `$soil` sits under it and nothing else: the coil is already ground, and the earlier version of this slot pressed a ground *line* across the tile because the plant it held stood up out of a hole. Nothing stands up any more. Tile is `$moss` at full strength \u2014 the one ramp of the vine's own green light enough to hold a 32px slot, and far enough from the Spit's bile and the Lash's husk to tell the row apart at a glance, while everything drawn on it is the dark end of the same colour.",
+  "description": "UI slot for the vine. Composes `ss.proj.vine` through `use`, so the slot shows the coil the weapon actually lays rather than a second drawing of one that can drift from it. A patch of `$soil` sits under it and nothing else: the coil is already ground, and the earlier version of this slot pressed a ground *line* across the tile because the plant it held stood up out of a hole. Nothing stands up any more. The plant is composed at its `slot` ramp \u2014 the same drawing one step up on each of its three colours \u2014 because a 32px slot and a sprite on the field are lit for different jobs, and the cord that keeps out of a crowd's way goes to mud at a tenth of the area. The plate under it comes up a step too, `$coal` over `$coal.dark`, which is as far as it can go before it starts taking contrast back off the cord. Tile is `$sage`. It was `$moss`, which is the cord's own green and was chosen for that, and laid out beside the other seven weapon slots it was the one dark square in a row of bright ones \u2014 the vine did not read as a weapon with a colour, it read as the slot that had not been finished. `$sage` is the same hue lifted to where the row lives, far enough from the Spit's bile and the Chirp's frost to tell them apart at a glance, and far enough from the Spit's bile and the Lash's husk to tell the row apart at a glance, while everything drawn on it is the dark end of the same colour.",
   "tags": [
     "icon",
     "weapon"
@@ -19,7 +19,7 @@
         "h": 32,
         "corner": 6
       },
-      "fill": "$moss"
+      "fill": "$sage"
     },
     {
       "id": "inner",
@@ -29,7 +29,7 @@
         "h": 28,
         "corner": 5
       },
-      "fill": "$coal.dark"
+      "fill": "$coal"
     },
     {
       "id": "floor",
@@ -42,7 +42,7 @@
         "rx": 12.4,
         "ry": 8.6
       },
-      "fill": "$soil@0.75"
+      "fill": "$soil.light@0.5"
     },
     {
       "id": "glyph",
@@ -51,7 +51,8 @@
         0.2
       ],
       "use": "ss.proj.vine",
-      "scale": 0.5
+      "scale": 0.5,
+      "variant": "slot"
     }
   ],
   "variants": {
@@ -59,7 +60,7 @@
       "description": "Gold-rimmed evolved twin, derived rather than drawn again. It takes the plant's own evolved variant with it, so the slot shows the gilded wood the evolved weapon actually grows.",
       "set": {
         "tile.fill": "$gold",
-        "glyph.variant": "evolved"
+        "glyph.variant": "evolved-slot"
       }
     }
   }

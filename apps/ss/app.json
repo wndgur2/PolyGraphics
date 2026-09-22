@@ -19,7 +19,7 @@
     "oneShot": { "death": { "settleBy": 0.85 } },
     "states": {
       "enemy": ["elite", "enraged", "final", "buried", "elite_buried", "spent", "grub", "loosed", "planted"],
-      "proj": ["evolved", "worn", "muck", "evolved-worn", "evolved-muck"],
+      "proj": ["evolved", "worn", "muck", "evolved-worn", "evolved-muck", "slot", "evolved-slot"],
       "icon": ["evolved"],
       "relic": ["glyph"],
       "curse": ["glyph"],
