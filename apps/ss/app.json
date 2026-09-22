@@ -38,6 +38,24 @@
       { "in": ["proj"], "forbid": "hive", "except": ["ss.proj.mine"], "because": "the arsenal is hive material with the signal stripped out" },
       { "in": ["icon"], "tagged": ["weapon"], "forbid": "hive", "except": ["ss.icon.mine"], "because": "the arsenal is hive material with the signal stripped out" }
     ],
+    "says": [
+      {
+        "in": ["relic", "curse"],
+        "beats": {
+          "more": "the thing drawn again, and the one that was added set apart from the ones that were already there",
+          "faster": "a clock the drawing is ahead of — a fuse burnt down, a beat run tight, a body already past where it was",
+          "longer": "the effect still there after what made it has gone",
+          "wider": "a ring, a cloud or a reach that goes past the body that made it",
+          "harder": "coral on the beat that lands, or the wound it opens drawn open",
+          "tougher": "a plate over the body, or the hit drawn glancing off",
+          "heals": "something budding, regrown or mending, on a body that was open",
+          "hides": "the body broken off its own outline, or standing where it is not looked for",
+          "slows": "what is coming drawn caught — held, stuck, or a beat behind",
+          "finds": "the ruin's gold on what is handed over, and more of it than one",
+          "costs": "what is taken drawn beside what is given, on the same plate"
+        }
+      }
+    ],
     "distinct": [{ "in": ["icon"], "tagged": ["weapon"], "part": "tile", "minDeltaE": 13 }],
     "contracts": {
       "ss.proj.ring": { "meta.radius": 62 },

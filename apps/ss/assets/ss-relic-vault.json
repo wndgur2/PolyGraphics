@@ -1,9 +1,13 @@
 {
   "id": "ss.relic.vault",
   "name": "Sealed vault",
-  "description": "A slab door with a gold seal still unbroken on it and a slot cut under the seal. Shut, and drawn shut: no hinge, no handle, nothing that suggests it opens often \u2014 the find makes ruins rarer, and a door you could walk through would have said the opposite. The seal is the only warm thing on a grey plate, which is where the other half of the trade is: what is behind this one is worth more than what is behind the rest.",
+  "description": "A slab door with a gold seal still unbroken on it and a slot cut under the seal. Shut, and drawn shut: no hinge, no handle, nothing that suggests it opens often \u2014 the find makes ruins rarer, and a door you could walk through would have said the opposite. The seal is the only warm thing on a grey plate, which is where the other half of the trade is: what is behind this one is worth more than what is behind the rest. Says pass: a shut door said rarer and stopped there, and the find is a trade. Two slots now: the left one spent and dark, the right one paying. What it pays comes up ember rather than the cold end of the ladder, which is the grade the find lifts.",
   "tags": [
     "relic"
+  ],
+  "says": [
+    "finds",
+    "costs"
   ],
   "size": [
     32,
@@ -92,9 +96,37 @@
       "fill": "$gold.light"
     },
     {
+      "id": "spent_o",
+      "at": [
+        -4.2,
+        6.4
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 3.8,
+        "h": 6.6,
+        "corner": 1.8
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "spent",
+      "at": [
+        -4.2,
+        6.4
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 2.2,
+        "h": 5.0,
+        "corner": 1.0
+      },
+      "fill": "$coal.dark"
+    },
+    {
       "id": "slot_o",
       "at": [
-        0,
+        4.2,
         6.4
       ],
       "shape": {
@@ -108,7 +140,7 @@
     {
       "id": "slot",
       "at": [
-        0,
+        4.2,
         6.4
       ],
       "shape": {
@@ -118,6 +150,73 @@
         "corner": 1
       },
       "fill": "$coal.dark"
+    },
+    {
+      "id": "paid_glow",
+      "at": [
+        4.2,
+        5.2
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 5.4
+      },
+      "fill": "$ember@0.3"
+    },
+    {
+      "id": "paid_spill",
+      "at": [
+        4.2,
+        2.4
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.6,
+            3.4
+          ],
+          [
+            1.6,
+            3.4
+          ],
+          [
+            3.0,
+            -3.8
+          ],
+          [
+            -3.0,
+            -3.8
+          ]
+        ]
+      },
+      "fill": "$ember@0.22"
+    },
+    {
+      "id": "paid",
+      "at": [
+        4.2,
+        5.6
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.9,
+        "ry": 3.0
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "paid_lit",
+      "at": [
+        3.9,
+        4.8
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 0.7,
+        "ry": 1.1
+      },
+      "fill": "$gold.light2"
     }
   ],
   "variants": {

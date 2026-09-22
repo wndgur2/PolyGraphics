@@ -174,6 +174,16 @@ export const AssetSchema = z.strictObject({
    * everybody learns to scroll past — `offBand` on a sound, generalised.
    */
   why: z.record(z.string(), z.string().min(1)).optional(),
+  /**
+   * What this drawing says the thing *does*, in the beats its app's `says`
+   * rule names. A find's badge has to be readable as an ability and not only
+   * as the object it is named after, and the only way to hold a drawing to
+   * that is to make its author answer the question in writing: a document
+   * that cannot name a beat is usually one that drew the noun and forgot the
+   * verb. It is a claim about the picture, not about the game's numbers —
+   * nothing here reads a balance table.
+   */
+  says: z.array(z.string().min(1)).min(1).optional(),
   skeleton: SkeletonSchema.optional(),
 });
 export type Asset = z.infer<typeof AssetSchema>;

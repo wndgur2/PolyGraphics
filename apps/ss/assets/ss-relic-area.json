@@ -3,6 +3,7 @@
   "name": "Blooming cap",
   "description": "A fungus cap and the cloud already off it, spread wider than the cap is: four soft puffs with three brighter ones inside them, and two motes that have got further than the rest. Reach drawn as the thing that reaches. Polish: the puffs were translucent teal and blurred into one smudge at 1×; they are now solid at the tones the alpha used to composite to, a dark facet with a brighter core each, on an ink underlay, and the cap and stem each carry a lit face over a darker body. The cluster's shape, the cap, the stem and the two motes sit where they did.",
   "tags": ["relic"],
+  "says": ["wider"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

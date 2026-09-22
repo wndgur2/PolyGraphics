@@ -1,9 +1,12 @@
 {
   "id": "ss.relic.berserk",
   "name": "Last sting",
-  "description": "A sting torn out of the body that used it, sac and all: a long barbed needle running from a dark, wet venom sac at the top left to a point at the bottom right, three strands of red tissue still trailing off the sac where it came away, and a bead at the tip. A bee's sting is the hit it dies for \u2014 it costs the whole body and lands harder than anything else it can do \u2014 and that is the relic exactly: the nearer you are to dying, the harder you hit. The barbs are what keep the needle from reading as a thorn or a pin, so they are large and pale against it; a thorn is smooth, and a hooked needle is something that was meant to stay in. The sac is drawn as a gland rather than a bulb \u2014 a first pass with a round pale sac on the shaft read as a matchstick \u2014 and the strands hang limp instead of radiating, because tissue tears, it does not spark. Legibility pass: the needle was drawn a hair wide of nothing and lit at its own value, so three pixels of it cleared the plate. It is a step lighter now, thickened across its axis \u2014 still a needle, not a cone \u2014 and the barbs are drawn at a size that survives 26px. The sac stays dark and wet: it is the one thing here the light is not meant to be on.",
+  "description": "A sting torn out of the body that used it, sac and all: a long barbed needle running from a dark, wet venom sac at the top left to a point at the bottom right, three strands of red tissue still trailing off the sac where it came away, and a bead at the tip. A bee's sting is the hit it dies for \u2014 it costs the whole body and lands harder than anything else it can do \u2014 and that is the relic exactly: the nearer you are to dying, the harder you hit. The barbs are what keep the needle from reading as a thorn or a pin, so they are large and pale against it; a thorn is smooth, and a hooked needle is something that was meant to stay in. The sac is drawn as a gland rather than a bulb \u2014 a first pass with a round pale sac on the shaft read as a matchstick \u2014 and the strands hang limp instead of radiating, because tissue tears, it does not spark. Legibility pass: the needle was drawn a hair wide of nothing and lit at its own value, so three pixels of it cleared the plate. It is a step lighter now, thickened across its axis \u2014 still a needle, not a cone \u2014 and the barbs are drawn at a size that survives 26px. The sac stays dark and wet: it is the one thing here the light is not meant to be on. Says pass: nothing on the plate carried the health this find reads. The body's reservoir is drawn beside the sting now with one quarter left in it \u2014 `ss.relic.secondwind`'s mark, read the same way \u2014 so the sting is the last of it, which is why it lands hardest.",
   "tags": [
     "relic"
+  ],
+  "says": [
+    "harder"
   ],
   "size": [
     32,
@@ -13,6 +16,44 @@
     {
       "id": "plate",
       "use": "ss.lib.relic-plate"
+    },
+    {
+      "id": "left_o",
+      "at": [
+        -7.4,
+        6.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 4.4
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "left_empty",
+      "at": [
+        -7.4,
+        6.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.6
+      },
+      "fill": "$coal.dark"
+    },
+    {
+      "id": "left_quarter",
+      "at": [
+        -7.4,
+        6.8
+      ],
+      "shape": {
+        "kind": "wedge",
+        "r": 3.6,
+        "from": 90,
+        "to": 180
+      },
+      "fill": "$blood.light"
     },
     {
       "id": "strand_a",

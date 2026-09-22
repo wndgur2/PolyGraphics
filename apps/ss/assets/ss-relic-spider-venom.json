@@ -3,6 +3,7 @@
   "name": "Venomed Claw",
   "description": "One arm, held up, with the hook wet and three drops coming off it — the biggest still hanging under the claw, the next mid-fall, the last already small. The find puts poison on the hand's bite, so what is drawn is the claw *loaded* rather than the claw closing: a single limb on the diagonal with a string of green falling away from the tip, which is a silhouette neither of the other two hand plates has. Eighth Leg fans four arms off a knuckle and Hauling Arms mirrors two of them inward; this is one. The green is the same venom token the acid finds wear, so the two poisons on the shelf read as one substance — this is the heavier dose, and the drawing says so by hanging a fat drop off the tip rather than by inventing a colour for it. `ss.lib.spider-arm`'s `venomed` variant does the staining and leaves the bones alone: a limb recoloured end to end stops reading as a limb.",
   "tags": ["relic"],
+  "says": ["harder"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

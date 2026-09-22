@@ -3,6 +3,7 @@
   "name": "Shed husk",
   "description": "An empty exoskeleton stood upright and seen from the front, pale husk with a shade down one side, leaning a little to the right at the head the way a thing with nothing inside it slumps; six stubby leg-nubs droop from the thorax, kept short and mostly under the body because two-segment legs this small read as arrows. The moult split runs from the top of the head down the thorax, gaping open at the head and closing lower, and its inside is a warm mid tone, deliberately not black — a dark slit in a pale body is a mouth. A small solid pheromone wisp curls up off the open head: that scent is why the swarm hunts the husk instead of you. No eyes, no antennae — two dots on a pale oval is a face, and a husk has no face left.",
   "tags": ["relic"],
+  "says": ["hides"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

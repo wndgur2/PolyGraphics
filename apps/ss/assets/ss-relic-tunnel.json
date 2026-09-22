@@ -3,6 +3,7 @@
   "name": "Boring jaws",
   "description": "A cross-section of packed earth — a lit crust, a rusty band, dark loam and red subsoil, with two grey stones and a few pebbles caught in the layers — and a tunnel bored up through it from the lower-left edge to a round mouth at the right, where a pair of chitin mandibles sit open, biting up toward the surface and past the block's edge. The bore is filled with a pale sandy brown rather than a dark tone: a dark channel through earth is a crack or a worm, and a dark round mouth ringed in brown is an eye, so the tunnel is the palest thing on the plate and the jaws are what is warm against it. Walking through earth and stone is the relic, so the jaws are the object and the earth is what they are in; the bite past the edge is what keeps the silhouette from being the plain slab ss.relic.mason already owns.",
   "tags": ["relic"],
+  "says": ["faster", "costs"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

@@ -3,6 +3,7 @@
   "name": "Answering hive-head",
   "description": "The face that comes when the ruins answer instead of pay: a hive-head lit from above, two hollow eyes, two fangs hanging past the jaw. Built on the relic plate's `curse` variant, so it is unmistakably the same kind of object as a find while being unmistakably not one — arcane where the finds are gold. Polish: the head was one flat `$arcane.dark` disc; it is now a `$arcane.dark2` body with a `$arcane.dark` face offset up-left (a darker crescent along the jaw side) and a narrow `$arcane` brow under the existing `$arcane.light2` crown, so it is a lit dome at 1× rather than a violet coin. The brow is kept small on purpose: a wide `$arcane` facet made the head the same colour as the curse rim, and the head is meant to stay darker than its rim. The ink underlays under head and fangs, the two eye holes — they are the curse, and the point — the fangs and the plate variant are exactly as they were.",
   "tags": ["curse"],
+  "says": ["costs"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate", "variant": "curse"},

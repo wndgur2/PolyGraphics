@@ -3,6 +3,7 @@
   "name": "Wingbeat",
   "description": "One forewing in profile, root at the lower-left and tip driving up and right: a straight leading edge, a bellied trailing edge, a near-white membrane cooling to aqua toward the tip, and dark veins — three long ones fanning from the root with two cross-veins — over it. Three solid tapered speed-dashes of different lengths trail straight back from the root the way it came, staggered and weighted to the trailing side rather than fanned evenly around the axis. The relic rewards holding one heading, so the whole object is a heading: the streaks say it has been going that way for a while. It is not ss.relic.camo's leaf, which is symmetric about a midrib and brown; this is lopsided, veined like a wing and cold. Fanned, curling streaks were tried and made a squid of it at 1×, and three even parallel dashes made a rocket; the lopsided set stays motion.",
   "tags": ["relic"],
+  "says": ["faster", "harder"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

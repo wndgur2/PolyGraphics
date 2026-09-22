@@ -3,6 +3,7 @@
   "name": "Four-leaf spore",
   "description": "Four spore caps on one stem, the fourth of them the point. The caps are domed rather than flat — a dark body with a lighter crown offset up-left on three of the four — so the cluster reads as growing out of the plate instead of stamped onto it, and the odd one out is the bottom-right, which is where the eye lands last. Polish: each cap is now a `$venom.dark2` body with a `$venom.dark` face offset up-left, so a darker crescent runs along every cap's lower-right edge and they read as domes at 1× instead of flat discs; the crowns and the four cap centres are untouched (ss.relic.blackspore mirrors this layout). The stem went from 1.8 to 2.2 px so it survives 1×, and the ink pinhole where the four circles missed each other in the middle is closed with a `$venom.dark2` fold, since a dark centre ringed by anything brighter reads as a hole.",
   "tags": ["relic"],
+  "says": ["finds"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

@@ -3,6 +3,7 @@
   "name": "Heaped caches",
   "description": "Six spore cases stacked in three courses, each one the weapon's own case given a side: the same eight-sided shell, the same bone collar, the same cold fuse that refuses to advertise you — and a dark wall under the lid so the pile reads as a pile rather than as six discs laid on top of each other. Polish: the old outlines were the same size as the cases and drew nothing; each case now carries its own ink underlay ~1.4 px proud, drawn just before it in back-to-front order, so the heap has one ink silhouette and every case is cut from its neighbours by an ink line. Each lid has a `$chitin.light` upper-left chamfer against the `$chitin.dark` lower-right one, over the `$chitin.dark2` wall, so top and side read as two faces. The fuse is lifted from `$frost.dark` to `$frost` with a `$frost.light2` spark — a lit core inside the bone collar rather than a dark one, which was reading as a pupil at 1×. The heap is eased in by 3.5% so the ink stays clear of the rim; stack, order and count unchanged.",
   "tags": ["relic"],
+  "says": ["more", "wider"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

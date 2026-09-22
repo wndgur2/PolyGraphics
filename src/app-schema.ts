@@ -59,6 +59,21 @@ export const RulesSchema = z.strictObject({
       }),
     )
     .optional(),
+  /**
+   * The beats a drawing may say it does, and the mark each one is drawn with.
+   * Every document the rule reaches has to declare its own beats in `says`,
+   * which is what keeps a roster's visual grammar a grammar rather than a
+   * habit each new drawing is free to miss.
+   */
+  says: z
+    .array(
+      z.strictObject({
+        ...ScopeFields,
+        /** beat → the mark that says it, in one sentence, for whoever draws the next one. */
+        beats: z.record(z.string(), z.string().min(1)),
+      }),
+    )
+    .optional(),
   /** A named part whose colour must stay apart across a category, in ΔE2000. */
   distinct: z.array(z.strictObject({ ...ScopeFields, part: z.string(), minDeltaE: z.number().positive() })).optional(),
   /** Numbers a document promised the game: `"meta.radius": 62` is the divisor the game uses. */

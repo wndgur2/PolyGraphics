@@ -1,8 +1,9 @@
 {
   "id": "ss.relic.drone",
   "name": "Triple clutch",
-  "description": "One brood cell gone yellow with age and three young in it instead of one, packed the only way three of anything fits a round space: each curled a third of the way round, every tail tucked under the next one's head, every eye shut. Each keeps a dark edge of its own so three still counts as three. Polish: the albumen was split into a base tone and an up-left lit face, and set a shade off-centre so the shell's dark rim is thin where the light falls and thicker below; each larva's dark edge went to ink and a little heavier, which is what keeps three curls three at 1× and makes the seam where one tail tucks under the next head read as a seam; the shut eyelids were thickened from a hairline.",
+  "description": "One brood cell gone yellow with age and three young in it instead of one, packed the only way three of anything fits a round space: each curled a third of the way round, every tail tucked under the next one's head, every eye shut. Each keeps a dark edge of its own so three still counts as three. Polish: the albumen was split into a base tone and an up-left lit face, and set a shade off-centre so the shell's dark rim is thin where the light falls and thicker below; each larva's dark edge went to ink and a little heavier, which is what keeps three curls three at 1\u00d7 and makes the seam where one tail tucks under the next head read as a seam; the shut eyelids were thickened from a hairline. Says pass: three young in a cell is a count, and this find is a clock. The shell is split down its right shoulder with the cell's own light coming up through it and one flake already off, so the drawing shows a clutch coming out early rather than a clutch that is merely large.",
   "tags": ["relic"],
+  "says": ["faster"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},
@@ -62,7 +63,11 @@
     {"id": "g3_head", "at": [3.27, 0.64], "shape": {"kind": "circle", "r": 2.05}, "fill": "$carapace.light"},
     {"id": "g3_lid", "at": [2.8, 0.93], "rot": -32, "shape": {"kind": "rect", "w": 1.0, "h": 2.4, "corner": 0.37}, "fill": "$carapace.dark2"},
     {"id": "glaze", "at": [-0.3, -0.2], "shape": {"kind": "ellipse", "rx": 8.2, "ry": 10.2}, "fill": "$chitin.light@0.2"},
-    {"id": "gleam", "at": [-4.4, -6.6], "rot": -24, "shape": {"kind": "ellipse", "rx": 1.6, "ry": 2.9}, "fill": "$silent@0.6"}
+    {"id": "gleam", "at": [-4.4, -6.6], "rot": -24, "shape": {"kind": "ellipse", "rx": 1.6, "ry": 2.9}, "fill": "$silent@0.6"},
+    {"id": "split_o", "shape": {"kind": "poly", "points": [[4.6, -10.4], [7.9, -7.2], [6.4, -4.1], [9.0, -1.0], [7.2, 2.4], [9.3, 4.9], [10.6, 3.6], [8.7, 1.6], [10.8, -1.6], [8.2, -4.6], [9.7, -7.6], [6.2, -11.2]]}, "fill": "$ink"},
+    {"id": "split", "shape": {"kind": "poly", "points": [[5.2, -10.0], [7.0, -7.3], [5.5, -4.2], [8.1, -1.1], [6.3, 2.3], [8.4, 4.6], [9.2, 3.8], [7.4, 1.7], [9.5, -1.5], [6.9, -4.5], [8.4, -7.5], [6.0, -10.6]]}, "fill": "$gold.light"},
+    {"id": "flake_o", "at": [12.0, 6.6], "rot": 24, "shape": {"kind": "poly", "points": [[-2.4, 1.5], [0.4, -2.0], [2.4, 1.3]]}, "fill": "$ink"},
+    {"id": "flake", "at": [12.0, 6.5], "rot": 24, "shape": {"kind": "poly", "points": [[-1.6, 0.9], [0.3, -1.3], [1.6, 0.8]]}, "fill": "$chitin.light"}
   ],
   "variants": {
     "glyph": {

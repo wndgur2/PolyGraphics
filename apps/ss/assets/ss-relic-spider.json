@@ -3,6 +3,7 @@
   "name": "Eighth Leg",
   "description": "Four arms where the hand has three, and the one that was added is the amber one reaching past the rest — the find gives +1 arm and 20% more reach, so it is drawn as the leg you can see was put there rather than as a plate you have to read. Same knuckle and the same ss.lib.spider-arm as the slot icon; only the count and that one arm's colour differ, which is the whole of what the find does.",
   "tags": ["relic"],
+  "says": ["more", "wider"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},

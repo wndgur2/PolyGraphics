@@ -1,9 +1,12 @@
 {
   "id": "ss.relic.oldblood",
   "name": "Old blood",
-  "description": "A puddle of blood that dried a long time ago: a flat irregular pool, the crust wine-dark with a lighter rim of the same red where it thinned at the edge, three rust-brown patches where the crust has lifted and gone matte, and one crack across it with its lower lip caught by the light. One small fresh drop sits on the upper-right edge, the only bright wet thing on the plate. The relic stops the ruins handing out Rares \u2014 the good blood has already been spilt and set \u2014 so the pool is old and the drop is what is left. The centre is kept the same value as the rim and broken up with the flakes so that a dark pool with a lighter edge does not read as a hole in the panel. Legibility pass: the flakes carry it. The pool was left wine-dark on purpose \u2014 brightened to clear the plate it read as fresh blood and the drop stopped being the only wet thing here \u2014 so the three rust-brown patches were grown instead, which is the same sentence this description already makes: the matte lifted crust is what a pool this old has to show.",
+  "description": "A puddle of blood that dried a long time ago: a flat irregular pool, the crust wine-dark with a lighter rim of the same red where it thinned at the edge, three rust-brown patches where the crust has lifted and gone matte, and one crack across it with its lower lip caught by the light. One small fresh drop sits on the upper-right edge, the only bright wet thing on the plate. The relic stops the ruins handing out Rares \u2014 the good blood has already been spilt and set \u2014 so the pool is old and the drop is what is left. The centre is kept the same value as the rim and broken up with the flakes so that a dark pool with a lighter edge does not read as a hole in the panel. Legibility pass: the flakes carry it. The pool was left wine-dark on purpose \u2014 brightened to clear the plate it read as fresh blood and the drop stopped being the only wet thing here \u2014 so the three rust-brown patches were grown instead, which is the same sentence this description already makes: the matte lifted crust is what a pool this old has to show. Says pass: a dried pool holds no part of what this find does. Three rungs of the ruins' own ladder sit over it now, cold to hot, and the cold one has dried to a crust \u2014 the shelf the find takes off the table, said in the inks every badge's rim already wears.",
   "tags": [
     "relic"
+  ],
+  "says": [
+    "finds"
   ],
   "size": [
     32,
@@ -578,6 +581,115 @@
         "ry": 0.8
       },
       "fill": "$blood.light2"
+    },
+    {
+      "id": "rung0_o",
+      "at": [
+        -8.6,
+        -10.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.9
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "rung0",
+      "at": [
+        -8.6,
+        -10.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.1
+      },
+      "fill": "$rust.dark"
+    },
+    {
+      "id": "rung0_crust",
+      "at": [
+        -8.6,
+        -10.8
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 2.1,
+        "width": 0.9
+      },
+      "fill": "$rust.light2"
+    },
+    {
+      "id": "rung1_o",
+      "at": [
+        -2.4,
+        -10.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.9
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "rung1",
+      "at": [
+        -2.4,
+        -10.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.1
+      },
+      "fill": "$arcane"
+    },
+    {
+      "id": "rung1_lit",
+      "at": [
+        -3.0,
+        -11.5
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.85
+      },
+      "fill": "$arcane.light2"
+    },
+    {
+      "id": "rung2_o",
+      "at": [
+        3.8,
+        -10.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.9
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "rung2",
+      "at": [
+        3.8,
+        -10.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.1
+      },
+      "fill": "$ember"
+    },
+    {
+      "id": "rung2_lit",
+      "at": [
+        3.1999999999999997,
+        -11.5
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.85
+      },
+      "fill": "$gold.light2"
     }
   ],
   "variants": {

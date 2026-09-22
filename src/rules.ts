@@ -209,6 +209,33 @@ export function evaluateRules(o: Owner): RuleReport[] {
     reports.push(rep);
   }
 
+  for (const rule of r.says ?? []) {
+    const docs = assets.filter((a) => inScope(a, rule));
+    const vocab = Object.keys(rule.beats);
+    const rep: RuleReport = {
+      rule: "says",
+      what: `${scopeText(rule)}: each says what it does, out of ${listOf(vocab)}`,
+      level: levelOf(m, "says"),
+      scope: docs.map((a) => a.id),
+      broken: [],
+      excepted: [],
+    };
+    for (const a of docs) {
+      if (a.why?.says) { rep.excepted.push({ id: a.id, why: a.why.says }); continue; }
+      // A drawing that cannot name a beat is the one worth finding: it is
+      // usually the object the thing is named after, drawn without whatever
+      // the thing actually does to the run.
+      if (!a.says?.length) {
+        rep.broken.push({ id: a.id, msg: `says nothing — name the beats this drawing shows, out of ${listOf(vocab)}` });
+        continue;
+      }
+      const off = a.says.filter((b) => !(b in rule.beats));
+      if (off.length)
+        rep.broken.push({ id: a.id, msg: `says ${listOf(off)} — not a beat this app draws (${listOf(vocab)})` });
+    }
+    reports.push(rep);
+  }
+
   for (const rule of r.distinct ?? []) {
     const docs = assets.filter((a) => inScope(a, rule));
     const rep: RuleReport = {

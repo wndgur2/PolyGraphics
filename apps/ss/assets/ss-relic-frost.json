@@ -3,6 +3,7 @@
   "name": "Deep resonance",
   "description": "Three rings off the same silent point, the outer one heavy where the weapon's is a hairline. The Chirp has no body to compose — it is a sound — so the upgrade is drawn as how far and how hard the sound goes. Polish: the rings no longer fade by alpha — a translucent ring on the dark panel was a blurry ring — but step down in tone from a near-white centre through light, mid and dark frost; each ring sits on an ink ring of its own; the centre disc was grown to meet the inner ring, because a dark gap inside a bright ring was an eye; and the radii were nudged off an even spacing.",
   "tags": ["relic"],
+  "says": ["more"],
   "size": [32, 32],
   "parts": [
     {"id": "plate", "use": "ss.lib.relic-plate"},
