@@ -105,13 +105,20 @@ export const AppManifestSchema = z.strictObject({
        * category to declare a `glyph` state: that is what lifts the plate off
        * so the object can be measured alone.
        *
-       * `field` is the plate's own part that the drawing is allowed to sit on.
+       * `field` is the part of the plate that the drawing is allowed to sit on.
        * Everything outside it — the rim, and the rounded corners the rim eats —
        * is not a margin a drawing may lean into: a consumer is free to treat
        * the rim as its own, and this one does, repainting it per grade and
        * cutting the glyph silhouette along the same line.
+       *
+       * `doc` is the library document the plate comes from, for a category that
+       * composes one. A category that draws its own plate inline leaves it out,
+       * and then `field` names a part of each document itself: everything up to
+       * and including it is the plate, everything after it is the drawing —
+       * which is the order they are authored in anyway, since a plate that came
+       * second would cover what it is the ground for.
        */
-      plate: z.record(category, z.strictObject({ doc: assetId, field: z.string().min(1) })).optional(),
+      plate: z.record(category, z.strictObject({ doc: assetId.optional(), field: z.string().min(1) })).optional(),
       /** Screen px per authored px — what "game scale" means for this app. */
       scale: z.number().positive().optional(),
       /**

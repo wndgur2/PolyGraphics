@@ -108,35 +108,40 @@ interface Badge { lit: number; peak: number; cover: number; spill: number }
  * composes it, variant and all. So nothing here has to know how a plate is put
  * together; it only has to know that lifting it off is what `glyph` means.
  */
-function measureBadge(id: string, plate: { doc: string; field: string }): Badge | string {
+function measureBadge(id: string, plate: { doc?: string; field: string }): Badge | string {
   const asset = assets.get(id);
   if (!asset) return "no such document";
-  const removed = asset.variants?.glyph?.remove ?? [];
-  if (!removed.length) return "has no glyph variant, so the plate cannot be lifted off to measure it";
-  const under = asset.parts.filter((p) => removed.includes(p.id));
-  if (!under.some((p) => "use" in p && p.use === plate.doc)) return `its glyph variant lifts off no part using ${plate.doc}`;
-  const plateDoc = assets.get(plate.doc);
-  const fieldPart = plateDoc?.parts.find((p) => p.id === plate.field);
-  if (!fieldPart || !("shape" in fieldPart)) return `${plate.doc} has no drawn part "${plate.field}" to be the field`;
-  const object = rasterize(renderSVG(asset, reg, { variant: "glyph" }).svg);
-  const ground = rasterize(renderSVG({ ...asset, parts: under, variants: undefined } as Asset, reg).svg);
-  // The field as this document composes it, so a plate placed or scaled by its
-  // wearer is still measured where it actually lands.
-  const field = rasterize(
-    renderSVG(
-      {
-        ...asset,
-        parts: under.map((p) =>
-          "use" in p
-            ? { id: p.id, at: p.at, rot: p.rot, scale: p.scale, shape: fieldPart.shape, fill: fieldPart.fill }
-            : p,
-        ) as Asset["parts"],
-        variants: undefined,
-      } as Asset,
-      reg,
-    ).svg,
-  );
-  if (object.w !== ground.w || object.h !== ground.h) return "the glyph variant is not the size of its own plate";
+  const only = (parts: Asset["parts"]) => rasterize(renderSVG({ ...asset, parts, variants: undefined } as Asset, reg).svg);
+
+  let object: ReturnType<typeof rasterize>, ground: ReturnType<typeof rasterize>, field: ReturnType<typeof rasterize>;
+  if (plate.doc) {
+    // A composed plate: what the `glyph` state lifts off is the plate, and the
+    // field is a part inside the document it came from.
+    const removed = asset.variants?.glyph?.remove ?? [];
+    if (!removed.length) return "has no glyph variant, so the plate cannot be lifted off to measure it";
+    const under = asset.parts.filter((p) => removed.includes(p.id));
+    if (!under.some((p) => "use" in p && p.use === plate.doc)) return `its glyph variant lifts off no part using ${plate.doc}`;
+    const fieldPart = assets.get(plate.doc)?.parts.find((p) => p.id === plate.field);
+    if (!fieldPart || !("shape" in fieldPart)) return `${plate.doc} has no drawn part "${plate.field}" to be the field`;
+    object = rasterize(renderSVG(asset, reg, { variant: "glyph" }).svg);
+    ground = only(under);
+    // The field as this document composes it, so a plate placed or scaled by
+    // its wearer is still measured where it actually lands.
+    field = only(
+      under.map((p) =>
+        "use" in p ? { id: p.id, at: p.at, rot: p.rot, scale: p.scale, shape: fieldPart.shape, fill: fieldPart.fill } : p,
+      ) as Asset["parts"],
+    );
+  } else {
+    // An inline plate: everything up to the field is the plate, the rest is
+    // the drawing it is the ground for.
+    const at = asset.parts.findIndex((p) => p.id === plate.field);
+    if (at < 0) return `has no part "${plate.field}" to be the field`;
+    object = only(asset.parts.slice(at + 1));
+    ground = only(asset.parts.slice(0, at + 1));
+    field = only(asset.parts.slice(at, at + 1));
+  }
+  if (object.w !== ground.w || object.h !== ground.h) return "the drawing is not the size of its own plate";
   let lit = 0, peak = 0, n = 0, spill = 0;
   for (let i = 0; i < object.px.length; i += 4) {
     if (object.px[i + 3] < 128) continue;
@@ -178,7 +183,7 @@ const judged = (a: { tags: string[] }): boolean => BODIES.has(bare(categoryOf(a)
 const targets = positional.length
   ? positional
   : [...app.assets.values()].filter(judged).map((a) => a.id).sort();
-const plateOf = (id: string): { doc: string; field: string } | undefined => {
+const plateOf = (id: string): { doc?: string; field: string } | undefined => {
   const a = assets.get(id);
   return a ? PLATES.get(bare(categoryOf(a))) : undefined;
 };
