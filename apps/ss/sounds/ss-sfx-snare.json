@@ -1,7 +1,7 @@
 {
   "id": "ss.sfx.snare",
   "name": "Snare",
-  "description": "A cord drawn tight. The weapon it belongs to does not throw anything and does not land on anything, so the one impact sound in the set would have been a lie \u2014 what actually happens is that something is caught and held, and the sound of that is tension arriving rather than a blow. Three voices say it in order. `fibres` is the cord itself taking the strain: nine grains of noise scattered unevenly across two tenths of a second under a bandpass climbing from `$shell` to `$grit`, so the strands give one after another and higher each time, which is the whole of the dry creak the thing is named for. Evenly spaced grains would read as a ratchet, and a ratchet is a machine. `pull` is the body under them, a sawtooth sliding up from `$moan` to `$tap` and shut in by a lowpass \u2014 nothing in this weapon is bright, and an unfiltered saw here would put the cord somewhere metallic. It sits in the mids rather than down at `$dirge` where it was first written, because a phone speaker hands back nothing under about 200Hz and a sound whose body lives there arrives on a phone as the grains alone. `cinch` lands last and alone, one short low knock at the moment it stops moving, because a cord pulled tight ends on a stop rather than on a fade. The jitter is on frequency only and narrow: this fires up to three times a cast and a dozen times a fight, and a sound that wanders far at that rate stops being one object.",
+  "description": "A leather strap pulled tight, which is stick-slip friction and nothing else: the cord grips, tears free, grips again, faster and tighter as the tension climbs. So there is no oscillator anywhere in this document. The first version had a filtered sawtooth sliding up underneath for body and it was the whole problem \u2014 a tone under a creak is a hum, and what came out was a low boom with some grit on top rather than a strap. Every voice here is noise cut into grains, and the sound is entirely in how those grains are spaced.\n\nThree layers, and the shape is an acceleration. `grip` is the strap taking the strain: eight slow grains over thirteen hundredths, wide apart, in the low-mid band where leather has its body. `slip` arrives on top of it a tenth in with twice the grains in the same space and half the length each, bandpassed higher and with a sharp Q, which is the run of fast ticks the ear reads as *drrr* \u2014 and it is what the whole cue is named for. `bite` is three grains at the end, low and close together, where it stops moving. Nothing fades out: a strap that goes quiet has been let go, and this one is still tight when the sound ends.\n\nThe grains are jittered rather than evenly spaced, and that is load-bearing. Evenly spaced clicks are a ratchet, a ratchet is a machine, and there is no machinery anywhere in this game.",
   "tags": [
     "sfx",
     "weapon"
@@ -12,17 +12,59 @@
   },
   "jitter": {
     "freq": [
-      0.94,
-      1.09
+      0.93,
+      1.1
     ]
   },
   "voices": [
     {
-      "id": "fibres",
-      "gain": "mid",
+      "id": "grip",
+      "gain": 1.28,
       "filter": {
         "type": "bandpass",
-        "freq": "$shell",
+        "freq": "$tap",
+        "to": "$shell",
+        "q": "band"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.6,
+              0.8
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        }
+      ],
+      "repeat": {
+        "of": {
+          "kind": "noise"
+        },
+        "count": 8,
+        "spread": 0.13,
+        "grain": 0.016,
+        "gainRange": [
+          0.55,
+          1
+        ]
+      }
+    },
+    {
+      "id": "slip",
+      "at": 0.1,
+      "gain": 1.6,
+      "filter": {
+        "type": "bandpass",
+        "freq": "$shell.up",
         "to": "$grit",
         "q": "band"
       },
@@ -32,15 +74,15 @@
           "keys": [
             [
               0,
-              0.5
+              0.45
             ],
             [
-              0.35,
+              0.55,
               1
             ],
             [
               1,
-              0.08
+              0.5
             ]
           ]
         }
@@ -49,59 +91,24 @@
         "of": {
           "kind": "noise"
         },
-        "count": 9,
-        "spread": 0.21,
-        "grain": 0.018,
+        "count": 17,
+        "spread": 0.16,
+        "grain": 0.009,
         "gainRange": [
-          0.45,
+          0.4,
           1
         ]
       }
     },
     {
-      "id": "pull",
-      "gain": "soft",
-      "dur": "beat",
+      "id": "bite",
+      "at": 0.25,
+      "gain": 0.96,
       "filter": {
-        "type": "lowpass",
-        "freq": "$grit.down",
-        "to": "$shell",
-        "q": "wide"
-      },
-      "source": {
-        "kind": "osc",
-        "wave": "sawtooth",
-        "freq": "$moan",
-        "to": "$tap"
-      },
-      "env": [
-        {
-          "prop": "gain",
-          "adsr": {
-            "attack": 0.012,
-            "peak": 1,
-            "decay": 0.13,
-            "sustain": 0.22,
-            "release": 0.05
-          }
-        }
-      ]
-    },
-    {
-      "id": "cinch",
-      "at": 0.2,
-      "gain": "faint",
-      "dur": "blip",
-      "filter": {
-        "type": "lowpass",
-        "freq": "$shell",
-        "q": "wide"
-      },
-      "source": {
-        "kind": "osc",
-        "wave": "triangle",
-        "freq": "$tap",
-        "to": "$moan"
+        "type": "bandpass",
+        "freq": "$swarm",
+        "to": "$tap",
+        "q": "band"
       },
       "env": [
         {
@@ -113,11 +120,23 @@
             ],
             [
               1,
-              0
+              0.35
             ]
           ]
         }
-      ]
+      ],
+      "repeat": {
+        "of": {
+          "kind": "noise"
+        },
+        "count": 3,
+        "spread": 0.035,
+        "grain": 0.02,
+        "gainRange": [
+          0.7,
+          1
+        ]
+      }
     }
   ]
 }
