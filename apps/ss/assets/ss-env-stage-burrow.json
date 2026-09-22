@@ -1,0 +1,2152 @@
+{
+  "id": "ss.env.stage-burrow",
+  "name": "Ant Burrow stage card (SS)",
+  "description": "The picture on the Ant Burrow card in Feelers' map select. The card used to photograph the real generator into a dynamic texture on every resize; this is the same burrow drawn once, and chosen rather than rolled.\n\nA burrow is a lattice \u2014 chambers with a way out of each side and masses of earth left standing between them \u2014 and that is what the picture is: sixteen hand-placed lattice corners, the outer ranks off the canvas so the chambers carry on past the frame, legs of earth between them with a doorway cut through each, and two walls missing altogether, which is the other way through a burrow and the reason a chamber never reads as a box. The earth is drawn in the run's own two passes \u2014 every contour, then every fill \u2014 so no mass outlines the one beside it. $carapace.dark for the earth and $ink.dark for its contour are the run's EARTH_INK and EARTH_RIM_INK to within a value or two; the floor is $dead.dark under the gouges the digging left.\n\nAuthored 3:2; the card crops it vertically and never horizontally, so the lattice reads across the full width at any height the card can give it. The fungi sit larger against a chamber than a run puts them \u2014 at the run's own ratio a cluster is six pixels of this card, and a picture of a burrow with nothing living in it is a picture of a wall. The husks the burrow also carries are on the floor as chips instead: whole, at a size that reads on a card this small, $husk is the brightest ink in a picture whose subject is earth.",
+  "tags": [
+    "env",
+    "card",
+    "stage"
+  ],
+  "size": [
+    384,
+    256
+  ],
+  "parts": [
+    {
+      "id": "floor",
+      "shape": {
+        "kind": "rect",
+        "w": 384,
+        "h": 256
+      },
+      "fill": "$dead.dark"
+    },
+    {
+      "id": "floor_grain",
+      "at": [
+        0,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "ellipse",
+          "rx": 6,
+          "ry": 4
+        },
+        "count": 140,
+        "area": [
+          400,
+          272
+        ],
+        "seed": 5101,
+        "scaleRange": [
+          0.4,
+          1.6
+        ],
+        "jitterRot": true
+      },
+      "fill": "$carapace@0.07"
+    },
+    {
+      "id": "floor_dark",
+      "at": [
+        0,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "ellipse",
+          "rx": 5,
+          "ry": 4
+        },
+        "count": 110,
+        "area": [
+          400,
+          272
+        ],
+        "seed": 5102,
+        "scaleRange": [
+          0.4,
+          1.5
+        ],
+        "jitterRot": true
+      },
+      "fill": "$ink@0.22"
+    },
+    {
+      "id": "gouge_0_cut",
+      "at": [
+        -148,
+        -6
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 30,
+        "width": 4,
+        "from": 20,
+        "to": 128
+      },
+      "fill": "$ink@0.55"
+    },
+    {
+      "id": "gouge_0_lip",
+      "at": [
+        -148,
+        -8
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 30,
+        "width": 2,
+        "from": 30,
+        "to": 118
+      },
+      "fill": "$carapace.dark2@0.35"
+    },
+    {
+      "id": "gouge_1_cut",
+      "at": [
+        -16,
+        14
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 26,
+        "width": 4,
+        "from": 150,
+        "to": 250
+      },
+      "fill": "$ink@0.55"
+    },
+    {
+      "id": "gouge_1_lip",
+      "at": [
+        -16,
+        12
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 26,
+        "width": 2,
+        "from": 160,
+        "to": 240
+      },
+      "fill": "$carapace.dark2@0.35"
+    },
+    {
+      "id": "gouge_2_cut",
+      "at": [
+        116,
+        -16
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 24,
+        "width": 4,
+        "from": 250,
+        "to": 340
+      },
+      "fill": "$ink@0.55"
+    },
+    {
+      "id": "gouge_2_lip",
+      "at": [
+        116,
+        -18
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 24,
+        "width": 2,
+        "from": 260,
+        "to": 330
+      },
+      "fill": "$carapace.dark2@0.35"
+    },
+    {
+      "id": "gouge_3_cut",
+      "at": [
+        -20,
+        -122
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 22,
+        "width": 4,
+        "from": 30,
+        "to": 130
+      },
+      "fill": "$ink@0.55"
+    },
+    {
+      "id": "gouge_3_lip",
+      "at": [
+        -20,
+        -124
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 22,
+        "width": 2,
+        "from": 40,
+        "to": 120
+      },
+      "fill": "$carapace.dark2@0.35"
+    },
+    {
+      "id": "gouge_4_cut",
+      "at": [
+        -150,
+        128
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 26,
+        "width": 4,
+        "from": 200,
+        "to": 300
+      },
+      "fill": "$ink@0.55"
+    },
+    {
+      "id": "gouge_4_lip",
+      "at": [
+        -150,
+        126
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 26,
+        "width": 2,
+        "from": 210,
+        "to": 290
+      },
+      "fill": "$carapace.dark2@0.35"
+    },
+    {
+      "id": "gouge_5_cut",
+      "at": [
+        120,
+        130
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 24,
+        "width": 4,
+        "from": 110,
+        "to": 210
+      },
+      "fill": "$ink@0.55"
+    },
+    {
+      "id": "gouge_5_lip",
+      "at": [
+        120,
+        128
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 24,
+        "width": 2,
+        "from": 120,
+        "to": 200
+      },
+      "fill": "$carapace.dark2@0.35"
+    },
+    {
+      "id": "floor_grit",
+      "at": [
+        0,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "rect",
+          "w": 3,
+          "h": 3
+        },
+        "count": 70,
+        "area": [
+          400,
+          272
+        ],
+        "seed": 5103,
+        "scaleRange": [
+          0.5,
+          1.4
+        ]
+      },
+      "fill": "$carapace.dark@0.7"
+    },
+    {
+      "id": "floor_rust",
+      "at": [
+        0,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "rect",
+          "w": 3,
+          "h": 3
+        },
+        "count": 26,
+        "area": [
+          400,
+          272
+        ],
+        "seed": 5104,
+        "scaleRange": [
+          0.5,
+          1.4
+        ]
+      },
+      "fill": "$rust@0.8"
+    },
+    {
+      "id": "floor_shell",
+      "at": [
+        0,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "rect",
+          "w": 3,
+          "h": 2
+        },
+        "count": 34,
+        "area": [
+          400,
+          272
+        ],
+        "seed": 5107,
+        "scaleRange": [
+          0.5,
+          1.5
+        ],
+        "jitterRot": true
+      },
+      "fill": "$husk@0.45"
+    },
+    {
+      "id": "rim_h00_0",
+      "at": [
+        -179.0,
+        -193.5
+      ],
+      "rot": 4.09,
+      "shape": {
+        "kind": "rect",
+        "w": 112.2,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h00_1",
+      "at": [
+        -95.0,
+        -187.5
+      ],
+      "rot": 4.09,
+      "shape": {
+        "kind": "rect",
+        "w": 84.1,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h01_0",
+      "at": [
+        -178.6,
+        -64.4
+      ],
+      "rot": 3.32,
+      "shape": {
+        "kind": "rect",
+        "w": 96.9,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h01_1",
+      "at": [
+        -92.6,
+        -59.4
+      ],
+      "rot": 3.32,
+      "shape": {
+        "kind": "rect",
+        "w": 91.4,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h02_0",
+      "at": [
+        -195.6,
+        63.3
+      ],
+      "rot": 3.32,
+      "shape": {
+        "kind": "rect",
+        "w": 86.8,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h02_1",
+      "at": [
+        -110.7,
+        68.2
+      ],
+      "rot": 3.32,
+      "shape": {
+        "kind": "rect",
+        "w": 103.4,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h03_0",
+      "at": [
+        -181.5,
+        194.4
+      ],
+      "rot": -3.18,
+      "shape": {
+        "kind": "rect",
+        "w": 99.1,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h03_1",
+      "at": [
+        -94.5,
+        189.6
+      ],
+      "rot": -3.18,
+      "shape": {
+        "kind": "rect",
+        "w": 99.1,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h10_0",
+      "at": [
+        -54.2,
+        -188.8
+      ],
+      "rot": -8.13,
+      "shape": {
+        "kind": "rect",
+        "w": 82.0,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h10_1",
+      "at": [
+        24.6,
+        -200.1
+      ],
+      "rot": -8.13,
+      "shape": {
+        "kind": "rect",
+        "w": 97.3,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h11_0",
+      "at": [
+        -51.1,
+        -59.8
+      ],
+      "rot": -6.24,
+      "shape": {
+        "kind": "rect",
+        "w": 75.9,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h11_1",
+      "at": [
+        27.8,
+        -68.5
+      ],
+      "rot": -6.24,
+      "shape": {
+        "kind": "rect",
+        "w": 106.8,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h13_0",
+      "at": [
+        -40.3,
+        191.0
+      ],
+      "rot": 6.55,
+      "shape": {
+        "kind": "rect",
+        "w": 93.8,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h13_1",
+      "at": [
+        37.6,
+        199.9
+      ],
+      "rot": 6.55,
+      "shape": {
+        "kind": "rect",
+        "w": 79.0,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h20_0",
+      "at": [
+        78.5,
+        -201.2
+      ],
+      "rot": 5.96,
+      "shape": {
+        "kind": "rect",
+        "w": 95.4,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h20_1",
+      "at": [
+        159.5,
+        -192.8
+      ],
+      "rot": 5.96,
+      "shape": {
+        "kind": "rect",
+        "w": 95.4,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h21_0",
+      "at": [
+        90.5,
+        -69.8
+      ],
+      "rot": 4.21,
+      "shape": {
+        "kind": "rect",
+        "w": 103.1,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h21_1",
+      "at": [
+        176.4,
+        -63.4
+      ],
+      "rot": 4.21,
+      "shape": {
+        "kind": "rect",
+        "w": 81.3,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h22_0",
+      "at": [
+        75.6,
+        59.5
+      ],
+      "rot": 7.33,
+      "shape": {
+        "kind": "rect",
+        "w": 97.6,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h22_1",
+      "at": [
+        160.4,
+        70.5
+      ],
+      "rot": 7.33,
+      "shape": {
+        "kind": "rect",
+        "w": 97.6,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h23_0",
+      "at": [
+        77.5,
+        200.1
+      ],
+      "rot": -4.97,
+      "shape": {
+        "kind": "rect",
+        "w": 85.2,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_h23_1",
+      "at": [
+        161.5,
+        192.8
+      ],
+      "rot": -4.97,
+      "shape": {
+        "kind": "rect",
+        "w": 107.3,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v00_0",
+      "at": [
+        -212.5,
+        -171.0
+      ],
+      "rot": 86.48,
+      "shape": {
+        "kind": "rect",
+        "w": 92.1,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v00_1",
+      "at": [
+        -207.5,
+        -91.0
+      ],
+      "rot": 86.48,
+      "shape": {
+        "kind": "rect",
+        "w": 92.1,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v01_0",
+      "at": [
+        -207.9,
+        -45.5
+      ],
+      "rot": 95.36,
+      "shape": {
+        "kind": "rect",
+        "w": 83.1,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v01_1",
+      "at": [
+        -215.6,
+        36.4
+      ],
+      "rot": 95.36,
+      "shape": {
+        "kind": "rect",
+        "w": 93.4,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v02_0",
+      "at": [
+        -216.3,
+        90.7
+      ],
+      "rot": 86.58,
+      "shape": {
+        "kind": "rect",
+        "w": 99.5,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v02_1",
+      "at": [
+        -211.4,
+        172.7
+      ],
+      "rot": 86.58,
+      "shape": {
+        "kind": "rect",
+        "w": 88.7,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v10_0",
+      "at": [
+        -72.7,
+        -157.4
+      ],
+      "rot": 87.32,
+      "shape": {
+        "kind": "rect",
+        "w": 99.3,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v10_1",
+      "at": [
+        -68.9,
+        -76.4
+      ],
+      "rot": 87.32,
+      "shape": {
+        "kind": "rect",
+        "w": 78.8,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v12_0",
+      "at": [
+        -78.0,
+        86.8
+      ],
+      "rot": 83.23,
+      "shape": {
+        "kind": "rect",
+        "w": 75.9,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v12_1",
+      "at": [
+        -69.1,
+        161.7
+      ],
+      "rot": 83.23,
+      "shape": {
+        "kind": "rect",
+        "w": 94.9,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v20_0",
+      "at": [
+        53.3,
+        -181.9
+      ],
+      "rot": 86.53,
+      "shape": {
+        "kind": "rect",
+        "w": 86.2,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v20_1",
+      "at": [
+        58.2,
+        -102.0
+      ],
+      "rot": 86.53,
+      "shape": {
+        "kind": "rect",
+        "w": 102.1,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v21_0",
+      "at": [
+        57.6,
+        -45.9
+      ],
+      "rot": 95.36,
+      "shape": {
+        "kind": "rect",
+        "w": 94.4,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v21_1",
+      "at": [
+        50.0,
+        35.0
+      ],
+      "rot": 95.36,
+      "shape": {
+        "kind": "rect",
+        "w": 84.1,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v22_0",
+      "at": [
+        49.9,
+        91.3
+      ],
+      "rot": 86.86,
+      "shape": {
+        "kind": "rect",
+        "w": 112.7,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v22_1",
+      "at": [
+        54.9,
+        181.3
+      ],
+      "rot": 86.86,
+      "shape": {
+        "kind": "rect",
+        "w": 83.5,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v30_0",
+      "at": [
+        187.9,
+        -165.5
+      ],
+      "rot": 85.53,
+      "shape": {
+        "kind": "rect",
+        "w": 91.2,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v30_1",
+      "at": [
+        194.1,
+        -86.5
+      ],
+      "rot": 85.53,
+      "shape": {
+        "kind": "rect",
+        "w": 91.2,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v31_0",
+      "at": [
+        194.5,
+        -36.0
+      ],
+      "rot": 93.37,
+      "shape": {
+        "kind": "rect",
+        "w": 94.1,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v31_1",
+      "at": [
+        189.5,
+        48.0
+      ],
+      "rot": 93.37,
+      "shape": {
+        "kind": "rect",
+        "w": 94.1,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v32_0",
+      "at": [
+        189.1,
+        95.5
+      ],
+      "rot": 87.04,
+      "shape": {
+        "kind": "rect",
+        "w": 85.1,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_v32_1",
+      "at": [
+        192.9,
+        168.5
+      ],
+      "rot": 87.04,
+      "shape": {
+        "kind": "rect",
+        "w": 85.1,
+        "h": 42,
+        "corner": 21
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n00",
+      "at": [
+        -214,
+        -196
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n01",
+      "at": [
+        -206,
+        -66
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n02",
+      "at": [
+        -218,
+        62
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n03",
+      "at": [
+        -210,
+        196
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n10",
+      "at": [
+        -74,
+        -186
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n11",
+      "at": [
+        -68,
+        -58
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n12",
+      "at": [
+        -80,
+        70
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n13",
+      "at": [
+        -66,
+        188
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n20",
+      "at": [
+        52,
+        -204
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n21",
+      "at": [
+        60,
+        -72
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n22",
+      "at": [
+        48,
+        56
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n23",
+      "at": [
+        56,
+        202
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n30",
+      "at": [
+        186,
+        -190
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n31",
+      "at": [
+        196,
+        -62
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n32",
+      "at": [
+        188,
+        74
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "rim_n33",
+      "at": [
+        194,
+        190
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 28
+      },
+      "fill": "$ink.dark"
+    },
+    {
+      "id": "earth_h00_0",
+      "at": [
+        -179.0,
+        -193.5
+      ],
+      "rot": 4.09,
+      "shape": {
+        "kind": "rect",
+        "w": 106.2,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h00_1",
+      "at": [
+        -95.0,
+        -187.5
+      ],
+      "rot": 4.09,
+      "shape": {
+        "kind": "rect",
+        "w": 78.1,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h01_0",
+      "at": [
+        -178.6,
+        -64.4
+      ],
+      "rot": 3.32,
+      "shape": {
+        "kind": "rect",
+        "w": 90.9,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h01_1",
+      "at": [
+        -92.6,
+        -59.4
+      ],
+      "rot": 3.32,
+      "shape": {
+        "kind": "rect",
+        "w": 85.4,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h02_0",
+      "at": [
+        -195.6,
+        63.3
+      ],
+      "rot": 3.32,
+      "shape": {
+        "kind": "rect",
+        "w": 80.8,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h02_1",
+      "at": [
+        -110.7,
+        68.2
+      ],
+      "rot": 3.32,
+      "shape": {
+        "kind": "rect",
+        "w": 97.4,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h03_0",
+      "at": [
+        -181.5,
+        194.4
+      ],
+      "rot": -3.18,
+      "shape": {
+        "kind": "rect",
+        "w": 93.1,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h03_1",
+      "at": [
+        -94.5,
+        189.6
+      ],
+      "rot": -3.18,
+      "shape": {
+        "kind": "rect",
+        "w": 93.1,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h10_0",
+      "at": [
+        -54.2,
+        -188.8
+      ],
+      "rot": -8.13,
+      "shape": {
+        "kind": "rect",
+        "w": 76.0,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h10_1",
+      "at": [
+        24.6,
+        -200.1
+      ],
+      "rot": -8.13,
+      "shape": {
+        "kind": "rect",
+        "w": 91.3,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h11_0",
+      "at": [
+        -51.1,
+        -59.8
+      ],
+      "rot": -6.24,
+      "shape": {
+        "kind": "rect",
+        "w": 69.9,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h11_1",
+      "at": [
+        27.8,
+        -68.5
+      ],
+      "rot": -6.24,
+      "shape": {
+        "kind": "rect",
+        "w": 100.8,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h13_0",
+      "at": [
+        -40.3,
+        191.0
+      ],
+      "rot": 6.55,
+      "shape": {
+        "kind": "rect",
+        "w": 87.8,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h13_1",
+      "at": [
+        37.6,
+        199.9
+      ],
+      "rot": 6.55,
+      "shape": {
+        "kind": "rect",
+        "w": 73.0,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h20_0",
+      "at": [
+        78.5,
+        -201.2
+      ],
+      "rot": 5.96,
+      "shape": {
+        "kind": "rect",
+        "w": 89.4,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h20_1",
+      "at": [
+        159.5,
+        -192.8
+      ],
+      "rot": 5.96,
+      "shape": {
+        "kind": "rect",
+        "w": 89.4,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h21_0",
+      "at": [
+        90.5,
+        -69.8
+      ],
+      "rot": 4.21,
+      "shape": {
+        "kind": "rect",
+        "w": 97.1,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h21_1",
+      "at": [
+        176.4,
+        -63.4
+      ],
+      "rot": 4.21,
+      "shape": {
+        "kind": "rect",
+        "w": 75.3,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h22_0",
+      "at": [
+        75.6,
+        59.5
+      ],
+      "rot": 7.33,
+      "shape": {
+        "kind": "rect",
+        "w": 91.6,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h22_1",
+      "at": [
+        160.4,
+        70.5
+      ],
+      "rot": 7.33,
+      "shape": {
+        "kind": "rect",
+        "w": 91.6,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h23_0",
+      "at": [
+        77.5,
+        200.1
+      ],
+      "rot": -4.97,
+      "shape": {
+        "kind": "rect",
+        "w": 79.2,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_h23_1",
+      "at": [
+        161.5,
+        192.8
+      ],
+      "rot": -4.97,
+      "shape": {
+        "kind": "rect",
+        "w": 101.3,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v00_0",
+      "at": [
+        -212.5,
+        -171.0
+      ],
+      "rot": 86.48,
+      "shape": {
+        "kind": "rect",
+        "w": 86.1,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v00_1",
+      "at": [
+        -207.5,
+        -91.0
+      ],
+      "rot": 86.48,
+      "shape": {
+        "kind": "rect",
+        "w": 86.1,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v01_0",
+      "at": [
+        -207.9,
+        -45.5
+      ],
+      "rot": 95.36,
+      "shape": {
+        "kind": "rect",
+        "w": 77.1,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v01_1",
+      "at": [
+        -215.6,
+        36.4
+      ],
+      "rot": 95.36,
+      "shape": {
+        "kind": "rect",
+        "w": 87.4,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v02_0",
+      "at": [
+        -216.3,
+        90.7
+      ],
+      "rot": 86.58,
+      "shape": {
+        "kind": "rect",
+        "w": 93.5,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v02_1",
+      "at": [
+        -211.4,
+        172.7
+      ],
+      "rot": 86.58,
+      "shape": {
+        "kind": "rect",
+        "w": 82.7,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v10_0",
+      "at": [
+        -72.7,
+        -157.4
+      ],
+      "rot": 87.32,
+      "shape": {
+        "kind": "rect",
+        "w": 93.3,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v10_1",
+      "at": [
+        -68.9,
+        -76.4
+      ],
+      "rot": 87.32,
+      "shape": {
+        "kind": "rect",
+        "w": 72.8,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v12_0",
+      "at": [
+        -78.0,
+        86.8
+      ],
+      "rot": 83.23,
+      "shape": {
+        "kind": "rect",
+        "w": 69.9,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v12_1",
+      "at": [
+        -69.1,
+        161.7
+      ],
+      "rot": 83.23,
+      "shape": {
+        "kind": "rect",
+        "w": 88.9,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v20_0",
+      "at": [
+        53.3,
+        -181.9
+      ],
+      "rot": 86.53,
+      "shape": {
+        "kind": "rect",
+        "w": 80.2,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v20_1",
+      "at": [
+        58.2,
+        -102.0
+      ],
+      "rot": 86.53,
+      "shape": {
+        "kind": "rect",
+        "w": 96.1,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v21_0",
+      "at": [
+        57.6,
+        -45.9
+      ],
+      "rot": 95.36,
+      "shape": {
+        "kind": "rect",
+        "w": 88.4,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v21_1",
+      "at": [
+        50.0,
+        35.0
+      ],
+      "rot": 95.36,
+      "shape": {
+        "kind": "rect",
+        "w": 78.1,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v22_0",
+      "at": [
+        49.9,
+        91.3
+      ],
+      "rot": 86.86,
+      "shape": {
+        "kind": "rect",
+        "w": 106.7,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v22_1",
+      "at": [
+        54.9,
+        181.3
+      ],
+      "rot": 86.86,
+      "shape": {
+        "kind": "rect",
+        "w": 77.5,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v30_0",
+      "at": [
+        187.9,
+        -165.5
+      ],
+      "rot": 85.53,
+      "shape": {
+        "kind": "rect",
+        "w": 85.2,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v30_1",
+      "at": [
+        194.1,
+        -86.5
+      ],
+      "rot": 85.53,
+      "shape": {
+        "kind": "rect",
+        "w": 85.2,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v31_0",
+      "at": [
+        194.5,
+        -36.0
+      ],
+      "rot": 93.37,
+      "shape": {
+        "kind": "rect",
+        "w": 88.1,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v31_1",
+      "at": [
+        189.5,
+        48.0
+      ],
+      "rot": 93.37,
+      "shape": {
+        "kind": "rect",
+        "w": 88.1,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v32_0",
+      "at": [
+        189.1,
+        95.5
+      ],
+      "rot": 87.04,
+      "shape": {
+        "kind": "rect",
+        "w": 79.1,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_v32_1",
+      "at": [
+        192.9,
+        168.5
+      ],
+      "rot": 87.04,
+      "shape": {
+        "kind": "rect",
+        "w": 79.1,
+        "h": 36,
+        "corner": 18
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n00",
+      "at": [
+        -214,
+        -196
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n01",
+      "at": [
+        -206,
+        -66
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n02",
+      "at": [
+        -218,
+        62
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n03",
+      "at": [
+        -210,
+        196
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n10",
+      "at": [
+        -74,
+        -186
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n11",
+      "at": [
+        -68,
+        -58
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n12",
+      "at": [
+        -80,
+        70
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n13",
+      "at": [
+        -66,
+        188
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n20",
+      "at": [
+        52,
+        -204
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n21",
+      "at": [
+        60,
+        -72
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n22",
+      "at": [
+        48,
+        56
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n23",
+      "at": [
+        56,
+        202
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n30",
+      "at": [
+        186,
+        -190
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n31",
+      "at": [
+        196,
+        -62
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n32",
+      "at": [
+        188,
+        74
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_n33",
+      "at": [
+        194,
+        190
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 25
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "id": "earth_grain",
+      "at": [
+        0,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "ellipse",
+          "rx": 4,
+          "ry": 3
+        },
+        "count": 120,
+        "area": [
+          400,
+          272
+        ],
+        "seed": 5105,
+        "scaleRange": [
+          0.4,
+          1.5
+        ],
+        "jitterRot": true
+      },
+      "fill": "$carapace@0.14"
+    },
+    {
+      "id": "earth_stone",
+      "at": [
+        0,
+        0
+      ],
+      "repeat": {
+        "of": {
+          "kind": "ellipse",
+          "rx": 3,
+          "ry": 2
+        },
+        "count": 80,
+        "area": [
+          400,
+          272
+        ],
+        "seed": 5106,
+        "scaleRange": [
+          0.5,
+          1.5
+        ],
+        "jitterRot": true
+      },
+      "fill": "$ink@0.3"
+    },
+    {
+      "id": "fungi_n",
+      "at": [
+        58,
+        -124
+      ],
+      "use": "ss.terrain.fungi",
+      "scale": 0.62
+    },
+    {
+      "id": "fungi_w",
+      "at": [
+        -140,
+        -10
+      ],
+      "use": "ss.terrain.fungi",
+      "scale": 0.66
+    },
+    {
+      "id": "fungi_c",
+      "at": [
+        -6,
+        2
+      ],
+      "use": "ss.terrain.fungi",
+      "scale": 0.7
+    },
+    {
+      "id": "fungi_e",
+      "at": [
+        122,
+        8
+      ],
+      "use": "ss.terrain.fungi",
+      "scale": 0.62
+    },
+    {
+      "id": "fungi_s",
+      "at": [
+        -126,
+        118
+      ],
+      "use": "ss.terrain.fungi",
+      "scale": 0.6
+    },
+    {
+      "id": "fungi_se",
+      "at": [
+        112,
+        124
+      ],
+      "use": "ss.terrain.fungi",
+      "scale": 0.56
+    },
+    {
+      "id": "fungi_sw",
+      "at": [
+        -34,
+        120
+      ],
+      "use": "ss.terrain.fungi",
+      "scale": 0.5
+    }
+  ]
+}
