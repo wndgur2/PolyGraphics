@@ -1,7 +1,7 @@
 {
   "id": "ss.char.mir",
-  "name": "Mir",
-  "description": "A hump. The burrow, walked from the inside down to the queen: a stocky bell of a coat whose back rounds up over the piece of its wall carried high on the back where the emitter used to be, warm half a month on, chewing inside it at night (M038, M042), corded across the chest, the rust of it showing over the near shoulder. A head lamp on the helmet, the one light the eight carry \u2014 the burrow is where the compass stopped (M005). The head sits a little low and forward, the stance is wide, and the walk has no bounce in it \u2014 the Porter's haul, twenty-nine levels of it (M035). Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
+  "name": "Mina",
+  "description": "A stem. The burrow, walked from the inside down to the queen: the narrowest waist of the eight, a coat that closes at it and flares again over the hip to a hem the feet show under, the smallest helmet, and two lengths of ash hair out from under it over the near shoulder. The game has called this texture `ch_hourglass` since before there was a body in it, and that is now what the body is. **What she took in place of the emitter has put out a runner, and the runner is the weapon.** The piece of burrow wall hangs at the near hip, palm-sized \u2014 the record's own word (M038) \u2014 still warm half a month on, with something chewing inside it and a crack where it comes out (M042); from there the runner goes up, once round the waist just below the clasp, then down over the hip and off the hem, on its way back into the floor the vines come up out of in a run (M041: she buried the piece behind base, and by morning there was a hole going down). `$moss` with a `$moss.light2` edge and one `$blood.dark2` barb, which is the cord, taper and barb of `ss.proj.vine` and `ss.proj.vine-snare` exactly \u2014 the weapon holds what it catches, and this is the body it never let go of. Her coat is the one warm tint of the eight and a slim body spends more of itself on outline, so the helmet and mantle are taken off the warm ramp into `$husk` to keep her off the floor: 3.1 : 1 against `ss.env.ground`, beside Sol's 3.3. A head lamp on the helmet, the one light the eight carry \u2014 the burrow is where the compass stopped (M005). Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
   "tags": [
     "char"
   ],
@@ -14,29 +14,243 @@
   },
   "parts": [
     {
-      "id": "wall",
+      "id": "arm_far",
       "at": [
-        -6.8,
-        -8.0
+        4.77,
+        -0.9
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 2.0,
+        "h": 6.6,
+        "corner": 1.2
+      },
+      "fill": "$timber.light",
+      "rot": -3
+    },
+    {
+      "id": "hand_far",
+      "at": [
+        4.99,
+        3.29
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.2,
+        "ry": 1.4
+      },
+      "fill": "$slate"
+    },
+    {
+      "id": "foot_far",
+      "at": [
+        3.6,
+        12.8
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 3.7,
+        "h": 2.11,
+        "corner": 1.1
+      },
+      "fill": "$slate"
+    },
+    {
+      "id": "foot",
+      "at": [
+        -1.8,
+        13.4
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 4.22,
+        "h": 2.38,
+        "corner": 1.2
+      },
+      "fill": "$slate.dark"
+    },
+    {
+      "id": "cloak",
+      "at": [
+        0,
+        0
+      ],
+      "rot": -1,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.26,
+            -3.0
+          ],
+          [
+            3.84,
+            -4.4
+          ],
+          [
+            4.42,
+            0.8
+          ],
+          [
+            3.0,
+            4.8
+          ],
+          [
+            5.57,
+            8.8
+          ],
+          [
+            5.38,
+            11.4
+          ],
+          [
+            2.88,
+            12.4
+          ],
+          [
+            0.19,
+            12.6
+          ],
+          [
+            -2.5,
+            12.4
+          ],
+          [
+            -4.99,
+            11.4
+          ],
+          [
+            -5.28,
+            8.8
+          ],
+          [
+            -2.83,
+            4.8
+          ],
+          [
+            -4.22,
+            0.6
+          ]
+        ]
+      },
+      "fill": "$timber.light2",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "cape",
+      "at": [
+        0,
+        0
       ],
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -2.8,
-            -2.4
+            -2.72,
+            -3.0
           ],
           [
-            2.6,
-            -2.8
+            3.13,
+            -4.4
           ],
           [
-            3.0,
+            4.96,
+            0.9
+          ],
+          [
+            2.31,
             2.4
           ],
           [
+            0.14,
+            1.3
+          ],
+          [
+            -2.31,
+            2.2
+          ],
+          [
+            -4.76,
+            0.2
+          ]
+        ]
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "organ",
+      "at": [
+        1.0,
+        1.0
+      ],
+      "use": "ss.lib.organ",
+      "variant": "dead",
+      "scale": 0.72
+    },
+    {
+      "id": "wall_bind",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
             -2.6,
-            2.6
+            5.74
+          ],
+          [
+            -2.65,
+            6.87
+          ],
+          [
+            -2.6,
+            8.0
+          ],
+          [
+            -1.4,
+            8.0
+          ],
+          [
+            -1.35,
+            6.93
+          ],
+          [
+            -1.2,
+            5.86
+          ]
+        ]
+      },
+      "fill": "$moss"
+    },
+    {
+      "id": "wall",
+      "at": [
+        -2.0,
+        9.4
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.8,
+            -1.6
+          ],
+          [
+            1.7,
+            -1.8
+          ],
+          [
+            1.9,
+            1.7
+          ],
+          [
+            -1.6,
+            1.9
           ]
         ]
       },
@@ -50,160 +264,81 @@
     {
       "id": "wall_crack",
       "at": [
-        -6.6,
-        -8.6
+        -1.9,
+        9.0
       ],
       "shape": {
         "kind": "rect",
-        "w": 3.2,
-        "h": 0.6,
+        "w": 2.2,
+        "h": 0.5,
         "corner": 0.2
       },
       "fill": "$rust.dark",
-      "rot": 24
+      "rot": 28
     },
     {
-      "id": "arm_far",
-      "at": [
-        6.64,
-        -0.31
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 2.6,
-        "h": 7.0,
-        "corner": 1.2
-      },
-      "fill": "$timber.light",
-      "rot": -4
-    },
-    {
-      "id": "hand_far",
-      "at": [
-        6.95,
-        4.08
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 1.4,
-        "ry": 1.6
-      },
-      "fill": "$slate"
-    },
-    {
-      "id": "foot_far",
-      "at": [
-        4.6,
-        12.5
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 4.2,
-        "h": 2.4,
-        "corner": 1.1
-      },
-      "fill": "$slate"
-    },
-    {
-      "id": "foot",
-      "at": [
-        -2.8,
-        13.1
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 4.8,
-        "h": 2.7,
-        "corner": 1.2
-      },
-      "fill": "$slate.dark"
-    },
-    {
-      "id": "cloak",
+      "id": "runner",
       "at": [
         0,
         0
       ],
-      "rot": 3,
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -4.67,
-            -3.0
+            -3.4,
+            5.48
           ],
           [
-            6.15,
-            -4.0
+            0.07,
+            6.58
           ],
           [
-            8.27,
-            1.6
+            2.66,
+            5.96
           ],
           [
-            9.18,
-            5.8
+            4.0,
+            7.89
           ],
           [
-            8.16,
-            10.2
+            4.94,
+            10.41
           ],
           [
-            4.49,
-            11.9
+            6.5,
+            12.59
           ],
           [
-            0.2,
-            12.3
+            7.1,
+            12.21
           ],
           [
-            -4.28,
-            11.9
+            5.86,
+            9.99
           ],
           [
-            -7.14,
-            10.6
+            5.2,
+            7.31
           ],
           [
-            -8.77,
-            6.0
+            3.34,
+            4.44
           ],
           [
-            -10.4,
-            0.4
+            0.33,
+            4.62
           ],
           [
-            -10.18,
-            -4.4
-          ],
-          [
-            -8.06,
-            -7.2
+            -2.6,
+            3.32
           ]
         ]
       },
-      "fill": "$timber.light2",
-      "stroke": {
-        "color": "$ink",
-        "width": "thin"
-      }
+      "fill": "$moss"
     },
     {
-      "id": "hump_shade",
-      "at": [
-        -7.6,
-        1.2
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 2.2,
-        "ry": 5.0
-      },
-      "fill": "$timber.light",
-      "rot": -10
-    },
-    {
-      "id": "cape",
+      "id": "runner_lit",
       "at": [
         0,
         0
@@ -212,76 +347,97 @@
         "kind": "poly",
         "points": [
           [
-            -4.9,
-            -2.6
+            -2.92,
+            4.19
           ],
           [
-            6.53,
-            -4.0
+            0.24,
+            5.33
+          ],
+          [
+            3.13,
+            4.91
+          ],
+          [
+            4.93,
+            7.44
+          ],
+          [
+            5.78,
+            10.03
+          ],
+          [
+            7.2,
+            12.15
           ],
           [
             7.45,
-            0.9
+            11.99
           ],
           [
-            3.47,
-            2.4
+            6.15,
+            9.86
           ],
           [
-            0.2,
-            1.3
+            5.38,
+            7.22
           ],
           [
-            -3.47,
-            2.2
+            3.38,
+            4.36
           ],
           [
-            -7.14,
-            0.2
+            0.33,
+            4.64
+          ],
+          [
+            -2.64,
+            3.44
           ]
         ]
       },
-      "fill": "$timber.light2"
+      "fill": "$moss.light2"
     },
     {
-      "id": "organ",
+      "id": "barb",
       "at": [
-        1.0,
-        1.0
-      ],
-      "use": "ss.lib.organ",
-      "variant": "dead",
-      "scale": 0.72
-    },
-    {
-      "id": "cord",
-      "at": [
-        0.2,
-        -0.6
+        1.6,
+        4.2
       ],
       "shape": {
-        "kind": "rect",
-        "w": 1.1,
-        "h": 9.4,
-        "corner": 0.4
+        "kind": "poly",
+        "points": [
+          [
+            -1.0,
+            0.9
+          ],
+          [
+            1.0,
+            0.9
+          ],
+          [
+            0.1,
+            -1.4
+          ]
+        ]
       },
-      "fill": "$bone",
-      "rot": -32
+      "fill": "$blood.dark2",
+      "rot": 12
     },
     {
       "id": "arm",
       "at": [
-        -5.46,
-        1.34
+        -4.39,
+        0.88
       ],
       "shape": {
         "kind": "rect",
-        "w": 3.0,
-        "h": 7.6,
+        "w": 2.4,
+        "h": 7.4,
         "corner": 1.4
       },
       "fill": "$timber.light2",
-      "rot": 10,
+      "rot": 6,
       "stroke": {
         "color": "$ink",
         "width": "hair"
@@ -290,13 +446,13 @@
     {
       "id": "hand",
       "at": [
-        -6.28,
-        5.97
+        -4.87,
+        5.45
       ],
       "shape": {
         "kind": "ellipse",
-        "rx": 1.7,
-        "ry": 1.9
+        "rx": 1.4,
+        "ry": 1.6
       },
       "fill": "$slate.dark",
       "stroke": {
@@ -305,18 +461,50 @@
       }
     },
     {
-      "id": "head",
+      "id": "lock",
       "at": [
-        2.6,
-        -7.2
+        -1.6,
+        -4.4
       ],
       "shape": {
         "kind": "ellipse",
-        "rx": 5.2,
-        "ry": 5.6
+        "rx": 1.5,
+        "ry": 3.6
       },
-      "fill": "$timber.light2",
-      "rot": -6,
+      "fill": "$steel",
+      "rot": 8,
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "lock_back",
+      "at": [
+        -3.4,
+        -5.2
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.2,
+        "ry": 2.9
+      },
+      "fill": "$steel.dark",
+      "rot": 16
+    },
+    {
+      "id": "head",
+      "at": [
+        2.2,
+        -8.2
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.4,
+        "ry": 4.8
+      },
+      "fill": "$husk",
+      "rot": -8,
       "stroke": {
         "color": "$ink",
         "width": "thin"
@@ -325,27 +513,27 @@
     {
       "id": "visor",
       "at": [
-        4.2,
-        -6.0
+        3.8,
+        -7.0
       ],
       "shape": {
         "kind": "rect",
-        "w": 6.6,
-        "h": 2.6,
+        "w": 5.4,
+        "h": 2.4,
         "corner": 1.3
       },
       "fill": "$ink",
-      "rot": -5
+      "rot": -6
     },
     {
       "id": "lamp_ring",
       "at": [
-        5.0,
-        -10.8
+        4.4,
+        -11.6
       ],
       "shape": {
         "kind": "circle",
-        "r": 1.9
+        "r": 1.8
       },
       "fill": "$slate.dark",
       "stroke": {
@@ -356,12 +544,12 @@
     {
       "id": "lamp",
       "at": [
-        5.0,
-        -10.8
+        4.4,
+        -11.6
       ],
       "shape": {
         "kind": "circle",
-        "r": 1.2
+        "r": 1.1
       },
       "fill": "$silent"
     }
@@ -369,48 +557,48 @@
   "skeleton": {
     "joints": {
       "head": [
-        2.6,
-        -7.2
+        2.2,
+        -8.2
       ],
       "neck": [
-        0.8,
-        -3.1
+        0.3,
+        -3.5
       ],
       "pelvis": [
-        0.8,
-        11.6
+        0.6,
+        11.4
       ],
       "shoulder_near": [
-        -4.8,
-        -2.4
+        -4.0,
+        -2.8
       ],
       "shoulder_far": [
-        6.4,
-        -3.8
+        4.6,
+        -4.2
       ],
       "hand_near": [
-        -6.28,
-        5.97
+        -4.87,
+        5.45
       ],
       "hand_far": [
-        6.95,
-        4.08
+        4.99,
+        3.29
       ],
       "hip_near": [
-        -2.8,
-        12.0
+        -2.0,
+        11.8
       ],
       "hip_far": [
-        4.4,
-        11.2
+        3.2,
+        11.0
       ],
       "foot_near": [
-        -2.8,
-        13.1
+        -1.8,
+        13.4
       ],
       "foot_far": [
-        4.6,
-        12.5
+        3.6,
+        12.8
       ]
     },
     "bones": [
@@ -450,8 +638,8 @@
   },
   "animations": {
     "idle": {
-      "description": "the body breathes under the coat",
-      "duration": 1.15,
+      "description": "the body breathes under the coat; the hair and the runner hang still",
+      "duration": 1.3,
       "tracks": [
         {
           "part": "head",
@@ -473,6 +661,42 @@
         },
         {
           "part": "visor",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "lock",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "lock_back",
           "prop": "y",
           "keys": [
             [
@@ -580,6 +804,24 @@
           ]
         },
         {
+          "part": "wall_bind",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
           "part": "wall",
           "prop": "y",
           "keys": [
@@ -616,7 +858,7 @@
           ]
         },
         {
-          "part": "cord",
+          "part": "runner",
           "prop": "y",
           "keys": [
             [
@@ -634,7 +876,25 @@
           ]
         },
         {
-          "part": "hump_shade",
+          "part": "runner_lit",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "barb",
           "prop": "y",
           "keys": [
             [
@@ -726,8 +986,8 @@
       ]
     },
     "walk": {
-      "description": "the haul: no bounce at all, short flat steps, the load riding still on the back",
-      "duration": 0.62,
+      "description": "a long even walk with the weight kept off what she carries: the hem swings wider than anybody's and the bob stays small \u2014 twenty-nine levels taught her not to bounce it (M035)",
+      "duration": 0.66,
       "tracks": [
         {
           "part": "head",
@@ -739,23 +999,23 @@
             ],
             [
               0.08,
-              -0.0
+              -0.17
             ],
             [
               0.17,
-              -0.0
+              -0.52
             ],
             [
               0.25,
-              -0.0
+              -0.7
             ],
             [
               0.33,
-              -0.0
+              -0.53
             ],
             [
               0.42,
-              -0.0
+              -0.17
             ],
             [
               0.5,
@@ -763,23 +1023,23 @@
             ],
             [
               0.58,
-              -0.0
+              -0.18
             ],
             [
               0.67,
-              -0.0
+              -0.52
             ],
             [
               0.75,
-              -0.0
+              -0.7
             ],
             [
               0.83,
-              -0.0
+              -0.52
             ],
             [
               0.92,
-              -0.0
+              -0.18
             ],
             [
               1.0,
@@ -798,23 +1058,23 @@
             ],
             [
               0.08,
-              -0.0
+              -0.17
             ],
             [
               0.17,
-              -0.0
+              -0.52
             ],
             [
               0.25,
-              -0.0
+              -0.7
             ],
             [
               0.33,
-              -0.0
+              -0.53
             ],
             [
               0.42,
-              -0.0
+              -0.17
             ],
             [
               0.5,
@@ -822,23 +1082,141 @@
             ],
             [
               0.58,
-              -0.0
+              -0.18
             ],
             [
               0.67,
-              -0.0
+              -0.52
             ],
             [
               0.75,
-              -0.0
+              -0.7
             ],
             [
               0.83,
-              -0.0
+              -0.52
             ],
             [
               0.92,
+              -0.18
+            ],
+            [
+              1.0,
               -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "lock",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.17
+            ],
+            [
+              0.17,
+              -0.52
+            ],
+            [
+              0.25,
+              -0.7
+            ],
+            [
+              0.33,
+              -0.53
+            ],
+            [
+              0.42,
+              -0.17
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              -0.18
+            ],
+            [
+              0.67,
+              -0.52
+            ],
+            [
+              0.75,
+              -0.7
+            ],
+            [
+              0.83,
+              -0.52
+            ],
+            [
+              0.92,
+              -0.18
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "lock_back",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.17
+            ],
+            [
+              0.17,
+              -0.52
+            ],
+            [
+              0.25,
+              -0.7
+            ],
+            [
+              0.33,
+              -0.53
+            ],
+            [
+              0.42,
+              -0.17
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              -0.18
+            ],
+            [
+              0.67,
+              -0.52
+            ],
+            [
+              0.75,
+              -0.7
+            ],
+            [
+              0.83,
+              -0.52
+            ],
+            [
+              0.92,
+              -0.18
             ],
             [
               1.0,
@@ -857,23 +1235,23 @@
             ],
             [
               0.08,
-              -0.0
+              -0.17
             ],
             [
               0.17,
-              -0.0
+              -0.52
             ],
             [
               0.25,
-              -0.0
+              -0.7
             ],
             [
               0.33,
-              -0.0
+              -0.53
             ],
             [
               0.42,
-              -0.0
+              -0.17
             ],
             [
               0.5,
@@ -881,23 +1259,23 @@
             ],
             [
               0.58,
-              -0.0
+              -0.18
             ],
             [
               0.67,
-              -0.0
+              -0.52
             ],
             [
               0.75,
-              -0.0
+              -0.7
             ],
             [
               0.83,
-              -0.0
+              -0.52
             ],
             [
               0.92,
-              -0.0
+              -0.18
             ],
             [
               1.0,
@@ -916,23 +1294,23 @@
             ],
             [
               0.08,
-              -0.0
+              -0.17
             ],
             [
               0.17,
-              -0.0
+              -0.52
             ],
             [
               0.25,
-              -0.0
+              -0.7
             ],
             [
               0.33,
-              -0.0
+              -0.53
             ],
             [
               0.42,
-              -0.0
+              -0.17
             ],
             [
               0.5,
@@ -940,23 +1318,23 @@
             ],
             [
               0.58,
-              -0.0
+              -0.18
             ],
             [
               0.67,
-              -0.0
+              -0.52
             ],
             [
               0.75,
-              -0.0
+              -0.7
             ],
             [
               0.83,
-              -0.0
+              -0.52
             ],
             [
               0.92,
-              -0.0
+              -0.18
             ],
             [
               1.0,
@@ -975,23 +1353,23 @@
             ],
             [
               0.08,
-              -0.0
+              -0.1
             ],
             [
               0.17,
-              -0.0
+              -0.31
             ],
             [
               0.25,
-              -0.0
+              -0.42
             ],
             [
               0.33,
-              -0.0
+              -0.32
             ],
             [
               0.42,
-              -0.0
+              -0.1
             ],
             [
               0.5,
@@ -999,23 +1377,23 @@
             ],
             [
               0.58,
-              -0.0
+              -0.11
             ],
             [
               0.67,
-              -0.0
+              -0.31
             ],
             [
               0.75,
-              -0.0
+              -0.42
             ],
             [
               0.83,
-              -0.0
+              -0.31
             ],
             [
               0.92,
-              -0.0
+              -0.11
             ],
             [
               1.0,
@@ -1034,23 +1412,23 @@
             ],
             [
               0.08,
-              -0.0
+              -0.1
             ],
             [
               0.17,
-              -0.0
+              -0.31
             ],
             [
               0.25,
-              -0.0
+              -0.42
             ],
             [
               0.33,
-              -0.0
+              -0.32
             ],
             [
               0.42,
-              -0.0
+              -0.1
             ],
             [
               0.5,
@@ -1058,23 +1436,23 @@
             ],
             [
               0.58,
-              -0.0
+              -0.11
             ],
             [
               0.67,
-              -0.0
+              -0.31
             ],
             [
               0.75,
-              -0.0
+              -0.42
             ],
             [
               0.83,
-              -0.0
+              -0.31
             ],
             [
               0.92,
-              -0.0
+              -0.11
             ],
             [
               1.0,
@@ -1093,23 +1471,23 @@
             ],
             [
               0.08,
-              -0.0
+              -0.1
             ],
             [
               0.17,
-              -0.0
+              -0.31
             ],
             [
               0.25,
-              -0.0
+              -0.42
             ],
             [
               0.33,
-              -0.0
+              -0.32
             ],
             [
               0.42,
-              -0.0
+              -0.1
             ],
             [
               0.5,
@@ -1117,23 +1495,82 @@
             ],
             [
               0.58,
-              -0.0
+              -0.11
             ],
             [
               0.67,
-              -0.0
+              -0.31
             ],
             [
               0.75,
-              -0.0
+              -0.42
             ],
             [
               0.83,
-              -0.0
+              -0.31
             ],
             [
               0.92,
+              -0.11
+            ],
+            [
+              1.0,
               -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "wall_bind",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.1
+            ],
+            [
+              0.17,
+              -0.31
+            ],
+            [
+              0.25,
+              -0.42
+            ],
+            [
+              0.33,
+              -0.32
+            ],
+            [
+              0.42,
+              -0.1
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              -0.11
+            ],
+            [
+              0.67,
+              -0.31
+            ],
+            [
+              0.75,
+              -0.42
+            ],
+            [
+              0.83,
+              -0.31
+            ],
+            [
+              0.92,
+              -0.11
             ],
             [
               1.0,
@@ -1152,23 +1589,23 @@
             ],
             [
               0.08,
-              -0.0
+              -0.1
             ],
             [
               0.17,
-              -0.0
+              -0.31
             ],
             [
               0.25,
-              -0.0
+              -0.42
             ],
             [
               0.33,
-              -0.0
+              -0.32
             ],
             [
               0.42,
-              -0.0
+              -0.1
             ],
             [
               0.5,
@@ -1176,23 +1613,23 @@
             ],
             [
               0.58,
-              -0.0
+              -0.11
             ],
             [
               0.67,
-              -0.0
+              -0.31
             ],
             [
               0.75,
-              -0.0
+              -0.42
             ],
             [
               0.83,
-              -0.0
+              -0.31
             ],
             [
               0.92,
-              -0.0
+              -0.11
             ],
             [
               1.0,
@@ -1211,23 +1648,23 @@
             ],
             [
               0.08,
-              -0.0
+              -0.1
             ],
             [
               0.17,
-              -0.0
+              -0.31
             ],
             [
               0.25,
-              -0.0
+              -0.42
             ],
             [
               0.33,
-              -0.0
+              -0.32
             ],
             [
               0.42,
-              -0.0
+              -0.1
             ],
             [
               0.5,
@@ -1235,23 +1672,23 @@
             ],
             [
               0.58,
-              -0.0
+              -0.11
             ],
             [
               0.67,
-              -0.0
+              -0.31
             ],
             [
               0.75,
-              -0.0
+              -0.42
             ],
             [
               0.83,
-              -0.0
+              -0.31
             ],
             [
               0.92,
-              -0.0
+              -0.11
             ],
             [
               1.0,
@@ -1261,7 +1698,7 @@
           "ease": "linear"
         },
         {
-          "part": "cord",
+          "part": "runner",
           "prop": "y",
           "keys": [
             [
@@ -1270,23 +1707,23 @@
             ],
             [
               0.08,
-              -0.0
+              -0.1
             ],
             [
               0.17,
-              -0.0
+              -0.31
             ],
             [
               0.25,
-              -0.0
+              -0.42
             ],
             [
               0.33,
-              -0.0
+              -0.32
             ],
             [
               0.42,
-              -0.0
+              -0.1
             ],
             [
               0.5,
@@ -1294,23 +1731,23 @@
             ],
             [
               0.58,
-              -0.0
+              -0.11
             ],
             [
               0.67,
-              -0.0
+              -0.31
             ],
             [
               0.75,
-              -0.0
+              -0.42
             ],
             [
               0.83,
-              -0.0
+              -0.31
             ],
             [
               0.92,
-              -0.0
+              -0.11
             ],
             [
               1.0,
@@ -1320,7 +1757,7 @@
           "ease": "linear"
         },
         {
-          "part": "hump_shade",
+          "part": "runner_lit",
           "prop": "y",
           "keys": [
             [
@@ -1329,23 +1766,23 @@
             ],
             [
               0.08,
-              -0.0
+              -0.1
             ],
             [
               0.17,
-              -0.0
+              -0.31
             ],
             [
               0.25,
-              -0.0
+              -0.42
             ],
             [
               0.33,
-              -0.0
+              -0.32
             ],
             [
               0.42,
-              -0.0
+              -0.1
             ],
             [
               0.5,
@@ -1353,23 +1790,82 @@
             ],
             [
               0.58,
-              -0.0
+              -0.11
             ],
             [
               0.67,
-              -0.0
+              -0.31
             ],
             [
               0.75,
-              -0.0
+              -0.42
             ],
             [
               0.83,
-              -0.0
+              -0.31
             ],
             [
               0.92,
+              -0.11
+            ],
+            [
+              1.0,
               -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "barb",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.1
+            ],
+            [
+              0.17,
+              -0.31
+            ],
+            [
+              0.25,
+              -0.42
+            ],
+            [
+              0.33,
+              -0.32
+            ],
+            [
+              0.42,
+              -0.1
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              -0.11
+            ],
+            [
+              0.67,
+              -0.31
+            ],
+            [
+              0.75,
+              -0.42
+            ],
+            [
+              0.83,
+              -0.31
+            ],
+            [
+              0.92,
+              -0.11
             ],
             [
               1.0,
@@ -1388,23 +1884,23 @@
             ],
             [
               0.08,
-              1.3
+              1.15
             ],
             [
               0.17,
-              2.25
+              1.99
             ],
             [
               0.25,
-              2.6
+              2.3
             ],
             [
               0.33,
-              2.25
+              1.99
             ],
             [
               0.42,
-              1.3
+              1.15
             ],
             [
               0.5,
@@ -1412,23 +1908,23 @@
             ],
             [
               0.58,
-              -1.3
+              -1.15
             ],
             [
               0.67,
-              -2.25
+              -1.99
             ],
             [
               0.75,
-              -2.6
+              -2.3
             ],
             [
               0.83,
-              -2.25
+              -1.99
             ],
             [
               0.92,
-              -1.3
+              -1.15
             ],
             [
               1.0,
@@ -1443,15 +1939,15 @@
           "keys": [
             [
               0.0,
-              -0.8
+              -1.0
             ],
             [
               0.08,
-              -0.64
+              -0.81
             ],
             [
               0.17,
-              -0.28
+              -0.35
             ],
             [
               0.25,
@@ -1483,15 +1979,15 @@
             ],
             [
               0.83,
-              -0.28
+              -0.35
             ],
             [
               0.92,
-              -0.64
+              -0.81
             ],
             [
               1.0,
-              -0.8
+              -1.0
             ]
           ],
           "ease": "linear"
@@ -1506,23 +2002,23 @@
             ],
             [
               0.08,
-              -1.3
+              -1.15
             ],
             [
               0.17,
-              -2.25
+              -1.99
             ],
             [
               0.25,
-              -2.6
+              -2.3
             ],
             [
               0.33,
-              -2.25
+              -1.99
             ],
             [
               0.42,
-              -1.3
+              -1.15
             ],
             [
               0.5,
@@ -1530,23 +2026,23 @@
             ],
             [
               0.58,
-              1.3
+              1.15
             ],
             [
               0.67,
-              2.25
+              1.99
             ],
             [
               0.75,
-              2.6
+              2.3
             ],
             [
               0.83,
-              2.25
+              1.99
             ],
             [
               0.92,
-              1.3
+              1.15
             ],
             [
               1.0,
@@ -1577,23 +2073,23 @@
             ],
             [
               0.33,
-              -0.28
+              -0.35
             ],
             [
               0.42,
-              -0.64
+              -0.81
             ],
             [
               0.5,
-              -0.8
+              -1.0
             ],
             [
               0.58,
-              -0.64
+              -0.81
             ],
             [
               0.67,
-              -0.28
+              -0.35
             ],
             [
               0.75,
@@ -1624,23 +2120,23 @@
             ],
             [
               0.08,
-              0.7
+              2.3
             ],
             [
               0.17,
-              1.21
+              3.98
             ],
             [
               0.25,
-              1.4
+              4.6
             ],
             [
               0.33,
-              1.21
+              3.98
             ],
             [
               0.42,
-              0.7
+              2.3
             ],
             [
               0.5,
@@ -1648,23 +2144,23 @@
             ],
             [
               0.58,
-              -0.7
+              -2.3
             ],
             [
               0.67,
-              -1.21
+              -3.98
             ],
             [
               0.75,
-              -1.4
+              -4.6
             ],
             [
               0.83,
-              -1.21
+              -3.98
             ],
             [
               0.92,
-              -0.7
+              -2.3
             ],
             [
               1.0,
@@ -1683,11 +2179,424 @@
             ],
             [
               0.08,
-              -0.26
+              -0.35
             ],
             [
               0.17,
-              -0.45
+              -0.6
+            ],
+            [
+              0.25,
+              -0.7
+            ],
+            [
+              0.33,
+              -0.6
+            ],
+            [
+              0.42,
+              -0.35
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              0.35
+            ],
+            [
+              0.67,
+              0.61
+            ],
+            [
+              0.75,
+              0.71
+            ],
+            [
+              0.83,
+              0.61
+            ],
+            [
+              0.92,
+              0.35
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "arm",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.08,
+              -0.16
+            ],
+            [
+              0.17,
+              -0.43
+            ],
+            [
+              0.25,
+              -0.56
+            ],
+            [
+              0.33,
+              -0.43
+            ],
+            [
+              0.42,
+              -0.16
+            ],
+            [
+              0.5,
+              0.0
+            ],
+            [
+              0.58,
+              -0.08
+            ],
+            [
+              0.67,
+              -0.3
+            ],
+            [
+              0.75,
+              -0.41
+            ],
+            [
+              0.83,
+              -0.3
+            ],
+            [
+              0.92,
+              -0.08
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "arm",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.08,
+              5.5
+            ],
+            [
+              0.17,
+              9.53
+            ],
+            [
+              0.25,
+              11.0
+            ],
+            [
+              0.33,
+              9.53
+            ],
+            [
+              0.42,
+              5.5
+            ],
+            [
+              0.5,
+              0.0
+            ],
+            [
+              0.58,
+              -5.5
+            ],
+            [
+              0.67,
+              -9.53
+            ],
+            [
+              0.75,
+              -11.0
+            ],
+            [
+              0.83,
+              -9.53
+            ],
+            [
+              0.92,
+              -5.5
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "hand",
+          "prop": "x",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.08,
+              -0.79
+            ],
+            [
+              0.17,
+              -1.35
+            ],
+            [
+              0.25,
+              -1.56
+            ],
+            [
+              0.33,
+              -1.35
+            ],
+            [
+              0.42,
+              -0.79
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              0.8
+            ],
+            [
+              0.67,
+              1.38
+            ],
+            [
+              0.75,
+              1.59
+            ],
+            [
+              0.83,
+              1.38
+            ],
+            [
+              0.92,
+              0.8
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "hand",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.08,
+              -0.23
+            ],
+            [
+              0.17,
+              -0.57
+            ],
+            [
+              0.25,
+              -0.74
+            ],
+            [
+              0.33,
+              -0.57
+            ],
+            [
+              0.42,
+              -0.23
+            ],
+            [
+              0.5,
+              0.0
+            ],
+            [
+              0.58,
+              -0.06
+            ],
+            [
+              0.67,
+              -0.29
+            ],
+            [
+              0.75,
+              -0.41
+            ],
+            [
+              0.83,
+              -0.29
+            ],
+            [
+              0.92,
+              -0.06
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "hand",
+          "prop": "rot",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.08,
+              5.5
+            ],
+            [
+              0.17,
+              9.53
+            ],
+            [
+              0.25,
+              11.0
+            ],
+            [
+              0.33,
+              9.53
+            ],
+            [
+              0.42,
+              5.5
+            ],
+            [
+              0.5,
+              0.0
+            ],
+            [
+              0.58,
+              -5.5
+            ],
+            [
+              0.67,
+              -9.53
+            ],
+            [
+              0.75,
+              -11.0
+            ],
+            [
+              0.83,
+              -9.53
+            ],
+            [
+              0.92,
+              -5.5
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "arm_far",
+          "prop": "x",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.08,
+              0.32
+            ],
+            [
+              0.17,
+              0.54
+            ],
+            [
+              0.25,
+              0.63
+            ],
+            [
+              0.33,
+              0.54
+            ],
+            [
+              0.42,
+              0.32
+            ],
+            [
+              0.5,
+              0.0
+            ],
+            [
+              0.58,
+              -0.32
+            ],
+            [
+              0.67,
+              -0.55
+            ],
+            [
+              0.75,
+              -0.63
+            ],
+            [
+              0.83,
+              -0.55
+            ],
+            [
+              0.92,
+              -0.32
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "arm_far",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.08,
+              -0.14
+            ],
+            [
+              0.17,
+              -0.39
             ],
             [
               0.25,
@@ -1695,448 +2604,35 @@
             ],
             [
               0.33,
+              -0.39
+            ],
+            [
+              0.42,
+              -0.14
+            ],
+            [
+              0.5,
+              0.0
+            ],
+            [
+              0.58,
+              -0.1
+            ],
+            [
+              0.67,
+              -0.33
+            ],
+            [
+              0.75,
               -0.45
             ],
             [
-              0.42,
-              -0.26
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              0.26
-            ],
-            [
-              0.67,
-              0.46
-            ],
-            [
-              0.75,
-              0.53
-            ],
-            [
               0.83,
-              0.46
+              -0.33
             ],
             [
               0.92,
-              0.26
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              -0.06
-            ],
-            [
-              0.17,
-              -0.11
-            ],
-            [
-              0.25,
-              -0.13
-            ],
-            [
-              0.33,
-              -0.11
-            ],
-            [
-              0.42,
-              -0.06
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              0.04
-            ],
-            [
-              0.67,
-              0.05
-            ],
-            [
-              0.75,
-              0.06
-            ],
-            [
-              0.83,
-              0.05
-            ],
-            [
-              0.92,
-              0.04
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm",
-          "prop": "rot",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              4.0
-            ],
-            [
-              0.17,
-              6.93
-            ],
-            [
-              0.25,
-              8.0
-            ],
-            [
-              0.33,
-              6.93
-            ],
-            [
-              0.42,
-              4.0
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              -4.0
-            ],
-            [
-              0.67,
-              -6.93
-            ],
-            [
-              0.75,
-              -8.0
-            ],
-            [
-              0.83,
-              -6.93
-            ],
-            [
-              0.92,
-              -4.0
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "hand",
-          "prop": "x",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              -0.58
-            ],
-            [
-              0.17,
-              -1.0
-            ],
-            [
-              0.25,
-              -1.15
-            ],
-            [
-              0.33,
-              -1.0
-            ],
-            [
-              0.42,
-              -0.58
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              0.59
-            ],
-            [
-              0.67,
-              1.02
-            ],
-            [
-              0.75,
-              1.18
-            ],
-            [
-              0.83,
-              1.02
-            ],
-            [
-              0.92,
-              0.59
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "hand",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              -0.12
-            ],
-            [
-              0.17,
-              -0.24
-            ],
-            [
-              0.25,
-              -0.29
-            ],
-            [
-              0.33,
-              -0.24
-            ],
-            [
-              0.42,
-              -0.12
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              0.08
-            ],
-            [
-              0.67,
-              0.12
-            ],
-            [
-              0.75,
-              0.12
-            ],
-            [
-              0.83,
-              0.12
-            ],
-            [
-              0.92,
-              0.08
-            ],
-            [
-              1.0,
-              0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "hand",
-          "prop": "rot",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              4.0
-            ],
-            [
-              0.17,
-              6.93
-            ],
-            [
-              0.25,
-              8.0
-            ],
-            [
-              0.33,
-              6.93
-            ],
-            [
-              0.42,
-              4.0
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              -4.0
-            ],
-            [
-              0.67,
-              -6.93
-            ],
-            [
-              0.75,
-              -8.0
-            ],
-            [
-              0.83,
-              -6.93
-            ],
-            [
-              0.92,
-              -4.0
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm_far",
-          "prop": "x",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              0.24
-            ],
-            [
-              0.17,
-              0.42
-            ],
-            [
-              0.25,
-              0.48
-            ],
-            [
-              0.33,
-              0.42
-            ],
-            [
-              0.42,
-              0.24
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              -0.24
-            ],
-            [
-              0.67,
-              -0.42
-            ],
-            [
-              0.75,
-              -0.49
-            ],
-            [
-              0.83,
-              -0.42
-            ],
-            [
-              0.92,
-              -0.24
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "arm_far",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.08,
-              -0.03
-            ],
-            [
-              0.17,
-              -0.05
-            ],
-            [
-              0.25,
-              -0.07
-            ],
-            [
-              0.33,
-              -0.05
-            ],
-            [
-              0.42,
-              -0.03
-            ],
-            [
-              0.5,
-              0.0
-            ],
-            [
-              0.58,
-              0.01
-            ],
-            [
-              0.67,
-              0.0
-            ],
-            [
-              0.75,
-              0.0
-            ],
-            [
-              0.83,
-              0.0
-            ],
-            [
-              0.92,
-              0.01
+              -0.1
             ],
             [
               1.0,
@@ -2155,23 +2651,23 @@
             ],
             [
               0.08,
-              -4.0
+              -5.5
             ],
             [
               0.17,
-              -6.93
+              -9.53
             ],
             [
               0.25,
-              -8.0
+              -11.0
             ],
             [
               0.33,
-              -6.93
+              -9.53
             ],
             [
               0.42,
-              -4.0
+              -5.5
             ],
             [
               0.5,
@@ -2179,23 +2675,23 @@
             ],
             [
               0.58,
-              4.0
+              5.5
             ],
             [
               0.67,
-              6.93
+              9.53
             ],
             [
               0.75,
-              8.0
+              11.0
             ],
             [
               0.83,
-              6.93
+              9.53
             ],
             [
               0.92,
-              4.0
+              5.5
             ],
             [
               1.0,
@@ -2214,23 +2710,23 @@
             ],
             [
               0.08,
-              0.55
+              0.72
             ],
             [
               0.17,
-              0.95
+              1.23
             ],
             [
               0.25,
-              1.09
+              1.42
             ],
             [
               0.33,
-              0.95
+              1.23
             ],
             [
               0.42,
-              0.55
+              0.72
             ],
             [
               0.5,
@@ -2238,23 +2734,23 @@
             ],
             [
               0.58,
-              -0.55
+              -0.72
             ],
             [
               0.67,
-              -0.95
+              -1.24
             ],
             [
               0.75,
-              -1.1
+              -1.44
             ],
             [
               0.83,
-              -0.95
+              -1.24
             ],
             [
               0.92,
-              -0.55
+              -0.72
             ],
             [
               1.0,
@@ -2273,23 +2769,23 @@
             ],
             [
               0.08,
-              -0.06
+              -0.18
             ],
             [
               0.17,
-              -0.12
+              -0.48
             ],
             [
               0.25,
-              -0.15
+              -0.63
             ],
             [
               0.33,
-              -0.12
+              -0.48
             ],
             [
               0.42,
-              -0.06
+              -0.18
             ],
             [
               0.5,
@@ -2297,23 +2793,23 @@
             ],
             [
               0.58,
-              0.02
+              -0.1
             ],
             [
               0.67,
-              0.01
+              -0.35
             ],
             [
               0.75,
-              0.0
+              -0.48
             ],
             [
               0.83,
-              0.01
+              -0.35
             ],
             [
               0.92,
-              0.02
+              -0.1
             ],
             [
               1.0,
@@ -2332,23 +2828,23 @@
             ],
             [
               0.08,
-              -4.0
+              -5.5
             ],
             [
               0.17,
-              -6.93
+              -9.53
             ],
             [
               0.25,
-              -8.0
+              -11.0
             ],
             [
               0.33,
-              -6.93
+              -9.53
             ],
             [
               0.42,
-              -4.0
+              -5.5
             ],
             [
               0.5,
@@ -2356,23 +2852,23 @@
             ],
             [
               0.58,
-              4.0
+              5.5
             ],
             [
               0.67,
-              6.93
+              9.53
             ],
             [
               0.75,
-              8.0
+              11.0
             ],
             [
               0.83,
-              6.93
+              9.53
             ],
             [
               0.92,
-              4.0
+              5.5
             ],
             [
               1.0,
