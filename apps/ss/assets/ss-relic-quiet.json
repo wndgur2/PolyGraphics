@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.quiet",
   "name": "Quiet air",
-  "description": "One enemy, on its own: a lopsided dusky-violet lump of a beetle, a lit ridge along its upper-left flank, the seam of its wing cases running down it off-centre and a scute on its rear, no legs and no eyes. To its right, where two more of its kind would have stood, two circles drawn only as broken grey arcs — dashes of a ring, not a faded disc, because a translucent shape at this size is a blur and not an absence. The relic halves the crowd and makes each one that comes tougher and worth more, so the one that came is drawn big and solid and the two that did not are drawn as their outlines.",
+  "description": "One enemy, on its own: a lopsided dusky-violet lump of a beetle, a lit ridge along its upper-left flank, the seam of its wing cases running down it off-centre and a scute on its rear, no legs and no eyes. To its right, where two more of its kind would have stood, two circles drawn only as broken grey arcs \u2014 dashes of a ring, not a faded disc, because a translucent shape at this size is a blur and not an absence. The relic halves the crowd and makes each one that comes tougher and worth more, so the one that came is drawn big and solid and the two that did not are drawn as their outlines. Legibility pass: the lump and its lit flank were a step low, which on a plate this dark left the one enemy that came dimmer than the two that did not. Body, lit face, seam and scute each went up one, so the solid one is solid and the broken arcs stay the absence.",
   "tags": [
     "relic"
   ],
@@ -118,7 +118,7 @@
           ]
         ]
       },
-      "fill": "$carapace.dark"
+      "fill": "$carapace"
     },
     {
       "id": "body_lit",
@@ -171,7 +171,7 @@
           ]
         ]
       },
-      "fill": "$carapace"
+      "fill": "$carapace.light"
     },
     {
       "id": "ridge",
@@ -445,7 +445,7 @@
           ]
         ]
       },
-      "fill": "$carapace.dark2"
+      "fill": "$carapace.dark"
     },
     {
       "id": "scute",
@@ -459,7 +459,7 @@
         "rx": 2.4,
         "ry": 1.6
       },
-      "fill": "$carapace.dark2"
+      "fill": "$carapace.dark"
     },
     {
       "id": "ghost_a_0",
@@ -599,7 +599,7 @@
   ],
   "variants": {
     "glyph": {
-      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
       "remove": [
         "plate"
       ]

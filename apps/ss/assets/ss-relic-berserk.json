@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.berserk",
   "name": "Last sting",
-  "description": "A sting torn out of the body that used it, sac and all: a long barbed needle running from a dark, wet venom sac at the top left to a point at the bottom right, three strands of red tissue still trailing off the sac where it came away, and a bead at the tip. A bee's sting is the hit it dies for — it costs the whole body and lands harder than anything else it can do — and that is the relic exactly: the nearer you are to dying, the harder you hit. The barbs are what keep the needle from reading as a thorn or a pin, so they are large and pale against it; a thorn is smooth, and a hooked needle is something that was meant to stay in. The sac is drawn as a gland rather than a bulb — a first pass with a round pale sac on the shaft read as a matchstick — and the strands hang limp instead of radiating, because tissue tears, it does not spark.",
+  "description": "A sting torn out of the body that used it, sac and all: a long barbed needle running from a dark, wet venom sac at the top left to a point at the bottom right, three strands of red tissue still trailing off the sac where it came away, and a bead at the tip. A bee's sting is the hit it dies for \u2014 it costs the whole body and lands harder than anything else it can do \u2014 and that is the relic exactly: the nearer you are to dying, the harder you hit. The barbs are what keep the needle from reading as a thorn or a pin, so they are large and pale against it; a thorn is smooth, and a hooked needle is something that was meant to stay in. The sac is drawn as a gland rather than a bulb \u2014 a first pass with a round pale sac on the shaft read as a matchstick \u2014 and the strands hang limp instead of radiating, because tissue tears, it does not spark. Legibility pass: the needle was drawn a hair wide of nothing and lit at its own value, so three pixels of it cleared the plate. It is a step lighter now, thickened across its axis \u2014 still a needle, not a cone \u2014 and the barbs are drawn at a size that survives 26px. The sac stays dark and wet: it is the one thing here the light is not meant to be on.",
   "tags": [
     "relic"
   ],
@@ -23,11 +23,11 @@
       "rot": 22,
       "shape": {
         "kind": "rect",
-        "w": 1.0,
+        "w": 1.7,
         "h": 6.0,
         "corner": 0.5
       },
-      "fill": "$blood.dark"
+      "fill": "$blood"
     },
     {
       "id": "strand_b",
@@ -38,11 +38,11 @@
       "rot": 48,
       "shape": {
         "kind": "rect",
-        "w": 0.9,
+        "w": 1.53,
         "h": 5.2,
         "corner": 0.45
       },
-      "fill": "$blood"
+      "fill": "$blood.light"
     },
     {
       "id": "strand_c",
@@ -53,11 +53,11 @@
       "rot": -30,
       "shape": {
         "kind": "rect",
-        "w": 0.85,
+        "w": 1.44,
         "h": 4.4,
         "corner": 0.42
       },
-      "fill": "$blood.dark"
+      "fill": "$blood"
     },
     {
       "id": "sting_o",
@@ -65,16 +65,16 @@
         "kind": "poly",
         "points": [
           [
-            -4.51,
-            -0.69
+            -5.08,
+            -0.12
           ],
           [
             10.9,
             10.9
           ],
           [
-            -0.69,
-            -4.51
+            -0.12,
+            -5.08
           ]
         ]
       },
@@ -226,20 +226,20 @@
         "kind": "poly",
         "points": [
           [
-            -3.7,
-            -1.5
+            -4.03,
+            -1.17
           ],
           [
             9.6,
             9.6
           ],
           [
-            -1.5,
-            -3.7
+            -1.17,
+            -4.03
           ]
         ]
       },
-      "fill": "$carapace.dark"
+      "fill": "$carapace.light"
     },
     {
       "id": "sting_lit",
@@ -247,20 +247,20 @@
         "kind": "poly",
         "points": [
           [
-            -1.6,
-            -3.2
+            -1.47,
+            -3.37
           ],
           [
             8.2,
             7.0
           ],
           [
-            -2.6,
-            -2.2
+            -2.73,
+            -2.03
           ]
         ]
       },
-      "fill": "$carapace"
+      "fill": "$carapace.light2"
     },
     {
       "id": "barb_a",
@@ -268,20 +268,20 @@
         "kind": "poly",
         "points": [
           [
-            1.79,
-            1.79
+            2.67,
+            1.87
           ],
           [
-            -2.73,
-            2.07
+            -4.11,
+            2.29
           ],
           [
-            1.01,
-            1.01
+            1.5,
+            0.7
           ]
         ]
       },
-      "fill": "$carapace.light"
+      "fill": "$carapace.light2"
     },
     {
       "id": "barb_b",
@@ -289,20 +289,20 @@
         "kind": "poly",
         "points": [
           [
-            4.48,
-            4.48
+            5.28,
+            4.56
           ],
           [
-            0.4,
-            4.73
+            -0.84,
+            4.93
           ],
           [
-            3.78,
-            3.78
+            4.23,
+            3.5
           ]
         ]
       },
-      "fill": "$carapace.light"
+      "fill": "$carapace.light2"
     },
     {
       "id": "barb_c",
@@ -310,20 +310,20 @@
         "kind": "poly",
         "points": [
           [
-            6.92,
-            6.92
+            7.58,
+            6.98
           ],
           [
-            3.52,
-            7.13
+            2.49,
+            7.3
           ],
           [
-            6.33,
-            6.33
+            6.7,
+            6.1
           ]
         ]
       },
-      "fill": "$carapace.light"
+      "fill": "$carapace.light2"
     },
     {
       "id": "bead_o",
@@ -364,7 +364,7 @@
   ],
   "variants": {
     "glyph": {
-      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
       "remove": [
         "plate"
       ]

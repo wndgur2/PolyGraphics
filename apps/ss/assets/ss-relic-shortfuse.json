@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.shortfuse",
   "name": "Short fuse",
-  "description": "A charge with almost no fuse left on it, already lit. The stub is barely longer than it is thick and the spark sits right on top of the casing, which is the whole find in one proportion: everything goes off before it is ready. The casing wears one blood band so it reads as something made to go off rather than as a jar.",
+  "description": "A charge with almost no fuse left on it, already lit. The stub is barely longer than it is thick and the spark sits right on top of the casing, which is the whole find in one proportion: everything goes off before it is ready. The casing wears one blood band so it reads as something made to go off rather than as a jar. Legibility pass: casing, band and fuse were all in their tokens' dark ends, so the spark was carrying the whole badge alone. Each went up one, which leaves the spark the brightest thing on the plate while giving it something to sit on.",
   "tags": [
     "relic"
   ],
@@ -40,7 +40,7 @@
         "h": 11.5,
         "corner": 2.2
       },
-      "fill": "$timber.dark"
+      "fill": "$timber"
     },
     {
       "id": "band",
@@ -53,7 +53,7 @@
         "w": 11.2,
         "h": 2.6
       },
-      "fill": "$blood.dark"
+      "fill": "$blood"
     },
     {
       "id": "fuse_o",
@@ -83,7 +83,7 @@
         "h": 5,
         "corner": 1.05
       },
-      "fill": "$husk.dark"
+      "fill": "$husk"
     },
     {
       "id": "spark_o",

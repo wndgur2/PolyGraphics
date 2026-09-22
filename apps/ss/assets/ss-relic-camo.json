@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.camo",
   "name": "Dead leaf",
-  "description": "A dead leaf with legs: a whole brown leaf — rib, veins, stalk — with three short limbs tucked so far under one side that only a stub of each clears the outline. The camouflage is carried by the joke rather than by the drawing coming apart: it is a leaf until you notice it has legs, which is exactly what the relic does to the swarm. Limbs drawn in full turned the icon into something carrying a leaf instead, so they are deliberately barely there — at 32px this reads as a plain brown leaf and the joke only lands at modal and codex size, which is the trade taken on purpose. Shapes tried and rejected: shin bent back up, which met the thigh at a narrow angle and became an arrowhead aimed at the leaf; shin dropped straight, which hid the bend and left three parallel bars reading as motion lines; and arcs instead of jointed bars, which disappeared under the leaf altogether. Four passes before those drew the leaf itself half-there, fading or giving out into a contour, on the idea that not-being-found should be an unfinished object — but a leaf that stops being a leaf is a broken drawing before it is a clever one, and at 32px every soft end was mud.",
+  "description": "A dead leaf with legs: a whole brown leaf \u2014 rib, veins, stalk \u2014 with three short limbs tucked so far under one side that only a stub of each clears the outline. The camouflage is carried by the joke rather than by the drawing coming apart: it is a leaf until you notice it has legs, which is exactly what the relic does to the swarm. Limbs drawn in full turned the icon into something carrying a leaf instead, so they are deliberately barely there \u2014 at 32px this reads as a plain brown leaf and the joke only lands at modal and codex size, which is the trade taken on purpose. Shapes tried and rejected: shin bent back up, which met the thigh at a narrow angle and became an arrowhead aimed at the leaf; shin dropped straight, which hid the bend and left three parallel bars reading as motion lines; and arcs instead of jointed bars, which disappeared under the leaf altogether. Four passes before those drew the leaf itself half-there, fading or giving out into a contour, on the idea that not-being-found should be an unfinished object \u2014 but a leaf that stops being a leaf is a broken drawing before it is a clever one, and at 32px every soft end was mud. Legibility pass: leaf, rib and veins were all in timber's dark end, and a brown leaf on a brown-lit panel came to nothing at 26px. The blade went two steps up and the lit face to `$timber.light2`, with rib and veins lifted to stay legible against it. Still a dead leaf, now one the light has found.",
   "tags": [
     "relic"
   ],
@@ -222,7 +222,7 @@
         "h": 4.4,
         "corner": 0.5
       },
-      "fill": "$timber.dark2"
+      "fill": "$timber.dark"
     },
     {
       "id": "leaf_o",
@@ -418,7 +418,7 @@
           ]
         ]
       },
-      "fill": "$timber.dark"
+      "fill": "$timber.light"
     },
     {
       "id": "leaf_lit",
@@ -516,7 +516,7 @@
           ]
         ]
       },
-      "fill": "$timber"
+      "fill": "$timber.light2"
     },
     {
       "id": "rib",
@@ -531,7 +531,7 @@
         "h": 17.67,
         "corner": 0.42
       },
-      "fill": "$timber.dark2"
+      "fill": "$timber.dark"
     },
     {
       "id": "vein_a",
@@ -546,7 +546,7 @@
         "h": 3.2,
         "corner": 0.25
       },
-      "fill": "$timber.dark2"
+      "fill": "$timber.dark"
     },
     {
       "id": "vein_b",
@@ -561,7 +561,7 @@
         "h": 3.8,
         "corner": 0.25
       },
-      "fill": "$timber.dark2"
+      "fill": "$timber.dark"
     },
     {
       "id": "vein_c",
@@ -576,12 +576,12 @@
         "h": 3.2,
         "corner": 0.25
       },
-      "fill": "$timber.dark2"
+      "fill": "$timber.dark"
     }
   ],
   "variants": {
     "glyph": {
-      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
       "remove": [
         "plate"
       ]

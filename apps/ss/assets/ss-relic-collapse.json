@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.collapse",
   "name": "Collapse",
-  "description": "A body folded flat against a wall, with the wound bursting sideways out of the contact and two chunks of the wall coming away. The body is drawn wider than it is tall \u2014 squashed along the wall's face \u2014 which is the only thing on the plate that says this happened *because* of the wall rather than merely near it. The chunks fly back the way the shove came from.",
+  "description": "A body folded flat against a wall, with the wound bursting sideways out of the contact and two chunks of the wall coming away. The body is drawn wider than it is tall \u2014 squashed along the wall's face \u2014 which is the only thing on the plate that says this happened *because* of the wall rather than merely near it. The chunks fly back the way the shove came from. Legibility pass: wall, body and chunks were every one of them at or below their token's own value, and nothing on the badge cleared the plate but the splat. Each went a step up, which also does the drawing a favour \u2014 a wall lit along its face is a wall you are being held against.",
   "tags": [
     "relic"
   ],
@@ -40,7 +40,7 @@
         "h": 27,
         "corner": 1.6
       },
-      "fill": "$rust"
+      "fill": "$rust.light"
     },
     {
       "id": "wall_lit",
@@ -54,7 +54,7 @@
         "h": 22,
         "corner": 1.3
       },
-      "fill": "$rust.light"
+      "fill": "$rust.light2"
     },
     {
       "id": "body_o",
@@ -82,7 +82,7 @@
         "rx": 6.2,
         "ry": 4.4
       },
-      "fill": "$carapace"
+      "fill": "$carapace.light"
     },
     {
       "id": "splat_o",
@@ -140,7 +140,7 @@
         "h": 2.5,
         "corner": 0.8
       },
-      "fill": "$rust.dark"
+      "fill": "$rust"
     },
     {
       "id": "chunk_b_o",
@@ -170,7 +170,7 @@
         "h": 2.1,
         "corner": 0.7
       },
-      "fill": "$rust.dark"
+      "fill": "$rust"
     }
   ],
   "variants": {

@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.hop",
   "name": "Springtail",
-  "description": "A springtail at the top of its jump: a scuff of dust at the bottom left where it left the ground, four dots of trail climbing an arc away from it, and the body itself at the apex at top right — a plump segmented back, a small head with two antennae thrown forward, and the furcula, the forked spring it jumps with, unfurled backward beneath it — backward, away from the direction of travel, which is what it does on the animal and what stops the two prongs reading as legs. The arc is the ability: it is drawn as where the thing has been, so the body reads as airborne rather than as a bug sitting on a slope. The furcula is the part that says springtail rather than beetle, and it is drawn unlatched because a latched one is just a tail. The antennae are drawn over the head in a pale tone: behind it in the body's own colour they vanished, and a body with no antennae at this size is a fish.",
+  "description": "A springtail at the top of its jump: a scuff of dust at the bottom left where it left the ground, four dots of trail climbing an arc away from it, and the body itself at the apex at top right \u2014 a plump segmented back, a small head with two antennae thrown forward, and the furcula, the forked spring it jumps with, unfurled backward beneath it \u2014 backward, away from the direction of travel, which is what it does on the animal and what stops the two prongs reading as legs. The arc is the ability: it is drawn as where the thing has been, so the body reads as airborne rather than as a bug sitting on a slope. The furcula is the part that says springtail rather than beetle, and it is drawn unlatched because a latched one is just a tail. The antennae are drawn over the head in a pale tone: behind it in the body's own colour they vanished, and a body with no antennae at this size is a fish. Legibility pass: body, head and furcula were all a step below what this plate will carry, so the springtail read as a dark blot under a bright trail. Each went up one. The trail was already the loud thing; the point was to let the animal making it be seen too.",
   "tags": [
     "relic"
   ],
@@ -188,7 +188,7 @@
         "h": 5.6,
         "corner": 0.55
       },
-      "fill": "$husk.dark"
+      "fill": "$husk"
     },
     {
       "id": "fork_l_o",
@@ -233,7 +233,7 @@
         "h": 3.0,
         "corner": 0.45
       },
-      "fill": "$husk.dark"
+      "fill": "$husk"
     },
     {
       "id": "fork_r",
@@ -248,7 +248,7 @@
         "h": 2.8,
         "corner": 0.45
       },
-      "fill": "$husk.dark"
+      "fill": "$husk"
     },
     {
       "id": "body_o",
@@ -276,7 +276,7 @@
         "rx": 5.2,
         "ry": 3.3
       },
-      "fill": "$carapace.dark"
+      "fill": "$carapace"
     },
     {
       "id": "body_lit",
@@ -290,7 +290,7 @@
         "rx": 3.9,
         "ry": 1.9
       },
-      "fill": "$carapace"
+      "fill": "$carapace.light"
     },
     {
       "id": "seg_a",
@@ -359,7 +359,7 @@
         "kind": "circle",
         "r": 2.0
       },
-      "fill": "$carapace"
+      "fill": "$carapace.light"
     },
     {
       "id": "eye",
@@ -420,7 +420,7 @@
   ],
   "variants": {
     "glyph": {
-      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
       "remove": [
         "plate"
       ]

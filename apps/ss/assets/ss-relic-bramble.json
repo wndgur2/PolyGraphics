@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.bramble",
   "name": "Bramble",
-  "description": "Two rings of thorns grown out of one stem, the outer set turned off the inner so no spike hides behind another: what the find does to the barbs on your back and the hairs on your skin is the same thing twice, and a single crown of thorns would have said it once. Moss green for the growth, with a blood bead at the centre where the stem is \u2014 the barbs are the body's, and they cost the body.",
+  "description": "Two rings of thorns grown out of one stem, the outer set turned off the inner so no spike hides behind another: what the find does to the barbs on your back and the hairs on your skin is the same thing twice, and a single crown of thorns would have said it once. Moss green for the growth, with a blood bead at the centre where the stem is \u2014 the barbs are the body's, and they cost the body. Legibility pass: the thorn rings sat at moss's own value, which on this plate is the plate. Both rings went a step up \u2014 the outer to `$moss.light`, the inner past it \u2014 so the crown reads as growth catching light rather than as a dark star on a dark panel.",
   "tags": [
     "relic"
   ],
@@ -32,7 +32,7 @@
         "r": 11.5,
         "r2": 5.4
       },
-      "fill": "$moss"
+      "fill": "$moss.light"
     },
     {
       "id": "inner_o",
@@ -54,7 +54,7 @@
         "r2": 3.4,
         "rot": 22
       },
-      "fill": "$moss.light"
+      "fill": "$moss.light2"
     },
     {
       "id": "stem_o",
@@ -70,7 +70,7 @@
         "kind": "circle",
         "r": 3.4
       },
-      "fill": "$blood.dark"
+      "fill": "$blood"
     },
     {
       "id": "bead",

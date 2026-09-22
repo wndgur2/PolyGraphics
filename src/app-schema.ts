@@ -82,10 +82,30 @@ export const AppManifestSchema = z.strictObject({
     .strictObject({
       /** The floors art is judged on, by name: `readability` and the gallery's ground button read these. */
       ground: z.record(z.string(), assetId).optional(),
+      /**
+       * The plate each badge category is read on. A category named here is not
+       * judged against a floor — it never touches one — but against the plate
+       * every one of its documents wears, which is the thing its glyph has to
+       * come off. Requires the category to declare a `glyph` state: that is
+       * what lifts the plate off so the object can be measured alone.
+       */
+      plate: z.record(category, assetId).optional(),
       /** Screen px per authored px — what "game scale" means for this app. */
       scale: z.number().positive().optional(),
-      /** `readability` thresholds: below `sinks` a body is lost in the floor, below `thin` it is marginal. */
-      contrast: z.strictObject({ sinks: z.number().positive(), thin: z.number().positive() }).optional(),
+      /**
+       * `readability` thresholds: below `sinks` a body is lost in the floor,
+       * below `thin` it is marginal. `badge` is the ratio a pixel of a plated
+       * glyph must clear against the plate under it to count as read, and
+       * `badgeLit` the share of the canvas that has to clear it.
+       */
+      contrast: z
+        .strictObject({
+          sinks: z.number().positive(),
+          thin: z.number().positive(),
+          badge: z.number().positive().optional(),
+          badgeLit: z.number().positive().max(1).optional(),
+        })
+        .optional(),
     })
     .optional(),
   rules: RulesSchema.optional(),
