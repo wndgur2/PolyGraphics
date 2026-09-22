@@ -1,11 +1,13 @@
 {
   "id": "ss.relic.mason",
   "name": "Mason gland",
-  "description": "Three blocks of chewed earth stood up in an arc, the middle one tallest and set back, the outer two shorter and turned slightly outward — the cover the relic raises, with the gaps between them left wide on purpose, because never walling its owner in is half of what the relic does. Each block is a squared prism: a dark left facet and a foreshortened top face, deliberately not an elliptical cap, which read as a barrel in two earlier passes. The middle one has a wet run down it — the material is secreted mortar, not cut stone, and cut stone is the one vocabulary the ruins' own pillars and slabs already own. The gland itself is not drawn: a sac would have read as one more of the glands already on this shelf, and the arc is the only part of this that says what it does. Polish: the ink underlays were quads while each block's silhouette has a shoulder where the top face meets the right side, so the ink there thinned to under half a pixel; each outline gained one point at that shoulder and the margin is now ~1.2 px all the way round. Facets, top faces, the run and the shadow are untouched.",
+  "description": "Three blocks of chewed earth stood up in an arc, the middle one tallest and set back, the outer two shorter and turned slightly outward \u2014 the cover the relic raises, with the gaps between them left wide on purpose, because never walling its owner in is half of what the relic does. Each block is a squared prism: a dark left facet and a foreshortened top face, deliberately not an elliptical cap, which read as a barrel in two earlier passes. The middle one has a wet run down it \u2014 the material is secreted mortar, not cut stone, and cut stone is the one vocabulary the ruins' own pillars and slabs already own. The gland itself is not drawn: a sac would have read as one more of the glands already on this shelf, and the arc is the only part of this that says what it does. Polish: the ink underlays were quads while each block's silhouette has a shoulder where the top face meets the right side, so the ink there thinned to under half a pixel; each outline gained one point at that shoulder and the margin is now ~1.2 px all the way round. Facets, top faces, the run and the shadow are untouched.",
   "tags": [
     "relic"
   ],
-  "says": ["tougher"],
+  "says": [
+    "tougher"
+  ],
   "size": [
     32,
     32
@@ -18,45 +20,45 @@
     {
       "id": "shadow",
       "at": [
-        0,
-        9.6
+        0.59,
+        8.68
       ],
       "shape": {
         "kind": "ellipse",
-        "rx": 12.2,
-        "ry": 2.3
+        "rx": 11.48,
+        "ry": 2.16
       },
       "fill": "$ink@heavy"
     },
     {
       "id": "mid_outline",
       "at": [
-        0.0,
-        -0.6
+        0.59,
+        -0.92
       ],
       "rot": 0,
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -6.5600000000000005,
-            -10.5
+            -6.17,
+            -9.88
           ],
           [
-            4.208,
-            -10.5
+            3.96,
+            -9.88
           ],
           [
-            5.5,
-            -7.2
+            5.18,
+            -6.78
           ],
           [
-            6.224,
-            8.7
+            5.86,
+            8.19
           ],
           [
-            -6.224,
-            8.7
+            -5.86,
+            8.19
           ]
         ]
       },
@@ -65,136 +67,136 @@
     {
       "id": "mid",
       "at": [
-        0.0,
-        -0.6
+        0.59,
+        -0.92
       ],
       "rot": 0,
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -4.2,
-            -7.0
+            -3.95,
+            -6.59
           ],
           [
-            4.2,
-            -7.0
+            3.95,
+            -6.59
           ],
           [
-            5.124,
-            7.6
+            4.82,
+            7.15
           ],
           [
-            -5.124,
-            7.6
+            -4.82,
+            7.15
+          ]
+        ]
+      },
+      "fill": "$timber"
+    },
+    {
+      "id": "mid_facet",
+      "at": [
+        0.59,
+        -0.92
+      ],
+      "rot": 0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -3.95,
+            -6.59
+          ],
+          [
+            -1.19,
+            -6.59
+          ],
+          [
+            -1.5,
+            7.15
+          ],
+          [
+            -4.82,
+            7.15
           ]
         ]
       },
       "fill": "$timber.dark"
     },
     {
-      "id": "mid_facet",
-      "at": [
-        0.0,
-        -0.6
-      ],
-      "rot": 0,
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -4.2,
-            -7.0
-          ],
-          [
-            -1.26,
-            -7.0
-          ],
-          [
-            -1.596,
-            7.6
-          ],
-          [
-            -5.124,
-            7.6
-          ]
-        ]
-      },
-      "fill": "$timber.dark2"
-    },
-    {
       "id": "mid_top",
       "at": [
-        0.0,
-        -0.6
+        0.59,
+        -0.92
       ],
       "rot": 0,
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -4.2,
-            -7.0
+            -3.95,
+            -6.59
           ],
           [
-            4.2,
-            -7.0
+            3.95,
+            -6.59
           ],
           [
-            3.108,
-            -9.4
+            2.92,
+            -8.85
           ],
           [
-            -5.460000000000001,
-            -9.4
+            -5.14,
+            -8.85
           ]
         ]
       },
-      "fill": "$timber.light"
+      "fill": "$timber.light2"
     },
     {
       "id": "mid_run",
       "at": [
-        1.0,
-        -0.8
+        1.53,
+        -1.11
       ],
       "shape": {
         "kind": "rect",
-        "w": 1.4,
-        "h": 10.2,
-        "corner": 0.7
+        "w": 1.32,
+        "h": 9.6,
+        "corner": 0.66
       },
-      "fill": "$timber"
+      "fill": "$timber.light"
     },
     {
       "id": "left_outline",
       "at": [
-        -9.4,
-        4.2
+        -8.26,
+        3.6
       ],
       "rot": -7,
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -5.26,
-            -8.1
+            -4.95,
+            -7.62
           ],
           [
-            3.468,
-            -8.1
+            3.26,
+            -7.62
           ],
           [
-            4.4,
-            -4.8
+            4.14,
+            -4.52
           ],
           [
-            5.004,
-            6.300000000000001
+            4.71,
+            5.93
           ],
           [
-            -5.004,
-            6.300000000000001
+            -4.71,
+            5.93
           ]
         ]
       },
@@ -203,58 +205,58 @@
     {
       "id": "left",
       "at": [
-        -9.4,
-        4.2
+        -8.26,
+        3.6
       ],
       "rot": -7,
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -3.2,
-            -4.6
+            -3.01,
+            -4.33
           ],
           [
-            3.2,
-            -4.6
+            3.01,
+            -4.33
           ],
           [
-            3.904,
-            5.2
+            3.67,
+            4.89
           ],
           [
-            -3.904,
-            5.2
+            -3.67,
+            4.89
           ]
         ]
       },
-      "fill": "$timber.dark2"
+      "fill": "$timber.dark"
     },
     {
       "id": "left_facet",
       "at": [
-        -9.4,
-        4.2
+        -8.26,
+        3.6
       ],
       "rot": -7,
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -3.2,
-            -4.6
+            -3.01,
+            -4.33
           ],
           [
-            -0.96,
-            -4.6
+            -0.9,
+            -4.33
           ],
           [
-            -1.2160000000000002,
-            5.2
+            -1.14,
+            4.89
           ],
           [
-            -3.904,
-            5.2
+            -3.67,
+            4.89
           ]
         ]
       },
@@ -263,62 +265,62 @@
     {
       "id": "left_top",
       "at": [
-        -9.4,
-        4.2
+        -8.26,
+        3.6
       ],
       "rot": -7,
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -3.2,
-            -4.6
+            -3.01,
+            -4.33
           ],
           [
-            3.2,
-            -4.6
+            3.01,
+            -4.33
           ],
           [
-            2.368,
-            -7.0
+            2.23,
+            -6.59
           ],
           [
-            -4.16,
-            -7.0
+            -3.91,
+            -6.59
           ]
         ]
       },
-      "fill": "$timber"
+      "fill": "$timber.light"
     },
     {
       "id": "right_outline",
       "at": [
-        9.4,
-        4.2
+        9.43,
+        3.6
       ],
       "rot": 7,
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -5.26,
-            -8.1
+            -4.95,
+            -7.62
           ],
           [
-            3.468,
-            -8.1
+            3.26,
+            -7.62
           ],
           [
-            4.4,
-            -4.8
+            4.14,
+            -4.52
           ],
           [
-            5.004,
-            6.300000000000001
+            4.71,
+            5.93
           ],
           [
-            -5.004,
-            6.300000000000001
+            -4.71,
+            5.93
           ]
         ]
       },
@@ -327,58 +329,58 @@
     {
       "id": "right",
       "at": [
-        9.4,
-        4.2
+        9.43,
+        3.6
       ],
       "rot": 7,
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -3.2,
-            -4.6
+            -3.01,
+            -4.33
           ],
           [
-            3.2,
-            -4.6
+            3.01,
+            -4.33
           ],
           [
-            3.904,
-            5.2
+            3.67,
+            4.89
           ],
           [
-            -3.904,
-            5.2
+            -3.67,
+            4.89
           ]
         ]
       },
-      "fill": "$timber.dark2"
+      "fill": "$timber.dark"
     },
     {
       "id": "right_facet",
       "at": [
-        9.4,
-        4.2
+        9.43,
+        3.6
       ],
       "rot": 7,
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -3.2,
-            -4.6
+            -3.01,
+            -4.33
           ],
           [
-            -0.96,
-            -4.6
+            -0.9,
+            -4.33
           ],
           [
-            -1.2160000000000002,
-            5.2
+            -1.14,
+            4.89
           ],
           [
-            -3.904,
-            5.2
+            -3.67,
+            4.89
           ]
         ]
       },
@@ -387,37 +389,37 @@
     {
       "id": "right_top",
       "at": [
-        9.4,
-        4.2
+        9.43,
+        3.6
       ],
       "rot": 7,
       "shape": {
         "kind": "poly",
         "points": [
           [
-            -3.2,
-            -4.6
+            -3.01,
+            -4.33
           ],
           [
-            3.2,
-            -4.6
+            3.01,
+            -4.33
           ],
           [
-            2.368,
-            -7.0
+            2.23,
+            -6.59
           ],
           [
-            -4.16,
-            -7.0
+            -3.91,
+            -6.59
           ]
         ]
       },
-      "fill": "$timber"
+      "fill": "$timber.light"
     }
   ],
   "variants": {
     "glyph": {
-      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
       "remove": [
         "plate"
       ]

@@ -5,7 +5,11 @@
   "tags": [
     "relic"
   ],
-  "says": ["harder", "tougher", "faster"],
+  "says": [
+    "harder",
+    "tougher",
+    "faster"
+  ],
   "size": [
     32,
     32
@@ -19,7 +23,7 @@
       "id": "trachea_outline",
       "at": [
         0,
-        -7.4
+        -4.53
       ],
       "shape": {
         "kind": "rect",
@@ -33,7 +37,7 @@
       "id": "bronch_l_outline",
       "at": [
         -2.7,
-        -2.8
+        0.08
       ],
       "rot": 38,
       "shape": {
@@ -48,7 +52,7 @@
       "id": "bronch_r_outline",
       "at": [
         2.7,
-        -2.8
+        0.08
       ],
       "rot": -38,
       "shape": {
@@ -63,13 +67,13 @@
       "id": "bronch_l",
       "at": [
         -2.7,
-        -2.8
+        0.08
       ],
       "rot": 38,
       "shape": {
         "kind": "rect",
         "w": 2.4,
-        "h": 5.0,
+        "h": 5,
         "corner": 1.2
       },
       "fill": "$husk.dark"
@@ -78,13 +82,13 @@
       "id": "bronch_r",
       "at": [
         2.7,
-        -2.8
+        0.08
       ],
       "rot": -38,
       "shape": {
         "kind": "rect",
         "w": 2.4,
-        "h": 5.0,
+        "h": 5,
         "corner": 1.2
       },
       "fill": "$husk.dark"
@@ -92,8 +96,8 @@
     {
       "id": "lung_l_outline",
       "at": [
-        -5.0,
-        2.2
+        -5,
+        5.08
       ],
       "shape": {
         "kind": "poly",
@@ -149,8 +153,8 @@
     {
       "id": "lung_l",
       "at": [
-        -5.0,
-        2.2
+        -5,
+        5.08
       ],
       "shape": {
         "kind": "poly",
@@ -206,8 +210,8 @@
     {
       "id": "lung_l_lit",
       "at": [
-        -5.0,
-        1.5000000000000002
+        -5,
+        4.38
       ],
       "shape": {
         "kind": "poly",
@@ -264,7 +268,7 @@
       "id": "lung_l_sheen",
       "at": [
         -6.5,
-        -0.3999999999999999
+        2.48
       ],
       "shape": {
         "kind": "ellipse",
@@ -276,8 +280,8 @@
     {
       "id": "lung_l_fissure",
       "at": [
-        -5.0,
-        2.8000000000000003
+        -5,
+        5.68
       ],
       "rot": -22,
       "shape": {
@@ -291,8 +295,8 @@
     {
       "id": "lung_r_outline",
       "at": [
-        5.0,
-        2.2
+        5,
+        5.08
       ],
       "shape": {
         "kind": "poly",
@@ -340,8 +344,8 @@
     {
       "id": "lung_r",
       "at": [
-        5.0,
-        2.2
+        5,
+        5.08
       ],
       "shape": {
         "kind": "poly",
@@ -389,8 +393,8 @@
     {
       "id": "lung_r_lit",
       "at": [
-        5.0,
-        1.5000000000000002
+        5,
+        4.38
       ],
       "shape": {
         "kind": "poly",
@@ -439,7 +443,7 @@
       "id": "lung_r_sheen",
       "at": [
         6.5,
-        -0.3999999999999999
+        2.48
       ],
       "shape": {
         "kind": "ellipse",
@@ -451,8 +455,8 @@
     {
       "id": "lung_r_fissure",
       "at": [
-        5.0,
-        2.8000000000000003
+        5,
+        5.68
       ],
       "rot": 22,
       "shape": {
@@ -467,11 +471,11 @@
       "id": "trachea",
       "at": [
         0,
-        -7.4
+        -4.53
       ],
       "shape": {
         "kind": "rect",
-        "w": 3.0,
+        "w": 3,
         "h": 6.4,
         "corner": 1.5
       },
@@ -481,11 +485,11 @@
       "id": "ring_a",
       "at": [
         0,
-        -9.4
+        -6.53
       ],
       "shape": {
         "kind": "rect",
-        "w": 3.0,
+        "w": 3,
         "h": 0.7,
         "corner": 0.35
       },
@@ -495,11 +499,11 @@
       "id": "ring_b",
       "at": [
         0,
-        -7.4
+        -4.53
       ],
       "shape": {
         "kind": "rect",
-        "w": 3.0,
+        "w": 3,
         "h": 0.7,
         "corner": 0.35
       },
@@ -509,11 +513,11 @@
       "id": "ring_c",
       "at": [
         0,
-        -5.4
+        -2.53
       ],
       "shape": {
         "kind": "rect",
-        "w": 3.0,
+        "w": 3,
         "h": 0.7,
         "corner": 0.35
       },
@@ -523,7 +527,7 @@
       "id": "bead_a_outline",
       "at": [
         2.6,
-        -11.0
+        -8.13
       ],
       "shape": {
         "kind": "circle",
@@ -535,7 +539,7 @@
       "id": "bead_b_outline",
       "at": [
         5.2,
-        -12.9
+        -10.03
       ],
       "shape": {
         "kind": "circle",
@@ -546,8 +550,8 @@
     {
       "id": "bead_c_outline",
       "at": [
-        7.0,
-        -14.2
+        7,
+        -11.32
       ],
       "shape": {
         "kind": "circle",
@@ -559,7 +563,7 @@
       "id": "bead_a",
       "at": [
         2.6,
-        -11.0
+        -8.13
       ],
       "shape": {
         "kind": "circle",
@@ -571,7 +575,7 @@
       "id": "bead_b",
       "at": [
         5.2,
-        -12.9
+        -10.03
       ],
       "shape": {
         "kind": "circle",
@@ -582,8 +586,8 @@
     {
       "id": "bead_c",
       "at": [
-        7.0,
-        -14.2
+        7,
+        -11.32
       ],
       "shape": {
         "kind": "circle",

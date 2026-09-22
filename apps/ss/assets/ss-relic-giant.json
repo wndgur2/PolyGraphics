@@ -1,11 +1,15 @@
 {
   "id": "ss.relic.giant",
   "name": "Giant instar",
-  "description": "One amber body swollen until it fills the plate — it runs to the rim on the top, right and bottom and its outline crosses onto the gold at the right, on purpose — with three segment bands curving across it and a highlight up on the shoulder. Down in the free lower-left corner sits a body of the ordinary size, a pale oval with one band, there to be the ruler. Half again the body, more health and more area is a relic about being large, so the icon is mostly not-plate. No eyes, no legs, no face: it is a mass with segments and not an animal looking at you.",
+  "description": "One amber body swollen until it fills the plate \u2014 it stands to the panel's inner edge on the top, right and bottom with nothing between it and the rim, and stops there \u2014 with three segment bands curving across it and a highlight up on the shoulder. Down in the free lower-left corner sits a body of the ordinary size, a pale oval with one band, there to be the ruler. Half again the body, more health and more area is a relic about being large, so the icon is mostly not-plate. No eyes, no legs, no face: it is a mass with segments and not an animal looking at you. Fit pass: the outline used to cross onto the gold, which read as too-big on the page and did not survive the game \u2014 the rim is the two outer pixels `BootScene.makeRelicGradeIcons` repaints with the find's grade, so what crossed was flattened to a grade colour and the glyph cutout lost it as well. Filling the panel to its edge says the same thing and keeps it.",
   "tags": [
     "relic"
   ],
-  "says": ["tougher", "wider", "costs"],
+  "says": [
+    "tougher",
+    "wider",
+    "costs"
+  ],
   "size": [
     32,
     32
@@ -21,64 +25,68 @@
         "kind": "poly",
         "points": [
           [
-            -10.13,
-            -9.88
+            -9.73,
+            -9.49
           ],
           [
-            -3.72,
-            -13.95
+            -3.57,
+            -13.41
           ],
           [
-            3.95,
-            -14.59
+            3.8,
+            -14.02
           ],
           [
-            10.67,
-            -11.74
+            10.25,
+            -11.28
           ],
           [
-            14.36,
-            -5.28
+            13.8,
+            -5.07
           ],
           [
-            14.8,
-            2.07
+            14.22,
+            1.99
           ],
           [
-            13.3,
-            9.04
+            12.78,
+            8.69
           ],
           [
-            8.85,
-            13.89
+            8.5,
+            13.35
           ],
           [
-            1.98,
-            14.8
+            1.9,
+            14.22
           ],
           [
-            -4.02,
-            13.71
+            -3.86,
+            13.18
           ],
           [
-            -8.24,
-            9.95
+            -7.92,
+            9.56
           ],
           [
-            -9.58,
-            5.42
+            -9.21,
+            5.21
           ],
           [
-            -10.37,
-            0.66
+            -9.97,
+            0.63
           ],
           [
-            -12.2,
-            -4.6
+            -11.72,
+            -4.42
           ]
         ]
       },
-      "fill": "$ink"
+      "fill": "$ink",
+      "at": [
+        -0.96,
+        -0.12
+      ]
     },
     {
       "id": "body",
@@ -86,64 +94,68 @@
         "kind": "poly",
         "points": [
           [
-            -9.4,
-            -9.2
+            -9.03,
+            -8.84
           ],
           [
-            -3.4,
-            -13.0
+            -3.27,
+            -12.49
           ],
           [
-            3.8,
-            -13.6
+            3.65,
+            -13.07
           ],
           [
-            10.0,
-            -11.0
+            9.61,
+            -10.57
           ],
           [
-            13.4,
-            -5.0
+            12.88,
+            -4.8
           ],
           [
-            13.8,
-            2.0
+            13.26,
+            1.92
           ],
           [
-            12.4,
-            8.6
+            11.92,
+            8.26
           ],
           [
-            8.4,
-            13.0
+            8.07,
+            12.49
           ],
           [
-            2.0,
-            13.8
+            1.92,
+            13.26
           ],
           [
-            -3.6,
-            12.8
+            -3.46,
+            12.3
           ],
           [
-            -7.4,
-            9.4
+            -7.11,
+            9.03
           ],
           [
-            -8.6,
-            5.2
+            -8.26,
+            5
           ],
           [
-            -9.4,
-            0.4
+            -9.03,
+            0.38
           ],
           [
-            -11.2,
-            -4.6
+            -10.76,
+            -4.42
           ]
         ]
       },
-      "fill": "$chitin.dark"
+      "fill": "$chitin.dark",
+      "at": [
+        -0.96,
+        -0.12
+      ]
     },
     {
       "id": "body_lit",
@@ -151,76 +163,80 @@
         "kind": "poly",
         "points": [
           [
-            -8.76,
-            -8.98
+            -8.42,
+            -8.63
           ],
           [
-            -3.6,
-            -12.25
+            -3.46,
+            -11.77
           ],
           [
-            2.59,
-            -12.77
+            2.49,
+            -12.27
           ],
           [
-            7.92,
-            -10.53
+            7.61,
+            -10.12
           ],
           [
-            10.85,
-            -5.37
+            10.43,
+            -5.16
           ],
           [
-            11.19,
-            0.65
+            10.75,
+            0.62
           ],
           [
-            9.99,
-            6.32
+            9.6,
+            6.07
           ],
           [
-            6.55,
-            10.11
+            6.29,
+            9.72
           ],
           [
-            1.04,
-            10.8
+            1,
+            10.38
           ],
           [
-            -3.77,
-            9.94
+            -3.62,
+            9.55
           ],
           [
-            -7.04,
-            7.01
+            -6.77,
+            6.74
           ],
           [
-            -8.07,
-            3.4
+            -7.76,
+            3.27
           ],
           [
-            -8.76,
-            -0.73
+            -8.42,
+            -0.7
           ],
           [
-            -10.31,
-            -5.03
+            -9.91,
+            -4.83
           ]
         ]
       },
-      "fill": "$chitin"
+      "fill": "$chitin",
+      "at": [
+        -0.96,
+        -0.12
+      ]
     },
     {
       "id": "sheen",
       "at": [
-        -3.4,
-        -8.4
+        -4.23,
+        -8.19
       ],
       "rot": -24,
       "shape": {
         "kind": "ellipse",
-        "rx": 3.6,
-        "ry": 2.0
+        "rx": 3.46,
+        "ry": 1.92
       },
       "fill": "$chitin.light2"
     },
@@ -230,96 +246,100 @@
         "kind": "poly",
         "points": [
           [
-            -9.93,
-            -5.41
+            -9.54,
+            -5.2
           ],
           [
-            -8.54,
-            -5.12
+            -8.21,
+            -4.92
           ],
           [
-            -6.59,
-            -4.67
+            -6.33,
+            -4.49
           ],
           [
-            -4.28,
-            -4.19
+            -4.11,
+            -4.03
           ],
           [
-            -1.82,
-            -3.79
+            -1.75,
+            -3.64
           ],
           [
-            0.59,
-            -3.6
+            0.57,
+            -3.46
           ],
           [
-            3.13,
-            -3.7
+            3.01,
+            -3.56
           ],
           [
-            5.94,
-            -4.0
+            5.71,
+            -3.84
           ],
           [
-            8.68,
-            -4.39
+            8.34,
+            -4.22
           ],
           [
-            11.03,
-            -4.77
+            10.6,
+            -4.58
           ],
           [
-            12.69,
-            -5.01
+            12.2,
+            -4.81
           ],
           [
-            12.51,
-            -6.19
-          ],
-          [
-            10.85,
+            12.02,
             -5.95
           ],
           [
-            8.5,
-            -5.58
+            10.43,
+            -5.72
           ],
           [
-            5.79,
-            -5.19
+            8.17,
+            -5.36
           ],
           [
-            3.04,
-            -4.9
+            5.56,
+            -4.99
           ],
           [
-            0.61,
-            -4.8
+            2.92,
+            -4.71
           ],
           [
-            -1.68,
-            -4.98
+            0.59,
+            -4.61
           ],
           [
-            -4.07,
-            -5.37
+            -1.61,
+            -4.79
           ],
           [
-            -6.34,
-            -5.84
+            -3.91,
+            -5.16
           ],
           [
-            -8.28,
-            -6.29
+            -6.09,
+            -5.61
           ],
           [
-            -9.67,
-            -6.59
+            -7.96,
+            -6.04
+          ],
+          [
+            -9.29,
+            -6.33
           ]
         ]
       },
-      "fill": "$chitin.dark2"
+      "fill": "$chitin.dark2",
+      "at": [
+        -0.96,
+        -0.12
+      ]
     },
     {
       "id": "segment_1",
@@ -327,96 +347,100 @@
         "kind": "poly",
         "points": [
           [
-            -8.73,
-            0.99
+            -8.39,
+            0.95
           ],
           [
-            -7.3,
-            1.3
+            -7.02,
+            1.25
           ],
           [
-            -5.28,
-            1.78
+            -5.07,
+            1.71
           ],
           [
-            -2.89,
-            2.31
+            -2.78,
+            2.22
           ],
           [
-            -0.4,
-            2.75
+            -0.38,
+            2.64
           ],
           [
-            1.97,
-            3.0
+            1.89,
+            2.88
           ],
           [
-            4.38,
-            2.98
+            4.21,
+            2.86
           ],
           [
-            6.96,
-            2.77
+            6.69,
+            2.66
           ],
           [
-            9.45,
-            2.47
+            9.08,
+            2.37
           ],
           [
-            11.58,
-            2.18
+            11.13,
+            2.09
           ],
           [
-            13.07,
-            2.0
+            12.56,
+            1.92
           ],
           [
-            12.93,
-            0.8
+            12.43,
+            0.77
           ],
           [
-            11.42,
-            0.99
+            10.97,
+            0.95
           ],
           [
-            9.3,
-            1.28
+            8.94,
+            1.23
           ],
           [
-            6.84,
-            1.57
+            6.57,
+            1.51
           ],
           [
-            4.32,
-            1.78
+            4.15,
+            1.71
           ],
           [
-            2.03,
-            1.8
+            1.95,
+            1.73
           ],
           [
-            -0.23,
-            1.57
+            -0.22,
+            1.51
           ],
           [
-            -2.66,
-            1.13
+            -2.56,
+            1.09
           ],
           [
-            -5.01,
-            0.62
+            -4.81,
+            0.6
           ],
           [
-            -7.03,
-            0.14
+            -6.76,
+            0.13
           ],
           [
-            -8.47,
-            -0.19
+            -8.14,
+            -0.18
           ]
         ]
       },
-      "fill": "$chitin.dark2"
+      "fill": "$chitin.dark2",
+      "at": [
+        -0.96,
+        -0.12
+      ]
     },
     {
       "id": "segment_2",
@@ -424,143 +448,147 @@
         "kind": "poly",
         "points": [
           [
-            -7.33,
-            7.19
+            -7.04,
+            6.91
           ],
           [
-            -6.02,
-            7.47
+            -5.79,
+            7.18
           ],
           [
-            -4.16,
-            7.91
-          ],
-          [
-            -1.99,
-            8.38
-          ],
-          [
-            0.27,
-            8.78
-          ],
-          [
-            2.37,
-            9.0
-          ],
-          [
-            4.45,
-            8.96
-          ],
-          [
-            6.62,
-            8.75
-          ],
-          [
-            8.69,
-            8.46
-          ],
-          [
-            10.45,
-            8.17
-          ],
-          [
-            11.69,
-            7.99
-          ],
-          [
-            11.51,
-            6.81
-          ],
-          [
-            10.26,
-            6.99
-          ],
-          [
-            8.51,
-            7.27
-          ],
-          [
-            6.48,
-            7.56
-          ],
-          [
-            4.38,
-            7.76
-          ],
-          [
-            2.43,
-            7.8
-          ],
-          [
-            0.44,
+            -4,
             7.6
           ],
           [
-            -1.76,
-            7.21
+            -1.91,
+            8.05
           ],
           [
-            -3.9,
-            6.74
+            0.26,
+            8.44
           ],
           [
-            -5.75,
-            6.3
+            2.28,
+            8.65
           ],
           [
-            -7.07,
-            6.01
+            4.28,
+            8.61
+          ],
+          [
+            6.36,
+            8.41
+          ],
+          [
+            8.35,
+            8.13
+          ],
+          [
+            10.04,
+            7.85
+          ],
+          [
+            11.23,
+            7.68
+          ],
+          [
+            11.06,
+            6.54
+          ],
+          [
+            9.86,
+            6.72
+          ],
+          [
+            8.18,
+            6.99
+          ],
+          [
+            6.23,
+            7.27
+          ],
+          [
+            4.21,
+            7.46
+          ],
+          [
+            2.34,
+            7.5
+          ],
+          [
+            0.42,
+            7.3
+          ],
+          [
+            -1.69,
+            6.93
+          ],
+          [
+            -3.75,
+            6.48
+          ],
+          [
+            -5.53,
+            6.05
+          ],
+          [
+            -6.79,
+            5.78
           ]
         ]
       },
-      "fill": "$chitin.dark2"
+      "fill": "$chitin.dark2",
+      "at": [
+        -0.96,
+        -0.12
+      ]
     },
     {
       "id": "small_outline",
       "at": [
-        -9.8,
-        9.8
+        -10.38,
+        9.3
       ],
       "rot": -30,
       "shape": {
         "kind": "ellipse",
-        "rx": 3.1,
-        "ry": 2.5
+        "rx": 2.98,
+        "ry": 2.4
       },
       "fill": "$ink"
     },
     {
       "id": "small",
       "at": [
-        -9.8,
-        9.8
+        -10.38,
+        9.3
       ],
       "rot": -30,
       "shape": {
         "kind": "ellipse",
-        "rx": 2.3,
-        "ry": 1.7
+        "rx": 2.21,
+        "ry": 1.63
       },
       "fill": "$husk"
     },
     {
       "id": "small_band",
       "at": [
-        -9.4,
-        9.6
+        -9.99,
+        9.11
       ],
       "rot": -30,
       "shape": {
         "kind": "rect",
-        "w": 3.2,
-        "h": 0.5
+        "w": 3.08,
+        "h": 0.48
       },
       "fill": "$husk.dark2"
     }
   ],
   "variants": {
     "glyph": {
-      "description": "Plate off, object only — the silhouette a collection shows for an entry not yet met.",
+      "description": "Plate off, object only \u2014 the silhouette a collection shows for an entry not yet met.",
       "remove": [
         "plate"
       ]

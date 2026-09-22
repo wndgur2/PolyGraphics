@@ -23,6 +23,9 @@
  *   lit%      share of the canvas clearing `contrast.badge` against the plate
  *   peak      the best any one pixel of the object manages
  *   cover%    share of the canvas the object fills with the plate lifted off
+ *   spill     opaque pixels of the object outside the plate's `field` part —
+ *             the rim, which a consumer is free to treat as its own. Any at all
+ *             is a break: ink out there is drawn twice for nothing.
  */
 import { Resvg } from "@resvg/resvg-js";
 import { renderSVG } from "../src/render.js";
@@ -88,7 +91,7 @@ function rasterize(svg: string): { px: Uint8Array; w: number; h: number } {
   return { px: out.pixels, w: out.width, h: out.height };
 }
 
-interface Badge { lit: number; peak: number; cover: number }
+interface Badge { lit: number; peak: number; cover: number; spill: number }
 
 /**
  * A plated badge against its own plate.
@@ -105,30 +108,50 @@ interface Badge { lit: number; peak: number; cover: number }
  * composes it, variant and all. So nothing here has to know how a plate is put
  * together; it only has to know that lifting it off is what `glyph` means.
  */
-function measureBadge(id: string, plateId: string): Badge | string {
+function measureBadge(id: string, plate: { doc: string; field: string }): Badge | string {
   const asset = assets.get(id);
   if (!asset) return "no such document";
   const removed = asset.variants?.glyph?.remove ?? [];
   if (!removed.length) return "has no glyph variant, so the plate cannot be lifted off to measure it";
   const under = asset.parts.filter((p) => removed.includes(p.id));
-  if (!under.some((p) => "use" in p && p.use === plateId)) return `its glyph variant lifts off no part using ${plateId}`;
+  if (!under.some((p) => "use" in p && p.use === plate.doc)) return `its glyph variant lifts off no part using ${plate.doc}`;
+  const plateDoc = assets.get(plate.doc);
+  const fieldPart = plateDoc?.parts.find((p) => p.id === plate.field);
+  if (!fieldPart || !("shape" in fieldPart)) return `${plate.doc} has no drawn part "${plate.field}" to be the field`;
   const object = rasterize(renderSVG(asset, reg, { variant: "glyph" }).svg);
-  const plate = rasterize(renderSVG({ ...asset, parts: under, variants: undefined } as Asset, reg).svg);
-  if (object.w !== plate.w || object.h !== plate.h) return "the glyph variant is not the size of its own plate";
-  let lit = 0, peak = 0, n = 0;
+  const ground = rasterize(renderSVG({ ...asset, parts: under, variants: undefined } as Asset, reg).svg);
+  // The field as this document composes it, so a plate placed or scaled by its
+  // wearer is still measured where it actually lands.
+  const field = rasterize(
+    renderSVG(
+      {
+        ...asset,
+        parts: under.map((p) =>
+          "use" in p
+            ? { id: p.id, at: p.at, rot: p.rot, scale: p.scale, shape: fieldPart.shape, fill: fieldPart.fill }
+            : p,
+        ) as Asset["parts"],
+        variants: undefined,
+      } as Asset,
+      reg,
+    ).svg,
+  );
+  if (object.w !== ground.w || object.h !== ground.h) return "the glyph variant is not the size of its own plate";
+  let lit = 0, peak = 0, n = 0, spill = 0;
   for (let i = 0; i < object.px.length; i += 4) {
     if (object.px[i + 3] < 128) continue;
     n++;
+    if (field.px[i + 3] < 128) spill++;
     // Against the plate where it is, not where it averages.
     const c = contrast(
       luminance(object.px[i], object.px[i + 1], object.px[i + 2]),
-      luminance(plate.px[i], plate.px[i + 1], plate.px[i + 2]),
+      luminance(ground.px[i], ground.px[i + 1], ground.px[i + 2]),
     );
     if (c >= badgeFloor) lit++;
     if (c > peak) peak = c;
   }
   const area = object.w * object.h;
-  return { lit: lit / area, peak, cover: n / area };
+  return { lit: lit / area, peak, cover: n / area, spill };
 }
 
 // Which floor to judge against. The field's is the default because most of the
@@ -149,13 +172,13 @@ const BODIES = new Set(["char", "enemy", "pickup"]);
 // manifest names. Both sets are judged in one run: a badge and a body are two
 // readings of the same question and there is no reason to ask them apart.
 const PLATES = new Map(Object.entries(ref?.plate ?? {}));
+/** The plate a document is read on, if it is read on one. */
 const bare = (cat: string) => (cat.startsWith(`${app.id}-`) ? cat.slice(app.id.length + 1) : cat);
 const judged = (a: { tags: string[] }): boolean => BODIES.has(bare(categoryOf(a))) || PLATES.has(bare(categoryOf(a)));
 const targets = positional.length
   ? positional
   : [...app.assets.values()].filter(judged).map((a) => a.id).sort();
-/** The plate a document is read on, if it is read on one. */
-const plateOf = (id: string): string | undefined => {
+const plateOf = (id: string): { doc: string; field: string } | undefined => {
   const a = assets.get(id);
   return a ? PLATES.get(bare(categoryOf(a))) : undefined;
 };
@@ -194,29 +217,33 @@ if (bodies.length) {
 }
 
 if (badges.length) {
-  console.log(`${bodies.length ? "\n" : ""}badges on their plate — a pixel reads at ${badgeFloor}:1, a badge reads at ${(badgeLit * 100).toFixed(0)}% of its canvas lit\n`);
-  console.log("badge                          lit%    peak  cover%");
-  console.log("─".repeat(64));
+  console.log(`${bodies.length ? "\n" : ""}badges on their plate — a pixel reads at ${badgeFloor}:1, a badge reads at ${(badgeLit * 100).toFixed(0)}% of its canvas lit, and none of it is off the field\n`);
+  console.log("badge                          lit%    peak  cover%  spill");
+  console.log("─".repeat(70));
 
-  const rows: { id: string; lit: number }[] = [];
+  const rows: { id: string; lit: number; spill: number }[] = [];
   for (const id of badges) {
     const b = measureBadge(id, plateOf(id)!);
     if (typeof b === "string") { console.log(`${id.padEnd(30)} — ${b}`); continue; }
-    rows.push({ id, lit: b.lit });
-    // Two ways to be unreadable, and they want different fixes: nothing on the
-    // badge clears the plate at all, or something does but there is too little
-    // of it. The first is a colour that has to move, the second is an area.
-    const flag = b.peak < badgeFloor ? "  ← lost on the plate" : b.lit < badgeLit ? "  ← too little of it reads" : "";
+    rows.push({ id, lit: b.lit, spill: b.spill });
+    // Three ways to be wrong, and they want three different fixes: nothing on
+    // the badge clears the plate at all (a colour has to move), something does
+    // but there is too little of it (an area), or the drawing is off its own
+    // field (a position, before a size — most of these are off-centre rather
+    // than too big).
+    const flag = b.spill ? `  ← ${b.spill}px off the field` : b.peak < badgeFloor ? "  ← lost on the plate" : b.lit < badgeLit ? "  ← too little of it reads" : "";
     console.log(
       `${id.padEnd(30)} ${(b.lit * 100).toFixed(1).padStart(5)}%  ${b.peak.toFixed(2).padStart(6)}  ` +
-        `${(b.cover * 100).toFixed(0).padStart(5)}%${flag}`,
+        `${(b.cover * 100).toFixed(0).padStart(5)}%  ${String(b.spill).padStart(5)}${flag}`,
     );
   }
 
   const dim = rows.filter((r) => r.lit < badgeLit);
+  const over = rows.filter((r) => r.spill > 0);
   console.log(
     `\n${rows.length} badges · median ${(rows.map((r) => r.lit).sort((a, b) => a - b)[Math.floor(rows.length / 2)] * 100).toFixed(1)}% lit` +
-      ` · ${dim.length} below ${(badgeLit * 100).toFixed(0)}%`,
+      ` · ${dim.length} below ${(badgeLit * 100).toFixed(0)}% · ${over.length} off the field`,
   );
   if (dim.length) console.log(`dim: ${dim.map((r) => r.id).join(", ")}`);
+  if (over.length) console.log(`off the field: ${over.map((r) => `${r.id} (${r.spill}px)`).join(", ")}`);
 }

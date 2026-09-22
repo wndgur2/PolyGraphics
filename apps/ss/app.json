@@ -7,7 +7,10 @@
 
   "reference": {
     "ground": { "field": "ss.env.ground", "pan": "ss.env.pan" },
-    "plate": { "relic": "ss.lib.relic-plate", "curse": "ss.lib.relic-plate" },
+    "plate": {
+      "relic": { "doc": "ss.lib.relic-plate", "field": "panel" },
+      "curse": { "doc": "ss.lib.relic-plate", "field": "panel" }
+    },
     "scale": 1.35,
     "contrast": { "sinks": 2.5, "thin": 3.5, "badge": 3, "badgeLit": 0.04 }
   },

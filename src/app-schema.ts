@@ -98,13 +98,20 @@ export const AppManifestSchema = z.strictObject({
       /** The floors art is judged on, by name: `readability` and the gallery's ground button read these. */
       ground: z.record(z.string(), assetId).optional(),
       /**
-       * The plate each badge category is read on. A category named here is not
-       * judged against a floor — it never touches one — but against the plate
-       * every one of its documents wears, which is the thing its glyph has to
-       * come off. Requires the category to declare a `glyph` state: that is
-       * what lifts the plate off so the object can be measured alone.
+       * The plate each badge category is read on, and the part of that plate a
+       * drawing may use. A category named here is not judged against a floor —
+       * it never touches one — but against the plate every one of its documents
+       * wears, which is the thing its glyph has to come off. Requires the
+       * category to declare a `glyph` state: that is what lifts the plate off
+       * so the object can be measured alone.
+       *
+       * `field` is the plate's own part that the drawing is allowed to sit on.
+       * Everything outside it — the rim, and the rounded corners the rim eats —
+       * is not a margin a drawing may lean into: a consumer is free to treat
+       * the rim as its own, and this one does, repainting it per grade and
+       * cutting the glyph silhouette along the same line.
        */
-      plate: z.record(category, assetId).optional(),
+      plate: z.record(category, z.strictObject({ doc: assetId, field: z.string().min(1) })).optional(),
       /** Screen px per authored px — what "game scale" means for this app. */
       scale: z.number().positive().optional(),
       /**
