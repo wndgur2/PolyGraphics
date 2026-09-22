@@ -328,7 +328,7 @@
           ]
         ]
       },
-      "fill": "$timber.dark"
+      "fill": "$moss.dark2"
     },
     {
       "id": "thorn_0_ink",
@@ -370,7 +370,7 @@
           ]
         ]
       },
-      "fill": "$husk"
+      "fill": "$blood.dark2"
     },
     {
       "id": "thorn_1_ink",
@@ -412,7 +412,7 @@
           ]
         ]
       },
-      "fill": "$husk"
+      "fill": "$blood.dark2"
     },
     {
       "id": "thorn_2_ink",
@@ -454,7 +454,7 @@
           ]
         ]
       },
-      "fill": "$husk"
+      "fill": "$blood.dark2"
     },
     {
       "id": "thorn_3_ink",
@@ -496,7 +496,7 @@
           ]
         ]
       },
-      "fill": "$husk"
+      "fill": "$blood.dark2"
     },
     {
       "id": "thorn_4_ink",
@@ -538,7 +538,7 @@
           ]
         ]
       },
-      "fill": "$husk"
+      "fill": "$blood.dark2"
     }
   ],
   "variants": {

@@ -1,7 +1,7 @@
 {
   "id": "ss.icon.vine",
   "name": "Vine icon",
-  "description": "UI slot for the vine. Composes `ss.proj.vine` through `use` so the slot shows the plant the weapon actually puts on the field rather than a second drawing of one that can drift from it \u2014 the same rule the dung slot it replaces was built on. The hole comes with it, and the hole is the weapon: this is the one thing in the arsenal that arrives from under the floor, and a picture of a leafy stem with no ground in it would be a picture of a plant. Tile is `$moss`, the stem's own green at full strength, which is the one ramp of it that holds clear of the Spit's bile and the Lash's husk. A ground line is pressed across the tile behind the plant so the hole reads as a hole rather than as a dark blot, and it sits low, because everything this weapon does happens at the player's feet.",
+  "description": "UI slot for the vine. Composes `ss.proj.vine` through `use`, so the slot shows the coil the weapon actually lays rather than a second drawing of one that can drift from it. A patch of `$soil` sits under it and nothing else: the coil is already ground, and the earlier version of this slot pressed a ground *line* across the tile because the plant it held stood up out of a hole. Nothing stands up any more. Tile is `$moss` at full strength \u2014 the one ramp of the vine's own green light enough to hold a 32px slot, and far enough from the Spit's bile and the Lash's husk to tell the row apart at a glance, while everything drawn on it is the dark end of the same colour.",
   "tags": [
     "icon",
     "weapon"
@@ -32,41 +32,26 @@
       "fill": "$coal.dark"
     },
     {
-      "id": "ground",
+      "id": "floor",
       "at": [
         0,
-        8.6
+        0.6
       ],
       "shape": {
-        "kind": "rect",
-        "w": 26,
-        "h": 7.4,
-        "corner": 1.2
+        "kind": "ellipse",
+        "rx": 12.4,
+        "ry": 8.6
       },
-      "fill": "$soil@0.9"
-    },
-    {
-      "id": "ground_lip",
-      "at": [
-        0,
-        5.2
-      ],
-      "shape": {
-        "kind": "rect",
-        "w": 26,
-        "h": 1.1,
-        "corner": 0.55
-      },
-      "fill": "$soil.light@0.7"
+      "fill": "$soil@0.75"
     },
     {
       "id": "glyph",
       "at": [
-        0.4,
-        -0.6
+        0,
+        0.2
       ],
       "use": "ss.proj.vine",
-      "scale": 0.44
+      "scale": 0.5
     }
   ],
   "variants": {

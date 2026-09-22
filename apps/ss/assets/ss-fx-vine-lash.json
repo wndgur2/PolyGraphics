@@ -589,7 +589,7 @@
           ]
         ]
       },
-      "fill": "$moss"
+      "fill": "$moss.dark2"
     },
     {
       "id": "lash_lit",
@@ -878,7 +878,7 @@
           ]
         ]
       },
-      "fill": "$moss.light"
+      "fill": "$moss"
     },
     {
       "id": "barb_0",
@@ -899,7 +899,7 @@
           ]
         ]
       },
-      "fill": "$husk"
+      "fill": "$blood.dark2"
     },
     {
       "id": "barb_1",
@@ -920,7 +920,7 @@
           ]
         ]
       },
-      "fill": "$husk"
+      "fill": "$blood.dark2"
     },
     {
       "id": "barb_2",
@@ -941,7 +941,7 @@
           ]
         ]
       },
-      "fill": "$husk"
+      "fill": "$blood.dark2"
     },
     {
       "id": "leaf_ink",
@@ -1191,7 +1191,7 @@
           ]
         ]
       },
-      "fill": "$lichen"
+      "fill": "$blood.dark2"
     }
   ]
 }

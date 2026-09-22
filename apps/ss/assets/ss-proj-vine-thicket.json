@@ -816,7 +816,7 @@
           ]
         ]
       },
-      "fill": "$timber.dark2"
+      "fill": "$rust"
     },
     {
       "id": "root_1",
@@ -929,7 +929,7 @@
           ]
         ]
       },
-      "fill": "$timber.dark2"
+      "fill": "$rust"
     },
     {
       "id": "root_2",
@@ -1042,7 +1042,7 @@
           ]
         ]
       },
-      "fill": "$timber.dark2"
+      "fill": "$rust"
     },
     {
       "id": "root_3",
@@ -1155,7 +1155,7 @@
           ]
         ]
       },
-      "fill": "$timber.dark2"
+      "fill": "$rust"
     },
     {
       "id": "root_4",
@@ -1268,7 +1268,7 @@
           ]
         ]
       },
-      "fill": "$timber.dark2"
+      "fill": "$rust"
     },
     {
       "id": "root_5",
@@ -1381,7 +1381,7 @@
           ]
         ]
       },
-      "fill": "$timber.dark2"
+      "fill": "$rust"
     },
     {
       "id": "knot_ink",
@@ -1407,7 +1407,7 @@
         "rx": 7.8,
         "ry": 5.2
       },
-      "fill": "$timber.dark2"
+      "fill": "$rust"
     },
     {
       "id": "knot_lit",
@@ -1420,7 +1420,7 @@
         "rx": 5.9,
         "ry": 3.7
       },
-      "fill": "$timber.dark"
+      "fill": "$rust.light"
     },
     {
       "id": "knot_core",
@@ -1433,7 +1433,7 @@
         "rx": 3.2,
         "ry": 2.0
       },
-      "fill": "$timber"
+      "fill": "$rust.light"
     },
     {
       "id": "coil_0_ink",
@@ -2077,7 +2077,7 @@
           ]
         ]
       },
-      "fill": "$moss"
+      "fill": "$moss.dark2"
     },
     {
       "id": "coil_0_lit",
@@ -2238,7 +2238,7 @@
           ]
         ]
       },
-      "fill": "$moss.light"
+      "fill": "$moss"
     },
     {
       "id": "coil_1",
@@ -2399,7 +2399,7 @@
           ]
         ]
       },
-      "fill": "$moss"
+      "fill": "$moss.dark2"
     },
     {
       "id": "coil_1_lit",
@@ -2560,7 +2560,7 @@
           ]
         ]
       },
-      "fill": "$moss.light"
+      "fill": "$moss"
     },
     {
       "id": "coil_2",
@@ -2721,7 +2721,7 @@
           ]
         ]
       },
-      "fill": "$moss"
+      "fill": "$moss.dark2"
     },
     {
       "id": "coil_2_lit",
@@ -2882,7 +2882,7 @@
           ]
         ]
       },
-      "fill": "$moss.light"
+      "fill": "$moss"
     },
     {
       "id": "leaf_0_ink",
@@ -3132,7 +3132,7 @@
           ]
         ]
       },
-      "fill": "$lichen"
+      "fill": "$blood.dark2"
     },
     {
       "id": "leaf_1_ink",
@@ -3382,7 +3382,7 @@
           ]
         ]
       },
-      "fill": "$lichen"
+      "fill": "$blood.dark2"
     },
     {
       "id": "leaf_2_ink",
@@ -3632,7 +3632,7 @@
           ]
         ]
       },
-      "fill": "$lichen"
+      "fill": "$blood.dark2"
     },
     {
       "id": "barb_0",
