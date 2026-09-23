@@ -1,7 +1,7 @@
 {
   "id": "ss.char.kano",
   "name": "Kano",
-  "description": "A column. The patrols, and the rules that came out of them: do not stop (K033). A narrow coat, long to the boots, under a peaked hood-helmet, and a staff in the far hand taller than the head \u2014 the twelfth emitter was dropped where it broke, as the rules say (K030, K033), so nothing rides on the back. Gaitered boots, and a walk that is the coat's: a slow glide with the staff planted, no bounce and no hurry \u2014 the one who does not stop does not rush either. Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat, in the same place on everyone still carrying one; flat token fills; radius 11.",
+  "description": "A column. The patrols, and the rules that came out of them: do not stop (K033). A narrow coat, long to the boots, under a peaked hood-helmet, and a staff in the far hand taller than the head \u2014 the twelfth emitter was dropped where it broke, as the rules say (K030, K033), so nothing rides on the back. Gaitered boots, and a walk that is the coat's: a slow glide with the staff planted, no bounce and no hurry \u2014 the one who does not stop does not rush either. Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
   "tags": [
     "char"
   ],
@@ -257,7 +257,7 @@
       "rot": 4,
       "stroke": {
         "color": "$ink",
-        "width": "thin"
+        "width": "hair"
       }
     },
     {
@@ -274,7 +274,7 @@
       "fill": "$slate.dark",
       "stroke": {
         "color": "$ink",
-        "width": "thin"
+        "width": "hair"
       }
     },
     {
