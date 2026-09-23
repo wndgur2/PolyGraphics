@@ -19,7 +19,7 @@ body is built to that shape from its own skeleton row:
   haram  a square: a slab body with squared shoulders, bone pauldrons and a
          chest plate, a box helmet, the survey on the back — the wall
   mir    an hourglass (and she is Mina — the id is the handle the game pins, the
-         name is `display`): no suit at all, pale green skin, a crimson mane
+         name is `display`): no suit at all, pale green skin, a red mane
          streaming back in leaf points, leaves at the waist and hip, a vine
          wound round the leg — the one who came up out of the hole the wall was
          buried in
@@ -68,7 +68,7 @@ BASE = {
     # Hair, where it shows, is each row's own part (a tail, a braid, a lock, a beard).
     "sex": "m",
     "coat": "bell", "cloak_sx": 1.0, "hem": 0.0, "coat_fill": None, "cape": True, "cape_fill": None,
-    "head": "egg", "head_r": (5.3, 5.8), "head_fill": None, "visor_w": 6.6, "visor_h": 2.6,
+    "head": "egg", "head_r": (5.3, 5.8), "head_fill": None, "visor_w": 6.6, "visor_h": 2.6, "eye_fill": "$gold", "mouth_fill": "$blood.dark",
     "arm_len": 7.6, "arm_w": 3.0, "arm_fill": None, "arm_far_len": 7.0, "arm_far_w": 2.6,
     "hand_r": (1.7, 1.9), "hand_far_r": (1.4, 1.6), "hand_fill": "$slate.dark", "hand_far_fill": "$slate",
     "legs": False, "leg_w": 3.0, "leg_far_w": 2.6, "leg_fill": None, "leg_far_fill": None,
@@ -170,8 +170,8 @@ def head_parts(kind, S, C, P):
         # chin forward and down, one lit almond of an eye slanting up toward the front, a mouth under it
         face = [(0.0, -1.0), (0.62, -0.8), (0.95, -0.3), (0.95, 0.22), (0.72, 0.62), (0.4, 0.95), (0.05, 0.9), (-0.45, 0.66), (-0.85, 0.25), (-0.92, -0.35), (-0.6, -0.84)]
         return [P_("head", h, poly([(x * rx, y * ry) for x, y in face]), C["head_fill"], rot=tilt, stroke=thin),
-                P_("eye", (h[0] + 1.9, h[1] + 0.1), ell(1.35, 0.5), "$gold", rot=-20, stroke=hair),
-                P_("mouth", (h[0] + 2.2, h[1] + 2.9), ell(0.75, 0.4), "$blood.dark", rot=-14)]
+                P_("eye", (h[0] + 1.9, h[1] + 0.1), ell(1.35, 0.5), C["eye_fill"], rot=-20, stroke=hair),
+                P_("mouth", (h[0] + 2.2, h[1] + 2.9), ell(0.75, 0.4), C["mouth_fill"], rot=-14)]
     raise KeyError(kind)
 
 # ============================================================== 4. one body, from its row
@@ -383,7 +383,7 @@ CHARACTERS = {
         # Mina. The key stays `mir`: `ss.char.mir` is the id feelers pins, and the name is `display`
         "display": "Mina",
         "sex": "f", "tint": ("sage", 2), "coat": "hourglass", "cape": False, "legs": True, "leg_w": 2.1, "leg_far_w": 1.8,
-        "head": "face", "head_r": (3.8, 4.4), "head_fill": "$sage.light2",
+        "head": "face", "head_r": (3.8, 4.4), "head_fill": "$sage.light2", "eye_fill": "$ochre", "mouth_fill": "$madder.dark",
         "skeleton": {"head": (2.8, -8.8), "head_tilt": -6, "shoulder_near": (-3.8, -2.8), "shoulder_far": (4.8, -3.9),
                      "hip_near": (-1.6, 5.4), "hip_far": (2.4, 4.8), "foot_near": (-1.0, 13.5), "foot_far": (3.2, 12.9)},
         "pose": {"coat_lean": 2, "arm_hang": 16, "arm_far_hang": -22}, "organ_scale": 0.6,
@@ -393,17 +393,12 @@ CHARACTERS = {
         "walk": {"duration": 0.6, "stride": 2.0, "bob": 0.9, "sway": 4.5, "arm_swing": 12, "leg_swing": 16, "hair": 7}, "idle": {"duration": 1.5},
         "extras": lambda c: [
             # the hair: a mane of red runners off the crown, streaming back and falling to the waist, every
-            # lock ending in a leaf point — the crown of the outline. The crimson underside is the whole mane; the
-            # lit layer over it is cut deep between the locks, so the crimson shows as the partings between them.
-            # The lit layer is coral, not crimson: the mane is a third of the body, and a crimson one sank it
-            # to 2.8 against the field where coral holds 3.3
-            ("behind", P_("hair_back", c["head"], poly([(2.2, -4.2), (1.0, -5.4), (-0.8, -6.0), (-3.0, -6.1), (-5.0, -5.8), (-7.4, -6.0), (-6.6, -4.9),
-                (-8.6, -4.8), (-10.8, -4.3), (-13.4, -4.0), (-11.6, -2.6), (-10.2, -1.5), (-11.4, -0.5), (-13.6, 0.8), (-11.4, 1.9), (-9.6, 2.7),
-                (-10.2, 4.4), (-11.8, 7.4), (-9.4, 6.8), (-8.4, 8.4), (-8.4, 11.0), (-10.0, 14.0), (-6.8, 12.0), (-5.2, 9.0), (-3.8, 6.2),
-                (-2.0, 4.0), (-0.6, 2.8)]), "$blood", stroke=hair), "hair"),
-            ("behind", P_("hair", c["head"], poly([(2.1, -4.5), (0.8, -5.6), (-1.4, -6.0), (-4.2, -5.7), (-6.8, -5.4), (-9.6, -4.6), (-12.8, -4.0),
-                (-9.4, -2.6), (-5.0, -2.2), (-8.8, -1.2), (-13.0, 0.8), (-9.4, 1.6), (-5.4, 0.8), (-7.8, 2.8), (-11.0, 7.0), (-7.6, 5.4),
-                (-4.8, 3.8), (-6.8, 7.4), (-9.2, 13.0), (-5.6, 9.2), (-2.6, 4.6), (-0.8, 2.6)]), "$coral", stroke=hair), "hair"),
+            # lock ending in a leaf point — the crown of the outline. The dark underside is the whole mane; the
+            # lit layer over it is cut deep between the locks, so the dark shows as the partings between them.
+            # `madder` is the roster's red: `$blood` let halfway down toward the muted tints the other seven
+            # wear, because a saturated mane made her the one thing on the card that shouted
+            ("behind", P_("hair_back", c["head"], poly([(1.87, -3.86), (0.85, -4.97), (-0.68, -5.52), (-2.55, -5.61), (-4.25, -5.34), (-6.29, -5.52), (-5.61, -4.51), (-7.31, -4.42), (-9.18, -3.96), (-11.39, -3.68), (-9.86, -2.39), (-8.67, -1.38), (-9.69, -0.46), (-11.56, 0.74), (-9.69, 1.75), (-8.16, 2.48), (-8.67, 4.05), (-10.03, 6.81), (-7.99, 6.26), (-7.14, 7.73), (-7.14, 10.12), (-8.5, 12.88), (-5.78, 11.04), (-4.42, 8.28), (-3.23, 5.7), (-1.7, 3.68), (-0.51, 2.58)]), "$madder.dark", stroke=hair), "hair"),
+            ("behind", P_("hair", c["head"], poly([(1.78, -4.14), (0.68, -5.15), (-1.19, -5.52), (-3.57, -5.24), (-5.78, -4.97), (-8.16, -4.23), (-10.88, -3.68), (-7.99, -2.39), (-4.25, -2.02), (-7.48, -1.1), (-11.05, 0.74), (-7.99, 1.47), (-4.59, 0.74), (-6.63, 2.58), (-9.35, 6.44), (-6.46, 4.97), (-4.08, 3.5), (-5.78, 6.81), (-7.82, 11.96), (-4.76, 8.46), (-2.21, 4.23), (-0.68, 2.39)]), "$madder", stroke=hair), "hair"),
             # a runner wound round the near leg: two turns across the front, joined down the back edge, turning with the leg
             ("feet_over", P_("leg_vine", c["leg_mid"], poly([(-1.5, -1.4), (1.5, 0.0), (1.5, 0.8), (-0.8, -0.3), (-0.8, 1.5), (1.5, 2.6), (1.5, 3.4),
                 (-1.5, 2.0)]), "$moss.dark", rot=c["leg_rot"]), "leg"),
@@ -411,15 +406,14 @@ CHARACTERS = {
             ("over_coat", P_("skirt", (0, 0), poly([(4.6, 2.8), (6.0, 4.6), (6.4, 6.4), (4.6, 5.6), (3.8, 7.4), (2.2, 6.0), (0.8, 7.8), (-0.8, 6.4),
                 (-2.4, 8.6), (-3.6, 7.0), (-5.8, 9.6), (-5.6, 7.2), (-7.4, 7.6), (-6.4, 5.4), (-5.2, 3.2), (-0.2, 4.2)]), "$sage", stroke=hair), "coat"),
             ("over_coat", P_("bodice", (0, 0), poly([(-3.3, -0.8), (-1.0, -2.4), (0.6, -0.9), (3.0, -2.8), (5.6, -1.0), (4.8, 0.6), (3.0, 1.9), (4.6, 3.6),
-                (-0.2, 4.2), (-5.2, 3.4), (-2.4, 1.5), (-3.7, -0.4)]), "$venom.dark", stroke=hair), "coat"),
+                (-0.2, 4.2), (-5.2, 3.4), (-2.4, 1.5), (-3.7, -0.4)]), "$sage.dark", stroke=hair), "coat"),
             # over the head: the hairline across the brow, swept back over the skull, a lock behind the jaw
             ("over_head", P_("fringe", c["head"], poly([(3.6, -2.8), (2.6, -4.2), (0.8, -4.9), (-1.6, -4.8), (-3.4, -3.6), (-4.2, -1.2), (-4.0, 1.6),
-                (-3.0, 4.2), (-2.2, 6.0), (-1.8, 3.4), (-1.4, 0.8), (-0.6, -1.0), (0.8, -2.0), (2.2, -2.0), (3.9, -1.4)]), "$coral", stroke=hair), "hair"),
-            ("over_head", P_("bloom", (c["head"][0] - 2.4, c["head"][1] - 2.2), {"kind": "star", "points": 8, "r": 1.8, "r2": 1.3}, "$pink.light", stroke=hair), "hair"),
+                (-3.0, 4.2), (-2.2, 6.0), (-1.8, 3.4), (-1.4, 0.8), (-0.6, -1.0), (0.8, -2.0), (2.2, -2.0), (3.9, -1.4)]), "$madder", stroke=hair), "hair"),
         ],
         "walk_desc": "a sway: the hip swings wide under the leaves and the stride is narrow and unhurried; the hair streams back a quarter-step behind the bob",
         "idle_desc": "the hair stirs as if it were growing; the body breathes",
-        "description": "An hourglass. Mina, the burrow walked from the inside down to the queen, and what came up out of the hole the piece of wall was buried in (M041): the one of the eight wearing no suit at all. The skin has gone the pale green of a leaf's underside, the hair is a mane of red runners streaming back off the crown and falling to the waist, every lock ending in a leaf point — the crown of the outline — with a pale bloom tucked behind the ear, and hers is the one face of the eight turned to the viewer: a narrowing jaw, red lips, and a single lit gold almond of an eye. A bodice of leaves at the waist, a fan of them at the hip, short in front and longer behind, long bare legs, and a runner wound round the near leg. The vine she carries is the same plant: it comes up out of the ground and holds. A narrow, swaying walk, the hip carrying it and the hair a beat behind." + SHARED,
+        "description": "An hourglass. Mina, the burrow walked from the inside down to the queen, and what came up out of the hole the piece of wall was buried in (M041): the one of the eight wearing no suit at all. The skin has gone the pale green of a leaf's underside, the hair is a mane of red runners streaming back off the crown and falling to the waist, every lock ending in a leaf point — the crown of the outline — and hers is the one face of the eight turned to the viewer: a narrowing jaw, a dark mouth and a single lit almond of an eye. Her colours are the roster's muted ones — the red let down to `madder`, the leaves `sage` — so she is found by her outline, not by shouting. A bodice of leaves at the waist, a fan of them at the hip, short in front and longer behind, long bare legs, and a runner wound round the near leg. The vine she carries is the same plant: it comes up out of the ground and holds. A narrow, swaying walk, the hip carrying it and the hair a beat behind." + SHARED,
     },
     "kano": {
         "sex": "m", "tint": ("silent", 0), "coat": "column", "cloak_sx": 1.0, "hem": 0.0, "head": "hood", "head_r": (4.8, 6.0), "visor_w": 5.8,
