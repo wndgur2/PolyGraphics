@@ -1,7 +1,7 @@
 {
   "id": "ss.char.mir",
   "name": "Mina",
-  "description": "A stem, and the one of the eight not wearing a coat. **The plant is on her instead of cloth**, which is a silhouette decision before it is a costume one: a coat leaves the shoulder and swings clear of the body, so its outline belongs to the coat and the body inside it could be anybody's, while a plant clings and the outline stays hers. So the torso is the body, and the body is written down \u2014 `scripts/walker.py` \u00a71a \u2014 7.8 across the shoulders, 7.0 at the chest, 5.4 at the waist, 7.8 at the hip, and it does **not** stop at the hip: a torso ending on a hem line with two bare legs starting under it is an upper half and a lower half, drawn separately and meeting in public. It runs on into the thigh, and the lowest turn is swept wide enough to lie across that edge, so the join happens *inside* the plant. What the eye gets is body, then a wrapped band where a skirt would be, then leg \u2014 and that band is the one thing on her that reads as clothing, which is what a cord wound many times in one place is. Out at the deltoid, in under it, in again to the waist, out at the hip: a torso that goes *out* below its own shoulder line is a loose top rather than a body, whatever is drawn over it, and this one used to. The waist ends up inside the near sleeve and a little daylight opens between arm and body, which is not a gap to close \u2014 it is the thing that says the waist is narrower than the reach. **Over it, `ss.proj.vine` wound three times**, at chest, waist and hip \u2014 two cords and the wide one \u2014 each dark with its own lit edge, with the body showing in the gaps. The gaps are half the reading and the shape of the turns is the other half: each one *hangs* like a cord on a barrel, sagging at the front because the camera looks down on her, and each one *swells and pinches* \u2014 full width where it faces you, thin where it turns away past the edge of the body. The pinch is what does the work; a curve on its own still reads flat. Behind them the far side of the torso is a step down the warm ramp, the same step the far arm and far leg take, because one flat fill edge to edge gives the turns a board to lie on. The lowest turn does not close but carries on off the far hip as a free tail, the way `ss.proj.vine-snare` ends \u2014 `stem`'s `hold` keeps the band at full width across the hip and spends the taper on the tail alone, because a width run down the whole length leaves the band already thin by the far side \u2014 and a `$blood.dark2` thorn comes off each end of the top turn \u2014 **rooted in the cord, not in her**. A thorn out of a shoulder is something that has happened to the body; what is true here is that the plant is on it. The top turn reaches onto the near sleeve to carry one of them, which makes it Zyra's spiked arm-vine arrived at from the other end. There are no leaves anywhere: the arsenal's plants have none on purpose, and at four pixels a leaf is a pauldron at the shoulder and a luggage tag at the hip. **And she stands, and walks like it.** The rig's default puts the helmet down over the shoulder line, which on a body this size is a stoop with the chin on the chest; the head sits back over the shoulders with a neck under it \u2014 the only neck in the set, and most of the difference between a figure that stands and one that hunches \u2014 the smallest head of the eight on the longest legs, the visor slit raised so the gaze is level. The walk is the same argument in motion: two contact points on one line, the longest stride and slowest beat in the set, the smallest bob, the head all but stopped. Carriage is mostly what a body does *not* do. **What she took in place of the emitter is what grew.** The piece of burrow wall hangs at the near hip, palm-sized \u2014 the record's own word (M038) \u2014 still warm half a month on with something chewing inside it (M042), and the turns came out of it: the vines that come up out of the ground in a run come up out of what this one carries (M041). The weapon holds what it catches, and this is the body it never let go of. **She is also the one with no clasp and no mantle**: M042 has her going back down with the wall *in place of the emitter*, so the dead organ the other seven wear stayed where it burned out beside the queen (M031). The helmet is the `lamp` kind and the one head in the set that is not an egg with something stuck on it: a profile cut in at the front and let out into a nape at the back, a visor slit, and the one light the eight carry clipped against the rim above it with nothing joining the two \u2014 a bar down the middle is a Corinthian nose guard before it is a bracket (M005). 23 parts, and 3.2 : 1 against `ss.env.ground`, beside Sol's 3.0. Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat, in the same place on everyone still carrying one; flat token fills; radius 11.",
+  "description": "A stem, and the one of the eight not wearing a coat. **The plant is on her instead of cloth**, which is a silhouette decision before it is a costume one: a coat leaves the shoulder and swings clear of the body, so its outline belongs to the coat and the body inside it could be anybody's, while a plant clings and the outline stays hers. So the torso is the body, and the body is written down \u2014 `scripts/walker.py` \u00a71a \u2014 7.8 across the shoulders, 7.0 at the chest, 5.4 at the waist, 7.4 at the hip \u2014 and the hip **off centre**, 4.25 of it behind the body's line and 3.15 in front, because in a three-quarter view the widest part of a hip is behind and the front of a pelvis is near flat. Flared evenly it put a bulge on the front where there is nothing to make one. The front line now runs long and almost straight from chest to thigh and the whole of the flare is on the back, which is the S and the point of it, and it does **not** stop at the hip: a torso ending on a hem line with two bare legs starting under it is an upper half and a lower half, drawn separately and meeting in public. It runs on into the thigh, and the lowest turn is swept wide enough to lie across that edge, so the join happens *inside* the plant. What the eye gets is body, then a wrapped band where a skirt would be, then leg \u2014 and that band is the one thing on her that reads as clothing, which is what a cord wound many times in one place is. Out at the deltoid, in under it, in again to the waist, and out at the hip behind only: a torso that goes *out* below its own shoulder line is a loose top rather than a body, whatever is drawn over it, and this one used to. The waist ends up inside the near sleeve and a little daylight opens between arm and body, which is not a gap to close \u2014 it is the thing that says the waist is narrower than the reach. **Over it, `ss.proj.vine` wound three times**, at chest, waist and hip \u2014 two cords and the wide one \u2014 each dark with its own lit edge, with the body showing in the gaps. The gaps are half the reading and the shape of the turns is the other half: each one *hangs* like a cord on a barrel, sagging at the front because the camera looks down on her, and each one *swells and pinches* \u2014 full width where it faces you, thin where it turns away past the edge of the body. The pinch is what does the work; a curve on its own still reads flat. Behind them the far side of the torso is a step down the warm ramp, the same step the far arm and far leg take, because one flat fill edge to edge gives the turns a board to lie on. The lowest turn does not close but carries on off the far hip as a free tail, the way `ss.proj.vine-snare` ends \u2014 `stem`'s `hold` keeps the band at full width across the hip and spends the taper on the tail alone, because a width run down the whole length leaves the band already thin by the far side \u2014 and a `$blood.dark2` thorn comes off each end of the top turn \u2014 **rooted in the cord, not in her**. A thorn out of a shoulder is something that has happened to the body; what is true here is that the plant is on it. The top turn reaches onto the near sleeve to carry one of them, which makes it Zyra's spiked arm-vine arrived at from the other end. There are no leaves anywhere: the arsenal's plants have none on purpose, and at four pixels a leaf is a pauldron at the shoulder and a luggage tag at the hip. **And she stands, and walks like it.** The rig's default puts the helmet down over the shoulder line, which on a body this size is a stoop with the chin on the chest; the head sits back over the shoulders with a neck under it \u2014 the only neck in the set, and most of the difference between a figure that stands and one that hunches \u2014 the smallest head of the eight on the longest legs, the visor slit raised so the gaze is level. The walk is the same argument in motion: two contact points on one line, the longest stride and slowest beat in the set, the smallest bob, the head all but stopped. Carriage is mostly what a body does *not* do. **What she took in place of the emitter is what grew.** The piece of burrow wall hangs at the near hip, palm-sized \u2014 the record's own word (M038) \u2014 still warm half a month on with something chewing inside it (M042), and the turns came out of it: the vines that come up out of the ground in a run come up out of what this one carries (M041). The weapon holds what it catches, and this is the body it never let go of. **She is also the one with no clasp and no mantle**: M042 has her going back down with the wall *in place of the emitter*, so the dead organ the other seven wear stayed where it burned out beside the queen (M031). The helmet is the `lamp` kind and the one head in the set that is not an egg with something stuck on it: a profile cut in at the front and let out into a nape at the back, a visor slit, and the one light the eight carry clipped against the rim above it with nothing joining the two \u2014 a bar down the middle is a Corinthian nose guard before it is a bracket (M005). 23 parts, and 3.2 : 1 against `ss.env.ground`, beside Sol's 3.0. Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat, in the same place on everyone still carrying one; flat token fills; radius 11.",
   "tags": [
     "char"
   ],
@@ -16,13 +16,13 @@
     {
       "id": "arm_far",
       "at": [
-        4.77,
-        -0.8
+        4.76,
+        -0.95
       ],
       "shape": {
         "kind": "rect",
         "w": 1.5,
-        "h": 6.6,
+        "h": 6.3,
         "corner": 1.2
       },
       "fill": "$timber.light",
@@ -31,8 +31,8 @@
     {
       "id": "hand_far",
       "at": [
-        4.91,
-        3.4
+        4.9,
+        3.1
       ],
       "shape": {
         "kind": "ellipse",
@@ -44,32 +44,32 @@
     {
       "id": "leg_far",
       "at": [
-        2.55,
-        9.1
+        2.4,
+        9.3
       ],
       "shape": {
         "kind": "rect",
         "w": 2.6,
-        "h": 7.264982043070833,
+        "h": 6.8309518948453,
         "corner": 1.2
       },
       "fill": "$timber.light",
-      "rot": 8.259437979878806
+      "rot": 5.906141113770497
     },
     {
       "id": "leg",
       "at": [
-        -1.52,
-        9.6
+        -1.6,
+        9.8
       ],
       "shape": {
         "kind": "rect",
         "w": 3.0,
-        "h": 7.456198571915211,
+        "h": 7.08276253029822,
         "corner": 1.2
       },
       "fill": "$timber.light2",
-      "rot": -7.565321068432292,
+      "rot": -9.462322208025613,
       "stroke": {
         "color": "$ink",
         "width": "thin"
@@ -130,11 +130,11 @@
             3.4
           ],
           [
-            4.05,
-            6.2
+            3.3,
+            6.6
           ],
           [
-            3.25,
+            3.1,
             9.0
           ],
           [
@@ -142,12 +142,12 @@
             9.4
           ],
           [
-            -2.95,
+            -3.4,
             8.9
           ],
           [
-            -3.75,
-            6.2
+            -4.1,
+            6.6
           ],
           [
             -2.55,
@@ -184,27 +184,27 @@
           ],
           [
             1.68,
-            3.26
+            3.17
           ],
           [
-            3.05,
-            6.21
+            2.3,
+            6.61
           ],
           [
-            2.37,
-            8.68
+            2.3,
+            8.75
           ],
           [
-            2.93,
-            8.92
+            2.9,
+            8.85
           ],
           [
-            4.45,
-            6.19
+            3.7,
+            6.59
           ],
           [
             3.42,
-            3.14
+            3.23
           ],
           [
             3.95,
@@ -430,108 +430,108 @@
         "kind": "poly",
         "points": [
           [
-            -4.32,
-            8.32
+            -4.7,
+            8.6
           ],
           [
-            -3.59,
-            8.82
+            -4.01,
+            9.1
           ],
           [
-            -2.79,
-            9.3
+            -3.25,
+            9.59
           ],
           [
-            -1.91,
-            9.73
-          ],
-          [
-            -0.96,
-            10.05
-          ],
-          [
-            0.05,
-            10.22
-          ],
-          [
-            1.08,
-            10.2
-          ],
-          [
-            2.07,
+            -2.41,
             10.02
           ],
           [
-            2.98,
-            9.71
+            -1.49,
+            10.35
           ],
           [
-            3.82,
-            9.33
+            -0.5,
+            10.52
           ],
           [
-            2.92,
-            8.75
+            0.5,
+            10.5
           ],
           [
-            4.02,
-            9.5
+            1.46,
+            10.32
           ],
           [
-            5.77,
-            10.97
+            2.34,
+            10.0
           ],
           [
-            6.03,
-            10.83
+            3.14,
+            9.62
           ],
           [
-            5.78,
-            8.5
+            2.14,
+            9.02
+          ],
+          [
+            3.7,
+            9.98
           ],
           [
             4.88,
-            6.05
+            11.63
           ],
           [
-            2.48,
-            6.13
+            5.12,
+            11.57
           ],
           [
-            1.82,
-            6.34
+            5.3,
+            9.22
           ],
           [
-            1.23,
-            6.48
+            4.16,
+            6.38
           ],
           [
-            0.72,
-            6.56
+            1.74,
+            6.44
           ],
           [
-            0.25,
+            1.12,
+            6.65
+          ],
+          [
+            0.58,
+            6.79
+          ],
+          [
+            0.12,
+            6.86
+          ],
+          [
+            -0.3,
+            6.88
+          ],
+          [
+            -0.73,
+            6.86
+          ],
+          [
+            -1.23,
+            6.76
+          ],
+          [
+            -1.81,
             6.58
           ],
           [
-            -0.24,
-            6.55
+            -2.47,
+            6.32
           ],
           [
-            -0.79,
-            6.45
-          ],
-          [
-            -1.41,
-            6.27
-          ],
-          [
-            -2.11,
-            6.01
-          ],
-          [
-            -2.88,
-            5.68
+            -3.2,
+            6.0
           ]
         ]
       },
@@ -547,108 +547,92 @@
         "kind": "poly",
         "points": [
           [
-            -3.31,
-            6.47
+            -3.67,
+            6.82
           ],
           [
-            -2.58,
-            6.9
-          ],
-          [
-            -1.87,
-            7.29
-          ],
-          [
-            -1.18,
-            7.6
-          ],
-          [
-            -0.5,
-            7.81
-          ],
-          [
-            0.18,
-            7.91
-          ],
-          [
-            0.85,
-            7.89
-          ],
-          [
-            1.54,
-            7.77
-          ],
-          [
-            2.23,
-            7.55
-          ],
-          [
-            2.95,
+            -2.99,
             7.25
           ],
           [
-            4.22,
-            6.96
+            -2.32,
+            7.64
           ],
           [
-            5.56,
-            8.62
+            -1.66,
+            7.94
           ],
           [
-            6.82,
-            10.42
+            -1.01,
+            8.14
           ],
           [
-            6.93,
-            10.36
+            -0.37,
+            8.23
           ],
           [
-            6.15,
-            8.29
+            0.26,
+            8.2
           ],
           [
-            4.87,
-            6.06
+            0.9,
+            8.06
           ],
           [
-            2.5,
-            6.18
+            1.55,
+            7.83
           ],
           [
-            1.84,
-            6.42
+            2.21,
+            7.51
           ],
           [
-            1.26,
-            6.59
+            2.9,
+            7.16
           ],
           [
-            0.73,
-            6.68
+            2.52,
+            6.34
           ],
           [
-            0.24,
-            6.7
+            1.82,
+            6.63
           ],
           [
-            -0.26,
+            1.19,
+            6.85
+          ],
+          [
+            0.63,
+            7.0
+          ],
+          [
+            0.14,
+            7.07
+          ],
+          [
+            -0.31,
+            7.07
+          ],
+          [
+            -0.76,
+            7.01
+          ],
+          [
+            -1.27,
+            6.87
+          ],
+          [
+            -1.84,
             6.64
           ],
           [
-            -0.8,
-            6.5
+            -2.48,
+            6.33
           ],
           [
-            -1.42,
-            6.28
-          ],
-          [
-            -2.09,
-            5.97
-          ],
-          [
-            -2.83,
-            5.6
+            -3.17,
+            5.96
           ]
         ]
       },
@@ -691,13 +675,13 @@
     {
       "id": "arm",
       "at": [
-        -4.61,
-        0.59
+        -4.59,
+        0.39
       ],
       "shape": {
         "kind": "rect",
         "w": 1.8,
-        "h": 7.4,
+        "h": 7.0,
         "corner": 1.4
       },
       "fill": "$timber.light2",
@@ -710,8 +694,8 @@
     {
       "id": "hand",
       "at": [
-        -4.93,
-        5.18
+        -4.9,
+        4.78
       ],
       "shape": {
         "kind": "ellipse",
@@ -1181,8 +1165,8 @@
         -3.6
       ],
       "pelvis": [
-        0.53,
-        6.2
+        0.3,
+        6.6
       ],
       "shoulder_near": [
         -4.35,
@@ -1193,20 +1177,20 @@
         -4.1
       ],
       "hand_near": [
-        -4.93,
-        5.18
+        -4.9,
+        4.78
       ],
       "hand_far": [
-        4.91,
-        3.4
+        4.9,
+        3.1
       ],
       "hip_near": [
-        -1.95,
-        6.4
+        -2.1,
+        6.8
       ],
       "hip_far": [
-        3.0,
-        6.0
+        2.7,
+        6.4
       ],
       "foot_near": [
         -1.1,
@@ -2500,23 +2484,23 @@
             ],
             [
               0.08,
-              0.68
+              0.64
             ],
             [
               0.17,
-              1.15
+              1.07
             ],
             [
               0.25,
-              1.31
+              1.22
             ],
             [
               0.33,
-              1.15
+              1.07
             ],
             [
               0.42,
-              0.68
+              0.64
             ],
             [
               0.5,
@@ -2524,23 +2508,23 @@
             ],
             [
               0.58,
-              -0.7
+              -0.66
             ],
             [
               0.67,
-              -1.21
+              -1.14
             ],
             [
               0.75,
-              -1.39
+              -1.31
             ],
             [
               0.83,
-              -1.21
+              -1.14
             ],
             [
               0.92,
-              -0.7
+              -0.66
             ],
             [
               1.0,
@@ -2559,23 +2543,23 @@
             ],
             [
               0.08,
-              -0.17
+              -0.18
             ],
             [
               0.17,
-              -0.38
+              -0.4
             ],
             [
               0.25,
-              -0.48
+              -0.49
             ],
             [
               0.33,
-              -0.38
+              -0.4
             ],
             [
               0.42,
-              -0.17
+              -0.18
             ],
             [
               0.5,
@@ -2583,23 +2567,23 @@
             ],
             [
               0.58,
-              0.02
+              0.04
             ],
             [
               0.67,
-              -0.07
+              -0.03
             ],
             [
               0.75,
-              -0.12
-            ],
-            [
-              0.83,
               -0.07
             ],
             [
+              0.83,
+              -0.03
+            ],
+            [
               0.92,
-              0.02
+              0.04
             ],
             [
               1.0,
@@ -2677,23 +2661,23 @@
             ],
             [
               0.08,
-              1.37
+              1.27
             ],
             [
               0.17,
-              2.3
+              2.14
             ],
             [
               0.25,
-              2.63
+              2.44
             ],
             [
               0.33,
-              2.3
+              2.14
             ],
             [
               0.42,
-              1.37
+              1.27
             ],
             [
               0.5,
@@ -2701,23 +2685,23 @@
             ],
             [
               0.58,
-              -1.41
+              -1.32
             ],
             [
               0.67,
-              -2.42
+              -2.28
             ],
             [
               0.75,
-              -2.78
+              -2.63
             ],
             [
               0.83,
-              -2.42
+              -2.28
             ],
             [
               0.92,
-              -1.41
+              -1.32
             ],
             [
               1.0,
@@ -2736,23 +2720,23 @@
             ],
             [
               0.08,
-              -0.34
+              -0.36
             ],
             [
               0.17,
-              -0.77
+              -0.79
             ],
             [
               0.25,
-              -0.96
+              -0.98
             ],
             [
               0.33,
-              -0.77
+              -0.79
             ],
             [
               0.42,
-              -0.34
+              -0.36
             ],
             [
               0.5,
@@ -2760,23 +2744,23 @@
             ],
             [
               0.58,
-              0.03
+              0.07
             ],
             [
               0.67,
-              -0.14
+              -0.05
             ],
             [
               0.75,
-              -0.24
-            ],
-            [
-              0.83,
               -0.14
             ],
             [
+              0.83,
+              -0.05
+            ],
+            [
               0.92,
-              0.03
+              0.07
             ],
             [
               1.0,
@@ -2795,23 +2779,23 @@
             ],
             [
               0.08,
-              -0.66
+              -0.62
             ],
             [
               0.17,
-              -1.11
+              -1.05
             ],
             [
               0.25,
-              -1.27
+              -1.2
             ],
             [
               0.33,
-              -1.11
+              -1.05
             ],
             [
               0.42,
-              -0.66
+              -0.62
             ],
             [
               0.5,
@@ -2819,23 +2803,23 @@
             ],
             [
               0.58,
-              0.68
+              0.63
             ],
             [
               0.67,
-              1.18
+              1.09
             ],
             [
               0.75,
-              1.35
+              1.25
             ],
             [
               0.83,
-              1.18
+              1.09
             ],
             [
               0.92,
-              0.68
+              0.63
             ],
             [
               1.0,
@@ -2854,23 +2838,23 @@
             ],
             [
               0.08,
-              -0.17
+              -0.13
             ],
             [
               0.17,
-              -0.38
+              -0.32
             ],
             [
               0.25,
-              -0.48
+              -0.4
             ],
             [
               0.33,
-              -0.38
+              -0.32
             ],
             [
               0.42,
-              -0.17
+              -0.13
             ],
             [
               0.5,
@@ -2878,23 +2862,23 @@
             ],
             [
               0.58,
-              0.02
+              -0.0
             ],
             [
               0.67,
-              -0.05
+              -0.09
             ],
             [
               0.75,
-              -0.1
+              -0.14
             ],
             [
               0.83,
-              -0.05
+              -0.09
             ],
             [
               0.92,
-              0.02
+              -0.0
             ],
             [
               1.0,
@@ -2972,23 +2956,23 @@
             ],
             [
               0.08,
-              -1.32
+              -1.24
             ],
             [
               0.17,
-              -2.22
+              -2.1
             ],
             [
               0.25,
-              -2.54
+              -2.39
             ],
             [
               0.33,
-              -2.22
+              -2.1
             ],
             [
               0.42,
-              -1.32
+              -1.24
             ],
             [
               0.5,
@@ -2996,23 +2980,23 @@
             ],
             [
               0.58,
-              1.36
+              1.27
             ],
             [
               0.67,
-              2.35
+              2.18
             ],
             [
               0.75,
-              2.7
+              2.51
             ],
             [
               0.83,
-              2.35
+              2.18
             ],
             [
               0.92,
-              1.36
+              1.27
             ],
             [
               1.0,
@@ -3031,23 +3015,23 @@
             ],
             [
               0.08,
-              -0.34
+              -0.27
             ],
             [
               0.17,
-              -0.77
+              -0.63
             ],
             [
               0.25,
-              -0.96
+              -0.8
             ],
             [
               0.33,
-              -0.77
+              -0.63
             ],
             [
               0.42,
-              -0.34
+              -0.27
             ],
             [
               0.5,
@@ -3055,23 +3039,23 @@
             ],
             [
               0.58,
-              0.05
+              -0.01
             ],
             [
               0.67,
-              -0.11
+              -0.19
             ],
             [
               0.75,
-              -0.2
+              -0.29
             ],
             [
               0.83,
-              -0.11
+              -0.19
             ],
             [
               0.92,
-              0.05
+              -0.01
             ],
             [
               1.0,
@@ -3149,23 +3133,23 @@
             ],
             [
               0.08,
-              -0.32
+              -0.3
             ],
             [
               0.17,
-              -0.55
+              -0.52
             ],
             [
               0.25,
-              -0.64
+              -0.6
             ],
             [
               0.33,
-              -0.55
+              -0.52
             ],
             [
               0.42,
-              -0.32
+              -0.3
             ],
             [
               0.5,
@@ -3173,23 +3157,23 @@
             ],
             [
               0.58,
-              0.32
+              0.31
             ],
             [
               0.67,
-              0.56
+              0.53
             ],
             [
               0.75,
-              0.64
+              0.61
             ],
             [
               0.83,
-              0.56
+              0.53
             ],
             [
               0.92,
-              0.32
+              0.31
             ],
             [
               1.0,
@@ -3326,23 +3310,23 @@
             ],
             [
               0.08,
-              -0.72
+              -0.68
             ],
             [
               0.17,
-              -1.24
+              -1.18
             ],
             [
               0.25,
-              -1.43
+              -1.36
             ],
             [
               0.33,
-              -1.24
+              -1.18
             ],
             [
               0.42,
-              -0.72
+              -0.68
             ],
             [
               0.5,
@@ -3350,23 +3334,23 @@
             ],
             [
               0.58,
-              0.72
+              0.69
             ],
             [
               0.67,
-              1.25
+              1.19
             ],
             [
               0.75,
-              1.45
+              1.38
             ],
             [
               0.83,
-              1.25
+              1.19
             ],
             [
               0.92,
-              0.72
+              0.69
             ],
             [
               1.0,
@@ -3393,7 +3377,7 @@
             ],
             [
               0.25,
-              -0.5
+              -0.49
             ],
             [
               0.33,
@@ -3417,7 +3401,7 @@
             ],
             [
               0.75,
-              -0.3
+              -0.29
             ],
             [
               0.83,
@@ -3503,23 +3487,23 @@
             ],
             [
               0.08,
-              0.29
+              0.27
             ],
             [
               0.17,
-              0.5
+              0.47
             ],
             [
               0.25,
-              0.57
+              0.54
             ],
             [
               0.33,
-              0.5
+              0.47
             ],
             [
               0.42,
-              0.29
+              0.27
             ],
             [
               0.5,
@@ -3527,23 +3511,23 @@
             ],
             [
               0.58,
-              -0.29
+              -0.27
             ],
             [
               0.67,
-              -0.5
+              -0.48
             ],
             [
               0.75,
-              -0.57
+              -0.55
             ],
             [
               0.83,
-              -0.5
+              -0.48
             ],
             [
               0.92,
-              -0.29
+              -0.27
             ],
             [
               1.0,
@@ -3566,7 +3550,7 @@
             ],
             [
               0.17,
-              -0.26
+              -0.25
             ],
             [
               0.25,
@@ -3574,7 +3558,7 @@
             ],
             [
               0.33,
-              -0.26
+              -0.25
             ],
             [
               0.42,
@@ -3680,23 +3664,23 @@
             ],
             [
               0.08,
-              0.65
+              0.63
             ],
             [
               0.17,
-              1.13
+              1.08
             ],
             [
               0.25,
-              1.3
+              1.25
             ],
             [
               0.33,
-              1.13
+              1.08
             ],
             [
               0.42,
-              0.65
+              0.63
             ],
             [
               0.5,
@@ -3704,23 +3688,23 @@
             ],
             [
               0.58,
-              -0.65
+              -0.63
             ],
             [
               0.67,
-              -1.13
+              -1.09
             ],
             [
               0.75,
-              -1.31
+              -1.25
             ],
             [
               0.83,
-              -1.13
+              -1.09
             ],
             [
               0.92,
-              -0.65
+              -0.63
             ],
             [
               1.0,
@@ -3743,15 +3727,15 @@
             ],
             [
               0.17,
-              -0.33
+              -0.32
             ],
             [
               0.25,
-              -0.43
+              -0.42
             ],
             [
               0.33,
-              -0.33
+              -0.32
             ],
             [
               0.42,
