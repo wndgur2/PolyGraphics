@@ -19,11 +19,13 @@ body is built to that shape from its own skeleton row:
   haram  a square: a slab body with squared shoulders, bone pauldrons and a
          chest plate, a box helmet, the survey on the back — the wall
   mir    a stem (and she is Mina — the id is the handle the game pins, the name
-         is `display`): a waist the coat closes at and flares from, a bare
-         chest with no clasp on it, a helmet cut to a profile with a lamp and a
-         slit on it and nothing between them, and the piece of burrow wall at the hip with the vine
-         that is her weapon run out of it and round her — the one who left the
-         emitter in the burrow, and the one the weapon is still holding
+         is `display`): the one of the eight who is not wearing a coat. The
+         plant is laid on the body in three turns with the body showing between
+         them, the legs come out from under the lowest, and she stands up — head
+         over the shoulders with a neck under it, which nobody else here has.
+         A helmet cut to a profile with a lamp and a slit on it and nothing
+         between them, the piece of burrow wall at the hip — the one who left
+         the emitter in the burrow, and the one the weapon is still holding
   kano   a column: a narrow long coat, a peaked hood, a staff taller than the
          head — the one who does not stop
   eden   a mushroom: a round coat under a wide hat brim, the throat swelling
@@ -168,8 +170,18 @@ def coat_points(kind, sn, sf, hem):
         return top + [[7.4, 0.8], [9.4, 3.8], [9.2, 7.0], [6.4, 8.6 + hem], [1.0, 9.0 + hem], [-3.8, 8.2 + hem], [-6.4, 6.8 + hem], [-6.9, 1.0]]
     if kind == "slab":      # squared shoulders, straight sides, a flat hem
         return [[sn[0] - 1.6, sn[1] - 0.6], [sf[0] + 1.8, sf[1] - 0.6], [8.6, 0.6], [8.8, 10.8 + hem], [6.8, 12.2 + hem], [-6.4, 12.2 + hem], [-8.6, 10.8 + hem], [-8.4, 0.4]]
-    if kind == "stem":      # narrow shoulders, a waist pulled in above a flared hip, a long hem closing again
-        return top + [[4.6, 0.8], [3.4, 4.8], [5.8, 8.8], [5.6, 11.4 + hem], [3.0, 12.4 + hem], [0.2, 12.6 + hem], [-2.6, 12.4 + hem], [-5.2, 11.4 + hem], [-5.5, 8.8], [-3.2, 4.8], [-4.4, 0.6]]
+    if kind == "wrap":      # not a garment: the plant itself, lying on the body and ending in leaf points
+        # Cloth hangs, plants cling, and the silhouette is where the difference
+        # lives. A coat leaves the shoulder and swings clear of the body, so the
+        # outline belongs to the coat and the body inside it could be anybody's.
+        # This one is the body — chest, waist, hip, stopping at the hip line with
+        # the legs carrying on out from under it, which no other walker does —
+        # and the plant is laid over it in bands that follow it round (the row's
+        # `band_*` parts). A leafy hem was tried on a solid piece first and read
+        # as a torn tunic, because a ragged edge on one closed shape is damage;
+        # what reads as *wrapped* is seeing the body between the turns.
+        return top + [[4.6, -1.0], [3.9, 3.0], [4.7, 6.0], [2.6, 7.6], [-0.2, 7.9],
+                      [-2.9, 7.5], [-4.5, 6.0], [-3.9, 3.0], [-4.7, -0.8]]
     if kind == "column":    # narrow and long
         return top + [[6.4, 1.6], [6.6, 7.0], [6.0, 12.6 + hem], [3.8, 13.4 + hem], [-3.4, 13.4 + hem], [-5.6, 12.6 + hem], [-6.2, 7.0], [-6.0, 1.2]]
     if kind == "round":     # wide and soft, the hem tucked in
@@ -414,7 +426,20 @@ SHARED = " Drawn from one skeleton and one facing (docs/character-rig-guide.md) 
 # go of. Out from under the load at the near shoulder, once round the waist just
 # below the clasp, then down over the hip and off the hem, on its way back to the
 # floor it comes up out of in a run.
-RUNNER = [(-3.0, 4.4), (0.2, 5.6), (3.0, 5.2), (4.6, 7.6), (5.4, 10.2), (6.8, 12.4)]
+# The turns the plant takes round her: over the near shoulder, across the ribs to
+# the far hip, and once round the waist under it. Both are `stem()` sweeps, same
+# as the arsenal's own plants, and the gaps between them are the point — a body
+# you can see between the turns is wrapped, a body you cannot is dressed.
+BAND_A = [(-2.6, -1.6), (-0.4, 0.8), (1.8, 3.2), (3.9, 5.6)]
+BAND_B = [(-3.6, 3.8), (-0.4, 4.8), (3.0, 4.3)]
+# The lowest turn does not close: it comes round the hip and carries on off the
+# far side as a free tail, tapering out. `ss.proj.vine-snare` ends the same way,
+# and it is the one thing here allowed past the outline — leaves were drawn at
+# the shoulder and at the hip and read as pauldrons and luggage tags, and the
+# arsenal's plants have no leaves on purpose (`ss.proj.vine`: a leafy stem is a
+# picture of a plant, not of this weapon).
+BAND_C = [(-3.2, 6.6), (-0.6, 7.4), (2.4, 7.0), (4.6, 7.6), (6.4, 9.6)]
+
 WALL_BIND = [(-1.9, 5.8), (-2.0, 6.9), (-2.0, 8.0)]
 
 CHARACTERS = {
@@ -464,32 +489,43 @@ CHARACTERS = {
     # id it has not got, so the name moves in `display` and the handle does not.
     "mir": {
         "display": "Mina",
-        "sex": "f", "tint": ("timber", 2), "coat": "stem", "cloak_sx": 0.96, "cape": False, "organ": False,
-        "skeleton": {"head": (2.2, -8.2), "head_tilt": -8, "shoulder_near": (-4.6, -2.8), "shoulder_far": (5.2, -4.2), "foot_near": (-1.8, 13.4), "foot_far": (3.6, 12.8), "hip_near": (-2.0, 11.8), "hip_far": (3.2, 11.0), "pack": (-5.6, -5.4)},
-        "head": "lamp", "head_r": (4.4, 4.8), "visor_w": 4.4, "visor_h": 1.8, "head_fill": "$husk", "pose": {"coat_lean": 1, "arm_hang": 6, "arm_far_hang": -3, "visor_turn": -6},
-        "arm_len": 7.4, "arm_w": 2.4, "arm_far_len": 6.6, "arm_far_w": 2.0, "hand_r": (1.4, 1.6), "hand_far_r": (1.2, 1.4),
-        "walk": {"duration": 0.66, "stride": 2.3, "lift": 1.0, "bob": 0.7, "sway": 4.6, "arm_swing": 11},
+        "sex": "f", "tint": ("timber", 2), "coat": "wrap", "cloak_sx": 1.0, 
+        "cape": False, "organ": False, "legs": True,
+        # Standing up. The head was at -8.2 with the helmet down over the shoulder
+        # line, which is the rig's default (the guide's §2: the head covers the
+        # shoulders) and on a small body it is a stoop — no neck, chin on the
+        # chest. Here the head goes up to -10.2, the shoulder line comes up and
+        # levels off, the line of action goes vertical, and the gap that opens
+        # between helmet and shoulders is filled by a neck, which is the whole
+        # difference between a figure that stands and one that hunches.
+        "skeleton": {"head": (2.0, -9.4), "head_tilt": -3, "shoulder_near": (-4.4, -3.0), "shoulder_far": (5.0, -4.0),
+                     "hip_near": (-2.0, 6.2), "hip_far": (2.8, 5.8), "foot_near": (-1.6, 12.4), "foot_far": (3.2, 11.8)},
+        "head": "lamp", "head_r": (4.4, 4.8), "visor_w": 4.4, "visor_h": 1.8, "head_fill": "$husk", "pose": {"coat_lean": 0, "arm_hang": 7, "arm_far_hang": -5, "visor_turn": -6},
+        "arm_len": 7.4, "arm_w": 2.4, "arm_far_len": 6.6, "arm_far_w": 2.0, "hand_r": (1.4, 1.6), "hand_far_r": (1.2, 1.4), "hand_fill": "$timber", "hand_far_fill": "$timber.dark",
+        "walk": {"duration": 0.66, "stride": 2.1, "lift": 1.0, "bob": 0.8, "sway": 2.4, "arm_swing": 12, "leg_swing": 20},
         "idle": {"duration": 1.3},
         "extras": lambda c: [
-            # The runner, and it is the weapon: one wind at the waist, then down
-            # over the hip and off the hem on its way back to the floor. Barbed
-            # once, and lit along its upper edge the way every stem in
-            # `ss.proj.vine` is. It sits at the waist rather than the chest
-            # because the chest is bare on this one — see `organ` above.
-            ("over_cape", P_("wall_bind", (0, 0), stem(WALL_BIND, 1.4, 1.2), "$moss"), "body"),
-            # Palm-sized, which is the record's own word for it (M038) — the slab
-            # it used to be was drawn before anybody read the page. It hangs off
-            # the wind at the near hip, cracked, because something is chewing
-            # inside it (M042), and what comes out of the crack is the weapon.
-            ("over_cape", P_("wall", (-2.0, 9.4), poly([(-1.8, -1.6), (1.7, -1.8), (1.9, 1.7), (-1.6, 1.9)]), "$rust", rot=-12, stroke=hair), "body"),
-            ("over_cape", P_("wall_crack", (-1.9, 9.0), rect(2.2, 0.5, 0.2), "$rust.dark", rot=28), "body"),
-            ("over_cape", P_("runner", (0, 0), stem(RUNNER, 2.3, 0.7), "$moss"), "body"),
-            ("over_cape", P_("runner_lit", (0, 0), stem(RUNNER, 0.8, 0.3, off=-0.62), "$moss.light2"), "body"),
-            ("over_cape", P_("barb", (1.6, 4.2), poly([(-1.0, 0.9), (1.0, 0.9), (0.1, -1.4)]), "$blood.dark2", rot=12), "body"),
+            # Two leaves off the wrap's shoulder, breaking the outline where a
+            # coat would have a smooth cap. One reads as a shoulder, two read as
+            # a plant.
+            ("over_coat", P_("band_a", (0, 0), stem(BAND_A, 1.9, 1.6), "$moss"), "body"),
+            ("over_coat", P_("band_a_lit", (0, 0), stem(BAND_A, 0.8, 0.6, off=-0.58), "$moss.light2"), "body"),
+            ("over_coat", P_("band_b", (0, 0), stem(BAND_B, 1.8, 1.5), "$moss"), "body"),
+            ("over_coat", P_("band_c", (0, 0), stem(BAND_C, 1.9, 0.5), "$moss"), "body"),
+            # The runner, and it is the weapon. The wrap is the plant that has
+            # grown over her and is drawn in the pale `$moss.light2`; this is the
+            # live one, at the arsenal's own value with its lit edge and its barb,
+            # so the two never read as one thing. Round the waist, over the hip
+            # and off the wrap's edge, on its way back to the floor.
+            ("over_cape", P_("wall", (-2.4, 8.2), poly([(-1.8, -1.6), (1.7, -1.8), (1.9, 1.7), (-1.6, 1.9)]), "$rust", rot=-12, stroke=hair), "body"),
+            ("over_cape", P_("barb", (2.7, 3.2), poly([(-1.0, 0.9), (1.0, 0.9), (0.1, -1.4)]), "$blood.dark2", rot=12), "body"),
+            # The neck. Nothing else on the eight has one, and nothing else on
+            # the eight stands up straight either; the two are the same fact.
+            ("in_hand", P_("neck", (0.9, -4.0), rect(2.8, 3.0, 0.8), shade(c["T"], -1), rot=-4), "body"),
         ],
-        "walk_desc": "a long even walk with the weight kept off what she carries: the hem swings wider than anybody's and the bob stays small — twenty-nine levels taught her not to bounce it (M035)",
-        "idle_desc": "the body breathes under the coat; the hair and the runner hang still",
-        "description": "A stem. The burrow, walked from the inside down to the queen: the narrowest waist of the eight, a coat that closes at it and flares again over the hip to a hem the feet show under, and the smallest helmet. The game has called this texture `ch_hourglass` since before there was a body in it, and that is now what the body is. **What she took in place of the emitter has put out a runner, and the runner is the weapon.** The piece of burrow wall hangs at the near hip, palm-sized — the record\'s own word (M038) — still warm half a month on, with something chewing inside it and a crack where it comes out (M042); from there the runner goes up, once round the waist, then down over the hip and off the hem, on its way back into the floor the vines come up out of in a run (M041: she buried the piece behind base, and by morning there was a hole going down). `$moss` with a `$moss.light2` edge and one `$blood.dark2` barb, which is the cord, taper and barb of `ss.proj.vine` and `ss.proj.vine-snare` exactly — the weapon holds what it catches, and this is the body it never let go of. **She is the one of the eight with no clasp and no mantle**, and it is the same sentence twice: M042 says she went back down with the piece of wall *in place of the emitter*, so the dead organ every other walker wears on the coat is not on this one — it stayed where it burned out, beside the queen (M031). Her chest is the plainest of the eight and it is the point. The helmet is the `lamp` kind and the one head in the set that is not an egg with something stuck on it: the dome is a profile, cut in over the visor at the front and let out into a nape at the back, the visor is a slit rather than the roster\'s full band, and the one light the eight carry is clipped against the rim above it — the burrow is where the compass stopped and this is the head that went down there (M005). **Three marks and nothing joining them.** A mount once bridged the lamp down to the slit and it turned the helmet Corinthian: one vertical line between the eyes is a nose guard before it is a bracket. Her coat is the one warm tint of the eight and a slim body spends more of itself on outline, so the helmet comes off the warm ramp into `$husk` to keep her off the floor: 3.4 : 1 against `ss.env.ground`, over Sol\'s 3.0." + SHARED,
+        "walk_desc": "the one walk here with legs in it: they swing from the hip under the lowest turn, the step is long and even, and the bob stays small — twenty-nine levels taught her not to bounce what she carries (M035)",
+        "idle_desc": "the body breathes under the turns; the tail off the hip hangs still",
+        "description": "A stem, and the one of the eight not wearing a coat. **The plant is on her instead of cloth**, which is a silhouette decision before it is a costume one: a coat leaves the shoulder and swings clear of the body, so its outline belongs to the coat and the body inside it could be anybody\'s, while a plant clings and the outline stays hers. So the torso is the body — chest, waist, hip, stopping at the hip line — and `ss.proj.vine` is laid over it in three turns that follow it round, with the body showing in the gaps. The gaps are the whole reading: a body you can see between the turns is wrapped, a body you cannot is dressed. The legs come out from under the lowest turn, which nobody else here does, the lowest turn does not close but carries on off the far hip as a free tail tapering out the way `ss.proj.vine-snare` ends, and one `$blood.dark2` barb rides the diagonal. There are no leaves: the arsenal\'s plants have none on purpose (a leafy stem is a picture of a plant, not of this weapon), and at four pixels a leaf drawn at the shoulder is a pauldron and at the hip a luggage tag — both were drawn before this was settled. **And she stands up.** The rig\'s default puts the helmet down over the shoulder line, which on a body this size is a stoop with the chin on the chest; here the head goes up, the shoulder line comes up and levels, the line of action goes vertical, and the gap that opens is filled with a neck — the only neck in the set, and the whole difference between a figure that stands and one that hunches. Bare arms and bare hands on the warm ramp, because a glove on a body wrapped in plant is a costume again. **What she took in place of the emitter is what grew.** The piece of burrow wall hangs at the near hip, palm-sized — the record\'s own word (M038) — still warm half a month on with something chewing inside it (M042), and the turns run out of it: the vines that come up out of the ground in a run come up out of what this one carries (M041: she buried the piece behind base, and by morning there was a hole going down). The weapon holds what it catches, and this is the body it never let go of. **She is also the one with no clasp and no mantle**: M042 has her going back down with the wall *in place of the emitter*, so the dead organ the other seven wear is not on her — it stayed where it burned out beside the queen (M031). The helmet is the `lamp` kind and the one head in the set that is not an egg with something stuck on it: a profile cut in at the front and let out into a nape at the back, a visor slit, and the one light the eight carry clipped against the rim above it, with nothing joining the two — a bar down the middle between them is a Corinthian nose guard before it is a bracket (M005: the burrow is where the compass stopped). Three turns of `$moss` on `$timber.light2` cost her some floor: 3.2 : 1 against `ss.env.ground`, beside Sol\'s 3.0." + SHARED,
     },
     "kano": {
         "sex": "m", "tint": ("silent", 0), "coat": "column", "cloak_sx": 1.0, "hem": 0.0, "head": "hood", "head_r": (4.8, 6.0), "visor_w": 5.8,
