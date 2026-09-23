@@ -108,6 +108,18 @@ rect = lambda w, h, corner=0.5: {"kind": "rect", "w": w, "h": h, "corner": corne
 ell = lambda rx, ry: {"kind": "ellipse", "rx": rx, "ry": ry}
 circ = lambda r: {"kind": "circle", "r": r}
 poly = lambda pts: {"kind": "poly", "points": [[r2(x), r2(y)] for x, y in pts]}
+def smooth(ctrl, steps=3):
+    """A closed outline curving through `ctrl` (a Catmull-Rom spline, `steps` points a span); a point
+    written (x, y, 1) is a corner — a leaf's tip or a notch — and the curve arrives at it and turns there."""
+    n = len(ctrl); P = [(c[0], c[1]) for c in ctrl]
+    m = [(0.0, 0.0) if len(ctrl[i]) > 2 else ((P[(i + 1) % n][0] - P[i - 1][0]) / 2, (P[(i + 1) % n][1] - P[i - 1][1]) / 2) for i in range(n)]
+    out = []
+    for i in range(n):
+        (x0, y0), (x1, y1), (u0, v0), (u1, v1) = P[i], P[(i + 1) % n], m[i], m[(i + 1) % n]
+        for k in range(steps):
+            t = k / steps; a, b, c, d = 2 * t**3 - 3 * t**2 + 1, t**3 - 2 * t**2 + t, -2 * t**3 + 3 * t**2, t**3 - t**2
+            out.append((a * x0 + b * u0 + c * x1 + d * u1, a * y0 + b * v0 + c * y1 + d * v1))
+    return out
 
 # ============================================================== 2. the coats — the primary shape of the body
 def coat_points(kind, sn, sf, hem):
@@ -336,6 +348,10 @@ def build(name, row):
 # ============================================================== 5. the eight
 SHARED = " Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11."
 
+# Mina's mane, from the head joint: over the crown, then three locks down the back, each to a leaf point (x, y, 1)
+MANE = [(2.0, -4.3), (-0.6, -5.7), (-4.2, -5.5), (-7.4, -4.2), (-11.4, -3.0, 1), (-8.2, -1.0), (-10.8, 2.4, 1), (-7.6, 3.2),
+        (-9.4, 9.4, 1), (-5.4, 6.6), (-2.6, 3.8), (-0.6, 2.6)]
+
 CHARACTERS = {
     "arin": {
         "sex": "f", "tint": ("frost", 0), "pack": True, "pack_w": 5.0, "pack_h": 5.2, "feelers": True,
@@ -392,28 +408,28 @@ CHARACTERS = {
         "foot_w": 3.0, "foot_h": 1.6, "foot_far_w": 2.6, "foot_far_h": 1.5, "foot_fill": "$moss", "foot_far_fill": "$moss.light",
         "walk": {"duration": 0.6, "stride": 2.0, "bob": 0.9, "sway": 4.5, "arm_swing": 12, "leg_swing": 16, "hair": 7}, "idle": {"duration": 1.5},
         "extras": lambda c: [
-            # the hair: a mane of red runners off the crown, streaming back and falling to the waist, every
-            # lock ending in a leaf point — the crown of the outline. The dark underside is the whole mane; the
-            # lit layer over it is cut deep between the locks, so the dark shows as the partings between them.
+            # the hair: a mane off the crown that sweeps back and falls down the back in three locks, each a
+            # clean curve to one leaf point — the crown of the outline. Drawn twice: the dark underside, and the
+            # lit mane over it lifted and drawn in a little, so the dark is only a rim along the underside.
             # `madder` is the roster's red: `$blood` let halfway down toward the muted tints the other seven
             # wear, because a saturated mane made her the one thing on the card that shouted
-            ("behind", P_("hair_back", c["head"], poly([(1.87, -3.86), (0.85, -4.97), (-0.68, -5.52), (-2.55, -5.61), (-4.25, -5.34), (-6.29, -5.52), (-5.61, -4.51), (-7.31, -4.42), (-9.18, -3.96), (-11.39, -3.68), (-9.86, -2.39), (-8.67, -1.38), (-9.69, -0.46), (-11.56, 0.74), (-9.69, 1.75), (-8.16, 2.48), (-8.67, 4.05), (-10.03, 6.81), (-7.99, 6.26), (-7.14, 7.73), (-7.14, 10.12), (-8.5, 12.88), (-5.78, 11.04), (-4.42, 8.28), (-3.23, 5.7), (-1.7, 3.68), (-0.51, 2.58)]), "$madder.dark", stroke=hair), "hair"),
-            ("behind", P_("hair", c["head"], poly([(1.78, -4.14), (0.68, -5.15), (-1.19, -5.52), (-3.57, -5.24), (-5.78, -4.97), (-8.16, -4.23), (-10.88, -3.68), (-7.99, -2.39), (-4.25, -2.02), (-7.48, -1.1), (-11.05, 0.74), (-7.99, 1.47), (-4.59, 0.74), (-6.63, 2.58), (-9.35, 6.44), (-6.46, 4.97), (-4.08, 3.5), (-5.78, 6.81), (-7.82, 11.96), (-4.76, 8.46), (-2.21, 4.23), (-0.68, 2.39)]), "$madder", stroke=hair), "hair"),
+            ("behind", P_("hair_back", c["head"], poly(smooth(MANE)), "$madder.dark", stroke=hair), "hair"),
+            ("behind", P_("hair", c["head"], poly(smooth([(x * 0.95 + 0.1, y * 0.94 - 0.5, *k) for x, y, *k in MANE])), "$madder", stroke=hair), "hair"),
             # a runner wound round the near leg: two turns across the front, joined down the back edge, turning with the leg
-            ("feet_over", P_("leg_vine", c["leg_mid"], poly([(-1.5, -1.4), (1.5, 0.0), (1.5, 0.8), (-0.8, -0.3), (-0.8, 1.5), (1.5, 2.6), (1.5, 3.4),
-                (-1.5, 2.0)]), "$moss.dark", rot=c["leg_rot"]), "leg"),
-            # the dress: a fan of leaves at the hip, each a point, short in front and longer to the back; a bodice of them at the waist
-            ("over_coat", P_("skirt", (0, 0), poly([(4.6, 2.8), (6.0, 4.6), (6.4, 6.4), (4.6, 5.6), (3.8, 7.4), (2.2, 6.0), (0.8, 7.8), (-0.8, 6.4),
-                (-2.4, 8.6), (-3.6, 7.0), (-5.8, 9.6), (-5.6, 7.2), (-7.4, 7.6), (-6.4, 5.4), (-5.2, 3.2), (-0.2, 4.2)]), "$sage", stroke=hair), "coat"),
-            ("over_coat", P_("bodice", (0, 0), poly([(-3.3, -0.8), (-1.0, -2.4), (0.6, -0.9), (3.0, -2.8), (5.6, -1.0), (4.8, 0.6), (3.0, 1.9), (4.6, 3.6),
-                (-0.2, 4.2), (-5.2, 3.4), (-2.4, 1.5), (-3.7, -0.4)]), "$sage.dark", stroke=hair), "coat"),
-            # over the head: the hairline across the brow, swept back over the skull, a lock behind the jaw
-            ("over_head", P_("fringe", c["head"], poly([(3.6, -2.8), (2.6, -4.2), (0.8, -4.9), (-1.6, -4.8), (-3.4, -3.6), (-4.2, -1.2), (-4.0, 1.6),
-                (-3.0, 4.2), (-2.2, 6.0), (-1.8, 3.4), (-1.4, 0.8), (-0.6, -1.0), (0.8, -2.0), (2.2, -2.0), (3.9, -1.4)]), "$madder", stroke=hair), "hair"),
+            ("feet_over", P_("leg_vine", c["leg_mid"], poly([(-1.4, -1.0), (1.4, 0.2), (1.4, 0.9), (-0.8, 0.0), (-0.8, 1.9), (1.4, 2.8), (1.4, 3.5),
+                (-1.4, 2.4)]), "$moss.dark", rot=c["leg_rot"]), "leg"),
+            # the dress: four leaves at the hip, one rhythm, each a little longer toward the back; a bodice at the waist
+            ("over_coat", P_("skirt", (0, 0), poly(smooth([(4.6, 2.8), (6.1, 4.8), (6.2, 6.8, 1), (4.2, 6.0, 1), (3.2, 7.4), (2.4, 8.0, 1), (0.8, 6.8, 1),
+                (-0.4, 8.2), (-1.4, 8.8, 1), (-3.0, 7.4, 1), (-4.4, 8.6), (-5.6, 9.0, 1), (-6.4, 6.8), (-5.2, 3.2, 1), (-0.2, 4.0)])), "$sage", stroke=hair), "coat"),
+            ("over_coat", P_("bodice", (0, 0), poly(smooth([(-3.4, -0.9), (-1.2, -2.2), (0.8, -1.0, 1), (3.0, -2.5), (5.4, -1.0), (4.4, 1.0), (3.2, 2.2),
+                (4.4, 3.6, 1), (-0.2, 4.0), (-5.0, 3.4, 1), (-2.8, 1.6), (-3.8, 0.2)])), "$sage.dark", stroke=hair), "coat"),
+            # over the head: a side-swept hairline across the brow, the skull covered, one lock behind the jaw
+            ("over_head", P_("fringe", c["head"], poly(smooth([(3.7, -2.6, 1), (2.4, -4.3), (-0.6, -4.9), (-3.2, -3.8), (-4.1, -1.0), (-3.5, 2.6),
+                (-2.3, 5.2, 1), (-1.6, 2.0), (-0.6, -0.6), (1.6, -1.9), (3.9, -1.4, 1)])), "$madder", stroke=hair), "hair"),
         ],
         "walk_desc": "a sway: the hip swings wide under the leaves and the stride is narrow and unhurried; the hair streams back a quarter-step behind the bob",
         "idle_desc": "the hair stirs as if it were growing; the body breathes",
-        "description": "An hourglass. Mina, the burrow walked from the inside down to the queen, and what came up out of the hole the piece of wall was buried in (M041): the one of the eight wearing no suit at all. The skin has gone the pale green of a leaf's underside, the hair is a mane of red runners streaming back off the crown and falling to the waist, every lock ending in a leaf point — the crown of the outline — and hers is the one face of the eight turned to the viewer: a narrowing jaw, a dark mouth and a single lit almond of an eye. Her colours are the roster's muted ones — the red let down to `madder`, the leaves `sage` — so she is found by her outline, not by shouting. A bodice of leaves at the waist, a fan of them at the hip, short in front and longer behind, long bare legs, and a runner wound round the near leg. The vine she carries is the same plant: it comes up out of the ground and holds. A narrow, swaying walk, the hip carrying it and the hair a beat behind." + SHARED,
+        "description": "An hourglass. Mina, the burrow walked from the inside down to the queen, and what came up out of the hole the piece of wall was buried in (M041): the one of the eight wearing no suit at all. The skin has gone the pale green of a leaf's underside, the hair is a mane swept back off the crown that falls down the back in three locks, each one clean curve to a leaf point — the crown of the outline — and hers is the one face of the eight turned to the viewer: a narrowing jaw, a dark mouth and a single lit almond of an eye. Her colours are the roster's muted ones — the red let down to `madder`, the leaves `sage` — so she is found by her outline, not by shouting. A leaf bodice at the waist, a skirt of four leaves at the hip in one rhythm, each a little longer toward the back, long bare legs, and a runner wound round the near leg. Every outline is a curve with its corners only at the leaf tips, so she sits with the rounded roster rather than bristling beside it. The vine she carries is the same plant: it comes up out of the ground and holds. A narrow, swaying walk, the hip carrying it and the hair a beat behind." + SHARED,
     },
     "kano": {
         "sex": "m", "tint": ("silent", 0), "coat": "column", "cloak_sx": 1.0, "hem": 0.0, "head": "hood", "head_r": (4.8, 6.0), "visor_w": 5.8,
