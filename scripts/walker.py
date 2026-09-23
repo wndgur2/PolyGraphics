@@ -20,10 +20,11 @@ body is built to that shape from its own skeleton row:
          chest plate, a box helmet, the survey on the back — the wall
   mir    a stem (and she is Mina — the id is the handle the game pins, the name
          is `display`): the one of the eight who is not wearing a coat. The
-         plant is laid on the body in three turns with the body showing between
-         them, a thorn out past each shoulder, the legs come out from under the
-         lowest turn, and she stands up — head over the shoulders with a neck
-         under it, which nobody else here has, on the slimmest arms in the set.
+         plant is laid on the body in three turns that hang and pinch the way a
+         cord does round a barrel, the far side of her in shadow behind them, a
+         thorn out past each shoulder, the legs coming out from under the lowest
+         turn, and she stands up — head over the shoulders with a neck under it,
+         which nobody else here has, on the slimmest arms in the set.
          A helmet cut to a profile with a lamp and a slit on it and nothing
          between them, the piece of burrow wall at the hip — the one who left
          the emitter in the burrow, and the one the weapon is still holding
@@ -131,7 +132,7 @@ circ = lambda r: {"kind": "circle", "r": r}
 
 poly = lambda pts: {"kind": "poly", "points": [[r2(x), r2(y)] for x, y in pts]}
 
-def stem(pts, w0, w1, off=0.0):
+def stem(pts, w0, w1, off=0.0, bulge=0.0):
     """A centreline swept by a taper and closed into one polygon. `ss.proj.vine`
     draws its plants this way — the shape *is* the path the thing grew along —
     and a plant grown on a body has to be the same plant. It draws a lock of
@@ -142,6 +143,13 @@ def stem(pts, w0, w1, off=0.0):
     half-width off it, so light cannot slide off a cord however hard it bends.
     Call `stem` twice with the same points — once wide and dark, once narrow and
     offset — and the two agree by construction rather than by hand.
+
+    `bulge` swells the width in the middle of the run and pinches it at both
+    ends, on top of the taper. It is foreshortening, and it is what makes a cord
+    read as going *round* something rather than lying flat across it: the part
+    facing you is seen at its full width, and the part turning away past the
+    side of the body is seen edge-on and gets thin. Without it a band on a torso
+    is a stripe painted on a board, however hard the centreline curves.
 
     There is no fiddlehead here, and that was tried: a curl needs an enclosed
     hole wider than the 1px ink that rings it, which at 32x32 puts the curl at a
@@ -159,7 +167,7 @@ def stem(pts, w0, w1, off=0.0):
     for i, (x, y) in enumerate(pts):
         nx, ny = normal(i)
         x, y = x + nx * off, y + ny * off
-        w = (w0 + (w1 - w0) * i / n) / 2
+        w = (w0 + (w1 - w0) * i / n) / 2 * (1 + bulge * math.sin(math.pi * i / n))
         left.append((x + nx * w, y + ny * w)); right.append((x - nx * w, y - ny * w))
     return poly(left + right[::-1])
 
@@ -431,18 +439,43 @@ SHARED = " Drawn from one skeleton and one facing (docs/character-rig-guide.md) 
 # below the clasp, then down over the hip and off the hem, on its way back to the
 # floor it comes up out of in a run.
 # The turns the plant takes round her: over the near shoulder, across the ribs to
-# the far hip, and once round the waist under it. Both are `stem()` sweeps, same
-# as the arsenal's own plants, and the gaps between them are the point — a body
-# you can see between the turns is wrapped, a body you cannot is dressed.
-BAND_A = [(-2.6, -1.6), (-0.4, 0.8), (1.8, 3.2), (3.9, 5.6)]
-BAND_B = [(-3.6, 3.8), (-0.4, 4.8), (3.0, 4.3)]
+# the far hip, once round the waist under it, and once round the hip. All three
+# are `stem()` sweeps, same as the arsenal's own plants, and the gaps between
+# them are the point — a body you can see between the turns is wrapped, a body
+# you cannot is dressed.
+#
+# **They bow, and they swell and pinch.** Drawn straight and at even width they
+# were stripes painted on a board: the body under them had no round in it,
+# because nothing about them had to travel round anything. So each centreline
+# arcs the way a cord does on a barrel — the waist turn dips at the front and
+# rises where it leaves for the sides — and each is swept with a `bulge`, wide
+# where it faces the viewer and thin where it turns away past the edge of the
+# body. The pinch is the part that does the work; a curve alone still reads flat.
+def wrap(x0, y0, x1, y1, sag, n=11):
+    """One turn of a cord across the front of a body. It enters and leaves at the
+    outline and hangs between, and the hang is a *curve*: `stem` joins points
+    with straight lines, so an arc drawn from four or five of them comes out as
+    a corner and the three turns read as a ribcage. Eleven is enough. It sags
+    rather than arches because the camera looks down on her — the front of the
+    cord is nearer than its sides, and nearer is lower on the screen."""
+    return [(x0 + (x1 - x0) * i / (n - 1),
+             y0 + (y1 - y0) * i / (n - 1) + sag * math.sin(math.pi * i / (n - 1))) for i in range(n)]
+
+# Three turns of one cord down the torso, not a diagonal and two straps: a cord
+# wound round a body crosses the front three times and is hidden behind at the
+# sides, so on screen it is three arcs that enter and leave at the outline and
+# hang between. Drawn as a diagonal once, and all three converged on the far hip
+# into a single green mass.
+BAND_A = wrap(-3.4, -1.8, 4.1, -0.8, 2.0)
+BAND_B = wrap(-3.5, 2.6, 3.7, 3.2, 1.9)
 # The lowest turn does not close: it comes round the hip and carries on off the
 # far side as a free tail, tapering out. `ss.proj.vine-snare` ends the same way,
 # and it is the one thing here allowed past the outline — leaves were drawn at
 # the shoulder and at the hip and read as pauldrons and luggage tags, and the
 # arsenal's plants have no leaves on purpose (`ss.proj.vine`: a leafy stem is a
 # picture of a plant, not of this weapon).
-BAND_C = [(-3.2, 6.6), (-0.6, 7.4), (2.4, 7.0), (4.6, 7.6), (6.4, 9.6)]
+TORSO_SHADE = [(3.3, -3.2), (4.2, -0.6), (3.2, 3.0), (4.0, 6.0), (2.2, 7.6)]
+BAND_C = wrap(-3.4, 6.0, 3.8, 6.3, 1.7) + [(5.3, 7.4), (6.3, 9.4)]
 
 WALL_BIND = [(-1.9, 5.8), (-2.0, 6.9), (-2.0, 8.0)]
 
@@ -527,12 +560,18 @@ CHARACTERS = {
             # Two leaves off the wrap's shoulder, breaking the outline where a
             # coat would have a smooth cap. One reads as a shoulder, two read as
             # a plant.
-            ("over_coat", P_("band_a", (0, 0), stem(BAND_A, 1.9, 1.6), "$moss"), "body"),
-            ("over_coat", P_("band_a_lit", (0, 0), stem(BAND_A, 0.8, 0.6, off=-0.58), "$moss.light2"), "body"),
-            ("over_coat", P_("band_b", (0, 0), stem(BAND_B, 1.8, 1.5), "$moss"), "body"),
-            ("over_coat", P_("band_b_lit", (0, 0), stem(BAND_B, 0.7, 0.6, off=-0.52), "$moss.light2"), "body"),
-            ("over_coat", P_("band_c", (0, 0), stem(BAND_C, 1.9, 0.5), "$moss"), "body"),
-            ("over_coat", P_("band_c_lit", (0, 0), stem(BAND_C, 0.7, 0.2, off=-0.55), "$moss.light2"), "body"),
+            # The far side of the torso turns away from the light, and until now it
+            # did not know it: one flat fill from edge to edge, so the turns had a
+            # board to lie on. This is the same step down the far arm and the far
+            # leg already take, run down the body's far edge and pinched out top
+            # and bottom so it reads as a cylinder rather than a stripe.
+            ("over_coat", P_("torso_shade", (0, 0), stem(TORSO_SHADE, 0.6, 0.6, bulge=1.9), shade(c["T"], -1)), "body"),
+            ("over_coat", P_("band_a", (0, 0), stem(BAND_A, 1.3, 1.05, bulge=0.45), "$moss"), "body"),
+            ("over_coat", P_("band_a_lit", (0, 0), stem(BAND_A, 0.6, 0.45, off=-0.55, bulge=0.45), "$moss.light2"), "body"),
+            ("over_coat", P_("band_b", (0, 0), stem(BAND_B, 1.25, 1.05, bulge=0.5), "$moss"), "body"),
+            ("over_coat", P_("band_b_lit", (0, 0), stem(BAND_B, 0.55, 0.45, off=-0.5, bulge=0.5), "$moss.light2"), "body"),
+            ("over_coat", P_("band_c", (0, 0), stem(BAND_C, 1.35, 0.35, bulge=0.4), "$moss"), "body"),
+            ("over_coat", P_("band_c_lit", (0, 0), stem(BAND_C, 0.55, 0.15, off=-0.52, bulge=0.4), "$moss.light2"), "body"),
             # The runner, and it is the weapon. The wrap is the plant that has
             # grown over her and is drawn in the pale `$moss.light2`; this is the
             # live one, at the arsenal's own value with its lit edge and its barb,
@@ -553,7 +592,7 @@ CHARACTERS = {
         ],
         "walk_desc": "carriage: the longest stride and the slowest beat of the eight, legs swinging from the hip under the lowest turn, and almost nothing above the waist — the smallest bob in the set, the arms barely moving, and the head carried rather than nodded (`head_nod` 0.5 against the rig's 2.5). It is a walk made of what the body does not do. Twenty-nine levels taught her not to bounce what she carries (M035), and the gait it left her is one that will not be hurried",
         "idle_desc": "the slowest breath of the eight bar Eden's: the body rises under the turns and the tail off the hip does not move",
-        "description": "A stem, and the one of the eight not wearing a coat. **The plant is on her instead of cloth**, which is a silhouette decision before it is a costume one: a coat leaves the shoulder and swings clear of the body, so its outline belongs to the coat and the body inside it could be anybody\'s, while a plant clings and the outline stays hers. So the torso is the body — chest, waist, hip, stopping at the hip line — and `ss.proj.vine` is laid over it in three turns that follow it round, each one dark with its own lit edge, with the body showing in the gaps. The gaps are the whole reading: a body you can see between the turns is wrapped, a body you cannot is dressed. The legs come out from under the lowest turn, which nobody else here does, that turn does not close but carries on off the far hip as a free tail tapering out the way `ss.proj.vine-snare` ends, and a `$blood.dark2` thorn comes out past each shoulder. **Zyra is the reference for those**: her silhouette is carried on pointed shapes off the shoulders and hips, and a thorn is the one pointed shape this arsenal already owns. Both sit on the outline rather than inside it — a barb in the middle of a torso is a decal, a barb on the edge is a plant that could catch on you. There are no leaves: the arsenal\'s plants have none on purpose (a leafy stem is a picture of a plant, not of this weapon), and at four pixels a leaf drawn at the shoulder is a pauldron and at the hip a luggage tag — both were drawn before this was settled. **And she stands, and walks like it.** The rig\'s default puts the helmet down over the shoulder line, which on a body this size is a stoop with the chin on the chest; here the head sits back over the shoulders with a neck under it — the only neck in the set, and most of the difference between a figure that stands and one that hunches — the smallest head of the eight on the longest legs, and the visor slit raised so the gaze is level rather than down. The walk is the same argument in motion, and it is a runway walk: the two contact points come onto one line, 2.8 apart rather than 3.8, so the legs angle in from the hips instead of running parallel — at this size that is the single cheapest thing separating a model\'s walk from a march. The longest stride and slowest beat in the set, the smallest bob, and the head all but stopped (`head_nod` 0.5 against the rig\'s 2.5). Carriage is mostly what a body does *not* do. The arms are the exception and they were got wrong once: taken down to almost nothing in the name of stillness, where every runway guide says the opposite — arms held stiff against the sides read as tension from the back of the room, and what reads as poise is a relaxed pendulum. They are back up, on the slimmest sleeves in the set. Bare arms and bare hands on the warm ramp, because a glove on a body wrapped in plant is a costume again. **What she took in place of the emitter is what grew.** The piece of burrow wall hangs at the near hip, palm-sized — the record\'s own word (M038) — still warm half a month on with something chewing inside it (M042), and the turns run out of it: the vines that come up out of the ground in a run come up out of what this one carries (M041: she buried the piece behind base, and by morning there was a hole going down). The weapon holds what it catches, and this is the body it never let go of. **She is also the one with no clasp and no mantle**: M042 has her going back down with the wall *in place of the emitter*, so the dead organ the other seven wear is not on her — it stayed where it burned out beside the queen (M031). The helmet is the `lamp` kind and the one head in the set that is not an egg with something stuck on it: a profile cut in at the front and let out into a nape at the back, a visor slit, and the one light the eight carry clipped against the rim above it, with nothing joining the two — a bar down the middle between them is a Corinthian nose guard before it is a bracket (M005: the burrow is where the compass stopped). Three turns of `$moss` on `$timber.light2` cost her some floor: 3.2 : 1 against `ss.env.ground`, beside Sol\'s 3.0. 22 parts, one over the set\'s previous high, and the legs and the neck are three of them." + SHARED,
+        "description": "A stem, and the one of the eight not wearing a coat. **The plant is on her instead of cloth**, which is a silhouette decision before it is a costume one: a coat leaves the shoulder and swings clear of the body, so its outline belongs to the coat and the body inside it could be anybody\'s, while a plant clings and the outline stays hers. So the torso is the body — chest, waist, hip, stopping at the hip line — and `ss.proj.vine` is laid over it in three turns, each dark with its own lit edge, with the body showing in the gaps. The gaps are half the reading — a body you can see between the turns is wrapped, a body you cannot is dressed — and **the shape of the turns is the other half**. Drawn straight and at even width they were stripes painted on a board: nothing about them had to travel round anything, so there was no round in the body under them. Now each one *hangs* (a cord on a barrel, sagging at the front because the camera looks down on her and nearer is lower on the screen) and each one *swells and pinches* (`stem`\'s `bulge`: full width where it faces you, thin where it turns away past the edge of the body). The pinch is what does the work. A curve on its own still reads flat. Behind them the far side of the torso is a step down the warm ramp — the same step the far arm and far leg already take, run down the body\'s far edge and pinched out top and bottom, because one flat fill from edge to edge gave the turns a board to lie on. The legs come out from under the lowest turn, which nobody else here does, that turn does not close but carries on off the far hip as a free tail tapering out the way `ss.proj.vine-snare` ends, and a `$blood.dark2` thorn comes out past each shoulder. **Zyra is the reference for those**: her silhouette is carried on pointed shapes off the shoulders and hips, and a thorn is the one pointed shape this arsenal already owns. Both sit on the outline rather than inside it — a barb in the middle of a torso is a decal, a barb on the edge is a plant that could catch on you. There are no leaves: the arsenal\'s plants have none on purpose (a leafy stem is a picture of a plant, not of this weapon), and at four pixels a leaf drawn at the shoulder is a pauldron and at the hip a luggage tag — both were drawn before this was settled. **And she stands, and walks like it.** The rig\'s default puts the helmet down over the shoulder line, which on a body this size is a stoop with the chin on the chest; here the head sits back over the shoulders with a neck under it — the only neck in the set, and most of the difference between a figure that stands and one that hunches — the smallest head of the eight on the longest legs, and the visor slit raised so the gaze is level rather than down. The walk is the same argument in motion, and it is a runway walk: the two contact points come onto one line, 2.8 apart rather than 3.8, so the legs angle in from the hips instead of running parallel — at this size that is the single cheapest thing separating a model\'s walk from a march. The longest stride and slowest beat in the set, the smallest bob, and the head all but stopped (`head_nod` 0.5 against the rig\'s 2.5). Carriage is mostly what a body does *not* do. The arms are the exception and they were got wrong once: taken down to almost nothing in the name of stillness, where every runway guide says the opposite — arms held stiff against the sides read as tension from the back of the room, and what reads as poise is a relaxed pendulum. They are back up, on the slimmest sleeves in the set. Bare arms and bare hands on the warm ramp, because a glove on a body wrapped in plant is a costume again. **What she took in place of the emitter is what grew.** The piece of burrow wall hangs at the near hip, palm-sized — the record\'s own word (M038) — still warm half a month on with something chewing inside it (M042), and the turns run out of it: the vines that come up out of the ground in a run come up out of what this one carries (M041: she buried the piece behind base, and by morning there was a hole going down). The weapon holds what it catches, and this is the body it never let go of. **She is also the one with no clasp and no mantle**: M042 has her going back down with the wall *in place of the emitter*, so the dead organ the other seven wear is not on her — it stayed where it burned out beside the queen (M031). The helmet is the `lamp` kind and the one head in the set that is not an egg with something stuck on it: a profile cut in at the front and let out into a nape at the back, a visor slit, and the one light the eight carry clipped against the rim above it, with nothing joining the two — a bar down the middle between them is a Corinthian nose guard before it is a bracket (M005: the burrow is where the compass stopped). Three turns of `$moss` on `$timber.light2` cost her some floor: 3.2 : 1 against `ss.env.ground`, beside Sol\'s 3.0. 23 parts, two over the set\'s previous high; the legs, the neck and the shaded side are four of them." + SHARED,
     },
     "kano": {
         "sex": "m", "tint": ("silent", 0), "coat": "column", "cloak_sx": 1.0, "hem": 0.0, "head": "hood", "head_r": (4.8, 6.0), "visor_w": 5.8,
