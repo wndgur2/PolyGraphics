@@ -18,8 +18,17 @@ body is built to that shape from its own skeleton row:
          flying back, the helmet at the hip — the runner
   haram  a square: a slab body with squared shoulders, bone pauldrons and a
          chest plate, a box helmet, the survey on the back — the wall
-  mir    a hump: the coat rises over the piece of wall carried on the back, the
-         head low and forward — the hauler
+  mir    a stem (and she is Mina — the id is the handle the game pins, the name
+         is `display`): the one of the eight who is not wearing a coat. The
+         plant is laid on the body in three turns that hang and pinch the way a
+         cord does round a barrel — two cords and, at the hip, a wide one that
+         reads as a garment and hides where the body ends and the legs start.
+         A thorn off each end of the top turn, the far side of her in shadow
+         behind them, and she stands up — head over the shoulders with a neck
+         under it, which nobody else here has, on the slimmest arms in the set.
+         A helmet cut to a profile with a lamp and a slit on it and nothing
+         between them, the piece of burrow wall at the hip — the one who left
+         the emitter in the burrow, and the one the weapon is still holding
   kano   a column: a narrow long coat, a peaked hood, a staff taller than the
          head — the one who does not stop
   eden   a mushroom: a round coat under a wide hat brim, the throat swelling
@@ -38,6 +47,16 @@ import json, math, sys
 R = lambda d: math.radians(d)
 def r2(x): return round(x, 2)
 
+# Two outline weights and one rule for which is which, because a body whose
+# sleeve is outlined at half the weight of the coat it hangs on reads as a
+# sleeve drawn by somebody else. **`thin` is the silhouette, `hair` is
+# everything laid on top of it.** The coat, the helmet and the near arm and
+# hand are the line the eye traces round the body — the near sleeve is half
+# inside the coat's outline and half outside it (docs/character-rig-guide.md
+# §2), so it is silhouette and takes the same weight. Packs, stakes, jars,
+# loads and lamp rings sit inside that line and take `hair`. Parts dark enough
+# to be their own edge — the feet, the visor, the far arm behind the body —
+# take none at all.
 hair = {"color": "$ink", "width": "hair"}
 thin = {"color": "$ink", "width": "thin"}
 
@@ -64,15 +83,66 @@ BASE = {
     # waist, a man's shoulders and chest are broader — with the feet to match.
     # Hair, where it shows, is each row's own part (a tail, a braid, a lock, a beard).
     "sex": "m",
-    "coat": "bell", "cloak_sx": 1.0, "hem": 0.0, "coat_fill": None, "cape": True, "cape_fill": None,
+    # `organ` is the premise worn on the body: `ss.lib.organ` with `variant:
+    # "dead"`, the same document every creature in the hive wears lit, cracked
+    # and silent on the coat of whoever is being hunted for the silence. It is
+    # on by default and should stay on — a walker without one has to say in its
+    # own description where theirs went.
+    "coat": "bell", "cloak_sx": 1.0, "hem": 0.0, "coat_fill": None, "cape": True, "cape_fill": None, "organ": True,
     "head": "egg", "head_r": (5.3, 5.8), "head_fill": None, "visor_w": 6.6, "visor_h": 2.6,
     "arm_len": 7.6, "arm_w": 3.0, "arm_fill": None, "arm_far_len": 7.0, "arm_far_w": 2.6,
     "hand_r": (1.7, 1.9), "hand_far_r": (1.4, 1.6), "hand_fill": "$slate.dark", "hand_far_fill": "$slate",
     "legs": False, "foot_w": 4.8, "foot_h": 2.7, "foot_far_w": 4.2, "foot_far_h": 2.4,
     "pack": False, "pack_w": 4.2, "pack_h": 4.4, "pack_fill": "$slate.light", "feelers": False,
-    "walk": {"duration": 0.56, "stride": 2.6, "lift": 1.2, "bob": 1.4, "sway": 3.0, "arm_swing": 14, "lurch": 0.0, "leg_swing": 22},
+    # `head_nod` is the head's own twitch about its centre, twice a stride. It is
+    # what makes a walk look busy or unbothered, and it is the cheapest dial in
+    # here: at 2.5 the head is working, at half a degree it is carried.
+    "walk": {"duration": 0.56, "stride": 2.6, "lift": 1.2, "bob": 1.4, "sway": 3.0, "arm_swing": 14, "lurch": 0.0, "leg_swing": 22, "head_nod": 2.5},
     "idle": {"duration": 1.15, "feelers": "sweep", "march": False},
 }
+
+# ============================================================== 1a. Mina's canon
+# Mina is the one body in this file that is not wearing a coat, so her outline is
+# a figure rather than a garment's, and a figure has to be written down or it
+# drifts every time somebody nudges a point. Twelve rounds of review landed on
+# the numbers below and they are re-derived here rather than left where the
+# nudges put them: everything from her shoulder line down is a function of four
+# widths and five heights, so changing the figure is changing one number instead
+# of hunting through a row. They live this high up because the coat table reads
+# them.
+#
+# Heights first. The body is 28 tall, head top to sole, and the head is a third
+# of that — the guide's ratio, and the one proportion here that is not hers.
+M_TOP, M_SOLE = -14.0, 14.0
+M_SHOULDER_Y, M_CHEST_Y, M_WAIST_Y, M_HIP_Y, M_HEM_Y = -3.1, -0.8, 3.4, 6.6, 9.4
+# Widths at those heights. Shoulders wider than the head; the chest in under the
+# deltoid; the waist the narrowest thing on her. An earlier body went *out*
+# below its own shoulder line — 7.0 across the shoulders and 9.3 across the
+# chest — and a torso that does that is a loose top rather than a body, whatever
+# is drawn over it.
+M_SHOULDER, M_CHEST, M_WAIST = 7.8, 7.0, 5.4
+# The hip and the thigh are **not** symmetric about that centre line, and this is
+# the difference between a figure and a snowman. In a three-quarter view the
+# widest part of a hip is behind the body; the front of a pelvis is close to
+# flat. Flaring it evenly puts a bulge on the front where there is nothing to
+# make one — which is what it did — so the two levels carry a back distance and
+# a front distance instead of one width. The front line then runs long and
+# almost straight from the chest, through the waist, down to the thigh, and the
+# whole of the flare is on the back. That is the S, and the S is the point.
+M_HIP_B, M_HIP_F = 4.25, 3.15       # hip, from the centre line: 7.4 across
+M_THIGH_B, M_THIGH_F = 3.55, 2.95   # thigh: 6.5 across
+# The body does not stop at the hip. It used to, and the join showed: a torso
+# ending on a hem line with two bare legs starting under it is an upper half and
+# a lower half, drawn separately and meeting in public. It runs on to
+# `M_HEM_Y` in the thigh now, and the lowest turn is wide enough to sit over
+# that edge — the seam happens *inside* the plant, so what the eye gets is body,
+# then a wrapped band where a skirt would be, then leg.
+# The centre line of a body facing front-right sits a touch right of the canvas.
+M_CX = 0.15
+M_L = lambda w: M_CX - w / 2        # the back (screen-left) edge at a symmetric width
+M_R = lambda w: M_CX + w / 2        # the front (screen-right) edge
+M_BK = lambda d: M_CX - d           # a back edge given as a distance
+M_FR = lambda d: M_CX + d           # a front edge given as a distance
 
 def shade(tint, delta):
     """A token in the tint's family, `delta` steps lighter (+) or darker (-) than its base, clamped to the ramp."""
@@ -103,7 +173,60 @@ def P_(id, at, shape, fill, rot=None, stroke=None):
 rect = lambda w, h, corner=0.5: {"kind": "rect", "w": w, "h": h, "corner": corner}
 ell = lambda rx, ry: {"kind": "ellipse", "rx": rx, "ry": ry}
 circ = lambda r: {"kind": "circle", "r": r}
+
 poly = lambda pts: {"kind": "poly", "points": [[r2(x), r2(y)] for x, y in pts]}
+
+def stem(pts, w0, w1, rail=0.0, bulge=0.0, hold=0.0):
+    """A centreline swept by a taper and closed into one polygon. `ss.proj.vine`
+    draws its plants this way — the shape *is* the path the thing grew along —
+    and a plant grown on a body has to be the same plant. It draws a lock of
+    hair too: hair and cord are one problem, a line whose width changes.
+
+    `rail` is how the arsenal lights a stem: it draws that fraction of the width
+    as a strip hugging the *outer* edge instead of the whole band, so calling
+    `stem` twice with the same points — once plain and dark, once with a rail and
+    light — gives a cord and a highlight that share an edge by construction. The
+    strip is measured against the width **at each point**, which is the whole
+    reason it is a parameter and not a second centreline pushed sideways: a
+    constant sideways push is sized for the band's middle, and anywhere the band
+    pinches or tapers below that the highlight walks off the cord and hangs in
+    the air beside it as a pale fan. That was drawn, on the skirt's tail.
+
+    `hold` keeps the width at `w0` for that fraction of the run before the taper
+    to `w1` starts, which is what a band needs when a tail leaves one end of it:
+    taper the whole length and the band is already thin by the far side. 0 is the
+    plain linear taper everything else here uses.
+
+    `bulge` swells the width in the middle of the run and pinches it at both
+    ends, on top of the taper. It is foreshortening, and it is what makes a cord
+    read as going *round* something rather than lying flat across it: the part
+    facing you is seen at its full width, and the part turning away past the
+    side of the body is seen edge-on and gets thin. Without it a band on a torso
+    is a stripe painted on a board, however hard the centreline curves.
+
+    There is no fiddlehead here, and that was tried: a curl needs an enclosed
+    hole wider than the 1px ink that rings it, which at 32x32 puts the curl at a
+    quarter of the body — and at anything smaller it fills in and reads as a
+    fist on the end of a limb. The plant's growing end lives at 56x56 in
+    `ss.proj.vine`; on a body it is a taper to a point."""
+    pts = list(pts)
+    n = len(pts) - 1
+    def normal(i):
+        (ax, ay), (bx, by) = pts[max(0, i - 1)], pts[min(n, i + 1)]
+        dx, dy = bx - ax, by - ay
+        L = math.hypot(dx, dy) or 1.0
+        return (-dy / L, dx / L)
+    left, right = [], []
+    for i, (x, y) in enumerate(pts):
+        nx, ny = normal(i)
+        t = i / n
+        tt = t if hold <= 0 else (0.0 if t <= hold else (t - hold) / (1 - hold))
+        w = (w0 + (w1 - w0) * tt) / 2 * (1 + bulge * math.sin(math.pi * t))
+        if rail:
+            x, y = x - nx * w * (1 - rail), y - ny * w * (1 - rail)
+            w *= rail
+        left.append((x + nx * w, y + ny * w)); right.append((x - nx * w, y - ny * w))
+    return poly(left + right[::-1])
 
 # ============================================================== 2. the coats — the primary shape of the body
 def coat_points(kind, sn, sf, hem):
@@ -116,8 +239,19 @@ def coat_points(kind, sn, sf, hem):
         return top + [[7.4, 0.8], [9.4, 3.8], [9.2, 7.0], [6.4, 8.6 + hem], [1.0, 9.0 + hem], [-3.8, 8.2 + hem], [-6.4, 6.8 + hem], [-6.9, 1.0]]
     if kind == "slab":      # squared shoulders, straight sides, a flat hem
         return [[sn[0] - 1.6, sn[1] - 0.6], [sf[0] + 1.8, sf[1] - 0.6], [8.6, 0.6], [8.8, 10.8 + hem], [6.8, 12.2 + hem], [-6.4, 12.2 + hem], [-8.6, 10.8 + hem], [-8.4, 0.4]]
-    if kind == "hump":      # a bell whose back rounds up a little over the load, and whose front rounds over a gut
-        return [[sn[0] + 0.4, sn[1] - 0.6], [sf[0] - 0.6, sf[1] - 0.2], [7.8, 1.6], [9.0, 5.8], [8.0, 10.2 + hem], [4.4, 11.9 + hem], [0.2, 12.3 + hem], [-4.2, 11.9 + hem], [-7.0, 10.6 + hem], [-8.6, 6.0], [-9.8, 0.4], [-9.6, -4.4], [-7.6, -7.2]]
+    if kind == "wrap":      # not a garment: the body, with the plant laid over it in turns
+        # Cloth hangs, plants cling, and the silhouette is where the difference
+        # lives. A coat leaves the shoulder and swings clear of the body, so the
+        # outline belongs to the coat and the body inside it could be anybody's.
+        # This one *is* the body — §1a's canon, shoulder to hem — and the plant
+        # goes over it as three turns with the body showing in the gaps (the
+        # row's `band_*`). A closed piece with a leafy hem was tried first and
+        # read as a torn tunic: a ragged edge on one shape is damage, and what
+        # reads as wrapped is seeing the body between the turns. It stops at the
+        # hip and the legs carry on out from under it, which no other walker does.
+        return top + [[M_R(M_CHEST), M_CHEST_Y], [M_R(M_WAIST), M_WAIST_Y], [M_FR(M_HIP_F), M_HIP_Y],
+                      [M_FR(M_THIGH_F), M_HEM_Y - 0.4], [M_CX + 0.2, M_HEM_Y], [M_BK(M_THIGH_B), M_HEM_Y - 0.5],
+                      [M_BK(M_HIP_B), M_HIP_Y], [M_L(M_WAIST), M_WAIST_Y], [M_L(M_CHEST), M_CHEST_Y]]
     if kind == "column":    # narrow and long
         return top + [[6.4, 1.6], [6.6, 7.0], [6.0, 12.6 + hem], [3.8, 13.4 + hem], [-3.4, 13.4 + hem], [-5.6, 12.6 + hem], [-6.2, 7.0], [-6.0, 1.2]]
     if kind == "round":     # wide and soft, the hem tucked in
@@ -131,6 +265,23 @@ def coat_points(kind, sn, sf, hem):
 def cape_points(sn, sf, sx):
     pts = [[sn[0], sn[1] - 0.2], [sf[0], sf[1] - 0.2], [7.3, 0.9], [3.4, 2.4], [0.2, 1.3], [-3.4, 2.2], [-7.0, 0.2]]
     return [[x * sx, y] for x, y in pts]
+
+def dome_points(rx, ry, n=32):
+    """A helmet's outline: the head ellipse with the front-lower quarter cut in
+    over the visor and the back-lower quarter let out into a nape. Both are
+    smooth functions of the angle rather than moved corners, because a corner
+    moved by hand on a 9px head is a facet and reads as a gem — and `n` is 24
+    for the same reason, since the renderer draws a polygon with straight
+    edges and nothing rounds them for you. Both numbers are small on purpose:
+    at 0.26 the front cut pulled the shell in behind its own visor."""
+    pts = []
+    for i in range(n):
+        a = 2 * math.pi * i / n - math.pi / 2
+        c, s_ = math.cos(a), math.sin(a)
+        front, back = max(0.0, c) * max(0.0, s_), max(0.0, -c) * max(0.0, s_)
+        r = 1.0 - 0.10 * front + 0.15 * back
+        pts.append((rx * r * c, ry * r * s_))
+    return pts
 
 # ============================================================== 3. the heads — the second shape
 def head_parts(kind, S, C, P):
@@ -152,6 +303,33 @@ def head_parts(kind, S, C, P):
     if kind == "brim":      # the egg helmet under a wide flat brim
         return [P_("head", h, ell(rx, ry), C["head_fill"], rot=tilt, stroke=thin), visor,
                 P_("brim", (h[0] + 0.4, h[1] - 2.4), ell(rx + 3.6, 1.7), "$husk", rot=-8, stroke=hair)]
+    if kind == "lamp":      # a caving helmet: a dome, a lamp and a visor slit — and nothing joining them
+        # Three marks, no fourth. There was a mount bridging the lamp down to the
+        # visor, and a bar running down the centre of a helmet between the eyes is
+        # a Corinthian nose guard before it is a lamp bracket — one vertical line
+        # in that one place carries a whole other helmet with it. The lamp sits
+        # against the rim on its own instead, which is also the truth of the
+        # object: it is clipped on, not built in.
+        #
+        # For whoever moves these next: at a big zoom a round light over a dark
+        # bar reads as an eye over a mouth. That reading was chased out once — the
+        # visor redrawn as a wrapped pane and the lamp as a lit strip along its
+        # rim, which does not do it — and this arrangement was picked over it
+        # anyway. So it is a choice, not an oversight; if you set out to fix it,
+        # change the *shapes* of the two marks rather than where they sit,
+        # because every placement of a disc and a bar on an oval is a face. What
+        # is not on the table is a third mark between them.
+        #
+        # The dome is a profile rather than an ellipse, and in the same number of
+        # parts: an ellipse has no front and no back, so three of the eight were
+        # wearing the same egg and telling them apart came down to what was stuck
+        # on it. This one cuts in over the visor at the front and lets out into a
+        # nape at the back, in units of the head radius so it scales with
+        # `head_r`. The visor is a slit rather than the roster's full band: the
+        # one who went down twenty-nine levels wanted the light, not the view.
+        return [P_("head", h, poly(dome_points(rx, ry)), C["head_fill"], rot=tilt, stroke=thin),
+                P_("lamp", (h[0] + 2.1, h[1] - 2.5), circ(1.15), "$silent", stroke=hair),
+                P_("visor", (h[0] + 1.3, h[1] + 0.9), rect(C["visor_w"], C["visor_h"], 0.9), "$ink", rot=P["visor_turn"])]
     if kind == "mask":      # goggles and a filter can — the most sealed head
         return [P_("head", h, ell(rx, ry), C["head_fill"], rot=tilt, stroke=thin),
                 P_("goggle", (h[0] + 2.4, h[1] + 0.6), circ(2.6), "$slate.dark", stroke=hair),
@@ -180,22 +358,25 @@ def build(name, row):
 
     heads = head_parts(C["head"], S, C, P)
     def figure(x, y):  # the waist drawn in on a woman, the chest let out on a man
+        # `wrap` states its own waist and hip in §1a, so the shared narrowing
+        # would take them in a second time.
+        if C["coat"] == "wrap": return x
         if C["sex"] == "f" and 2.5 < y < 8.5: return x * 0.92
         if C["sex"] == "m" and y < 2.0: return x * 1.04
         return x
     cloak = {"id": "cloak", "at": [0, 0], "rot": P["coat_lean"] - 2, "shape": poly([(figure(x, y) * sx, y) for x, y in coat_points(C["coat"], sn, sf, C["hem"])]), "fill": C["coat_fill"], "stroke": thin}
     cape = {"id": "cape", "at": [0, 0], "shape": poly(cape_points(sn, sf, sx)), "fill": C["cape_fill"]} if C["cape"] else None
-    organ = {"id": "organ", "at": [1.0, 1.0], "use": "ss.lib.organ", "variant": "dead", "scale": 0.72}
+    organ = {"id": "organ", "at": [1.0, 1.0], "use": "ss.lib.organ", "variant": "dead", "scale": 0.72} if C["organ"] else None
     foot = P_("foot", S["foot_near"], rect(C["foot_w"], C["foot_h"], 1.2), "$slate.dark")
     foot_far = P_("foot_far", S["foot_far"], rect(C["foot_far_w"], C["foot_far_h"], 1.1), "$slate")
     legs = []
     if C["legs"]:
         for pid, hip, ft, w, fill in (("leg_far", S["hip_far"], S["foot_far"], 2.6, C["leg_far_fill"]), ("leg", S["hip_near"], S["foot_near"], 3.0, C["leg_fill"])):
             L = math.hypot(ft[0] - hip[0], ft[1] - hip[1]); ang = -math.degrees(math.atan2(ft[0] - hip[0], ft[1] - hip[1]))
-            legs.append(P_(pid, hang(hip, L, ang), rect(w, L + 1.0, 1.2), fill, rot=ang, stroke=hair if pid == "leg" else None))
+            legs.append(P_(pid, hang(hip, L, ang), rect(w, L + 1.0, 1.2), fill, rot=ang, stroke=thin if pid == "leg" else None))
     a_c = hang(sn, C["arm_len"], P["arm_hang"]); h_c = below(sn, C["arm_len"] + 0.9, P["arm_hang"])
-    arm = P_("arm", a_c, rect(C["arm_w"], C["arm_len"], 1.4), C["arm_fill"], rot=P["arm_hang"], stroke=hair)
-    hand = P_("hand", h_c, ell(*C["hand_r"]), C["hand_fill"], stroke=hair)
+    arm = P_("arm", a_c, rect(C["arm_w"], C["arm_len"], 1.4), C["arm_fill"], rot=P["arm_hang"], stroke=thin)
+    hand = P_("hand", h_c, ell(*C["hand_r"]), C["hand_fill"], stroke=thin)
     af_c = hang(sf, C["arm_far_len"], P["arm_far_hang"]); hf_c = below(sf, C["arm_far_len"] + 0.9, P["arm_far_hang"])
     arm_far = P_("arm_far", af_c, rect(C["arm_far_w"], C["arm_far_len"], 1.2), C["arm_far_fill"], rot=P["arm_far_hang"])
     hand_far = P_("hand_far", hf_c, ell(*C["hand_far_r"]), C["hand_far_fill"])
@@ -214,7 +395,7 @@ def build(name, row):
 
     # depth = draw order, far to near for a body facing front-right
     parts = feelers + ([pack] if pack else []) + layers["behind"] + [arm_far, hand_far] + legs + [foot_far, foot] + layers["feet_over"] \
-        + [cloak] + layers["over_coat"] + ([cape] if cape else []) + [organ] + layers["over_cape"] + [arm, hand] + layers["in_hand"] + heads + layers["over_head"]
+        + [cloak] + layers["over_coat"] + ([cape] if cape else []) + ([organ] if organ else []) + layers["over_cape"] + [arm, hand] + layers["in_hand"] + heads + layers["over_head"]
     ids = [p["id"] for p in parts]
     assert len(ids) == len(set(ids)), ids
 
@@ -231,7 +412,7 @@ def build(name, row):
     skeleton = {"joints": {k: [r2(v[0]), r2(v[1])] for k, v in joints.items()}, "bones": bones}
 
     head_group = [p["id"] for p in heads] + (["pack"] if pack else []) + [p["id"] for p in feelers]
-    body_group = ["cloak", "organ"] + (["cape"] if cape else [])
+    body_group = ["cloak"] + (["organ"] if organ else []) + (["cape"] if cape else [])
     for pid, fol in follow.items():
         if fol == "head": head_group.append(pid)
         elif fol == "body": body_group.append(pid)
@@ -275,7 +456,7 @@ def build(name, row):
             for pid, (xs, ys, rs) in cols.items():
                 tr.extend([track(pid, "x", xs), track(pid, "y", ys), track(pid, "rot", rs)])
         arm_tracks(sn, arm_pieces, +1); arm_tracks(sf, arm_far_pieces, -1)
-        tr.append(track("head", "rot", [2.5 * math.sin(4 * math.pi * t + 0.8) for t in TS]))
+        tr.append(track("head", "rot", [w["head_nod"] * math.sin(4 * math.pi * t + 0.8) for t in TS]))
         for pid, fol in follow.items():
             if fol == "scarf": tr.append(track(pid, "rot", [-9 * (0.5 - 0.5 * math.cos(4 * math.pi * t)) for t in TS]))
         if C["feelers"] and I["feelers"] != "still":
@@ -300,11 +481,126 @@ def build(name, row):
             if fol == "scarf": tr.append({"part": pid, "prop": "rot", "keys": [[0, 0], [0.5, -5], [1, 0]]})
         return {"description": row.get("idle_desc", "the body breathes under the coat"), "duration": I["duration"], "tracks": tr}
 
-    return {"id": f"ss.char.{name}", "name": name.capitalize(), "description": row["description"], "tags": ["char"], "size": [32, 32], "meta": {"radius": 11},
+    # The row key is the document's id, and an id is a handle the consumer pins:
+    # `feelers/src/pg/textures.ts` throws at build time on an id the pinned bundle
+    # has not got, so a walker who is renamed keeps the id she was published under
+    # and says her name in `display`. Eden answering to `ss.char.star` in the game
+    # is the same bargain one repo over.
+    return {"id": f"ss.char.{name}", "name": row.get("display", name.capitalize()), "description": row["description"], "tags": ["char"], "size": [32, 32], "meta": {"radius": 11},
             "parts": parts, "skeleton": skeleton, "animations": {"idle": idle(), "walk": walk()}}
 
 # ============================================================== 5. the eight
-SHARED = " Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11."
+SHARED = " Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat, in the same place on everyone still carrying one; flat token fills; radius 11."
+
+def wrap(x0, y0, x1, y1, sag, n=17, skew=0.5):
+    """One turn of a cord across the front of a body. It enters and leaves at the
+    outline and hangs between, and the hang is a *curve*: `stem` joins points
+    with straight lines, so an arc drawn from four or five of them comes out as
+    a corner, and three corners down a torso is a ribcage. Seventeen, because the
+    cosine below crowds them at the two ends and leaves the middle to fend for
+    itself. It
+    sags rather than arches because the camera looks down on her — the front of
+    the cord is nearer than its sides, and nearer is lower on the screen.
+
+    `skew` is where along the span that nearest point falls. At 0.5 the hang is
+    symmetric, which is the cord on a body facing square on; she is not, she is
+    three-quarters onto her front-right, so the surface nearest the camera is
+    past the middle of the span towards the front and the sag goes with it.
+    Symmetric arcs down a three-quarter body are the tell that they were drawn
+    on the picture rather than round the thing in it.
+
+    The ends of `y0`..`y1` are not level either. A cord wound round a body is a
+    helix: it crosses the front, goes round the back, and comes back to the
+    front one pitch lower, so every crossing you can see runs *downhill*, by
+    about half the gap to the next turn — the back of the turn spends the other
+    half. Level ends are three separate hoops, and hoops at even spacing are
+    stripes.
+
+    And the run across is a **cosine, not a straight line**, which is the single
+    thing that decides whether a band looks wound or printed. Take the helix
+    round a cylinder of radius r, `x = r sin t`, `y = pitch * t`, and look at it
+    from the front: at the two edges, where `t` is a quarter turn either side,
+    `dx/dt` is zero and `dy/dt` is not. **The projected cord arrives at the
+    outline going straight down.** It does not run into the edge at a slant and
+    stop — it turns, and the last of it you see is vertical, which is the whole
+    picture of something going round the back. Spread `x` evenly instead and
+    every crossing meets the outline at a slant: a chevron laid on the front,
+    three of them a pattern printed on the surface. Everything else here — the
+    sag, the pinch, the descent — was already right while this was linear, and
+    it still read flat, because this is the one that says *round*.
+
+    (The sag is the same cylinder's other half: depth is `r cos t`, which is the
+    `sin(pi*t)` below, so the hang is not a fudge — it is how far the front of
+    the cord is towards the camera, dropped on screen because the camera is
+    above. The two come from one model and that is why they agree.)"""
+    return [(x0 + (x1 - x0) * (1 - math.cos(math.pi * t)) / 2,
+             y0 + (y1 - y0) * t + sag * math.sin(math.pi * (0.5 * t / skew if t < skew else 0.5 + 0.5 * (t - skew) / (1 - skew))))
+            for t in (i / (n - 1) for i in range(n))]
+
+# ONE cord wound round the body of §1a — not three, and the difference is the
+# whole of whether it looks wound or painted on. It was three: three arcs at the
+# chest, the waist and the hip, each entering and leaving level, each sagging by
+# the same symmetric amount, evenly spaced down the torso. Three hoops at even
+# spacing are a stripe pattern, and the eye reads a stripe pattern as printed on
+# the surface — the cord had never gone anywhere, so nothing said it had gone
+# *round*.
+#
+# What makes it one cord is that the three crossings agree about a helix they are
+# all part of. Three things carry that, and none of them is drawing more:
+#
+#   the descent — one turn drops `M_PITCH` down the body, so the crossing you can
+#     see drops half of it and the hidden half behind her spends the rest. Read
+#     down the near edge and the cord leaves the front at one height and comes
+#     back at the next one, which is the only evidence there is that the back of
+#     the turn exists at all.
+#   the pinch — `bulge`, taken far enough to matter. The cord is seen at full
+#     width where it faces you and edge-on where it turns past the outline, so it
+#     must *end* at a fraction of its middle. It used to end at 1.3 of a 1.7
+#     middle, which is a blunt stub against the outline: cut off, not gone round.
+#   the skew — the sag hangs past the middle of the span, because she is three-
+#     quarters onto her front-right and that is where the surface nearest the
+#     camera is. Symmetric arcs are the tell that the arc was fitted to the
+#     silhouette rather than laid on the body inside it.
+#
+# The top turn reaches out onto the near sleeve. That is where its thorn goes,
+# and it makes the turn Zyra's spiked arm-vine as well; it can stay on `body`
+# because it sits a unit below the shoulder joint, where the arm's swing
+# displaces it by a fifth of a pixel.
+M_PITCH = 3.6            # one full turn of the cord, measured down the body
+_HALF = M_PITCH / 2      # ...so this much of it is the crossing you can see
+BAND_A = wrap(M_L(M_SHOULDER) - 1.7, M_CHEST_Y - 2.0, M_R(M_CHEST) + 0.15, M_CHEST_Y - 2.0 + _HALF, 2.2, skew=0.6)
+# The waist is the narrowest and shallowest part of her, so this turn sags least:
+# the sag is the cord's hang round the *depth* of the body, and the depth follows
+# the width. The chest and the hip are both deeper than the waist and both hang
+# further, which is the third thing keeping the three from reading as parallel.
+BAND_B = wrap(M_L(M_WAIST) - 0.35, M_WAIST_Y - 1.65, M_R(M_WAIST) + 0.35, M_WAIST_Y - 1.65 + _HALF, 1.5, skew=0.6)
+# The lowest turn is the one that reads as a garment. A cord wound many times in
+# one place is a band, so this one is swept three times the width of the others
+# and laid across the hip, where it covers the edge the body ends on: the join
+# between torso and leg is underneath it, which is the whole point — a seam that
+# happens inside the plant is not a seam anybody sees. It does not close either,
+# but carries on off the far hip as a free tail tapering out, the way
+# `ss.proj.vine-snare` ends, and that tail is the one thing allowed past the
+# outline. There are no leaves anywhere on her — the arsenal's plants have none
+# on purpose (`ss.proj.vine`: a leafy stem is a picture of a plant, not of this
+# weapon), and at four pixels a leaf is a pauldron at the shoulder and a luggage
+# tag at the hip. Both were drawn.
+#
+# It is on the same helix but it does not drop the full half-pitch: it is many
+# turns lying side by side in one place, so what you see is the face of a band
+# and a band's face tilts by a third of what one cord's crossing would. Its entry
+# stays exactly where it was — that end is what covers the join — and the tilt is
+# spent on the exit. And it hangs deepest of the three: the hip is the deepest
+# part of her.
+BAND_C_ARC = wrap(M_BK(M_HIP_B) + 0.15, M_HIP_Y + 0.7, M_FR(M_HIP_F) - 0.15, M_HIP_Y + 0.7 + M_PITCH / 3, 1.6, skew=0.58)
+BAND_C = BAND_C_ARC + [(4.5, 10.2), (5.0, 12.0)]
+# The far side of her turns away from the light and until recently did not know
+# it: one flat fill edge to edge, which gives the turns a board to lie on. This
+# is the step down the warm ramp that the far arm and far leg already take, run
+# down the body's far edge and pinched out top and bottom.
+TORSO_SHADE = [(M_R(M_SHOULDER) - 1.0, M_SHOULDER_Y - 0.3), (M_R(M_CHEST) - 0.4, M_CHEST_Y),
+               (M_R(M_WAIST) - 0.3, M_WAIST_Y - 0.2), (M_FR(M_HIP_F) - 0.3, M_HIP_Y),
+               (M_FR(M_THIGH_F) - 0.5, M_HEM_Y - 0.6)]
 
 CHARACTERS = {
     "arin": {
@@ -349,21 +645,82 @@ CHARACTERS = {
         "walk_desc": "a heavy lurching walk: low bob, the slab of a body rocking on each step — the Husk's shamble at low amplitude",
         "description": "A square. The survey: a slab of a body with squared shoulders, the widest of the eight, under a box of a helmet. The husk shell scraped into the mark II emitter (H027) is coming through as bone: one bleached pauldron over the near shoulder. On the back, the benchmark stakes (H001); on the far shoulder, the one pink spore pod the lure grows from. Four kilos up on the same ration, pulse thirty-eight (H043): armour, a lurch in the walk, and slower for it." + SHARED,
     },
+    # The id stays `mir`: the game pins this bundle and throws at build time on an
+    # id it has not got, so the name moves in `display` and the handle does not.
+    # The id stays `mir`: the game pins this bundle and throws at build time on an
+    # id it has not got, so the name moves in `display` and the handle does not.
     "mir": {
-        "sex": "m", "tint": ("timber", 2), "coat": "hump", "cloak_sx": 1.02,
-        "skeleton": {"head": (2.6, -7.2), "head_tilt": -6, "shoulder_near": (-4.4, -2.4), "shoulder_far": (6.0, -3.8), "foot_near": (-2.8, 13.1), "foot_far": (4.6, 12.5), "hip_near": (-2.8, 12.0), "hip_far": (4.4, 11.2), "pack": (-6.8, -8.0)},
-        "head_r": (5.2, 5.6), "pose": {"coat_lean": 5, "arm_hang": 10, "arm_far_hang": -4},
-        "walk": {"duration": 0.62, "bob": 0.0, "lift": 0.8, "sway": 1.4, "arm_swing": 8},
+        "display": "Mina",
+        "sex": "f", "tint": ("timber", 2), "coat": "wrap", "cloak_sx": 1.0,
+        # No coat, so no mantle either; no clasp, because M042 has her going back
+        # down with the piece of wall *in place of the emitter* and the dead organ
+        # the other seven wear stayed where it burned out beside the queen (M031).
+        # She is the one bare chest of the eight and the one with legs.
+        "cape": False, "organ": False, "legs": True,
+        # The skeleton is §1a's canon, not a set of nudged points. The head sits
+        # a third of the body's height at the top of it and 0.6 ahead of the
+        # shoulder midpoint — under the guide's 1–3, because that range assumes
+        # the default posture where the helmet comes down over the shoulders, and
+        # that posture on a body this size is a stoop with no neck and the chin on
+        # the chest. The two contact points are 3.2 apart, near enough one line:
+        # a runway walk puts one foot almost in front of the other, and at this
+        # size that is the cheapest thing separating a model's walk from a march.
+        "skeleton": {"head": (0.9, M_TOP + 4.3), "head_tilt": -6,
+                     "shoulder_near": (M_L(M_SHOULDER) - 1.2, M_SHOULDER_Y), "shoulder_far": (M_R(M_SHOULDER) + 1.2, M_SHOULDER_Y - 1.0),
+                     "hip_near": (M_BK(M_HIP_B) + 2.0, M_HIP_Y + 0.2), "hip_far": (M_FR(M_HIP_F) - 0.6, M_HIP_Y - 0.2),
+                     "foot_near": (-1.1, M_SOLE - 1.2), "foot_far": (2.1, M_SOLE - 1.8)},
+        # The `lamp` helmet: a dome cut to a profile, a visor slit, and the one
+        # light the eight carry clipped against the rim above it — with nothing
+        # joining the two, because a bar down the middle between them is a
+        # Corinthian nose guard before it is a bracket.
+        "head": "lamp", "head_r": (3.95, 4.35), "visor_w": 4.2, "visor_h": 1.7, "head_fill": "$husk",
+        "pose": {"coat_lean": 0, "arm_hang": 4, "arm_far_hang": -2, "visor_turn": -6},
+        # The slimmest limbs in the set, and bare: a glove on a body wrapped in
+        # plant is a costume again, so the hands come off `$slate.dark` onto the
+        # warm ramp. The waist is inside the near sleeve, so daylight opens
+        # between arm and body — not a gap to close, the thing that says the
+        # waist is narrower than the reach.
+        "arm_len": 7.0, "arm_w": 1.8, "arm_far_len": 6.3, "arm_far_w": 1.5,
+        "hand_r": (1.15, 1.3), "hand_far_r": (1.0, 1.15), "hand_fill": "$timber", "hand_far_fill": "$timber.dark",
+        # Carriage, and it is made by taking motion away, not adding it: the
+        # longest stride and slowest beat of the eight, the smallest bob, and the
+        # head carried rather than nodded (`head_nod` 0.5 against the rig's 2.5).
+        # The arms are the exception and were got wrong once — taken down to
+        # almost nothing in the name of stillness, where every runway guide says
+        # arms held stiff against the sides read as tension from the back of the
+        # room and poise is a relaxed pendulum.
+        "walk": {"duration": 0.78, "stride": 2.6, "lift": 0.7, "bob": 0.45, "sway": 2.0, "arm_swing": 10, "leg_swing": 25, "head_nod": 0.5},
+        "idle": {"duration": 1.7},
         "extras": lambda c: [
-            ("behind", P_("wall", c["S"]["pack"], poly([(-2.8, -2.4), (2.6, -2.8), (3.0, 2.4), (-2.6, 2.6)]), "$rust", rot=-12, stroke=hair), "body"),
-            ("behind", P_("wall_crack", (c["S"]["pack"][0] + 0.2, c["S"]["pack"][1] - 0.6), rect(3.2, 0.6, 0.2), "$rust.dark", rot=24), "body"),
-            ("over_cape", P_("cord", (0.2, -0.6), rect(1.1, 9.4, 0.4), "$bone", rot=-32), "body"),
-            ("over_coat", P_("hump_shade", (-7.6, 1.2), ell(2.2, 5.0), shade(c["T"], -1), rot=-10), "body"),
-            ("over_head", P_("lamp_ring", (c["head"][0] + 2.4, c["head"][1] - 3.6), circ(1.9), "$slate.dark", stroke=hair), "head"),
-            ("over_head", P_("lamp", (c["head"][0] + 2.4, c["head"][1] - 3.6), circ(1.2), "$silent"), "head"),
+            ("over_coat", P_("torso_shade", (0, 0), stem(TORSO_SHADE, 0.6, 0.6, bulge=1.9), shade(c["T"], -1)), "body"),
+            ("over_coat", P_("band_b", (0, 0), stem(BAND_B, 0.72, 0.60, bulge=1.6), "$moss"), "body"),
+            ("over_coat", P_("band_b_lit", (0, 0), stem(BAND_B, 0.72, 0.60, rail=0.4, bulge=1.6), "$moss.light2"), "body"),
+            ("over_coat", P_("band_c", (0, 0), stem(BAND_C, 2.4, 0.25, bulge=0.5, hold=0.84), "$moss"), "body"),
+            # The band's own numbers, with a rail instead of a fill — so the
+            # highlight follows it out along the tail too, which is where the old
+            # fixed offset came off it and hung in the air as a pale fan.
+            ("over_coat", P_("band_c_lit", (0, 0), stem(BAND_C, 2.4, 0.25, rail=0.36, bulge=0.5, hold=0.84), "$moss.light2"), "body"),
+            # Palm-sized, which is the record's own word for it (M038) — the slab
+            # it used to be was drawn before anybody read the page. It hangs at the
+            # near hip with something chewing inside it (M042), and the turns are
+            # what came out.
+            ("over_cape", P_("wall", (M_L(M_WAIST) - 0.35, M_WAIST_Y + 2.2), poly([(-1.5, -1.4), (1.5, -1.6), (1.6, 1.5), (-1.4, 1.6)]), "$rust", rot=-12, stroke=hair), "body"),
+            # The neck. Nothing else on the eight has one, and nothing else here
+            # stands up straight either; the two are the same fact.
+            ("in_hand", P_("neck", (0.0, M_SHOULDER_Y - 0.8), rect(2.4, 3.2, 0.7), shade(c["T"], -1)), "body"),
+            # The top turn crosses the near sleeve, so it is drawn after it, and
+            # both thorns are rooted in its two ends. They were planted on the
+            # shoulder line first, where no cord runs, so they grew out of *her* —
+            # a thorn out of a shoulder is a thing that has happened to the body,
+            # and what is true here is that the plant is on it.
+            ("in_hand", P_("band_a", (0, 0), stem(BAND_A, 0.72, 0.59, bulge=1.6), "$moss"), "body"),
+            ("in_hand", P_("band_a_lit", (0, 0), stem(BAND_A, 0.72, 0.59, rail=0.4, bulge=1.6), "$moss.light2"), "body"),
+            ("in_hand", P_("thorn", (M_L(M_SHOULDER) - 2.2, M_SHOULDER_Y - 0.3), poly([(-0.9, 1.0), (0.9, 0.8), (-0.1, -1.9)]), "$blood.dark2", rot=-44), "body"),
+            ("in_hand", P_("thorn_far", (M_R(M_CHEST) + 0.75, M_CHEST_Y - 0.8), poly([(-0.9, 0.9), (0.9, 0.7), (0.0, -1.8)]), "$blood.dark2", rot=46), "body"),
         ],
-        "walk_desc": "the haul: no bounce at all, short flat steps, the load riding still on the back",
-        "description": "A hump. The burrow, walked from the inside down to the queen: a stocky bell of a coat whose back rounds up over the piece of its wall carried high on the back where the emitter used to be, warm half a month on, chewing inside it at night (M038, M042), corded across the chest, the rust of it showing over the near shoulder. A head lamp on the helmet, the one light the eight carry — the burrow is where the compass stopped (M005). The head sits a little low and forward, the stance is wide, and the walk has no bounce in it — the Porter's haul, twenty-nine levels of it (M035)." + SHARED,
+        "walk_desc": "carriage, and a runway walk: the two contact points on one line so the legs angle in from the hips, the longest stride and slowest beat of the eight, legs swinging under the lowest turn, the smallest bob in the set, and the head carried rather than nodded. It is a walk made of what the body does not do — except the arms, which keep a relaxed pendulum, because stiff arms against the sides are tension and not poise. Twenty-nine levels taught her not to bounce what she carries (M035)",
+        "idle_desc": "the slowest breath of the eight bar Eden's: the body rises under the turns and the tail off the hip does not move",
+        "description": "A stem, and the one of the eight not wearing a coat. **The plant is on her instead of cloth**, which is a silhouette decision before it is a costume one: a coat leaves the shoulder and swings clear of the body, so its outline belongs to the coat and the body inside it could be anybody\'s, while a plant clings and the outline stays hers. So the torso is the body, and the body is written down — `scripts/walker.py` \u00a71a — 7.8 across the shoulders, 7.0 at the chest, 5.4 at the waist, 7.4 at the hip — and the hip **off centre**, 4.25 of it behind the body\'s line and 3.15 in front, because in a three-quarter view the widest part of a hip is behind and the front of a pelvis is near flat. Flared evenly it put a bulge on the front where there is nothing to make one. The front line now runs long and almost straight from chest to thigh and the whole of the flare is on the back, which is the S and the point of it, and it does **not** stop at the hip: a torso ending on a hem line with two bare legs starting under it is an upper half and a lower half, drawn separately and meeting in public. It runs on into the thigh, and the lowest turn is swept wide enough to lie across that edge, so the join happens *inside* the plant. What the eye gets is body, then a wrapped band where a skirt would be, then leg — and that band is the one thing on her that reads as clothing, which is what a cord wound many times in one place is. Out at the deltoid, in under it, in again to the waist, and out at the hip behind only: a torso that goes *out* below its own shoulder line is a loose top rather than a body, whatever is drawn over it, and this one used to. The waist ends up inside the near sleeve and a little daylight opens between arm and body, which is not a gap to close — it is the thing that says the waist is narrower than the reach. **Over it, one length of `ss.proj.vine` wound three times** — at chest, waist and hip, two crossings and the wide band, each dark with its own lit edge and the body showing in the gaps. The gaps are half the reading and the rest is that the three agree about a helix they are all part of, because they are drawn as one: a cord on a cylinder, `x = r sin t` and `y = pitch t`, seen from the front. So the run across is a **cosine**, which puts `dx/dt` at zero where the cord meets the outline — it arrives there going *straight down* and turns out of sight, instead of hitting the edge at a slant and stopping, which is a chevron laid on the front. Each crossing runs **downhill** by half the gap to the next turn, the hidden half behind her spending the rest; each **swells and pinches**, full width facing you and edge-on past the side, so it ends at a third of its middle rather than three quarters of it; and each **hangs** by that same cylinder's depth, `r cos t`, which is why the waist — the thinnest and shallowest part of her — sags least while the chest and the hip sag more, and why the hang falls past the middle of the span, she being three-quarters onto her front-right and that being where her surface comes nearest the camera. Each of those four was wrong once. The cosine was the last of them and the largest: with the other three right and the run still spread evenly, three turns read as printed on the surface. Behind them the far side of the torso is a step down the warm ramp, the same step the far arm and far leg take, because one flat fill edge to edge gives the turns a board to lie on. The lowest turn does not close but carries on off the far hip as a free tail, the way `ss.proj.vine-snare` ends — `stem`\'s `hold` keeps the band at full width across the hip and spends the taper on the tail alone, because a width run down the whole length leaves the band already thin by the far side — and a `$blood.dark2` thorn comes off each end of the top turn — **rooted in the cord, not in her**. A thorn out of a shoulder is something that has happened to the body; what is true here is that the plant is on it. The top turn reaches onto the near sleeve to carry one of them, which makes it Zyra\'s spiked arm-vine arrived at from the other end. There are no leaves anywhere: the arsenal\'s plants have none on purpose, and at four pixels a leaf is a pauldron at the shoulder and a luggage tag at the hip. **And she stands, and walks like it.** The rig\'s default puts the helmet down over the shoulder line, which on a body this size is a stoop with the chin on the chest; the head sits back over the shoulders with a neck under it — the only neck in the set, and most of the difference between a figure that stands and one that hunches — the smallest head of the eight on the longest legs, the visor slit raised so the gaze is level. The walk is the same argument in motion: two contact points on one line, the longest stride and slowest beat in the set, the smallest bob, the head all but stopped. Carriage is mostly what a body does *not* do. **What she took in place of the emitter is what grew.** The piece of burrow wall hangs at the near hip, palm-sized — the record\'s own word (M038) — still warm half a month on with something chewing inside it (M042), and the turns came out of it: the vines that come up out of the ground in a run come up out of what this one carries (M041). The weapon holds what it catches, and this is the body it never let go of. **She is also the one with no clasp and no mantle**: M042 has her going back down with the wall *in place of the emitter*, so the dead organ the other seven wear stayed where it burned out beside the queen (M031). The helmet is the `lamp` kind and the one head in the set that is not an egg with something stuck on it: a profile cut in at the front and let out into a nape at the back, a visor slit, and the one light the eight carry clipped against the rim above it with nothing joining the two — a bar down the middle is a Corinthian nose guard before it is a bracket (M005). 23 parts, and 3.2 : 1 against `ss.env.ground`, beside Sol\'s 3.0." + SHARED,
     },
     "kano": {
         "sex": "m", "tint": ("silent", 0), "coat": "column", "cloak_sx": 1.0, "hem": 0.0, "head": "hood", "head_r": (4.8, 6.0), "visor_w": 5.8,

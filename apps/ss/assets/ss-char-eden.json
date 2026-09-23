@@ -1,7 +1,7 @@
 {
   "id": "ss.char.eden",
   "name": "Eden",
-  "description": "A mushroom. The long station: a round coat under the wide flat brim on the helmet, the shape of six years beside the fungi (E009) and of the Gland's dome to come. A fingertip of royal jelly in place of the last cartridge (E093), carried in the one specimen jar at the coat front \u2014 the collector's jar, the brightest thing on the body. Two locks of hair under the brim. Nothing of the Gland shows yet: the body is still within its own range. The slowest breath of the eight. Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
+  "description": "A mushroom. The long station: a round coat under the wide flat brim on the helmet, the shape of six years beside the fungi (E009) and of the Gland's dome to come. A fingertip of royal jelly in place of the last cartridge (E093), carried in the one specimen jar at the coat front \u2014 the collector's jar, the brightest thing on the body. Two locks of hair under the brim. Nothing of the Gland shows yet: the body is still within its own range. The slowest breath of the eight. Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat, in the same place on everyone still carrying one; flat token fills; radius 11.",
   "tags": [
     "char"
   ],
@@ -248,7 +248,7 @@
       "rot": 8,
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
@@ -265,7 +265,7 @@
       "fill": "$slate.dark",
       "stroke": {
         "color": "$ink",
-        "width": "hair"
+        "width": "thin"
       }
     },
     {
