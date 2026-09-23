@@ -1,7 +1,7 @@
 {
   "id": "ss.char.teo",
   "name": "Teo",
-  "description": "Small, under the biggest load. The archive: the smallest body of the eight, its coat short, and on its back a satchel of pages wider than its shoulders with the sheets showing at the flap (T034) \u2014 ninety-eight picked up one at a time \u2014 and one page in the hand. The head is the most sealed of the eight, goggles and a filter can at the jaw: the helmet stays on and the filter interval was halved (T006). The hands are amber and leave wet iron on paper, which is why a mite carries a page off (T003); a flower mite has bloomed pink in the emitter's tube (T017). One more projectile, less on each. Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat, in the same place on everyone still carrying one; flat token fills; radius 11.",
+  "description": "Small, under the biggest load. The archive: the smallest body of the eight, its coat short, and on its back a satchel of pages wider than its shoulders with the sheets showing at the flap (T034) \u2014 ninety-eight picked up one at a time \u2014 and one page in the hand. The head is the most sealed of the eight, goggles and a filter can at the jaw: the helmet stays on and the filter interval was halved (T006). The hands are amber and leave wet iron on paper, which is why a mite carries a page off (T003); a flower mite has bloomed pink in the emitter's tube (T017). One more projectile, less on each. Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
   "tags": [
     "char"
   ],
@@ -292,7 +292,7 @@
       "rot": 8,
       "stroke": {
         "color": "$ink",
-        "width": "thin"
+        "width": "hair"
       }
     },
     {
@@ -309,7 +309,7 @@
       "fill": "$chitin",
       "stroke": {
         "color": "$ink",
-        "width": "thin"
+        "width": "hair"
       }
     },
     {
