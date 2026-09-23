@@ -1,7 +1,7 @@
 {
   "id": "ss.char.mir",
   "name": "Mina",
-  "description": "A stem, and the one of the eight not wearing a coat. **The plant is on her instead of cloth**, which is a silhouette decision before it is a costume one: a coat leaves the shoulder and swings clear of the body, so its outline belongs to the coat and the body inside it could be anybody's, while a plant clings and the outline stays hers. So the torso is the body, and the body is written down \u2014 `scripts/walker.py` \u00a71a \u2014 7.8 across the shoulders, 7.0 at the chest, 5.4 at the waist, 7.8 at the hip, stopping at the hip line with the legs carrying on out from under it, which nobody else here does. Out at the deltoid, in under it, in again to the waist, out at the hip: a torso that goes *out* below its own shoulder line is a loose top rather than a body, whatever is drawn over it, and this one used to. The waist ends up inside the near sleeve and a little daylight opens between arm and body, which is not a gap to close \u2014 it is the thing that says the waist is narrower than the reach. **Over it, `ss.proj.vine` wound three times**, at chest, waist and hip, each dark with its own lit edge, with the body showing in the gaps. The gaps are half the reading and the shape of the turns is the other half: each one *hangs* like a cord on a barrel, sagging at the front because the camera looks down on her, and each one *swells and pinches* \u2014 full width where it faces you, thin where it turns away past the edge of the body. The pinch is what does the work; a curve on its own still reads flat. Behind them the far side of the torso is a step down the warm ramp, the same step the far arm and far leg take, because one flat fill edge to edge gives the turns a board to lie on. The lowest turn does not close but carries on off the far hip as a free tail, the way `ss.proj.vine-snare` ends, and a `$blood.dark2` thorn comes off each end of the top turn \u2014 **rooted in the cord, not in her**. A thorn out of a shoulder is something that has happened to the body; what is true here is that the plant is on it. The top turn reaches onto the near sleeve to carry one of them, which makes it Zyra's spiked arm-vine arrived at from the other end. There are no leaves anywhere: the arsenal's plants have none on purpose, and at four pixels a leaf is a pauldron at the shoulder and a luggage tag at the hip. **And she stands, and walks like it.** The rig's default puts the helmet down over the shoulder line, which on a body this size is a stoop with the chin on the chest; the head sits back over the shoulders with a neck under it \u2014 the only neck in the set, and most of the difference between a figure that stands and one that hunches \u2014 the smallest head of the eight on the longest legs, the visor slit raised so the gaze is level. The walk is the same argument in motion: two contact points on one line, the longest stride and slowest beat in the set, the smallest bob, the head all but stopped. Carriage is mostly what a body does *not* do. **What she took in place of the emitter is what grew.** The piece of burrow wall hangs at the near hip, palm-sized \u2014 the record's own word (M038) \u2014 still warm half a month on with something chewing inside it (M042), and the turns came out of it: the vines that come up out of the ground in a run come up out of what this one carries (M041). The weapon holds what it catches, and this is the body it never let go of. **She is also the one with no clasp and no mantle**: M042 has her going back down with the wall *in place of the emitter*, so the dead organ the other seven wear stayed where it burned out beside the queen (M031). The helmet is the `lamp` kind and the one head in the set that is not an egg with something stuck on it: a profile cut in at the front and let out into a nape at the back, a visor slit, and the one light the eight carry clipped against the rim above it with nothing joining the two \u2014 a bar down the middle is a Corinthian nose guard before it is a bracket (M005). 23 parts, and 3.2 : 1 against `ss.env.ground`, beside Sol's 3.0. Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat, in the same place on everyone still carrying one; flat token fills; radius 11.",
+  "description": "A stem, and the one of the eight not wearing a coat. **The plant is on her instead of cloth**, which is a silhouette decision before it is a costume one: a coat leaves the shoulder and swings clear of the body, so its outline belongs to the coat and the body inside it could be anybody's, while a plant clings and the outline stays hers. So the torso is the body, and the body is written down \u2014 `scripts/walker.py` \u00a71a \u2014 7.8 across the shoulders, 7.0 at the chest, 5.4 at the waist, 7.8 at the hip, and it does **not** stop at the hip: a torso ending on a hem line with two bare legs starting under it is an upper half and a lower half, drawn separately and meeting in public. It runs on into the thigh, and the lowest turn is swept wide enough to lie across that edge, so the join happens *inside* the plant. What the eye gets is body, then a wrapped band where a skirt would be, then leg \u2014 and that band is the one thing on her that reads as clothing, which is what a cord wound many times in one place is. Out at the deltoid, in under it, in again to the waist, out at the hip: a torso that goes *out* below its own shoulder line is a loose top rather than a body, whatever is drawn over it, and this one used to. The waist ends up inside the near sleeve and a little daylight opens between arm and body, which is not a gap to close \u2014 it is the thing that says the waist is narrower than the reach. **Over it, `ss.proj.vine` wound three times**, at chest, waist and hip \u2014 two cords and the wide one \u2014 each dark with its own lit edge, with the body showing in the gaps. The gaps are half the reading and the shape of the turns is the other half: each one *hangs* like a cord on a barrel, sagging at the front because the camera looks down on her, and each one *swells and pinches* \u2014 full width where it faces you, thin where it turns away past the edge of the body. The pinch is what does the work; a curve on its own still reads flat. Behind them the far side of the torso is a step down the warm ramp, the same step the far arm and far leg take, because one flat fill edge to edge gives the turns a board to lie on. The lowest turn does not close but carries on off the far hip as a free tail, the way `ss.proj.vine-snare` ends \u2014 `stem`'s `hold` keeps the band at full width across the hip and spends the taper on the tail alone, because a width run down the whole length leaves the band already thin by the far side \u2014 and a `$blood.dark2` thorn comes off each end of the top turn \u2014 **rooted in the cord, not in her**. A thorn out of a shoulder is something that has happened to the body; what is true here is that the plant is on it. The top turn reaches onto the near sleeve to carry one of them, which makes it Zyra's spiked arm-vine arrived at from the other end. There are no leaves anywhere: the arsenal's plants have none on purpose, and at four pixels a leaf is a pauldron at the shoulder and a luggage tag at the hip. **And she stands, and walks like it.** The rig's default puts the helmet down over the shoulder line, which on a body this size is a stoop with the chin on the chest; the head sits back over the shoulders with a neck under it \u2014 the only neck in the set, and most of the difference between a figure that stands and one that hunches \u2014 the smallest head of the eight on the longest legs, the visor slit raised so the gaze is level. The walk is the same argument in motion: two contact points on one line, the longest stride and slowest beat in the set, the smallest bob, the head all but stopped. Carriage is mostly what a body does *not* do. **What she took in place of the emitter is what grew.** The piece of burrow wall hangs at the near hip, palm-sized \u2014 the record's own word (M038) \u2014 still warm half a month on with something chewing inside it (M042), and the turns came out of it: the vines that come up out of the ground in a run come up out of what this one carries (M041). The weapon holds what it catches, and this is the body it never let go of. **She is also the one with no clasp and no mantle**: M042 has her going back down with the wall *in place of the emitter*, so the dead organ the other seven wear stayed where it burned out beside the queen (M031). The helmet is the `lamp` kind and the one head in the set that is not an egg with something stuck on it: a profile cut in at the front and let out into a nape at the back, a visor slit, and the one light the eight carry clipped against the rim above it with nothing joining the two \u2014 a bar down the middle is a Corinthian nose guard before it is a bracket (M005). 23 parts, and 3.2 : 1 against `ss.env.ground`, beside Sol's 3.0. Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat, in the same place on everyone still carrying one; flat token fills; radius 11.",
   "tags": [
     "char"
   ],
@@ -134,16 +134,16 @@
             6.2
           ],
           [
-            2.25,
-            7.7
+            3.25,
+            9.0
           ],
           [
-            0.15,
-            8.0
+            0.35,
+            9.4
           ],
           [
-            -2.15,
-            7.6
+            -2.95,
+            8.9
           ],
           [
             -3.75,
@@ -188,19 +188,19 @@
           ],
           [
             3.05,
-            6.14
+            6.21
           ],
           [
-            1.94,
-            7.48
+            2.37,
+            8.68
           ],
           [
-            2.36,
-            7.92
+            2.93,
+            8.92
           ],
           [
             4.45,
-            6.26
+            6.19
           ],
           [
             3.42,
@@ -430,108 +430,108 @@
         "kind": "poly",
         "points": [
           [
-            -4.0,
-            6.54
+            -4.32,
+            8.32
           ],
           [
-            -3.25,
-            7.13
+            -3.59,
+            8.82
           ],
           [
-            -2.47,
-            7.67
+            -2.79,
+            9.3
           ],
           [
-            -1.64,
-            8.11
+            -1.91,
+            9.73
           ],
           [
-            -0.77,
-            8.4
+            -0.96,
+            10.05
           ],
           [
-            0.12,
-            8.5
+            0.05,
+            10.22
           ],
           [
-            1.0,
-            8.38
+            1.08,
+            10.2
           ],
           [
-            1.84,
-            8.08
+            2.07,
+            10.02
           ],
           [
-            2.61,
-            7.65
-          ],
-          [
-            3.35,
-            7.12
+            2.98,
+            9.71
           ],
           [
             3.82,
-            6.6
+            9.33
           ],
           [
-            5.21,
-            7.55
+            2.92,
+            8.75
           ],
           [
-            6.24,
-            9.48
+            4.02,
+            9.5
           ],
           [
-            6.56,
-            9.32
+            5.77,
+            10.97
           ],
           [
-            5.59,
-            7.25
+            6.03,
+            10.83
           ],
           [
-            3.98,
-            6.0
+            5.78,
+            8.5
           ],
           [
-            2.95,
-            6.47
+            4.88,
+            6.05
           ],
           [
-            2.19,
-            6.83
+            2.48,
+            6.13
           ],
           [
-            1.46,
-            7.09
+            1.82,
+            6.34
           ],
           [
-            0.8,
-            7.21
+            1.23,
+            6.48
           ],
           [
-            0.18,
-            7.2
+            0.72,
+            6.56
           ],
           [
-            -0.43,
-            7.07
+            0.25,
+            6.58
           ],
           [
-            -1.06,
-            6.82
+            -0.24,
+            6.55
           ],
           [
-            -1.73,
+            -0.79,
             6.45
           ],
           [
-            -2.45,
-            5.98
+            -1.41,
+            6.27
           ],
           [
-            -3.2,
-            5.46
+            -2.11,
+            6.01
+          ],
+          [
+            -2.88,
+            5.68
           ]
         ]
       },
@@ -547,108 +547,108 @@
         "kind": "poly",
         "points": [
           [
-            -3.45,
-            5.8
+            -3.31,
+            6.47
           ],
           [
-            -2.71,
-            6.36
+            -2.58,
+            6.9
           ],
           [
-            -1.98,
-            6.86
+            -1.87,
+            7.29
           ],
           [
-            -1.25,
-            7.25
-          ],
-          [
-            -0.54,
-            7.5
-          ],
-          [
-            0.16,
+            -1.18,
             7.6
           ],
           [
-            0.85,
-            7.53
-          ],
-          [
-            1.55,
-            7.3
-          ],
-          [
-            2.25,
-            6.95
-          ],
-          [
-            2.96,
-            6.49
-          ],
-          [
-            4.0,
-            5.92
-          ],
-          [
-            5.73,
-            7.14
-          ],
-          [
-            6.8,
-            9.2
-          ],
-          [
-            6.93,
-            9.13
-          ],
-          [
-            5.88,
-            7.01
-          ],
-          [
-            4.07,
-            5.67
-          ],
-          [
-            2.79,
-            6.22
-          ],
-          [
-            2.07,
-            6.61
-          ],
-          [
-            1.39,
-            6.89
-          ],
-          [
-            0.77,
-            7.04
+            -0.5,
+            7.81
           ],
           [
             0.18,
-            7.06
+            7.91
           ],
           [
-            -0.4,
+            0.85,
+            7.89
+          ],
+          [
+            1.54,
+            7.77
+          ],
+          [
+            2.23,
+            7.55
+          ],
+          [
+            2.95,
+            7.25
+          ],
+          [
+            4.22,
             6.96
           ],
           [
-            -1.02,
-            6.73
+            5.56,
+            8.62
           ],
           [
-            -1.68,
-            6.37
+            6.82,
+            10.42
           ],
           [
-            -2.39,
-            5.9
+            6.93,
+            10.36
           ],
           [
-            -3.13,
-            5.36
+            6.15,
+            8.29
+          ],
+          [
+            4.87,
+            6.06
+          ],
+          [
+            2.5,
+            6.18
+          ],
+          [
+            1.84,
+            6.42
+          ],
+          [
+            1.26,
+            6.59
+          ],
+          [
+            0.73,
+            6.68
+          ],
+          [
+            0.24,
+            6.7
+          ],
+          [
+            -0.26,
+            6.64
+          ],
+          [
+            -0.8,
+            6.5
+          ],
+          [
+            -1.42,
+            6.28
+          ],
+          [
+            -2.09,
+            5.97
+          ],
+          [
+            -2.83,
+            5.6
           ]
         ]
       },
@@ -657,8 +657,8 @@
     {
       "id": "wall",
       "at": [
-        -2.45,
-        8.4
+        -2.9,
+        5.6
       ],
       "shape": {
         "kind": "poly",
