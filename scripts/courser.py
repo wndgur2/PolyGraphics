@@ -348,6 +348,46 @@ animations["read"] = {
        track("eye_d_glint", "scale", [1.0 + 0.6 * smoothstep(0.0, 0.25, t) for t in READ_TS], READ_TS)],
 }
 
+# ---- listen: feeling the ground for a footstep. The second verb.
+LISTEN = 1.0
+def listen_pose(side, n, t):
+    # Every leg laid out flat and still — a spider listens with its feet —
+    # except the front pair, which tap, one side then the other, twice a loop.
+    if n == "1":
+        ph = 0.0 if side == "u" else 0.5
+        tap = max(0.0, math.sin(2 * math.pi * (2 * t + ph)))
+        return 4.0 + 5.0 * tap, -8.0 + 14.0 * tap
+    return 0.0, -9.0
+animations["listen"] = {
+    "description": "The second verb: it stops and feels the ground for your footsteps. Every leg laid out flat and still, the abdomen down on the floor, the palps held out, and only the front pair moving — tapping, one side then the other — because a spider hears with its feet. Looped for as long as it is listening; the game draws the ring that tightens round you while you move and loosens while you do not.",
+    "duration": LISTEN,
+    "tracks": leg_tracks(listen_pose)
+    + abdomen_tracks(lambda t: 0.0, TS, scale=lambda t: 0.96)
+    + palp_tracks(lambda side, t: (-1 if side == "u" else 1) * 10.0)
+    + [track("organ", "scale", [0.9 + 0.08 * max(0.0, cyc(2 * t)) for t in TS])],
+}
+
+# ---- pounce: the lunge onto where it heard you
+POUNCE_TS = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+def pounce_pose(side, n, t):
+    gather = smoothstep(0.0, 0.25, t) * (1 - smoothstep(0.25, 0.5, t))
+    throw = smoothstep(0.25, 0.55, t)
+    if n in ("1", "2"):
+        # The front half reaches for the place it heard.
+        reach = 22.0 if n == "1" else 12.0
+        return -8.0 * gather + reach * throw, 16.0 * gather - 14.0 * throw
+    # The back half is what throws it: gathered under, then straight out behind.
+    back = -18.0 if n == "4" else -10.0
+    return -4.0 * gather + back * throw, 18.0 * gather - 10.0 * throw
+animations["pounce"] = {
+    "description": "The lunge onto where it last heard you: a snatch of every leg in under the body, then the front pair thrown forward to reach and the back pair straight out behind, the abdomen stretched long, the palps up and the organ flaring. Played once at the launch and held for the flight; the walk takes over when it lands.",
+    "duration": 0.3,
+    "tracks": leg_tracks(pounce_pose, POUNCE_TS)
+    + abdomen_tracks(lambda t: 0.0, POUNCE_TS, scale=lambda t: 1.0 - 0.04 * smoothstep(0.0, 0.25, t) + 0.1 * smoothstep(0.25, 0.6, t))
+    + palp_tracks(lambda side, t: (-1 if side == "u" else 1) * -18.0 * smoothstep(0.25, 0.55, t), POUNCE_TS)
+    + [track("organ", "scale", [1.0 + 0.35 * smoothstep(0.2, 0.6, t) for t in POUNCE_TS], POUNCE_TS)],
+}
+
 # ---- death: the curl
 DEATH_TS = [0, 0.08, 0.16, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 1.0]
 def death_pose(side, n, t):
@@ -446,6 +486,8 @@ DESCRIPTION = (
     "The legs are built on a skeleton of hips, knees and feet and every clip turns those, so no swing can part a leg at the knee. "
     "`trot` is the walk and the idle, `read` the tell (front legs up, palps drumming, the organ swelling, then the gather to go), "
     "`run` the gallop it runs the ring at, looped for the length of the lap. "
+    "Its second verb hunts by vibration: `listen` lays every leg flat on the floor with only the front pair tapping, "
+    "and `pounce` is the lunge onto where it last heard a footstep — a snatch of the legs, then the front pair thrown forward. "
     "`enraged` turns the value structure over — dark body, burning pattern, the hair standing; `final` has run itself out: bald, the "
     "abdomen emptied pale, a leg gone from each side and the organ white. Gameplay radius 40. The `death` clip is the curl."
 )
