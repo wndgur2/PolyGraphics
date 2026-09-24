@@ -1,0 +1,1815 @@
+{
+ "id": "ss.lib.lovebug-m",
+ "name": "Lovebug, male",
+ "description": "The smaller partner (0.86x): holoptic eyes that meet on top of the head, a slimmer abdomen and hooked claspers at the tip, where a pair couples. Archived design sketch, not used by Feelers: the flats' third boss was drafted as \uc0c9\uc138\uae30, three lovebugs coupled at the tail, and set aside for a dragonfly redesign. Kept so the drawing is not lost.",
+ "tags": [
+  "lib"
+ ],
+ "size": [
+  72,
+  64
+ ],
+ "anchor": [
+  0.55,
+  0.5
+ ],
+ "parts": [
+  {
+   "id": "leg_u1_femur",
+   "at": [
+    10.32,
+    -6.02
+   ],
+   "rot": -135.0,
+   "shape": {
+    "kind": "rect",
+    "w": 1.63,
+    "h": 7.3,
+    "corner": 0.81
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "leg_u1_tibia",
+   "at": [
+    15.48,
+    -10.11
+   ],
+   "rot": -120.26,
+   "shape": {
+    "kind": "rect",
+    "w": 1.16,
+    "h": 5.97,
+    "corner": 0.58
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "leg_u1_tarsus",
+   "at": [
+    19.78,
+    -11.39
+   ],
+   "rot": -82.87,
+   "shape": {
+    "kind": "rect",
+    "w": 0.82,
+    "h": 3.47,
+    "corner": 0.41
+   },
+   "fill": "$carapace.dark2"
+  },
+  {
+   "id": "leg_u1_knee",
+   "at": [
+    12.9,
+    -8.6
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 0.9
+   },
+   "fill": "$carapace.dark"
+  },
+  {
+   "id": "leg_d1_femur",
+   "at": [
+    10.32,
+    6.02
+   ],
+   "rot": -45.0,
+   "shape": {
+    "kind": "rect",
+    "w": 1.63,
+    "h": 7.3,
+    "corner": 0.81
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "leg_d1_tibia",
+   "at": [
+    15.48,
+    10.11
+   ],
+   "rot": -59.74,
+   "shape": {
+    "kind": "rect",
+    "w": 1.16,
+    "h": 5.97,
+    "corner": 0.58
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "leg_d1_tarsus",
+   "at": [
+    19.78,
+    11.39
+   ],
+   "rot": -97.13,
+   "shape": {
+    "kind": "rect",
+    "w": 0.82,
+    "h": 3.47,
+    "corner": 0.41
+   },
+   "fill": "$carapace.dark2"
+  },
+  {
+   "id": "leg_d1_knee",
+   "at": [
+    12.9,
+    8.6
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 0.9
+   },
+   "fill": "$carapace.dark"
+  },
+  {
+   "id": "leg_u2_femur",
+   "at": [
+    4.08,
+    -7.53
+   ],
+   "rot": 176.63,
+   "shape": {
+    "kind": "rect",
+    "w": 1.63,
+    "h": 7.32,
+    "corner": 0.81
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "leg_u2_tibia",
+   "at": [
+    1.94,
+    -13.97
+   ],
+   "rot": 145.3,
+   "shape": {
+    "kind": "rect",
+    "w": 1.16,
+    "h": 6.8,
+    "corner": 0.58
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "leg_u2_tarsus",
+   "at": [
+    -1.07,
+    -17.84
+   ],
+   "rot": 135.0,
+   "shape": {
+    "kind": "rect",
+    "w": 0.82,
+    "h": 3.04,
+    "corner": 0.41
+   },
+   "fill": "$carapace.dark2"
+  },
+  {
+   "id": "leg_u2_knee",
+   "at": [
+    3.87,
+    -11.18
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 0.9
+   },
+   "fill": "$carapace.dark"
+  },
+  {
+   "id": "leg_d2_femur",
+   "at": [
+    4.08,
+    7.53
+   ],
+   "rot": 3.37,
+   "shape": {
+    "kind": "rect",
+    "w": 1.63,
+    "h": 7.32,
+    "corner": 0.81
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "leg_d2_tibia",
+   "at": [
+    1.94,
+    13.97
+   ],
+   "rot": 34.7,
+   "shape": {
+    "kind": "rect",
+    "w": 1.16,
+    "h": 6.8,
+    "corner": 0.58
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "leg_d2_tarsus",
+   "at": [
+    -1.07,
+    17.84
+   ],
+   "rot": 45.0,
+   "shape": {
+    "kind": "rect",
+    "w": 0.82,
+    "h": 3.04,
+    "corner": 0.41
+   },
+   "fill": "$carapace.dark2"
+  },
+  {
+   "id": "leg_d2_knee",
+   "at": [
+    3.87,
+    11.18
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 0.9
+   },
+   "fill": "$carapace.dark"
+  },
+  {
+   "id": "leg_u3_femur",
+   "at": [
+    -2.36,
+    -7.09
+   ],
+   "rot": 135.0,
+   "shape": {
+    "kind": "rect",
+    "w": 1.63,
+    "h": 10.34,
+    "corner": 0.81
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "leg_u3_tibia",
+   "at": [
+    -10.32,
+    -13.33
+   ],
+   "rot": 120.96,
+   "shape": {
+    "kind": "rect",
+    "w": 1.16,
+    "h": 10.03,
+    "corner": 0.58
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "leg_u3_tarsus",
+   "at": [
+    -16.55,
+    -17.2
+   ],
+   "rot": 123.69,
+   "shape": {
+    "kind": "rect",
+    "w": 0.82,
+    "h": 4.65,
+    "corner": 0.41
+   },
+   "fill": "$carapace.dark2"
+  },
+  {
+   "id": "leg_u3_knee",
+   "at": [
+    -6.02,
+    -10.75
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 0.9
+   },
+   "fill": "$carapace.dark"
+  },
+  {
+   "id": "leg_d3_femur",
+   "at": [
+    -2.36,
+    7.09
+   ],
+   "rot": 45.0,
+   "shape": {
+    "kind": "rect",
+    "w": 1.63,
+    "h": 10.34,
+    "corner": 0.81
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "leg_d3_tibia",
+   "at": [
+    -10.32,
+    13.33
+   ],
+   "rot": 59.04,
+   "shape": {
+    "kind": "rect",
+    "w": 1.16,
+    "h": 10.03,
+    "corner": 0.58
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "leg_d3_tarsus",
+   "at": [
+    -16.55,
+    17.2
+   ],
+   "rot": 56.31,
+   "shape": {
+    "kind": "rect",
+    "w": 0.82,
+    "h": 4.65,
+    "corner": 0.41
+   },
+   "fill": "$carapace.dark2"
+  },
+  {
+   "id": "leg_d3_knee",
+   "at": [
+    -6.02,
+    10.75
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 0.9
+   },
+   "fill": "$carapace.dark"
+  },
+  {
+   "id": "tergite_6",
+   "at": [
+    -21.5,
+    0
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 2.49,
+    "ry": 2.47
+   },
+   "fill": "$dead",
+   "stroke": {
+    "color": "$ink",
+    "width": "hair"
+   }
+  },
+  {
+   "id": "tergite_5",
+   "at": [
+    -18.58,
+    0
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 2.92,
+    "ry": 3.24
+   },
+   "fill": "$dead",
+   "stroke": {
+    "color": "$ink",
+    "width": "hair"
+   }
+  },
+  {
+   "id": "tergite_4",
+   "at": [
+    -15.14,
+    0
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 3.18,
+    "ry": 3.88
+   },
+   "fill": "$dead",
+   "stroke": {
+    "color": "$ink",
+    "width": "hair"
+   }
+  },
+  {
+   "id": "tergite_3",
+   "at": [
+    -11.35,
+    0
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 3.35,
+    "ry": 4.37
+   },
+   "fill": "$dead",
+   "stroke": {
+    "color": "$ink",
+    "width": "hair"
+   }
+  },
+  {
+   "id": "tergite_2",
+   "at": [
+    -7.4,
+    0
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 3.35,
+    "ry": 4.58
+   },
+   "fill": "$dead",
+   "stroke": {
+    "color": "$ink",
+    "width": "hair"
+   }
+  },
+  {
+   "id": "tergite_1",
+   "at": [
+    -3.44,
+    0
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 3.18,
+    "ry": 4.37
+   },
+   "fill": "$dead",
+   "stroke": {
+    "color": "$ink",
+    "width": "hair"
+   }
+  },
+  {
+   "id": "abdomen_sheen",
+   "at": [
+    -12.04,
+    -1.89
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 8.17,
+    "ry": 0.95
+   },
+   "fill": "$carapace@soft"
+  },
+  {
+   "id": "clasper_u",
+   "at": [
+    -24.25,
+    -1.2
+   ],
+   "rot": -25,
+   "shape": {
+    "kind": "poly",
+    "points": [
+     [
+      1.6,
+      0.6
+     ],
+     [
+      -1.6,
+      -1.2
+     ],
+     [
+      -2.6,
+      0.4
+     ],
+     [
+      -1.2,
+      0.2
+     ],
+     [
+      0.8,
+      1.4
+     ]
+    ]
+   },
+   "fill": "$carapace.dark"
+  },
+  {
+   "id": "clasper_d",
+   "at": [
+    -24.25,
+    1.2
+   ],
+   "rot": 25,
+   "shape": {
+    "kind": "poly",
+    "points": [
+     [
+      1.6,
+      -0.6
+     ],
+     [
+      -1.6,
+      1.2
+     ],
+     [
+      -2.6,
+      -0.4
+     ],
+     [
+      -1.2,
+      -0.2
+     ],
+     [
+      0.8,
+      -1.4
+     ]
+    ]
+   },
+   "fill": "$carapace.dark"
+  },
+  {
+   "id": "haltere_u_stalk",
+   "at": [
+    -0.56,
+    -5.16
+   ],
+   "rot": 140.6,
+   "shape": {
+    "kind": "rect",
+    "w": 0.7,
+    "h": 3.12,
+    "corner": 0.35
+   },
+   "fill": "$carapace.dark"
+  },
+  {
+   "id": "haltere_u_knob",
+   "at": [
+    -1.81,
+    -6.71
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 1.0
+   },
+   "fill": "$husk.dark"
+  },
+  {
+   "id": "haltere_d_stalk",
+   "at": [
+    -0.56,
+    5.16
+   ],
+   "rot": 39.4,
+   "shape": {
+    "kind": "rect",
+    "w": 0.7,
+    "h": 3.12,
+    "corner": 0.35
+   },
+   "fill": "$carapace.dark"
+  },
+  {
+   "id": "haltere_d_knob",
+   "at": [
+    -1.81,
+    6.71
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 1.0
+   },
+   "fill": "$husk.dark"
+  },
+  {
+   "id": "wing_u",
+   "at": [
+    3.01,
+    -3.61
+   ],
+   "shape": {
+    "kind": "poly",
+    "points": [
+     [
+      -0.58,
+      -0.85
+     ],
+     [
+      -3.16,
+      -0.22
+     ],
+     [
+      -5.7,
+      0.47
+     ],
+     [
+      -8.21,
+      1.2
+     ],
+     [
+      -10.66,
+      2.04
+     ],
+     [
+      -12.96,
+      3.08
+     ],
+     [
+      -15.08,
+      4.39
+     ],
+     [
+      -16.98,
+      6.05
+     ],
+     [
+      -18.59,
+      8.12
+     ],
+     [
+      -19.88,
+      10.66
+     ],
+     [
+      -21.25,
+      13.09
+     ],
+     [
+      -21.25,
+      13.09
+     ],
+     [
+      -18.64,
+      13.08
+     ],
+     [
+      -16.74,
+      11.95
+     ],
+     [
+      -14.71,
+      10.9
+     ],
+     [
+      -12.59,
+      9.86
+     ],
+     [
+      -10.39,
+      8.74
+     ],
+     [
+      -8.16,
+      7.5
+     ],
+     [
+      -5.95,
+      6.05
+     ],
+     [
+      -3.84,
+      4.32
+     ],
+     [
+      -1.92,
+      2.19
+     ],
+     [
+      -0.58,
+      -0.85
+     ]
+    ]
+   },
+   "fill": "$slate@soft",
+   "stroke": {
+    "color": "$ink@soft",
+    "width": "hair"
+   }
+  },
+  {
+   "id": "wing_u_costa",
+   "at": [
+    3.01,
+    -3.61
+   ],
+   "shape": {
+    "kind": "poly",
+    "points": [
+     [
+      -0.58,
+      -0.85
+     ],
+     [
+      -3.16,
+      -0.22
+     ],
+     [
+      -5.7,
+      0.47
+     ],
+     [
+      -8.21,
+      1.2
+     ],
+     [
+      -10.66,
+      2.04
+     ],
+     [
+      -12.96,
+      3.08
+     ],
+     [
+      -15.08,
+      4.39
+     ],
+     [
+      -16.98,
+      6.05
+     ],
+     [
+      -18.59,
+      8.12
+     ],
+     [
+      -19.88,
+      10.66
+     ],
+     [
+      -21.25,
+      13.09
+     ],
+     [
+      -21.25,
+      13.99
+     ],
+     [
+      -19.88,
+      11.56
+     ],
+     [
+      -18.59,
+      9.02
+     ],
+     [
+      -16.98,
+      6.95
+     ],
+     [
+      -15.08,
+      5.29
+     ],
+     [
+      -12.96,
+      3.98
+     ],
+     [
+      -10.66,
+      2.94
+     ],
+     [
+      -8.21,
+      2.1
+     ],
+     [
+      -5.7,
+      1.37
+     ],
+     [
+      -3.16,
+      0.68
+     ],
+     [
+      -0.58,
+      0.05
+     ]
+    ]
+   },
+   "fill": "$ink@heavy"
+  },
+  {
+   "id": "wing_u_stigma",
+   "at": [
+    3.01,
+    -3.61
+   ],
+   "shape": {
+    "kind": "poly",
+    "points": [
+     [
+      -14.98,
+      6.05
+     ],
+     [
+      -19.98,
+      6.25
+     ],
+     [
+      -19.580000000000002,
+      4.449999999999999
+     ],
+     [
+      -15.58,
+      4.75
+     ]
+    ]
+   },
+   "fill": "$ink@heavy"
+  },
+  {
+   "id": "wing_u_vein1",
+   "at": [
+    3.01,
+    -3.61
+   ],
+   "shape": {
+    "kind": "poly",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      -10.66,
+      5.39
+     ],
+     [
+      -11.06,
+      5.89
+     ],
+     [
+      0,
+      0.5
+     ]
+    ]
+   },
+   "fill": "$smoke@soft"
+  },
+  {
+   "id": "wing_u_vein2",
+   "at": [
+    3.01,
+    -3.61
+   ],
+   "shape": {
+    "kind": "poly",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      -16.98,
+      9.0
+     ],
+     [
+      -17.38,
+      9.5
+     ],
+     [
+      0,
+      0.5
+     ]
+    ]
+   },
+   "fill": "$smoke@soft"
+  },
+  {
+   "id": "wing_d",
+   "at": [
+    3.01,
+    3.61
+   ],
+   "shape": {
+    "kind": "poly",
+    "points": [
+     [
+      -0.58,
+      0.85
+     ],
+     [
+      -3.16,
+      0.22
+     ],
+     [
+      -5.7,
+      -0.47
+     ],
+     [
+      -8.21,
+      -1.2
+     ],
+     [
+      -10.66,
+      -2.04
+     ],
+     [
+      -12.96,
+      -3.08
+     ],
+     [
+      -15.08,
+      -4.39
+     ],
+     [
+      -16.98,
+      -6.05
+     ],
+     [
+      -18.59,
+      -8.12
+     ],
+     [
+      -19.88,
+      -10.66
+     ],
+     [
+      -21.25,
+      -13.09
+     ],
+     [
+      -21.25,
+      -13.09
+     ],
+     [
+      -18.64,
+      -13.08
+     ],
+     [
+      -16.74,
+      -11.95
+     ],
+     [
+      -14.71,
+      -10.9
+     ],
+     [
+      -12.59,
+      -9.86
+     ],
+     [
+      -10.39,
+      -8.74
+     ],
+     [
+      -8.16,
+      -7.5
+     ],
+     [
+      -5.95,
+      -6.05
+     ],
+     [
+      -3.84,
+      -4.32
+     ],
+     [
+      -1.92,
+      -2.19
+     ],
+     [
+      -0.58,
+      0.85
+     ]
+    ]
+   },
+   "fill": "$slate@soft",
+   "stroke": {
+    "color": "$ink@soft",
+    "width": "hair"
+   }
+  },
+  {
+   "id": "wing_d_costa",
+   "at": [
+    3.01,
+    3.61
+   ],
+   "shape": {
+    "kind": "poly",
+    "points": [
+     [
+      -0.58,
+      0.85
+     ],
+     [
+      -3.16,
+      0.22
+     ],
+     [
+      -5.7,
+      -0.47
+     ],
+     [
+      -8.21,
+      -1.2
+     ],
+     [
+      -10.66,
+      -2.04
+     ],
+     [
+      -12.96,
+      -3.08
+     ],
+     [
+      -15.08,
+      -4.39
+     ],
+     [
+      -16.98,
+      -6.05
+     ],
+     [
+      -18.59,
+      -8.12
+     ],
+     [
+      -19.88,
+      -10.66
+     ],
+     [
+      -21.25,
+      -13.09
+     ],
+     [
+      -21.25,
+      -13.99
+     ],
+     [
+      -19.88,
+      -11.56
+     ],
+     [
+      -18.59,
+      -9.02
+     ],
+     [
+      -16.98,
+      -6.95
+     ],
+     [
+      -15.08,
+      -5.29
+     ],
+     [
+      -12.96,
+      -3.98
+     ],
+     [
+      -10.66,
+      -2.94
+     ],
+     [
+      -8.21,
+      -2.1
+     ],
+     [
+      -5.7,
+      -1.37
+     ],
+     [
+      -3.16,
+      -0.68
+     ],
+     [
+      -0.58,
+      -0.05
+     ]
+    ]
+   },
+   "fill": "$ink@heavy"
+  },
+  {
+   "id": "wing_d_stigma",
+   "at": [
+    3.01,
+    3.61
+   ],
+   "shape": {
+    "kind": "poly",
+    "points": [
+     [
+      -14.98,
+      -6.05
+     ],
+     [
+      -19.98,
+      -6.25
+     ],
+     [
+      -19.580000000000002,
+      -4.449999999999999
+     ],
+     [
+      -15.58,
+      -4.75
+     ]
+    ]
+   },
+   "fill": "$ink@heavy"
+  },
+  {
+   "id": "wing_d_vein1",
+   "at": [
+    3.01,
+    3.61
+   ],
+   "shape": {
+    "kind": "poly",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      -10.66,
+      -5.39
+     ],
+     [
+      -11.06,
+      -4.89
+     ],
+     [
+      0,
+      0.5
+     ]
+    ]
+   },
+   "fill": "$smoke@soft"
+  },
+  {
+   "id": "wing_d_vein2",
+   "at": [
+    3.01,
+    3.61
+   ],
+   "shape": {
+    "kind": "poly",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      -16.98,
+      -9.0
+     ],
+     [
+      -17.38,
+      -8.5
+     ],
+     [
+      0,
+      0.5
+     ]
+    ]
+   },
+   "fill": "$smoke@soft"
+  },
+  {
+   "id": "pleura",
+   "at": [
+    5.16,
+    0
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 7.22,
+    "ry": 5.93
+   },
+   "fill": "$dead",
+   "stroke": {
+    "color": "$ink",
+    "width": "thin"
+   }
+  },
+  {
+   "id": "scutum",
+   "at": [
+    5.85,
+    0
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 6.19,
+    "ry": 4.99
+   },
+   "fill": "$coral"
+  },
+  {
+   "id": "scutum_shine",
+   "at": [
+    7.05,
+    -1.89
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 2.92,
+    "ry": 1.29
+   },
+   "fill": "$coral.light"
+  },
+  {
+   "id": "scutellum",
+   "at": [
+    -0.34,
+    0
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 1.98,
+    "ry": 2.92
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "bristle_0",
+   "at": [
+    9.89,
+    -3.61
+   ],
+   "rot": 30,
+   "shape": {
+    "kind": "rect",
+    "w": 0.5,
+    "h": 2.2
+   },
+   "fill": "$ink@heavy"
+  },
+  {
+   "id": "bristle_1",
+   "at": [
+    10.75,
+    -1.72
+   ],
+   "rot": 10,
+   "shape": {
+    "kind": "rect",
+    "w": 0.5,
+    "h": 2.2
+   },
+   "fill": "$ink@heavy"
+  },
+  {
+   "id": "bristle_2",
+   "at": [
+    10.75,
+    1.72
+   ],
+   "rot": -10,
+   "shape": {
+    "kind": "rect",
+    "w": 0.5,
+    "h": 2.2
+   },
+   "fill": "$ink@heavy"
+  },
+  {
+   "id": "bristle_3",
+   "at": [
+    9.89,
+    3.61
+   ],
+   "rot": -30,
+   "shape": {
+    "kind": "rect",
+    "w": 0.5,
+    "h": 2.2
+   },
+   "fill": "$ink@heavy"
+  },
+  {
+   "id": "bristle_4",
+   "at": [
+    3.01,
+    -4.47
+   ],
+   "rot": 60,
+   "shape": {
+    "kind": "rect",
+    "w": 0.5,
+    "h": 2.2
+   },
+   "fill": "$ink@heavy"
+  },
+  {
+   "id": "bristle_5",
+   "at": [
+    3.01,
+    4.47
+   ],
+   "rot": -60,
+   "shape": {
+    "kind": "rect",
+    "w": 0.5,
+    "h": 2.2
+   },
+   "fill": "$ink@heavy"
+  },
+  {
+   "id": "head",
+   "at": [
+    13.93,
+    0
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 3.96
+   },
+   "fill": "$dead",
+   "stroke": {
+    "color": "$ink",
+    "width": "thin"
+   }
+  },
+  {
+   "id": "eye_u",
+   "at": [
+    14.53,
+    -1.98
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 3.35,
+    "ry": 2.49
+   },
+   "fill": "$ink",
+   "stroke": {
+    "color": "$carapace.dark",
+    "width": "hair"
+   }
+  },
+  {
+   "id": "eye_u_glint",
+   "at": [
+    15.73,
+    -2.49
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 0.9
+   },
+   "fill": "$steel@soft"
+  },
+  {
+   "id": "eye_d",
+   "at": [
+    14.53,
+    1.98
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 3.35,
+    "ry": 2.49
+   },
+   "fill": "$ink",
+   "stroke": {
+    "color": "$carapace.dark",
+    "width": "hair"
+   }
+  },
+  {
+   "id": "eye_d_glint",
+   "at": [
+    15.73,
+    2.49
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 0.9
+   },
+   "fill": "$steel@soft"
+  },
+  {
+   "id": "antenna_u0",
+   "at": [
+    17.72,
+    -1.2
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 0.85
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "antenna_u1",
+   "at": [
+    18.83,
+    -1.89
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 0.85
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "antenna_u2",
+   "at": [
+    19.87,
+    -2.58
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 0.85
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "antenna_d0",
+   "at": [
+    17.72,
+    1.2
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 0.85
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "antenna_d1",
+   "at": [
+    18.83,
+    1.89
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 0.85
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "antenna_d2",
+   "at": [
+    19.87,
+    2.58
+   ],
+   "shape": {
+    "kind": "circle",
+    "r": 0.85
+   },
+   "fill": "$dead"
+  },
+  {
+   "id": "proboscis",
+   "at": [
+    17.89,
+    0
+   ],
+   "shape": {
+    "kind": "rect",
+    "w": 1.0,
+    "h": 2.4,
+    "corner": 0.5
+   },
+   "rot": 90,
+   "fill": "$carapace.dark2"
+  }
+ ],
+ "animations": {
+  "fly": {
+   "duration": 0.3,
+   "tracks": [
+    {
+     "part": "wing_u",
+     "prop": "rot",
+     "keys": [
+      [
+       0,
+       0
+      ],
+      [
+       0.25,
+       -9
+      ],
+      [
+       0.5,
+       0
+      ],
+      [
+       0.75,
+       5
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "ease": "linear"
+    },
+    {
+     "part": "wing_u_costa",
+     "prop": "rot",
+     "keys": [
+      [
+       0,
+       0
+      ],
+      [
+       0.25,
+       -9
+      ],
+      [
+       0.5,
+       0
+      ],
+      [
+       0.75,
+       5
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "ease": "linear"
+    },
+    {
+     "part": "wing_u_stigma",
+     "prop": "rot",
+     "keys": [
+      [
+       0,
+       0
+      ],
+      [
+       0.25,
+       -9
+      ],
+      [
+       0.5,
+       0
+      ],
+      [
+       0.75,
+       5
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "ease": "linear"
+    },
+    {
+     "part": "wing_u_vein1",
+     "prop": "rot",
+     "keys": [
+      [
+       0,
+       0
+      ],
+      [
+       0.25,
+       -9
+      ],
+      [
+       0.5,
+       0
+      ],
+      [
+       0.75,
+       5
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "ease": "linear"
+    },
+    {
+     "part": "wing_u_vein2",
+     "prop": "rot",
+     "keys": [
+      [
+       0,
+       0
+      ],
+      [
+       0.25,
+       -9
+      ],
+      [
+       0.5,
+       0
+      ],
+      [
+       0.75,
+       5
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "ease": "linear"
+    },
+    {
+     "part": "haltere_u_knob",
+     "prop": "y",
+     "keys": [
+      [
+       0,
+       0
+      ],
+      [
+       0.25,
+       0.8
+      ],
+      [
+       0.5,
+       0
+      ],
+      [
+       0.75,
+       -0.8
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "ease": "linear"
+    },
+    {
+     "part": "wing_d",
+     "prop": "rot",
+     "keys": [
+      [
+       0,
+       0
+      ],
+      [
+       0.25,
+       9
+      ],
+      [
+       0.5,
+       0
+      ],
+      [
+       0.75,
+       -5
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "ease": "linear"
+    },
+    {
+     "part": "wing_d_costa",
+     "prop": "rot",
+     "keys": [
+      [
+       0,
+       0
+      ],
+      [
+       0.25,
+       9
+      ],
+      [
+       0.5,
+       0
+      ],
+      [
+       0.75,
+       -5
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "ease": "linear"
+    },
+    {
+     "part": "wing_d_stigma",
+     "prop": "rot",
+     "keys": [
+      [
+       0,
+       0
+      ],
+      [
+       0.25,
+       9
+      ],
+      [
+       0.5,
+       0
+      ],
+      [
+       0.75,
+       -5
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "ease": "linear"
+    },
+    {
+     "part": "wing_d_vein1",
+     "prop": "rot",
+     "keys": [
+      [
+       0,
+       0
+      ],
+      [
+       0.25,
+       9
+      ],
+      [
+       0.5,
+       0
+      ],
+      [
+       0.75,
+       -5
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "ease": "linear"
+    },
+    {
+     "part": "wing_d_vein2",
+     "prop": "rot",
+     "keys": [
+      [
+       0,
+       0
+      ],
+      [
+       0.25,
+       9
+      ],
+      [
+       0.5,
+       0
+      ],
+      [
+       0.75,
+       -5
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "ease": "linear"
+    },
+    {
+     "part": "haltere_d_knob",
+     "prop": "y",
+     "keys": [
+      [
+       0,
+       0
+      ],
+      [
+       0.25,
+       -0.8
+      ],
+      [
+       0.5,
+       0
+      ],
+      [
+       0.75,
+       0.8
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "ease": "linear"
+    }
+   ]
+  }
+ }
+}
