@@ -18,9 +18,9 @@ body is built to that shape from its own skeleton row:
          flying back, the helmet at the hip — the runner
   haram  a square: a slab body with squared shoulders, bone pauldrons and a
          chest plate, a box helmet, the survey on the back — the wall
-  mir    a hump: the coat rises over the piece of wall carried on the back, the
-         head low and forward, a bun under the helmet — the hauler (Mina; the id
-         stays `mir`, the game pins it)
+  mir    a load: a plain bell coat with the piece of wall strapped on the back,
+         the head low and forward, a bun under the helmet — the hauler (Mina; the
+         id stays `mir`, the game pins it)
   kano   a column: a narrow long coat, a peaked hood, a staff taller than the
          head — the one who does not stop
   eden   a mushroom: a round coat under a wide hat brim, the throat swelling
@@ -351,8 +351,8 @@ CHARACTERS = {
         "description": "A square. The survey: a slab of a body with squared shoulders, the widest of the eight, under a box of a helmet. The husk shell scraped into the mark II emitter (H027) is coming through as bone: one bleached pauldron over the near shoulder. On the back, the benchmark stakes (H001); on the far shoulder, the one pink spore pod the lure grows from. Four kilos up on the same ration, pulse thirty-eight (H043): armour, a lurch in the walk, and slower for it." + SHARED,
     },
     "mir": {
-        "display": "Mina", "sex": "f", "tint": ("timber", 2), "coat": "hump", "cloak_sx": 1.02,
-        "skeleton": {"head": (2.6, -7.2), "head_tilt": -6, "shoulder_near": (-4.4, -2.4), "shoulder_far": (6.0, -3.8), "foot_near": (-2.8, 13.1), "foot_far": (4.6, 12.5), "hip_near": (-2.8, 12.0), "hip_far": (4.4, 11.2), "pack": (-6.8, -8.0)},
+        "display": "Mina", "sex": "f", "tint": ("timber", 2), "coat": "bell", "cloak_sx": 1.02,
+        "skeleton": {"head": (2.6, -7.2), "head_tilt": -6, "shoulder_near": (-4.4, -2.4), "shoulder_far": (6.0, -3.8), "foot_near": (-2.8, 13.1), "foot_far": (4.6, 12.5), "hip_near": (-2.8, 12.0), "hip_far": (4.4, 11.2), "pack": (-7.4, -3.4)},
         "head_r": (5.2, 5.6), "pose": {"coat_lean": 5, "arm_hang": 10, "arm_far_hang": -4},
         "walk": {"duration": 0.62, "bob": 0.0, "lift": 0.8, "sway": 1.4, "arm_swing": 8},
         "extras": lambda c: [
@@ -360,12 +360,11 @@ CHARACTERS = {
             ("behind", P_("wall_crack", (c["S"]["pack"][0] + 0.2, c["S"]["pack"][1] - 0.6), rect(3.2, 0.6, 0.2), "$rust.dark", rot=24), "body"),
             ("over_cape", P_("cord", (0.2, -0.6), rect(1.1, 9.4, 0.4), "$bone", rot=-32), "body"),
             ("in_hand", P_("bun", (c["head"][0] - 5.2, c["head"][1] - 0.6), ell(2.3, 2.1), "$slate.dark", rot=-10, stroke=hair), "head"),
-            ("over_coat", P_("hump_shade", (-7.6, 1.2), ell(2.2, 5.0), shade(c["T"], -1), rot=-10), "body"),
             ("over_head", P_("lamp_ring", (c["head"][0] + 2.4, c["head"][1] - 3.6), circ(1.9), "$slate.dark", stroke=hair), "head"),
             ("over_head", P_("lamp", (c["head"][0] + 2.4, c["head"][1] - 3.6), circ(1.2), "$silent"), "head"),
         ],
         "walk_desc": "the haul: no bounce at all, short flat steps, the load riding still on the back",
-        "description": "A hump. The burrow, walked from the inside down to the queen: a bell of a coat drawn in at the waist whose back rounds up over the piece of its wall carried high on the back where the emitter used to be, warm half a month on, chewing inside it at night (M038, M042), corded across the chest, the rust of it showing over the near shoulder. A head lamp on the helmet, the one light the eight carry — the burrow is where the compass stopped (M005) — and a bun of dark hair at the back of the head under it. The head sits a little low and forward, the stance is wide, and the walk has no bounce in it — the Porter's haul, twenty-nine levels of it (M035)." + SHARED,
+        "description": "A load. The burrow, walked from the inside down to the queen: a plain bell of a coat drawn in at the waist, and the piece of its wall strapped on the back where the emitter used to be, showing past the near shoulder, warm half a month on, chewing inside it at night (M038, M042), corded across the chest. A head lamp on the helmet, the one light the eight carry — the burrow is where the compass stopped (M005) — and a bun of dark hair at the back of the head under it. The head sits a little low and forward, the stance is wide, and the walk has no bounce in it — the Porter's haul, twenty-nine levels of it (M035)." + SHARED,
     },
     "kano": {
         "sex": "m", "tint": ("silent", 0), "coat": "column", "cloak_sx": 1.0, "hem": 0.0, "head": "hood", "head_r": (4.8, 6.0), "visor_w": 5.8,

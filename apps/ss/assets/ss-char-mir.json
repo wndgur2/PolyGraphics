@@ -1,7 +1,7 @@
 {
   "id": "ss.char.mir",
   "name": "Mina",
-  "description": "A hump. The burrow, walked from the inside down to the queen: a bell of a coat drawn in at the waist whose back rounds up over the piece of its wall carried high on the back where the emitter used to be, warm half a month on, chewing inside it at night (M038, M042), corded across the chest, the rust of it showing over the near shoulder. A head lamp on the helmet, the one light the eight carry \u2014 the burrow is where the compass stopped (M005) \u2014 and a bun of dark hair at the back of the head under it. The head sits a little low and forward, the stance is wide, and the walk has no bounce in it \u2014 the Porter's haul, twenty-nine levels of it (M035). Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
+  "description": "A load. The burrow, walked from the inside down to the queen: a plain bell of a coat drawn in at the waist, and the piece of its wall strapped on the back where the emitter used to be, showing past the near shoulder, warm half a month on, chewing inside it at night (M038, M042), corded across the chest. A head lamp on the helmet, the one light the eight carry \u2014 the burrow is where the compass stopped (M005) \u2014 and a bun of dark hair at the back of the head under it. The head sits a little low and forward, the stance is wide, and the walk has no bounce in it \u2014 the Porter's haul, twenty-nine levels of it (M035). Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
   "tags": [
     "char"
   ],
@@ -16,8 +16,8 @@
     {
       "id": "wall",
       "at": [
-        -6.8,
-        -8.0
+        -7.4,
+        -3.4
       ],
       "shape": {
         "kind": "poly",
@@ -50,8 +50,8 @@
     {
       "id": "wall_crack",
       "at": [
-        -6.6,
-        -8.6
+        -7.2,
+        -4.0
       ],
       "shape": {
         "kind": "rect",
@@ -129,24 +129,24 @@
         "kind": "poly",
         "points": [
           [
-            -3.47,
-            -3.0
+            -3.26,
+            -2.6
           ],
           [
             4.9,
             -4.0
           ],
           [
-            7.96,
+            7.65,
             1.6
           ],
           [
-            8.45,
-            5.8
+            7.23,
+            6.0
           ],
           [
-            8.16,
-            10.2
+            6.94,
+            10.6
           ],
           [
             4.49,
@@ -161,24 +161,16 @@
             11.9
           ],
           [
-            -7.14,
+            -6.94,
             10.6
           ],
           [
-            -8.07,
+            -7.13,
             6.0
           ],
           [
-            -10.0,
-            0.4
-          ],
-          [
-            -9.79,
-            -4.4
-          ],
-          [
-            -7.75,
-            -7.2
+            -7.34,
+            1.2
           ]
         ]
       },
@@ -187,20 +179,6 @@
         "color": "$ink",
         "width": "thin"
       }
-    },
-    {
-      "id": "hump_shade",
-      "at": [
-        -7.6,
-        1.2
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 2.2,
-        "ry": 5.0
-      },
-      "fill": "$timber.light",
-      "rot": -10
     },
     {
       "id": "cape",
@@ -653,24 +631,6 @@
         },
         {
           "part": "cord",
-          "prop": "y",
-          "keys": [
-            [
-              0,
-              0
-            ],
-            [
-              0.5,
-              -0.5
-            ],
-            [
-              1,
-              0
-            ]
-          ]
-        },
-        {
-          "part": "hump_shade",
           "prop": "y",
           "keys": [
             [
@@ -1357,65 +1317,6 @@
         },
         {
           "part": "cord",
-          "prop": "y",
-          "keys": [
-            [
-              0.0,
-              -0.0
-            ],
-            [
-              0.08,
-              -0.0
-            ],
-            [
-              0.17,
-              -0.0
-            ],
-            [
-              0.25,
-              -0.0
-            ],
-            [
-              0.33,
-              -0.0
-            ],
-            [
-              0.42,
-              -0.0
-            ],
-            [
-              0.5,
-              -0.0
-            ],
-            [
-              0.58,
-              -0.0
-            ],
-            [
-              0.67,
-              -0.0
-            ],
-            [
-              0.75,
-              -0.0
-            ],
-            [
-              0.83,
-              -0.0
-            ],
-            [
-              0.92,
-              -0.0
-            ],
-            [
-              1.0,
-              -0.0
-            ]
-          ],
-          "ease": "linear"
-        },
-        {
-          "part": "hump_shade",
           "prop": "y",
           "keys": [
             [
