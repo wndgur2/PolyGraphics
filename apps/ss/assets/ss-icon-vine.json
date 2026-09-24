@@ -1,7 +1,7 @@
 {
   "id": "ss.icon.vine",
   "name": "Vine icon",
-  "description": "UI slot for the vine. Composes `ss.proj.vine` through `use`, so the slot shows the coil the weapon actually lays rather than a second drawing of one that can drift from it. A patch of `$soil` sits under it and nothing else: the coil is already ground, and the earlier version of this slot pressed a ground *line* across the tile because the plant it held stood up out of a hole. Nothing stands up any more. The plant is composed at its `slot` ramp — the same drawing one step up on each of its three colours — because a 32px slot and a sprite on the field are lit for different jobs, and the cord that keeps out of a crowd's way goes to mud at a tenth of the area. The plate under it comes up a step too, `$coal` over `$coal.dark`, which is as far as it can go before it starts taking contrast back off the cord. Tile is `$sage`. It was `$moss`, which is the cord's own green and was chosen for that, and laid out beside the other seven weapon slots it was the one dark square in a row of bright ones — the vine did not read as a weapon with a colour, it read as the slot that had not been finished. `$sage` is the same hue lifted to where the row lives, far enough from the Spit's bile and the Chirp's frost to tell them apart at a glance, and far enough from the Spit's bile and the Lash's husk to tell the row apart at a glance, while everything drawn on it is the dark end of the same colour.",
+  "description": "UI slot for the vine. Composes `ss.proj.vine` through `use`, so the slot shows the coil the weapon actually lays rather than a second drawing of one that can drift from it. A patch of `$soil` sits under it and nothing else: the coil is already ground, and the earlier version of this slot pressed a ground *line* across the tile because the plant it held stood up out of a hole. Nothing stands up any more. The plant is composed at its `slot` ramp — the same drawing one step up on each of its three colours — because a 32px slot and a sprite on the field are lit for different jobs, and the cord that keeps out of a crowd's way goes to mud at a tenth of the area. The plate under it comes up a step too, `$coal` over `$coal.dark`, which is as far as it can go before it starts taking contrast back off the cord. Tile is `$venom.dark`. It was `$moss`, which is the cord's own green and was chosen for that, and laid out beside the other seven weapon slots it was the one dark square in a row of bright ones — the vine did not read as a weapon with a colour, it read as the slot that had not been finished. It was `$sage` after that, the same hue lifted to where the row lives, until the Bulk heart that wears this rim sat 16.5 from Plus One's lime `$bile` on the passive bar. `$venom.dark` is the cord's hue with the grey taken out instead: 20.6 from the Spit's bile, and everything drawn on it is still the dark end of the same colour.",
   "tags": [
     "icon",
     "weapon"
@@ -19,7 +19,7 @@
         "h": 32,
         "corner": 6
       },
-      "fill": "$sage"
+      "fill": "$venom.dark"
     },
     {
       "id": "inner",
