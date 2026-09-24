@@ -1,7 +1,7 @@
 {
   "id": "ss.icon.luck",
   "name": "Luck icon",
-  "description": "Passive icon: four-leaf clover — four circles and a darker stem. Port of the hand-drawn i_luck from Feelers' BootScene. Rim is `$arcane.dark`, the same as `ss.icon.spider`: this passive is the Spider Hand evolution's other half, so the pair reads as a pair on the bar. The glyph wears the rim's colour as well, so the passive is one colour on the bar. It was `$cobalt`, the third blue on a bar that already had Stink's `$frost` and the Wing trait's `$aqua.light`; violet is a hue no other passive wears.",
+  "description": "Passive icon: four-leaf clover — four circles and a darker stem. Port of the hand-drawn i_luck from Feelers' BootScene. Rim is `$arcane.dark`, the same as `ss.icon.spider`: this passive is the Spider Hand evolution's other half, so the pair reads as a pair on the bar. The glyph wears the rim's colour as well, so the passive is one colour on the bar. It was `$cobalt`, then the third blue on a bar that also had Stink's `$frost` and the Wing trait's `$aqua.light`; violet is a hue no other passive wears.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
