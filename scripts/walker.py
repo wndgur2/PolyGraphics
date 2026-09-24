@@ -18,8 +18,9 @@ body is built to that shape from its own skeleton row:
          flying back, the helmet at the hip — the runner
   haram  a square: a slab body with squared shoulders, bone pauldrons and a
          chest plate, a box helmet, the survey on the back — the wall
-  mir    a hump: the coat rises over the piece of wall carried on the back, the
-         head low and forward — the hauler
+  mir    grown: a plain bell coat, the piece of wall grown into the back and
+         vines pouring out of it, a bun under the helmet — the hauler, and the
+         vine's (Mina; the id stays `mir`, the game pins it)
   kano   a column: a narrow long coat, a peaked hood, a staff taller than the
          head — the one who does not stop
   eden   a mushroom: a round coat under a wide hat brim, the throat swelling
@@ -104,6 +105,27 @@ rect = lambda w, h, corner=0.5: {"kind": "rect", "w": w, "h": h, "corner": corne
 ell = lambda rx, ry: {"kind": "ellipse", "rx": rx, "ry": ry}
 circ = lambda r: {"kind": "circle", "r": r}
 poly = lambda pts: {"kind": "poly", "points": [[r2(x), r2(y)] for x, y in pts]}
+def smooth(ctrl, per=5):
+    """A Catmull-Rom curve through the control points: the renderer joins points with
+    straight lines, so a plant drawn from its five or six bends comes out as elbows."""
+    c = [ctrl[0]] + list(ctrl) + [ctrl[-1]]; out = []
+    for i in range(1, len(c) - 2):
+        p0, p1, p2, p3 = c[i - 1], c[i], c[i + 1], c[i + 2]
+        for k in range(per):
+            t = k / per; t2, t3 = t * t, t * t * t
+            out.append(tuple(0.5 * (2 * p1[j] + (-p0[j] + p2[j]) * t + (2 * p0[j] - 5 * p1[j] + 4 * p2[j] - p3[j]) * t2 + (-p0[j] + 3 * p1[j] - 3 * p2[j] + p3[j]) * t3) for j in (0, 1)))
+    return out + [tuple(ctrl[-1])]
+def stem(pts, w0, w1):
+    """A centreline swept by a taper from `w0` to `w1` and closed into one polygon —
+    how `ss.proj.vine` draws its cords, so a vine grown on a body is the same plant."""
+    pts = smooth(pts); n = len(pts) - 1; left, right = [], []
+    for i, (x, y) in enumerate(pts):
+        (ax, ay), (bx, by) = pts[max(0, i - 1)], pts[min(n, i + 1)]
+        L = math.hypot(bx - ax, by - ay) or 1.0
+        nx, ny = -(by - ay) / L, (bx - ax) / L
+        w = (w0 + (w1 - w0) * i / n) / 2
+        left.append((x + nx * w, y + ny * w)); right.append((x - nx * w, y - ny * w))
+    return poly(left + right[::-1])
 
 # ============================================================== 2. the coats — the primary shape of the body
 def coat_points(kind, sn, sf, hem):
@@ -163,7 +185,7 @@ def head_parts(kind, S, C, P):
 def build(name, row):
     S = dict(BASE_SKELETON); S.update(row.get("skeleton", {}))
     P = dict(BASE_POSE); P.update(row.get("pose", {}))
-    C = dict(BASE); C.update({k: v for k, v in row.items() if k not in ("skeleton", "pose", "extras", "walk", "idle", "description")})
+    C = dict(BASE); C.update({k: v for k, v in row.items() if k not in ("skeleton", "pose", "extras", "walk", "idle", "description", "display")})
     W = dict(BASE["walk"]); W.update(row.get("walk", {}))
     I = dict(BASE["idle"]); I.update(row.get("idle", {}))
     if C["sex"] == "f":
@@ -234,7 +256,7 @@ def build(name, row):
     body_group = ["cloak", "organ"] + (["cape"] if cape else [])
     for pid, fol in follow.items():
         if fol == "head": head_group.append(pid)
-        elif fol == "body": body_group.append(pid)
+        elif fol in ("body", "vine"): body_group.append(pid)
     arm_pieces = [("arm", a_c), ("hand", h_c)] + [(p["id"], tuple(p["at"])) for L in layers.values() for p in L if follow[p["id"]] in ("arm", "flutter_arm")]
     arm_far_pieces = [("arm_far", af_c), ("hand_far", hf_c)] + [(p["id"], tuple(p["at"])) for L in layers.values() for p in L if follow[p["id"]] == "arm_far"]
     foot_followers = {"foot": [p["id"] for L in layers.values() for p in L if follow[p["id"]] == "foot"],
@@ -278,6 +300,8 @@ def build(name, row):
         tr.append(track("head", "rot", [2.5 * math.sin(4 * math.pi * t + 0.8) for t in TS]))
         for pid, fol in follow.items():
             if fol == "scarf": tr.append(track(pid, "rot", [-9 * (0.5 - 0.5 * math.cos(4 * math.pi * t)) for t in TS]))
+        for i, pid in enumerate(p for p, f in follow.items() if f == "vine"):  # trailing a beat behind the step, each its own beat
+            tr.append(track(pid, "rot", [5 * math.sin(2 * math.pi * t - 1.2 - 0.9 * i) for t in TS]))
         if C["feelers"] and I["feelers"] != "still":
             tr.append(track("feeler", "rot", [-8 * math.sin(4 * math.pi * t - 0.9) for t in TS]))
             tr.append(track("feeler_far", "rot", [7 * math.sin(4 * math.pi * t - 0.9) for t in TS]))
@@ -298,9 +322,12 @@ def build(name, row):
         for pid, fol in follow.items():
             if fol == "flutter_arm": tr.append({"part": pid, "prop": "rot", "keys": [[0, 0], [0.3, 6], [0.7, -6], [1, 0]]})
             if fol == "scarf": tr.append({"part": pid, "prop": "rot", "keys": [[0, 0], [0.5, -5], [1, 0]]})
+        for i, pid in enumerate(p for p, f in follow.items() if f == "vine"):
+            a = 4 if i % 2 else -4
+            tr.append({"part": pid, "prop": "rot", "keys": [[0, 0], [0.3 + 0.1 * i, a], [0.75, -a / 2], [1, 0]]})
         return {"description": row.get("idle_desc", "the body breathes under the coat"), "duration": I["duration"], "tracks": tr}
 
-    return {"id": f"ss.char.{name}", "name": name.capitalize(), "description": row["description"], "tags": ["char"], "size": [32, 32], "meta": {"radius": 11},
+    return {"id": f"ss.char.{name}", "name": row.get("display", name.capitalize()), "description": row["description"], "tags": ["char"], "size": [32, 32], "meta": {"radius": 11},
             "parts": parts, "skeleton": skeleton, "animations": {"idle": idle(), "walk": walk()}}
 
 # ============================================================== 5. the eight
@@ -350,20 +377,27 @@ CHARACTERS = {
         "description": "A square. The survey: a slab of a body with squared shoulders, the widest of the eight, under a box of a helmet. The husk shell scraped into the mark II emitter (H027) is coming through as bone: one bleached pauldron over the near shoulder. On the back, the benchmark stakes (H001); on the far shoulder, the one pink spore pod the lure grows from. Four kilos up on the same ration, pulse thirty-eight (H043): armour, a lurch in the walk, and slower for it." + SHARED,
     },
     "mir": {
-        "sex": "m", "tint": ("timber", 2), "coat": "hump", "cloak_sx": 1.02,
-        "skeleton": {"head": (2.6, -7.2), "head_tilt": -6, "shoulder_near": (-4.4, -2.4), "shoulder_far": (6.0, -3.8), "foot_near": (-2.8, 13.1), "foot_far": (4.6, 12.5), "hip_near": (-2.8, 12.0), "hip_far": (4.4, 11.2), "pack": (-6.8, -8.0)},
+        "display": "Mina", "sex": "f", "tint": ("timber", 2), "coat": "bell", "cloak_sx": 1.02,
+        "skeleton": {"head": (2.6, -7.2), "head_tilt": -6, "shoulder_near": (-4.4, -2.4), "shoulder_far": (6.0, -3.8), "foot_near": (-2.8, 13.1), "foot_far": (4.6, 12.5), "hip_near": (-2.8, 12.0), "hip_far": (4.4, 11.2), "pack": (-6.0, -2.6)},
         "head_r": (5.2, 5.6), "pose": {"coat_lean": 5, "arm_hang": 10, "arm_far_hang": -4},
         "walk": {"duration": 0.62, "bob": 0.0, "lift": 0.8, "sway": 1.4, "arm_swing": 8},
         "extras": lambda c: [
-            ("behind", P_("wall", c["S"]["pack"], poly([(-2.8, -2.4), (2.6, -2.8), (3.0, 2.4), (-2.6, 2.6)]), "$rust", rot=-12, stroke=hair), "body"),
-            ("behind", P_("wall_crack", (c["S"]["pack"][0] + 0.2, c["S"]["pack"][1] - 0.6), rect(3.2, 0.6, 0.2), "$rust.dark", rot=24), "body"),
-            ("over_cape", P_("cord", (0.2, -0.6), rect(1.1, 9.4, 0.4), "$bone", rot=-32), "body"),
-            ("over_coat", P_("hump_shade", (-7.6, 1.2), ell(2.2, 5.0), shade(c["T"], -1), rot=-10), "body"),
+            # the wall has grown into her back and the vines come out of it: drawn behind
+            # the coat, each rooted at its own `at` so it sways from there, and hanging —
+            # they pour down her back and trail, they do not reach
+            ("behind", P_("vine_long", (c["S"]["pack"][0] - 0.8, c["S"]["pack"][1] + 0.8), stem([(0, 0), (-2.2, 1.2), (-3.4, 3.6), (-3.0, 6.4), (-3.8, 9.0), (-5.8, 10.8), (-7.6, 11.0)], 2.4, 0.3), "$moss.light", stroke=hair), "vine"),
+            ("behind", P_("vine_mid", (c["S"]["pack"][0] - 0.6, c["S"]["pack"][1] - 0.2), stem([(0, 0), (-2.6, -0.4), (-4.8, 0.8), (-5.8, 3.2), (-5.4, 5.6), (-6.6, 7.4)], 2.0, 0.3), "$moss", stroke=hair), "vine"),
+            ("behind", P_("vine_up", (c["S"]["pack"][0] + 0.2, c["S"]["pack"][1] - 1.6), stem([(0, 0), (-1.2, -2.2), (-3.2, -3.4), (-5.2, -3.0), (-6.4, -1.4), (-6.6, 0.4)], 1.8, 0.3), "$moss.light", stroke=hair), "vine"),
+            ("behind", P_("wall", c["S"]["pack"], poly([(-2.2, -1.6), (-0.4, -2.6), (1.8, -2.2), (2.6, -0.2), (2.0, 1.8), (-0.2, 2.6), (-2.2, 1.4)]), "$rust.light", rot=-12, stroke=hair), "body"),
+            ("behind", P_("wall_seam", (c["S"]["pack"][0] - 0.8, c["S"]["pack"][1] + 0.1), rect(0.7, 3.0, 0.3), "$rust", rot=-24), "body"),
+            ("over_cape", P_("tendril", (c["sn"][0] + 0.6, c["sn"][1] - 0.2), stem([(0, 0), (1.4, 0.8), (2.4, 2.4), (3.8, 3.2)], 1.4, 0.3), "$moss.light", stroke=hair), "body"),
+            ("in_hand", P_("bun", (c["head"][0] - 5.2, c["head"][1] - 0.6), ell(2.3, 2.1), "$slate.dark", rot=-10, stroke=hair), "head"),
             ("over_head", P_("lamp_ring", (c["head"][0] + 2.4, c["head"][1] - 3.6), circ(1.9), "$slate.dark", stroke=hair), "head"),
             ("over_head", P_("lamp", (c["head"][0] + 2.4, c["head"][1] - 3.6), circ(1.2), "$silent"), "head"),
         ],
-        "walk_desc": "the haul: no bounce at all, short flat steps, the load riding still on the back",
-        "description": "A hump. The burrow, walked from the inside down to the queen: a stocky bell of a coat whose back rounds up over the piece of its wall carried high on the back where the emitter used to be, warm half a month on, chewing inside it at night (M038, M042), corded across the chest, the rust of it showing over the near shoulder. A head lamp on the helmet, the one light the eight carry — the burrow is where the compass stopped (M005). The head sits a little low and forward, the stance is wide, and the walk has no bounce in it — the Porter's haul, twenty-nine levels of it (M035)." + SHARED,
+        "walk_desc": "the haul: no bounce at all, short flat steps, the vines on the back swinging a beat behind each one",
+        "idle_desc": "the body breathes under the coat; the vines on the back stir, one after another",
+        "description": "Grown. The burrow, walked from the inside down to the queen: a plain bell of a coat drawn in at the waist, and the piece of its wall — the wall that heals its own cuts (M009), warm half a month on, chewing inside it at night (M038, M042) — no longer carried where the emitter used to be but grown into the upper back behind the near shoulder. Out of its seam come the vines she fights with: three pour down her back and trail, swaying a beat behind the step, and one comes over the near shoulder onto the chest. The weapon is the body, the same plant `ss.proj.vine` lays on the ground, and the same greens. A head lamp on the helmet, the one light the eight carry — the burrow is where the compass stopped (M005) — and a bun of dark hair at the back of the head under it. The head sits a little low and forward, the stance is wide, and the walk has no bounce in it — the Porter's haul, twenty-nine levels of it (M035)." + SHARED,
     },
     "kano": {
         "sex": "m", "tint": ("silent", 0), "coat": "column", "cloak_sx": 1.0, "hem": 0.0, "head": "hood", "head_r": (4.8, 6.0), "visor_w": 5.8,
