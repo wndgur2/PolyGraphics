@@ -1,0 +1,19 @@
+{
+  "id": "ss.icon.lock",
+  "name": "Lock icon",
+  "description": "A shut stage on Feelers' map page: a padlock, pale body and shackle over a dark rim so it reads on whatever picture it lies on, the keyhole cut dark through the body. No tile — it stands on the stage's own picture rather than in a slot.",
+  "tags": ["icon"],
+  "size": [32, 32],
+  "parts": [
+    { "id": "shackle_rim", "at": [0, -4], "shape": { "kind": "ring", "r": 6.5, "width": 5, "from": 180, "to": 360 }, "fill": "$dead" },
+    { "id": "leg_rim_l", "at": [-6.5, -1], "shape": { "kind": "rect", "w": 5, "h": 6 }, "fill": "$dead" },
+    { "id": "leg_rim_r", "at": [6.5, -1], "shape": { "kind": "rect", "w": 5, "h": 6 }, "fill": "$dead" },
+    { "id": "body_rim", "at": [0, 6], "shape": { "kind": "rect", "w": 22, "h": 17, "corner": 3.5 }, "fill": "$dead" },
+    { "id": "shackle", "at": [0, -4], "shape": { "kind": "ring", "r": 6.5, "width": 2.5, "from": 180, "to": 360 }, "fill": "$husk" },
+    { "id": "leg_l", "at": [-6.5, -1], "shape": { "kind": "rect", "w": 2.5, "h": 6 }, "fill": "$husk" },
+    { "id": "leg_r", "at": [6.5, -1], "shape": { "kind": "rect", "w": 2.5, "h": 6 }, "fill": "$husk" },
+    { "id": "body", "at": [0, 6], "shape": { "kind": "rect", "w": 19, "h": 14, "corner": 2.5 }, "fill": "$husk" },
+    { "id": "keyhole", "at": [0, 4.5], "shape": { "kind": "circle", "r": 2.2 }, "fill": "$dead" },
+    { "id": "keyslot", "shape": { "kind": "poly", "points": [[-1.2, 5], [1.2, 5], [1.8, 10], [-1.8, 10]] }, "fill": "$dead" }
+  ]
+}
