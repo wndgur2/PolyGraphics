@@ -44,12 +44,14 @@ src/                      schema (zod) · app-schema · apps (the loader) · tok
                           compiler · lint · rules · gallery · cli · sound-schema/compile/render
 scripts/                  watch (rebuild on save) · site (the gallery as a static site) · inspect · filmstrip
                           inspect-sound · readability · compare · adapter and lint tests
+                          spikes/ — evidence for a plan, not system code (see graphics-capability-plan.md)
 dist/<id>/assets.json     committed: the app's bundle, imported as `polygraphics/apps/<id>/assets`
 dist/<id>/sounds.json     likewise, as `polygraphics/apps/<id>/sounds`
 dist/assets.json          the union of every app, `polygraphics/assets` — what the current consumer imports
 out/                      generated, ignored: svg/, compiled/, png/, wav/, gallery.html, manifest.json
 site/                     generated, ignored: the gallery as Vercel serves it (index.html + wav/ + spec/)
 docs/                     reference-analysis.md — why this exists · app-design-systems-plan.md — one grammar, a convention per app
+                          graphics-capability-plan.md — materials, looks and scenes: what drawing past shape art takes
 ```
 
 ## Apps
@@ -619,4 +621,5 @@ You are the intended primary author. Rules of the road:
 - Part libraries beyond `demo.lib.face` (hands, crowns, telegraph markers); named particle-emitter presets. `core/` is where one goes once it paints with base tokens only
 - Palette lint: flag near-duplicate hex across tokens; gradient support in adapters (currently flat mid-color fallback)
 - ~~App design systems~~ → shipped, phases 0–4 of [docs/app-design-systems-plan.md](docs/app-design-systems-plan.md): `apps/<id>/` per app, a manifest whose rules `check` reads, per-app bundles. Still to do: the second real app (Cellspire is the candidate) with no edit to `src/`; the spider hand's own rim colour; dropping the union bundle once the game imports `polygraphics/apps/ss/assets`
+- Graphics past shape art — a painterly and a pixel-art reference as the bar: bake-first engine contract, curves and brushes, materials and emission as tokens, a per-app `look`, scene documents, a style probe. Proposal and spikes in [docs/graphics-capability-plan.md](docs/graphics-capability-plan.md); nothing landed
 - ~~Sound: schema, offline bake, WebAudio adapter, the SFX set~~ → shipped; 22 documents in `apps/ss/sounds/`. ~~Spectrograms, before/after, a phone to listen through, K-weighted loudness and family bands, `unison` / `echo` / `phrase` / `takes`~~ → shipped, phases 1–3 of [docs/sound-quality-plan.md](docs/sound-quality-plan.md). Still to do, in that plan's order: re-author the placeholder gestures one family at a time with a listening record, fill the seam (new documents, variants and takes played, panning on the engine side), a Godot path (offline WAV rather than a live graph), and the adaptive score's *materials* (the score itself is a scheduler and stays in the game)
