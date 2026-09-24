@@ -1,0 +1,158 @@
+{
+  "id": "ss.enemy.plug",
+  "name": "Plug",
+  "description": "What a Warden fires out of its vent: a chip of the door. The same keystone the body is — a flat face at the front narrowing to nothing behind, `$chitin.dark` packed earth under a `$husk` rim, two dark strata across it — cut to a bolt's size, with the acid it was holding back seeping through a crack in the middle. Its own drawing because it used to borrow the Gland's spit (`ss.enemy.shot`), so a boss's volley and the commonest shooter in the burrow threw the same bead; the wedge is the one shape nothing else in the game fires, and it is the Warden's. The glow stays the vent's teal so the shot still reads as leaving that body. Drawn pointing +x — face first — and rotated by the game to its heading.",
+  "tags": [
+    "enemy",
+    "projectile"
+  ],
+  "size": [
+    20,
+    14
+  ],
+  "parts": [
+    {
+      "id": "glow",
+      "at": [
+        1,
+        0
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 8,
+        "ry": 5
+      },
+      "fill": "$spore.light@soft"
+    },
+    {
+      "id": "outline",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            7.5,
+            -5.5
+          ],
+          [
+            7.5,
+            5.5
+          ],
+          [
+            -9,
+            1.6
+          ],
+          [
+            -9,
+            -1.6
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "body",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            6.2,
+            -4.3
+          ],
+          [
+            6.2,
+            4.3
+          ],
+          [
+            -7.4,
+            1
+          ],
+          [
+            -7.4,
+            -1
+          ]
+        ]
+      },
+      "fill": "$chitin.dark"
+    },
+    {
+      "id": "stratum_a",
+      "at": [
+        0.5,
+        -1.8
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 9,
+        "h": 0.7
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "stratum_b",
+      "at": [
+        0.5,
+        1.8
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 9,
+        "h": 0.7
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "face_rim",
+      "at": [
+        6.2,
+        0
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 1.6,
+        "h": 8.6
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "seep",
+      "at": [
+        2,
+        0
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3,
+        "ry": 1.7
+      },
+      "fill": {
+        "gradient": "radial",
+        "from": [
+          0.5,
+          0.5
+        ],
+        "stops": [
+          [
+            0,
+            "$spore.light"
+          ],
+          [
+            1,
+            "$spore@0.2"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "glint",
+      "at": [
+        6.2,
+        -3
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.8
+      },
+      "fill": "$silent"
+    }
+  ]
+}
