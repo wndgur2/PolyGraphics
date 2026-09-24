@@ -762,6 +762,56 @@
         "spot_4.fill": "$ember",
         "spot_5.fill": "$ember"
       }
+    },
+    "final": {
+      "description": "Phase three: the elytra are gone rather than lifted, and the wings they were hiding have nothing left in them. The eyes are out \u2014 it was only ever blind between stops, and now it is blind in them too. What is left is the running and the jaws.",
+      "set": {
+        "elytron_u.opacity": 0,
+        "elytron_d.opacity": 0,
+        "hindwing_u.opacity": 1,
+        "hindwing_d.opacity": 1,
+        "hindwing_u.fill": "$smoke@soft",
+        "hindwing_d.fill": "$smoke@soft",
+        "eye_u.fill": "$dead",
+        "eye_d.fill": "$dead",
+        "eye_u_core.fill": "$ink",
+        "eye_d_core.fill": "$ink",
+        "abdomen.fill": "$husk.dark",
+        "seam.opacity": 0,
+        "spot_0.opacity": 0,
+        "spot_1.opacity": 0,
+        "spot_2.opacity": 0,
+        "spot_3.opacity": 0,
+        "spot_4.opacity": 0,
+        "spot_5.opacity": 0,
+        "thorax.fill": "$moss.dark2",
+        "thorax_light.fill": "$moss.dark",
+        "head.fill": "$moss.dark",
+        "ant_u.fill": "$dead",
+        "ant_d.fill": "$dead",
+        "jaw_u.fill": "$white",
+        "jaw_d.fill": "$white",
+        "jaw_u.scale": [
+          1.3,
+          1.3
+        ],
+        "jaw_d.scale": [
+          1.3,
+          1.3
+        ],
+        "jaw_u_o.scale": [
+          1.3,
+          1.3
+        ],
+        "jaw_d_o.scale": [
+          1.3,
+          1.3
+        ],
+        "organ.scale": [
+          1.9,
+          1.6
+        ]
+      }
     }
   },
   "animations": {
