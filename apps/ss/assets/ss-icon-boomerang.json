@@ -7,7 +7,7 @@
   "parts": [
     { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$chitin" },
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
-    { "id": "glyph", "use": "ss.proj.boom", "at": [-1.5, 1.5], "scale": 1.05 }
+    { "id": "glyph", "use": "ss.proj.boom", "scale": 1.05 }
   ],
   "variants": {
     "evolved": {

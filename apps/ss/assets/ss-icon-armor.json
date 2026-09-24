@@ -1,14 +1,14 @@
 {
   "id": "ss.icon.armor",
   "name": "Armor icon",
-  "description": "Passive icon: pale steel shield — a flat plate over a point. Port of the hand-drawn i_armor from Feelers' BootScene.",
+  "description": "Passive icon: grey shield — a flat plate over a point. Port of the hand-drawn i_armor from Feelers' BootScene. Tile and glyph are `$smoke.light2`, a neutral grey. They were `$steel.light`, pale and blued, which sat ΔE 15.5 from Pulse Rate's cream and 14.9 from Stink's `$frost`: on the bar the shield read as one more light slot among three. The neutral grey stands 25.8 from Pulse Rate's white and 23.5 from `$frost`.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$steel.light" },
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$smoke.light2" },
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
-    { "id": "plate", "at": [0, -4.5], "shape": { "kind": "rect", "w": 18, "h": 7 }, "fill": "$steel.light" },
-    { "id": "point", "shape": { "kind": "poly", "points": [[-9, -2], [9, -2], [0, 10]] }, "fill": "$steel.light" }
+    { "id": "plate", "at": [0, -4.5], "shape": { "kind": "rect", "w": 18, "h": 7 }, "fill": "$smoke.light2" },
+    { "id": "point", "shape": { "kind": "poly", "points": [[-9, -2], [9, -2], [0, 10]] }, "fill": "$smoke.light2" }
   ],
   "variants": {
     "evolved": {
