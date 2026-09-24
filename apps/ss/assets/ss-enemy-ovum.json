@@ -1,0 +1,1173 @@
+{
+  "id": "ss.enemy.ovum",
+  "name": "Ovum",
+  "description": "What the Matriarch lays: one of the pink shapes drifting inside her brood chamber, put down on the floor. A single rigid egg sitting in a smear of jelly: a pale, yellowed shell (`$ochre.light2`, a fifth see-through, so the floor and the jelly show in it) with her `$pheromone` glowing through it from inside, and the thing inside showing through with it — a curled grub, already carrying a lit organ, because what she lays now is marked. Pale rather than her pink so it reads as an egg on a floor and against her, not as one more pink body. The only body on the roster that does not move of its own accord: it rocks. It is two pieces already — a cup and a cap, meeting along a hairline crack round the upper third — and that is where it opens. The game draws it in place of the young for the hatch window, sized to what is coming out, so a Bulwark's egg is visibly bigger than a Replete's. Idle (`rock`) is the egg rocking on the jelly with the grub turning inside — the one thing on the field that says 'about to'. `death` is the hatch or the kill, the same break either way: the cap kicks off along the crack, the dark of the empty cup shows where it was, what was inside is gone, the cup settles and the jelly spreads.",
+  "tags": [
+    "enemy",
+    "brood"
+  ],
+  "size": [
+    40,
+    48
+  ],
+  "meta": {
+    "radius": 11
+  },
+  "parts": [
+    {
+      "id": "jelly",
+      "at": [
+        0,
+        10.6
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 13.5,
+        "ry": 4.2
+      },
+      "fill": "$pheromone.dark@soft"
+    },
+    {
+      "id": "jelly_sheen",
+      "at": [
+        -4.2,
+        9.7
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 4.6,
+        "ry": 1.2
+      },
+      "fill": "$pheromone.light@ghost"
+    },
+    {
+      "id": "cup",
+      "at": [
+        0,
+        -1
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            9.87,
+            -4.28
+          ],
+          [
+            10.37,
+            -1.96
+          ],
+          [
+            10.49,
+            0.44
+          ],
+          [
+            10.23,
+            2.81
+          ],
+          [
+            9.59,
+            5.08
+          ],
+          [
+            8.6,
+            7.17
+          ],
+          [
+            7.29,
+            8.99
+          ],
+          [
+            5.72,
+            10.48
+          ],
+          [
+            3.93,
+            11.59
+          ],
+          [
+            2.0,
+            12.27
+          ],
+          [
+            0.0,
+            12.5
+          ],
+          [
+            -2.0,
+            12.27
+          ],
+          [
+            -3.93,
+            11.59
+          ],
+          [
+            -5.72,
+            10.48
+          ],
+          [
+            -7.29,
+            8.99
+          ],
+          [
+            -8.6,
+            7.17
+          ],
+          [
+            -9.59,
+            5.08
+          ],
+          [
+            -10.23,
+            2.81
+          ],
+          [
+            -10.49,
+            0.44
+          ],
+          [
+            -10.37,
+            -1.96
+          ],
+          [
+            -9.87,
+            -4.28
+          ],
+          [
+            -7.2,
+            -6.4
+          ],
+          [
+            -4.6,
+            -4.4
+          ],
+          [
+            -1.8,
+            -6.9
+          ],
+          [
+            1.0,
+            -4.6
+          ],
+          [
+            3.9,
+            -6.6
+          ],
+          [
+            6.6,
+            -4.5
+          ]
+        ]
+      },
+      "fill": "$ochre.light2@0.82",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "hollow",
+      "at": [
+        0,
+        -6.4
+      ],
+      "opacity": 0,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 8.4,
+        "ry": 2.6
+      },
+      "fill": "$pheromone.dark"
+    },
+    {
+      "id": "albumen",
+      "at": [
+        -1.2,
+        1.4
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 6.6,
+        "ry": 7.4
+      },
+      "fill": "$pheromone@soft"
+    },
+    {
+      "id": "embryo",
+      "at": [
+        0.6,
+        2.6
+      ],
+      "rot": -20,
+      "shape": {
+        "kind": "ring",
+        "r": 4.2,
+        "width": 2.8,
+        "from": 30,
+        "to": 300
+      },
+      "fill": "$pheromone.dark"
+    },
+    {
+      "id": "embryo_head",
+      "at": [
+        4.4,
+        0.9
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.1
+      },
+      "fill": "$pheromone.dark"
+    },
+    {
+      "id": "organ",
+      "at": [
+        -3.3,
+        3.8
+      ],
+      "use": "ss.lib.organ",
+      "scale": [
+        0.4,
+        0.4
+      ]
+    },
+    {
+      "id": "shade",
+      "at": [
+        0,
+        -1
+      ],
+      "shape": {
+        "kind": "ring",
+        "r": 9.3,
+        "width": 2.2,
+        "from": 15,
+        "to": 165
+      },
+      "fill": "$pheromone.light@soft"
+    },
+    {
+      "id": "cap",
+      "at": [
+        0,
+        -1
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -9.87,
+            -4.28
+          ],
+          [
+            -9.36,
+            -5.67
+          ],
+          [
+            -8.7,
+            -6.99
+          ],
+          [
+            -7.92,
+            -8.2
+          ],
+          [
+            -7.03,
+            -9.29
+          ],
+          [
+            -6.02,
+            -10.24
+          ],
+          [
+            -4.93,
+            -11.04
+          ],
+          [
+            -3.76,
+            -11.67
+          ],
+          [
+            -2.54,
+            -12.13
+          ],
+          [
+            -1.28,
+            -12.41
+          ],
+          [
+            -0.0,
+            -12.5
+          ],
+          [
+            1.28,
+            -12.41
+          ],
+          [
+            2.54,
+            -12.13
+          ],
+          [
+            3.76,
+            -11.67
+          ],
+          [
+            4.93,
+            -11.04
+          ],
+          [
+            6.02,
+            -10.24
+          ],
+          [
+            7.03,
+            -9.29
+          ],
+          [
+            7.92,
+            -8.2
+          ],
+          [
+            8.7,
+            -6.99
+          ],
+          [
+            9.36,
+            -5.67
+          ],
+          [
+            9.87,
+            -4.28
+          ],
+          [
+            6.6,
+            -4.5
+          ],
+          [
+            3.9,
+            -6.6
+          ],
+          [
+            1.0,
+            -4.6
+          ],
+          [
+            -1.8,
+            -6.9
+          ],
+          [
+            -4.6,
+            -4.4
+          ],
+          [
+            -7.2,
+            -6.4
+          ]
+        ]
+      },
+      "fill": "$ochre.light2@0.82",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "gloss",
+      "at": [
+        0,
+        -1
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -6.4,
+            -6.6
+          ],
+          [
+            -5.2,
+            -9.4
+          ],
+          [
+            -2.6,
+            -10.8
+          ],
+          [
+            -3.4,
+            -8.6
+          ],
+          [
+            -5.0,
+            -6.9
+          ]
+        ]
+      },
+      "fill": "$white@soft"
+    }
+  ],
+  "animations": {
+    "rock": {
+      "description": "the egg rocks on its jelly in a short burst and settles — cup, cap and shine turning as one about the shell's own centre — while the grub inside turns over a beat later and the organ in it swells; the jelly breathes under it",
+      "duration": 1.0,
+      "tracks": [
+        {
+          "part": "cup",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              6.5
+            ],
+            [
+              0.26,
+              -5
+            ],
+            [
+              0.4,
+              3
+            ],
+            [
+              0.54,
+              -1.2
+            ],
+            [
+              0.66,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "shade",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              6.5
+            ],
+            [
+              0.26,
+              -5
+            ],
+            [
+              0.4,
+              3
+            ],
+            [
+              0.54,
+              -1.2
+            ],
+            [
+              0.66,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "cap",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              6.5
+            ],
+            [
+              0.26,
+              -5
+            ],
+            [
+              0.4,
+              3
+            ],
+            [
+              0.54,
+              -1.2
+            ],
+            [
+              0.66,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "gloss",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              6.5
+            ],
+            [
+              0.26,
+              -5
+            ],
+            [
+              0.4,
+              3
+            ],
+            [
+              0.54,
+              -1.2
+            ],
+            [
+              0.66,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "embryo",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -20
+            ],
+            [
+              0.2,
+              -20
+            ],
+            [
+              0.34,
+              -38
+            ],
+            [
+              0.5,
+              -8
+            ],
+            [
+              0.66,
+              -24
+            ],
+            [
+              1,
+              -20
+            ]
+          ]
+        },
+        {
+          "part": "embryo_head",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.34,
+              -1.4
+            ],
+            [
+              0.5,
+              0.8
+            ],
+            [
+              0.66,
+              -0.2
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "embryo_head",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.34,
+              -0.9
+            ],
+            [
+              0.5,
+              0.4
+            ],
+            [
+              0.66,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "organ",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.3,
+              1.35
+            ],
+            [
+              0.6,
+              0.95
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "albumen",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.3,
+              0.65
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "jelly",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.14,
+              1.05
+            ],
+            [
+              0.4,
+              0.98
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
+      ]
+    },
+    "death": {
+      "description": "the break: the egg swells once, the cap kicks off along the crack and tumbles away with its shine, the dark of the empty cup shows where it was, the organ flares and whatever was inside is simply gone; the cup sags and the jelly spreads under it",
+      "duration": 0.45,
+      "tracks": [
+        {
+          "part": "cup",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.12,
+              1.08
+            ],
+            [
+              0.5,
+              0.92
+            ],
+            [
+              0.85,
+              0.9
+            ],
+            [
+              1,
+              0.9
+            ]
+          ]
+        },
+        {
+          "part": "hollow",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              0
+            ],
+            [
+              0.3,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "hollow",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.12,
+              1.08
+            ],
+            [
+              0.5,
+              0.92
+            ],
+            [
+              0.85,
+              0.9
+            ],
+            [
+              1,
+              0.9
+            ]
+          ]
+        },
+        {
+          "part": "shade",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.12,
+              1.08
+            ],
+            [
+              0.5,
+              0.9
+            ],
+            [
+              0.85,
+              0.86
+            ],
+            [
+              1,
+              0.86
+            ]
+          ]
+        },
+        {
+          "part": "cap",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              -1.2
+            ],
+            [
+              0.45,
+              -6.2
+            ],
+            [
+              0.85,
+              -4.2
+            ],
+            [
+              1,
+              -4.2
+            ]
+          ]
+        },
+        {
+          "part": "cap",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              0.4
+            ],
+            [
+              0.45,
+              3.2
+            ],
+            [
+              0.85,
+              5.4
+            ],
+            [
+              1,
+              5.4
+            ]
+          ]
+        },
+        {
+          "part": "cap",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              6
+            ],
+            [
+              0.45,
+              34
+            ],
+            [
+              0.85,
+              52
+            ],
+            [
+              1,
+              52
+            ]
+          ]
+        },
+        {
+          "part": "cap",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.5,
+              1
+            ],
+            [
+              0.85,
+              0.35
+            ],
+            [
+              1,
+              0.35
+            ]
+          ]
+        },
+        {
+          "part": "gloss",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              -1.2
+            ],
+            [
+              0.45,
+              -6.2
+            ],
+            [
+              0.85,
+              -4.2
+            ],
+            [
+              1,
+              -4.2
+            ]
+          ]
+        },
+        {
+          "part": "gloss",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              0.4
+            ],
+            [
+              0.45,
+              3.2
+            ],
+            [
+              0.85,
+              5.4
+            ],
+            [
+              1,
+              5.4
+            ]
+          ]
+        },
+        {
+          "part": "gloss",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              6
+            ],
+            [
+              0.45,
+              34
+            ],
+            [
+              0.85,
+              52
+            ],
+            [
+              1,
+              52
+            ]
+          ]
+        },
+        {
+          "part": "gloss",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.3,
+              0.6
+            ],
+            [
+              0.6,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "embryo",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.12,
+              1
+            ],
+            [
+              0.3,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "embryo_head",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.12,
+              1
+            ],
+            [
+              0.3,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "organ",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.1,
+              1.6
+            ],
+            [
+              0.3,
+              0.2
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "organ",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.12,
+              1
+            ],
+            [
+              0.3,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "albumen",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.12,
+              1
+            ],
+            [
+              0.4,
+              0.25
+            ],
+            [
+              0.85,
+              0.2
+            ],
+            [
+              1,
+              0.2
+            ]
+          ]
+        },
+        {
+          "part": "jelly",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.2,
+              1.12
+            ],
+            [
+              0.6,
+              1.3
+            ],
+            [
+              0.85,
+              1.34
+            ],
+            [
+              1,
+              1.34
+            ]
+          ]
+        },
+        {
+          "part": "jelly_sheen",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.4,
+              0.3
+            ],
+            [
+              0.85,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}
