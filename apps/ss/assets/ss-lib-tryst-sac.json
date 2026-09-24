@@ -1,0 +1,135 @@
+{
+ "id": "ss.lib.tryst-sac",
+ "name": "Tryst acid sac",
+ "description": "색세기's acid sac: a ribbed lantern of pale membrane with the acid glowing through it, pointing -x toward its nozzle. Composed by `ss.enemy.tryst` behind her waist and pumped as one part by her spray clip. Pink while she is whole; the enraged variant burns red.",
+ "tags": [
+  "lib"
+ ],
+ "size": [
+  20,
+  16
+ ],
+ "parts": [
+  {
+   "id": "halo",
+   "shape": {
+    "kind": "ellipse",
+    "rx": 8.8,
+    "ry": 7.0
+   },
+   "fill": "$pheromone@ghost"
+  },
+  {
+   "id": "skin",
+   "shape": {
+    "kind": "ellipse",
+    "rx": 7.2,
+    "ry": 5.6
+   },
+   "fill": "$pink",
+   "stroke": {
+    "color": "$pheromone.dark2",
+    "width": "thin"
+   }
+  },
+  {
+   "id": "acid",
+   "at": [
+    -0.6,
+    0.8
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 5.2,
+    "ry": 3.8
+   },
+   "fill": "$pheromone.light"
+  },
+  {
+   "id": "core",
+   "at": [
+    -1.4,
+    1.2
+   ],
+   "shape": {
+    "kind": "ellipse",
+    "rx": 2.6,
+    "ry": 1.9
+   },
+   "fill": "$pheromone.light2"
+  },
+  {
+   "id": "rib_0",
+   "at": [
+    -3.6,
+    0
+   ],
+   "rot": 8,
+   "shape": {
+    "kind": "rect",
+    "w": 0.55,
+    "h": 8.6,
+    "corner": 0.27
+   },
+   "fill": "$husk@heavy"
+  },
+  {
+   "id": "rib_1",
+   "at": [
+    0.2,
+    0
+   ],
+   "rot": 4,
+   "shape": {
+    "kind": "rect",
+    "w": 0.55,
+    "h": 10.6,
+    "corner": 0.27
+   },
+   "fill": "$husk@heavy"
+  },
+  {
+   "id": "rib_2",
+   "at": [
+    3.9,
+    0
+   ],
+   "shape": {
+    "kind": "rect",
+    "w": 0.55,
+    "h": 8.0,
+    "corner": 0.27
+   },
+   "fill": "$husk@heavy"
+  },
+  {
+   "id": "shine",
+   "at": [
+    1.4,
+    -3.0
+   ],
+   "rot": -8,
+   "shape": {
+    "kind": "ellipse",
+    "rx": 3.2,
+    "ry": 1.0
+   },
+   "fill": "$silent@soft"
+  }
+ ],
+ "variants": {
+  "enraged": {
+   "description": "her last phase: the acid burns red-orange through the skin",
+   "set": {
+    "halo.fill": "$blood@ghost",
+    "skin.fill": "$blood.light",
+    "skin.stroke": {
+     "color": "$blood.dark",
+     "width": "thin"
+    },
+    "acid.fill": "$ember",
+    "core.fill": "$gold"
+   }
+  }
+ }
+}
