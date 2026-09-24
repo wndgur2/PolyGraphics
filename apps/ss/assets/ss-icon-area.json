@@ -1,11 +1,11 @@
 {
   "id": "ss.icon.area",
   "name": "Area icon",
-  "description": "Passive icon: a bright inner circle and a fainter outer one — reach spreading outward. Port of the hand-drawn i_area from Feelers' BootScene.",
+  "description": "Passive icon: a bright inner circle and a fainter outer one — reach spreading outward. Port of the hand-drawn i_area from Feelers' BootScene. Rim is `$pink`, the same as `ss.icon.mine`: this passive is the Spore evolution's other half, so the pair reads as a pair on the bar.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$ember.light" },
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$pink" },
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
     { "id": "near", "shape": { "kind": "ring", "r": 5, "width": 2 }, "fill": "$ember.light" },
     { "id": "far", "shape": { "kind": "ring", "r": 10, "width": 2 }, "fill": "$ember.light@0.5" }

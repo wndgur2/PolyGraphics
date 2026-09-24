@@ -1,11 +1,11 @@
 {
   "id": "ss.icon.maxhp",
   "name": "Max HP icon",
-  "description": "Passive icon: coral heart built the classic way, two lobes over a point. Port of the hand-drawn i_maxhp from Feelers' BootScene.",
+  "description": "Passive icon: coral heart built the classic way, two lobes over a point. Port of the hand-drawn i_maxhp from Feelers' BootScene. Rim is `$sage`, the same as `ss.icon.vine`: this passive is the Vine evolution's other half, so the pair reads as a pair on the bar.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$coral" },
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$sage" },
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
     { "id": "lobe_l", "at": [-4.5, -3], "shape": { "kind": "circle", "r": 5.5 }, "fill": "$coral" },
     { "id": "lobe_r", "at": [4.5, -3], "shape": { "kind": "circle", "r": 5.5 }, "fill": "$coral" },
