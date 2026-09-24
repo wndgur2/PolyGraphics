@@ -1,13 +1,13 @@
 {
   "id": "ss.icon.cooldown",
   "name": "Cooldown icon",
-  "description": "Passive icon: an hourglass, two triangles meeting point-to-point. Port of the hand-drawn i_cooldown from Feelers' BootScene. Rim is `$husk`, the same as `ss.icon.whip`: this passive is the Lash evolution's other half, so the pair reads as a pair on the bar. The glyph wears the rim's colour as well, so the passive is one colour on the bar.",
+  "description": "Passive icon: an hourglass, two triangles meeting point-to-point. Port of the hand-drawn i_cooldown from Feelers' BootScene. Rim is `$white`, the same as `ss.icon.whip`: this passive is the Lash evolution's other half, so the pair reads as a pair on the bar. The glyph wears the rim's colour as well, so the passive is one colour on the bar. It was the Lash's `$husk`, a cream that sat ΔE 15.5 from the grey the Shell and Scab wore, and three pale slots read as one shelf; pure white stands 25.8 off the grey they wear now.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$husk" },
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$white" },
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
-    { "id": "top", "shape": { "kind": "poly", "points": [[-7, -8], [7, -8], [0, 0]] }, "fill": "$husk" },
-    { "id": "bottom", "shape": { "kind": "poly", "points": [[-7, 8], [7, 8], [0, 0]] }, "fill": "$husk" }
+    { "id": "top", "shape": { "kind": "poly", "points": [[-7, -8], [7, -8], [0, 0]] }, "fill": "$white" },
+    { "id": "bottom", "shape": { "kind": "poly", "points": [[-7, 8], [7, 8], [0, 0]] }, "fill": "$white" }
   ]
 }

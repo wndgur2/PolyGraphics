@@ -1,11 +1,11 @@
 {
   "id": "ss.icon.spider",
   "name": "Spider hand icon",
-  "description": "UI slot icon for the spider hand: three arms fanned off one knuckle, caught mid-reach. Composes ss.lib.spider-arm three times rather than drawing a leg three times, so the slot, the two finds and the evolution all show the same limb. The rim is `$cobalt`, a blued steel: the arms are drawn in `$steel`, and this is that colour with the grey taken out, far enough from every other rim (nearest `$frost`, ΔE 22.4) to be its own slot.",
+  "description": "UI slot icon for the spider hand: three arms fanned off one knuckle, caught mid-reach. Composes ss.lib.spider-arm three times rather than drawing a leg three times, so the slot, the two finds and the evolution all show the same limb. The rim is `$arcane.dark`, a deep violet. It was `$cobalt`, the arms' `$steel` with the grey taken out, and that made the Four-Leaf Clover that wears this rim a third blue on the passive bar. Its nearest rim is the Wing blade's `$arcane` at ΔE 16.4 — the same hue a step darker, which the `distinct` rule's 13 clears, where the brighter violet tried for Widow's Grip sat 8.5.",
   "tags": ["icon", "weapon"],
   "size": [32, 32],
   "parts": [
-    {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$cobalt"},
+    {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$arcane.dark"},
     {"id": "inner", "shape": {"kind": "rect", "w": 28, "h": 28, "corner": 5}, "fill": "$coal.dark"},
     {"id": "arm_0", "at": [-6.0, 8.0], "rot": -78.0, "use": "ss.lib.spider-arm"},
     {"id": "arm_1", "at": [-6.0, 8.0], "rot": -45.0, "use": "ss.lib.spider-arm"},

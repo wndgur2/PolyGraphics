@@ -1,11 +1,11 @@
 {
   "id": "ss.icon.whip",
   "name": "Lash icon",
-  "description": "UI slot icon for the mandible lash. Composes the real `ss.proj.slash` arc via `use` at a quarter scale, so retuning the weapon's sweep restyles its icon in the same edit. Rim is `$husk` \u2014 the bone the mandible is, and three quarters of what this icon draws.",
+  "description": "UI slot icon for the mandible lash. Composes the real `ss.proj.slash` arc via `use` at a quarter scale, so retuning the weapon's sweep restyles its icon in the same edit. Rim is `$white` \u2014 the bone the mandible is, bleached. It was `$husk`, three quarters of what this icon draws, until the Pulse Rate passive that wears this rim had to read as white beside the Shell's grey; the mandible inside keeps its husk, so the rim is the bone a step whiter rather than a colour from somewhere else.",
   "tags": ["icon", "weapon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$husk" },
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$white" },
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
     { "id": "glyph", "use": "ss.proj.slash", "at": [-5, 0], "scale": 0.26 }
   ],
