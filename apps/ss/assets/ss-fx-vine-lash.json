@@ -1,7 +1,7 @@
 {
   "id": "ss.fx.vine-lash",
   "name": "Vine lash",
-  "description": "One strike of a planted thicket, and an arm rather than an effect. It was a still that faded out where it stopped, which is a decal \u2014 the Spider Hand's arms go out and come home, and this had to do the same to read as the same kind of thing.\n\nSolved as a spiral about the plant it leaves: the radius grows with the angle because the tendril is still travelling outward when the swing runs out, where an arc of even radius reads as a ring with a piece cut out of it. Cut into six segments whose points are held relative to their own start, so scaling one from nothing extends it out of where the last one ended \u2014 the arm reaching, rather than the whole arc swelling out of the plant's middle.\n\n`strike` is out, a beat at full stretch, then home. The return is tip-first: the outer segments leave before the inner ones, so the arm rolls up into the plant instead of shrinking at both ends. 0.34s, which is the weapon's own `lashS`, and the three parts of it are what that length is for: the arm is reaching until 0.45, held out until 0.66, and rolled up by 0.9 \u2014 at 0.18 the beat was a single frame and the whole swing read as a flicker at the edge of the eye rather than as an arm. The root is already a quarter out at t=0, because a tendril the plant is about to swing is a thing that is there, and a first frame with nothing in it is a frame the strike does not get. Thorns ride the segment they sit on and the hook at the tip is the largest of them, because the end of a reach is where a barb would actually catch.\n\nThe pivot is the document's own origin, which is why the box is square and mostly empty: the game drops the sprite on the thicket, turns it to the heading and scales it by the reach the weapon actually hits at, so the picture and the hitbox are one number. `meta.radius` is how far the tip gets from that pivot. The heading is also animated there rather than here \u2014 the game cocks the arm back and sweeps it onto the heading as the reach completes \u2014 because a document that turned itself would be turning about the wrong point.\n\nIt is painted a step up the ramp from what swings it: the plant is `$moss.dark2` under `$moss` and this is `$moss.light` under `$sage`, with `$blood` thorns rather than `$blood.dark2`. Against the field's own floor that is a contrast of 3.1 where the old paint measured 1.34 \u2014 under the 2.5 the manifest calls sinking, on the one drawing in this set that exists only while it moves.",
+  "description": "One strike of a planted thicket, and an arm rather than an effect. It was a still that faded out where it stopped, which is a decal \u2014 the Spider Hand's arms go out and come home, and this had to do the same to read as the same kind of thing.\n\nSolved as a spiral about the plant it leaves: the radius grows with the angle because the tendril is still travelling outward when the swing runs out, where an arc of even radius reads as a ring with a piece cut out of it. Cut into six segments whose points are held relative to their own start, so scaling one from nothing extends it out of where the last one ended \u2014 the arm reaching, rather than the whole arc swelling out of the plant's middle.\n\n`strike` is out, a beat at full stretch, then home. The return is tip-first: the outer segments leave before the inner ones, so the arm rolls up into the plant instead of shrinking at both ends. 0.34s, which is the weapon's own `lashS`, and the three parts of it are what that length is for: the arm is reaching until 0.45, held out until 0.66, and rolled up by 0.9 \u2014 at 0.18 the beat was a single frame and the whole swing read as a flicker at the edge of the eye rather than as an arm. The root is already a quarter out at t=0, because a tendril the plant is about to swing is a thing that is there, and a first frame with nothing in it is a frame the strike does not get. Thorns ride the segment they sit on and the hook at the tip is the largest of them, because the end of a reach is where a barb would actually catch.\n\nThe pivot is the document's own origin, which is why the box is square and mostly empty: the game drops the sprite on the thicket, turns it to the heading and scales it by the reach the weapon actually hits at, so the picture and the hitbox are one number. `meta.radius` is how far the tip gets from that pivot. The heading is also animated there rather than here \u2014 the game cocks the arm back and sweeps it onto the heading as the reach completes \u2014 because a document that turned itself would be turning about the wrong point.\n\nIt is painted a step up the ramp from what swings it: the plant is `$moss.dark2` under `$moss` and this is `$moss.light` under `$sage.dark`, with `$blood` thorns rather than `$blood.dark2`. Against the field's own floor that is a contrast of 2.6 where the old paint measured 1.34 \u2014 under the 2.5 the manifest calls sinking, on the one drawing in this set that exists only while it moves. The lit edge was `$sage` itself, which measured 3.1; `$sage.dark` takes the arm a shade darker and still keeps it over the line.",
   "tags": [
     "fx"
   ],
@@ -1064,7 +1064,7 @@
           ]
         ]
       },
-      "fill": "$sage",
+      "fill": "$sage.dark",
       "at": [
         3.23,
         -6.77
@@ -1319,7 +1319,7 @@
           ]
         ]
       },
-      "fill": "$sage",
+      "fill": "$sage.dark",
       "at": [
         8.88,
         -9.58
@@ -1574,7 +1574,7 @@
           ]
         ]
       },
-      "fill": "$sage",
+      "fill": "$sage.dark",
       "at": [
         14.79,
         -8.48
@@ -1829,7 +1829,7 @@
           ]
         ]
       },
-      "fill": "$sage",
+      "fill": "$sage.dark",
       "at": [
         20.12,
         -4.45
@@ -2084,7 +2084,7 @@
           ]
         ]
       },
-      "fill": "$sage",
+      "fill": "$sage.dark",
       "at": [
         23.81,
         2.02
@@ -2339,7 +2339,7 @@
           ]
         ]
       },
-      "fill": "$sage",
+      "fill": "$sage.dark",
       "at": [
         25.02,
         10.2
