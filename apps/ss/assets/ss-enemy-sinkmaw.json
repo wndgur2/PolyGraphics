@@ -743,6 +743,54 @@
         "leg_5_femur.opacity": 1,
         "leg_5_tibia.opacity": 1
       }
+    },
+    "final": {
+      "description": "Phase three: the four steps are gone \u2014 the slopes have fallen into the throat and the hole runs flat to its own rim, with no grains left sliding because there is no slope left to slide down. This is the drawing of `pullFlat`: out at the edge it now pulls exactly as hard as it does in the middle.",
+      "set": {
+        "slope_a.fill": "$rust.dark",
+        "slope_b.fill": "$soil",
+        "slope_c.fill": "$soil",
+        "slope_d.fill": "$soil",
+        "grain_a.opacity": 0,
+        "grain_b.opacity": 0,
+        "rim_far.fill": "$ember@soft",
+        "crack_a.opacity": 1,
+        "crack_b.opacity": 1,
+        "crack_c.opacity": 1,
+        "throat.scale": [
+          1.35,
+          1.35
+        ],
+        "throat_o.scale": [
+          1.35,
+          1.35
+        ],
+        "throat_glow.fill": "$ember@heavy",
+        "throat_glow.scale": [
+          1.7,
+          1.7
+        ],
+        "eye_u.scale": 1.5,
+        "eye_d.scale": 1.5,
+        "jaw_u_edge.fill": "$white",
+        "jaw_d_edge.fill": "$white",
+        "organ.scale": [
+          2.0,
+          1.7
+        ],
+        "leg_0_femur.opacity": 1,
+        "leg_0_tibia.opacity": 1,
+        "leg_1_femur.opacity": 1,
+        "leg_1_tibia.opacity": 1,
+        "leg_2_femur.opacity": 1,
+        "leg_2_tibia.opacity": 1,
+        "leg_3_femur.opacity": 1,
+        "leg_3_tibia.opacity": 1,
+        "leg_4_femur.opacity": 1,
+        "leg_4_tibia.opacity": 1,
+        "leg_5_femur.opacity": 1,
+        "leg_5_tibia.opacity": 1
+      }
     }
   },
   "animations": {
