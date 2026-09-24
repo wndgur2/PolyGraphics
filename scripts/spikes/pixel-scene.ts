@@ -21,9 +21,10 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { PNG } from "pngjs";
 import { renderSVG } from "../../src/render.js";
-import { loadLibrary, ownerOf, ROOT } from "../../src/apps.js";
+import { loadLibrary, ROOT } from "../../src/apps.js";
 import { mulberry32 } from "../../src/prng.js";
 import { fromOklab, hexRgb, hueShiftedRamp, oklab, pad, paletteFor, pixelPass, raster, snapRegistry, type Img, type RGB } from "./pixel.js";
+import { finish, over } from "./kit.js";
 
 const NW = 480, NH = 270, UP = 3;
 const GROUND = 222;
@@ -147,18 +148,6 @@ function sprite(id: string): { img: Img; emissive: Img } {
   return { img, emissive };
 }
 
-/** Straight-alpha over, at integer pixel positions — sprites never land between pixels. */
-function over(dst: Img, src: Img, ox: number, oy: number): void {
-  for (let y = 0; y < src.h; y++)
-    for (let x = 0; x < src.w; x++) {
-      const si = (y * src.w + x) * 4;
-      if (src.px[si + 3] === 0) continue;
-      const dx = ox + x, dy = oy + y;
-      if (dx < 0 || dy < 0 || dx >= dst.w || dy >= dst.h) continue;
-      dst.px.set(src.px.subarray(si, si + 4), (dy * dst.w + dx) * 4);
-    }
-}
-
 const frame = raster(svgOf(bg), 1);
 const glow = raster(svgOf([`<rect width="${NW}" height="${NH}" fill="none"/>`, ...emissiveSvg]), 1);
 const player = sprite("ss.figure.dot");
@@ -184,56 +173,8 @@ over(frame, raster(svgOf(emissiveSvg), 1), 0, 0);
 
 // ---------------------------------------------------------------- upscale, then light
 
-function upscale(img: Img, k: number): Float32Array {
-  const W = img.w * k, H = img.h * k, out = new Float32Array(W * H * 3);
-  for (let y = 0; y < H; y++)
-    for (let x = 0; x < W; x++) {
-      const si = (Math.floor(y / k) * img.w + Math.floor(x / k)) * 4, di = (y * W + x) * 3;
-      const a = img.px[si + 3] / 255;
-      for (let c = 0; c < 3; c++) out[di + c] = (img.px[si + c] / 255) * (a > 0 ? 1 : 0);
-    }
-  return out;
-}
-
-/** Three box passes each way ≈ a Gaussian; cheap and separable. */
-function blur(buf: Float32Array, W: number, H: number, r: number): Float32Array {
-  let a: Float32Array = buf, b: Float32Array = new Float32Array(buf.length);
-  const pass = (src: Float32Array, dst: Float32Array, horiz: boolean) => {
-    const n = horiz ? W : H, m = horiz ? H : W;
-    for (let j = 0; j < m; j++)
-      for (let c = 0; c < 3; c++) {
-        let acc = 0;
-        const idx = (i: number) => (horiz ? (j * W + i) * 3 + c : (i * W + j) * 3 + c);
-        for (let i = -r; i <= r; i++) acc += src[idx(Math.max(0, Math.min(n - 1, i)))];
-        for (let i = 0; i < n; i++) {
-          dst[idx(i)] = acc / (2 * r + 1);
-          acc += src[idx(Math.min(n - 1, i + r + 1))] - src[idx(Math.max(0, i - r))];
-        }
-      }
-  };
-  for (let k = 0; k < 3; k++) {
-    pass(a, b, true); [a, b] = [b, a];
-    pass(a, b, false); [a, b] = [b, a];
-  }
-  return a;
-}
-
+const png = finish(frame, glow, { up: UP, bloom: { tight: 4, wide: 16, tightGain: 0.9, wideGain: 0.7 }, vignette: 0.55 });
 const W = NW * UP, H = NH * UP;
-const base = upscale(frame, UP);
-const em = upscale(glow, UP);
-const tight = blur(em, W, H, 4), wide = blur(em, W, H, 16);
-const png = new PNG({ width: W, height: H });
-for (let y = 0; y < H; y++)
-  for (let x = 0; x < W; x++) {
-    const i = (y * W + x) * 3;
-    const dx = x / W - 0.5, dy = y / H - 0.5;
-    const vig = 1 - 0.55 * Math.min(1, (dx * dx + dy * dy) * 2.2);
-    for (let c = 0; c < 3; c++) {
-      const v = (base[i + c] + tight[i + c] * 0.9 + wide[i + c] * 0.7) * vig;
-      png.data[(y * W + x) * 4 + c] = Math.round(255 * Math.min(1, v));
-    }
-    png.data[(y * W + x) * 4 + 3] = 255;
-  }
 
 const outDir = `${ROOT}out/spikes`;
 mkdirSync(outDir, { recursive: true });

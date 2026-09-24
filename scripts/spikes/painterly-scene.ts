@@ -22,91 +22,9 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { Resvg } from "@resvg/resvg-js";
 import { mulberry32 } from "../../src/prng.js";
 import { ROOT } from "../../src/apps.js";
+import { blob, brush, d, f, scatterAlong, type P } from "./kit.js";
 
 const W = 1280, H = 720, BAR = 48;
-type P = [number, number];
-const f = (n: number) => (Math.round(n * 10) / 10).toString();
-
-// ---------------------------------------------------------------- curves
-
-/** Catmull-Rom through the points, sampled densely — the spine a `brush` or `along` walks. */
-function spline(pts: P[], samples: number, closed = false): P[] {
-  const out: P[] = [];
-  const n = pts.length;
-  const at = (i: number) => (closed ? pts[(i + n) % n] : pts[Math.max(0, Math.min(n - 1, i))]);
-  const segs = closed ? n : n - 1;
-  for (let s = 0; s < segs; s++) {
-    const [p0, p1, p2, p3] = [at(s - 1), at(s), at(s + 1), at(s + 2)];
-    const k = Math.ceil(samples / segs);
-    for (let j = 0; j < k; j++) {
-      const t = j / k, t2 = t * t, t3 = t2 * t;
-      const c = (a: number, b: number, c_: number, d: number) =>
-        0.5 * (2 * b + (-a + c_) * t + (2 * a - 5 * b + 4 * c_ - d) * t2 + (-a + 3 * b - 3 * c_ + d) * t3);
-      out.push([c(p0[0], p1[0], p2[0], p3[0]), c(p0[1], p1[1], p2[1], p3[1])]);
-    }
-  }
-  if (!closed) out.push(pts[n - 1]);
-  return out;
-}
-
-const d = (pts: P[], close = true) => `M${pts.map(([x, y]) => `${f(x)} ${f(y)}`).join(" L")}${close ? " Z" : ""}`;
-
-/** `blob`: a closed curve round an ellipse, each control point pushed in or out by a seeded amount. */
-function blob(cx: number, cy: number, rx: number, ry: number, seed: number, jitter = 0.22, n = 11): string {
-  const rng = mulberry32(seed);
-  const pts: P[] = [];
-  for (let i = 0; i < n; i++) {
-    const a = (i / n) * Math.PI * 2;
-    const k = 1 + (rng() - 0.5) * 2 * jitter;
-    pts.push([cx + Math.cos(a) * rx * k, cy + Math.sin(a) * ry * k]);
-  }
-  return d(spline(pts, n * 8, true));
-}
-
-/** `brush`: a spine and a width profile [[t, w], …]; the outline is the spine offset both ways. */
-function brush(spine: P[], widths: [number, number][]): P[] {
-  const s = spline(spine, 120);
-  const w = (t: number) => {
-    for (let i = 1; i < widths.length; i++)
-      if (t <= widths[i][0]) {
-        const [t0, w0] = widths[i - 1], [t1, w1] = widths[i];
-        const u = (t - t0) / (t1 - t0 || 1);
-        return w0 + (w1 - w0) * (0.5 - 0.5 * Math.cos(Math.PI * u));
-      }
-    return widths[widths.length - 1][1];
-  };
-  const left: P[] = [], right: P[] = [];
-  s.forEach((p, i) => {
-    const a = s[Math.max(0, i - 1)], b = s[Math.min(s.length - 1, i + 1)];
-    const len = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1;
-    const [nx, ny] = [-(b[1] - a[1]) / len, (b[0] - a[0]) / len];
-    const half = w(i / (s.length - 1)) / 2;
-    left.push([p[0] + nx * half, p[1] + ny * half]);
-    right.push([p[0] - nx * half, p[1] - ny * half]);
-  });
-  return [...left, ...right.reverse()];
-}
-
-/** `repeat.along`: `count` marks spread normally about a curve, denser in its middle. */
-function scatterAlong(spine: P[], count: number, spread: number, size: [number, number], seed: number, fills: string[]): string {
-  const rng = mulberry32(seed);
-  const s = spline(spine, 200);
-  const gauss = () => (rng() + rng() + rng() - 1.5) / 1.5;
-  let out = "";
-  for (let i = 0; i < count; i++) {
-    const t = Math.min(0.999, Math.max(0, 0.5 + gauss() * 0.55));
-    const k = Math.floor(t * (s.length - 1));
-    const [x, y] = s[k];
-    const taper = 1 - Math.abs(t - 0.5) * 1.2;
-    const ox = gauss() * spread * taper, oy = gauss() * spread * taper;
-    const sz = size[0] + rng() * (size[1] - size[0]) * taper;
-    const rot = Math.round(rng() * 180);
-    const fill = fills[Math.floor(rng() * fills.length)];
-    out += `<rect x="${f(-sz / 2)}" y="${f(-sz / 3)}" width="${f(sz)}" height="${f(sz * 0.66)}" transform="translate(${f(x + ox)} ${f(y + oy)}) rotate(${rot})" fill="${fill}"/>`;
-  }
-  return out;
-}
-
 // ---------------------------------------------------------------- materials (filters)
 
 const defs = `

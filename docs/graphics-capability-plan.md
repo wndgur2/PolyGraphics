@@ -3,8 +3,9 @@
 *2026-09-24. A design review: what PolyGraphics would have to become to draw frames at the level of two
 references attached to the request — a painterly one (two stills from GRIS: a white ruin, a red
 calligraphic bird-wing over it, light shafts, a flock) and a pixel-art one (three stills from Skul: The Hero
-Slayer: two boss fights and a castle room). Reads the repository at #102. Five spikes in `scripts/spikes/`
-back the claims; they are evidence, not system code, and nothing in `src/` or `adapters/` changed.*
+Slayer: two boss fights and a castle room). Reads the repository at #102. A second round added four more
+references — see [More references](#more-references). Nine spikes in `scripts/spikes/` back the claims; they are
+evidence, not system code, and nothing in `src/` or `adapters/` changed.*
 
 *Status: proposal. Nothing below has landed. The decisions it needs from a person are at the end.*
 
@@ -266,7 +267,7 @@ A document kind of its own, `apps/<id>/scenes/*.json`, for what the stage cards 
   trunks take every colour they have from their depth.
 - **Fog is a hue, not a grey.** The first version of that spike stripped chroma with depth; the style probe
   (below) put the frame at C̄ 0.039 against the reference's 0.049–0.095, and its accent share at 4.6% against
-  12–57%. The second kept chroma and moved the hue toward a saturated violet fog: C̄ 0.068, accent 36.8%, both
+  12–57%. The second kept chroma and moved the hue toward a saturated violet fog: C̄ 0.068, accent 36.7%, both
   inside the reference's range, value unchanged (L̄ 0.28 → 0.27). One edit, measured before and after — which
   is the loop this whole plan is for.
 - **Post runs after the upscale.** The pixel frame is 480×270 on a hard grid; its bloom is computed at
@@ -307,7 +308,7 @@ bright saturated ones, and the two dominant hues. On the references and the spik
 | reference B, castle room | 0.28 | 0.17–0.43 | 0.054 | 25.0% | red, magenta |
 | reference B, Yggdrasil | 0.40 | 0.26–0.65 | 0.049 | 12.2% | violet, purple |
 | pixel spike, v1 | 0.28 | 0.16–0.40 | 0.039 | 4.6% | violet, purple |
-| **pixel spike, v2** | **0.27** | **0.16–0.38** | **0.068** | **36.8%** | **violet, purple** |
+| **pixel spike, v2** | **0.27** | **0.16–0.38** | **0.068** | **36.7%** | **violet, purple** |
 
 It does not say whether a picture is good. It says whether it is in the same register and which knob is off:
 the painterly spike is within 0.02 of the reference's value, on its chroma and its hues, with twice the accent
@@ -327,10 +328,97 @@ distance from its target the way loudness reports a sound's distance from its fa
 | emission budget | scene | the share of the frame in the emission map — bloom over a third of it is fog |
 | bake parity | all | an adapter's runtime effect against its TypeScript reference, frame by frame |
 
+## More references
+
+A second round brought four more stills, each drawn as a spike the way the first two were. They were chosen by
+the requester, not by this plan, which makes them a fair test of it: what did they need that the plan did not
+already propose?
+
+| | reference | what it needed that A and B did not |
+|---|---|---|
+| C | Skul, a daylight forest: bright sky, foliage, a ruin, a floating island hung with leaves, a tree boss, a slash, damage numbers | fog toward a *light* colour; foliage; a small hero; bitmap text |
+| D | Blasphemous, a gothic nave: fluted columns, a stone Pietà, candelabra, broken flagstones, a penitent | light from candles only; a near-grey palette; a matte grade |
+| E | Children of Morta, a three-quarter desert canyon: strata, dead trees, a throne grown from a tree, a glowing totem, a round minimap | shadows on the ground; many trees from one idea; coloured light |
+| F | a mobile practice dungeon: a painted blue forest, a tree of lightning, a pixel slime, orange numbers, a Korean HUD | depth of field; lightning; a pixel sprite in a painted frame; Hangul |
+
+**What each one added.**
+
+- **Fog can brighten** (C). In daylight, distance goes toward the sky's pale cyan, not toward dark; the same
+  `atDepth` does it with a different fog colour. Nothing to add but the observation that `fog` is a colour
+  token, not a direction.
+- **Foliage is cluster shading** (C). `clump()` draws a leaf mass as four offset layers of one ramp and a light
+  direction, plus single-pixel flecks: the way a pixel artist shades a bush, as a generator. Every tree, bush
+  and cloud in C is one call.
+- **A hero written as `pixels` reads where a squeezed vector did not** (C, D, E). The skull, the penitent and
+  the wanderer are 9 to 15 pixels wide, authored as rows over a legend, and each reads at a glance — the thing
+  `ss.figure.dot` could not do through the pixel pass. It is evidence for the `pixels` primitive, and also its
+  cost: every pixel was placed by hand, by an agent, and a boss-sized figure would be a great many of them.
+- **Text is two things.** A 3×5 bitmap font that is itself `pixels` documents carries C and E's numbers and
+  labels; a vector font carries F's Hangul and its bold numerals. The fonts are *files named explicitly*, with
+  system fonts off: a line of Hangul rendered without its font file comes out as 0 pixels instead of 1,145,
+  with no error. So a text part whose font is not loaded must fail `check`, and fonts belong in the repository
+  (`tokens.fonts`), not on the machine. The spike reads them from `/usr/share/fonts` and refuses to run when one
+  is missing.
+- **Lit pixel art is cheap and enough** (D, E). The frame is drawn at full value, then multiplied by an ambient
+  and each point light's falloff, computed at the output resolution so the falloff is smooth over hard pixels;
+  emissive pixels are painted back afterwards, because light does not darken a flame. D has 22 candle lights,
+  E a cyan totem, a blue selection ring and fireflies. No normal maps — none of the six references needs them.
+  That moves point lights from "later" into the scene phase.
+- **Some darkness is a grade, not a lack of light** (D). The first render measured L̄ 0.16 against the
+  reference's 0.25. Raising the ambient moved it to 0.18. The reference's *darkest* pixels sit at L 0.21: its
+  blacks are lifted, a matte grade. One post step — `lift: 0.085`, raise the black point — put the frame at L̄
+  0.28, p10–p90 0.21–0.36 against 0.21–0.35. So the post stack gets `grade` (lift, gain, tint).
+- **A three-quarter view needs shadows, and a shadow is a ramp step** (E). Every standing thing lays its own
+  outline on the ground, sheared down-left and squashed, filled with the sand's dark step rather than a
+  translucent black — so the frame stays palette-closed. This is the view `ss` is drawn in.
+- **One generator, many trees** (E). Five dead trees and the two that make the throne are `branchTree` with
+  seven seeds, twist near 1. The bark highlight is the same tree grown again from the same seed with a thinner
+  width: width never touches the rng, so the second growth lands exactly on the first. Generators like this —
+  `tree`, `bolt`, `clump` — are seeded parts that compile to polygons, the way `repeat` compiles to instances.
+- **Depth does a fourth job: blur** (F). Painted backgrounds read as painted largely because the far layers are
+  soft. The same depth that sets parallax, fog and order sets a blur radius, for looks that are not pixel.
+- **Mixed resolution is ordinary** (F). The slime is drawn at 72×54 with anti-aliasing off and placed ×4 into a
+  1280×720 painted frame. That is what the reference is, and the pipeline needed nothing new for it but a
+  premultiplied blend for the layers that do have soft edges.
+
+**Measured.**
+
+| frame | L̄ | L p10–p90 | C̄ | accent | hues |
+|---|---|---|---|---|---|
+| reference C | 0.60 | 0.37–0.94 | 0.054 | 22.5% | green, teal |
+| forest v1 | 0.56 | 0.24–0.88 | 0.058 | 27.3% | green, azure |
+| **forest v2** — ground on the ramp's base step, not its dark one | **0.59** | **0.32–0.88** | **0.058** | **27.3%** | **green, azure** |
+| reference D | 0.25 | 0.21–0.35 | 0.010 | 0.0% | red |
+| cathedral v1 | 0.16 | 0.08–0.23 | 0.004 | 0.2% | yellow, lime |
+| **cathedral v3** — ambient up, then a lifted black | **0.28** | **0.21–0.36** | **0.004** | **0.3%** | **yellow, lime** |
+| reference E | 0.41 | 0.26–0.55 | 0.060 | 27.3% | yellow, lime |
+| canyon v1 | 0.46 | 0.29–0.59 | 0.074 | 45.6% | yellow, orange |
+| **canyon v3** — sand less saturated and darker | **0.43** | **0.27–0.54** | **0.062** | **1.6%** | **yellow, green** |
+| reference F | 0.50 | 0.29–0.72 | 0.082 | 47.2% | blue, violet |
+| mystic, untuned | 0.46 | 0.23–0.70 | 0.091 | 62.4% | blue, violet |
+
+**The probe broke once, usefully.** On E, bringing mean chroma from 0.074 to the reference's 0.060 took the
+accent share from 45.6% to 1.6%. Nothing visible changed that much: the frame is mostly one flat floor, and
+its chroma had crossed the probe's single threshold (0.08). The reference's floor is textured, so its chroma is
+spread across that line; the spike's is uniform, so all of it moved at once. Matching a mean is not matching a
+look. `look.target` should store the distributions — value and chroma histograms, compared with something like
+an earth mover's distance — rather than a mean and one threshold, and that same comparison would have said what
+was actually wrong: a floor too even, not too grey.
+
+**What it did not change.** Figures are still the weakest element. The Pietà's body reads as an insect, not a
+corpse; the heroine in F is a paper doll next to the reference's. The machinery puts a frame in a reference's
+register — the four probes above are within 0.04 of the reference's mean value — and it does not draw a
+Blasphemous sculpture. That is the same limit the first round found, found again.
+
+**While building these,** the spikes' blur turned out to overwrite its own input — the emission map the second
+bloom pass and the emissive test still had to read. Fixed in `kit.ts`; the only number above it moved is the
+pixel spike's accent share, from 36.8% to 36.7%.
+
 ## The spikes
 
-All five are deterministic; the three that draw write to `out/spikes/`, which is ignored. The reference stills
-are not in the repository; their numbers above are.
+All nine are deterministic — each drawing spike was rendered twice and compared byte for byte — and the seven
+that draw write to `out/spikes/`, which is ignored. `kit.ts` and `pixel.ts` are the pieces they share. The
+reference stills are not in the repository; their numbers above are.
 
 | script | asks | answer |
 |---|---|---|
@@ -339,6 +427,10 @@ are not in the repository; their numbers above are.
 | `pixel-look.ts [ids…]` | can existing documents become pixel art? quantise after, or snap first? | snap first; mid-size forms yes, detailed small figures no |
 | `pixel-scene.ts` | can a frame in reference B's register be built at 480×270 from depth, tiles, the repository's own documents, token emission and post-upscale bloom? | yes, in 2.5s; the figure is its weakest element, for the reason above |
 | `style-probe.ts files…` | is a frame in a reference's register, and which knob is off? | the table above |
+| `forest-scene.ts` | reference C: daylight depth, clumped foliage, a hero written as `pixels`, bitmap-font numbers | yes; one edit to reach the reference's lows |
+| `cathedral-scene.ts` | reference D: pixel art lit by 22 candles over a dim ambient, a lifted-black grade | yes; value matched by the grade, not by more light |
+| `canyon-scene.ts` | reference E: three-quarter view, generated trees, sheared shadows in the ground's dark step, coloured light | yes; the probe's accent threshold broke on it |
+| `mystic-scene.ts` | reference F: painted HD depth with blur, lightning, a 72×54 pixel slime at ×4, Hangul from font files | yes, untuned: a little dark, a little over-saturated |
 
 ## Phases
 
@@ -348,19 +440,22 @@ Ordered by what each unblocks against what it risks. Each ends with something me
    with a rect manifest; adapters read the atlas when there is one; the gallery shows the bake for any document
    with a material. *Done when* the 29 gradient documents reach the Phaser adapter as textures rather than as a
    flat mid colour — the mock-scene test asserts it — and `ss` runs unchanged without an atlas.
-1. **Geometry.** `smooth`, `path`, `brush`, `blob`, `repeat.along`, `repeat.grid`, `group` with `clip`. All
-   compile to polygons, so no adapter changes. *Done when* the 180-point polygon is redrawn as a smooth one
-   with a tenth of the points and the silhouette overlay cannot tell them apart.
+1. **Geometry.** `smooth`, `path`, `brush`, `blob`, `repeat.along`, `repeat.grid`, `group` with `clip`, and the
+   seeded generators `grow: tree | bolt | clump`. All compile to polygons, so no adapter changes. *Done when*
+   the 180-point polygon is redrawn as a smooth one with a tenth of the points and the silhouette overlay cannot
+   tell them apart.
 2. **Materials and colour.** Material tokens, `blend`, OKLCH ramps as an opt-in, the emission map. *Done when* a
    theme swaps a material without touching a document, and `ss` baselines have not moved.
 3. **Looks.** Pixel — paint snapping in the compiler, crisp rasterisation, outline, translucency policy,
-   `pixels`, flipbook sheets, the three pixel lints. Painterly — paper, wash, vignette. *Done when* a pixel
+   `pixels`, flipbook sheets, the three pixel lints, bitmap fonts as `pixels` documents. Painterly — paper, wash,
+   vignette, vector text from vendored font files. *Done when* a pixel
    app's roster passes palette closure and min-feature.
-4. **Scenes.** The document kind, depth and atmosphere, tiles, the post stack, a gallery tab, per-layer bakes,
-   the stage cards migrated, the style probe as `look.target`.
+4. **Scenes.** The document kind, depth and atmosphere (fog, and blur for looks that are not pixel), tiles,
+   shadows, point lights over an ambient, the post stack with `grade`, a gallery tab, per-layer bakes, the stage
+   cards migrated, the style probe as `look.target` comparing distributions.
 5. **Runtime motion.** Emitters, `tint` and `emission` tracks, bloom in the adapters, parity tests.
-6. **Later.** Nine-slice frames and text for HUDs; 2D lights with normal maps. Vector geometry gives exact
-   heights for free, but neither reference depends on dynamic lighting, so it waits for a game that does.
+6. **Later.** Nine-slice frames for HUDs; normal-mapped lights. Vector geometry gives exact heights for free,
+   but none of the six references needs more than point lights over an ambient, so it waits for a game that does.
 
 The second app the [app design systems plan](app-design-systems-plan.md) is waiting for is where phase 3 gets
 decided. Cellspire's audit — facing flips, slam dust, parries — reads as a side-view action game, the kind the
