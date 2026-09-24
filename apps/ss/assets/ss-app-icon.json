@@ -1,7 +1,7 @@
 {
   "id": "ss.app.icon",
   "name": "App icon — the silent one",
-  "description": "The game's emblem, for a home screen: the player's own body seen against the soil a run happens in. Everything in this world announces itself by scent, so the frame is washed pink from behind — a bloom of pheromone rising out of the earth, seams of it along the strata, a pool of it on the ground — and the one object in the middle of all that is sealed, pale and silent, with a dead organ in its socket. That is the premise in a single picture, and it is also what makes the icon read at 48px: a bright sphere against a dim pink haze, with two dark feelers up where nothing else in the frame has any. The body is composed rather than redrawn (`use: ss.char.dot`), so the icon is always the character the player is actually given. Authored at 512 so the 512 plate bakes 1:1; the `maskable` variant pulls the body in for a round mask.",
+  "description": "The game's emblem, for a home screen: a Tracker — the hive's first responder, the first thing a run sends at you and the thing on screen by the hundred — seen against the soil a run happens in. The game is named for them: everything in this world reads it by scent, so the frame is washed pink from behind — a bloom of pheromone rising out of the earth, seams of it along the strata, a pool of it on the ground — and the Tracker in the middle of it carries the source, a lit organ on its back. That is what makes the icon read at 48px: a warm orange body with one pink light on it against a dim pink haze, and two feelers up where nothing else in the frame has any. The body is composed rather than redrawn (`use: ss.enemy.imp`), so the icon moves with the Tracker whenever the Tracker is redrawn. Authored at 512 so the 512 plate bakes 1:1; the `maskable` variant pulls the body in for a round mask",
   "tags": ["app", "icon"],
   "size": [512, 512],
   "parts": [
@@ -19,12 +19,12 @@
 
     { "id": "press", "shape": { "kind": "rect", "w": 512, "h": 512 }, "fill": { "gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$ink@0"], [0.62, "$ink@0.1"], [1, "$ink@0.46"]] } },
 
-    { "id": "emblem", "use": "ss.char.dot", "at": [0, 30], "scale": 12.5 }
+    { "id": "emblem", "use": "ss.enemy.imp", "at": [11, 4], "scale": 13.5 }
   ],
   "variants": {
     "maskable": {
-      "description": "The same picture with the body inside a round mask's safe zone — Android crops an installed icon to whatever shape the launcher likes, and a feeler is the first thing a circle would take off. The ground stays full-bleed, because that is what the crop is supposed to eat.",
-      "set": { "emblem.scale": 10.2, "emblem.at": [0, 24] }
+      "description": "The same picture with the body inside a round mask's safe zone — Android crops an installed icon to whatever shape the launcher likes, and a feeler tip is the first thing a circle would take off; the feet leave the pool to make room, which costs less than a feeler. The ground stays full-bleed, because that is what the crop is supposed to eat.",
+      "set": { "emblem.scale": 11, "emblem.at": [9, 8] }
     }
   }
 }
