@@ -1,7 +1,7 @@
 {
   "id": "ss.char.mir",
-  "name": "Mir",
-  "description": "A hump. The burrow, walked from the inside down to the queen: a stocky bell of a coat whose back rounds up over the piece of its wall carried high on the back where the emitter used to be, warm half a month on, chewing inside it at night (M038, M042), corded across the chest, the rust of it showing over the near shoulder. A head lamp on the helmet, the one light the eight carry \u2014 the burrow is where the compass stopped (M005). The head sits a little low and forward, the stance is wide, and the walk has no bounce in it \u2014 the Porter's haul, twenty-nine levels of it (M035). Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
+  "name": "Mina",
+  "description": "A hump. The burrow, walked from the inside down to the queen: a bell of a coat drawn in at the waist whose back rounds up over the piece of its wall carried high on the back where the emitter used to be, warm half a month on, chewing inside it at night (M038, M042), corded across the chest, the rust of it showing over the near shoulder. A head lamp on the helmet, the one light the eight carry \u2014 the burrow is where the compass stopped (M005) \u2014 and a bun of dark hair at the back of the head under it. The head sits a little low and forward, the stance is wide, and the walk has no bounce in it \u2014 the Porter's haul, twenty-nine levels of it (M035). Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11.",
   "tags": [
     "char"
   ],
@@ -65,7 +65,7 @@
     {
       "id": "arm_far",
       "at": [
-        6.64,
+        5.64,
         -0.31
       ],
       "shape": {
@@ -80,7 +80,7 @@
     {
       "id": "hand_far",
       "at": [
-        6.95,
+        5.95,
         4.08
       ],
       "shape": {
@@ -98,8 +98,8 @@
       ],
       "shape": {
         "kind": "rect",
-        "w": 4.2,
-        "h": 2.4,
+        "w": 3.7,
+        "h": 2.11,
         "corner": 1.1
       },
       "fill": "$slate"
@@ -112,8 +112,8 @@
       ],
       "shape": {
         "kind": "rect",
-        "w": 4.8,
-        "h": 2.7,
+        "w": 4.22,
+        "h": 2.38,
         "corner": 1.2
       },
       "fill": "$slate.dark"
@@ -129,19 +129,19 @@
         "kind": "poly",
         "points": [
           [
-            -4.67,
+            -3.47,
             -3.0
           ],
           [
-            6.15,
+            4.9,
             -4.0
           ],
           [
-            8.27,
+            7.96,
             1.6
           ],
           [
-            9.18,
+            8.45,
             5.8
           ],
           [
@@ -165,19 +165,19 @@
             10.6
           ],
           [
-            -8.77,
+            -8.07,
             6.0
           ],
           [
-            -10.4,
+            -10.0,
             0.4
           ],
           [
-            -10.18,
+            -9.79,
             -4.4
           ],
           [
-            -8.06,
+            -7.75,
             -7.2
           ]
         ]
@@ -212,11 +212,11 @@
         "kind": "poly",
         "points": [
           [
-            -4.9,
+            -3.88,
             -2.6
           ],
           [
-            6.53,
+            5.51,
             -4.0
           ],
           [
@@ -271,7 +271,7 @@
     {
       "id": "arm",
       "at": [
-        -5.46,
+        -4.46,
         1.34
       ],
       "shape": {
@@ -290,7 +290,7 @@
     {
       "id": "hand",
       "at": [
-        -6.28,
+        -5.28,
         5.97
       ],
       "shape": {
@@ -299,6 +299,24 @@
         "ry": 1.9
       },
       "fill": "$slate.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "bun",
+      "at": [
+        -2.6,
+        -7.8
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 2.3,
+        "ry": 2.1
+      },
+      "fill": "$slate.dark",
+      "rot": -10,
       "stroke": {
         "color": "$ink",
         "width": "hair"
@@ -381,19 +399,19 @@
         11.6
       ],
       "shoulder_near": [
-        -4.8,
+        -3.8,
         -2.4
       ],
       "shoulder_far": [
-        6.4,
+        5.4,
         -3.8
       ],
       "hand_near": [
-        -6.28,
+        -5.28,
         5.97
       ],
       "hand_far": [
-        6.95,
+        5.95,
         4.08
       ],
       "hip_near": [
@@ -473,6 +491,24 @@
         },
         {
           "part": "visor",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "bun",
           "prop": "y",
           "keys": [
             [
@@ -790,6 +826,65 @@
         },
         {
           "part": "visor",
+          "prop": "y",
+          "keys": [
+            [
+              0.0,
+              -0.0
+            ],
+            [
+              0.08,
+              -0.0
+            ],
+            [
+              0.17,
+              -0.0
+            ],
+            [
+              0.25,
+              -0.0
+            ],
+            [
+              0.33,
+              -0.0
+            ],
+            [
+              0.42,
+              -0.0
+            ],
+            [
+              0.5,
+              -0.0
+            ],
+            [
+              0.58,
+              -0.0
+            ],
+            [
+              0.67,
+              -0.0
+            ],
+            [
+              0.75,
+              -0.0
+            ],
+            [
+              0.83,
+              -0.0
+            ],
+            [
+              0.92,
+              -0.0
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "ease": "linear"
+        },
+        {
+          "part": "bun",
           "prop": "y",
           "keys": [
             [
