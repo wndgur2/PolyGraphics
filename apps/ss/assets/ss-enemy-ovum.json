@@ -1,7 +1,7 @@
 {
   "id": "ss.enemy.ovum",
   "name": "Ovum",
-  "description": "What the Matriarch lays: one of the pink shapes drifting inside her brood chamber, put down on the floor. A single rigid egg sitting in a smear of jelly: a pale `$bone` shell with her `$pheromone` glowing through it from inside, and the thing inside showing through with it — a curled grub, already carrying a lit organ, because what she lays now is marked. Pale rather than her pink so it reads as an egg on a floor and against her, not as one more pink body. The only body on the roster that does not move of its own accord: it rocks. It is two pieces already — a cup and a cap, meeting along a hairline crack round the upper third — and that is where it opens. The game draws it in place of the young for the hatch window, sized to what is coming out, so a Bulwark's egg is visibly bigger than a Replete's. Idle (`rock`) is the egg rocking on the jelly with the grub turning inside — the one thing on the field that says 'about to'. `death` is the hatch or the kill, the same break either way: the cap kicks off along the crack, the dark of the empty cup shows where it was, what was inside is gone, the cup settles and the jelly spreads.",
+  "description": "What the Matriarch lays: one of the pink shapes drifting inside her brood chamber, put down on the floor. A single rigid egg sitting in a smear of jelly: a pale, yellowed shell (`$ochre.light2`, a fifth see-through, so the floor and the jelly show in it) with her `$pheromone` glowing through it from inside, and the thing inside showing through with it — a curled grub, already carrying a lit organ, because what she lays now is marked. Pale rather than her pink so it reads as an egg on a floor and against her, not as one more pink body. The only body on the roster that does not move of its own accord: it rocks. It is two pieces already — a cup and a cap, meeting along a hairline crack round the upper third — and that is where it opens. The game draws it in place of the young for the hatch window, sized to what is coming out, so a Bulwark's egg is visibly bigger than a Replete's. Idle (`rock`) is the egg rocking on the jelly with the grub turning inside — the one thing on the field that says 'about to'. `death` is the hatch or the kill, the same break either way: the cap kicks off along the crack, the dark of the empty cup shows where it was, what was inside is gone, the cup settles and the jelly spreads.",
   "tags": [
     "enemy",
     "brood"
@@ -159,7 +159,7 @@
           ]
         ]
       },
-      "fill": "$bone",
+      "fill": "$ochre.light2@0.82",
       "stroke": {
         "color": "$ink",
         "width": "thin"
@@ -366,7 +366,7 @@
           ]
         ]
       },
-      "fill": "$bone",
+      "fill": "$ochre.light2@0.82",
       "stroke": {
         "color": "$ink",
         "width": "thin"
