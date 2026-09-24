@@ -1,0 +1,73 @@
+{
+  "id": "ss.enemy.splat",
+  "name": "Splat",
+  "description": "What the Tryst and her mates fling when they spin: a lovebug's acid, a coral blob with a dark rim, a shine and a short drip behind it, so a spiral of them reads as spray from a body rather than a bolt. Drawn pointing +x.",
+  "tags": [
+    "enemy",
+    "projectile"
+  ],
+  "size": [
+    14,
+    10
+  ],
+  "parts": [
+    {
+      "id": "drip",
+      "at": [
+        -3.2,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.0,
+            -1.6
+          ],
+          [
+            -2.8,
+            0
+          ],
+          [
+            2.0,
+            1.6
+          ]
+        ]
+      },
+      "fill": "$coral.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "body",
+      "at": [
+        1.2,
+        0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.2
+      },
+      "fill": "$coral",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "shine",
+      "at": [
+        1.9,
+        -1.1
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 1.3,
+        "ry": 0.8
+      },
+      "fill": "$coral.light"
+    }
+  ]
+}

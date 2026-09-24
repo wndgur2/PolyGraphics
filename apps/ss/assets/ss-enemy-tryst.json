@@ -1,0 +1,2298 @@
+{
+  "id": "ss.enemy.tryst",
+  "name": "Tryst",
+  "description": "The flats' last arrival, 색세기, drawn side-on like every other flyer: a lovebug. Black abdomen with a violet sheen so it holds against dark ground, the red-orange scutum over a black underside that is the species' one mark, a black head with a small high eye, a stub of antenna, the hive's organ underneath where abdomen meets thorax. Two-joint wings like the Flitter's, pale so they carry the read, the far pair darker behind. No legs worth the name: two tucked nubs, because a flyer's legs on show read as a spider. She is the largest of the three that arrive together and the one left at the end. Clips: `fly` (the buzz, roots leading tips), `spray` (the abdomen flicks up and the organ flares as the three fling acid in a spin), `flap` (enraged: whole-arm strokes; `meta.flapCue` is the downbeat, when the game surges her), `death` (wings drop onto the back, the organ goes out, the abdomen curls). `enraged` is the last one alone: the thorax flushed crimson, the eye lit, the near wing torn at the tip.",
+  "tags": [
+    "enemy",
+    "boss"
+  ],
+  "size": [
+    91.0,
+    70.0
+  ],
+  "anchor": [
+    0.5,
+    0.5
+  ],
+  "meta": {
+    "radius": 16,
+    "flapCue": 0.35
+  },
+  "parts": [
+    {
+      "at": [
+        5.6,
+        -8.05
+      ],
+      "fill": "$slate",
+      "id": "wing_far_root",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -16.01,
+            -1.68
+          ],
+          [
+            -15.49,
+            -2.88
+          ],
+          [
+            -14.24,
+            -3.88
+          ],
+          [
+            -12.37,
+            -4.57
+          ],
+          [
+            -10.08,
+            -4.91
+          ],
+          [
+            -7.59,
+            -4.84
+          ],
+          [
+            -5.13,
+            -4.39
+          ],
+          [
+            -2.96,
+            -3.59
+          ],
+          [
+            -1.28,
+            -2.51
+          ],
+          [
+            -0.26,
+            -1.28
+          ],
+          [
+            0.0,
+            -0.0
+          ],
+          [
+            -0.52,
+            1.2
+          ],
+          [
+            -1.78,
+            2.19
+          ],
+          [
+            -3.64,
+            2.89
+          ],
+          [
+            -5.93,
+            3.23
+          ],
+          [
+            -8.43,
+            3.16
+          ],
+          [
+            -10.88,
+            2.71
+          ],
+          [
+            -13.05,
+            1.9
+          ],
+          [
+            -14.73,
+            0.83
+          ],
+          [
+            -15.75,
+            -0.4
+          ]
+        ]
+      }
+    },
+    {
+      "at": [
+        5.6,
+        -8.05
+      ],
+      "fill": "$slate",
+      "id": "wing_far_tip",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -25.84,
+            -2.31
+          ],
+          [
+            -25.41,
+            -3.32
+          ],
+          [
+            -24.27,
+            -4.19
+          ],
+          [
+            -22.53,
+            -4.83
+          ],
+          [
+            -20.36,
+            -5.19
+          ],
+          [
+            -17.98,
+            -5.23
+          ],
+          [
+            -15.61,
+            -4.94
+          ],
+          [
+            -13.49,
+            -4.36
+          ],
+          [
+            -11.83,
+            -3.53
+          ],
+          [
+            -10.79,
+            -2.55
+          ],
+          [
+            -10.46,
+            -1.5
+          ],
+          [
+            -10.89,
+            -0.5
+          ],
+          [
+            -12.03,
+            0.37
+          ],
+          [
+            -13.77,
+            1.02
+          ],
+          [
+            -15.94,
+            1.37
+          ],
+          [
+            -18.33,
+            1.41
+          ],
+          [
+            -20.69,
+            1.13
+          ],
+          [
+            -22.81,
+            0.54
+          ],
+          [
+            -24.48,
+            -0.28
+          ],
+          [
+            -25.52,
+            -1.27
+          ]
+        ]
+      }
+    },
+    {
+      "id": "wing_far_vein",
+      "at": [
+        5.6,
+        -8.05
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            -25.97,
+            -2.73
+          ],
+          [
+            -25.97,
+            -1.93
+          ],
+          [
+            0,
+            0.8
+          ]
+        ]
+      },
+      "fill": "$slate.dark@heavy"
+    },
+    {
+      "id": "leg_0",
+      "at": [
+        7.35,
+        8.58
+      ],
+      "rot": 24,
+      "shape": {
+        "kind": "rect",
+        "w": 2.1,
+        "h": 4.9,
+        "corner": 1.05
+      },
+      "fill": "$carapace.dark2"
+    },
+    {
+      "id": "leg_1",
+      "at": [
+        14.35,
+        8.58
+      ],
+      "rot": -18,
+      "shape": {
+        "kind": "rect",
+        "w": 2.1,
+        "h": 4.9,
+        "corner": 1.05
+      },
+      "fill": "$carapace.dark2"
+    },
+    {
+      "id": "abdomen",
+      "at": [
+        -12.25,
+        2.8
+      ],
+      "rot": 7,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 20.12,
+        "ry": 9.45
+      },
+      "fill": "$dead",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "band_0",
+      "at": [
+        -6.12,
+        3.54
+      ],
+      "rot": 7,
+      "shape": {
+        "kind": "rect",
+        "w": 0.96,
+        "h": 14.65,
+        "corner": 0.53
+      },
+      "fill": "$carapace.dark2"
+    },
+    {
+      "id": "band_1",
+      "at": [
+        -13.12,
+        2.7
+      ],
+      "rot": 7,
+      "shape": {
+        "kind": "rect",
+        "w": 0.96,
+        "h": 14.65,
+        "corner": 0.53
+      },
+      "fill": "$carapace.dark2"
+    },
+    {
+      "id": "band_2",
+      "at": [
+        -20.12,
+        1.85
+      ],
+      "rot": 7,
+      "shape": {
+        "kind": "rect",
+        "w": 0.96,
+        "h": 14.65,
+        "corner": 0.53
+      },
+      "fill": "$carapace.dark2"
+    },
+    {
+      "id": "abdomen_shine",
+      "at": [
+        -10.85,
+        -2.1
+      ],
+      "rot": 7,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 12.6,
+        "ry": 2.62
+      },
+      "fill": "$heather.dark"
+    },
+    {
+      "id": "tail",
+      "at": [
+        -32.2,
+        5.95
+      ],
+      "rot": 7,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            2.8,
+            -3.15
+          ],
+          [
+            -3.15,
+            0.0
+          ],
+          [
+            2.8,
+            3.15
+          ]
+        ]
+      },
+      "fill": "$dead"
+    },
+    {
+      "id": "organ",
+      "at": [
+        1.4,
+        9.45
+      ],
+      "use": "ss.lib.organ",
+      "scale": [
+        0.96,
+        0.73
+      ]
+    },
+    {
+      "id": "thorax",
+      "at": [
+        10.15,
+        -1.4
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 10.85,
+        "ry": 9.8
+      },
+      "fill": "$coral",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "underside",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            20.63,
+            1.14
+          ],
+          [
+            19.77,
+            3.13
+          ],
+          [
+            18.46,
+            4.9
+          ],
+          [
+            16.76,
+            6.37
+          ],
+          [
+            14.74,
+            7.48
+          ],
+          [
+            12.5,
+            8.17
+          ],
+          [
+            10.15,
+            8.4
+          ],
+          [
+            7.8,
+            8.17
+          ],
+          [
+            5.56,
+            7.48
+          ],
+          [
+            3.54,
+            6.37
+          ],
+          [
+            1.84,
+            4.9
+          ],
+          [
+            0.53,
+            3.13
+          ],
+          [
+            -0.33,
+            1.14
+          ]
+        ]
+      },
+      "fill": "$dead"
+    },
+    {
+      "id": "thorax_shine",
+      "at": [
+        11.55,
+        -6.3
+      ],
+      "rot": -8,
+      "shape": {
+        "kind": "ellipse",
+        "rx": 5.95,
+        "ry": 2.62
+      },
+      "fill": "$coral.light"
+    },
+    {
+      "id": "head",
+      "at": [
+        22.4,
+        0.35
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 6.83
+      },
+      "fill": "$dead",
+      "stroke": {
+        "color": "$ink",
+        "width": "thin"
+      }
+    },
+    {
+      "id": "eye",
+      "at": [
+        24.15,
+        -1.57
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 3.68,
+        "ry": 4.2
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "glint",
+      "at": [
+        25.03,
+        -3.15
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.96
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "antenna",
+      "at": [
+        27.82,
+        -6.83
+      ],
+      "rot": 40,
+      "shape": {
+        "kind": "rect",
+        "w": 1.57,
+        "h": 5.95,
+        "corner": 0.79
+      },
+      "fill": "$dead"
+    },
+    {
+      "id": "mouth",
+      "at": [
+        28.35,
+        4.2
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -1.05,
+            -1.4
+          ],
+          [
+            3.15,
+            1.05
+          ],
+          [
+            -0.7,
+            2.1
+          ]
+        ]
+      },
+      "fill": "$carapace.dark"
+    },
+    {
+      "at": [
+        5.6,
+        -8.05
+      ],
+      "fill": "$steel.light",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      },
+      "id": "wing_root",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -16.64,
+            -5.41
+          ],
+          [
+            -15.8,
+            -6.61
+          ],
+          [
+            -14.23,
+            -7.43
+          ],
+          [
+            -12.08,
+            -7.79
+          ],
+          [
+            -9.56,
+            -7.65
+          ],
+          [
+            -6.92,
+            -7.03
+          ],
+          [
+            -4.41,
+            -5.98
+          ],
+          [
+            -2.29,
+            -4.62
+          ],
+          [
+            -0.76,
+            -3.06
+          ],
+          [
+            0.03,
+            -1.47
+          ],
+          [
+            0.0,
+            -0.0
+          ],
+          [
+            -0.84,
+            1.2
+          ],
+          [
+            -2.42,
+            2.03
+          ],
+          [
+            -4.57,
+            2.39
+          ],
+          [
+            -7.09,
+            2.25
+          ],
+          [
+            -9.73,
+            1.62
+          ],
+          [
+            -12.23,
+            0.58
+          ],
+          [
+            -14.35,
+            -0.79
+          ],
+          [
+            -15.88,
+            -2.35
+          ],
+          [
+            -16.67,
+            -3.94
+          ]
+        ]
+      }
+    },
+    {
+      "at": [
+        5.6,
+        -8.05
+      ],
+      "fill": "$steel.light",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      },
+      "id": "wing_tip",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -27.0,
+            -8.31
+          ],
+          [
+            -26.31,
+            -9.3
+          ],
+          [
+            -24.9,
+            -9.98
+          ],
+          [
+            -22.89,
+            -10.29
+          ],
+          [
+            -20.49,
+            -10.19
+          ],
+          [
+            -17.94,
+            -9.69
+          ],
+          [
+            -15.48,
+            -8.84
+          ],
+          [
+            -13.35,
+            -7.73
+          ],
+          [
+            -11.77,
+            -6.47
+          ],
+          [
+            -10.88,
+            -5.17
+          ],
+          [
+            -10.78,
+            -3.96
+          ],
+          [
+            -11.47,
+            -2.97
+          ],
+          [
+            -12.89,
+            -2.29
+          ],
+          [
+            -14.89,
+            -1.99
+          ],
+          [
+            -17.29,
+            -2.09
+          ],
+          [
+            -19.84,
+            -2.59
+          ],
+          [
+            -22.3,
+            -3.43
+          ],
+          [
+            -24.43,
+            -4.54
+          ],
+          [
+            -26.01,
+            -5.81
+          ],
+          [
+            -26.9,
+            -7.11
+          ]
+        ]
+      }
+    },
+    {
+      "id": "wing_vein",
+      "at": [
+        5.6,
+        -8.05
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            -27.03,
+            -8.78
+          ],
+          [
+            -27.03,
+            -7.98
+          ],
+          [
+            0,
+            0.8
+          ]
+        ]
+      },
+      "fill": "$slate.dark@heavy"
+    }
+  ],
+  "animations": {
+    "fly": {
+      "description": "the buzz: near and far wings beat as a pair about their hinge, the tips a beat behind the roots; the body bobs under it",
+      "duration": 0.3,
+      "tracks": [
+        {
+          "part": "wing_root",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -16
+            ],
+            [
+              0.5,
+              16
+            ],
+            [
+              1,
+              -16
+            ]
+          ]
+        },
+        {
+          "part": "wing_vein",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -16
+            ],
+            [
+              0.5,
+              16
+            ],
+            [
+              1,
+              -16
+            ]
+          ]
+        },
+        {
+          "part": "wing_tip",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -22
+            ],
+            [
+              0.62,
+              22
+            ],
+            [
+              1,
+              -22
+            ]
+          ]
+        },
+        {
+          "part": "wing_far_root",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -11.2
+            ],
+            [
+              0.5,
+              11.2
+            ],
+            [
+              1,
+              -11.2
+            ]
+          ]
+        },
+        {
+          "part": "wing_far_vein",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -11.2
+            ],
+            [
+              0.5,
+              11.2
+            ],
+            [
+              1,
+              -11.2
+            ]
+          ]
+        },
+        {
+          "part": "wing_far_tip",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -15.399999999999999
+            ],
+            [
+              0.62,
+              15.399999999999999
+            ],
+            [
+              1,
+              -15.399999999999999
+            ]
+          ]
+        },
+        {
+          "part": "abdomen",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_0",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_1",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_2",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "abdomen_shine",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "tail",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "organ",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "thorax",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "underside",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "thorax_shine",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "eye",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "glint",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "antenna",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "mouth",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "leg_0",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "leg_1",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              -1.22
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "spray": {
+      "description": "a squirt of the body's acid: the abdomen flicks up, the organ under it flares",
+      "duration": 0.5,
+      "tracks": [
+        {
+          "part": "abdomen",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.3,
+              -9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "abdomen_shine",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.3,
+              -9
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "organ",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.3,
+              1.7
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "wing_root",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -22
+            ],
+            [
+              0.5,
+              22
+            ],
+            [
+              1,
+              -22
+            ]
+          ]
+        },
+        {
+          "part": "wing_vein",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -22
+            ],
+            [
+              0.5,
+              22
+            ],
+            [
+              1,
+              -22
+            ]
+          ]
+        },
+        {
+          "part": "wing_tip",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -30
+            ],
+            [
+              0.62,
+              30
+            ],
+            [
+              1,
+              -30
+            ]
+          ]
+        },
+        {
+          "part": "wing_far_root",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -15.399999999999999
+            ],
+            [
+              0.5,
+              15.399999999999999
+            ],
+            [
+              1,
+              -15.399999999999999
+            ]
+          ]
+        },
+        {
+          "part": "wing_far_vein",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -15.399999999999999
+            ],
+            [
+              0.5,
+              15.399999999999999
+            ],
+            [
+              1,
+              -15.399999999999999
+            ]
+          ]
+        },
+        {
+          "part": "wing_far_tip",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -21.0
+            ],
+            [
+              0.62,
+              21.0
+            ],
+            [
+              1,
+              -21.0
+            ]
+          ]
+        }
+      ]
+    },
+    "flap": {
+      "description": "enraged: whole-arm strokes, the downbeat at 0.35 is when it surges",
+      "duration": 0.45,
+      "tracks": [
+        {
+          "part": "wing_root",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -34
+            ],
+            [
+              0.35,
+              38
+            ],
+            [
+              0.62,
+              -40
+            ],
+            [
+              1,
+              -34
+            ]
+          ]
+        },
+        {
+          "part": "wing_vein",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -34
+            ],
+            [
+              0.35,
+              38
+            ],
+            [
+              0.62,
+              -40
+            ],
+            [
+              1,
+              -34
+            ]
+          ]
+        },
+        {
+          "part": "wing_far_root",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -34
+            ],
+            [
+              0.35,
+              38
+            ],
+            [
+              0.62,
+              -40
+            ],
+            [
+              1,
+              -34
+            ]
+          ]
+        },
+        {
+          "part": "wing_far_vein",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -34
+            ],
+            [
+              0.35,
+              38
+            ],
+            [
+              0.62,
+              -40
+            ],
+            [
+              1,
+              -34
+            ]
+          ]
+        },
+        {
+          "part": "wing_tip",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -40
+            ],
+            [
+              0.4,
+              44
+            ],
+            [
+              0.68,
+              -46
+            ],
+            [
+              1,
+              -40
+            ]
+          ]
+        },
+        {
+          "part": "wing_far_tip",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              -40
+            ],
+            [
+              0.4,
+              44
+            ],
+            [
+              0.68,
+              -46
+            ],
+            [
+              1,
+              -40
+            ]
+          ]
+        },
+        {
+          "part": "abdomen",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_0",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_1",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "band_2",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "abdomen_shine",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "tail",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "organ",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "thorax",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "underside",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "thorax_shine",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "eye",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "glint",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "antenna",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "mouth",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "leg_0",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "leg_1",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.35,
+              2.1
+            ],
+            [
+              0.62,
+              -2.45
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "death": {
+      "description": "the wings stop and droop, the organ goes out, the abdomen curls under and the head drops",
+      "duration": 0.6,
+      "tracks": [
+        {
+          "part": "wing_root",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.15,
+              10
+            ],
+            [
+              0.7,
+              -26
+            ],
+            [
+              0.85,
+              -28
+            ],
+            [
+              1,
+              -28
+            ]
+          ]
+        },
+        {
+          "part": "wing_tip",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.15,
+              10
+            ],
+            [
+              0.7,
+              -26
+            ],
+            [
+              0.85,
+              -28
+            ],
+            [
+              1,
+              -28
+            ]
+          ]
+        },
+        {
+          "part": "wing_vein",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.15,
+              10
+            ],
+            [
+              0.7,
+              -26
+            ],
+            [
+              0.85,
+              -28
+            ],
+            [
+              1,
+              -28
+            ]
+          ]
+        },
+        {
+          "part": "wing_far_root",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.15,
+              10
+            ],
+            [
+              0.7,
+              -26
+            ],
+            [
+              0.85,
+              -28
+            ],
+            [
+              1,
+              -28
+            ]
+          ]
+        },
+        {
+          "part": "wing_far_tip",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.15,
+              10
+            ],
+            [
+              0.7,
+              -26
+            ],
+            [
+              0.85,
+              -28
+            ],
+            [
+              1,
+              -28
+            ]
+          ]
+        },
+        {
+          "part": "wing_far_vein",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.15,
+              10
+            ],
+            [
+              0.7,
+              -26
+            ],
+            [
+              0.85,
+              -28
+            ],
+            [
+              1,
+              -28
+            ]
+          ]
+        },
+        {
+          "part": "abdomen",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.15,
+              -6
+            ],
+            [
+              0.7,
+              16
+            ],
+            [
+              0.85,
+              18
+            ],
+            [
+              1,
+              18
+            ]
+          ]
+        },
+        {
+          "part": "abdomen_shine",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.15,
+              -6
+            ],
+            [
+              0.7,
+              16
+            ],
+            [
+              0.85,
+              18
+            ],
+            [
+              1,
+              18
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.7,
+              2.1
+            ],
+            [
+              0.85,
+              2.27
+            ],
+            [
+              1,
+              2.27
+            ]
+          ]
+        },
+        {
+          "part": "eye",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0
+            ],
+            [
+              0.7,
+              2.1
+            ],
+            [
+              0.85,
+              2.27
+            ],
+            [
+              1,
+              2.27
+            ]
+          ]
+        },
+        {
+          "part": "organ",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.12,
+              1.8
+            ],
+            [
+              0.5,
+              0.3
+            ],
+            [
+              0.85,
+              0.1
+            ],
+            [
+              1,
+              0.1
+            ]
+          ]
+        },
+        {
+          "part": "organ",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.3,
+              1
+            ],
+            [
+              0.7,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "variants": {
+    "enraged": {
+      "description": "the last one: thorax flushed crimson, eye lit, the near wing torn at the tip",
+      "set": {
+        "thorax.fill": "$blood",
+        "thorax_shine.fill": "$blood.light",
+        "glint.fill": "$pheromone",
+        "abdomen_shine.fill": "$pheromone.dark",
+        "wing_tip.fill": "$steel",
+        "wing_tip.shape": {
+          "kind": "poly",
+          "points": [
+            [
+              -27.0,
+              -8.31
+            ],
+            [
+              -26.31,
+              -9.3
+            ],
+            [
+              -24.9,
+              -9.98
+            ],
+            [
+              -21.37,
+              -8.71
+            ],
+            [
+              -20.49,
+              -10.19
+            ],
+            [
+              -18.3,
+              -8.34
+            ],
+            [
+              -15.48,
+              -8.84
+            ],
+            [
+              -15.46,
+              -7.12
+            ],
+            [
+              -11.77,
+              -6.47
+            ],
+            [
+              -13.92,
+              -5.54
+            ],
+            [
+              -10.78,
+              -3.96
+            ],
+            [
+              -14.29,
+              -4.17
+            ],
+            [
+              -12.89,
+              -2.29
+            ],
+            [
+              -16.41,
+              -3.57
+            ],
+            [
+              -17.29,
+              -2.09
+            ],
+            [
+              -19.48,
+              -3.94
+            ],
+            [
+              -22.3,
+              -3.43
+            ],
+            [
+              -24.43,
+              -4.54
+            ],
+            [
+              -26.01,
+              -5.81
+            ],
+            [
+              -26.9,
+              -7.11
+            ]
+          ]
+        }
+      },
+      "add": [
+        {
+          "id": "eye_fire",
+          "at": [
+            24.15,
+            -1.57
+          ],
+          "shape": {
+            "kind": "circle",
+            "r": 2.1
+          },
+          "fill": "$pheromone@soft"
+        }
+      ]
+    }
+  }
+}
