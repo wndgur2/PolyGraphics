@@ -1,12 +1,11 @@
 {
   "id": "ss.icon.spider",
   "name": "Spider hand icon",
-  "description": "UI slot icon for the spider hand: three arms fanned off one knuckle, caught mid-reach. Composes ss.lib.spider-arm three times rather than drawing a leg three times, so the slot, the two finds and the evolution all show the same limb. The rim is bile, the one colour no other slot in the game wears — a venom green for the only weapon that gets hold of things.",
+  "description": "UI slot icon for the spider hand: three arms fanned off one knuckle, caught mid-reach. Composes ss.lib.spider-arm three times rather than drawing a leg three times, so the slot, the two finds and the evolution all show the same limb. The rim is `$cobalt`, a blued steel: the arms are drawn in `$steel`, and this is that colour with the grey taken out, far enough from every other rim (nearest `$frost`, ΔE 22.4) to be its own slot.",
   "tags": ["icon", "weapon"],
   "size": [32, 32],
-  "why": { "distinct": "Its tile is the wand's $bile: the spider hand came after the rims were each given their weapon's own colour and has not been given one yet. The rule stands; this is the one slot still owing it." },
   "parts": [
-    {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$bile"},
+    {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$cobalt"},
     {"id": "inner", "shape": {"kind": "rect", "w": 28, "h": 28, "corner": 5}, "fill": "$coal.dark"},
     {"id": "arm_0", "at": [-6.0, 8.0], "rot": -78.0, "use": "ss.lib.spider-arm"},
     {"id": "arm_1", "at": [-6.0, 8.0], "rot": -45.0, "use": "ss.lib.spider-arm"},

@@ -1,11 +1,11 @@
 {
   "id": "ss.icon.speed",
   "name": "Attack speed icon",
-  "description": "Passive icon: double chevron pointing right, venom green. Port of the hand-drawn i_speed from Feelers' BootScene.",
+  "description": "Passive icon: double chevron pointing right, venom green. Port of the hand-drawn i_speed from Feelers' BootScene. Rim is `$chitin`, the same as `ss.icon.boomerang`: this passive is the Mandible evolution's other half, so the pair reads as a pair on the bar.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$venom" },
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$chitin" },
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
     { "id": "back", "shape": { "kind": "poly", "points": [[-8, -8], [0, 0], [-8, 8]] }, "fill": "$venom" },
     { "id": "front", "shape": { "kind": "poly", "points": [[0, -8], [8, 0], [0, 8]] }, "fill": "$venom" }
