@@ -1,7 +1,7 @@
 {
   "id": "ss.fx.vine-lash",
   "name": "Vine lash",
-  "description": "One strike of a planted thicket, and an arm rather than an effect. It was a still that faded out where it stopped, which is a decal \u2014 the Spider Hand's arms go out and come home, and this had to do the same to read as the same kind of thing.\n\nSolved as a spiral about the plant it leaves: the radius grows with the angle because the tendril is still travelling outward when the swing runs out, where an arc of even radius reads as a ring with a piece cut out of it. Cut into six segments whose points are held relative to their own start, so scaling one from nothing extends it out of where the last one ended \u2014 the arm reaching, rather than the whole arc swelling out of the plant's middle.\n\n`strike` is out, a beat at full stretch, then home. The return is tip-first: the outer segments leave before the inner ones, so the arm rolls up into the plant instead of shrinking at both ends. 0.34s, which is the weapon's own `lashS`, and the three parts of it are what that length is for: the arm is reaching until 0.45, held out until 0.66, and rolled up by 0.9 \u2014 at 0.18 the beat was a single frame and the whole swing read as a flicker at the edge of the eye rather than as an arm. The root is already a quarter out at t=0, because a tendril the plant is about to swing is a thing that is there, and a first frame with nothing in it is a frame the strike does not get. Thorns ride the segment they sit on and the hook at the tip is the largest of them, because the end of a reach is where a barb would actually catch.\n\nThe pivot is the document's own origin, which is why the box is square and mostly empty: the game drops the sprite on the thicket, turns it to the heading and scales it by the reach the weapon actually hits at, so the picture and the hitbox are one number. `meta.radius` is how far the tip gets from that pivot. The heading is also animated there rather than here \u2014 the game cocks the arm back and sweeps it onto the heading as the reach completes \u2014 because a document that turned itself would be turning about the wrong point.\n\nIt is painted a step up the ramp from what swings it: the plant is `$moss.dark2` under `$moss` and this is `$moss.light` under `$sage.dark`, with `$blood` thorns rather than `$blood.dark2`. Against the field's own floor that is a contrast of 2.6 where the old paint measured 1.34 \u2014 under the 2.5 the manifest calls sinking, on the one drawing in this set that exists only while it moves. The lit edge was `$sage` itself, which measured 3.1; `$sage.dark` takes the arm a shade darker and still keeps it over the line.",
+  "description": "One strike of a planted thicket, and an arm rather than an effect. It was a still that faded out where it stopped, which is a decal \u2014 the Spider Hand's arms go out and come home, and this had to do the same to read as the same kind of thing.\n\nSolved as a spiral about the plant it leaves: the radius grows with the angle because the tendril is still travelling outward when the swing runs out, where an arc of even radius reads as a ring with a piece cut out of it. Cut into six segments whose points are held relative to their own start, so scaling one from nothing extends it out of where the last one ended \u2014 the arm reaching, rather than the whole arc swelling out of the plant's middle.\n\n`strike` is out, a beat at full stretch, then home. The return is tip-first: the outer segments leave before the inner ones, so the arm rolls up into the plant instead of shrinking at both ends. 0.48s, which is the weapon's own `lashS`. The reach and the beat keep the timing they had at 0.34 \u2014 reaching until about 0.15s, held out until about 0.25s \u2014 and the extra time all goes to the way out: each segment takes 0.18s to roll up where it took 0.06, easing in and out rather than on `backOut`, and fades as it goes. At 0.34 the arm was gone in two frames, with an ease that overshot through zero on the way, and the swing read as switching off rather than as leaving. Scale is sampled into linear keys because a part carries one scale track, and the reach keeps the `backOut` shape it had while the return does not. The root is already a quarter out at t=0, because a tendril the plant is about to swing is a thing that is there, and a first frame with nothing in it is a frame the strike does not get. Thorns ride the segment they sit on and the hook at the tip is the largest of them, because the end of a reach is where a barb would actually catch.\n\nThe pivot is the document's own origin, which is why the box is square and mostly empty: the game drops the sprite on the thicket, turns it to the heading and scales it by the reach the weapon actually hits at, so the picture and the hitbox are one number. `meta.radius` is how far the tip gets from that pivot. The heading is also animated there rather than here \u2014 the game cocks the arm back and sweeps it onto the heading as the reach completes \u2014 because a document that turned itself would be turning about the wrong point.\n\nIt is painted a step up the ramp from what swings it, and a step down from where it started: the plant is `$moss.dark2` under `$moss`, and this is `$sage.dark2` under a `$sage.dark` edge, with `$blood.dark` thorns. It began at `$moss.light` and `$blood`, which measured 2.6 against the field's floor; that drew the eye off the bodies the swing was hitting, so the arm is darker now and measures 2.16. That is under the 2.5 the manifest calls sinking, and on purpose: it moves, and a thing that moves is found without having to be bright.",
   "tags": [
     "fx"
   ],
@@ -14,8 +14,8 @@
   },
   "animations": {
     "strike": {
-      "description": "strike \u2014 out, a beat held at full stretch, then rolled home tip-first. 0.34s, which is the weapon's own `lashS`.",
-      "duration": 0.34,
+      "description": "strike \u2014 out, a beat held at full stretch, then rolled home tip-first and faded as it goes. 0.48s, which is the weapon's own `lashS`.",
+      "duration": 0.48,
       "tracks": [
         {
           "part": "s0_ink",
@@ -26,23 +26,73 @@
               0.25
             ],
             [
-              0.19,
-              1.06
+              0.071,
+              0.779
             ],
             [
-              0.5,
+              0.142,
+              1.022
+            ],
+            [
+              0.212,
+              1.075
+            ],
+            [
+              0.283,
+              1.035
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.521,
               1
             ],
             [
-              0.735,
-              1
+              0.596,
+              0.854
             ],
             [
-              0.905,
+              0.67,
+              0.501
+            ],
+            [
+              0.745,
+              0.147
+            ],
+            [
+              0.82,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s0_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.521,
+              1
+            ],
+            [
+              0.82,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s0",
@@ -53,23 +103,73 @@
               0.25
             ],
             [
-              0.19,
-              1.06
+              0.071,
+              0.779
             ],
             [
-              0.5,
+              0.142,
+              1.022
+            ],
+            [
+              0.212,
+              1.075
+            ],
+            [
+              0.283,
+              1.035
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.521,
               1
             ],
             [
-              0.735,
-              1
+              0.596,
+              0.854
             ],
             [
-              0.905,
+              0.67,
+              0.501
+            ],
+            [
+              0.745,
+              0.147
+            ],
+            [
+              0.82,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s0",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.521,
+              1
+            ],
+            [
+              0.82,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s0_lit",
@@ -80,23 +180,73 @@
               0.25
             ],
             [
-              0.19,
-              1.06
+              0.071,
+              0.779
             ],
             [
-              0.5,
+              0.142,
+              1.022
+            ],
+            [
+              0.212,
+              1.075
+            ],
+            [
+              0.283,
+              1.035
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.521,
               1
             ],
             [
-              0.735,
-              1
+              0.596,
+              0.854
             ],
             [
-              0.905,
+              0.67,
+              0.501
+            ],
+            [
+              0.745,
+              0.147
+            ],
+            [
+              0.82,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s0_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.521,
+              1
+            ],
+            [
+              0.82,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s1_ink",
@@ -107,27 +257,77 @@
               0.001
             ],
             [
-              0.05,
+              0.035,
               0.001
             ],
             [
-              0.24,
-              1.06
+              0.099,
+              0.706
             ],
             [
-              0.5,
+              0.163,
+              1.029
+            ],
+            [
+              0.226,
+              1.099
+            ],
+            [
+              0.29,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.51,
               1
             ],
             [
-              0.72,
-              1
+              0.595,
+              0.854
             ],
             [
-              0.89,
+              0.68,
+              0.501
+            ],
+            [
+              0.765,
+              0.147
+            ],
+            [
+              0.85,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s1_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.51,
+              1
+            ],
+            [
+              0.85,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s1",
@@ -138,27 +338,77 @@
               0.001
             ],
             [
-              0.05,
+              0.035,
               0.001
             ],
             [
-              0.24,
-              1.06
+              0.099,
+              0.706
             ],
             [
-              0.5,
+              0.163,
+              1.029
+            ],
+            [
+              0.226,
+              1.099
+            ],
+            [
+              0.29,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.51,
               1
             ],
             [
-              0.72,
-              1
+              0.595,
+              0.854
             ],
             [
-              0.89,
+              0.68,
+              0.501
+            ],
+            [
+              0.765,
+              0.147
+            ],
+            [
+              0.85,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s1",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.51,
+              1
+            ],
+            [
+              0.85,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s1_lit",
@@ -169,27 +419,77 @@
               0.001
             ],
             [
-              0.05,
+              0.035,
               0.001
             ],
             [
-              0.24,
-              1.06
+              0.099,
+              0.706
             ],
             [
-              0.5,
+              0.163,
+              1.029
+            ],
+            [
+              0.226,
+              1.099
+            ],
+            [
+              0.29,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.51,
               1
             ],
             [
-              0.72,
-              1
+              0.595,
+              0.854
             ],
             [
-              0.89,
+              0.68,
+              0.501
+            ],
+            [
+              0.765,
+              0.147
+            ],
+            [
+              0.85,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s1_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.51,
+              1
+            ],
+            [
+              0.85,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s2_ink",
@@ -200,27 +500,77 @@
               0.001
             ],
             [
-              0.1,
+              0.071,
               0.001
             ],
             [
-              0.29,
-              1.06
+              0.128,
+              0.706
             ],
             [
-              0.5,
+              0.184,
+              1.029
+            ],
+            [
+              0.241,
+              1.099
+            ],
+            [
+              0.297,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.499,
               1
             ],
             [
-              0.705,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.875,
+              0.69,
+              0.501
+            ],
+            [
+              0.785,
+              0.147
+            ],
+            [
+              0.88,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s2_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.499,
+              1
+            ],
+            [
+              0.88,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s2",
@@ -231,27 +581,77 @@
               0.001
             ],
             [
-              0.1,
+              0.071,
               0.001
             ],
             [
-              0.29,
-              1.06
+              0.128,
+              0.706
             ],
             [
-              0.5,
+              0.184,
+              1.029
+            ],
+            [
+              0.241,
+              1.099
+            ],
+            [
+              0.297,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.499,
               1
             ],
             [
-              0.705,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.875,
+              0.69,
+              0.501
+            ],
+            [
+              0.785,
+              0.147
+            ],
+            [
+              0.88,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s2",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.499,
+              1
+            ],
+            [
+              0.88,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s2_lit",
@@ -262,27 +662,77 @@
               0.001
             ],
             [
-              0.1,
+              0.071,
               0.001
             ],
             [
-              0.29,
-              1.06
+              0.128,
+              0.706
             ],
             [
-              0.5,
+              0.184,
+              1.029
+            ],
+            [
+              0.241,
+              1.099
+            ],
+            [
+              0.297,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.499,
               1
             ],
             [
-              0.705,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.875,
+              0.69,
+              0.501
+            ],
+            [
+              0.785,
+              0.147
+            ],
+            [
+              0.88,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s2_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.499,
+              1
+            ],
+            [
+              0.88,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s3_ink",
@@ -293,27 +743,77 @@
               0.001
             ],
             [
-              0.15,
+              0.106,
               0.001
             ],
             [
-              0.34,
-              1.06
+              0.156,
+              0.706
             ],
             [
-              0.5,
+              0.205,
+              1.029
+            ],
+            [
+              0.255,
+              1.099
+            ],
+            [
+              0.304,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.489,
               1
             ],
             [
-              0.69,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.86,
+              0.7,
+              0.501
+            ],
+            [
+              0.805,
+              0.147
+            ],
+            [
+              0.91,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s3_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.489,
+              1
+            ],
+            [
+              0.91,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s3",
@@ -324,27 +824,77 @@
               0.001
             ],
             [
-              0.15,
+              0.106,
               0.001
             ],
             [
-              0.34,
-              1.06
+              0.156,
+              0.706
             ],
             [
-              0.5,
+              0.205,
+              1.029
+            ],
+            [
+              0.255,
+              1.099
+            ],
+            [
+              0.304,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.489,
               1
             ],
             [
-              0.69,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.86,
+              0.7,
+              0.501
+            ],
+            [
+              0.805,
+              0.147
+            ],
+            [
+              0.91,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s3",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.489,
+              1
+            ],
+            [
+              0.91,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s3_lit",
@@ -355,27 +905,77 @@
               0.001
             ],
             [
-              0.15,
+              0.106,
               0.001
             ],
             [
-              0.34,
-              1.06
+              0.156,
+              0.706
             ],
             [
-              0.5,
+              0.205,
+              1.029
+            ],
+            [
+              0.255,
+              1.099
+            ],
+            [
+              0.304,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.489,
               1
             ],
             [
-              0.69,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.86,
+              0.7,
+              0.501
+            ],
+            [
+              0.805,
+              0.147
+            ],
+            [
+              0.91,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s3_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.489,
+              1
+            ],
+            [
+              0.91,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s4_ink",
@@ -386,27 +986,77 @@
               0.001
             ],
             [
-              0.2,
+              0.142,
               0.001
             ],
             [
-              0.39,
-              1.06
+              0.184,
+              0.706
             ],
             [
-              0.5,
+              0.227,
+              1.029
+            ],
+            [
+              0.269,
+              1.099
+            ],
+            [
+              0.312,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.478,
               1
             ],
             [
-              0.675,
-              1
+              0.593,
+              0.854
             ],
             [
-              0.845,
+              0.709,
+              0.501
+            ],
+            [
+              0.825,
+              0.147
+            ],
+            [
+              0.94,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s4_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.478,
+              1
+            ],
+            [
+              0.94,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s4",
@@ -417,27 +1067,77 @@
               0.001
             ],
             [
-              0.2,
+              0.142,
               0.001
             ],
             [
-              0.39,
-              1.06
+              0.184,
+              0.706
             ],
             [
-              0.5,
+              0.227,
+              1.029
+            ],
+            [
+              0.269,
+              1.099
+            ],
+            [
+              0.312,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.478,
               1
             ],
             [
-              0.675,
-              1
+              0.593,
+              0.854
             ],
             [
-              0.845,
+              0.709,
+              0.501
+            ],
+            [
+              0.825,
+              0.147
+            ],
+            [
+              0.94,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s4",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.478,
+              1
+            ],
+            [
+              0.94,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s4_lit",
@@ -448,27 +1148,77 @@
               0.001
             ],
             [
-              0.2,
+              0.142,
               0.001
             ],
             [
-              0.39,
-              1.06
+              0.184,
+              0.706
             ],
             [
-              0.5,
+              0.227,
+              1.029
+            ],
+            [
+              0.269,
+              1.099
+            ],
+            [
+              0.312,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.478,
               1
             ],
             [
-              0.675,
-              1
+              0.593,
+              0.854
             ],
             [
-              0.845,
+              0.709,
+              0.501
+            ],
+            [
+              0.825,
+              0.147
+            ],
+            [
+              0.94,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s4_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.478,
+              1
+            ],
+            [
+              0.94,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s5_ink",
@@ -479,27 +1229,77 @@
               0.001
             ],
             [
-              0.25,
+              0.177,
               0.001
             ],
             [
-              0.44,
-              1.06
+              0.212,
+              0.706
             ],
             [
-              0.5,
+              0.248,
+              1.029
+            ],
+            [
+              0.283,
+              1.099
+            ],
+            [
+              0.319,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.468,
               1
             ],
             [
-              0.66,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.83,
+              0.719,
+              0.501
+            ],
+            [
+              0.845,
+              0.147
+            ],
+            [
+              0.97,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s5_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.468,
+              1
+            ],
+            [
+              0.97,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s5",
@@ -510,27 +1310,77 @@
               0.001
             ],
             [
-              0.25,
+              0.177,
               0.001
             ],
             [
-              0.44,
-              1.06
+              0.212,
+              0.706
             ],
             [
-              0.5,
+              0.248,
+              1.029
+            ],
+            [
+              0.283,
+              1.099
+            ],
+            [
+              0.319,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.468,
               1
             ],
             [
-              0.66,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.83,
+              0.719,
+              0.501
+            ],
+            [
+              0.845,
+              0.147
+            ],
+            [
+              0.97,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s5",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.468,
+              1
+            ],
+            [
+              0.97,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "s5_lit",
@@ -541,27 +1391,77 @@
               0.001
             ],
             [
-              0.25,
+              0.177,
               0.001
             ],
             [
-              0.44,
-              1.06
+              0.212,
+              0.706
             ],
             [
-              0.5,
+              0.248,
+              1.029
+            ],
+            [
+              0.283,
+              1.099
+            ],
+            [
+              0.319,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.468,
               1
             ],
             [
-              0.66,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.83,
+              0.719,
+              0.501
+            ],
+            [
+              0.845,
+              0.147
+            ],
+            [
+              0.97,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "s5_lit",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.468,
+              1
+            ],
+            [
+              0.97,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "b0_ink",
@@ -572,27 +1472,77 @@
               0.001
             ],
             [
-              0.1,
+              0.071,
               0.001
             ],
             [
-              0.29,
-              1.06
+              0.128,
+              0.706
             ],
             [
-              0.5,
+              0.184,
+              1.029
+            ],
+            [
+              0.241,
+              1.099
+            ],
+            [
+              0.297,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.499,
               1
             ],
             [
-              0.705,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.875,
+              0.69,
+              0.501
+            ],
+            [
+              0.785,
+              0.147
+            ],
+            [
+              0.88,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "b0_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.499,
+              1
+            ],
+            [
+              0.88,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "b0",
@@ -603,27 +1553,77 @@
               0.001
             ],
             [
-              0.1,
+              0.071,
               0.001
             ],
             [
-              0.29,
-              1.06
+              0.128,
+              0.706
             ],
             [
-              0.5,
+              0.184,
+              1.029
+            ],
+            [
+              0.241,
+              1.099
+            ],
+            [
+              0.297,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.499,
               1
             ],
             [
-              0.705,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.875,
+              0.69,
+              0.501
+            ],
+            [
+              0.785,
+              0.147
+            ],
+            [
+              0.88,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "b0",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.499,
+              1
+            ],
+            [
+              0.88,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "b1_ink",
@@ -634,27 +1634,77 @@
               0.001
             ],
             [
-              0.15,
+              0.106,
               0.001
             ],
             [
-              0.34,
-              1.06
+              0.156,
+              0.706
             ],
             [
-              0.5,
+              0.205,
+              1.029
+            ],
+            [
+              0.255,
+              1.099
+            ],
+            [
+              0.304,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.489,
               1
             ],
             [
-              0.69,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.86,
+              0.7,
+              0.501
+            ],
+            [
+              0.805,
+              0.147
+            ],
+            [
+              0.91,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "b1_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.489,
+              1
+            ],
+            [
+              0.91,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "b1",
@@ -665,27 +1715,77 @@
               0.001
             ],
             [
-              0.15,
+              0.106,
               0.001
             ],
             [
-              0.34,
-              1.06
+              0.156,
+              0.706
             ],
             [
-              0.5,
+              0.205,
+              1.029
+            ],
+            [
+              0.255,
+              1.099
+            ],
+            [
+              0.304,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.489,
               1
             ],
             [
-              0.69,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.86,
+              0.7,
+              0.501
+            ],
+            [
+              0.805,
+              0.147
+            ],
+            [
+              0.91,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "b1",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.489,
+              1
+            ],
+            [
+              0.91,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "b2_ink",
@@ -696,27 +1796,77 @@
               0.001
             ],
             [
-              0.2,
+              0.142,
               0.001
             ],
             [
-              0.39,
-              1.06
+              0.184,
+              0.706
             ],
             [
-              0.5,
+              0.227,
+              1.029
+            ],
+            [
+              0.269,
+              1.099
+            ],
+            [
+              0.312,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.478,
               1
             ],
             [
-              0.675,
-              1
+              0.593,
+              0.854
             ],
             [
-              0.845,
+              0.709,
+              0.501
+            ],
+            [
+              0.825,
+              0.147
+            ],
+            [
+              0.94,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "b2_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.478,
+              1
+            ],
+            [
+              0.94,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "b2",
@@ -727,27 +1877,77 @@
               0.001
             ],
             [
-              0.2,
+              0.142,
               0.001
             ],
             [
-              0.39,
-              1.06
+              0.184,
+              0.706
             ],
             [
-              0.5,
+              0.227,
+              1.029
+            ],
+            [
+              0.269,
+              1.099
+            ],
+            [
+              0.312,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.478,
               1
             ],
             [
-              0.675,
-              1
+              0.593,
+              0.854
             ],
             [
-              0.845,
+              0.709,
+              0.501
+            ],
+            [
+              0.825,
+              0.147
+            ],
+            [
+              0.94,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "b2",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.478,
+              1
+            ],
+            [
+              0.94,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "hook_ink",
@@ -758,27 +1958,77 @@
               0.001
             ],
             [
-              0.25,
+              0.177,
               0.001
             ],
             [
-              0.44,
-              1.06
+              0.212,
+              0.706
             ],
             [
-              0.5,
+              0.248,
+              1.029
+            ],
+            [
+              0.283,
+              1.099
+            ],
+            [
+              0.319,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.468,
               1
             ],
             [
-              0.66,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.83,
+              0.719,
+              0.501
+            ],
+            [
+              0.845,
+              0.147
+            ],
+            [
+              0.97,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "hook_ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.468,
+              1
+            ],
+            [
+              0.97,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         },
         {
           "part": "hook",
@@ -789,27 +2039,77 @@
               0.001
             ],
             [
-              0.25,
+              0.177,
               0.001
             ],
             [
-              0.44,
-              1.06
+              0.212,
+              0.706
             ],
             [
-              0.5,
+              0.248,
+              1.029
+            ],
+            [
+              0.283,
+              1.099
+            ],
+            [
+              0.319,
+              1.046
+            ],
+            [
+              0.354,
+              1.0
+            ],
+            [
+              0.468,
               1
             ],
             [
-              0.66,
-              1
+              0.594,
+              0.854
             ],
             [
-              0.83,
+              0.719,
+              0.501
+            ],
+            [
+              0.845,
+              0.147
+            ],
+            [
+              0.97,
+              0.001
+            ],
+            [
+              1,
               0.001
             ]
           ],
-          "ease": "backOut"
+          "ease": "linear"
+        },
+        {
+          "part": "hook",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1
+            ],
+            [
+              0.468,
+              1
+            ],
+            [
+              0.97,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
         }
       ]
     }
@@ -979,7 +2279,7 @@
           ]
         ]
       },
-      "fill": "$moss.light",
+      "fill": "$sage.dark2",
       "at": [
         3.23,
         -6.77
@@ -1234,7 +2534,7 @@
           ]
         ]
       },
-      "fill": "$moss.light",
+      "fill": "$sage.dark2",
       "at": [
         8.88,
         -9.58
@@ -1489,7 +2789,7 @@
           ]
         ]
       },
-      "fill": "$moss.light",
+      "fill": "$sage.dark2",
       "at": [
         14.79,
         -8.48
@@ -1744,7 +3044,7 @@
           ]
         ]
       },
-      "fill": "$moss.light",
+      "fill": "$sage.dark2",
       "at": [
         20.12,
         -4.45
@@ -1999,7 +3299,7 @@
           ]
         ]
       },
-      "fill": "$moss.light",
+      "fill": "$sage.dark2",
       "at": [
         23.81,
         2.02
@@ -2254,7 +3554,7 @@
           ]
         ]
       },
-      "fill": "$moss.light",
+      "fill": "$sage.dark2",
       "at": [
         25.02,
         10.2
@@ -2385,7 +3685,7 @@
           ]
         ]
       },
-      "fill": "$blood"
+      "fill": "$blood.dark"
     },
     {
       "id": "b1_ink",
@@ -2427,7 +3727,7 @@
           ]
         ]
       },
-      "fill": "$blood"
+      "fill": "$blood.dark"
     },
     {
       "id": "b2_ink",
@@ -2469,7 +3769,7 @@
           ]
         ]
       },
-      "fill": "$blood"
+      "fill": "$blood.dark"
     },
     {
       "id": "hook_ink",
@@ -2511,7 +3811,7 @@
           ]
         ]
       },
-      "fill": "$blood"
+      "fill": "$blood.dark"
     }
   ]
 }
