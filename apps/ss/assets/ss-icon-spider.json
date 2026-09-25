@@ -1,29 +1,13 @@
 {
   "id": "ss.icon.spider",
   "name": "Spider hand icon",
-  "description": "UI slot icon for the spider hand: three arms fanned off one knuckle, caught mid-reach. Composes ss.lib.spider-arm three times rather than drawing a leg three times, so the slot, the two finds and the evolution all show the same limb. The rim is `$arcane.dark`, a deep violet. It was `$cobalt`, the arms' `$steel` with the grey taken out, and that made the Four-Leaf Clover that wears this rim a third blue on the passive bar. Its nearest rim is the Wing blade's `$arcane` at ΔE 16.4 — the same hue a step darker, which the `distinct` rule's 13 clears, where the brighter violet tried for Widow's Grip sat 8.5.",
+  "description": "UI slot icon for Spider Hand: its sample, `ss.sample.spider`, on the weapon's tile. The weapon icons used to compose each weapon's projectile; since the level-up became a choice of which sample fills a syringe, a weapon is the sample it was taken as, so the slot shows that and the tray, the codex and the level-up card all agree on what the thing is. Composed through `use`, so redrawing the sample redraws the slot. The tile keeps its colour, which is what the `distinct` rule holds apart, and goes gold when the weapon awakens.",
   "tags": ["icon", "weapon"],
   "size": [32, 32],
   "parts": [
     {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$arcane.dark"},
     {"id": "inner", "shape": {"kind": "rect", "w": 28, "h": 28, "corner": 5}, "fill": "$coal.dark"},
-    {"id": "arm_0", "at": [-6.0, 8.0], "rot": -78.0, "use": "ss.lib.spider-arm"},
-    {"id": "arm_1", "at": [-6.0, 8.0], "rot": -45.0, "use": "ss.lib.spider-arm"},
-    {"id": "arm_2", "at": [-6.0, 8.0], "rot": -12.0, "use": "ss.lib.spider-arm", "scale": 0.8},
-    {"id": "knuckle_shadow", "at": [-6.0, 8.0], "shape": {"kind": "circle", "r": 5.0}, "fill": "$ink"},
-    {"id": "knuckle", "at": [-6.0, 8.0], "shape": {"kind": "circle", "r": 3.4}, "fill": "$steel.dark"}
+    {"id": "sample", "use": "ss.sample.spider", "scale": 0.86}
   ],
-  "variants": {
-    "evolved": {
-      "description": "Widow's Grip. The rim goes gold the way every evolved slot in the roster does, but the three limbs are swapped out for ss.lib.spider-arm-widow \u2014 banded, spurred, hooked on three toes, bruised purple carrying blood \u2014 rather than recoloured, because the evolution changes what the arm is and not just what colour it is. Same fan, same knuckle, same three angles, so the two slots read as one weapon at two ages.",
-      "set": {
-        "tile.fill": "$gold",
-        "arm_0.use": "ss.lib.spider-arm-widow",
-        "arm_1.use": "ss.lib.spider-arm-widow",
-        "arm_2.use": "ss.lib.spider-arm-widow",
-        "knuckle.fill": "$carapace.dark",
-        "knuckle_shadow.fill": "$ink"
-      }
-    }
-  }
+  "variants": {"evolved": {"description": "Gold-rimmed evolved twin: the same sample on a gold tile.", "set": {"tile.fill": "$gold"}}}
 }

@@ -1,18 +1,13 @@
 {
   "id": "ss.icon.whip",
   "name": "Lash icon",
-  "description": "UI slot icon for the mandible lash. Composes the real `ss.proj.slash` arc via `use` at a quarter scale, so retuning the weapon's sweep restyles its icon in the same edit. Rim is `$white` \u2014 the bone the mandible is, bleached. It was `$husk`, three quarters of what this icon draws, until the Pulse Rate passive that wears this rim had to read as white beside the Shell's grey; the mandible inside keeps its husk, so the rim is the bone a step whiter rather than a colour from somewhere else.",
+  "description": "UI slot icon for Lash: its sample, `ss.sample.whip`, on the weapon's tile. The weapon icons used to compose each weapon's projectile; since the level-up became a choice of which sample fills a syringe, a weapon is the sample it was taken as, so the slot shows that and the tray, the codex and the level-up card all agree on what the thing is. Composed through `use`, so redrawing the sample redraws the slot. The tile keeps its colour, which is what the `distinct` rule holds apart, and goes gold when the weapon awakens.",
   "tags": ["icon", "weapon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$white" },
-    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
-    { "id": "glyph", "use": "ss.proj.slash", "at": [-5, 0], "scale": 0.26 }
+    {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$white"},
+    {"id": "inner", "shape": {"kind": "rect", "w": 28, "h": 28, "corner": 5}, "fill": "$coal.dark"},
+    {"id": "sample", "use": "ss.sample.whip", "scale": 0.86}
   ],
-  "variants": {
-    "evolved": {
-      "description": "Gold-rimmed evolved twin (the old i_whip_evo).",
-      "set": { "tile.fill": "$gold" }
-    }
-  }
+  "variants": {"evolved": {"description": "Gold-rimmed evolved twin: the same sample on a gold tile.", "set": {"tile.fill": "$gold"}}}
 }
