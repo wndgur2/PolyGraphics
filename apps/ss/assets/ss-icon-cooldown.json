@@ -1,13 +1,12 @@
 {
   "id": "ss.icon.cooldown",
   "name": "Cooldown icon",
-  "description": "Passive icon: an hourglass, two triangles meeting point-to-point. Port of the hand-drawn i_cooldown from Feelers' BootScene. Rim is `$white`, the same as `ss.icon.whip`: this passive is the Lash evolution's other half, so the pair reads as a pair on the bar. The glyph wears the rim's colour as well, so the passive is one colour on the bar. It was the Lash's `$husk`, a cream that sat ΔE 15.5 from the grey the Shell and Scab wore, and three pale slots read as one shelf; pure white stands 25.8 off the grey they wear now.",
+  "description": "Trait icon for Pulse Rate: its sample, `ss.sample.cooldown`, on the trait's tile. A trait is a stat, with nothing on the field to match it to, so since the level-up became a choice of which sample fills a syringe the slot shows the sample the trait was taken as, and the tray, the level-up card and the pause sheet agree on what it is. Composed through `use`, so redrawing the sample redraws the slot. The tile keeps its colour. (The weapons keep their projectiles: a weapon's slot has to match what it throws.)",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$white" },
-    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
-    { "id": "top", "shape": { "kind": "poly", "points": [[-7, -8], [7, -8], [0, 0]] }, "fill": "$white" },
-    { "id": "bottom", "shape": { "kind": "poly", "points": [[-7, 8], [7, 8], [0, 0]] }, "fill": "$white" }
+    {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$white"},
+    {"id": "inner", "shape": {"kind": "rect", "w": 28, "h": 28, "corner": 5}, "fill": "$coal.dark"},
+    {"id": "sample", "use": "ss.sample.cooldown", "scale": 0.86}
   ]
 }

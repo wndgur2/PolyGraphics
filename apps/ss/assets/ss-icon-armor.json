@@ -1,31 +1,13 @@
 {
   "id": "ss.icon.armor",
   "name": "Armor icon",
-  "description": "Passive icon: grey shield — a flat plate over a point. Port of the hand-drawn i_armor from Feelers' BootScene. Tile and glyph are `$smoke.light2`, a neutral grey. They were `$steel.light`, pale and blued, which sat ΔE 15.5 from Pulse Rate's cream and 14.9 from Stink's `$frost`: on the bar the shield read as one more light slot among three. The neutral grey stands 25.8 from Pulse Rate's white and 23.5 from `$frost`.",
+  "description": "Trait icon for Shell: its sample, `ss.sample.armor`, on the trait's tile. A trait is a stat, with nothing on the field to match it to, so since the level-up became a choice of which sample fills a syringe the slot shows the sample the trait was taken as, and the tray, the level-up card and the pause sheet agree on what it is. Composed through `use`, so redrawing the sample redraws the slot. The tile keeps its colour. (The weapons keep their projectiles: a weapon's slot has to match what it throws.)",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$smoke.light2" },
-    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
-    { "id": "plate", "at": [0, -4.5], "shape": { "kind": "rect", "w": 18, "h": 7 }, "fill": "$smoke.light2" },
-    { "id": "point", "shape": { "kind": "poly", "points": [[-9, -2], [9, -2], [0, 10]] }, "fill": "$smoke.light2" }
+    {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$smoke.light2"},
+    {"id": "inner", "shape": {"kind": "rect", "w": 28, "h": 28, "corner": 5}, "fill": "$coal.dark"},
+    {"id": "sample", "use": "ss.sample.armor", "scale": 0.86}
   ],
-  "variants": {
-    "evolved": {
-      "description": "Quicklime: the awakened Shell, and the first trait awakening there has been one of. The shield is the base icon's, barely pulled in, because an awakening has to read as the thing it grew out of — what is new is four arcs standing clear of it, the blow the plate stopped going outward instead of in. Arcs and not a closed ring: a ring reads as a badge drawn around a shield, where four marks with gaps between them read as something leaving. They sit on the cardinals, clear of the shield's own top corners at 222°, and at r 11 rather than the 12 drawn first, which hugged the rim instead of standing off the plate. Blood and not ember, which is the obvious colour for a blast and was drawn first: at 32px an ember arc sits a shade off the gold rim every awakening wears and the two merge into one warm blob, where red separates from gold at the only size this icon is ever actually seen.",
-      "set": {
-        "tile.fill": "$gold",
-        "plate.at": [0, -3.8],
-        "plate.shape.w": 15,
-        "plate.shape.h": 6,
-        "point.shape.points": [[-7.5, -2], [7.5, -2], [0, 8.5]]
-      },
-      "add": [
-        { "id": "vent_0", "shape": { "kind": "ring", "r": 11, "width": 2.5, "from": 62, "to": 118 }, "fill": "$blood" },
-        { "id": "vent_1", "shape": { "kind": "ring", "r": 11, "width": 2.5, "from": 152, "to": 208 }, "fill": "$blood" },
-        { "id": "vent_2", "shape": { "kind": "ring", "r": 11, "width": 2.5, "from": 242, "to": 298 }, "fill": "$blood" },
-        { "id": "vent_3", "shape": { "kind": "ring", "r": 11, "width": 2.5, "from": 332, "to": 388 }, "fill": "$blood" }
-      ]
-    }
-  }
+  "variants": {"evolved": {"description": "Quicklime, the awakened Shell: the same plates on a gold tile, pulled in a little, with four blood arcs standing clear of them on the cardinals, the blow the plate stopped going outward instead of in. Arcs rather than a closed ring, so they read as something leaving rather than a badge; blood rather than ember, so they part from the gold rim at 32px.", "set": {"tile.fill": "$gold", "sample.scale": 0.66}, "add": [{"id": "vent_0", "shape": {"kind": "ring", "r": 11, "width": 2.5, "from": 62, "to": 118}, "fill": "$blood"}, {"id": "vent_1", "shape": {"kind": "ring", "r": 11, "width": 2.5, "from": 152, "to": 208}, "fill": "$blood"}, {"id": "vent_2", "shape": {"kind": "ring", "r": 11, "width": 2.5, "from": 242, "to": 298}, "fill": "$blood"}, {"id": "vent_3", "shape": {"kind": "ring", "r": 11, "width": 2.5, "from": 332, "to": 388}, "fill": "$blood"}]}}
 }

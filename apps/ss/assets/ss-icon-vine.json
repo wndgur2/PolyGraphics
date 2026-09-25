@@ -1,13 +1,84 @@
 {
   "id": "ss.icon.vine",
   "name": "Vine icon",
-  "description": "UI slot icon for Vine: its sample, `ss.sample.vine`, on the weapon's tile. The weapon icons used to compose each weapon's projectile; since the level-up became a choice of which sample fills a syringe, a weapon is the sample it was taken as, so the slot shows that and the tray, the codex and the level-up card all agree on what the thing is. Composed through `use`, so redrawing the sample redraws the slot. The tile keeps its colour, which is what the `distinct` rule holds apart, and goes gold when the weapon awakens.",
-  "tags": ["icon", "weapon"],
-  "size": [32, 32],
-  "parts": [
-    {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$venom.dark"},
-    {"id": "inner", "shape": {"kind": "rect", "w": 28, "h": 28, "corner": 5}, "fill": "$coal.dark"},
-    {"id": "sample", "use": "ss.sample.vine", "scale": 0.86}
+  "description": "UI slot for the vine. Composes `ss.proj.vine` through `use`, so the slot shows the coil the weapon actually lays rather than a second drawing of one that can drift from it. A patch of `$soil` sits under it and nothing else: the coil is already ground, and the earlier version of this slot pressed a ground *line* across the tile because the plant it held stood up out of a hole. Nothing stands up any more. The plant is composed at its `slot` ramp — the same drawing one step up on each of its three colours — because a 32px slot and a sprite on the field are lit for different jobs, and the cord that keeps out of a crowd's way goes to mud at a tenth of the area. The plate under it comes up a step too, `$coal` over `$coal.dark`, which is as far as it can go before it starts taking contrast back off the cord. Tile is `$venom.dark`. It was `$moss`, which is the cord's own green and was chosen for that, and laid out beside the other seven weapon slots it was the one dark square in a row of bright ones — the vine did not read as a weapon with a colour, it read as the slot that had not been finished. It was `$sage` after that, the same hue lifted to where the row lives, until the Bulk heart that wears this rim sat 16.5 from Plus One's lime `$bile` on the passive bar. `$venom.dark` is the cord's hue with the grey taken out instead: 20.6 from the Spit's bile, and everything drawn on it is still the dark end of the same colour.",
+  "tags": [
+    "icon",
+    "weapon"
   ],
-  "variants": {"evolved": {"description": "Gold-rimmed evolved twin: the same sample on a gold tile.", "set": {"tile.fill": "$gold"}}}
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "tile",
+      "shape": {
+        "kind": "rect",
+        "w": 32,
+        "h": 32,
+        "corner": 6
+      },
+      "fill": "$venom.dark"
+    },
+    {
+      "id": "inner",
+      "shape": {
+        "kind": "rect",
+        "w": 28,
+        "h": 28,
+        "corner": 5
+      },
+      "fill": "$coal"
+    },
+    {
+      "id": "floor",
+      "at": [
+        0,
+        0.6
+      ],
+      "shape": {
+        "kind": "ellipse",
+        "rx": 12.4,
+        "ry": 8.6
+      },
+      "fill": "$soil.light@0.5"
+    },
+    {
+      "id": "glyph",
+      "at": [
+        0,
+        0.2
+      ],
+      "use": "ss.proj.vine",
+      "scale": 0.5,
+      "variant": "slot"
+    }
+  ],
+  "variants": {
+    "evolved": {
+      "description": "Thicket. The rim goes gold the way every evolved slot does, and the coil is swapped for the thing the evolution plants: `ss.proj.vine-thicket` composed through `use`, the knot, its roots and three barbed coils standing up out of the same patch of `$soil` the base slot lies on. The base slot shows what the vine does; this one shows what the evolved vine leaves behind, which is the whole of what the evolution adds. Composed rather than drawn again, so retuning the thicket restyles its slot in the same edit.",
+      "set": {
+        "tile.fill": "$gold",
+        "floor.at": [
+          0,
+          5
+        ]
+      },
+      "remove": [
+        "glyph"
+      ],
+      "add": [
+        {
+          "id": "plant",
+          "at": [
+            0,
+            -1.5
+          ],
+          "use": "ss.proj.vine-thicket",
+          "scale": 0.47
+        }
+      ]
+    }
+  }
 }
