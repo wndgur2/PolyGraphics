@@ -1,0 +1,22 @@
+{
+  "id": "ss.sample.magnet",
+  "name": "Feeler segment",
+  "description": "Feelers. Six joints of an antenna, the end that listens. It keeps turning toward the side of the vial with the most light.",
+  "tags": ["sample"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "seg_0", "shape": {"kind": "poly", "points": [[-8.5, 9.99], [-8.07, 9.26], [-7.43, 8.21], [-6.72, 7.05], [-6.09, 6.0], [-5.66, 5.28], [-8.34, 3.52], [-8.83, 4.2], [-9.54, 5.21], [-10.31, 6.33], [-11.01, 7.34], [-11.5, 8.01]]}, "fill": "$chitin.dark", "stroke": {"color": "$ink", "width": 1.1}},
+    {"id": "joint_0", "at": [-7, 4.4], "shape": {"kind": "circle", "r": 1.6}, "fill": "$husk", "stroke": {"color": "$ink", "width": 1.1}},
+    {"id": "seg_1", "shape": {"kind": "poly", "points": [[-5.66, 5.32], [-5.23, 4.63], [-4.59, 3.62], [-3.88, 2.49], [-3.25, 1.5], [-2.83, 0.81], [-5.17, -0.81], [-5.67, -0.16], [-6.38, 0.81], [-7.15, 1.88], [-7.85, 2.83], [-8.34, 3.48]]}, "fill": "$chitin.dark", "stroke": {"color": "$ink", "width": 1.1}},
+    {"id": "joint_1", "at": [-4, 0], "shape": {"kind": "circle", "r": 1.48}, "fill": "$husk", "stroke": {"color": "$ink", "width": 1.1}},
+    {"id": "seg_2", "shape": {"kind": "poly", "points": [[-2.95, 1.0], [-2.42, 0.39], [-1.66, -0.49], [-0.79, -1.45], [-0.01, -2.33], [0.51, -2.94], [-1.31, -4.66], [-1.89, -4.11], [-2.71, -3.29], [-3.64, -2.37], [-4.48, -1.55], [-5.05, -1.0]]}, "fill": "$chitin.dark", "stroke": {"color": "$ink", "width": 1.1}},
+    {"id": "joint_2", "at": [-0.4, -3.8], "shape": {"kind": "circle", "r": 1.36}, "fill": "$husk", "stroke": {"color": "$ink", "width": 1.1}},
+    {"id": "seg_3", "shape": {"kind": "poly", "points": [[0.4, -2.81], [0.98, -3.33], [1.85, -4.07], [2.82, -4.9], [3.69, -5.64], [4.27, -6.16], [2.93, -7.84], [2.29, -7.38], [1.38, -6.7], [0.35, -5.93], [-0.56, -5.25], [-1.2, -4.79]]}, "fill": "$chitin.dark", "stroke": {"color": "$ink", "width": 1.1}},
+    {"id": "joint_3", "at": [3.6, -7], "shape": {"kind": "circle", "r": 1.2400000000000002}, "fill": "$husk", "stroke": {"color": "$ink", "width": 1.1}},
+    {"id": "seg_4", "shape": {"kind": "poly", "points": [[4.12, -6.03], [4.78, -6.43], [5.74, -7.01], [6.82, -7.64], [7.78, -8.21], [8.43, -8.61], [7.57, -10.19], [6.88, -9.87], [5.88, -9.36], [4.76, -8.79], [3.76, -8.29], [3.08, -7.97]]}, "fill": "$chitin.dark", "stroke": {"color": "$ink", "width": 1.1}},
+    {"id": "joint_4", "at": [8, -9.4], "shape": {"kind": "circle", "r": 1.12}, "fill": "$husk", "stroke": {"color": "$ink", "width": 1.1}},
+    {"id": "seg_5", "shape": {"kind": "poly", "points": [[8.22, -8.5], [8.83, -8.69], [9.7, -8.96], [10.69, -9.24], [11.58, -9.51], [12.17, -9.7], [11.83, -11.1], [11.2, -10.99], [10.31, -10.8], [9.3, -10.6], [8.39, -10.41], [7.78, -10.3]]}, "fill": "$chitin.dark", "stroke": {"color": "$ink", "width": 1.1}},
+    {"id": "joint_5", "at": [12, -10.4], "shape": {"kind": "circle", "r": 1.0}, "fill": "$husk", "stroke": {"color": "$ink", "width": 1.1}},
+    {"id": "base", "at": [-10, 9], "shape": {"kind": "circle", "r": 2.2}, "fill": "$chitin", "stroke": {"color": "$ink", "width": 1.1}}
+  ]
+}
