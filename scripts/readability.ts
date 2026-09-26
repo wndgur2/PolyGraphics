@@ -12,6 +12,9 @@
  * default the first floor the app's manifest names under `reference.ground`,
  * with the thresholds `reference.contrast` states):
  *   contrast  WCAG-style ratio of mean sprite luminance vs mean ground luminance
+ *             (a body darker than the floor is also shown against the most the
+ *             floor allows the dark side — pure black — which on a mid-luminance
+ *             floor like the pan's is barely over the threshold)
  *   bright%   share of opaque pixels above 0.18 luminance — the focal points
  *   cover%    share of the canvas the sprite actually fills
  */
@@ -90,17 +93,28 @@ const targets = positional.length
   ? positional
   : [...app.assets.values()].filter((a) => BODIES.has(bare(categoryOf(a)))).map((a) => a.id).sort();
 
-console.log(`${groundId} mean rgb(${ground.mean.map((v) => Math.round(v)).join(",")}) luminance ${ground.lum.toFixed(4)}\n`);
+// A floor at mid luminance caps the dark side: a body darker than it can reach
+// at most the ratio pure black would, and on the pan's sand that is barely
+// over `sinks`. Such a body is reported against that cap rather than left to
+// read as a failure it cannot fix by going darker — its choice is to go light,
+// or to be read by what is bright on it (a sac, a rim, a pair of jaws).
+const darkCap = contrast(0, ground.lum);
+console.log(
+  `${groundId} mean rgb(${ground.mean.map((v) => Math.round(v)).join(",")}) luminance ${ground.lum.toFixed(4)}` +
+    ` · a body darker than it tops out at ${darkCap.toFixed(2)}\n`,
+);
 console.log("asset                 contrast  bright%  cover%   mean");
 console.log("─".repeat(64));
 
-const rows: { id: string; c: number }[] = [];
+const rows: { id: string; c: number; dark: boolean }[] = [];
 for (const id of targets) {
   const s = measure(id);
   if (!s) { console.log(`${id.padEnd(21)} — no opaque pixels`); continue; }
   const c = contrast(s.lum, ground.lum);
-  rows.push({ id, c });
-  const flag = c < sinks ? "  ← sinks into the floor" : c < thin ? "  ← thin" : "";
+  const dark = s.lum < ground.lum;
+  rows.push({ id, c, dark });
+  const capped = dark && darkCap < thin ? ` (dark: ${Math.round((c / darkCap) * 100)}% of the ${darkCap.toFixed(2)} this floor allows)` : "";
+  const flag = (c < sinks ? "  ← sinks into the floor" : c < thin ? "  ← thin" : "") + (c < thin ? capped : "");
   console.log(
     `${id.padEnd(21)} ${c.toFixed(2).padStart(7)}  ${(s.bright * 100).toFixed(0).padStart(6)}%  ` +
       `${(s.cover * 100).toFixed(0).padStart(5)}%   rgb(${s.mean.map((v) => Math.round(v)).join(",")})${flag}`,
@@ -113,3 +127,6 @@ console.log(
     ` · ${weak.length} below ${sinks}`,
 );
 if (weak.length) console.log(`weak: ${weak.map((r) => r.id).join(", ")}`);
+const capped = weak.filter((r) => r.dark && darkCap < sinks + 0.5);
+if (capped.length)
+  console.log(`of which darker than a floor that caps them at ${darkCap.toFixed(2)}: ${capped.map((r) => r.id).join(", ")}`);
