@@ -188,10 +188,13 @@ def ell(rx, ry): return {"kind": "ellipse", "rx": r2(rx), "ry": r2(ry)}
 def circ(r): return {"kind": "circle", "r": r2(r)}
 def rect(w, h, corner=None): return {"kind": "rect", "w": r2(w), "h": r2(h), "corner": r2(corner if corner is not None else min(w, h) / 2)}
 INK_THIN = {"color": "$ink", "width": "thin"}
-# The game's adapters draw a stroke centred on the edge and over the fill, where
-# the gallery's SVG lays it under — so in play half of every outline eats into
-# the shape it rims. On the big masses that is a firmer edge; on a 4px tail
-# segment or a claw finger it is most of the part. Those take the hairline.
+# The small parts — tail segments, claws, legs — take the hairline. A `thin`
+# outline is two units wide; on a 4px tail segment or a claw finger that is
+# most of the part's rim at game scale, and the body and carapace are the
+# masses that want the firm edge. (This was first forced by the adapters
+# drawing strokes over their fills, which ate half of every outline in play;
+# they lay them under now, as the gallery does, and the hairline stays because
+# it reads better at 1.2×.)
 INK_HAIR = {"color": "$ink", "width": "hair"}
 
 parts = []

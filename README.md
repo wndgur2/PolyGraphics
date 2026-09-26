@@ -162,7 +162,7 @@ Every part has an `id` (snake_case — variants and animations address parts by 
 { "gradient": "linear"|"radial", "from"?, "to"?, "stops": [[0,"$soul.light"],[1,"$soul.dark"]] }
 ```
 
-Stroke widths and opacities likewise take token names (`"width": "thin"`, `"opacity": "soft"`). Raw `#hex` renders but warns with the nearest token. **A theme is just a token overlay** — `apps/ss/themes/ice.json` swaps warm hues for cold and every asset restyles coherently, silhouettes untouched.
+Stroke widths and opacities likewise take token names (`"width": "thin"`, `"opacity": "soft"`). A stroke is laid **under its own fill** (`paint-order: stroke`), so only its outer half shows — `thin` (2) is a one-unit rim outside the shape. The SVG renderer and both engine adapters draw it that way; the adapters used to draw it over the fill, which put the other half inside the shape in play and made every outline in the game twice what the gallery showed. Raw `#hex` renders but warns with the nearest token. **A theme is just a token overlay** — `apps/ss/themes/ice.json` swaps warm hues for cold and every asset restyles coherently, silhouettes untouched.
 
 ### Variants — patches, not redraws
 
