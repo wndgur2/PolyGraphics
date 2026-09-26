@@ -90,25 +90,7 @@ def leg_parts(leg, femur, tibia, foot, stroke):
 # ---- the legs, both under the sac: the hips are hidden by it and the
 # knees fold out below it; the far one a step darker
 leg_parts("far", "$spore.dark2", "$spore.dark2", "$spore.dark2", INK_HAIR)
-leg_parts("near", SAC_MID, SAC_DARK, SAC_DARK, INK_HAIR)
-
-# ---- the snout: a tapered tube hinged at the collar, pale lip ring at the
-# end, the mouth in it; the bead sits on the lip and grows there.
-at, a = on_bone("snout")
-L = SNOUT_LEN
-put("snout", "snout", at, a, poly([(-1.4, -3.2), (1.8, -3.0), (L - 1.2, -2.0), (L, -2.3), (L + 0.6, -1.6),
-                                   (L + 0.6, 1.6), (L, 2.3), (L - 1.2, 2.0), (1.8, 3.0), (-1.4, 3.2)]), SAC_MID, INK_THIN)
-at, a = on_bone("snout", L * 0.45, 1.4)
-put("snout_shade", "snout", at, a, poly([(-3.6, -0.3), (3.4, -0.5), (3.4, 0.9), (-3.6, 1.6)]), SAC_DARK)
-for i, u in enumerate((0.28, 0.58)):
-    at, a = on_bone("snout", L * u)
-    put(f"snout_ring_{i}", "snout", at, a, rect(0.8, 5.2 - 1.6 * u, 0.4), SAC_DARK)
-at, a = on_bone("snout", L * 0.5, -1.6)
-put("snout_gloss", "snout", at, a, ell(2.2, 0.45), "$white@0.3")
-at, a = on_bone("snout", L + 0.5)
-put("lip", "snout", at, a, ell(1.1, 2.5), "$verdigris.light", INK_HAIR)
-at, a = on_bone("snout", L + 0.7)
-put("mouth", "snout", at, a, ell(0.6, 1.5), "$ink")
+leg_parts("near", SAC_MID, SAC_MID, SAC_DARK, INK_HAIR)
 
 # ---- the sac: dark underside, lit body offset up, muscle bands, pores, the
 # charge glowing inside; it rides its own bone and scales from its centre.
@@ -116,7 +98,7 @@ sx, sy = SAC_C
 SAC_RX, SAC_RY = 9.2, 8.7
 put("sac", "sac", (sx, sy), 0.0, ell(SAC_RX, SAC_RY), SAC_DARK, INK_THIN)
 put("sac_lit", "sac", (sx + 0.1, sy - 0.6), 0.0, ell(8.9, 8.1), SAC_MID)
-put("charge", "sac", (sx + 2.8, sy + 0.6), 0.0, ell(5.2, 4.6), "$spore.light@soft")
+put("charge", "sac", (sx + 2.2, sy + 0.4), 0.0, ell(5.6, 5.0), "$spore.light", opacity=0.35)
 # The muscle bands: arcs round the collar that squeeze the sac toward the
 # snout — the wall of a gland, and what makes the swell read as a muscle
 # working rather than a balloon. Each is a crescent of the circle about the
@@ -135,8 +117,8 @@ def band(R, w, inset=1.2):
     return poly(outer + inner[::-1])
 R_ = math.radians
 for i, (Rr, w) in enumerate(((7.4, 1.2), (11.4, 1.1))):
-    put(f"band_{i}", "sac", (sx, sy), 0.0, band(Rr, w), "$spore.dark2@0.55")
-put("sac_rim", "sac", (sx - 0.6, sy - 4.2), -10.0, ell(6.6, 2.6), "$spore.light@0.5")
+    put(f"band_{i}", "sac", (sx, sy), 0.0, band(Rr, w), "$spore.dark2@0.45")
+put("sac_rim", "sac", (sx - 0.4, sy - 3.8), -10.0, ell(7.2, 3.3), "$spore.light@0.6")
 put("gleam", "sac", (sx - 2.8, sy - 4.4), -24.0, ell(2.7, 1.4), "$spore.light2@0.8")
 for i, (ox, oy, r) in enumerate(((-6.0, 1.8, 0.8), (-3.6, 4.6, 0.7), (-7.0, -2.6, 0.6))):
     put(f"pore_{i}", "sac", (sx + ox, sy + oy), 0.0, circ(r), SAC_DARK)
@@ -145,6 +127,30 @@ RIG.use("organ", "sac", (sx - 1.4, sy - 7.6), "ss.lib.organ", scale=[0.52, 0.48]
 # The eye, on the front of the sac over the snout.
 put("eye", "sac", (sx + 7.0, sy - 3.8), 0.0, circ(1.0), "$ink")
 put("eye_glint", "sac", (sx + 7.3, sy - 4.1), 0.0, circ(0.34), "$silent")
+
+# ---- the snout, over the sac: a tapered tube hinged at the collar, pale lip
+# ring at the end, the mouth in it; the bead sits on the lip and grows there.
+# Drawn over the sac so the swell bulges round its root instead of swallowing
+# it, with a dark muscular collar where the two meet.
+at, a = on_bone("snout")
+L = SNOUT_LEN
+put("snout", "snout", at, a, poly([(-1.4, -3.2), (1.8, -3.0), (L - 1.2, -2.0), (L, -2.3), (L + 0.6, -1.6),
+                                   (L + 0.6, 1.6), (L, 2.3), (L - 1.2, 2.0), (1.8, 3.0), (-1.4, 3.2)]), SAC_MID, INK_THIN)
+at, a = on_bone("snout", L * 0.45, 1.4)
+put("snout_shade", "snout", at, a, poly([(-3.6, -0.3), (3.4, -0.5), (3.4, 0.9), (-3.6, 1.6)]), SAC_DARK)
+for i, u in enumerate((0.28, 0.58)):
+    at, a = on_bone("snout", L * u)
+    put(f"snout_ring_{i}", "snout", at, a, rect(0.8, 5.2 - 1.6 * u, 0.4), SAC_DARK)
+at, a = on_bone("snout", L * 0.5, -1.6)
+put("snout_gloss", "snout", at, a, ell(2.2, 0.45), "$white@0.3")
+at, a = on_bone("snout", L + 0.5)
+put("lip", "snout", at, a, ell(1.1, 2.5), "$verdigris.light", INK_HAIR)
+at, a = on_bone("snout", L + 0.7)
+put("mouth", "snout", at, a, ell(0.6, 1.5), "$ink")
+at, a = on_bone("snout", -0.2)
+put("collar", "snout", at, a, ell(1.6, 3.6), SAC_DARK, INK_HAIR)
+at, a = on_bone("snout", -0.6, -1.4)
+put("collar_lit", "snout", at, a, ell(0.8, 1.6), SAC_MID)
 
 # ---- the bead and the flash on the lip: the bolt, before it is one
 at, a = on_bone("snout", L + 2.2)
@@ -216,7 +222,7 @@ def walk_amount(t):
     return (1 - smooth(0.12, 0.2, t)) if t < 0.5 else smooth(0.74, 0.86, t)
 
 def sac_scale(t):
-    return 1.0 - 0.08 * draw(t) + 0.19 * fill(t) - 0.14 * spent(t) + 0.05 * max(0.0, -kick(t))
+    return 1.0 - 0.12 * draw(t) + 0.24 * fill(t) - 0.14 * spent(t) + 0.05 * max(0.0, -kick(t))
 
 STRIDE = 1.3
 def step(u):
@@ -326,7 +332,7 @@ def bead_fly(t):
 
 # Keys: every 1/78 (twice the 39-frame sheet) and dense through the release.
 TS_SPIT = sorted(set([round(i / 78, 4) for i in range(79)] + [0.62, REL0, 0.628, 0.632, REL1, KICK, 0.646, 0.652, 0.658, 0.664, 0.67]))
-def glow_o(t): return 0.45 + 1.4 * fill(t) ** 1.3
+def glow_o(t): return 0.85 + 1.6 * fill(t) ** 1.4
 SPIT_EXTRA = [
     ("charge", "opacity", glow_o),
     ("charge", "scale", lambda t: 0.8 + 0.3 * fill(t)),
@@ -339,8 +345,15 @@ SPIT_EXTRA = [
     ("organ", "scale", lambda t: 1.0 + 0.12 * fill(t)),
 ]
 
+# The sac's front wall is this far ahead of its centre along the snout: as the
+# sac swells or draws in, the snout and its collar are pushed out or pulled in
+# with it, so the nozzle stays seated on the wall.
+SAC_FRONT = SNOUT_ROOT[0] - SAC_C[0]
+def growth(s_fn): return lambda t: (s_fn(t) - 1.0) * SAC_FRONT
+
 def spit_tracks():
     tr = tracks_scaled(spit_pose, TS_SPIT, sac_scale, SPIT_EXTRA)
+    tr = with_slide(tr, TS_SPIT, spit_pose, growth(sac_scale), SNOUT_PARTS + ("collar", "collar_lit"))
     tr = with_slide(tr, TS_SPIT, spit_pose, snout_slide, SNOUT_PARTS)
     return with_slide(tr, TS_SPIT, spit_pose, bead_fly, ("bead", "bead_glint"))
 
@@ -367,7 +380,7 @@ def bead_fall_x(t): return 0.0
 TS_DEATH = [0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 1.0]
 DEATH_EXTRA = [
     ("organ", "opacity", lambda t: 1.0 - 0.85 * smooth(0.3, 0.8, t)),
-    ("charge", "opacity", lambda t: 0.25 + 0.75 * smooth(0.0, 0.2, t) - smooth(0.3, 0.6, t)),
+    ("charge", "opacity", lambda t: max(0.0, 0.85 + 1.4 * smooth(0.0, 0.2, t) - 2.2 * smooth(0.3, 0.6, t))),
     ("gleam", "opacity", lambda t: 1.0 - 0.8 * smooth(0.34, 0.7, t)),
     ("sac_rim", "opacity", lambda t: 1.0 - 0.8 * smooth(0.34, 0.7, t)),
     ("eye_glint", "opacity", lambda t: 1.0 - smooth(0.3, 0.6, t)),
@@ -378,6 +391,7 @@ DEATH_EXTRA = [
 ]
 def death_tracks():
     tr = tracks_scaled(death_pose, TS_DEATH, death_sac, DEATH_EXTRA)
+    tr = with_slide(tr, TS_DEATH, death_pose, growth(death_sac), SNOUT_PARTS + ("collar", "collar_lit"))
     tr = with_slide(tr, TS_DEATH, death_pose, death_slide, SNOUT_PARTS)
     # The bead falls out of the lip and lands in front of the feet.
     by = {(x["part"], x["prop"]): x for x in tr}

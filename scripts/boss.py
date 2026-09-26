@@ -18,11 +18,15 @@ coin. The concept stays — a seated mass with six organs round the rim firing
 in sequence, a crown of six spines between them, a toothed vent in the middle
 that has only ever shouted — and the body is rebuilt as a creature:
 
-  - six carapace *segments*, a petal each, round a mouth: every segment is a
-    lobe of flesh with a shield-plate on it (a lit face and a shade, a keel down
-    the middle) and an organ seated at its outer end. The segment carries its
-    organ, so when the organ fires the whole segment swells and pushes out —
-    the light travels round, and the body travels with it
+  - the shell is still one round disc with its rings on it — a pale plate, a
+    tan course, a dark rim — but cut along six seams into six *segments*, one
+    per organ, over a flesh that shows in the seams. Every segment is a plate
+    with a lit face and a shade, a keel from the tan course to its organ, and
+    the organ seated in its rim. The segment carries its organ, so when the
+    organ fires the whole segment swells and pushes out, the seams either side
+    open on the flesh, and the rim bulges there — the light travels round, and
+    the outline travels with it; under that a slower wave breathes the six
+    segments in and out one after another, so the disc is never still
   - six spines at the seams, each a two-bone horn (a root and a thorn, hinged)
     that rises out of the seam as the organ beside it fires and lays back along
     the body behind the wave — a power stroke and a slow recovery, the way cilia
@@ -62,65 +66,65 @@ def XY(z): return (z.real, z.imag)
 
 # ============================================================== geometry (document units, origin at the centre)
 SIZE = 104
-ORG_R = 28.2        # organ seat, along a segment
-SPINE_R = 25.4      # spine root, in a seam
-SP_L0, SP_L1 = 8.6, 9.6   # root and thorn
-SPINE_LEAN = 22.0   # rest lean of a spine back against the wave (degrees)
-SPINE_CURL = 16.0   # the thorn curls further back than its root
+SHELL_R = 28.0      # the shell's rim (the old disc was 30 with the organs outside it at 32)
+ORG_R = 28.4        # organ seat, on the rim at the middle of its segment
+SPINE_R = 25.6      # spine root, in a seam, under the rim
+SP_L0, SP_L1 = 7.4, 8.6   # root and thorn
+SPINE_LEAN = 16.0   # rest lean of a spine back against the wave (degrees)
+SPINE_CURL = 12.0   # the thorn curls further back than its root
 FANG_R = 10.2       # fang hinge radius
-FANG_TWIST = 6.0   # the blades are not radial: an iris
+FANG_TWIST = 6.0    # the blades are not radial: an iris
 FANG_L = 7.4
 ORGAN_SCALE = 0.74
+HALF = 30.0         # a segment owns 60 degrees
 
-def egg(cx, rx, ry, inner=0.5, n=22):
-    """A petal along +x: centred at cx, `rx` long, `ry` wide, narrower toward the mouth (the inner end by `inner`)."""
+def sector(r0, r1, half, bulge=0.0, corner=1.4, n=14, dx=0.0, dy=0.0):
+    """
+    An annular sector along +x — a shell segment: from radius `r0` to `r1`,
+    `half` degrees either side, the outer edge domed by `bulge` and its corners
+    rounded off by `corner`. `dx, dy` shift it (a lit face offset toward the light).
+    """
     pts = []
-    for i in range(n):
-        ph = 2 * math.pi * i / n
-        c, s = math.cos(ph), math.sin(ph)
-        taper = lerp(inner, 1.0, (1 + c) / 2) ** 0.8
-        pts.append((cx + rx * c, ry * s * taper))
+    for i in range(n + 1):
+        u = lerp(-1.0, 1.0, i / n)
+        r = r1 + bulge * (1 - u * u) - corner * abs(u) ** 6
+        a = R(half * u)
+        pts.append((r * math.cos(a) + dx, r * math.sin(a) + dy))
+    for i in range(5):
+        u = lerp(1.0, -1.0, i / 4)
+        a = R(half * u * 0.96)
+        pts.append((r0 * math.cos(a) + dx, r0 * math.sin(a) + dy))
+    return pts
+def arc_band(r0, r1, half, n=12, taper=0.0):
+    """A course across a segment: the band between two radii, its ends drawn in by `taper`."""
+    pts = []
+    for i in range(n + 1):
+        u = lerp(-1.0, 1.0, i / n)
+        a = R(half * u)
+        r = r1 - taper * abs(u) ** 4
+        pts.append((r * math.cos(a), r * math.sin(a)))
+    for i in range(n + 1):
+        u = lerp(1.0, -1.0, i / n)
+        a = R(half * u)
+        r = r0 + taper * 0.4 * abs(u) ** 4
+        pts.append((r * math.cos(a), r * math.sin(a)))
     return pts
 
-def rot_pts(pts, deg, off=0j):
-    u = U(deg)
-    return [XY(C(p) * u + off) for p in pts]
-
-LOBE = egg(19.0, 13.2, 12.6, inner=0.46)
-PLATE = egg(19.2, 12.3, 11.5, inner=0.5)
-def crescent(outline, side, keep=0.42):
-    """The shaded side of a plate: its outline on that side, closed by the same curve pulled most of the way out."""
-    half = [p for p in outline if p[1] * side > 0.05]
-    half.sort(key=lambda p: p[0])
-    back = [(x, y * keep) for x, y in reversed(half)]
-    return half + back
-KEEL = [(10.5, -0.5), (19.0, -0.9), (27.0, -0.3), (27.0, 0.3), (19.0, 0.7), (10.5, 0.4)]
-def half_width(outline, x):
-    """The plate's half-width at `x` along it (from its outline's upper side)."""
-    best = 0.0
-    pts = [p for p in outline if p[1] < 0]
-    for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
-        if min(x0, x1) <= x <= max(x0, x1) and x1 != x0:
-            best = max(best, -lerp(y0, y1, (x - x0) / (x1 - x0)))
-    return best
-def band(outline, x0, bow=1.6, th=0.9, inset=0.6):
-    """A seam across the plate at `x0`, bowed outward — the plate is built in courses."""
-    w = half_width(outline, x0) - inset
-    n = 9
-    front = [(x0 + bow * (1 - (y / w) ** 2), y) for y in (lerp(-w, w, i / (n - 1)) for i in range(n))]
-    back = [(x - th * (0.4 + 0.6 * (1 - (y / w) ** 2)), y) for x, y in reversed(front)]
-    return front + back
-THORN = [(-0.6, -2.4), (2.5, -2.4), (6.0, -1.6), (8.6, -0.5), (SP_L1 + 0.4, 0.35), (8.0, 0.9), (4.0, 2.0), (0.0, 2.4), (-0.6, 1.7)]
+# the shell: six plates round the mouth, each a sector of one disc — the
+# medallion the Chorus always was, now cut along six seams so a segment can
+# move on its own. `lobe` is the plate's dark rim and underside, standing a
+# little proud of it all round, so the six rims read as the old ring.
+LOBE = sector(9.5, SHELL_R + 1.0, HALF - 2.2, bulge=1.0, corner=1.8)
+PLATE = sector(10.0, SHELL_R - 1.1, HALF - 3.6, bulge=0.9, corner=1.5)
+PLATE_LIT = sector(11.0, SHELL_R - 3.2, HALF - 7.0, bulge=0.8, corner=1.2)
+MID = arc_band(15.2, 18.4, HALF - 4.2, taper=0.8)     # the second course, the old tan ring
+RIM = arc_band(24.2, SHELL_R - 1.1, HALF - 3.8, taper=1.2)  # the outer course, darker
+VEIN = [(18.6, -0.3), (21.5, -0.6), (24.4, -0.4), (24.4, 0.4), (21.5, 0.6), (18.6, 0.3)]  # the keel: from the mouth to the organ
+THORN = [(-0.6, -2.3), (2.4, -2.3), (5.6, -1.5), (7.8, -0.5), (SP_L1 + 0.4, 0.3), (7.4, 0.9), (3.8, 1.9), (0.0, 2.3), (-0.6, 1.6)]
 FANG = [(-0.3, -2.2), (2.6, -1.7), (5.4, -0.7), (FANG_L, 0.4), (5.2, 0.9), (2.4, 1.8), (-0.3, 2.0)]
 
-# the mass: a star under the segments whose points are the seams, so the seams
-# (and the spine roots in them) sit on flesh rather than on nothing
-MASS = []
-for i in range(6):
-    MASS.append(XY(U(SEG[i]) * 19.0))
-    MASS.append(XY(U(SEG[i] + 18) * 24.5))
-    MASS.append(XY(U(SPN[i]) * 28.6))
-    MASS.append(XY(U(SEG[i] + 42) * 24.5))
+# the flesh under the shell: what shows in the seams when a segment lifts
+MASS = [XY(U(15.0 * i) * (SHELL_R - 0.6)) for i in range(24)]
 
 # ============================================================== the radial rig
 # A node is a similarity (m, c): z -> m z + c, in its parent's frame; a part
@@ -175,30 +179,26 @@ def put(id, node, at, rot, shape, fill, stroke=None, opacity=None, scale=None):
 def use(id, node, at, asset, scale):
     PARTS.append({"id": id, "at": [r2(at.real), r2(at.imag)], "use": asset, "scale": scale}); RIDE[id] = node
 
-SHADE = []  # which side of each segment faces away from the light (top-left)
-for i in range(6):
-    side = U(SEG[i] + 90)
-    SHADE.append(1.0 if side.real + side.imag > 0 else -1.0)
-
 # spines behind everything: they leave the body through the seams
 for k in range(6):
     x = L[k]
-    put(f"spine_{x}", f"sp_{x}0", SP_ROOT[k], SP_H0[k], bar(SP_L0, 7.6, 4.8, over=0.4), "$husk.dark", INK_HAIR)
+    put(f"spine_{x}", f"sp_{x}0", SP_ROOT[k], SP_H0[k], bar(SP_L0, 6.8, 4.4, over=0.4), "$husk.dark", INK_HAIR)
     put(f"spine_{x}_tip", f"sp_{x}1", SP_KNEE[k], SP_H1[k], poly(THORN), "$bone", INK_HAIR)
-put("mass", "body", 0j, 0.0, poly(MASS), "$chitin.dark2", {"color": "$ink", "width": "thin"})
-for k in range(6):
-    x = L[k]
-    put(f"spine_root_{x}", f"seam_{x}", U(SPN[k]) * 24.6, SPN[k], poly([(-2.0, -3.6), (2.6, -3.0), (3.6, 0), (2.6, 3.0), (-2.0, 3.6)]), "$chitin.dark2")
+put("mass", "body", 0j, 0.0, poly(MASS), "$carapace.dark", INK_THIN)
 for i in range(6):
     x, a = L[i], SEG[i]
-    s = SHADE[i]
-    put(f"lobe_{x}", f"seg_{x}", 0j, a, poly(LOBE), "$chitin.dark", INK_HAIR)
+    lit = U(225.0 - a) * 1.3  # toward the light (top-left), in the segment's own frame
+    put(f"lobe_{x}", f"seg_{x}", 0j, a, poly(LOBE), "$chitin.dark2", INK_HAIR)
     put(f"plate_{x}", f"seg_{x}", 0j, a, poly(PLATE), "$husk.dark")
-    lit = U(225.0 - a) * 1.25  # toward the light (top-left), in the segment's own frame
-    put(f"plate_{x}_lit", f"seg_{x}", 0j, a, poly([(19.4 + (px - 19.4) * 0.84 + lit.real, py * 0.8 + lit.imag) for px, py in PLATE]), "$husk")
-    put(f"band_{x}", f"seg_{x}", 0j, a, poly(band(PLATE, 14.0) + []), "$husk.dark2")
-    put(f"band_{x}2", f"seg_{x}", 0j, a, poly(band(PLATE, 21.5, bow=2.0)), "$husk.dark2")
-    put(f"socket_{x}", f"seg_{x}", ORG_AT[i], a, {"kind": "ellipse", "rx": 3.9, "ry": 4.3}, "$husk.dark2")
+    put(f"plate_{x}_lit", f"seg_{x}", 0j, a, poly(sector(11.0, SHELL_R - 2.6, HALF - 6.0, bulge=0.8, corner=1.2, dx=lit.real, dy=lit.imag)), "$husk")
+    put(f"band_{x}", f"seg_{x}", 0j, a, poly(MID), "$chitin.light2")
+    put(f"band_{x}2", f"seg_{x}", 0j, a, poly(RIM), "$husk.dark")
+    put(f"keel_{x}", f"seg_{x}", 0j, a, poly(VEIN), "$husk.dark2")
+    put(f"socket_{x}", f"seg_{x}", ORG_AT[i], a, {"kind": "ellipse", "rx": 3.9, "ry": 4.4}, "$chitin.dark2")
+for k in range(6):
+    x = L[k]
+    # the knuckle the spine leaves the shell through, capping the seam
+    put(f"spine_root_{x}", f"seam_{x}", U(SPN[k]) * 26.2, SPN[k], poly([(-2.6, -2.2), (0.6, -2.7), (2.8, -1.5), (3.3, 0), (2.8, 1.5), (0.6, 2.7), (-2.6, 2.2)]), "$chitin.dark2", INK_HAIR)
 for i in range(6):
     x = L[i]
     use(f"organ_{x}", f"org_{x}", ORG_AT[i], "ss.lib.organ", ORGAN_SCALE)
@@ -251,7 +251,7 @@ def pose(state):
     for i in range(6):
         x = L[i]
         f = fire[i]
-        sh = U(SEG[i]) * (2.2 * f + push[i])
+        sh = U(SEG[i]) * (2.6 * f + push[i])
         seg_shift.append(sh)
         T = about(SEG_ROOT[i], 1.0 + 0.07 * f, 0.0, sh)
         if turn[i]: T = after(about(0j, 1.0, turn[i]), T)
@@ -316,7 +316,7 @@ def chorus(t):
         "lean": U(360.0 * t - 20.0) * 1.1,
         "breath": 1.0 + 0.018 * math.sin(2 * math.pi * 2 * t),
         "fire": fire,
-        "push": [0.7 * math.sin(2 * math.pi * (t - i / 6.0) + 0.6) for i in range(6)],
+        "push": [1.3 * math.sin(2 * math.pi * (t - i / 6.0) + 0.6) for i in range(6)],
         "spine": spine,
         "gape": 0.2 + 0.7 * gape,
         "mouth": 1.0 + 0.05 * (gape - 0.5),
@@ -409,17 +409,22 @@ animations = {
 # ============================================================== states
 ALL = range(6)
 enraged_set = {
+    # the seams burn through: the flesh between the plates is lit from inside
     "mass.fill": "$pheromone.dark",
-    **{f"spine_root_{L[k]}.fill": "$pheromone.dark" for k in ALL},
-    **{f"lobe_{L[i]}.fill": "$rust.light" for i in ALL},
-    **{f"spine_{L[k]}_tip.scale": 1.25 for k in ALL},
-    **{f"band_{L[i]}.fill": "$pheromone.light" for i in ALL},
-    **{f"band_{L[i]}2.fill": "$pheromone" for i in ALL},
+    **{f"lobe_{L[i]}.fill": "$rust" for i in ALL},
+    **{f"plate_{L[i]}.fill": "$husk.dark2" for i in ALL},
+    **{f"plate_{L[i]}_lit.fill": "$husk.dark" for i in ALL},
+    **{f"band_{L[i]}.fill": "$chitin.dark" for i in ALL},
+    **{f"band_{L[i]}2.fill": "$rust" for i in ALL},
+    # and every plate opens down its keel, from the rim course to the organ
+    **{f"keel_{L[i]}.fill": "$pheromone.light" for i in ALL},
+    **{f"keel_{L[i]}.scale": 1.12 for i in ALL},
     **{f"socket_{L[i]}.fill": "$pheromone.dark" for i in ALL},
+    **{f"spine_root_{L[k]}.fill": "$rust" for k in ALL},
+    **{f"spine_{L[k]}.fill": "$husk" for k in ALL},
+    **{f"spine_{L[k]}_tip.scale": 1.2 for k in ALL},
     **{f"organ_{L[i]}.scale": r2(ORGAN_SCALE * 1.3) for i in ALL},
     **{f"cry_{L[i]}.opacity": 1 for i in ALL},
-    **{f"spine_{L[k]}.fill": "$husk" for k in ALL},
-    **{f"spine_{L[k]}_tip.fill": "$bone" for k in ALL},
     "collar.fill": "$rust",
     "gum.fill": "$pheromone.dark",
     "vent_glow.fill": {"gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$white"], [0.5, "$pheromone.light"], [1, "$pheromone@0"]]},
@@ -430,25 +435,27 @@ DEAD = (1, 3, 5)   # b, d, f burnt out
 LIT = (0, 2, 4)
 final_set = {
     "mass.fill": "$dead",
-    **{f"spine_root_{L[k]}.fill": "$dead.light" for k in ALL},
     **{f"lobe_{L[i]}.fill": "$dead.light" for i in ALL},
     **{f"plate_{L[i]}.fill": "$bone.dark2" for i in ALL},
     **{f"plate_{L[i]}_lit.fill": "$bone.dark" for i in ALL},
-    **{f"band_{L[i]}.fill": "$dead" for i in ALL},
-    **{f"band_{L[i]}2.fill": "$dead" for i in ALL},
+    **{f"band_{L[i]}.fill": "$bone.dark2" for i in ALL},
+    **{f"band_{L[i]}2.fill": "$dead.light" for i in ALL},
+    **{f"keel_{L[i]}.fill": "$pheromone.light" for i in LIT},
+    **{f"keel_{L[i]}.fill": "$dead" for i in DEAD},
+    **{f"spine_root_{L[k]}.fill": "$dead.light" for k in ALL},
     **{f"spine_{L[k]}.fill": "$bone.dark" for k in ALL},
-    **{f"spine_{L[k]}_tip.fill": "$bone" for k in ALL},
+    **{f"spine_{L[k]}_tip.fill": "$bone" for k in LIT},
     **{f"organ_{L[i]}.variant": "dead" for i in DEAD},
     **{f"organ_{L[i]}.scale": r2(ORGAN_SCALE * 0.8) for i in DEAD},
     **{f"socket_{L[i]}.fill": "$ink" for i in DEAD},
-    **{f"lobe_{L[i]}.scale": 0.93 for i in DEAD},
-    **{f"plate_{L[i]}.scale": 0.93 for i in DEAD},
-    **{f"plate_{L[i]}_lit.scale": 0.93 for i in DEAD},
-    **{f"band_{L[i]}.scale": 0.93 for i in DEAD},
-    **{f"band_{L[i]}2.scale": 0.93 for i in DEAD},
+    **{f"{p}_{L[i]}.scale": 0.94 for i in DEAD for p in ("lobe", "plate")},
+    **{f"plate_{L[i]}_lit.scale": 0.94 for i in DEAD},
+    **{f"band_{L[i]}.scale": 0.94 for i in DEAD},
+    **{f"band_{L[i]}2.scale": 0.94 for i in DEAD},
+    **{f"keel_{L[i]}.scale": 0.94 for i in DEAD},
     **{f"organ_{L[i]}.scale": r2(ORGAN_SCALE * 1.4) for i in LIT},
     **{f"socket_{L[i]}.fill": "$pheromone.dark" for i in LIT},
-    **{f"cry_{L[i]}.opacity": 0.7 for i in LIT},
+    **{f"cry_{L[i]}.opacity": 0.8 for i in LIT},
     "collar.fill": "$dead.light",
     "gum.fill": "$bone.dark",
     **{f"fang_{j}.fill": "$bone.light" for j in range(8)},
@@ -489,9 +496,9 @@ for j in range(8):
     bones.append(["centre", f"fang_{j}"])
 
 DESCRIPTION = (
-    "Not the biggest thing in the hive — the loudest. A seated mass of six carapace segments round a mouth, each carrying an organ at its outer end, "
+    "Not the biggest thing in the hive — the loudest. A seated disc of shell round a mouth — pale plate, tan course, dark rim, six organs in the rim and six spines between them, the medallion it always was — cut along six seams into six segments over a flesh that shows between them, each segment carrying its organ, "
     "and the six fire in sequence, so the light travels around it like a voice going round a room; that rotation is the whole read. It has no limbs "
-    "and does not walk, so the rig is in what it does instead: the segment under the firing organ swells and pushes out, the spine in the next seam "
+    "and does not walk, so the rig is in what it does instead: the segment under the firing organ swells and pushes out (its seams opening on the flesh, the rim bulging there) while a slower wave breathes all six in and out in turn, the spine in the next seam "
     "rises out of the body past upright and lays back behind the wave (a two-bone horn, root and thorn), and the whole mass leans toward the light as "
     "it goes, so the sequence runs through the body as well as the light. The middle is an iris of eight fangs in a collar of gum over a vent that "
     "has never eaten anything, only shouted; it breathes open and shut in the idle, and the shout is it clenching and then being thrown wide. "

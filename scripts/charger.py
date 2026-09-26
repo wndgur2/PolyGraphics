@@ -32,6 +32,14 @@ over the bow's head so the pair had no face. Rebuilt on the rig (scripts/rig.py)
     than they grow, so the lit seam down its back opens as it fills
 
 Seen from above, facing +x, mirrored by the game (it never rotates).
+
+The canvas grew from 60×52 to 72×60: the drawn-back barb hangs its sac off
+the end of the stock at the top of the coil, and the prod tips sweep near the
+old top and bottom edges on the draw and the throw. Contrast on the Plains
+floor is held at or above the original's 3.16 by keeping the big masses light
+— the stock `$carapace.light2`, both prods `$husk`, the barb's plates
+`$verdigris.light` — since the hairline ink on six legs and eight prod links
+pulls the mean down.
 """
 import math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -39,7 +47,7 @@ from rig import (Rig, R, D, r2, lerp, smooth, cyc, wrap, keyset, ik2 as ik, comp
                  poly, ell, circ, rect, bar, INK_THIN, INK_HAIR, write_doc)
 
 # ============================================================== rig
-# Canvas 64×56, origin at the centre, +x forward, +y down (the "d" side). The
+# Canvas 72×60, origin at the centre, +x forward, +y down (the "d" side). The
 # "u" side is drawn and the "d" side is its mirror.
 RIG = Rig()
 B = RIG.bones
@@ -112,9 +120,9 @@ for n in ("b", "m", "f"):
     for sd, s in SIDES:
         leg = f"{n}_{sd}"
         lf, lt, ls = LEGS[leg][2], LEGS[leg][3], LEGS[leg][4]
-        at, a = RIG.on_bone(f"{leg}_tarsus"); put(f"leg_{leg}_tarsus", f"{leg}_tarsus", at, a, bar(ls, 1.1, 0.6, 0.4), "$carapace.dark", INK_HAIR)
-        at, a = RIG.on_bone(f"{leg}_tibia"); put(f"leg_{leg}_tibia", f"{leg}_tibia", at, a, bar(lt, 1.6, 1.1), "$carapace", INK_HAIR)
-        at, a = RIG.on_bone(f"{leg}_femur"); put(f"leg_{leg}_femur", f"{leg}_femur", at, a, bar(lf, 2.3, 1.7), "$carapace.light", INK_HAIR)
+        at, a = RIG.on_bone(f"{leg}_tarsus"); put(f"leg_{leg}_tarsus", f"{leg}_tarsus", at, a, bar(ls, 1.1, 0.6, 0.4), "$carapace.light", INK_HAIR)
+        at, a = RIG.on_bone(f"{leg}_tibia"); put(f"leg_{leg}_tibia", f"{leg}_tibia", at, a, bar(lt, 1.6, 1.1), "$carapace.light", INK_HAIR)
+        at, a = RIG.on_bone(f"{leg}_femur"); put(f"leg_{leg}_femur", f"{leg}_femur", at, a, bar(lf, 2.3, 1.7), "$carapace.light2", INK_HAIR)
         at, a = RIG.on_bone(f"{leg}_tibia"); put(f"leg_{leg}_knee", f"{leg}_tibia", at, 0.0, circ(0.9), "$carapace.light2")
 
 # ---- palps, under the head
@@ -125,7 +133,7 @@ for sd, s in SIDES:
 
 # ---- the prod-limbs, roots tucked under the shoulders
 for sd, s in SIDES:
-    fill = "$husk" if sd == "u" else "$husk.dark"
+    fill = "$husk"
     for i in range(N_PROD):
         nm = f"prod_{sd}_{i}"; at, a = RIG.on_bone(nm)
         L = B[nm].length
@@ -145,7 +153,7 @@ def half_outline(tbl):
     top = [(x, -w) for x, w in tbl]
     bot = [(x, w) for x, w in reversed(tbl) if w > 0]
     return top + bot
-put("stock", "body", (0.0, 0.0), 0.0, poly(half_outline(STOCK_HW)), "$carapace.light", INK_THIN)
+put("stock", "body", (0.0, 0.0), 0.0, poly(half_outline(STOCK_HW)), "$carapace.light2", INK_THIN)
 def stock_hw(x):
     for (x0, w0), (x1, w1) in zip(STOCK_HW, STOCK_HW[1:]):
         if x1 <= x <= x0: return lerp(w1, w0, (x - x1) / (x0 - x1))
@@ -153,16 +161,16 @@ def stock_hw(x):
 # the abdomen's segments, dark bands across it; the waist between thorax and abdomen
 for i, x in enumerate((1.0, -6.0, -11.5, -16.5, -20.6)):
     hw = stock_hw(x) - 0.5
-    put(f"band_{i}", "body", (x, 0.0), 0.0, poly([(0.55, -hw), (-0.55, -hw * 0.98), (-0.9, 0.0), (-0.55, hw * 0.98), (0.55, hw), (0.2, 0.0)]), "$carapace")
-put("stock_shine", "body", (-8.0, -4.6), -2.0, ell(10.0, 1.2), "$carapace.light2")
-put("thorax_shine", "body", (5.0, -5.0), -12.0, ell(2.6, 1.0), "$carapace.light2")
-put("stock_shade", "body", (-8.0, 5.0), 2.0, ell(11.0, 1.2), "$carapace@soft")
+    put(f"band_{i}", "body", (x, 0.0), 0.0, poly([(0.55, -hw), (-0.55, -hw * 0.98), (-0.9, 0.0), (-0.55, hw * 0.98), (0.55, hw), (0.2, 0.0)]), "$carapace.light")
+put("stock_shine", "body", (-8.0, -4.6), -2.0, ell(10.0, 1.2), "$dusk.light")
+put("thorax_shine", "body", (5.0, -5.0), -12.0, ell(2.6, 1.0), "$dusk.light")
+put("stock_shade", "body", (-8.0, 5.0), 2.0, ell(11.0, 1.2), "$carapace.light")
 # the knuckles the prods hang from
 for sd, s in SIDES:
     put(f"knuckle_{sd}", "body", (SHOULDER[0] + 0.2, SHOULDER[1] * s * 1.02), 0.0, ell(2.3, 1.9), "$husk.dark" if sd == "d" else "$husk", INK_HAIR)
 # the groove the barb lies in, down the middle of the stock
 GROOVE = [(9.8, 1.2), (8.6, 2.5), (0.0, 2.9), (-12.0, 2.9), (-19.5, 2.2), (-21.8, 0.9), (-22.4, 0.0)]
-put("groove", "body", (0.0, 0.0), 0.0, poly(half_outline(GROOVE)), "$carapace.dark")
+put("groove", "body", (0.0, 0.0), 0.0, poly(half_outline(GROOVE)), "$carapace")
 
 # ---- the bow's head, at the leading end, and its organ
 HEAD = [(19.6, 0.0), (19.0, -2.3), (17.2, -3.9), (14.4, -4.5), (11.8, -3.8), (10.4, -2.0), (10.0, 0.0)]
@@ -170,7 +178,7 @@ put("head", "head", (0.0, 0.0), 0.0, poly(half_outline(HEAD)), "$husk", INK_THIN
 put("head_shade", "head", (14.6, 2.6), 4.0, ell(3.6, 1.0), "$husk.dark")
 put("head_shine", "head", (16.0, -2.3), -12.0, ell(2.2, 0.8), "$white@soft")
 for sd, s in SIDES:
-    put(f"eye_{sd}", "head", (16.6, 3.5 * s), -18.0 * s, ell(1.35, 0.95), "$ink")
+    put(f"eye_{sd}", "head", (16.9, 2.9 * s), -18.0 * s, ell(1.2, 0.85), "$ink")
 RIG.use("organ", "head", (13.8, 0.0), "ss.lib.organ", scale=0.44)
 
 # ---- the barb, in the groove: the point laid under the sac with its rear
@@ -188,9 +196,9 @@ def sac_outline(n=18):
     return [(u, -sac_hw(u)) for u in us] + [(u, sac_hw(u)) for u in reversed(us)][1:-1]
 POINT = [(-4.8, -1.6), (2.6, -1.9), (2.0, -3.5), (4.6, -2.4), (7.6, -1.2), (10.8, 0.0),
          (7.6, 1.2), (4.6, 2.4), (2.0, 3.5), (2.6, 1.9), (-4.8, 1.6)]
-put("barb_point", "barb", (0.0, 0.0), 0.0, poly(POINT), "$moss.dark", INK_HAIR)
-put("barb_ridge", "barb", (5.6, 0.0), 0.0, rect(6.4, 0.7, 0.35), "$verdigris.light")
-put("barb_sac", "barb", SC, 0.0, poly(sac_outline()), "$moss", INK_THIN)
+put("barb_point", "barb", (0.0, 0.0), 0.0, poly(POINT), "$verdigris.dark", INK_HAIR)
+put("barb_ridge", "barb", (5.6, 0.0), 0.0, rect(6.4, 0.7, 0.35), "$moss")
+put("barb_sac", "barb", SC, 0.0, poly(sac_outline()), "$verdigris.dark", INK_THIN)
 put("barb_core", "barb", (SC[0] + 0.6, 0.0), 0.0, ell(5.0, 3.3),
     {"gradient": "radial", "from": [0.5, 0.5], "stops": [[0, "$gold.light"], [0.45, "$gold"], [1, "$ember@0.15"]]})
 def plate(sgn):
@@ -199,14 +207,14 @@ def plate(sgn):
     outer = [(u, sgn * (sac_hw(u) - 0.15)) for u in us]
     def seam(u):
         rx = SAC_RX_F if u > 0 else SAC_RX_B
-        return 1.35 * math.sqrt(max(0.0, 1 - (u / (rx * 0.92)) ** 2))
+        return 1.75 * math.sqrt(max(0.0, 1 - (u / (rx * 0.92)) ** 2))
     inner = [(u, sgn * seam(u)) for u in reversed(us)]
     return outer + inner
 for sd, s in SIDES:
     pc = (SC[0], 2.6 * s)  # the plate's own origin, which it is carried out from the sac's centre by
     pts = [(x, y - pc[1]) for x, y in plate(s)]
-    put(f"barb_plate_{sd}", "barb", pc, 0.0, poly(pts), "$verdigris" if sd == "u" else "$verdigris.dark", INK_HAIR)
-    put(f"barb_plate_{sd}_shine", "barb", (SC[0] - 1.0, 3.2 * s), 0.0, ell(4.4, 0.7), "$verdigris.light" if sd == "u" else "$verdigris")
+    put(f"barb_plate_{sd}", "barb", pc, 0.0, poly(pts), "$verdigris.light" if sd == "u" else "$verdigris", INK_HAIR)
+    put(f"barb_plate_{sd}_shine", "barb", (SC[0] - 1.0, 3.2 * s), 0.0, ell(4.4, 0.7), "$husk@soft" if sd == "u" else "$verdigris.light")
 RIG.use("barb_organ", "barb", (1.4, 0.0), "ss.lib.organ", scale=0.4)
 
 RIG.check()
@@ -282,7 +290,7 @@ def plant(pose, feet):
 def chain_set(pose, prefix, deltas):
     for i, d in enumerate(deltas): pose[f"{prefix}_{i}"] = pose.get(f"{prefix}_{i}", 0.0) + d
 
-LOAD = [10.0, 13.0, 16.0, 19.0]   # per-link bend under a full draw, degrees, toward the back
+LOAD = [14.0, 18.0, 22.0, 27.0]   # per-link bend under a full draw, degrees, toward the back
 def prods(pose, load, extra=(0.0, 0.0, 0.0, 0.0)):
     """Bend both prod-limbs back by `load` (1 = full draw; negative throws them forward), plus `extra` (+ = forward)."""
     for sd, s in SIDES:
@@ -384,7 +392,7 @@ def coil_swell(t):
 SLACK = [3.0, 4.0, 8.0, 14.0]   # the fallen-open prods, degrees forward per link
 LUNGE = 14.0
 def strike_load(t):
-    ks = [(0.0, 1.0), (0.13, -0.62), (0.3, 0.26), (0.46, -0.12), (0.62, 0.0), (1.0, 0.0)]
+    ks = [(0.0, 1.0), (0.12, -0.95), (0.3, 0.34), (0.47, -0.14), (0.64, 0.0), (1.0, 0.0)]
     for (t0, v0), (t1, v1) in zip(ks, ks[1:]):
         if t <= t1: return lerp(v0, v1, smooth(t0, t1, t))
     return 0.0
@@ -392,7 +400,7 @@ def strike_pose(t):
     L = strike_load(t)
     kick = math.sin(math.pi * smooth(0.02, 0.4, t))
     settle = smooth(0.35, 0.8, t)
-    pose = {"body": (lerp(-BRACE_BACK, 0.0, smooth(0.1, 0.62, t)) - 2.8 * kick, 0.0, 2.5 * math.sin(2 * math.pi * smooth(0.05, 0.6, t)) * (1 - settle))}
+    pose = {"body": (lerp(-BRACE_BACK, 0.0, smooth(0.1, 0.62, t)) - 3.6 * kick, 0.0, 2.5 * math.sin(2 * math.pi * smooth(0.05, 0.6, t)) * (1 - settle))}
     pose["head"] = -6.0 * kick + 4.0 * settle
     prods(pose, L, [v * settle for v in SLACK])
     for sd, s in SIDES:
@@ -418,8 +426,8 @@ def keyed(ks, t):
     for (t0, v0), (t1, v1) in zip(ks, ks[1:]):
         if t <= t1: return lerp(v0, v1, smooth(t0, t1, t))
     return ks[-1][1]
-FUSE_SAC = [(0.0, 1.0), (0.1, 1.17), (0.19, 1.09), (0.31, 1.32), (0.4, 1.23), (0.52, 1.48), (0.61, 1.39), (0.74, 1.66), (0.88, 1.76), (1.0, 1.76)]
-FUSE_CORE = [(0.0, 1.3), (0.08, 1.55), (0.17, 1.35), (0.28, 1.8), (0.38, 1.55), (0.49, 2.05), (0.59, 1.8), (0.71, 2.35), (0.86, 2.5), (1.0, 2.5)]
+FUSE_SAC = [(0.0, 1.0), (0.1, 1.2), (0.19, 1.1), (0.31, 1.4), (0.4, 1.28), (0.52, 1.6), (0.61, 1.46), (0.74, 1.82), (0.88, 1.94), (1.0, 1.94)]
+FUSE_CORE = [(0.0, 1.3), (0.08, 1.6), (0.17, 1.38), (0.28, 1.9), (0.38, 1.62), (0.49, 2.2), (0.59, 1.9), (0.71, 2.5), (0.86, 2.7), (1.0, 2.7)]
 FUSE_DIM = [(0.0, 1.0), (0.1, 0.72), (0.19, 1.0), (0.31, 0.68), (0.4, 1.0), (0.52, 0.64), (0.61, 1.0), (0.74, 0.6), (0.86, 1.0), (1.0, 1.0)]
 def fuse_shake(t): return (0.25 + 0.9 * smooth(0.0, 0.85, t)) * (1 - smooth(0.9, 0.95, t))
 def fuse_pose(t):
@@ -526,11 +534,12 @@ variants = {
         "set": dict([(f"{pid}.at", shifted(pid)["at"]) for pid in BARB_PARTS] + [("barb_core.scale", 1.3)]),
     },
     "planted": {
-        "description": "The barb after it has landed and before it goes off: the same parts it flew as, recentred the same way, lying in a scorch it put there arriving. Plays `fuse` (`e_charger_planted`), stretched to the fuse it drew; the half-second it holds this is the half-second the player has to not be here. The barb's parts are re-added over the scorch (variant `add` draws on top), so it lies in the burn rather than under it.",
+        "description": "The barb after it has landed and before it goes off: the same parts it flew as, recentred the same way, lying in a scorch it put there arriving — a dark burn with a pale ring of ash round it, so it reads on the Plains' dark floor. Plays `fuse` (`e_charger_planted`), stretched to the fuse it drew; the half-second it holds this is the half-second the player has to not be here. The barb's parts are re-added over the scorch (variant `add` draws on top), so it lies in the burn rather than under it.",
         "animations": ["fuse"],
         "remove": BOW_PARTS + BARB_PARTS,
         "add": [
-            {"id": "scorch", "at": [0.0, 0.8], "shape": ell(17.0, 10.5), "fill": "$dead@soft"},
+            {"id": "scorch_ash", "at": [0.0, 0.8], "shape": ell(19.0, 12.0), "fill": "$husk.dark2@ghost"},
+            {"id": "scorch", "at": [0.0, 0.8], "shape": ell(16.5, 10.0), "fill": "$dead@heavy"},
             {"id": "scorch_burn", "at": [-1.0, 0.5], "shape": ell(12.0, 7.0), "fill": "$rust@soft"},
             {"id": "scorch_core", "at": [-2.0, 0.3], "shape": ell(7.5, 4.6), "fill": "$dead@soft"},
         ] + [shifted(pid) for pid in BARB_PARTS],
@@ -566,7 +575,7 @@ doc = {
     "name": "Bow and barb",
     "description": DESCRIPTION,
     "tags": ["enemy", "duo"],
-    "size": [64, 56],
+    "size": [72, 60],
     "meta": {"radius": 16},
     "parts": RIG.parts,
     "variants": variants,

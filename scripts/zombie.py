@@ -48,21 +48,24 @@ bone("body", None, PELVIS, 0.0)
 # Waist straight up, the chest bent forward over it — the hunch.
 bone("spine", "body", PELVIS, -80.0, 6.0)
 bone("chest", "spine", RIG.end_of("spine"), -58.0, 6.6)
-bone("neck", "chest", RIG.end_of("chest"), 22.0, 2.4)
-bone("head", "neck", RIG.end_of("neck"), 52.0, 5.6)
+bone("neck", "chest", RIG.end_of("chest"), 18.0, 3.2)
+bone("head", "neck", RIG.end_of("neck"), 50.0, 6.6)
 HEAD_AT = RIG.end_of("neck")
 def head_pt(along, across):
     """A point in the head's rest frame (along the skull, down-forward; across, + is the underside)."""
     h = R(BONES["head"].heading)
     return (HEAD_AT[0] + along * math.cos(h) - across * math.sin(h), HEAD_AT[1] + along * math.sin(h) + across * math.cos(h))
-bone("jaw", "head", head_pt(3.2, 1.6), 64.0, 3.6)
-bone("feeler", "head", head_pt(0.6, -2.3), -128.0, 4.4)
+bone("jaw", "head", head_pt(3.8, 1.9), 62.0, 4.2)
+bone("feeler", "head", head_pt(0.8, -2.8), -128.0, 4.4)
 
 # The arms, hung off the shoulder at the top of the chest.
-SHOULDER = (RIG.end_of("chest")[0] - 1.6, RIG.end_of("chest")[1] + 1.4)
+# The shoulder is on the front of the hunch, under the neck, so the long arm
+# hangs in front of the belly — clear of the graft, and a line of its own in
+# the silhouette rather than a stripe across the torso.
+SHOULDER = (4.3, -7.2)
 ARMS = {  # side: (shoulder, [(length, heading)...]) upper, fore, claw
-    "far": ((SHOULDER[0] + 0.6, SHOULDER[1] - 0.6), [(4.4, 78.0), (4.2, 8.0), (2.2, 34.0)]),
-    "near": (SHOULDER, [(6.6, 98.0), (7.0, 84.0), (2.6, 66.0)]),
+    "far": ((3.2, -7.8), [(4.6, 92.0), (4.0, 14.0), (2.2, 52.0)]),
+    "near": (SHOULDER, [(6.6, 92.0), (7.0, 86.0), (2.6, 70.0)]),
 }
 for side, (sh, links) in ARMS.items():
     p, parent = sh, "chest"
@@ -132,15 +135,16 @@ put("torso", "chest", at, 0.0,
 # The back in shade, the chest in the light: the mid value down the spine.
 put("torso_shade", "chest", at, 0.0, poly([(-3.8, 0.6), (-4.3, -3.2), (-3.3, -6.6), (-0.8, -9.0), (0.2, -8.2), (-1.4, -5.6), (-2.0, -2.2), (-1.4, 1.4)]),
     NEAR)
-put("rib_a", "chest", (at[0] + 3.4, at[1] - 3.0), -24.0, rect(4.2, 0.9, 0.45), FAR)
-put("rib_b", "chest", (at[0] + 2.2, at[1] - 0.6), -14.0, rect(3.6, 0.9, 0.45), FAR)
+# A rib showing through the belly, under the graft.
+put("rib", "chest", (at[0] - 1.8, at[1] + 1.2), -10.0, rect(3.8, 0.9, 0.45), FAR)
 CRACK = [(0.0, 0.0), (1.2, -1.8), (0.6, -3.4), (2.0, -5.2), (1.6, -6.6), (2.4, -5.0), (1.2, -3.4), (1.8, -1.8), (0.6, 0.4)]
-put("crack", "chest", (at[0] + 2.4, at[1] + 1.0), 0.0, poly(CRACK), SEAM)
-GRAFT_AT = (at[0] + 1.6, at[1] - 4.6)
-put("graft", "chest", GRAFT_AT, 14.0, {"kind": "ngon", "sides": 6, "r": 3.4}, "$carapace.dark", INK_HAIR)
-use("organ", "chest", GRAFT_AT, "ss.lib.organ", scale=0.5, variant="faint")
+# The crack runs from under the graft down the belly to the waist.
+put("crack", "chest", (at[0] - 0.4, at[1] + 3.2), 0.0, poly(CRACK), SEAM)
+GRAFT_AT = (at[0] + 0.1, at[1] - 3.4)
+put("graft", "chest", GRAFT_AT, 14.0, {"kind": "ngon", "sides": 6, "r": 3.7}, "$carapace.dark", INK_HAIR)
+use("organ", "chest", GRAFT_AT, "ss.lib.organ", scale=0.6, variant="faint")
 # The second graft (elite): fresh, fully lit, in the hump of the back.
-GRAFT2_AT = (at[0] - 1.6, at[1] - 7.4)
+GRAFT2_AT = (at[0] - 2.0, at[1] - 7.6)
 put("graft2", "chest", GRAFT2_AT, 20.0, {"kind": "ngon", "sides": 6, "r": 2.7}, "$carapace.dark", INK_HAIR, opacity=0)
 use("organ2", "chest", GRAFT2_AT, "ss.lib.organ", scale=0.42, opacity=0)
 
@@ -156,13 +160,13 @@ put("jaw", "jaw", at, a, poly([(-0.8, -0.9), (1.6, -1.1), (3.6, -0.4), (4.4, 0.9
 # neck tapering to the snout — hung face-down, so it reads as a skull and not
 # as an eye.
 at, a = on_bone("head")
-HEAD = [(-1.4, -0.4), (-0.6, -2.2), (1.4, -2.9), (3.8, -2.4), (5.8, -1.3), (6.6, 0.0), (6.0, 1.3), (3.8, 2.1), (1.2, 2.3), (-0.8, 1.4)]
+HEAD = [(x * 1.2, y * 1.2) for x, y in [(-1.4, -0.4), (-0.6, -2.2), (1.4, -2.9), (3.8, -2.4), (5.8, -1.3), (6.6, 0.0), (6.0, 1.3), (3.8, 2.1), (1.2, 2.3), (-0.8, 1.4)]]
 put("head", "head", at, a, poly(HEAD), LIT, INK_THIN)
-put("head_shade", "head", at, a, poly([(-0.8, 1.4), (1.2, 2.3), (3.8, 2.1), (6.0, 1.3), (6.3, 0.6), (3.8, 1.2), (1.0, 1.2), (-1.0, 0.6)]), NEAR)
-at, a = on_bone("head", 1.7, -0.9)
-put("socket", "head", at, a, ell(1.45, 1.0), "$ink")
-at, a = on_bone("head", 1.9, -0.8)
-put("eye", "head", at, a, circ(0.45), "$pheromone@heavy")
+put("head_shade", "head", at, a, poly([(x * 1.2, y * 1.2) for x, y in [(-0.8, 1.4), (1.2, 2.3), (3.8, 2.1), (6.0, 1.3), (6.3, 0.6), (3.8, 1.2), (1.0, 1.2), (-1.0, 0.6)]]), NEAR)
+at, a = on_bone("head", 2.1, -1.1)
+put("socket", "head", at, a, ell(1.8, 1.25), "$ink")
+at, a = on_bone("head", 2.4, -1.0)
+put("eye", "head", at, a, circ(0.55), "$pheromone@heavy")
 
 # ---- near side: the working leg, then the long arm over the torso
 seg("leg_thigh", "near_thigh", 3.8, 3.0, NEAR)
@@ -222,9 +226,9 @@ def shamble_pose(t):
     drop = bump(t, 0.38, 0.66)
     hike = bump(t, 0.60, 0.98)
     vault = bump(t, 0.02, 0.36)
-    dy = 2.6 * drop - 1.3 * hike - 0.9 * vault
-    dx = 1.2 * cyc(t, 0.05)
-    lean = 6.0 * drop - 5.0 * hike
+    dy = 3.2 * drop - 1.4 * hike - 1.0 * vault
+    dx = 1.6 * cyc(t, 0.05)
+    lean = 7.0 * drop - 6.0 * hike
     pose = {"body": (dx, dy, lean)}
     pose["spine"] = 5.0 * drop - 2.0 * vault
     pose["chest"] = 16.0 * drop - 7.0 * hike + 2.0 * vault
@@ -255,24 +259,32 @@ def shamble_pose(t):
 # it jerks upright as both organs flare, then the knees go, the frame folds
 # forward over them, the head drops and the long arm sprawls onto the floor.
 # Still from 0.85.
+WRIST_REST = (RIG.end_of("near_fore")[0] - SHOULDER[0], RIG.end_of("near_fore")[1] - SHOULDER[1])
 DEATH_TS = [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 1.0]
 def death_pose(t):
     jerk = math.sin(math.pi * smooth(0.0, 0.3, t))
     fall = smooth(0.18, 0.72, t)
     settle = math.sin(math.pi * smooth(0.62, 0.85, t)) * 0.5
-    pose = {"body": (lerp(0.0, -2.4, fall), -1.0 * jerk + lerp(0.0, 5.2, fall) - settle, -6.0 * jerk + 10.0 * fall)}
+    pose = {"body": (lerp(0.0, -1.6, fall), -0.3 * jerk + lerp(0.0, 7.0, fall) - settle, -4.0 * jerk + 16.0 * fall)}
     pose["spine"] = -4.0 * jerk + 10.0 * fall
-    pose["chest"] = -10.0 * jerk + 26.0 * fall
-    pose["neck"] = -8.0 * jerk + 12.0 * fall
-    pose["head"] = -26.0 * jerk + 34.0 * fall
+    pose["chest"] = -6.0 * jerk + 16.0 * fall
+    pose["neck"] = -8.0 * jerk + 6.0 * fall
+    pose["head"] = -16.0 * jerk + 10.0 * fall
     pose["jaw"] = 8.0 + 30.0 * jerk + 10.0 * fall
     pose["feeler"] = 20.0 * jerk - 30.0 * fall
     # The long arm is flung up with the jerk and then thrown out along the
     # floor in front, the claw last to land — set as world headings, since
     # it is falling, not being carried.
-    rest = {n: BONES[n].heading for n in ("near_upper", "near_fore", "near_claw")}
-    for n, up, down in (("near_upper", 10.0, 62.0), ("near_fore", -12.0, 14.0), ("near_claw", -30.0, 8.0)):
-        pose[f"abs:{n}"] = lerp(lerp(rest[n], up, jerk), down, smooth(0.3, 0.8, t))
+    # The wrist is steered (two-bone IK off the shoulder as it falls): flung
+    # out ahead with the jerk, then laid on the floor in front, so the arm
+    # lands rather than sweeping through the ground.
+    sx, sy, _ = solve(pose)["near_upper"]
+    lay = smooth(0.3, 0.8, t)
+    rel = mix(WRIST_REST, (8.6, 1.4), jerk)
+    wrist = mix((sx + rel[0], sy + rel[1]), (10.2, GROUND - 1.7), lay)
+    h1, h2 = ik((sx, sy), wrist, BONES["near_upper"].length, BONES["near_fore"].length, -1)
+    pose["abs:near_upper"], pose["abs:near_fore"] = h1, h2
+    pose["abs:near_claw"] = lerp(lerp(BONES["near_claw"].heading, -30.0, jerk), 8.0, smooth(0.3, 0.6, t))
     pose["far_upper"] = -40.0 * jerk + 30.0 * fall
     pose["far_fore"] = -20.0 * jerk + 20.0 * fall
     pose["far_claw"] = 20.0 * fall
@@ -328,6 +340,15 @@ DESCRIPTION = (
     "the chest opens, and the frame folds forward over its knees."
 )
 
+# The drawing was laid out about the pelvis; the long arm and the head reach
+# further forward than the back does behind, so the whole body sits a unit
+# back on the canvas to centre its reach (offsets are relative, so the clips
+# are unchanged).
+SHIFT_X = -1.0
+for p in RIG.parts: p["at"][0] = r2(p["at"][0] + SHIFT_X)
+SKELETON = RIG.skeleton()
+for k, v in SKELETON["joints"].items(): v[0] = r2(v[0] + SHIFT_X)
+
 doc = {
     "id": "ss.enemy.zombie",
     "name": "Husk",
@@ -338,7 +359,7 @@ doc = {
     "parts": RIG.parts,
     "variants": VARIANTS,
     "animations": animations,
-    "skeleton": RIG.skeleton(),
+    "skeleton": SKELETON,
 }
 
 if __name__ == "__main__":
