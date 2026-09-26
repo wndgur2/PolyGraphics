@@ -36,8 +36,8 @@ from rig import (Rig, R, D, r2, lerp, mix, smooth, cyc, cyc_c, wrap, keyset, ik2
                  poly, ell, circ, rect, bar, INK_THIN, INK_HAIR, write_doc)
 
 # ============================================================== rig
-# Canvas 76×76, origin at the centre, +x forward, +y down.
-SIZE = [76, 76]
+# Canvas 84×76, origin at the centre, +x forward, +y down.
+SIZE = [84, 76]
 GROUND = 19.0
 FAR_LIFT = 1.2
 BODY_PIVOT = (-3.0, 4.0)
@@ -69,10 +69,10 @@ for side, (sh, el, wr, h3) in ARMS.items():
 # outward — the mid leg's forward, the hind leg's back — the stance of a
 # thing too heavy to stand in its legs any other way.
 LEGS = {  # name: (hip, rest foot x, femur, tibia)
-    "far_h": ((-10.4, 6.2), -15.0, 8.2, 8.8),
-    "far_m": ((0.6, 6.6), 4.8, 8.0, 8.6),
-    "near_h": ((-10.0, 7.4), -20.6, 8.6, 9.2),
-    "near_m": ((1.8, 7.8), 11.4, 8.4, 9.0),
+    "far_h": ((-11.4, 6.6), -16.4, 6.0, 9.4),
+    "far_m": ((-0.4, 7.0), 5.4, 5.8, 9.2),
+    "near_h": ((-10.6, 8.0), -19.2, 6.6, 10.2),
+    "near_m": ((1.6, 8.4), 9.8, 6.4, 10.0),
 }
 def ground_of(leg): return GROUND - (FAR_LIFT if leg.startswith("far") else 0.0)
 def knee_bend(leg): return 1 if leg.endswith("_m") else -1
@@ -106,42 +106,57 @@ def arm_parts(side, humerus, forearm, claw, stroke):
 
 # ---- far side, a step darker: legs, then the arm behind everything
 for leg in ("far_h", "far_m"):
-    leg_parts(leg, "$carapace.light", "$carapace.light", "$carapace", INK_HAIR)
-arm_parts("far", "$carapace.light", "$carapace.light", "$carapace.light2", INK_HAIR)
+    leg_parts(leg, "$heather", "$heather.dark", "$heather.dark", INK_HAIR)
+arm_parts("far", "$heather", "$heather.dark", "$heather.light", INK_HAIR)
 
 # ---- the body: belly, the dome of the elytra, the pronotum, the head
 BELLY = [(-20.0, 3.0), (-17.0, 7.6), (-8.0, 10.0), (2.0, 9.8), (8.6, 7.0), (6.0, 2.0), (-18.0, 1.0)]
-put("belly", "body", (0, 0), 0, poly(BELLY), "$carapace", INK_THIN)
+put("belly", "body", (0, 0), 0, poly(BELLY), "$heather", INK_HAIR)
 for i, x in enumerate((-14.6, -9.4, -4.2, 1.0)):
-    put(f"sternite_{i}", "body", (x, 8.4 - 0.1 * abs(x + 5)), 12.0, rect(0.9, 3.2, 0.45), "$carapace.dark")
-# The dome: high, rounded, falling off behind to a blunt point — the beetle's
-# whole back is its two elytra, closed.
-DOME = [(-22.0, 3.6), (-22.4, -0.4), (-20.6, -5.0), (-16.6, -8.8), (-10.6, -11.0), (-4.2, -11.2),
-        (1.4, -9.4), (5.2, -6.0), (6.4, -1.8), (5.8, 2.8), (-2.0, 5.2), (-12.0, 5.6), (-19.0, 5.0)]
+    put(f"sternite_{i}", "body", (x, 8.4 - 0.1 * abs(x + 5)), 12.0, rect(0.9, 3.2, 0.45), "$heather.dark")
+# The dome: high and round, a superellipse over a shallow keel — the beetle's
+# whole back is its two elytra, closed, and it is the biggest light thing on
+# the floor.
+DOME_C, DOME_A, DOME_B, DOME_N = (-8.4, 2.4), 15.2, 16.4, 2.5
+def dome_top(u, shrink=0.0):
+    """A point on the dome's upper edge, u from 0 (front) to 1 (back), `shrink` in from the rim."""
+    th = math.pi * u
+    c, s_ = math.cos(th), math.sin(th)
+    x = DOME_C[0] + (DOME_A - shrink) * math.copysign(abs(c) ** (2 / DOME_N), c)
+    y = DOME_C[1] - (DOME_B - shrink) * abs(s_) ** (2 / DOME_N)
+    return (x, y)
+def dome_keel(u):
+    """The lower edge, front (u=0) to back (u=1): a shallow curve that tucks up at both ends."""
+    x = lerp(DOME_C[0] + DOME_A, DOME_C[0] - DOME_A, u)
+    return (x, DOME_C[1] + 3.2 * math.sin(math.pi * u) ** 0.7)
+DOME = [dome_top(i / 20) for i in range(21)] + [dome_keel(1 - i / 8) for i in range(1, 8)]
 put("elytron", "body", (0, 0), 0, poly(DOME), "$heather.light2", INK_THIN)
-# The split between the two elytra runs over the top of the dome; the near
-# one's lower edge is a shadow line, and the striae are three dark arcs.
-SEAM = [(-21.8, -0.6), (-20.2, -5.0), (-16.2, -8.6), (-10.4, -10.6), (-4.2, -10.8), (1.2, -9.0),
-        (1.0, -8.0), (-4.2, -9.8), (-10.2, -9.6), (-15.6, -7.6), (-19.4, -4.4), (-20.8, -0.4)]
-put("seam", "body", (0, 0), 0, poly(SEAM), "$carapace.dark")
-put("elytron_shade", "body", (0, 0), 0,
-    poly([(-21.6, 2.2), (-12.0, 4.0), (-2.0, 3.8), (5.6, 1.4), (5.8, 2.8), (-2.0, 5.2), (-12.0, 5.6), (-19.0, 5.0), (-22.0, 3.6)]),
-    "$heather")
-for i, (x, y, rx, ry, rot) in enumerate(((-14.6, -2.6, 4.6, 0.55, -24.0), (-8.4, -3.8, 5.4, 0.55, -6.0), (-2.2, -2.8, 4.4, 0.55, 20.0))):
-    put(f"stria_{i}", "body", (x, y), rot, ell(rx, ry), "$heather.dark")
-put("gloss", "body", (-9.6, -7.4), -8.0, ell(6.4, 1.3), "$white@0.55")
+# The lower flank of the near elytron in shade: the mid value, under the light.
+SHADE = [dome_top(1 - i / 10 * 0.14) for i in range(11)]
+SHADE = [(x, max(y, -1.4)) for x, y in SHADE]
+SHADE = [(DOME_C[0] - DOME_A + 0.2, -0.6)] + [(lerp(DOME_C[0] - DOME_A + 1.0, DOME_C[0] + DOME_A - 1.0, i / 10), -0.6 + 1.2 * math.sin(math.pi * i / 10)) for i in range(11)] + \
+        [(DOME_C[0] + DOME_A - 0.2, -0.2)] + [dome_keel(i / 8) for i in range(9)]
+put("elytron_shade", "body", (0, 0), 0, poly(SHADE), "$heather")
+# The split between the two elytra runs over the crown; three striae follow
+# the curve of the shell down its side.
+SEAM = [dome_top(0.12 + 0.8 * i / 12, 0.6) for i in range(13)] + [dome_top(0.92 - 0.8 * i / 12, 2.0) for i in range(13)]
+put("seam", "body", (0, 0), 0, poly(SEAM), "$heather.dark")
+for i, sh in enumerate((5.0, 8.4)):
+    STRIA = [dome_top(0.2 + 0.66 * j / 10, sh) for j in range(11)] + [dome_top(0.86 - 0.66 * j / 10, sh + 0.8) for j in range(11)]
+    put(f"stria_{i}", "body", (0, 0), 0, poly(STRIA), "$heather.light")
+put("gloss", "body", (-11.0, -9.4), -10.0, ell(6.0, 1.4), "$white@0.6")
 # The hive's organ, set into the top of the dome under the load.
-RIG.use("organ", "body", (-7.6, -4.6), "ss.lib.organ", scale=[0.72, 0.6])
+RIG.use("organ", "body", (-7.2, -5.2), "ss.lib.organ", scale=[0.72, 0.6])
 # The pronotum: a shield over the shoulders, the arms coming out of its top.
-PRONOTUM = [(3.2, -6.0), (7.2, -8.2), (11.2, -7.0), (13.2, -3.2), (13.0, 1.8), (10.4, 5.4), (5.6, 6.0), (3.0, 1.0)]
+PRONOTUM = [(3.0, -7.0), (7.2, -8.8), (11.2, -7.4), (13.4, -3.2), (13.0, 1.8), (10.4, 5.4), (5.6, 6.0), (3.0, 1.0)]
 put("pronotum", "body", (0, 0), 0, poly(PRONOTUM), "$heather.light", INK_THIN)
-put("pronotum_rim", "body", (0, 0), 0, poly([(4.0, 3.6), (10.4, 4.2), (12.8, 1.2), (13.0, 1.8), (10.4, 5.4), (5.6, 6.0)]), "$heather.dark")
-put("pronotum_gloss", "body", (8.2, -5.8), -18.0, ell(2.8, 0.8), "$white@0.35")
+put("pronotum_rim", "body", (0, 0), 0, poly([(4.0, 3.2), (10.4, 3.8), (12.8, 0.8), (13.0, 1.8), (10.4, 5.4), (5.6, 6.0)]), "$heather")
+put("pronotum_gloss", "body", (8.2, -6.2), -18.0, ell(2.8, 0.8), "$white@0.45")
 # The head, low and forward, with the horn curving up off it.
 at, a = on_bone("head", 2.6, 0.4)
-put("head", "head", at, 0.0, ell(4.4, 3.8), "$carapace.light2", INK_THIN)
+put("head", "head", at, 0.0, ell(4.4, 3.8), "$heather.light", INK_HAIR)
 at, a = on_bone("head", 5.0, 3.2)
-put("mandible", "head", at, 18.0, poly([(-1.2, -1.0), (1.6, -0.8), (3.2, 0.6), (1.0, 0.8), (-1.2, 1.2)]), "$carapace.dark2", INK_HAIR)
+put("mandible", "head", at, 18.0, poly([(-1.2, -1.0), (1.6, -0.8), (3.2, 0.6), (1.0, 0.8), (-1.2, 1.2)]), "$carapace.dark", INK_HAIR)
 # The horn: rooted on the snout, sweeping forward and up to a point that
 # curls back. Its origin is its root, so a larger horn grows out of the head.
 HORN_ROOT, _ = on_bone("head", 4.4, -1.8)
@@ -155,7 +170,7 @@ put("eye_glint", "head", (at[0] + 0.4, at[1] - 0.4), 0.0, circ(0.42), "$white")
 
 # ---- near side: the legs over the belly
 for leg in ("near_h", "near_m"):
-    leg_parts(leg, "$carapace.light2", "$carapace.light", "$carapace.light", INK_HAIR)
+    leg_parts(leg, "$heather.light", "$heather.light", "$heather.light", INK_HAIR)
 
 # ---- the load: a live Mite held up over the back in the claws, riding the
 # near claw. The far claw is behind it, the near claw closes over its front.
@@ -163,7 +178,7 @@ LOAD_AT = (0.0, -24.0)
 LOAD_ROT = -14.0
 LOAD_SCALE = 0.62
 RIG.use("load", "near_claw", LOAD_AT, "ss.enemy.imp", scale=[LOAD_SCALE, LOAD_SCALE], rot=LOAD_ROT)
-arm_parts("near", "$carapace.light2", "$carapace.light2", "$heather.light", INK_HAIR)
+arm_parts("near", "$heather.light", "$heather", "$heather.light2", INK_HAIR)
 
 RIG.check()
 
@@ -182,11 +197,13 @@ def plant_legs(pose, feet):
 def rest_feet():
     return {leg: (fx, ground_of(leg)) for leg, (hip, fx, lf, lt) in LEGS.items()}
 
-def arms(pose, h, f, c, far_lag=0.0):
-    """Both arms at humerus/forearm/claw deltas; the far arm a touch behind."""
+def arms(pose, h, f, c, far_lag=0.0, far_h=None):
+    """Both arms at humerus/forearm/claw deltas; the far arm a touch behind.
+    `far_h` overrides the far humerus: it starts pointing back over the dome,
+    so the swing that lays the near arm forward only stands the far one up."""
     for side in ("near", "far"):
         k = 1.0 if side == "near" else 1.0 - far_lag
-        pose[f"{side}_humerus"] = h * k
+        pose[f"{side}_humerus"] = h * k if side == "near" or far_h is None else far_h
         pose[f"{side}_forearm"] = f * k
         pose[f"{side}_claw"] = c * k
     return pose
@@ -233,13 +250,13 @@ def plod_pose(t):
 # thrown Mite on the clip's first frame, so the windup is a short, hard
 # gather (0–0.16), the throw lands the release at the top of the swing by
 # 0.3, and most of the clip is the follow-through and the reload.
-H_WIND, H_REL, H_OVER = 0.16, 0.30, 0.44
-WIND_BODY = (-2.2, 1.8, -9.0)
-THROW_BODY = (2.6, -0.8, 8.0)
-OVER_BODY = (3.4, 2.2, 13.0)
-WIND_ARM = (-26.0, -22.0, -20.0)
-THROW_ARM = (62.0, 38.0, 30.0)
-OVER_ARM = (104.0, 58.0, 44.0)
+H_WIND, H_REL, H_OVER = 0.14, 0.26, 0.40
+WIND_BODY = (-2.4, 2.0, -9.0)
+THROW_BODY = (2.0, -1.2, 6.0)
+OVER_BODY = (2.6, 2.2, 11.0)
+WIND_ARM = (-20.0, -18.0, -16.0)
+THROW_ARM = (32.0, 14.0, 12.0)
+OVER_ARM = (80.0, 36.0, 26.0)
 
 def heave_body_arm(t):
     """Body (dx, dy, dth) and arm (h, f, c) deltas at heave time t."""
@@ -289,7 +306,7 @@ def death_pose(t):
                      lerp(0.0, DEATH_BODY[2], fall) - 5.0 * jolt)}
     pose["head"] = 26.0 * smooth(0.25, 0.8, t)
     drop = smooth(0.05, 0.55, t)
-    arms(pose, -10.0 * jolt + 118.0 * drop, 42.0 * drop, 40.0 * smooth(0.1, 0.6, t), far_lag=0.1)
+    arms(pose, -10.0 * jolt + 92.0 * drop, 24.0 * drop, 36.0 * smooth(0.1, 0.6, t), far_lag=0.1, far_h=-10.0 * jolt + 150.0 * smooth(0.1, 0.65, t))
     feet = {}
     for leg, (hip, fx, lf, lt) in LEGS.items():
         out = 1.0 if leg.endswith("_m") else -1.0
@@ -314,17 +331,17 @@ def heave_load(t):
     x1, y1, a1 = load_world(heave_pose, H_REL - 0.03)
     vx, vy = (x0 - x1) / 0.03, (y0 - y1) / 0.03
     dt = t - H_REL
-    if dt <= 0.14:
-        x, y = x0 + vx * dt * 0.55, y0 + vy * dt * 0.55
-        fade = 1.0 - smooth(0.0, 0.14, dt)
-        grow = 1.0 - 0.35 * smooth(0.0, 0.14, dt)
+    if dt <= 0.10:
+        x, y = x0 + vx * dt * 0.4, y0 + vy * dt * 0.4
+        fade = 1.0 - smooth(0.0, 0.10, dt)
+        grow = 1.0 - 0.3 * smooth(0.0, 0.10, dt)
         return x - LOAD_REST[0], y - LOAD_REST[1], wrap(a0 + 260.0 * dt - LOAD_REST[2]), grow, fade
     # The new one: climbs into the claws from behind the head and is held by 0.9.
     x, y, a = load_world(heave_pose, t)
     k = smooth(0.62, 0.9, t)
     return x - LOAD_REST[0], y - LOAD_REST[1] + 5.0 * (1 - k), wrap(a - LOAD_REST[2]), lerp(0.35, 1.0, k) if t >= 0.62 else 0.35, k
 
-GROUND_LOAD = (21.0, GROUND - 5.2)
+GROUND_LOAD = (29.0, GROUND - 4.6)
 def death_load(t):
     let_go = 0.34
     if t <= let_go:
@@ -382,7 +399,6 @@ VARIANTS = {
             "elytron_shade.fill": "$husk.dark",
             "stria_0.fill": "$husk.dark",
             "stria_1.fill": "$husk.dark",
-            "stria_2.fill": "$husk.dark",
             "seam.fill": "$carapace",
             "pronotum.fill": "$husk.dark",
             "pronotum_rim.fill": "$carapace.light",
@@ -414,7 +430,7 @@ DESCRIPTION = (
 
 # The drawing sits a little low in its canvas: the heave throws the load up
 # and forward, and that is where the room is kept.
-Y0 = 3.0
+Y0 = 5.0
 for p in RIG.parts: p["at"] = [p["at"][0], r2(p["at"][1] + Y0)]
 SKELETON = RIG.skeleton()
 SKELETON["joints"] = {k: [v[0], r2(v[1] + Y0)] for k, v in SKELETON["joints"].items()}

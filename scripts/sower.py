@@ -35,7 +35,8 @@ from rig import (Rig, R, D, r2, lerp, smooth, cyc, cyc_c, keyset,
                  poly, ell, circ, rect, bar, INK_THIN, INK_HAIR, write_doc)
 
 # ============================================================== rig
-# Canvas 64×48, origin at the centre, +x forward, +y down.
+# Canvas 64×56, origin at the centre, +x forward, +y down (the document is
+# shifted 4 forward on the way out: see SHIFT).
 RIG = Rig()
 B = RIG.bones
 bone = RIG.bone
@@ -114,24 +115,24 @@ def wing(id, bn, fill, vein, stroke):
     put(f"{id}_stigma", bn, at3, a, ell(1.6, 0.8), vein)
 
 # ---- far side: wing, legs, antenna — a step darker, behind everything
-wing("wing_far", "wing_far", "$heather@0.4", "$arcane.dark@soft", {"color": "$silent@soft", "width": "hair"})
+wing("wing_far", "wing_far", "$heather@0.55", "$arcane.dark@soft", {"color": "$silent@soft", "width": "hair"})
 for leg in ("b", "m", "f"):
-    leg_parts(f"far_{leg}", "$arcane.light", "$arcane.light", "$arcane", None)
+    leg_parts(f"far_{leg}", "$arcane.light", "$arcane.light", "$arcane.light", None)
 for i, w in ((0, 1.1), (1, 0.8)):
     at, a = on_bone(f"antf_{i}")
-    put(f"antf_{i}", f"antf_{i}", at, a, bar(B[f"antf_{i}"].length, w, w * 0.8, 0.4), "$arcane")
+    put(f"antf_{i}", f"antf_{i}", at, a, bar(B[f"antf_{i}"].length, w, w * 0.8, 0.4), "$arcane.light")
 
 # ---- the ovipositor: a bone blade under a dark sheath, trailing from the tip
 at, a = on_bone("ovi")
 put("ovipositor", "ovi", at, a, poly([(-1.0, -1.1), (3.0, -0.9), (8.0, -0.3), (9.4, 0.3), (7.6, 0.6), (3.0, 1.0), (-1.0, 1.2)]),
-    "$bone", INK_HAIR)
-put("ovi_sheath", "ovi", at, a, poly([(-1.0, -1.1), (3.2, -0.8), (4.2, 0.0), (3.2, 0.9), (-1.0, 1.2)]), "$arcane.dark2")
+    "$bone", HAIR_DARK)
+put("ovi_sheath", "ovi", at, a, poly([(-1.0, -1.1), (3.2, -0.8), (4.2, 0.0), (3.2, 0.9), (-1.0, 1.2)]), "$arcane.dark")
 
 # ---- the gaster: a teardrop off the waist, lit on top, orchid bands
 G0 = B["gaster"].at
 GASTER = [(-4.2, -0.4), (-5.4, -3.2), (-8.2, -4.8), (-12.0, -4.8), (-16.0, -3.6), (-19.6, -1.2), (-21.6, 1.4),
           (-21.2, 3.2), (-18.0, 4.8), (-13.0, 6.2), (-8.4, 6.2), (-5.2, 4.4), (-4.0, 1.8)]
-put("gaster", "gaster", G0, 0.0, wpoly(G0, GASTER), "$arcane.light2", INK_HAIR)
+put("gaster", "gaster", G0, 0.0, wpoly(G0, GASTER), "$arcane.light2", HAIR_DARK)
 put("gaster_shade", "gaster", G0, 0.0, wpoly(G0, [(-4.6, 2.8), (-8.4, 5.6), (-13.0, 5.6), (-18.0, 4.2), (-20.8, 2.4),
                                                     (-18.0, 3.0), (-13.0, 3.6), (-8.0, 3.4)]), "$arcane.light")
 for i, (x, top, bot) in enumerate(((-7.6, -4.6, 6.0), (-11.6, -4.8, 6.1), (-15.6, -3.8, 5.0), (-19.0, -1.8, 3.6))):
@@ -146,9 +147,9 @@ for n, s, r in (("tick_c", 0.68, -24.0), ("tick_b", 0.72, -14.0), ("tick_a", 0.6
 # ---- the waist, the thorax, the organ on its back
 P0 = B["petiole"].at
 put("petiole", "petiole", P0, 0.0, wpoly(P0, [(0.4, -1.2), (-1.8, -0.6), (-3.4, 0.2), (-3.4, 1.4), (-1.8, 1.2), (0.4, 0.8)]),
-    "$arcane.light", INK_HAIR)
+    "$arcane.light", HAIR_DARK)
 THX = [(-0.8, -1.6), (0.4, -4.8), (3.4, -7.2), (7.0, -7.0), (9.6, -4.6), (10.2, -1.4), (9.0, 1.6), (5.6, 3.2), (1.6, 2.8), (-0.6, 0.8)]
-put("thorax", "thorax", THORAX, 0.0, wpoly(THORAX, THX), "$arcane.light2", INK_HAIR)
+put("thorax", "thorax", THORAX, 0.0, wpoly(THORAX, THX), "$arcane.light2", HAIR_DARK)
 put("thorax_shade", "thorax", THORAX, 0.0, wpoly(THORAX, [(0.4, 0.8), (3.0, 0.4), (6.4, 0.6), (9.4, -0.4), (9.0, 1.6),
                                                           (5.6, 3.0), (1.6, 2.6)]), "$arcane.light")
 put("scutum", "thorax", (5.4, -4.4), -8.0, ell(3.8, 1.8), "$white@0.45")
@@ -157,21 +158,21 @@ RIG.use("organ", "thorax", (4.2, -3.6), "ss.lib.organ", scale=[0.48, 0.42])
 # ---- the head: a round capsule with a big compound eye, jaws under it
 HEAD = (12.6, -2.2)
 put("head", "head", HEAD, 0.0, wpoly(HEAD, [(9.4, -3.6), (11.0, -6.0), (13.8, -6.4), (16.0, -4.6), (16.8, -1.6),
-                                          (16.0, 1.2), (13.6, 2.4), (10.8, 1.8), (9.2, -0.6)]), "$arcane.light2", INK_HAIR)
+                                          (16.0, 1.2), (13.6, 2.4), (10.8, 1.8), (9.2, -0.6)]), "$arcane.light2", HAIR_DARK)
 put("head_gloss", "head", (14.2, -4.8), 20.0, ell(1.6, 0.9), "$white@0.45")
 put("eye", "head", (12.8, -2.4), 8.0, ell(2.0, 2.9), "$ink")
 put("eye_glint", "head", (12.3, -3.8), 0.0, circ(0.6), "$silent")
 put("clypeus", "head", (15.6, 0.0), 0.0, ell(1.1, 1.2), "$orchid")
 put("mandible", "head", (15.2, 1.2), 0.0, wpoly((15.2, 1.2), [(14.2, 0.8), (16.6, 1.0), (18.0, 2.2), (16.4, 2.8), (14.6, 2.2)]),
-    "$arcane.dark2")
+    "$arcane.dark")
 for i, w in ((0, 1.2), (1, 0.9)):
     at, a = on_bone(f"ant_{i}")
-    put(f"ant_{i}", f"ant_{i}", at, a, bar(B[f"ant_{i}"].length, w, w * 0.8, 0.4), "$arcane")
+    put(f"ant_{i}", f"ant_{i}", at, a, bar(B[f"ant_{i}"].length, w, w * 0.8, 0.4), "$arcane.light")
 
 # ---- near legs over the body, the near wing over everything
 for leg in ("b", "m", "f"):
-    leg_parts(f"near_{leg}", "$arcane.light2", "$arcane.light", "$arcane", INK_HAIR)
-wing("wing", "wing", "$silent@0.45", "$arcane.dark@soft", {"color": "$silent@heavy", "width": "hair"})
+    leg_parts(f"near_{leg}", "$arcane.light2", "$arcane.light2", "$arcane.light", HAIR_DARK)
+wing("wing", "wing", "$silent@0.6", "$arcane.dark@soft", {"color": "$silent@heavy", "width": "hair"})
 
 RIG.check()
 
@@ -219,13 +220,17 @@ def death_pose(t):
     jolt = math.sin(math.pi * smooth(0.0, 0.22, t))
     fall = smooth(0.12, 0.7, t)
     land = smooth(0.62, 0.8, t)
-    pose = {"body": (-1.2 * fall, -2.0 * jolt + 9.0 * fall - 0.8 * math.sin(math.pi * land), -10.0 * jolt + 18.0 * fall)}
-    pose["wing"] = -40.0 * jolt + lerp(0.0, 20.0, fall)
-    pose["wing_far"] = -36.0 * jolt + lerp(0.0, 18.0, fall)
+    pose = {"body": (-1.2 * fall, -2.0 * jolt + 7.0 * fall - 0.8 * math.sin(math.pi * land), -10.0 * jolt + 18.0 * fall)}
+    # The last stroke is a downbeat (+), then the wings lie back flat along the
+    # gaster (−) as it drops, the way a dead wasp's do.
+    pose["wing"] = 34.0 * jolt - 20.0 * fall
+    pose["wing_far"] = 30.0 * jolt - 22.0 * fall
     pose["head"] = 14.0 * fall
     pose["petiole"] = -6.0 * jolt + 10.0 * fall
-    pose["gaster"] = -8.0 * jolt - 14.0 * fall
-    pose["ovi"] = 20.0 * jolt - 30.0 * fall
+    # The gaster curls under (−, down and forward) — the sting drawn in
+    # toward the legs, the way a dead wasp lies.
+    pose["gaster"] = 8.0 * jolt - 18.0 * fall
+    pose["ovi"] = 16.0 * jolt - 30.0 * fall
     for n in LEG_NAMES:
         pose[f"{n}_femur"] = -26.0 * fall
         pose[f"{n}_tibia"] = -50.0 * fall
@@ -238,7 +243,7 @@ def death_pose(t):
 
 # The young let go on their own: they fall to the sand under where it drops
 # and scatter, each its own way, and stay (they are live shots in the game).
-SCATTER = {"tick_a": (5.0, 13.0, 50.0), "tick_b": (-2.0, 14.0, -30.0), "tick_c": (-8.0, 12.0, 160.0)}
+SCATTER = {"tick_a": (5.0, 11.5, 50.0), "tick_b": (-2.0, 12.5, -30.0), "tick_c": (-8.0, 10.5, 160.0)}
 LET_GO = 0.2
 def ticks_free():
     """x/y/rot tracks for the young: riding the body until they let go at LET_GO, then their own fall to the sand."""
@@ -291,16 +296,25 @@ DESCRIPTION = (
     "it to the sand with the wings folded and lets the young go."
 )
 
+# The rig is drawn with the thorax near the origin, which leaves the body's
+# mass (thorax and gaster together) four units behind the anchor; the parts and
+# the skeleton are shifted forward so the anchor — the game's centre, where the
+# radius is measured from — sits at the waist, in the middle of the body.
+SHIFT = 4.0
+PARTS = [dict(p, at=[r2(p["at"][0] + SHIFT), p["at"][1]]) for p in RIG.parts]
+SKEL = RIG.skeleton()
+SKEL["joints"] = {k: [r2(v[0] + SHIFT), v[1]] for k, v in SKEL["joints"].items()}
+
 doc = {
     "id": "ss.enemy.sower",
     "name": "Sower",
     "description": DESCRIPTION,
     "tags": ["enemy", "sower"],
-    "size": [64, 48],
+    "size": [64, 56],
     "meta": {"radius": 11},
-    "parts": RIG.parts,
+    "parts": PARTS,
     "animations": animations,
-    "skeleton": RIG.skeleton(),
+    "skeleton": SKEL,
 }
 
 if __name__ == "__main__":

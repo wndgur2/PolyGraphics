@@ -89,6 +89,9 @@ put, on_bone = RIG.put, RIG.on_bone
 # abdomen, near legs), dark (tibiae, bands, far side). Hairlines on everything
 # thin; the three masses — pronotum, head, abdomen — take `thin`.
 HAIR_DARK = {"color": "$bile.dark2", "width": "hair"}
+# The abdomen sits inside the silhouette under the wing: a dark-bile edge
+# separates it from the legs without an ink ring dragging the value down.
+EDGE = {"color": "$bile.dark2", "width": "thin"}
 
 def small_leg(leg, femur, tibia, stroke):
     lf, lt, ls = LEGS[leg][2], LEGS[leg][3], LEGS[leg][4]
@@ -109,7 +112,7 @@ def hind_leg(leg, femur_fill, tibia_fill, stroke, marks):
     put(f"{leg}_femur", f"{leg}_femur", at, a, poly([(x * k, y * k) for x, y in FEMUR]), femur_fill, stroke)
     if marks:
         at, a = on_bone(f"{leg}_femur", 4.6 * k, 1.0 * k)
-        put(f"{leg}_face", f"{leg}_femur", at, a + 4.0, ell(4.6 * k, 1.2 * k), "$bile.light")
+        put(f"{leg}_face", f"{leg}_femur", at, a + 4.0, ell(4.6 * k, 1.2 * k), "$bile.light2")
         # the lower keel of the femur, dark, and the herringbone over the face
         at, a = on_bone(f"{leg}_femur", 5.2 * k, -1.35 * k)
         put(f"{leg}_keel", f"{leg}_femur", at, a, rect(8.4 * k, 0.9, 0.45), "$bile.dark")
@@ -124,20 +127,20 @@ def hind_leg(leg, femur_fill, tibia_fill, stroke, marks):
 for i in range(3):
     n = f"ant_f_{i}"; at, a = on_bone(n)
     put(n, n, at, a, bar(B[n].length, 0.9 - 0.12 * i, 0.75 - 0.12 * i, 0.4), "$bile.dark2")
-hind_leg("hind_f", "$bile.dark", "$bile.dark2", None, False)
-small_leg("mid_f", "$bile.dark2", "$bile.dark2", None)
-small_leg("front_f", "$bile.dark2", "$bile.dark2", None)
+hind_leg("hind_f", "$bile", "$bile.dark", None, False)
+small_leg("mid_f", "$bile.dark", "$bile.dark", None)
+small_leg("front_f", "$bile.dark", "$bile.dark", None)
 
 # ---- abdomen: two ringed segments, tip under the wing
 at, a = on_bone("abd_1")
 put("abd_1", "abd_1", at, a, poly([(-1.0, -3.0), (2.0, -3.0), (5.0, -2.3), (6.8, -1.2), (7.4, 0.0), (6.8, 1.0),
-                                   (4.8, 1.6), (2.0, 2.4), (-1.0, 2.8)]), "$bile", INK_THIN)
+                                   (4.8, 1.6), (2.0, 2.4), (-1.0, 2.8)]), "$bile.light", EDGE)
 at, a = on_bone("abd_0")
 put("abd_0", "abd_0", at, a, poly([(-1.8, -2.8), (1.0, -3.6), (4.2, -3.5), (6.8, -3.1), (7.2, 0.0), (6.8, 2.9),
-                                   (3.8, 3.3), (0.6, 3.4), (-1.8, 2.6)]), "$bile", INK_THIN)
+                                   (3.8, 3.3), (0.6, 3.4), (-1.8, 2.6)]), "$bile.light", EDGE)
 for j, (bn, x, h) in enumerate((("abd_0", 1.6, 6.0), ("abd_0", 4.4, 5.8), ("abd_1", 0.8, 4.8), ("abd_1", 3.6, 3.6))):
     at, a = on_bone(bn, x, -0.2)
-    put(f"ring_{j}", bn, at, a, rect(0.8, h, 0.4), "$bile.dark")
+    put(f"ring_{j}", bn, at, a, rect(0.8, h, 0.4), "$bile.dark@soft")
 at, a = on_bone("abd_0", 3.0, -2.2)   # the pale belly line (ventral is -y here: the bone points back)
 put("belly", "abd_0", at, a, rect(8.0, 1.0, 0.5), "$bile.light@soft")
 
@@ -153,7 +156,7 @@ at, a = on_bone("tegmen")
 put("tegmen", "tegmen", at, a, poly([(-0.8, -0.9), (2.6, -1.7), (9.0, -1.9), (15.6, -1.6), (18.8, -0.8), (19.6, 0.2),
                                      (18.6, 1.1), (14.0, 1.7), (6.0, 1.9), (1.0, 1.6), (-0.8, 0.9)]), "$bile.light", INK_HAIR)
 at, a = on_bone("tegmen", 9.6, 0.4)
-put("vein", "tegmen", at, a, rect(16.0, 0.6, 0.3), "$bile.dark")
+put("vein", "tegmen", at, a, rect(16.0, 0.6, 0.3), "$bile.dark@soft")
 for j, (x, y, rx) in enumerate(((5.2, -0.9, 1.2), (9.4, -1.1, 1.0), (13.2, -0.8, 1.1), (16.4, -0.5, 0.8))):
     at, a = on_bone("tegmen", x, y)
     put(f"mottle_{j}", "tegmen", at, a, ell(rx, 0.55), "$bile.dark@soft")
@@ -173,18 +176,18 @@ put("head", "head", (0.0, 0.0), 0.0, poly(HEAD), "$bile", INK_THIN)
 put("cheek", "head", (9.6, 1.6), -10.0, ell(2.4, 1.2), "$bile.dark@soft")
 put("mandible", "head", (12.4, 3.0), 20.0, ell(1.3, 0.9), "$bile.dark2", INK_HAIR)
 put("palp", "head", (11.6, 4.4), 76.0, bar(1.6, 0.8, 0.6, 0.3), "$bile.dark2")
-put("eye", "head", (10.7, -3.3), -14.0, ell(1.9, 2.4), "$ink")
+put("eye", "head", (10.7, -3.3), -14.0, ell(1.75, 2.2), "$ink")
 put("glint", "head", (10.3, -4.3), 0.0, circ(0.55), "$silent")
 
 # ---- near antenna, over the head
 for i in range(3):
     n = f"ant_n_{i}"; at, a = on_bone(n)
-    put(n, n, at, a, bar(B[n].length, 1.0 - 0.15 * i, 0.85 - 0.15 * i, 0.4), "$bile.dark", HAIR_DARK)
+    put(n, n, at, a, bar(B[n].length, 1.0 - 0.15 * i, 0.85 - 0.15 * i, 0.4), "$bile", HAIR_DARK)
 
 # ---- near legs, over everything
-small_leg("mid_n", "$bile", "$bile.dark", INK_HAIR)
-small_leg("front_n", "$bile", "$bile.dark", INK_HAIR)
-hind_leg("hind_n", "$bile", "$bile.dark", INK_HAIR, True)
+small_leg("mid_n", "$bile.light", "$bile", HAIR_DARK)
+small_leg("front_n", "$bile.light", "$bile", HAIR_DARK)
+hind_leg("hind_n", "$bile", "$bile.dark", HAIR_DARK, True)
 
 RIG.check()
 
