@@ -116,20 +116,51 @@ def seam_line(u, w, bow=1.6, n=10):
         out.append((x + h / 2, y)); back.append((x - h / 2, y))
     return out + back[::-1]
 
-def leg_parts(leg, femur, tibia, foot, knee, stroke):
+def taper(L, w0, wm, w1, um=0.35, over=0.7, n=8):
+    """A limb segment from 0 to L along +x that swells to `wm` at `um` of its length and narrows to `w1`, ends rounded."""
+    def w(u):
+        return lerp(w0, wm, math.sin(0.5 * math.pi * u / um)) if u <= um else lerp(wm, w1, smooth(um, 1.0, u))
+    us = [i / n for i in range(n + 1)]
+    upper = [(-over, -w0 * 0.3)] + [(u * L, -w(u) / 2) for u in us] + [(L + over, -w1 * 0.3)]
+    lower = [(L + over, w1 * 0.3)] + [(u * L, w(u) / 2) for u in reversed(us)] + [(-over, w0 * 0.3)]
+    return poly(upper + lower)
+def edge(L, w0, wm, w1, um=0.35, t=0.55, a=0.12, b=0.82):
+    """The lit hairline along a taper's upper (−across) edge, from `a` to `b` of its length."""
+    def w(u):
+        return lerp(w0, wm, math.sin(0.5 * math.pi * u / um)) if u <= um else lerp(wm, w1, smooth(um, 1.0, u))
+    us = [lerp(a, b, i / 6) for i in range(7)]
+    return poly([(u * L, -w(u) / 2 + 0.15) for u in us] + [(u * L, -w(u) / 2 + 0.15 + t * math.sin(math.pi * (u - a) / (b - a))) for u in reversed(us)])
+
+# A real arthropod leg, short and sturdy: a femur swollen near the hip and
+# narrowing to the knee, a knuckle at the knee, a tibia narrower than the
+# femur tapering to the foot, and a clawed foot. Dark carapace, darker than the
+# shell, with the light only a hairline along the top edge of each segment.
+# (A first rebuild drew them as flat lavender boards — the lightest mass on the
+# body after the shell, and where the eye went first.)
+def leg_parts(leg, femur, tibia, foot, knee, lit, stroke, k=1.0):
     b = BONES
-    # The foot: a broad pad with three claws on the front, lying along +x.
-    at, a = on_bone(f"{leg}_foot", -1.2)
+    Lf, Lt = b[f"{leg}_femur"].length, b[f"{leg}_tibia"].length
+    F = (4.2 * k, 4.8 * k, 3.0 * k)
+    T = (3.0 * k, 3.2 * k, 1.8 * k)
+    # The foot: a narrow pad and two hooked claws forward, a dew claw behind.
+    at, a = on_bone(f"{leg}_foot", -0.8)
     put(f"{leg}_claw", f"{leg}_foot", at, a,
-        poly([(-1.2, -1.6), (2.2, -1.6), (3.8, -0.6), (5.4, 0.2), (3.6, 0.5), (4.4, 1.2), (2.4, 1.2), (2.6, 1.8),
-              (0.0, 1.8), (-1.8, 1.4), (-2.2, -0.4)]), foot, stroke)
-    at, a = on_bone(f"{leg}_tibia"); put(f"{leg}_tibia", f"{leg}_tibia", at, a, bar(b[f"{leg}_tibia"].length, 4.4, 3.8, 0.8), tibia, stroke)
-    at, a = on_bone(f"{leg}_femur"); put(f"{leg}_femur", f"{leg}_femur", at, a, bar(b[f"{leg}_femur"].length, 5.6, 4.8, 0.8), femur, stroke)
-    at, a = on_bone(f"{leg}_tibia"); put(f"{leg}_knee", f"{leg}_tibia", at, 0.0, circ(2.5), knee)
+        poly([(-1.6 * k, -1.0 * k), (1.2, -1.3 * k), (3.0, -0.8 * k), (4.6, 0.4), (4.9, 1.4), (3.8, 0.8), (2.8, 0.7),
+              (3.4, 1.5), (1.6, 1.1), (0.0, 1.3 * k), (-1.4, 1.2 * k), (-2.4, 1.6), (-2.0, 0.4)]), foot, stroke)
+    at, a = on_bone(f"{leg}_tibia")
+    put(f"{leg}_tibia", f"{leg}_tibia", at, a, taper(Lt, *T, um=0.22), tibia, stroke)
+    put(f"{leg}_tibia_lit", f"{leg}_tibia", at, a, edge(Lt, *T, um=0.22, t=0.45 * k), lit)
+    at, a = on_bone(f"{leg}_femur")
+    put(f"{leg}_femur", f"{leg}_femur", at, a, taper(Lf, *F), femur, stroke)
+    put(f"{leg}_femur_lit", f"{leg}_femur", at, a, edge(Lf, *F, t=0.55 * k), lit)
+    # The knee knuckle, over both segments' ends.
+    at, a = on_bone(f"{leg}_tibia")
+    put(f"{leg}_knee", f"{leg}_tibia", at, 0.0, circ(1.75 * k), knee, stroke)
+    put(f"{leg}_knee_lit", f"{leg}_tibia", (at[0] - 0.35 * k, at[1] - 0.6 * k), 0.0, circ(0.55 * k), lit)
 
 # ---- far side, a step darker: legs behind everything
 for leg in ("far_b", "far_f"):
-    leg_parts(leg, "$carapace", "$carapace", "$husk.dark", "$carapace", INK_HAIR)
+    leg_parts(leg, "$carapace.dark", "$carapace.dark2", "$husk.dark2", "$carapace.dark2", "$carapace@0.8", INK_HAIR, k=0.88)
 
 # ---- the head, under the brow: a squat capsule, the maw in front, the two
 # mandibles hinged either side of it
@@ -183,20 +214,20 @@ for i, u in enumerate((0.12, 0.3, 0.5, 0.7, 0.88)):
     put(f"stud_{i}", "body", (x, y), 0.0, ell(1.3, 0.8), "$chitin.dark2")
 # The dorsal shield: the pale plate over the top of the back.
 PLATE = band(0.28, 0.76, 1.4, 9.2, 16)
-put("plate", "body", (0, 0), 0.0, poly(PLATE), "$chitin.light")
+put("plate", "body", (0, 0), 0.0, poly(PLATE), "$chitin.light2")
 # The brow: the front plate, laid over the head, its lower lip in shade.
 BROW = band(0.02, 0.3, 0.9, 5.2, 12)
-put("brow", "body", (0, 0), 0.0, poly(BROW), "$chitin.light@0.55")
+put("brow", "body", (0, 0), 0.0, poly(BROW), "$chitin.light@0.8")
 # The plates' edges, front over back.
 put("seam_a", "body", (0, 0), 0.0, poly(seam_line(0.3, 1.3, 1.8)), "$chitin.dark2")
 put("seam_b", "body", (0, 0), 0.0, poly(seam_line(0.74, 1.2, 1.4)), "$chitin.dark2")
 # The crest along the spine, and a few bosses on the plates — stone, not shell.
-put("ridge", "body", (0, 0), 0.0, poly(band(0.3, 0.72, 0.5, 2.0, 16)), "$husk")
+put("ridge", "body", (0, 0), 0.0, poly(band(0.28, 0.74, 0.4, 2.6, 16)), "$husk")
 for i, (u, s, r) in enumerate(((0.18, 5.8, 1.3), (0.52, 9.4, 1.5), (0.86, 4.6, 1.2))):
     x, y = top(u, s)
     put(f"boss_{i}", "body", (x, y + 0.4), 0.0, ell(r, r * 0.7), "$chitin.dark")
     put(f"boss_{i}_lit", "body", (x - 0.2, y), 0.0, ell(r * 0.8, r * 0.5), "$chitin.light")
-put("gloss", "body", (-3.0, -10.8), -6.0, ell(5.2, 1.0), "$white@0.3")
+put("gloss", "body", (-3.0, -10.8), -6.0, ell(6.0, 1.2), "$white@0.35")
 # The organs: the kill order broadcast from the back, one on the shield and
 # one low on the rear plate; the elite's third stands on the brow.
 RIG.use("organ", "body", (-5.8, -7.4), "ss.lib.organ", scale=[0.7, 0.62])
@@ -205,7 +236,7 @@ RIG.use("organ_top", "body", (2.4, -8.6), "ss.lib.organ", scale=[0.46, 0.42], op
 
 # ---- near side: the legs over the skirt
 for leg in ("near_b", "near_f"):
-    leg_parts(leg, "$carapace.light", "$carapace.light", "$husk", "$carapace.light", INK_HAIR)
+    leg_parts(leg, "$carapace", "$carapace.dark", "$husk.dark", "$carapace.dark", "$carapace.light@0.85", INK_HAIR)
 
 RIG.check()
 
@@ -318,7 +349,7 @@ def death_pose(t):
 
 animations = {}
 TS_STOMP = sorted(set(keyset(52) + [0.035, 0.285, 0.535, 0.785]))
-STILL = [f"{l}_knee" for l in LEGS]
+STILL = [f"{l}_knee" for l in LEGS] + [f"{l}_knee_lit" for l in LEGS]
 animations["stomp"] = {
     "description": "The walk and the idle, slow and four-beat, three feet always under it: each foot pushes back through a long stance while the shell rolls over it, then the knee comes up high, the foot hangs and slams down onto its mark; the near feet take the beats and the far ones the off-beats. On every landing the shell drops onto the foot and rebounds, and the mass shifts onto it — lurching and pitching forward onto a front foot, sitting back onto a hind one; the head nods after the drop, the mandibles part as a near foot rises and snap shut as it lands, and the organs pulse in turn and bounce a beat behind the shell.",
     "duration": STOMP,

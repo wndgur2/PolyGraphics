@@ -14,7 +14,8 @@ This rebuilds it on the shared rig (scripts/rig.py):
   - a pelvis root that rides the gait, a spine of two bones (waist and a
     hunched chest), a neck and a head that hangs forward off it, a jaw hinged
     under the head and a snapped feeler stub on top
-  - two arms off the shoulder: the near one long, dangling past the knee and
+  - two arms off the front of the hunch: the near one long, hanging in front of
+    the belly (clear of the graft) past the knee and
     swinging a beat behind the body; the far one short and withered, crooked
     forward at chest height
   - two legs solved every frame to a foot on the ground (two-bone IK). The
@@ -301,7 +302,7 @@ animations["shamble"] = {
     "tracks": tracks(shamble_pose, keyset(22), still=ROUND),
 }
 animations["death"] = {
-    "description": "The two grafts stop walking it: it jerks upright with the head thrown back and the jaw wide as both organs flare, then they go out, the crack down the chest opens wider, the knees give, and the frame folds forward over them — head dropping, the long arm sprawling onto the floor, the short one falling open. Still from 0.85.",
+    "description": "The two grafts stop walking it: it jerks upright with the head thrown back and the jaw wide as both organs flare, then they go out, the crack down the chest opens wider, the knees give, and the frame folds forward over them — head dropping, the long arm flung out and then laid along the floor in front, the short one falling open. Still from 0.85.",
     "duration": 0.46,
     "tracks": tracks(death_pose, DEATH_TS, [
         ("organ", "scale", lambda t: 1.0 + 0.7 * math.sin(math.pi * smooth(0.0, 0.34, t))),
@@ -329,8 +330,8 @@ VARIANTS = {
 DESCRIPTION = (
     "A drone that ran out of scent and stopped being anybody — the hive grafted an organ onto its chest and it walks again. Seen side-on "
     "facing +x and mirrored by the game: a tall hunched frame of bleached bone, the chest bent forward over the waist, a drone's head capsule "
-    "hung out in front of the shoulders with an empty eye socket, a slack jaw and one feeler snapped to a stub. One arm long, dangling past "
-    "the knee with a hooked claw; the other short and withered, crooked forward at chest height. A dark hexagonal graft in the chest carries "
+    "hung out in front of the shoulders with an empty eye socket, a slack jaw and one feeler snapped to a stub. One arm long, hanging in front "
+    "of the belly past the knee with a hooked claw; the other short and withered, crooked forward at chest height. A dark hexagonal graft in the chest carries "
     "a faint organ, and a crack runs down the front. Tall and pale where the Tracker is low and amber: at a glance you are reading height "
     "and value, not detail. Built on a skeleton (scripts/zombie.py): a pelvis that rides the gait, a two-bone spine, a hanging head, two "
     "chained arms and two legs solved every frame to a foot on the floor. The `shamble` is a limp — one leg walks, the other is stiff, so "

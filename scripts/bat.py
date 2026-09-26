@@ -124,7 +124,7 @@ RIG.use("organ", "body", (2.4, 7.4), "ss.lib.organ", scale=[0.5, 0.42])
 
 # ---- the head: a small capsule, a big eye, the pale snout
 HEAD_C = (8.2, 3.4)
-put("snout", "head", (10.4, 4.2), 0.0, poly([(-0.6, -1.6), (2.4, -0.8), (4.4, 0.4), (2.4, 1.2), (-0.6, 1.8)]), "$husk.dark")
+put("snout", "head", (10.4, 4.2), 0.0, poly([(-0.6, -1.6), (2.4, -0.8), (4.4, 0.4), (2.4, 1.2), (-0.6, 1.8)]), "$husk")
 put("head", "head", HEAD_C, 0.0, ell(2.8, 2.6), "$chitin.dark", INK_HAIR)
 put("eye", "head", (9.0, 2.6), 0.0, circ(1.4), "$ink")
 put("eye_glint", "head", (8.6, 2.1), 0.0, circ(0.5), "$white")
@@ -173,9 +173,9 @@ def death_pose(t):
     land = math.sin(math.pi * smooth(0.66, 0.85, t))
     pose = {"body": (-0.8 * fall, -1.6 * snap + 3.6 * fall - 0.7 * land, -8.0 * snap + 26.0 * fall)}
     pose["head"] = 10.0 * fall
-    pose["wing"] = 30.0 * snap - 62.0 * fall
+    pose["wing"] = 52.0 * snap - 62.0 * fall
     pose["wing_tip"] = -14.0 * snap - 30.0 * fall
-    pose["wing_far"] = 26.0 * snap - 52.0 * fall
+    pose["wing_far"] = 46.0 * snap - 52.0 * fall
     pose["wing_far_tip"] = -12.0 * snap - 26.0 * fall
     pose["abd_0"] = 10.0 * snap - 22.0 * fall
     pose["abd_1"] = 14.0 * snap - 30.0 * fall
