@@ -24,10 +24,17 @@ went anywhere. This rebuilds it on the shared rig (scripts/rig.py):
     the dome rolls over it
 
 Colour: the dome was `$carapace`, and on the pan's sunlit sand that sat at the
-floor's own tone (contrast 1.01). The family stays purple, a step up the
-ramp: the elytra are `$heather` (the pale lilac nobody else on the pan wears),
-the pronotum, head and arms are `$carapace.light`, and the legs and belly are
-the dark `$carapace` — three values, light on top where the sun is.
+floor's own tone (contrast 1.01). The family stays purple, moved up the ramp to
+`$heather` (the pale lilac nobody else on the pan wears) in three values: the
+dome `$heather.light2` with its lower flank in shade, the pronotum, arms and
+near legs `$heather.light`/`$heather`, and the far limbs, belly and seams
+`$heather.dark` — light on top where the sun is. It measures 2.50 against the
+pan, with the orange Mite it carries counted in.
+
+The heave's arc is a lob, not a punch (the game's shot has `shotArc: 70`): the
+game launches the real Mite from the body on the clip's first frame, so the
+held one is gathered back, whipped up and let go by 0.26 (0.18s), rising and
+fading roughly where the game's Mite is climbing through at that moment.
 """
 import math, os, sys
 
