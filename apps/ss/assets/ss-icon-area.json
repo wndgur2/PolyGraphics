@@ -1,12 +1,13 @@
 {
   "id": "ss.icon.area",
   "name": "Area icon",
-  "description": "Trait icon for Bloom: its sample, `ss.sample.area`, on the trait's tile. A trait is a stat, with nothing on the field to match it to, so since the level-up became a choice of which sample fills a syringe the slot shows the sample the trait was taken as, and the tray, the level-up card and the pause sheet agree on what it is. Composed through `use`, so redrawing the sample redraws the slot. The tile keeps its colour. (The weapons keep their projectiles: a weapon's slot has to match what it throws.)",
+  "description": "Passive icon: a bright inner circle and a fainter outer one — reach spreading outward. Port of the hand-drawn i_area from Feelers' BootScene. Rim is `$pink`, the same as `ss.icon.mine`: this passive is the Spore evolution's other half, so the pair reads as a pair on the bar. The glyph wears the rim's colour as well, so the passive is one colour on the bar.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
-    {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$pink"},
-    {"id": "inner", "shape": {"kind": "rect", "w": 28, "h": 28, "corner": 5}, "fill": "$coal.dark"},
-    {"id": "sample", "use": "ss.sample.area", "scale": 0.86}
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$pink" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "near", "shape": { "kind": "ring", "r": 5, "width": 2 }, "fill": "$pink" },
+    { "id": "far", "shape": { "kind": "ring", "r": 10, "width": 2 }, "fill": "$pink@0.5" }
   ]
 }

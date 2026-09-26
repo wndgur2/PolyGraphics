@@ -1,12 +1,13 @@
 {
   "id": "ss.icon.magnet",
   "name": "Magnet icon (SS)",
-  "description": "Trait icon for Feelers: its sample, `ss.sample.magnet`, on the trait's tile. A trait is a stat, with nothing on the field to match it to, so since the level-up became a choice of which sample fills a syringe the slot shows the sample the trait was taken as, and the tray, the level-up card and the pause sheet agree on what it is. Composed through `use`, so redrawing the sample redraws the slot. The tile keeps its colour. (The weapons keep their projectiles: a weapon's slot has to match what it throws.)",
+  "description": "Shape Survivors passive icon: blue horseshoe magnet — an arc arch with two leg rects. Port of i_magnet (BootScene.ts:607-613). Tile and glyph are `$cobalt`. The magnet was pink, the same `$pink` as the Bloom passive beside it (ΔE 0), and Bloom keeps it because it is the Spore's rim. No trait is paired with this one, so it takes the free hue: a mid blue, 22.4 from Stink's pale `$frost` and 21.2 from the Shell's grey, its nearest on the bar.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
-    {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$cobalt"},
-    {"id": "inner", "shape": {"kind": "rect", "w": 28, "h": 28, "corner": 5}, "fill": "$coal.dark"},
-    {"id": "sample", "use": "ss.sample.magnet", "scale": 0.86}
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$cobalt" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "arch", "at": [0, -2], "shape": { "kind": "ring", "r": 7, "width": 4, "from": 180, "to": 360 }, "fill": "$cobalt" },
+    { "id": "leg", "mirrorX": true, "at": [-7, 2.5], "shape": { "kind": "rect", "w": 4, "h": 9 }, "fill": "$cobalt" }
   ]
 }

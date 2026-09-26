@@ -1,12 +1,12 @@
 {
   "id": "ss.icon.movespeed",
   "name": "Move speed icon",
-  "description": "Trait icon for Wing: its sample, `ss.sample.movespeed`, on the trait's tile. A trait is a stat, with nothing on the field to match it to, so since the level-up became a choice of which sample fills a syringe the slot shows the sample the trait was taken as, and the tray, the level-up card and the pause sheet agree on what it is. Composed through `use`, so redrawing the sample redraws the slot. The tile keeps its colour. (The weapons keep their projectiles: a weapon's slot has to match what it throws.)",
+  "description": "Passive icon: a single teal arrowhead aimed right. Port of the hand-drawn i_movespeed from Feelers' BootScene. Tile and glyph are `$spore`. They were `$aqua.light`, which sat ΔE 9.4 from Stink's `$frost`: a pale-blue arrow beside a pale-blue clock. The arrow keeps its cool hue and goes green of it, 23.6 from `$frost` and 25 or more from everything else on the bar.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
-    {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$spore"},
-    {"id": "inner", "shape": {"kind": "rect", "w": 28, "h": 28, "corner": 5}, "fill": "$coal.dark"},
-    {"id": "sample", "use": "ss.sample.movespeed", "scale": 0.86}
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$spore" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "dart", "shape": { "kind": "poly", "points": [[-9, -6], [9, 0], [-9, 6]] }, "fill": "$spore" }
   ]
 }

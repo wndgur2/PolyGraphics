@@ -1,12 +1,13 @@
 {
   "id": "ss.icon.speed",
   "name": "Attack speed icon",
-  "description": "Trait icon for Snap: its sample, `ss.sample.speed`, on the trait's tile. A trait is a stat, with nothing on the field to match it to, so since the level-up became a choice of which sample fills a syringe the slot shows the sample the trait was taken as, and the tray, the level-up card and the pause sheet agree on what it is. Composed through `use`, so redrawing the sample redraws the slot. The tile keeps its colour. (The weapons keep their projectiles: a weapon's slot has to match what it throws.)",
+  "description": "Passive icon: double chevron pointing right. Port of the hand-drawn i_speed from Feelers' BootScene. Rim is `$chitin`, the same as `ss.icon.boomerang`: this passive is the Mandible evolution's other half, so the pair reads as a pair on the bar. The glyph wears the rim's colour as well, so the passive is one colour on the bar.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
-    {"id": "tile", "shape": {"kind": "rect", "w": 32, "h": 32, "corner": 6}, "fill": "$chitin"},
-    {"id": "inner", "shape": {"kind": "rect", "w": 28, "h": 28, "corner": 5}, "fill": "$coal.dark"},
-    {"id": "sample", "use": "ss.sample.speed", "scale": 0.86}
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$chitin" },
+    { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
+    { "id": "back", "shape": { "kind": "poly", "points": [[-8, -8], [0, 0], [-8, 8]] }, "fill": "$chitin" },
+    { "id": "front", "shape": { "kind": "poly", "points": [[0, -8], [8, 0], [0, 8]] }, "fill": "$chitin" }
   ]
 }
