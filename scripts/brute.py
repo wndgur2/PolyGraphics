@@ -65,7 +65,7 @@ bone("mandible_dn", "head", MAND_DN_ROOT, 6.0, 8.0)
 # forward, hind knees back — a thing this heavy stands in its legs like a
 # table in its frame.
 LEGS = {  # name: (hip, rest foot x, femur, tibia)
-    "far_b": ((-15.2, 2.6), -17.0, 5.8, 6.4),
+    "far_b": ((-15.2, 2.6), -16.4, 5.8, 6.4),
     "far_f": ((-0.6, 2.6), 1.0, 5.8, 6.4),
     "near_b": ((-13.0, 4.2), -14.4, 6.0, 6.8),
     "near_f": ((1.6, 4.2), 3.2, 6.0, 6.8),
@@ -129,18 +129,19 @@ def leg_parts(leg, femur, tibia, foot, knee, stroke):
 
 # ---- far side, a step darker: legs behind everything
 for leg in ("far_b", "far_f"):
-    leg_parts(leg, "$carapace.dark", "$carapace.dark2", "$husk.dark2", "$carapace.dark", INK_HAIR)
+    leg_parts(leg, "$carapace", "$carapace", "$husk.dark", "$carapace", INK_HAIR)
 
 # ---- the head, under the brow: a squat capsule, the maw in front, the two
 # mandibles hinged either side of it
 at, a = on_bone("head", 2.8, 0.2)
-put("head", "head", at, a, ell(6.0, 4.6), "$carapace", INK_HAIR)
+put("head", "head", at, a, ell(6.0, 4.6), "$carapace.light", INK_HAIR)
 at, a = on_bone("head", 2.2, 2.4)
-put("head_shade", "head", at, a, ell(4.4, 1.6), "$carapace.dark")
+put("head_shade", "head", at, a, ell(4.4, 1.6), "$carapace")
 at, a = on_bone("head", 6.6, 0.8)
 put("maw", "head", at, a, poly([(-1.8, -2.4), (1.2, -1.8), (2.4, 0.0), (1.2, 1.8), (-1.8, 2.4), (-0.6, 0.0)]), "$ink")
 MAND = [(-1.4, 1.4), (-1.0, -1.2), (1.4, -1.9), (4.4, -1.9), (6.8, -0.8), (8.4, 1.2), (8.8, 2.6), (7.4, 1.6), (5.8, 0.8),
         (4.8, 1.4), (4.0, 0.6), (2.2, 0.9), (0.6, 1.8)]
+MAND = [(x * 0.92, y * 0.92) for x, y in MAND]
 def flip(pts): return [(x, -y) for x, y in pts]
 at, a = on_bone("mandible_dn")
 put("mandible_dn", "mandible_dn", at, a, poly(flip(MAND)), "$husk.dark", INK_HAIR)
@@ -171,17 +172,17 @@ put("shell", "body", (0, 0), 0.0, poly(SHELL), "$chitin.dark", INK_THIN)
 # the flank, rising to the brow — the upper two thirds of the mass in light.
 def lit_floor(u):
     x = lerp(SHELL_C[0] + SHELL_AF - 0.6, SHELL_C[0] - SHELL_AB + 0.6, u)
-    return (x, 0.6 - 2.2 * math.sin(math.pi * u) - 1.6 * (1 - u))
+    return (x, 4.2 - 0.4 * math.sin(math.pi * u) - 1.8 * (1 - u))
 LIT = [top(i / 28, 0.7) for i in range(29)] + [lit_floor(1 - i / 12) for i in range(1, 12)]
 put("shell_lit", "body", (0, 0), 0.0, poly(LIT), "$chitin")
 # The skirt: the heavy rim the legs come out from under.
 SKIRT = [keel(i / 14, 2.6) for i in range(15)] + [keel(1 - i / 14) for i in range(15)]
-put("skirt", "body", (0, 0), 0.0, poly(SKIRT), "$chitin.dark2")
+put("skirt", "body", (0, 0), 0.0, poly(SKIRT), "$chitin.dark")
 for i, u in enumerate((0.12, 0.3, 0.5, 0.7, 0.88)):
     x, y = keel(u, 1.3)
-    put(f"stud_{i}", "body", (x, y), 0.0, ell(1.3, 0.8), "$chitin.dark")
+    put(f"stud_{i}", "body", (x, y), 0.0, ell(1.3, 0.8), "$chitin.dark2")
 # The dorsal shield: the pale plate over the top of the back.
-PLATE = band(0.3, 0.74, 1.6, 7.6, 16)
+PLATE = band(0.28, 0.76, 1.4, 9.2, 16)
 put("plate", "body", (0, 0), 0.0, poly(PLATE), "$chitin.light")
 # The brow: the front plate, laid over the head, its lower lip in shade.
 BROW = band(0.02, 0.3, 0.9, 5.2, 12)
@@ -204,7 +205,7 @@ RIG.use("organ_top", "body", (2.4, -8.6), "ss.lib.organ", scale=[0.46, 0.42], op
 
 # ---- near side: the legs over the skirt
 for leg in ("near_b", "near_f"):
-    leg_parts(leg, "$carapace", "$carapace.dark", "$husk.dark", "$carapace", INK_HAIR)
+    leg_parts(leg, "$carapace.light", "$carapace.light", "$husk", "$carapace.light", INK_HAIR)
 
 RIG.check()
 
@@ -224,8 +225,8 @@ def plant_legs(pose, feet, rolls=None):
 STOMP = 1.3
 IMPACT = {"near_f": 0.0, "far_b": 0.25, "near_b": 0.5, "far_f": 0.75}
 SWING = 0.34      # of the loop a foot is off the ground, ending at its impact
-STRIDE = 3.4      # half a step, px either side of the rest foot
-LIFT = {"near_f": 7.0, "near_b": 5.0, "far_f": 3.0, "far_b": 2.4}
+STRIDE = 3.0      # half a step, px either side of the rest foot
+LIFT = {"near_f": 8.4, "near_b": 5.6, "far_f": 3.0, "far_b": 2.4}
 WEIGHT = {"near_f": 1.0, "near_b": 0.9, "far_f": 0.45, "far_b": 0.4}
 
 def since(t, t0):
@@ -271,7 +272,7 @@ def stomp_pose(t):
         # the other way round, and softer.
         dth += w * ((-5.0 * lam + 5.0 * imp) if front else (2.2 * lam - 2.6 * imp))
         dx += w * ((-2.2 * lam + 2.6 * imp) if front else (0.8 * lam - 1.2 * imp))
-        dy += w * (0.3 * lam + 1.5 * imp)
+        dy += w * ((-0.9 * lam if front else 0.3 * lam) + 2.0 * imp)
     pose = {"body": (dx, dy - 0.4, dth)}
     # The head rides the shell's drop a beat late, and the mandibles shear
     # once a step: they part as a near foot comes up and snap shut on it.
@@ -279,8 +280,8 @@ def stomp_pose(t):
     pose["head"] = 5.0 * lag - 2.0 * (lifted(t, "near_f") + lifted(t, "near_b"))
     part = max(lifted(t, "near_f"), lifted(t, "near_b"))
     snap = impact(t, "near_f") + impact(t, "near_b")
-    pose["mandible_up"] = -28.0 * part + 5.0 * snap
-    pose["mandible_dn"] = 26.0 * part - 5.0 * snap
+    pose["mandible_up"] = -34.0 * part + 5.0 * snap
+    pose["mandible_dn"] = 30.0 * part - 5.0 * snap
     feet, rolls = {}, {}
     for leg, (hip, fx, lf, lt) in LEGS.items():
         x, lift, roll = foot(t, leg)

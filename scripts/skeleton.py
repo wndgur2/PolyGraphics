@@ -71,8 +71,8 @@ for side, (sh, hf, lf, ht, lt) in FORE.items():
 # The hind legs: thigh, shin and a tarsus, solved to a foot on the floor with
 # the knee thrown forward.
 LEGS = {  # leg: (hip, rest foot x, thigh, shin)
-    "far": ((-2.2, 4.4), -3.4, 4.6, 5.0),
-    "near": ((-0.4, 5.0), 1.4, 4.6, 5.0),
+    "far": ((-2.2, 4.4), -3.4, 5.4, 5.6),
+    "near": ((-0.4, 5.0), 1.4, 5.4, 5.6),
 }
 KNEE = 1  # knee forward of the hip-foot line
 for leg, (hip, fx, l1, l2) in LEGS.items():
@@ -89,8 +89,8 @@ put, on_bone, use = RIG.put, RIG.on_bone, RIG.use
 # Cold grey where the Husk is warm bone. Three values: the front plate and
 # hood the lightest, the back half the body tone, the far limbs and the
 # sutures a step down; the inside of the case is ink.
-LIT, BODY, SHADE, FAR = "$steel.light2", "$steel", "$steel.dark", "$slate.light"
-HOOD = "$steel.light"
+LIT, BODY, SHADE, FAR = "$steel.light2", "$steel.light", "$steel", "$steel.dark"
+HOOD = "$steel.light2"
 
 def rel(pts, origin):
     """World points as offsets from `origin` — a part whose origin is its hinge turns about the hinge."""
@@ -106,7 +106,8 @@ def hind_leg(leg, thigh, shin):
     at, a = on_bone(f"{leg}_shin")
     L = BONES[f"{leg}_shin"].length
     put(f"{leg}_shin", f"{leg}_shin", at, a,
-        poly([(-0.6, -0.8), (0.0, -1.0), (L, -0.6), (L + 0.5, -0.4), (L + 1.3, -1.3), (L + 0.9, 0.2), (L + 0.4, 0.6), (0.0, 0.9), (-0.6, 0.7)]),
+        poly([(-0.6, -0.8), (0.0, -1.0), (L, -0.6), (L + 0.5, -0.2), (L + 0.4, 0.4), (L - 0.3, 0.6), (L - 0.7, 1.7),
+              (L - 1.4, 0.8), (0.0, 0.9), (-0.6, 0.7)]),
         shin, INK_HAIR)
     # The tarsus: a thin foot with a hooked claw forward.
     at, a = on_bone(f"{leg}_foot")
@@ -130,7 +131,7 @@ def foreleg(side, femur, tibia):
 
 # ---- far side, behind everything
 hind_leg("far", FAR, FAR)
-foreleg("far", FAR, FAR)
+foreleg("far", FAR, SHADE)
 
 # ---- the inside of the case: dark, the glow, the faint organ in the split
 INSIDE = [(1.6, -7.6), (3.6, -5.0), (4.2, -1.0), (3.6, 3.0), (1.8, 6.4), (-0.4, 3.2), (-1.0, -1.0), (-0.4, -5.0)]
@@ -154,7 +155,7 @@ SUTURES = [
     [(-7.0, 2.4), (-4.2, 3.2), (-1.2, 3.4), (0.4, 2.8), (0.6, 3.6), (-1.2, 4.2), (-4.2, 4.0), (-6.6, 3.2)],
 ]
 for i, pts in enumerate(SUTURES):
-    put(f"suture_{'abc'[i]}", "back", HINGE, 0.0, poly(rel(pts, HINGE)), FAR)
+    put(f"suture_{'abc'[i]}", "back", HINGE, 0.0, poly(rel(pts, HINGE)), SHADE)
 
 # ---- the front plate: narrow, lit, leading; its inner edge bows forward,
 # which is the other half of the lens
@@ -178,8 +179,8 @@ put("socket", "hood", (5.4, -9.8), -12.0, ell(1.6, 1.15), "$ink")
 put("eye", "hood", (5.7, -9.8), 0.0, circ(0.5), "$pheromone@heavy")
 
 # ---- near side: the foreleg over the plate, the walking leg over the case
-foreleg("near", SHADE, BODY)
-hind_leg("near", SHADE, SHADE)
+foreleg("near", SHADE, LIT)
+hind_leg("near", BODY, SHADE)
 
 RIG.check()
 
@@ -211,7 +212,7 @@ def clack(t, at, period=0.14, decay=0.3):
 # up over the other, and each footfall drops the case onto it, claps the
 # halves shut and lets them bounce open. The hood nods after the drop, the
 # forelegs dangle a beat behind, and the light swells as the lens opens.
-STRIDE = 3.2
+STRIDE = 3.8
 SWING = {"near": (0.0, 0.34), "far": (0.5, 0.84)}
 LANDS = (0.34, 0.84)
 
@@ -228,29 +229,34 @@ def foot_track(t, swing, lift):
 def opening(t):
     """How far the halves hang apart, in degrees each: open while the case is up, clapped and bouncing at each footfall."""
     up = bump(t, 0.06, 0.34) + bump(t, 0.56, 0.84)
-    return 3.0 + 5.0 * up + 5.0 * (clack(t, LANDS[0]) + clack(t, LANDS[1]))
+    return 3.0 + 7.0 * up + 7.0 * (clack(t, LANDS[0]) + clack(t, LANDS[1]))
 
 def rattle_pose(t):
     nd, nl = foot_track(t, SWING["near"], 2.4)
-    fd, fl = foot_track(t, SWING["far"], 2.4)
-    rise = bump(t, 0.04, 0.34) + bump(t, 0.54, 0.84)
-    drop = bump(t, 0.32, 0.5) + bump(t, 0.82, 1.0)
-    # Up over the stepping leg, down hard on the landing; it rocks toward the
-    # leg it is standing on, and pitches forward on each drop.
-    dy = -1.8 * rise + 1.6 * drop
-    dx = 0.8 * cyc(2 * t, 0.1)
-    pitch = 4.0 * drop - 2.0 * rise + 2.0 * cyc(t, 0.2)
+    fd, fl = foot_track(t, SWING["far"], 1.6)
+    rise = bump(t, 0.04, 0.34) + 0.7 * bump(t, 0.54, 0.84)
+    drop = 1.4 * bump(t, 0.32, 0.52) + 0.6 * bump(t, 0.82, 1.0)
+    # Nobody is driving, so the two steps are not the same step: the near leg
+    # throws the case up and it lands hard, pitching forward, the forelegs
+    # flung out ahead by it; the far leg only shuffles it on. Up over the
+    # stepping leg, down on the landing, a beat of rock between.
+    jab = bump(t, 0.34, 0.58)
+    dy = -2.0 * rise + 2.2 * drop
+    dx = 1.2 * cyc(2 * t, 0.1) + 0.8 * jab
+    pitch = 13.0 * jab + 4.0 * bump(t, 0.84, 0.04) - 5.0 * rise + 2.0 * cyc(t, 0.2)
     pose = {"body": (dx, dy, pitch)}
     o = opening(t)
     pose["back"] = o
     pose["front"] = -o
     # The hood nods the way it is going, a beat after the drop.
-    pose["hood"] = 7.0 * (bump(t, 0.38, 0.62) + bump(t, 0.88, 0.12)) - 3.0 * rise
-    # The forelegs hang loose off the plate: swung by the case a beat late,
-    # the hooks flicking on each landing.
-    for side, lag in (("near", 0.0), ("far", 0.08)):
-        pose[f"{side}_femur"] = 14.0 * cyc(2 * t, -0.18 - lag) + o
-        pose[f"{side}_tibia"] = 18.0 * cyc(2 * t, -0.32 - lag) - 10.0 * (bump(t, 0.36, 0.54) + bump(t, 0.86, 0.04))
+    pose["hood"] = 12.0 * (bump(t, 0.4, 0.64) + 0.6 * bump(t, 0.9, 0.12)) - 5.0 * rise
+    # The forelegs hang loose off the plate, swung by the case a beat late;
+    # the hard landing flings them open, hooks out ahead — the reach that
+    # hits harder than a shell should.
+    for side, lag in (("near", 0.0), ("far", 0.06)):
+        fl_ = bump(t, 0.36 + lag, 0.62 + lag)
+        pose[f"{side}_femur"] = 12.0 * cyc(2 * t, -0.18 - lag) + o - 16.0 * fl_ - 8.0 * pitch / 11.0
+        pose[f"{side}_tibia"] = 16.0 * cyc(2 * t, -0.32 - lag) - 48.0 * fl_
     feet = {"near": (LEGS["near"][1] + nd, GROUND - nl), "far": (LEGS["far"][1] + fd, GROUND - fl)}
     toes = {"near": 20.0 * math.sin(math.pi * min(1.0, (t % 1.0) / 0.34)) if (t % 1.0) < 0.34 else 0.0,
             "far": 20.0 * math.sin(math.pi * (t - 0.5) / 0.34) if 0.5 <= (t % 1.0) < 0.84 else 0.0}
@@ -266,14 +272,14 @@ def death_pose(t):
     flare = math.sin(math.pi * smooth(0.0, 0.26, t))
     go = smooth(0.14, 0.62, t)
     bounce = math.sin(math.pi * smooth(0.6, 0.85, t))
-    pose = {"body": (lerp(0.0, -0.6, go), -1.2 * flare + 5.2 * go - 0.8 * bounce, -3.0 * flare + 8.0 * go)}
-    pose["back"] = -2.0 * flare + 38.0 * go - 6.0 * bounce
-    pose["front"] = 2.0 * flare - 44.0 * go + 8.0 * bounce
+    pose = {"body": (lerp(0.0, -1.0, go), -1.2 * flare + 6.2 * go - 0.8 * bounce, -3.0 * flare + 6.0 * go)}
+    pose["back"] = -2.0 * flare + 34.0 * go - 6.0 * bounce
+    pose["front"] = 2.0 * flare - 34.0 * go + 6.0 * bounce
     pose["hood"] = -8.0 * flare + 34.0 * go - 5.0 * bounce
     for side in ("near", "far"):
         pose[f"{side}_femur"] = -16.0 * flare + 50.0 * go
         pose[f"{side}_tibia"] = 20.0 * flare - 30.0 * go
-    feet = {"near": (LEGS["near"][1] + 2.4 * go, GROUND), "far": (LEGS["far"][1] - 2.0 * go, GROUND)}
+    feet = {"near": (LEGS["near"][1] + 3.6 * go, GROUND), "far": (LEGS["far"][1] + 1.4 * go, GROUND)}
     return plant_legs(pose, feet, toes={"near": 16.0 * go, "far": -10.0 * go})
 
 tracks = RIG.tracks
@@ -299,6 +305,7 @@ animations["death"] = {
         ("organ", "opacity", lambda t: 1.0 - smooth(0.2, 0.5, t)),
         ("organ_bright", "opacity", lambda t: 1.0 - smooth(0.12, 0.4, t)),
         ("eye", "opacity", lambda t: 1.0 - smooth(0.12, 0.45, t)),
+        ("inside", "opacity", lambda t: 1.0 - 0.6 * smooth(0.3, 0.75, t)),
     ], still=ROUND),
 }
 
@@ -346,7 +353,15 @@ DESCRIPTION = (
     "swings open along the seam and drops."
 )
 
-SHIFT_X = 0.0
+# Laid out about the pelvis; the hood and the forelegs reach further forward
+# than the case does behind, so the whole body sits back on the canvas to
+# centre its reach (offsets are relative, so the clips are unchanged).
+SHIFT_X = -1.2
+for p in RIG.parts: p["at"][0] = r2(p["at"][0] + SHIFT_X)
+for k in [k for k in ELITE_SET if k.endswith(".at")]: ELITE_SET[k][0] = r2(ELITE_SET[k][0] + SHIFT_X)
+SKELETON = RIG.skeleton()
+for k, v in SKELETON["joints"].items(): v[0] = r2(v[0] + SHIFT_X)
+
 doc = {
     "id": "ss.enemy.skeleton",
     "name": "Molt",
@@ -357,7 +372,7 @@ doc = {
     "parts": RIG.parts,
     "variants": VARIANTS,
     "animations": animations,
-    "skeleton": RIG.skeleton(),
+    "skeleton": SKELETON,
 }
 
 if __name__ == "__main__":

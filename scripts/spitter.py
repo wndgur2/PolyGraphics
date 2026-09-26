@@ -42,7 +42,7 @@ from rig import (Rig, R, D, r2, lerp, mix, smooth, cyc, cyc_c, wrap, keyset, ik2
                  compose, invert_apply, poly, ell, circ, rect, bar, INK_THIN, INK_HAIR, write_doc)
 
 # ============================================================== rig
-# Canvas 36×36, origin at the centre, +x forward, +y down.
+# Canvas 40×36, origin at the centre, +x forward, +y down.
 SIZE = [40, 36]
 GROUND = 11.0
 FAR_LIFT = 0.8
@@ -422,7 +422,7 @@ animations = {
 # ============================================================== document
 DESCRIPTION = (
     "Ranged sac that holds the far edge of your reach and spits where you're going to be. A bulbous teal sac with a firing snout on the right "
-    "— that read is the Gland and is kept — drawn in three values: the sac mid teal over a dark underside, girdled by three muscle bands that "
+    "— that read is the Gland and is kept — drawn in three values: the sac mid teal over a dark underside, girdled by muscle bands that "
     "squeeze it, a muscular collar with the eye on it, and a tapered snout ending in a pale lip; the bright teal is kept for what is charged, "
     "the fluid lighting up inside the sac and the bead on the lip, which is the bolt (`ss.enemy.shot`). A lit organ on its back, because it "
     "is hive; two short legs under it, because a thing that holds a distance has to be able to hold it. Built on a skeleton "
