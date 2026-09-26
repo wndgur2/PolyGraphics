@@ -1,0 +1,20 @@
+{
+  "id": "ss.sample.amount",
+  "name": "Twin eggs",
+  "description": "Plus One. Two eggs laid into one another, sharing a shell where they meet. Spotted, like everything else that came out of the brood.",
+  "tags": ["sample"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "egg_a", "at": [-3.6, 2.4], "shape": {"kind": "ellipse", "rx": 6.4, "ry": 8.2}, "fill": "$husk", "rot": -22, "stroke": {"color": "$ink", "width": 1.1}},
+    {"id": "egg_b", "at": [4, -2.2], "shape": {"kind": "ellipse", "rx": 6, "ry": 7.6}, "fill": "$husk", "rot": 24, "stroke": {"color": "$ink", "width": 1.1}},
+    {"id": "shade_a", "at": [-2.4, 4.4], "shape": {"kind": "ellipse", "rx": 4.2, "ry": 5.6}, "fill": "$husk.dark", "rot": -22},
+    {"id": "shade_b", "at": [5, 0], "shape": {"kind": "ellipse", "rx": 4, "ry": 5.2}, "fill": "$husk.dark", "rot": 24},
+    {"id": "spot_a", "at": [-5.6, 4], "shape": {"kind": "circle", "r": 1.2}, "fill": "$sand"},
+    {"id": "spot_b", "at": [-2, -2.4], "shape": {"kind": "circle", "r": 0.9}, "fill": "$sand"},
+    {"id": "spot_c", "at": [5.4, -5], "shape": {"kind": "circle", "r": 1.1}, "fill": "$sand"},
+    {"id": "spot_d", "at": [6.4, 1.8], "shape": {"kind": "circle", "r": 0.8}, "fill": "$sand"},
+    {"id": "spot_e", "at": [-4.4, 8], "shape": {"kind": "circle", "r": 0.8}, "fill": "$sand"},
+    {"id": "glint_a", "at": [-5.8, -2.6], "shape": {"kind": "circle", "r": 1.2}, "fill": "$white@heavy"},
+    {"id": "glint_b", "at": [1.8, -6.8], "shape": {"kind": "circle", "r": 1.1}, "fill": "$white@heavy"}
+  ]
+}
