@@ -84,12 +84,9 @@ static func _add_draw(parent: Node2D, d: Dictionary) -> void:
 		parent.add_child(line)
 		return
 	var pts := _outline(d)
-	if d.has("fill"):
-		var poly := Polygon2D.new()
-		poly.polygon = pts
-		poly.color = _color(d["fill"])
-		poly.antialiased = true
-		parent.add_child(poly)
+	# Stroke added first so the fill draws over it: the reference renderer lays
+	# every outline under its own fill (`paint-order: stroke`) and only the outer
+	# half shows. The other way round the inner half eats into the shape.
 	if d.has("stroke"):
 		var stroke: Dictionary = d["stroke"]
 		var line := Line2D.new()
@@ -100,6 +97,12 @@ static func _add_draw(parent: Node2D, d: Dictionary) -> void:
 		line.joint_mode = Line2D.LINE_JOINT_ROUND
 		line.antialiased = true
 		parent.add_child(line)
+	if d.has("fill"):
+		var poly := Polygon2D.new()
+		poly.polygon = pts
+		poly.color = _color(d["fill"])
+		poly.antialiased = true
+		parent.add_child(poly)
 
 
 static func _outline(d: Dictionary) -> PackedVector2Array:
