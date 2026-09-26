@@ -23,8 +23,9 @@ rebuilds it on the shared rig (scripts/rig.py):
   - six legs, each a femur and a tibia solved every frame to a foot on the
     ground (two-bone IK), so a planted foot stays planted while the ball rides
     over it
-  - the spines ripple in a wave that runs round the ring once a stride, so the
-    ball reads as trundling rather than gliding
+  - the spines follow the ball's twist a beat late and overshoot it, bristle
+    up on each push, and ripple round the ring once a stride, so the ball reads
+    as trundling rather than gliding
 
 Chitin amber, lit from the upper left with a dark crescent on the lower right
 (the three values: lit cap, body, shade), the spines pale husk with dark
@@ -37,9 +38,9 @@ from rig import (Rig, R, D, r2, lerp, smooth, cyc, cyc_c, wrap, keyset, ik2,
                  poly, ell, circ, rect, bar, INK_THIN, INK_HAIR, write_doc)
 
 # ============================================================== rig
-# Canvas 44×44, origin at the centre, seen from above, +x forward, +y down
+# Canvas 48×48, origin at the centre, seen from above, +x forward, +y down
 # (the "d" side; "u" is its mirror at -y).
-W, H = 44, 44
+W, H = 48, 48
 RIG = Rig()
 B = RIG.bones
 bone = RIG.bone
@@ -63,9 +64,9 @@ PRIMARY = [36.0 + 72.0 * k for k in range(5)]        # 36 108 180 252 324
 SECONDARY = [72.0 + 72.0 * k for k in range(4)]      # 72 144 216 288
 SPINES = []  # (name, angle, length, primary)
 for k, a in enumerate(PRIMARY):
-    SPINES.append((f"spine_{k}", a, 10.2, True))
+    SPINES.append((f"spine_{k}", a, 10.6, True))
 for k, a in enumerate(SECONDARY):
-    SPINES.append((f"spur_{k}", a, 6.6, False))
+    SPINES.append((f"spur_{k}", a, 7.4, False))
 SPINES.sort(key=lambda s: s[1])
 for name, a, L, _ in SPINES:
     bone(name, "ball", (SPINE_ROOT * math.cos(R(a)), SPINE_ROOT * math.sin(R(a))), a, L)
@@ -186,21 +187,20 @@ def step(t, ph, stride, tuck, duty=0.55):
     return lerp(-stride, stride, smooth(0.0, 1.0, v)), tuck * math.sin(math.pi * v)
 
 # ---- trundle (0.62s): the walk and the idle. The ball surges on each push and
-# rocks toward the pushing side; the spines ripple in a wave that runs round
-# the ring once a stride — each one laid back and raised in turn, the primaries
-# furthest — so the ball reads as rolling along under them; the head nods
-# ahead of the ball and the mandibles work.
-WAVE = 16.0
+# twists toward the pushing side, and the spines follow the twist a beat late
+# and overshoot it, whipping round as a ring (secondary motion on the ball's
+# rock), while a smaller ripple runs round the ring once a stride — each spine
+# laid back and lifted in turn — so the ball reads as trundling along under
+# them. The head counter-turns to keep its line and the mandibles work.
+TWIST, RIPPLE, YAW = 12.0, 10.0, 10.0
 def trundle_pose(t):
-    pose = {"ball": (1.3 * cyc(2 * t, 0.1), 1.4 * cyc(t, 0.25), 7.0 * cyc(t, 0.0))}
+    pose = {"ball": (2.2 * cyc(2 * t, 0.1), -2.2 * cyc(t, 0.05), YAW * cyc(t, 0.0))}
     for name, a, L, prim in SPINES:
-        # a wave running round the ring (the phase is the spine's bearing), the
-        # spine laid back toward the rear on the crest
         lag = a / 360.0
         back = 1 if 0 < a < 180 else -1   # which way "back" is for this side
-        amp = WAVE if prim else WAVE * 0.7
-        pose[name] = back * amp * cyc(t, -lag)
-    pose["head"] = -4.0 * cyc(t, -0.08)
+        k = 1.0 if prim else 0.75
+        pose[name] = k * (TWIST * cyc(t, -0.12) + back * RIPPLE * cyc(t, -lag))
+    pose["head"] = -0.7 * YAW * cyc(t, -0.06)
     m = 10.0 * max(0.0, cyc(2 * t, 0.3)) - 6.0
     pose["mand_u"] = -m
     pose["mand_d"] = m
@@ -210,9 +210,19 @@ def trundle_pose(t):
         fx, fy = foot_of(n, s)
         feet[leg] = (fx + dx, fy - SIDES[s] * tk)
     return plant(pose, feet)
+def lift(a, t):
+    """
+    How far a spine stands up off the ball, seen from above as a shortening:
+    the whole ring bristles on each push (twice a stride) and lies back
+    between, the ripple running round it on top.
+    """
+    return 1.0 - 0.3 * max(0.0, cyc(2 * t, 0.1)) ** 0.8 - 0.08 * max(0.0, -cyc(t, -a / 360.0))
 def trundle_extra():
     squash = lambda t: 1.0 + 0.05 * cyc(2 * t, 0.35)
-    return [(pid, "scale", squash) for pid in ("ball", "ball_body", "ball_lit")]
+    ex = [(pid, "scale", squash) for pid in ("ball", "ball_body", "ball_lit")]
+    for name, a, L, prim in SPINES:
+        ex.append((name, "scale", lambda t, a=a: lift(a, t)))
+    return ex
 
 # ---- death (0.42s). The game throws its five spines the moment it is killed,
 # so the clip's release is at the start, and what it draws is the shot:
@@ -245,7 +255,7 @@ def death_pose(t):
         k = lerp(1.0, 0.45, fall) + 0.12 * burst
         feet[leg] = (hx + (fx - hx) * k, hy + (fy - hy) * k)
     return plant(pose, feet)
-LAUNCH = 5.0
+LAUNCH = 3.8
 def launch(t):
     """How far a primary spine has left its root: drawn in on the clench, then out and away."""
     return -1.4 * smooth(0.0, FIRE, t) * (1 - smooth(FIRE, FIRE + 0.04, t)) + LAUNCH * smooth(FIRE, 0.42, t)
@@ -253,10 +263,8 @@ def death_extra():
     ex = []
     for name, a, L, prim in SPINES:
         if not prim: continue
-        c, s_ = math.cos(R(a)), math.sin(R(a))
-        for pid in (name, f"{name}_keel", f"{name}_collar"):
+        for pid in (name, f"{name}_keel"):
             ex.append((pid, "opacity", lambda t: 1.0 - smooth(FIRE + 0.1, 0.5, t)))
-        # the out-along-the-root travel is added on top of the rig's pose below
     ex.append(("ball", "scale", lambda t: 1.0 - 0.07 * smooth(0.0, FIRE, t) + 0.13 * math.sin(math.pi * smooth(FIRE, 0.4, t)) - 0.1 * smooth(0.35, 0.82, t)))
     for pid in ("ball_body", "ball_lit"):
         ex.append((pid, "scale", lambda t: 1.0 - 0.07 * smooth(0.0, FIRE, t) + 0.13 * math.sin(math.pi * smooth(FIRE, 0.4, t)) - 0.1 * smooth(0.35, 0.82, t)))
@@ -264,13 +272,14 @@ def death_extra():
     return ex
 def death_tracks(ts):
     out = tracks(death_pose, ts, death_extra())
-    # The launch: each primary spine (and its keel and collar) slides out along
-    # its own bearing. The rig moves them with the ball; this rides on top.
+    # The launch: each primary spine (and its keel) slides out along its own
+    # bearing, leaving its dark collar behind as an empty socket. The rig moves
+    # them with the ball; this rides on top.
     by = {(tr["part"], tr["prop"]): tr for tr in out}
     for name, a, L, prim in SPINES:
         if not prim: continue
         c, s_ = math.cos(R(a)), math.sin(R(a))
-        for pid in (name, f"{name}_keel", f"{name}_collar"):
+        for pid in (name, f"{name}_keel"):
             for prop, k in (("x", c), ("y", s_)):
                 tr = by.get((pid, prop))
                 if tr is None:
@@ -282,13 +291,13 @@ def death_tracks(ts):
 animations = {}
 TS_TRUNDLE = keyset(12)
 animations["trundle"] = {
-    "description": "The walk and the idle: six legs in two tripods, each foot planted while the ball rides over it and carried forward tucked in; the ball surges on each push and rocks toward the pushing side, squashing a little on the step; the spines ripple in a wave that runs round the ring once a stride, each laid back and raised in turn, so it reads as rolling along under them; the head nods ahead of the ball and the mandibles work.",
+    "description": "The walk and the idle: six legs in two tripods, each foot planted while the ball rides over it and carried forward tucked in; the ball surges on each push and twists toward the pushing side, squashing a little on the step; the spines follow the twist a beat late and overshoot it, the whole ring bristles up on every push and lies back between, and a smaller ripple runs round it once a stride, so it reads as trundling along under them; the head counter-turns to keep its line and the mandibles work.",
     "duration": 0.62,
     "tracks": tracks(trundle_pose, TS_TRUNDLE, trundle_extra()),
 }
 TS_DEATH = [0, 0.04, 0.08, 0.11, 0.14, 0.17, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 1.0]
 animations["death"] = {
-    "description": "The shot, drawn: the ball clenches with every spine drawn in and bristling straight out, then the five big spines kick out along their own roots and are gone — the five the game throws in a ring — as the ball bursts after them and the small spurs are flung flat; then it sags, the legs fold in under it, the head drops and the organ goes out. Still from 0.85.",
+    "description": "The shot, drawn: the ball clenches with every spine drawn in and bristling straight out, then the five big spines kick out along their own roots and are gone — the five the game throws in a ring — leaving five empty dark sockets, as the ball bursts after them and the small spurs are flung flat; then it sags, the legs fold in under it, the head drops and the organ goes out. Still from 0.85.",
     "duration": 0.42,
     "tracks": death_tracks(TS_DEATH),
 }
@@ -308,6 +317,9 @@ variants = {
             **{f"{n}.scale": 1.12 for n, a, L, p in SPINES if p},
             **{f"{n}_keel.scale": 1.12 for n, a, L, p in SPINES if p},
             **{f"{n}.scale": 1.45 for n, a, L, p in SPINES if not p},
+            **{f"leg_{leg}_{seg}.fill": "$husk.dark" for leg, n, s in leg_names() for seg in ("femur", "tibia")},
+            **{f"leg_{leg}_knee.fill": "$husk" for leg, n, s in leg_names()},
+            **{f"socket_{k}.fill": "$husk.dark" for k in range(6)},
             "organ.scale": [0.74, 0.68],
         },
     },
@@ -320,7 +332,7 @@ DESCRIPTION = (
     "smaller spur between each pair, a lit organ in a ring of sockets on the back, a small dark head at +x with bone mandibles, and six "
     "legs under. The silhouette is a star, and nothing else in the roster is one. Seen from above, facing +x, mirrored by the game. Built on "
     "a skeleton (scripts/burr.py): the legs are solved to planted feet and every spine is a bone rooted in the ball's rim, so `trundle` "
-    "ripples them in a wave running round the ring while the ball rides the step. Gameplay radius 10. `elite` is the bleached, heavier "
+    "whips and bristles them round the ring while the ball rides the step. Gameplay radius 10. `elite` is the bleached, heavier "
     "version the stage-6 marking wears, every spine long and bone-white. The `death` clip is the mechanic drawn: the ball clenches, the "
     "five big spines kick out along their own roots and are gone, and the ball sags under the spurs."
 )

@@ -119,6 +119,8 @@ npx tsx scripts/motion.ts ss.enemy.stinger ss.enemy.courser --all   # every clip
 npx tsx scripts/motion.ts --match ss.enemy.                          # the whole roster, first clip each
 ```
 
+A body that has to move like a body is drawn on a skeleton rather than placed part by part: `scripts/rig.py` holds the bones, forward kinematics, two-bone IK for legs that stay planted, a chain solver that takes a pose as a place and a bearing (the Stinger's aimed hook, the Hurler's throw), and the solve from pose functions to the flat per-part tracks a document carries. Every Salt Pan body has its generator beside it (`scripts/<name>.py` → `apps/ss/assets/ss-enemy-<name>.json`, deterministic, one command each); change the script and rerun it rather than editing the document.
+
 ## Asset document
 
 ```jsonc
