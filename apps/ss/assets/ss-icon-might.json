@@ -1,13 +1,13 @@
 {
   "id": "ss.icon.might",
   "name": "Might icon (SS)",
-  "description": "Shape Survivors passive icon: up-arrow (triangle + stem). Port of i_might (BootScene.ts:574-576). Rim is `$blood`, the same as `ss.icon.drone`: this passive is the Broodling evolution's other half, so the pair reads as a pair on the bar. The glyph wears the rim's colour as well, so the passive is one colour on the bar.",
+  "description": "Shape Survivors passive icon: up-arrow (triangle + stem). Port of i_might (BootScene.ts:574-576). Rim is `$venom.dark`, the same as `ss.icon.drone`: this passive is the Broodling evolution's other half, so the pair reads as a pair on the bar, in the green of the solutions the two are drawn from on the level-up. The glyph wears the rim's colour as well, so the passive is one colour on the bar.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$blood" },
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$venom.dark" },
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
-    { "id": "head", "shape": { "kind": "poly", "points": [[0, -9], [9, 4], [-9, 4]] }, "fill": "$blood" },
-    { "id": "stem", "at": [0, 6], "shape": { "kind": "rect", "w": 6, "h": 6 }, "fill": "$blood" }
+    { "id": "head", "shape": { "kind": "poly", "points": [[0, -9], [9, 4], [-9, 4]] }, "fill": "$venom.dark" },
+    { "id": "stem", "at": [0, 6], "shape": { "kind": "rect", "w": 6, "h": 6 }, "fill": "$venom.dark" }
   ]
 }

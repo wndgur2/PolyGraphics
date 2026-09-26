@@ -1,14 +1,14 @@
 {
   "id": "ss.icon.maxhp",
   "name": "Max HP icon",
-  "description": "Passive icon: a heart built the classic way, two lobes over a point. Port of the hand-drawn i_maxhp from Feelers' BootScene. Rim is `$venom.dark`, the same as `ss.icon.vine`: this passive is the Vine evolution's other half, so the pair reads as a pair on the bar. The glyph wears the rim's colour as well, so the passive is one colour on the bar. It was `$sage`, a grey-green that sat ΔE 16.5 from Plus One's lime `$bile`; the plain green stands 20.6 off it.",
+  "description": "Passive icon: a heart built the classic way, two lobes over a point. Port of the hand-drawn i_maxhp from Feelers' BootScene. Rim is `$blood`, the same as `ss.icon.vine`: this passive is the Vine evolution's other half, so the pair reads as a pair on the bar, in the red of the solutions the two are drawn from on the level-up. The glyph wears the rim's colour as well, so the passive is one colour on the bar. It was `$sage`, a grey-green that sat ΔE 16.5 from Plus One's lime `$bile`; the plain green stands 20.6 off it.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [
-    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$venom.dark" },
+    { "id": "tile", "shape": { "kind": "rect", "w": 32, "h": 32, "corner": 6 }, "fill": "$blood" },
     { "id": "inner", "shape": { "kind": "rect", "w": 28, "h": 28, "corner": 5 }, "fill": "$coal.dark" },
-    { "id": "lobe_l", "at": [-4.5, -3], "shape": { "kind": "circle", "r": 5.5 }, "fill": "$venom.dark" },
-    { "id": "lobe_r", "at": [4.5, -3], "shape": { "kind": "circle", "r": 5.5 }, "fill": "$venom.dark" },
-    { "id": "point", "shape": { "kind": "poly", "points": [[-9.5, -0.5], [9.5, -0.5], [0, 10]] }, "fill": "$venom.dark" }
+    { "id": "lobe_l", "at": [-4.5, -3], "shape": { "kind": "circle", "r": 5.5 }, "fill": "$blood" },
+    { "id": "lobe_r", "at": [4.5, -3], "shape": { "kind": "circle", "r": 5.5 }, "fill": "$blood" },
+    { "id": "point", "shape": { "kind": "poly", "points": [[-9.5, -0.5], [9.5, -0.5], [0, 10]] }, "fill": "$blood" }
   ]
 }
