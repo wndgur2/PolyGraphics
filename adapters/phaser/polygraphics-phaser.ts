@@ -200,13 +200,18 @@ function drawNode(g: GraphicsLike, node: IRNode, parent: Mat, parentAlpha: numbe
     const pts = polygonize(d).map(([x, y]) => apply(m, x, y));
     const fill = d.fill;
     const stroke = "stroke" in d ? d.stroke : undefined;
-    if (fill) {
-      g.fillStyle(colorInt(fill), fill[3] * alpha);
-      g.fillPoints(pts, true);
-    }
+    // Stroke first, fill over it: the reference renderer lays every outline
+    // under its own fill (`paint-order: stroke`), so only the outer half of it
+    // shows. Drawn the other way round the inner half eats into the shape —
+    // twice the outline the gallery showed, and on a limb a few pixels wide
+    // most of the limb.
     if (stroke) {
       g.lineStyle(stroke.width * avgScale(m), colorInt(stroke.color), stroke.color[3] * alpha);
       g.strokePoints(pts, true);
+    }
+    if (fill) {
+      g.fillStyle(colorInt(fill), fill[3] * alpha);
+      g.fillPoints(pts, true);
     }
   }
   for (const c of node.children) drawNode(g, c, m, alpha);
