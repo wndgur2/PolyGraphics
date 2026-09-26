@@ -32,18 +32,12 @@ the pan's mid-brown sand it is the lightest thing on the floor; the vesicle is
 ember because the bolt it throws is (`ss.enemy.sting`), and a shooter is the
 colour of what it fires.
 """
-import json, math, os
+import math, os
 
-R = math.radians
-D = math.degrees
-def r2(x): return round(x + 0.0, 2)
-def lerp(a, b, t): return a + (b - a) * t
-def smooth(a, b, t):
-    x = max(0.0, min(1.0, (t - a) / (b - a)))
-    return x * x * (3 - 2 * x)
-def cyc(t, ph=0.0): return math.sin(2 * math.pi * (t + ph))
-def cyc_c(t, ph=0.0): return math.cos(2 * math.pi * (t + ph))
-def wrap(a): return (a + 180.0) % 360.0 - 180.0
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from rig import (Rig, R, D, r2, lerp, mix, smooth, cyc, cyc_c, wrap, keyset, ik2 as ik,
+                 poly, ell, circ, rect, bar, INK_THIN, INK_HAIR, write_doc)
 
 # ============================================================== rig
 # Canvas 72×56, origin at the centre, +x forward, +y down. The ground the feet
@@ -51,17 +45,10 @@ def wrap(a): return (a + 180.0) % 360.0 - 180.0
 GROUND = 12.0
 BODY_PIVOT = (-2.0, -1.0)  # the root bone turns and bobs about here
 
-class Bone:
-    """A rest transform in the asset's frame: where the bone starts and the way it points."""
-    def __init__(self, name, parent, at, heading, length=0.0):
-        self.name, self.parent, self.at, self.heading, self.length = name, parent, at, heading, length
-
-BONES = {}
-def bone(name, parent, at, heading, length=0.0):
-    BONES[name] = Bone(name, parent, at, heading, length)
-    return BONES[name]
-def end_of(b):
-    return (b.at[0] + b.length * math.cos(R(b.heading)), b.at[1] + b.length * math.sin(R(b.heading)))
+RIG = Rig()
+BONES = RIG.bones
+bone = RIG.bone
+def end_of(b): return b.end()
 
 bone("body", None, BODY_PIVOT, 0.0)
 
@@ -119,17 +106,6 @@ for leg, (hip, fx, lf, lt) in LEGS.items():
     bone(f"{leg}_tibia", f"{leg}_femur", end_of(BONES[f"{leg}_femur"]), 90.0, lt)
     bone(f"{leg}_tarsus", f"{leg}_tibia", end_of(BONES[f"{leg}_tibia"]), 90.0, 2.4)
 
-def ik(hip, foot, lf, lt, bend):
-    """Femur and tibia headings (world degrees) putting the foot at `foot`, knee on the `bend` side."""
-    dx, dy = foot[0] - hip[0], foot[1] - hip[1]
-    d = max(1e-3, min(lf + lt - 1e-3, math.hypot(dx, dy)))
-    base = math.atan2(dy, dx)
-    a = math.acos(max(-1.0, min(1.0, (lf * lf + d * d - lt * lt) / (2 * lf * d))))
-    th_f = base - bend * a
-    kx, ky = hip[0] + lf * math.cos(th_f), hip[1] + lf * math.sin(th_f)
-    th_t = math.atan2(foot[1] - ky, foot[0] - kx)
-    return D(th_f), D(th_t)
-
 def knee_bend(leg):
     """Which way the knee folds so it rises above the hip: forward legs fold back, rear legs forward."""
     return 1 if LEGS[leg][1] >= LEGS[leg][0][0] else -1
@@ -143,51 +119,11 @@ for leg, (hip, fx, lf, lt) in LEGS.items():
     BONES[f"{leg}_tarsus"].at = end_of(BONES[f"{leg}_tibia"])
     BONES[f"{leg}_tarsus"].heading = 90.0 + (18.0 if fx >= hip[0] else -18.0)
 
-# ---- forward kinematics
-def compose(parent_xf, local):
-    (px, py, pa), (lx, ly, la) = parent_xf, local
-    c, s = math.cos(R(pa)), math.sin(R(pa))
-    return (px + lx * c - ly * s, py + lx * s + ly * c, pa + la)
-def invert_apply(xf, pt, ang):
-    """`pt, ang` given in the world, expressed in frame `xf`."""
-    x, y, a = xf
-    c, s = math.cos(R(a)), math.sin(R(a))
-    dx, dy = pt[0] - x, pt[1] - y
-    return (dx * c + dy * s, -dx * s + dy * c, ang - a)
-REST = {n: (b.at[0], b.at[1], b.heading) for n, b in BONES.items()}
-LOCAL = {}
-for n, b in BONES.items():
-    LOCAL[n] = REST[n] if b.parent is None else invert_apply(REST[b.parent], b.at, b.heading)
-
-def solve(pose):
-    """
-    World transforms of every bone for `pose`: a dict of
-      body: (dx, dy, dtheta)       — the root's travel and pitch about BODY_PIVOT
-      <bone>: dtheta               — a turn about the bone's own start
-      abs:<bone>: heading          — the bone's world heading outright (IK)
-    """
-    out = {}
-    def xf(n):
-        if n in out: return out[n]
-        b = BONES[n]
-        if b.parent is None:
-            dx, dy, dth = pose.get("body", (0.0, 0.0, 0.0))
-            out[n] = (b.at[0] + dx, b.at[1] + dy, b.heading + dth)
-        else:
-            px, py, pa = compose(xf(b.parent), (LOCAL[n][0], LOCAL[n][1], 0.0))
-            a = pa + LOCAL[n][2] + pose.get(n, 0.0)
-            if f"abs:{n}" in pose: a = pose[f"abs:{n}"]
-            out[n] = (px, py, a)
-        return out[n]
-    for n in BONES: xf(n)
-    return out
+RIG.seal()
+REST = RIG.rest
+solve = RIG.solve
 
 # ============================================================== parts
-def poly(pts): return {"kind": "poly", "points": [[r2(x), r2(y)] for x, y in pts]}
-def ell(rx, ry): return {"kind": "ellipse", "rx": r2(rx), "ry": r2(ry)}
-def circ(r): return {"kind": "circle", "r": r2(r)}
-def rect(w, h, corner=None): return {"kind": "rect", "w": r2(w), "h": r2(h), "corner": r2(corner if corner is not None else min(w, h) / 2)}
-INK_THIN = {"color": "$ink", "width": "thin"}
 # The small parts — tail segments, claws, legs — take the hairline. A `thin`
 # outline is two units wide; on a 4px tail segment or a claw finger that is
 # most of the part's rim at game scale, and the body and carapace are the
@@ -195,31 +131,10 @@ INK_THIN = {"color": "$ink", "width": "thin"}
 # drawing strokes over their fills, which ate half of every outline in play;
 # they lay them under now, as the gallery does, and the hairline stays because
 # it reads better at 1.2×.)
-INK_HAIR = {"color": "$ink", "width": "hair"}
-
-parts = []
-ATTACH = {}  # part id -> bone it rides
-def put(id, bone_name, at, rot, shape, fill, stroke=None, opacity=None, scale=None):
-    """A part placed in the world at rest, riding `bone_name` from then on."""
-    p = {"id": id, "at": [r2(at[0]), r2(at[1])]}
-    if abs(rot) > 1e-6: p["rot"] = r2(rot)
-    if scale is not None: p["scale"] = scale
-    if opacity is not None: p["opacity"] = opacity
-    p["shape"] = shape
-    p["fill"] = fill
-    if stroke: p["stroke"] = stroke
-    parts.append(p)
-    ATTACH[id] = bone_name
-def on_bone(bone_name, along=0.0, across=0.0):
-    """A point in the bone's rest frame, and the bone's heading, in the world."""
-    x, y, a = REST[bone_name]
-    c, s = math.cos(R(a)), math.sin(R(a))
-    return (x + along * c - across * s, y + along * s + across * c), a
-
-def bar(L, w0, w1, over=0.6):
-    """A limb segment from 0 to L along +x, `w0` wide at the root and `w1` at the tip, ends rounded off."""
-    return poly([(-over, -w0 * 0.36), (0.0, -w0 / 2), (L, -w1 / 2), (L + over, -w1 * 0.36),
-                 (L + over, w1 * 0.36), (L, w1 / 2), (0.0, w0 / 2), (-over, w0 * 0.36)])
+parts = RIG.parts
+ATTACH = RIG.attach
+put = RIG.put
+on_bone = RIG.on_bone
 
 def leg_parts(leg, femur, tibia, tarsus, knee, stroke=None):
     b = BONES
@@ -284,7 +199,7 @@ for i, x in enumerate((-11.4, -8.4, -5.4, -2.4, 0.6, 3.4)):
     put(f"plate_{i}", "body", (x, top + 3.4), 8.0, rect(0.8, 7.4, 0.4), "$husk.dark")
 put("meso_gloss", "body", (-4.6, -4.8), -3.0, ell(7.4, 1.1), "$white@soft")
 # The hive's organ on the back, where every body in the hive wears it.
-parts.append({"id": "organ", "at": [-4.6, -4.2], "scale": [0.52, 0.44], "use": "ss.lib.organ"}); ATTACH["organ"] = "body"
+RIG.use("organ", "body", (-4.6, -4.2), "ss.lib.organ", scale=[0.52, 0.44])
 CARA = [(3.0, -5.4), (7.0, -6.2), (11.0, -5.2), (13.8, -2.8), (14.4, -0.4), (13.2, 1.6), (9.0, 2.8), (3.8, 2.6)]
 put("carapace", "body", (0, 0), 0, poly(CARA), "$husk.light", INK_THIN)
 put("carapace_gloss", "body", (8.2, -4.2), -6.0, ell(3.6, 0.9), "$white@0.3")
@@ -298,41 +213,10 @@ claw_parts("near", "$husk.dark", "$husk.light", "$husk", INK_HAIR)
 for leg in ("near_b", "near_m", "near_f"):
     leg_parts(leg, "$husk", "$husk.dark", "$husk.dark", "$husk.light2", INK_HAIR)
 
-ids = [p["id"] for p in parts]
-assert len(ids) == len(set(ids)), "duplicate part ids"
-BASE = {p["id"]: p for p in parts}
+RIG.check()
 
 # ============================================================== motion
-def posed_parts(pose):
-    """Every part's (x, y, rot) under `pose`, as the adapters would pose it."""
-    world = solve(pose)
-    out = {}
-    for pid, bn in ATTACH.items():
-        p = BASE[pid]
-        at, rot = tuple(p["at"]), p.get("rot", 0.0)
-        lx, ly, la = invert_apply(REST[bn], at, rot)
-        out[pid] = compose(world[bn], (lx, ly, la))
-    return out
-REST_PARTS = posed_parts({})
-
-def keyset(n): return [i / n for i in range(n + 1)]
-def tracks(pose_at, ts, extra=None):
-    """Solve `pose_at(t)` at every `t` to per-part x/y/rot offset tracks (linear between keys)."""
-    series = {pid: ([], [], []) for pid in ATTACH}
-    for t in ts:
-        now = posed_parts(pose_at(t))
-        for pid, (x, y, a) in now.items():
-            bx, by, ba = REST_PARTS[pid]
-            series[pid][0].append(x - bx); series[pid][1].append(y - by); series[pid][2].append(wrap(a - ba))
-    out = []
-    for pid in ids:
-        xs, ys, rs = series[pid]
-        for prop, vs in (("x", xs), ("y", ys), ("rot", rs)):
-            if max(abs(v) for v in vs) > 0.01:
-                out.append({"part": pid, "prop": prop, "keys": [[r2(t), r2(v)] for t, v in zip(ts, vs)], "ease": "linear"})
-    for pid, prop, fn in (extra or []):
-        out.append({"part": pid, "prop": prop, "keys": [[r2(t), r2(fn(t))] for t in ts], "ease": "linear"})
-    return out
+tracks = RIG.tracks
 
 def plant_legs(pose, feet):
     """Solve every leg's femur and tibia to put its foot at `feet[leg]`, against the body as posed."""
@@ -364,45 +248,20 @@ ACULEUS_TIP = (5.6 + 5.2, 3.0)  # the hook's point, in the telson's frame
 VESICLE_AT = 2.8
 ACULEUS_TIP_DIR = D(math.atan2(ACULEUS_TIP[1], ACULEUS_TIP[0] - VESICLE_AT))  # vesicle → point
 
+TAIL_CHAIN = [f"tail_{i}" for i in range(5)] + ["telson"]
 def reach(body, tip, direction):
     """
     Tail deltas (five segments and the telson) that put the hook's point at
     `tip` with the vesicle-to-point line along `direction`, for the body posed
-    at `body`. The telson's heading follows from the direction outright; the
-    five segments are found by a small coordinate descent that prefers the
-    rest curl and an even bend over the chain, so a pose is asked for as a
-    place and a bearing rather than as six angles.
+    at `body` — a pose asked for as a place and a bearing rather than as six
+    angles (Rig.reach).
     """
-    th = direction - ACULEUS_TIP_DIR
-    c, s_ = math.cos(R(th)), math.sin(R(th))
-    goal = (tip[0] - (ACULEUS_TIP[0] * c - ACULEUS_TIP[1] * s_), tip[1] - (ACULEUS_TIP[0] * s_ + ACULEUS_TIP[1] * c))
-    def cost(ds):
-        pose = {"body": body}
-        tail_pose(pose, list(ds) + [0.0])
-        x, y, _ = solve(pose)["telson"]
-        smooth_ = sum((ds[i] - ds[i + 1]) ** 2 for i in range(4))
-        return (x - goal[0]) ** 2 + (y - goal[1]) ** 2 + 0.0004 * sum(d * d for d in ds) + 0.0008 * smooth_
-    ds, step_ = [0.0] * 5, 16.0
-    best = cost(ds)
-    while step_ > 0.01:
-        moved = False
-        for i in range(5):
-            for sgn in (1, -1):
-                trial = ds[:]; trial[i] += sgn * step_
-                c2 = cost(trial)
-                if c2 < best: ds, best, moved = trial, c2, True
-        if not moved: step_ /= 2
-    pose = {"body": body}
-    tail_pose(pose, ds + [0.0])
-    tel = th - solve(pose)["telson"][2]
-    return ds + [wrap(tel)]
+    return RIG.reach(TAIL_CHAIN, ACULEUS_TIP, tip, direction - ACULEUS_TIP_DIR, {"body": body})
 
 def tail_set(pose, deltas):
     for i, d in enumerate(deltas[:5]): pose[f"tail_{i}"] = d
     pose["telson"] = deltas[5]
     return pose
-
-def mix(a, b, t): return [lerp(x, y, t) for x, y in zip(a, b)]
 
 # The four places the tail is asked to be, as a point and a bearing for the
 # hook, each against the body as it is posed there.
@@ -555,13 +414,6 @@ animations["death"] = {
 }
 
 # ============================================================== document
-skeleton_joints, bones = {}, []
-for n, b in BONES.items():
-    skeleton_joints[n] = b.at
-    if b.parent is not None: bones.append([b.parent, n])
-    if b.length > 0 and not any(c.parent == n for c in BONES.values()):
-        skeleton_joints[f"{n}_end"] = end_of(b); bones.append([n, f"{n}_end"])
-
 DESCRIPTION = (
     "A scorpion, the other turn of the Lance's slot and the furthest thing from you on the pan. Seen side-on facing +x and mirrored by the game: "
     "a low plated body in pale husk with a wide carapace in front, two big chelae carried forward, six legs standing in a frame with their knees "
@@ -584,40 +436,12 @@ doc = {
     "meta": {"radius": 13},
     "parts": parts,
     "animations": animations,
-    "skeleton": {"joints": {k: [r2(v[0]), r2(v[1])] for k, v in skeleton_joints.items()}, "bones": bones},
+    "skeleton": RIG.skeleton(),
 }
-
-# ============================================================== the house format
-def one(v): return json.dumps(v, ensure_ascii=False)
-def write(doc, path):
-    L = ["{"]
-    for k in ("id", "name", "description", "tags", "size", "meta"):
-        L.append(f'  "{k}": {one(doc[k])},')
-    L.append('  "parts": [')
-    L.append(",\n".join(f"    {one(p)}" for p in doc["parts"]))
-    L.append("  ],")
-    L.append('  "skeleton": {')
-    L.append('    "joints": {')
-    L.append(",\n".join(f"      {one(k)}: {one(v)}" for k, v in doc["skeleton"]["joints"].items()))
-    L.append("    },")
-    L.append(f'    "bones": {one(doc["skeleton"]["bones"])}')
-    L.append("  },")
-    L.append('  "animations": {')
-    anims = []
-    for name, a in doc["animations"].items():
-        body = [f'    {one(name)}: {{', f'      "description": {one(a["description"])},', f'      "duration": {one(a["duration"])},', '      "tracks": [']
-        body.append(",\n".join(f"        {one(t)}" for t in a["tracks"]))
-        body.append("      ]")
-        body.append("    }")
-        anims.append("\n".join(body))
-    L.append(",\n".join(anims))
-    L.append("  }")
-    L.append("}")
-    open(path, "w").write("\n".join(L) + "\n")
 
 if __name__ == "__main__":
     here = os.path.dirname(os.path.abspath(__file__))
     out = os.path.join(here, "..", "apps", "ss", "assets", "ss-enemy-stinger.json")
-    write(doc, out)
+    write_doc(doc, out)
     n_tracks = sum(len(a["tracks"]) for a in animations.values())
     print(f"wrote {os.path.relpath(out)}: {len(parts)} parts, {len(animations)} clips, {n_tracks} tracks")
