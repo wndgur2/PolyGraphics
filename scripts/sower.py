@@ -23,9 +23,9 @@ called — a *drift*, a loaded wasp labouring through the air:
     and everything that hangs off it — gaster, ovipositor, the young, the legs,
     the antennae — answers late, a wave running out from the thorax
 
-Seen side-on facing +x and mirrored by the game. Pale arcane, lighter than
+Seen side-on facing +x and mirrored by the game. Dusk — a dulled violet grey, lighter than
 the old body, so it stands off the pan's mid-brown sand (it sank at 1.44);
-banded in orchid, and the young (`use: ss.enemy.tick`, the very shot it
+banded darker, and the young (`use: ss.enemy.tick`, the very shot it
 fires) ride in a row under the belly in plain sight.
 """
 import math, os, sys
@@ -95,9 +95,13 @@ def along(name, a, c=0.0):
     return on_bone(name, a, c)[0]
 
 # ============================================================== parts
-# Three values: the pale lit body (arcane.light / light2), the mid bands and
-# shadow side (orchid, arcane), the darks — legs, eye, ovipositor sheath.
-HAIR_DARK = {"color": "$arcane.dark2", "width": "hair"}
+# Three values, all `$dusk` — the pan's dulled violet, so the wasp sits in the
+# earth palette instead of glowing out of it (a first rebuild in `$arcane`,
+# the hive's own saturated purple, was the loudest thing on the sand): the lit
+# body (dusk.light), the mid (dusk.dark), the darks and bands (dusk.dark2).
+# The young it carries keep their own colour: they are the shot, and a shooter
+# wears what it fires.
+HAIR_DARK = {"color": "$dusk.dark2", "width": "hair"}
 
 def leg_parts(n, femur, tibia, tarsus, stroke):
     for seg, fill, w0, w1 in (("tarsus", tarsus, 0.9, 0.6), ("tibia", tibia, 1.2, 1.0), ("femur", femur, 1.6, 1.3)):
@@ -115,29 +119,29 @@ def wing(id, bn, fill, vein, stroke):
     put(f"{id}_stigma", bn, at3, a, ell(1.6, 0.8), vein)
 
 # ---- far side: wing, legs, antenna — a step darker, behind everything
-wing("wing_far", "wing_far", "$heather@0.55", "$arcane.dark@soft", {"color": "$silent@soft", "width": "hair"})
+wing("wing_far", "wing_far", "$bone@0.4", "$dusk.dark2@soft", {"color": "$bone@soft", "width": "hair"})
 for leg in ("b", "m", "f"):
-    leg_parts(f"far_{leg}", "$arcane.light", "$arcane.light", "$arcane.light", None)
+    leg_parts(f"far_{leg}", "$dusk.dark", "$dusk.dark", "$dusk.dark", None)
 for i, w in ((0, 1.1), (1, 0.8)):
     at, a = on_bone(f"antf_{i}")
-    put(f"antf_{i}", f"antf_{i}", at, a, bar(B[f"antf_{i}"].length, w, w * 0.8, 0.4), "$arcane.light")
+    put(f"antf_{i}", f"antf_{i}", at, a, bar(B[f"antf_{i}"].length, w, w * 0.8, 0.4), "$dusk.dark")
 
 # ---- the ovipositor: a bone blade under a dark sheath, trailing from the tip
 at, a = on_bone("ovi")
 put("ovipositor", "ovi", at, a, poly([(-1.0, -1.1), (3.0, -0.9), (8.0, -0.3), (9.4, 0.3), (7.6, 0.6), (3.0, 1.0), (-1.0, 1.2)]),
     "$bone", HAIR_DARK)
-put("ovi_sheath", "ovi", at, a, poly([(-1.0, -1.1), (3.2, -0.8), (4.2, 0.0), (3.2, 0.9), (-1.0, 1.2)]), "$arcane.dark")
+put("ovi_sheath", "ovi", at, a, poly([(-1.0, -1.1), (3.2, -0.8), (4.2, 0.0), (3.2, 0.9), (-1.0, 1.2)]), "$dusk.dark2")
 
-# ---- the gaster: a teardrop off the waist, lit on top, orchid bands
+# ---- the gaster: a teardrop off the waist, lit on top, dark bands
 G0 = B["gaster"].at
 GASTER = [(-4.2, -0.4), (-5.4, -3.2), (-8.2, -4.8), (-12.0, -4.8), (-16.0, -3.6), (-19.6, -1.2), (-21.6, 1.4),
           (-21.2, 3.2), (-18.0, 4.8), (-13.0, 6.2), (-8.4, 6.2), (-5.2, 4.4), (-4.0, 1.8)]
-put("gaster", "gaster", G0, 0.0, wpoly(G0, GASTER), "$arcane.light2", HAIR_DARK)
+put("gaster", "gaster", G0, 0.0, wpoly(G0, GASTER), "$dusk.light", HAIR_DARK)
 put("gaster_shade", "gaster", G0, 0.0, wpoly(G0, [(-4.6, 2.8), (-8.4, 5.6), (-13.0, 5.6), (-18.0, 4.2), (-20.8, 2.4),
-                                                    (-18.0, 3.0), (-13.0, 3.6), (-8.0, 3.4)]), "$arcane.light")
+                                                    (-18.0, 3.0), (-13.0, 3.6), (-8.0, 3.4)]), "$dusk.dark")
 for i, (x, top, bot) in enumerate(((-7.6, -4.6, 6.0), (-11.6, -4.8, 6.1), (-15.6, -3.8, 5.0), (-19.0, -1.8, 3.6))):
-    put(f"band_{i}", "gaster", (x, (top + bot) / 2), 10.0, rect(1.3, bot - top - 0.4, 0.65), "$orchid.light")
-put("gaster_gloss", "gaster", (-11.8, -2.4), -5.0, ell(7.4, 1.9), "$white@0.45")
+    put(f"band_{i}", "gaster", (x, (top + bot) / 2), 10.0, rect(1.3, bot - top - 0.4, 0.65), "$dusk.dark2")
+put("gaster_gloss", "gaster", (-11.8, -2.4), -5.0, ell(7.4, 1.9), "$white@0.3")
 
 # ---- the young, riding under the belly in a row, heads forward, holding on
 for n, s, r in (("tick_c", 0.68, -24.0), ("tick_b", 0.72, -14.0), ("tick_a", 0.68, -6.0)):
@@ -147,32 +151,32 @@ for n, s, r in (("tick_c", 0.68, -24.0), ("tick_b", 0.72, -14.0), ("tick_a", 0.6
 # ---- the waist, the thorax, the organ on its back
 P0 = B["petiole"].at
 put("petiole", "petiole", P0, 0.0, wpoly(P0, [(0.4, -1.2), (-1.8, -0.6), (-3.4, 0.2), (-3.4, 1.4), (-1.8, 1.2), (0.4, 0.8)]),
-    "$arcane.light", HAIR_DARK)
+    "$dusk.dark", HAIR_DARK)
 THX = [(-0.8, -1.6), (0.4, -4.8), (3.4, -7.2), (7.0, -7.0), (9.6, -4.6), (10.2, -1.4), (9.0, 1.6), (5.6, 3.2), (1.6, 2.8), (-0.6, 0.8)]
-put("thorax", "thorax", THORAX, 0.0, wpoly(THORAX, THX), "$arcane.light2", HAIR_DARK)
+put("thorax", "thorax", THORAX, 0.0, wpoly(THORAX, THX), "$dusk.light", HAIR_DARK)
 put("thorax_shade", "thorax", THORAX, 0.0, wpoly(THORAX, [(0.4, 0.8), (3.0, 0.4), (6.4, 0.6), (9.4, -0.4), (9.0, 1.6),
-                                                          (5.6, 3.0), (1.6, 2.6)]), "$arcane.light")
-put("scutum", "thorax", (5.4, -4.4), -8.0, ell(3.8, 1.8), "$white@0.45")
+                                                          (5.6, 3.0), (1.6, 2.6)]), "$dusk.dark")
+put("scutum", "thorax", (5.4, -4.4), -8.0, ell(3.8, 1.8), "$white@0.3")
 RIG.use("organ", "thorax", (4.2, -3.6), "ss.lib.organ", scale=[0.48, 0.42])
 
 # ---- the head: a round capsule with a big compound eye, jaws under it
 HEAD = (12.6, -2.2)
 put("head", "head", HEAD, 0.0, wpoly(HEAD, [(9.4, -3.6), (11.0, -6.0), (13.8, -6.4), (16.0, -4.6), (16.8, -1.6),
-                                          (16.0, 1.2), (13.6, 2.4), (10.8, 1.8), (9.2, -0.6)]), "$arcane.light2", HAIR_DARK)
-put("head_gloss", "head", (14.2, -4.8), 20.0, ell(1.6, 0.9), "$white@0.45")
+                                          (16.0, 1.2), (13.6, 2.4), (10.8, 1.8), (9.2, -0.6)]), "$dusk.light", HAIR_DARK)
+put("head_gloss", "head", (14.2, -4.8), 20.0, ell(1.6, 0.9), "$white@0.3")
 put("eye", "head", (12.8, -2.4), 8.0, ell(2.0, 2.9), "$ink")
 put("eye_glint", "head", (12.3, -3.8), 0.0, circ(0.6), "$silent")
-put("clypeus", "head", (15.6, 0.0), 0.0, ell(1.1, 1.2), "$orchid")
+put("clypeus", "head", (15.6, 0.0), 0.0, ell(1.1, 1.2), "$dusk.dark")
 put("mandible", "head", (15.2, 1.2), 0.0, wpoly((15.2, 1.2), [(14.2, 0.8), (16.6, 1.0), (18.0, 2.2), (16.4, 2.8), (14.6, 2.2)]),
-    "$arcane.dark")
+    "$dusk.dark2")
 for i, w in ((0, 1.2), (1, 0.9)):
     at, a = on_bone(f"ant_{i}")
-    put(f"ant_{i}", f"ant_{i}", at, a, bar(B[f"ant_{i}"].length, w, w * 0.8, 0.4), "$arcane.light")
+    put(f"ant_{i}", f"ant_{i}", at, a, bar(B[f"ant_{i}"].length, w, w * 0.8, 0.4), "$dusk.dark")
 
 # ---- near legs over the body, the near wing over everything
 for leg in ("b", "m", "f"):
-    leg_parts(f"near_{leg}", "$arcane.light2", "$arcane.light2", "$arcane.light", HAIR_DARK)
-wing("wing", "wing", "$silent@0.6", "$arcane.dark@soft", {"color": "$silent@heavy", "width": "hair"})
+    leg_parts(f"near_{leg}", "$dusk.light", "$dusk.light", "$dusk.dark", HAIR_DARK)
+wing("wing", "wing", "$bone@0.5", "$dusk.dark2@soft", {"color": "$bone@heavy", "width": "hair"})
 
 RIG.check()
 
@@ -284,7 +288,7 @@ animations["death"] = {
 
 # ============================================================== document
 DESCRIPTION = (
-    "The other turn of the Gland's slot: a wasp seen side-on, pale arcane purple banded in orchid, thin at the waist, with a bone ovipositor "
+    "The other turn of the Gland's slot: a wasp seen side-on in dusk, a dulled violet grey banded darker, thin at the waist, with a bone ovipositor "
     "trailing from the tip of the gaster and three of its young — `use: ss.enemy.tick`, the very shot it fires — riding in a row under the belly. "
     "The wings are pale washes over the back. It does not aim (EnemyType.shotTurn: what it lets go turns toward the player on its own), so "
     "nothing on it points; the read is a body carrying live cargo, and the cargo is the threat. Purple, because nothing else on the pan is, "

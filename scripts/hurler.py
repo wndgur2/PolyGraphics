@@ -25,10 +25,11 @@ went anywhere. This rebuilds it on the shared rig (scripts/rig.py):
 
 Colour: the dome was `$carapace`, and on the pan's sunlit sand that sat at the
 floor's own tone (contrast 1.01). The family stays purple, moved up the ramp to
-`$heather` (the pale lilac nobody else on the pan wears) in three values: the
-dome `$heather.light2` with its lower flank in shade, the pronotum, arms and
-near legs `$heather.light`/`$heather`, and the far limbs, belly and seams
-`$heather.dark` — light on top where the sun is. It measures 2.50 against the
+`$mauve` (a dusty rose-grey, the pan's dulled cut of the old carapace purple —
+a first rebuild in pastel `$heather` was the loudest thing on the sand) in
+three values: the dome `$mauve.light2` with its lower flank in `$mauve`, the
+pronotum and head `$mauve.light`, and the far limbs, belly and seams
+`$mauve.dark`/`dark2` — light on top where the sun is. It measures 1.92 against the
 pan, with the orange Mite it carries counted in.
 
 The heave's arc is a lob, not a punch (the game's shot has `shotArc: 70`): the
@@ -113,14 +114,14 @@ def arm_parts(side, humerus, forearm, claw, stroke):
 
 # ---- far side, a step darker: legs, then the arm behind everything
 for leg in ("far_h", "far_m"):
-    leg_parts(leg, "$heather", "$heather.dark", "$heather.dark", INK_HAIR)
-arm_parts("far", "$heather", "$heather.dark", "$heather.light", INK_HAIR)
+    leg_parts(leg, "$mauve.dark", "$mauve.dark2", "$mauve.dark2", INK_HAIR)
+arm_parts("far", "$mauve.dark", "$mauve.dark2", "$mauve", INK_HAIR)
 
 # ---- the body: belly, the dome of the elytra, the pronotum, the head
 BELLY = [(-20.0, 3.0), (-17.0, 7.6), (-8.0, 10.0), (2.0, 9.8), (8.6, 7.0), (6.0, 2.0), (-18.0, 1.0)]
-put("belly", "body", (0, 0), 0, poly(BELLY), "$heather", INK_HAIR)
+put("belly", "body", (0, 0), 0, poly(BELLY), "$mauve.dark", INK_HAIR)
 for i, x in enumerate((-14.6, -9.4, -4.2, 1.0)):
-    put(f"sternite_{i}", "body", (x, 8.4 - 0.1 * abs(x + 5)), 12.0, rect(0.9, 3.2, 0.45), "$heather.dark")
+    put(f"sternite_{i}", "body", (x, 8.4 - 0.1 * abs(x + 5)), 12.0, rect(0.9, 3.2, 0.45), "$mauve.dark2")
 # The dome: high and round, a superellipse over a shallow keel — the beetle's
 # whole back is its two elytra, closed, and it is the biggest light thing on
 # the floor.
@@ -137,31 +138,31 @@ def dome_keel(u):
     x = lerp(DOME_C[0] + DOME_A, DOME_C[0] - DOME_A, u)
     return (x, DOME_C[1] + 3.2 * math.sin(math.pi * u) ** 0.7)
 DOME = [dome_top(i / 20) for i in range(21)] + [dome_keel(1 - i / 8) for i in range(1, 8)]
-put("elytron", "body", (0, 0), 0, poly(DOME), "$heather.light2", INK_THIN)
+put("elytron", "body", (0, 0), 0, poly(DOME), "$mauve.light2", INK_THIN)
 # The lower flank of the near elytron in shade: the mid value, under the light.
 SHADE = [dome_top(1 - i / 10 * 0.14) for i in range(11)]
 SHADE = [(x, max(y, -1.4)) for x, y in SHADE]
 SHADE = [(DOME_C[0] - DOME_A + 0.2, -0.6)] + [(lerp(DOME_C[0] - DOME_A + 1.0, DOME_C[0] + DOME_A - 1.0, i / 10), -0.6 + 1.2 * math.sin(math.pi * i / 10)) for i in range(11)] + \
         [(DOME_C[0] + DOME_A - 0.2, -0.2)] + [dome_keel(i / 8) for i in range(9)]
-put("elytron_shade", "body", (0, 0), 0, poly(SHADE), "$heather")
+put("elytron_shade", "body", (0, 0), 0, poly(SHADE), "$mauve")
 # The split between the two elytra runs over the crown; three striae follow
 # the curve of the shell down its side.
 SEAM = [dome_top(0.12 + 0.8 * i / 12, 0.6) for i in range(13)] + [dome_top(0.92 - 0.8 * i / 12, 2.0) for i in range(13)]
-put("seam", "body", (0, 0), 0, poly(SEAM), "$heather.dark")
+put("seam", "body", (0, 0), 0, poly(SEAM), "$mauve.dark2")
 for i, sh in enumerate((5.0, 8.4)):
     STRIA = [dome_top(0.2 + 0.66 * j / 10, sh) for j in range(11)] + [dome_top(0.86 - 0.66 * j / 10, sh + 0.8) for j in range(11)]
-    put(f"stria_{i}", "body", (0, 0), 0, poly(STRIA), "$heather.light")
-put("gloss", "body", (-11.0, -9.4), -10.0, ell(6.0, 1.4), "$white@0.6")
+    put(f"stria_{i}", "body", (0, 0), 0, poly(STRIA), "$mauve")
+put("gloss", "body", (-11.0, -9.4), -10.0, ell(6.0, 1.4), "$white@0.35")
 # The hive's organ, set into the top of the dome under the load.
 RIG.use("organ", "body", (-7.2, -5.2), "ss.lib.organ", scale=[0.72, 0.6])
 # The pronotum: a shield over the shoulders, the arms coming out of its top.
 PRONOTUM = [(3.0, -7.0), (7.2, -8.8), (11.2, -7.4), (13.4, -3.2), (13.0, 1.8), (10.4, 5.4), (5.6, 6.0), (3.0, 1.0)]
-put("pronotum", "body", (0, 0), 0, poly(PRONOTUM), "$heather.light", INK_THIN)
-put("pronotum_rim", "body", (0, 0), 0, poly([(4.0, 3.2), (10.4, 3.8), (12.8, 0.8), (13.0, 1.8), (10.4, 5.4), (5.6, 6.0)]), "$heather")
-put("pronotum_gloss", "body", (8.2, -6.2), -18.0, ell(2.8, 0.8), "$white@0.45")
+put("pronotum", "body", (0, 0), 0, poly(PRONOTUM), "$mauve.light", INK_THIN)
+put("pronotum_rim", "body", (0, 0), 0, poly([(4.0, 3.2), (10.4, 3.8), (12.8, 0.8), (13.0, 1.8), (10.4, 5.4), (5.6, 6.0)]), "$mauve.dark")
+put("pronotum_gloss", "body", (8.2, -6.2), -18.0, ell(2.8, 0.8), "$white@0.3")
 # The head, low and forward, with the horn curving up off it.
 at, a = on_bone("head", 2.6, 0.4)
-put("head", "head", at, 0.0, ell(4.4, 3.8), "$heather.light", INK_HAIR)
+put("head", "head", at, 0.0, ell(4.4, 3.8), "$mauve.light", INK_HAIR)
 at, a = on_bone("head", 5.0, 3.2)
 put("mandible", "head", at, 18.0, poly([(-1.2, -1.0), (1.6, -0.8), (3.2, 0.6), (1.0, 0.8), (-1.2, 1.2)]), "$carapace.dark", INK_HAIR)
 # The horn: rooted on the snout, sweeping forward and up to a point that
@@ -177,7 +178,7 @@ put("eye_glint", "head", (at[0] + 0.4, at[1] - 0.4), 0.0, circ(0.42), "$white")
 
 # ---- near side: the legs over the belly
 for leg in ("near_h", "near_m"):
-    leg_parts(leg, "$heather.light", "$heather.light", "$heather.light", INK_HAIR)
+    leg_parts(leg, "$mauve", "$mauve", "$mauve", INK_HAIR)
 
 # ---- the load: a live Mite held up over the back in the claws, riding the
 # near claw. The far claw is behind it, the near claw closes over its front.
@@ -185,7 +186,7 @@ LOAD_AT = (0.0, -24.0)
 LOAD_ROT = -14.0
 LOAD_SCALE = 0.62
 RIG.use("load", "near_claw", LOAD_AT, "ss.enemy.imp", scale=[LOAD_SCALE, LOAD_SCALE], rot=LOAD_ROT)
-arm_parts("near", "$heather.light", "$heather", "$heather.light2", INK_HAIR)
+arm_parts("near", "$mauve", "$mauve.dark", "$mauve.light", INK_HAIR)
 
 RIG.check()
 
@@ -423,7 +424,7 @@ VARIANTS = {
 
 DESCRIPTION = (
     "The pan's heavy: the Bulwark's slot, and where the Bulwark is a wall this is a catapult. A rhinoceros beetle seen side-on — a high "
-    "lilac dome of closed elytra split along the top, a pronotum shield, a low head with a bone horn curving up off it — walking on four "
+    "dusty mauve dome of closed elytra split along the top, a pronotum shield, a low head with a bone horn curving up off it — walking on four "
     "legs, because the front pair are arms: they reach up and back over its own body and hold a live Mite (`use: ss.enemy.imp`, at 0.62) "
     "above the dome. The load is the silhouette: nothing else in the game carries something above itself, and the thing it carries is "
     "what it throws (EnemyType.shotSpawn — the game lobs a live Mite and stands it up where it lands). "

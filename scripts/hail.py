@@ -40,7 +40,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from rig import (Rig, R, D, r2, lerp, smooth, cyc, cyc_c, wrap, keyset, ik2 as ik,
                  poly, ell, circ, rect, bar, INK_THIN, INK_HAIR, write_doc)
 
-SIZE = 112
+SIZE = 108
 RIG = Rig()
 B = RIG.bones
 bone = RIG.bone
@@ -48,12 +48,15 @@ bone("body", None, (0.0, 0.0), 0.0)
 
 # ============================================================== legs
 # Eight legs, four a side, symmetric about the x axis. A leg's hip is on the
-# mass under the ring; its foot stands out past the stones; the knee is thrown
-# to the front on the fore pairs and to the back on the hind pairs, as a
-# spider's are, so the silhouette between the stones is a row of elbows.
+# mass under the ring; its foot comes out just past the stones; the knee is
+# thrown to the front on the fore pairs and to the back on the hind pairs, so
+# the silhouette between the stones is a row of short elbows. Short and thick:
+# the thing is a heavy dome that shuffles, and a first draw with femurs as long
+# as the mass's radius read as a spider standing over a ball rather than a
+# ball walking.
 LEG_ANGLES = {"1": 26.0, "2": 70.0, "3": 112.0, "4": 152.0}
-HIP_R, FOOT_R = 15.0, 46.0
-FEMUR, TIBIA = 23.0, 16.0
+HIP_R, FOOT_R = 18.0, 38.5
+FEMUR, TIBIA = 12.5, 10.5
 SIDES = {"r": 1, "l": -1}  # r: +y (the right side of a body facing +x, seen from above)
 def leg_angle(side, n): return SIDES[side] * LEG_ANGLES[n]
 def polar(a, r): return (r * math.cos(R(a)), r * math.sin(R(a)))
@@ -83,17 +86,17 @@ parts_order = []  # (kind, id) so the ring can be slotted in between the rig's p
 def leg_parts(side, n):
     L = f"leg_{side}{n}"
     at, a = on_bone(f"{L}_tibia")
-    put(f"{L}_tibia", f"{L}_tibia", at, a, bar(TIBIA, 4.4, 2.6, 0.8), "$steel.dark", HAIR_SLATE)
-    # A hooked foot at the tibia's tip, pointing on out along it.
-    at, a = on_bone(f"{L}_tibia", TIBIA)
-    put(f"{L}_foot", f"{L}_tibia", at, a, poly([(-0.6, -1.3), (1.8, -1.0), (3.6, 0.4), (1.8, 0.9), (-0.6, 1.2)]),
+    put(f"{L}_tibia", f"{L}_tibia", at, a, bar(TIBIA, 4.6, 3.6, 0.8), "$slate.light", HAIR_SLATE)
+    # A blunt pad at the tibia's tip: it stands on the sand rather than spears it.
+    at, a = on_bone(f"{L}_tibia", TIBIA + 0.4)
+    put(f"{L}_foot", f"{L}_tibia", at, a, ell(2.2, 2.4),
         "$slate.dark2")
     at, a = on_bone(f"{L}_femur")
-    put(f"{L}_femur", f"{L}_femur", at, a, bar(FEMUR, 5.0, 4.0, 1.0), "$slate.light", HAIR_SLATE)
+    put(f"{L}_femur", f"{L}_femur", at, a, bar(FEMUR, 5.8, 5.0, 1.0), "$slate.light", HAIR_SLATE)
     at, a = on_bone(f"{L}_femur", FEMUR * 0.45, -0.9 * SIDES[side])
     put(f"{L}_femur_lit", f"{L}_femur", at, a, rect(FEMUR * 0.6, 1.1, 0.55), "$steel@soft")
     at, a = on_bone(f"{L}_tibia")
-    put(f"{L}_knee", f"{L}_tibia", at, 0.0, circ(3.0), "$steel", HAIR_SLATE)
+    put(f"{L}_knee", f"{L}_tibia", at, 0.0, circ(2.6), "$steel", HAIR_SLATE)
 
 for side, n in LEGS:
     leg_parts(side, n)
@@ -207,7 +210,7 @@ def feet_at(fn):
 # at each footfall and turns a little after the sway.
 TETRA = {("r", "1"): 0.0, ("l", "2"): 0.0, ("r", "3"): 0.0, ("l", "4"): 0.0,
          ("l", "1"): 0.5, ("r", "2"): 0.5, ("l", "3"): 0.5, ("r", "4"): 0.5}
-STRIDE = 6.5
+STRIDE = 4.2
 def step(u):
     """Foot travel along x and how far it is drawn in, for a leg at phase `u` of its step."""
     u %= 1.0
@@ -277,7 +280,7 @@ def death_pose(t):
         fx, fy = foot_rest(s, n)
         a = leg_angle(s, n)
         kick = (3.0 if TETRA[(s, n)] == 0 else -3.0) * flinch
-        r = lerp(FOOT_R, HIP_R + 13.0, fold)
+        r = lerp(FOOT_R, HIP_R + 9.0, fold)
         a2 = a + SIDES[s] * (8.0 * fold) + kick
         return polar(a2, r)
     return plant(pose, feet_at(foot))
