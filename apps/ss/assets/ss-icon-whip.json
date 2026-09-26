@@ -11,8 +11,11 @@
   ],
   "variants": {
     "evolved": {
-      "description": "Gold-rimmed evolved twin (the old i_whip_evo).",
-      "set": { "tile.fill": "$gold" }
+      "description": "Cowboy. The rim goes gold the way every evolved slot does, and the one crescent becomes the two turns the evolution swings: the lash all the way round, then back again. Both are the same `ss.proj.slash` the base slot composes, placed on the centre of the circle its arc is cut from (local [6.4, 5.0], r 34.7) so they wind round one point. The forehand is the outer arc, open on the left; the backhand is the inner, turned 180° so it opens the other way. Two arcs at one radius closed into an O and read as an eye, not a swing — two radii make a spiral, and a spiral is a turn with a direction. Composed rather than drawn again, so retuning the sweep restyles both slots in the same edit.",
+      "set": { "tile.fill": "$gold", "glyph.at": [-2.18, -1.7], "glyph.scale": 0.34 },
+      "add": [
+        { "id": "glyph_back", "use": "ss.proj.slash", "at": [1.41, 1.1], "rot": 180, "scale": 0.22 }
+      ]
     }
   }
 }
