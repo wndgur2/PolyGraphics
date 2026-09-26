@@ -21,7 +21,7 @@ against the pan's sand. This rebuilds it on the shared rig (`rig.py`):
     with two huge bulging eyes, a white labrum, sickle mandibles that cross,
     a narrow barrel pronotum, long parallel elytra with cream lunules, and
     legs as long as the body
-  - metallic sage over moss darks — still the pan's one green besides the
+  - tarnished verdigris over moss darks — still the pan's one green besides the
     Locust, lifted to the colour a tiger beetle actually is, which is also
     what gets it off the sand
 
@@ -101,10 +101,10 @@ def rel(pts, origin): return [(x - origin[0], y - origin[1]) for x, y in pts]
 # ---- legs, under everything: dark moss femora, darker tibiae, near-black tarsi
 for s, n in LEG_IDS:
     L = B
-    at, a = on_bone(f"{s}{n}_tarsus"); put(f"leg_{s}{n}_tarsus", f"{s}{n}_tarsus", at, a, bar(L[f"{s}{n}_tarsus"].length, 1.4, 0.9, 0.4), "$sage.dark2", INK_HAIR)
-    at, a = on_bone(f"{s}{n}_tibia"); put(f"leg_{s}{n}_tibia", f"{s}{n}_tibia", at, a, bar(L[f"{s}{n}_tibia"].length, 2.0, 1.4), "$sage.dark", INK_HAIR)
-    at, a = on_bone(f"{s}{n}_femur"); put(f"leg_{s}{n}_femur", f"{s}{n}_femur", at, a, bar(L[f"{s}{n}_femur"].length, 3.0, 2.2), "$sage", INK_HAIR)
-    at, a = on_bone(f"{s}{n}_tibia"); put(f"leg_{s}{n}_knee", f"{s}{n}_tibia", at, 0.0, circ(1.4), "$sage.light")
+    at, a = on_bone(f"{s}{n}_tarsus"); put(f"leg_{s}{n}_tarsus", f"{s}{n}_tarsus", at, a, bar(L[f"{s}{n}_tarsus"].length, 1.4, 0.9, 0.4), "$verdigris.dark2", INK_HAIR)
+    at, a = on_bone(f"{s}{n}_tibia"); put(f"leg_{s}{n}_tibia", f"{s}{n}_tibia", at, a, bar(L[f"{s}{n}_tibia"].length, 2.0, 1.4), "$verdigris.dark", INK_HAIR)
+    at, a = on_bone(f"{s}{n}_femur"); put(f"leg_{s}{n}_femur", f"{s}{n}_femur", at, a, bar(L[f"{s}{n}_femur"].length, 3.0, 2.2), "$verdigris", INK_HAIR)
+    at, a = on_bone(f"{s}{n}_tibia"); put(f"leg_{s}{n}_knee", f"{s}{n}_tibia", at, 0.0, circ(1.4), "$verdigris.light")
 
 # ---- hind wings, folded back under the elytra at rest; enraged and the death
 # swing them out from under
@@ -112,7 +112,7 @@ WING = [(0, 0), (-6, -2.6), (-16, -5.4), (-26, -6.4), (-32, -5.2), (-34, -2.6), 
 for s in ("u", "d"):
     pts = WING if s == "u" else mirror_pts(WING)
     at, a = on_bone(f"wing_{s}")
-    put(f"hindwing_{s}", f"wing_{s}", at, 0.0, poly(pts), "$venom@heavy", INK_HAIR)
+    put(f"hindwing_{s}", f"wing_{s}", at, 0.0, poly(pts), "$husk@soft", INK_HAIR)
     vein = [(-2, -0.4), (-20, -4.2), (-30, -4.0), (-20, -3.2), (-2, 0.4)]
     put(f"hindvein_{s}", f"wing_{s}", at, 0.0, poly(vein if s == "u" else mirror_pts(vein)), "$moss.dark@soft")
 
@@ -141,33 +141,33 @@ for s in ("u", "d"):
     f = (lambda p: p) if s == "u" else mirror_pts
     hinge = HINGE[s]
     at, a = on_bone(f"ely_{s}")
-    put(f"elytron_{s}", f"ely_{s}", hinge, 0.0, poly(rel(f(ELY_U), hinge)), "$sage", INK_THIN)
+    put(f"elytron_{s}", f"ely_{s}", hinge, 0.0, poly(rel(f(ELY_U), hinge)), "$verdigris", INK_THIN)
     sheen = [(4.2, -9.4), (-4.0, -12.0), (-20.0, -12.2), (-33.0, -9.4), (-31.0, -6.6), (-18.0, -7.4), (-4.0, -7.6)]
-    put(f"sheen_{s}", f"ely_{s}", hinge, 0.0, poly(rel(f(sheen), hinge)), "$sage.light")
+    put(f"sheen_{s}", f"ely_{s}", hinge, 0.0, poly(rel(f(sheen), hinge)), "$verdigris.light")
     for name, pts in MAC_U.items():
         pid = f"spot_{s}_{name}"
         SPOT_IDS.append(pid)
         put(pid, f"ely_{s}", hinge, 0.0, poly(rel(f(pts), hinge)), "$husk")
 put("suture", "body", (-17.8, 0.0), 0.0, rect(48.0, 1.3, 0.6), "$moss.dark2")
-put("scutellum", "body", (6.2, 0.0), 0.0, poly([(1.6, 0), (-1.8, -1.6), (-3.2, 0), (-1.8, 1.6)]), "$sage.dark")
+put("scutellum", "body", (6.2, 0.0), 0.0, poly([(1.6, 0), (-1.8, -1.6), (-3.2, 0), (-1.8, 1.6)]), "$verdigris.dark")
 # The hive's organ rides the suture, on the back, where every body wears it.
 use("organ", "body", (-11.0, 0.0), "ss.lib.organ", scale=[1.25, 1.1])
 
 # ---- pronotum: a narrow barrel, two grooves across it
 PRONO = [(17.6, -4.2), (16.0, -6.2), (12.0, -7.0), (8.0, -6.6), (6.2, -5.0), (6.2, 5.0), (8.0, 6.6), (12.0, 7.0), (16.0, 6.2), (17.6, 4.2)]
-put("pronotum", "body", (0.0, 0.0), 0.0, poly(PRONO), "$sage", INK_THIN)
-put("pronotum_sheen", "body", (12.6, -3.2), -4.0, ell(3.8, 1.5), "$sage.light")
+put("pronotum", "body", (0.0, 0.0), 0.0, poly(PRONO), "$verdigris", INK_THIN)
+put("pronotum_sheen", "body", (12.6, -3.2), -4.0, ell(3.8, 1.5), "$verdigris.light")
 put("groove_f", "body", (15.6, 0.0), 0.0, rect(0.8, 8.4, 0.4), "$moss.dark2")
 put("groove_b", "body", (8.4, 0.0), 0.0, rect(0.8, 9.0, 0.4), "$moss.dark2")
 
 # ---- head: wider than the pronotum, the eyes bulging off its sides
 HEAD = [(16.6, -4.0), (18.8, -6.4), (22.0, -7.2), (25.6, -6.6), (28.4, -5.0), (30.0, -3.0), (30.4, 0.0),
         (30.0, 3.0), (28.4, 5.0), (25.6, 6.6), (22.0, 7.2), (18.8, 6.4), (16.6, 4.0)]
-put("head", "head", (0.0, 0.0), 0.0, poly(HEAD), "$sage", INK_THIN)
-put("head_sheen", "head", (22.6, -1.8), 0.0, ell(3.4, 1.4), "$sage.light")
+put("head", "head", (0.0, 0.0), 0.0, poly(HEAD), "$verdigris", INK_THIN)
+put("head_sheen", "head", (22.6, -1.8), 0.0, ell(3.4, 1.4), "$verdigris.light")
 put("vertex", "head", (21.0, 0.0), 0.0, rect(5.0, 1.0, 0.5), "$moss.dark2")
 for s, sg in (("u", -1), ("d", 1)):
-    put(f"eye_{s}", "head", (22.4, sg * 7.6), 0.0, ell(3.9, 3.3), "$frost", INK_THIN)
+    put(f"eye_{s}", "head", (22.4, sg * 7.6), 0.0, ell(3.9, 3.3), "$steel.light", INK_THIN)
     put(f"eye_{s}_core", "head", (23.4, sg * 8.2), 0.0, ell(1.5, 1.3), "$ink")
     put(f"eye_{s}_glint", "head", (21.6, sg * 6.6), 0.0, circ(0.8), "$white")
 # The labrum, white, between the mandibles — the tiger beetle's own tell.
@@ -322,7 +322,7 @@ animations["spit"] = {
 }
 DEATH_TS = [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 1.0]
 animations["death"] = {
-    "description": "The jaws snap once and fall wide, the legs kick out of step and then draw in and curl, the elytra part and the venom hind wings slide out from under them, the head droops, the antennae fall back, the eyes dim and the organ goes out. Still from 0.85.",
+    "description": "The jaws snap once and fall wide, the legs kick out of step and then draw in and curl, the elytra part and the pale hind wings slide out from under them, the head droops, the antennae fall back, the eyes dim and the organ goes out. Still from 0.85.",
     "duration": 0.8,
     "tracks": tracks(death_pose, DEATH_TS, [
         ("eye_u", "opacity", lambda t: 1.0 - 0.55 * smooth(0.2, 0.7, t)),
@@ -353,6 +353,7 @@ enraged_set.update({
     "jaw_u.scale": 1.15, "jaw_d.scale": 1.15, "jaw_u_tip.scale": 1.15, "jaw_d_tip.scale": 1.15,
     "jaw_u_tip.fill": "$ember.dark", "jaw_d_tip.fill": "$ember.dark",
     "eye_u.fill": "$ember", "eye_d.fill": "$ember",
+    "hindwing_u.fill": "$venom@heavy", "hindwing_d.fill": "$venom@heavy",
     "organ.scale": [1.6, 1.4],
     **{f"{p}.fill": "$ember" for p in SPOT_IDS},
 })
@@ -363,7 +364,7 @@ final_set = {
     "abdomen.fill": "$husk.dark",
     "suture.opacity": 0, "scutellum.fill": "$moss.dark2",
     "eye_u.fill": "$dead", "eye_d.fill": "$dead", "eye_u_glint.opacity": 0, "eye_d_glint.opacity": 0,
-    "pronotum.fill": "$moss.dark", "pronotum_sheen.fill": "$sage.dark", "head.fill": "$moss",
+    "pronotum.fill": "$moss.dark", "pronotum_sheen.fill": "$verdigris.dark", "head.fill": "$moss",
     "ant_u_1.fill": "$dead", "ant_u_2.fill": "$dead", "ant_d_1.fill": "$dead", "ant_d_2.fill": "$dead",
     "jaw_u.fill": "$white", "jaw_d.fill": "$white",
     "jaw_u.scale": 1.3, "jaw_d.scale": 1.3, "jaw_u_tip.scale": 1.3, "jaw_d_tip.scale": 1.3,
@@ -384,11 +385,11 @@ variants = {
 DESCRIPTION = (
     "The pan's second arrival, the one that comes for you: a tiger beetle, the fastest thing on legs, which runs so fast it goes blind and has to "
     "stop to see — the game runs it as a sprint and a rest (EnemyType.hopSpeed) and it fires only in the rest. Seen from above along +x and turned "
-    "by the game rather than mirrored, like the Courser: long parallel elytra in metallic sage with cream lunules (the humeral comma, the middle "
-    "band, the apical crescent), a narrow barrel pronotum, a head wider than it with two huge frost eyes bulging off its sides and a white labrum, "
+    "by the game rather than mirrored, like the Courser: long parallel elytra in tarnished verdigris with cream lunules (the humeral comma, the middle "
+    "band, the apical crescent), a narrow barrel pronotum, a head wider than it with two huge pale steel eyes bulging off its sides and a white labrum, "
     "six legs as long as the body, and jaws — two toothed husk sickles that cross, the read at any distance, and the mouth the glass fan leaves "
     "from (`ss.enemy.glassbolt`; the `spit` clip flares an aqua glint there). Green, the pan's one green besides the Locust, which is chaff — "
-    "lifted from moss to the metallic sage a tiger beetle actually is, over moss darks, which is also what lifts it off the sand. "
+    "a tarnished metallic green over moss darks: `$verdigris`, the pan's own dulled cut of green, so it sits in the pan's earth palette rather than glowing out of it (a first rebuild in mint `$sage` was the loudest thing on the sand). "
     "Built on a skeleton (scripts/forerunner.py): the legs are solved every frame to a foot on the ground, the antennae are chains, the mandibles "
     "and the elytra are hinged bones and the hind wings lie folded under the elytra. `sprint` is the idle and the run — two alternating tripods, "
     "the body surging and yawing off each push; `spit` the shot, a snap back and a drive forward with the jaws wide. `enraged` lifts and parts "
