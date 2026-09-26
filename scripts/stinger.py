@@ -188,6 +188,11 @@ def ell(rx, ry): return {"kind": "ellipse", "rx": r2(rx), "ry": r2(ry)}
 def circ(r): return {"kind": "circle", "r": r2(r)}
 def rect(w, h, corner=None): return {"kind": "rect", "w": r2(w), "h": r2(h), "corner": r2(corner if corner is not None else min(w, h) / 2)}
 INK_THIN = {"color": "$ink", "width": "thin"}
+# The game's adapters draw a stroke centred on the edge and over the fill, where
+# the gallery's SVG lays it under — so in play half of every outline eats into
+# the shape it rims. On the big masses that is a firmer edge; on a 4px tail
+# segment or a claw finger it is most of the part. Those take the hairline.
+INK_HAIR = {"color": "$ink", "width": "hair"}
 
 parts = []
 ATTACH = {}  # part id -> bone it rides
@@ -239,7 +244,7 @@ def claw_parts(side, arm, hand, finger, stroke):
 # ---- far side: legs, then the claw, both a step darker than the near side
 for leg in ("far_b", "far_m", "far_f"):
     leg_parts(leg, "$husk.dark", "$husk.dark", "$husk.dark", "$husk")
-claw_parts("far", "$husk.dark", "$husk", "$husk.dark", INK_THIN)
+claw_parts("far", "$husk.dark", "$husk", "$husk.dark", INK_HAIR)
 
 # ---- the tail, behind the body: segments darkening toward the root, a dark
 # joint between each pair, a pale keel along the outside of the curl
@@ -249,7 +254,7 @@ for i, (L, h, w0, w1) in enumerate(TAIL):
     at, a = on_bone(n)
     put(n, n, at, a, poly([(-0.8, -w0 * 0.42), (0.2, -w0 / 2), (L * 0.7, -w1 / 2 - 0.3), (L + 0.8, -w1 * 0.44),
                              (L + 0.8, w1 * 0.44), (L * 0.7, w1 / 2 + 0.3), (0.2, w0 / 2), (-0.8, w0 * 0.42)]),
-        TAIL_FILL[i], INK_THIN)
+        TAIL_FILL[i], INK_HAIR)
     at, a = on_bone(n, L * 0.45, -w0 * 0.22)
     put(f"{n}_keel", n, at, a, rect(L * 0.7, 0.8, 0.4), "$husk.light2@soft")
     at, a = on_bone(n, L + 0.2)
@@ -258,12 +263,12 @@ for i, (L, h, w0, w1) in enumerate(TAIL):
 # curling in toward the ventral side, which is the inside of the curl.
 at, a = on_bone("telson", 2.8)
 put("glow", "telson", at, a, circ(5.2), "$ember@ghost")
-put("vesicle", "telson", at, a, ell(3.6, 2.7), "$ember.dark", INK_THIN)
+put("vesicle", "telson", at, a, ell(3.6, 2.7), "$ember.dark", INK_HAIR)
 at, a = on_bone("telson", 3.2, -0.9)
 put("vesicle_core", "telson", at, a, ell(1.8, 1.1), "$ember")
 at, a = on_bone("telson", 5.6)
 ACULEUS = [(-0.6, -1.6), (1.8, -1.2), (3.6, -0.2), (4.8, 1.4), (5.2, 3.0), (4.2, 1.8), (2.6, 1.0), (0.6, 1.2), (-0.6, 1.4)]
-put("aculeus", "telson", at, a, poly(ACULEUS), "$bone.light", INK_THIN)
+put("aculeus", "telson", at, a, poly(ACULEUS), "$bone.light", INK_HAIR)
 
 # ---- the body: mesosoma (seven plates, the tail's root under the last) and
 # the carapace in front, low and wide, with the median eyes on a mound
@@ -283,12 +288,12 @@ put("carapace_gloss", "body", (8.2, -4.2), -6.0, ell(3.6, 0.9), "$white@0.3")
 put("eye_mound", "body", (9.6, -5.8), 0, ell(1.9, 1.1), "$husk")
 put("eye", "body", (9.9, -6.2), 0, circ(0.9), "$ink")
 put("eye_glint", "body", (10.2, -6.5), 0, circ(0.35), "$white")
-put("chelicera", "body", (14.4, 0.6), 0, ell(1.4, 1.1), "$husk.dark", INK_THIN)
+put("chelicera", "body", (14.4, 0.6), 0, ell(1.4, 1.1), "$husk.dark", INK_HAIR)
 
 # ---- near side: the claw, then the legs over everything
-claw_parts("near", "$husk.dark", "$husk.light", "$husk", INK_THIN)
+claw_parts("near", "$husk.dark", "$husk.light", "$husk", INK_HAIR)
 for leg in ("near_b", "near_m", "near_f"):
-    leg_parts(leg, "$husk", "$husk.dark", "$husk.dark", "$husk.light2", {"color": "$ink", "width": "hair"})
+    leg_parts(leg, "$husk", "$husk.dark", "$husk.dark", "$husk.light2", INK_HAIR)
 
 ids = [p["id"] for p in parts]
 assert len(ids) == len(set(ids)), "duplicate part ids"
