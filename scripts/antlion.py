@@ -108,9 +108,14 @@ put = RIG.put
 # Only the sack and the head take the thin outline; the thorax, the jaws and
 # everything narrower take the hairline (bone on the sand needs no more, and
 # every unit of ink is a unit of the body sunk into the floor).
-BODY, PALE, BAND, HEAD, HEAD_MARK = "$timber.light2", "$husk", "$timber.light", "$timber.light", "$timber"
-LEG_FEMUR, LEG_TIBIA, LEG_CLAW, LEG_KNEE = "$timber", "$timber", "$rust.light", "$timber.light"
-BRISTLE = "$timber"
+BODY, PALE, BAND, HEAD, HEAD_MARK = "$timber.light2", "$husk", "$husk.dark", "$timber.light2", "$timber.light"
+LEG_FEMUR, LEG_TIBIA, LEG_CLAW, LEG_KNEE = "$timber.light", "$timber.light", "$rust.light", "$timber.light2"
+BRISTLE = "$timber.light"
+# The body's own outline is its darkest timber rather than ink: on the pan's
+# mid-brown sand an ink rim round every leg and segment is most of what a
+# 50px body's mean comes to, and it pulls the whole larva down to the floor's
+# tone. The jaws and the head keep ink — they are the read.
+RIM = {"color": "$timber.dark2", "width": "hair"}
 
 # ---- the buried drawing, hidden on the base (every part at opacity 0; the
 # `buried` state turns them up and takes the body away). Drawn first: it is
@@ -142,9 +147,9 @@ for s, sg in SIDES.items():
 
 # ---- legs, under everything: claw, tibia, femur, and a knee over the joint
 for leg, n, s in leg_names():
-    at, a = on_bone(f"{leg}_claw"); put(f"leg_{leg}_claw", f"{leg}_claw", at, a, bar(1.8, 1.1, 0.5, 0.4), LEG_CLAW, INK_HAIR)
-    at, a = on_bone(f"{leg}_tibia"); put(f"leg_{leg}_tibia", f"{leg}_tibia", at, a, bar(LEGS[n][3], 2.0, 1.3), LEG_TIBIA, INK_HAIR)
-    at, a = on_bone(f"{leg}_femur"); put(f"leg_{leg}_femur", f"{leg}_femur", at, a, bar(LEGS[n][2], 2.6, 2.1), LEG_FEMUR, INK_HAIR)
+    at, a = on_bone(f"{leg}_claw"); put(f"leg_{leg}_claw", f"{leg}_claw", at, a, bar(1.8, 1.1, 0.5, 0.4), LEG_CLAW, RIM)
+    at, a = on_bone(f"{leg}_tibia"); put(f"leg_{leg}_tibia", f"{leg}_tibia", at, a, bar(LEGS[n][3], 2.0, 1.3), LEG_TIBIA, RIM)
+    at, a = on_bone(f"{leg}_femur"); put(f"leg_{leg}_femur", f"{leg}_femur", at, a, bar(LEGS[n][2], 2.6, 2.1), LEG_FEMUR, RIM)
     at, a = on_bone(f"{leg}_tibia"); put(f"leg_{leg}_knee", f"{leg}_tibia", at, 0.0, circ(1.2), LEG_KNEE)
 
 # ---- the abdomen, rear segment first (a front segment laps over the one
@@ -176,7 +181,7 @@ SPOT = {"abd_0": 0.34, "abd_1": 0.36, "abd_2": 0.3}
 # are told apart by their bands rather than by a black seam each.
 for bn, c, rx, ry in SEGS:
     at, a = on_bone(bn, c)
-    put(f"{bn}_rim", bn, at, 0.0, ell(rx, ry), BODY, INK_HAIR)
+    put(f"{bn}_rim", bn, at, 0.0, ell(rx, ry), BODY, RIM)
 for bn, c, rx, ry in SEGS:
     at, a = on_bone(bn, c)
     put(bn, bn, at, 0.0, ell(rx - 0.1, ry - 0.1), BODY)
@@ -199,7 +204,7 @@ at, _ = on_bone("abd_1", 3.4)
 RIG.use("organ", "abd_1", at, "ss.lib.organ", scale=[0.62, 0.56])
 
 # ---- the thorax: a pale shield with a darker saddle
-put("thorax", "thorax", (0.8, 0.0), 0.0, ell(4.2, 4.8), BODY, INK_HAIR)
+put("thorax", "thorax", (0.8, 0.0), 0.0, ell(4.2, 4.8), BODY, RIM)
 put("thorax_pale", "thorax", (0.6, 0.0), 0.0, ell(3.2, 3.6), PALE)
 put("saddle", "thorax", (0.6, 0.0), 0.0, poly([(1.8, -2.2), (2.6, 0.0), (1.8, 2.2), (-1.2, 1.6), (-2.0, 0), (-1.2, -1.6)]), BAND)
 put("thorax_gloss", "thorax", (0.0, -2.8), -10.0, ell(1.8, 0.7), "$white@soft")
@@ -222,7 +227,7 @@ for s in ("u", "d"):
 # ---- the head: a broad flat capsule, wider than long, darker than the body,
 # with the eye tubercles standing off its front corners
 HEAD_PTS = [(-2.6, -2.8), (-0.8, -4.2), (2.2, -4.8), (4.2, -4.2), (5.0, -2.4), (5.2, 0.0), (5.0, 2.4), (4.2, 4.2), (2.2, 4.8), (-0.8, 4.2), (-2.6, 2.8)]
-put("head", "head", (6.0, 0.0), 0.0, poly(HEAD_PTS), HEAD, INK_THIN)
+put("head", "head", (6.0, 0.0), 0.0, poly(HEAD_PTS), HEAD, INK_HAIR)
 put("head_mark", "head", (6.6, 0.0), 0.0, poly([(-2.4, 0), (0.0, -1.8), (2.8, -1.0), (3.2, 0.0), (2.8, 1.0), (0.0, 1.8)]), HEAD_MARK)
 put("head_gloss", "head", (5.2, -2.8), -8.0, ell(1.8, 0.6), "$white@soft")
 for s in ("u", "d"):
