@@ -112,6 +112,13 @@ A body drawn on a skeleton carries it (`skeleton`: named joints and the bones be
 
 `sheet.ts` is the same loop for a clip: one PNG per asset with the base render, the silhouette, two game-scale copies, and then the animation **posed frame by frame the way the engine adapters pose it** — offsets in the parent frame, rotation about the part's own origin — so a leg hinged at the hip or a ball on a chain can be judged without a browser. It also prints the rendered bounds against the canvas, because a feeler that crosses the edge is invisible in the SVG and a hard cut in the bake. It is how the survivors' walk cycles were tuned, and it caught a chain that let go of the hand mid-stride.
 
+`motion.ts` is the number under that picture: it poses a clip the same way, rasterises every frame at the scale the game draws it (1.2 by default), and reports how far the silhouette's furthest edge travels across the loop, in screen pixels. A clip whose keys look busy can still move a pixel on screen — a tail swaying five degrees about each segment's own centre, a leg swinging four — and this is where that shows up before anyone plays it. The walks that read sit at 8px and up; the Salt Pan roster's loops measured 3–5 when the Stinger was rebuilt on a rig (`scripts/stinger.py`) and went to 9.
+
+```bash
+npx tsx scripts/motion.ts ss.enemy.stinger ss.enemy.courser --all   # every clip of each
+npx tsx scripts/motion.ts --match ss.enemy.                          # the whole roster, first clip each
+```
+
 ## Asset document
 
 ```jsonc
