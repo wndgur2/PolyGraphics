@@ -30,9 +30,8 @@ gets, and nobody could see it. It was also the colour of the floor it lies on
 
 The buried state is the same document with the body taken off: a mound of
 pale sand with a dark pit in it, the two ember tips scissoring up out of the
-pit, and a ripple — a lit crest over a dark trough — thrown out from under the
-mound once a loop, big, with a fainter echo after it, so it reads on the sand
-as a pulse and not as a texture.
+pit, and two rings round the mound breathing against each other — the inner
+one swelling and fading while the outer one draws in and brightens.
 """
 import math, os, sys
 
@@ -121,11 +120,11 @@ RIM = {"color": "$timber.dark2", "width": "hair"}
 # `buried` state turns them up and takes the body away). Drawn first: it is
 # the floor.
 def hidden(p): p["opacity"] = 0; return p
-RIPPLE_R = 9.0
 MOUND = (0.0, 0.0)
-for k in ("echo", "wave"):  # the echo under the wave
-    hidden(put(f"ripple_{k}_trough", "thorax", (0.5, 0.7), 0, {"kind": "ring", "r": RIPPLE_R, "width": 1.7}, "$sand.dark2"))
-    hidden(put(f"ripple_{k}", "thorax", (0.0, 0.0), 0, {"kind": "ring", "r": RIPPLE_R, "width": 1.4}, "$sand.light2"))
+# Two rings round the mound, the outer one under: they breathe against each
+# other in `creep` (see RIPPLE_KEYS).
+hidden(put("ripple_b", "thorax", (0.0, 0.0), 0, {"kind": "ring", "r": 15.0, "width": 1.4}, "$sand.light@soft"))
+hidden(put("ripple_a", "thorax", (0.0, 0.0), 0, {"kind": "ring", "r": 10.0, "width": 1.6}, "$sand.light@heavy"))
 hidden(put("mound_shade", "thorax", (0.9, 1.1), 0, ell(10.0, 8.2), "$sand.dark"))
 hidden(put("mound", "thorax", MOUND, 0, ell(9.6, 7.8), "$sand.light"))
 hidden(put("mound_lit", "thorax", (-2.0, -2.2), -14, ell(5.8, 3.6), "$sand.light2"))
@@ -300,38 +299,21 @@ def crawl_pose(t): return gait(t)
 # ---- creep: under the sand (1.1s). The body under the mound crawls low and
 # slow — the `buried` state takes the body off and leaves what that does to the
 # sand: the mound shoving forward and swelling on each push of the thing under
-# it, a ripple thrown out from under it once a loop (crest over trough, a
-# fainter ridge close behind), grains rolling off its shoulders, and the lit
+# it, the two rings round it breathing against each other, grains rolling off
+# its shoulders, and the lit
 # tips of the jaws scissoring in the pit.
 def creep_pose(t): return gait(t, stride=3.0, tuck=1.4, sway=1.0, yaw=5.0, surge=0.8, wag=8.0, jaw=0.8)
 
-# The ripple is a train of two ridges thrown out together — the ridge and a
-# fainter one after it — that spreads to twice the mound's width and dies, and
-# then the sand is still for a beat before the next. A pulse with a gap in it
-# reads as something moving under there; rings that are always present read as
-# a pattern printed on the floor.
-RING_S0, RING_S1 = 0.95, 2.2   # from the mound's edge out to a little over twice it
-RING_LIFE = 0.86               # of the loop; the rest is the still beat
-RING_DELAY = {"wave": 0.0, "echo": 0.13}
-RING_PEAK = {"wave": 1.0, "echo": 0.5}
-def ring_u(t, k): return (t - RING_DELAY[k]) % 1.0
-def ring_scale(k):
-    def f(t):
-        u = ring_u(t, k)
-        if u <= RING_LIFE:
-            return lerp(RING_S0, RING_S1, 1 - (1 - u / RING_LIFE) ** 1.2)  # thrown out, slowing a little as it spreads
-        return lerp(RING_S1, RING_S0, smooth(RING_LIFE, 1.0, u))  # home again unseen
-    return f
-def ring_alpha(k):
-    def f(t):
-        u = ring_u(t, k)
-        return RING_PEAK[k] * smooth(0.0, 0.05, u) * (1 - smooth(0.66, RING_LIFE, u))
-    return f
-def creep_ts():
-    ts = set(r2(i / 22) for i in range(23))
-    for d in RING_DELAY.values():
-        ts.add(r2(d))
-    return sorted(ts)
+# The rings breathe against each other, once a loop: the inner one swells and
+# fades while the outer one draws in and brightens, then back. Keyed at the
+# ends and the middle and eased, so the loop has no seam.
+RIPPLE_KEYS = {
+    ("ripple_a", "scale"): [[0.0, 0.8], [0.5, 1.15], [1.0, 0.8]],
+    ("ripple_a", "opacity"): [[0.0, 0.5], [0.5, 0.2], [1.0, 0.5]],
+    ("ripple_b", "scale"): [[0.0, 1.1], [0.5, 0.85], [1.0, 1.1]],
+    ("ripple_b", "opacity"): [[0.0, 0.22], [0.5, 0.5], [1.0, 0.22]],
+}
+def creep_ts(): return sorted(set(r2(i / 22) for i in range(23)))
 def heave(t):
     """The shove from under: twice a loop, a quick swell and a slower fall."""
     return max(0.0, cyc(2 * t, 0.1)) ** 1.3
@@ -342,10 +324,8 @@ def creep_sand_tracks(ts):
         ks = [[r2(t), r2(fn(t))] for t in ts]
         ks[-1][1] = ks[0][1]  # a loop
         out.append({"part": pid, "prop": prop, "keys": ks, "ease": "linear"})
-    for k in RING_DELAY:
-        for pid in (f"ripple_{k}_trough", f"ripple_{k}"):
-            T(pid, "scale", ring_scale(k))
-            T(pid, "opacity", ring_alpha(k))
+    for (pid, prop), keys in RIPPLE_KEYS.items():
+        out.append({"part": pid, "prop": prop, "keys": keys})
     for pid, amp in (("mound", 0.09), ("mound_shade", 0.1), ("mound_lit", 0.12), ("pit", 0.25)):
         T(pid, "scale", lambda t, amp=amp: 1.0 + amp * heave(t))
         T(pid, "x", lambda t, pid=pid: mound_dx(t) * (1.4 if pid == "pit" else 1.0))
@@ -407,7 +387,7 @@ animations["crawl"] = {
 }
 TS_CREEP = creep_ts()
 animations["creep"] = {
-    "description": "Under the sand, which is what the `buried` states play: the mound shoves forward and swells on each push of the thing under it and falls back; once a loop a ripple — a lit crest over a dark trough, a fainter ridge close behind it — is thrown out from under it to twice its width and dies, and the sand is still for a beat; grains roll off its shoulders and the two lit jaw tips scissor in the pit. On the base drawing (never shown buried) it is the same crawl, low and slow.",
+    "description": "Under the sand, which is what the `buried` states play: the mound shoves forward and swells on each push of the thing under it and falls back; two rings breathe round it against each other; grains roll off its shoulders and the two lit jaw tips scissor in the pit. On the base drawing (never shown buried) it is the same crawl, low and slow.",
     "duration": 1.1,
     "tracks": tracks(creep_pose, TS_CREEP, skip=BUR_ONLY) + creep_sand_tracks(TS_CREEP),
 }
@@ -452,7 +432,7 @@ variants = {
         "set": ELITE_SET,
     },
     "buried": {
-        "description": "Under the sand: the body is gone and what is left is a mound of paler sand with a dark pit in it, the two lit jaw tips scissoring up out of the pit, and a ripple — a lit crest over a dark trough — thrown out from under it once a loop, a fainter ridge close behind it, then a still beat. The state the game spawns it in (EnemyType.ambush); it plays `creep`.",
+        "description": "Under the sand: the body is gone and what is left is a mound of paler sand with a dark pit in it, the two lit jaw tips scissoring up out of the pit, and two rings round it breathing against each other. The state the game spawns it in (EnemyType.ambush); it plays `creep`.",
         "remove": BODY_PARTS,
         "set": BURIED_SET,
         "animations": ["creep"],
@@ -465,8 +445,6 @@ variants = {
             **BURIED_SET,
             "mound.fill": "$husk.dark",
             "mound_lit.fill": "$husk",
-            "ripple_wave.fill": "$husk",
-            "ripple_echo.fill": "$husk",
             "sand_jaw_u.fill": "$bone.light2",
             "sand_jaw_d.fill": "$bone.light2",
             "sand_tip_u.fill": "$ember.light",
@@ -483,7 +461,7 @@ DESCRIPTION = (
     "sickles curving in on each other, toothed on the inside, the last third of each lit ember, because the tips are the only part of it "
     "that shows when it is under. Which it usually is: the game spawns it in the `buried` state (EnemyType.ambush) and swaps to this "
     "drawing when it comes up. `buried` takes the body off and leaves a mound of pale sand with a dark pit, the two lit tips scissoring "
-    "up out of it and a ripple thrown out from under it once a loop, playing `creep`; `elite_buried` is the elite patch and the buried "
+    "up out of it and two rings breathing round it, playing `creep`; `elite_buried` is the elite patch and the buried "
     "patch in one, because a variant is a patch on the base and the game cannot stack two. Built on a skeleton (scripts/antlion.py): the "
     "legs are solved to planted feet, the abdomen is a chain that swings after the body, and each jaw is hinged at the head. Gameplay "
     "radius 11. The `death` clip snaps the jaws once on nothing and lets them fall open; a body killed while buried comes up to play it."
