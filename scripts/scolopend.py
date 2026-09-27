@@ -21,8 +21,9 @@ changes the drawing and the gait:
     half-width), blunt, a step darker than the plates but close to them. Each is
     a femur and a tibia solved every frame to a foot (two-bone IK); they step
     once a loop in a slow metachronal wave, a trundle rather than a scuttle
-  - the head leads: a round shield with two readable eyes (`eye_a`, `eye_b`)
-    and the hive's organ, short thick two-link antennae that sway, small blunt
+  - the head leads: a round shield with a darker brow rim and the hive's
+    organ, and no eyes; long three-link antennae arcing forward and out, calm
+    and tapering, that sway, lay back and flick; small blunt
     bone fangs with a venom bead that still snap in the strike, and two short
     tail prongs behind
 
@@ -95,7 +96,7 @@ for i in range(N):
 HEAD_LEN = 11.0
 front = (J[0][0] + (HEAD_LEN + 7.0) * unit(HEAD_REST)[0], J[0][1] + (HEAD_LEN + 7.0) * unit(HEAD_REST)[1])
 back = (J[-1][0] - 9.0 * unit(REST_H[-1])[0], J[-1][1] - 9.0 * unit(REST_H[-1])[1])
-SHIFT = (-(front[0] + back[0]) / 2 - 1.5, -(front[1] + back[1]) / 2 - 2.0)
+SHIFT = (-(front[0] + back[0]) / 2 - 5.5, -(front[1] + back[1]) / 2 - 2.0)
 J = [(x + SHIFT[0], y + SHIFT[1]) for x, y in J]
 
 # ============================================================== skeleton
@@ -124,12 +125,14 @@ def local_to_world(origin, heading, along, across):
 def head_pt(along, across): return local_to_world(J[0], HEAD_REST, along, across)
 SIDES = (("l", -1), ("r", 1))     # the animal's left is -across (up the screen at rest)
 
-# Antennae: two short, thick links from the front of the shield.
-ANT = [5.0, 4.4]
-ANT_W = [(2.3, 2.0), (2.0, 1.3)]
-ANT_SPLAY, ANT_BEND = 34.0, 10.0
+# Antennae: three tapering links, about 1.3 head lengths, arcing forward and
+# out from the front of the shield.
+ANT = [6.4, 5.8, 5.2]
+ANT_W = [(2.2, 1.8), (1.8, 1.3), (1.3, 0.6)]
+ANT_FILL = ["$ember.dark", "$ember.dark", "$chitin.dark"]
+ANT_SPLAY, ANT_BEND = 16.0, 15.0
 for sd, sg in SIDES:
-    p = head_pt(9.6, sg * 2.2)
+    p = head_pt(10.2, sg * 2.0)
     h = HEAD_REST + sg * ANT_SPLAY
     for k, Lk in enumerate(ANT):
         b = bone(f"ant_{sd}{k}", "head" if k == 0 else f"ant_{sd}{k - 1}", p, h, Lk)
@@ -235,7 +238,7 @@ for i in reversed(LEG_PLATES):
 for sd, sg in SIDES:
     for k, Lk in enumerate(ANT):
         at, a = on_bone(f"ant_{sd}{k}")
-        put(f"ant_{sd}{k}", f"ant_{sd}{k}", at, a, bar(Lk, *ANT_W[k], 1.0), ["$spore.dark", "$spore.dark2"][k], INK_HAIR)
+        put(f"ant_{sd}{k}", f"ant_{sd}{k}", at, a, bar(Lk, *ANT_W[k], 0.7), ANT_FILL[k], INK_HAIR)
 def fang(Lf, c, w0=1.35, bend=0.07):
     """A small blunt fang along +x, `Lf` long, curving toward `c` (±1), ending in a rounded tip."""
     xs = [Lf * k / 5 for k in range(6)]
@@ -261,19 +264,24 @@ for i in range(N - 1, -1, -1):
     put(f"band_{i}", f"s{i}", c, h, seam_shape(HW[i]), SEAM_FILL)
     put(f"gloss_{i}", f"s{i}", local_to_world(c, h, 1.1, -HW[i] * 0.28), h, ell(1.4, HW[i] * 0.48), "$white@0.2")
 
-# ---- the head: a round shield, the organ on its crown, two eyes at the front
+# ---- the head: a round shield, the organ on its crown, a darker brow at the
+# front — no eyes
 HEAD_SHAPE = poly(superellipse(6.6, 7.6, 2.3, 32, 0.08, 4.4))
 put("head", "head", J[0], HEAD_REST, HEAD_SHAPE, "$oxblood", INK_THIN)
 put("head_gloss", "head", head_pt(4.0, -3.6), HEAD_REST - 20, ell(2.8, 1.4), "$white@0.2")
 use("organ", "head", head_pt(3.2, 0.0), "ss.lib.organ", scale=0.66)
-for sd, sg in SIDES:
-    x = "a" if sg < 0 else "b"
-    # slanted in toward the midline at the front: a hunter's look, not a doll's
-    put(f"eye_{x}", "head", head_pt(7.9, sg * 4.1), HEAD_REST + sg * 28, ell(1.8, 1.15), "$dead", INK_HAIR)
-    put(f"glint_{x}", "head", head_pt(8.5, sg * 4.0), HEAD_REST, circ(0.42), "$white@0.8")
+# The brow: a darker rim across the front of the shield, which is what makes
+# it read as a head without eyes.
+def brow_shape():
+    a, b, x0 = 6.6, 7.6, 4.4
+    rim = [p for p in superellipse(a, b * 0.97, 2.3, 48, 0.08, x0) if p[0] - x0 > a * 0.35]
+    rim.sort(key=lambda p: p[1])
+    inner = [(x - 2.0 * (1 - abs(y) / b) ** 0.7 - 0.35, y) for x, y in reversed(rim)]
+    return poly(rim + inner)
+put("brow", "head", J[0], HEAD_REST, brow_shape(), "$oxblood.dark")
 
 RIG.check()
-HEAD_GROUP = ["head", "head_gloss", "organ", "eye_a", "eye_b", "glint_a", "glint_b"]
+HEAD_GROUP = ["head", "brow", "head_gloss", "organ"]
 
 # ============================================================== posing
 # A pose is asked for as plain numbers and turned into the rig's pose here:
@@ -322,9 +330,9 @@ def build(seg, head=0.0, trunk=(0.0, 0.0), feet=None, ant=None, fc=None, ult=Non
 # ---- crawl
 def ant_crawl(t):
     def f(sd, sg, k):
-        # a slow sway, the pair in antiphase, the tip a little behind
+        # a slow sway, the pair in antiphase, each link a little behind the last
         ph = 0.0 if sg < 0 else 0.5
-        return [9.0, 6.0][k] * cyc(t, ph - 0.1 * k)
+        return [8.0, 6.0, 6.0][k] * cyc(t, ph - 0.1 * k)
     return f
 def fc_crawl(t):
     def f(sd, sg, k):
@@ -363,9 +371,9 @@ def coil_feet(g):
 # The fangs: a pair of deltas (base, fang), + turning each side outward.
 FC_OPEN = (14.0, 32.0)
 FC_SHUT = (-5.0, -12.0)
-ANT_BACK = (24.0, 10.0)
+ANT_BACK = (34.0, 10.0, 6.0)      # + turns each antenna outward and back
 def coil_bits(g, shiver=0.0):
-    ant = lambda sd, sg, k: -sg * ANT_BACK[k] * g + shiver * (1 if k % 2 else -1) * 2.5
+    ant = lambda sd, sg, k: sg * ANT_BACK[k] * g + shiver * (1 if k % 2 else -1) * 2.5
     fc = lambda sd, sg, k: sg * FC_OPEN[k] * g
     ult = lambda sd, sg, k: -sg * (18.0 if k == 0 else 8.0) * g
     return ant, fc, ult
@@ -392,7 +400,8 @@ def strike_pose(t):
     lunge = lerp(lunge, 0.0, smooth(0.36, 1.0, t))
     snap = smooth(0.08, 0.22, t)
     back = smooth(0.4, 1.0, t)
-    ant = lambda sd, sg, k: lerp(-sg * ANT_BACK[k] * max(g, 0.0) * (1 - snap) - sg * [28.0, 12.0][k] * snap, 0.0, back)
+    # laid back, then flicked forward as the fangs snap, then home
+    ant = lambda sd, sg, k: lerp(sg * ANT_BACK[k] * max(g, 0.0) * (1 - snap) - sg * [18.0, 10.0, 8.0][k] * snap, 0.0, back)
     fc = lambda sd, sg, k: lerp(lerp(sg * FC_OPEN[k], sg * FC_SHUT[k], snap), 0.0, back)
     ult = lambda sd, sg, k: lerp(-sg * (18.0 if k == 0 else 8.0), sg * (8.0 if k == 0 else 10.0), smooth(0.05, 0.4, t)) * (1 - back)
     seg = [COIL_S[i] * g for i in range(N)]
@@ -411,7 +420,7 @@ def strike_pose(t):
 # back over the shield, the fangs shut, the tail prongs together
 def dive_feet(i, sg):
     return (-3.8, sg * (HW[i] * 0.9 + 0.8))
-DIVE_ANT = lambda sd, sg, k: -sg * [40.0, 8.0][k]
+DIVE_ANT = lambda sd, sg, k: sg * [128.0, 6.0, -5.0][k]     # folded back flat along the side of the shield
 DIVE_FC = lambda sd, sg, k: sg * FC_SHUT[k]
 DIVE_ULT = lambda sd, sg, k: sg * (12.0 if k == 0 else 4.0)
 DIVE_SEG = [(AX - REST_H[i]) * 0.9 for i in range(N)]    # laid nearly straight down the line
@@ -459,7 +468,8 @@ def surface_pose(t):
         return (lerp(a0, a1, u) + 0.8 * math.sin(math.pi * u), lerp(c0, c1, u) + sg * wide)
     ua = smooth(0.0, 0.7, t)
     fc_open = lambda sd, sg, k: lerp(DIVE_FC(sd, sg, k), 0.0, smooth(0.0, 0.8, t)) + sg * FC_OPEN[k] * 1.1 * math.sin(math.pi * smooth(0.05, 0.8, t))
-    ant = lambda sd, sg, k: lerp(DIVE_ANT(sd, sg, k), 0.0, ua) + sg * [14.0, 6.0][k] * math.sin(math.pi * ua)
+    # springing out and a little past forward, then settling
+    ant = lambda sd, sg, k: lerp(DIVE_ANT(sd, sg, k), 0.0, ua) - sg * [16.0, 8.0, 8.0][k] * math.sin(math.pi * ua)
     ult = lambda sd, sg, k: lerp(DIVE_ULT(sd, sg, k), 0.0, smooth(0.45, 1.0, t)) - sg * 12.0 * math.sin(math.pi * smooth(0.45, 1.0, t))
     return build(seg, head, (rise, 0.0), feet, ant, fc_open, ult)
 
@@ -482,7 +492,8 @@ def death_pose(t):
         return (lerp(a, -1.0, u), lerp(c, sg * (HW[i] * 0.78), u))
     shut = smooth(0.0, 0.16, t)
     fc = lambda sd, sg, k: sg * FC_SHUT[k] * 1.2 * shut
-    ant = lambda sd, sg, k: -sg * [28.0, 16.0][k] * smooth(0.15, 0.55, t)
+    # drooping out and curling in at the tips
+    ant = lambda sd, sg, k: sg * [22.0, -18.0, -30.0][k] * smooth(0.15, 0.6, t)
     ult = lambda sd, sg, k: -[14.0, 18.0][k] * smooth(0.55, 0.85, t)
     return build(seg, head, (lerp(0.0, -1.5, smooth(0.2, 0.7, t)), 0.0), feet, ant, fc, ult)
 
@@ -575,7 +586,9 @@ enraged_set.update({
     "head.fill": "$dead", "head_gloss.fill": "$white@0.12",
     "fc_l0.fill": "$bone", "fc_r0.fill": "$bone", "fc_l1.fill": "$white", "fc_r1.fill": "$white",
     "venom_l.fill": "$white", "venom_r.fill": "$white",
-    "eye_a.fill": "$ember", "eye_b.fill": "$ember",
+    "brow.fill": "$ember.dark",
+    "ant_l0.fill": "$bone.dark", "ant_r0.fill": "$bone.dark", "ant_l1.fill": "$bone.dark", "ant_r1.fill": "$bone.dark",
+    "ant_l2.fill": "$bone.dark2", "ant_r2.fill": "$bone.dark2",
     "organ.scale": 0.76,
 })
 FINAL_PLATES = ["$sand", "$sand.light"] * (N // 2)
@@ -587,13 +600,14 @@ for lid in LEG_IDS: final_set[f"{lid}.fill"] = "$sand.dark" if lid.endswith("_f"
 final_set.update({
     "ult_l0.fill": "$sand.dark", "ult_r0.fill": "$sand.dark", "ult_l1.fill": "$soil.light", "ult_r1.fill": "$soil.light",
     "ant_l0.fill": "$sand.light", "ant_r0.fill": "$sand.light", "ant_l1.fill": "$sand", "ant_r1.fill": "$sand",
+    "ant_l2.fill": "$sand.dark", "ant_r2.fill": "$sand.dark", "brow.fill": "$sand.dark2",
     "head.fill": "$sand.dark", "head_gloss.fill": "$white@0.08",
     "fc_l0.fill": "$bone", "fc_r0.fill": "$bone", "fc_l1.fill": "$bone.light", "fc_r1.fill": "$bone.light",
     "venom_l.fill": "$venom.light", "venom_r.fill": "$venom.light",
 })
 variants = {
     "enraged": {
-        "description": "Phase two: the body goes hot from the middle out — the plates at the centre flare to the lightest amber and the seams burn — the legs bleach to bone, the head blackens with its eyes lit ember, and the venom at the fang tips stops being a highlight and starts being the brightest thing on the creature.",
+        "description": "Phase two: the body goes hot from the middle out — the plates at the centre flare to the lightest amber and the seams burn — the legs bleach to bone, the head blackens under a brow gone ember, the antennae bleach with the legs, and the venom at the fang tips stops being a highlight and starts being the brightest thing on the creature.",
         "scale": 1.08,
         "set": enraged_set,
     },
@@ -609,8 +623,8 @@ DESCRIPTION = (
     "What an ant nest is actually afraid of, and it was already down here before you were. A centipede seen from above along its travel axis "
     "and turned by the game rather than mirrored; the rest pose's axis sits 18.6 degrees above +x, which is the `faceOffset` the game pairs with "
     "this document. Drawn stylised rather than skittering: ten rounded amber plates overlapping like an armoured train, each with a thin "
-    "oxblood seam at its rear margin, under a round oxblood head shield carrying the hive's organ and two readable eyes; small blunt bone "
-    "fangs with a venom bead closing in front of it; short thick two-link antennae; five pairs of short, chunky legs on every other plate, a "
+    "oxblood seam at its rear margin, under a round oxblood head shield carrying the hive's organ under a darker brow, and no eyes; small blunt "
+    "bone fangs with a venom bead closing in front of it; long three-link antennae arcing forward and out; five pairs of short, chunky legs on every other plate, a "
     "step darker than the plates; and two short tail prongs behind. "
     "Built on a skeleton (scripts/scolopend.py): the spine is a chain rooted mid-body, so a bend put in at the head travels down it and nothing "
     "parts at a joint; every leg is a femur and a tibia solved each frame to a foot. `crawl` is a slow body wave head to tail over a gentle "
