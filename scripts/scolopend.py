@@ -23,9 +23,10 @@ changes the drawing and the gait:
     once a loop in a slow metachronal wave, a trundle rather than a scuttle
   - the head leads: a round shield with a darker brow rim and the hive's
     organ, and no eyes; long three-link antennae arcing forward and out, calm
-    and tapering, that sway, lay back and flick; small blunt
-    bone fangs with a venom bead that still snap in the strike, and two short
-    tail prongs behind
+    and tapering, that sway, lay back, flick and stream back in the dash; a
+    drill jaw — two half-cones that close into one twist-drill bit leading the
+    head, splay open like pincers in the windup and slam shut on the release —
+    and two short tail prongs behind
 
 Seen from above along its travel axis, and turned by the game (feelers
 `EnemyType.turns`, `faceOffset: 18.6`): the rest pose's travel axis — the
@@ -132,18 +133,20 @@ ANT_W = [(2.2, 1.8), (1.8, 1.3), (1.3, 0.6)]
 ANT_FILL = ["$ember.dark", "$ember.dark", "$chitin.dark"]
 ANT_SPLAY, ANT_BEND = 16.0, 15.0
 for sd, sg in SIDES:
-    p = head_pt(10.2, sg * 2.0)
+    p = head_pt(8.2, sg * 3.9)
     h = HEAD_REST + sg * ANT_SPLAY
     for k, Lk in enumerate(ANT):
         b = bone(f"ant_{sd}{k}", "head" if k == 0 else f"ant_{sd}{k - 1}", p, h, Lk)
         p = b.end(); h += sg * ANT_BEND
 
-# Forcipules: a short base out from under the shield and a small blunt fang
-# turned back in, so the pair close in front of the head.
-FC0, FC1 = 3.0, 4.6
+# The drill jaw: two half-cones hinged at the outer corners of their bases on
+# the front of the shield. Closed they are one conical bit along the head's
+# axis, about 0.7 head lengths clear of the shield; opened (+ turns each half
+# outward) they are a pair of pincers.
+JAW_L, JAW_W = 10.0, 3.7           # bit length from the hinge line, and the half-width of its base
+JAW_AT = 9.8                       # the hinge line, along the head bone (the shield's front is at 11)
 for sd, sg in SIDES:
-    b0 = bone(f"fc_{sd}0", "head", head_pt(8.6, sg * 3.6), HEAD_REST + sg * 40.0, FC0)
-    bone(f"fc_{sd}1", f"fc_{sd}0", b0.end(), HEAD_REST - sg * 42.0, FC1)
+    bone(f"jaw_{sd}", "head", head_pt(JAW_AT, sg * JAW_W), HEAD_REST, JAW_L)
 
 # Tail prongs: the ultimate legs, short and blunt, off the last plate.
 ULT = [3.8, 3.4]
@@ -234,27 +237,37 @@ for i in reversed(LEG_PLATES):
         at, a = on_bone(f"leg_{i}{sd}_t"); put(f"leg_{i}{sd}_t", f"leg_{i}{sd}_t", at, a, bar(TIBIA, 2.5, 1.8, 1.0), TIBIA_FILL, INK_HAIR)
         at, a = on_bone(f"leg_{i}{sd}_f"); put(f"leg_{i}{sd}_f", f"leg_{i}{sd}_f", at, a, bar(FEMUR, 3.0, 2.7, 0.8), FEMUR_FILL, INK_HAIR)
 
-# ---- antennae, then the fangs over them, all with their roots under the shield
+# ---- the drill jaw, its bases under the shield. Each half is drawn in its
+# hinge's frame: the midline of the bit runs along local y = -sg*JAW_W, the
+# outer edge curves in from the hinge to the point. Slanted groove bands run
+# across both halves on one slope, so the closed pair reads as a twist drill.
+def jaw_width(x): return JAW_W * max(0.0, 1 - x / JAW_L) ** 0.85
+def jaw_half(sg):
+    m = -sg * JAW_W
+    xs = [JAW_L * k / 10 for k in range(11)]
+    outer = [(x, m + sg * jaw_width(x)) for x in xs]
+    return poly([(-1.2, m), (-1.2, 0.0)] + outer + [(JAW_L + 0.3, m)])
+GROOVES = [2.2, 4.6, 6.8]          # where each band crosses the midline
+GROOVE_SLOPE, GROOVE_W = 0.6, 0.55
+def groove(sg, xc):
+    m = -sg * JAW_W
+    def edge(dx):
+        x = xc + dx
+        for _ in range(4):
+            yy = sg * jaw_width(x) * 0.96
+            x = xc + dx + GROOVE_SLOPE * yy
+        return (x, m + yy)
+    return poly([(xc - GROOVE_W, m), (xc + GROOVE_W, m), edge(GROOVE_W), edge(-GROOVE_W)])
+def jaw_point(sg):
+    m = -sg * JAW_W
+    x0 = JAW_L - 2.0
+    return poly([(x0, m), (x0, m + sg * jaw_width(x0)), (JAW_L * 0.95, m + sg * jaw_width(JAW_L * 0.95)), (JAW_L + 0.3, m)])
 for sd, sg in SIDES:
-    for k, Lk in enumerate(ANT):
-        at, a = on_bone(f"ant_{sd}{k}")
-        put(f"ant_{sd}{k}", f"ant_{sd}{k}", at, a, bar(Lk, *ANT_W[k], 0.7), ANT_FILL[k], INK_HAIR)
-def fang(Lf, c, w0=1.35, bend=0.07):
-    """A small blunt fang along +x, `Lf` long, curving toward `c` (±1), ending in a rounded tip."""
-    xs = [Lf * k / 5 for k in range(6)]
-    mid = [c * bend * x * x for x in xs]
-    half = [w0 * (1 - 0.6 * x / Lf) for x in xs]
-    outer = [(x, m - c * h) for x, m, h in zip(xs, mid, half)]
-    inner = [(x, m + c * h) for x, m, h in zip(xs, mid, half)]
-    tip = [(Lf + 0.45, mid[-1] + c * 0.15)]
-    return poly([(-0.5, -c * w0 * 0.8)] + outer + tip + inner[::-1] + [(-0.5, c * w0 * 0.8)])
-for sd, sg in SIDES:
-    at, a = on_bone(f"fc_{sd}0"); put(f"fc_{sd}0", f"fc_{sd}0", at, a, bar(FC0, 3.2, 2.8), "$oxblood", INK_HAIR)
-    at, a = on_bone(f"fc_{sd}1")
-    c = -sg  # the fang curls toward the midline
-    put(f"fc_{sd}1", f"fc_{sd}1", at, a, fang(FC1, c), "$bone", INK_HAIR)
-    at, a = on_bone(f"fc_{sd}1", FC1 - 0.2, c * 0.07 * (FC1 - 0.2) ** 2)
-    put(f"venom_{sd}", f"fc_{sd}1", at, 0.0, circ(0.75), "$spore.light")
+    at, a = on_bone(f"jaw_{sd}")
+    put(f"jaw_{sd}", f"jaw_{sd}", at, a, jaw_half(sg), "$bone", INK_HAIR)
+    for n, xc in enumerate(GROOVES):
+        put(f"groove_{sd}{n}", f"jaw_{sd}", at, a, groove(sg, xc), "$husk.dark")
+    put(f"point_{sd}", f"jaw_{sd}", at, a, jaw_point(sg), "$bone.dark")
 
 # ---- the trunk, tail plate first so each plate's rear margin lies over the next
 for i in range(N - 1, -1, -1):
@@ -280,6 +293,13 @@ def brow_shape():
     return poly(rim + inner)
 put("brow", "head", J[0], HEAD_REST, brow_shape(), "$oxblood.dark")
 
+# ---- antennae, over the shield: they grow from the top of the head's front,
+# which is also what lets them stream back over it in the dash
+for sd, sg in SIDES:
+    for k, Lk in enumerate(ANT):
+        at, a = on_bone(f"ant_{sd}{k}")
+        put(f"ant_{sd}{k}", f"ant_{sd}{k}", at, a, bar(Lk, *ANT_W[k], 0.7), ANT_FILL[k], INK_HAIR)
+
 RIG.check()
 HEAD_GROUP = ["head", "brow", "head_gloss", "organ"]
 
@@ -289,10 +309,10 @@ HEAD_GROUP = ["head", "brow", "head_gloss", "organ"]
 #   head     the head's heading delta off the rest
 #   trunk    (along, across) travel of the root, in the axis frame
 #   feet     fn(i, sg) -> (along, across) foot in its plate's frame
-#   ant, fc, ult: fn(sd, sg, k) -> delta
+#   ant, ult: fn(sd, sg, k) -> delta; jaw: fn(sd, sg) -> delta (+ opens outward)
 def axis_vec(along, across): return local_to_world((0.0, 0.0), AX, along, across)
 
-def build(seg, head=0.0, trunk=(0.0, 0.0), feet=None, ant=None, fc=None, ult=None, keep_head_on_axis=0.0):
+def build(seg, head=0.0, trunk=(0.0, 0.0), feet=None, ant=None, jaw=None, ult=None, keep_head_on_axis=0.0):
     dx, dy = axis_vec(*trunk)
     pose = {"body": (dx, dy, 0.0)}
     for i in range(N):
@@ -310,8 +330,8 @@ def build(seg, head=0.0, trunk=(0.0, 0.0), feet=None, ant=None, fc=None, ult=Non
     for sd, sg in SIDES:
         for k in range(len(ANT)):
             if ant: pose[f"ant_{sd}{k}"] = ant(sd, sg, k)
+        if jaw: pose[f"jaw_{sd}"] = jaw(sd, sg)
         for k in range(2):
-            if fc: pose[f"fc_{sd}{k}"] = fc(sd, sg, k)
             if ult: pose[f"ult_{sd}{k}"] = ult(sd, sg, k)
     world = solve(pose)
     for i in LEG_PLATES:
@@ -334,11 +354,9 @@ def ant_crawl(t):
         ph = 0.0 if sg < 0 else 0.5
         return [8.0, 6.0, 6.0][k] * cyc(t, ph - 0.1 * k)
     return f
-def fc_crawl(t):
-    def f(sd, sg, k):
-        # the fangs working open and shut once a loop
-        return sg * [3.0, 7.0][k] * (0.5 + 0.5 * cyc(t, 0.1 - 0.08 * k))
-    return f
+def jaw_crawl(t):
+    # closed, with a small click open and shut twice a loop
+    return lambda sd, sg: sg * 2.5 * (0.5 - 0.5 * math.cos(4 * math.pi * t)) ** 3
 def ult_crawl(t):
     def f(sd, sg, k):
         # riding the tail's wave, a beat later
@@ -354,12 +372,12 @@ def zeroed(fn_t, t):
 def crawl_pose(t):
     surge = 0.8 * (cyc(t, 0.0) - cyc(0.0, 0.0))
     return build(crawl_seg(t), crawl_head(t), (surge, 0.0),
-                 lambda i, sg: crawl_foot(i, sg, t), zeroed(ant_crawl, t), zeroed(fc_crawl, t), zeroed(ult_crawl, t))
+                 lambda i, sg: crawl_foot(i, sg, t), zeroed(ant_crawl, t), jaw_crawl(t), zeroed(ult_crawl, t))
 
 REST_FEET = lambda i, sg: crawl_foot(i, sg, 0.0)
 
 # ---- the coiled pose: the trunk thrown into an S behind a head held on the
-# line, drawn back down it, reared (the head shield swells), the fangs open,
+# line, drawn back down it, reared (the head shield swells), the drill jaw split open,
 # the antennae laid back, the legs braced wide and the tail prongs lifted apart
 COIL_S = [36.0 * math.cos(2 * math.pi * (i * 11.0 / N + 0.4) / 9.4) for i in range(N)]
 AIM_HEAD = AX - HEAD_REST     # the head turned exactly onto the line it will run
@@ -368,19 +386,17 @@ def coil_feet(g):
         a, c = REST_FEET(i, sg)
         return (lerp(a, rake(i) * 0.4 - 0.6, g), c + sg * 1.6 * g)
     return f
-# The fangs: a pair of deltas (base, fang), + turning each side outward.
-FC_OPEN = (14.0, 32.0)
-FC_SHUT = (-5.0, -12.0)
+JAW_OPEN = 34.0                   # the jaw's halves splayed in the windup
 ANT_BACK = (34.0, 10.0, 6.0)      # + turns each antenna outward and back
 def coil_bits(g, shiver=0.0):
     ant = lambda sd, sg, k: sg * ANT_BACK[k] * g + shiver * (1 if k % 2 else -1) * 2.5
-    fc = lambda sd, sg, k: sg * FC_OPEN[k] * g
+    jaw = lambda sd, sg: sg * JAW_OPEN * g
     ult = lambda sd, sg, k: -sg * (18.0 if k == 0 else 8.0) * g
-    return ant, fc, ult
+    return ant, jaw, ult
 def coil_like(g, shiver=0.0, trunk_along=-4.4):
-    ant, fc, ult = coil_bits(g, shiver)
+    ant, jaw, ult = coil_bits(g, shiver)
     seg = [COIL_S[i] * g for i in range(N)]
-    return build(seg, AIM_HEAD * g, (trunk_along * g, 0.0), coil_feet(g), ant, fc, ult,
+    return build(seg, AIM_HEAD * g, (trunk_along * g, 0.0), coil_feet(g), ant, jaw, ult,
                  keep_head_on_axis=g)
 def wind(t):
     """Wound, not eased: a fast first draw, a slow creep, a last snatch — at 1 by 0.94 and held."""
@@ -391,7 +407,7 @@ def coil_pose(t):
 COILED = coil_like(1.0)
 
 # ---- strike: from the coiled frame the S throws itself straight and a
-# little past it, the body lunges down the line with the fangs snapping shut,
+# little past it, the body lunges down the line with the jaw slamming shut into the drill,
 # then it settles onto the rest pose
 def strike_pose(t):
     g = lerp(1.0, -0.32, smooth(0.0, 0.34, t))
@@ -400,9 +416,9 @@ def strike_pose(t):
     lunge = lerp(lunge, 0.0, smooth(0.36, 1.0, t))
     snap = smooth(0.08, 0.22, t)
     back = smooth(0.4, 1.0, t)
-    # laid back, then flicked forward as the fangs snap, then home
+    # laid back, then flicked forward as the jaw slams shut, then home
     ant = lambda sd, sg, k: lerp(sg * ANT_BACK[k] * max(g, 0.0) * (1 - snap) - sg * [18.0, 10.0, 8.0][k] * snap, 0.0, back)
-    fc = lambda sd, sg, k: lerp(lerp(sg * FC_OPEN[k], sg * FC_SHUT[k], snap), 0.0, back)
+    jaw = lambda sd, sg: sg * JAW_OPEN * (1 - snap)       # slammed shut into the drill
     ult = lambda sd, sg, k: lerp(-sg * (18.0 if k == 0 else 8.0), sg * (8.0 if k == 0 else 10.0), smooth(0.05, 0.4, t)) * (1 - back)
     seg = [COIL_S[i] * g for i in range(N)]
     # the feet: from the braced stance, thrown back as it lunges, home at the end
@@ -412,16 +428,30 @@ def strike_pose(t):
         mid = (rake(i) - 2.2, c1 - sg * 0.8)
         u = smooth(0.0, 0.3, t); v = smooth(0.35, 1.0, t)
         return (lerp(lerp(a0, mid[0], u), a1, v), lerp(lerp(c0, mid[1], u), c1, v))
-    return build(seg, AIM_HEAD * g, (lunge, 0.0), feet, ant, fc, ult,
+    return build(seg, AIM_HEAD * g, (lunge, 0.0), feet, ant, jaw, ult,
                  keep_head_on_axis=max(0.0, min(1.0, abs(g))))
 
 # ---- the dive pose, held through the whole crossing: the trunk laid straight
 # down the line, every leg folded back flat along its plate, the antennae laid
-# back over the shield, the fangs shut, the tail prongs together
+# back over the shoulders, the jaw shut into the drill, the tail prongs together
 def dive_feet(i, sg):
     return (-3.8, sg * (HW[i] * 0.9 + 0.8))
-DIVE_ANT = lambda sd, sg, k: sg * [128.0, 6.0, -5.0][k]     # folded back flat along the side of the shield
-DIVE_FC = lambda sd, sg, k: sg * FC_SHUT[k]
+# The antennae in the dash: streamed back over the shoulders like hair in a
+# wind, a clean V mirrored about the travel line, each link trailing a little
+# straighter than the last. Asked for as each link's angle off straight back
+# (the head is on the trunk's line in this frame, so off the head's back is
+# off the trunk's back), and turned into deltas off the rest (ANT_SPLAY out,
+# then ANT_BEND a link): the tips end about 4 units outside the plate edge.
+DIVE_ANT_OFF = (30.0, 22.0, 17.0)
+def _dive_ant_deltas():
+    out, prev = [], None
+    for k, off in enumerate(DIVE_ANT_OFF):
+        a = 180.0 - off                   # bearing off the head's forward, outward positive
+        out.append(a - ANT_SPLAY if k == 0 else a - prev - ANT_BEND)
+        prev = a
+    return out
+DIVE_ANT_D = _dive_ant_deltas()
+DIVE_ANT = lambda sd, sg, k: sg * DIVE_ANT_D[k]
 DIVE_ULT = lambda sd, sg, k: sg * (12.0 if k == 0 else 4.0)
 DIVE_SEG = [(AX - REST_H[i]) * 0.9 for i in range(N)]    # laid nearly straight down the line
 DIVE_HEAD = AX - HEAD_REST
@@ -444,14 +474,17 @@ def submerge_pose(t):
         u = smooth(0.06 + 0.06 * i, 0.26 + 0.06 * i, t)
         a0, c0 = coil_feet(1.0)(i, sg); a1, c1 = dive_feet(i, sg)
         return (lerp(a0, a1, u), lerp(c0, c1, u))
-    ant0, fc0, ult0 = coil_bits(1.0)
-    return build(seg, head, (drive, 0.0), feet, lerp_fn(ant0, DIVE_ANT, smooth(0.0, 0.3, t)),
-                 lerp_fn(fc0, DIVE_FC, smooth(0.0, 0.2, t)), lerp_fn(ult0, DIVE_ULT, smooth(0.5, 1.0, t)),
+    ant0, jaw0, ult0 = coil_bits(1.0)
+    # the antennae sweep out and back through the side, the tips trailing
+    ant = lambda sd, sg, k: lerp(ant0(sd, sg, k), DIVE_ANT(sd, sg, k), smooth(0.0 + 0.1 * k, 0.55 + 0.1 * k, t))
+    # the jaw closes into the drill at once, and the drill leads the dive
+    jaw = lambda sd, sg: jaw0(sd, sg) * (1 - smooth(0.0, 0.18, t))
+    return build(seg, head, (drive, 0.0), feet, ant, jaw, lerp_fn(ult0, DIVE_ULT, smooth(0.5, 1.0, t)),
                  keep_head_on_axis=1.0 - smooth(0.0, 0.5, t))
 
 # ---- surface: from the dive, the head rears first and the wave runs out of
 # the body behind it; each pair of legs comes out wide as its plate clears,
-# the fangs open on the way up, and it settles on the rest pose
+# the jaw parts a little on the way up, and it settles on the rest pose
 def surface_pose(t):
     seg = []
     for i in range(N):
@@ -467,13 +500,13 @@ def surface_pose(t):
         wide = 2.2 * math.sin(math.pi * u)
         return (lerp(a0, a1, u) + 0.8 * math.sin(math.pi * u), lerp(c0, c1, u) + sg * wide)
     ua = smooth(0.0, 0.7, t)
-    fc_open = lambda sd, sg, k: lerp(DIVE_FC(sd, sg, k), 0.0, smooth(0.0, 0.8, t)) + sg * FC_OPEN[k] * 1.1 * math.sin(math.pi * smooth(0.05, 0.8, t))
+    jaw = lambda sd, sg: sg * 9.0 * math.sin(math.pi * smooth(0.35, 1.0, t))     # closed, then parting a little
     # springing out and a little past forward, then settling
     ant = lambda sd, sg, k: lerp(DIVE_ANT(sd, sg, k), 0.0, ua) - sg * [16.0, 8.0, 8.0][k] * math.sin(math.pi * ua)
     ult = lambda sd, sg, k: lerp(DIVE_ULT(sd, sg, k), 0.0, smooth(0.45, 1.0, t)) - sg * 12.0 * math.sin(math.pi * smooth(0.45, 1.0, t))
-    return build(seg, head, (rise, 0.0), feet, ant, fc_open, ult)
+    return build(seg, head, (rise, 0.0), feet, ant, jaw, ult)
 
-# ---- death: the fangs close, then the body rolls up from the head back into
+# ---- death: the jaw falls open, then the body rolls up from the head back into
 # a curl and settles, the legs tucking in under their plates as the curl
 # reaches them, the tail prongs last. No thrash. Still from 0.85.
 # A curl is a bend, not a turn: the heading changes steadily down the body,
@@ -490,12 +523,11 @@ def death_pose(t):
         u = smooth(0.12 + 0.05 * i, 0.36 + 0.05 * i, t)
         a, c = REST_FEET(i, sg)
         return (lerp(a, -1.0, u), lerp(c, sg * (HW[i] * 0.78), u))
-    shut = smooth(0.0, 0.16, t)
-    fc = lambda sd, sg, k: sg * FC_SHUT[k] * 1.2 * shut
+    jaw = lambda sd, sg: sg * (30.0 if sg < 0 else 22.0) * smooth(0.08, 0.5, t)    # falling open, slack
     # drooping out and curling in at the tips
     ant = lambda sd, sg, k: sg * [22.0, -18.0, -30.0][k] * smooth(0.15, 0.6, t)
     ult = lambda sd, sg, k: -[14.0, 18.0][k] * smooth(0.55, 0.85, t)
-    return build(seg, head, (lerp(0.0, -1.5, smooth(0.2, 0.7, t)), 0.0), feet, ant, fc, ult)
+    return build(seg, head, (lerp(0.0, -1.5, smooth(0.2, 0.7, t)), 0.0), feet, ant, jaw, ult)
 
 # ============================================================== clips
 tracks = RIG.tracks
@@ -503,7 +535,6 @@ def head_scale(fn): return [(p, "scale", fn) for p in HEAD_GROUP]
 def plate_scale(fn_i):
     return [(f"seg_{i}", "scale", (lambda i: lambda t: fn_i(i, t))(i)) for i in range(N)] + \
            [(f"band_{i}", "scale", (lambda i: lambda t: fn_i(i, t))(i)) for i in range(N)]
-def glow(fn): return [("venom_l", "scale", fn), ("venom_r", "scale", fn)]
 
 # The coil's rear: the shield swells toward the camera and the plates
 # fatten as the body piles into itself, most at the tail.
@@ -535,40 +566,38 @@ def death_fat(i, t):
 animations = {}
 TS_CRAWL = keyset(36)
 animations["crawl"] = {
-    "description": "The walk, and the idle the game plays at whatever pace it is covering: a slow bend travels down the trunk head to tail once a loop, the head leading it; under it the five pairs of short legs step once each — a foot pushing back along its plate while it is down and coming forward tucked in while it is up — in a gentle metachronal wave head to tail, left and right in antiphase, a trundle rather than a scuttle; the antennae sway in turn, the fangs work, and the tail prongs ride the tail a beat later. The first frame is the rest pose.",
+    "description": "The walk, and the idle the game plays at whatever pace it is covering: a slow bend travels down the trunk head to tail once a loop, the head leading it; under it the five pairs of short legs step once each — a foot pushing back along its plate while it is down and coming forward tucked in while it is up — in a gentle metachronal wave head to tail, left and right in antiphase, a trundle rather than a scuttle; the antennae sway in turn, the drill jaw clicks, and the tail prongs ride the tail a beat later. The first frame is the rest pose.",
     "duration": CRAWL,
-    "tracks": tracks(crawl_pose, TS_CRAWL, glow(lambda t: 1.0 + 0.12 * (0.5 + 0.5 * cyc(t, 0.25)) - 0.12 * (0.5 + 0.5 * cyc(0.0, 0.25)))),
+    "tracks": tracks(crawl_pose, TS_CRAWL),
 }
 TS_COIL = keyset(30)
 animations["coil"] = {
-    "description": "Winding up, from the rest pose. The trunk throws itself into an S behind a head held on the line it has chosen and drawn back down it; the head rears (the shield swells toward you) and the plates fatten as the body piles into itself, most at the tail; the fangs open wide, the antennae lay back, the legs brace out and the tail prongs lift apart. Wound rather than eased — a fast first draw, a slow creep with a shiver in it, a last snatch — and held on the final frame, because the release is the dash. The game stretches it to the brace.",
+    "description": "Winding up, from the rest pose. The trunk throws itself into an S behind a head held on the line it has chosen and drawn back down it; the head rears (the shield swells toward you) and the plates fatten as the body piles into itself, most at the tail; the drill splits open into a pair of pincers, the antennae lay back, the legs brace out and the tail prongs lift apart. Wound rather than eased — a fast first draw, a slow creep with a shiver in it, a last snatch — and held on the final frame, because the release is the dash. The game stretches it to the brace.",
     "duration": 0.95,
-    "tracks": tracks(coil_pose, TS_COIL, head_scale(coil_rear) + plate_scale(coil_fat) + glow(lambda t: 1.0 + 0.45 * wind(t))),
+    "tracks": tracks(coil_pose, TS_COIL, head_scale(coil_rear) + plate_scale(coil_fat)),
 }
 TS_STRIKE = keyset(18)
 animations["strike"] = {
-    "description": "The release. It opens on the coil's last frame exactly: the S throws itself straight and a little past, the body lunges down the line with the fangs snapping shut and the antennae swept back, the legs thrown behind; then it settles onto the rest pose, which is the crawl's first frame. Played once on the dash.",
+    "description": "The release. It opens on the coil's last frame exactly: the S throws itself straight and a little past, the body lunges down the line with the jaw slamming shut into the drill and the antennae flicked forward, the legs thrown behind; then it settles onto the rest pose, which is the crawl's first frame. Played once on the dash.",
     "duration": 0.3,
-    "tracks": tracks(strike_pose, TS_STRIKE, head_scale(strike_rear) + plate_scale(strike_fat) + glow(lambda t: 1.0 + 0.45 * max(0.0, strike_g(t)) * (1 - smooth(0.1, 0.3, t)))),
+    "tracks": tracks(strike_pose, TS_STRIKE, head_scale(strike_rear) + plate_scale(strike_fat)),
 }
 TS_DEATH = [i / 40 for i in range(35)] + [0.9, 0.95, 1.0]
 animations["death"] = {
-    "description": "It lets go and rolls up: the fangs close, then the body curls from the head back, each plate settling a little lower as the curl reaches it and its legs tucking in under it, the tail prongs last; it lies curled, the organ and the venom gone dim. No thrash. Still from 0.85.",
+    "description": "It lets go and rolls up: the drill jaw falls open, slack, then the body curls from the head back, each plate settling a little lower as the curl reaches it and its legs tucking in under it, the tail prongs last; it lies curled, the organ gone dim. No thrash. Still from 0.85.",
     "duration": 0.7,
     "tracks": tracks(death_pose, TS_DEATH, head_scale(death_rear) + plate_scale(death_fat)
-                     + [("organ", "opacity", lambda t: 1.0 - 0.7 * smooth(0.3, 0.8, min(t, 0.85))),
-                        ("venom_l", "opacity", lambda t: 1.0 - 0.75 * smooth(0.2, 0.7, min(t, 0.85))),
-                        ("venom_r", "opacity", lambda t: 1.0 - 0.75 * smooth(0.2, 0.7, min(t, 0.85)))]),
+                     + [("organ", "opacity", lambda t: 1.0 - 0.7 * smooth(0.3, 0.8, min(t, 0.85)))]),
 }
 TS_SUB = keyset(20)
 animations["submerge"] = {
-    "description": "Going into the earth, and the release a burrowing body plays in place of `strike` — so it opens on the coil's last frame exactly. The head drives down (the shield sinks away from you) and the body follows it in as the crawl's own wave spent once and hard, head to tail: each plate throws the S out as the wave reaches it and lies straight down the line, its legs folding back flat along it, the antennae laying back over the shield and the fangs shutting. The last frame is what the body wears for the whole crossing — streamlined for the earth, sunk a little, legs stowed — and is exactly where `surface` begins.",
+    "description": "Going into the earth, and the release a burrowing body plays in place of `strike` — so it opens on the coil's last frame exactly. The head drives down (the shield sinks away from you) and the body follows it in as the crawl's own wave spent once and hard, head to tail: each plate throws the S out as the wave reaches it and lies straight down the line, its legs folding back flat along it, while the jaw shuts into the drill and the antennae sweep out and back. The last frame is what the body wears for the whole crossing — the drill leading, the antennae streamed back over the shoulders in a slight V, the body straight and sunk a little, legs stowed — and is exactly where `surface` begins.",
     "duration": 0.34,
-    "tracks": tracks(submerge_pose, TS_SUB, head_scale(sub_rear) + plate_scale(sub_fat) + glow(lambda t: lerp(1.45, 1.0, smooth(0.0, 0.4, t)))),
+    "tracks": tracks(submerge_pose, TS_SUB, head_scale(sub_rear) + plate_scale(sub_fat)),
 }
 TS_SURF = keyset(18)
 animations["surface"] = {
-    "description": "Coming back out, and the reverse of `submerge` in shape rather than in frames: from the dive's last frame the head rears first (the shield swells up toward you and settles), and the wave runs out of the body behind it; each pair of legs comes out wide as its plate clears, the fangs open on the way up and the antennae flare, the tail prongs last. Ends on the rest pose. Played where the ground bulges.",
+    "description": "Coming back out, and the reverse of `submerge` in shape rather than in frames: from the dive's last frame the head rears first (the shield swells up toward you and settles), and the wave runs out of the body behind it; each pair of legs comes out wide as its plate clears, the antennae spring forward from their streamed-back sweep, the drill parts a little on the way up, the tail prongs last. Ends on the rest pose. Played where the ground bulges.",
     "duration": 0.3,
     "tracks": tracks(surface_pose, TS_SURF, head_scale(surf_rear) + plate_scale(surf_fat)),
 }
@@ -580,12 +609,13 @@ ENRAGED_PLATES = ["$oxblood", "$ember.dark", "$chitin", "$chitin.light", "$chiti
 enraged_set = {}
 for i, f in enumerate(ENRAGED_PLATES): enraged_set[f"seg_{i}.fill"] = f
 for i in range(N): enraged_set[f"band_{i}.fill"] = "$coral.dark"
+for sd, _ in SIDES:
+    for n in range(len(GROOVES)): enraged_set[f"groove_{sd}{n}.fill"] = "$ember"
 for lid in LEG_IDS: enraged_set[f"{lid}.fill"] = "$bone.dark" if lid.endswith("_f") else "$bone.dark2"
 enraged_set.update({
     "ult_l0.fill": "$bone.dark", "ult_r0.fill": "$bone.dark", "ult_l1.fill": "$bone", "ult_r1.fill": "$bone",
     "head.fill": "$dead", "head_gloss.fill": "$white@0.12",
-    "fc_l0.fill": "$bone", "fc_r0.fill": "$bone", "fc_l1.fill": "$white", "fc_r1.fill": "$white",
-    "venom_l.fill": "$white", "venom_r.fill": "$white",
+    "jaw_l.fill": "$bone.light", "jaw_r.fill": "$bone.light", "point_l.fill": "$ember.dark", "point_r.fill": "$ember.dark",
     "brow.fill": "$ember.dark",
     "ant_l0.fill": "$bone.dark", "ant_r0.fill": "$bone.dark", "ant_l1.fill": "$bone.dark", "ant_r1.fill": "$bone.dark",
     "ant_l2.fill": "$bone.dark2", "ant_r2.fill": "$bone.dark2",
@@ -596,23 +626,24 @@ final_set = {}
 for i, f in enumerate(FINAL_PLATES): final_set[f"seg_{i}.fill"] = f
 for i in range(N): final_set[f"band_{i}.fill"] = "$ember"
 for i in range(N): final_set[f"gloss_{i}.fill"] = "$white@0.08"
+for sd, _ in SIDES:
+    for n in range(len(GROOVES)): final_set[f"groove_{sd}{n}.fill"] = "$ember"
 for lid in LEG_IDS: final_set[f"{lid}.fill"] = "$sand.dark" if lid.endswith("_f") else "$soil.light"
 final_set.update({
     "ult_l0.fill": "$sand.dark", "ult_r0.fill": "$sand.dark", "ult_l1.fill": "$soil.light", "ult_r1.fill": "$soil.light",
     "ant_l0.fill": "$sand.light", "ant_r0.fill": "$sand.light", "ant_l1.fill": "$sand", "ant_r1.fill": "$sand",
     "ant_l2.fill": "$sand.dark", "ant_r2.fill": "$sand.dark", "brow.fill": "$sand.dark2",
     "head.fill": "$sand.dark", "head_gloss.fill": "$white@0.08",
-    "fc_l0.fill": "$bone", "fc_r0.fill": "$bone", "fc_l1.fill": "$bone.light", "fc_r1.fill": "$bone.light",
-    "venom_l.fill": "$venom.light", "venom_r.fill": "$venom.light",
+    "jaw_l.fill": "$sand.dark", "jaw_r.fill": "$sand.dark", "point_l.fill": "$sand.dark2", "point_r.fill": "$sand.dark2",
 })
 variants = {
     "enraged": {
-        "description": "Phase two: the body goes hot from the middle out — the plates at the centre flare to the lightest amber and the seams burn — the legs bleach to bone, the head blackens under a brow gone ember, the antennae bleach with the legs, and the venom at the fang tips stops being a highlight and starts being the brightest thing on the creature.",
+        "description": "Phase two: the body goes hot from the middle out — the plates at the centre flare to the lightest amber and the seams burn — the legs bleach to bone, the head blackens under a brow gone ember, the antennae bleach with the legs, and the drill goes white-hot, its spiral grooves burning ember.",
         "scale": 1.08,
         "set": enraged_set,
     },
     "final": {
-        "description": "Phase three: it has been living in the earth for the last third of the fight and the earth is all over it. The plates have gone the colour of the ground, dulled and caked, the legs and the antennae with them, and the only things on the body still the colour of an animal are the two venom fangs and the light coming up between the plates — every rear seam ember — which is the read: it is not brighter, it is buried, and what you can still see of it is the part that kills you.",
+        "description": "Phase three: it has been living in the earth for the last third of the fight and the earth is all over it. The plates have gone the colour of the ground, dulled and caked, the legs and the antennae with them, and the only things still alight on it are the drill's spiral grooves and the light coming up between the plates — every rear seam ember — which is the read: it is not brighter, it is buried, and what you can still see of it is the part that kills you.",
         "scale": 1.1,
         "set": final_set,
     },
@@ -623,18 +654,18 @@ DESCRIPTION = (
     "What an ant nest is actually afraid of, and it was already down here before you were. A centipede seen from above along its travel axis "
     "and turned by the game rather than mirrored; the rest pose's axis sits 18.6 degrees above +x, which is the `faceOffset` the game pairs with "
     "this document. Drawn stylised rather than skittering: ten rounded amber plates overlapping like an armoured train, each with a thin "
-    "oxblood seam at its rear margin, under a round oxblood head shield carrying the hive's organ under a darker brow, and no eyes; small blunt "
-    "bone fangs with a venom bead closing in front of it; long three-link antennae arcing forward and out; five pairs of short, chunky legs on every other plate, a "
+    "oxblood seam at its rear margin, under a round oxblood head shield carrying the hive's organ under a darker brow, and no eyes; a drill jaw — two bone half-cones "
+    "with spiral groove bands that close into one twist-drill bit leading the head, and splay open into pincers in the windup; long three-link antennae arcing forward and out; five pairs of short, chunky legs on every other plate, a "
     "step darker than the plates; and two short tail prongs behind. "
     "Built on a skeleton (scripts/scolopend.py): the spine is a chain rooted mid-body, so a bend put in at the head travels down it and nothing "
     "parts at a joint; every leg is a femur and a tibia solved each frame to a foot. `crawl` is a slow body wave head to tail over a gentle "
     "metachronal wave of the legs, and its first frame is the rest pose. `coil` and `strike` are the windup and its release: the trunk throws "
     "itself into an S behind a head held on the line, rears and fattens, and `strike` opens on exactly `coil`'s last frame and settles on the "
-    "rest pose. Gameplay radius 40. The `death` clip closes the fangs and rolls the body up into a curl from the head back, the legs tucking "
+    "rest pose. Gameplay radius 40. The `death` clip lets the jaw fall open and rolls the body up into a curl from the head back, the legs tucking "
     "in as it goes.\n\n"
     "`submerge` and `surface` are the pair the game's burrowing dash needs. For this body the dive *is* the release (EnemySystem plays it "
     "where another body would play `strike`), so it too opens on the coil's last frame; its last frame is held for the whole crossing, so it "
-    "is a streamlined body with its legs stowed, and `surface` opens exactly there. They are written as one shape each rather than as one "
+    "is the charge through the earth — drill leading, antennae streamed back in a slight V, legs stowed — and `surface` opens exactly there. They are written as one shape each rather than as one "
     "clip played backwards, because a reversed dive un-dives — it reads as the ground giving the animal back rather than as the animal coming "
     "up through it."
 )
