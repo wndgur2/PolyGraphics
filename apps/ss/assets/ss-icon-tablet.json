@@ -1,0 +1,21 @@
+{
+  "id": "ss.icon.tablet",
+  "name": "Record tablet (SS)",
+  "description": "The stone a Pit record is cut into: the tile behind every entry on the codex's 개미지옥 / PIT tab, one tile a run, with the run's boss count scratched over it (`ss.icon.tally`) and the character's face beside it (feelers docs/pit-plan.md §6.4). The game frames the tile in its own plate and puts the first record's amber rim on that, so this is the slab and nothing round it.\n\nIt is the ruins' stone (`ss.terrain.ruins`): $carapace on an $ink contour, turned to face you — a slab with a lit bevel along its top and left edges and a shaded one along the bottom and right, one corner broken off and lit where it broke, a nick out of the left edge, two cracks and a scatter of wear. The face is kept flat and a little darker in the middle ($coal wash) so the amber of what is cut into it reads, and the marks on it stay to the edges, where a count and a face will not land. A dark shadow a unit down and right sets it off the codex panel.",
+  "tags": ["icon", "record"],
+  "size": [32, 32],
+  "parts": [
+    {"id": "shadow", "at": [1.0, 1.4], "shape": {"kind": "poly", "points": [[-12.6, -14.6], [8.4, -15.0], [11.0, -12.6], [13.4, -12.8], [13.8, 12.4], [12.4, 14.8], [-11.8, 15.0], [-13.6, 13.2], [-13.4, -1.0], [-14.6, -3.2], [-13.6, -5.0], [-13.8, -12.8]]}, "fill": "$ink@0.55"},
+    {"id": "slab_rim", "shape": {"kind": "poly", "points": [[-12.6, -14.6], [8.4, -15.0], [11.0, -12.6], [13.4, -12.8], [13.8, 12.4], [12.4, 14.8], [-11.8, 15.0], [-13.6, 13.2], [-13.4, -1.0], [-14.6, -3.2], [-13.6, -5.0], [-13.8, -12.8]]}, "fill": "$ink"},
+    {"id": "slab", "shape": {"kind": "poly", "points": [[-11.75, -13.62], [7.76, -13.87], [10.15, -11.62], [12.46, -11.9], [12.83, 11.53], [11.57, 13.8], [-11.0, 13.98], [-12.67, 12.29], [-12.1, -0.9], [-13.33, -2.92], [-12.38, -4.55], [-12.85, -11.92]]}, "fill": "$carapace.dark"},
+    {"id": "bevel_lit", "shape": {"kind": "poly", "points": [[-11.6, -13.2], [7.8, -13.6], [9.6, -11.8], [7.0, -11.0], [-9.4, -10.6], [-10.0, 11.6], [-12.0, 12.4], [-12.0, -1.2], [-12.8, -3.2], [-12.0, -5.0]]}, "fill": "$carapace"},
+    {"id": "bevel_shade", "shape": {"kind": "poly", "points": [[12.2, -11.4], [12.4, 12.0], [11.4, 13.4], [-10.8, 13.6], [-10.0, 11.6], [9.8, 11.2], [10.0, -10.8]]}, "fill": "$carapace.dark2"},
+    {"id": "face", "shape": {"kind": "poly", "points": [[-9.4, -10.6], [7.0, -11.0], [9.6, -11.8], [10.0, -10.8], [9.8, 11.2], [-10.0, 11.6]]}, "fill": "$carapace.dark"},
+    {"id": "face_wash", "at": [0.2, 0.4], "shape": {"kind": "rect", "w": 17, "h": 19, "corner": 6}, "fill": "$coal@0.25"},
+    {"id": "wear", "repeat": {"of": {"kind": "rect", "w": 1.2, "h": 1.2}, "count": 14, "area": [18, 20], "seed": 7301, "scaleRange": [0.5, 1.2]}, "fill": "$carapace@0.45"},
+    {"id": "pits", "repeat": {"of": {"kind": "circle", "r": 0.7}, "count": 8, "area": [18, 20], "seed": 7302, "scaleRange": [0.6, 1.3]}, "fill": "$ink@0.5"},
+    {"id": "crack_a", "shape": {"kind": "poly", "points": [[10.0, 3.0], [7.0, 4.6], [5.4, 8.2], [2.6, 9.4], [2.8, 9.9], [5.9, 8.7], [7.5, 5.2], [10.0, 3.7]]}, "fill": "$ink@0.7"},
+    {"id": "crack_b", "shape": {"kind": "poly", "points": [[-9.6, -7.0], [-6.6, -6.2], [-5.4, -3.4], [-5.9, -3.2], [-7.0, -5.7], [-9.6, -6.4]]}, "fill": "$ink@0.6"},
+    {"id": "chip_lit", "shape": {"kind": "poly", "points": [[8.4, -13.6], [10.6, -11.6], [12.2, -11.6], [12.0, -10.6], [10.2, -10.6], [8.0, -12.6]]}, "fill": "$carapace.light@0.6"}
+  ]
+}
