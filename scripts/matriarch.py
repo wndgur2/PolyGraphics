@@ -399,7 +399,7 @@ def swell_state(t):
     b = breath(t)
     late = breath(t - 0.1)
     pose = {"body": (0.6 * late, 1.6 * late, -1.2 * breath(t - 0.05))}
-    pose["abd"] = 6.5 * breath(t - 0.04)
+    pose["abd"] = 7.5 * breath(t - 0.04)
     pose["thorax"] = 1.5 * breath(t - 0.12)
     pose["head"] = 7.0 * breath(t - 0.2) + 3.0 * math.sin(2 * math.pi * (3 * t))
     jaw = max(0.0, math.sin(2 * math.pi * (2 * t + 0.1)))
@@ -412,7 +412,7 @@ def swell_state(t):
         lift = tread(t, TREAD_PH[leg])
         feet[leg] = (fx + 0.5 * lift, fy - lift)
     plant(pose, feet)
-    flex = {sid: 17.0 * breath(t - 0.05 - 0.035 * i) for i, sid in enumerate(SPINE_FRONT)}
+    flex = {sid: 19.0 * breath(t - 0.05 - 0.035 * i) for i, sid in enumerate(SPINE_FRONT)}
     nod = {}
     for j, (nid, th, r) in enumerate(NODULES):
         nod[nid] = (-16.0 * math.sin(2 * math.pi * (t - 0.12 * j)), 1.0 + 0.3 * math.sin(2 * math.pi * (t - 0.12 * j - 0.25)))

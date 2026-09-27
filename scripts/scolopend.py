@@ -202,7 +202,7 @@ put, use, on_bone = RIG.put, RIG.use, RIG.on_bone
 # ============================================================== parts
 PLATE_FILL = ["$ember.dark", "$chitin", "$chitin", "$chitin", "$chitin", "$chitin",
               "$chitin", "$chitin", "$chitin", "$chitin", "$ember.dark"]
-BAND_FILL = "$blood.dark"
+BAND_FILL = "$oxblood"
 FEMUR_FILL, TIBIA_FILL = "$ember.dark", "$timber"
 
 def plate_shape(hw):
@@ -216,7 +216,7 @@ def band_shape(hw):
 # ---- ultimate legs, under everything at the tail
 for sd, sg in SIDES:
     at, a = on_bone(f"ult_{sd}0"); put(f"ult_{sd}0", f"ult_{sd}0", at, a, bar(ULT[0], 2.4, 1.9), "$ember.dark", INK_HAIR)
-    at, a = on_bone(f"ult_{sd}1"); put(f"ult_{sd}1", f"ult_{sd}1", at, a, bar(ULT[1], 1.8, 0.5), "$blood.dark", INK_HAIR)
+    at, a = on_bone(f"ult_{sd}1"); put(f"ult_{sd}1", f"ult_{sd}1", at, a, bar(ULT[1], 1.8, 0.5), "$oxblood", INK_HAIR)
 
 # ---- legs, rear pairs first so the front ones lie over them
 for i in range(N - 1, -1, -1):
@@ -240,7 +240,7 @@ def sickle(Lf, c, w0=1.25, bend=0.055):
     inner = [(x, m + c * h) for x, m, h in zip(xs, mid, half)]
     return poly([(-0.5, -c * w0 * 0.8)] + outer[:-1] + [(Lf + 0.2, mid[-1] + c * 0.2)] + inner[::-1][1:] + [(-0.5, c * w0 * 0.8)])
 for sd, sg in SIDES:
-    at, a = on_bone(f"fc_{sd}0"); put(f"fc_{sd}0", f"fc_{sd}0", at, a, bar(FC0, 3.4, 2.6), "$blood.dark", INK_HAIR)
+    at, a = on_bone(f"fc_{sd}0"); put(f"fc_{sd}0", f"fc_{sd}0", at, a, bar(FC0, 3.4, 2.6), "$oxblood", INK_HAIR)
     at, a = on_bone(f"fc_{sd}1")
     c = -sg  # the fang curls toward the midline
     put(f"fc_{sd}1", f"fc_{sd}1", at, a, sickle(FC1, c), "$bone", INK_HAIR)
@@ -259,7 +259,7 @@ for i in range(N - 1, -1, -1):
 # front corners
 HEAD_SHAPE = poly([(-1.6, -4.6), (1.2, -6.0), (4.6, -6.2), (7.4, -5.0), (8.9, -2.6), (9.3, 0.0),
                    (8.9, 2.6), (7.4, 5.0), (4.6, 6.2), (1.2, 6.0), (-1.6, 4.6), (-2.2, 0.0)])
-put("head", "head", J[0], HEAD_REST, HEAD_SHAPE, "$blood.dark", INK_THIN)
+put("head", "head", J[0], HEAD_REST, HEAD_SHAPE, "$oxblood", INK_THIN)
 put("head_gloss", "head", head_pt(5.0, -2.8), HEAD_REST, ell(2.6, 1.3), "$white@0.2")
 use("organ", "head", head_pt(3.4, 0.0), "ss.lib.organ", scale=0.62)
 for sd, sg in SIDES:
@@ -564,8 +564,8 @@ animations["surface"] = {
 
 # ============================================================== states
 LEG_IDS = [f"leg_{i}{sd}_{j}" for i in range(N) for sd, _ in SIDES for j in ("f", "t")]
-ENRAGED_PLATES = ["$blood.dark", "$ember.dark", "$chitin", "$chitin", "$chitin.light", "$chitin.light",
-                  "$chitin.light", "$chitin", "$chitin", "$ember.dark", "$blood.dark"]
+ENRAGED_PLATES = ["$oxblood", "$ember.dark", "$chitin", "$chitin", "$chitin.light", "$chitin.light",
+                  "$chitin.light", "$chitin", "$chitin", "$ember.dark", "$oxblood"]
 enraged_set = {}
 for i, f in enumerate(ENRAGED_PLATES): enraged_set[f"seg_{i}.fill"] = f
 for i in range(N): enraged_set[f"band_{i}.fill"] = "$coral.dark"
