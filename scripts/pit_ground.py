@@ -10,7 +10,7 @@ pan's sand lying on it in drifts rather than covering it — and mid-toned on
 purpose: all three stages' bodies walk on it, and the dark plains roster and
 the mid-brown pan roster both have to stand off it.
 
-What says "pit" is what lies on the earth: sand pooled in its low places,
+What says "pit" is what lies on the earth: sand pooled faintly in its low places,
 short claw-scored scars where something dug and was dug after (a dark cut under
 a lit lip, the burrow's gouge made small), crumbs of shed chitin, and the
 plains' rust flecks where scent dried, so the three read as one world.
@@ -81,13 +81,13 @@ for i, (x, y, rx, ry, rot) in enumerate([(26, -40, 22, 14, -12), (-8, 18, 18, 11
         put(f"pack{i}_{k}", (x, y), ell(rx * f, ry * f), "$soil@0.09", rot)
 
 # ------------------------------------------------------------------ the sand on it
-# Drifts pooled in the low places: soft pale lenses, each lit on its upper-left
-# edge where the light catches the lip of the drift.
-for i, (x, y, rx, ry, rot) in enumerate([(4, -8, 30, 17, -13), (-50, -8, 20, 12, -13), (50, -50, 22, 11, -13),
-                                         (30, 56, 26, 13, -13)]):
-    for k, f in enumerate((1.0, 0.74, 0.5)):
-        put(f"drift{i}_{k}", (x, y), ell(rx * f, ry * f), "$sand@0.22", rot)
-    put(f"drift{i}_lit", (x - 1.5, y - 2), ell(rx * 0.9, ry * 0.55), "$chitin@0.05", rot)
+# Drifts pooled in the low places: two broad, faint lenses rather than many
+# small ones. The game shuffles this tile into a 1024px field in patches, so
+# every lens drawn here is laid a dozen times over at random offsets, and small
+# bright lenses laid that often read as leaf litter, not as sand.
+for i, (x, y, rx, ry, rot) in enumerate([(8, -12, 44, 22, -13), (-36, 44, 34, 16, -13)]):
+    for k, f in enumerate((1.0, 0.62)):
+        put(f"drift{i}_{k}", (x, y), ell(rx * f, ry * f), "$sand@0.1", rot)
 
 grain("grit_dark", sq(1), 150, 7101, "$soil@0.28", [0.65, 1.3])
 grain("grit_pale", sq(1), 140, 7102, "$sand.light@0.26", [0.65, 1.25])
