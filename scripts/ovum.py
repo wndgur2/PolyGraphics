@@ -178,10 +178,10 @@ def death_state(t):
 
 # the cap's flight, laid over its hinge motion: up and to the right, turning
 # over, and down to lie on its side on the floor
-CAP_DX = [(0.0, 0.0), (0.2, 0.0), (0.45, 5.0), (0.85, 9.5), (1.0, 9.5)]
+CAP_DX = [(0.0, 0.0), (0.2, 0.0), (0.45, 4.0), (0.85, 7.5), (1.0, 7.5)]
 CAP_DY = [(0.0, 0.0), (0.2, 0.0), (0.4, -3.0), (0.62, 0.5), (0.85, 11.0), (1.0, 11.0)]
 CAP_ROT = [(0.0, 0.0), (0.2, 0.0), (0.5, 60.0), (0.85, 104.0), (1.0, 104.0)]
-SHARD_FLY = {"shard_a": (-11.0, -9.0, -150.0), "shard_b": (1.5, -14.0, 200.0), "shard_c": (12.0, -8.0, 170.0)}
+SHARD_FLY = {"shard_a": (-9.5, -8.0, -150.0), "shard_b": (1.5, -9.5, 200.0), "shard_c": (9.0, -7.0, 170.0)}
 def appear_fade(t): return keyed([(0.0, 0.0), (0.2, 0.0), (0.24, 1.0), (0.55, 1.0), (0.75, 0.0), (1.0, 0.0)], t)
 def gone(t0, t1): return lambda t: 1.0 - smooth(t0, t1, t)
 
