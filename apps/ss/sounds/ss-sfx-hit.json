@@ -4,6 +4,8 @@
   "description": "A weapon landing on chitin. A short square thump falling an octave, over a scatter of dry grains that dulls as it goes — the shell giving a little, not air moving. Every enemy takes hundreds of these in a run, so it is deliberately the smallest sound in the set.",
   "tags": ["sfx", "impact"],
   "duration": 0.09,
+  "gain": 0.5,
+  "offBand": "Under the set on purpose. It fires on every blow that lands, up to twenty times a second in a crowd, so at the level of a cue heard once it stacks into the loudest thing in the mix; alone it only has to say the blow connected.",
   "meta": { "minInterval": 45 },
   "jitter": { "freq": [0.82, 1.2] },
   "voices": [
