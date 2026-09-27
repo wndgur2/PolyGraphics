@@ -49,15 +49,15 @@ from rig import (Rig, R, D, r2, lerp, mix, smooth, cyc, cyc_c, wrap, keyset, ik2
                  poly, ell, circ, rect, bar, INK_THIN, INK_HAIR, write_doc)
 
 # ============================================================== layout
-# Canvas 128×96 (grown from 120×88 so the lunge and the death curl clear the edge), origin at the centre, +y down. The travel axis runs AX
-# degrees (world, +y down, so negative is up the screen) — the game's
-# faceOffset. Each plate's rest heading bends a little off it along the body:
+# Canvas 128×96 (grown from 120×88 so the lunge and the death curl clear the
+# edge), origin at the centre, +y down. The travel axis runs AX degrees (world,
+# +y down, so negative is up the screen) — the game's faceOffset. Each plate's rest heading bends a little off it along the body:
 # the tail is laid lower and the head lifted, the curve the original drew.
 SIZE = (128, 96)
 AX = -18.6
 N = 11            # trunk plates, seg_0 behind the head … seg_10 at the tail
 L = 6.4           # plate pitch along the spine
-ARC = 0.8         # degrees of bend per plate: the head end flatter, the tail steeper
+ARC = 0.8         # degrees of bend per plate: the head end flatter, the tail steeper (tail low and behind)
 HW = [5.6, 6.2, 6.6, 6.9, 7.0, 7.0, 7.0, 6.8, 6.5, 6.0, 5.2]   # plate half-widths
 ROOT = 6          # the spine's root sits at joint J6, the front of seg_6
 
@@ -70,11 +70,19 @@ def wave_amp(i): return 8.0 + 8.0 * i / (N - 1)
 def wave(i, t): return wave_amp(i) * math.sin(2 * math.pi * (t - i * KB))
 HEAD_AMP, HEAD_LEAD = 7.0, 0.07
 
-def arc_heading(i): return AX + ARC * (i - 5)     # forward heading of plate i, before the wave
-REST_H = [arc_heading(i) + wave(i, 0.0) for i in range(N)]
-HEAD_REST = arc_heading(0) + 1.5 + HEAD_AMP * math.sin(2 * math.pi * HEAD_LEAD)
-
+def arc_heading(i): return AX + TILT - ARC * (i - 5)     # forward heading of plate i, before the wave
 def unit(h): return (math.cos(R(h)), math.sin(R(h)))
+def chord(tilt):
+    """The heading from the tail joint to the neck, for a given tilt of the whole curve."""
+    x = y = 0.0
+    for i in range(N):
+        c, s = unit(AX + tilt - ARC * (i - 5) + wave(i, 0.0)); x += c; y += s
+    return D(math.atan2(y, x))
+# Tilt the curve so the chord from tail to neck lies exactly on AX: that
+# chord is the axis the game's faceOffset turns onto the heading.
+TILT = AX - chord(0.0)
+REST_H = [arc_heading(i) + wave(i, 0.0) for i in range(N)]
+HEAD_REST = arc_heading(0) - 3.5 + HEAD_AMP * math.sin(2 * math.pi * HEAD_LEAD)
 
 # Joints J0 (neck) … J11 (tail), walked back from the neck along the rest
 # headings, then shifted so the whole animal — antennae to ultimate legs —
@@ -116,7 +124,6 @@ def local_to_world(origin, heading, along, across):
 
 # The head: its bone runs from the neck forward; the shield's centre, the
 # forcipules' bases and the antennae's roots are points on it.
-HEAD_C = 4.6                      # shield centre, along the head bone
 def head_pt(along, across): return local_to_world(J[0], HEAD_REST, along, across)
 SIDES = (("l", -1), ("r", 1))     # the animal's left is -across (up the screen at rest)
 
@@ -301,7 +308,7 @@ def build(seg, head=0.0, trunk=(0.0, 0.0), feet=None, ant=None, fc=None, ult=Non
             fwd = ba - 180.0; c = (bx + L / 2 * math.cos(R(ba)), by + L / 2 * math.sin(R(ba)))
         for sd, sg in SIDES:
             hx, hy, _ = world[f"leg_{i}{sd}_f"]
-            fl = feet(i, sg) if feet else foot_rest_local(i, sg)
+            fl = feet(i, sg) if feet else crawl_foot(i, sg, 0.0)
             foot = local_to_world(c, fwd, *fl)
             h1, h2 = ik2((hx, hy), foot, FEMUR, TIBIA, BEND[(i, sd)])
             pose[f"abs:leg_{i}{sd}_f"] = h1
@@ -343,7 +350,8 @@ REST_FEET = lambda i, sg: crawl_foot(i, sg, 0.0)
 # line, drawn back down it, reared (the head shield swells), the forcipules
 # wide, the antennae laid back, the legs braced wide and the ultimate legs
 # lifted apart
-COIL_S = [30.0 * math.cos(2 * math.pi * (i + 0.4) / 9.4) for i in range(N)]
+COIL_S = [36.0 * math.cos(2 * math.pi * (i + 0.4) / 9.4) for i in range(N)]
+AIM_HEAD = AX - HEAD_REST     # the head turned exactly onto the line it will run
 def coil_feet(g):
     def f(i, sg):
         a, c = REST_FEET(i, sg)
@@ -357,10 +365,10 @@ def coil_bits(g, shiver=0.0):
     fc = lambda sd, sg, k: sg * FC_OPEN[k] * g
     ult = lambda sd, sg, k: (-sg * 22.0 * g if k == 0 else -sg * 10.0 * g)
     return ant, fc, ult
-def coil_like(g, shiver=0.0, trunk_along=-3.2):
+def coil_like(g, shiver=0.0, trunk_along=-4.4):
     ant, fc, ult = coil_bits(g, shiver)
     seg = [COIL_S[i] * g for i in range(N)]
-    return build(seg, -COIL_S[0] * g * 0.9, (trunk_along * g, 0.0), coil_feet(g), ant, fc, ult,
+    return build(seg, AIM_HEAD * g, (trunk_along * g, 0.0), coil_feet(g), ant, fc, ult,
                  keep_head_on_axis=g)
 def wind(t):
     """Wound, not eased: a fast first draw, a slow creep, a last snatch — at 1 by 0.94 and held."""
@@ -376,7 +384,7 @@ COILED = coil_like(1.0)
 def strike_pose(t):
     g = lerp(1.0, -0.32, smooth(0.0, 0.34, t))
     g = lerp(g, 0.0, smooth(0.34, 1.0, t))
-    lunge = lerp(-3.2, 4.2, smooth(0.0, 0.3, t))
+    lunge = lerp(-4.4, 4.2, smooth(0.0, 0.3, t))
     lunge = lerp(lunge, 0.0, smooth(0.36, 1.0, t))
     snap = smooth(0.08, 0.22, t)
     back = smooth(0.4, 1.0, t)
@@ -392,7 +400,7 @@ def strike_pose(t):
         u = smooth(0.0, 0.3, t); v = smooth(0.35, 1.0, t)
         a = lerp(lerp(a0, mid[0], u), a1, v); c = lerp(lerp(c0, mid[1], u), c1, v)
         return (a, c)
-    return build(seg, -COIL_S[0] * g * 0.9, (lunge, 0.0), feet, ant, fc, ult,
+    return build(seg, AIM_HEAD * g, (lunge, 0.0), feet, ant, fc, ult,
                  keep_head_on_axis=max(0.0, min(1.0, abs(g))))
 
 # ---- the dive pose, held through the whole crossing: the trunk laid straight
@@ -403,8 +411,8 @@ def dive_feet(i, sg):
 DIVE_ANT = lambda sd, sg, k: -sg * [44.0, 10.0, 4.0][k]
 DIVE_FC = lambda sd, sg, k: sg * FC_SHUT[k]
 DIVE_ULT = lambda sd, sg, k: (sg * 12.0 if k == 0 else sg * 4.0)
-DIVE_SEG = [-(wave(i, 0.0)) * 0.9 for i in range(N)]    # straightened back onto the arc
-DIVE_HEAD = -0.6 * (HEAD_REST - arc_heading(0))
+DIVE_SEG = [(AX - REST_H[i]) * 0.9 for i in range(N)]    # laid nearly straight down the line
+DIVE_HEAD = AX - HEAD_REST
 
 def lerp_fn(f0, f1, u):
     return lambda sd, sg, k: lerp(f0(sd, sg, k), f1(sd, sg, k), u(sd, sg, k) if callable(u) else u)
@@ -418,8 +426,8 @@ def submerge_pose(t):
         kick = 18.0 * math.sin(math.pi * u) * math.cos(math.pi * i / 3.2)
         seg.append(lerp(COIL_S[i], DIVE_SEG[i], u) + kick)
     uh = smooth(0.0, 0.3, t)
-    head = lerp(-COIL_S[0] * 0.9, DIVE_HEAD, uh) - 10.0 * math.sin(math.pi * uh)
-    drive = lerp(-3.2, 2.0, smooth(0.0, 0.35, t))
+    head = lerp(AIM_HEAD, DIVE_HEAD, uh) - 10.0 * math.sin(math.pi * uh)
+    drive = lerp(-4.4, 2.0, smooth(0.0, 0.35, t))
     def feet(i, sg):
         u = smooth(0.06 + 0.06 * i, 0.26 + 0.06 * i, t)
         a0, c0 = coil_feet(1.0)(i, sg); a1, c1 = dive_feet(i, sg)
@@ -560,7 +568,7 @@ ENRAGED_PLATES = ["$blood.dark", "$ember.dark", "$chitin", "$chitin", "$chitin.l
                   "$chitin.light", "$chitin", "$chitin", "$ember.dark", "$blood.dark"]
 enraged_set = {}
 for i, f in enumerate(ENRAGED_PLATES): enraged_set[f"seg_{i}.fill"] = f
-for i in range(N): enraged_set[f"band_{i}.fill"] = "$blood"
+for i in range(N): enraged_set[f"band_{i}.fill"] = "$coral.dark"
 for lid in LEG_IDS: enraged_set[f"{lid}.fill"] = "$bone.dark" if lid.endswith("_f") else "$bone.dark2"
 enraged_set.update({
     "ult_l0.fill": "$bone.dark", "ult_r0.fill": "$bone.dark", "ult_l1.fill": "$bone", "ult_r1.fill": "$bone",

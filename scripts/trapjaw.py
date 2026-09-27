@@ -247,7 +247,7 @@ def load(t):
     """0 at cocked, 1 at the top of the strain."""
     return smooth(0.05, 0.4, t) * (1 - smooth(0.62, 0.95, t))
 def shiver(t):
-    return math.sin(2 * math.pi * 9 * t) * smooth(0.25, 0.4, t) * (1 - smooth(0.6, 0.72, t))
+    return math.sin(2 * math.pi * 6 * t) * smooth(0.25, 0.4, t) * (1 - smooth(0.6, 0.72, t))
 def latch_pose(t):
     bob = 0.7 * (0.5 - 0.5 * math.cos(4 * math.pi * t))
     k = load(t)
@@ -256,7 +256,7 @@ def latch_pose(t):
     pose["head"] = -1.8 * cyc(2 * t, 0.05) - 7.0 * k
     for s, sg in (("u", -1), ("d", 1)):
         pose[f"jaw_{s}"] = sg * (18.0 * k + 2.6 * shiver(t))
-        pose[f"trig_{s}"] = 14.0 * math.sin(2 * math.pi * 6 * t + (0.0 if s == "u" else 1.9)) + sg * 6.0 * k
+        pose[f"trig_{s}"] = 14.0 * math.sin(2 * math.pi * 5 * t + (0.0 if s == "u" else 1.9)) + sg * 6.0 * k
     # the gaster swings after the step
     pose["petiole"] = 4.0 * cyc(2 * t, -0.05)
     pose["gaster"] = 7.0 * cyc(2 * t, -0.15) + 3.0 * k

@@ -114,8 +114,8 @@ put, on_bone = RIG.put, RIG.on_bone
 # ============================================================== parts
 SHELL, HONEY, HONEY_LIT = "$husk", "$chitin.light", "$chitin.light2"
 HIDE = 0.01
-FRONT, FRONT_LIT, FRONT_SHADE = "$carapace.dark", "$carapace", "$carapace.dark2"
-LEG_NEAR, LEG_NEAR_2, LEG_FAR = "$carapace.dark2", "$dead", "$dead"
+FRONT, FRONT_LIT, FRONT_SHADE = "$carapace", "$carapace.light", "$carapace.dark"
+LEG_NEAR, LEG_NEAR_2, LEG_FAR = "$carapace.dark", "$carapace.dark2", "$dead"
 
 def leg_parts(leg, femur, tibia, tarsus, stroke):
     b = BONES

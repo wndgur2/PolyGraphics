@@ -314,15 +314,15 @@ def charge_pose(t):
     # the shuffle: two steps a cycle, a bob on each
     ph = 2.0 * ((t + 0.2) % 1.0)
     bob = 0.5 * w * (0.5 - 0.5 * math.cos(2 * math.pi * ph))
-    pose = {"body": (-0.6 * d - 1.6 * k + 0.3 * w * cyc(ph / 2.0),
-                     1.4 * d - 0.6 * aim(t) + 0.8 * max(0.0, k) + bob,
-                     3.0 * d - 6.0 * aim(t) - 5.0 * k + 1.0 * w * cyc(ph))}
+    pose = {"body": (-0.8 * d - 3.0 * k + 0.3 * w * cyc(ph / 2.0),
+                     2.0 * d - 0.8 * aim(t) + 1.0 * max(0.0, k) + bob,
+                     5.0 * d - 7.0 * aim(t) - 6.0 * k + 1.0 * w * cyc(ph))}
     # the gaster: a wave from the root out while it walks; curled tight in
     # the draw; opened and lifted to aim in the build (the nozzle along +x);
     # thrown back by the kick, the tip last
     sway = [3.0 * w * cyc(ph / 2.0, -0.12 * i) for i in range(4)]
-    tight = [10.0, 12.0, 10.0, 0.0]
-    level = [-8.0, -6.0, -4.0, 8.0]
+    tight = [14.0, 18.0, 14.0, -4.0]
+    level = [-10.0, -7.0, -4.0, 11.0]
     thrown = [-8.0, -10.0, -14.0, -22.0]
     a = aim(t)
     for i, n in enumerate(GAS + ["nozzle"]):
@@ -343,8 +343,8 @@ def charge_pose(t):
 
 def sac_scale(t, k):
     """Sac k's size: drawn in, then the throbs running up the chain toward the nozzle, the clench, a wobble."""
-    lag = 0.02 * k
-    return (1.0 - 0.1 * draw(t) + 0.2 * fill(t - lag) + 0.02 * k * fill(t - lag)
+    lag = 0.02 * k if t < REL0 else 0.0  # the swell runs up the chain; the clench is all at once
+    return (1.0 - 0.16 * draw(t) + 0.24 * fill(t - lag) + 0.02 * k * fill(t - lag)
             - 0.16 * spent(t) + 0.06 * max(0.0, -kick(t - lag)))
 
 def charge_frame(t):
@@ -414,13 +414,13 @@ def death_pose(t):
     jerk = smooth(0.0, 0.08, t) * (1 - smooth(0.1, 0.3, t))
     fall = smooth(0.2, 0.8, t)
     pose = {"body": (-0.8 * jerk + 0.4 * fall, -0.6 * jerk + 2.6 * fall, -4.0 * jerk + 6.0 * fall)}
-    sink = [-22.0, -16.0, -10.0, 16.0]  # the arch lies back and down over the back
+    sink = [14.0, 20.0, 24.0, 22.0]  # the arch folds forward and down onto the back
     for i, n in enumerate(GAS + ["nozzle"]):
-        pose[n] = -10.0 * jerk * (1 if i < 3 else 2) + sink[i] * smooth(0.2 + 0.08 * (3 - i), 0.62 + 0.06 * (3 - i), t)
-    pose["head"] = 6.0 * jerk + 24.0 * fall
+        pose[n] = -6.0 * jerk * (1 if i < 3 else 1.5) + sink[i] * smooth(0.2 + 0.08 * (3 - i), 0.62 + 0.06 * (3 - i), t)
+    pose["head"] = 6.0 * jerk + 18.0 * fall
     for side in ("near", "far"):
-        pose[f"{side}_scape"] = -24.0 * jerk + 30.0 * fall
-        pose[f"{side}_funic"] = -20.0 * jerk + 26.0 * fall
+        pose[f"{side}_scape"] = -24.0 * jerk + 16.0 * fall
+        pose[f"{side}_funic"] = -20.0 * jerk + 20.0 * fall
     pose["tarsus"] = 30.0 * fall
     feet = {}
     for leg, (hip, fx, lf, lt) in LEGS.items():
