@@ -2,13 +2,15 @@
 
     python3 scripts/pit_card.py       # rewrites apps/ss/assets/ss-env-stage-pit.json
 
-The fourth stage is the other three in one run — plains, burrow and salt pan
-laid in 1800px zones — with sand funnels dug into it (feelers
-`docs/pit-plan.md` §3, §7). The card says that in one picture: the funnel in
-the middle, `use: ss.terrain.funnel` so the card's pit is the run's pit, and the
-three grounds in patches round its rim, each in its own card's inks and with
-its own props, meeting at the seams the run decorates (§3.3: `fissure` where
-sand meets plains, `rubble` where the burrow meets anything).
+The fourth stage is one place of its own (feelers `docs/pit-v2-plan.md`): the
+burrow's lattice dug thin and open to the sky, a packed red-brown floor with
+sand blown down onto it (`ss.env.pit`), obstacles gathered on the lattice's
+bare corners, and sand funnels in the wide chambers. The card says that in one
+picture: the funnel in the middle, `use: ss.terrain.funnel` so the card's pit
+is the run's pit; a ridge of earth and two lumps of it round the chamber, in
+the burrow's inks and the run's two passes; and on the corners where no wall
+stands, the three stages' obstacles side by side — which is the stage: every
+ground's things, fallen into one hole.
 
 Authored 3:2 like the other three cards (384×256), weight through the middle,
 props free to run off the flanks. Every ink here is one of the other three
@@ -47,79 +49,35 @@ def prop(pid, at, asset, scale, rot=None):
     parts.append(p)
 def shift(pts, dx, dy): return [(x + dx, y + dy) for x, y in pts]
 
-# ============================================================== the pan: the ground the pit is dug in
-put("base", None, rect(W, H, 0), "$sand")
-parts[-1]["shape"].pop("corner")
-put("glare", None, rect(W, H, 0), "$sand.light2@0.45")
-parts[-1]["shape"].pop("corner")
-for name, at, rx, ry, fill in [("swell_n", (70, -104), 150, 70, "$sand.light2@0.09"),
-                               ("swell_s", (40, 118), 160, 72, "$sand.light2@0.09"),
-                               ("shade_e", (172, 40), 110, 90, "$rust.dark@0.06")]:
-    for k, f in enumerate((1.0, 0.7, 0.45)):
-        put(f"{name}_{k}", at, ell(rx * f, ry * f), fill, rot=-13)
-scatter("grain_bed", (0, 0), ell(6, 4), 150, [400, 272], 6601, "$sand.dark@0.16", [0.35, 1.5])
-scatter("grain_pale", (0, 0), ell(5, 4), 120, [400, 272], 6602, "$husk@0.10", [0.35, 1.5])
-scatter("grain_warm", (0, 0), ell(5, 3), 90, [400, 272], 6603, "$chitin@0.10", [0.4, 1.5])
-# Wind ripples on the pan's own -13 degrees, where the pan shows.
-for i, (x, y, rx) in enumerate([(-30, -112, 90), (60, -84, 70), (150, 34, 60), (132, 92, 80), (40, 122, 96),
-                                (-70, 116, 70), (176, -8, 40)]):
-    put(f"ripple_{i}_lee", (x, y), ell(rx, 8), "$sand.dark@0.2", rot=-13)
-    put(f"ripple_{i}_lit", (x, y - 1.5), ell(rx * 0.82, 3.6), "$chitin@0.12", rot=-13)
-# Salt bloom where the crust still shows through.
-BLOOMS = [(128, 64, 1.0), (-12, 118, 0.8), (174, 114, 0.7)]
-BLOOM = [(43.2, -6.0), (40.0, 12.2), (20.3, 28.6), (-11.8, 23.1), (-35.1, 13.7), (-56.6, -4.2), (-35.8, -23.1),
-         (-2.0, -23.2), (28.9, -23.0)]
-for i, (x, y, s) in enumerate(BLOOMS):
-    put(f"bloom_{i}", (x, y), poly([(px * s * 0.8, py * s * 0.8) for px, py in BLOOM]), "$husk@0.18")
-    put(f"bloom_{i}_core", (x, y), poly([(px * s * 0.5, py * s * 0.5) for px, py in BLOOM]), "$husk@0.16")
-# Cracks in the crust, each a dark cut under a pale lip.
-CRACKS = [[(104, 118), (126, 112), (150, 118), (170, 110)], [(150, 50), (164, 38), (186, 34)],
-          [(18, 112), (40, 120), (62, 114)]]
-for c, pts in enumerate(CRACKS):
-    for j in range(len(pts) - 1):
-        (x0, y0), (x1, y1) = pts[j], pts[j + 1]
-        L = math.hypot(x1 - x0, y1 - y0)
-        a = math.degrees(math.atan2(y1 - y0, x1 - x0))
-        mx, my = (x0 + x1) / 2, (y0 + y1) / 2
-        put(f"crack_{c}_{j}_lip", (mx, my - 1.5), rect(L, 2, 1), "$husk@0.22", rot=a)
-        put(f"crack_{c}_{j}", (mx, my), rect(L, 2, 1), "$ink@0.32", rot=a)
-
-# ============================================================== the plains, west
-PLAINS = [(-200, -140), (-96, -140), (-104, -112), (-126, -84), (-118, -52), (-134, -22), (-126, 12), (-142, 44),
-          (-130, 78), (-112, 104), (-120, 140), (-200, 140)]
-put("plains_fringe", None, poly(shift(PLAINS, 7, 3)), "$soil@0.35")
-put("plains", None, poly(PLAINS), "$soil")
-for k, f in enumerate((1.0, 0.68, 0.42)):
-    put(f"plains_rise_{k}", (-176, -40), ell(60 * f, 90 * f), "$soil.light@0.08")
-scatter("plains_grain_lit", (-164, 0), ell(7, 5), 40, [70, 272], 4111, "$soil.light@0.10", [0.35, 1.4])
-scatter("plains_grain_dark", (-164, 0), ell(6, 4), 36, [70, 272], 4112, "$ink@0.16", [0.4, 1.5])
-scatter("plains_flecks", (-164, 0), rect(3, 3, 0), 16, [70, 264], 4115, "$rust", [0.55, 1.5], jitter=False)
-scatter("plains_specks", (-164, 0), rect(2, 2, 0), 22, [70, 264], 4116, "$rust.dark@heavy", [0.6, 1.5], jitter=False)
-for r in parts[-2:]:
-    r["repeat"]["of"].pop("corner")
-put("plains_pit_0", (-176, 62), circ(5), "$ink@heavy")
-put("plains_pit_1", (-150, -96), circ(3.5), "$ink@heavy")
-# A scent trail still bleeding along the ground — and running over the lip
-# into the funnel, which is this stage's sentence: whatever goes in stays in.
-scatter("trail_chips", (-122, -18), rect(3, 3, 0), 26, [120, 18], 4211, "$pheromone@0.5", [0.45, 1.6], rot=12)
+# ============================================================== the floor (ss.env.pit)
+put("base", None, rect(W, H, 0), "$sand.dark")
+for name, at, rx, ry, rot in [("hard_w", (-120, -60), 120, 70, 24), ("hard_e", (130, 70), 130, 64, -32),
+                              ("hard_s", (-60, 110), 90, 40, 8)]:
+    for k, f in enumerate((1.0, 0.72, 0.46)):
+        put(f"{name}_{k}", at, ell(rx * f, ry * f), "$rust@0.07", rot=rot)
+for name, at, rx, ry in [("drift_n", (40, -96), 110, 34), ("drift_w", (-150, 20), 60, 26), ("drift_e", (150, -20), 70, 24),
+                         ("drift_s", (60, 110), 100, 30)]:
+    for k, f in enumerate((1.0, 0.74, 0.5)):
+        put(f"{name}_{k}", at, ell(rx * f, ry * f), "$sand@0.22", rot=-13)
+    put(f"{name}_lit", (at[0] - 3, at[1] - 4), ell(rx * 0.9, ry * 0.55), "$chitin@0.06", rot=-13)
+scatter("grain_dark", (0, 0), ell(4, 3), 160, [400, 272], 7601, "$soil@0.22", [0.35, 1.4])
+scatter("grain_pale", (0, 0), ell(4, 3), 130, [400, 272], 7602, "$sand.light@0.2", [0.35, 1.4])
+scatter("grain_warm", (0, 0), ell(4, 3), 80, [400, 272], 7603, "$chitin@0.1", [0.4, 1.4])
+for i, (x, y, r, a0, a1) in enumerate([(-96, -18, 26, 200, 262), (104, 24, 22, 20, 84), (-30, 96, 28, 150, 206),
+                                       (70, -60, 18, 290, 350)]):
+    put(f"scar_{i}", (x, y), {"kind": "ring", "r": r, "width": 4, "from": a0, "to": a1}, "$soil@0.42")
+    put(f"scar_{i}_lip", (x, y - 2), {"kind": "ring", "r": r, "width": 2, "from": a0 + 4, "to": a1 - 4},
+        "$sand.light@0.16")
+scatter("flecks", (0, 0), rect(3, 3, 0), 18, [380, 250], 7615, "$rust", [0.55, 1.4], jitter=False)
 parts[-1]["repeat"]["of"].pop("corner")
 
-# ============================================================== the burrow, north-east
-BURROW = [(78, -140), (200, -140), (200, 10), (172, 2), (146, -8), (120, -26), (104, -52), (96, -84), (84, -110)]
-put("burrow_fringe", None, poly(shift(BURROW, -6, 5)), "$dead.dark@0.4")
-put("burrow", None, poly(BURROW), "$dead.dark")
-scatter("burrow_grain", (150, -70), ell(9, 6), 26, [100, 130], 5111, "$carapace@0.07", [0.4, 1.6])
-scatter("burrow_dark", (150, -70), ell(8, 5), 22, [100, 130], 5112, "$ink@0.22", [0.4, 1.5])
-put("gouge_cut", (150, -44), {"kind": "ring", "r": 30, "width": 5, "from": 200, "to": 300}, "$ink@0.55")
-put("gouge_lip", (150, -47), {"kind": "ring", "r": 30, "width": 2.5, "from": 208, "to": 292}, "$carapace.dark2@0.35")
-scatter("burrow_grit", (150, -70), rect(4, 4, 0), 14, [100, 130], 5113, "$carapace.dark@0.7", [0.5, 1.4], jitter=False)
-scatter("burrow_shell", (150, -70), rect(4, 3, 0), 8, [100, 130], 5117, "$husk@0.45", [0.5, 1.5])
-for r in parts[-2:]:
-    r["repeat"]["of"].pop("corner")
-# Earth left standing: every contour first, then every fill, so no mass
-# outlines the one beside it — the run's own two passes.
-EARTH = [("h0", (152, -122), rect(132, 54, 27), -7), ("h1", (206, -60), rect(48, 110, 24), 4),
-         ("n0", (104, -118), circ(24), 0), ("n1", (190, -110), circ(30), 0), ("n2", (196, -6), circ(24), 0)]
+# ============================================================== earth: a ridge and two lumps
+# The lattice dug thin: a partition running off the top-right with its corner
+# mass, and a lone lump on the bottom-left — everything a contour first, then
+# every fill, so no mass outlines the one beside it (the run's two passes).
+EARTH = [("ridge", (150, -96), rect(150, 30, 15), -22), ("ridge_end", (84, -70), circ(24), 0),
+         ("ridge_far", (214, -122), circ(30), 0), ("lump", (-170, 104), circ(34), 0),
+         ("lump_lobe", (-140, 118), circ(20), 0)]
 def grow(shape, d):
     s = dict(shape)
     if s["kind"] == "circle": s["r"] = r2(s["r"] + d)
@@ -129,44 +87,32 @@ for eid, at, shape, rot in EARTH:
     put(f"rim_{eid}", at, grow(shape, 4), "$ink.dark", rot=rot)
 for eid, at, shape, rot in EARTH:
     put(f"earth_{eid}", at, shape, "$carapace.dark", rot=rot)
-FACES = [((128, -128), 5.5, 3.7, 20, "$ink@0.3"), ((166, -114), 6.2, 4.2, 127, "$carapace@0.16"),
-         ((188, -128), 3.8, 2.6, 35, "$carapace.dark2@0.5"), ((104, -114), 5.0, 3.2, 95, "$ink@0.3"),
-         ((200, -84), 5.6, 3.6, 70, "$carapace@0.16"), ((196, -44), 4.6, 3.0, 300, "$ink@0.3"),
-         ((190, -2), 5.0, 3.4, 150, "$carapace@0.16"), ((142, -104), 3.6, 2.4, 250, "$carapace.dark2@0.5"),
-         ((206, -22), 3.4, 2.2, 40, "$carapace.dark2@0.5")]
+FACES = [((120, -84), 5.5, 3.7, 20, "$ink@0.3"), ((166, -102), 6.2, 4.2, 127, "$carapace@0.16"),
+         ((196, -118), 3.8, 2.6, 35, "$carapace.dark2@0.5"), ((84, -72), 5.0, 3.2, 95, "$ink@0.3"),
+         ((-170, 98), 5.6, 3.6, 70, "$carapace@0.16"), ((-158, 112), 4.6, 3.0, 300, "$ink@0.3"),
+         ((-138, 118), 3.4, 2.2, 40, "$carapace.dark2@0.5")]
 for i, (at, rx, ry, rot, fill) in enumerate(FACES):
     put(f"earth_face_{i}", at, ell(rx, ry), fill, rot=rot)
 
-# ============================================================== the seams (§3.3)
-prop("seam_fissure_n", (-118, -64), "ss.terrain.fissure", 0.9, rot=78)
-prop("seam_fissure_s", (-132, 60), "ss.terrain.fissure", 0.85, rot=62)
-prop("seam_rubble_a", (100, -40), "ss.terrain.rubble", 0.9)
-prop("seam_rubble_b", (150, 4), "ss.terrain.rubble", 0.8)
+# ============================================================== bare corners, and what stands on them
+# West: the flats' spires and boulder leaning together.
+prop("spire_wa", (-150, -70), "ss.terrain.spire", 1.15)
+prop("spire_wb", (-124, -52), "ss.terrain.spire", 0.78)
+prop("boulder_w", (-172, -38), "ss.terrain.boulder", 0.9)
+# East: the pan's plate on edge, a ribcage, the Mason's shard.
+prop("saltplate_e", (150, 74), "ss.terrain.saltplate", 1.0)
+prop("ribcage_e", (112, 106), "ss.terrain.ribcage", 0.72)
+prop("chitin_e", (182, 104), "ss.terrain.chitin", 0.8)
+# And the floor's own litter.
+prop("fungi_n", (38, -104), "ss.terrain.fungi", 0.62)
+prop("glass_s", (-84, 112), "ss.terrain.glass", 0.7)
+prop("fissure_w", (-110, 40), "ss.terrain.fissure", 0.8, rot=62)
 
-# ============================================================== props round the rim
-# plains: a thicket of spires where the trail crystallised, a boulder, a vent
-prop("spire_wa", (-162, -58), "ss.terrain.spire", 1.2)
-prop("spire_wb", (-134, -40), "ss.terrain.spire", 0.82)
-prop("spire_wc", (-178, -26), "ss.terrain.spire", 0.7)
-prop("boulder_w", (-164, 52), "ss.terrain.boulder", 1.0)
-prop("vent_w", (-150, 104), "ss.terrain.vent", 0.85)
-# burrow: fungi on the chamber floor
-prop("fungi_ne", (150, -54), "ss.terrain.fungi", 0.85)
-prop("fungi_nn", (116, -76), "ss.terrain.fungi", 0.62)
-# pan: a heaved plate, fused glass, a ribcage half in the drift
-prop("saltplate_e", (156, 66), "ss.terrain.saltplate", 1.05)
-prop("saltplate_s", (112, 106), "ss.terrain.saltplate", 0.72)
-prop("glass_se", (178, 108), "ss.terrain.glass", 0.8)
-prop("ribcage_s", (-72, 116), "ss.terrain.ribcage", 0.72)
-
-scatter("glints", (0, 0), rect(3, 3, 0), 50, [400, 272], 6621, "$silent@0.55", [0.45, 1.3], jitter=False)
+scatter("glints", (0, 0), rect(3, 3, 0), 40, [400, 272], 7621, "$silent@0.5", [0.45, 1.3], jitter=False)
 parts[-1]["repeat"]["of"].pop("corner")
 
 # ============================================================== the pit
 prop("funnel", FUNNEL_AT, "ss.terrain.funnel", FUNNEL_SCALE)
-# the trail does not stop at the lip: a last few chips going down the slope
-scatter("trail_in", (-74, -9), rect(3, 3, 0), 9, [44, 10], 4212, "$pheromone@0.4", [0.4, 1.2], rot=8)
-parts[-1]["repeat"]["of"].pop("corner")
 
 for p in parts:
     s = p.get("shape")
@@ -178,21 +124,15 @@ doc = {
     "description": (
         "The picture on the Pit card (개미지옥) in Feelers' map select: the fourth stage, the one that never ends, "
         "drawn once from the camera's own height like the other three.\n\n"
-        "The Pit is the other three stages in one run — plains, burrow and salt pan laid in 1800px zones, with sand "
-        "funnels dug into the desert — so the card is all three round one hole. In the middle, `use: "
-        "ss.terrain.funnel`: the run's own pit, the lip spilling pale sand onto whatever it was dug in, the slope "
-        "stepping down to the throat with its tongues of sand running in and the antlion's jaws just showing. "
-        "Round its rim the grounds lie in patches, each in its own card's inks and with its own props: the plains "
-        "west ($soil, a thicket of spires, a boulder, a vent), with a pink scent trail running over the lip and into "
-        "the funnel, which is the stage's one sentence; the burrow north-east ($dead.dark under $carapace.dark "
-        "earth on its $ink.dark contour, drawn in the run's two passes, fungi on the chamber floor); and the pan "
-        "everywhere else, the floor the pit is dug in, with its ripples on -13 degrees, salt bloom, cracks, plates "
-        "heaved on edge, fused glass and a ribcage half in the drift. The patches meet at the seams the run "
-        "decorates (feelers docs/pit-plan.md §3.3): a `fissure` where sand meets plains, `rubble` where the burrow "
-        "meets anything.\n\n"
+        "The Pit is one place of its own: the burrow's lattice dug thin and open to the sky, on a packed red-brown "
+        "floor with sand blown down onto it (ss.env.pit's inks, drifts on the pan's -13 degrees, claw scars, rust "
+        "flecks). In the middle, `use: ss.terrain.funnel`: the run's own pit, dug in a wide chamber. Round it, a "
+        "partition of earth with its corner mass and a lone lump, $carapace.dark on its $ink.dark contour in the "
+        "run's two passes; and on the corners no wall reaches, the three stages' obstacles gathered side by side — "
+        "the flats' spires and boulder, the pan's salt plate and ribcage, the Mason's chitin shard — which is the "
+        "stage in one sentence: every ground's things, fallen into one hole.\n\n"
         "Every ink is one the other three cards use. Authored 3:2 like them: the card fits it to the strip's width "
-        "and crops it vertically, so the pit sits on the middle band and the patches run off the left and right "
-        "edges, where the frame is the only thing that cuts them."
+        "and crops it vertically, so the pit sits on the middle band and the flanks run off the left and right edges."
     ),
     "tags": ["env", "card", "stage"],
     "size": [W, H],
