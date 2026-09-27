@@ -86,9 +86,9 @@ for s, (at, h, links) in ANT.items():
 
 # Legs off the underside of the mesosoma.
 LEGS = {  # name: (hip, rest foot x, femur, tibia, tarsus)
-    "f": ((1.6, 1.6), 9.0, 4.6, 5.0, 2.4),
-    "m": ((-1.4, 1.9), 1.4, 4.2, 4.6, 2.4),
-    "b": ((-4.2, 1.7), -10.4, 5.0, 5.6, 2.6),
+    "f": ((2.2, 2.0), 8.8, 4.4, 4.8, 2.4),
+    "m": ((-0.8, 2.3), 1.2, 4.2, 4.6, 2.4),
+    "b": ((-3.6, 2.1), -8.8, 4.6, 5.0, 2.6),
 }
 FAR_DX = -0.8
 def hip_rest(s, n):
@@ -128,13 +128,20 @@ def head_poly(pts):
 # everything, keep the ink.
 RIM = {"color": "$chitin.dark2", "width": "thin"}
 RIM_HAIR = {"color": "$chitin.dark2", "width": "hair"}
+RIM_LEG = {"color": "$rust.dark", "width": "hair"}
 
 # ---- far side: legs, antenna
+def femur_shape(L):
+    """Club-shaped, the way an ant's femur is: slim at the hip, swelling toward the knee, rounded off at both ends."""
+    return poly([(-0.5, -0.35), (0.2, -0.6), (L * 0.55, -0.85), (L * 0.85, -0.8), (L + 0.45, -0.4),
+                 (L + 0.45, 0.4), (L * 0.85, 0.8), (L * 0.55, 0.85), (0.2, 0.6), (-0.5, 0.35)])
 def leg_parts(s, n, femur, tibia, stroke):
-    for seg, w0, w1, over in (("tarsus", 0.9, 0.55, 0.3), ("tibia", 1.35, 0.85, 0.45), ("femur", 1.8, 1.25, 0.5)):
+    for seg in ("tarsus", "tibia", "femur"):
         nm = f"{s}{n}_{seg}"
         at, a = on_bone(nm)
-        put(f"leg_{nm}", nm, at, a, bar(B[nm].length, w0, w1, over), tibia if seg != "femur" else femur, stroke)
+        L = B[nm].length
+        shape = femur_shape(L) if seg == "femur" else bar(L, 1.1, 0.7, 0.4) if seg == "tibia" else bar(L, 0.65, 0.4, 0.3)
+        put(f"leg_{nm}", nm, at, a, shape, femur if seg == "femur" else tibia, stroke)
 for n in ("b", "m", "f"):
     leg_parts("f", n, "$chitin.dark2", "$rust.light", None)
 
@@ -202,7 +209,7 @@ put("socket", "head", on_bone("head", 9.9, 0.0)[0], -14.0, ell(1.2, 2.2), "$chit
 # ---- near side: antenna, legs
 antenna("n", "$chitin.dark")
 for n in ("b", "m", "f"):
-    leg_parts("n", n, "$chitin.dark2", "$chitin.dark2", INK_HAIR)
+    leg_parts("n", n, "$chitin.dark2", "$chitin.dark2", RIM_LEG)
 
 RIG.check()
 STILL = {"eye", "organ", "socket"}

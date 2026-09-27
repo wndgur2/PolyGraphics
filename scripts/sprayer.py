@@ -83,7 +83,7 @@ GAS = RIG.chain("gas", "body", PETIOLE, GASTER)
 bone("nozzle", GAS[-1], RIG.end_of(GAS[-1]), NOZZLE_HEADING, NOZZLE_LEN)
 # the sacs, one on each gaster link at its middle, a little off the line to
 # the outside of the curl (up/back), so the arch is fat on its outside
-SAC = [(3.6, 3.2), (4.5, 4.1), (3.7, 3.2)]  # (along-radius, across-radius)
+SAC = [(3.8, 3.4), (4.8, 4.4), (3.9, 3.4)]  # (along-radius, across-radius)
 SAC_OUT = [-0.4, -0.6, -0.4]
 for k, (L, h) in enumerate(GASTER):
     at, a = RIG.on_bone(f"gas_{k}", L * 0.5, SAC_OUT[k])
@@ -112,9 +112,9 @@ solve = RIG.solve
 put, on_bone = RIG.put, RIG.on_bone
 
 # ============================================================== parts
-SAC_MID, SAC_DARK, SAC_LIT, SAC_GLEAM = "$spore.dark", "$spore.dark2", "$spore@0.6", "$spore.light2@0.8"
-FRONT, FRONT_LIT = "$spore.dark2", "$spore.dark"
-LEG_NEAR, LEG_NEAR_2, LEG_FAR = "$carapace.dark", "$carapace.dark2", "$dead"
+SAC_MID, SAC_DARK, SAC_LIT, SAC_GLEAM = "$spore.dark", "$spore.dark2", "$spore@0.7", "$spore.light2@0.8"
+FRONT, FRONT_LIT, FRONT_SHADE = "$spore.dark", "$spore@0.5", "$spore.dark2"
+LEG_NEAR, LEG_NEAR_2, LEG_FAR = "$spore.dark2", "$spore.dark2", "$carapace.dark2"
 HIDE = 0.01
 
 def leg_parts(leg, femur, tibia, tarsus, stroke):
@@ -141,11 +141,11 @@ def sac_parts(k):
     b = f"sac_{k}"
     (x, y), a = on_bone(b)
     ra, rc = SAC[k]
-    put(f"gas_{k}", b, (x, y), a, ell(ra, rc), SAC_MID, INK_THIN if k == 1 else INK_HAIR)
+    put(f"gas_{k}", b, (x, y), a, ell(ra, rc), SAC_MID, INK_HAIR)
     # lit from above whichever way the sac leans: the dark underside toward
     # the floor, the lit rim toward the ceiling
     def lean(dx, dy): return (x + dx, y + dy)
-    put(f"belly_{k}", b, lean(0.2, rc * 0.36), a, ell(ra * 0.86, rc * 0.6), SAC_DARK)
+    put(f"belly_{k}", b, lean(0.2, rc * 0.46), a, ell(ra * 0.8, rc * 0.5), SAC_DARK)
     put(f"rim_{k}", b, lean(-0.2, -rc * 0.42), a, ell(ra * 0.78, rc * 0.4), SAC_LIT)
     at, _ = on_bone(b, ra * 0.42, 0.0)
     put(f"band_{k}", b, at, a + 90.0, rect(rc * 1.7, 0.8, 0.4), "$spore.dark2@0.8")
@@ -180,7 +180,8 @@ put("flash", "nozzle", at, a, poly([(-1.6, 0.0), (-0.3, -1.0), (0.2, -2.8), (0.9
 # ---- the body: petiole node, mesosoma, the organ, the head
 put("petiole", "body", (-4.4, 1.8), 20.0, ell(1.5, 2.0), FRONT, INK_HAIR)
 MESO = [(-3.6, 2.8), (-3.8, 0.0), (-2.6, -1.8), (-0.4, -2.8), (2.0, -2.4), (3.6, -0.8), (3.8, 1.4), (2.6, 3.2), (-0.6, 3.8)]
-put("thorax", "body", (0, 0), 0.0, poly(MESO), FRONT, INK_THIN)
+put("thorax", "body", (0, 0), 0.0, poly(MESO), FRONT, INK_HAIR)
+put("thorax_shade", "body", (0, 0), 0.0, poly([(-3.4, 1.8), (-0.6, 2.6), (2.6, 2.2), (3.7, 1.0), (2.6, 3.2), (-0.6, 3.8), (-3.6, 2.8)]), FRONT_SHADE)
 put("thorax_lit", "body", (0, 0), 0.0, poly([(-2.8, -1.2), (-0.6, -2.4), (1.8, -2.0), (3.0, -0.8), (1.6, -1.2), (-0.6, -1.2)]), FRONT_LIT)
 RIG.use("organ", "body", (0.2, -2.9), "ss.lib.organ", scale=[0.44, 0.38])
 
@@ -192,7 +193,7 @@ put("mandible", "head", (HEAD_C[0] + 3.2, HEAD_C[1] + 1.7), 16.0,
     poly([(-1.1, -0.8), (0.8, -0.9), (2.2, -0.2), (2.7, 0.8), (1.4, 0.4), (0.2, 0.8), (-1.1, 0.8)]), "$husk.dark", INK_HAIR)
 put("eye", "head", (HEAD_C[0] + 1.1, HEAD_C[1] - 0.5), 0.0, ell(1.05, 0.9), "$ink")
 put("eye_glint", "head", (HEAD_C[0] + 1.4, HEAD_C[1] - 0.85), 0.0, circ(0.36), "$silent")
-antenna("near", FRONT_LIT, INK_HAIR)
+antenna("near", FRONT, INK_HAIR)
 
 for leg in ("near_b", "near_m", "near_f"):
     leg_parts(leg, LEG_NEAR, LEG_NEAR_2, LEG_NEAR_2, INK_HAIR)

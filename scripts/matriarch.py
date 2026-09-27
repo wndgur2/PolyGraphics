@@ -341,7 +341,7 @@ def tracks(state_at, ts, scales=None, extra=None):
         xs, ys, rs, ss = series[pid]
         for prop, vs, rv in (("x", xs, 0.0), ("y", ys, 0.0), ("rot", rs, 0.0), ("scale", ss, 1.0)):
             if prop == "rot" and is_round(pid): continue
-            if max(abs(v - rv) for v in vs) > (0.004 if prop == "scale" else 0.01):
+            if max(abs(v - rv) for v in vs) > {"scale": 0.004, "rot": 0.2}.get(prop, 0.05):
                 out.append({"part": pid, "prop": prop, "keys": [[r2(t), round(v, 3) if prop == "scale" else r2(v)] for t, v in zip(ts, vs)], "ease": "linear"})
     for pid, prop, fn in (extra or []):
         out.append({"part": pid, "prop": prop, "keys": [[r2(t), r2(fn(t))] for t in ts], "ease": "linear"})
@@ -621,19 +621,19 @@ animations = {}
 animations["swell"] = {
     "description": "The chamber breathing, and everything on it arriving late: it fills — the skin swells, the plates fan apart and the seams between them open pink, the tail lifts and the crown rises in a wave from the front to the rear — and lets go; the weight comes onto the legs a beat after, so the body sinks and the knees give. Inside, the eggs drift on their own orbits with their glows pulsing, and three nodules — eggs pressing the skin out from inside — roll along the belly toward the vent. The head nods, the jaws work twice, the antennae sweep and each leg treads once in turn. The idle she plays whenever she is not doing one of the other two, walking or standing.",
     "duration": 2.8,
-    "tracks": tracks(swell_state, keyset(28), SWELL_SCALES, SWELL_EXTRA),
+    "tracks": tracks(swell_state, keyset(24), SWELL_SCALES, SWELL_EXTRA),
 }
 animations["command"] = {
     "description": "The call: she draws in — the chamber tight, the crown flat, the head down and back, the antennae folded — then rears and lets go, the head thrown up and forward with the jaws gaping, the chamber heaving out with the seams and the core flaring, the front feet lifting, and the crown standing up in a wave from the front to the rear, the way the rings the game draws leave her mouth; then everything settles back, the crown last. No damage and no windup — what answers it is the brood, not her.",
     "duration": 0.9,
-    "tracks": tracks(command_state, keyset(24), COMMAND_SCALES, COMMAND_EXTRA),
+    "tracks": tracks(command_state, keyset(18), COMMAND_SCALES, COMMAND_EXTRA),
 }
 animations["lay"] = {
     "description": "One egg leaving through the seam under the chamber: she braces and fills, and the egg nearest the vent is shifted down onto it; a squeeze runs round the chamber from the tail to the vent, the tail tips down, she squats, the vent opens and the egg is pushed through it and drops, out and gone at 0.62 (where the game's egg takes over, at (6.5, 34.5)); then the vent closes, the chamber relaxes, the rest of the brood settles into the room it left and the next egg rises into its place.",
     "duration": 1.2,
-    "tracks": tracks(lay_state, keyset(30), LAY_SCALES, LAY_EXTRA),
+    "tracks": tracks(lay_state, keyset(24), LAY_SCALES, LAY_EXTRA),
 }
-TS_DEATH = [i / 40 for i in range(35)] + [0.9, 0.95, 1.0]
+TS_DEATH = [i / 32 for i in range(28)] + [0.85, 0.9, 1.0]
 animations["death"] = {
     "description": "The chamber dies, not the animal: it swells tight with the crown standing and the core flaring, then the core burns up white and goes out, the brood goes dark, the chamber collapses to two thirds of itself with the plates slumping apart over it, the tail drops to the floor, the legs give and the body comes down, the head sags with the jaws slack; the crown comes down over the sac in a wave from the front to the rear. Still from 0.85.",
     "duration": 0.95,

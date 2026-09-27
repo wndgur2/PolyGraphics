@@ -317,8 +317,8 @@ def ant_crawl(t):
     return f
 def fc_crawl(t):
     def f(sd, sg, k):
-        if k == 0: return sg * 7.0 * (0.5 + 0.5 * cyc(2 * t, 0.1))
-        return -sg * 6.0 * (0.5 + 0.5 * cyc(2 * t, 0.0))
+        # the fangs working open and shut twice a loop, the tips lagging the bases
+        return sg * [5.0, 12.0][k] * (0.5 + 0.5 * cyc(2 * t, 0.1 - 0.08 * k))
     return f
 def ult_crawl(t):
     def f(sd, sg, k):
@@ -349,9 +349,12 @@ def coil_feet(g):
         a, c = REST_FEET(i, sg)
         return (lerp(a, rake(i) * 0.4 - 0.8, g), c + sg * 2.2 * g)
     return f
+# The fangs: a pair of deltas (base, fang), + turning each side outward.
+FC_OPEN = (16.0, 34.0)
+FC_SHUT = (-6.0, -14.0)
 def coil_bits(g, shiver=0.0):
     ant = lambda sd, sg, k: -sg * [26.0, 12.0, 8.0][k] * g + shiver * (1 if k % 2 else -1) * 3.0
-    fc = lambda sd, sg, k: (sg * 22.0 * g if k == 0 else -sg * 18.0 * g)
+    fc = lambda sd, sg, k: sg * FC_OPEN[k] * g
     ult = lambda sd, sg, k: (-sg * 22.0 * g if k == 0 else -sg * 10.0 * g)
     return ant, fc, ult
 def coil_like(g, shiver=0.0, trunk_along=-3.2):
@@ -378,7 +381,7 @@ def strike_pose(t):
     snap = smooth(0.08, 0.22, t)
     back = smooth(0.4, 1.0, t)
     ant = lambda sd, sg, k: lerp(-sg * [26.0, 12.0, 8.0][k] * max(g, 0.0) * (1 - snap) + sg * [-30.0, -14.0, -10.0][k] * snap, 0.0, back)
-    fc = lambda sd, sg, k: lerp(lerp((sg * 22.0 if k == 0 else -sg * 18.0), (-sg * 8.0 if k == 0 else sg * 10.0), snap), 0.0, back)
+    fc = lambda sd, sg, k: lerp(lerp(sg * FC_OPEN[k], sg * FC_SHUT[k], snap), 0.0, back)
     ult = lambda sd, sg, k: lerp((-sg * 22.0 if k == 0 else -sg * 10.0), (sg * 8.0 if k == 0 else sg * 14.0), smooth(0.05, 0.4, t)) * (1 - back)
     seg = [COIL_S[i] * g for i in range(N)]
     # the feet: from the braced stance, thrown back as it lunges, home at the end
@@ -398,7 +401,7 @@ def strike_pose(t):
 def dive_feet(i, sg):
     return (-5.2, sg * (HW[i] * 0.95 + 1.2))
 DIVE_ANT = lambda sd, sg, k: -sg * [44.0, 10.0, 4.0][k]
-DIVE_FC = lambda sd, sg, k: (-sg * 10.0 if k == 0 else sg * 12.0)
+DIVE_FC = lambda sd, sg, k: sg * FC_SHUT[k]
 DIVE_ULT = lambda sd, sg, k: (sg * 12.0 if k == 0 else sg * 4.0)
 DIVE_SEG = [-(wave(i, 0.0)) * 0.9 for i in range(N)]    # straightened back onto the arc
 DIVE_HEAD = -0.6 * (HEAD_REST - arc_heading(0))
@@ -447,7 +450,7 @@ def surface_pose(t):
         wide = 3.2 * math.sin(math.pi * u)
         return (lerp(a0, a1, u) + 1.2 * math.sin(math.pi * u), lerp(c0, c1, u) + sg * wide)
     ua = smooth(0.0, 0.7, t)
-    fc_open = lambda sd, sg, k: lerp(DIVE_FC(sd, sg, k), 0.0, smooth(0.0, 0.8, t)) + (sg * 24.0 if k == 0 else -sg * 20.0) * math.sin(math.pi * smooth(0.05, 0.8, t))
+    fc_open = lambda sd, sg, k: lerp(DIVE_FC(sd, sg, k), 0.0, smooth(0.0, 0.8, t)) + sg * FC_OPEN[k] * 1.1 * math.sin(math.pi * smooth(0.05, 0.8, t))
     ant = lambda sd, sg, k: lerp(DIVE_ANT(sd, sg, k), 0.0, ua) + sg * [16.0, 8.0, 10.0][k] * math.sin(math.pi * ua)
     ult = lambda sd, sg, k: lerp(DIVE_ULT(sd, sg, k), 0.0, smooth(0.45, 1.0, t)) - sg * 14.0 * math.sin(math.pi * smooth(0.45, 1.0, t))
     return build(seg, head, (rise, 0.0), feet, ant, fc_open, ult)
@@ -471,7 +474,7 @@ def death_pose(t):
         a, c = REST_FEET(i, sg)
         return (lerp(a, -2.4, u), lerp(c, sg * (HW[i] * 0.8 + 1.6), u))
     snap = smooth(0.0, 0.14, t)
-    fc = lambda sd, sg, k: (sg * 16.0 * jerk - sg * 14.0 * snap if k == 0 else -sg * 16.0 * jerk + sg * 16.0 * snap)
+    fc = lambda sd, sg, k: sg * FC_OPEN[k] * 0.8 * jerk + sg * FC_SHUT[k] * 1.2 * snap
     ant = lambda sd, sg, k: sg * [18.0, 10.0, 12.0][k] * jerk - sg * [30.0, 20.0, 16.0][k] * smooth(0.3, 0.6, t)
     ult = lambda sd, sg, k: sg * 16.0 * math.sin(math.pi * smooth(0.55, 0.85, t)) - [16.0, 24.0][k] * smooth(0.6, 0.85, t)
     return build(seg, head, (lerp(0.0, -1.5, smooth(0.2, 0.7, t)), 0.0), feet, ant, fc, ult)

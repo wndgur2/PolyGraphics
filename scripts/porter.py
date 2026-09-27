@@ -104,7 +104,7 @@ SEGS = [
 ]
 NSEG = len(SEGS)
 def seg_angle(i):
-    """A segment's rest heading: along the spine, pointing to the tail (so +y of the segment is its belly... on the up-side)."""
+    """A segment's rest heading: along the spine toward the tail, so the segment's +y side is its back (up on screen)."""
     a = SEGS[max(0, i - 1)]; b = SEGS[min(NSEG - 1, i + 1)]
     return D(math.atan2(b[1] - a[1], b[0] - a[0]))
 SEG_REST = [(x, y, seg_angle(i)) for i, (x, y, rx, ry) in enumerate(SEGS)]
