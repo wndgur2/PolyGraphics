@@ -1,7 +1,7 @@
 {
   "id": "ss.icon.might",
-  "name": "Might icon (SS)",
-  "description": "Shape Survivors passive icon: up-arrow (triangle + stem). Port of i_might (BootScene.ts:574-576). Rim is `$venom.dark`, the same as `ss.icon.drone`: this passive is the Broodling evolution's other half, so the pair reads as a pair on the bar, in the green of the solutions the two are drawn from on the level-up. The glyph wears the rim's colour as well, so the passive is one colour on the bar.",
+  "name": "Might icon",
+  "description": "Passive icon: up-arrow (triangle + stem). Port of i_might (BootScene.ts:574-576). Rim is `$venom.dark`, the same as `ss.icon.drone`: this passive is the Broodling evolution's other half, so the pair reads as a pair on the bar, in the green of the solutions the two are drawn from on the level-up. The glyph wears the rim's colour as well, so the passive is one colour on the bar.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [

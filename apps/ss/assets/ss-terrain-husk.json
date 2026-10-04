@@ -1,7 +1,7 @@
 {
   "id": "ss.terrain.husk",
-  "name": "Bleached husk (SS)",
-  "description": "Shape Survivors set dressing: the bleached dome of something that ran out of scent — a half-shell of nested ribs sitting on the ground line. Arcs are ring parts swept 180→360 (the top half). Port of t_husk from Feelers' BootScene.",
+  "name": "Bleached husk",
+  "description": "Set dressing: the bleached dome of something that ran out of scent — a half-shell of nested ribs sitting on the ground line. Arcs are ring parts swept 180→360 (the top half). Port of t_husk from Feelers' BootScene.",
   "tags": ["terrain"],
   "size": [46, 30],
   "parts": [

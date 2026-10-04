@@ -56,7 +56,7 @@ docs/                     reference-analysis.md — why this exists · app-desig
 
 An **app** is whatever consumes a bundle: one game, one launcher, one screen. It is a directory under
 `apps/`, and the directory is the namespace — every document it holds has an id starting with `<id>.`, and
-its bundle is `dist/<id>/`. `apps/ss/` is the Shape Survivors roster; `apps/demo/` is the worked examples
+its bundle is `dist/<id>/`. `apps/ss/` is The Feelers' roster (`ss` is its historical id, from when the game was called Shape Survivors: the display name moved, and the namespace and every id under it stayed); `apps/demo/` is the worked examples
 this README draws on, and the template for the next app.
 
 An app owns its **palette** (`tokens.json`, over `tokens/base.json`), its **categories**, the **floor** its
@@ -106,7 +106,7 @@ npx tsx scripts/inspect.ts ss.enemy.imp ss.enemy.bat --anim   # open out/inspect
 npx tsx scripts/sheet.ts ss.figure.dot --anim walk            # out/sheet/ss-figure-dot--walk.png
 ```
 
-Renders each asset **big** (judge the form), **at true game scale on the real ground color** (judge whether it survives the size it is actually seen at), and **as a flat silhouette** (if two enemies are indistinguishable in black, colour is doing work that shape should be doing). This is the loop the Shape Survivors redesign was built in — it caught a chaser that read as facing backwards, two antennae that overlapped into one, and two creatures that were the same cream colour.
+Renders each asset **big** (judge the form), **at true game scale on the real ground color** (judge whether it survives the size it is actually seen at), and **as a flat silhouette** (if two enemies are indistinguishable in black, colour is doing work that shape should be doing). This is the loop The Feelers' redesign was built in — it caught a chaser that read as facing backwards, two antennae that overlapped into one, and two creatures that were the same cream colour.
 
 A body drawn on a skeleton carries it (`skeleton`: named joints and the bones between them — see `docs/character-rig-guide.md`), and the gallery's detail view has a **skeleton** toggle beside *silhouette* that draws the joints, by name, over the parts; `inspect.ts --skeleton` does the same on the inspect page. It is the scaffold the parts were placed from and never reaches a bake, and it is what a change is asked for in: "`shoulder_near` a pixel lower", not "the sleeve".
 
@@ -573,7 +573,7 @@ Because rendering is deterministic, a one-digit token drift (the `ff9b3d` vs `ff
 
 `npm run check` also lints the palette: a colour token nothing references is reported as dead (drop it or use it), and a theme overriding a token that no longer exists is an error, not a silent no-op.
 
-## Worked example: the Shape Survivors roster
+## Worked example: The Feelers' roster
 
 `apps/ss/assets/` is the full roster of the sibling project, first transcribed 1:1 from its `BootScene.ts`, then re-authored around one sentence of fiction: **the protagonist has lost their pheromone transmitter, and the hive hunts them for the silence.** `npx tsx scripts/compare.ts` builds `out/compare.html` — 39 before/after pairs.
 

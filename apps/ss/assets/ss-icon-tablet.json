@@ -1,6 +1,6 @@
 {
   "id": "ss.icon.tablet",
-  "name": "Record tablet (SS)",
+  "name": "Record tablet",
   "description": "The stone a Pit record is cut into: the tile behind every entry on the codex's 개미지옥 / PIT tab, one tile a run, with the run's boss count scratched over it (`ss.icon.tally`) and the character's face beside it (feelers docs/pit-plan.md §6.4). The game frames the tile in its own plate and puts the first record's amber rim on that, so this is the slab and nothing round it.\n\nIt is the ruins' stone (`ss.terrain.ruins`): $carapace on an $ink contour, turned to face you — a slab with a lit bevel along its top and left edges and a shaded one along the bottom and right, one corner broken off and lit where it broke, a nick out of the left edge, two cracks and a scatter of wear. The face is kept flat and a little darker in the middle ($coal wash) so the amber of what is cut into it reads, and the marks on it stay to the edges, where a count and a face will not land. A dark shadow a unit down and right sets it off the codex panel.",
   "tags": ["icon", "record"],
   "size": [32, 32],
