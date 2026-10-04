@@ -327,18 +327,31 @@ function writeBundle(path: string, format: string, key: "assets" | "sounds", row
   return lines.length;
 }
 
+/**
+ * A document tagged `archived` is a drawing the repo keeps and no consumer
+ * reads: a retired body, a declined proposal. It is validated, rendered,
+ * linted and shown in the gallery like any other, so the idea survives
+ * intact, but it does not ship — the bundle is what a game downloads, and an
+ * id in it is an id somebody may start reading. Retiring art is still game
+ * first: archive a document once nothing asks for it. A shipped document may
+ * `use` an archived one, because `use` is inlined into the IR.
+ */
+const ARCHIVED = "archived";
+const ships = (a: { tags: string[] }): boolean => !a.tags.includes(ARCHIVED);
+
 if (cmd === "dist" || cmd === "check") {
   // One bundle per app — `polygraphics/apps/<id>/assets` — because an app
   // imports its own art and nobody else's. The union at dist/assets.json is
   // what today's consumer imports and keeps building until it has moved;
   // dropping it is a change the game makes first.
-  const assetRows = (o: Owner): [string, unknown][] => [...o.assets.values()].map((a) => [a.id, compileAsset(a, o.reg).ir]);
+  const assetRows = (o: Owner): [string, unknown][] => [...o.assets.values()].filter(ships).map((a) => [a.id, compileAsset(a, o.reg).ir]);
   const soundRows = (o: Owner): [string, unknown][] => [...o.sounds.values()].map((sd) => [sd.id, compileSound(sd, o.sreg).ir]);
   const written: string[] = [];
   for (const o of all) {
     mkdirSync(dir("dist", o.id), { recursive: true });
     const n = writeBundle(`dist/${o.id}/assets.json`, BUNDLE_FORMAT, "assets", assetRows(o));
-    written.push(`dist/${o.id}/assets.json (${n})`);
+    const kept = o.assets.size - n;
+    written.push(`dist/${o.id}/assets.json (${n}${kept ? `; ${kept} archived, kept out` : ""})`);
     if (o.sounds.size) written.push(`dist/${o.id}/sounds.json (${writeBundle(`dist/${o.id}/sounds.json`, SOUND_FORMAT, "sounds", soundRows(o))})`);
   }
   const n = writeBundle("dist/assets.json", BUNDLE_FORMAT, "assets", all.flatMap(assetRows));
