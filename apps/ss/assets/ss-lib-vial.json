@@ -14,7 +14,7 @@
   ],
   "variants": {
     "ichor": {
-      "description": "The hive's own blood, drawn from a Tracker.",
+      "description": "The hive's own blood, drawn from a Mite.",
       "set": { "fluid.fill": "$blood", "meniscus.fill": "$blood.light" }
     },
     "bile": {
@@ -38,7 +38,7 @@
       "set": { "fluid.fill": "$rust", "meniscus.fill": "$rust.light" }
     },
     "wingblood": {
-      "description": "Bled from a Drifter's wing where it meets the body.",
+      "description": "Bled from a Flitter's wing where it meets the body.",
       "set": { "fluid.fill": "$gold", "meniscus.fill": "$gold.light2" }
     },
     "milk": {

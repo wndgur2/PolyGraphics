@@ -31,6 +31,14 @@ The pieces:
   Rig.on_bone(bone, along, across)
       A point in a bone's rest frame, in the world, and the bone's heading —
       where to put a part so it sits on the bone.
+  Rig.tip(id, seg, bone, along, r, fill) / Rig.bar_tip(…) / Rig.follow_tips(variants)
+      The end of a feeler, under the one name the game looks for —
+      `feeler_tip`, or `feeler_tip_<side>` with one letter for the side. A
+      disc in the last segment's own fill, inside its rounded end, so by day
+      there is nothing to see; at night the game lights it (feelers:
+      NightSystem), and a body with none lights its eyes instead.
+      `follow_tips` keeps each tip the colour of its segment through every
+      variant, so a recoloured feeler never shows a dot at the end.
   Rig.tracks(pose_at, ts, extra)
       Solve `pose_at(t)` at every key time to per-part x/y/rot tracks (linear
       between keys, sampled densely enough that linear is the curve), plus any
@@ -45,9 +53,10 @@ The pieces:
 `scripts/stinger.py` is the worked example: a tail on `reach`, legs on `ik2`,
 and four clips written as pose functions.
 """
-import json, math
+import json, math, re
 
 R = math.radians
+TIP_ID = re.compile(r"^feeler_tip(_[a-z])?$")
 D = math.degrees
 def r2(x): return round(x + 0.0, 2)
 def lerp(a, b, t): return a + (b - a) * t
@@ -108,6 +117,7 @@ class Rig:
         self.bones = {}
         self.parts = []
         self.attach = {}  # part id -> bone it rides
+        self.tips = {}    # feeler tip id -> the segment part it ends
         self.rest = None
 
     # ---- skeleton
@@ -177,6 +187,28 @@ class Rig:
         if variant: p["variant"] = variant
         self.parts.append(p); self.attach[id] = bone
         return p
+    def tip(self, id, seg, bone, along, r, fill, across=0.0):
+        """
+        A feeler's end, `along` its last bone (and `across` it, for a curled
+        one), as a disc of radius `r` in the fill of `seg` — the part it ends,
+        and which it must sit inside. See the module docstring.
+        """
+        assert TIP_ID.match(id), f"a feeler tip is named feeler_tip or feeler_tip_<letter>, not {id}"
+        at, a = self.on_bone(bone, along, across)
+        self.tips[id] = seg
+        return self.put(id, bone, at, a, circ(r), fill)
+    def bar_tip(self, id, bone, w1, over, fill, seg=None):
+        """`tip` for a last segment drawn as `bar(L, w0, w1, over)` along all of `bone`: halfway into its rounded end."""
+        return self.tip(id, seg or bone, bone, self.bones[bone].length + over / 2, min(0.3 * w1, 0.4 * over), fill)
+    def follow_tips(self, variants):
+        """Every variant that recolours or hides a tipped segment does the same to its tip."""
+        for v in variants.values():
+            s = v.get("set", {})
+            for tip, seg in self.tips.items():
+                for prop in ("fill", "opacity"):
+                    if f"{seg}.{prop}" in s:
+                        s.setdefault(f"{tip}.{prop}", s[f"{seg}.{prop}"])
+        return variants
     def check(self):
         ids = [p["id"] for p in self.parts]
         dup = {i for i in ids if ids.count(i) > 1}
@@ -198,7 +230,8 @@ class Rig:
         """
         Solve `pose_at(t)` at every `t` to per-part x/y/rot offset tracks, and
         append `extra` (part, prop, fn) tracks. Parts named in `still` never
-        take a `rot` track (a round part whose turn would only show as noise).
+        take a `rot` track (a round part whose turn would only show as noise),
+        and nor does a feeler tip, which is a disc for the same reason.
         """
         rest = self.posed_parts({})
         series = {pid: ([], [], []) for pid in self.attach}
@@ -212,7 +245,7 @@ class Rig:
             pid = p["id"]
             xs, ys, rs = series[pid]
             for prop, vs in (("x", xs), ("y", ys), ("rot", rs)):
-                if prop == "rot" and pid in still: continue
+                if prop == "rot" and (pid in still or pid in self.tips): continue
                 if max(abs(v) for v in vs) > 0.01:
                     out.append({"part": pid, "prop": prop, "keys": [[r2(t), r2(v)] for t, v in zip(ts, vs)], "ease": "linear"})
         for pid, prop, fn in (extra or []):

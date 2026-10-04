@@ -43,7 +43,7 @@ writeFileSync(
   .col span{font:10px ui-monospace,monospace;color:#5b6575}
   code{width:100%;text-align:center;color:#8fd0ff;font:11px ui-monospace,monospace}
 </style>
-<h1>Shape Survivors — faithful port vs. redesign</h1>
+<h1>The Feelers — faithful port vs. redesign</h1>
 <p class=sub>Left: the roster transcribed 1:1 from <code>BootScene.ts</code>. Right: the same gameplay slots re-authored around the premise that the protagonist has lost their pheromone transmitter and is being hunted for the silence. Same ids, same body radii, same variant slots — only the documents changed.</p>
 <main>${rows}</main>`,
 );

@@ -120,7 +120,7 @@ for p in parts:
 
 doc = {
     "id": "ss.env.stage-pit",
-    "name": "Pit stage card (SS)",
+    "name": "Pit stage card",
     "description": (
         "The picture on the Pit card (개미지옥) in Feelers' map select: the fourth stage, the one that never ends, "
         "drawn once from the camera's own height like the other three.\n\n"

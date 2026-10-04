@@ -356,7 +356,7 @@ for tr in bite + idle + sense:
 
 doc = {
     "id": "ss.terrain.funnel",
-    "name": "Sand funnel (SS)",
+    "name": "Sand funnel",
     "description": (
         "The Pit's hazard: an antlion's trap, a funnel of sand 150 world px in radius dug into the desert zones "
         "(and, rarely, the plains) of Feelers' fourth stage. It is not a body and it blocks nothing — it pulls "

@@ -1,7 +1,7 @@
 {
   "id": "ss.terrain.chitin",
-  "name": "Chitin slab (SS)",
-  "description": "Shape Survivors set dressing: a broken slab of hive carapace, ridged amber, leaning out of the ground. The three ridges are thin rects standing in for the original's line strokes. Port of t_chitin from Feelers' BootScene.",
+  "name": "Chitin slab",
+  "description": "Set dressing: a broken slab of hive carapace, ridged amber, leaning out of the ground. The three ridges are thin rects standing in for the original's line strokes. Port of t_chitin from Feelers' BootScene.",
   "tags": ["terrain"],
   "size": [48, 31],
   "parts": [

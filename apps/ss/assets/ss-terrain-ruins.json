@@ -1,7 +1,7 @@
 {
   "id": "ss.terrain.ruins",
-  "name": "Sunken ruin ring (SS)",
-  "description": "Shape Survivors set dressing: a sunken stone ring humming with old scent — a glowing pheromone core in a dark bowl, three broken standing stones around the rim. Port of t_ruins from Feelers' BootScene.",
+  "name": "Sunken ruin ring",
+  "description": "Set dressing: a sunken stone ring humming with old scent — a glowing pheromone core in a dark bowl, three broken standing stones around the rim. Port of t_ruins from Feelers' BootScene.",
   "tags": ["terrain"],
   "size": [68, 52],
   "parts": [

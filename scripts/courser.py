@@ -175,8 +175,14 @@ for side, s in (("u", -1), ("d", 1)):
     b0, b1, b2 = (19.5, s * 5.2), (25.5, s * 8.8), (31.0, s * 8.0)
     parts.append(P(f"palp_{side}", ((b0[0] + b1[0]) / 2, (b0[1] + b1[1]) / 2), rect(2.4, dist(b0, b1) + 1.0), "$blood.dark", rot=rot_of(ang(b0, b1))))
     parts.append(P(f"palp_{side}_tip", ((b1[0] + b2[0]) / 2, (b1[1] + b2[1]) / 2), rect(2.2, dist(b1, b2) + 0.8), "$dead", rot=rot_of(ang(b1, b2))))
+    # The feeler's end, under the name the game lights at night (`feeler_tip_*`,
+    # see scripts/rig.py): a disc in the pale tip's own fill, inside its
+    # rounded end, so by day there is nothing to see.
+    k = 0.5 / dist(b1, b2)
+    parts.append(P(f"feeler_tip_{side}", (b2[0] - (b2[0] - b1[0]) * k, b2[1] - (b2[1] - b1[1]) * k), circ(0.5), "$dead"))
 # The eyes: two big ones over a row of four small. Only the big pair are named
-# `eye_*`, which is what the game lights at night.
+# `eye_*`, which is what the game would light at night if it had no feelers;
+# it lights the palps' ends instead.
 for side, s in (("u", -1), ("d", 1)):
     parts.append(P(f"eye_{side}", (15.8, s * 3.7), ell(2.5, 2.3), "$dead", stroke=INK_THIN))
     parts.append(P(f"eye_{side}_glint", (16.4, s * 3.7 - 0.7), circ(0.85), "$pink.light"))
@@ -272,7 +278,7 @@ def palp_tracks(rot_deg, ts=TS):
     out = []
     for side, s in (("u", -1), ("d", 1)):
         root = (19.5, s * 5.2)
-        for pid in (f"palp_{side}", f"palp_{side}_tip"):
+        for pid in (f"palp_{side}", f"palp_{side}_tip", f"feeler_tip_{side}"):
             c = tuple(BASE[pid]["at"])
             xs, ys, rs = [], [], []
             for t in ts:
@@ -281,7 +287,8 @@ def palp_tracks(rot_deg, ts=TS):
                 xs.append(root[0] + dx * math.cos(th) - dy * math.sin(th) - c[0])
                 ys.append(root[1] + dx * math.sin(th) + dy * math.cos(th) - c[1])
                 rs.append(rot_deg(side, t))
-            out += [track(pid, "x", xs, ts), track(pid, "y", ys, ts), track(pid, "rot", rs, ts)]
+            out += [track(pid, "x", xs, ts), track(pid, "y", ys, ts)]
+            if not pid.startswith("feeler_tip"): out.append(track(pid, "rot", rs, ts))
     return out
 
 def cyc(t, phase=0.0): return math.sin(2 * math.pi * (t + phase))

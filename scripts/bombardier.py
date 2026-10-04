@@ -96,6 +96,7 @@ def leg_parts(leg, femur, tibia, tarsus, stroke):
 # ---- far side: antenna and legs, a step darker, behind everything
 at, a = on_bone("far_ant_0"); put("far_ant_0", "far_ant_0", at, a, bar(3.4, 0.9, 0.7, 0.3), LEG_MID)
 at, a = on_bone("far_ant_1"); put("far_ant_1", "far_ant_1", at, a, bar(3.2, 0.7, 0.9, 0.3), LEG_MID)
+RIG.bar_tip("feeler_tip_f", "far_ant_1", 0.9, 0.3, LEG_MID)
 for leg in ("far_b", "far_m", "far_f"):
     leg_parts(leg, LEG_MID, LEG_DARK, LEG_DARK, None)
 
@@ -169,6 +170,7 @@ put("eye_glint", "head", (at[0] + 0.35, at[1] - 0.35), 0.0, circ(0.32), "$white"
 # ---- near side: antenna and legs over everything
 at, a = on_bone("near_ant_0"); put("near_ant_0", "near_ant_0", at, a, bar(3.4, 1.0, 0.8, 0.3), LEG_LIGHT, INK_HAIR)
 at, a = on_bone("near_ant_1"); put("near_ant_1", "near_ant_1", at, a, bar(3.2, 0.8, 1.0, 0.3), LEG_LIGHT, INK_HAIR)
+RIG.bar_tip("feeler_tip_n", "near_ant_1", 1.0, 0.3, LEG_LIGHT)
 for leg in ("near_b", "near_m", "near_f"):
     leg_parts(leg, LEG_LIGHT, LEG_MID, LEG_MID, INK_HAIR)
 

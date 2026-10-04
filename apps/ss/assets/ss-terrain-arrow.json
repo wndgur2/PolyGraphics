@@ -1,7 +1,7 @@
 {
   "id": "ss.terrain.arrow",
-  "name": "Compass arrow (SS)",
-  "description": "Shape Survivors HUD compass toward active ruins, pointing +x. Port of arrow (BootScene.ts:325-331).",
+  "name": "Compass arrow",
+  "description": "HUD compass toward active ruins, pointing +x. Port of arrow (BootScene.ts:325-331).",
   "tags": ["terrain", "hud"],
   "size": [18, 16],
   "parts": [

@@ -127,6 +127,7 @@ def hind_leg(leg, femur_fill, tibia_fill, stroke, marks):
 for i in range(3):
     n = f"ant_f_{i}"; at, a = on_bone(n)
     put(n, n, at, a, bar(B[n].length, 0.9 - 0.12 * i, 0.75 - 0.12 * i, 0.4), "$bile.dark2")
+RIG.bar_tip("feeler_tip_f", "ant_f_2", 0.51, 0.4, "$bile.dark2")
 hind_leg("hind_f", "$bile", "$bile.dark", None, False)
 small_leg("mid_f", "$bile.dark", "$bile.dark", None)
 small_leg("front_f", "$bile.dark", "$bile.dark", None)
@@ -183,6 +184,7 @@ put("glint", "head", (10.3, -4.3), 0.0, circ(0.55), "$silent")
 for i in range(3):
     n = f"ant_n_{i}"; at, a = on_bone(n)
     put(n, n, at, a, bar(B[n].length, 1.0 - 0.15 * i, 0.85 - 0.15 * i, 0.4), "$bile", HAIR_DARK)
+RIG.bar_tip("feeler_tip_n", "ant_n_2", 0.55, 0.4, "$bile")
 
 # ---- near legs, over everything
 small_leg("mid_n", "$bile.light", "$bile", HAIR_DARK)

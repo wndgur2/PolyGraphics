@@ -1,7 +1,7 @@
 {
  "id": "ss.lib.tryst-sac",
- "name": "Tryst acid sac",
- "description": "색세기's acid sac: a ribbed lantern of pale membrane with the acid glowing through it, pointing -x toward its nozzle. Composed by `ss.enemy.tryst` behind her waist and pumped as one part by her spray clip. Pink while she is whole; the enraged variant burns red.",
+ "name": "Bride's acid sac",
+ "description": "The Bride's acid sac (색세기): a ribbed lantern of pale membrane with the acid glowing through it, pointing -x toward its nozzle. Composed by `ss.enemy.tryst` behind her waist and pumped as one part by her spray clip. Pink while she is whole; the enraged variant burns red.",
  "tags": [
   "lib"
  ],

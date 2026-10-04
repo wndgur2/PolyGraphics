@@ -124,6 +124,7 @@ for sd, s in SIDES:
     for i in range(N_ANT):
         nm = f"ant_{sd}_{i}"; at, a = RIG.on_bone(nm)
         put(nm, nm, at, a, bar(B[nm].length, 0.95 - 0.08 * i, 0.7 - 0.08 * i, 0.5), "$coal", INK_HAIR)
+    RIG.bar_tip(f"feeler_tip_{sd}", f"ant_{sd}_{N_ANT - 1}", 0.7 - 0.08 * (N_ANT - 1), 0.5, "$coal")
 
 # ---- the sac. Under it all, the red membrane in two halves (front on sac_0,
 # rear on sac_1, overlapping so the wag bends it); over it, five black plates
@@ -233,7 +234,7 @@ def tracks(pose_at, swell_at, ts, scales=None, extra=None, still=()):
         pid = p["id"]
         xs, ys, rs, ss = series[pid]
         for prop, vs, rest_v in (("x", xs, 0.0), ("y", ys, 0.0), ("rot", rs, 0.0), ("scale", ss, 1.0)):
-            if prop == "rot" and pid in still: continue
+            if prop == "rot" and (pid in still or pid in RIG.tips): continue
             if max(abs(v - rest_v) for v in vs) > 0.005:
                 out.append({"part": pid, "prop": prop, "keys": [[r2(t), round(v, 3) if prop == "scale" else r2(v)] for t, v in zip(ts, vs)], "ease": "linear"})
     for pid, prop, fn in (extra or []):

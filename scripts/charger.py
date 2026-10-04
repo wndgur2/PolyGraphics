@@ -130,6 +130,7 @@ for sd, s in SIDES:
     for i in range(2):
         nm = f"palp_{sd}_{i}"; at, a = RIG.on_bone(nm)
         put(nm, nm, at, a, bar(B[nm].length, 0.9 - 0.2 * i, 0.6 - 0.2 * i, 0.4), "$husk.dark", INK_HAIR)
+    RIG.bar_tip(f"feeler_tip_{sd}", f"palp_{sd}_1", 0.4, 0.4, "$husk.dark")
 
 # ---- the prod-limbs, roots tucked under the shoulders
 for sd, s in SIDES:
@@ -269,7 +270,7 @@ def tracks(pose_at, ts, swell_at=None, scales=None, extra=None, still=()):
         pid = p["id"]
         xs, ys, rs, ss = series[pid]
         for prop, vs, rest_v in (("x", xs, 0.0), ("y", ys, 0.0), ("rot", rs, 0.0), ("scale", ss, 1.0)):
-            if prop == "rot" and pid in still: continue
+            if prop == "rot" and (pid in still or pid in RIG.tips): continue
             if max(abs(v - rest_v) for v in vs) > 0.005:
                 out.append({"part": pid, "prop": prop, "keys": [[r2(t), round(v, 3) if prop == "scale" else r2(v)] for t, v in zip(ts, vs)], "ease": "linear"})
     for pid, prop, fn in (extra or []):
@@ -572,13 +573,13 @@ DESCRIPTION = (
 
 doc = {
     "id": "ss.enemy.charger",
-    "name": "Bow and barb",
+    "name": "Lance",
     "description": DESCRIPTION,
     "tags": ["enemy", "duo"],
     "size": [72, 60],
     "meta": {"radius": 16},
     "parts": RIG.parts,
-    "variants": variants,
+    "variants": RIG.follow_tips(variants),
     "animations": animations,
     "skeleton": RIG.skeleton(),
 }

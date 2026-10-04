@@ -1,7 +1,7 @@
 {
   "id": "ss.icon.magnet",
-  "name": "Magnet icon (SS)",
-  "description": "Shape Survivors passive icon: blue horseshoe magnet — an arc arch with two leg rects. Port of i_magnet (BootScene.ts:607-613). Tile and glyph are `$cobalt`. The magnet was pink, the same `$pink` as the Bloom passive beside it (ΔE 0), and Bloom keeps it because it is the Spore's rim. No trait is paired with this one, so it takes the free hue: a mid blue, 22.4 from Stink's pale `$frost` and 21.2 from the Shell's grey, its nearest on the bar.",
+  "name": "Magnet icon",
+  "description": "Passive icon: blue horseshoe magnet — an arc arch with two leg rects. Port of i_magnet (BootScene.ts:607-613). Tile and glyph are `$cobalt`. The magnet was pink, the same `$pink` as the Bloom passive beside it (ΔE 0), and Bloom keeps it because it is the Spore's rim. No trait is paired with this one, so it takes the free hue: a mid blue, 22.4 from Stink's pale `$frost` and 21.2 from the Shell's grey, its nearest on the bar.",
   "tags": ["icon"],
   "size": [32, 32],
   "parts": [

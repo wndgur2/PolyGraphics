@@ -1,6 +1,6 @@
 {
   "id": "ss.env.stage-den",
-  "name": "Reeking Flats stage card (SS)",
+  "name": "Reeking Flats stage card",
   "description": "The picture on the Reeking Flats card in Feelers' map select: the stage drawn once, from the camera's own height, rather than photographed off the generator every time the window changes size.\n\nIt is the field's own ground and the field's own set dressing, composed instead of scattered. $soil under five seeded grain passes, with ss.env.ground's burrow pits and rust flecks over them, so the card's floor is the run's floor; swells and dips in three concentric steps each, because the Phaser bake flattens a gradient to one flat colour. Three pink smears are scent still bleeding along the ground, and each one runs into a thicket of spires, which is this stage's whole sentence: the trail goes in, the crystal comes up. The middle is left open on purpose \u2014 room to run is what the ground is selling.\n\nAuthored 3:2. The card fits it to the strip's width and crops it vertically, never horizontally, so the weight sits in a band through the middle and props are free to run off the left and right edges where the frame is the only thing that cuts them. Props sit larger against the ground than a run places them: the card is a sixth of the screen it advertises, and a spire drawn at the run's own ratio is four pixels of it.",
   "tags": [
     "env",

@@ -135,6 +135,7 @@ for i in range(3):
     nm = f"ant_f_{i}"
     at, a = on_bone(nm)
     put(nm, nm, at, a, bar(B[nm].length, 0.75 - 0.15 * i, 0.6 - 0.15 * i, 0.3), "$steel.dark2")
+RIG.bar_tip("feeler_tip_f", "ant_f_2", 0.3, 0.3, "$steel.dark2")
 
 # ---- the plume: base wedge, then the three prongs in one outline
 at, a = on_bone("pl_0")
@@ -176,6 +177,7 @@ for i in range(3):
     nm = f"ant_n_{i}"
     at, a = on_bone(nm)
     put(nm, nm, at, a, bar(B[nm].length, 1.0 - 0.15 * i, 0.8 - 0.15 * i, 0.3), "$steel.dark")
+RIG.bar_tip("feeler_tip_n", "ant_n_2", 0.5, 0.3, "$steel.dark")
 
 # ---- near legs over everything
 for n in ("b", "m", "f"):
@@ -321,7 +323,7 @@ doc = {
     "size": [W, H],
     "meta": {"radius": 7},
     "parts": RIG.parts,
-    "variants": variants,
+    "variants": RIG.follow_tips(variants),
     "animations": animations,
     "skeleton": RIG.skeleton(),
 }

@@ -1,4 +1,4 @@
-/** Bake every ported Shape Survivors IR through the Phaser adapter (mock scene). */
+/** Bake every ported `ss` (The Feelers) IR through the Phaser adapter (mock scene). */
 import { readFileSync, readdirSync } from "node:fs";
 import { bakeFlat, buildRig, type IRAsset, type SceneLike } from "../adapters/phaser/polygraphics-phaser.js";
 

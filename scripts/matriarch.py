@@ -159,6 +159,7 @@ for n in ("b", "m", "f"):
 for i in range(N_ANT):
     nm = f"ant_f_{i}"; at, a = RIG.on_bone(nm)
     put(nm, nm, at, a, bar(B[nm].length, 1.6 - 0.25 * i, 1.3 - 0.25 * i, 0.6), "$carapace.dark", INK_HAIR)
+RIG.bar_tip("feeler_tip_f", f"ant_f_{N_ANT - 1}", 1.3 - 0.25 * (N_ANT - 1), 0.6, "$carapace.dark")
 
 # ---- nodules: eggs pressing the skin out from inside, under the skin
 for nid, th, r in NODULES:
@@ -223,6 +224,7 @@ at, a = RIG.on_bone("mand_u"); put("mand_up", "mand_u", at, a, poly(MAND), "$hus
 for i in range(N_ANT):
     nm = f"ant_n_{i}"; at, a = RIG.on_bone(nm)
     put(nm, nm, at, a, bar(B[nm].length, 1.9 - 0.3 * i, 1.6 - 0.3 * i, 0.6), "$carapace", INK_HAIR)
+RIG.bar_tip("feeler_tip_n", f"ant_n_{N_ANT - 1}", 1.6 - 0.3 * (N_ANT - 1), 0.6, "$carapace")
 
 # ---- near legs, over the body
 for n in ("b", "m", "f"):
@@ -323,7 +325,7 @@ def posed(pose, ch, extra_scale=None, t=0.0):
 
 REST = posed({}, Chamber())
 ROUND = {"sac", "core", "organ", "knee", "eye_a", "eye_b"}
-def is_round(pid): return pid in ROUND or pid.endswith("_knee") or pid.startswith("eye")
+def is_round(pid): return pid in ROUND or pid in RIG.tips or pid.endswith("_knee") or pid.startswith("eye")
 
 def tracks(state_at, ts, scales=None, extra=None):
     """Solve `state_at(t) -> (pose, chamber)` at every t to x/y/rot/scale tracks, plus `extra` (part, prop, fn)."""
@@ -723,7 +725,7 @@ doc = {
     "size": [120, 112],
     "meta": {"radius": 46},
     "parts": RIG.parts,
-    "variants": variants,
+    "variants": RIG.follow_tips(variants),
     "animations": animations,
     "skeleton": RIG.skeleton(),
 }

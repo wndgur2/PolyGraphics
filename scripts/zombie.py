@@ -4,7 +4,7 @@
 
 The flats' slow heavy chaser (feelers `zombie`: speed 56, radius 11, hp 14),
 arriving in dozens from the second wave on. So the drawing's job is a
-silhouette and a rhythm, not detail: tall and pale where the Tracker is low and
+silhouette and a rhythm, not detail: tall and pale where the Mite is low and
 amber, and a gait that is visibly wrong — lopsided, not merely slow.
 
 It was hand-placed, and its shamble moved six pixels at game scale: rects
@@ -332,7 +332,7 @@ DESCRIPTION = (
     "facing +x and mirrored by the game: a tall hunched frame of bleached bone, the chest bent forward over the waist, a drone's head capsule "
     "hung out in front of the shoulders with an empty eye socket, a slack jaw and one feeler snapped to a stub. One arm long, hanging in front "
     "of the belly past the knee with a hooked claw; the other short and withered, crooked forward at chest height. A dark hexagonal graft in the chest carries "
-    "a faint organ, and a crack runs down the front. Tall and pale where the Tracker is low and amber: at a glance you are reading height "
+    "a faint organ, and a crack runs down the front. Tall and pale where the Mite is low and amber: at a glance you are reading height "
     "and value, not detail. Built on a skeleton (scripts/zombie.py): a pelvis that rides the gait, a two-bone spine, a hanging head, two "
     "chained arms and two legs solved every frame to a foot on the floor. The `shamble` is a limp — one leg walks, the other is stiff, so "
     "the body drops onto the good leg, hikes its hip to swing the stiff one through with its toe dragging and vaults over it — and the "

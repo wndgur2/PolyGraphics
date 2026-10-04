@@ -187,7 +187,10 @@ ${a.description ? `<p>${esc(a.description)}</p>` : ""}<ul><li><code>${esc(tracks
     ...(anims.length ? [`animations: ${anims.map(([n]) => n).join(", ")}`] : []),
   ].join("\n");
 
-  return `<section class="detail" id="d-${slug(asset.id)}" hidden>
+  // The plain ground swatch, for an app that names no floor to tile: its own
+  // $soil, the colour inspect.ts and filmstrip.ts already judge a body on.
+  const soil = o.tokens.colors.soil ?? "#131019";
+  return `<section class="detail" id="d-${slug(asset.id)}" style="--soil:${esc(soil)}" hidden>
   <div class="detail-head">
     <button class="back" data-back>← ${esc(asset.tags[0])}</button>
     <h2>${esc(asset.name)}</h2>
@@ -208,7 +211,7 @@ ${a.description ? `<p>${esc(a.description)}</p>` : ""}<ul><li><code>${esc(tracks
           <button data-bg="checker" class="on"></button>
           ${grounds.length
             ? grounds.map((g) => `<button data-bg="${esc(g.cls.slice(3))}" data-w="${g.w}" data-h="${g.h}" class="${esc(g.cls)}" title="${esc(g.name)}: ${esc(g.id)}, tiled"></button>`).join("")
-            : `<button data-bg="ground" style="background:#1a1420"></button>`}
+            : `<button data-bg="ground" style="background:var(--soil)" title="$soil"></button>`}
           <button data-bg="ink" style="background:#10121a"></button>
           <button data-bg="light" style="background:#e6e1d3"></button>
         </span>
@@ -767,7 +770,7 @@ export function buildGallery(lib: Library, issues: Issue[]): string {
   .viewer-stage { border:1px solid var(--line); border-radius:10px; padding:24px; min-height:240px; display:flex;
     align-items:safe center; justify-content:safe center; overflow:auto; max-height:72vh;
     background: repeating-conic-gradient(#181c28 0% 25%, #141824 0% 50%) 0 0/16px 16px; }
-  .viewer-stage.bg-ground { background:#1a1420; } .viewer-stage.bg-ink { background:#10121a; } .viewer-stage.bg-light { background:#e6e1d3; }
+  .viewer-stage.bg-ground { background:var(--soil); } .viewer-stage.bg-ink { background:#10121a; } .viewer-stage.bg-light { background:#e6e1d3; }
   .bgs button[data-w] { background-size:cover; }
   ${groundCss}
   .skeleton { display:none; }

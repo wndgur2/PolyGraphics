@@ -125,6 +125,7 @@ for leg in ("b", "m", "f"):
 for i, w in ((0, 1.1), (1, 0.8)):
     at, a = on_bone(f"antf_{i}")
     put(f"antf_{i}", f"antf_{i}", at, a, bar(B[f"antf_{i}"].length, w, w * 0.8, 0.4), "$dusk.dark")
+RIG.bar_tip("feeler_tip_f", "antf_1", 0.8 * 0.8, 0.4, "$dusk.dark")
 
 # ---- the ovipositor: a bone blade under a dark sheath, trailing from the tip
 at, a = on_bone("ovi")
@@ -172,6 +173,7 @@ put("mandible", "head", (15.2, 1.2), 0.0, wpoly((15.2, 1.2), [(14.2, 0.8), (16.6
 for i, w in ((0, 1.2), (1, 0.9)):
     at, a = on_bone(f"ant_{i}")
     put(f"ant_{i}", f"ant_{i}", at, a, bar(B[f"ant_{i}"].length, w, w * 0.8, 0.4), "$dusk.dark")
+RIG.bar_tip("feeler_tip_n", "ant_1", 0.9 * 0.8, 0.4, "$dusk.dark")
 
 # ---- near legs over the body, the near wing over everything
 for leg in ("b", "m", "f"):

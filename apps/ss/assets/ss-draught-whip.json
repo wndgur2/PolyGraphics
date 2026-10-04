@@ -1,8 +1,8 @@
 {
   "id": "ss.draught.whip",
-  "name": "Tracker's Ichor",
+  "name": "Mite's Ichor",
   "description": "Hive blood, and it separates in the bottle the way blood does — thin on top, everything solid settled into a dark bed at the bottom with a few clots still on their way down.",
-  "tags": ["draught"],
+  "tags": ["draught", "archived"],
   "size": [32, 32],
   "parts": [
     { "id": "vial", "use": "ss.lib.vial", "variant": "ichor" },

@@ -1,6 +1,6 @@
 {
   "id": "ss.env.stage-pit",
-  "name": "Pit stage card (SS)",
+  "name": "Pit stage card",
   "description": "The picture on the Pit card (개미지옥) in Feelers' map select: the fourth stage, the one that never ends, drawn once from the camera's own height like the other three.\n\nThe Pit is one place of its own: the burrow's lattice dug thin and open to the sky, on a packed red-brown floor with sand blown down onto it (ss.env.pit's inks, drifts on the pan's -13 degrees, claw scars, rust flecks). In the middle, `use: ss.terrain.funnel`: the run's own pit, dug in a wide chamber. Round it, a partition of earth with its corner mass and a lone lump, $carapace.dark on its $ink.dark contour in the run's two passes; and on the corners no wall reaches, the three stages' obstacles gathered side by side — the flats' spires and boulder, the pan's salt plate and ribcage, the Mason's chitin shard — which is the stage in one sentence: every ground's things, fallen into one hole.\n\nEvery ink is one the other three cards use. Authored 3:2 like them: the card fits it to the strip's width and crops it vertically, so the pit sits on the middle band and the flanks run off the left and right edges.",
   "tags": ["env", "card", "stage"],
   "size": [384, 256],

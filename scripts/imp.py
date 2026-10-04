@@ -118,6 +118,7 @@ def feeler_parts(prefix, fill, stroke, w=1.0):
         n = f"{prefix}_{i}"
         at, a = on_bone(n)
         put(n, n, at, a, bar(B[n].length, w0, w1, 0.6), fill, stroke)
+    RIG.bar_tip("feeler_tip_" + ("f" if prefix.endswith("_far") else "n"), f"{prefix}_1", 0.8 * w, 0.6, fill)
 
 # ---- far side, behind the body: legs and feeler, a step darker
 for leg in ("far_b", "far_m", "far_f"):
@@ -300,8 +301,8 @@ variants = {
 }
 
 DESCRIPTION = (
-    "The hive's first responder — the one that found you, and the body on screen by the hundred; feelers calls it the Mite, and on the "
-    "Salt Pan it is also what a Hurler throws (`shotSpawn: 'imp'`). A mite seen side-on, facing +x and mirrored by the game: one domed "
+    "The hive's first responder — the one that found you, and the body on screen by the hundred; on the Salt Pan it is "
+    "also what a Hurler throws (`shotSpawn: 'imp'`). A mite seen side-on, facing +x and mirrored by the game: one domed "
     "chitin-amber sack lit under a paler dorsal shield and shaded underneath, a lit organ on the dome, a darker capitulum in front with an "
     "eye, a dark maw and two pale hooked fangs, six short thick legs and — a mite's front pair — two feelers carried up off the head. The "
     "silhouette is a dome on stubs with two feelers up, kept fat and few-parted so it survives at 1.2× in a crowd. Built on a skeleton "
@@ -313,13 +314,13 @@ DESCRIPTION = (
 
 doc = {
     "id": "ss.enemy.imp",
-    "name": "Tracker",
+    "name": "Mite",
     "description": DESCRIPTION,
-    "tags": ["enemy", "tracker"],
+    "tags": ["enemy", "chaser"],
     "size": [W, H],
     "meta": {"radius": 8.5},
     "parts": RIG.parts,
-    "variants": variants,
+    "variants": RIG.follow_tips(variants),
     "animations": animations,
     "skeleton": RIG.skeleton(),
 }

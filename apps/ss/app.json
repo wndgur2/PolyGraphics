@@ -1,6 +1,6 @@
 {
   "id": "ss",
-  "name": "Shape Survivors",
+  "name": "The Feelers",
   "premise": "The protagonist has lost their pheromone transmitter, and the hive hunts them for the silence.",
   "engines": ["phaser"],
   "categories": ["char", "figure", "enemy", "proj", "fx", "pickup", "terrain", "env", "icon", "relic", "curse", "draught", "sample", "app", "lib"],

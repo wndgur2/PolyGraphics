@@ -1,7 +1,7 @@
 {
   "id": "ss.pickup.food",
-  "name": "Gland",
-  "description": "A nutrient sac cut out of something that stopped needing it. Warm, soft-shelled and slightly translucent against everything else's chitin — the only round soft thing in the level, which is exactly why it reads as heal at a glance.",
+  "name": "Chicken",
+  "description": "A nutrient sac cut out of something that stopped needing it. Warm, soft-shelled and slightly translucent against everything else's chitin — the only round soft thing in the level, which is exactly why it reads as heal at a glance. The game calls it Chicken, after the field record that named it (S005): it is not a chicken, but roasted it tastes like one.",
   "tags": ["pickup"],
   "size": [20, 20],
   "parts": [
