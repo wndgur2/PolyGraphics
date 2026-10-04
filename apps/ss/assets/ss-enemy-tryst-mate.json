@@ -1,7 +1,7 @@
 {
  "id": "ss.enemy.tryst-mate",
- "name": "Swain (색세기 수컷)",
- "description": "One of the two males of 색세기's flight: slimmer than her, lilac, with a slender segmented abdomen ending in a hook, the bigger feathered feelers, shorter tail filaments and the same four pale wings. He goes round the player in the second phase and dashes through them with her. Clips: fly (idle), spray (the spin's tell), lunge (the pincer dash), death.",
+ "name": "Groom (색세기 수컷)",
+ "description": "A Groom: one of the two males of the Bride's flight (색세기), slimmer than her, lilac, with a slender segmented abdomen ending in a hook, the bigger feathered feelers, shorter tail filaments and the same four pale wings. He goes round the player in the second phase and dashes through them with her. Clips: fly (idle), spray (the spin's tell), lunge (the pincer dash), death.",
  "tags": [
   "enemy",
   "boss"

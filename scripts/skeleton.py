@@ -1,4 +1,4 @@
-"""The Molt (feelers `skeleton`, the Rattle) — a shed shell still walking.
+"""The Rattle (feelers `skeleton`) — a shed shell still walking.
 
     python3 scripts/skeleton.py        # rewrites apps/ss/assets/ss-enemy-skeleton.json
 
@@ -364,7 +364,7 @@ for k, v in SKELETON["joints"].items(): v[0] = r2(v[0] + SHIFT_X)
 
 doc = {
     "id": "ss.enemy.skeleton",
-    "name": "Molt",
+    "name": "Rattle",
     "description": DESCRIPTION,
     "tags": ["enemy", "shell"],
     "size": SIZE,

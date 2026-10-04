@@ -1,7 +1,7 @@
 {
  "id": "ss.enemy.tryst",
- "name": "Tryst (색세기)",
- "description": "The flats' third boss, 색세기: the female of a mating flight of three, drawn side-on and facing +x like the Flitter. An amber thorax on a pale belly, four long pale wings, feathered feelers and two tail filaments, and behind the waist the acid sac she throws her spirals from, lit from inside (`ss.lib.tryst-sac`). Everything is kept well above the ground's value so the flight reads at a glance. Clips: fly (idle), spray (the spin's tell), flap (her last phase; the downbeat is meta.flapCue), death.",
+ "name": "Bride (색세기)",
+ "description": "The flats' third boss, 색세기, the Bride: the female of a mating flight of three, drawn side-on and facing +x like the Flitter. An amber thorax on a pale belly, four long pale wings, feathered feelers and two tail filaments, and behind the waist the acid sac she throws her spirals from, lit from inside (`ss.lib.tryst-sac`). Everything is kept well above the ground's value so the flight reads at a glance. Clips: fly (idle), spray (the spin's tell), flap (her last phase; the downbeat is meta.flapCue), death.",
  "tags": [
   "enemy",
   "boss"

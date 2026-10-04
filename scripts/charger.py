@@ -572,7 +572,7 @@ DESCRIPTION = (
 
 doc = {
     "id": "ss.enemy.charger",
-    "name": "Bow and barb",
+    "name": "Lance",
     "description": DESCRIPTION,
     "tags": ["enemy", "duo"],
     "size": [72, 60],

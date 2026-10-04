@@ -1,4 +1,4 @@
-"""The Bulwark — the wall the hive walks at you when a Tracker's call is answered.
+"""The Bulwark — the wall the hive walks at you when a Mite's call is answered.
 
     python3 scripts/brute.py        # rewrites apps/ss/assets/ss-enemy-brute.json
 
@@ -389,7 +389,7 @@ VARIANTS = {
 }
 
 DESCRIPTION = (
-    "The caste that gets sent when a Tracker's call is answered, and the Plains' wall: \"Barely moves. Nothing you own moves it either.\" "
+    "The caste that gets sent when a Mite's call is answered, and the Plains' wall: \"Barely moves. Nothing you own moves it either.\" "
     "Seen side-on facing +x and mirrored by the game. One heavy plated shell as wide as the thing is tall — steep and high over the head, "
     "long and low behind — in the orange chitin it always wore, big, bright and almost featureless on purpose, because a tank has to read "
     "as mass from across the screen: three values (the flank `$chitin.dark`, the lit shell `$chitin`, a pale dorsal shield), plates lapping "

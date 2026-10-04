@@ -1,6 +1,6 @@
 {
   "id": "ss.enemy.skeleton",
-  "name": "Molt",
+  "name": "Rattle",
   "description": "Nobody is inside. The shed case of a drone — the exuvia a cicada leaves on a stalk — split down the front and held upright only by the signal rattling around in it. Seen side-on facing +x and mirrored by the game: a hooded head capsule jutting forward with the empty socket of an eye, a big segmented back half trailing, a narrow lit front plate leading, raptorial forelegs folded under the hood with hooked tips, and two jointed hind legs with hooked feet. The two halves hang off one hinge under the hood and part along the front in a lens, and the lens is where the light is: the dark inside, a glow, and a faint organ framed by the halves. Cold pale grey where the Husk is warm bone. Built on a skeleton (scripts/skeleton.py): a pelvis, the case on it, the halves off the hinge, the hood, the forelegs on the front plate and the hind legs solved every frame to a foot on the floor. The `rattle` is its walk: two steps a loop, the case riding up over each leg and dropping onto it, and every footfall claps the loose halves shut so they bounce open again. Gameplay radius 10. `elite` is the shell answering louder: the halves forced wide, the split blazing, the organ fully lit. The `death` clip is the only honest one in the roster: nothing dies, the signal just stops, and the shell it was rattling around in swings open along the seam and drops.",
   "tags": ["enemy", "shell"],
   "size": [32, 36],

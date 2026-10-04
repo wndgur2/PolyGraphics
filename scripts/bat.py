@@ -221,11 +221,11 @@ variants = {
 }
 
 DESCRIPTION = (
-    "Released from a vent to sweep for you; feelers calls it the Flitter, and it reads your heading and cuts across it rather than "
+    "Released from a vent to sweep for you; it reads your heading and cuts across it rather than "
     "chasing. Seen side-on, facing +x and mirrored by the game: two pale wings over a small dark-amber body — a round thorax lit on top, "
     "a small head with a big eye and a pale snout, a banded abdomen trailing to a pale sting — with the organ underneath and, off the "
     "sting, the trail (`ss.lib.wisp`) that tells the ground castes where you were. The wings carry the whole read — a wide pale shape "
-    "against the Tracker's compact blob. Built on a skeleton (scripts/bat.py): each wing is a root and a tip hinged at the shoulder and "
+    "against the Mite's compact blob. Built on a skeleton (scripts/bat.py): each wing is a root and a tip hinged at the shoulder and "
     "at a wrist, the abdomen is a two-link chain off the thorax with the sting and the trail riding its end. `flit` is one full stroke: "
     "the wings flung up over the back and driven down past the belly with the tip lagging the root, the body lifting on the downstroke "
     "and the back half answering late. Gameplay radius 7. `elite` is the marked scout: brighter membranes, a heavier sting, a fatter "
@@ -235,7 +235,7 @@ DESCRIPTION = (
 
 doc = {
     "id": "ss.enemy.bat",
-    "name": "Drifter",
+    "name": "Flitter",
     "description": DESCRIPTION,
     "tags": ["enemy", "flier"],
     "size": [W, H],
