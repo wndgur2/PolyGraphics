@@ -326,7 +326,7 @@ animations["death"] = {
 # ============================================================== document
 DESCRIPTION = (
     "The burrow's charger, and the jaws are what throws it: a trap-jaw ant. Drawn from the side facing +x and flipped by the game; the gape opens up "
-    "and down rather than across, the way the Soldier's mandibles already do, because a horizontal gape seen side-on is one blade and no V at all. "
+    "and down rather than across, the way the Bulwark's mandibles already do, because a horizontal gape seen side-on is one blade and no V at all. "
     "Almost all of it is jaw: two long straight pale-bone mandibles with hooked ember tips, cocked open into a wide V from sockets at the front of a "
     "long head, the ember trigger hairs out between them — the silhouette is an open mouth travelling. Behind the head a humped mesosoma, the "
     "Odontomachus petiole with its tall pointed node, and an oval gaster, all amber-brown chitin; elbowed antennae; six tapered legs darker than the body. "
