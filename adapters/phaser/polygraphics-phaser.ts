@@ -476,8 +476,11 @@ export function buildRig(scene: SceneLike, ir: IRAsset, opts: RigOptions = {}): 
  * Offsets are additive over each node's authored transform, matching buildRig,
  * and mirrored copies (which share their id) get x and rot negated so a pair
  * stays symmetric.
+ *
+ * Exported so a consumer can ask where a part is on a frame of a baked sheet
+ * without drawing it: `bakeSheet` poses frame f of n at progress f / n.
  */
-function poseNodes(nodes: IRNode[], anim: IRAnim, progress: number): IRNode[] {
+export function poseNodes(nodes: IRNode[], anim: IRAnim, progress: number): IRNode[] {
   const out = nodes.map((n) => structuredClone(n));
   for (const track of anim.tracks) {
     const v = evalTrack(track, progress);
