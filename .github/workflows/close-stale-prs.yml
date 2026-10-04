@@ -1,0 +1,36 @@
+name: Close stale PRs
+
+# Close pull requests that have seen no activity for 7 days.
+# After 5 quiet days the PR is labeled `stale` with a warning comment;
+# any push, comment or review removes the label and restarts the clock.
+# If it stays quiet for 2 more days, it is closed.
+# Label a PR `keep-open` to exempt it.
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # daily at 09:00 KST
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v11
+        with:
+          days-before-issue-stale: -1
+          days-before-issue-close: -1
+          days-before-pr-stale: 5
+          days-before-pr-close: 2
+          stale-pr-label: stale
+          exempt-pr-labels: keep-open
+          stale-pr-message: >
+            This PR has had no activity for 5 days. It will be closed in
+            2 days unless there is a new push, comment or review.
+          close-pr-message: >
+            Closed after 7 days without activity. Reopen it if the work
+            is still wanted.
