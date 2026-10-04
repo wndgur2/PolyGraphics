@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.lean",
   "name": "Lean season",
-  "description": "An empty husk with one coin in it. The husk is drawn as an open ring with its mouth turned to the viewer and nothing but the plate's dark inside, so the emptiness is the object and the coin is the exception \u2014 the find takes the field's food away and pays in trade instead. One coin, sitting low, because a heap would have read as a good year.",
+  "description": "An empty husk with one bead of jelly in it. The husk is drawn as an open ring with its mouth turned to the viewer and nothing but the plate's dark inside, so the emptiness is the object and the jelly is the exception \u2014 the find takes the field's food away and pays in jelly instead. The bead is the currency's own (`ss.pickup.coin`), composed in. One bead, sitting low, because a heap would have read as a good year.",
   "tags": [
     "relic"
   ],
@@ -45,40 +45,13 @@
       "fill": "$coal.dark"
     },
     {
-      "id": "coin_o",
+      "id": "jelly",
       "at": [
         3.6,
-        4.6
+        4.85
       ],
-      "shape": {
-        "kind": "circle",
-        "r": 5.2
-      },
-      "fill": "$ink"
-    },
-    {
-      "id": "coin",
-      "at": [
-        3.6,
-        4.6
-      ],
-      "shape": {
-        "kind": "circle",
-        "r": 4
-      },
-      "fill": "$gold"
-    },
-    {
-      "id": "coin_face",
-      "at": [
-        3.2,
-        4.2
-      ],
-      "shape": {
-        "kind": "circle",
-        "r": 2.1
-      },
-      "fill": "$gold.light"
+      "use": "ss.pickup.coin",
+      "scale": 0.72
     }
   ],
   "variants": {
