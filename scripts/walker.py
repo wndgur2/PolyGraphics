@@ -442,7 +442,7 @@ CHARACTERS = {
             ("over_coat", P_("chisel", (6.6, 8.4), rect(1.2, 4.6, 0.3), "$steel", rot=16, stroke=hair), "body"),
         ],
         "walk_desc": "a heavy, planted walk: low bob, the big arm barely swinging, the whole wedge of a body leaning into each step",
-        "description": "A wedge. The ruins, and who built them: broad and low, widest at the hem, the last of the eight to be moved by anything. The near arm is sleeved in carapace plate, the colour of the Soldier, and ends in a gauntlet the size of the head with a ridge of knuckles across it — since the stone bowl the right arm is stronger (R015), and the little finger folded to fit the grooves does not straighten (R053). The emitter has turned to stone from the inside (R048), warm at the ruin's temperature, and is worn as the clasp like the others'. A T-slit visor on the helmet, and a chisel at the coat." + SHARED,
+        "description": "A wedge. The ruins, and who built them: broad and low, widest at the hem, the last of the eight to be moved by anything. The near arm is sleeved in carapace plate, the colour of the Bulwark, and ends in a gauntlet the size of the head with a ridge of knuckles across it — since the stone bowl the right arm is stronger (R015), and the little finger folded to fit the grooves does not straighten (R053). The emitter has turned to stone from the inside (R048), warm at the ruin's temperature, and is worn as the clasp like the others'. A T-slit visor on the helmet, and a chisel at the coat." + SHARED,
     },
     "teo": {
         "sex": "f", "tint": ("frost", 2), "coat": "small", "cloak_sx": 0.92, "head": "mask", "head_r": (4.6, 5.0),

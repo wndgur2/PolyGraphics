@@ -1,7 +1,7 @@
 {
   "id": "ss.relic.bargain",
   "name": "Hive bargain",
-  "description": "One cell of comb with an arcane mark set into it and a coin caught on its lower edge. The mark is the hive's notice \u2014 the same violet the curse plate wears, which is exactly what the find buys with the curse it adds \u2014 and the coin is what the notice is worth. Hexagonal because everything the hive builds is, and drawn as a single cell rather than a sheet so the bargain reads as one made with you.",
+  "description": "One cell of comb with an arcane mark set into it and a bead of jelly caught on its lower edge. The mark is the hive's notice \u2014 the same violet the curse plate wears, which is exactly what the find buys with the curse it adds \u2014 and the jelly is what the notice is worth: the currency's own bead (`ss.pickup.coin`), composed in rather than redrawn, so the two cannot disagree. Hexagonal because everything the hive builds is, and drawn as a single cell rather than a sheet so the bargain reads as one made with you.",
   "tags": [
     "relic"
   ],
@@ -77,28 +77,13 @@
       "fill": "$orchid"
     },
     {
-      "id": "coin_o",
+      "id": "jelly",
       "at": [
         5.4,
-        6.2
+        6.4
       ],
-      "shape": {
-        "kind": "circle",
-        "r": 4.8
-      },
-      "fill": "$ink"
-    },
-    {
-      "id": "coin",
-      "at": [
-        5.4,
-        6.2
-      ],
-      "shape": {
-        "kind": "circle",
-        "r": 3.6
-      },
-      "fill": "$gold"
+      "use": "ss.pickup.coin",
+      "scale": 0.68
     }
   ],
   "variants": {

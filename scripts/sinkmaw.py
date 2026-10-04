@@ -350,7 +350,9 @@ variants = {
 
 # ============================================================== document
 DESCRIPTION = (
-    "The pan's last arrival: it answers you by opening. Not a body on the ground but a hole in it, seen from above — an antlion's pit: a pale lip "
+    "The pan's last arrival: it answers you by opening. She is the pan's queen, and the pit is her chamber: a queen never leaves hers and "
+    "everything is brought to her, and here the slope does the bringing — which is why the casket the stones promise is left when she falls "
+    "(feelers docs/brand-guide.md §3.6). Not a body on the ground but a hole in it, seen from above — an antlion's pit: a pale lip "
     "of thrown sand, four rings stepping down to a dark throat (lit from the upper left, so the far wall is the bright one), grains out on the "
     "floor sliding over the lip and down into it, and in the throat the larva — a flat rust head with the organ lit on it, two ember eyes, and "
     "two long toothed husk jaws hinged in the throat and curving out toward +x. The game pulls the player toward it (EnemyType.pull) and every "

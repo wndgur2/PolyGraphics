@@ -34,7 +34,7 @@
       "set": { "fluid.fill": "$frost", "meniscus.fill": "$frost.light2" }
     },
     "marrow": {
-      "description": "Rendered out of a Soldier's jaw.",
+      "description": "Rendered out of a Bulwark's jaw.",
       "set": { "fluid.fill": "$rust", "meniscus.fill": "$rust.light" }
     },
     "wingblood": {
