@@ -299,6 +299,7 @@ for sd, sg in SIDES:
     for k, Lk in enumerate(ANT):
         at, a = on_bone(f"ant_{sd}{k}")
         put(f"ant_{sd}{k}", f"ant_{sd}{k}", at, a, bar(Lk, *ANT_W[k], 0.7), ANT_FILL[k], INK_HAIR)
+    RIG.bar_tip(f"feeler_tip_{sd}", f"ant_{sd}{len(ANT) - 1}", ANT_W[-1][1], 0.7, ANT_FILL[-1])
 
 RIG.check()
 HEAD_GROUP = ["head", "brow", "head_gloss", "organ"]
@@ -678,7 +679,7 @@ doc = {
     "size": list(SIZE),
     "meta": {"radius": 40},
     "parts": RIG.parts,
-    "variants": variants,
+    "variants": RIG.follow_tips(variants),
     "animations": animations,
     "skeleton": RIG.skeleton(),
 }

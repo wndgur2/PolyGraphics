@@ -207,6 +207,7 @@ at, a = on_bone("mand", 0.0, 0.6)
 put("mand", "mand", at, a, MAND, "$timber.dark", HAIR_DK)
 at, a = on_bone("ant_0"); put("ant_0", "ant_0", at, a, bar(3.2, 1.1, 0.9, 0.4), "$timber.dark", HAIR_DK)
 at, a = on_bone("ant_1"); put("ant_1", "ant_1", at, a, bar(4.0, 0.9, 0.7, 0.4), "$timber.dark", HAIR_DK)
+RIG.bar_tip("feeler_tip", "ant_1", 0.7, 0.4, "$timber.dark")
 RIG.check()
 
 GRUB_IDS = list(GRUB_PARTS)
@@ -533,7 +534,7 @@ doc = {
     "size": [44, 40],
     "meta": {"radius": 10},
     "parts": [dropped(p) for p in RIG.parts],
-    "variants": variants,
+    "variants": RIG.follow_tips(variants),
     "animations": animations,
     "skeleton": SKEL,
 }

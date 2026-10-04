@@ -191,6 +191,7 @@ for s in ("u", "d"):
         n = f"ant_{s}_{i}"
         at, a = on_bone(n)
         put(n, n, at, a, bar(B[n].length, w0, w1, 0.4), "$dead" if i else "$moss.dark", INK_HAIR if i == 0 else None)
+    RIG.bar_tip(f"feeler_tip_{s}", f"ant_{s}_{len(ANT_W) - 1}", ANT_W[-1][1], 0.4, "$dead")
 
 # ---- the glass glint at the mouth, folded to nothing until the spit
 put("spit_glow", "head", (38.0, 0.0), 0.0, circ(7.0), "$aqua@soft", scale=0.05)
@@ -405,7 +406,7 @@ doc = {
     "size": [128, 88],
     "meta": {"radius": 42},
     "parts": RIG.parts,
-    "variants": variants,
+    "variants": RIG.follow_tips(variants),
     "skeleton": RIG.skeleton(),
     "animations": animations,
 }

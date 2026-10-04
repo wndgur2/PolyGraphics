@@ -118,6 +118,7 @@ def feeler_parts(prefix, fill, stroke, w=1.0):
         n = f"{prefix}_{i}"
         at, a = on_bone(n)
         put(n, n, at, a, bar(B[n].length, w0, w1, 0.6), fill, stroke)
+    RIG.bar_tip("feeler_tip_" + ("f" if prefix.endswith("_far") else "n"), f"{prefix}_1", 0.8 * w, 0.6, fill)
 
 # ---- far side, behind the body: legs and feeler, a step darker
 for leg in ("far_b", "far_m", "far_f"):
@@ -319,7 +320,7 @@ doc = {
     "size": [W, H],
     "meta": {"radius": 8.5},
     "parts": RIG.parts,
-    "variants": variants,
+    "variants": RIG.follow_tips(variants),
     "animations": animations,
     "skeleton": RIG.skeleton(),
 }
