@@ -1365,6 +1365,238 @@ def prints():
     )
 
 
+# ============================================================== the structures
+# Built things the camp has that are not stations: the fence round it, the
+# larder, the sample cellar, the lab. Nothing to use in them; they are the
+# camp's masses (feelers docs/staging-method.md §4), so their detail sits
+# on a third of each and the rest is plate and earth.
+
+def post():
+    stake = [(-2, -16), (2, -16), (2, 20), (-2, 20)]
+    parts = [
+        shadow("shadow", 0, 20, 5.5, 1.6, "0.4"),
+        P("dirt", ell(5, 1.6), "$sand@0.6", at=(0, 19.4)),
+        *shaded("stake", stake, "$steel.dark", [(0.4, 2.1, "$slate.dark")], stroke=INK_HAIR, axis=0),
+        P("stake_lit", R(0.9, 30, 0.4), "$steel@0.9", at=(-1.1, 3)),
+        P("cap", R(6, 3, 1), "$steel", at=(0, -16.4), stroke=INK_HAIR),
+        lit_edge("cap_lit", -2.4, 2.4, -17.4, 0.7, "$white@0.45"),
+        *[P(f"lash_{i}", R(5.2, 0.9, 0.4), "$bone.dark", at=(0, -11 + i * 1.4)) for i in range(3)],
+    ]
+    doc(
+        "ss.base.post",
+        "Fence post",
+        "A length of steel pipe from the lander driven into the ground, capped, with cord lashed round its top. The camp's fence is a ring "
+        "of these with cord run between them (feelers draws the cord, so it can sag and move in the wind), gapped where the roads go out.",
+        (12, 44),
+        parts,
+    )
+    cloth = parts + [
+        P("cloth", poly([(1.6, -12), (8, -11), (7, -6), (9, -1), (1.6, -3)]), "$frost.dark", stroke=INK_HAIR),
+        P("cloth_fold", poly([(1.6, -7), (7, -6.4), (7.6, -5), (1.6, -5.4)]), "$ink@0.25"),
+    ]
+    doc(
+        "ss.base.gatepost",
+        "Gate post",
+        "A fence post with a strip of cold cloth knotted on: the posts either side of a road out of the camp carry one, so the gap reads as "
+        "a way through and not a break.",
+        (20, 44),
+        cloth,
+    )
+
+
+def larder():
+    def arch(rx, top, base, n=14, cx=0):
+        return [(cx + rx * math.cos(math.pi * k / n), base - (base - top) * math.sin(math.pi * k / n)) for k in range(n + 1)]
+
+    roof = arch(46, -32, 8)
+    end_wall = arch(40, -25, 8)
+    parts = [
+        shadow("shadow", 0, 36, 60, 8, "0.42"),
+        # Dug in: a mound of earth banked up round a half-buried store.
+        P("mound", poly([(-62, 34), (-58, 18), (-46, 8), (46, 8), (58, 18), (62, 34)]), "$sand.dark", stroke=INK_HAIR),
+        band("mound_lit", [(-58, 18), (-46, 8), (46, 8), (58, 18)], 2, "$sand@0.85"),
+        # Its roof is a curl of the lander's skin, corrugated.
+        P("roof", poly(roof), "$steel.dark", stroke=INK_THIN),
+        *[P(f"rib_{i}", R(1.2, max(1, 40 * math.sqrt(max(0.0, 1 - (x / 46) ** 2)) - 2), 0.4), "$ink@0.25",
+            at=(x, 8 - (40 * math.sqrt(max(0.0, 1 - (x / 46) ** 2)) - 2) / 2)) for i, x in enumerate(range(-40, 41, 8))],
+        band("roof_lit", [(46 * math.cos(math.pi * k / 10), 8 - 40 * math.sin(math.pi * k / 10)) for k in range(5, 10)], 2, "$steel@0.85"),
+        P("roof_grit", ell(16, 2.4), "$sand@0.6", at=(-8, -29)),
+        # The end wall, slate, and the door into the dark.
+        P("end_wall", poly(end_wall), "$slate.dark"),
+        P("doorway", R(18, 26, 3), "$coal", at=(-10, -4)),
+        P("door", poly([(-19, -17), (-30, -14), (-30, 10), (-19, 9)]), "$steel", stroke=INK_HAIR),
+        P("door_lit", poly([(-21, -15), (-24, -14.4), (-24, 8.4), (-21, 8.6)]), "$steel.light@0.7"),
+        *bolt("door_pull", -27, -2, 1, "$slate.dark"),
+        P("beam", R(64, 2.4, 1), "$slate", at=(2, -20), stroke=INK_HAIR),
+        # What is kept: sacs cut out of things that stopped needing them, hung
+        # to cure (the field's Chicken, S005), and the expedition's own tins.
+        *[p for i, (x, y) in enumerate([(10, -10), (19, -7), (28, -11)]) for p in [
+            P(f"sac_{i}_cord", R(0.8, 5, 0.3), "$bone.dark", at=(x, -17)),
+            {"id": f"sac_{i}", "use": "ss.pickup.food", "at": [x, y + 2], "scale": 0.5},
+        ]],
+        *[p for i, (x, y) in enumerate([(30, 24), (38, 24), (34, 16)]) for p in [
+            P(f"tin_{i}", R(7, 8, 1.4), "$steel", at=(x, y), stroke=INK_HAIR),
+            P(f"tin_{i}_label", R(7, 3, 0.6), "$bone@0.9", at=(x, y + 0.6)),
+            P(f"tin_{i}_lit", R(1, 6, 0.4), "$white@0.4", at=(x - 2.2, y)),
+        ]],
+        P("sack", poly([(-48, 28), (-50, 18), (-44, 12), (-38, 13), (-34, 20), (-36, 28)]), "$husk.dark", stroke=INK_HAIR),
+        P("sack_tie", R(6, 1.4, 0.5), "$bone.dark", at=(-41, 14)),
+        P("sack_fold", poly([(-46, 26), (-44, 18), (-42, 18), (-43, 26)]), "$ink@0.2"),
+        *shaded("crate", rr(16, 11, 1.5, (-24, 26)), "$slate", [(28, 32, "$slate.dark")], stroke=INK_HAIR),
+        P("step_a", ell(6, 2), "$smoke", at=(-12, 12), stroke=INK_HAIR),
+        P("step_b", ell(4, 1.6), "$smoke.dark", at=(-4, 14), stroke=INK_HAIR),
+    ]
+    doc(
+        "ss.base.larder",
+        "The larder",
+        "The camp's food store, dug in where the ground keeps cool: a half-buried hole banked with earth and roofed with a corrugated curl "
+        "of the lander's skin. Under the roof a beam carries the sacs the field gives up, hung on cords to cure — the soft warm things the "
+        "records call Chicken (S005), cut out of something that stopped needing them — and by the door are the expedition's own tins, a tied "
+        "sack and a crate. The door stands open on the dark. Nothing to do here in feelers; it is part of the west wing, where the camp lives.",
+        (128, 92),
+        parts,
+    )
+
+
+def cellar():
+    vial_cols = ["$venom", "$ember", "$frost", "$bile", "$aqua", "$orchid"]
+    parts = [
+        shadow("shadow", 0, 38, 26, 6, "0.42"),
+        *[P(f"leg_{i}", R(4, 8, 1), "$slate.dark", at=(x, 34), stroke=INK_HAIR) for i, x in enumerate([-19, 19])],
+        *shaded("body", rr(48, 60, 4, (0, 2)), "$steel", [(10, 25, "$steel.dark")], axis=0),
+        P("body_lit", R(1.4, 50, 0.6), "$steel.light", at=(-21.4, 4)),
+        P("top", R(52, 6, 2), "$steel.light", at=(0, -29), stroke=INK_HAIR),
+        lit_edge("top_lit", -24, 24, -31.4, 0.8, "$white@0.5"),
+        # The door: frosted glass with the samples on racks behind it, the
+        # cold creeping in from its corners.
+        P("glass", R(32, 40, 3), "$frost.dark@0.6", at=(-3, 3), stroke=INK_HAIR),
+        *[P(f"shelf_{i}", R(30, 1.2, 0.4), "$slate.dark", at=(-3, -9 + i * 12)) for i in range(3)],
+        *[P(f"vial_{r}_{c}", R(3, 7, 1), vial_cols[(r * 2 + c) % 6] + "@0.55", at=(-15 + c * 6, -13 + r * 12)) for r in range(3) for c in range(5)],
+        P("glass_haze", R(32, 40, 3), "$frost.light@0.25", at=(-3, 3)),
+        P("frost_a", poly([(-19, -17), (-10, -17), (-14, -13), (-19, -9)]), "$white@0.55"),
+        P("frost_b", poly([(13, 23), (13, 13), (9, 18), (4, 23)]), "$white@0.5"),
+        P("frost_c", poly([(13, -17), (8, -17), (13, -12)]), "$white@0.4"),
+        P("handle", R(2.4, 12, 1), "$steel.light", at=(17, 3), stroke=INK_HAIR),
+        # Chained shut, and a padlock on the chain.
+        band("chain", [(-18, -14), (-6, -4), (6, 6), (16, 14)], 1.4, "$slate.dark"),
+        *[P(f"link_{i}", R(2.4, 0.6, 0.3), "$steel@0.8", at=(-14 + i * 6, -11 + i * 5), rot=40) for i in range(6)],
+        P("lock", R(6, 6, 1.5), "$steel", at=(6, 9), stroke=INK_HAIR),
+        P("shackle", ring_arc(2.2, 0.9, 180, 360), "$steel.dark", at=(6, 6)),
+        # The thermometer: its needle well over to the cold.
+        P("dial", circ(4.2), "$bone", at=(16, -22), stroke=INK_HAIR),
+        P("dial_needle", R(3.2, 0.7, 0.3), "$ink", at=(14.8, -22.6), rot=210),
+        P("dial_cold", ring_arc(3.2, 0.8, 180, 250), "$frost", at=(16, -22)),
+        # Ice on the lip, and the cold breathing out at the foot.
+        *[P(f"icicle_{i}", poly([(-1, 0), (1, 0), (0, 2.6 + (i % 2) * 1.6)]), "$frost.light@0.85", at=(x, -26)) for i, x in enumerate([-18, -10, -2, 8, 18])],
+        P("mist_a", ell(8, 1.6), "$white@0.22", at=(-8, 33)),
+        P("mist_b", ell(6, 1.4), "$white@0.18", at=(9, 34)),
+    ]
+    doc(
+        "ss.base.cellar",
+        "The sample cellar",
+        "Where the samples are kept between expeditions: a squat steel cabinet on legs, frosted glass in its door, and behind the glass racks "
+        "of vials in the six colours the level-up's samples come in, muted by the cold. Frost creeps in from the glass's corners and hangs in "
+        "icicles off the lip; the thermometer's needle is well over to the cold; a chain and padlock keep it shut; the cold breathes out at "
+        "its foot. It stands by the bench, which draws from it. Nothing to do here in feelers; it is part of the east wing.",
+        (64, 88),
+        parts,
+    )
+
+
+def lab():
+    front = [(-70, -22), (50, -22), (50, 50), (-70, 50)]
+    side = [(50, -22), (74, -36), (74, 36), (50, 50)]
+    roof = [(-80, -20), (56, -20), (82, -40), (-54, -40)]
+    parts = [
+        shadow("shadow", 0, 54, 86, 10, "0.42"),
+        # A shed of the lander's plates: a front, a side going back into the
+        # dark, a single slope of corrugated roof.
+        *shaded("side", side, "$smoke.dark", [(30, 51, "$coal@0.6")], stroke=INK_THIN),
+        *shaded("front", front, "$smoke", [(-23, -14, "$steel@0.8"), (32, 51, "$smoke.dark")], stroke=INK_THIN),
+        *[P(f"seam_{i}", R(1.4, 70, 0.5), "$ink@0.3", at=(x, 14)) for i, x in enumerate([-40, -10, 26])],
+        *[p for i, x in enumerate([-40, -10, 26]) for p in rivet_row(f"seam_{i}_rv", x + 2.4, -16, x + 2.4, 44, 7, 0.7)],
+        P("patch", R(16, 12, 1), "$steel.dark", at=(-56, 30), stroke=INK_HAIR),
+        *rust("rust_a", -40, -18, 3, 26),
+        *rust("rust_b", 26, -18, 2.6, 18, 0.5),
+        P("roof", poly(roof), "$steel.dark", stroke=INK_THIN),
+        *[P(f"roof_rib_{i}", poly([(-74 + i * 14, -21), (-72.6 + i * 14, -21), (-46.6 + i * 14, -39), (-48 + i * 14, -39)]), "$ink@0.25") for i in range(10)],
+        band("roof_lit", [(-80, -20), (56, -20)], 2.2, "$steel"),
+        P("roof_grit", ell(20, 2.4), "$sand@0.55", at=(10, -32)),
+        # The window: a jar of caps on the sill inside, so it is lit a little.
+        *shaded("window_frame", rr(26, 20, 2, (22, 2)), "$slate", [(8, 13, "$slate.dark")], stroke=INK_HAIR),
+        P("window", R(20, 14, 1.5), "$coal", at=(22, 2)),
+        *halo("window_glow", 24, 6, 9, 6, 0.6),
+        P("window_jar", R(5, 6, 1.4), "$frost.dark@0.6", at=(26, 6)),
+        P("window_cap", ell(2, 1.2), "$spore", at=(26, 6.4)),
+        P("mullion_v", R(1.2, 14, 0.4), "$slate", at=(22, 2)),
+        P("mullion_h", R(20, 1.2, 0.4), "$slate", at=(22, 2)),
+        P("window_glint", R(6, 1, 0.4), "$frost@0.5", at=(16, -2), rot=-20),
+        P("sill", R(28, 2.6, 1), "$slate.light", at=(22, 13.6), stroke=INK_HAIR),
+        # The door, a canvas flap tied back.
+        P("doorway", R(22, 38, 2), "$coal", at=(-38, 31)),
+        P("flap", poly([(-49, 12), (-38, 12), (-44, 30), (-47, 50), (-49, 50)]), "$slate.light", stroke=INK_HAIR),
+        P("flap_fold", poly([(-46, 16), (-44, 16), (-46, 48), (-47.4, 48)]), "$slate@0.8"),
+        P("flap_tie", R(4, 1.6, 0.5), "$bone.dark", at=(-46, 30)),
+        P("step", R(26, 4, 1.5), "$slate.dark", at=(-38, 51), stroke=INK_HAIR),
+        # Readings pinned up by the door.
+        *[p for i, (x, y, r) in enumerate([(-14, 6, -6), (-4, 4, 5), (-10, 18, 3)]) for p in [
+            P(f"sheet_{i}", R(8, 10, 0.6), "$bone" if i != 1 else "$husk", at=(x, y), rot=r, stroke=INK_HAIR),
+            P(f"sheet_{i}_ln", R(5, 0.8, 0.3), "$slate.dark@0.55", at=(x, y - 1), rot=r),
+            P(f"sheet_{i}_pin", circ(0.7), "$steel.light", at=(x, y - 4)),
+        ]],
+        # A mast on the roof for the wind meter (`ss.base.vane`), a cable down the side.
+        P("mast", R(2.4, 34, 0.8), "$steel.dark", at=(64, -54), stroke=INK_HAIR),
+        band("cable", [(66, -40), (70, -20), (72, 10), (80, 40), (86, 54)], 1.1, "$coal"),
+        # By the door: a crate of instruments with a coil of wire on it, and a stool.
+        *shaded("crate", rr(18, 11, 1.5, (-62, 46)), "$slate", [(48, 52, "$slate.dark")], stroke=INK_HAIR),
+        P("coil", {"kind": "ring", "r": 3.6, "width": 1.2}, "$steel.dark", at=(-62, 39)),
+        P("stool_seat", ell(6, 2.2), "$steel", at=(4, 42), stroke=INK_HAIR),
+        P("stool_leg_a", R(1.4, 9, 0.5), "$steel.dark", at=(1, 47), rot=8),
+        P("stool_leg_b", R(1.4, 9, 0.5), "$steel.dark", at=(7, 47), rot=-8),
+    ]
+    doc(
+        "ss.base.lab",
+        "The lab",
+        "A shed the expedition built out of the lander's plates to work in out of the wind: a riveted front with a patch and rust down its "
+        "seams, a side going back into the dark, a single slope of corrugated roof. A jar of caps sits on the sill inside, so its window is "
+        "lit a little. Readings are pinned up by the door, which is a canvas flap tied back; a crate of instruments with a coil of wire and "
+        "a stool stand outside. A mast on the roof carries the wind meter (`ss.base.vane`), and a cable runs down the side toward the bench. "
+        "Nothing to do here in feelers; it is the back of the east wing.",
+        (176, 150),
+        parts,
+    )
+
+
+def vane():
+    # The rotor faces the camp, so its turning reads as turning: three
+    # broad blades round a hub, a tail fin behind to keep it into the wind.
+    hub = (0, -10)
+    blades = []
+    for i, a in enumerate([90, 210, 330]):
+        t = math.radians(a)
+        c, s_ = math.cos(t), math.sin(t)
+        pts = [(1.2, -1.2), (6, -2.6), (10, -1.8), (11, 0), (10, 1.4), (6, 2.2), (1.2, 1.2)]
+        blades.append(P(f"blade_{i}", poly([(x * c - y * s_, x * s_ + y * c) for x, y in pts]), "$steel.light", at=hub, stroke=INK_HAIR))
+    parts = [
+        P("pole", R(2, 16, 0.6), "$steel.dark", at=(0, 6), stroke=INK_HAIR),
+        P("tail_arm", R(9, 1.4, 0.5), "$steel.dark", at=(5, -9)),
+        P("tail", poly([(8, -9), (13, -14), (14, -6)]), "$frost.dark", stroke=INK_HAIR),
+        P("body", ell(3.4, 3), "$steel", at=(0, -9.4), stroke=INK_HAIR),
+        *blades,
+        P("hub", circ(1.8), "$slate.dark", at=hub, stroke=INK_HAIR),
+        P("hub_lit", circ(0.6), "$white@0.6", at=(-0.5, -10.5)),
+    ]
+    doc(
+        "ss.base.vane",
+        "Wind meter",
+        "A three-bladed wind meter on the lab's mast, its rotor facing the camp and a cold tail fin keeping it into the wind; it turns "
+        "(`spin`). The only thing in the camp that moves all the time by itself, and it is small.",
+        (32, 48),
+        parts,
+        {"spin": loop("the blades turn in the wind", 1.2, [track(f"blade_{i}", "rot", [(0, 0), (1, 360)]) for i in range(3)])},
+    )
+
+
 # ============================================================== the clutter
 def clutter():
     doc(
@@ -1446,5 +1678,10 @@ if __name__ == "__main__":
     stump()
     cairn()
     prints()
+    post()
+    larder()
+    cellar()
+    lab()
+    vane()
     clutter()
     print("wrote the base")
