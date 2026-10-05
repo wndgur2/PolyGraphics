@@ -1,0 +1,1411 @@
+{
+  "id": "ss.fx.spore-burst",
+  "name": "Spore burst",
+  "description": "What a tripped Spore lure lets go of: a white frame and a cold core, a wave out to the blast's edge, eight puffs of spore in the husk's ochre and four flakes of the case thrown clear. The pod that called the swarm is pink; what comes out of it is not — the hive's colour is the call, and the call is over. Everything sits on ink and goes in held steps. Authored so the wave reaches r=30 at full: the game scales it by the blast radius over 30, the way it scales fx.blast.",
+  "tags": [
+    "fx",
+    "blast",
+    "kit"
+  ],
+  "size": [
+    80,
+    80
+  ],
+  "meta": {
+    "authoredR": 30
+  },
+  "parts": [
+    {
+      "id": "ink",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 9
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "flash",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 8
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "ink_wave",
+      "shape": {
+        "kind": "ring",
+        "r": 21.0,
+        "width": 6.5
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "wave",
+      "shape": {
+        "kind": "ring",
+        "r": 21.0,
+        "width": 4.0
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "wave_far",
+      "shape": {
+        "kind": "ring",
+        "r": 28.5,
+        "width": 2.2
+      },
+      "fill": "$frost"
+    },
+    {
+      "id": "spore_0",
+      "at": [
+        3.99,
+        0.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.2
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "spore_1",
+      "at": [
+        3.13,
+        5.1
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.7
+      },
+      "fill": "$ochre"
+    },
+    {
+      "id": "spore_2",
+      "at": [
+        0.0,
+        7.98
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.2
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "spore_3",
+      "at": [
+        -8.51,
+        5.21
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.2
+      },
+      "fill": "$ochre"
+    },
+    {
+      "id": "spore_4",
+      "at": [
+        -3.99,
+        0.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.7
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "spore_5",
+      "at": [
+        -3.13,
+        -5.1
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.2
+      },
+      "fill": "$ochre"
+    },
+    {
+      "id": "spore_6",
+      "at": [
+        -0.0,
+        -7.98
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 3.2
+      },
+      "fill": "$husk"
+    },
+    {
+      "id": "spore_7",
+      "at": [
+        8.51,
+        -5.21
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 2.7
+      },
+      "fill": "$ochre"
+    },
+    {
+      "id": "chip_0",
+      "at": [
+        3.3,
+        2.26
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            -1.8
+          ],
+          [
+            2.6,
+            0.4
+          ],
+          [
+            -1.2,
+            1.6
+          ]
+        ]
+      },
+      "fill": "$husk.dark",
+      "rot": 34
+    },
+    {
+      "id": "chip_1",
+      "at": [
+        -2.67,
+        2.98
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            -1.8
+          ],
+          [
+            2.6,
+            0.4
+          ],
+          [
+            -1.2,
+            1.6
+          ]
+        ]
+      },
+      "fill": "$ochre",
+      "rot": 131
+    },
+    {
+      "id": "chip_2",
+      "at": [
+        -2.9,
+        -2.75
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            -1.8
+          ],
+          [
+            2.6,
+            0.4
+          ],
+          [
+            -1.2,
+            1.6
+          ]
+        ]
+      },
+      "fill": "$husk.dark",
+      "rot": 223
+    },
+    {
+      "id": "chip_3",
+      "at": [
+        1.87,
+        -3.53
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            -1.8
+          ],
+          [
+            2.6,
+            0.4
+          ],
+          [
+            -1.2,
+            1.6
+          ]
+        ]
+      },
+      "fill": "$ochre",
+      "rot": 297
+    }
+  ],
+  "animations": {
+    "play": {
+      "description": "a white frame; the wave goes out and thins; the spores billow and drift up; the flakes fly and drop — 0.36s, held steps throughout",
+      "duration": 0.36,
+      "cues": {
+        "impact": 0.0
+      },
+      "tracks": [
+        {
+          "part": "flash",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1.6,
+              "hold"
+            ],
+            [
+              0.08,
+              1.0,
+              "quadOut"
+            ],
+            [
+              0.4,
+              0.6
+            ]
+          ]
+        },
+        {
+          "part": "flash",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.3,
+              0.6,
+              "hold"
+            ],
+            [
+              0.5,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1.7,
+              "hold"
+            ],
+            [
+              0.08,
+              1.1,
+              "quadOut"
+            ],
+            [
+              0.4,
+              0.7
+            ]
+          ]
+        },
+        {
+          "part": "ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0.9,
+              "hold"
+            ],
+            [
+              0.3,
+              0.54,
+              "hold"
+            ],
+            [
+              0.5,
+              0.27,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "wave",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.25,
+              "expoOut"
+            ],
+            [
+              0.55,
+              1.0,
+              "sine"
+            ],
+            [
+              1,
+              1.08
+            ]
+          ]
+        },
+        {
+          "part": "ink_wave",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.25,
+              "expoOut"
+            ],
+            [
+              0.55,
+              1.0,
+              "sine"
+            ],
+            [
+              1,
+              1.08
+            ]
+          ]
+        },
+        {
+          "part": "wave",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.45,
+              0.6,
+              "hold"
+            ],
+            [
+              0.7,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "ink_wave",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0.85,
+              "hold"
+            ],
+            [
+              0.45,
+              0.51,
+              "hold"
+            ],
+            [
+              0.7,
+              0.255,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "wave_far",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.2,
+              "expoOut"
+            ],
+            [
+              0.7,
+              1.0,
+              "sine"
+            ],
+            [
+              1,
+              1.05
+            ]
+          ]
+        },
+        {
+          "part": "wave_far",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.1,
+              0.9,
+              "hold"
+            ],
+            [
+              0.6,
+              0.5,
+              "hold"
+            ],
+            [
+              0.85,
+              0.2,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "spore_0",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              3.9899999999999998,
+              "expoOut"
+            ],
+            [
+              1,
+              11.4
+            ]
+          ]
+        },
+        {
+          "part": "spore_0",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "expoOut"
+            ],
+            [
+              1,
+              -3.0
+            ]
+          ]
+        },
+        {
+          "part": "spore_0",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.6,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.3,
+              "sine"
+            ],
+            [
+              1,
+              1.6
+            ]
+          ]
+        },
+        {
+          "part": "spore_0",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.6,
+              0.6,
+              "hold"
+            ],
+            [
+              0.85,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "spore_1",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              3.1271539098249543,
+              "expoOut"
+            ],
+            [
+              1,
+              8.934725456642727
+            ]
+          ]
+        },
+        {
+          "part": "spore_1",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              5.103051383659242,
+              "expoOut"
+            ],
+            [
+              1,
+              11.580146810454977
+            ]
+          ]
+        },
+        {
+          "part": "spore_1",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.6,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.3,
+              "sine"
+            ],
+            [
+              1,
+              1.6
+            ]
+          ]
+        },
+        {
+          "part": "spore_1",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.6,
+              0.6,
+              "hold"
+            ],
+            [
+              0.85,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "spore_2",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              4.886340728597939e-16,
+              "expoOut"
+            ],
+            [
+              1,
+              1.3960973510279826e-15
+            ]
+          ]
+        },
+        {
+          "part": "spore_2",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              7.9799999999999995,
+              "expoOut"
+            ],
+            [
+              1,
+              19.8
+            ]
+          ]
+        },
+        {
+          "part": "spore_2",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.6,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.3,
+              "sine"
+            ],
+            [
+              1,
+              1.6
+            ]
+          ]
+        },
+        {
+          "part": "spore_2",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.6,
+              0.6,
+              "hold"
+            ],
+            [
+              0.85,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "spore_3",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              -8.50508563943207,
+              "expoOut"
+            ],
+            [
+              1,
+              -24.30024468409163
+            ]
+          ]
+        },
+        {
+          "part": "spore_3",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              5.211923183041591,
+              "expoOut"
+            ],
+            [
+              1,
+              11.891209094404546
+            ]
+          ]
+        },
+        {
+          "part": "spore_3",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.6,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.3,
+              "sine"
+            ],
+            [
+              1,
+              1.6
+            ]
+          ]
+        },
+        {
+          "part": "spore_3",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.6,
+              0.6,
+              "hold"
+            ],
+            [
+              0.85,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "spore_4",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              -3.9899999999999998,
+              "expoOut"
+            ],
+            [
+              1,
+              -11.4
+            ]
+          ]
+        },
+        {
+          "part": "spore_4",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              4.886340728597939e-16,
+              "expoOut"
+            ],
+            [
+              1,
+              -2.9999999999999987
+            ]
+          ]
+        },
+        {
+          "part": "spore_4",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.6,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.3,
+              "sine"
+            ],
+            [
+              1,
+              1.6
+            ]
+          ]
+        },
+        {
+          "part": "spore_4",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.6,
+              0.6,
+              "hold"
+            ],
+            [
+              0.85,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "spore_5",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              -3.127153909824957,
+              "expoOut"
+            ],
+            [
+              1,
+              -8.934725456642735
+            ]
+          ]
+        },
+        {
+          "part": "spore_5",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -5.10305138365924,
+              "expoOut"
+            ],
+            [
+              1,
+              -17.580146810454973
+            ]
+          ]
+        },
+        {
+          "part": "spore_5",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.6,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.3,
+              "sine"
+            ],
+            [
+              1,
+              1.6
+            ]
+          ]
+        },
+        {
+          "part": "spore_5",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.6,
+              0.6,
+              "hold"
+            ],
+            [
+              0.85,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "spore_6",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              -1.4659022185793818e-15,
+              "expoOut"
+            ],
+            [
+              1,
+              -4.188292053083948e-15
+            ]
+          ]
+        },
+        {
+          "part": "spore_6",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -7.9799999999999995,
+              "expoOut"
+            ],
+            [
+              1,
+              -25.8
+            ]
+          ]
+        },
+        {
+          "part": "spore_6",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.6,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.3,
+              "sine"
+            ],
+            [
+              1,
+              1.6
+            ]
+          ]
+        },
+        {
+          "part": "spore_6",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.6,
+              0.6,
+              "hold"
+            ],
+            [
+              0.85,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "spore_7",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              8.505085639432066,
+              "expoOut"
+            ],
+            [
+              1,
+              24.30024468409162
+            ]
+          ]
+        },
+        {
+          "part": "spore_7",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              -5.211923183041597,
+              "expoOut"
+            ],
+            [
+              1,
+              -17.891209094404562
+            ]
+          ]
+        },
+        {
+          "part": "spore_7",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.6,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.3,
+              "sine"
+            ],
+            [
+              1,
+              1.6
+            ]
+          ]
+        },
+        {
+          "part": "spore_7",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.6,
+              0.6,
+              "hold"
+            ],
+            [
+              0.85,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chip_0",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "expoOut"
+            ],
+            [
+              1,
+              23.522065024925833
+            ]
+          ]
+        },
+        {
+          "part": "chip_0",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "expoOut"
+            ],
+            [
+              0.6,
+              12.092310491758507,
+              "quadIn"
+            ],
+            [
+              1,
+              18.092310491758507
+            ]
+          ]
+        },
+        {
+          "part": "chip_0",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              1,
+              260
+            ]
+          ]
+        },
+        {
+          "part": "chip_0",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.7,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chip_1",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "expoOut"
+            ],
+            [
+              1,
+              -18.988866606474986
+            ]
+          ]
+        },
+        {
+          "part": "chip_1",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "expoOut"
+            ],
+            [
+              0.6,
+              17.252598547036527,
+              "quadIn"
+            ],
+            [
+              1,
+              23.252598547036527
+            ]
+          ]
+        },
+        {
+          "part": "chip_1",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              1,
+              260
+            ]
+          ]
+        },
+        {
+          "part": "chip_1",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.7,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chip_2",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "expoOut"
+            ],
+            [
+              1,
+              -20.689070669703995
+            ]
+          ]
+        },
+        {
+          "part": "chip_2",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "expoOut"
+            ],
+            [
+              0.6,
+              -23.60133553674325,
+              "quadIn"
+            ],
+            [
+              1,
+              -17.60133553674325
+            ]
+          ]
+        },
+        {
+          "part": "chip_2",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              1,
+              260
+            ]
+          ]
+        },
+        {
+          "part": "chip_2",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.7,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "chip_3",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "expoOut"
+            ],
+            [
+              1,
+              13.352725132060746
+            ]
+          ]
+        },
+        {
+          "part": "chip_3",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "expoOut"
+            ],
+            [
+              0.6,
+              -29.178457688024366,
+              "quadIn"
+            ],
+            [
+              1,
+              -23.178457688024366
+            ]
+          ]
+        },
+        {
+          "part": "chip_3",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              1,
+              260
+            ]
+          ]
+        },
+        {
+          "part": "chip_3",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.7,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

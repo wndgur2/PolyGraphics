@@ -1,0 +1,454 @@
+{
+  "id": "ss.fx.crack",
+  "name": "Ground crack",
+  "description": "The ground about to give: a heave of earth and five dark cracks running out from a lifted lip — the Vine's tell, set down where a vine is about to come up. It is the field's warning in the field's own material, so it is fair to whatever stands there and reads as soil, not as an interface. Opens fast, then holds until the vine breaks through.",
+  "tags": [
+    "fx",
+    "decal",
+    "kit"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "id": "heave",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            11.04,
+            0.0
+          ],
+          [
+            10.88,
+            6.28
+          ],
+          [
+            5.21,
+            9.02
+          ],
+          [
+            0.0,
+            11.03
+          ],
+          [
+            -4.98,
+            8.63
+          ],
+          [
+            -9.26,
+            5.35
+          ],
+          [
+            -12.27,
+            0.0
+          ],
+          [
+            -9.46,
+            -5.46
+          ],
+          [
+            -5.88,
+            -10.18
+          ],
+          [
+            -0.0,
+            -9.74
+          ],
+          [
+            5.22,
+            -9.04
+          ],
+          [
+            9.96,
+            -5.75
+          ]
+        ]
+      },
+      "fill": "$rust"
+    },
+    {
+      "id": "arm_0",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            -1.4
+          ],
+          [
+            5.62,
+            -0.23
+          ],
+          [
+            10.83,
+            1.91
+          ],
+          [
+            6.46,
+            0.61
+          ],
+          [
+            0,
+            1.4
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "arm_1",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            -1.4
+          ],
+          [
+            0.85,
+            4.09
+          ],
+          [
+            -0.7,
+            7.97
+          ],
+          [
+            1.69,
+            4.93
+          ],
+          [
+            0,
+            1.4
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "arm_2",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            -1.4
+          ],
+          [
+            -5.7,
+            2.22
+          ],
+          [
+            -11.82,
+            2.08
+          ],
+          [
+            -4.86,
+            3.06
+          ],
+          [
+            0,
+            1.4
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "arm_3",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            -1.4
+          ],
+          [
+            -2.67,
+            -3.82
+          ],
+          [
+            -3.08,
+            -8.46
+          ],
+          [
+            -1.83,
+            -2.98
+          ],
+          [
+            0,
+            1.4
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "arm_4",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0,
+            -1.4
+          ],
+          [
+            1.91,
+            -3.17
+          ],
+          [
+            5.36,
+            -4.5
+          ],
+          [
+            2.75,
+            -2.33
+          ],
+          [
+            0,
+            1.4
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "lip",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            3.33,
+            0.0
+          ],
+          [
+            1.77,
+            2.23
+          ],
+          [
+            -0.73,
+            3.18
+          ],
+          [
+            -2.39,
+            1.15
+          ],
+          [
+            -1.93,
+            -0.93
+          ],
+          [
+            -0.66,
+            -2.9
+          ],
+          [
+            1.63,
+            -2.05
+          ]
+        ]
+      },
+      "fill": "$rust.light"
+    }
+  ],
+  "animations": {
+    "open": {
+      "description": "the cracks run out and the lip lifts, then hold — 0.12s",
+      "duration": 0.12,
+      "cues": {
+        "open": 0.5
+      },
+      "tracks": [
+        {
+          "part": "heave",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.3,
+              "expoOut"
+            ],
+            [
+              0.5,
+              1.0,
+              "hold"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "arm_0",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.3,
+              "expoOut"
+            ],
+            [
+              0.5,
+              1.0,
+              "hold"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "arm_1",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.3,
+              "expoOut"
+            ],
+            [
+              0.5,
+              1.0,
+              "hold"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "arm_2",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.3,
+              "expoOut"
+            ],
+            [
+              0.5,
+              1.0,
+              "hold"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "arm_3",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.3,
+              "expoOut"
+            ],
+            [
+              0.5,
+              1.0,
+              "hold"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "arm_4",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.3,
+              "expoOut"
+            ],
+            [
+              0.5,
+              1.0,
+              "hold"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "lip",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.3,
+              "expoOut"
+            ],
+            [
+              0.5,
+              1.0,
+              "hold"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "lip",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "quadOut"
+            ],
+            [
+              0.5,
+              -1.2,
+              "hold"
+            ],
+            [
+              1,
+              -1.2
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

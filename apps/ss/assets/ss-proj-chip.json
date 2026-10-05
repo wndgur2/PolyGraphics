@@ -1,7 +1,7 @@
 {
   "id": "ss.proj.chip",
   "name": "Grub",
-  "description": "What a broodling drops: a pale larva that crawls at whatever it was aimed at. It is seven pixels on screen, so the drawing is two decisions \u2014 one body that is round at the front and drawn out to a tail, and one segment line. Front-ness lives entirely in the silhouette now: flatten this to black and it still points. That matters because the weapon code already wags this sprite sixteen degrees either side of its heading at twenty-six hertz and lurches the pace with it \u2014 the hexagon that used to be here was symmetric, so all of that scuttle landed on a shape with no front and read as nothing. Kept near-white so the fed one, which is amber, is the one that draws the eye.",
+  "description": "What a broodling drops: a pale larva that crawls at whatever it was aimed at. It is seven pixels on screen, so the drawing is two decisions — one body that is round at the front and drawn out to a tail, and one segment line. Front-ness lives entirely in the silhouette now: flatten this to black and it still points. That matters because the weapon code already wags this sprite sixteen degrees either side of its heading at twenty-six hertz and lurches the pace with it — the hexagon that used to be here was symmetric, so all of that scuttle landed on a shape with no front and read as nothing. Kept near-white so the fed one, which is amber, is the one that draws the eye.",
   "tags": [
     "proj",
     "orbital"
@@ -84,7 +84,7 @@
   ],
   "variants": {
     "evolved": {
-      "description": "A Brood Swarm grub: the same larva, fed. It carries the head the plain one gave up \u2014 a near-black rust dot at the front \u2014 over an amber body, and it is authored a third larger. The 1.3 is a texel budget and not a size: a consumer folds it into the texture and divides it back out when it asks for a world scale, so this variant is drawn at thirteen pixels in order to be sharp at whatever size it is asked for, and how big it actually lands is the game's call, not this document's. What the extra detail buys is that the head survives \u2014 at seven pixels a bigger, darker head was invisible next to the plain grub, which is why hue was carrying the whole distinction. This one does not spend itself on one hit: it latches, bites three times, and is thrown off backwards between bites still facing its mark, which is a thing only a drawing with a front can do.",
+      "description": "A Brood Swarm grub: the same larva, fed. It carries the head the plain one gave up — a near-black rust dot at the front — over an amber body, and it is authored a third larger. The 1.3 is a texel budget and not a size: a consumer folds it into the texture and divides it back out when it asks for a world scale, so this variant is drawn at thirteen pixels in order to be sharp at whatever size it is asked for, and how big it actually lands is the game's call, not this document's. What the extra detail buys is that the head survives — at seven pixels a bigger, darker head was invisible next to the plain grub, which is why hue was carrying the whole distinction. This one does not spend itself on one hit: it latches, bites three times, and is thrown off backwards between bites still facing its mark, which is a thing only a drawing with a front can do.",
       "set": {
         "body.fill": "$chitin",
         "seg.fill": "$chitin.dark"
@@ -155,7 +155,251 @@
           "fill": "$husk.light"
         }
       ],
-      "scale": 1.3
+      "scale": 1.3,
+      "animations": [
+        "crawl",
+        "bite"
+      ]
+    }
+  },
+  "animations": {
+    "crawl": {
+      "description": "the grub inches: stretched, gathered, stretched — the game turns it toward what it is after",
+      "duration": 0.24,
+      "cues": {
+        "contact": 0.5
+      },
+      "tracks": [
+        {
+          "part": "body",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              1,
+              "sine"
+            ],
+            [
+              0.5,
+              1.18,
+              "sine"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "body",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              1,
+              "sine"
+            ],
+            [
+              0.5,
+              0.86,
+              "sine"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "seg",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              1,
+              "sine"
+            ],
+            [
+              0.5,
+              1.18,
+              "sine"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "seg",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              1,
+              "sine"
+            ],
+            [
+              0.5,
+              0.86,
+              "sine"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "seg",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "sine"
+            ],
+            [
+              0.5,
+              -0.8,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "bite": {
+      "description": "draws back and holds, lunges, recoils — the evolved grub's three bites are this three times",
+      "duration": 0.3,
+      "cues": {
+        "bite": 0.55
+      },
+      "tracks": [
+        {
+          "part": "body",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "quadOut"
+            ],
+            [
+              0.3,
+              -1.4,
+              "hold"
+            ],
+            [
+              0.4,
+              -1.4,
+              "expoOut"
+            ],
+            [
+              0.55,
+              2.2,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "body",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              1,
+              "quadOut"
+            ],
+            [
+              0.3,
+              0.8,
+              "hold"
+            ],
+            [
+              0.4,
+              0.8,
+              "expoOut"
+            ],
+            [
+              0.55,
+              1.3,
+              "quadOut"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "seg",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "quadOut"
+            ],
+            [
+              0.3,
+              -1.4,
+              "hold"
+            ],
+            [
+              0.4,
+              -1.4,
+              "expoOut"
+            ],
+            [
+              0.55,
+              2.2,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "seg",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              1,
+              "quadOut"
+            ],
+            [
+              0.3,
+              0.8,
+              "hold"
+            ],
+            [
+              0.4,
+              0.8,
+              "expoOut"
+            ],
+            [
+              0.55,
+              1.3,
+              "quadOut"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
+      ]
     }
   }
 }

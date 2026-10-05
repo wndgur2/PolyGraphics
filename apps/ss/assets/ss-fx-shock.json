@@ -1,0 +1,176 @@
+{
+  "id": "ss.fx.shock",
+  "name": "Shock ring",
+  "description": "A small ring thrown out from a point — a staff striking the ground, a pod landing, an awakening — white on ink, a thinner frost ring inside it. Out fast and let go in held steps. White so the game can tint it to the weapon (a multiply on white is the colour), and authored at r=30 so it scales by radius over 30.",
+  "tags": [
+    "fx",
+    "kit"
+  ],
+  "size": [
+    72,
+    72
+  ],
+  "meta": {
+    "authoredR": 30
+  },
+  "parts": [
+    {
+      "id": "ink",
+      "shape": {
+        "kind": "ring",
+        "r": 30,
+        "width": 6
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "edge",
+      "shape": {
+        "kind": "ring",
+        "r": 30,
+        "width": 3.4
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "trail",
+      "shape": {
+        "kind": "ring",
+        "r": 24.599999999999998,
+        "width": 1.6
+      },
+      "fill": "$frost.light"
+    }
+  ],
+  "animations": {
+    "play": {
+      "description": "out from the point, thinning, gone in held steps — 0.24s",
+      "duration": 0.24,
+      "cues": {
+        "impact": 0.0
+      },
+      "tracks": [
+        {
+          "part": "ink",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.2,
+              "expoOut"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "edge",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.2,
+              "expoOut"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "trail",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              0.2,
+              "expoOut"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0.8,
+              "hold"
+            ],
+            [
+              0.5,
+              0.48,
+              "hold"
+            ],
+            [
+              0.75,
+              0.24,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "edge",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.5,
+              0.6,
+              "hold"
+            ],
+            [
+              0.75,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "trail",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0.8,
+              "hold"
+            ],
+            [
+              0.4,
+              0.4,
+              "hold"
+            ],
+            [
+              0.7,
+              0,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

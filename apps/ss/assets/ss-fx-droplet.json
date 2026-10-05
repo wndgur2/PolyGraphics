@@ -1,0 +1,304 @@
+{
+  "id": "ss.fx.droplet",
+  "name": "Droplet",
+  "description": "One drop of Spit's acid off the glob or the mouth, pointing +x (the game turns it to where it is flying): stretched on the way out, round as it slows, gone in held steps. The bile of the weapon's own tile, on ink, with one bright point — the acid is the colour, not a glow.",
+  "tags": [
+    "fx",
+    "kit"
+  ],
+  "size": [
+    16,
+    12
+  ],
+  "parts": [
+    {
+      "id": "ink",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.7,
+            0
+          ],
+          [
+            -0.94,
+            -2.8
+          ],
+          [
+            2.82,
+            -2.35
+          ],
+          [
+            4.7,
+            0
+          ],
+          [
+            2.82,
+            2.35
+          ],
+          [
+            -0.94,
+            2.8
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "body",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -4.0,
+            0
+          ],
+          [
+            -0.8,
+            -2.2
+          ],
+          [
+            2.4,
+            -1.85
+          ],
+          [
+            4.0,
+            0
+          ],
+          [
+            2.4,
+            1.85
+          ],
+          [
+            -0.8,
+            2.2
+          ]
+        ]
+      },
+      "fill": "$bile"
+    },
+    {
+      "id": "glint",
+      "at": [
+        1.6,
+        -0.8
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.9
+      },
+      "fill": "$bile.light2"
+    }
+  ],
+  "animations": {
+    "play": {
+      "description": "stretched, rounding, shrinking, gone — 0.22s",
+      "duration": 0.22,
+      "tracks": [
+        {
+          "part": "ink",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              1.3,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.0,
+              "sine"
+            ],
+            [
+              1,
+              0.7
+            ]
+          ]
+        },
+        {
+          "part": "ink",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              0.8,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.0,
+              "sine"
+            ],
+            [
+              1,
+              0.7
+            ]
+          ]
+        },
+        {
+          "part": "ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.5,
+              0.6,
+              "hold"
+            ],
+            [
+              0.75,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "body",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              1.3,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.0,
+              "sine"
+            ],
+            [
+              1,
+              0.7
+            ]
+          ]
+        },
+        {
+          "part": "body",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              0.8,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.0,
+              "sine"
+            ],
+            [
+              1,
+              0.7
+            ]
+          ]
+        },
+        {
+          "part": "body",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.5,
+              0.6,
+              "hold"
+            ],
+            [
+              0.75,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "glint",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              1.3,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.0,
+              "sine"
+            ],
+            [
+              1,
+              0.7
+            ]
+          ]
+        },
+        {
+          "part": "glint",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              0.8,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.0,
+              "sine"
+            ],
+            [
+              1,
+              0.7
+            ]
+          ]
+        },
+        {
+          "part": "glint",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1.0,
+              "hold"
+            ],
+            [
+              0.5,
+              0.6,
+              "hold"
+            ],
+            [
+              0.75,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}
