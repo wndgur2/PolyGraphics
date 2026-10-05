@@ -3376,6 +3376,401 @@
           ]
         }
       ]
+    },
+    "cast": {
+      "description": "Broodling: the satchel's flap lifts and holds, then drops as a grub goes; the page in the hand flutters",
+      "duration": 0.34,
+      "cues": {
+        "windup": 0.0,
+        "release": 0.62
+      },
+      "tracks": [
+        {
+          "part": "satchel_flap",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -26,
+              "hold"
+            ],
+            [
+              0.56,
+              -26,
+              "expoOut"
+            ],
+            [
+              0.68,
+              4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "pages",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.8,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.8,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "page",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -8,
+              "hold"
+            ],
+            [
+              0.56,
+              -8,
+              "expoOut"
+            ],
+            [
+              0.68,
+              10,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.4,
+              "hold"
+            ],
+            [
+              0.56,
+              0.4,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "goggle",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.4,
+              "hold"
+            ],
+            [
+              0.56,
+              0.4,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "goggle_glass",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.4,
+              "hold"
+            ],
+            [
+              0.56,
+              0.4,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "filter",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.4,
+              "hold"
+            ],
+            [
+              0.56,
+              0.4,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "braid",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.4,
+              "hold"
+            ],
+            [
+              0.56,
+              0.4,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "braid_tie",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.4,
+              "hold"
+            ],
+            [
+              0.56,
+              0.4,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    },
+    "cast_evo": {
+      "description": "Brood Swarm: the flap thrown open and the satchel shaken twice \u2014 the savage brood tipped out",
+      "duration": 0.56,
+      "cues": {
+        "windup": 0.0,
+        "release": 0.36
+      },
+      "tracks": [
+        {
+          "part": "satchel_flap",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0,
+              "quadOut"
+            ],
+            [
+              0.2,
+              -30,
+              "expoOut"
+            ],
+            [
+              0.35,
+              -18,
+              "sine"
+            ],
+            [
+              0.5,
+              -32,
+              "sine"
+            ],
+            [
+              0.65,
+              -18,
+              "sine"
+            ],
+            [
+              0.8,
+              -28,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "satchel",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0,
+              "sine"
+            ],
+            [
+              0.35,
+              4,
+              "sine"
+            ],
+            [
+              0.5,
+              -4,
+              "sine"
+            ],
+            [
+              0.65,
+              4,
+              "sine"
+            ],
+            [
+              0.8,
+              -3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "page",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -10,
+              "hold"
+            ],
+            [
+              0.56,
+              -10,
+              "expoOut"
+            ],
+            [
+              0.68,
+              14,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
     }
   }
 }

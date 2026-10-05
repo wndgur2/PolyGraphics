@@ -3244,6 +3244,446 @@
           ]
         }
       ]
+    },
+    "cast": {
+      "description": "Spit: the belly fills under the jacket and holds, the head jerks forward and the mouth opens on the release, the belly empties",
+      "duration": 0.38,
+      "cues": {
+        "windup": 0.0,
+        "release": 0.62
+      },
+      "tracks": [
+        {
+          "part": "cloak",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              1.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              1.12,
+              "hold"
+            ],
+            [
+              0.56,
+              1.12,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.95,
+              "sine"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "belly_sheen",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              1.2,
+              "hold"
+            ],
+            [
+              0.56,
+              1.2,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.9,
+              "sine"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.7,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.7,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.7,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "hair",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.7,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.7,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.7,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "mouth",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.7,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.7,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.7,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "drip",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.7,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.7,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.7,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "mouth",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.8,
+              "hold"
+            ],
+            [
+              0.56,
+              0.8,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.35,
+              "sine"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        }
+      ]
+    },
+    "cast_evo": {
+      "description": "Acid Jet: the head thrust out and held while the pour runs, the belly emptying across it",
+      "duration": 0.8,
+      "cues": {
+        "windup": 0.0,
+        "release": 0.22
+      },
+      "tracks": [
+        {
+          "part": "cloak",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              1,
+              "quadOut"
+            ],
+            [
+              0.18,
+              1.14,
+              "expoOut"
+            ],
+            [
+              0.26,
+              1.1,
+              "linear"
+            ],
+            [
+              0.86,
+              0.92,
+              "sine"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "belly_sheen",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1,
+              "quadOut"
+            ],
+            [
+              0.18,
+              1.2,
+              "expoOut"
+            ],
+            [
+              0.26,
+              1.15,
+              "linear"
+            ],
+            [
+              0.86,
+              0.85,
+              "sine"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.18,
+              -0.6,
+              "expoOut"
+            ],
+            [
+              0.26,
+              1.8,
+              "linear"
+            ],
+            [
+              0.86,
+              1.8,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "hair",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.18,
+              -0.6,
+              "expoOut"
+            ],
+            [
+              0.26,
+              1.8,
+              "linear"
+            ],
+            [
+              0.86,
+              1.8,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "mouth",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.18,
+              -0.6,
+              "expoOut"
+            ],
+            [
+              0.26,
+              1.8,
+              "linear"
+            ],
+            [
+              0.86,
+              1.8,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "drip",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.18,
+              -0.6,
+              "expoOut"
+            ],
+            [
+              0.26,
+              1.8,
+              "linear"
+            ],
+            [
+              0.86,
+              1.8,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "mouth",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1.0,
+              "quadOut"
+            ],
+            [
+              0.18,
+              0.8,
+              "expoOut"
+            ],
+            [
+              0.26,
+              1.4,
+              "linear"
+            ],
+            [
+              0.86,
+              1.4,
+              "sine"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        }
+      ]
     }
   }
 }

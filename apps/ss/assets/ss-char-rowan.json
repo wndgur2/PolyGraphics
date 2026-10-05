@@ -2480,6 +2480,568 @@
           ]
         }
       ]
+    },
+    "cast": {
+      "description": "Spider Hand: the gauntlet clenches and draws back, then opens and thrusts as the jointed arms come out of it",
+      "duration": 0.36,
+      "cues": {
+        "windup": 0.0,
+        "release": 0.62
+      },
+      "tracks": [
+        {
+          "part": "hand",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.88,
+              "hold"
+            ],
+            [
+              0.56,
+              0.88,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.18,
+              "sine"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "knuckles",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.88,
+              "hold"
+            ],
+            [
+              0.56,
+              0.88,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.18,
+              "sine"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "arm",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.6,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "hand",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.6,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "knuckles",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.6,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.3,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.3,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "visor",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.3,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.3,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "visor_bar",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.3,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.3,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    },
+    "cast_evo": {
+      "description": "Widow's Grip: the gauntlet clenches and thrusts, and goes pale for a moment after \u2014 the hand drinking",
+      "duration": 0.36,
+      "cues": {
+        "windup": 0.0,
+        "release": 0.62
+      },
+      "tracks": [
+        {
+          "part": "hand",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.88,
+              "hold"
+            ],
+            [
+              0.56,
+              0.88,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.18,
+              "sine"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "knuckles",
+          "prop": "scale",
+          "keys": [
+            [
+              0,
+              1.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.88,
+              "hold"
+            ],
+            [
+              0.56,
+              0.88,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.18,
+              "sine"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "arm",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.6,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "hand",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.6,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "knuckles",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.6,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.3,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.3,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "visor",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.3,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.3,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "visor_bar",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.3,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.3,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "hand",
+          "prop": "tint",
+          "to": "$frost.light2",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.62,
+              0.7,
+              "hold"
+            ],
+            [
+              0.75,
+              0.35,
+              "hold"
+            ],
+            [
+              0.88,
+              0,
+              "linear"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "knuckles",
+          "prop": "tint",
+          "to": "$frost.light2",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.62,
+              0.7,
+              "hold"
+            ],
+            [
+              0.75,
+              0.35,
+              "hold"
+            ],
+            [
+              0.88,
+              0,
+              "linear"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
     }
   }
 }

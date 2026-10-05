@@ -4079,6 +4079,566 @@
           ]
         }
       ]
+    },
+    "cast": {
+      "description": "Vine: the vines on the back reach down toward the ground and hold, then go still all at once \u2014 the moment the vine comes up somewhere else",
+      "duration": 0.46,
+      "cues": {
+        "windup": 0.0,
+        "release": 0.62
+      },
+      "tracks": [
+        {
+          "part": "vine_long",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              18,
+              "hold"
+            ],
+            [
+              0.56,
+              18,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "vine_mid",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              22,
+              "hold"
+            ],
+            [
+              0.56,
+              22,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "vine_up",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              26,
+              "hold"
+            ],
+            [
+              0.56,
+              26,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -8,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "tendril",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              10,
+              "hold"
+            ],
+            [
+              0.56,
+              10,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -3,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.6,
+              "hold"
+            ],
+            [
+              0.56,
+              0.6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "visor",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.6,
+              "hold"
+            ],
+            [
+              0.56,
+              0.6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "bun",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.6,
+              "hold"
+            ],
+            [
+              0.56,
+              0.6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "lamp_ring",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.6,
+              "hold"
+            ],
+            [
+              0.56,
+              0.6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "lamp",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.6,
+              "hold"
+            ],
+            [
+              0.56,
+              0.6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.4,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    },
+    "cast_evo": {
+      "description": "Thicket: the vines draw in, then fan out from the back like a plant opening",
+      "duration": 0.5,
+      "cues": {
+        "windup": 0.0,
+        "release": 0.62
+      },
+      "tracks": [
+        {
+          "part": "vine_long",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              10,
+              "hold"
+            ],
+            [
+              0.56,
+              10,
+              "expoOut"
+            ],
+            [
+              0.68,
+              24,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "vine_mid",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -6,
+              "hold"
+            ],
+            [
+              0.56,
+              -6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -22,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "vine_up",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -10,
+              "hold"
+            ],
+            [
+              0.56,
+              -10,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -30,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "tendril",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              6,
+              "hold"
+            ],
+            [
+              0.56,
+              6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              14,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.5,
+              "hold"
+            ],
+            [
+              0.56,
+              0.5,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "visor",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.5,
+              "hold"
+            ],
+            [
+              0.56,
+              0.5,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "bun",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.5,
+              "hold"
+            ],
+            [
+              0.56,
+              0.5,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "lamp_ring",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.5,
+              "hold"
+            ],
+            [
+              0.56,
+              0.5,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "lamp",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.5,
+              "hold"
+            ],
+            [
+              0.56,
+              0.5,
+              "expoOut"
+            ],
+            [
+              0.68,
+              -0.6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
     }
   }
 }
