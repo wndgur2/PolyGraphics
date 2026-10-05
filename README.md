@@ -44,6 +44,8 @@ src/                      schema (zod) · app-schema · apps (the loader) · tok
                           compiler · lint · rules · gallery · cli · sound-schema/compile/render
 scripts/                  watch (rebuild on save) · site (the gallery as a static site) · inspect · filmstrip
                           inspect-sound · readability · compare · adapter and lint tests
+                          draw.py (the hand-built documents' drawing helpers) · bits_*.py (small things by
+                          material) · bits.ts + specimen.py (specimen cards at 1.2/2.4/8, → out/bits/)
 dist/<id>/assets.json     committed: the app's bundle, imported as `polygraphics/apps/<id>/assets`
                           (every document but those tagged `archived`)
 dist/<id>/sounds.json     likewise, as `polygraphics/apps/<id>/sounds`
@@ -51,6 +53,7 @@ dist/assets.json          the union of every app, `polygraphics/assets` — what
 out/                      generated, ignored: svg/, compiled/, png/, wav/, gallery.html, manifest.json
 site/                     generated, ignored: the gallery as Vercel serves it (index.html + wav/ + spec/)
 docs/                     reference-analysis.md — why this exists · app-design-systems-plan.md — one grammar, a convention per app
+                          small-things.md — drawing the small things in a prop: modules by material, specimen cards, three scales
 ```
 
 ## Apps
