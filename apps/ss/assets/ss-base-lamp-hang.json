@@ -6,12 +6,16 @@
   "size": [28, 40],
   "parts": [
     {"id": "cord", "at": [0.0, -14.0], "shape": {"kind": "rect", "w": 1.4, "h": 12.0, "corner": 0.5}, "fill": "$bone.dark"},
-    {"id": "jar_glow", "shape": {"kind": "ellipse", "rx": 12.0, "ry": 12.0}, "fill": "$spore@0.06"},
-    {"id": "jar_glow_1", "shape": {"kind": "ellipse", "rx": 10.0, "ry": 10.0}, "fill": "$spore@0.06"},
-    {"id": "jar_glow_2", "shape": {"kind": "ellipse", "rx": 8.0, "ry": 8.0}, "fill": "$spore@0.06"},
-    {"id": "jar_glow_3", "shape": {"kind": "ellipse", "rx": 6.0, "ry": 6.0}, "fill": "$spore@0.06"},
-    {"id": "jar_glow_4", "shape": {"kind": "ellipse", "rx": 4.0, "ry": 4.0}, "fill": "$spore@0.06"},
-    {"id": "jar_glow_5", "shape": {"kind": "ellipse", "rx": 2.0, "ry": 2.0}, "fill": "$spore@0.06"},
+    {"id": "jar_glow", "shape": {"kind": "ellipse", "rx": 12.0, "ry": 12.0}, "fill": "$spore@0.04"},
+    {"id": "jar_glow_1", "shape": {"kind": "ellipse", "rx": 10.8, "ry": 10.8}, "fill": "$spore@0.04"},
+    {"id": "jar_glow_2", "shape": {"kind": "ellipse", "rx": 9.6, "ry": 9.6}, "fill": "$spore@0.04"},
+    {"id": "jar_glow_3", "shape": {"kind": "ellipse", "rx": 8.4, "ry": 8.4}, "fill": "$spore@0.04"},
+    {"id": "jar_glow_4", "shape": {"kind": "ellipse", "rx": 7.2, "ry": 7.2}, "fill": "$spore@0.04"},
+    {"id": "jar_glow_5", "shape": {"kind": "ellipse", "rx": 6.0, "ry": 6.0}, "fill": "$spore@0.04"},
+    {"id": "jar_glow_6", "shape": {"kind": "ellipse", "rx": 4.8, "ry": 4.8}, "fill": "$spore@0.04"},
+    {"id": "jar_glow_7", "shape": {"kind": "ellipse", "rx": 3.6, "ry": 3.6}, "fill": "$spore@0.04"},
+    {"id": "jar_glow_8", "shape": {"kind": "ellipse", "rx": 2.4, "ry": 2.4}, "fill": "$spore@0.04"},
+    {"id": "jar_glow_9", "shape": {"kind": "ellipse", "rx": 1.2, "ry": 1.2}, "fill": "$spore@0.04"},
     {"id": "jar_jar", "shape": {"kind": "rect", "w": 14.0, "h": 16.0, "corner": 4.0}, "fill": "$frost.dark@0.3", "stroke": {"color": "$ink", "width": "thin"}},
     {"id": "jar_cap_a_stem", "at": [-2.0, 4.98], "shape": {"kind": "rect", "w": 1.98, "h": 3.96, "corner": 0.9}, "fill": "$husk.dark", "stroke": {"color": "$ink", "width": "hair"}},
     {"id": "jar_cap_a_head", "at": [-2.0, 3.0], "shape": {"kind": "ellipse", "rx": 3.6, "ry": 2.23}, "fill": "$spore", "stroke": {"color": "$ink", "width": "hair"}},
@@ -26,7 +30,12 @@
     {"id": "jar_cap_c_under", "at": [-1.4, -3.25], "shape": {"kind": "ellipse", "rx": 2.02, "ry": 0.57}, "fill": "$spore.dark"},
     {"id": "jar_cap_c_lit", "at": [-2.1, -4.48], "shape": {"kind": "ellipse", "rx": 0.92, "ry": 0.44}, "fill": "$spore.light2"},
     {"id": "jar_lid", "at": [0.0, -9.0], "shape": {"kind": "rect", "w": 15.0, "h": 3.4, "corner": 1.2}, "fill": "$steel", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "jar_glass_lit", "at": [-5.0, 0.0], "shape": {"kind": "rect", "w": 2.0, "h": 10.0, "corner": 1.0}, "fill": "$white@0.35"}
+    {"id": "jar_vent_0", "at": [-4.0, -9.0], "shape": {"kind": "circle", "r": 0.5}, "fill": "$slate.dark"},
+    {"id": "jar_vent_1", "at": [0.0, -9.0], "shape": {"kind": "circle", "r": 0.5}, "fill": "$slate.dark"},
+    {"id": "jar_vent_2", "at": [4.0, -9.0], "shape": {"kind": "circle", "r": 0.5}, "fill": "$slate.dark"},
+    {"id": "jar_bail", "at": [0.0, -10.0], "shape": {"kind": "ring", "r": 5.0, "width": 0.9, "from": 180, "to": 360}, "fill": "$steel.dark"},
+    {"id": "jar_glass_lit", "at": [-5.0, 0.0], "shape": {"kind": "rect", "w": 2.0, "h": 10.0, "corner": 1.0}, "fill": "$white@0.35"},
+    {"id": "jar_glass_lit_b", "at": [5.0, 3.0], "shape": {"kind": "rect", "w": 1.0, "h": 4.0, "corner": 0.5}, "fill": "$white@0.25"}
   ],
   "animations": {
     "breathe": {
@@ -39,6 +48,10 @@
         {"part": "jar_glow_3", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
         {"part": "jar_glow_4", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
         {"part": "jar_glow_5", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "jar_glow_6", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "jar_glow_7", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "jar_glow_8", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "jar_glow_9", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
         {"part": "jar_cap_a_lit", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
         {"part": "jar_cap_b_lit", "prop": "opacity", "keys": [[0.0, 1.0], [0.5, 0.65], [1.0, 1.0]]},
         {"part": "jar_cap_c_lit", "prop": "opacity", "keys": [[0.0, 0.75], [0.5, 1.0], [1.0, 0.75]]},
@@ -48,6 +61,10 @@
         {"part": "jar_glow_3", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
         {"part": "jar_glow_4", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
         {"part": "jar_glow_5", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
+        {"part": "jar_glow_6", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
+        {"part": "jar_glow_7", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
+        {"part": "jar_glow_8", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
+        {"part": "jar_glow_9", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
         {"part": "jar_jar", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
         {"part": "jar_cap_a_stem", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
         {"part": "jar_cap_a_head", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
@@ -58,7 +75,12 @@
         {"part": "jar_cap_c_stem", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
         {"part": "jar_cap_c_head", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
         {"part": "jar_cap_c_under", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
-        {"part": "jar_lid", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]}
+        {"part": "jar_lid", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
+        {"part": "jar_vent_0", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
+        {"part": "jar_vent_1", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
+        {"part": "jar_vent_2", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
+        {"part": "jar_bail", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]},
+        {"part": "jar_glass_lit_b", "prop": "x", "keys": [[0.0, 0.0], [0.5, 1.4], [1.0, 0.0]]}
       ]
     }
   }

@@ -134,12 +134,12 @@ def moved(pts, at):
     return [(x + at[0], y + at[1]) for x, y in pts]
 
 
-def halo(id, x, y, rx, ry, a=0.4, token="$spore", n=6):
+def halo(id, x, y, rx, ry, a=0.4, token="$spore", n=10):
     """Light on the ground or in the air round a cap: `n` rings stacked thin, densest at the middle."""
     return [P(id if i == 0 else f"{id}_{i}", ell(rx * (1 - i / n), ry * (1 - i / n)), f"{token}@{r2(a / n)}", at=(x, y)) for i in range(n)]
 
 
-def halo_ids(id, n=6):
+def halo_ids(id, n=10):
     return [id] + [f"{id}_{i}" for i in range(1, n)]
 
 
@@ -211,7 +211,7 @@ def track(part, prop, keys):
     return {"part": part, "prop": prop, "keys": [[r2(t), r2(v)] for t, v in keys]}
 
 
-def glow_tracks(id, lo, hi, n=6, phase=0.0):
+def glow_tracks(id, lo, hi, n=10, phase=0.0):
     """A stacked halo brightening and dimming: every ring's opacity, together."""
     a, b = (lo, hi) if phase < 0.5 else (hi, lo)
     return [track(r, "opacity", [(0, a), (0.5, b), (1, a)]) for r in halo_ids(id, n)]
@@ -242,6 +242,59 @@ def tally(prefix, x0, y, groups, last=0, h=11.0):
     return parts
 
 
+# ---------------------------------------------------------------- detail
+# The prop pass (feelers docs/staging-method.md §9): every mass gets one lit
+# edge where the light from the upper left catches it, a dark seam where it
+# meets the ground or the thing on it, and its small things — bolts, rivets,
+# scratches — gathered on a third of it, not spread over all of it.
+
+def lit_edge(id, x0, x1, y, w=1.0, fill="$white@0.35"):
+    """A highlight along a top edge, from x0 to x1 at y."""
+    return P(id, R(abs(x1 - x0), w, w / 2), fill, at=((x0 + x1) / 2, y))
+
+
+def ao(id, x, y, w, h=1.6, a=0.35):
+    """The dark where one thing rests on another."""
+    return P(id, R(w, h, h / 2), f"$ink@{a}", at=(x, y))
+
+
+def bolt(id, x, y, r=1.3, fill="$slate"):
+    """A bolt head: the disc, and the catch of light on its upper left."""
+    return [
+        P(id, circ(r), fill, at=(x, y), stroke=INK_HAIR),
+        P(f"{id}_lit", circ(r * 0.42), "$white@0.55", at=(x - r * 0.32, y - r * 0.32)),
+    ]
+
+
+def rivet_row(prefix, x0, y0, x1, y1, n, r=0.8, fill="$slate.dark@0.75", skip=None):
+    out = []
+    for i in range(n):
+        t = i / (n - 1) if n > 1 else 0
+        x, y = x0 + (x1 - x0) * t, y0 + (y1 - y0) * t
+        if skip and skip(x, y):
+            continue
+        out.append(P(f"{prefix}_{i}", circ(r), fill, at=(x, y)))
+    return out
+
+
+def scratches(prefix, x, y, w, h, n, fill="$steel.light@0.55", seed=7):
+    """Short scuffs in a box, placed by a fixed little generator so the drawing never changes under you."""
+    out, s = [], seed
+    for i in range(n):
+        s = (s * 1103515245 + 12345) % 2147483648
+        u = s / 2147483648
+        s = (s * 1103515245 + 12345) % 2147483648
+        v = s / 2147483648
+        s = (s * 1103515245 + 12345) % 2147483648
+        a = (s / 2147483648 - 0.5) * 50
+        out.append(P(f"{prefix}_{i}", R(2.4 + 3 * u, 0.6, 0.3), fill, at=(x + (u - 0.5) * w, y + (v - 0.5) * h), rot=a))
+    return out
+
+
+def ring_arc(r, width, a, b):
+    return {"kind": "ring", "r": r2(r), "width": r2(width), "from": a, "to": b}
+
+
 # ============================================================== the lander
 def lander():
     hull = [
@@ -250,48 +303,72 @@ def lander():
         (-128, 44), (-134, 32), (-137, 0), (-134, -32),
     ]
     bell = [(-120, -12), (-148, -22), (-160, -18), (-160, 18), (-148, 24), (-120, 12)]
-    drift_top = [(-172, 60), (-160, 46), (-140, 38), (-116, 43), (-86, 39), (-56, 45), (-24, 43), (6, 47), (36, 41), (70, 44), (104, 40), (132, 45), (158, 43), (172, 58)]
-    drift_foot = [(172, 62), (140, 67), (100, 63), (60, 69), (20, 65), (-20, 69), (-60, 64), (-100, 68), (-140, 63), (-172, 66)]
+    drift_top = [(-170, 56), (-158, 47), (-140, 41), (-118, 44), (-92, 41), (-64, 45), (-34, 43), (-4, 46), (28, 42), (62, 44), (98, 41), (128, 45), (156, 44), (170, 54)]
+    drift_foot = [(170, 58), (140, 61), (100, 59), (60, 62), (20, 60), (-20, 62), (-60, 59), (-100, 61), (-140, 58), (-170, 59)]
     ramp = [(-62, 38), (-22, 38), (-16, 58), (-68, 58)]
+    in_hatch = lambda x, y: -72 < x < -12
     parts = [
         shadow("shadow", 0, 52, 168, 20, "0.42"),
-        # The engines, dead, behind the hull: two bells flaring west, soot at the mouths.
+        # The engines, dead, behind the hull: two bells flaring west, soot at
+        # the mouths, a reinforcing band round each.
         *shaded("bell_top", moved(bell, (0, -22)), "$smoke.dark", [(-161, -142, "$coal")], axis=0),
+        P("bell_top_band", R(3, 30, 1), "$steel.dark", at=(-136, -22)),
         P("bell_top_mouth", ell(4.5, 18), "$coal.dark", at=(-157, -22), stroke=INK_HAIR),
         P("bell_top_lit", R(2, 26, 1), "$steel@0.45", at=(-150, -22)),
         *shaded("bell_low", moved(bell, (0, 14)), "$smoke.dark", [(-161, -142, "$coal")], axis=0),
+        P("bell_low_band", R(3, 30, 1), "$steel.dark", at=(-136, 14)),
         P("bell_low_mouth", ell(4.5, 18), "$coal.dark", at=(-157, 14), stroke=INK_HAIR),
         # The hull: a drum on its side, lit from above, its belly in shadow.
         *shaded("hull", hull, "$smoke", [(-47, -29, "$steel"), (-29, -22, "$steel.dark"), (18, 45, "$smoke.dark")], stroke=None),
         P("crown_lit", R(196, 5, 2.5), "$steel.light", at=(-22, -40)),
         P("specular", R(120, 2, 1), "$white@0.4", at=(-34, -42)),
+        # Two panels replaced at some point, a different metal, riveted on.
+        P("patch_a", R(20, 16, 1), "$steel.dark", at=(-102, 22), stroke=INK_HAIR),
+        *rivet_row("patch_a_rv", -110, 16, -94, 16, 4, 0.7),
+        P("patch_b", R(24, 12, 1), "$smoke.light", at=(54, 26), stroke=INK_HAIR),
+        *rivet_row("patch_b_rv", 44, 22, 64, 22, 4, 0.7),
+        # A dent the ground gave it, coming down.
+        P("dent", ell(9, 5), "$smoke.dark", at=(20, 27)),
+        P("dent_lit", ell(7, 1.6), "$steel@0.7", at=(18, 31)),
         *shaded("collar", rr(12, 92, 3, (-121, -1)), "$slate", [(-48, -30, "$slate.light"), (18, 46, "$slate.dark")], stroke=INK_HAIR),
-        *[P(f"collar_rivet_{i}", circ(1.3), "$slate.dark2", at=(-121, y)) for i, y in enumerate([-36, -18, 0, 18, 36])],
-        # Panel seams, and the rust the ground has drawn down each one.
-        *[P(f"seam_{i}", R(1.6, 86, 0.6), "$ink@0.35", at=(x, -1)) for i, x in enumerate([-84, -6, 58])],
+        *[p for i, y in enumerate([-36, -18, 0, 18, 36]) for p in bolt(f"collar_bolt_{i}", -121, y, 1.3, "$slate.dark")],
+        # Panel seams with their rivets, and the rust the ground has drawn
+        # down each one.
+        *[P(f"seam_{i}", R(1.6, 86, 0.6), "$ink@0.35", at=(x, -1)) for i, x in enumerate([-96, -6, 62])],
+        *[p for i, x in enumerate([-96, -6, 62]) for p in rivet_row(f"seam_{i}_rv", x + 2.6, -38, x + 2.6, 36, 9, 0.7)],
         P("seam_low", R(236, 1.4, 0.6), "$ink@0.25", at=(-12, 10)),
-        *rust("rust_a", -84, -6, 5, 40),
-        *rust("rust_b", 58, -2, 4.6, 34),
-        *rust("rust_c", 72, -6, 3.6, 22, 0.55),
-        # Soot up the belly from the engines.
+        *rivet_row("seam_low_rv", -116, 13, 96, 13, 22, 0.7, skip=in_hatch),
+        *rust("rust_a", -96, -6, 5, 40),
+        *rust("rust_b", 62, -2, 4.6, 34),
+        # Soot up the belly from the engines, and a smudge round the collar.
         P("scorch", poly([(-128, 4), (-80, 16), (-36, 30), (4, 44), (-128, 44)]), "$coal@0.35"),
         P("scorch_deep", poly([(-128, 16), (-96, 24), (-66, 36), (-50, 44), (-128, 44)]), "$coal@0.35"),
+        P("soot", ell(16, 10), "$coal@0.3", at=(-112, -8)),
         # The settlers' stripe round the nose: cold, like everything people brought.
         P("stripe", R(9, 84, 1), "$frost.dark@0.7", at=(106, -1)),
         P("stripe_lit", R(9, 12, 1), "$frost@0.5", at=(106, -38)),
-        # The port, dead: no light behind it.
+        # The port, dead: no light behind it. Bolted round.
         P("port_rim", circ(11), "$slate", at=(130, -8), stroke=INK_THIN),
-        P("port", circ(7.5), "$coal", at=(130, -8)),
+        *[P(f"port_bolt_{i}", circ(0.9), "$slate.dark", at=(130 + 8.6 * math.cos(a), -8 + 8.6 * math.sin(a))) for i, a in enumerate([k * math.pi / 3 + 0.5 for k in range(6)])],
+        P("port", circ(7), "$coal", at=(130, -8)),
         P("port_glint", ell(3, 1.6), "$frost@0.45", at=(127, -11), rot=-30),
-        # The hatch, open. Somebody keeps a jar of caps inside: the hull's
-        # dark has a little teal in the bottom of it.
+        # The hatch, open, on two hinges. A jar of caps sits on the floor
+        # inside: that is where the teal in the hull's dark comes from.
         *shaded("hatch_frame", rr(54, 66, 12, (-42, 6)), "$slate", [(-28, -16, "$slate.light"), (26, 40, "$slate.dark")]),
         P("hatch_dark", R(44, 56, 9), "$coal", at=(-42, 8)),
-        *halo("hatch_glow", -42, 27, 20, 11, 0.6),
+        *halo("hatch_glow", -40, 27, 20, 11, 0.6),
+        P("hatch_jar", R(7, 8, 2), "$frost.dark@0.55", at=(-34, 29), stroke=INK_HAIR),
+        P("hatch_jar_cap", ell(2.6, 1.6), "$spore", at=(-34, 29.5)),
+        P("hatch_jar_lid", R(8, 1.6, 0.6), "$steel.dark", at=(-34, 24.6)),
+        P("hatch_cable", poly([(-58, -20), (-56, -20), (-54, 0), (-50, 12), (-52, 12), (-56, 0)]), "$ink@0.7"),
         P("hatch_sill", R(46, 6, 2), "$smoke.dark", at=(-42, 35), stroke=INK_HAIR),
+        lit_edge("hatch_sill_lit", -63, -21, 32.6, 0.9, "$smoke.light@0.8"),
+        P("hinge_a", R(4, 7, 1), "$steel.dark", at=(-15, -14), stroke=INK_HAIR),
+        P("hinge_b", R(4, 7, 1), "$steel.dark", at=(-15, 24), stroke=INK_HAIR),
         P("door", poly([(0, -28), (14, -32), (17, 24), (0, 32)]), "$steel.dark", at=(-14, 6), stroke=INK_THIN),
         P("door_lit", poly([(2, -24), (6, -25), (7, 20), (2, 23)]), "$steel@0.85", at=(-14, 6)),
-        P("door_bolt", circ(1.8), "$slate.dark", at=(-6, 2)),
+        P("door_seal", poly([(12, -27), (14, -28), (16, 22), (14, 23)]), "$ink@0.4", at=(-14, 6)),
+        *bolt("door_bolt", -6, 2, 1.8, "$slate.dark"),
         # What the settlers scratched into the skin (X001): a count, in fives.
         *tally("tally", 4, -16, 3, 2),
         *tally("tally_b", 4, 2, 2, 3, 9),
@@ -302,6 +379,8 @@ def lander():
         *[P(f"rivet_hole_{i}", circ(1.3), "$coal", at=(84 + dx, -16 + dy)) for i, (dx, dy) in enumerate([(-12, -6), (12, -6), (-12, 6), (12, 6)])],
         *rust("rust_hole_a", 72, -9, 2.2, 14, 0.6),
         *rust("rust_hole_b", 96, -9, 2.2, 10, 0.5),
+        # A few scuffs where hands and packs have gone in and out.
+        *scratches("scuff", -2, 24, 22, 10, 4, "$steel@0.4", 11),
         # A stub of mast on the crown, snapped, its cable hanging.
         P("mast", R(4, 20, 1.5), "$steel.dark", at=(30, -55), stroke=INK_HAIR, rot=10),
         P("mast_cap", R(9, 3, 1), "$steel", at=(32, -65), rot=10),
@@ -311,17 +390,24 @@ def lander():
         P("grit_b", ell(16, 2.2), "$sand@0.6", at=(44, -46)),
         *bud("bud_a", -112, -45, 1.1, 0.5),
         *bud("bud_b", -100, -46, 0.75, -0.3),
-        # Its own drift: the hull is half in the ground, and the drift thins
-        # out into the field at its foot.
-        P("drift_skirt", poly(drift_top + [(p[0], p[1] + 5) for p in drift_foot]), "$sand@0.4"),
+        # Its own drift: the hull is half in the ground. Ripples across it
+        # where the wind lies, a lit crest, a few stones.
+        P("drift_skirt", poly(drift_top + [(p[0], p[1] + 4) for p in drift_foot]), "$sand@0.4"),
         P("drift", poly(drift_top + drift_foot), "$sand"),
-        band("drift_lit", drift_top[1:-1], 2.2, "$sand.light@0.6"),
+        band("drift_lit", drift_top[1:-1], 2, "$sand.light@0.6"),
+        band("ripple_a", [(-150, 51), (-130, 50), (-110, 52)], 0.9, "$sand.dark@0.7"),
+        band("ripple_b", [(-58, 53), (-38, 52), (-18, 54)], 0.9, "$sand.dark@0.7"),
+        band("ripple_c", [(72, 52), (94, 51), (114, 53)], 0.9, "$sand.dark@0.7"),
+        P("stone_a", ell(3, 1.8), "$smoke.dark", at=(-128, 55), stroke=INK_HAIR),
+        P("stone_b", ell(2.2, 1.4), "$smoke", at=(140, 56), stroke=INK_HAIR),
         # Things on the drift: the ramp out of the hatch, a leg that broke on
         # the way down, another folded under.
         *shaded("ramp", ramp, "$steel.dark", [(51, 59, "$slate.dark")]),
+        lit_edge("ramp_lit", -61, -23, 39, 0.9, "$steel@0.9"),
         *[P(f"tread_{i}", R(40 + i * 3, 1.2, 0.4), "$ink@0.4", at=(-42, 43 + i * 5)) for i in range(3)],
         P("strut", poly([(0, 0), (6, 0), (26, 22), (40, 24), (40, 30), (22, 30), (0, 6)]), "$slate", at=(112, 32), stroke=INK_THIN),
         P("strut_lit", poly([(1, 1), (4, 1), (22, 20), (19, 21)]), "$slate.light", at=(112, 32)),
+        *bolt("strut_bolt", 116, 35, 1.2, "$slate.dark"),
         P("strut_foot", R(18, 5, 2), "$slate.dark", at=(148, 62), stroke=INK_HAIR),
         P("leg_folded", R(30, 5, 2), "$slate.dark", at=(-96, 47), rot=10, stroke=INK_HAIR),
     ]
@@ -330,13 +416,15 @@ def lander():
         "The lander",
         "The settlers' hull, lying where it came down in 2650 and would not fly again (X001: \"The lander will not fly again. We live here.\"). "
         "Every expedition since camped in its lee. A drum on its side, lit from above, with two dead engine bells flaring at one end and a "
-        "rounded nose at the other, half sunk in the drift it has gathered. The hatch is open and a ramp runs down from it; somebody keeps a "
-        "jar of caps in the hull, so its dark has a little teal in the bottom of it. There is a dead port, a leg that broke on the way down, "
-        "a snapped mast with its cable hanging, and a cold stripe round the nose. Rust runs down the seams, which is the ground reaching up, "
-        "and soot runs up the belly from the engines. Beside the hatch is the settlers' count, scratched into the skin in fives. Near the "
-        "nose is where the plate was, the one with the same word on it as the ruin's stones and Eden's iron (T041): a paler patch and four "
-        "rivet holes bleeding rust, because the plate itself stands in the middle of the camp now (`ss.base.marker`). Two pink buds are "
-        "pushing out at the engine collar: the hive reclaiming the camp, the way the crystal grew on Arin's frame (A055).",
+        "rounded nose at the other, half sunk in the drift it has gathered, the wind's ripples across it. Its panels are riveted along every "
+        "seam; two have been replaced in another metal, and it took a dent coming down. The hatch is open on two hinges and a ramp runs down "
+        "from it; a jar of caps sits on the floor inside, so the hull's dark has a little teal in the bottom of it. There is a dead port "
+        "bolted round, a leg that broke on the way down, a snapped mast with its cable hanging, and a cold stripe round the nose. Rust runs "
+        "down the seams, which is the ground reaching up, and soot runs up the belly from the engines. Beside the hatch is the settlers' "
+        "count, scratched into the skin in fives. Near the nose is where the plate was, the one with the same word on it as the ruin's "
+        "stones and Eden's iron (T041): a paler patch and four rivet holes bleeding rust, because the plate itself stands in the middle of "
+        "the camp now (`ss.base.marker`). Two pink buds are pushing out at the engine collar: the hive reclaiming the camp, the way the "
+        "crystal grew on Arin's frame (A055).",
         (344, 160),
         parts,
     )
@@ -370,6 +458,8 @@ def frame():
         # Where the camp sleeps: a bedroll laid out with a folded pillow, one
         # still rolled, a mug, a stack of pages to read by.
         *shaded("blanket", [(-6, 36), (56, 36), (62, 54), (-10, 54)], "$slate.light", [(48, 55, "$slate")], stroke=INK_HAIR),
+        P("blanket_stripe_a", poly([(-2, 41), (58, 41), (58.6, 43), (-3, 43)]), "$frost.dark@0.55"),
+        P("blanket_stripe_b", poly([(-4, 47), (60, 47), (60.6, 49), (-5, 49)]), "$frost.dark@0.55"),
         P("blanket_fold", poly([(30, 36), (56, 36), (60, 46), (38, 44)]), "$slate.light2@0.9", stroke=INK_HAIR),
         P("pillow", R(16, 8, 3), "$bone.dark", at=(2, 40), rot=-4, stroke=INK_HAIR),
         P("roll", R(34, 11, 5.5), "$slate.light", at=(-50, 44), stroke=INK_HAIR),
@@ -380,8 +470,6 @@ def frame():
         P("mug_rim", ell(3, 1), "$coal", at=(70, 42.6)),
         P("stack", R(14, 5, 0.8), "$bone", at=(-74, 52), rot=-6, stroke=INK_HAIR),
         P("stack_top", R(12, 4, 0.8), "$husk", at=(-73, 49), rot=4, stroke=INK_HAIR),
-        # The light in there, off the hung jar.
-        *halo("inside_glow", 0, 22, 66, 30, 0.22),
         # The canvas, seen from above: back bar high, front edge sagging
         # between the front poles.
         *shaded("roof", [(-84, -46), (84, -46)] + sag, "$slate.light", [(-47, -35, "$slate"), (-12, 0, "$slate.light2")]),
@@ -389,6 +477,11 @@ def frame():
         P("roof_seam_a", poly([(-30, -46), (-28, -46), (-33, -5), (-35, -5)]), "$slate.dark@0.5"),
         P("roof_seam_b", poly([(28, -46), (30, -46), (35, -5), (33, -5)]), "$slate.dark@0.5"),
         P("roof_lit", poly([(-70, -32), (-38, -32), (-40, -16), (-74, -18)]), "$white@0.12"),
+        P("crease_a", poly([(-76, -44), (-72, -44), (-50, -10), (-54, -9)]), "$slate@0.3"),
+        P("crease_b", poly([(70, -44), (74, -44), (56, -9), (52, -10)]), "$slate@0.3"),
+        *[P(f"stitch_{i}", R(3, 0.8, 0.3), "$slate.light2@0.8", at=(x, y - 3.4), rot=math.degrees(math.atan2(dy, 32))) for i, (x, y, dy) in enumerate([(-80, -11, 6), (-48, -6.5, 3), (-16, -4.5, 1), (16, -4.5, -1), (48, -6.5, -3), (80, -11, -6)])],
+        P("grommet_l", circ(1.6), "$steel", at=(-91, -14), stroke=INK_HAIR),
+        P("grommet_r", circ(1.6), "$steel", at=(91, -14), stroke=INK_HAIR),
         P("patch", R(16, 12, 1), "$bone.dark", at=(56, -28), rot=8, stroke=INK_HAIR),
         P("patch_stitch", R(12, 1, 0.3), "$ink@0.5", at=(56, -28), rot=8),
         P("roof_grit", ell(18, 2.4), "$sand@0.5", at=(-8, -38)),
@@ -396,6 +489,9 @@ def frame():
         # The front poles, and their ropes out to the pegs.
         pole("pole_fl", -94, 22, 72, "$steel.dark"),
         pole("pole_fr", 94, 22, 72, "$steel.dark"),
+        P("pole_fl_lit", R(1, 64, 0.4), "$steel@0.9", at=(-95.2, 24)),
+        P("pole_fr_lit", R(1, 64, 0.4), "$steel@0.9", at=(92.8, 24)),
+        *[P(f"lash_{side}_{i}", R(7, 1.4, 0.5), "$bone.dark", at=(sx * 94, -9 + i * 2.2)) for side, sx in (("l", -1), ("r", 1)) for i in range(3)],
         band("rope_l", [(-95, -12), (-102, 20), (-108, 56)], 1.1, "$bone.dark@0.85"),
         band("rope_r", [(95, -12), (102, 20), (108, 56)], 1.1, "$bone.dark@0.85"),
         P("peg_l", R(3, 7, 1), "$steel.dark", at=(-108, 57), stroke=INK_HAIR),
@@ -423,7 +519,6 @@ def frame():
                 track("jar_cap_a_lit", "opacity", [(0, 0.7), (0.5, 1), (1, 0.7)]),
                 track("jar_cap_b_lit", "opacity", [(0, 1), (0.5, 0.7), (1, 1)]),
                 *glow_tracks("jar_glow", 0.75, 1),
-                *glow_tracks("inside_glow", 0.8, 1),
             ],
         )
     }
@@ -449,15 +544,32 @@ def tank():
         shadow("shadow", 0, 27, 24, 6),
         P("leg_l", R(4, 10, 1), "$slate", at=(-12, 22), stroke=INK_HAIR),
         P("leg_r", R(4, 10, 1), "$slate", at=(12, 22), stroke=INK_HAIR),
+        ao("leg_ao", 0, 19.6, 30, 1.8, 0.45),
         *shaded("body", rr(36, 44, 6, (0, -2)), "$steel", [(6, 19, "$steel.dark")], axis=0),
         P("body_lit", R(4, 36, 2), "$steel.light", at=(-11, -2)),
+        # A dent, and rust from the tap down the side.
+        P("dent", ell(4, 2.6), "$steel.dark", at=(8, -4)),
+        P("dent_lit", ell(3, 0.9), "$steel.light@0.8", at=(7.4, -1.8)),
+        *rust("rust_tap", 15, 16, 2, 6, 0.5),
         P("cap", ell(18, 5), "$steel.light", at=(0, -24), stroke=INK_THIN),
         P("cap_lid", ell(7, 2.2), "$slate", at=(0, -25)),
+        # The fill valve on top, a wheel on a stem.
+        P("valve_stem", R(2, 4, 0.6), "$slate.dark", at=(9, -27)),
+        P("valve", {"kind": "ring", "r": 2.8, "width": 1}, "$slate.dark", at=(9, -29.4)),
+        P("valve_hub", circ(0.8), "$steel", at=(9, -29.4)),
         P("band_a", R(37, 3, 1), "$slate", at=(0, -12)),
         P("band_b", R(37, 3, 1), "$slate", at=(0, 10)),
-        # The gauge: a strip of glass with the water standing in it.
+        *rivet_row("band_a_rv", -14, -12, 14, -12, 5, 0.6, "$slate.light@0.8"),
+        *rivet_row("band_b_rv", -14, 10, 14, 10, 5, 0.6, "$slate.light@0.8"),
+        # The gauge: a strip of glass with the water standing in it, ticked.
         P("gauge", R(5, 26, 2), "$frost.dark@0.5", at=(-3, 0), stroke=INK_HAIR),
         P("gauge_water", R(3, 14, 1.5), "$aqua@0.75", at=(-3, 5)),
+        P("gauge_surface", R(3, 0.7, 0.3), "$white@0.6", at=(-3, -1.6)),
+        *[P(f"gauge_tick_{i}", R(1.6, 0.5, 0.2), "$ink@0.5", at=(0.6, -8 + i * 5)) for i in range(4)],
+        # A tin cup on a hook for whoever is thirsty.
+        P("hook", R(1, 4, 0.4), "$steel.dark", at=(-19, -4)),
+        P("cup", R(5, 6, 1.2), "$steel", at=(-20, 0), stroke=INK_HAIR),
+        P("cup_lit", R(1, 4, 0.4), "$steel.light", at=(-21.4, 0.4)),
         P("tap", R(7, 3, 1), "$slate.dark", at=(20, 14), stroke=INK_HAIR),
         P("drip", ell(1.1, 1.6), "$aqua@0.8", at=(22, 17)),
         P("puddle", ell(5.5, 1.8), "$aqua@0.3", at=(21, 27)),
@@ -476,8 +588,9 @@ def tank():
     return doc(
         "ss.base.tank",
         "The tank",
-        "The water tank Arin put up beside the frame on the first day (A001). A steel drum on two legs with slate bands, a glass gauge with "
-        "the water standing in it, and a tap that drips into a small puddle (`drip`). It is cold, like everything the expedition carried in.",
+        "The water tank Arin put up beside the frame on the first day (A001). A steel drum on two legs with riveted slate bands and a dent, "
+        "a fill valve on top, a ticked glass gauge with the water standing in it, a tin cup on a hook, and a tap that drips into a small "
+        "puddle and has rusted the side under it (`drip`). It is cold, like everything the expedition carried in.",
         (56, 62),
         parts,
         anims,
@@ -488,15 +601,35 @@ def tank():
 def shelf():
     parts = [shadow("shadow", 0, 30, 60, 8)]
     # Seven boxes (A055): three on the ground, three on those, one on top.
+    # Each is numbered in the expedition's way — a count of strokes on its
+    # face — has steel corners, rope handles on the bottom row, and the
+    # shade of the box above lying on its lid. The top one's lid is off
+    # its seat: somebody was in it last.
     boxes = [(-34, 16), (0, 18), (34, 16), (-18, -4), (16, -3), (46, -1), (-2, -24)]
     pages = [(-1, -1), (1, 0), (0, 1), (1, 1), (-1, 0), (0, -1), (1, -1)]
     for i, (x, y) in enumerate(boxes):
         w = 34 if i < 3 else 30 if i < 6 else 28
+        top = i == 6
+        if i >= 3:
+            parts.append(ao(f"box_{i}_ao", x, y + 11, w - 2, 2.2, 0.45))
         parts += [
             *shaded(f"box_{i}", rr(w, 20, 2, (x, y)), "$slate", [(y + 4, y + 11, "$slate.dark")]),
             P(f"box_{i}_face", R(w - 8, 8, 1.5), "$slate.light@0.45", at=(x, y)),
-            P(f"box_{i}_lid", R(w + 2, 5, 1.5), "$slate.light", at=(x, y - 9), stroke=INK_HAIR),
             P(f"box_{i}_corner", R(4, 18, 1), "$steel@0.8", at=(x - w / 2 + 3, y)),
+            P(f"box_{i}_corner_r", R(3, 18, 1), "$steel.dark@0.9", at=(x + w / 2 - 2.5, y)),
+            # The count: i + 1 strokes, the fifth across the four.
+            *[P(f"box_{i}_n{k}", R(0.9, 4.4, 0.3), "$bone@0.85", at=(x - 4 + (k % 4) * 2.2 + (5 if k >= 5 else 0), y + 0.2)) for k in range(i + 1) if k != 4],
+            *([P(f"box_{i}_n4", R(8, 0.9, 0.3), "$bone@0.85", at=(x - 0.7, y + 0.2), rot=-26)] if i >= 4 else []),
+        ]
+        if i < 3:
+            parts += [
+                P(f"box_{i}_handle_l", ring_arc(2.4, 0.9, 90, 270), "$bone.dark", at=(x - w / 2 - 0.6, y + 2)),
+                P(f"box_{i}_handle_r", ring_arc(2.4, 0.9, -90, 90), "$bone.dark", at=(x + w / 2 + 0.6, y + 2)),
+            ]
+        lid_y = y - 10.5 if top else y - 9
+        parts += [
+            P(f"box_{i}_lid", R(w + 2, 5, 1.5), "$slate.light", at=(x + (2 if top else 0), lid_y), rot=-5 if top else 0, stroke=INK_HAIR),
+            lit_edge(f"box_{i}_lid_lit", x - w / 2 + 2, x + w / 2 - 2, lid_y - 1.6, 0.8, "$white@0.3"),
         ]
         # Paper standing proud of every lid, a different lie in each box.
         dx, dr = pages[i]
@@ -506,12 +639,14 @@ def shelf():
             P(f"box_{i}_line", R(w * 0.3, 1, 0.3), "$slate.dark@0.55", at=(x + dx * 3, y - 14), rot=dr * 7),
         ]
     parts += [
-        # The cord round the top box.
+        # The cord round the top box, knotted.
         P("cord", R(30, 1.6, 0.5), "$bone.dark", at=(-2, -22)),
-        # Loose pages that did not make it into a box.
+        P("cord_knot", circ(1.4), "$bone.dark", at=(8, -22), stroke=INK_HAIR),
+        # Loose pages that did not make it into a box, one weighted with a stone.
         P("loose_a", R(12, 8, 0.8), "$bone", at=(-54, 30), rot=-14, stroke=INK_HAIR),
         P("loose_a_ln", R(7, 1, 0.3), "$slate.dark@0.5", at=(-54, 29), rot=-14),
         P("loose_b", R(10, 7, 0.8), "$husk", at=(54, 29), rot=10, stroke=INK_HAIR),
+        P("loose_stone", ell(3.4, 2.2), "$smoke", at=(-53, 28.4), stroke=INK_HAIR),
     ]
     anims = {
         "stir": loop(
@@ -525,9 +660,10 @@ def shelf():
         "ss.base.shelf",
         "The shelf",
         "The seven boxes of paper (A055: \"Base inventory: the frame, the tank, seven boxes of paper, the saw.\"), stacked three, three and one "
-        "in cold slate crates with paper standing proud of every lid, cord round the top box, and loose pages that never got in. This is the "
-        "ninth expedition's shelf (guide §3.3, §12.1), where the pages the player picks up are filed. feelers opens the COLLECTION here. "
-        "The pages stir in the wind (`stir`).",
+        "in cold slate crates with steel corners, each numbered on its face in the expedition's way — a count of strokes, one to seven — and "
+        "the bottom row with rope handles. Paper stands proud of every lid; the top box's lid is off its seat and a cord is knotted round "
+        "it; loose pages that never got in lie beside, one weighted with a stone. This is the ninth expedition's shelf (guide §3.3, §12.1), "
+        "where the pages the player picks up are filed. feelers opens the COLLECTION here. The pages stir in the wind (`stir`).",
         (132, 78),
         parts,
         anims,
@@ -586,22 +722,39 @@ def line():
 def vat():
     parts = [
         shadow("shadow", 0, 34, 26, 6),
+        # A riveted stand on two feet.
+        P("foot_l", R(8, 3, 1), "$slate.dark", at=(-14, 34.5), stroke=INK_HAIR),
+        P("foot_r", R(8, 3, 1), "$slate.dark", at=(14, 34.5), stroke=INK_HAIR),
         P("stand", R(40, 8, 2), "$slate", at=(0, 30), stroke=INK_THIN),
-        P("stand_lit", R(30, 2, 1), "$slate.light", at=(0, 28)),
+        P("stand_lit", R(30, 1.6, 0.8), "$slate.light", at=(0, 27.4)),
+        *[p for i, x in enumerate([-14, 0, 14]) for p in bolt(f"stand_bolt_{i}", x, 31, 1, "$slate.dark")],
+        ao("stand_ao", 0, 25.6, 34, 1.6, 0.5),
         # The glass, drawn behind the jelly so the colour is the jelly's.
         P("glass", R(40, 46, 9), "$frost.dark@0.32", at=(0, 3), stroke=INK_THIN),
         *shaded("jelly", rr(36, 30, 8, (0, 10)), "$gold", [(-6, 0, "$gold.light"), (16, 26, "$chitin")], stroke=None),
         P("meniscus", ell(17, 2.6), "$gold.light2", at=(0, -4)),
+        P("meniscus_edge", ell(17, 2.6), None, at=(0, -4), stroke={"color": "$chitin@0.6", "width": "hair"}),
         P("caustic", ell(6, 2), "$gold.light2@0.8", at=(-7, 8)),
         P("bubble_a", circ(1.6), "$gold.light2@0.9", at=(8, 12)),
         P("bubble_b", circ(1.1), "$gold.light2@0.8", at=(5, 18)),
+        P("speck_a", circ(0.7), "$chitin.dark@0.7", at=(-6, 16)),
+        P("speck_b", circ(0.6), "$chitin.dark@0.6", at=(10, 20)),
         P("glass_lit", R(4, 34, 2), "$white@0.45", at=(-14, 2)),
+        P("glass_lit_b", R(1.6, 10, 0.8), "$white@0.3", at=(14, -6)),
+        # The lid, bolted down, and its two clamps.
         *shaded("lid", rr(44, 7, 2.5, (0, -21)), "$steel", [(-25, -22, "$steel.light")]),
+        *[p for i, x in enumerate([-15, -5, 5, 15]) for p in bolt(f"lid_bolt_{i}", x, -20.4, 0.9, "$steel.dark")],
         P("clamp_l", R(4, 12, 1), "$steel.dark", at=(-21, -16), stroke=INK_HAIR),
         P("clamp_r", R(4, 12, 1), "$steel.dark", at=(21, -16), stroke=INK_HAIR),
+        # A tag on a cord off the right clamp: what is in it, written down.
+        band("tag_cord", [(21, -11), (23, -6), (25, -2)], 0.8, "$bone.dark"),
+        P("tag", R(7, 9, 0.6), "$bone", at=(26, 2), rot=8, stroke=INK_HAIR),
+        P("tag_ln", R(4, 0.8, 0.3), "$slate.dark@0.6", at=(26, 1), rot=8),
+        P("tag_ln2", R(3, 0.8, 0.3), "$slate.dark@0.5", at=(26.4, 3), rot=8),
         # The ladle hooked over the rim, and the drop that got away.
         P("ladle", R(3, 24, 1.2), "$steel.light", at=(14, -25), rot=18, stroke=INK_HAIR),
         P("ladle_bowl", ell(4.4, 3), "$steel", at=(17.5, -36), stroke=INK_HAIR),
+        P("ladle_gold", ell(2.6, 1.2), "$gold@0.9", at=(17.5, -36.6)),
         P("drop", ell(2, 3), "$gold", at=(-19.5, 14), stroke=INK_HAIR),
         P("drop_lit", circ(0.7), "$gold.light2", at=(-20.2, 13)),
     ]
@@ -614,16 +767,18 @@ def vat():
                 track("meniscus", "scale", [(0, 1), (0.5, 0.94), (1, 1)]),
                 track("bubble_a", "y", [(0, 0), (0.8, -14), (0.81, 0), (1, 0)]),
                 track("bubble_a", "opacity", [(0, 1), (0.78, 1), (0.8, 0), (0.85, 0), (1, 1)]),
+                track("tag", "rot", [(0, 8), (0.5, 14), (1, 8)]),
             ],
         )
     }
     return doc(
         "ss.base.vat",
         "The jelly vat",
-        "The jelly the expedition trades in, kept in a glass vat on a slate stand under a clamped steel lid. The glass is drawn behind the "
-        "jelly so the colour is the jelly's: gold, because gold is jelly's (feelers D14), going to chitin in the deep, with light moving on "
-        "the surface and a bubble rising (`settle`). A ladle is hooked over the rim and a drop has run down the side. The guide's meta shop "
-        "is \"to evolve on jelly\" (§12.1), so feelers opens EVOLUTION here.",
+        "The jelly the expedition trades in, kept in a glass vat on a riveted slate stand under a bolted, clamped steel lid. The glass is "
+        "drawn behind the jelly so the colour is the jelly's: gold, because gold is jelly's (feelers D14), going to chitin in the deep, with "
+        "light moving on the surface, a bubble rising and a few specks hanging in it (`settle`). A paper tag hangs off a clamp on a cord. "
+        "A ladle with gold in its bowl is hooked over the rim and a drop has run down the side. The guide's meta shop is \"to evolve on "
+        "jelly\" (§12.1), so feelers opens EVOLUTION here.",
         (60, 84),
         parts,
         anims,
@@ -635,40 +790,57 @@ def bench():
     vials = ["$venom", "$ember", "$frost", "$bile", "$aqua", "$orchid"]
     parts = [
         shadow("shadow", 0, 26, 54, 7),
-        # A field table on crossed legs, with a crate under it.
+        # A field table on crossed legs, a stretcher between them, a crate
+        # under it.
         *shaded("under_crate", rr(26, 14, 1.5, (-4, 18)), "$slate", [(20, 26, "$slate.dark")], stroke=INK_HAIR),
         P("under_crate_lid", R(27, 3, 1), "$slate.light", at=(-4, 11.5)),
+        P("under_crate_stencil", R(10, 1.6, 0.5), "$frost.dark@0.6", at=(-4, 18)),
+        P("stretcher", R(72, 2.4, 1), "$slate.dark", at=(0, 14), stroke=INK_HAIR),
         P("leg_a", R(4, 30, 1.5), "$slate", at=(-34, 12), rot=18, stroke=INK_HAIR),
         P("leg_b", R(4, 30, 1.5), "$slate", at=(-34, 12), rot=-18, stroke=INK_HAIR),
         P("leg_c", R(4, 30, 1.5), "$slate", at=(34, 12), rot=18, stroke=INK_HAIR),
         P("leg_d", R(4, 30, 1.5), "$slate", at=(34, 12), rot=-18, stroke=INK_HAIR),
+        *bolt("leg_bolt_l", -34, 12, 1.2, "$steel"),
+        *bolt("leg_bolt_r", 34, 12, 1.2, "$steel"),
         P("top", R(100, 9, 2.5), "$steel", at=(0, -4), stroke=INK_THIN),
-        P("top_lit", R(84, 2, 1), "$steel.light", at=(-4, -7)),
+        lit_edge("top_lit", -46, 42, -7.4, 1.4, "$steel.light"),
         P("top_edge", R(100, 3, 1.5), "$steel.dark", at=(0, 0)),
+        *scratches("top_scuff", 6, -4.6, 60, 2.4, 4, "$steel.light@0.6", 5),
         # The rack of samples the level-up draws from.
         P("rack", R(44, 14, 2), "$slate", at=(-20, -14), stroke=INK_THIN),
+        lit_edge("rack_lit", -40, 0, -20.4, 0.8, "$slate.light"),
+        ao("rack_ao", -20, -7.4, 42, 1.4, 0.4),
     ]
     for i, c in enumerate(vials):
         x = -38 + i * 7.2
         parts += [
             P(f"vial_{i}", R(5, 15, 2), "$frost.dark@0.4", at=(x, -19), stroke=INK_HAIR),
             P(f"vial_{i}_fill", R(4, 8, 1.5), c, at=(x, -16)),
+            P(f"vial_{i}_surface", R(3.4, 0.8, 0.3), "$white@0.55", at=(x, -19.6)),
             P(f"vial_{i}_lit", R(1, 6, 0.4), "$white@0.45", at=(x - 1.2, -18)),
             P(f"vial_{i}_cap", R(5, 3, 1), "$steel.light", at=(x, -27)),
         ]
     parts += [
-        # The syringe, lying where the last dose was drawn.
+        # The syringe, lying where the last dose was drawn, and the drop it left.
         P("barrel", R(26, 6, 2), "$frost@0.45", at=(18, -11), rot=-6, stroke=INK_HAIR),
         P("barrel_fill", R(12, 4, 1.5), "$venom@0.8", at=(13, -10.4), rot=-6),
+        P("barrel_marks", R(10, 0.6, 0.2), "$ink@0.4", at=(20, -12.6), rot=-6),
         P("plunger", R(10, 3, 1), "$steel.light", at=(36, -13), rot=-6, stroke=INK_HAIR),
         P("needle", R(8, 1.2, 0.4), "$steel.light", at=(1, -9), rot=-6),
-        # The instrument: a box with a dial, its face the instrument's blue.
+        P("spill", ell(2.2, 0.9), "$venom@0.7", at=(-3, -7.6)),
+        # The instrument: a box with a dial, its face the instrument's blue,
+        # ticks round it and two knobs under it.
         P("box", R(20, 14, 2), "$slate.dark", at=(40, -15), stroke=INK_THIN),
+        lit_edge("box_lit", 31, 49, -21.4, 0.8, "$slate.light"),
         P("dial", circ(4.4), "$frost@0.7", at=(40, -15), stroke=INK_HAIR),
+        *[P(f"tick_{i}", circ(0.45), "$ink@0.7", at=(40 + 3.3 * math.cos(a), -15 + 3.3 * math.sin(a))) for i, a in enumerate([math.radians(d) for d in (200, 240, 270, 300, 340)])],
         P("needle_dial", R(4, 0.9, 0.3), "$ink", at=(41.5, -16), rot=-35),
-        # A notebook page under the rack.
+        P("knob_a", circ(1.2), "$steel", at=(34, -10.4), stroke=INK_HAIR),
+        P("knob_b", circ(1.2), "$steel", at=(46, -10.4), stroke=INK_HAIR),
+        # A notebook page under the rack, held down with a stone.
         P("note", R(14, 10, 0.8), "$bone", at=(-44, -6), rot=-8, stroke=INK_HAIR),
         P("note_ln", R(9, 0.9, 0.3), "$slate.dark@0.5", at=(-44, -7), rot=-8),
+        P("note_stone", ell(3, 2), "$smoke", at=(-41, -8.6), stroke=INK_HAIR),
     ]
     anims = {
         "read": loop(
@@ -680,10 +852,11 @@ def bench():
     return doc(
         "ss.base.bench",
         "The bench",
-        "The instrument's own table: a field bench on crossed legs with a crate under it. On it is a rack of six vials in the colours the "
-        "level-up's samples come in, the syringe lying where the last dose was drawn, a notebook page, and a slate box whose dial is the "
-        "instrument's blue. The needle wanders, reading the air (`read`). feelers opens BUILD here, where the order samples are drawn in "
-        "is planned.",
+        "The instrument's own table: a field bench on bolted crossed legs with a stretcher between them and a stencilled crate under it, "
+        "its steel top scuffed. On it is a rack of six vials in the colours the level-up's samples come in, the syringe lying where the last "
+        "dose was drawn with a drop spilled beside it, a notebook page held down by a stone, and a slate box whose dial is the instrument's "
+        "blue, ticked round, with two knobs. The needle wanders, reading the air (`read`). feelers opens BUILD here, where the order samples "
+        "are drawn in is planned.",
         (120, 64),
         parts,
         anims,
@@ -701,8 +874,10 @@ def hearth():
     def stone(i, x, y, r):
         k = [(-1, 0.55), (-0.62, -0.5), (0.1, -0.72), (0.86, -0.3), (1, 0.4), (0.3, 0.7), (-0.6, 0.72)]
         jag = [(px * r * (1 + 0.08 * ((i + j) % 3 - 1)), py * r * 0.7) for j, (px, py) in enumerate(k)]
+        under = clip(moved(jag, (x, y)), 1, y + r * 0.18, y + r)
         return [
             P(f"stone_{i}", poly(jag), "$smoke" if i % 3 else "$smoke.dark", at=(x, y), stroke=INK_HAIR),
+            *([P(f"stone_{i}_dk", poly(under), "$ink@0.28")] if len(under) >= 3 else []),
             P(f"stone_{i}_lit", ell(r * 0.45, r * 0.18), "$smoke.light@0.8", at=(x - r * 0.2, y - r * 0.32)),
         ]
 
@@ -710,6 +885,8 @@ def hearth():
         ("c0", -12, -2, 4.2), ("c1", -3, -5, 5.4), ("c2", 8, -3, 4.6), ("c3", 15, 2, 3.2),
         ("c4", -16, 5, 3.0), ("c5", -6, 4, 4.0), ("c6", 5, 6, 3.6), ("c7", 12, 8, 2.4),
     ]
+    # And three that have got out over the stones: it spreads.
+    strays = [("s0", -33, 13, 1.7), ("s1", 35, 6, 1.5), ("s2", 24, -11, 1.4)]
     parts = [
         # The light the caps lay on the ground round the ring.
         *halo("spill", 0, 6, 44, 24, 0.36),
@@ -718,16 +895,26 @@ def hearth():
     ]
     parts += [p for i, x, y, r, front in stones if not front for p in stone(i, x, y, r)]
     parts += halo("halo", 0, -2, 26, 18, 0.5)
-    parts += [p for cid, x, y, r in caps for p in cap(cid, x, y, r)]
+    for cid, x, y, r in caps:
+        parts += cap(cid, x, y, r)
+        if r > 4:
+            # Speckles on the big ones, the way a cap is marked.
+            parts += [
+                P(f"{cid}_spot_a", circ(r * 0.12), "$spore.dark", at=(x + r * 0.35, y - r * 0.08)),
+                P(f"{cid}_spot_b", circ(r * 0.09), "$spore.dark", at=(x + r * 0.05, y + r * 0.12)),
+            ]
     parts += [p for i, x, y, r, front in stones if front for p in stone(i, x, y, r)]
+    parts += [p for cid, x, y, r in strays for p in cap(cid, x, y, r)]
     # Two mugs left by the ring, and spores going up off the caps.
     parts += [
         P("mug_a", R(5.4, 6.4, 1.3), "$steel", at=(33, 18), stroke=INK_HAIR),
         P("mug_a_lit", R(1.2, 4.4, 0.4), "$steel.light", at=(31.6, 18.4)),
         P("mug_a_rim", ell(2.7, 0.9), "$coal", at=(33, 15)),
+        P("mug_a_handle", ring_arc(1.8, 0.8, -80, 80), "$steel.dark", at=(35.6, 18.4)),
         P("mug_b", R(5.4, 6.4, 1.3), "$steel", at=(-34, 17), rot=-8, stroke=INK_HAIR),
         P("mug_b_lit", R(1.2, 4.4, 0.4), "$steel.light", at=(-35.4, 17.2), rot=-8),
         P("mug_b_rim", ell(2.7, 0.9), "$coal", at=(-34.4, 13.8), rot=-8),
+        P("mug_b_handle", ring_arc(1.8, 0.8, 100, 260), "$steel.dark", at=(-37, 17.4)),
     ]
     motes = [("m0", -8, -8), ("m1", 4, -10), ("m2", 12, -6), ("m3", -2, -12)]
     parts += [P(mid, circ(0.9), "$spore.light2@0.9", at=(x, y)) for mid, x, y in motes]
@@ -739,9 +926,10 @@ def hearth():
         "ss.base.hearth",
         "The hearth",
         "Where a camp elsewhere would keep a fire. An expedition does not glow and lights nothing (feelers guide §7.2), so this camp sits "
-        "round the hive's light instead: a ring of stones round a bed of dug earth, and in the bed the glowing caps, grown from the one Sol "
-        "carried in an emitter that never worked. They are the warm thing in a cold camp and they are not the camp's. Two steel mugs have "
-        "been left by the ring. The caps brighten and dim, slower than breathing, and spores go up off them (`breathe`).",
+        "round the hive's light instead: a ring of stones round a bed of dug earth, and in the bed the glowing caps, speckled the way caps "
+        "are, grown from the one Sol carried in an emitter that never worked — three small ones have already got out over the stones. They "
+        "are the warm thing in a cold camp and they are not the camp's. Two steel mugs have been left by the ring. The caps brighten and "
+        "dim, slower than breathing, and spores go up off them (`breathe`).",
         (92, 60),
         parts,
         {"breathe": loop("the caps brighten and dim, slower than breathing, and spores go up off them", 4.0, tracks)},
@@ -757,29 +945,45 @@ def marker():
     ]
     parts = [
         shadow("shadow", 0, 62, 16, 4, "0.4"),
-        # The rest of the lander's mast, driven into the ground, its snapped end up.
+        # The rest of the lander's mast, driven into the ground, its snapped
+        # end up; a collar where two lengths of it were joined.
         P("sleeve", R(9, 12, 1.5), "$slate.dark", at=(0, 55), stroke=INK_HAIR),
+        lit_edge("sleeve_lit", -3.6, 3.6, 49.6, 0.8, "$slate.light@0.8"),
         *shaded("mast", [(-2.6, -50), (-1, -56), (0.6, -52), (2.6, -57), (2.6, 60), (-2.6, 60)], "$steel.dark", [(-60, 61, "$steel.dark")], stroke=INK_HAIR),
         P("mast_lit", R(1.1, 100, 0.4), "$steel", at=(-1.3, 6)),
-        # The clamps that hold the plate to it, and the plate (T041): the one
-        # line cut into it, the same word as the ruin's stones and Eden's iron.
+        P("joint", R(7, 4, 1), "$steel", at=(0, 40), stroke=INK_HAIR),
+        lit_edge("joint_lit", -3, 3, 38.6, 0.7, "$white@0.5"),
+        P("snap_lit", poly([(-2.6, -50), (-1, -56), (0.6, -52), (0.6, -50)]), "$steel.light"),
+        # The clamps that hold the plate to it, bolted at both ends.
         P("clamp_top", R(46, 3, 1), "$steel.dark", at=(0, -45), stroke=INK_HAIR),
         P("clamp_low", R(46, 3, 1), "$steel.dark", at=(0, -23), stroke=INK_HAIR),
+        *[p for i, (x, y) in enumerate([(-22, -45), (22, -45), (-22, -23), (22, -23)]) for p in bolt(f"clamp_bolt_{i}", x, y, 1.1, "$steel")],
+        # The plate (T041): bevelled, its top edge catching the hearth's light,
+        # the one line cut in it — the same word as the ruin's stones and
+        # Eden's iron — scuffed by years of hands.
         *shaded("plate", rr(38, 24, 2, (0, -34)), "$steel.light", [(-27, -22, "$steel")]),
-        P("plate_lit", R(30, 2, 1), "$white@0.35", at=(-2, -43)),
+        lit_edge("plate_bevel", -17, 17, -45.2, 1.2, "$white@0.6"),
+        P("plate_lit", R(26, 1.6, 0.8), "$white@0.25", at=(-3, -42)),
+        P("plate_under", R(36, 1.2, 0.6), "$steel.dark", at=(0, -22.8)),
+        *scratches("plate_scuff", 0, -32, 30, 14, 5, "$steel.light2@0.7", 3),
         P("line", R(26, 2, 0.6), "$ink@0.75", at=(0, -35)),
         P("line_lit", R(26, 0.8, 0.3), "$steel.light2@0.8", at=(0, -33.6)),
-        *[P(f"rivet_{i}", circ(1.4), "$slate", at=(dx, -34 + dy)) for i, (dx, dy) in enumerate([(-16, -9), (16, -9), (-16, 9), (16, 9)])],
+        *[p for i, (dx, dy) in enumerate([(-16, -9), (16, -9), (-16, 9), (16, 9)]) for p in bolt(f"rivet_{i}", dx, -34 + dy, 1.4, "$slate")],
         *rust("rust_a", -16, -24, 2.4, 16, 0.6),
         *rust("rust_b", 16, -24, 2.4, 11, 0.5),
+        P("rust_bloom", ell(3, 2), "$rust@0.35", at=(-16, -25)),
     ]
     # Eight strips of cloth tied down the mast, alternate sides: one for each
-    # expedition that set out from here (T045: "eight times, and once in stone").
+    # expedition that set out from here (T045: "eight times, and once in
+    # stone"). Each has its knot, a fold of shade under it and a frayed end.
     for i, (y, side, n, fill) in enumerate(strips):
         tail = [(0, -1.6), (n * 0.55, -2.2), (n, -0.6), (n * 0.8, 0.6), (n, 2.2), (n * 0.5, 1.8), (0, 1.6)]
+        fold = [(0, 0.6), (n * 0.5, 1.2), (n * 0.95, 2.0), (n * 0.5, 1.9), (0, 1.6)]
         parts += [
             P(f"strip_{i}", poly([(side * x, y2) for x, y2 in tail]), fill, at=(side * 2.4, y), stroke=INK_HAIR),
+            P(f"strip_{i}_fold", poly([(side * x, y2) for x, y2 in fold]), "$ink@0.28", at=(side * 2.4, y)),
             P(f"knot_{i}", R(6.4, 2.6, 1), "$bone.dark", at=(0, y)),
+            P(f"knot_{i}_lit", R(4, 0.7, 0.3), "$bone@0.9", at=(-0.6, y - 0.7)),
         ]
     parts += [
         # The hive, starting up it from the foot (A055).
@@ -788,20 +992,19 @@ def marker():
     ]
     flap = []
     for i, (y, side, n, _f) in enumerate(strips):
-        ph = (i * 0.13) % 1
-        flap += [
-            track(f"strip_{i}", "rot", [(0, 0), ((0.25 + ph) % 1 or 0.25, side * 7), ((0.6 + ph) % 1 or 0.6, -side * 3), (1, 0)] if (0.25 + ph) % 1 < (0.6 + ph) % 1 else [(0, 0), (0.35, side * 6), (0.7, -side * 3), (1, 0)]),
-            track(f"strip_{i}", "scale", [(0, 1), (0.4, 0.9), (0.8, 1.04), (1, 1)]),
-        ]
+        keys = [(0, 0), (0.35, side * 6), (0.7, -side * 3), (1, 0)] if i % 2 else [(0, 0), (0.3, side * 7), (0.65, -side * 2), (1, 0)]
+        for part in (f"strip_{i}", f"strip_{i}_fold"):
+            flap += [track(part, "rot", keys), track(part, "scale", [(0, 1), (0.4, 0.9), (0.8, 1.04), (1, 1)])]
     doc(
         "ss.base.marker",
         "The marker",
         "The middle of the camp: the plate off the lander (T041), stood up on what is left of the lander's mast and driven into the ground, "
-        "with the hearth's caps round its foot. The plate is riveted on with two clamps and has the one line cut in it — the same word as the "
-        "ruin's stones and Eden's iron, which every writer was given and wrote down as an attack. It is the game's own line: do not come. "
-        "Rust has bled from its lower rivets. Down the mast are eight strips of cold cloth tied on, alternate sides, one for each expedition "
-        "that set out from here (T045: \"Read as one log they say do not come, eight times\"); they flap in the wind (`flutter`). At the foot "
-        "the hive is starting up it: two pink buds (A055). feelers stands it in the middle of the base, the stations round it.",
+        "with the hearth's caps round its foot. The plate is bevelled and riveted on with two bolted clamps, scuffed by years of hands, and "
+        "has the one line cut in it — the same word as the ruin's stones and Eden's iron, which every writer was given and wrote down as an "
+        "attack. It is the game's own line: do not come. Rust has bled from its lower rivets. Down the mast, below a collar where two lengths "
+        "of it were joined, are eight strips of cold cloth knotted on, alternate sides, one for each expedition that set out from here (T045: "
+        "\"Read as one log they say do not come, eight times\"); they flap in the wind (`flutter`). At the foot the hive is starting up it: "
+        "two pink buds (A055). feelers stands it in the middle of the base, the stations round it.",
         (64, 136),
         parts,
         {"flutter": loop("the eight strips flap in the wind, each a little after the one above it", 1.6, flap)},
@@ -855,7 +1058,10 @@ def lamp_jar(prefix, x, y):
         *cap(f"{prefix}_cap_b", x + 3, y - 1, 2.8),
         *cap(f"{prefix}_cap_c", x - 1.4, y - 4, 2.2),
         P(f"{prefix}_lid", R(15, 3.4, 1.2), "$steel", at=(x, y - 9), stroke=INK_HAIR),
+        *[P(f"{prefix}_vent_{i}", circ(0.5), "$slate.dark", at=(x - 4 + i * 4, y - 9)) for i in range(3)],
+        P(f"{prefix}_bail", ring_arc(5, 0.9, 180, 360), "$steel.dark", at=(x, y - 10)),
         P(f"{prefix}_glass_lit", R(2, 10, 1), "$white@0.35", at=(x - 5, y)),
+        P(f"{prefix}_glass_lit_b", R(1, 4, 0.5), "$white@0.25", at=(x + 5, y + 3)),
     ]
 
 
@@ -875,7 +1081,11 @@ def lamps():
         shadow("shadow", -2, 20, 11, 2.5),
         P("pole", R(3, 36, 1), "$steel.dark", at=(-9, 2), stroke=INK_HAIR),
         P("pole_lit", R(1, 30, 0.4), "$steel", at=(-9.6, 2)),
-        P("foot", R(12, 3, 1), "$slate", at=(-9, 20), stroke=INK_HAIR),
+        P("leg_l", R(2, 9, 0.6), "$steel.dark", at=(-12.4, 17), rot=28, stroke=INK_HAIR),
+        P("leg_r", R(2, 9, 0.6), "$steel.dark", at=(-5.6, 17), rot=-28, stroke=INK_HAIR),
+        P("foot", ell(5, 2.4), "$smoke", at=(-9, 20.4), stroke=INK_HAIR),
+        P("foot_lit", ell(2.6, 0.8), "$smoke.light@0.8", at=(-10, 19.4)),
+        *[P(f"wrap_{i}", R(4.2, 1, 0.4), "$bone.dark", at=(-9, 2 + i * 1.6)) for i in range(3)],
         P("arm", R(16, 2.4, 1), "$steel.dark", at=(-2, -15), stroke=INK_HAIR),
         P("hook", R(1.2, 4, 0.4), "$steel.dark", at=(5, -12.5)),
         *lamp_jar("jar", 5, 0),
@@ -935,16 +1145,28 @@ def locker():
     parts = [
         shadow("shadow", 0, 10, 16, 3.5),
         *shaded("box", rr(30, 16, 2, (0, 2)), "$slate", [(5, 11, "$slate.dark")]),
-        P("lid", R(32, 5, 1.5), "$slate.light", at=(0, -6), stroke=INK_HAIR),
-        P("latch", R(5, 5, 1), "$steel", at=(0, 2), stroke=INK_HAIR),
         P("stripe", R(30, 2, 0.5), "$frost.dark@0.5", at=(0, 7)),
+        *scratches("scuff", 4, 4, 18, 6, 3, "$slate.light@0.7", 9),
+        ao("lid_ao", 0, -3.4, 30, 1.4, 0.45),
+        P("lid", R(32, 5, 1.5), "$slate.light", at=(0, -6), stroke=INK_HAIR),
+        lit_edge("lid_lit", -14, 14, -7.6, 0.8, "$white@0.35"),
+        P("hinge_a", R(4, 1.4, 0.4), "$steel.dark", at=(-9, -3.4)),
+        P("hinge_b", R(4, 1.4, 0.4), "$steel.dark", at=(9, -3.4)),
+        *[P(f"corner_{i}", R(3, 3, 0.6), "$steel", at=(x, y)) for i, (x, y) in enumerate([(-14, -6.4), (14, -6.4), (-13.6, 8.6), (13.6, 8.6)])],
+        P("latch", R(5, 5, 1), "$steel", at=(0, 2), stroke=INK_HAIR),
+        P("latch_lit", R(3, 0.8, 0.3), "$white@0.5", at=(-0.4, 0.4)),
+        P("hasp", ring_arc(1.4, 0.7, 0, 180), "$steel.dark", at=(0, 4.6)),
+        # A grab handle on the lid: the lockers stand shoulder to shoulder, so it is carried from the top.
+        P("grip", R(10, 1.6, 0.8), "$steel.dark", at=(0, -8.8), stroke=INK_HAIR),
+        P("grip_lit", R(8, 0.6, 0.3), "$steel@0.9", at=(0, -9.2)),
     ]
     doc(
         "ss.base.locker",
         "Locker",
-        "One writer's footlocker, in the cold slate everything of the expedition's is: a box, a lid, a latch, a frost stripe. A row of eight "
-        "stands along the camp's fence, one per writer in the order the expeditions came. On each lid is the one thing that writer's log "
-        "kept (`ss.base.keep-*`). In feelers you take up a writer's body at their locker.",
+        "One writer's footlocker, in the cold slate everything of the expedition's is: a box with steel corners, a hinged lid with a "
+        "grab handle on top, a latch and hasp, a frost stripe, a few scuffs. A row of eight stands at the foot of the frame's beds, one per writer "
+        "in the order the expeditions came. On each lid is the one thing that writer's log kept (`ss.base.keep-*`). In feelers you take up "
+        "a writer's body at their locker.",
         (36, 24),
         parts,
     )
@@ -1053,19 +1275,27 @@ def keeps():
 def stump():
     parts = [
         shadow("shadow", 0, 11, 15, 4),
-        *shaded("trunk", [(-11, -4), (11, -4), (13, 9), (-13, 9)], "$pheromone.dark", [(4, 10, "$pheromone.dark2")]),
-        P("trunk_lit", poly([(-9, -3), (-5, -3), (-6, 8), (-11, 8)]), "$pheromone@0.55"),
+        # Cut, the signal has gone out of it: the trunk is the drained
+        # spire's mauve, not the field's pink, faceted the way a crystal grows.
+        *shaded("trunk", [(-11, -4), (11, -4), (13, 9), (-13, 9)], "$mauve.dark", [(4, 10, "$mauve.dark2")]),
+        P("trunk_lit", poly([(-9, -3), (-5, -3), (-6, 8), (-11, 8)]), "$mauve@0.8"),
+        P("facet_a", poly([(-1, -3), (0.4, -3), (1, 8), (-0.6, 8)]), "$mauve.dark2@0.7"),
+        P("facet_b", poly([(6, -3), (7.2, -3), (8.6, 8), (7.2, 8)]), "$mauve.dark2@0.6"),
+        P("chip_a", poly([(-15, 10), (-12, 7), (-10, 10)]), "$mauve", stroke=INK_HAIR),
+        P("chip_b", poly([(12, 10), (14, 8), (16, 10.4)]), "$mauve.dark", stroke=INK_HAIR),
         P("face", ell(11.5, 4.2), "$husk.dark", at=(0, -4), stroke=INK_THIN),
-        *[P(f"ring_{i}", ell(9.4 - i * 2.3, 3.4 - i * 0.82), "$pheromone.dark@0.45" if i % 2 == 0 else "$husk.dark", at=(0, -4)) for i in range(4)],
+        *[P(f"ring_{i}", ell(9.4 - i * 2.3, 3.4 - i * 0.82), "$mauve.dark@0.55" if i % 2 == 0 else "$husk.dark", at=(0, -4)) for i in range(4)],
         P("heart", ell(1.4, 0.6), "$pheromone@0.85", at=(0, -4)),
         P("saw_mark", R(18, 0.9, 0.3), "$ink@0.35", at=(1, -3.4), rot=-4),
+        lit_edge("face_lit", -8, 2, -7.6, 0.8, "$white@0.4"),
     ]
     doc(
         "ss.base.stump",
         "Cut spire",
-        "A pheromone spire cut off flat. The face has gone pale where the signal ran out of it, and it is ringed like a tree, one ring per "
-        "passing of the vermin (A030), with a little pink left at the heart and the saw's line across it. Three of these stand by the camp's "
-        "south path, the cut spires the records found south of base (T010). In feelers they mark the way out to the Plains.",
+        "A pheromone spire cut off flat. The signal has gone out of it: the trunk is a drained mauve rather than the field's pink, faceted the "
+        "way a crystal grows, with chips at its foot. The face is pale and ringed like a tree, one ring per passing of the vermin (A030), "
+        "with a little pink left at the heart and the saw's line across it. Three of these stand by the camp's south path, the cut spires "
+        "the records found south of base (T010). In feelers they mark the way out to the Plains.",
         (32, 28),
         parts,
     )
@@ -1074,10 +1304,12 @@ def stump():
 def cairn():
     def slab(id, pts, top_fill, face_fill):
         cx = sum(x for x, _ in pts) / len(pts)
+        top = [(pts[0][0] + 2, pts[1][1] + 1.6), pts[1], pts[2], (pts[3][0] - 2, pts[2][1] + 1.6)]
         return [
             P(f"{id}_under", poly([(cx + (x - cx) * 1.08, y + 1.2) for x, y in pts]), "$ink"),
             P(id, poly(pts), face_fill),
-            P(f"{id}_top", poly([(pts[0][0] + 2, pts[1][1] + 1.6), pts[1], pts[2], (pts[3][0] - 2, pts[2][1] + 1.6)]), top_fill),
+            P(f"{id}_top", poly(top), top_fill),
+            band(f"{id}_crust", [pts[1], pts[2]], 0.9, "$white@0.7"),
         ]
 
     parts = [
@@ -1087,21 +1319,27 @@ def cairn():
         *slab("slab_c", [(-7, 4), (-5, -2), (6, -2), (7, 3)], "$silent", "$husk"),
         P("glare", poly([(-3, -1), (2, -1.6), (3, 0.6), (-2, 1)]), "$white@0.8"),
         P("crack", R(8, 0.9, 0.3), "$husk.dark2", at=(-2, 15)),
+        P("crack_b", R(5, 0.8, 0.3), "$husk.dark2", at=(4, 7.4), rot=12),
+        P("chip", poly([(10, 21), (13, 18.6), (16, 21)]), "$husk.dark", stroke=INK_HAIR),
         P("stake", R(2.6, 26, 0.8), "$smoke.light", at=(2, -12), stroke=INK_HAIR),
-        P("flag", poly([(3, -24), (14, -21), (12, -18), (15, -15), (3, -16)]), "$frost.dark", stroke=INK_HAIR),
+        P("binding_a", R(4, 1.2, 0.4), "$bone.dark", at=(2, -4)),
+        P("binding_b", R(4, 1.2, 0.4), "$bone.dark", at=(2, -6)),
+        P("flag", poly([(3, -24), (14, -21), (12.6, -19.6), (15, -18.4), (12, -17), (15, -15), (3, -16)]), "$frost.dark", stroke=INK_HAIR),
+        P("flag_fold", poly([(3, -19), (12, -18.6), (12, -17.4), (3, -17.6)]), "$ink@0.25"),
     ]
     anims = {
         "flutter": loop(
             "the strip of cloth on the stake flaps in the wind off the pan",
             1.4,
-            [track("flag", "scale", [(0, 1), (0.3, 0.86), (0.6, 1.06), (1, 1)]), track("flag", "y", [(0, 0), (0.3, 0.6), (0.6, -0.4), (1, 0)])],
+            [track(p, prop, keys) for p in ("flag", "flag_fold") for prop, keys in (("scale", [(0, 1), (0.3, 0.86), (0.6, 1.06), (1, 1)]), ("y", [(0, 0), (0.3, 0.6), (0.6, -0.4), (1, 0)]))],
         )
     }
     doc(
         "ss.base.cairn",
         "Salt cairn",
         "Three slabs of the pan's salt plate stacked by the north-west road, drawn the way the pan's own plates are (`ss.terrain.saltplate`), "
-        "with a stake driven into them and a cold strip of cloth flapping on it (`flutter`). In feelers this is the way out to the Salt Pan.",
+        "salt crusted white along their edges and cracked, a chip fallen at the foot, with a stake bound into them and a frayed strip of cold "
+        "cloth flapping on it (`flutter`). In feelers this is the way out to the Salt Pan.",
         (32, 52),
         parts,
         anims,
