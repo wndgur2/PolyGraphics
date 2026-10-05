@@ -52,6 +52,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from rig import r2, poly, ell, circ, rect, write_doc  # noqa: E402
 from draw import *  # noqa: E402,F401,F403
+from bits_metal import chain, clamp, hasp, hinge, hook, padlock, sag, wire_coil  # noqa: E402
 from bits_cloth import bed, bedroll, flap, pillow, rope_coil, sack  # noqa: E402
 from bits_camp import dial, ladle, mug, page, page_stack, saw, stone, stool, tag, tin_stack  # noqa: E402
 from bits_keeps import KEEP_PARTS  # noqa: E402
@@ -143,12 +144,12 @@ def lander():
         P("hatch_cable", poly([(-58, -20), (-56, -20), (-54, 0), (-50, 12), (-52, 12), (-56, 0)]), "$ink@0.7"),
         P("hatch_sill", R(46, 6, 2), "$smoke.dark", at=(-42, 35), stroke=INK_HAIR),
         lit_edge("hatch_sill_lit", -63, -21, 32.6, 0.9, "$smoke.light@0.8"),
-        P("hinge_a", R(4, 7, 1), "$steel.dark", at=(-15, -14), stroke=INK_HAIR),
-        P("hinge_b", R(4, 7, 1), "$steel.dark", at=(-15, 24), stroke=INK_HAIR),
         P("door", poly([(0, -28), (14, -32), (17, 24), (0, 32)]), "$steel.dark", at=(-14, 6), stroke=INK_THIN),
         P("door_lit", poly([(2, -24), (6, -25), (7, 20), (2, 23)]), "$steel@0.85", at=(-14, 6)),
         P("door_seal", poly([(12, -27), (14, -28), (16, 22), (14, 23)]), "$ink@0.4", at=(-14, 6)),
         *bolt("door_bolt", -6, 2, 1.8, "$slate.dark"),
+        *hinge("hinge_a", -15, -14, vertical=True, length=7, leaf=2.0),
+        *hinge("hinge_b", -15, 24, vertical=True, length=7, leaf=2.0),
         # What the settlers scratched into the skin (X001): a count, in fives.
         *tally("tally", 4, -16, 3, 2),
         *tally("tally_b", 4, 2, 2, 3, 9),
@@ -339,8 +340,8 @@ def tank():
         P("gauge_surface", R(3, 0.7, 0.3), "$white@0.6", at=(-3, -1.6)),
         *[P(f"gauge_tick_{i}", R(1.6, 0.5, 0.2), "$ink@0.5", at=(0.6, -8 + i * 5)) for i in range(4)],
         # A tin cup on a hook for whoever is thirsty.
-        P("hook", R(1, 4, 0.4), "$steel.dark", at=(-19, -4)),
-        *mug("cup", -19 - 2.8 * 0.85, -2.4 + 5.6 * 0.85, s=0.85, ground=False),
+        *mug("cup", -21 - 2.8 * 0.85, -2.4 + 5.6 * 0.85, s=0.85, ground=False),
+        *hook("hook", -18 - (2.2 + 0.8) * 0.75, -0.83 - 1.8 * 0.85 + 0.95 * 0.85 / 2, 0.75, reach=2.2),
         P("tap", R(7, 3, 1), "$slate.dark", at=(20, 14), stroke=INK_HAIR),
         P("drip", ell(1.1, 1.6), "$aqua@0.8", at=(22, 17)),
         P("puddle", ell(5.5, 1.8), "$aqua@0.3", at=(21, 27)),
@@ -509,11 +510,12 @@ def vat():
         P("speck_b", circ(0.6), "$chitin.dark@0.6", at=(10, 20)),
         P("glass_lit", R(4, 34, 2), "$white@0.45", at=(-14, 2)),
         P("glass_lit_b", R(1.6, 10, 0.8), "$white@0.3", at=(14, -6)),
-        # The lid, bolted down, and its two clamps.
+        # The lid, bolted down on the glass's rim, and its two clamps.
+        P("rim", R(41, 1.8, 0.6), "$steel.dark", at=(0, -16.6), stroke=INK_FINE),
         *shaded("lid", rr(44, 7, 2.5, (0, -21)), "$steel", [(-25, -22, "$steel.light")]),
         *[p for i, x in enumerate([-15, -5, 5, 15]) for p in bolt(f"lid_bolt_{i}", x, -20.4, 0.9, "$steel.dark")],
-        P("clamp_l", R(4, 12, 1), "$steel.dark", at=(-21, -16), stroke=INK_HAIR),
-        P("clamp_r", R(4, 12, 1), "$steel.dark", at=(21, -16), stroke=INK_HAIR),
+        *clamp("clamp_l", -22, -24.5),
+        *clamp("clamp_r", 22, -24.5, side="r"),
         # A tag on a cord off the right clamp: what is in it, written down.
         *label,
         # The ladle hooked over the lid's end, and the drop that got away.
@@ -820,8 +822,8 @@ def lamps():
         P("foot_lit", ell(2.6, 0.8), "$smoke.light@0.8", at=(-10, 19.4)),
         *[P(f"wrap_{i}", R(4.2, 1, 0.4), "$bone.dark", at=(-9, 2 + i * 1.6)) for i in range(3)],
         P("arm", R(16, 2.4, 1), "$steel.dark", at=(-2, -15), stroke=INK_HAIR),
-        P("hook", R(1.2, 1.6, 0.4), "$steel.dark", at=(5, (-13.8 + jar_bail_top(14, 16)[1]) / 2 - 0.2)),
-        *lamp_jar("jar", 5, 0),
+        *lamp_jar("jar", 5, 3.6),
+        *hook("hook", 5, jar_bail_top(14, 16)[1] + 0.8 + 3.6, mount="screw", reach=jar_bail_top(14, 16)[1] + 0.8 + 3.6 + 13.8),
     ]
     doc(
         "ss.base.lamp",
@@ -883,14 +885,13 @@ def locker():
         P("stripe", R(30, 2, 0.5), "$frost.dark@0.5", at=(0, 7)),
         *scratches("scuff", 4, 4, 18, 6, 3, "$slate.light@0.7", 9),
         ao("lid_ao", 0, -3.4, 30, 1.4, 0.45),
+        *hinge("hinge_a", -9, -8.7, leaf=0, length=5),
+        *hinge("hinge_b", 9, -8.7, leaf=0, length=5),
         P("lid", R(32, 5, 1.5), "$slate.light", at=(0, -6), stroke=INK_HAIR),
         lit_edge("lid_lit", -14, 14, -7.6, 0.8, "$white@0.35"),
-        P("hinge_a", R(4, 1.4, 0.4), "$steel.dark", at=(-9, -3.4)),
-        P("hinge_b", R(4, 1.4, 0.4), "$steel.dark", at=(9, -3.4)),
         *[P(f"corner_{i}", R(3, 3, 0.6), "$steel", at=(x, y)) for i, (x, y) in enumerate([(-14, -6.4), (14, -6.4), (-13.6, 8.6), (13.6, 8.6)])],
-        P("latch", R(5, 5, 1), "$steel", at=(0, 2), stroke=INK_HAIR),
-        P("latch_lit", R(3, 0.8, 0.3), "$white@0.5", at=(-0.4, 0.4)),
-        P("hasp", ring_arc(1.4, 0.7, 0, 180), "$steel.dark", at=(0, 4.6)),
+        # The hasp down over its staple. No lock in it: whose locker is open is the game's to say, not the drawing's.
+        *hasp("hasp", 0, -3.5, locked=False),
         # A grab handle on the lid: the lockers stand shoulder to shoulder, so it is carried from the top.
         P("grip", R(10, 1.6, 0.8), "$steel.dark", at=(0, -8.8), stroke=INK_HAIR),
         P("grip_lit", R(8, 0.6, 0.3), "$steel@0.9", at=(0, -9.2)),
@@ -1172,12 +1173,12 @@ def cellar():
         P("frost_a", poly([(-19, -17), (-10, -17), (-14, -13), (-19, -9)]), "$white@0.55"),
         P("frost_b", poly([(13, 23), (13, 13), (9, 18), (4, 23)]), "$white@0.5"),
         P("frost_c", poly([(13, -17), (8, -17), (13, -12)]), "$white@0.4"),
+        # Chained shut: round the cabinet's left side high, across the glass and through the handle; the
+        # other end round the right side; a padlock through the two end links.
+        *chain("chain", sag((-26, -16), (18.6, 3.6), 2.0, 8) + [(16.8, 12)], first="face", within=(-23.8, 23.8)),
+        *chain("chain_b", [(26, 5.5), (18.0, 12)], first="edge", within=(-23.8, 23.8)),
         P("handle", R(2.4, 12, 1), "$steel.light", at=(17, 3), stroke=INK_HAIR),
-        # Chained shut, and a padlock on the chain.
-        band("chain", [(-18, -14), (-6, -4), (6, 6), (16, 14)], 1.4, "$slate.dark"),
-        *[P(f"link_{i}", R(2.4, 0.6, 0.3), "$steel@0.8", at=(-14 + i * 6, -11 + i * 5), rot=40) for i in range(6)],
-        P("lock", R(6, 6, 1.5), "$steel", at=(6, 9), stroke=INK_HAIR),
-        P("shackle", ring_arc(2.2, 0.9, 180, 360), "$steel.dark", at=(6, 6)),
+        *padlock("lock", 17.4, 12, 0.85),
         # The thermometer: its needle well over to the cold.
         *dial("dial", 16, -22, s=0.93, reading=0.12),
         # Ice on the lip, and the cold breathing out at the foot.
@@ -1237,7 +1238,8 @@ def lab():
         band("cable", [(66, -40), (70, -20), (72, 10), (80, 40), (86, 54)], 1.1, "$coal"),
         # By the door: a crate of instruments with a coil of wire on it, and a stool.
         *shaded("crate", rr(18, 11, 1.5, (-62, 46)), "$slate", [(48, 52, "$slate.dark")], stroke=INK_HAIR),
-        P("coil", {"kind": "ring", "r": 3.6, "width": 1.2}, "$steel.dark", at=(-62, 39)),
+        P("crate_top", poly([(-71, 40.5), (-53, 40.5), (-54, 36.5), (-70, 36.5)]), "$slate.light", stroke=INK_HAIR),
+        *wire_coil("coil", -63, 38.6),
         *stool("stool", 4, 51.5),
     ]
     doc(
