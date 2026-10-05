@@ -28,6 +28,23 @@
       "add": [
         { "id": "eye", "mirrorX": true, "at": [-2.4, 0.4], "shape": { "kind": "circle", "r": 1.3 }, "fill": "$pheromone.light" }
       ]
+    },
+    "royal": {
+      "description": "What a boss leaves: the cell a queen's chamber is sealed with. The same comb cell, its wax gone to deep gold and stamped with an ember sigil, a gold stud driven into every corner, and three spines of the chamber standing up off its top edge — a crown, read from across the field before the player has walked to it. Lit stronger from inside. The elite's chest is the cell; this is the cell a boss was keeping.",
+      "set": {
+        "cell.fill": "$chitin.dark2",
+        "cap.fill": "$gold",
+        "cap_seam.fill": "$ember.dark",
+        "glow.fill": "$gold@soft"
+      },
+      "add": [
+        { "id": "sigil", "at": [0, 0.4], "shape": { "kind": "star", "points": 4, "r": 2.6, "r2": 1 }, "fill": "$ember" },
+        { "id": "stud_side", "mirrorX": true, "at": [-13.4, 1], "shape": { "kind": "circle", "r": 1.3 }, "fill": "$gold.dark", "stroke": { "color": "$ink", "width": "hair" } },
+        { "id": "stud_low", "mirrorX": true, "at": [-8.2, 10.01], "shape": { "kind": "circle", "r": 1.2 }, "fill": "$gold.dark", "stroke": { "color": "$ink", "width": "hair" } },
+        { "id": "stud_high", "mirrorX": true, "at": [-8.2, -8.01], "shape": { "kind": "circle", "r": 1.2 }, "fill": "$gold.dark", "stroke": { "color": "$ink", "width": "hair" } },
+        { "id": "spine_side", "mirrorX": true, "at": [-4, -8.1], "rot": -12, "shape": { "kind": "poly", "points": [[-1.3, 0.6], [0, -3], [1.3, 0.6]] }, "fill": "$gold.dark", "stroke": { "color": "$ink", "width": "hair" } },
+        { "id": "spine_mid", "at": [0, -8.1], "shape": { "kind": "poly", "points": [[-1.5, 0.6], [0, -3.8], [1.5, 0.6]] }, "fill": "$gold", "stroke": { "color": "$ink", "width": "hair" } }
+      ]
     }
   },
   "animations": {

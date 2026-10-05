@@ -5,24 +5,41 @@
   "tags": ["pickup"],
   "size": [16, 16],
   "parts": [
-    { "id": "halo", "shape": { "kind": "circle", "r": 6.4 }, "fill": "$white@0.12" },
-    { "id": "mass", "shape": { "kind": "poly", "points": [[-6.2, -0.6], [-5.4, -3.2], [-3.4, -4.6], [-1.6, -3.6], [0.2, -5.4], [2.4, -4.4], [4.2, -4.8], [5.8, -2.6], [6.6, -0.2], [6, 2.4], [3.8, 4.4], [1.6, 3.4], [-0.8, 5.2], [-3.6, 4.6], [-5.4, 2.4]] }, "fill": "$smoke" },
-    { "id": "flesh", "shape": { "kind": "poly", "points": [[-4.9, -0.5], [-4.2, -2.5], [-2.6, -3.5], [-1.4, -2.7], [0.2, -4.1], [2.1, -3.3], [3.6, -3.6], [4.7, -1.9], [5.3, -0.2], [4.8, 1.8], [3.1, 3.3], [1.4, 2.5], [-0.6, 3.9], [-2.9, 3.4], [-4.3, 1.7]] }, "fill": "$bone" },
-    { "id": "shade", "shape": { "kind": "poly", "points": [[5.3, -0.2], [4.8, 1.8], [3.1, 3.3], [1.4, 2.5], [-0.6, 3.9], [-2.9, 3.4], [-4.3, 1.7], [-2.6, 0.9], [0.4, 1.1], [3.2, 0.4]] }, "fill": "$bone.dark" },
-    { "id": "pit", "at": [2.2, 2.2], "rot": 12, "shape": { "kind": "ellipse", "rx": 1.1, "ry": 0.8 }, "fill": "$smoke" },
-    { "id": "gloss", "at": [-2.6, -2.4], "rot": -26, "shape": { "kind": "ellipse", "rx": 2.2, "ry": 0.75 }, "fill": "$white" }
+    {"id": "halo", "shape": {"kind": "circle", "r": 6.4}, "fill": "$white@0.12"},
+    {"id": "mass", "shape": {"kind": "poly", "points": [[-6.2, -0.6], [-5.4, -3.2], [-3.4, -4.6], [-1.6, -3.6], [0.2, -5.4], [2.4, -4.4], [4.2, -4.8], [5.8, -2.6], [6.6, -0.2], [6, 2.4], [3.8, 4.4], [1.6, 3.4], [-0.8, 5.2], [-3.6, 4.6], [-5.4, 2.4]]}, "fill": "$smoke"},
+    {"id": "flesh", "shape": {"kind": "poly", "points": [[-4.9, -0.5], [-4.2, -2.5], [-2.6, -3.5], [-1.4, -2.7], [0.2, -4.1], [2.1, -3.3], [3.6, -3.6], [4.7, -1.9], [5.3, -0.2], [4.8, 1.8], [3.1, 3.3], [1.4, 2.5], [-0.6, 3.9], [-2.9, 3.4], [-4.3, 1.7]]}, "fill": "$bone"},
+    {"id": "shade", "shape": {"kind": "poly", "points": [[5.3, -0.2], [4.8, 1.8], [3.1, 3.3], [1.4, 2.5], [-0.6, 3.9], [-2.9, 3.4], [-4.3, 1.7], [-2.6, 0.9], [0.4, 1.1], [3.2, 0.4]]}, "fill": "$bone.dark"},
+    {"id": "pit", "at": [2.2, 2.2], "rot": 12, "shape": {"kind": "ellipse", "rx": 1.1, "ry": 0.8}, "fill": "$smoke"},
+    {"id": "gloss", "at": [-2.6, -2.4], "rot": -26, "shape": {"kind": "ellipse", "rx": 2.2, "ry": 0.75}, "fill": "$white"}
   ],
+  "variants": {
+    "ripe": {
+      "description": "The middle tier: a fuller lump that has budded — a second lobe swelling out of its upper right, and a seed of something brighter set in it. Drawn bigger by the game and tinted its tier colour; the bud is what tells it from the scrap below it by silhouette alone.",
+      "add": [{"id": "bud", "at": [4.0, -3.9], "shape": {"kind": "circle", "r": 2.8}, "fill": "$smoke"}, {"id": "bud_flesh", "at": [3.9, -3.9], "shape": {"kind": "circle", "r": 1.9}, "fill": "$bone"}, {"id": "bud_gloss", "at": [3.3, -4.6], "rot": -26, "shape": {"kind": "ellipse", "rx": 0.9, "ry": 0.45}, "fill": "$white"}, {"id": "seed", "at": [-0.4, 0.6], "rot": -20, "shape": {"kind": "ellipse", "rx": 1.6, "ry": 1.1}, "fill": "$white"}],
+      "set": {
+        "halo.fill": "$white@0.16"
+      }
+    },
+    "gravid": {
+      "description": "The top tier: a heavy lump with three shards of something hard and bright grown up through it, the way a hive's richest tissue calcifies. Drawn biggest by the game and tinted its tier colour; the jagged crown is its silhouette, and the shards' lit faces are what the eye finds on a crowded floor.",
+      "add": [{"id": "shard_a_rim", "at": [-0.6, -2.0], "rot": -12, "shape": {"kind": "poly", "points": [[-2.4, 0.49], [-1.8, -2.8], [0, -6.04], [1.95, -2.54], [2.4, 0.49]]}, "fill": "$smoke"}, {"id": "shard_b_rim", "at": [3.0, -2.2], "rot": 28, "shape": {"kind": "poly", "points": [[-2.1, 0.54], [-1.62, -2.28], [0, -5.19], [1.74, -2.07], [2.1, 0.54]]}, "fill": "$smoke"}, {"id": "shard_c_rim", "at": [-3.6, -1.8], "rot": -42, "shape": {"kind": "poly", "points": [[-1.9, 0.6], [-1.5, -1.9800000000000002], [0, -4.7700000000000005], [1.6, -1.8], [1.9, 0.6]]}, "fill": "$smoke"}, {"id": "shard_a", "at": [-0.6, -2.0], "rot": -12, "shape": {"kind": "poly", "points": [[-1.5, 0.0], [-0.9, -2.8], [0, -5.08], [1.05, -2.54], [1.5, 0.0]]}, "fill": "$white"}, {"id": "shard_a_side", "at": [-0.6, -2.0], "rot": -12, "shape": {"kind": "poly", "points": [[0, 0.16], [0, -5.08], [1.05, -2.54], [1.5, 0.0]]}, "fill": "$bone"}, {"id": "shard_b", "at": [3.0, -2.2], "rot": 28, "shape": {"kind": "poly", "points": [[-1.2, 0.0], [-0.72, -2.28], [0, -4.14], [0.84, -2.07], [1.2, 0.0]]}, "fill": "$white"}, {"id": "shard_b_side", "at": [3.0, -2.2], "rot": 28, "shape": {"kind": "poly", "points": [[0, 0.18], [0, -4.14], [0.84, -2.07], [1.2, 0.0]]}, "fill": "$bone"}, {"id": "shard_c", "at": [-3.6, -1.8], "rot": -42, "shape": {"kind": "poly", "points": [[-1.0, 0], [-0.6, -1.9800000000000002], [0, -3.6], [0.7, -1.8], [1.0, 0]]}, "fill": "$white"}, {"id": "shard_c_side", "at": [-3.6, -1.8], "rot": -42, "shape": {"kind": "poly", "points": [[0, 0.2], [0, -3.6], [0.7, -1.8], [1.0, 0]]}, "fill": "$bone"}],
+      "set": {
+        "halo.shape": {"kind": "circle", "r": 7.2},
+        "halo.fill": "$white@0.2"
+      }
+    }
+  },
   "animations": {
     "squelch": {
       "description": "swells and settles — soft tissue, not a stone. The mass swells less than the flesh inside it, so the dark rim thins as it fills, and the sheen wets and dries with it.",
       "duration": 2.1,
       "tracks": [
-        { "part": "flesh", "prop": "scale", "keys": [[0, 1], [0.5, 1.06], [1, 1]] },
-        { "part": "shade", "prop": "scale", "keys": [[0, 1], [0.5, 1.06], [1, 1]] },
-        { "part": "pit", "prop": "scale", "keys": [[0, 1], [0.5, 1.06], [1, 1]] },
-        { "part": "mass", "prop": "scale", "keys": [[0, 1], [0.5, 1.04], [1, 1]] },
-        { "part": "gloss", "prop": "opacity", "keys": [[0, 0.45], [0.5, 1], [1, 0.45]] },
-        { "part": "halo", "prop": "scale", "keys": [[0, 0.9], [0.5, 1.15], [1, 0.9]] }
+        {"part": "flesh", "prop": "scale", "keys": [[0, 1], [0.5, 1.06], [1, 1]]},
+        {"part": "shade", "prop": "scale", "keys": [[0, 1], [0.5, 1.06], [1, 1]]},
+        {"part": "pit", "prop": "scale", "keys": [[0, 1], [0.5, 1.06], [1, 1]]},
+        {"part": "mass", "prop": "scale", "keys": [[0, 1], [0.5, 1.04], [1, 1]]},
+        {"part": "gloss", "prop": "opacity", "keys": [[0, 0.45], [0.5, 1], [1, 0.45]]},
+        {"part": "halo", "prop": "scale", "keys": [[0, 0.9], [0.5, 1.15], [1, 0.9]]}
       ]
     }
   }
