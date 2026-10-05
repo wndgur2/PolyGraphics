@@ -2,9 +2,11 @@
  * Deterministic SVG renderer: interprets asset documents against a token set.
  * Same asset + same tokens + same seed → byte-identical SVG (diffable output).
  */
+import type { Track } from "./anim.js";
 import type { Anim, Asset, Gradient, Paint, Part, RepeatPart, Shape, ShapePart, UsePart } from "./schema.js";
 import { PartSchema } from "./schema.js";
 import { mulberry32, hashSeed } from "./prng.js";
+import { needsSampling, trackValue, type PoseTint } from "./anim.js";
 import { resolveColor, resolveNumber, suggest, type Tokens } from "./tokens.js";
 
 export interface Issue {
@@ -24,6 +26,8 @@ export interface RenderOptions {
   displayScale?: number; // width/height attrs = size * displayScale
   uid?: string; // unique prefix so multiple inline SVGs never collide
   skeleton?: boolean; // draw the document's skeleton over the parts (gallery / inspect use; never a bake)
+  /** Still tints to lay over parts, from `poseAsset` — a posed frame's `tint` tracks. */
+  tints?: Record<string, PoseTint>;
 }
 
 const FALLBACK = "#ff00ff"; // loud placeholder for unresolvable paints
@@ -160,6 +164,10 @@ interface Ctx {
   defs: string[];
   uid: string;
   animated: Set<string>; // part ids wrapped for animation
+  /** Part ids whose clip squashes them, so the scale goes inside the part's own rotation. */
+  squashed: Set<string>;
+  /** Part ids covered by a tint: the colour, and either a still amount or "animated". */
+  tinted: Map<string, { color: string; amount: number | "animated" }>;
   useStack: string[];
 }
 
@@ -239,17 +247,19 @@ function ringEl(part: ShapePart, ctx: Ctx, where: string): string {
  * in different directions from the same `x` track — which is a body coming
  * apart in the gallery and holding together in the game.
  */
-function partTransform(part: Part): { place: string; pose: string } {
+function partTransform(part: Part, split = false): { place: string; whole: string; rot?: string; scale?: string } {
   const [x, y] = part.at ?? [0, 0];
-  const t: string[] = [];
-  if (part.rot) t.push(`rotate(${fmt(part.rot)})`);
+  const rot = part.rot ? `rotate(${fmt(part.rot)})` : "";
+  let scale = "";
   if (part.scale !== undefined) {
     const [sx, sy] = typeof part.scale === "number" ? [part.scale, part.scale] : part.scale;
-    t.push(`scale(${fmt(sx)},${fmt(sy)})`);
+    scale = `scale(${fmt(sx)},${fmt(sy)})`;
   }
+  const attr = (t: string) => (t ? ` transform="${t}"` : "");
   return {
     place: x !== 0 || y !== 0 ? ` transform="translate(${fmt(x)},${fmt(y)})"` : "",
-    pose: t.length ? ` transform="${t.join(" ")}"` : "",
+    whole: attr([rot, scale].filter(Boolean).join(" ")),
+    ...(split ? { rot: attr(rot), scale: attr(scale) } : {}),
   };
 }
 
@@ -302,14 +312,34 @@ function renderRepeat(part: RepeatPart, ctx: Ctx, where: string, ownerId: string
 }
 
 function renderPart(part: Part, ctx: Ctx, where: string, owner: Asset): string {
-  let content = renderPartContent(part, ctx, where, owner);
-  const { place, pose } = partTransform(part);
+  const content = renderPartContent(part, ctx, where, owner);
+  const top = ctx.useStack.length === 0;
+  const { place, ...pose } = partTransform(part, top && ctx.squashed.has(part.id));
   // Turned and sized first, then offset by the animation, then placed: the
   // order the adapters pose a node in. Uniform scale commutes with rotation, so
-  // an animated scale reads the same on either side of the static one.
-  let body = pose ? `<g${pose}>${content}</g>` : content;
-  if (ctx.animated.has(part.id) && ctx.useStack.length === 0)
-    body = `<g class="aw-${ctx.uid}-${part.id}">${body}</g>`;
+  // an animated scale reads the same on either side of the static one; a
+  // squash does not, so it goes inside the part's own turn (`as-`), the way an
+  // engine image stretches along its own axes.
+  let inner: string;
+  if (pose.scale !== undefined) {
+    const sized = pose.scale ? `<g${pose.scale}>${content}</g>` : content;
+    const squash = `<g class="as-${ctx.uid}-${part.id}">${sized}</g>`;
+    inner = pose.rot ? `<g${pose.rot}>${squash}</g>` : squash;
+  } else inner = pose.whole ? `<g${pose.whole}>${content}</g>` : content;
+  const tint = top ? ctx.tinted.get(part.id) : undefined;
+  if (tint) {
+    // A tint is the part's silhouette in one colour, laid over it: flood the
+    // colour and keep it only where the part has paint. Over an opaque part,
+    // the cover at `amount` is the fill mixed that far toward the colour.
+    const fid = `tint-${ctx.uid}-${part.id}`;
+    ctx.defs.push(
+      `<filter id="${fid}" filterUnits="userSpaceOnUse" x="-1000" y="-1000" width="2000" height="2000"><feFlood flood-color="${tint.color}"/><feComposite in2="SourceGraphic" operator="in"/></filter>`,
+    );
+    const cover = tint.amount === "animated" ? ` class="tw-${ctx.uid}-${part.id}"` : ` opacity="${fmt(tint.amount)}"`;
+    inner += `<g filter="url(#${fid})"${cover}>${inner}</g>`;
+  }
+  let body = inner;
+  if (ctx.animated.has(part.id) && top) body = `<g class="aw-${ctx.uid}-${part.id}">${body}</g>`;
   let attrs = place;
   if (part.opacity !== undefined) {
     const o = resolveNumber(part.opacity, ctx.reg.tokens.alpha, "alpha");
@@ -329,35 +359,52 @@ const EASE: Record<string, string> = {
   backOut: "cubic-bezier(0.34,1.56,0.64,1)",
 };
 
-/**
- * The same easing the engine adapters use, so a value sampled here and a value
- * posed there agree. Only needed when one part carries tracks that do not share
- * a timeline — see animCss.
- */
-const EASE_FN: Record<string, (t: number) => number> = {
-  linear: (t) => t,
-  sine: (t) => 0.5 - 0.5 * Math.cos(Math.PI * t),
-  backOut: (t) => {
-    const c = 1.70158;
-    const u = t - 1;
-    return 1 + (c + 1) * u * u * u + c * u * u;
-  },
-};
+const SQUASH = new Set(["scaleX", "scaleY"]);
 
-/** A track's value at an arbitrary time, interpolated with its own ease. */
-function valueAt(tr: Anim["tracks"][number], t: number): number {
-  const keys = tr.keys;
-  if (t <= keys[0][0]) return keys[0][1];
-  for (let i = 1; i < keys.length; i++) {
-    const [t1, v1] = keys[i];
-    const [t0, v0] = keys[i - 1];
-    if (t <= t1) {
-      const span = t1 - t0;
-      if (span <= 0) return v1;
-      return v0 + (v1 - v0) * EASE_FN[tr.ease ?? "sine"]((t - t0) / span);
+/**
+ * The times a set of tracks has to be sampled at to become one CSS timeline.
+ * Tracks CSS can ease itself between their own keys need only the key times;
+ * a per-key ease, or one CSS has no curve for, is sampled through each segment
+ * and drawn linear between samples — a `hold` gets a sample a hair before the
+ * next key, so it steps instead of sliding.
+ */
+function sampleTimes(tracks: Track[]): number[] {
+  const set = new Set<number>(tracks.flatMap((tr) => tr.keys.map((k) => k[0])));
+  for (const tr of tracks) {
+    if (!needsSampling(tr)) continue;
+    for (let i = 1; i < tr.keys.length; i++) {
+      const t0 = tr.keys[i - 1][0];
+      const t1 = tr.keys[i][0];
+      if (t1 <= t0) continue;
+      for (let k = 1; k < 12; k++) set.add(Math.round((t0 + ((t1 - t0) * k) / 12) * 1e4) / 1e4);
+      set.add(Math.round((t1 - 1e-4) * 1e4) / 1e4);
     }
   }
-  return keys[keys.length - 1][1];
+  return [...set].sort((a, b) => a - b);
+}
+
+/** One @keyframes rule and its class, running on the tracks' own ease when they all agree on it. */
+function cssRule(
+  cls: string,
+  name: string,
+  tracks: Track[],
+  duration: number,
+  decls: (t: number) => string[],
+): string {
+  const times = sampleTimes(tracks);
+  const kf = times.map((t) => `${fmt(t * 100)}% { ${decls(t).join("; ")} }`).join(" ");
+  // Whose ease the rule runs on. One track, or several agreeing on both ease
+  // and key times, and the browser re-eases between the same points the
+  // author stated — identical to what a single track used to emit. Anything
+  // else is already sampled with each track's own ease above, so the rule
+  // goes linear between those samples rather than easing them twice.
+  const first = tracks[0];
+  const uniform =
+    !tracks.some(needsSampling) &&
+    tracks.every((tr) => (tr.ease ?? "sine") === (first.ease ?? "sine")) &&
+    tracks.every((tr) => tr.keys.length === times.length);
+  const timing = uniform ? EASE[first.ease ?? "sine"] : EASE.linear;
+  return `@keyframes ${name} { ${kf} } .${cls} { animation: ${name} ${fmt(duration)}s ${timing} infinite; }\n`;
 }
 
 /**
@@ -400,43 +447,81 @@ function animCss(anim: Anim, animName: string, ctx: Ctx, where: string, parts: P
       }
       byProp.set(tr.prop, tr);
     }
-    ctx.animated.add(pid);
     const x = byProp.get("x");
     const y = byProp.get("y");
     const rot = byProp.get("rot");
     const scale = byProp.get("scale");
+    const sx = byProp.get("scaleX");
+    const sy = byProp.get("scaleY");
     const opacity = byProp.get("opacity");
+    const tint = byProp.get("tint");
 
-    // CSS gives one transform and one timing function per rule, so several
-    // tracks have to become one timeline. Sample every key time any of them
-    // states, and read each track at those times through its own ease.
-    const times = [...new Set(tracks.flatMap((tr) => tr.keys.map((k) => k[0])))].sort((a, b) => a - b);
-    const kf = times
-      .map((t) => {
+    // `scale` turns with the part either side of its rotation; a squash only
+    // means anything along the part's own axes, so the two do not mix.
+    if (scale && (sx || sy))
+      ctx.issues.push({
+        level: "error",
+        where,
+        msg: `animation "${animName}": part "${pid}" animates "scale" and a squash ("scaleX"/"scaleY") — use the squash pair alone`,
+      });
+
+    const moving = [x, y, rot, opacity, sx || sy ? undefined : scale].filter((t): t is Track => !!t);
+    if (moving.length) {
+      ctx.animated.add(pid);
+      css += cssRule(`aw-${ctx.uid}-${pid}`, `kf-${ctx.uid}-${pid}`, moving, anim.duration, (t) => {
         const tf: string[] = [];
-        if (x || y) tf.push(`translate(${fmt(x ? valueAt(x, t) : 0)}px, ${fmt(y ? valueAt(y, t) : 0)}px)`);
-        if (rot) tf.push(`rotate(${fmt(valueAt(rot, t))}deg)`);
-        if (scale) tf.push(`scale(${fmt(valueAt(scale, t))})`);
+        if (x || y) tf.push(`translate(${fmt(x ? trackValue(x, t) : 0)}px, ${fmt(y ? trackValue(y, t) : 0)}px)`);
+        if (rot) tf.push(`rotate(${fmt(trackValue(rot, t))}deg)`);
+        if (scale && !(sx || sy)) tf.push(`scale(${fmt(trackValue(scale, t))})`);
         const decls: string[] = [];
         if (tf.length) decls.push(`transform: ${tf.join(" ")}`);
-        if (opacity) decls.push(`opacity: ${fmt(valueAt(opacity, t))}`);
-        return `${fmt(t * 100)}% { ${decls.join("; ")} }`;
-      })
-      .join(" ");
-
-    // Whose ease the rule runs on. One track, or several agreeing on both ease
-    // and key times, and the browser re-eases between the same points the
-    // author stated — identical to what a single track used to emit. Anything
-    // else is already sampled with each track's own ease above, so the rule
-    // goes linear between those samples rather than easing them twice.
-    const first = tracks[0];
-    const uniform =
-      tracks.every((tr) => (tr.ease ?? "sine") === (first.ease ?? "sine")) &&
-      tracks.every((tr) => tr.keys.length === times.length);
-    const timing = uniform ? EASE[first.ease ?? "sine"] : EASE.linear;
-    css += `@keyframes kf-${ctx.uid}-${pid} { ${kf} } .aw-${ctx.uid}-${pid} { animation: kf-${ctx.uid}-${pid} ${fmt(anim.duration)}s ${timing} infinite; }\n`;
+        if (opacity) decls.push(`opacity: ${fmt(trackValue(opacity, t))}`);
+        return decls;
+      });
+    }
+    if (sx || sy) {
+      ctx.squashed.add(pid);
+      const pair = [sx, sy].filter((t): t is Track => !!t);
+      css += cssRule(`as-${ctx.uid}-${pid}`, `kfs-${ctx.uid}-${pid}`, pair, anim.duration, (t) => [
+        `transform: scale(${fmt(sx ? trackValue(sx, t) : 1)}, ${fmt(sy ? trackValue(sy, t) : 1)})`,
+      ]);
+    }
+    if (tint) {
+      const color = tintColor(tint, ctx, `${where} animation "${animName}"`);
+      if (color) {
+        ctx.tinted.set(pid, { color, amount: "animated" });
+        css += cssRule(`tw-${ctx.uid}-${pid}`, `kft-${ctx.uid}-${pid}`, [tint], anim.duration, (t) => [
+          `opacity: ${fmt(Math.max(0, Math.min(1, trackValue(tint, t))))}`,
+        ]);
+      }
+    }
+    for (const tr of tracks)
+      if (tr.to !== undefined && tr.prop !== "tint")
+        ctx.issues.push({ level: "error", where, msg: `animation "${animName}": "${pid}.${tr.prop}" has a "to" colour, which only a tint track reads` });
   }
+  if (anim.cues)
+    for (const [name, t] of Object.entries(anim.cues))
+      if (t >= 1)
+        ctx.issues.push({
+          level: "warn",
+          where,
+          msg: `animation "${animName}": cue "${name}" sits at t=1, which is the clip's first frame again — put it at the moment itself`,
+        });
   return css;
+}
+
+/** A tint track's colour, resolved, or an issue saying why not. */
+function tintColor(tr: Track, ctx: Ctx, where: string): string | undefined {
+  if (tr.to === undefined) {
+    ctx.issues.push({ level: "error", where, msg: `"${tr.part}.tint" has no "to" colour to tint toward` });
+    return undefined;
+  }
+  const c = resolveColor(tr.to, ctx.reg.tokens);
+  if (!c.ok) {
+    ctx.issues.push({ level: "error", where, msg: `"${tr.part}.tint" to: ${c.error}` });
+    return undefined;
+  }
+  return c.value;
 }
 
 // ---------------------------------------------------------------- entry
@@ -449,7 +534,12 @@ export function renderSVG(
   const issues: Issue[] = [];
   const asset = opts.variant ? applyVariant(assetIn, opts.variant, issues) : assetIn;
   const uid = opts.uid ?? asset.id.replace(/\./g, "-") + (opts.variant ? `--${opts.variant}` : "");
-  const ctx: Ctx = { reg, issues, defs: [], uid, animated: new Set(), useStack: [] };
+  const ctx: Ctx = { reg, issues, defs: [], uid, animated: new Set(), squashed: new Set(), tinted: new Map(), useStack: [] };
+  for (const [pid, tint] of Object.entries(opts.tints ?? {})) {
+    const c = resolveColor(tint.color, reg.tokens);
+    if (c.ok) ctx.tinted.set(pid, { color: c.value, amount: tint.amount });
+    else issues.push({ level: "error", where: asset.id, msg: `tint on "${pid}": ${c.error}` });
+  }
 
   const where = opts.variant ? `${asset.id}#${opts.variant}` : asset.id;
   let css = "";
@@ -475,6 +565,11 @@ export function renderSVG(
     const j = asset.skeleton.joints;
     for (const [a, b] of asset.skeleton.bones ?? [])
       for (const n of [a, b]) if (!j[n]) issues.push({ level: "error", where, msg: `skeleton: bone names no joint "${n}"` });
+    for (const [name, sock] of Object.entries(asset.skeleton.sockets ?? {})) {
+      if (!j[sock.joint]) issues.push({ level: "error", where, msg: `skeleton: socket "${name}" names no joint "${sock.joint}"` });
+      if (sock.part && !assetIn.parts.some((p) => p.id === sock.part))
+        issues.push({ level: "error", where, msg: `skeleton: socket "${name}" rides no part "${sock.part}"` });
+    }
     if (opts.skeleton) bones = skeletonOverlay(asset.skeleton, uid);
   }
 

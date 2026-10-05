@@ -42,14 +42,28 @@ export interface IRNode {
   children: IRNode[];
 }
 
+export type IREase = "linear" | "sine" | "backOut" | "hold" | "quadIn" | "quadOut" | "expoOut";
+
 export interface IRAnimTrack {
   part: string;
-  prop: "x" | "y" | "rot" | "scale" | "opacity";
-  keys: [number, number][];
-  ease?: "linear" | "sine" | "backOut";
+  /** scaleX/scaleY squash about the part's own axes; tint covers it `v` of the way in `to` */
+  prop: "x" | "y" | "rot" | "scale" | "scaleX" | "scaleY" | "opacity" | "tint";
+  /** [t 0..1, value, ease?] — a key's ease shapes the segment leaving it */
+  keys: ([number, number] | [number, number, IREase])[];
+  ease?: IREase;
+  to?: Rgba;
 }
 
-export interface IRAnim { duration: number; tracks: IRAnimTrack[]; description?: string }
+export interface IRAnim {
+  duration: number;
+  tracks: IRAnimTrack[];
+  description?: string;
+  /** named moments, 0..1 of the clip: `release`, `contact`… (see cueTime / SheetResult.cues) */
+  cues?: Record<string, number>;
+}
+
+/** An attachment point: where it is at rest (asset space), and the part it rides. */
+export interface IRSocket { at: [number, number]; part?: string }
 
 export interface IRAsset {
   format: string;
@@ -60,6 +74,7 @@ export interface IRAsset {
   nodes: IRNode[];
   variants: Record<string, { scale: number; nodes: IRNode[] }>;
   animations: Record<string, IRAnim>;
+  sockets?: Record<string, IRSocket>;
 }
 
 // ---------------------------------------------------------------- structural Phaser types
@@ -77,6 +92,8 @@ export interface ImageLike {
   x: number; y: number; rotation: number; alpha: number;
   setOrigin(x: number, y: number): unknown;
   setScale(x: number, y: number): unknown;
+  /** Only needed for clips with `tint` tracks: the cover is a white silhouette tinted to the colour. */
+  setTint?(color: number): unknown;
 }
 
 export interface ContainerLike { add(child: unknown): unknown }
@@ -120,6 +137,12 @@ function trs(at: [number, number], rotDeg: number, scale: [number, number]): Mat
   const r = (rotDeg * Math.PI) / 180;
   const cos = Math.cos(r), sin = Math.sin(r);
   return [cos * scale[0], sin * scale[0], -sin * scale[1], cos * scale[1], at[0], at[1]];
+}
+
+function invert(m: Mat): Mat {
+  const det = m[0] * m[3] - m[1] * m[2] || 1e-9;
+  const a = m[3] / det, b = -m[1] / det, c = -m[2] / det, d = m[0] / det;
+  return [a, b, c, d, -(a * m[4] + c * m[5]), -(b * m[4] + d * m[5])];
 }
 
 function apply(m: Mat, x: number, y: number): { x: number; y: number } {
@@ -313,30 +336,80 @@ function nodeBounds(node: IRNode, parent: Mat, box: { minX: number; minY: number
 
 interface PartHandle {
   img: ImageLike;
+  /** the tint cover, for a part some clip tints */
+  cover?: ImageLike;
   baseX: number; baseY: number; baseRot: number;
   baseSX: number; baseSY: number; baseAlpha: number;
   sign: number; // -1 for mirrored copies: x/rot offsets flip so both sides stay symmetric
 }
 
-const EASE_FN: Record<string, (t: number) => number> = {
+/**
+ * The eases, and a track's value at a point in the clip. A copy of src/anim.ts
+ * (this file stays one drop-in with no imports); scripts/test-phaser-adapter.ts
+ * samples every ease and every track in the library through both and fails on
+ * the first value that differs.
+ */
+const EASE_FN: Record<IREase, (t: number) => number> = {
   linear: (t) => t,
   sine: (t) => 0.5 - 0.5 * Math.cos(Math.PI * t),
   backOut: (t) => { const c = 1.70158; const u = t - 1; return 1 + (c + 1) * u * u * u + c * u * u; },
+  hold: (t) => (t >= 1 ? 1 : 0),
+  quadIn: (t) => t * t,
+  quadOut: (t) => 1 - (1 - t) * (1 - t),
+  expoOut: (t) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t)),
 };
 
-function evalTrack(track: IRAnimTrack, progress: number): number {
+/** A track's value at `progress` (0..1 through the clip). */
+export function trackValue(track: IRAnimTrack, progress: number): number {
   const keys = track.keys;
   if (progress <= keys[0][0]) return keys[0][1];
   for (let i = 1; i < keys.length; i++) {
-    if (progress <= keys[i][0]) {
+    const [t1, v1] = keys[i];
+    if (progress <= t1) {
       const [t0, v0] = keys[i - 1];
-      const [t1, v1] = keys[i];
-      const span = t1 - t0 || 1;
-      const f = EASE_FN[track.ease ?? "sine"]((progress - t0) / span);
-      return v0 + (v1 - v0) * f;
+      const span = t1 - t0;
+      if (span <= 0) return v1;
+      const ease = keys[i - 1][2] ?? track.ease ?? "sine";
+      return v0 + (v1 - v0) * EASE_FN[ease]((progress - t0) / span);
     }
   }
   return keys[keys.length - 1][1];
+}
+
+const evalTrack = trackValue;
+
+/** A cue's time in seconds into the clip, or undefined when the clip has no such cue. */
+export function cueTime(ir: IRAsset, animation: string, cue: string): number | undefined {
+  const anim = ir.animations[animation];
+  const t = anim?.cues?.[cue];
+  return anim && t !== undefined ? t * anim.duration : undefined;
+}
+
+/**
+ * The frame of an n-frame sheet on which a cue has happened. Frame f shows the
+ * clip at f/n (see bakeSheet), so this is the first frame at or past the cue.
+ */
+export function cueFrame(t: number, frames: number): number {
+  return Math.min(frames - 1, Math.max(0, Math.ceil(t * frames - 1e-9)));
+}
+
+/** Mix a colour `f` of the way toward another, keeping its own alpha. */
+function mixRgba(c: Rgba, to: Rgba, f: number): Rgba {
+  return [c[0] + (to[0] - c[0]) * f, c[1] + (to[1] - c[1]) * f, c[2] + (to[2] - c[2]) * f, c[3]];
+}
+
+/** A node subtree repainted: every fill and stroke mapped through `paint`. */
+function repaint(node: IRNode, paint: (c: Rgba) => Rgba): IRNode {
+  return {
+    ...node,
+    draws: node.draws.map((d) => {
+      const out = { ...d } as IRDraw & { fill?: Rgba; stroke?: IRStroke };
+      if (out.fill) out.fill = paint(out.fill);
+      if ("stroke" in d && d.stroke) out.stroke = { ...d.stroke, color: paint(d.stroke.color) };
+      return out as IRDraw;
+    }),
+    children: node.children.map((c) => repaint(c, paint)),
+  };
 }
 
 export interface Rig {
@@ -362,7 +435,9 @@ export interface RigOptions {
 
 /**
  * Build a Container with one Image per top-level IR node (per-part textures baked
- * on first use) and a keyframe player driving x/y/rot/scale/opacity offsets.
+ * on first use) and a keyframe player driving x/y/rot/scale/squash/opacity
+ * offsets. A part some clip tints gets a second Image over it — its silhouette
+ * baked white, tinted to the clip's colour, shown at the tint's amount.
  */
 export function buildRig(scene: SceneLike, ir: IRAsset, opts: RigOptions = {}): Rig {
   const { nodes, vScale } = nodesOf(ir, opts.variant);
@@ -371,6 +446,9 @@ export function buildRig(scene: SceneLike, ir: IRAsset, opts: RigOptions = {}): 
 
   const container = scene.add.container(0, 0);
   const parts = new Map<string, PartHandle[]>();
+  const tinted = new Set<string>();
+  for (const anim of Object.values(ir.animations))
+    for (const tr of anim.tracks) if (tr.prop === "tint") tinted.add(tr.part);
 
   nodes.forEach((node, i) => {
     // bake the node subtree in local space (identity transform), then let the
@@ -381,29 +459,45 @@ export function buildRig(scene: SceneLike, ir: IRAsset, opts: RigOptions = {}): 
     if (box.minX > box.maxX) return; // empty node
     const w = Math.max(1, Math.ceil((box.maxX - box.minX) * res));
     const h = Math.max(1, Math.ceil((box.maxY - box.minY) * res));
-    const key = `${prefix}/${node.id}#${i}`;
-    if (!opts.hasTexture?.(key)) {
+    const origin: Mat = [res, 0, 0, res, -box.minX * res, -box.minY * res];
+    const bake = (key: string, n: IRNode) => {
+      if (opts.hasTexture?.(key)) return;
       const g = scene.add.graphics();
-      drawNode(g, local, [res, 0, 0, res, -box.minX * res, -box.minY * res], 1);
+      drawNode(g, n, origin, 1);
       g.generateTexture(key, w, h);
       g.destroy();
-    }
+    };
+    const key = `${prefix}/${node.id}#${i}`;
+    bake(key, local);
 
     const sign = node.scale[0] < 0 ? -1 : 1;
-    const img = scene.add.image(node.at[0] * vScale, node.at[1] * vScale, key);
-    img.setOrigin((-box.minX * res) / w, (-box.minY * res) / h);
-    const sx = (sign * vScale) / res;
-    const sy = vScale / res;
-    img.setScale(sx, sy);
-    img.rotation = (sign * node.rot * Math.PI) / 180;
+    const place = (img: ImageLike) => {
+      img.setOrigin((-box.minX * res) / w, (-box.minY * res) / h);
+      img.setScale((sign * vScale) / res, vScale / res);
+      img.x = node.at[0] * vScale;
+      img.y = node.at[1] * vScale;
+      img.rotation = (sign * node.rot * Math.PI) / 180;
+      return img;
+    };
+    const img = place(scene.add.image(node.at[0] * vScale, node.at[1] * vScale, key));
     img.alpha = node.opacity;
     container.add(img);
 
+    let cover: ImageLike | undefined;
+    if (tinted.has(node.id)) {
+      const ckey = `${key}~white`;
+      bake(ckey, repaint(local, (c) => [1, 1, 1, c[3]]));
+      cover = place(scene.add.image(node.at[0] * vScale, node.at[1] * vScale, ckey));
+      cover.alpha = 0;
+      container.add(cover);
+    }
+
     const handle: PartHandle = {
       img,
+      cover,
       baseX: node.at[0] * vScale, baseY: node.at[1] * vScale,
       baseRot: (sign * node.rot * Math.PI) / 180,
-      baseSX: sx, baseSY: sy, baseAlpha: node.opacity,
+      baseSX: (sign * vScale) / res, baseSY: vScale / res, baseAlpha: node.opacity,
       sign,
     };
     parts.set(node.id, [...(parts.get(node.id) ?? []), handle]);
@@ -414,22 +508,36 @@ export function buildRig(scene: SceneLike, ir: IRAsset, opts: RigOptions = {}): 
   let onComplete: (() => void) | undefined;
   let t = 0;
 
+  function pose(hd: PartHandle, p: PartPose): void {
+    hd.img.x = hd.baseX + p.dx * vScale * hd.sign;
+    hd.img.y = hd.baseY + p.dy * vScale;
+    hd.img.rotation = hd.baseRot + (p.drot * Math.PI * hd.sign) / 180;
+    hd.img.setScale(hd.baseSX * p.s * p.sx, hd.baseSY * p.s * p.sy);
+    hd.img.alpha = hd.baseAlpha * p.alpha;
+    if (hd.cover) {
+      hd.cover.x = hd.img.x; hd.cover.y = hd.img.y; hd.cover.rotation = hd.img.rotation;
+      hd.cover.setScale(hd.baseSX * p.s * p.sx, hd.baseSY * p.s * p.sy);
+      hd.cover.alpha = hd.img.alpha * p.tint;
+      if (p.tintTo) hd.cover.setTint?.(colorInt(p.tintTo));
+    }
+  }
+
+  function rest(): void {
+    for (const handles of parts.values()) for (const hd of handles) pose(hd, restPose());
+  }
+
   function applyProgress(progress: number): void {
     if (!current) return;
+    // Every part the clip touches is posed from rest each frame, so two tracks
+    // on one part (a squash and a turn) compose instead of the last one winning.
+    const posed = new Map<string, PartPose>();
     for (const track of current.tracks) {
-      const handles = parts.get(track.part);
-      if (!handles) continue;
-      const v = evalTrack(track, progress);
-      for (const hd of handles) {
-        switch (track.prop) {
-          case "x": hd.img.x = hd.baseX + v * vScale * hd.sign; break;
-          case "y": hd.img.y = hd.baseY + v * vScale; break;
-          case "rot": hd.img.rotation = hd.baseRot + (v * Math.PI * hd.sign) / 180; break;
-          case "scale": hd.img.setScale(hd.baseSX * v, hd.baseSY * v); break;
-          case "opacity": hd.img.alpha = hd.baseAlpha * v; break;
-        }
-      }
+      if (!parts.has(track.part)) continue;
+      let p = posed.get(track.part);
+      if (!p) posed.set(track.part, (p = restPose()));
+      foldTrack(p, track, evalTrack(track, progress));
     }
+    for (const [id, p] of posed) for (const hd of parts.get(id)!) pose(hd, p);
   }
 
   return {
@@ -438,6 +546,8 @@ export function buildRig(scene: SceneLike, ir: IRAsset, opts: RigOptions = {}): 
     play(name, o = {}) {
       const anim = ir.animations[name];
       if (!anim) throw new Error(`polygraphics: asset "${ir.id}" has no animation "${name}"`);
+      // a part the last clip moved and this one does not goes back to rest
+      rest();
       current = anim;
       loop = o.loop ?? true;
       onComplete = o.onComplete;
@@ -446,11 +556,7 @@ export function buildRig(scene: SceneLike, ir: IRAsset, opts: RigOptions = {}): 
     },
     stop() {
       current = null;
-      for (const handles of parts.values())
-        for (const hd of handles) {
-          hd.img.x = hd.baseX; hd.img.y = hd.baseY; hd.img.rotation = hd.baseRot;
-          hd.img.setScale(hd.baseSX, hd.baseSY); hd.img.alpha = hd.baseAlpha;
-        }
+      rest();
     },
     tick(dt) {
       if (!current) return;
@@ -469,13 +575,34 @@ export function buildRig(scene: SceneLike, ir: IRAsset, opts: RigOptions = {}): 
   };
 }
 
+/** One part's offsets from its authored transform, at one moment of a clip. */
+interface PartPose { dx: number; dy: number; drot: number; s: number; sx: number; sy: number; alpha: number; tint: number; tintTo?: Rgba }
+
+function restPose(): PartPose {
+  return { dx: 0, dy: 0, drot: 0, s: 1, sx: 1, sy: 1, alpha: 1, tint: 0 };
+}
+
+function foldTrack(p: PartPose, track: IRAnimTrack, v: number): void {
+  switch (track.prop) {
+    case "x": p.dx = v; break;
+    case "y": p.dy = v; break;
+    case "rot": p.drot = v; break;
+    case "scale": p.s = v; break;
+    case "scaleX": p.sx = v; break;
+    case "scaleY": p.sy = v; break;
+    case "opacity": p.alpha = v; break;
+    case "tint": p.tint = Math.max(0, Math.min(1, v)); p.tintTo = track.to; break;
+  }
+}
+
 // ---------------------------------------------------------------- spritesheet
 
 /**
  * Applies an animation's tracks to a copy of the node list at `progress` (0..1).
  * Offsets are additive over each node's authored transform, matching buildRig,
  * and mirrored copies (which share their id) get x and rot negated so a pair
- * stays symmetric.
+ * stays symmetric. A squash scales along the node's own axes; a tint mixes its
+ * colours toward the tint's.
  *
  * Exported so a consumer can ask where a part is on a frame of a baked sheet
  * without drawing it: `bakeSheet` poses frame f of n at progress f / n.
@@ -492,7 +619,16 @@ export function poseNodes(nodes: IRNode[], anim: IRAnim, progress: number): IRNo
         case "y": n.at = [n.at[0], n.at[1] + v]; break;
         case "rot": n.rot += v * sign; break;
         case "scale": n.scale = [n.scale[0] * v, n.scale[1] * v]; break;
+        case "scaleX": n.scale = [n.scale[0] * v, n.scale[1]]; break;
+        case "scaleY": n.scale = [n.scale[0], n.scale[1] * v]; break;
         case "opacity": n.opacity *= v; break;
+        case "tint": {
+          // the colour mixed toward the tint: what the rig's cover shows over an opaque part
+          const f = Math.max(0, Math.min(1, v));
+          const to = track.to;
+          if (to && f > 0) Object.assign(n, repaint(n, (c) => mixRgba(c, to, f)));
+          break;
+        }
       }
     }
   }
@@ -517,6 +653,8 @@ export interface SheetOptions {
 export interface SheetResult {
   key: string;
   frames: number;
+  /** each of the clip's cues as the frame it has happened on (cueFrame) */
+  cues: Record<string, number>;
   cell: [number, number];
   texture: [number, number];
 }
@@ -569,7 +707,45 @@ export function bakeSheet(scene: SheetSceneLike, ir: IRAsset, opts: SheetOptions
     });
   }
 
-  return { key, frames, cell: [cellW, cellH], texture: [cols * cellW, rows * cellH] };
+  const cues: Record<string, number> = {};
+  for (const [name, ct] of Object.entries(anim.cues ?? {})) cues[name] = cueFrame(ct, frames);
+  return { key, frames, cues, cell: [cellW, cellH], texture: [cols * cellW, rows * cellH] };
+}
+
+// ---------------------------------------------------------------- sockets
+
+export interface SocketOptions {
+  variant?: string;
+  /** a clip to pose the socket's part in, and how far through it (0..1) */
+  animation?: string;
+  progress?: number;
+}
+
+/**
+ * Where a socket is, in the asset's own space (origin at the anchor, variant
+ * scale applied) — multiply by the sprite's scale and flip x for a sprite
+ * facing left. A socket that rides a part goes where the clip takes that part
+ * at `progress`: the same pose `bakeSheet` draws, so a projectile spawned at
+ * the socket on a cue frame leaves from the hand the frame shows.
+ * Undefined when the asset has no such socket.
+ */
+export function socketAt(ir: IRAsset, name: string, opts: SocketOptions = {}): { x: number; y: number } | undefined {
+  const sock = ir.sockets?.[name];
+  if (!sock) return undefined;
+  const { nodes, vScale } = nodesOf(ir, opts.variant);
+  let { x, y } = { x: sock.at[0], y: sock.at[1] };
+  const anim = opts.animation ? ir.animations[opts.animation] : undefined;
+  if (opts.animation && !anim) throw new Error(`polygraphics: asset "${ir.id}" has no animation "${opts.animation}"`);
+  if (sock.part && anim) {
+    const node = nodes.find((n) => n.id === sock.part && n.scale[0] >= 0) ?? nodes.find((n) => n.id === sock.part);
+    if (node) {
+      const posed = poseNodes([node], anim, opts.progress ?? 0)[0];
+      const rest = trs(node.at, node.rot, node.scale);
+      const now = trs(posed.at, posed.rot, posed.scale);
+      ({ x, y } = apply(mul(now, invert(rest)), x, y));
+    }
+  }
+  return { x: x * vScale, y: y * vScale };
 }
 
 // ---------------------------------------------------------------- octants

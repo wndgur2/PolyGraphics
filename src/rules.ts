@@ -32,7 +32,7 @@ const scopeText = (s: Scope) =>
   `${listOf(s.in)}${s.tagged?.length ? ` tagged ${listOf(s.tagged)}` : ""}${s.unless?.length ? ` unless ${listOf(s.unless)}` : ""}`;
 
 /** The moment a track last changes value. */
-function lastMove(keys: [number, number][]): { t: number; to: number } {
+function lastMove(keys: readonly (readonly [number, number, ...unknown[]])[]): { t: number; to: number } {
   let t = 0, to = keys[0][1];
   for (let i = 1; i < keys.length; i++) if (keys[i][1] !== keys[i - 1][1]) { t = keys[i][0]; to = keys[i][1]; }
   return { t, to };

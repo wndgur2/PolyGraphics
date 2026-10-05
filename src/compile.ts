@@ -59,7 +59,19 @@ export interface IRAsset {
   meta: Record<string, number>;
   nodes: IRNode[];
   variants: Record<string, { description: string; scale: number; nodes: IRNode[] }>;
-  animations: Record<string, Anim>;
+  animations: Record<string, IRAnim>;
+  /** Attachment points (skeleton `sockets`): rest position in asset space, and the part each rides. Absent when none. */
+  sockets?: Record<string, IRSocket>;
+}
+
+/** A clip as the document wrote it, except that a tint's `to` is a resolved colour. */
+export type IRAnim = Omit<Anim, "tracks"> & {
+  tracks: (Omit<Anim["tracks"][number], "to"> & { to?: Rgba })[];
+};
+
+export interface IRSocket {
+  at: [number, number];
+  part?: string;
 }
 
 function rgba(ref: string, t: Tokens, issues: Issue[], where: string): Rgba {
@@ -253,7 +265,45 @@ export function compileAsset(asset: Asset, reg: Registry): { ir: IRAsset; issues
     meta: { ...asset.meta, radius: derivedRadius(asset, reg) },
     nodes,
     variants,
-    animations: asset.animations ?? {},
+    animations: compileAnimations(asset, reg.tokens, issues),
   };
+  const sockets = compileSockets(asset);
+  if (sockets) ir.sockets = sockets;
   return { ir, issues };
+}
+
+/**
+ * Clips pass through as written — an adapter tweens what the author keyed —
+ * except that a tint's colour token is resolved like every other paint, so no
+ * adapter has to carry the palette. A clip with no tint is the same object.
+ */
+function compileAnimations(asset: Asset, t: Tokens, issues: Issue[]): Record<string, IRAnim> {
+  const out: Record<string, IRAnim> = {};
+  for (const [name, anim] of Object.entries(asset.animations ?? {})) {
+    if (!anim.tracks.some((tr) => tr.to !== undefined)) {
+      out[name] = anim as IRAnim;
+      continue;
+    }
+    out[name] = {
+      ...anim,
+      tracks: anim.tracks.map((tr) => {
+        if (tr.to === undefined) return tr as IRAnim["tracks"][number];
+        const { to, ...rest } = tr;
+        return { ...rest, to: rgba(to, t, issues, `${asset.id} animation "${name}" ${tr.part}.${tr.prop}`) };
+      }),
+    };
+  }
+  return out;
+}
+
+function compileSockets(asset: Asset): Record<string, IRSocket> | undefined {
+  const sk = asset.skeleton;
+  if (!sk?.sockets || Object.keys(sk.sockets).length === 0) return undefined;
+  const out: Record<string, IRSocket> = {};
+  for (const [name, s] of Object.entries(sk.sockets)) {
+    const at = sk.joints[s.joint];
+    if (!at) continue; // the renderer reports it
+    out[name] = s.part ? { at: [at[0], at[1]], part: s.part } : { at: [at[0], at[1]] };
+  }
+  return out;
 }

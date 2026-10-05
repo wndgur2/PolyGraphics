@@ -96,6 +96,15 @@ export type ShapePart = z.infer<typeof ShapePartSchema>;
 export type UsePart = z.infer<typeof UsePartSchema>;
 export type RepeatPart = z.infer<typeof RepeatPartSchema>;
 
+/**
+ * How a segment between two keys is shaped (see src/anim.ts). `hold` is a step:
+ * the value waits at its key until the next one, then arrives all at once —
+ * the held pose a stepped clip (an anticipation, a smear) is drawn from.
+ */
+export const EaseSchema = z.enum(["linear", "sine", "backOut", "hold", "quadIn", "quadOut", "expoOut"]);
+
+const cueName = z.string().regex(/^[a-z][a-z0-9_]*$/, "cue names are snake_case");
+
 export const AnimSchema = z.strictObject({
   description: z.string().optional(),
   duration: z.number().positive(), // seconds; loops
@@ -103,13 +112,26 @@ export const AnimSchema = z.strictObject({
     .array(
       z.strictObject({
         part: partId,
-        prop: z.enum(["x", "y", "rot", "scale", "opacity"]),
-        // keyframes: [t 0..1, value]; px for x/y, degrees for rot, factor for scale
-        keys: z.array(z.tuple([z.number().min(0).max(1), z.number()])).min(2),
-        ease: z.enum(["linear", "sine", "backOut"]).optional(), // default sine
+        // scaleX/scaleY squash and stretch a part about its own origin; `tint` is
+        // how far (0..1) the part is covered by `to`, its silhouette in that colour
+        prop: z.enum(["x", "y", "rot", "scale", "scaleX", "scaleY", "opacity", "tint"]),
+        // keyframes: [t 0..1, value, ease?]; px for x/y, degrees for rot, factor for
+        // scale, 0..1 for opacity and tint. A key's ease shapes the segment leaving it.
+        keys: z
+          .array(z.union([z.tuple([z.number().min(0).max(1), z.number()]), z.tuple([z.number().min(0).max(1), z.number(), EaseSchema])]))
+          .min(2),
+        ease: EaseSchema.optional(), // default sine
+        to: z.string().optional(), // colour token, for `tint` only
       }),
     )
     .min(1),
+  /**
+   * Named moments in the clip, as 0..1 of its length: `release` is when the
+   * weapon leaves the body, `contact` when a foot lands. A consumer times what
+   * the clip is for — the projectile, the dust — off these rather than off a
+   * number it keeps itself, which is how `meta.layCue` drifted from the lay.
+   */
+  cues: z.record(cueName, z.number().min(0).max(1)).optional(),
 });
 export type Anim = z.infer<typeof AnimSchema>;
 
@@ -151,6 +173,15 @@ const jointName = z.string().regex(/^[a-z][a-z0-9_]*$/, "joint names are snake_c
 export const SkeletonSchema = z.strictObject({
   joints: z.record(jointName, Vec2),
   bones: z.array(z.tuple([jointName, jointName])).optional(),
+  /**
+   * The points a consumer attaches things to — where a projectile leaves the
+   * body, where a spark sits. Unlike the rest of the skeleton these do reach
+   * the bake: each names a joint for where it is at rest and, optionally, the
+   * part it rides, so that when a clip swings that part the socket swings with
+   * it (`socketAt` in the adapter). Names are the game's to read, so they say
+   * what the point is for (`mouth`, `feeler_tip`), not where it is.
+   */
+  sockets: z.record(jointName, z.strictObject({ joint: jointName, part: partId.optional() })).optional(),
 });
 export type Skeleton = z.infer<typeof SkeletonSchema>;
 
