@@ -1,0 +1,109 @@
+{
+  "id": "ss.fx.whirl",
+  "name": "Whirl",
+  "description": "The disc a thrown Mandible's jaws sweep at speed, laid under the spinning sprite: two frames, empty and swept, alternating — a blur in frames, since a bake cannot blur. The game plays it while the jaws fly fast and stops it at the top of the throw, where they all but stop and the sharp jaws are all there is.",
+  "tags": [
+    "fx",
+    "kit"
+  ],
+  "size": [
+    20,
+    20
+  ],
+  "parts": [
+    {
+      "id": "ink",
+      "shape": {
+        "kind": "ring",
+        "r": 9.0,
+        "width": 3.4
+      },
+      "fill": "$ink@soft"
+    },
+    {
+      "id": "disc",
+      "shape": {
+        "kind": "circle",
+        "r": 8.6
+      },
+      "fill": "$chitin@ghost"
+    },
+    {
+      "id": "rim",
+      "shape": {
+        "kind": "ring",
+        "r": 8.4,
+        "width": 1.6
+      },
+      "fill": "$chitin.light@soft"
+    }
+  ],
+  "animations": {
+    "spin": {
+      "description": "off, on — two frames at whatever rate the game spins",
+      "duration": 0.1,
+      "tracks": [
+        {
+          "part": "ink",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.5,
+              1,
+              "hold"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "disc",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.5,
+              1,
+              "hold"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "rim",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.5,
+              1,
+              "hold"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

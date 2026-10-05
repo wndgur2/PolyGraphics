@@ -327,8 +327,60 @@ def build(name, row):
             tr.append({"part": pid, "prop": "rot", "keys": [[0, 0], [0.3 + 0.1 * i, a], [0.75, -a / 2], [1, 0]]})
         return {"description": row.get("idle_desc", "the body breathes under the coat"), "duration": I["duration"], "tracks": tr}
 
+    def hurt():
+        # The wound, laid over whatever the body is doing (the game plays it on a
+        # layer of its own): the head snaps back off the blow, the coat takes it
+        # flat and springs back, the visor goes pale for two frames. Arrives on
+        # a hold — a hit has no anticipation, it has already happened.
+        tr = [{"part": pid, "prop": "x", "keys": [[0, 0, "hold"], [0.05, -1.4, "quadOut"], [0.45, 0.3, "sine"], [1, 0]]} for pid in head_group]
+        tr += [{"part": pid, "prop": "y", "keys": [[0, 0, "hold"], [0.05, 0.6, "quadOut"], [1, 0]]} for pid in head_group]
+        tr += [{"part": "cloak", "prop": "scaleX", "keys": [[0, 1, "hold"], [0.05, 1.08, "quadOut"], [0.5, 0.98, "sine"], [1, 1]]},
+               {"part": "cloak", "prop": "scaleY", "keys": [[0, 1, "hold"], [0.05, 0.92, "quadOut"], [0.5, 1.02, "sine"], [1, 1]]}]
+        if any(p["id"] == "visor" for p in parts):
+            tr.append({"part": "visor", "prop": "tint", "to": "$frost.light2", "keys": [[0, 0, "hold"], [0.02, 1, "hold"], [0.2, 0, "linear"], [1, 0]]})
+        return {"description": "struck: the head snaps back, the coat flattens and springs, the visor goes pale — laid over the walk or the idle, never instead of them",
+                "duration": 0.2, "tracks": tr}
+
+    clips = {"idle": idle(), "walk": walk(), "hurt": hurt()}
+    # contact: where each foot has landed — the dust goes down on these
+    clips["walk"]["cues"] = {"contact": 0.25, "contact_far": 0.75}
+    for clip_name, make in row.get("clips", {}).items():
+        clips[clip_name] = make(ctx)
     return {"id": f"ss.char.{name}", "name": row.get("display", name.capitalize()), "description": row["description"], "tags": ["char"], "size": [32, 32], "meta": {"radius": 11},
-            "parts": parts, "skeleton": skeleton, "animations": {"idle": idle(), "walk": walk()}}
+            "parts": parts, "skeleton": skeleton, "animations": clips}
+
+# ============================================================== 4b. the casts — the weapon coming out of the body
+# A cast is the body throwing its own weapon (feelers docs/motion-vfx-plan.md
+# §7.2): anticipation on a hold, a release on `expoOut`, a recovery past rest and
+# home. It is played on the game's upper layer over the walk, so it touches only
+# what throws — never the feet. `release` is the frame the weapon leaves the body.
+
+def arin_cast(c):
+    """The Lash: both feelers coil back over the helmet, hold, and crack forward."""
+    tr = [
+        {"part": "feeler", "prop": "rot", "keys": [[0, 0, "quadOut"], [0.42, -34, "hold"], [0.56, -34, "expoOut"], [0.68, 82, "quadOut"], [0.84, 52, "sine"], [1, 0]]},
+        {"part": "feeler_far", "prop": "rot", "keys": [[0, 0, "quadOut"], [0.44, -30, "hold"], [0.58, -30, "expoOut"], [0.72, 76, "quadOut"], [0.88, 46, "sine"], [1, 0]]},
+        {"part": "head", "prop": "x", "keys": [[0, 0, "quadOut"], [0.42, -0.8, "hold"], [0.56, -0.8, "expoOut"], [0.68, 1.2, "sine"], [1, 0]]},
+        {"part": "visor", "prop": "x", "keys": [[0, 0, "quadOut"], [0.42, -0.8, "hold"], [0.56, -0.8, "expoOut"], [0.68, 1.2, "sine"], [1, 0]]},
+        {"part": "pack", "prop": "rot", "keys": [[0, 0, "quadOut"], [0.42, -6, "hold"], [0.56, -6, "expoOut"], [0.68, 5, "sine"], [1, 0]]},
+        {"part": "cloak", "prop": "scaleX", "keys": [[0, 1, "quadOut"], [0.42, 1.05, "hold"], [0.56, 1.05, "expoOut"], [0.68, 0.96, "sine"], [1, 1]]},
+        {"part": "cloak", "prop": "scaleY", "keys": [[0, 1, "quadOut"], [0.42, 0.95, "hold"], [0.56, 0.95, "expoOut"], [0.68, 1.04, "sine"], [1, 1]]},
+    ]
+    return {"description": "the Lash: the feelers coil back over the helmet and hold, the coat gathers, then both crack forward on the release and settle past rest",
+            "duration": 0.42, "cues": {"windup": 0.0, "release": 0.62}, "tracks": tr}
+
+def arin_cast_evo(c):
+    """Cowboy: the feelers whirl right round overhead, once forehand, once back."""
+    tr = [
+        {"part": "feeler", "prop": "rot", "keys": [[0, 0, "quadOut"], [0.16, -24, "expoOut"], [0.5, 336, "hold"], [0.52, 336, "expoOut"], [0.86, -24, "sine"], [1, 0]]},
+        {"part": "feeler_far", "prop": "rot", "keys": [[0, 0, "quadOut"], [0.18, -20, "expoOut"], [0.52, 340, "hold"], [0.54, 340, "expoOut"], [0.88, -20, "sine"], [1, 0]]},
+        {"part": "cloak", "prop": "rot", "keys": [[0, 0, "quadOut"], [0.16, -3, "sine"], [0.5, 5, "sine"], [0.86, -5, "sine"], [1, 0]]},
+        {"part": "cloak", "prop": "scaleY", "keys": [[0, 1, "quadOut"], [0.16, 0.94, "expoOut"], [0.3, 1.03, "sine"], [1, 1]]},
+        {"part": "head", "prop": "y", "keys": [[0, 0, "quadOut"], [0.16, 0.8, "expoOut"], [0.3, -0.6, "sine"], [1, 0]]},
+        {"part": "visor", "prop": "y", "keys": [[0, 0, "quadOut"], [0.16, 0.8, "expoOut"], [0.3, -0.6, "sine"], [1, 0]]},
+    ]
+    return {"description": "Cowboy: a crouch, then the feelers whirl right round over the helmet — forehand, a beat, backhand — the coat swinging half a beat behind",
+            "duration": 0.76, "cues": {"windup": 0.0, "release": 0.16, "release2": 0.52}, "tracks": tr}
 
 # ============================================================== 5. the eight
 SHARED = " Drawn from one skeleton and one facing (docs/character-rig-guide.md) by scripts/walker.py, with its own primary shape; the dead organ is worn as the clasp of the coat in the same place on all eight; flat token fills; radius 11."
@@ -340,6 +392,7 @@ CHARACTERS = {
             ("behind", P_("rack", (c["S"]["pack"][0] - 3.3, c["S"]["pack"][1] + 0.8), rect(2.2, 4.0), "$steel.light", stroke=hair), "head"),
         ],
         "idle_desc": "the body breathes under the coat; the dead feelers keep sweeping for a signal that never comes",
+        "clips": {"cast": arin_cast, "cast_evo": arin_cast_evo},
         "description": "A circle. The first expedition, on the day the last cartridge went in (A047): the bell coat, the egg helmet, and the prototype emitter — the biggest box any of the eight carries, its cartridge rack beside it, and the two dead feelers rising from its lid, swept back past the helmet as the crown of the silhouette. Arin is the only one of the eight with feelers: the antennae were the prototype's design (A004), and every mark after it vents through a tube — and they are the Lash. Grown long and thin into two whips that trail back past the helmet and crack forward, the weapon is the feelers themselves, which is what the game is named for: the sweep `ss.proj.slash` draws is a feeler's tip, and `ss.sample.whip` is a length of one. The hands have gone dark and hard — the saw does not mark them (A052), the Rattle's slate, the first of the body to lose its blood." + SHARED,
     },
     "sol": {

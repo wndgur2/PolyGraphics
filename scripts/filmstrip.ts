@@ -15,6 +15,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { Resvg } from "@resvg/resvg-js";
 import type { Anim, Asset, Part } from "../src/schema.js";
 import { renderSVG } from "../src/render.js";
+import { poseAsset } from "../src/anim.js";
 import { loadLibrary, ownerOf } from "../src/apps.js";
 
 const root = new URL("..", import.meta.url);
@@ -40,46 +41,9 @@ const tokens = owner.tokens;
 const anim = asset.animations?.[clip];
 if (!anim) throw new Error(`${id} has no animation "${clip}"`);
 
-/** A track's value at t, linearly between its keys — close enough to judge a pose by. */
-function valueAt(track: Anim["tracks"][number], t: number): number {
-  const keys = track.keys;
-  if (t <= keys[0][0]) return keys[0][1];
-  for (let i = 1; i < keys.length; i++) {
-    const [t1, v1] = keys[i];
-    if (t > t1) continue;
-    const [t0, v0] = keys[i - 1];
-    const k = t1 === t0 ? 1 : (t - t0) / (t1 - t0);
-    return v0 + (v1 - v0) * k;
-  }
-  return keys[keys.length - 1][1];
-}
-
-/** The document posed at t: every track folded into its part's own transform. */
-function poseAt(t: number): Asset {
-  const parts: Part[] = asset!.parts.map((p) => ({ ...p }));
-  const byId = new Map(parts.map((p) => [p.id, p]));
-  for (const track of anim!.tracks) {
-    const p = byId.get(track.part);
-    if (!p) continue;
-    const v = valueAt(track, t);
-    const [x, y] = p.at ?? [0, 0];
-    switch (track.prop) {
-      case "x": p.at = [x + v, y]; break;
-      case "y": p.at = [x, y + v]; break;
-      case "rot": p.rot = (p.rot ?? 0) + v; break;
-      case "scale": {
-        const s = p.scale ?? 1;
-        p.scale = typeof s === "number" ? Math.max(s * v, 0.0001) : [Math.max(s[0] * v, 0.0001), Math.max(s[1] * v, 0.0001)];
-        break;
-      }
-      case "opacity": {
-        const o = p.opacity;
-        p.opacity = typeof o === "number" ? o * v : v; // a token opacity is read as 1
-        break;
-      }
-    }
-  }
-  return { ...asset!, parts };
+/** The document posed at t, read through the same clip code the renderer and adapters use. */
+function poseAt(t: number) {
+  return poseAsset(asset!, anim!, t, reg.tokens.alpha);
 }
 
 const [w, h] = asset.size;
@@ -90,7 +54,8 @@ const cells: string[] = [];
 for (let f = 0; f < frames; f++) {
   // the same sampling bakeSheet uses: a frame short of the end, so what you are
   // looking at is what the engine will actually show
-  const { svg, issues } = renderSVG(poseAt(f / frames), reg, { variant, displayScale: scale, uid: `f${f}` });
+  const pose = poseAt(f / frames);
+  const { svg, issues } = renderSVG(pose.asset, reg, { variant, displayScale: scale, uid: `f${f}`, tints: pose.tints });
   for (const i of issues) console.log(`${i.level === "error" ? "✖" : "▲"} ${i.where}: ${i.msg}`);
   cells.push(svg.replace("<svg ", `<svg x="${f * cellW}" y="0" `));
 }

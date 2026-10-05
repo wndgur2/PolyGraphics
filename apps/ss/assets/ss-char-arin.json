@@ -2422,6 +2422,778 @@
           ],
           "ease": "linear"
         }
+      ],
+      "cues": {
+        "contact": 0.25,
+        "contact_far": 0.75
+      }
+    },
+    "hurt": {
+      "description": "struck: the head snaps back, the coat flattens and springs, the visor goes pale \u2014 laid over the walk or the idle, never instead of them",
+      "duration": 0.2,
+      "tracks": [
+        {
+          "part": "head",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              -1.4,
+              "quadOut"
+            ],
+            [
+              0.45,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "visor",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              -1.4,
+              "quadOut"
+            ],
+            [
+              0.45,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "pack",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              -1.4,
+              "quadOut"
+            ],
+            [
+              0.45,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "feeler_far",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              -1.4,
+              "quadOut"
+            ],
+            [
+              0.45,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "feeler",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              -1.4,
+              "quadOut"
+            ],
+            [
+              0.45,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "rack",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              -1.4,
+              "quadOut"
+            ],
+            [
+              0.45,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              0.6,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "visor",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              0.6,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "pack",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              0.6,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "feeler_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              0.6,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "feeler",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              0.6,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "rack",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              0.6,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "cloak",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.05,
+              1.08,
+              "quadOut"
+            ],
+            [
+              0.5,
+              0.98,
+              "sine"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "cloak",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.05,
+              0.92,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.02,
+              "sine"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "visor",
+          "prop": "tint",
+          "to": "$frost.light2",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.02,
+              1,
+              "hold"
+            ],
+            [
+              0.2,
+              0,
+              "linear"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "cast": {
+      "description": "the Lash: the feelers coil back over the helmet and hold, the coat gathers, then both crack forward on the release and settle past rest",
+      "duration": 0.42,
+      "cues": {
+        "windup": 0.0,
+        "release": 0.62
+      },
+      "tracks": [
+        {
+          "part": "feeler",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -34,
+              "hold"
+            ],
+            [
+              0.56,
+              -34,
+              "expoOut"
+            ],
+            [
+              0.68,
+              82,
+              "quadOut"
+            ],
+            [
+              0.84,
+              52,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "feeler_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0,
+              "quadOut"
+            ],
+            [
+              0.44,
+              -30,
+              "hold"
+            ],
+            [
+              0.58,
+              -30,
+              "expoOut"
+            ],
+            [
+              0.72,
+              76,
+              "quadOut"
+            ],
+            [
+              0.88,
+              46,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.8,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.8,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.2,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "visor",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.8,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.8,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.2,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "pack",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -6,
+              "hold"
+            ],
+            [
+              0.56,
+              -6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              5,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "cloak",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              1,
+              "quadOut"
+            ],
+            [
+              0.42,
+              1.05,
+              "hold"
+            ],
+            [
+              0.56,
+              1.05,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.96,
+              "sine"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "cloak",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              1,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.95,
+              "hold"
+            ],
+            [
+              0.56,
+              0.95,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.04,
+              "sine"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
+      ]
+    },
+    "cast_evo": {
+      "description": "Cowboy: a crouch, then the feelers whirl right round over the helmet \u2014 forehand, a beat, backhand \u2014 the coat swinging half a beat behind",
+      "duration": 0.76,
+      "cues": {
+        "windup": 0.0,
+        "release": 0.16,
+        "release2": 0.52
+      },
+      "tracks": [
+        {
+          "part": "feeler",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0,
+              "quadOut"
+            ],
+            [
+              0.16,
+              -24,
+              "expoOut"
+            ],
+            [
+              0.5,
+              336,
+              "hold"
+            ],
+            [
+              0.52,
+              336,
+              "expoOut"
+            ],
+            [
+              0.86,
+              -24,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "feeler_far",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0,
+              "quadOut"
+            ],
+            [
+              0.18,
+              -20,
+              "expoOut"
+            ],
+            [
+              0.52,
+              340,
+              "hold"
+            ],
+            [
+              0.54,
+              340,
+              "expoOut"
+            ],
+            [
+              0.88,
+              -20,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "cloak",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              0,
+              "quadOut"
+            ],
+            [
+              0.16,
+              -3,
+              "sine"
+            ],
+            [
+              0.5,
+              5,
+              "sine"
+            ],
+            [
+              0.86,
+              -5,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "cloak",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              1,
+              "quadOut"
+            ],
+            [
+              0.16,
+              0.94,
+              "expoOut"
+            ],
+            [
+              0.3,
+              1.03,
+              "sine"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "quadOut"
+            ],
+            [
+              0.16,
+              0.8,
+              "expoOut"
+            ],
+            [
+              0.3,
+              -0.6,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "visor",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "quadOut"
+            ],
+            [
+              0.16,
+              0.8,
+              "expoOut"
+            ],
+            [
+              0.3,
+              -0.6,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
       ]
     }
   }

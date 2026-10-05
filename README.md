@@ -85,6 +85,10 @@ The manifest is where a convention stops being a README sentence. `apps/ss/app.j
 | `layers` | which `tokens.layers` depth each category draws on | `out/manifest.json` carries `layer` and `depth` per entry |
 | `audio.key` | fanfares play only the score's degrees | a warning on the note outside them |
 
+The conventions no lint can check — where the light comes from, which outline method and stroke weight a
+category uses, the oblique ground view, when a second version is a variant — are written down for `ss` in
+[docs/ss-art-rules.md](docs/ss-art-rules.md).
+
 A document steps outside a rule *in writing*: `"why": { "size": "…" }` on the document, keyed by the rule,
 and the rule leaves it alone while the gallery lists the exception with its reason. That is `offBand` on a
 sound, generalised — the exception reads as a decision somebody made rather than a warning everybody learns
@@ -198,6 +202,28 @@ Patched parts are re-validated, so a variant can never silently produce an inval
 ```
 
 Props: `x` `y` (px) · `rot` (deg) · `scale` (factor) · `opacity`. A part may animate several of them at once but each at most once, which is the guarantee that actually mattered: transform channels never collide, so the `scale.x`-is-also-facing bug class stays structurally impossible while a part can still gather and swell in the same breath. CSS gets one transform and one timing function per rule, so tracks that disagree on key times are sampled onto a shared timeline through each track's own ease; tracks that agree emit exactly what they always did. The gallery plays them as CSS; engine adapters read the same keys as tweens.
+
+The clip model is read in one place, `src/anim.ts`, by the renderer and every script; the Phaser adapter keeps its own copy because it is one drop-in file, and `scripts/test-anim.ts` samples every track in the library through both and fails on the first value that differs. What a clip can say beyond moving a part:
+
+```jsonc
+"cast": {
+  "duration": 0.42,
+  "cues": { "windup": 0.1, "release": 0.38 },                        // named moments, 0..1 of the clip
+  "tracks": [
+    // a key's own ease shapes the segment leaving it; `hold` waits, then arrives
+    { "part": "feeler", "prop": "rot", "keys": [[0,0],[0.3,-40,"hold"],[0.38,25,"expoOut"],[1,0]] },
+    { "part": "coat",   "prop": "scaleX", "keys": [[0,1],[0.38,1.12],[0.6,1]] },              // squash, along the part's own axes
+    { "part": "coat",   "prop": "scaleY", "keys": [[0,1],[0.38,0.9],[0.6,1]] },
+    { "part": "hand",   "prop": "tint", "to": "$frost.light2", "keys": [[0,0],[0.38,1],[0.5,0]] } // covered 0..1 in a colour
+  ]
+}
+```
+
+- **Eases**: `linear` `sine` (default) `backOut` `hold` `quadIn` `quadOut` `expoOut`, on the track or per key. `hold` is the stepped pose an anticipation is drawn from — the thing a 15fps bake does by accident, said on purpose.
+- **Squash** (`scaleX`, `scaleY`) stretches a part along its own axes, the way an engine image does; it does not mix with `scale` on the same part (an error), since the two disagree about which way is x once the part is turned.
+- **Tint** covers the part with its own silhouette in `to`, `0..1` of the way: a hand going white on the release, a visor flashing on a hit. The gallery floods a filter over the part; the rig lays a white cover Image over it tinted to the colour; `poseNodes` (and so a baked sheet) mixes the part's paint toward it. Exact on an opaque part.
+- **Cues** name the moments a consumer times things off — the projectile leaves on `release`, the dust on `contact`. `cueTime(ir, clip, cue)` gives seconds; `bakeSheet` returns `cues` as the frame each has happened on (`cueFrame`).
+- **Sockets** (`skeleton.sockets`) are the points a consumer attaches things to: `{ "mouth": { "joint": "jaw", "part": "head" } }`. They reach the IR, and `socketAt(ir, name, { animation, progress })` says where one is on any frame — the pose `bakeSheet` draws — so a projectile spawned at a socket on a cue frame leaves from where the frame shows it.
 
 **A hinge is not a prop.** The schema turns a part about its own origin, which is the right primitive and the wrong verb for a leg: a femur and a tibia each turned thirty degrees about their own centres stay parallel and drift apart, so the leg comes to pieces instead of folding. A chain turned about one joint is equal `rot` down the chain *plus* the `x`/`y` each link's offset from that joint sweeps — `ss.enemy.trapjaw`'s `latch` is the worked example, and every `death` clip in the roster is built the same way.
 
@@ -566,7 +592,7 @@ add_child(rig)
 PolyGraphics.play(rig, ir, "idle")            # Tweens driven by the same keyframe data
 ```
 
-Both adapters are verified: the Phaser one by a mock-scene smoke test (`npx tsx scripts/test-phaser-adapter.ts`), the Godot one headlessly in the real engine (`godot --headless -s scripts/test_godot_adapter.gd`).
+Both adapters are verified: the Phaser one by a mock-scene smoke test (`npx tsx scripts/test-phaser-adapter.ts`), the Godot one headlessly in the real engine (`godot --headless -s scripts/test_godot_adapter.gd`). The clip model has its own test, `npx tsx scripts/test-anim.ts` (eases, squash, tint, cues and sockets through the renderer and the Phaser adapter, and the parity of the two readers). The Godot adapter plays the new eases and squash; a `tint` track is skipped there with a warning until it grows a cover of its own.
 
 ## Visual regression
 

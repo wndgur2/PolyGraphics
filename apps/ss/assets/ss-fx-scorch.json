@@ -1,0 +1,248 @@
+{
+  "id": "ss.fx.scorch",
+  "name": "Scorch",
+  "description": "Where a Spore went off: a dark burn with an ochre rim and a few flecks of spore still on it. Ground, not light — it says something happened here and does not say it loudly. No clip: the game sets it down at the blast's size and lets it go in held steps over three quarters of a second, so a field of them stays a field rather than a pattern.",
+  "tags": [
+    "fx",
+    "decal",
+    "kit"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "meta": {
+    "authoredR": 13
+  },
+  "parts": [
+    {
+      "id": "rim",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            13.86,
+            0.0
+          ],
+          [
+            13.08,
+            6.3
+          ],
+          [
+            7.86,
+            9.85
+          ],
+          [
+            2.99,
+            13.1
+          ],
+          [
+            -2.4,
+            10.51
+          ],
+          [
+            -8.32,
+            10.43
+          ],
+          [
+            -12.43,
+            5.99
+          ],
+          [
+            -13.53,
+            0.0
+          ],
+          [
+            -12.76,
+            -6.15
+          ],
+          [
+            -6.77,
+            -8.49
+          ],
+          [
+            -2.88,
+            -12.61
+          ],
+          [
+            2.8,
+            -12.26
+          ],
+          [
+            8.65,
+            -10.85
+          ],
+          [
+            13.23,
+            -6.37
+          ]
+        ]
+      },
+      "fill": "$ochre.dark@soft",
+      "rot": 8,
+      "scale": 1.12
+    },
+    {
+      "id": "burn",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            13.86,
+            0.0
+          ],
+          [
+            13.08,
+            6.3
+          ],
+          [
+            7.86,
+            9.85
+          ],
+          [
+            2.99,
+            13.1
+          ],
+          [
+            -2.4,
+            10.51
+          ],
+          [
+            -8.32,
+            10.43
+          ],
+          [
+            -12.43,
+            5.99
+          ],
+          [
+            -13.53,
+            0.0
+          ],
+          [
+            -12.76,
+            -6.15
+          ],
+          [
+            -6.77,
+            -8.49
+          ],
+          [
+            -2.88,
+            -12.61
+          ],
+          [
+            2.8,
+            -12.26
+          ],
+          [
+            8.65,
+            -10.85
+          ],
+          [
+            13.23,
+            -6.37
+          ]
+        ]
+      },
+      "fill": "$ink@heavy"
+    },
+    {
+      "id": "core",
+      "at": [
+        0,
+        0
+      ],
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            7.78,
+            0.0
+          ],
+          [
+            5.11,
+            3.72
+          ],
+          [
+            2.18,
+            6.72
+          ],
+          [
+            -1.58,
+            4.88
+          ],
+          [
+            -5.0,
+            3.64
+          ],
+          [
+            -7.11,
+            0.0
+          ],
+          [
+            -5.4,
+            -3.93
+          ],
+          [
+            -2.38,
+            -7.32
+          ],
+          [
+            1.64,
+            -5.05
+          ],
+          [
+            4.97,
+            -3.61
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "fleck_a",
+      "at": [
+        8,
+        -5
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.4
+      },
+      "fill": "$ochre@soft"
+    },
+    {
+      "id": "fleck_b",
+      "at": [
+        -9,
+        3
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.1
+      },
+      "fill": "$husk@soft"
+    },
+    {
+      "id": "fleck_c",
+      "at": [
+        3,
+        9
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.9
+      },
+      "fill": "$ochre@soft"
+    }
+  ]
+}

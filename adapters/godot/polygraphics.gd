@@ -176,22 +176,37 @@ static func play(root: Node2D, ir: Dictionary, anim_name: String, loop: bool = t
 			if loop:
 				tw.set_loops()
 			var keys: Array = track["keys"]
-			var ease_name: String = track.get("ease", "sine")
+			var prop := String(track["prop"])
+			if prop == "tint":
+				# a tint is a second, flooded copy of the part (see the Phaser adapter's
+				# cover); not drawn here yet, so the clip plays without it
+				push_warning("polygraphics: %s.%s tint is not drawn by the Godot adapter" % [anim_name, track["part"]])
+				continue
+			var track_ease: String = track.get("ease", "sine")
 			var first: Array = keys[0]
-			_apply_prop(float(first[1]), target, String(track["prop"]))
+			_apply_prop(float(first[1]), target, prop)
 			for i in range(1, keys.size()):
 				var k0: Array = keys[i - 1]
 				var k1: Array = keys[i]
-				var seg := tw.tween_method(
-					_apply_prop.bind(target, String(track["prop"])),
-					float(k0[1]), float(k1[1]),
-					(float(k1[0]) - float(k0[0])) * duration
-				)
+				var span := (float(k1[0]) - float(k0[0])) * duration
+				# a key's own ease shapes the segment leaving it
+				var ease_name: String = String(k0[2]) if k0.size() > 2 else track_ease
+				if ease_name == "hold":
+					tw.tween_interval(span)
+					tw.tween_callback(_apply_prop.bind(float(k1[1]), target, prop))
+					continue
+				var seg := tw.tween_method(_apply_prop.bind(target, prop), float(k0[1]), float(k1[1]), span)
 				match ease_name:
 					"linear":
 						seg.set_trans(Tween.TRANS_LINEAR)
 					"backOut":
 						seg.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+					"quadIn":
+						seg.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+					"quadOut":
+						seg.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+					"expoOut":
+						seg.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 					_:
 						seg.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 			tweens.append(tw)
@@ -209,6 +224,10 @@ static func _apply_prop(v: float, target: Node2D, prop: String) -> void:
 			target.rotation_degrees = float(target.get_meta("pg_base_rot")) + v * sign
 		"scale":
 			target.scale = (target.get_meta("pg_base_scale") as Vector2) * v
+		"scaleX":
+			target.scale.x = (target.get_meta("pg_base_scale") as Vector2).x * v
+		"scaleY":
+			target.scale.y = (target.get_meta("pg_base_scale") as Vector2).y * v
 		"opacity":
 			target.modulate.a = float(target.get_meta("pg_base_alpha")) * v
 

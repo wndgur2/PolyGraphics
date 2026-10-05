@@ -1,0 +1,85 @@
+{
+  "id": "ss.fx.smear",
+  "name": "Smear",
+  "description": "The arc a whirled feeler leaves behind its tip — Cowboy's sweep (ss.char.arin `cast_evo`). The leading edge is at 0° and the tail trails back anticlockwise, so the engine turns the whole thing to wherever the tip is and draws it again a few degrees behind, fainter, for the afterimages. Three bands, thick to thin, white to frost, each on a band of ink a little wider: cold and cut-paper, never lit, since the player's marks do not glow. Authored at r 56 and drawn as geometry at the radius the turn really has (drawAsset), because that radius grows with the weapon's area and a bake scaled to it would blur.",
+  "tags": [
+    "fx",
+    "melee",
+    "kit"
+  ],
+  "size": [
+    128,
+    128
+  ],
+  "meta": {
+    "authoredR": 56
+  },
+  "parts": [
+    {
+      "id": "ink_lead",
+      "shape": {
+        "kind": "ring",
+        "r": 56,
+        "width": 13.5,
+        "from": -34,
+        "to": 1.5
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "ink_mid",
+      "shape": {
+        "kind": "ring",
+        "r": 56,
+        "width": 10,
+        "from": -72,
+        "to": -32
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "ink_tail",
+      "shape": {
+        "kind": "ring",
+        "r": 56,
+        "width": 6.5,
+        "from": -110,
+        "to": -70
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "lead",
+      "shape": {
+        "kind": "ring",
+        "r": 56,
+        "width": 10,
+        "from": -32,
+        "to": 0
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "mid",
+      "shape": {
+        "kind": "ring",
+        "r": 56,
+        "width": 7,
+        "from": -70,
+        "to": -31
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "tail",
+      "shape": {
+        "kind": "ring",
+        "r": 56,
+        "width": 4,
+        "from": -108,
+        "to": -69
+      },
+      "fill": "$frost"
+    }
+  ]
+}

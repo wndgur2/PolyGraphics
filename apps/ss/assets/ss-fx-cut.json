@@ -1,0 +1,657 @@
+{
+  "id": "ss.fx.cut",
+  "name": "Cut",
+  "description": "Where a blade of yours crossed a body: three thin slivers laid along the line of the stroke, crossing at a shallow angle, on a sliver of ink each a hair wider. Drawn pointing +x — the engine turns it to the stroke's tangent — and baked rather than drawn live, because there are many of them and they are all the same size. It flicks out long, holds, thins to a line and goes, in a tenth of a second and a half: the cut is the shape of the stroke, not a burst, so a Lash's strike reads as a slice and a crit's Shell break (ss.fx.impact) reads as something else. Frost-white on the cold side of the palette, never the hive's pink; the player's marks do not glow.",
+  "tags": [
+    "fx",
+    "hit",
+    "kit"
+  ],
+  "size": [
+    32,
+    16
+  ],
+  "parts": [
+    {
+      "id": "ink_a",
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -13.0,
+            0
+          ],
+          [
+            0,
+            -2.1
+          ],
+          [
+            13.0,
+            0
+          ],
+          [
+            0,
+            2.1
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "ink_b",
+      "at": [
+        0,
+        -1.6
+      ],
+      "rot": -9,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -9.0,
+            0
+          ],
+          [
+            0,
+            -1.6
+          ],
+          [
+            9.0,
+            0
+          ],
+          [
+            0,
+            1.6
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "ink_c",
+      "at": [
+        0,
+        1.8
+      ],
+      "rot": 11,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -7.0,
+            0
+          ],
+          [
+            0,
+            -1.5
+          ],
+          [
+            7.0,
+            0
+          ],
+          [
+            0,
+            1.5
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "cut_a",
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -12.0,
+            0
+          ],
+          [
+            0,
+            -1.2
+          ],
+          [
+            12.0,
+            0
+          ],
+          [
+            0,
+            1.2
+          ]
+        ]
+      },
+      "fill": "$silent"
+    },
+    {
+      "id": "cut_b",
+      "at": [
+        0,
+        -1.6
+      ],
+      "rot": -9,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -8.0,
+            0
+          ],
+          [
+            0,
+            -0.8
+          ],
+          [
+            8.0,
+            0
+          ],
+          [
+            0,
+            0.8
+          ]
+        ]
+      },
+      "fill": "$frost.light"
+    },
+    {
+      "id": "cut_c",
+      "at": [
+        0,
+        1.8
+      ],
+      "rot": 11,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -6.0,
+            0
+          ],
+          [
+            0,
+            -0.7
+          ],
+          [
+            6.0,
+            0
+          ],
+          [
+            0,
+            0.7
+          ]
+        ]
+      },
+      "fill": "$frost.light"
+    }
+  ],
+  "animations": {
+    "play": {
+      "description": "flicks out long on the first frame, holds, thins to a line, gone — 0.15s",
+      "duration": 0.15,
+      "cues": {
+        "impact": 0.0
+      },
+      "tracks": [
+        {
+          "part": "ink_a",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              0.7,
+              "expoOut"
+            ],
+            [
+              0.25,
+              1.15,
+              "hold"
+            ],
+            [
+              0.5,
+              1.15,
+              "quadIn"
+            ],
+            [
+              1,
+              1.3
+            ]
+          ]
+        },
+        {
+          "part": "ink_a",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              1.2,
+              "quadOut"
+            ],
+            [
+              0.35,
+              1,
+              "hold"
+            ],
+            [
+              0.55,
+              1,
+              "quadIn"
+            ],
+            [
+              1,
+              0.15
+            ]
+          ]
+        },
+        {
+          "part": "ink_a",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.6,
+              0.6,
+              "hold"
+            ],
+            [
+              0.85,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "ink_b",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              0.7,
+              "expoOut"
+            ],
+            [
+              0.25,
+              1.15,
+              "hold"
+            ],
+            [
+              0.5,
+              1.15,
+              "quadIn"
+            ],
+            [
+              1,
+              1.3
+            ]
+          ]
+        },
+        {
+          "part": "ink_b",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              1.2,
+              "quadOut"
+            ],
+            [
+              0.35,
+              1,
+              "hold"
+            ],
+            [
+              0.55,
+              1,
+              "quadIn"
+            ],
+            [
+              1,
+              0.15
+            ]
+          ]
+        },
+        {
+          "part": "ink_b",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.6,
+              0.6,
+              "hold"
+            ],
+            [
+              0.85,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "ink_c",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              0.7,
+              "expoOut"
+            ],
+            [
+              0.25,
+              1.15,
+              "hold"
+            ],
+            [
+              0.5,
+              1.15,
+              "quadIn"
+            ],
+            [
+              1,
+              1.3
+            ]
+          ]
+        },
+        {
+          "part": "ink_c",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              1.2,
+              "quadOut"
+            ],
+            [
+              0.35,
+              1,
+              "hold"
+            ],
+            [
+              0.55,
+              1,
+              "quadIn"
+            ],
+            [
+              1,
+              0.15
+            ]
+          ]
+        },
+        {
+          "part": "ink_c",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.6,
+              0.6,
+              "hold"
+            ],
+            [
+              0.85,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "cut_a",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              0.7,
+              "expoOut"
+            ],
+            [
+              0.25,
+              1.15,
+              "hold"
+            ],
+            [
+              0.5,
+              1.15,
+              "quadIn"
+            ],
+            [
+              1,
+              1.3
+            ]
+          ]
+        },
+        {
+          "part": "cut_a",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              1.2,
+              "quadOut"
+            ],
+            [
+              0.35,
+              1,
+              "hold"
+            ],
+            [
+              0.55,
+              1,
+              "quadIn"
+            ],
+            [
+              1,
+              0.15
+            ]
+          ]
+        },
+        {
+          "part": "cut_a",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.6,
+              0.6,
+              "hold"
+            ],
+            [
+              0.85,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "cut_b",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              0.7,
+              "expoOut"
+            ],
+            [
+              0.25,
+              1.15,
+              "hold"
+            ],
+            [
+              0.5,
+              1.15,
+              "quadIn"
+            ],
+            [
+              1,
+              1.3
+            ]
+          ]
+        },
+        {
+          "part": "cut_b",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              1.2,
+              "quadOut"
+            ],
+            [
+              0.35,
+              1,
+              "hold"
+            ],
+            [
+              0.55,
+              1,
+              "quadIn"
+            ],
+            [
+              1,
+              0.15
+            ]
+          ]
+        },
+        {
+          "part": "cut_b",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.6,
+              0.6,
+              "hold"
+            ],
+            [
+              0.85,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "cut_c",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              0.7,
+              "expoOut"
+            ],
+            [
+              0.25,
+              1.15,
+              "hold"
+            ],
+            [
+              0.5,
+              1.15,
+              "quadIn"
+            ],
+            [
+              1,
+              1.3
+            ]
+          ]
+        },
+        {
+          "part": "cut_c",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              1.2,
+              "quadOut"
+            ],
+            [
+              0.35,
+              1,
+              "hold"
+            ],
+            [
+              0.55,
+              1,
+              "quadIn"
+            ],
+            [
+              1,
+              0.15
+            ]
+          ]
+        },
+        {
+          "part": "cut_c",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.6,
+              0.6,
+              "hold"
+            ],
+            [
+              0.85,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}
