@@ -341,11 +341,115 @@ def build(name, row):
         return {"description": "struck: the head snaps back, the coat flattens and springs, the visor goes pale — laid over the walk or the idle, never instead of them",
                 "duration": 0.2, "tracks": tr}
 
-    clips = {"idle": idle(), "walk": walk(), "hurt": hurt()}
+    # The body's whole-frame moments (feelers docs/motion-vfx-plan.md §7.1, §9):
+    # the knees go, the body comes down onto them, the head bows. Only the feet
+    # stay where they are. `drop` is how far the hips come down, as keys.
+    drop_group = body_group + [pid for pid, f in follow.items() if f == "scarf"]
+    arm_ids = [pid for pid, _ in arm_pieces] + [pid for pid, _ in arm_far_pieces]
+    def crouch(drop, head, head_x, arm, arm_far, times, eases):
+        """Every part but the feet, down by `drop` (head parts by `head`, forward by
+        `head_x`), the arms hinged about their shoulders through `arm`/`arm_far` as
+        they come down with it — one key per time."""
+        def keys(vals):
+            ks = [[t, r2(v), e] for t, v, e in zip(times, vals, eases)]
+            ks[-1] = ks[-1][:2]
+            return ks
+        tr = [{"part": pid, "prop": "y", "keys": keys(head)} for pid in head_group]
+        tr += [{"part": pid, "prop": "x", "keys": keys(head_x)} for pid in head_group]
+        tr += [{"part": pid, "prop": "y", "keys": keys(drop)} for pid in drop_group]
+        for joint, pieces, angles in ((sn, arm_pieces, arm), (sf, arm_far_pieces, arm_far)):
+            for pid, centre in pieces:
+                sw = [swing(joint, centre, th) for th in angles]
+                tr.append({"part": pid, "prop": "x", "keys": keys([w[0] for w in sw])})
+                tr.append({"part": pid, "prop": "y", "keys": keys([w[1] + d for w, d in zip(sw, drop)])})
+                tr.append({"part": pid, "prop": "rot", "keys": keys([w[2] for w in sw])})
+        # the coat gathers on the ground as the body comes down onto it
+        full = max(abs(d) for d in drop) or 1
+        tr.append({"part": "cloak", "prop": "scaleY", "keys": keys([1 - 0.1 * d / full for d in drop])})
+        tr.append({"part": "cloak", "prop": "scaleX", "keys": keys([1 + 0.06 * d / full for d in drop])})
+        for leg in legs:  # a leg is shortened from its hip, its foot left where it stood
+            L = leg["shape"]["h"]
+            tr.append({"part": leg["id"], "prop": "scaleY", "keys": keys([1 - d / L for d in drop])})
+            tr.append({"part": leg["id"], "prop": "y", "keys": keys([d / 2 for d in drop])})
+        return tr
+
+    def death():
+        # The last chapter: caught — the blow lands and holds the body up for a
+        # beat — then let go: the knees fold, the body comes down onto them, the
+        # head bows and the weapon goes slack; it settles and is still by 0.85
+        # (brand §7.2's grammar of a death: caught, let go, sunk, stopped).
+        # `down` is the knees reaching the ground.
+        t = [0, 0.1, 0.42, 0.6, 0.72, 0.85, 1]
+        e = ["quadOut", "hold", "quadIn", "quadOut", "sine", "hold", "linear"]
+        tr = crouch([0, -0.5, 2.6, 4.0, 3.6, 3.8, 3.8], [0, -0.8, 3.6, 5.8, 5.6, 6.4, 6.4], [0, -1.2, 0.6, 1.4, 1.6, 2.0, 2.0],
+                    [0, 8, -4, -12, -9, -11, -11], [0, -6, 2, 10, 7, 9, 9], t, e)
+        if C["feelers"]:  # the feelers flop back off the pack and hang there
+            tr.append({"part": "feeler", "prop": "rot", "keys": [[0, 0, "quadOut"], [0.1, 8, "hold"], [0.6, -30, "quadOut"], [0.72, -42, "sine"], [0.85, -38, "hold"], [1, -38]]})
+            tr.append({"part": "feeler_far", "prop": "rot", "keys": [[0, 0, "quadOut"], [0.1, 6, "hold"], [0.62, -26, "quadOut"], [0.74, -38, "sine"], [0.85, -34, "hold"], [1, -34]]})
+        for i, pid in enumerate(p for p, f in follow.items() if f == "vine"):  # the vines hang
+            tr.append({"part": pid, "prop": "rot", "keys": [[0, 0, "quadOut"], [0.1, -4, "hold"], [0.6 + 0.04 * i, 18, "quadOut"], [0.85, 14, "hold"], [1, 14]]})
+        # and what kept the body going goes out (brand: a death is the organ going dark)
+        tr.append({"part": "organ", "prop": "tint", "to": "$ink", "keys": [[0, 0, "hold"], [0.6, 0, "quadIn"], [0.85, 0.75, "hold"], [1, 0.75]]})
+        if any(p["id"] == "visor" for p in parts):
+            tr.append({"part": "visor", "prop": "tint", "to": "$frost.light2", "keys": [[0, 0, "hold"], [0.02, 1, "hold"], [0.1, 0, "linear"], [1, 0]]})
+        return {"description": "the last chapter: caught on the blow, then let go — the knees fold, the body comes down onto them, the head bows, the weapon goes slack and the clasp goes dark; still by 0.85",
+                "duration": 1.2, "cues": {"down": 0.6}, "tracks": tr}
+
+    def arrive():
+        # The count-in: the body is down on its knees as the field comes up, and
+        # rises — the hips first, the head a beat behind them — past standing and
+        # back. `ready` is the moment it is standing: the count's last beat.
+        t = [0, 0.18, 0.62, 0.8, 1]
+        e = ["hold", "expoOut", "sine", "sine", "linear"]
+        tr = crouch([2.4, 2.4, -0.4, 0.1, 0], [3.6, 3.6, -0.2, -0.5, 0], [1.2, 1.2, 0.2, -0.2, 0],
+                    [-8, -8, 4, -1, 0], [6, 6, -3, 1, 0], t, e)
+        if C["feelers"]:  # and the feelers lift last, sweeping up off the helmet
+            tr.append({"part": "feeler", "prop": "rot", "keys": [[0, -30, "hold"], [0.3, -30, "expoOut"], [0.7, 12, "sine"], [1, 0]]})
+            tr.append({"part": "feeler_far", "prop": "rot", "keys": [[0, -26, "hold"], [0.34, -26, "expoOut"], [0.74, 10, "sine"], [1, 0]]})
+        return {"description": "the count-in: down on the knees as the field comes up, then the body rises — hips first, the head a beat behind — past standing and settles",
+                "duration": 0.6, "cues": {"ready": 0.8}, "tracks": tr}
+
+    def awaken(evo):
+        # The awakening (§9.1): the body draws in and down, holds, and opens —
+        # the chest up, the head back, the arms out — and on `change` the weapon's
+        # own awakened throw (`cast_evo`) runs through it, so what changes is seen
+        # being used. Squashed into the change, stretched out of it.
+        t = [0, 0.3, 0.44, 0.56, 0.78, 1]
+        e = ["quadOut", "hold", "expoOut", "sine", "sine", "linear"]
+        tr = crouch([0, 1.6, 1.6, -0.8, 0.2, 0], [0, 2.2, 2.2, -1.4, 0.2, 0], [0, 0.6, 0.6, -0.8, 0, 0],
+                    [0, -6, -6, 16, 4, 0], [0, 4, 4, -14, -3, 0], t, e)
+        tr = [k for k in tr if k["part"] != "cloak"]
+        tr.append({"part": "cloak", "prop": "scaleY", "keys": [[0, 1, "quadOut"], [0.3, 0.9, "hold"], [0.44, 0.9, "expoOut"], [0.56, 1.08, "sine"], [0.78, 0.98, "sine"], [1, 1]]})
+        tr.append({"part": "cloak", "prop": "scaleX", "keys": [[0, 1, "quadOut"], [0.3, 1.08, "hold"], [0.44, 1.08, "expoOut"], [0.56, 0.95, "sine"], [0.78, 1.01, "sine"], [1, 1]]})
+        if any(p["id"] == "visor" for p in parts):
+            tr.append({"part": "visor", "prop": "tint", "to": "$frost.light2", "keys": [[0, 0, "hold"], [0.44, 1, "hold"], [0.5, 0.5, "hold"], [0.56, 0, "linear"], [1, 0]]})
+        if evo:
+            # the throw, laid over the second half: its keys moved into [0.44, 1].
+            # A part both move draws in with the body, then throws from there —
+            # the throw's own first key is the drawn-in pose.
+            lo, span = 0.44, 0.56
+            mine = {(k["part"], k["prop"]): k for k in tr}
+            for k in evo["tracks"]:
+                ks = [[r2(lo + span * key[0]), *key[1:]] for key in k["keys"]]
+                body = mine.pop((k["part"], k["prop"]), None)
+                if body:
+                    before = [key for key in body["keys"] if key[0] < lo]
+                    at = [key for key in body["keys"] if key[0] == lo]
+                    ks[0] = [lo, at[0][1] if at else ks[0][1], *ks[0][2:]]
+                    keys = before + ks
+                else:
+                    keys = [[0, k["keys"][0][1], "hold"]] + ks
+                tr = [x for x in tr if x is not body]
+                tr.append({**k, "keys": keys})
+        return {"description": "the awakening: the body draws in and holds, then opens — chest up, arms out, the visor going pale — and the weapon's awakened throw runs through it on the change",
+                "duration": 0.9, "cues": {"change": 0.44}, "tracks": tr}
+
+    clips = {"idle": idle(), "walk": walk(), "hurt": hurt(), "death": death(), "arrive": arrive()}
     # contact: where each foot has landed — the dust goes down on these
     clips["walk"]["cues"] = {"contact": 0.25, "contact_far": 0.75}
     for clip_name, make in row.get("clips", {}).items():
         clips[clip_name] = make(ctx)
+    clips["awaken"] = awaken(clips.get("cast_evo"))
     return {"id": f"ss.char.{name}", "name": row.get("display", name.capitalize()), "description": row["description"], "tags": ["char"], "size": [32, 32], "meta": {"radius": 11},
             "parts": parts, "skeleton": skeleton, "animations": clips}
 
