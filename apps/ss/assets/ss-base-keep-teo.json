@@ -1,0 +1,19 @@
+{
+  "id": "ss.base.keep-teo",
+  "name": "Teo's bundle",
+  "description": "Teo had nothing to put in the emitter but paper. This is a bundle of pages tied with cord, the edges uneven. It sits on its writer's locker (`ss.base.locker`).",
+  "tags": ["base"],
+  "size": [24, 22],
+  "parts": [
+    {"id": "pages", "shape": {"kind": "rect", "w": 16.0, "h": 10.0, "corner": 1.0}, "fill": "$bone", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "page_top", "at": [1.0, -2.0], "rot": -5.0, "shape": {"kind": "rect", "w": 14.0, "h": 8.0, "corner": 1.0}, "fill": "$husk", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "cord_v", "at": [-2.0, -1.0], "shape": {"kind": "rect", "w": 1.6, "h": 11.0, "corner": 0.4}, "fill": "$bone.dark2"},
+    {"id": "cord_h", "shape": {"kind": "rect", "w": 17.0, "h": 1.6, "corner": 0.4}, "fill": "$bone.dark2"},
+    {"id": "line_0", "at": [3.0, -4.0], "rot": -5.0, "shape": {"kind": "rect", "w": 8.0, "h": 0.8, "corner": 0.3}, "fill": "$slate.dark@0.5"},
+    {"id": "line_1", "at": [3.0, -2.2], "rot": -5.0, "shape": {"kind": "rect", "w": 8.0, "h": 0.8, "corner": 0.3}, "fill": "$slate.dark@0.5"},
+    {"id": "line_2", "at": [3.0, -0.4], "rot": -5.0, "shape": {"kind": "rect", "w": 8.0, "h": 0.8, "corner": 0.3}, "fill": "$slate.dark@0.5"}
+  ],
+  "animations": {
+
+  }
+}

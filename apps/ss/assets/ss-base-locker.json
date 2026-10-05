@@ -1,0 +1,19 @@
+{
+  "id": "ss.base.locker",
+  "name": "Locker",
+  "description": "One writer's footlocker, in the cold slate everything of the expedition's is: a box, a lid, a latch, a frost stripe. A row of eight stands along the camp's fence, one per writer in the order the expeditions came. On each lid is the one thing that writer's log kept (`ss.base.keep-*`). In feelers you take up a writer's body at their locker.",
+  "tags": ["base"],
+  "size": [36, 24],
+  "parts": [
+    {"id": "shadow", "at": [0.0, 10.0], "shape": {"kind": "ellipse", "rx": 16.0, "ry": 3.5}, "fill": "$ink@0.45"},
+    {"id": "box", "shape": {"kind": "poly", "points": [[13.0, -6.0], [13.77, -5.85], [14.41, -5.41], [14.85, -4.77], [15.0, -4.0], [15.0, 8.0], [14.85, 8.77], [14.41, 9.41], [13.77, 9.85], [13.0, 10.0], [-13.0, 10.0], [-13.77, 9.85], [-14.41, 9.41], [-14.85, 8.77], [-15.0, 8.0], [-15.0, -4.0], [-14.85, -4.77], [-14.41, -5.41], [-13.77, -5.85], [-13.0, -6.0]]}, "fill": "$slate"},
+    {"id": "box_v0", "shape": {"kind": "poly", "points": [[15.0, 5.0], [15.0, 8.0], [14.85, 8.77], [14.41, 9.41], [13.77, 9.85], [13.0, 10.0], [-13.0, 10.0], [-13.77, 9.85], [-14.41, 9.41], [-14.85, 8.77], [-15.0, 8.0], [-15.0, 5.0]]}, "fill": "$slate.dark"},
+    {"id": "box_rim", "shape": {"kind": "poly", "points": [[13.0, -6.0], [13.77, -5.85], [14.41, -5.41], [14.85, -4.77], [15.0, -4.0], [15.0, 8.0], [14.85, 8.77], [14.41, 9.41], [13.77, 9.85], [13.0, 10.0], [-13.0, 10.0], [-13.77, 9.85], [-14.41, 9.41], [-14.85, 8.77], [-15.0, 8.0], [-15.0, -4.0], [-14.85, -4.77], [-14.41, -5.41], [-13.77, -5.85], [-13.0, -6.0]]}, "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "lid", "at": [0.0, -6.0], "shape": {"kind": "rect", "w": 32.0, "h": 5.0, "corner": 1.5}, "fill": "$slate.light", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "latch", "at": [0.0, 2.0], "shape": {"kind": "rect", "w": 5.0, "h": 5.0, "corner": 1.0}, "fill": "$steel", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "stripe", "at": [0.0, 7.0], "shape": {"kind": "rect", "w": 30.0, "h": 2.0, "corner": 0.5}, "fill": "$frost.dark@0.5"}
+  ],
+  "animations": {
+
+  }
+}

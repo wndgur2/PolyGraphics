@@ -1,0 +1,19 @@
+{
+  "id": "ss.base.keep-haram",
+  "name": "Haram's husk",
+  "description": "Haram put a moulted husk into the second-model emitter. It is a hollow, segmented shell in husk white. It sits on its writer's locker (`ss.base.locker`).",
+  "tags": ["base"],
+  "size": [24, 22],
+  "parts": [
+    {"id": "husk", "shape": {"kind": "ellipse", "rx": 9.0, "ry": 5.0}, "fill": "$husk", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "seg_0", "at": [-5.0, 0.0], "shape": {"kind": "rect", "w": 1.2, "h": 7.0, "corner": 0.4}, "fill": "$husk.dark"},
+    {"id": "seg_1", "at": [-1.6, 0.0], "shape": {"kind": "rect", "w": 1.2, "h": 7.0, "corner": 0.4}, "fill": "$husk.dark"},
+    {"id": "seg_2", "at": [1.8, 0.0], "shape": {"kind": "rect", "w": 1.2, "h": 7.0, "corner": 0.4}, "fill": "$husk.dark"},
+    {"id": "seg_3", "at": [5.2, 0.0], "shape": {"kind": "rect", "w": 1.2, "h": 7.0, "corner": 0.4}, "fill": "$husk.dark"},
+    {"id": "mouth", "at": [8.0, 0.0], "shape": {"kind": "ellipse", "rx": 2.6, "ry": 2.2}, "fill": "$coal"},
+    {"id": "lit", "at": [-2.0, -3.0], "shape": {"kind": "ellipse", "rx": 4.0, "ry": 1.2}, "fill": "$white@0.4"}
+  ],
+  "animations": {
+
+  }
+}

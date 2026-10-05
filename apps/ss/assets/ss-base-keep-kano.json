@@ -1,0 +1,20 @@
+{
+  "id": "ss.base.keep-kano",
+  "name": "Kano's road stake",
+  "description": "Kano walked the swarm's road for 330 days. This is a marker stake from it, notched once for every ten days, with a cold strip of cloth tied on. It sits on its writer's locker (`ss.base.locker`).",
+  "tags": ["base"],
+  "size": [24, 22],
+  "parts": [
+    {"id": "stake", "at": [0.0, -1.0], "shape": {"kind": "rect", "w": 4.0, "h": 18.0, "corner": 1.0}, "fill": "$smoke.light", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "notch_0", "at": [0.0, -7.0], "shape": {"kind": "rect", "w": 4.0, "h": 0.9, "corner": 0.2}, "fill": "$ink@0.55"},
+    {"id": "notch_1", "at": [0.0, -4.8], "shape": {"kind": "rect", "w": 4.0, "h": 0.9, "corner": 0.2}, "fill": "$ink@0.55"},
+    {"id": "notch_2", "at": [0.0, -2.6], "shape": {"kind": "rect", "w": 4.0, "h": 0.9, "corner": 0.2}, "fill": "$ink@0.55"},
+    {"id": "notch_3", "at": [0.0, -0.4], "shape": {"kind": "rect", "w": 4.0, "h": 0.9, "corner": 0.2}, "fill": "$ink@0.55"},
+    {"id": "notch_4", "at": [0.0, 1.8], "shape": {"kind": "rect", "w": 4.0, "h": 0.9, "corner": 0.2}, "fill": "$ink@0.55"},
+    {"id": "notch_5", "at": [0.0, 4.0], "shape": {"kind": "rect", "w": 4.0, "h": 0.9, "corner": 0.2}, "fill": "$ink@0.55"},
+    {"id": "cloth", "shape": {"kind": "poly", "points": [[2.0, -7.0], [9.0, -6.0], [8.0, -3.0], [2.0, -4.0]]}, "fill": "$frost.dark", "stroke": {"color": "$ink", "width": "hair"}}
+  ],
+  "animations": {
+
+  }
+}

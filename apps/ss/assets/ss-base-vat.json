@@ -1,0 +1,42 @@
+{
+  "id": "ss.base.vat",
+  "name": "The jelly vat",
+  "description": "The jelly the expedition trades in, kept in a glass vat on a slate stand under a clamped steel lid. The glass is drawn behind the jelly so the colour is the jelly's: gold, because gold is jelly's (feelers D14), going to chitin in the deep, with light moving on the surface and a bubble rising (`settle`). A ladle is hooked over the rim and a drop has run down the side. The guide's meta shop is \"to evolve on jelly\" (§12.1), so feelers opens EVOLUTION here.",
+  "tags": ["base"],
+  "size": [60, 84],
+  "parts": [
+    {"id": "shadow", "at": [0.0, 34.0], "shape": {"kind": "ellipse", "rx": 26.0, "ry": 6.0}, "fill": "$ink@0.45"},
+    {"id": "stand", "at": [0.0, 30.0], "shape": {"kind": "rect", "w": 40.0, "h": 8.0, "corner": 2.0}, "fill": "$slate", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "stand_lit", "at": [0.0, 28.0], "shape": {"kind": "rect", "w": 30.0, "h": 2.0, "corner": 1.0}, "fill": "$slate.light"},
+    {"id": "glass", "at": [0.0, 3.0], "shape": {"kind": "rect", "w": 40.0, "h": 46.0, "corner": 9.0}, "fill": "$frost.dark@0.32", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "jelly", "shape": {"kind": "poly", "points": [[10.0, -5.0], [13.06, -4.39], [15.66, -2.66], [17.39, -0.06], [18.0, 3.0], [18.0, 17.0], [17.39, 20.06], [15.66, 22.66], [13.06, 24.39], [10.0, 25.0], [-10.0, 25.0], [-13.06, 24.39], [-15.66, 22.66], [-17.39, 20.06], [-18.0, 17.0], [-18.0, 3.0], [-17.39, -0.06], [-15.66, -2.66], [-13.06, -4.39], [-10.0, -5.0]]}, "fill": "$gold"},
+    {"id": "jelly_v0", "shape": {"kind": "poly", "points": [[10.0, -5.0], [13.06, -4.39], [15.66, -2.66], [17.39, -0.06], [17.4, 0.0], [-17.4, 0.0], [-17.39, -0.06], [-15.66, -2.66], [-13.06, -4.39], [-10.0, -5.0]]}, "fill": "$gold.light"},
+    {"id": "jelly_v1", "shape": {"kind": "poly", "points": [[18.0, 16.0], [18.0, 17.0], [17.39, 20.06], [15.66, 22.66], [13.06, 24.39], [10.0, 25.0], [-10.0, 25.0], [-13.06, 24.39], [-15.66, 22.66], [-17.39, 20.06], [-18.0, 17.0], [-18.0, 16.0]]}, "fill": "$chitin"},
+    {"id": "meniscus", "at": [0.0, -4.0], "shape": {"kind": "ellipse", "rx": 17.0, "ry": 2.6}, "fill": "$gold.light2"},
+    {"id": "caustic", "at": [-7.0, 8.0], "shape": {"kind": "ellipse", "rx": 6.0, "ry": 2.0}, "fill": "$gold.light2@0.8"},
+    {"id": "bubble_a", "at": [8.0, 12.0], "shape": {"kind": "circle", "r": 1.6}, "fill": "$gold.light2@0.9"},
+    {"id": "bubble_b", "at": [5.0, 18.0], "shape": {"kind": "circle", "r": 1.1}, "fill": "$gold.light2@0.8"},
+    {"id": "glass_lit", "at": [-14.0, 2.0], "shape": {"kind": "rect", "w": 4.0, "h": 34.0, "corner": 2.0}, "fill": "$white@0.45"},
+    {"id": "lid", "shape": {"kind": "poly", "points": [[19.5, -24.5], [20.46, -24.31], [21.27, -23.77], [21.81, -22.96], [22.0, -22.0], [22.0, -20.0], [21.81, -19.04], [21.27, -18.23], [20.46, -17.69], [19.5, -17.5], [-19.5, -17.5], [-20.46, -17.69], [-21.27, -18.23], [-21.81, -19.04], [-22.0, -20.0], [-22.0, -22.0], [-21.81, -22.96], [-21.27, -23.77], [-20.46, -24.31], [-19.5, -24.5]]}, "fill": "$steel"},
+    {"id": "lid_v0", "shape": {"kind": "poly", "points": [[19.5, -24.5], [20.46, -24.31], [21.27, -23.77], [21.81, -22.96], [22.0, -22.0], [22.0, -22.0], [-22.0, -22.0], [-22.0, -22.0], [-21.81, -22.96], [-21.27, -23.77], [-20.46, -24.31], [-19.5, -24.5]]}, "fill": "$steel.light"},
+    {"id": "lid_rim", "shape": {"kind": "poly", "points": [[19.5, -24.5], [20.46, -24.31], [21.27, -23.77], [21.81, -22.96], [22.0, -22.0], [22.0, -20.0], [21.81, -19.04], [21.27, -18.23], [20.46, -17.69], [19.5, -17.5], [-19.5, -17.5], [-20.46, -17.69], [-21.27, -18.23], [-21.81, -19.04], [-22.0, -20.0], [-22.0, -22.0], [-21.81, -22.96], [-21.27, -23.77], [-20.46, -24.31], [-19.5, -24.5]]}, "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "clamp_l", "at": [-21.0, -16.0], "shape": {"kind": "rect", "w": 4.0, "h": 12.0, "corner": 1.0}, "fill": "$steel.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "clamp_r", "at": [21.0, -16.0], "shape": {"kind": "rect", "w": 4.0, "h": 12.0, "corner": 1.0}, "fill": "$steel.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "ladle", "at": [14.0, -25.0], "rot": 18.0, "shape": {"kind": "rect", "w": 3.0, "h": 24.0, "corner": 1.2}, "fill": "$steel.light", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "ladle_bowl", "at": [17.5, -36.0], "shape": {"kind": "ellipse", "rx": 4.4, "ry": 3.0}, "fill": "$steel", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "drop", "at": [-19.5, 14.0], "shape": {"kind": "ellipse", "rx": 2.0, "ry": 3.0}, "fill": "$gold", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "drop_lit", "at": [-20.2, 13.0], "shape": {"kind": "circle", "r": 0.7}, "fill": "$gold.light2"}
+  ],
+  "animations": {
+    "settle": {
+      "description": "the jelly settles: the light moves on it and a bubble rises",
+      "duration": 4.0,
+      "tracks": [
+        {"part": "caustic", "prop": "x", "keys": [[0.0, 0.0], [0.5, 6.0], [1.0, 0.0]]},
+        {"part": "meniscus", "prop": "scale", "keys": [[0.0, 1.0], [0.5, 0.94], [1.0, 1.0]]},
+        {"part": "bubble_a", "prop": "y", "keys": [[0.0, 0.0], [0.8, -14.0], [0.81, 0.0], [1.0, 0.0]]},
+        {"part": "bubble_a", "prop": "opacity", "keys": [[0.0, 1.0], [0.78, 1.0], [0.8, 0.0], [0.85, 0.0], [1.0, 1.0]]}
+      ]
+    }
+  }
+}

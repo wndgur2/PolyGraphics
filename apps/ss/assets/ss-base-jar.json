@@ -1,0 +1,42 @@
+{
+  "id": "ss.base.jar",
+  "name": "Path jar",
+  "description": "A small jar of glowing caps set down on the ground, one of a row along each path out of the camp, so the way back in can be found in the dark. It breathes like the lamps (`breathe`).",
+  "tags": ["base"],
+  "size": [20, 20],
+  "parts": [
+    {"id": "shadow", "at": [0.0, 7.0], "shape": {"kind": "ellipse", "rx": 6.0, "ry": 2.0}, "fill": "$ink@0.4"},
+    {"id": "glow", "shape": {"kind": "ellipse", "rx": 9.0, "ry": 8.0}, "fill": "$spore@0.06"},
+    {"id": "glow_1", "shape": {"kind": "ellipse", "rx": 7.5, "ry": 6.67}, "fill": "$spore@0.06"},
+    {"id": "glow_2", "shape": {"kind": "ellipse", "rx": 6.0, "ry": 5.33}, "fill": "$spore@0.06"},
+    {"id": "glow_3", "shape": {"kind": "ellipse", "rx": 4.5, "ry": 4.0}, "fill": "$spore@0.06"},
+    {"id": "glow_4", "shape": {"kind": "ellipse", "rx": 3.0, "ry": 2.67}, "fill": "$spore@0.06"},
+    {"id": "glow_5", "shape": {"kind": "ellipse", "rx": 1.5, "ry": 1.33}, "fill": "$spore@0.06"},
+    {"id": "jar", "at": [0.0, 1.0], "shape": {"kind": "rect", "w": 10.0, "h": 12.0, "corner": 3.0}, "fill": "$frost.dark@0.3", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "cap_a_stem", "at": [-1.4, 4.43], "shape": {"kind": "rect", "w": 1.43, "h": 2.86, "corner": 0.65}, "fill": "$husk.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "cap_a_head", "at": [-1.4, 3.0], "shape": {"kind": "ellipse", "rx": 2.6, "ry": 1.61}, "fill": "$spore", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "cap_a_under", "at": [-1.4, 3.88], "shape": {"kind": "ellipse", "rx": 2.39, "ry": 0.68}, "fill": "$spore.dark"},
+    {"id": "cap_a_lit", "at": [-2.23, 2.43], "shape": {"kind": "ellipse", "rx": 1.09, "ry": 0.52}, "fill": "$spore.light2"},
+    {"id": "cap_b_stem", "at": [2.0, 1.1], "shape": {"kind": "rect", "w": 1.1, "h": 2.2, "corner": 0.5}, "fill": "$husk.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "cap_b_head", "at": [2.0, 0.0], "shape": {"kind": "ellipse", "rx": 2.0, "ry": 1.24}, "fill": "$spore", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "cap_b_under", "at": [2.0, 0.68], "shape": {"kind": "ellipse", "rx": 1.84, "ry": 0.52}, "fill": "$spore.dark"},
+    {"id": "cap_b_lit", "at": [1.36, -0.44], "shape": {"kind": "ellipse", "rx": 0.84, "ry": 0.4}, "fill": "$spore.light2"},
+    {"id": "lid", "at": [0.0, -5.4], "shape": {"kind": "rect", "w": 11.0, "h": 2.6, "corner": 1.0}, "fill": "$steel", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "glass_lit", "at": [-3.4, 1.0], "shape": {"kind": "rect", "w": 1.4, "h": 7.0, "corner": 0.6}, "fill": "$white@0.35"}
+  ],
+  "animations": {
+    "breathe": {
+      "description": "the caps brighten and dim",
+      "duration": 3.6,
+      "tracks": [
+        {"part": "glow", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "glow_1", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "glow_2", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "glow_3", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "glow_4", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "glow_5", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "cap_a_lit", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]}
+      ]
+    }
+  }
+}

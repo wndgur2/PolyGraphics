@@ -1,0 +1,53 @@
+{
+  "id": "ss.base.lamp",
+  "name": "Fungus lamp",
+  "description": "The camp's light, and it is not the camp's. Glowing caps are shut in a jar and hung off a steel pole. An expedition does not glow (feelers guide §7.2), so it lives by borrowed fungus — the cap Sol carried in an emitter that never worked, grown on. The caps breathe (`breathe`), and feelers lays a soft teal pool of light under the jar.",
+  "tags": ["base"],
+  "size": [32, 46],
+  "parts": [
+    {"id": "shadow", "at": [-2.0, 20.0], "shape": {"kind": "ellipse", "rx": 11.0, "ry": 2.5}, "fill": "$ink@0.45"},
+    {"id": "pole", "at": [-9.0, 2.0], "shape": {"kind": "rect", "w": 3.0, "h": 36.0, "corner": 1.0}, "fill": "$steel.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "pole_lit", "at": [-9.6, 2.0], "shape": {"kind": "rect", "w": 1.0, "h": 30.0, "corner": 0.4}, "fill": "$steel"},
+    {"id": "foot", "at": [-9.0, 20.0], "shape": {"kind": "rect", "w": 12.0, "h": 3.0, "corner": 1.0}, "fill": "$slate", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "arm", "at": [-2.0, -15.0], "shape": {"kind": "rect", "w": 16.0, "h": 2.4, "corner": 1.0}, "fill": "$steel.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "hook", "at": [5.0, -12.5], "shape": {"kind": "rect", "w": 1.2, "h": 4.0, "corner": 0.4}, "fill": "$steel.dark"},
+    {"id": "jar_glow", "at": [5.0, 0.0], "shape": {"kind": "ellipse", "rx": 12.0, "ry": 12.0}, "fill": "$spore@0.06"},
+    {"id": "jar_glow_1", "at": [5.0, 0.0], "shape": {"kind": "ellipse", "rx": 10.0, "ry": 10.0}, "fill": "$spore@0.06"},
+    {"id": "jar_glow_2", "at": [5.0, 0.0], "shape": {"kind": "ellipse", "rx": 8.0, "ry": 8.0}, "fill": "$spore@0.06"},
+    {"id": "jar_glow_3", "at": [5.0, 0.0], "shape": {"kind": "ellipse", "rx": 6.0, "ry": 6.0}, "fill": "$spore@0.06"},
+    {"id": "jar_glow_4", "at": [5.0, 0.0], "shape": {"kind": "ellipse", "rx": 4.0, "ry": 4.0}, "fill": "$spore@0.06"},
+    {"id": "jar_glow_5", "at": [5.0, 0.0], "shape": {"kind": "ellipse", "rx": 2.0, "ry": 2.0}, "fill": "$spore@0.06"},
+    {"id": "jar_jar", "at": [5.0, 0.0], "shape": {"kind": "rect", "w": 14.0, "h": 16.0, "corner": 4.0}, "fill": "$frost.dark@0.3", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "jar_cap_a_stem", "at": [3.0, 4.98], "shape": {"kind": "rect", "w": 1.98, "h": 3.96, "corner": 0.9}, "fill": "$husk.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "jar_cap_a_head", "at": [3.0, 3.0], "shape": {"kind": "ellipse", "rx": 3.6, "ry": 2.23}, "fill": "$spore", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "jar_cap_a_under", "at": [3.0, 4.22], "shape": {"kind": "ellipse", "rx": 3.31, "ry": 0.94}, "fill": "$spore.dark"},
+    {"id": "jar_cap_a_lit", "at": [1.85, 2.21], "shape": {"kind": "ellipse", "rx": 1.51, "ry": 0.72}, "fill": "$spore.light2"},
+    {"id": "jar_cap_b_stem", "at": [8.0, 0.54], "shape": {"kind": "rect", "w": 1.54, "h": 3.08, "corner": 0.7}, "fill": "$husk.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "jar_cap_b_head", "at": [8.0, -1.0], "shape": {"kind": "ellipse", "rx": 2.8, "ry": 1.74}, "fill": "$spore", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "jar_cap_b_under", "at": [8.0, -0.05], "shape": {"kind": "ellipse", "rx": 2.58, "ry": 0.73}, "fill": "$spore.dark"},
+    {"id": "jar_cap_b_lit", "at": [7.1, -1.62], "shape": {"kind": "ellipse", "rx": 1.18, "ry": 0.56}, "fill": "$spore.light2"},
+    {"id": "jar_cap_c_stem", "at": [3.6, -2.79], "shape": {"kind": "rect", "w": 1.21, "h": 2.42, "corner": 0.55}, "fill": "$husk.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "jar_cap_c_head", "at": [3.6, -4.0], "shape": {"kind": "ellipse", "rx": 2.2, "ry": 1.36}, "fill": "$spore", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "jar_cap_c_under", "at": [3.6, -3.25], "shape": {"kind": "ellipse", "rx": 2.02, "ry": 0.57}, "fill": "$spore.dark"},
+    {"id": "jar_cap_c_lit", "at": [2.9, -4.48], "shape": {"kind": "ellipse", "rx": 0.92, "ry": 0.44}, "fill": "$spore.light2"},
+    {"id": "jar_lid", "at": [5.0, -9.0], "shape": {"kind": "rect", "w": 15.0, "h": 3.4, "corner": 1.2}, "fill": "$steel", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "jar_glass_lit", "shape": {"kind": "rect", "w": 2.0, "h": 10.0, "corner": 1.0}, "fill": "$white@0.35"}
+  ],
+  "animations": {
+    "breathe": {
+      "description": "the caps in the jar brighten and dim, slower than breathing",
+      "duration": 3.2,
+      "tracks": [
+        {"part": "jar_glow", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "jar_glow_1", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "jar_glow_2", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "jar_glow_3", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "jar_glow_4", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "jar_glow_5", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "jar_cap_a_lit", "prop": "opacity", "keys": [[0.0, 0.7], [0.5, 1.0], [1.0, 0.7]]},
+        {"part": "jar_cap_b_lit", "prop": "opacity", "keys": [[0.0, 1.0], [0.5, 0.65], [1.0, 1.0]]},
+        {"part": "jar_cap_c_lit", "prop": "opacity", "keys": [[0.0, 0.75], [0.5, 1.0], [1.0, 0.75]]}
+      ]
+    }
+  }
+}

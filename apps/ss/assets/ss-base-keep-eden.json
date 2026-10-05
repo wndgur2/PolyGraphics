@@ -1,0 +1,16 @@
+{
+  "id": "ss.base.keep-eden",
+  "name": "Eden's jelly",
+  "description": "Eden put a finger of royal jelly into the emitter. It is a small jar with that finger of gold in it. It sits on its writer's locker (`ss.base.locker`).",
+  "tags": ["base"],
+  "size": [24, 22],
+  "parts": [
+    {"id": "jar", "shape": {"kind": "rect", "w": 10.0, "h": 13.0, "corner": 3.0}, "fill": "$frost.dark@0.35", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "jelly", "at": [0.0, 3.0], "shape": {"kind": "rect", "w": 8.0, "h": 6.0, "corner": 2.0}, "fill": "$gold"},
+    {"id": "shine", "at": [-2.0, 2.0], "shape": {"kind": "circle", "r": 1.0}, "fill": "$gold.light2"},
+    {"id": "lid", "at": [0.0, -7.0], "shape": {"kind": "rect", "w": 11.0, "h": 3.0, "corner": 1.0}, "fill": "$steel", "stroke": {"color": "$ink", "width": "hair"}}
+  ],
+  "animations": {
+
+  }
+}

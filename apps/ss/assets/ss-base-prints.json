@@ -1,0 +1,20 @@
+{
+  "id": "ss.base.prints",
+  "name": "Boot prints",
+  "description": "Four steps of boot prints going one way, worn into the ground on the roads out of the camp. The expedition's, so they are the only tracks in the field with a heel.",
+  "tags": ["base"],
+  "size": [56, 20],
+  "parts": [
+    {"id": "sole_0", "at": [-19.4, 4.0], "rot": 4.0, "shape": {"kind": "ellipse", "rx": 3.2, "ry": 1.8}, "fill": "$soil@0.8"},
+    {"id": "heel_0", "at": [-24.2, 4.0], "rot": 4.0, "shape": {"kind": "ellipse", "rx": 1.7, "ry": 1.5}, "fill": "$soil@0.8"},
+    {"id": "sole_1", "at": [-5.4, -4.0], "rot": 4.0, "shape": {"kind": "ellipse", "rx": 3.2, "ry": 1.8}, "fill": "$soil@0.8"},
+    {"id": "heel_1", "at": [-10.2, -4.0], "rot": 4.0, "shape": {"kind": "ellipse", "rx": 1.7, "ry": 1.5}, "fill": "$soil@0.8"},
+    {"id": "sole_2", "at": [8.6, 4.0], "rot": 4.0, "shape": {"kind": "ellipse", "rx": 3.2, "ry": 1.8}, "fill": "$soil@0.8"},
+    {"id": "heel_2", "at": [3.8, 4.0], "rot": 4.0, "shape": {"kind": "ellipse", "rx": 1.7, "ry": 1.5}, "fill": "$soil@0.8"},
+    {"id": "sole_3", "at": [22.6, -4.0], "rot": 4.0, "shape": {"kind": "ellipse", "rx": 3.2, "ry": 1.8}, "fill": "$soil@0.8"},
+    {"id": "heel_3", "at": [17.8, -4.0], "rot": 4.0, "shape": {"kind": "ellipse", "rx": 1.7, "ry": 1.5}, "fill": "$soil@0.8"}
+  ],
+  "animations": {
+
+  }
+}

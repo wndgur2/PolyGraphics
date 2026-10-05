@@ -1,0 +1,26 @@
+{
+  "id": "ss.base.plate",
+  "name": "Hull plate",
+  "description": "A panel of the lander's skin stuck upright in the dirt as a windbreak. It is riveted, bent at one corner, and rust has run down from its rivets. The camp is walled with these and with crates.",
+  "tags": ["base"],
+  "size": [48, 40],
+  "parts": [
+    {"id": "shadow", "at": [0.0, 15.0], "shape": {"kind": "ellipse", "rx": 22.0, "ry": 4.0}, "fill": "$ink@0.45"},
+    {"id": "plate", "shape": {"kind": "poly", "points": [[-20.0, 14.0], [-19.0, -12.0], [-8.0, -16.0], [18.0, -14.0], [20.0, 14.0]]}, "fill": "$smoke"},
+    {"id": "plate_v0", "shape": {"kind": "poly", "points": [[-19.23, -6.0], [-19.0, -12.0], [-8.0, -16.0], [18.0, -14.0], [18.57, -6.0]]}, "fill": "$steel"},
+    {"id": "plate_v1", "shape": {"kind": "poly", "points": [[-20.0, 14.0], [-19.69, 6.0], [19.43, 6.0], [20.0, 14.0]]}, "fill": "$smoke.dark"},
+    {"id": "plate_rim", "shape": {"kind": "poly", "points": [[-20.0, 14.0], [-19.0, -12.0], [-8.0, -16.0], [18.0, -14.0], [20.0, 14.0]]}, "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "plate_lit", "shape": {"kind": "poly", "points": [[-17.0, 12.0], [-16.0, -10.0], [-9.0, -13.0], [-9.0, 12.0]]}, "fill": "$steel.light@0.35"},
+    {"id": "bend", "shape": {"kind": "poly", "points": [[12.0, -14.0], [18.0, -14.0], [20.0, -4.0]]}, "fill": "$smoke.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "rivet_0", "at": [-14.0, -8.0], "shape": {"kind": "circle", "r": 1.2}, "fill": "$slate"},
+    {"id": "rivet_1", "at": [-5.0, -8.0], "shape": {"kind": "circle", "r": 1.2}, "fill": "$slate"},
+    {"id": "rivet_2", "at": [4.0, -8.0], "shape": {"kind": "circle", "r": 1.2}, "fill": "$slate"},
+    {"id": "rivet_3", "at": [13.0, -8.0], "shape": {"kind": "circle", "r": 1.2}, "fill": "$slate"},
+    {"id": "rust", "shape": {"kind": "poly", "points": [[3.5, -8.0], [6.5, -8.0], [7.1, 2.8], [5.0, 10.0], [2.9, 1.9]]}, "fill": "$rust@0.65"},
+    {"id": "rust_v0", "shape": {"kind": "poly", "points": [[2.9, 1.9], [7.05, 1.9], [7.1, 2.8], [5.0, 10.0], [2.9, 1.9]]}, "fill": "$rust@0.29"},
+    {"id": "foot_dirt", "shape": {"kind": "poly", "points": [[-21.0, 14.0], [-12.0, 10.0], [12.0, 11.0], [21.0, 14.0]]}, "fill": "$sand@0.7"}
+  ],
+  "animations": {
+
+  }
+}

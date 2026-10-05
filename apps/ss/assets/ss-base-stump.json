@@ -1,0 +1,24 @@
+{
+  "id": "ss.base.stump",
+  "name": "Cut spire",
+  "description": "A pheromone spire cut off flat. The face has gone pale where the signal ran out of it, and it is ringed like a tree, one ring per passing of the vermin (A030), with a little pink left at the heart and the saw's line across it. Three of these stand by the camp's south path, the cut spires the records found south of base (T010). In feelers they mark the way out to the Plains.",
+  "tags": ["base"],
+  "size": [32, 28],
+  "parts": [
+    {"id": "shadow", "at": [0.0, 11.0], "shape": {"kind": "ellipse", "rx": 15.0, "ry": 4.0}, "fill": "$ink@0.45"},
+    {"id": "trunk", "shape": {"kind": "poly", "points": [[-11.0, -4.0], [11.0, -4.0], [13.0, 9.0], [-13.0, 9.0]]}, "fill": "$pheromone.dark"},
+    {"id": "trunk_v0", "shape": {"kind": "poly", "points": [[-12.23, 4.0], [12.23, 4.0], [13.0, 9.0], [-13.0, 9.0]]}, "fill": "$pheromone.dark2"},
+    {"id": "trunk_rim", "shape": {"kind": "poly", "points": [[-11.0, -4.0], [11.0, -4.0], [13.0, 9.0], [-13.0, 9.0]]}, "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "trunk_lit", "shape": {"kind": "poly", "points": [[-9.0, -3.0], [-5.0, -3.0], [-6.0, 8.0], [-11.0, 8.0]]}, "fill": "$pheromone@0.55"},
+    {"id": "face", "at": [0.0, -4.0], "shape": {"kind": "ellipse", "rx": 11.5, "ry": 4.2}, "fill": "$husk.dark", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "ring_0", "at": [0.0, -4.0], "shape": {"kind": "ellipse", "rx": 9.4, "ry": 3.4}, "fill": "$pheromone.dark@0.45"},
+    {"id": "ring_1", "at": [0.0, -4.0], "shape": {"kind": "ellipse", "rx": 7.1, "ry": 2.58}, "fill": "$husk.dark"},
+    {"id": "ring_2", "at": [0.0, -4.0], "shape": {"kind": "ellipse", "rx": 4.8, "ry": 1.76}, "fill": "$pheromone.dark@0.45"},
+    {"id": "ring_3", "at": [0.0, -4.0], "shape": {"kind": "ellipse", "rx": 2.5, "ry": 0.94}, "fill": "$husk.dark"},
+    {"id": "heart", "at": [0.0, -4.0], "shape": {"kind": "ellipse", "rx": 1.4, "ry": 0.6}, "fill": "$pheromone@0.85"},
+    {"id": "saw_mark", "at": [1.0, -3.4], "rot": -4.0, "shape": {"kind": "rect", "w": 18.0, "h": 0.9, "corner": 0.3}, "fill": "$ink@0.35"}
+  ],
+  "animations": {
+
+  }
+}

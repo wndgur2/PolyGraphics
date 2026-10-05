@@ -1,0 +1,23 @@
+{
+  "id": "ss.base.saw",
+  "name": "The saw",
+  "description": "The saw from the base inventory (A055). It cut the spire whose rings gave the vermin's passings away (A030), and it lies by the stumps it made.",
+  "tags": ["base"],
+  "size": [38, 16],
+  "parts": [
+    {"id": "shadow", "at": [0.0, 6.0], "shape": {"kind": "ellipse", "rx": 16.0, "ry": 2.5}, "fill": "$ink@0.45"},
+    {"id": "blade", "shape": {"kind": "poly", "points": [[-16.0, -2.0], [10.0, -4.0], [10.0, 3.0], [-16.0, 3.0]]}, "fill": "$steel.light", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "tooth_0", "at": [-15.0, 3.0], "shape": {"kind": "poly", "points": [[0.0, 0.0], [1.6, 2.2], [3.2, 0.0]]}, "fill": "$steel"},
+    {"id": "tooth_1", "at": [-11.6, 3.0], "shape": {"kind": "poly", "points": [[0.0, 0.0], [1.6, 2.2], [3.2, 0.0]]}, "fill": "$steel"},
+    {"id": "tooth_2", "at": [-8.2, 3.0], "shape": {"kind": "poly", "points": [[0.0, 0.0], [1.6, 2.2], [3.2, 0.0]]}, "fill": "$steel"},
+    {"id": "tooth_3", "at": [-4.8, 3.0], "shape": {"kind": "poly", "points": [[0.0, 0.0], [1.6, 2.2], [3.2, 0.0]]}, "fill": "$steel"},
+    {"id": "tooth_4", "at": [-1.4, 3.0], "shape": {"kind": "poly", "points": [[0.0, 0.0], [1.6, 2.2], [3.2, 0.0]]}, "fill": "$steel"},
+    {"id": "tooth_5", "at": [2.0, 3.0], "shape": {"kind": "poly", "points": [[0.0, 0.0], [1.6, 2.2], [3.2, 0.0]]}, "fill": "$steel"},
+    {"id": "tooth_6", "at": [5.4, 3.0], "shape": {"kind": "poly", "points": [[0.0, 0.0], [1.6, 2.2], [3.2, 0.0]]}, "fill": "$steel"},
+    {"id": "handle", "at": [14.0, -1.0], "shape": {"kind": "rect", "w": 10.0, "h": 8.0, "corner": 2.5}, "fill": "$smoke", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "grip", "at": [14.0, -1.0], "shape": {"kind": "rect", "w": 5.0, "h": 3.4, "corner": 1.2}, "fill": "$coal"}
+  ],
+  "animations": {
+
+  }
+}

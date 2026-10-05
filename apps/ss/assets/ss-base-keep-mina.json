@@ -1,0 +1,16 @@
+{
+  "id": "ss.base.keep-mina",
+  "name": "Mina's piece of wall",
+  "description": "A palm-sized piece of the burrow's wall, and it is warm (M041). It is a chunk of rust earth in strata, with a seam of the wall's own pull through it. It sits on its writer's locker (`ss.base.locker`).",
+  "tags": ["base"],
+  "size": [24, 22],
+  "parts": [
+    {"id": "chunk", "shape": {"kind": "poly", "points": [[-8.0, 4.0], [-7.0, -3.0], [-2.0, -6.0], [5.0, -5.0], [8.0, 0.0], [6.0, 5.0], [-2.0, 6.0]]}, "fill": "$rust.light", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "stratum_a", "shape": {"kind": "poly", "points": [[-7.0, 0.0], [7.0, -2.0], [7.0, 0.0], [-7.0, 2.0]]}, "fill": "$sand@0.8"},
+    {"id": "stratum_b", "shape": {"kind": "poly", "points": [[-6.0, 3.0], [6.0, 2.0], [5.0, 4.0], [-5.0, 5.0]]}, "fill": "$rust@0.9"},
+    {"id": "warm", "at": [1.0, -2.0], "shape": {"kind": "circle", "r": 2.0}, "fill": "$ember@0.35"}
+  ],
+  "animations": {
+
+  }
+}

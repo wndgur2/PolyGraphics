@@ -1,0 +1,33 @@
+{
+  "id": "ss.base.cairn",
+  "name": "Salt cairn",
+  "description": "Three slabs of the pan's salt plate stacked by the north-west road, drawn the way the pan's own plates are (`ss.terrain.saltplate`), with a stake driven into them and a cold strip of cloth flapping on it (`flutter`). In feelers this is the way out to the Salt Pan.",
+  "tags": ["base"],
+  "size": [32, 52],
+  "parts": [
+    {"id": "shadow", "at": [0.0, 20.0], "shape": {"kind": "ellipse", "rx": 15.0, "ry": 4.0}, "fill": "$ink@0.45"},
+    {"id": "slab_a_under", "shape": {"kind": "poly", "points": [[-14.02, 19.2], [-11.86, 12.2], [10.82, 11.2], [14.06, 19.2]]}, "fill": "$ink"},
+    {"id": "slab_a", "shape": {"kind": "poly", "points": [[-13.0, 18.0], [-11.0, 11.0], [10.0, 10.0], [13.0, 18.0]]}, "fill": "$husk.dark"},
+    {"id": "slab_a_top", "shape": {"kind": "poly", "points": [[-11.0, 12.6], [-11.0, 11.0], [10.0, 10.0], [11.0, 11.6]]}, "fill": "$husk"},
+    {"id": "slab_b_under", "shape": {"kind": "poly", "points": [[-10.8, 12.2], [-8.64, 5.2], [8.64, 4.2], [10.8, 11.2]]}, "fill": "$ink"},
+    {"id": "slab_b", "shape": {"kind": "poly", "points": [[-10.0, 11.0], [-8.0, 4.0], [8.0, 3.0], [10.0, 10.0]]}, "fill": "$husk.dark"},
+    {"id": "slab_b_top", "shape": {"kind": "poly", "points": [[-8.0, 5.6], [-8.0, 4.0], [8.0, 3.0], [8.0, 4.6]]}, "fill": "$husk"},
+    {"id": "slab_c_under", "shape": {"kind": "poly", "points": [[-7.58, 5.2], [-5.42, -0.8], [6.46, -0.8], [7.54, 4.2]]}, "fill": "$ink"},
+    {"id": "slab_c", "shape": {"kind": "poly", "points": [[-7.0, 4.0], [-5.0, -2.0], [6.0, -2.0], [7.0, 3.0]]}, "fill": "$husk"},
+    {"id": "slab_c_top", "shape": {"kind": "poly", "points": [[-5.0, -0.4], [-5.0, -2.0], [6.0, -2.0], [5.0, -0.4]]}, "fill": "$silent"},
+    {"id": "glare", "shape": {"kind": "poly", "points": [[-3.0, -1.0], [2.0, -1.6], [3.0, 0.6], [-2.0, 1.0]]}, "fill": "$white@0.8"},
+    {"id": "crack", "at": [-2.0, 15.0], "shape": {"kind": "rect", "w": 8.0, "h": 0.9, "corner": 0.3}, "fill": "$husk.dark2"},
+    {"id": "stake", "at": [2.0, -12.0], "shape": {"kind": "rect", "w": 2.6, "h": 26.0, "corner": 0.8}, "fill": "$smoke.light", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "flag", "shape": {"kind": "poly", "points": [[3.0, -24.0], [14.0, -21.0], [12.0, -18.0], [15.0, -15.0], [3.0, -16.0]]}, "fill": "$frost.dark", "stroke": {"color": "$ink", "width": "hair"}}
+  ],
+  "animations": {
+    "flutter": {
+      "description": "the strip of cloth on the stake flaps in the wind off the pan",
+      "duration": 1.4,
+      "tracks": [
+        {"part": "flag", "prop": "scale", "keys": [[0.0, 1.0], [0.3, 0.86], [0.6, 1.06], [1.0, 1.0]]},
+        {"part": "flag", "prop": "y", "keys": [[0.0, 0.0], [0.3, 0.6], [0.6, -0.4], [1.0, 0.0]]}
+      ]
+    }
+  }
+}

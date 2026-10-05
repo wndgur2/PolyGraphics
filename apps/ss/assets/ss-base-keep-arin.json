@@ -1,0 +1,23 @@
+{
+  "id": "ss.base.keep-arin",
+  "name": "Arin's cartridges",
+  "description": "Arin's emitter was the prototype, and its forty cartridges dried on day 388 (feelers character plan §1.3). Five of the spent tubes stand in a slate clip: frost glass, empty. It sits on its writer's locker (`ss.base.locker`).",
+  "tags": ["base"],
+  "size": [24, 22],
+  "parts": [
+    {"id": "clip", "at": [0.0, 4.0], "shape": {"kind": "rect", "w": 18.0, "h": 5.0, "corner": 1.5}, "fill": "$slate", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "tube_0", "at": [-6.0, -2.0], "shape": {"kind": "rect", "w": 3.0, "h": 11.0, "corner": 1.2}, "fill": "$frost.dark@0.45", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "tube_1", "at": [-3.0, -2.0], "shape": {"kind": "rect", "w": 3.0, "h": 11.0, "corner": 1.2}, "fill": "$frost.dark@0.45", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "tube_2", "at": [0.0, -2.0], "shape": {"kind": "rect", "w": 3.0, "h": 11.0, "corner": 1.2}, "fill": "$frost.dark@0.45", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "tube_3", "at": [3.0, -2.0], "shape": {"kind": "rect", "w": 3.0, "h": 11.0, "corner": 1.2}, "fill": "$frost.dark@0.45", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "tube_4", "at": [6.0, -2.0], "shape": {"kind": "rect", "w": 3.0, "h": 11.0, "corner": 1.2}, "fill": "$frost.dark@0.45", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "tube_0_cap", "at": [-6.0, -8.0], "shape": {"kind": "rect", "w": 3.0, "h": 2.0, "corner": 0.6}, "fill": "$steel"},
+    {"id": "tube_1_cap", "at": [-3.0, -8.0], "shape": {"kind": "rect", "w": 3.0, "h": 2.0, "corner": 0.6}, "fill": "$steel"},
+    {"id": "tube_2_cap", "at": [0.0, -8.0], "shape": {"kind": "rect", "w": 3.0, "h": 2.0, "corner": 0.6}, "fill": "$steel"},
+    {"id": "tube_3_cap", "at": [3.0, -8.0], "shape": {"kind": "rect", "w": 3.0, "h": 2.0, "corner": 0.6}, "fill": "$steel"},
+    {"id": "tube_4_cap", "at": [6.0, -8.0], "shape": {"kind": "rect", "w": 3.0, "h": 2.0, "corner": 0.6}, "fill": "$steel"}
+  ],
+  "animations": {
+
+  }
+}

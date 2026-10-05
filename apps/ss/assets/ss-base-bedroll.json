@@ -1,0 +1,19 @@
+{
+  "id": "ss.base.bedroll",
+  "name": "Bedroll",
+  "description": "A rolled sleeping bag in cold slate, strapped and set down by a crate. Somebody sleeps in this camp between expeditions.",
+  "tags": ["base"],
+  "size": [44, 20],
+  "parts": [
+    {"id": "shadow", "at": [0.0, 7.0], "shape": {"kind": "ellipse", "rx": 20.0, "ry": 3.0}, "fill": "$ink@0.45"},
+    {"id": "roll", "shape": {"kind": "rect", "w": 38.0, "h": 13.0, "corner": 6.5}, "fill": "$slate.light", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "roll_shade", "at": [-1.0, 3.5], "shape": {"kind": "rect", "w": 34.0, "h": 5.0, "corner": 2.5}, "fill": "$slate"},
+    {"id": "end", "at": [17.0, 0.0], "shape": {"kind": "ellipse", "rx": 4.0, "ry": 6.5}, "fill": "$slate", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "end_spiral", "at": [17.0, 0.0], "shape": {"kind": "ellipse", "rx": 2.0, "ry": 3.4}, "fill": "$slate.dark"},
+    {"id": "strap_a", "at": [-8.0, 0.0], "shape": {"kind": "rect", "w": 2.4, "h": 14.0, "corner": 0.6}, "fill": "$steel.dark"},
+    {"id": "strap_b", "at": [6.0, 0.0], "shape": {"kind": "rect", "w": 2.4, "h": 14.0, "corner": 0.6}, "fill": "$steel.dark"}
+  ],
+  "animations": {
+
+  }
+}

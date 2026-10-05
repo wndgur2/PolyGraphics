@@ -1,0 +1,36 @@
+{
+  "id": "ss.base.tank",
+  "name": "The tank",
+  "description": "The water tank Arin put up beside the frame on the first day (A001). A steel drum on two legs with slate bands, a glass gauge with the water standing in it, and a tap that drips into a small puddle (`drip`). It is cold, like everything the expedition carried in.",
+  "tags": ["base"],
+  "size": [56, 62],
+  "parts": [
+    {"id": "shadow", "at": [0.0, 27.0], "shape": {"kind": "ellipse", "rx": 24.0, "ry": 6.0}, "fill": "$ink@0.45"},
+    {"id": "leg_l", "at": [-12.0, 22.0], "shape": {"kind": "rect", "w": 4.0, "h": 10.0, "corner": 1.0}, "fill": "$slate", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "leg_r", "at": [12.0, 22.0], "shape": {"kind": "rect", "w": 4.0, "h": 10.0, "corner": 1.0}, "fill": "$slate", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "body", "shape": {"kind": "poly", "points": [[12.0, -24.0], [14.3, -23.54], [16.24, -22.24], [17.54, -20.3], [18.0, -18.0], [18.0, 14.0], [17.54, 16.3], [16.24, 18.24], [14.3, 19.54], [12.0, 20.0], [-12.0, 20.0], [-14.3, 19.54], [-16.24, 18.24], [-17.54, 16.3], [-18.0, 14.0], [-18.0, -18.0], [-17.54, -20.3], [-16.24, -22.24], [-14.3, -23.54], [-12.0, -24.0]]}, "fill": "$steel"},
+    {"id": "body_v0", "shape": {"kind": "poly", "points": [[6.0, -24.0], [12.0, -24.0], [14.3, -23.54], [16.24, -22.24], [17.54, -20.3], [18.0, -18.0], [18.0, 14.0], [17.54, 16.3], [16.24, 18.24], [14.3, 19.54], [12.0, 20.0], [6.0, 20.0]]}, "fill": "$steel.dark"},
+    {"id": "body_rim", "shape": {"kind": "poly", "points": [[12.0, -24.0], [14.3, -23.54], [16.24, -22.24], [17.54, -20.3], [18.0, -18.0], [18.0, 14.0], [17.54, 16.3], [16.24, 18.24], [14.3, 19.54], [12.0, 20.0], [-12.0, 20.0], [-14.3, 19.54], [-16.24, 18.24], [-17.54, 16.3], [-18.0, 14.0], [-18.0, -18.0], [-17.54, -20.3], [-16.24, -22.24], [-14.3, -23.54], [-12.0, -24.0]]}, "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "body_lit", "at": [-11.0, -2.0], "shape": {"kind": "rect", "w": 4.0, "h": 36.0, "corner": 2.0}, "fill": "$steel.light"},
+    {"id": "cap", "at": [0.0, -24.0], "shape": {"kind": "ellipse", "rx": 18.0, "ry": 5.0}, "fill": "$steel.light", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "cap_lid", "at": [0.0, -25.0], "shape": {"kind": "ellipse", "rx": 7.0, "ry": 2.2}, "fill": "$slate"},
+    {"id": "band_a", "at": [0.0, -12.0], "shape": {"kind": "rect", "w": 37.0, "h": 3.0, "corner": 1.0}, "fill": "$slate"},
+    {"id": "band_b", "at": [0.0, 10.0], "shape": {"kind": "rect", "w": 37.0, "h": 3.0, "corner": 1.0}, "fill": "$slate"},
+    {"id": "gauge", "at": [-3.0, 0.0], "shape": {"kind": "rect", "w": 5.0, "h": 26.0, "corner": 2.0}, "fill": "$frost.dark@0.5", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "gauge_water", "at": [-3.0, 5.0], "shape": {"kind": "rect", "w": 3.0, "h": 14.0, "corner": 1.5}, "fill": "$aqua@0.75"},
+    {"id": "tap", "at": [20.0, 14.0], "shape": {"kind": "rect", "w": 7.0, "h": 3.0, "corner": 1.0}, "fill": "$slate.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "drip", "at": [22.0, 17.0], "shape": {"kind": "ellipse", "rx": 1.1, "ry": 1.6}, "fill": "$aqua@0.8"},
+    {"id": "puddle", "at": [21.0, 27.0], "shape": {"kind": "ellipse", "rx": 5.5, "ry": 1.8}, "fill": "$aqua@0.3"}
+  ],
+  "animations": {
+    "drip": {
+      "description": "a drop gathers at the tap, falls, and the puddle takes it",
+      "duration": 2.4,
+      "tracks": [
+        {"part": "drip", "prop": "y", "keys": [[0.0, 0.0], [0.7, 0.0], [0.86, 9.0], [0.87, 0.0], [1.0, 0.0]]},
+        {"part": "drip", "prop": "opacity", "keys": [[0.0, 0.0], [0.5, 1.0], [0.85, 1.0], [0.87, 0.0], [1.0, 0.0]]},
+        {"part": "puddle", "prop": "scale", "keys": [[0.0, 1.0], [0.86, 1.0], [0.9, 1.18], [1.0, 1.0]]}
+      ]
+    }
+  }
+}

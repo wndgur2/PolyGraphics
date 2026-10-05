@@ -1,0 +1,16 @@
+{
+  "id": "ss.base.keep-rowan",
+  "name": "Rowan's bowl",
+  "description": "A stone bowl from the ruins, with the old pheromone dried in it. Rowan's tubes turned to stone. The film in the bowl is pink, because it is the hive's signal. It sits on its writer's locker (`ss.base.locker`).",
+  "tags": ["base"],
+  "size": [24, 22],
+  "parts": [
+    {"id": "bowl", "shape": {"kind": "poly", "points": [[-9.0, -2.0], [9.0, -2.0], [6.0, 5.0], [-6.0, 5.0]]}, "fill": "$smoke", "stroke": {"color": "$ink", "width": "thin"}},
+    {"id": "rim", "at": [0.0, -2.0], "shape": {"kind": "ellipse", "rx": 9.0, "ry": 2.4}, "fill": "$smoke.light", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "film", "at": [0.0, -1.8], "shape": {"kind": "ellipse", "rx": 6.4, "ry": 1.4}, "fill": "$pheromone@0.75"},
+    {"id": "chip", "shape": {"kind": "poly", "points": [[5.0, 1.0], [8.0, 0.0], [7.0, 3.0]]}, "fill": "$smoke.dark"}
+  ],
+  "animations": {
+
+  }
+}
