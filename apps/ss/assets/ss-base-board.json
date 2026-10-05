@@ -26,7 +26,16 @@
     {"id": "pin_ne", "at": [12.0, -20.0], "shape": {"kind": "circle", "r": 1.5}, "fill": "$frost", "stroke": {"color": "$ink", "width": "hair"}},
     {"id": "pin_nw", "at": [-13.0, -19.0], "shape": {"kind": "circle", "r": 1.5}, "fill": "$frost", "stroke": {"color": "$ink", "width": "hair"}},
     {"id": "pin_w", "at": [-14.0, -6.0], "shape": {"kind": "circle", "r": 1.5}, "fill": "$frost", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "note", "at": [15.0, -2.0], "rot": 8.0, "shape": {"kind": "rect", "w": 10.0, "h": 8.0, "corner": 0.6}, "fill": "$husk", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "note_shadow", "shape": {"kind": "poly", "points": [[-4.55, -3.35], [5.45, -3.35], [5.45, 2.73], [3.53, 4.65], [-4.55, 4.65]]}, "fill": "$ink@0.3", "at": [15.0, -2.0], "rot": 8.0},
+    {"id": "note", "shape": {"kind": "poly", "points": [[-5.0, -4.0], [5.0, -4.0], [5.0, 2.08], [3.08, 4.0], [-5.0, 4.0]]}, "fill": "$husk", "at": [15.0, -2.0], "rot": 8.0},
+    {"id": "note_v0", "shape": {"kind": "poly", "points": [[-5.0, 2.88], [4.2, 2.88], [3.08, 4.0], [-5.0, 4.0]]}, "fill": "$husk.dark@0.3", "at": [15.0, -2.0], "rot": 8.0},
+    {"id": "note_rim", "shape": {"kind": "poly", "points": [[-5.0, -4.0], [5.0, -4.0], [5.0, 2.08], [3.08, 4.0], [-5.0, 4.0]]}, "stroke": {"color": "$ink", "width": 0.6}, "at": [15.0, -2.0], "rot": 8.0},
+    {"id": "note_ln0_0", "at": [13.41, -4.55], "shape": {"kind": "rect", "w": 3.53, "h": 0.65, "corner": 0.28}, "fill": "$slate.dark@0.72", "rot": 8.0},
+    {"id": "note_ln1_0", "at": [14.26, -2.56], "shape": {"kind": "rect", "w": 5.78, "h": 0.55, "corner": 0.28}, "fill": "$slate.dark@0.62", "rot": 8.0},
+    {"id": "note_ln2_0", "at": [14.1, -0.71], "shape": {"kind": "rect", "w": 5.98, "h": 0.55, "corner": 0.28}, "fill": "$slate.dark@0.62", "rot": 8.0},
+    {"id": "note_ln3_0", "at": [12.21, 0.89], "shape": {"kind": "rect", "w": 2.69, "h": 0.55, "corner": 0.28}, "fill": "$slate.dark@0.62", "rot": 8.0},
+    {"id": "note_ear_shadow", "shape": {"kind": "poly", "points": [[4.65, 1.73], [2.73, 3.65], [2.73, 1.73]]}, "fill": "$ink@0.18", "at": [15.0, -2.0], "rot": 8.0},
+    {"id": "note_ear", "shape": {"kind": "poly", "points": [[5.0, 2.08], [3.08, 4.0], [3.08, 2.08]]}, "fill": "$husk.dark", "stroke": {"color": "$ink", "width": 0.6}, "at": [15.0, -2.0], "rot": 8.0},
     {"id": "chalk", "at": [-12.0, 6.5], "shape": {"kind": "rect", "w": 8.0, "h": 2.0, "corner": 0.8}, "fill": "$bone"}
   ],
   "animations": {

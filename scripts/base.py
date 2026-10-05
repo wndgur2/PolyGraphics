@@ -52,6 +52,9 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from rig import r2, poly, ell, circ, rect, write_doc  # noqa: E402
 from draw import *  # noqa: E402,F401,F403
+from bits_cloth import bed, bedroll, flap, pillow, rope_coil, sack  # noqa: E402
+from bits_camp import dial, ladle, mug, page, page_stack, saw, stone, stool, tag, tin_stack  # noqa: E402
+from bits_keeps import KEEP_PARTS  # noqa: E402
 from bits_glass import cartridge, jar, jar_bail_top, jar_fill, syringe, tube_rack, vial  # noqa: E402,F401
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -209,6 +212,9 @@ def lander():
 
 # ============================================================== the frame
 def frame():
+    # The two pages the wind moves: each turns about one point, the pin or its middle.
+    note_b = page("note_b", -36, 12, rot=6, w=10, h=13, fill="$husk", pin="pin", pivot="pin")
+    roof_page = page("roof_page", -52, -32, rot=-24, w=9, h=11, pivot="centre")
     pole = lambda id, x, y, h, fill: P(id, R(5, h, 1.5), fill, at=(x, y), stroke=INK_HAIR)
     sag = [(96, -14), (64, -8), (32, -5), (0, -4), (-32, -5), (-64, -8), (-96, -14)]
     parts = [
@@ -225,28 +231,16 @@ def frame():
         P("wall_fold_b", R(1.4, 56, 0.5), "$ink@0.25", at=(30, -2)),
         # Pages pinned to the wall, and a cord between them.
         band("wall_cord", [(-62, 2), (-44, 5), (-26, 6), (-6, 5)], 0.9, "$bone.dark@0.8"),
-        P("note_a", R(11, 14, 0.8), "$bone", at=(-54, 11), rot=-5, stroke=INK_HAIR),
-        P("note_a_ln", R(7, 1, 0.3), "$slate.dark@0.6", at=(-54, 8), rot=-5),
-        P("note_a_ln2", R(6, 1, 0.3), "$slate.dark@0.5", at=(-54, 11), rot=-5),
-        P("note_b", R(10, 13, 0.8), "$husk", at=(-36, 12), rot=6, stroke=INK_HAIR),
-        P("note_b_ln", R(6, 1, 0.3), "$slate.dark@0.5", at=(-36, 10), rot=6),
-        P("note_c", R(12, 9, 0.8), "$bone", at=(-17, 11), rot=-2, stroke=INK_HAIR),
-        P("note_c_ln", R(8, 1, 0.3), "$slate.dark@0.5", at=(-17, 10), rot=-2),
-        # Where the camp sleeps: a bedroll laid out with a folded pillow, one
+        *page("note_a", -54, 11, rot=-5, w=11, h=14, pin="pin"),
+        *note_b,
+        *page("note_c", -17, 11, rot=-2, w=12, h=9, pin="tape", ear=None),
+        # Where the camp sleeps: a sleeping bag laid out with a pillow, one
         # still rolled, a mug, a stack of pages to read by.
-        *shaded("blanket", [(-6, 36), (56, 36), (62, 54), (-10, 54)], "$slate.light", [(48, 55, "$slate")], stroke=INK_HAIR),
-        P("blanket_stripe_a", poly([(-2, 41), (58, 41), (58.6, 43), (-3, 43)]), "$frost.dark@0.55"),
-        P("blanket_stripe_b", poly([(-4, 47), (60, 47), (60.6, 49), (-5, 49)]), "$frost.dark@0.55"),
-        P("blanket_fold", poly([(30, 36), (56, 36), (60, 46), (38, 44)]), "$slate.light2@0.9", stroke=INK_HAIR),
-        P("pillow", R(16, 8, 3), "$bone.dark", at=(2, 40), rot=-4, stroke=INK_HAIR),
-        P("roll", R(34, 11, 5.5), "$slate.light", at=(-50, 44), stroke=INK_HAIR),
-        P("roll_shade", R(30, 4, 2), "$slate", at=(-50, 47)),
-        P("roll_end", ell(3.4, 5.5), "$slate", at=(-34, 44), stroke=INK_HAIR),
-        P("roll_strap", R(2.2, 12, 0.6), "$steel.dark", at=(-54, 44)),
-        P("mug", R(6, 7, 1.4), "$steel", at=(70, 46), stroke=INK_HAIR),
-        P("mug_rim", ell(3, 1), "$coal", at=(70, 42.6)),
-        P("stack", R(14, 5, 0.8), "$bone", at=(-74, 52), rot=-6, stroke=INK_HAIR),
-        P("stack_top", R(12, 4, 0.8), "$husk", at=(-73, 49), rot=4, stroke=INK_HAIR),
+        *bed("bed", 27, 45, length=64),
+        *pillow("pillow", 4.5, 40, rot=-3),
+        *bedroll("roll", -52, 50.5),
+        *mug("mug", 70, 49.5),
+        *page_stack("stack", -74, 50, w=12, h=10, lie=0.5, s=0.9),
         # The canvas, seen from above: back bar high, front edge sagging
         # between the front poles.
         *shaded("roof", [(-84, -46), (84, -46)] + sag, "$slate.light", [(-47, -35, "$slate"), (-12, 0, "$slate.light2")]),
@@ -262,7 +256,7 @@ def frame():
         P("patch", R(16, 12, 1), "$bone.dark", at=(56, -28), rot=8, stroke=INK_HAIR),
         P("patch_stitch", R(12, 1, 0.3), "$ink@0.5", at=(56, -28), rot=8),
         P("roof_grit", ell(18, 2.4), "$sand@0.5", at=(-8, -38)),
-        P("roof_page", R(9, 11, 0.6), "$bone", at=(-52, -32), rot=-24, stroke=INK_HAIR),
+        *roof_page,
         # The front poles, and their ropes out to the pegs.
         pole("pole_fl", -94, 22, 72, "$steel.dark"),
         pole("pole_fr", 94, 22, 72, "$steel.dark"),
@@ -272,6 +266,7 @@ def frame():
         band("rope_l", [(-95, -12), (-102, 20), (-108, 56)], 1.1, "$bone.dark@0.85"),
         band("rope_r", [(95, -12), (102, 20), (108, 56)], 1.1, "$bone.dark@0.85"),
         P("peg_l", R(3, 7, 1), "$steel.dark", at=(-108, 57), stroke=INK_HAIR),
+        *rope_coil("coil", -96, 63, loops=3, tail=-1),
         P("peg_r", R(3, 7, 1), "$steel.dark", at=(108, 57), stroke=INK_HAIR),
         # The jar hung from the middle of the front edge.
         P("jar_cord", R(1.2, 12 + jar_bail_top(11, 13)[1] + 4, 0.4), "$bone.dark", at=(0, (12 + jar_bail_top(11, 13)[1] - 4) / 2)),
@@ -290,8 +285,8 @@ def frame():
             [
                 track("hem", "y", [(0, 0), (0.45, -1.6), (0.7, -0.5), (1, 0)]),
                 track("roof_lit", "opacity", [(0, 1), (0.45, 0.6), (1, 1)]),
-                track("roof_page", "rot", [(0, -24), (0.4, -16), (0.6, -27), (1, -24)]),
-                track("note_b", "rot", [(0, 6), (0.3, 12), (0.55, 3), (1, 6)]),
+                *[track(q["id"], "rot", [(0, 0), (0.4, 8), (0.6, -3), (1, 0)]) for q in roof_page],
+                *[track(q["id"], "rot", [(0, 0), (0.3, 6), (0.55, -3), (1, 0)]) for q in note_b],
                 track("jar_cap_a_lit", "opacity", [(0, 0.7), (0.5, 1), (1, 0.7)]),
                 track("jar_cap_b_lit", "opacity", [(0, 1), (0.5, 0.7), (1, 1)]),
                 *glow_tracks("jar_glow", 0.75, 1),
@@ -304,8 +299,9 @@ def frame():
         "Arin's frame, put up on the first day (A001: \"Base frame and water tank up.\"), with a canvas over it: where the camp sleeps "
         "between expeditions. Four poles; the canvas is let down from the back bar to the ground for a wall, and stretched forward over the "
         "front poles, sagging between them, with guy ropes out to pegs. Pages are pinned to the wall on a cord, a bone patch is stitched on "
-        "the roof, and a loose page has blown up onto it. Underneath on a ground sheet are a bedroll laid out with a folded pillow, one still "
-        "rolled, a mug and a stack of pages to read by. A jar of glowing caps hangs from the middle of the front edge, and its light is the "
+        "the roof, and a loose page has blown up onto it. Underneath on a ground sheet is a sleeping bag laid out, quilted, its top "
+        "turned back on its lining and the dent where somebody lay still in it, a pillow at its head; another still rolled and strapped; a "
+        "mug and a stack of pages to read by under a stone; a coil of rope by the left peg. A jar of glowing caps hangs from the middle of the front edge, and its light is the "
         "only light in there. At the front-left joint is the crystal the frame grew, which by day 471 came off one-handed (A055). The hem "
         "lifts in the wind and the jar's caps breathe (`breathe`).",
         (224, 140),
@@ -344,8 +340,7 @@ def tank():
         *[P(f"gauge_tick_{i}", R(1.6, 0.5, 0.2), "$ink@0.5", at=(0.6, -8 + i * 5)) for i in range(4)],
         # A tin cup on a hook for whoever is thirsty.
         P("hook", R(1, 4, 0.4), "$steel.dark", at=(-19, -4)),
-        P("cup", R(5, 6, 1.2), "$steel", at=(-20, 0), stroke=INK_HAIR),
-        P("cup_lit", R(1, 4, 0.4), "$steel.light", at=(-21.4, 0.4)),
+        *mug("cup", -19 - 2.8 * 0.85, -2.4 + 5.6 * 0.85, s=0.85, ground=False),
         P("tap", R(7, 3, 1), "$slate.dark", at=(20, 14), stroke=INK_HAIR),
         P("drip", ell(1.1, 1.6), "$aqua@0.8", at=(22, 17)),
         P("puddle", ell(5.5, 1.8), "$aqua@0.3", at=(21, 27)),
@@ -375,6 +370,7 @@ def tank():
 
 # ============================================================== the shelf: seven boxes of paper
 def shelf():
+    loose_b = page("loose_b", 54, 29, w=10, h=9, rot=10, fill="$husk", lie=0.7, pivot="centre")
     parts = [shadow("shadow", 0, 30, 60, 8)]
     # Seven boxes (A055): three on the ground, three on those, one on top.
     # Each is numbered in the expedition's way — a count of strokes on its
@@ -419,17 +415,16 @@ def shelf():
         P("cord", R(30, 1.6, 0.5), "$bone.dark", at=(-2, -22)),
         P("cord_knot", circ(1.4), "$bone.dark", at=(8, -22), stroke=INK_HAIR),
         # Loose pages that did not make it into a box, one weighted with a stone.
-        P("loose_a", R(12, 8, 0.8), "$bone", at=(-54, 30), rot=-14, stroke=INK_HAIR),
-        P("loose_a_ln", R(7, 1, 0.3), "$slate.dark@0.5", at=(-54, 29), rot=-14),
-        P("loose_b", R(10, 7, 0.8), "$husk", at=(54, 29), rot=10, stroke=INK_HAIR),
-        P("loose_stone", ell(3.4, 2.2), "$smoke", at=(-53, 28.4), stroke=INK_HAIR),
+        *page("loose_a", -54, 30, w=12, h=11, rot=-14, lie=0.7),
+        *stone("loose_stone", -53, 30.5, s=0.7),
+        *loose_b,
     ]
     anims = {
         "stir": loop(
             "the wind lifts the pages standing proud of the lids, one box after another",
             3.2,
-            [track(f"box_{i}_page", "rot", [(0, pages[i][1] * 7), (0.12 * i + 0.1, pages[i][1] * 7 + 5), (min(0.95, 0.12 * i + 0.3), pages[i][1] * 7), (1, pages[i][1] * 7)]) for i in range(7)]
-            + [track("loose_b", "rot", [(0, 10), (0.4, 18), (0.6, 8), (1, 10)])],
+            [track(f"box_{i}_page", "rot", [(0, 0), (0.12 * i + 0.1, 5), (min(0.95, 0.12 * i + 0.3), 0), (1, 0)]) for i in range(7)]
+            + [track(q["id"], "rot", [(0, 0), (0.4, 8), (0.6, -2), (1, 0)]) for q in loose_b],
         )
     }
     return doc(
@@ -461,25 +456,20 @@ def line():
         band("cord", [(x, cord_y(x)) for x in range(-54, 55, 6)], 1.1, "$bone.dark"),
     ]
     fills = ["$bone", "$husk", "$bone", "$bone.dark", "$husk", "$bone"]
+    hung = []
     for i, x in enumerate(xs):
         y = cord_y(x)
         w, h = (10, 13) if i % 2 == 0 else (11, 11)
-        parts += [
-            P(f"page_{i}", R(w, h, 0.6), fills[i], at=(x, y + h / 2 + 0.5), rot=tilt(i), stroke=INK_HAIR),
-            P(f"page_{i}_ln", R(w - 4, 0.9, 0.3), "$slate.dark@0.55", at=(x, y + h / 2 - 1), rot=tilt(i)),
-            P(f"page_{i}_ln2", R(w - 5, 0.9, 0.3), "$slate.dark@0.4", at=(x, y + h / 2 + 2), rot=tilt(i)),
-            P(f"peg_{i}", R(2, 3.6, 0.6), "$steel.light", at=(x, y)),
-        ]
-    parts += [
-        P("fallen", R(10, 7, 0.6), "$bone", at=(18, 25), rot=12, stroke=INK_HAIR),
-        P("fallen_ln", R(6, 0.9, 0.3), "$slate.dark@0.5", at=(18, 24.5), rot=12),
-    ]
-    swing = lambda i: [(0, tilt(i)), (0.08 + i * 0.1, tilt(i) + 9), (0.3 + i * 0.1, tilt(i) - 3), (1, tilt(i))]
+        sheet = page(f"page_{i}", x, y + h / 2 + 0.5, rot=tilt(i), w=w, h=h, fill=fills[i], ear=None if i % 3 else "br", seed=i + 2, pivot=(0, -h / 2 - 0.5))
+        hung.append(sheet)
+        parts += [*sheet, P(f"peg_{i}", R(2, 3.6, 0.6), "$steel.light", at=(x, y), stroke=INK_FINE)]
+    parts += page("fallen", 18, 25, w=10, h=9, rot=12, lie=0.7, ear="tl")
+    swing = lambda i: [(0, 0), (0.08 + i * 0.1, 9), (0.3 + i * 0.1, -3), (1, 0)]
     anims = {
         "stir": loop(
             "the wind goes down the line and the pages swing on their pegs, one after another",
             2.8,
-            [track(f"page_{i}{s}", "rot", swing(i)) for i in range(len(xs)) for s in ("", "_ln", "_ln2")],
+            [track(q["id"], "rot", swing(i)) for i, sheet in enumerate(hung) for q in sheet],
         )
     }
     doc(
@@ -496,6 +486,8 @@ def line():
 
 # ============================================================== the vat
 def vat():
+    # A tag on a string off the right clamp: what is in it, written down. It swings about the knot.
+    label = tag("tag", 21, -10, rot=-14, s=1.15)
     parts = [
         shadow("shadow", 0, 34, 26, 6),
         # A riveted stand on two feet.
@@ -523,14 +515,9 @@ def vat():
         P("clamp_l", R(4, 12, 1), "$steel.dark", at=(-21, -16), stroke=INK_HAIR),
         P("clamp_r", R(4, 12, 1), "$steel.dark", at=(21, -16), stroke=INK_HAIR),
         # A tag on a cord off the right clamp: what is in it, written down.
-        band("tag_cord", [(21, -11), (23, -6), (25, -2)], 0.8, "$bone.dark"),
-        P("tag", R(7, 9, 0.6), "$bone", at=(26, 2), rot=8, stroke=INK_HAIR),
-        P("tag_ln", R(4, 0.8, 0.3), "$slate.dark@0.6", at=(26, 1), rot=8),
-        P("tag_ln2", R(3, 0.8, 0.3), "$slate.dark@0.5", at=(26.4, 3), rot=8),
-        # The ladle hooked over the rim, and the drop that got away.
-        P("ladle", R(3, 24, 1.2), "$steel.light", at=(14, -25), rot=18, stroke=INK_HAIR),
-        P("ladle_bowl", ell(4.4, 3), "$steel", at=(17.5, -36), stroke=INK_HAIR),
-        P("ladle_gold", ell(2.6, 1.2), "$gold@0.9", at=(17.5, -36.6)),
+        *label,
+        # The ladle hooked over the lid's end, and the drop that got away.
+        *ladle("ladle", -21.3, -23.8, side="left", s=0.9),
         P("drop", ell(2, 3), "$gold", at=(-19.5, 14), stroke=INK_HAIR),
         P("drop_lit", circ(0.7), "$gold.light2", at=(-20.2, 13)),
     ]
@@ -543,7 +530,7 @@ def vat():
                 track("meniscus", "scale", [(0, 1), (0.5, 0.94), (1, 1)]),
                 track("bubble_a", "y", [(0, 0), (0.8, -14), (0.81, 0), (1, 0)]),
                 track("bubble_a", "opacity", [(0, 1), (0.78, 1), (0.8, 0), (0.85, 0), (1, 1)]),
-                track("tag", "rot", [(0, 8), (0.5, 14), (1, 8)]),
+                *[track(q["id"], "rot", [(0, 0), (0.5, 6), (1, 0)]) for q in label],
             ],
         )
     }
@@ -591,23 +578,20 @@ def bench():
         # ticks round it and two knobs under it.
         P("box", R(20, 14, 2), "$slate.dark", at=(40, -15), stroke=INK_THIN),
         lit_edge("box_lit", 31, 49, -21.4, 0.8, "$slate.light"),
-        P("dial", circ(4.4), "$frost@0.7", at=(40, -15), stroke=INK_HAIR),
-        *[P(f"tick_{i}", circ(0.45), "$ink@0.7", at=(40 + 3.3 * math.cos(a), -15 + 3.3 * math.sin(a))) for i, a in enumerate([math.radians(d) for d in (200, 240, 270, 300, 340)])],
-        P("needle_dial", R(4, 0.9, 0.3), "$ink", at=(41.5, -16), rot=-35),
+        *dial("dial", 40, -15, s=1.15, face="$frost.light", reading=0.38),
         P("knob_a", circ(1.2), "$steel", at=(34, -10.4), stroke=INK_HAIR),
         P("knob_b", circ(1.2), "$steel", at=(46, -10.4), stroke=INK_HAIR),
         # The syringe, lying where the last dose was drawn, and the drop it left.
         *syringe("syringe", 17, -4.4, rot=-5),
         # A notebook page under the rack, held down with a stone.
-        P("note", R(14, 10, 0.8), "$bone", at=(-44, -6), rot=-8, stroke=INK_HAIR),
-        P("note_ln", R(9, 0.9, 0.3), "$slate.dark@0.5", at=(-44, -7), rot=-8),
-        P("note_stone", ell(3, 2), "$smoke", at=(-41, -8.6), stroke=INK_HAIR),
+        *page("note", -44, -6, w=14, h=10, rot=-8, lie=0.8),
+        *stone("note_stone", -41, -6.4, s=0.7),
     ]
     anims = {
         "read": loop(
             "the dial's needle wanders and settles: the instrument reading the air",
             3.0,
-            [track("needle_dial", "rot", [(0, -35), (0.3, -20), (0.55, -42), (0.75, -30), (1, -35)])],
+            [track("dial_needle", "rot", [(0, 0), (0.3, 15), (0.55, -7), (0.75, 5), (1, 0)])],
         )
     }
     return doc(
@@ -668,14 +652,8 @@ def hearth():
     parts += [p for cid, x, y, r in strays for p in cap(cid, x, y, r)]
     # Two mugs left by the ring, and spores going up off the caps.
     parts += [
-        P("mug_a", R(5.4, 6.4, 1.3), "$steel", at=(33, 18), stroke=INK_HAIR),
-        P("mug_a_lit", R(1.2, 4.4, 0.4), "$steel.light", at=(31.6, 18.4)),
-        P("mug_a_rim", ell(2.7, 0.9), "$coal", at=(33, 15)),
-        P("mug_a_handle", ring_arc(1.8, 0.8, -80, 80), "$steel.dark", at=(35.6, 18.4)),
-        P("mug_b", R(5.4, 6.4, 1.3), "$steel", at=(-34, 17), rot=-8, stroke=INK_HAIR),
-        P("mug_b_lit", R(1.2, 4.4, 0.4), "$steel.light", at=(-35.4, 17.2), rot=-8),
-        P("mug_b_rim", ell(2.7, 0.9), "$coal", at=(-34.4, 13.8), rot=-8),
-        P("mug_b_handle", ring_arc(1.8, 0.8, 100, 260), "$steel.dark", at=(-37, 17.4)),
+        *mug("mug_a", 33, 21.2, s=0.9),
+        *mug("mug_b", -34, 20.5, s=0.9, tipped=True, facing="left"),
     ]
     motes = [("m0", -8, -8), ("m1", 4, -10), ("m2", 12, -6), ("m3", -2, -12)]
     parts += [P(mid, circ(0.9), "$spore.light2@0.9", at=(x, y)) for mid, x, y in motes]
@@ -796,7 +774,7 @@ def board():
         P("pin_ne", circ(1.5), "$frost", at=(12, -20), stroke=INK_HAIR),
         P("pin_nw", circ(1.5), "$frost", at=(-13, -19), stroke=INK_HAIR),
         P("pin_w", circ(1.5), "$frost", at=(-14, -6), stroke=INK_HAIR),
-        P("note", R(10, 8, 0.6), "$husk", at=(15, -2), rot=8, stroke=INK_HAIR),
+        *page("note", 15, -2, w=10, h=8, fill="$husk", rot=8, words=False),
         P("chalk", R(8, 2, 0.8), "$bone", at=(-12, 6.5)),
     ]
     doc(
@@ -929,90 +907,57 @@ def locker():
     )
 
 
+# The one thing each writer's log kept, drawn in scripts/bits_keeps.py: each rests on its doc's y=+7
+# (bits_keeps.FOOT), which feelers sets on the locker's lid.
 KEEPS = {
     "arin": (
         "Arin's cartridges",
         "Arin's emitter was the prototype, and its forty cartridges dried on day 388 (feelers character plan §1.3). Five of the spent tubes stand in a "
-        "slate clip: frost glass, empty.",
-        lambda: [
-            P("clip", R(18, 5, 1.5), "$slate", at=(0, 4), stroke=INK_HAIR),
-            *[P(f"tube_{i}", R(3, 11, 1.2), "$frost.dark@0.45", at=(-6 + i * 3, -2), stroke=INK_HAIR) for i in range(5)],
-            *[P(f"tube_{i}_cap", R(3, 2, 0.6), "$steel", at=(-6 + i * 3, -8)) for i in range(5)],
-        ],
+        "riveted slate clip: frost glass, empty, steel-capped, each with the ring its last charge dried to, one standing proud and askew.",
+        KEEP_PARTS["arin"],
     ),
     "sol": (
         "Sol's cap",
         "Sol's emitter never worked from the first day, and Sol carried a fungus cap in it instead. Here is the cap, dull and teal, with no "
-        "light in it any more — the ones in the camp's jars and its hearth were grown from it.",
-        lambda: [
-            P("stem", R(3, 7, 1), "$husk.dark", at=(0, 3), stroke=INK_HAIR),
-            P("cap", ell(8, 4.6), "$spore.dark", at=(0, -2), stroke=INK_THIN),
-            P("cap_shade", ell(8, 2), "$spore.dark2@0.8", at=(0, 0.5)),
-            P("spot", circ(1.3), "$spore@0.6", at=(-3, -3)),
-        ],
+        "light in it any more — the ones in the camp's jars and its hearth were grown from it. Its rim has dried wavy and cracked, and the gills "
+        "show under it.",
+        KEEP_PARTS["sol"],
     ),
     "haram": (
         "Haram's husk",
-        "Haram put a moulted husk into the second-model emitter. It is a hollow, segmented shell in husk white.",
-        lambda: [
-            P("husk", ell(9, 5), "$husk", at=(0, 0), stroke=INK_THIN),
-            *[P(f"seg_{i}", R(1.2, 7, 0.4), "$husk.dark", at=(-5 + i * 3.4, 0)) for i in range(4)],
-            P("mouth", ell(2.6, 2.2), "$coal", at=(8, 0)),
-            P("lit", ell(4, 1.2), "$white@0.4", at=(-2, -3)),
-        ],
+        "Haram put a moulted husk into the second-model emitter. It is a hollow, segmented shell in husk white, "
+        "split down the back where it was shed, with stubs of legs and an empty mouth.",
+        KEEP_PARTS["haram"],
     ),
     "mina": (
         "Mina's piece of wall",
         "A palm-sized piece of the burrow's wall, and it is warm (M041). It is a chunk of rust earth in strata, with a seam of the wall's own pull through "
         "it.",
-        lambda: [
-            P("chunk", poly([(-8, 4), (-7, -3), (-2, -6), (5, -5), (8, 0), (6, 5), (-2, 6)]), "$rust.light", stroke=INK_THIN),
-            P("stratum_a", poly([(-7, 0), (7, -2), (7, 0), (-7, 2)]), "$sand@0.8"),
-            P("stratum_b", poly([(-6, 3), (6, 2), (5, 4), (-5, 5)]), "$rust@0.9"),
-            P("warm", circ(2), "$ember@0.35", at=(1, -2)),
-        ],
+        KEEP_PARTS["mina"],
     ),
     "kano": (
         "Kano's road stake",
-        "Kano walked the swarm's road for 330 days. This is a marker stake from it, notched once for every ten days, with a cold strip of cloth "
-        "tied on.",
-        lambda: [
-            P("stake", R(4, 18, 1), "$smoke.light", at=(0, -1), stroke=INK_HAIR),
-            *[P(f"notch_{i}", R(4, 0.9, 0.2), "$ink@0.55", at=(0, -7 + i * 2.2)) for i in range(6)],
-            P("cloth", poly([(2, -7), (9, -6), (8, -3), (2, -4)]), "$frost.dark", stroke=INK_HAIR),
-        ],
+        "Kano walked the swarm's road for 330 days. This is a marker stake from it, notched once for every ten days — thirty-three, cut in fives "
+        "along its top — split at the head, stained where it stood in the ground, with a cold strip of cloth wound on and knotted.",
+        KEEP_PARTS["kano"],
     ),
     "eden": (
         "Eden's jelly",
-        "Eden put a finger of royal jelly into the emitter. It is a small jar with that finger of gold in it.",
-        lambda: [
-            P("jar", R(10, 13, 3), "$frost.dark@0.35", at=(0, 0), stroke=INK_THIN),
-            P("jelly", R(8, 6, 2), "$gold", at=(0, 3)),
-            P("shine", circ(1), "$gold.light2", at=(-2, 2)),
-            P("lid", R(11, 3, 1), "$steel", at=(0, -7), stroke=INK_HAIR),
-        ],
+        "Eden put a finger of royal jelly into the emitter. It is a small jar with a screw lid, and that finger of "
+        "gold in it.",
+        KEEP_PARTS["eden"],
     ),
     "rowan": (
         "Rowan's bowl",
-        "A stone bowl from the ruins, with the old pheromone dried in it. Rowan's tubes turned to stone. The film in the bowl is pink, because it "
+        "A bowl of the ruins' own stone, carved round its rim and chipped, with the old pheromone dried and crazed in it. Rowan's tubes turned to stone. The film in the bowl is pink, because it "
         "is the hive's signal.",
-        lambda: [
-            P("bowl", poly([(-9, -2), (9, -2), (6, 5), (-6, 5)]), "$smoke", stroke=INK_THIN),
-            P("rim", ell(9, 2.4), "$smoke.light", at=(0, -2), stroke=INK_HAIR),
-            P("film", ell(6.4, 1.4), "$pheromone@0.75", at=(0, -1.8)),
-            P("chip", poly([(5, 1), (8, 0), (7, 3)]), "$smoke.dark"),
-        ],
+        KEEP_PARTS["rowan"],
     ),
     "teo": (
         "Teo's bundle",
-        "Teo had nothing to put in the emitter but paper. This is a bundle of pages tied with cord, the edges uneven.",
-        lambda: [
-            P("pages", R(16, 10, 1), "$bone", at=(0, 0), stroke=INK_THIN),
-            P("page_top", R(14, 8, 1), "$husk", at=(1, -2), rot=-5, stroke=INK_HAIR),
-            P("cord_v", R(1.6, 11, 0.4), "$bone.dark2", at=(-2, -1)),
-            P("cord_h", R(17, 1.6, 0.4), "$bone.dark2", at=(0, 0)),
-            *[P(f"line_{i}", R(8, 0.8, 0.3), "$slate.dark@0.5", at=(3, -4 + i * 1.8), rot=-5) for i in range(3)],
-        ],
+        "Teo had nothing to put in the emitter but paper. This is a bundle of pages tied with cord, crossed and "
+        "knotted, the edges uneven, the top sheet written on.",
+        KEEP_PARTS["teo"],
     ),
 }
 
@@ -1191,14 +1136,8 @@ def larder():
             P(f"sac_{i}_cord", R(0.8, 5, 0.3), "$bone.dark", at=(x, -17)),
             {"id": f"sac_{i}", "use": "ss.pickup.food", "at": [x, y + 2], "scale": 0.5},
         ]],
-        *[p for i, (x, y) in enumerate([(30, 24), (38, 24), (34, 16)]) for p in [
-            P(f"tin_{i}", R(7, 8, 1.4), "$steel", at=(x, y), stroke=INK_HAIR),
-            P(f"tin_{i}_label", R(7, 3, 0.6), "$bone@0.9", at=(x, y + 0.6)),
-            P(f"tin_{i}_lit", R(1, 6, 0.4), "$white@0.4", at=(x - 2.2, y)),
-        ]],
-        P("sack", poly([(-48, 28), (-50, 18), (-44, 12), (-38, 13), (-34, 20), (-36, 28)]), "$husk.dark", stroke=INK_HAIR),
-        P("sack_tie", R(6, 1.4, 0.5), "$bone.dark", at=(-41, 14)),
-        P("sack_fold", poly([(-46, 26), (-44, 18), (-42, 18), (-43, 26)]), "$ink@0.2"),
+        *tin_stack("tin", 34, 28, opened=2),
+        *sack("sack", -42, 28),
         *shaded("crate", rr(16, 11, 1.5, (-24, 26)), "$slate", [(28, 32, "$slate.dark")], stroke=INK_HAIR),
         P("step_a", ell(6, 2), "$smoke", at=(-12, 12), stroke=INK_HAIR),
         P("step_b", ell(4, 1.6), "$smoke.dark", at=(-4, 14), stroke=INK_HAIR),
@@ -1240,9 +1179,7 @@ def cellar():
         P("lock", R(6, 6, 1.5), "$steel", at=(6, 9), stroke=INK_HAIR),
         P("shackle", ring_arc(2.2, 0.9, 180, 360), "$steel.dark", at=(6, 6)),
         # The thermometer: its needle well over to the cold.
-        P("dial", circ(4.2), "$bone", at=(16, -22), stroke=INK_HAIR),
-        P("dial_needle", R(3.2, 0.7, 0.3), "$ink", at=(14.8, -22.6), rot=210),
-        P("dial_cold", ring_arc(3.2, 0.8, 180, 250), "$frost", at=(16, -22)),
+        *dial("dial", 16, -22, s=0.93, reading=0.12),
         # Ice on the lip, and the cold breathing out at the foot.
         *[P(f"icicle_{i}", poly([(-1, 0), (1, 0), (0, 2.6 + (i % 2) * 1.6)]), "$frost.light@0.85", at=(x, -26)) for i, x in enumerate([-18, -10, -2, 8, 18])],
         P("mist_a", ell(8, 1.6), "$white@0.22", at=(-8, 33)),
@@ -1290,25 +1227,18 @@ def lab():
         P("sill", R(28, 2.6, 1), "$slate.light", at=(22, 13.6), stroke=INK_HAIR),
         # The door, a canvas flap tied back.
         P("doorway", R(22, 38, 2), "$coal", at=(-38, 31)),
-        P("flap", poly([(-49, 12), (-38, 12), (-44, 30), (-47, 50), (-49, 50)]), "$slate.light", stroke=INK_HAIR),
-        P("flap_fold", poly([(-46, 16), (-44, 16), (-46, 48), (-47.4, 48)]), "$slate@0.8"),
-        P("flap_tie", R(4, 1.6, 0.5), "$bone.dark", at=(-46, 30)),
+        *flap("flap", -49, 12),
         P("step", R(26, 4, 1.5), "$slate.dark", at=(-38, 51), stroke=INK_HAIR),
         # Readings pinned up by the door.
-        *[p for i, (x, y, r) in enumerate([(-14, 6, -6), (-4, 4, 5), (-10, 18, 3)]) for p in [
-            P(f"sheet_{i}", R(8, 10, 0.6), "$bone" if i != 1 else "$husk", at=(x, y), rot=r, stroke=INK_HAIR),
-            P(f"sheet_{i}_ln", R(5, 0.8, 0.3), "$slate.dark@0.55", at=(x, y - 1), rot=r),
-            P(f"sheet_{i}_pin", circ(0.7), "$steel.light", at=(x, y - 4)),
-        ]],
+        *[p for i, (x, y, r) in enumerate([(-14, 6, -6), (-4, 4, 5), (-10, 18, 3)])
+          for p in page(f"sheet_{i}", x, y, rot=r, w=8, h=10, fill="$bone" if i != 1 else "$husk", pin="pin", ear="br" if i == 2 else None, seed=11 + i)],
         # A mast on the roof for the wind meter (`ss.base.vane`), a cable down the side.
         P("mast", R(2.4, 34, 0.8), "$steel.dark", at=(64, -54), stroke=INK_HAIR),
         band("cable", [(66, -40), (70, -20), (72, 10), (80, 40), (86, 54)], 1.1, "$coal"),
         # By the door: a crate of instruments with a coil of wire on it, and a stool.
         *shaded("crate", rr(18, 11, 1.5, (-62, 46)), "$slate", [(48, 52, "$slate.dark")], stroke=INK_HAIR),
         P("coil", {"kind": "ring", "r": 3.6, "width": 1.2}, "$steel.dark", at=(-62, 39)),
-        P("stool_seat", ell(6, 2.2), "$steel", at=(4, 42), stroke=INK_HAIR),
-        P("stool_leg_a", R(1.4, 9, 0.5), "$steel.dark", at=(1, 47), rot=8),
-        P("stool_leg_b", R(1.4, 9, 0.5), "$steel.dark", at=(7, 47), rot=-8),
+        *stool("stool", 4, 51.5),
     ]
     doc(
         "ss.base.lab",
@@ -1389,16 +1319,11 @@ def clutter():
     doc(
         "ss.base.bedroll",
         "Bedroll",
-        "A rolled sleeping bag in cold slate, strapped and set down by a crate. Somebody sleeps in this camp between expeditions.",
+        "A rolled sleeping bag in cold slate, set down by a crate: its end shows the roll's spiral, the lining between the wraps; two straps are "
+        "buckled round it, their tails loose, and a carry loop rides between them. Somebody sleeps in this camp between expeditions.",
         (44, 20),
         [
-            shadow("shadow", 0, 7, 20, 3),
-            P("roll", R(38, 13, 6.5), "$slate.light", at=(0, 0), stroke=INK_THIN),
-            P("roll_shade", R(34, 5, 2.5), "$slate", at=(-1, 3.5)),
-            P("end", ell(4, 6.5), "$slate", at=(17, 0), stroke=INK_HAIR),
-            P("end_spiral", ell(2, 3.4), "$slate.dark", at=(17, 0)),
-            P("strap_a", R(2.4, 14, 0.6), "$steel.dark", at=(-8, 0)),
-            P("strap_b", R(2.4, 14, 0.6), "$steel.dark", at=(6, 0)),
+            *bedroll("roll", 0, 7),
         ],
     )
     doc(
@@ -1408,11 +1333,7 @@ def clutter():
         "stumps it made.",
         (38, 16),
         [
-            shadow("shadow", 0, 6, 16, 2.5),
-            P("blade", poly([(-16, -2), (10, -4), (10, 3), (-16, 3)]), "$steel.light", stroke=INK_THIN),
-            *[P(f"tooth_{i}", poly([(0, 0), (1.6, 2.2), (3.2, 0)]), "$steel", at=(-15 + i * 3.4, 3)) for i in range(7)],
-            P("handle", R(10, 8, 2.5), "$smoke", at=(14, -1), stroke=INK_THIN),
-            P("grip", R(5, 3.4, 1.2), "$coal", at=(14, -1)),
+            *saw("saw", -0.6, 0, s=0.97),
         ],
     )
 
