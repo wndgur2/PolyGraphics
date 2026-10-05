@@ -202,20 +202,22 @@ def leaf():
     })
 
 # ============================================================== Mandible: a blur to spin with
-def boom_spin():
-    d = load("ss.proj.boom")
-    if not any(p["id"] == "blur" for p in d["parts"]):
-        # under the jaws: the disc the jaws sweep at speed
-        d["parts"].insert(0, {"id": "blur", "shape": {"kind": "circle", "r": 8.6}, "fill": "$chitin@ghost"})
-        d["parts"].insert(1, {"id": "blur_rim", "shape": {"kind": "ring", "r": 8.2, "width": 1.6}, "fill": "$chitin.light@soft"})
-    jaws = [p["id"] for p in d["parts"] if p["id"] not in ("blur", "blur_rim")]
-    tr = [{"part": "blur", "prop": "opacity", "keys": [[0, 0, "hold"], [0.5, 1, "hold"], [1, 1]]},
-          {"part": "blur_rim", "prop": "opacity", "keys": [[0, 0, "hold"], [0.5, 1, "hold"], [1, 1]]}]
-    tr += [{"part": pid, "prop": "opacity", "keys": [[0, 1, "hold"], [0.5, 0.35, "hold"], [1, 0.35]]} for pid in jaws]
-    d.setdefault("animations", {})["spin"] = {
-        "description": "two frames that alternate while the game turns the sprite: the jaws sharp, then the jaws faint inside the disc they sweep — a blur in frames, since a bake cannot blur. Played fast while it flies and held on the sharp frame at the top of its throw, where it all but stops.",
-        "duration": 0.1, "tracks": tr}
-    write(d)
+def whirl():
+    """Its own document, not parts of ss.proj.boom: the boom is also the
+    Mandible icon's glyph, and a blur drawn into it would sit in every flat
+    bake of it — an opacity of 0 at rest cannot be animated back up, since a
+    track multiplies the part's own."""
+    parts = [{"id": "ink", "shape": {"kind": "ring", "r": 9.0, "width": 3.4}, "fill": "$ink@soft"},
+             {"id": "disc", "shape": {"kind": "circle", "r": 8.6}, "fill": "$chitin@ghost"},
+             {"id": "rim", "shape": {"kind": "ring", "r": 8.4, "width": 1.6}, "fill": "$chitin.light@soft"}]
+    tr = [{"part": pid, "prop": "opacity", "keys": [[0, 0, "hold"], [0.5, 1, "hold"], [1, 1]]} for pid in ("ink", "disc", "rim")]
+    write({
+        "id": "ss.fx.whirl", "name": "Whirl",
+        "description": "The disc a thrown Mandible's jaws sweep at speed, laid under the spinning sprite: two frames, empty and swept, alternating — a blur in frames, since a bake cannot blur. The game plays it while the jaws fly fast and stops it at the top of the throw, where they all but stop and the sharp jaws are all there is.",
+        "tags": ["fx", "kit"], "size": [20, 20],
+        "parts": parts,
+        "animations": {"spin": {"description": "off, on — two frames at whatever rate the game spins", "duration": 0.1, "tracks": tr}},
+    })
 
 # ============================================================== Broodling: a grub that crawls and bites
 def chip_clips():
@@ -240,4 +242,4 @@ def chip_clips():
     write(d)
 
 if __name__ == "__main__":
-    spore_burst(); scorch(); droplet(); shock(); crack(); leaf(); boom_spin(); chip_clips()
+    spore_burst(); scorch(); droplet(); shock(); crack(); leaf(); whirl(); chip_clips()
