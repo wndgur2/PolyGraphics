@@ -2910,6 +2910,626 @@
           ]
         }
       ]
+    },
+    "cast": {
+      "description": "Chirp: the staff lifts and holds, then comes down on the ground \u2014 the robe flares on the strike",
+      "duration": 0.42,
+      "cues": {
+        "windup": 0.0,
+        "release": 0.62
+      },
+      "tracks": [
+        {
+          "part": "staff",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -3.2,
+              "hold"
+            ],
+            [
+              0.56,
+              -3.2,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.8,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "staff_cap",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -3.2,
+              "hold"
+            ],
+            [
+              0.56,
+              -3.2,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.8,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "arm_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -3.2,
+              "hold"
+            ],
+            [
+              0.56,
+              -3.2,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.8,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "hand_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -3.2,
+              "hold"
+            ],
+            [
+              0.56,
+              -3.2,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.8,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "cloak",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              1.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              1.03,
+              "hold"
+            ],
+            [
+              0.56,
+              1.03,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.95,
+              "sine"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "cloak",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              1.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              0.98,
+              "hold"
+            ],
+            [
+              0.56,
+              0.98,
+              "expoOut"
+            ],
+            [
+              0.68,
+              1.06,
+              "sine"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.6,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "visor",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.6,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "beard",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.42,
+              -0.6,
+              "hold"
+            ],
+            [
+              0.56,
+              -0.6,
+              "expoOut"
+            ],
+            [
+              0.68,
+              0.6,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
+    },
+    "cast_evo": {
+      "description": "Sonic Boom: both hands on the staff, a long lift and a hold, and a strike that squashes the whole body",
+      "duration": 0.6,
+      "cues": {
+        "windup": 0.0,
+        "release": 0.66
+      },
+      "tracks": [
+        {
+          "part": "staff",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.5,
+              -4.4,
+              "hold"
+            ],
+            [
+              0.62,
+              -4.4,
+              "expoOut"
+            ],
+            [
+              0.72,
+              1.2,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "staff_cap",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.5,
+              -4.4,
+              "hold"
+            ],
+            [
+              0.62,
+              -4.4,
+              "expoOut"
+            ],
+            [
+              0.72,
+              1.2,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "arm_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.5,
+              -4.4,
+              "hold"
+            ],
+            [
+              0.62,
+              -4.4,
+              "expoOut"
+            ],
+            [
+              0.72,
+              1.2,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "hand_far",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.5,
+              -4.4,
+              "hold"
+            ],
+            [
+              0.62,
+              -4.4,
+              "expoOut"
+            ],
+            [
+              0.72,
+              1.2,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "arm",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.5,
+              -4.4,
+              "hold"
+            ],
+            [
+              0.62,
+              -4.4,
+              "expoOut"
+            ],
+            [
+              0.72,
+              1.2,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "hand",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.5,
+              -4.4,
+              "hold"
+            ],
+            [
+              0.62,
+              -4.4,
+              "expoOut"
+            ],
+            [
+              0.72,
+              1.2,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "cloak",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              1.0,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.05,
+              "hold"
+            ],
+            [
+              0.62,
+              1.05,
+              "expoOut"
+            ],
+            [
+              0.72,
+              0.92,
+              "sine"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "cloak",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              1.0,
+              "quadOut"
+            ],
+            [
+              0.5,
+              0.97,
+              "hold"
+            ],
+            [
+              0.62,
+              0.97,
+              "expoOut"
+            ],
+            [
+              0.72,
+              1.09,
+              "sine"
+            ],
+            [
+              1,
+              1.0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.5,
+              -0.8,
+              "hold"
+            ],
+            [
+              0.62,
+              -0.8,
+              "expoOut"
+            ],
+            [
+              0.72,
+              0.9,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "visor",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.5,
+              -0.8,
+              "hold"
+            ],
+            [
+              0.62,
+              -0.8,
+              "expoOut"
+            ],
+            [
+              0.72,
+              0.9,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        },
+        {
+          "part": "beard",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0.0,
+              "quadOut"
+            ],
+            [
+              0.5,
+              -0.8,
+              "hold"
+            ],
+            [
+              0.62,
+              -0.8,
+              "expoOut"
+            ],
+            [
+              0.72,
+              0.9,
+              "sine"
+            ],
+            [
+              1,
+              0.0
+            ]
+          ]
+        }
+      ]
     }
   }
 }
