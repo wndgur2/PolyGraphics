@@ -341,11 +341,115 @@ def build(name, row):
         return {"description": "struck: the head snaps back, the coat flattens and springs, the visor goes pale — laid over the walk or the idle, never instead of them",
                 "duration": 0.2, "tracks": tr}
 
-    clips = {"idle": idle(), "walk": walk(), "hurt": hurt()}
+    # The body's whole-frame moments (feelers docs/motion-vfx-plan.md §7.1, §9):
+    # the knees go, the body comes down onto them, the head bows. Only the feet
+    # stay where they are. `drop` is how far the hips come down, as keys.
+    drop_group = body_group + [pid for pid, f in follow.items() if f == "scarf"]
+    arm_ids = [pid for pid, _ in arm_pieces] + [pid for pid, _ in arm_far_pieces]
+    def crouch(drop, head, head_x, arm, arm_far, times, eases):
+        """Every part but the feet, down by `drop` (head parts by `head`, forward by
+        `head_x`), the arms hinged about their shoulders through `arm`/`arm_far` as
+        they come down with it — one key per time."""
+        def keys(vals):
+            ks = [[t, r2(v), e] for t, v, e in zip(times, vals, eases)]
+            ks[-1] = ks[-1][:2]
+            return ks
+        tr = [{"part": pid, "prop": "y", "keys": keys(head)} for pid in head_group]
+        tr += [{"part": pid, "prop": "x", "keys": keys(head_x)} for pid in head_group]
+        tr += [{"part": pid, "prop": "y", "keys": keys(drop)} for pid in drop_group]
+        for joint, pieces, angles in ((sn, arm_pieces, arm), (sf, arm_far_pieces, arm_far)):
+            for pid, centre in pieces:
+                sw = [swing(joint, centre, th) for th in angles]
+                tr.append({"part": pid, "prop": "x", "keys": keys([w[0] for w in sw])})
+                tr.append({"part": pid, "prop": "y", "keys": keys([w[1] + d for w, d in zip(sw, drop)])})
+                tr.append({"part": pid, "prop": "rot", "keys": keys([w[2] for w in sw])})
+        # the coat gathers on the ground as the body comes down onto it
+        full = max(abs(d) for d in drop) or 1
+        tr.append({"part": "cloak", "prop": "scaleY", "keys": keys([1 - 0.1 * d / full for d in drop])})
+        tr.append({"part": "cloak", "prop": "scaleX", "keys": keys([1 + 0.06 * d / full for d in drop])})
+        for leg in legs:  # a leg is shortened from its hip, its foot left where it stood
+            L = leg["shape"]["h"]
+            tr.append({"part": leg["id"], "prop": "scaleY", "keys": keys([1 - d / L for d in drop])})
+            tr.append({"part": leg["id"], "prop": "y", "keys": keys([d / 2 for d in drop])})
+        return tr
+
+    def death():
+        # The last chapter: caught — the blow lands and holds the body up for a
+        # beat — then let go: the knees fold, the body comes down onto them, the
+        # head bows and the weapon goes slack; it settles and is still by 0.85
+        # (brand §7.2's grammar of a death: caught, let go, sunk, stopped).
+        # `down` is the knees reaching the ground.
+        t = [0, 0.1, 0.42, 0.6, 0.72, 0.85, 1]
+        e = ["quadOut", "hold", "quadIn", "quadOut", "sine", "hold", "linear"]
+        tr = crouch([0, -0.5, 2.6, 4.0, 3.6, 3.8, 3.8], [0, -0.8, 3.6, 5.8, 5.6, 6.4, 6.4], [0, -1.2, 0.6, 1.4, 1.6, 2.0, 2.0],
+                    [0, 8, -4, -12, -9, -11, -11], [0, -6, 2, 10, 7, 9, 9], t, e)
+        if C["feelers"]:  # the feelers flop back off the pack and hang there
+            tr.append({"part": "feeler", "prop": "rot", "keys": [[0, 0, "quadOut"], [0.1, 8, "hold"], [0.6, -30, "quadOut"], [0.72, -42, "sine"], [0.85, -38, "hold"], [1, -38]]})
+            tr.append({"part": "feeler_far", "prop": "rot", "keys": [[0, 0, "quadOut"], [0.1, 6, "hold"], [0.62, -26, "quadOut"], [0.74, -38, "sine"], [0.85, -34, "hold"], [1, -34]]})
+        for i, pid in enumerate(p for p, f in follow.items() if f == "vine"):  # the vines hang
+            tr.append({"part": pid, "prop": "rot", "keys": [[0, 0, "quadOut"], [0.1, -4, "hold"], [0.6 + 0.04 * i, 18, "quadOut"], [0.85, 14, "hold"], [1, 14]]})
+        # and what kept the body going goes out (brand: a death is the organ going dark)
+        tr.append({"part": "organ", "prop": "tint", "to": "$ink", "keys": [[0, 0, "hold"], [0.6, 0, "quadIn"], [0.85, 0.75, "hold"], [1, 0.75]]})
+        if any(p["id"] == "visor" for p in parts):
+            tr.append({"part": "visor", "prop": "tint", "to": "$frost.light2", "keys": [[0, 0, "hold"], [0.02, 1, "hold"], [0.1, 0, "linear"], [1, 0]]})
+        return {"description": "the last chapter: caught on the blow, then let go — the knees fold, the body comes down onto them, the head bows, the weapon goes slack and the clasp goes dark; still by 0.85",
+                "duration": 1.2, "cues": {"down": 0.6}, "tracks": tr}
+
+    def arrive():
+        # The count-in: the body is down on its knees as the field comes up, and
+        # rises — the hips first, the head a beat behind them — past standing and
+        # back. `ready` is the moment it is standing: the count's last beat.
+        t = [0, 0.18, 0.62, 0.8, 1]
+        e = ["hold", "expoOut", "sine", "sine", "linear"]
+        tr = crouch([2.4, 2.4, -0.4, 0.1, 0], [3.6, 3.6, -0.2, -0.5, 0], [1.2, 1.2, 0.2, -0.2, 0],
+                    [-8, -8, 4, -1, 0], [6, 6, -3, 1, 0], t, e)
+        if C["feelers"]:  # and the feelers lift last, sweeping up off the helmet
+            tr.append({"part": "feeler", "prop": "rot", "keys": [[0, -30, "hold"], [0.3, -30, "expoOut"], [0.7, 12, "sine"], [1, 0]]})
+            tr.append({"part": "feeler_far", "prop": "rot", "keys": [[0, -26, "hold"], [0.34, -26, "expoOut"], [0.74, 10, "sine"], [1, 0]]})
+        return {"description": "the count-in: down on the knees as the field comes up, then the body rises — hips first, the head a beat behind — past standing and settles",
+                "duration": 0.6, "cues": {"ready": 0.8}, "tracks": tr}
+
+    def awaken(evo):
+        # The awakening (§9.1): the body draws in and down, holds, and opens —
+        # the chest up, the head back, the arms out — and on `change` the weapon's
+        # own awakened throw (`cast_evo`) runs through it, so what changes is seen
+        # being used. Squashed into the change, stretched out of it.
+        t = [0, 0.3, 0.44, 0.56, 0.78, 1]
+        e = ["quadOut", "hold", "expoOut", "sine", "sine", "linear"]
+        tr = crouch([0, 1.6, 1.6, -0.8, 0.2, 0], [0, 2.2, 2.2, -1.4, 0.2, 0], [0, 0.6, 0.6, -0.8, 0, 0],
+                    [0, -6, -6, 16, 4, 0], [0, 4, 4, -14, -3, 0], t, e)
+        tr = [k for k in tr if k["part"] != "cloak"]
+        tr.append({"part": "cloak", "prop": "scaleY", "keys": [[0, 1, "quadOut"], [0.3, 0.9, "hold"], [0.44, 0.9, "expoOut"], [0.56, 1.08, "sine"], [0.78, 0.98, "sine"], [1, 1]]})
+        tr.append({"part": "cloak", "prop": "scaleX", "keys": [[0, 1, "quadOut"], [0.3, 1.08, "hold"], [0.44, 1.08, "expoOut"], [0.56, 0.95, "sine"], [0.78, 1.01, "sine"], [1, 1]]})
+        if any(p["id"] == "visor" for p in parts):
+            tr.append({"part": "visor", "prop": "tint", "to": "$frost.light2", "keys": [[0, 0, "hold"], [0.44, 1, "hold"], [0.5, 0.5, "hold"], [0.56, 0, "linear"], [1, 0]]})
+        if evo:
+            # the throw, laid over the second half: its keys moved into [0.44, 1].
+            # A part both move draws in with the body, then throws from there —
+            # the throw's own first key is the drawn-in pose.
+            lo, span = 0.44, 0.56
+            mine = {(k["part"], k["prop"]): k for k in tr}
+            for k in evo["tracks"]:
+                ks = [[r2(lo + span * key[0]), *key[1:]] for key in k["keys"]]
+                body = mine.pop((k["part"], k["prop"]), None)
+                if body:
+                    before = [key for key in body["keys"] if key[0] < lo]
+                    at = [key for key in body["keys"] if key[0] == lo]
+                    ks[0] = [lo, at[0][1] if at else ks[0][1], *ks[0][2:]]
+                    keys = before + ks
+                else:
+                    keys = [[0, k["keys"][0][1], "hold"]] + ks
+                tr = [x for x in tr if x is not body]
+                tr.append({**k, "keys": keys})
+        return {"description": "the awakening: the body draws in and holds, then opens — chest up, arms out, the visor going pale — and the weapon's awakened throw runs through it on the change",
+                "duration": 0.9, "cues": {"change": 0.44}, "tracks": tr}
+
+    clips = {"idle": idle(), "walk": walk(), "hurt": hurt(), "death": death(), "arrive": arrive()}
     # contact: where each foot has landed — the dust goes down on these
     clips["walk"]["cues"] = {"contact": 0.25, "contact_far": 0.75}
     for clip_name, make in row.get("clips", {}).items():
         clips[clip_name] = make(ctx)
+    clips["awaken"] = awaken(clips.get("cast_evo"))
     return {"id": f"ss.char.{name}", "name": row.get("display", name.capitalize()), "description": row["description"], "tags": ["char"], "size": [32, 32], "meta": {"radius": 11},
             "parts": parts, "skeleton": skeleton, "animations": clips}
 
@@ -354,6 +458,144 @@ def build(name, row):
 # §7.2): anticipation on a hold, a release on `expoOut`, a recovery past rest and
 # home. It is played on the game's upper layer over the walk, so it touches only
 # what throws — never the feet. `release` is the frame the weapon leaves the body.
+
+def beat(part, prop, wind, hit, rest=0.0, tw=0.42, tr=0.56, tp=0.68):
+    """The anticipation grammar every cast shares: ease into the wind-up, hold it,
+    snap to the hit on `expoOut`, settle home. Times are shares of the clip."""
+    return {"part": part, "prop": prop, "keys": [[0, rest, "quadOut"], [tw, wind, "hold"], [tr, wind, "expoOut"], [tp, hit, "sine"], [1, rest]]}
+
+def hinge(joint, pieces, angles, times, eases):
+    """Turn `pieces` (id, centre) about `joint` through `angles` at `times`: rot plus
+    the x/y the swing sweeps (character-rig-guide §6), one key per time."""
+    tr = []
+    for pid, centre in pieces:
+        xs, ys, rs = [], [], []
+        for t, th, e in zip(times, angles, eases):
+            dx, dy, rot = swing(joint, centre, th)
+            xs.append([t, r2(dx), e]); ys.append([t, r2(dy), e]); rs.append([t, r2(rot), e])
+        for prop, keys in (("x", xs), ("y", ys), ("rot", rs)):
+            keys[-1] = keys[-1][:2]
+            tr.append({"part": pid, "prop": prop, "keys": keys})
+    return tr
+
+def arm_pieces(c, near=True):
+    C, P = c["C"], c["P"]
+    if near:
+        return c["sn"], [("arm", hang(c["sn"], C["arm_len"], P["arm_hang"])), ("hand", c["hand"])]
+    return c["sf"], [("arm_far", hang(c["sf"], C["arm_far_len"], P["arm_far_hang"])), ("hand_far", c["hand_far"])]
+
+def sol_cast(c):
+    """Spit: the belly fills, the head jerks forward, the belly empties."""
+    tr = [beat("cloak", "scaleX", 1.12, 0.95, 1.0), beat("belly_sheen", "scale", 1.2, 0.9, 1.0)]
+    tr += [beat(pid, "x", -0.7, 1.7) for pid in ("head", "hair", "mouth", "drip")]
+    tr.append(beat("mouth", "scale", 0.8, 1.35, 1.0))
+    return {"description": "Spit: the belly fills under the jacket and holds, the head jerks forward and the mouth opens on the release, the belly empties",
+            "duration": 0.38, "cues": {"windup": 0.0, "release": 0.62}, "tracks": tr}
+
+def sol_cast_evo(c):
+    """Acid Jet: the head thrust forward and held for the length of the pour."""
+    hold = lambda part, prop, wind, out, rest=0.0: {"part": part, "prop": prop, "keys": [[0, rest, "quadOut"], [0.18, wind, "expoOut"], [0.26, out, "linear"], [0.86, out, "sine"], [1, rest]]}
+    tr = [{"part": "cloak", "prop": "scaleX", "keys": [[0, 1, "quadOut"], [0.18, 1.14, "expoOut"], [0.26, 1.1, "linear"], [0.86, 0.92, "sine"], [1, 1]]},
+          {"part": "belly_sheen", "prop": "scale", "keys": [[0, 1, "quadOut"], [0.18, 1.2, "expoOut"], [0.26, 1.15, "linear"], [0.86, 0.85, "sine"], [1, 1]]}]
+    tr += [hold(pid, "x", -0.6, 1.8) for pid in ("head", "hair", "mouth", "drip")]
+    tr.append(hold("mouth", "scale", 0.8, 1.4, 1.0))
+    return {"description": "Acid Jet: the head thrust out and held while the pour runs, the belly emptying across it",
+            "duration": 0.8, "cues": {"windup": 0.0, "release": 0.22}, "tracks": tr}
+
+def haram_cast(c):
+    """Spore: the pod pulses twice, the body dips, the pod lets go behind."""
+    tr = [{"part": "pod", "prop": "scale", "keys": [[0, 1, "quadOut"], [0.14, 1.25, "quadIn"], [0.26, 1.0, "quadOut"], [0.38, 1.3, "hold"], [0.56, 1.3, "expoOut"], [0.66, 0.85, "sine"], [1, 1]]}]
+    tr += [beat(pid, "y", -0.4, 1.4) for pid in ("head", "visor")]
+    tr += [beat(pid, "y", -0.2, 1.0) for pid in ("cloak", "pauldron", "organ", "pod", "arm", "hand")]
+    return {"description": "Spore: the pod on the far shoulder pulses twice and swells, the slab of a body dips, and the pod lets the lure go behind",
+            "duration": 0.5, "cues": {"windup": 0.0, "release": 0.62}, "tracks": tr}
+
+def haram_cast_evo(c):
+    """Cluster Bloom: the same throw, and the pod splits as it goes."""
+    clip = haram_cast(c)
+    clip["tracks"][0] = {"part": "pod", "prop": "scale", "keys": [[0, 1, "quadOut"], [0.14, 1.3, "quadIn"], [0.26, 1.05, "quadOut"], [0.38, 1.45, "hold"], [0.56, 1.45, "expoOut"], [0.66, 0.8, "sine"], [1, 1]]}
+    clip["tracks"].append({"part": "pod", "prop": "tint", "to": "$ochre", "keys": [[0, 0, "hold"], [0.38, 0.6, "hold"], [0.66, 0, "linear"], [1, 0]]})
+    clip["description"] = "Cluster Bloom: the pod swells further and goes ochre as it splits, the body dips, the clutch goes behind"
+    return clip
+
+def mir_cast(c):
+    """Vine: the vines on the back reach down into the ground, and stop."""
+    tr = [beat("vine_long", "rot", 18, -6), beat("vine_mid", "rot", 22, -4), beat("vine_up", "rot", 26, -8), beat("tendril", "rot", 10, -3)]
+    tr += [beat(pid, "y", 0.6, -0.4) for pid in ("head", "visor", "bun", "lamp_ring", "lamp")]
+    return {"description": "Vine: the vines on the back reach down toward the ground and hold, then go still all at once — the moment the vine comes up somewhere else",
+            "duration": 0.46, "cues": {"windup": 0.0, "release": 0.62}, "tracks": tr}
+
+def mir_cast_evo(c):
+    """Thicket: the vines fan out from the back."""
+    tr = [beat("vine_long", "rot", 10, 24), beat("vine_mid", "rot", -6, -22), beat("vine_up", "rot", -10, -30), beat("tendril", "rot", 6, 14)]
+    tr += [beat(pid, "y", 0.5, -0.6) for pid in ("head", "visor", "bun", "lamp_ring", "lamp")]
+    return {"description": "Thicket: the vines draw in, then fan out from the back like a plant opening",
+            "duration": 0.5, "cues": {"windup": 0.0, "release": 0.62}, "tracks": tr}
+
+def kano_cast(c):
+    """Chirp: the staff is lifted, held, and struck down on the ground."""
+    tr = [beat(pid, "y", -3.2, 0.8) for pid in ("staff", "staff_cap", "arm_far", "hand_far")]
+    tr += [beat("cloak", "scaleY", 1.03, 0.95, 1.0), beat("cloak", "scaleX", 0.98, 1.06, 1.0)]
+    tr += [beat(pid, "y", -0.6, 0.6) for pid in ("head", "visor", "beard")]
+    return {"description": "Chirp: the staff lifts and holds, then comes down on the ground — the robe flares on the strike",
+            "duration": 0.42, "cues": {"windup": 0.0, "release": 0.62}, "tracks": tr}
+
+def kano_cast_evo(c):
+    """Sonic Boom: both hands on the staff, a longer lift, a harder strike."""
+    tr = [beat(pid, "y", -4.4, 1.2, tw=0.5, tr=0.62, tp=0.72) for pid in ("staff", "staff_cap", "arm_far", "hand_far", "arm", "hand")]
+    tr += [beat("cloak", "scaleY", 1.05, 0.92, 1.0, tw=0.5, tr=0.62, tp=0.72), beat("cloak", "scaleX", 0.97, 1.09, 1.0, tw=0.5, tr=0.62, tp=0.72)]
+    tr += [beat(pid, "y", -0.8, 0.9, tw=0.5, tr=0.62, tp=0.72) for pid in ("head", "visor", "beard")]
+    return {"description": "Sonic Boom: both hands on the staff, a long lift and a hold, and a strike that squashes the whole body",
+            "duration": 0.6, "cues": {"windup": 0.0, "release": 0.66}, "tracks": tr}
+
+def eden_cast(c):
+    """Mandible: the near arm goes back about the shoulder, holds, and throws."""
+    joint, pieces = arm_pieces(c)
+    tr = hinge(joint, pieces, [0, 42, 42, -38, 0], [0, 0.42, 0.56, 0.68, 1], ["quadOut", "hold", "expoOut", "sine", "linear"])
+    tr += [beat(pid, "x", -0.6, 0.9) for pid in ("head", "visor", "brim", "lock", "lock_back")]
+    return {"description": "Mandible: the near arm swings back about the shoulder and holds, then throws through — the head follows the throw",
+            "duration": 0.4, "cues": {"windup": 0.0, "release": 0.64}, "tracks": tr}
+
+def eden_cast_evo(c):
+    """Dancing Mandibles: both arms swing out and round."""
+    joint, pieces = arm_pieces(c)
+    jf, pf = arm_pieces(c, near=False)
+    t = [0, 0.3, 0.55, 0.8, 1]
+    tr = hinge(joint, pieces, [0, 50, -40, 20, 0], t, ["quadOut", "sine", "sine", "sine", "linear"])
+    tr += hinge(jf, pf, [0, 40, -40, 20, 0], t, ["quadOut", "sine", "sine", "sine", "linear"])
+    tr.append({"part": "cloak", "prop": "rot", "keys": [[0, 0, "sine"], [0.3, -4, "sine"], [0.55, 4, "sine"], [0.8, -2, "sine"], [1, 0]]})
+    return {"description": "Dancing Mandibles: both arms swing out and round, the coat turning with them — the dance starts in the body",
+            "duration": 0.6, "cues": {"windup": 0.0, "release": 0.3}, "tracks": tr}
+
+def rowan_cast(c):
+    """Spider Hand: the gauntlet clenches, then opens as the arms come out of it."""
+    tr = [beat(pid, "scale", 0.88, 1.18, 1.0) for pid in ("hand", "knuckles")]
+    tr += [beat(pid, "x", -0.6, 1.4) for pid in ("arm", "hand", "knuckles")]
+    tr += [beat(pid, "x", -0.3, 0.6) for pid in ("head", "visor", "visor_bar")]
+    return {"description": "Spider Hand: the gauntlet clenches and draws back, then opens and thrusts as the jointed arms come out of it",
+            "duration": 0.36, "cues": {"windup": 0.0, "release": 0.62}, "tracks": tr}
+
+def rowan_cast_evo(c):
+    """Widow's Grip: the same, and the gauntlet goes pale as it drinks."""
+    clip = rowan_cast(c)
+    clip["tracks"] += [{"part": pid, "prop": "tint", "to": "$frost.light2", "keys": [[0, 0, "hold"], [0.62, 0.7, "hold"], [0.75, 0.35, "hold"], [0.88, 0, "linear"], [1, 0]]} for pid in ("hand", "knuckles")]
+    clip["description"] = "Widow's Grip: the gauntlet clenches and thrusts, and goes pale for a moment after — the hand drinking"
+    return clip
+
+def teo_cast(c):
+    """Broodling: the satchel's flap lifts and falls as a grub goes."""
+    tr = [beat("satchel_flap", "rot", -26, 4), beat("pages", "y", -0.8, 0.3), beat("page", "rot", -8, 10)]
+    tr += [beat(pid, "y", 0.4, -0.4) for pid in ("head", "goggle", "goggle_glass", "filter", "braid", "braid_tie")]
+    return {"description": "Broodling: the satchel's flap lifts and holds, then drops as a grub goes; the page in the hand flutters",
+            "duration": 0.34, "cues": {"windup": 0.0, "release": 0.62}, "tracks": tr}
+
+def teo_cast_evo(c):
+    """Brood Swarm: the flap held open, shaken twice."""
+    tr = [{"part": "satchel_flap", "prop": "rot", "keys": [[0, 0, "quadOut"], [0.2, -30, "expoOut"], [0.35, -18, "sine"], [0.5, -32, "sine"], [0.65, -18, "sine"], [0.8, -28, "sine"], [1, 0]]},
+          {"part": "satchel", "prop": "rot", "keys": [[0, 0, "sine"], [0.35, 4, "sine"], [0.5, -4, "sine"], [0.65, 4, "sine"], [0.8, -3, "sine"], [1, 0]]},
+          beat("page", "rot", -10, 14)]
+    return {"description": "Brood Swarm: the flap thrown open and the satchel shaken twice — the savage brood tipped out",
+            "duration": 0.56, "cues": {"windup": 0.0, "release": 0.36}, "tracks": tr}
 
 def arin_cast(c):
     """The Lash: both feelers coil back over the helmet, hold, and crack forward."""
@@ -396,6 +638,7 @@ CHARACTERS = {
         "description": "A circle. The first expedition, on the day the last cartridge went in (A047): the bell coat, the egg helmet, and the prototype emitter — the biggest box any of the eight carries, its cartridge rack beside it, and the two dead feelers rising from its lid, swept back past the helmet as the crown of the silhouette. Arin is the only one of the eight with feelers: the antennae were the prototype's design (A004), and every mark after it vents through a tube — and they are the Lash. Grown long and thin into two whips that trail back past the helmet and crack forward, the weapon is the feelers themselves, which is what the game is named for: the sweep `ss.proj.slash` draws is a feeler's tip, and `ss.sample.whip` is a length of one. The hands have gone dark and hard — the saw does not mark them (A052), the Rattle's slate, the first of the body to lose its blood." + SHARED,
     },
     "sol": {
+        "clips": {"cast": sol_cast, "cast_evo": sol_cast_evo},
         "sex": "f", "tint": ("lichen", 0), "coat": "jacket_belly", "cloak_sx": 0.9, "legs": True, "cape": False,
         "head": "bare", "head_r": (4.6, 5.0),
         "skeleton": {"hip_near": (-2.2, 6.4), "hip_far": (3.2, 5.8), "foot_near": (-1.8, 13.4), "foot_far": (4.0, 12.8), "head": (2.6, -8.4)},
@@ -415,6 +658,7 @@ CHARACTERS = {
         "description": "A triangle, leaning. The scout sent out alone: a short jacket over long legs, the body pitched ten degrees into the run, the arms swinging high, a scarf flying back from the neck. The one bare head of the eight — the helmet came off on day two (S002) and hangs from the hip now, found and not put on (S009). The issued emitter was dead on day one and was never carried (S004); a pouch of fungi with a pink cap showing is what gets Sol past the swarm (S003). Faster than they are (S009), and short of health for it." + SHARED,
     },
     "haram": {
+        "clips": {"cast": haram_cast, "cast_evo": haram_cast_evo},
         "sex": "m", "tint": ("ochre", 0), "coat": "slab", "head": "box", "head_r": (5.4, 5.0), "visor_w": 7.4, "cape": False,
         "skeleton": {"shoulder_near": (-6.2, -3.4), "shoulder_far": (7.0, -4.6), "head": (1.6, -8.6), "foot_near": (-2.6, 13.2), "foot_far": (4.4, 12.6)},
         "pose": {"coat_lean": 3, "arm_hang": 4, "arm_far_hang": -6}, "arm_w": 3.6, "arm_far_w": 3.2, "foot_w": 5.4, "foot_h": 2.8, "foot_far_w": 4.8, "foot_far_h": 2.6,
@@ -430,6 +674,7 @@ CHARACTERS = {
         "description": "A square. The survey: a slab of a body with squared shoulders, the widest of the eight, under a box of a helmet. The husk shell scraped into the mark II emitter (H027) is coming through as bone: one bleached pauldron over the near shoulder. On the back, the benchmark stakes (H001); on the far shoulder, the one pink spore pod the lure grows from. Four kilos up on the same ration, pulse thirty-eight (H043): armour, a lurch in the walk, and slower for it." + SHARED,
     },
     "mir": {
+        "clips": {"cast": mir_cast, "cast_evo": mir_cast_evo},
         "display": "Mina", "sex": "f", "tint": ("timber", 2), "coat": "bell", "cloak_sx": 1.02,
         "skeleton": {"head": (2.6, -7.2), "head_tilt": -6, "shoulder_near": (-4.4, -2.4), "shoulder_far": (6.0, -3.8), "foot_near": (-2.8, 13.1), "foot_far": (4.6, 12.5), "hip_near": (-2.8, 12.0), "hip_far": (4.4, 11.2), "pack": (-6.0, -2.6)},
         "head_r": (5.2, 5.6), "pose": {"coat_lean": 5, "arm_hang": 10, "arm_far_hang": -4},
@@ -453,6 +698,7 @@ CHARACTERS = {
         "description": "Grown. The burrow, walked from the inside down to the queen: a plain bell of a coat drawn in at the waist, and the piece of its wall — the wall that heals its own cuts (M009), warm half a month on, chewing inside it at night (M038, M042) — no longer carried where the emitter used to be but grown into the upper back behind the near shoulder. Out of its seam come the vines she fights with: three pour down her back and trail, swaying a beat behind the step, and one comes over the near shoulder onto the chest. The weapon is the body, the same plant `ss.proj.vine` lays on the ground, and the same greens. A head lamp on the helmet, the one light the eight carry — the burrow is where the compass stopped (M005) — and a bun of dark hair at the back of the head under it. The head sits a little low and forward, the stance is wide, and the walk has no bounce in it — the Porter's haul, twenty-nine levels of it (M035)." + SHARED,
     },
     "kano": {
+        "clips": {"cast": kano_cast, "cast_evo": kano_cast_evo},
         "sex": "m", "tint": ("silent", 0), "coat": "column", "cloak_sx": 1.0, "hem": 0.0, "head": "hood", "head_r": (4.8, 6.0), "visor_w": 5.8,
         "skeleton": {"head": (1.8, -7.3), "shoulder_near": (-4.2, -3.2), "shoulder_far": (5.0, -4.4), "foot_near": (-1.4, 14.0), "foot_far": (3.2, 13.4), "hip_near": (-1.6, 12.6), "hip_far": (3.0, 12.0)},
         "pose": {"coat_lean": 4, "arm_hang": 4, "arm_far_hang": -4}, "arm_far_len": 7.4, "foot_h": 2.4, "foot_far_h": 2.2,
@@ -469,6 +715,7 @@ CHARACTERS = {
         "description": "A column. The patrols, and the rules that came out of them: do not stop (K033). A narrow coat, long to the boots, under a peaked hood-helmet, and a staff in the far hand taller than the head — the twelfth emitter was dropped where it broke, as the rules say (K030, K033), so nothing rides on the back. Gaitered boots, and a walk that is the coat's: a slow glide with the staff planted, no bounce and no hurry — the one who does not stop does not rush either." + SHARED,
     },
     "eden": {
+        "clips": {"cast": eden_cast, "cast_evo": eden_cast_evo},
         "sex": "f", "tint": ("sage", 0), "coat": "round", "head": "brim", "head_r": (5.0, 5.4),
         "skeleton": {"head": (2.2, -7.2), "shoulder_near": (-5.2, -2.6), "shoulder_far": (6.0, -3.8)},
         "pack": True, "pack_w": 3.8, "pack_h": 4.0, "pose": {"coat_lean": 1, "arm_hang": 8, "arm_far_hang": -10},
@@ -484,6 +731,7 @@ CHARACTERS = {
         "description": "A mushroom. The long station: a round coat under the wide flat brim on the helmet, the shape of six years beside the fungi (E009) and of the Gland's dome to come. A fingertip of royal jelly in place of the last cartridge (E093), carried in the one specimen jar at the coat front — the collector's jar, the brightest thing on the body. Two locks of hair under the brim. Nothing of the Gland shows yet: the body is still within its own range. The slowest breath of the eight." + SHARED,
     },
     "rowan": {
+        "clips": {"cast": rowan_cast, "cast_evo": rowan_cast_evo},
         "sex": "m", "tint": ("heather", 0), "coat": "wedge", "hem": -0.6, "head_r": (5.2, 5.4),
         "skeleton": {"head": (2.2, -8.0), "head_tilt": -4, "shoulder_near": (-6.0, -2.2), "shoulder_far": (6.4, -3.8), "foot_near": (-3.0, 13.0), "foot_far": (5.0, 12.4), "hip_near": (-3.0, 12.0), "hip_far": (4.8, 11.2)},
         "arm_len": 8.2, "arm_w": 4.2, "arm_fill": "$carapace.light", "hand_r": (3.2, 3.4), "hand_fill": "$carapace.light", "foot_w": 5.6, "foot_h": 2.9, "foot_far_w": 5.0, "foot_far_h": 2.6,
@@ -498,6 +746,7 @@ CHARACTERS = {
         "description": "A wedge. The ruins, and who built them: broad and low, widest at the hem, the last of the eight to be moved by anything. The near arm is sleeved in carapace plate, the colour of the Bulwark, and ends in a gauntlet the size of the head with a ridge of knuckles across it — since the stone bowl the right arm is stronger (R015), and the little finger folded to fit the grooves does not straighten (R053). The emitter has turned to stone from the inside (R048), warm at the ruin's temperature, and is worn as the clasp like the others'. A T-slit visor on the helmet, and a chisel at the coat." + SHARED,
     },
     "teo": {
+        "clips": {"cast": teo_cast, "cast_evo": teo_cast_evo},
         "sex": "f", "tint": ("frost", 2), "coat": "small", "cloak_sx": 0.92, "head": "mask", "head_r": (4.6, 5.0),
         "skeleton": {"head": (2.0, -6.6), "shoulder_near": (-4.0, -2.2), "shoulder_far": (4.8, -3.4), "hip_near": (-1.6, 10.6), "hip_far": (3.0, 10.0), "foot_near": (-1.4, 12.0), "foot_far": (3.2, 11.5), "pack": (-5.0, -2.6)},
         "arm_len": 6.4, "arm_w": 2.6, "arm_far_len": 6.0, "arm_far_w": 2.2, "hand_r": (1.5, 1.6), "hand_fill": "$chitin", "hand_far_fill": "$chitin.dark",
