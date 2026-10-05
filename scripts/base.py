@@ -52,6 +52,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from rig import r2, poly, ell, circ, rect, write_doc  # noqa: E402
 from draw import *  # noqa: E402,F401,F403
+from bits_glass import cartridge, jar, jar_bail_top, jar_fill, syringe, tube_rack, vial  # noqa: E402,F401
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "apps", "ss", "assets")
@@ -135,9 +136,7 @@ def lander():
         *shaded("hatch_frame", rr(54, 66, 12, (-42, 6)), "$slate", [(-28, -16, "$slate.light"), (26, 40, "$slate.dark")]),
         P("hatch_dark", R(44, 56, 9), "$coal", at=(-42, 8)),
         *halo("hatch_glow", -40, 27, 20, 11, 0.6),
-        P("hatch_jar", R(7, 8, 2), "$frost.dark@0.55", at=(-34, 29), stroke=INK_HAIR),
-        P("hatch_jar_cap", ell(2.6, 1.6), "$spore", at=(-34, 29.5)),
-        P("hatch_jar_lid", R(8, 1.6, 0.6), "$steel.dark", at=(-34, 24.6)),
+        *jar("hatch_jar", -34, 29, 7, 8, inner="$spore@0.12", contents=cap("hatch_jar_cap", 0, 1.0, 2.4)),
         P("hatch_cable", poly([(-58, -20), (-56, -20), (-54, 0), (-50, 12), (-52, 12), (-56, 0)]), "$ink@0.7"),
         P("hatch_sill", R(46, 6, 2), "$smoke.dark", at=(-42, 35), stroke=INK_HAIR),
         lit_edge("hatch_sill_lit", -63, -21, 32.6, 0.9, "$smoke.light@0.8"),
@@ -275,13 +274,12 @@ def frame():
         P("peg_l", R(3, 7, 1), "$steel.dark", at=(-108, 57), stroke=INK_HAIR),
         P("peg_r", R(3, 7, 1), "$steel.dark", at=(108, 57), stroke=INK_HAIR),
         # The jar hung from the middle of the front edge.
-        P("jar_cord", R(1.2, 9, 0.4), "$bone.dark", at=(0, 1)),
-        *halo("jar_glow", 0, 13, 15, 13, 0.5),
-        P("jar", R(11, 13, 3.4), "$frost.dark@0.3", at=(0, 12), stroke=INK_HAIR),
-        *cap("jar_cap_a", -1.6, 14, 3),
-        *cap("jar_cap_b", 2.4, 10.5, 2.3),
-        P("jar_lid", R(12, 3, 1), "$steel", at=(0, 5.4), stroke=INK_HAIR),
-        P("jar_shine", R(1.6, 8, 0.8), "$white@0.35", at=(-3.8, 12)),
+        P("jar_cord", R(1.2, 12 + jar_bail_top(11, 13)[1] + 4, 0.4), "$bone.dark", at=(0, (12 + jar_bail_top(11, 13)[1] - 4) / 2)),
+        *jar(
+            "jar", 0, 12, 11, 13, bail=True, inner="$spore@0.12",
+            behind=halo("jar_glow", 0, 1, 15, 13, 0.5),
+            contents=[*cap("jar_cap_a", -1.6, 2, 3), *cap("jar_cap_b", 2.4, -1.5, 2.3)],
+        ),
         # The crystal the frame grew (A055), at the front-left joint.
         *bud("bud", -96, -10, 0.9, 0.5),
     ]
@@ -584,28 +582,11 @@ def bench():
         lit_edge("top_lit", -46, 42, -7.4, 1.4, "$steel.light"),
         P("top_edge", R(100, 3, 1.5), "$steel.dark", at=(0, 0)),
         *scratches("top_scuff", 6, -4.6, 60, 2.4, 4, "$steel.light@0.6", 5),
-        # The rack of samples the level-up draws from.
-        P("rack", R(44, 14, 2), "$slate", at=(-20, -14), stroke=INK_THIN),
-        lit_edge("rack_lit", -40, 0, -20.4, 0.8, "$slate.light"),
-        ao("rack_ao", -20, -7.4, 42, 1.4, 0.4),
+        # The rack of samples the level-up draws from: stoppered tubes, and
+        # one slot empty — that one is in the syringe.
+        *tube_rack("rack", -20, -6.4, fills=(vials[0], vials[1], None, vials[2], vials[3], vials[4], vials[5])),
     ]
-    for i, c in enumerate(vials):
-        x = -38 + i * 7.2
-        parts += [
-            P(f"vial_{i}", R(5, 15, 2), "$frost.dark@0.4", at=(x, -19), stroke=INK_HAIR),
-            P(f"vial_{i}_fill", R(4, 8, 1.5), c, at=(x, -16)),
-            P(f"vial_{i}_surface", R(3.4, 0.8, 0.3), "$white@0.55", at=(x, -19.6)),
-            P(f"vial_{i}_lit", R(1, 6, 0.4), "$white@0.45", at=(x - 1.2, -18)),
-            P(f"vial_{i}_cap", R(5, 3, 1), "$steel.light", at=(x, -27)),
-        ]
     parts += [
-        # The syringe, lying where the last dose was drawn, and the drop it left.
-        P("barrel", R(26, 6, 2), "$frost@0.45", at=(18, -11), rot=-6, stroke=INK_HAIR),
-        P("barrel_fill", R(12, 4, 1.5), "$venom@0.8", at=(13, -10.4), rot=-6),
-        P("barrel_marks", R(10, 0.6, 0.2), "$ink@0.4", at=(20, -12.6), rot=-6),
-        P("plunger", R(10, 3, 1), "$steel.light", at=(36, -13), rot=-6, stroke=INK_HAIR),
-        P("needle", R(8, 1.2, 0.4), "$steel.light", at=(1, -9), rot=-6),
-        P("spill", ell(2.2, 0.9), "$venom@0.7", at=(-3, -7.6)),
         # The instrument: a box with a dial, its face the instrument's blue,
         # ticks round it and two knobs under it.
         P("box", R(20, 14, 2), "$slate.dark", at=(40, -15), stroke=INK_THIN),
@@ -615,6 +596,8 @@ def bench():
         P("needle_dial", R(4, 0.9, 0.3), "$ink", at=(41.5, -16), rot=-35),
         P("knob_a", circ(1.2), "$steel", at=(34, -10.4), stroke=INK_HAIR),
         P("knob_b", circ(1.2), "$steel", at=(46, -10.4), stroke=INK_HAIR),
+        # The syringe, lying where the last dose was drawn, and the drop it left.
+        *syringe("syringe", 17, -4.4, rot=-5),
         # A notebook page under the rack, held down with a stone.
         P("note", R(14, 10, 0.8), "$bone", at=(-44, -6), rot=-8, stroke=INK_HAIR),
         P("note_ln", R(9, 0.9, 0.3), "$slate.dark@0.5", at=(-44, -7), rot=-8),
@@ -631,8 +614,8 @@ def bench():
         "ss.base.bench",
         "The bench",
         "The instrument's own table: a field bench on bolted crossed legs with a stretcher between them and a stencilled crate under it, "
-        "its steel top scuffed. On it is a rack of six vials in the colours the level-up's samples come in, the syringe lying where the last "
-        "dose was drawn with a drop spilled beside it, a notebook page held down by a stone, and a slate box whose dial is the instrument's "
+        "its steel top scuffed. On it is a rack of stoppered sample tubes in the colours the level-up's samples come in, one slot empty: that "
+        "dose is in the syringe lying beside it, graduated, its plunger drawn back and a drop at its needle. There is a notebook page held down by a stone, and a slate box whose dial is the instrument's "
         "blue, ticked round, with two knobs. The needle wanders, reading the air (`read`). feelers opens BUILD here, where the order samples "
         "are drawn in is planned.",
         (120, 64),
@@ -829,18 +812,12 @@ def board():
 
 # ============================================================== the lamps
 def lamp_jar(prefix, x, y):
-    return [
-        *halo(f"{prefix}_glow", x, y, 12, 12, 0.36),
-        P(f"{prefix}_jar", R(14, 16, 4), "$frost.dark@0.3", at=(x, y), stroke=INK_THIN),
-        *cap(f"{prefix}_cap_a", x - 2, y + 3, 3.6),
-        *cap(f"{prefix}_cap_b", x + 3, y - 1, 2.8),
-        *cap(f"{prefix}_cap_c", x - 1.4, y - 4, 2.2),
-        P(f"{prefix}_lid", R(15, 3.4, 1.2), "$steel", at=(x, y - 9), stroke=INK_HAIR),
-        *[P(f"{prefix}_vent_{i}", circ(0.5), "$slate.dark", at=(x - 4 + i * 4, y - 9)) for i in range(3)],
-        P(f"{prefix}_bail", ring_arc(5, 0.9, 180, 360), "$steel.dark", at=(x, y - 10)),
-        P(f"{prefix}_glass_lit", R(2, 10, 1), "$white@0.35", at=(x - 5, y)),
-        P(f"{prefix}_glass_lit_b", R(1, 4, 0.5), "$white@0.25", at=(x + 5, y + 3)),
-    ]
+    """The lamps' jar: three caps behind glass, the light they lay round it, a screw lid with vents and a bail to hang it by."""
+    return jar(
+        prefix, x, y, 14, 16, bail=True, vents=3, inner="$spore@0.12",
+        behind=halo(f"{prefix}_glow", 0, 0, 12, 12, 0.36),
+        contents=[*cap(f"{prefix}_cap_a", -2, 3, 3.6), *cap(f"{prefix}_cap_b", 3, -1, 2.8), *cap(f"{prefix}_cap_c", -1.4, -3.6, 2.2)],
+    )
 
 
 def breathe_tracks(prefix):
@@ -865,7 +842,7 @@ def lamps():
         P("foot_lit", ell(2.6, 0.8), "$smoke.light@0.8", at=(-10, 19.4)),
         *[P(f"wrap_{i}", R(4.2, 1, 0.4), "$bone.dark", at=(-9, 2 + i * 1.6)) for i in range(3)],
         P("arm", R(16, 2.4, 1), "$steel.dark", at=(-2, -15), stroke=INK_HAIR),
-        P("hook", R(1.2, 4, 0.4), "$steel.dark", at=(5, -12.5)),
+        P("hook", R(1.2, 1.6, 0.4), "$steel.dark", at=(5, (-13.8 + jar_bail_top(14, 16)[1]) / 2 - 0.2)),
         *lamp_jar("jar", 5, 0),
     ]
     doc(
@@ -878,9 +855,12 @@ def lamps():
         standing,
         {"breathe": loop("the caps in the jar brighten and dim, slower than breathing", 3.2, breathe_tracks("jar"))},
     )
+    hung = lamp_jar("jar", 0, 0)
+    top = jar_bail_top(14, 16)[1]
     hanging = [
-        P("cord", R(1.4, 12, 0.5), "$bone.dark", at=(0, -14)),
-        *lamp_jar("jar", 0, 0),
+        P("cord", R(1.4, top + 20, 0.5), "$bone.dark", at=(0, (top - 20) / 2)),
+        P("cord_knot", R(2.6, 1.6, 0.6), "$bone.dark", at=(0, top - 0.4), stroke=INK_FINE),
+        *hung,
     ]
     doc(
         "ss.base.lamp-hang",
@@ -894,18 +874,17 @@ def lamps():
                 "the caps brighten and dim, and the jar sways on its cord",
                 3.2,
                 breathe_tracks("jar")
-                + [track(p["id"], "x", [(0, 0), (0.5, 1.4), (1, 0)]) for p in hanging if p["id"].startswith("jar_") and not p["id"].endswith("_lit")],
+                + [track(p["id"], "x", [(0, 0), (0.5, 1.4), (1, 0)]) for p in hung + [hanging[1]]],
             )
         },
     )
-    jar = [
+    path_jar = [
         shadow("shadow", 0, 7, 6, 2, "0.4"),
-        *halo("glow", 0, 0, 9, 8, 0.36),
-        P("jar", R(10, 12, 3), "$frost.dark@0.3", at=(0, 1), stroke=INK_HAIR),
-        *cap("cap_a", -1.4, 3, 2.6),
-        *cap("cap_b", 2, 0, 2),
-        P("lid", R(11, 2.6, 1), "$steel", at=(0, -5.4), stroke=INK_HAIR),
-        P("glass_lit", R(1.4, 7, 0.6), "$white@0.35", at=(-3.4, 1)),
+        *jar(
+            "jar", 0, 1, 10, 12, inner="$spore@0.12",
+            behind=halo("glow", 0, -1, 9, 8, 0.36),
+            contents=[*cap("cap_a", -1.4, 2, 2.6), *cap("cap_b", 2, -1, 2)],
+        ),
     ]
     doc(
         "ss.base.jar",
@@ -913,7 +892,7 @@ def lamps():
         "A small jar of glowing caps set down on the ground, one of a row along each path out of the camp, so the way back in can be found "
         "in the dark. It breathes like the lamps (`breathe`).",
         (20, 20),
-        jar,
+        path_jar,
         {"breathe": loop("the caps brighten and dim", 3.6, [*glow_tracks("glow", 0.7, 1), track("cap_a_lit", "opacity", [(0, 0.7), (0.5, 1), (1, 0.7)])])},
     )
 
@@ -1249,7 +1228,7 @@ def cellar():
         # cold creeping in from its corners.
         P("glass", R(32, 40, 3), "$frost.dark@0.6", at=(-3, 3), stroke=INK_HAIR),
         *[P(f"shelf_{i}", R(30, 1.2, 0.4), "$slate.dark", at=(-3, -9 + i * 12)) for i in range(3)],
-        *[P(f"vial_{r}_{c}", R(3, 7, 1), vial_cols[(r * 2 + c) % 6] + "@0.55", at=(-15 + c * 6, -13 + r * 12)) for r in range(3) for c in range(5)],
+        *[p for r in range(3) for c in range(5) for p in vial(f"vial_{r}_{c}", -15 + c * 6, -9.6 + r * 12, fill=vial_cols[(r * 2 + c) % 6], muted=0.75, cold=True)],
         P("glass_haze", R(32, 40, 3), "$frost.light@0.25", at=(-3, 3)),
         P("frost_a", poly([(-19, -17), (-10, -17), (-14, -13), (-19, -9)]), "$white@0.55"),
         P("frost_b", poly([(13, 23), (13, 13), (9, 18), (4, 23)]), "$white@0.5"),
@@ -1304,8 +1283,7 @@ def lab():
         *shaded("window_frame", rr(26, 20, 2, (22, 2)), "$slate", [(8, 13, "$slate.dark")], stroke=INK_HAIR),
         P("window", R(20, 14, 1.5), "$coal", at=(22, 2)),
         *halo("window_glow", 24, 6, 9, 6, 0.6),
-        P("window_jar", R(5, 6, 1.4), "$frost.dark@0.6", at=(26, 6)),
-        P("window_cap", ell(2, 1.2), "$spore", at=(26, 6.4)),
+        *jar("window_jar", 26, 6, 5, 6, inner="$spore@0.12", contents=cap("window_cap", 0, 0.8, 1.7)),
         P("mullion_v", R(1.2, 14, 0.4), "$slate", at=(22, 2)),
         P("mullion_h", R(20, 1.2, 0.4), "$slate", at=(22, 2)),
         P("window_glint", R(6, 1, 0.4), "$frost@0.5", at=(16, -2), rot=-20),
