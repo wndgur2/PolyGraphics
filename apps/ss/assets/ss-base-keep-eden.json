@@ -1,0 +1,42 @@
+{
+  "id": "ss.base.keep-eden",
+  "name": "Eden's jelly",
+  "description": "Eden put a finger of royal jelly into the emitter. It is a small jar with a screw lid, and that finger of gold in it. It sits on its writer's locker (`ss.base.locker`).",
+  "tags": ["base"],
+  "size": [24, 22],
+  "parts": [
+    {"id": "shadow", "at": [0.4, 7.0], "shape": {"kind": "ellipse", "rx": 6.6, "ry": 1.4}, "fill": "$ink@0.45"},
+    {"id": "neck_k", "at": [0.0, -3.4], "shape": {"kind": "rect", "w": 7.2, "h": 2.2, "corner": 0.5}, "fill": "$ink", "stroke": {"color": "$ink", "width": 2.0}},
+    {"id": "glass_k", "at": [0.0, 2.1], "shape": {"kind": "rect", "w": 10.4, "h": 9.8, "corner": 2.9}, "fill": "$ink", "stroke": {"color": "$ink", "width": 2.0}},
+    {"id": "neck", "at": [0.0, -3.4], "shape": {"kind": "rect", "w": 7.2, "h": 2.2, "corner": 0.5}, "fill": "$frost.dark@0.6"},
+    {"id": "thread", "at": [0.0, -3.55], "rot": -5.0, "shape": {"kind": "rect", "w": 7.0, "h": 0.42, "corner": 0.2}, "fill": "$frost@0.75"},
+    {"id": "thread_b", "at": [-0.6, -2.95], "rot": -5.0, "shape": {"kind": "rect", "w": 5.0, "h": 0.36, "corner": 0.18}, "fill": "$frost@0.5"},
+    {"id": "glass", "at": [0.0, 2.1], "shape": {"kind": "rect", "w": 10.4, "h": 9.8, "corner": 2.9}, "fill": "$frost.dark@0.5"},
+    {"id": "glass_back", "at": [0.3, 1.7], "shape": {"kind": "rect", "w": 8.0, "h": 7.4, "corner": 2.0}, "fill": "$frost.dark2@0.3"},
+    {"id": "jelly", "shape": {"kind": "poly", "points": [[2.5, 3.05], [3.23, 3.19], [3.84, 3.61], [4.26, 4.22], [4.4, 4.95], [4.4, 4.95], [4.26, 5.68], [3.84, 6.29], [3.23, 6.71], [2.5, 6.85], [-2.5, 6.85], [-3.23, 6.71], [-3.84, 6.29], [-4.26, 5.68], [-4.4, 4.95], [-4.4, 4.95], [-4.26, 4.22], [-3.84, 3.61], [-3.23, 3.19], [-2.5, 3.05]]}, "fill": "$gold"},
+    {"id": "jelly_v0", "shape": {"kind": "poly", "points": [[4.27, 5.6], [4.26, 5.68], [3.84, 6.29], [3.23, 6.71], [2.5, 6.85], [-2.5, 6.85], [-3.23, 6.71], [-3.84, 6.29], [-4.26, 5.68], [-4.27, 5.6]]}, "fill": "$chitin"},
+    {"id": "jelly_dk", "shape": {"kind": "poly", "points": [[2.79, 3.11], [3.23, 3.19], [3.84, 3.61], [4.26, 4.22], [4.4, 4.95], [4.4, 4.95], [4.26, 5.68], [3.84, 6.29], [3.23, 6.71], [2.5, 6.85], [2.42, 6.85]]}, "fill": "$chitin@0.75"},
+    {"id": "surface", "at": [0.0, 3.2], "shape": {"kind": "ellipse", "rx": 4.3, "ry": 0.72}, "fill": "$gold.light2"},
+    {"id": "surface_edge", "at": [0.0, 3.2], "shape": {"kind": "ellipse", "rx": 4.3, "ry": 0.72}, "stroke": {"color": "$chitin@0.55", "width": 0.3}},
+    {"id": "caustic", "at": [-1.9, 5.3], "shape": {"kind": "ellipse", "rx": 1.4, "ry": 0.42}, "fill": "$gold.light2@0.85"},
+    {"id": "base", "at": [0.0, 6.45], "shape": {"kind": "rect", "w": 8.6, "h": 0.9, "corner": 0.4}, "fill": "$frost@0.3"},
+    {"id": "shine", "at": [-3.9, 1.6], "shape": {"kind": "rect", "w": 1.1, "h": 6.8, "corner": 0.55}, "fill": "$white@0.5"},
+    {"id": "shine_b", "at": [3.9, 0.2], "shape": {"kind": "rect", "w": 0.6, "h": 2.2, "corner": 0.3}, "fill": "$white@0.3"},
+    {"id": "shoulder_lit", "at": [-1.6, -2.15], "shape": {"kind": "rect", "w": 3.0, "h": 0.45, "corner": 0.22}, "fill": "$white@0.4"},
+    {"id": "lid", "shape": {"kind": "poly", "points": [[3.6, -1.5], [3.91, -1.44], [4.17, -1.27], [4.34, -1.01], [4.4, -0.7], [4.4, 0.7], [4.34, 1.01], [4.17, 1.27], [3.91, 1.44], [3.6, 1.5], [-3.6, 1.5], [-3.91, 1.44], [-4.17, 1.27], [-4.34, 1.01], [-4.4, 0.7], [-4.4, -0.7], [-4.34, -1.01], [-4.17, -1.27], [-3.91, -1.44], [-3.6, -1.5]]}, "fill": "$steel", "at": [0.1, -5.25], "rot": -2.5},
+    {"id": "lid_v0", "shape": {"kind": "poly", "points": [[3.6, -1.5], [3.91, -1.44], [4.17, -1.27], [4.34, -1.01], [4.4, -0.7], [4.4, -0.7], [-4.4, -0.7], [-4.34, -1.01], [-4.17, -1.27], [-3.91, -1.44], [-3.6, -1.5]]}, "fill": "$steel.light", "at": [0.1, -5.25], "rot": -2.5},
+    {"id": "lid_v1", "shape": {"kind": "poly", "points": [[4.38, 0.8], [4.34, 1.01], [4.17, 1.27], [3.91, 1.44], [3.6, 1.5], [-3.6, 1.5], [-3.91, 1.44], [-4.17, 1.27], [-4.34, 1.01], [-4.38, 0.8]]}, "fill": "$steel.dark", "at": [0.1, -5.25], "rot": -2.5},
+    {"id": "lid_rim", "shape": {"kind": "poly", "points": [[3.6, -1.5], [3.91, -1.44], [4.17, -1.27], [4.34, -1.01], [4.4, -0.7], [4.4, 0.7], [4.34, 1.01], [4.17, 1.27], [3.91, 1.44], [3.6, 1.5], [-3.6, 1.5], [-3.91, 1.44], [-4.17, 1.27], [-4.34, 1.01], [-4.4, 0.7], [-4.4, -0.7], [-4.34, -1.01], [-4.17, -1.27], [-3.91, -1.44], [-3.6, -1.5]]}, "stroke": {"color": "$ink", "width": "hair"}, "at": [0.1, -5.25], "rot": -2.5},
+    {"id": "knurl_0", "at": [-3.19, -4.91], "shape": {"kind": "rect", "w": 0.32, "h": 1.5, "corner": 0.12}, "fill": "$steel.dark@0.75", "rot": -2.5},
+    {"id": "knurl_1", "at": [-2.09, -4.95], "shape": {"kind": "rect", "w": 0.32, "h": 1.5, "corner": 0.12}, "fill": "$steel.dark@0.75", "rot": -2.5},
+    {"id": "knurl_2", "at": [-0.99, -5.0], "shape": {"kind": "rect", "w": 0.32, "h": 1.5, "corner": 0.12}, "fill": "$steel.dark@0.75", "rot": -2.5},
+    {"id": "knurl_3", "at": [0.11, -5.05], "shape": {"kind": "rect", "w": 0.32, "h": 1.5, "corner": 0.12}, "fill": "$steel.dark@0.75", "rot": -2.5},
+    {"id": "knurl_4", "at": [1.21, -5.1], "shape": {"kind": "rect", "w": 0.32, "h": 1.5, "corner": 0.12}, "fill": "$steel.dark@0.75", "rot": -2.5},
+    {"id": "knurl_5", "at": [2.31, -5.15], "shape": {"kind": "rect", "w": 0.32, "h": 1.5, "corner": 0.12}, "fill": "$steel.dark@0.75", "rot": -2.5},
+    {"id": "knurl_6", "at": [3.41, -5.19], "shape": {"kind": "rect", "w": 0.32, "h": 1.5, "corner": 0.12}, "fill": "$steel.dark@0.75", "rot": -2.5},
+    {"id": "lid_scratch", "at": [1.69, -5.52], "rot": -16.5, "shape": {"kind": "rect", "w": 2.2, "h": 0.3, "corner": 0.15}, "fill": "$steel.light@0.8"}
+  ],
+  "animations": {
+
+  }
+}

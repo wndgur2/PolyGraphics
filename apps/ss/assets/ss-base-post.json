@@ -1,0 +1,23 @@
+{
+  "id": "ss.base.post",
+  "name": "Fence post",
+  "description": "A length of steel pipe from the lander driven into the ground, capped, with cord lashed round its top. The camp's fence is a ring of these with cord run between them (feelers draws the cord, so it can sag and move in the wind), gapped where the roads go out.",
+  "tags": ["base"],
+  "size": [12, 44],
+  "parts": [
+    {"id": "shadow", "at": [0.0, 20.0], "shape": {"kind": "ellipse", "rx": 5.5, "ry": 1.6}, "fill": "$ink@0.4"},
+    {"id": "dirt", "at": [0.0, 19.4], "shape": {"kind": "ellipse", "rx": 5.0, "ry": 1.6}, "fill": "$sand@0.6"},
+    {"id": "stake", "shape": {"kind": "poly", "points": [[-2.0, -16.0], [2.0, -16.0], [2.0, 20.0], [-2.0, 20.0]]}, "fill": "$steel.dark"},
+    {"id": "stake_v0", "shape": {"kind": "poly", "points": [[0.4, -16.0], [2.0, -16.0], [2.0, 20.0], [0.4, 20.0]]}, "fill": "$slate.dark"},
+    {"id": "stake_rim", "shape": {"kind": "poly", "points": [[-2.0, -16.0], [2.0, -16.0], [2.0, 20.0], [-2.0, 20.0]]}, "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "stake_lit", "at": [-1.1, 3.0], "shape": {"kind": "rect", "w": 0.9, "h": 30.0, "corner": 0.4}, "fill": "$steel@0.9"},
+    {"id": "cap", "at": [0.0, -16.4], "shape": {"kind": "rect", "w": 6.0, "h": 3.0, "corner": 1.0}, "fill": "$steel", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "cap_lit", "at": [0.0, -17.4], "shape": {"kind": "rect", "w": 4.8, "h": 0.7, "corner": 0.35}, "fill": "$white@0.45"},
+    {"id": "lash_0", "at": [0.0, -11.0], "shape": {"kind": "rect", "w": 5.2, "h": 0.9, "corner": 0.4}, "fill": "$bone.dark"},
+    {"id": "lash_1", "at": [0.0, -9.6], "shape": {"kind": "rect", "w": 5.2, "h": 0.9, "corner": 0.4}, "fill": "$bone.dark"},
+    {"id": "lash_2", "at": [0.0, -8.2], "shape": {"kind": "rect", "w": 5.2, "h": 0.9, "corner": 0.4}, "fill": "$bone.dark"}
+  ],
+  "animations": {
+
+  }
+}

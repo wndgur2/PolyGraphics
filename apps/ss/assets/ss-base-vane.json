@@ -1,0 +1,29 @@
+{
+  "id": "ss.base.vane",
+  "name": "Wind meter",
+  "description": "A three-bladed wind meter on the lab's mast, its rotor facing the camp and a cold tail fin keeping it into the wind; it turns (`spin`). The only thing in the camp that moves all the time by itself, and it is small.",
+  "tags": ["base"],
+  "size": [32, 48],
+  "parts": [
+    {"id": "pole", "at": [0.0, 6.0], "shape": {"kind": "rect", "w": 2.0, "h": 16.0, "corner": 0.6}, "fill": "$steel.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "tail_arm", "at": [5.0, -9.0], "shape": {"kind": "rect", "w": 9.0, "h": 1.4, "corner": 0.5}, "fill": "$steel.dark"},
+    {"id": "tail", "shape": {"kind": "poly", "points": [[8.0, -9.0], [13.0, -14.0], [14.0, -6.0]]}, "fill": "$frost.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "body", "at": [0.0, -9.4], "shape": {"kind": "ellipse", "rx": 3.4, "ry": 3.0}, "fill": "$steel", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "blade_0", "at": [0.0, -10.0], "shape": {"kind": "poly", "points": [[1.2, 1.2], [2.6, 6.0], [1.8, 10.0], [0.0, 11.0], [-1.4, 10.0], [-2.2, 6.0], [-1.2, 1.2]]}, "fill": "$steel.light", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "blade_1", "at": [0.0, -10.0], "shape": {"kind": "poly", "points": [[-1.64, 0.44], [-6.5, -0.75], [-9.56, -3.44], [-9.53, -5.5], [-7.96, -6.21], [-4.1, -4.91], [-0.44, -1.64]]}, "fill": "$steel.light", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "blade_2", "at": [0.0, -10.0], "shape": {"kind": "poly", "points": [[0.44, -1.64], [3.9, -5.25], [7.76, -6.56], [9.53, -5.5], [9.36, -3.79], [6.3, -1.09], [1.64, 0.44]]}, "fill": "$steel.light", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "hub", "at": [0.0, -10.0], "shape": {"kind": "circle", "r": 1.8}, "fill": "$slate.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "hub_lit", "at": [-0.5, -10.5], "shape": {"kind": "circle", "r": 0.6}, "fill": "$white@0.6"}
+  ],
+  "animations": {
+    "spin": {
+      "description": "the blades turn in the wind",
+      "duration": 1.2,
+      "tracks": [
+        {"part": "blade_0", "prop": "rot", "keys": [[0.0, 0.0], [1.0, 360.0]]},
+        {"part": "blade_1", "prop": "rot", "keys": [[0.0, 0.0], [1.0, 360.0]]},
+        {"part": "blade_2", "prop": "rot", "keys": [[0.0, 0.0], [1.0, 360.0]]}
+      ]
+    }
+  }
+}
