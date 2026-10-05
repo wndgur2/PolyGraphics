@@ -184,5 +184,50 @@ const reg = { ...owner.reg, assets: new Map([...owner.reg.assets, [doc.id, doc]]
   check("the cover goes when the tint does", near(cover.alpha, 0));
 }
 
+// ---------------- layers: a cast over a walk
+{
+  const base: Asset = AssetSchema.parse({
+    ...doc,
+    id: "ss.test.layers",
+    animations: {
+      walk: { duration: 1, tracks: [{ part: "arm", prop: "x", keys: [[0, 2], [1, 2]], ease: "linear" }, { part: "body", prop: "y", keys: [[0, 1], [1, 1]], ease: "linear" }] },
+      cast: { duration: 0.5, cues: { release: 0.5 }, tracks: [{ part: "arm", prop: "x", keys: [[0, 10], [1, 10]], ease: "linear" }] },
+    },
+    skeleton: undefined,
+  });
+  const reg2 = { ...reg, assets: new Map([...reg.assets, [base.id, base]]) };
+  const ir = compileAsset(base, reg2).ir as unknown as IRAsset;
+  const imgs: Record<string, ImageLike> = {};
+  const scene: SceneLike = {
+    add: {
+      graphics: () => ({ fillStyle() {}, lineStyle() {}, fillPoints() {}, strokePoints() {}, generateTexture() {}, destroy() {} }),
+      image: (x, y, key) => (imgs[key] = { x, y, rotation: 0, alpha: 1, setOrigin() { return this; }, setScale() { return this; } } as ImageLike),
+      container: () => ({ add() {} }),
+    },
+  };
+  const rig = buildRig(scene, ir, { resolution: 1 });
+  const arm = rig.parts.get("arm")![0].img;
+  const body = rig.parts.get("body")![0].img;
+  const restX = rig.parts.get("arm")![0].baseX;
+  rig.play("walk");
+  rig.tick(0.1);
+  check("the base layer plays", near(arm.x, restX + 2));
+  const cues: string[] = [];
+  let ended = false;
+  rig.play("cast", { layer: "upper", loop: false, fadeIn: 0.1, onCue: (c) => cues.push(c), onComplete: () => (ended = true) });
+  rig.tick(0.05);
+  check("a layer fades in over the one under it", near(arm.x, restX + 6), `${arm.x - restX}`);
+  rig.tick(0.1);
+  check("a higher layer takes the props it animates", near(arm.x, restX + 10));
+  check("and leaves the rest to the layer under it", near(body.y, rig.parts.get("body")![0].baseY + 1));
+  check("what a layer is playing", rig.playing("upper") === "cast" && rig.playing() === "walk");
+  rig.tick(0.2);
+  check("a cue fires as the playhead passes it", cues.join() === "release", cues.join());
+  rig.tick(0.2);
+  check("a one-shot layer ends and lets go", ended && rig.playing("upper") === null && near(arm.x, restX + 2), `${arm.x - restX}`);
+  rig.stop();
+  check("stop puts every part back to rest", near(arm.x, restX) && near(body.y, rig.parts.get("body")![0].baseY));
+}
+
 console.log(failures ? `\n${failures} FAILED` : "\nALL PASS");
 process.exit(failures ? 1 : 0);

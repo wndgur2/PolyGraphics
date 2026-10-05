@@ -412,11 +412,36 @@ function repaint(node: IRNode, paint: (c: Rgba) => Rgba): IRNode {
   };
 }
 
+export interface PlayOptions {
+  loop?: boolean;
+  onComplete?: () => void;
+  /**
+   * Which layer the clip plays on. Layers stack in the order they were first
+   * played on, `base` always first: a part a higher layer animates takes that
+   * layer's value for the props it animates, and keeps the lower layers' for
+   * the rest — a cast on the arms over a walk on the feet.
+   */
+  layer?: string;
+  /** Seconds to blend in from what the layers under it show. */
+  fadeIn?: number;
+  /** Seconds before the end of a one-shot to blend back out to the layers under it. */
+  fadeOut?: number;
+  /** Called as the clip's playhead passes each of its cues (`IRAnim.cues`), once per pass. */
+  onCue?: (cue: string) => void;
+  /** Playback rate, 1 = the clip's own duration. */
+  timeScale?: number;
+}
+
 export interface Rig {
   container: ContainerLike;
   parts: Map<string, PartHandle[]>;
-  play(anim: string, opts?: { loop?: boolean; onComplete?: () => void }): void;
-  stop(): void;
+  play(anim: string, opts?: PlayOptions): void;
+  /** Stop one layer (its parts go back to the layers under it), or every layer. */
+  stop(layer?: string): void;
+  /** What a layer is playing, or null. */
+  playing(layer?: string): string | null;
+  /** Set a layer's playback rate. */
+  setTimeScale(scale: number, layer?: string): void;
   /** advance the animation clock; call from your scene's update with dt in seconds */
   tick(dtSec: number): void;
 }
@@ -503,10 +528,23 @@ export function buildRig(scene: SceneLike, ir: IRAsset, opts: RigOptions = {}): 
     parts.set(node.id, [...(parts.get(node.id) ?? []), handle]);
   });
 
-  let current: IRAnim | null = null;
-  let loop = true;
-  let onComplete: (() => void) | undefined;
-  let t = 0;
+  interface Layer {
+    anim: IRAnim;
+    name: string;
+    t: number;
+    loop: boolean;
+    onComplete?: () => void;
+    onCue?: (cue: string) => void;
+    fadeIn: number;
+    fadeOut: number;
+    timeScale: number;
+    finished: boolean;
+  }
+  const layers = new Map<string, Layer>();
+  /** Every layer name ever played, in first-played order, `base` first. */
+  const order: string[] = ["base"];
+  /** Parts posed last frame, so a part a layer let go of goes back to rest. */
+  let touched = new Set<string>();
 
   function pose(hd: PartHandle, p: PartPose): void {
     hd.img.x = hd.baseX + p.dx * vScale * hd.sign;
@@ -522,22 +560,39 @@ export function buildRig(scene: SceneLike, ir: IRAsset, opts: RigOptions = {}): 
     }
   }
 
-  function rest(): void {
-    for (const handles of parts.values()) for (const hd of handles) pose(hd, restPose());
+  function weightOf(L: Layer): number {
+    const d = L.anim.duration;
+    let w = 1;
+    if (L.fadeIn > 0) w = Math.min(w, L.t / L.fadeIn);
+    if (!L.loop && L.fadeOut > 0) w = Math.min(w, (d - L.t) / L.fadeOut);
+    return Math.max(0, Math.min(1, w));
   }
 
-  function applyProgress(progress: number): void {
-    if (!current) return;
-    // Every part the clip touches is posed from rest each frame, so two tracks
-    // on one part (a squash and a turn) compose instead of the last one winning.
+  function apply(): void {
+    // Every part any layer touches is posed from rest each frame, so two
+    // tracks on one part compose, and a higher layer overrides a lower one
+    // prop by prop, blended by its weight.
     const posed = new Map<string, PartPose>();
-    for (const track of current.tracks) {
-      if (!parts.has(track.part)) continue;
-      let p = posed.get(track.part);
-      if (!p) posed.set(track.part, (p = restPose()));
-      foldTrack(p, track, evalTrack(track, progress));
+    for (const name of order) {
+      const L = layers.get(name);
+      if (!L) continue;
+      const w = weightOf(L);
+      const progress = Math.min(1, L.t / L.anim.duration);
+      for (const track of L.anim.tracks) {
+        if (!parts.has(track.part)) continue;
+        let p = posed.get(track.part);
+        if (!p) posed.set(track.part, (p = restPose()));
+        foldTrack(p, track, evalTrack(track, progress), w);
+      }
     }
+    for (const id of touched) if (!posed.has(id)) for (const hd of parts.get(id)!) pose(hd, restPose());
     for (const [id, p] of posed) for (const hd of parts.get(id)!) pose(hd, p);
+    touched = new Set(posed.keys());
+  }
+
+  function rest(): void {
+    for (const handles of parts.values()) for (const hd of handles) pose(hd, restPose());
+    touched = new Set();
   }
 
   return {
@@ -546,31 +601,67 @@ export function buildRig(scene: SceneLike, ir: IRAsset, opts: RigOptions = {}): 
     play(name, o = {}) {
       const anim = ir.animations[name];
       if (!anim) throw new Error(`polygraphics: asset "${ir.id}" has no animation "${name}"`);
-      // a part the last clip moved and this one does not goes back to rest
-      rest();
-      current = anim;
-      loop = o.loop ?? true;
-      onComplete = o.onComplete;
-      t = 0;
-      applyProgress(0);
+      const layer = o.layer ?? "base";
+      if (!order.includes(layer)) order.push(layer);
+      layers.set(layer, {
+        anim, name, t: 0,
+        loop: o.loop ?? true,
+        onComplete: o.onComplete,
+        onCue: o.onCue,
+        fadeIn: o.fadeIn ?? 0,
+        fadeOut: o.fadeOut ?? 0,
+        timeScale: o.timeScale ?? 1,
+        finished: false,
+      });
+      // a cue at t=0 has happened the moment the clip starts
+      for (const [cue, ct] of Object.entries(anim.cues ?? {})) if (ct <= 0) o.onCue?.(cue);
+      apply();
     },
-    stop() {
-      current = null;
-      rest();
+    stop(layer) {
+      if (layer === undefined) {
+        layers.clear();
+        rest();
+        return;
+      }
+      layers.delete(layer);
+      apply();
+    },
+    playing(layer = "base") {
+      return layers.get(layer)?.name ?? null;
+    },
+    setTimeScale(scale, layer = "base") {
+      const L = layers.get(layer);
+      if (L) L.timeScale = scale;
     },
     tick(dt) {
-      if (!current) return;
-      t += dt;
-      if (t >= current.duration) {
-        if (loop) t %= current.duration;
-        else {
-          applyProgress(1);
-          current = null;
-          onComplete?.();
-          return;
+      if (layers.size === 0) return;
+      const done: Layer[] = [];
+      for (const [key, L] of layers) {
+        if (L.finished) continue;
+        const d = L.anim.duration;
+        const from = L.t;
+        L.t += dt * L.timeScale;
+        if (L.onCue && L.anim.cues) {
+          for (const [cue, ct] of Object.entries(L.anim.cues)) {
+            const at = ct * d;
+            // crossed this tick, or (looping) crossed after wrapping round
+            if ((at > from && at <= L.t) || (L.loop && L.t >= d && at <= L.t - d)) L.onCue(cue);
+          }
         }
+        if (L.t < d) continue;
+        if (L.loop) {
+          L.t %= d;
+          continue;
+        }
+        // A one-shot on the base layer holds its last pose, as a clip always
+        // has; one on a higher layer lets its parts go back to the layers under it.
+        L.t = d;
+        L.finished = true;
+        if (key !== "base") layers.delete(key);
+        done.push(L);
       }
-      applyProgress(t / current.duration);
+      apply();
+      for (const L of done) L.onComplete?.();
     },
   };
 }
@@ -582,16 +673,18 @@ function restPose(): PartPose {
   return { dx: 0, dy: 0, drot: 0, s: 1, sx: 1, sy: 1, alpha: 1, tint: 0 };
 }
 
-function foldTrack(p: PartPose, track: IRAnimTrack, v: number): void {
+/** Fold a track's value into a pose, `w` of the way over what is there (1 = replace it). */
+function foldTrack(p: PartPose, track: IRAnimTrack, v: number, w = 1): void {
+  const mix = (was: number) => was + (v - was) * w;
   switch (track.prop) {
-    case "x": p.dx = v; break;
-    case "y": p.dy = v; break;
-    case "rot": p.drot = v; break;
-    case "scale": p.s = v; break;
-    case "scaleX": p.sx = v; break;
-    case "scaleY": p.sy = v; break;
-    case "opacity": p.alpha = v; break;
-    case "tint": p.tint = Math.max(0, Math.min(1, v)); p.tintTo = track.to; break;
+    case "x": p.dx = mix(p.dx); break;
+    case "y": p.dy = mix(p.dy); break;
+    case "rot": p.drot = mix(p.drot); break;
+    case "scale": p.s = mix(p.s); break;
+    case "scaleX": p.sx = mix(p.sx); break;
+    case "scaleY": p.sy = mix(p.sy); break;
+    case "opacity": p.alpha = mix(p.alpha); break;
+    case "tint": p.tint = Math.max(0, Math.min(1, mix(p.tint))); if (track.to) p.tintTo = track.to; break;
   }
 }
 

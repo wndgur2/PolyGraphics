@@ -2955,6 +2955,426 @@
           ],
           "ease": "linear"
         }
+      ],
+      "cues": {
+        "contact": 0.25,
+        "contact_far": 0.75
+      }
+    },
+    "hurt": {
+      "description": "struck: the head snaps back, the coat flattens and springs, the visor goes pale \u2014 laid over the walk or the idle, never instead of them",
+      "duration": 0.2,
+      "tracks": [
+        {
+          "part": "head",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              -1.4,
+              "quadOut"
+            ],
+            [
+              0.45,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "goggle",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              -1.4,
+              "quadOut"
+            ],
+            [
+              0.45,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "goggle_glass",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              -1.4,
+              "quadOut"
+            ],
+            [
+              0.45,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "filter",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              -1.4,
+              "quadOut"
+            ],
+            [
+              0.45,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "pack",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              -1.4,
+              "quadOut"
+            ],
+            [
+              0.45,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "bloom",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              -1.4,
+              "quadOut"
+            ],
+            [
+              0.45,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "braid",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              -1.4,
+              "quadOut"
+            ],
+            [
+              0.45,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "braid_tie",
+          "prop": "x",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              -1.4,
+              "quadOut"
+            ],
+            [
+              0.45,
+              0.3,
+              "sine"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "head",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              0.6,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "goggle",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              0.6,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "goggle_glass",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              0.6,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "filter",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              0.6,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "pack",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              0.6,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "bloom",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              0.6,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "braid",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              0.6,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "braid_tie",
+          "prop": "y",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.05,
+              0.6,
+              "quadOut"
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "part": "cloak",
+          "prop": "scaleX",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.05,
+              1.08,
+              "quadOut"
+            ],
+            [
+              0.5,
+              0.98,
+              "sine"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "cloak",
+          "prop": "scaleY",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.05,
+              0.92,
+              "quadOut"
+            ],
+            [
+              0.5,
+              1.02,
+              "sine"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
       ]
     }
   }
