@@ -23,7 +23,7 @@
       "icon": ["evolved"],
       "relic": ["glyph"],
       "curse": ["glyph"],
-      "pickup": ["cursed", "royal"],
+      "pickup": ["cursed", "royal", "ripe", "gravid"],
       "terrain": ["filled"],
       "app": ["maskable"],
       "lib": "*"
