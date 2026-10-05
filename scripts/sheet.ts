@@ -17,6 +17,7 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { Resvg } from "@resvg/resvg-js";
 import type { Asset, Anim } from "../src/schema.js";
 import { renderSVG } from "../src/render.js";
+import { poseAsset, type PoseTint } from "../src/anim.js";
 import { loadLibrary, ownerOf, type Owner } from "../src/apps.js";
 
 const root = new URL("..", import.meta.url).pathname;
@@ -25,37 +26,9 @@ mkdirSync(outDir, { recursive: true });
 const lib = loadLibrary();
 for (const i of lib.issues) if (i.level === "error") console.log("✖", i.where, i.msg);
 
-const EASE: Record<string, (t: number) => number> = {
-  linear: (t) => t,
-  sine: (t) => 0.5 - 0.5 * Math.cos(Math.PI * t),
-  backOut: (t) => { const c = 1.70158; const u = t - 1; return 1 + (c + 1) * u * u * u + c * u * u; },
-};
-function evalTrack(tr: Anim["tracks"][number], p: number): number {
-  const keys = tr.keys;
-  if (p <= keys[0][0]) return keys[0][1];
-  for (let i = 1; i < keys.length; i++) if (p <= keys[i][0]) {
-    const [t0, v0] = keys[i - 1]; const [t1, v1] = keys[i];
-    return v0 + (v1 - v0) * EASE[tr.ease ?? "sine"]((p - t0) / ((t1 - t0) || 1));
-  }
-  return keys[keys.length - 1][1];
-}
-function posed(owner: Owner, a: Asset, anim: Anim, p: number): Asset {
-  const parts = structuredClone(a.parts);
-  for (const tr of anim.tracks) {
-    const v = evalTrack(tr, p);
-    for (const part of parts) {
-      if (part.id !== tr.part) continue;
-      const at = part.at ?? [0, 0];
-      switch (tr.prop) {
-        case "x": part.at = [at[0] + v, at[1]]; break;
-        case "y": part.at = [at[0], at[1] + v]; break;
-        case "rot": part.rot = (part.rot ?? 0) + v; break;
-        case "scale": { const s = part.scale ?? 1; part.scale = typeof s === "number" ? s * v : [s[0] * v, s[1] * v]; break; }
-        case "opacity": { const o = typeof part.opacity === "number" ? part.opacity : part.opacity === undefined ? 1 : owner.tokens.alpha[part.opacity] ?? 1; part.opacity = Math.max(0, Math.min(1, o * v)); break; }
-      }
-    }
-  }
-  return { ...a, parts };
+/** The document posed at `p`, read through the same clip code the renderer and adapters use. */
+function posed(owner: Owner, a: Asset, anim: Anim, p: number): { asset: Asset; tints: Record<string, PoseTint> } {
+  return poseAsset(a, anim, p, owner.tokens.alpha);
 }
 
 const args = process.argv.slice(2);
@@ -99,7 +72,7 @@ for (const id of ids) {
     let fx = 0;
     for (let f = 0; f < frames; f++) {
       const p = f / frames;
-      const svg = renderSVG(posed(o, a, anim, p), reg, {}).svg;
+      const svg = ((q) => renderSVG(q.asset, reg, { tints: q.tints }))(posed(o, a, anim, p)).svg;
       items.push(strip(svg, x + fx + ax * cellFrame, ay * cellFrame, cellFrame));
       items.push(`<text x="${x + fx + 2}" y="${h * cellFrame + 12}" fill="#8fa" font-size="10" font-family="monospace">${p.toFixed(2)}</text>`);
       fx += w * cellFrame + 4;

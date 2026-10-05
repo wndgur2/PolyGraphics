@@ -30,39 +30,12 @@
 import { Resvg } from "@resvg/resvg-js";
 import type { Asset, Anim } from "../src/schema.js";
 import { renderSVG } from "../src/render.js";
+import { poseAsset, type PoseTint } from "../src/anim.js";
 import { loadLibrary, ownerOf, owners, type Owner } from "../src/apps.js";
 
-const EASE: Record<string, (t: number) => number> = {
-  linear: (t) => t,
-  sine: (t) => 0.5 - 0.5 * Math.cos(Math.PI * t),
-  backOut: (t) => { const c = 1.70158; const u = t - 1; return 1 + (c + 1) * u * u * u + c * u * u; },
-};
-function evalTrack(tr: Anim["tracks"][number], p: number): number {
-  const keys = tr.keys;
-  if (p <= keys[0][0]) return keys[0][1];
-  for (let i = 1; i < keys.length; i++) if (p <= keys[i][0]) {
-    const [t0, v0] = keys[i - 1]; const [t1, v1] = keys[i];
-    return v0 + (v1 - v0) * (EASE[tr.ease ?? "sine"] ?? EASE.sine)((p - t0) / ((t1 - t0) || 1));
-  }
-  return keys[keys.length - 1][1];
-}
-function posed(owner: Owner, a: Asset, anim: Anim, p: number): Asset {
-  const parts = structuredClone(a.parts);
-  for (const tr of anim.tracks) {
-    const v = evalTrack(tr, p);
-    for (const part of parts) {
-      if (part.id !== tr.part) continue;
-      const at = part.at ?? [0, 0];
-      switch (tr.prop) {
-        case "x": part.at = [at[0] + v, at[1]]; break;
-        case "y": part.at = [at[0], at[1] + v]; break;
-        case "rot": part.rot = (part.rot ?? 0) + v; break;
-        case "scale": { const s = part.scale ?? 1; part.scale = typeof s === "number" ? s * v : [s[0] * v, s[1] * v]; break; }
-        case "opacity": { const o = typeof part.opacity === "number" ? part.opacity : part.opacity === undefined ? 1 : owner.tokens.alpha[part.opacity] ?? 1; part.opacity = Math.max(0, Math.min(1, o * v)); break; }
-      }
-    }
-  }
-  return { ...a, parts };
+/** The document posed at `p`, read through the same clip code the renderer and adapters use. */
+function posed(owner: Owner, a: Asset, anim: Anim, p: number): { asset: Asset; tints: Record<string, PoseTint> } {
+  return poseAsset(a, anim, p, owner.tokens.alpha);
 }
 
 const args = process.argv.slice(2);
@@ -113,7 +86,7 @@ for (const id of ids) {
     const anim = a.animations?.[name];
     if (!anim) { console.log(id.padEnd(28), "(no clip)"); continue; }
     const ms = [] as Uint8Array[]; let w = 0, h = 0;
-    for (let f = 0; f < frames; f++) { const r = mask(renderSVG(posed(o, a, anim, f / frames), o.reg, {}).svg); ms.push(r.m); w = r.w; h = r.h; }
+    for (let f = 0; f < frames; f++) { const r = mask(((q) => renderSVG(q.asset, o.reg, { tints: q.tints }))(posed(o, a, anim, f / frames)).svg); ms.push(r.m); w = r.w; h = r.h; }
     let uni = 0, inter = 0;
     for (let i = 0; i < w * h; i++) { let s = 0; for (const m of ms) s += m[i]; if (s) uni++; if (s === frames) inter++; }
     let flick = 0;
