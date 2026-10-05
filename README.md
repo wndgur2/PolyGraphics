@@ -82,6 +82,10 @@ The manifest is where a convention stops being a README sentence. `apps/ss/app.j
 | `layers` | which `tokens.layers` depth each category draws on | `out/manifest.json` carries `layer` and `depth` per entry |
 | `audio.key` | fanfares play only the score's degrees | a warning on the note outside them |
 
+The conventions no lint can check — where the light comes from, which outline method and stroke weight a
+category uses, the oblique ground view, when a second version is a variant — are written down for `ss` in
+[docs/ss-art-rules.md](docs/ss-art-rules.md).
+
 A document steps outside a rule *in writing*: `"why": { "size": "…" }` on the document, keyed by the rule,
 and the rule leaves it alone while the gallery lists the exception with its reason. That is `offBand` on a
 sound, generalised — the exception reads as a decision somebody made rather than a warning everybody learns
