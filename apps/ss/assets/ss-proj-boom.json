@@ -1,7 +1,7 @@
 {
   "id": "ss.proj.boom",
   "name": "Paired mandibles",
-  "description": "Two Bulwark mandibles bound at the elbow so they come back to you. Each jaw is what a jaw actually is: thick at the hinge, curving as it tapers, hooking back toward its partner at the tip, and toothed down the inside edge where it would close on something. Only the right jaw is drawn \u2014 `mirrorX` supplies the left, which is also why the pair can never drift out of symmetry. The old silhouette was the thrown chevron this weapon started life as, kept because it read at any rotation; a pair of jaws costs some of that and buys back the thing the weapon is named after. No spin animation is declared here on purpose \u2014 whole-body rotation is the engine's job (the weapon code already does `sprite.rotation += spin * dt`), and a document animation can only move parts within the body.",
+  "description": "Two Bulwark mandibles bound at the elbow so they come back to you. Each jaw is what a jaw actually is: thick at the hinge, curving as it tapers, hooking back toward its partner at the tip, and toothed down the inside edge where it would close on something. Only the right jaw is drawn — `mirrorX` supplies the left, which is also why the pair can never drift out of symmetry. The old silhouette was the thrown chevron this weapon started life as, kept because it read at any rotation; a pair of jaws costs some of that and buys back the thing the weapon is named after. No spin animation is declared here on purpose — whole-body rotation is the engine's job (the weapon code already does `sprite.rotation += spin * dt`), and a document animation can only move parts within the body.",
   "tags": [
     "proj",
     "ranged"
@@ -11,6 +11,23 @@
     20
   ],
   "parts": [
+    {
+      "id": "blur",
+      "shape": {
+        "kind": "circle",
+        "r": 8.6
+      },
+      "fill": "$chitin@ghost"
+    },
+    {
+      "id": "blur_rim",
+      "shape": {
+        "kind": "ring",
+        "r": 8.2,
+        "width": 1.6
+      },
+      "fill": "$chitin.light@soft"
+    },
     {
       "id": "jaw",
       "mirrorX": true,
@@ -119,5 +136,113 @@
       },
       "fill": "$chitin"
     }
-  ]
+  ],
+  "animations": {
+    "spin": {
+      "description": "two frames that alternate while the game turns the sprite: the jaws sharp, then the jaws faint inside the disc they sweep — a blur in frames, since a bake cannot blur. Played fast while it flies and held on the sharp frame at the top of its throw, where it all but stops.",
+      "duration": 0.1,
+      "tracks": [
+        {
+          "part": "blur",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.5,
+              1,
+              "hold"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "blur_rim",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.5,
+              1,
+              "hold"
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "part": "jaw",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.5,
+              0.35,
+              "hold"
+            ],
+            [
+              1,
+              0.35
+            ]
+          ]
+        },
+        {
+          "part": "binding",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.5,
+              0.35,
+              "hold"
+            ],
+            [
+              1,
+              0.35
+            ]
+          ]
+        },
+        {
+          "part": "knot",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.5,
+              0.35,
+              "hold"
+            ],
+            [
+              1,
+              0.35
+            ]
+          ]
+        }
+      ]
+    }
+  }
 }
