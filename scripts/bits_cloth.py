@@ -1,7 +1,7 @@
 """Cloth: the expedition's soft things — a rolled bedroll, a sleeping bag laid out, a pillow (or a folded jacket),
-a sack of stores, a coil of cord, a canvas door flap tied back.
+a sack of stores, a coil of cord, a canvas door flap tied back, a strip of cloth knotted on and blowing.
 
-    from bits_cloth import bedroll, bed, pillow, sack, rope_coil, flap
+    from bits_cloth import bedroll, bed, pillow, sack, rope_coil, flap, streamer, streamer_tracks
 
 Cloth is the expedition's own, so it is cold — slate, steel, frost — with bone
 for cord and stitching, and it reads through its folds, seams and stitches.
@@ -750,3 +750,109 @@ def flap(prefix, x, y, s=1.0, rot=0.0, w=11.0, h=38.0, tie=0.47, side="left", cl
     if side == "right":
         parts = _mirror(parts)
     return placed(parts, (x, y), s, rot)
+
+
+def _slab(pts, x0, x1):
+    """The part of a polygon between x = x0 and x = x1 (Sutherland–Hodgman against the two sides)."""
+    def cut(pts, keep, at):
+        out = []
+        for i, q in enumerate(pts):
+            p = pts[i - 1]
+            if keep(q):
+                if not keep(p):
+                    out.append(_lerp(p, q, (at - p[0]) / (q[0] - p[0])))
+                out.append(q)
+            elif keep(p):
+                out.append(_lerp(p, q, (at - p[0]) / (q[0] - p[0])))
+        return out
+
+    return cut(cut(pts, lambda q: q[0] >= x0, x0), lambda q: q[0] <= x1, x1)
+
+
+# Where a streamer is cut along its length, as fractions: the last length is the longest, so the cut
+# before it falls short of a frayed tip's notch and no length carries a sliver of the notch's gap.
+STREAMER_CUTS = (0.0, 0.26, 0.5, 0.72, 1.0)
+
+
+def streamer(prefix, x, y, outline, fill, side=1, fold=None, fold_fill="$ink@0.28", over=0.6, cuts=STREAMER_CUTS):
+    """A strip of cloth knotted on at (x, y) and blowing out from it, cut into four lengths so a clip can
+    run a wave down it (`streamer_tracks`) instead of swinging it whole like a board.
+
+    `outline` is the strip drawn streaming out along +x from its knot at (0, 0), x the distance along it
+    and y across it; the tip, frayed or not, is its far end. `side=-1` blows it out to the left instead.
+    `fold` is a crease of shade along it, in the same frame.
+
+    Each length is drawn twice: once with the ink line round it, and again over all of those without, a
+    little longer at both ends than the cut, so where two lengths meet the line between them is painted
+    out and the strip reads as one piece of cloth at any bend the clip puts in it. Give the crease a
+    solid colour (the cloth's own `.dark`) and it overlaps the same way; a wash (`@` an opacity) is cut
+    at the joins exactly instead, since an overlap would darken into a band — but two washes that only
+    meet leave a hairline of light between them, which is why the solid colour is the better choice.
+    `cuts` are where it is cut, as fractions of its length (`STREAMER_CUTS`); keep the last cut, plus
+    `over`, short of any notch in the tip. Pass the same `cuts` to `streamer_tracks`.
+    Parts: `<prefix>_<k>_ink`, `<prefix>_<k>`, `<prefix>_<k>_fold` for k = 0..3, root to tip, each with
+    its origin at the root of its length.
+    """
+    n = max(q[0] for q in outline)
+    xs = [n * c for c in cuts]
+    solid = "@" not in fold_fill
+    ink, cloth, crease = [], [], []
+    for k in range(len(xs) - 1):
+        x0, x1 = xs[k], xs[k + 1]
+        lo, hi = (x0 - over if k else x0), (x1 + over if k < len(xs) - 2 else x1)
+        seg = [(side * (q[0] - x0), q[1]) for q in _slab(outline, lo, hi)]
+        at = (x + side * x0, y)
+        ink.append(P(f"{prefix}_{k}_ink", poly(seg), fill, at=at, stroke=INK_HAIR))
+        cloth.append(P(f"{prefix}_{k}", poly(seg), fill, at=at))
+        if fold:
+            f = _slab(fold, *((lo, hi) if solid else (x0, x1)))
+            if len(f) >= 3:
+                crease.append(P(f"{prefix}_{k}_fold", poly([(side * (q[0] - x0), q[1]) for q in f]), fold_fill, at=at))
+    return ink + cloth + crease
+
+
+def streamer_tracks(prefix, outline, side=1, flaps=2, flicker=3, swing=14.0, flick=6.0, gust=5.0, sag=4.0,
+                    twist=0.18, lag=0.0, wave=0.9, keys=25, fold=True, cuts=STREAMER_CUTS):
+    """The wind in a `streamer`: a wave that leaves the knot and runs out to the tip, so the root barely
+    moves and the frayed end whips, with the whole strip lifting and sagging a little once a loop.
+
+    Each length's angle is laid end to end from the knot (each length starts where the one before it
+    ends), so the strip stays joined however far it bends; the tracks are that chain sampled `keys` times
+    through the loop and read back linearly. `flaps` and `flicker` are how many times the main wave and a
+    quicker one on top of it run through a loop (whole numbers, so it loops); `swing` and `flick` their
+    reach in degrees at the tip, `gust` the slow lift, `sag` how far the strip droops on average, `wave`
+    how much of a wavelength fits along the strip. `twist` narrows the outer lengths as the wave passes
+    through them, the cloth turning edge-on. `lag` (0..1 of a flap) is how far behind the wind this strip
+    is, so a row of them does not flap in step.
+    """
+    n = max(q[0] for q in outline)
+    xs = [n * c for c in cuts]
+    segs = len(xs) - 1
+    tau = 2 * math.pi
+    samples = []
+    for j in range(keys):
+        t = j / (keys - 1)
+        px, py, pose = 0.0, 0.0, []
+        for k in range(segs):
+            u = (xs[k] + xs[k + 1]) / 2 / n
+            ph = tau * (flaps * t - u * wave - lag)
+            a = (sag * u
+                 + swing * (0.25 + 0.75 * u) * math.sin(ph)
+                 + flick * u * math.sin(tau * (flicker * t - u * wave * 1.6 - lag * 1.3))
+                 + gust * u * math.sin(tau * (t - lag * 0.5)))
+            sy = 1 - twist * u * (0.5 + 0.5 * math.cos(ph))
+            pose.append((px - xs[k], py, a, sy))
+            L = xs[k + 1] - xs[k]
+            px += L * math.cos(math.radians(a))
+            py += L * math.sin(math.radians(a))
+        samples.append((t, pose))
+    tracks = []
+    for k in range(segs):
+        ids = [f"{prefix}_{k}_ink", f"{prefix}_{k}"] + ([f"{prefix}_{k}_fold"] if fold else [])
+        for prop, val in (("x", lambda p: side * p[0]), ("y", lambda p: p[1]), ("rot", lambda p: side * p[2]), ("scaleY", lambda p: p[3])):
+            if k == 0 and prop in ("x", "y"):
+                continue  # the root length is knotted on: it turns, it does not travel
+            ks = [[r2(t), r2(val(pose[k]))] for t, pose in samples]
+            for pid in ids:
+                tracks.append({"part": pid, "prop": prop, "keys": ks, "ease": "linear"})
+    return tracks

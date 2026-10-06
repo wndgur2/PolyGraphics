@@ -53,7 +53,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from rig import r2, poly, ell, circ, rect, write_doc  # noqa: E402
 from draw import *  # noqa: E402,F401,F403
 from bits_metal import chain, clamp, hasp, hinge, hook, padlock, sag, wire_coil  # noqa: E402
-from bits_cloth import bed, bedroll, flap, pillow, rope_coil, sack  # noqa: E402
+from bits_cloth import bed, bedroll, flap, pillow, rope_coil, sack, streamer, streamer_tracks  # noqa: E402
 from bits_camp import dial, ladle, mug, page, page_stack, saw, stone, stool, tag, tin_stack  # noqa: E402
 from bits_keeps import KEEP_PARTS  # noqa: E402
 from bits_glass import cartridge, jar, jar_bail_top, jar_fill, syringe, tube_rack, vial  # noqa: E402,F401
@@ -716,13 +716,16 @@ def marker():
     ]
     # Eight strips of cloth tied down the mast, alternate sides: one for each
     # expedition that set out from here (T045: "eight times, and once in
-    # stone"). Each has its knot, a fold of shade under it and a frayed end.
+    # stone"). Each has its knot, a fold of shade under it and a frayed end,
+    # and is cut into lengths so the wind can run down it (`streamer`).
+    tail = lambda n: [(0, -1.6), (n * 0.55, -2.2), (n, -0.6), (n * 0.8, 0.6), (n, 2.2), (n * 0.5, 1.8), (0, 1.6)]
+    fold = lambda n: [(0, 0.6), (n * 0.5, 1.2), (n * 0.95, 2.0), (n * 0.5, 1.9), (0, 1.6)]
+    # The crease is the cloth's own colour a step down rather than ink washed
+    # over it, so where two lengths overlap it does not darken or crack.
+    crease = {"$frost": "$frost.dark", "$frost.dark": "$frost.dark2", "$slate.light": "$slate"}
     for i, (y, side, n, fill) in enumerate(strips):
-        tail = [(0, -1.6), (n * 0.55, -2.2), (n, -0.6), (n * 0.8, 0.6), (n, 2.2), (n * 0.5, 1.8), (0, 1.6)]
-        fold = [(0, 0.6), (n * 0.5, 1.2), (n * 0.95, 2.0), (n * 0.5, 1.9), (0, 1.6)]
         parts += [
-            P(f"strip_{i}", poly([(side * x, y2) for x, y2 in tail]), fill, at=(side * 2.4, y), stroke=INK_HAIR),
-            P(f"strip_{i}_fold", poly([(side * x, y2) for x, y2 in fold]), "$ink@0.28", at=(side * 2.4, y)),
+            *streamer(f"strip_{i}", side * 2.4, y, tail(n), fill, side=side, fold=fold(n), fold_fill=crease[fill]),
             P(f"knot_{i}", R(6.4, 2.6, 1), "$bone.dark", at=(0, y)),
             P(f"knot_{i}_lit", R(4, 0.7, 0.3), "$bone@0.9", at=(-0.6, y - 0.7)),
         ]
@@ -731,11 +734,14 @@ def marker():
         *bud("bud_a", -4, 50, 0.8, -0.4),
         *bud("bud_b", 3, 46, 0.6, 0.4),
     ]
+    # The wind comes down the mast: each strip a little behind the one above
+    # it, the longer ones reaching further, every one whipping at its frayed
+    # end while its knot holds. A first draft swung each strip whole about its
+    # knot, a few degrees each way, and the strips read as feathers — stiff
+    # vanes stuck in the mast, tilting — not cloth.
     flap = []
     for i, (y, side, n, _f) in enumerate(strips):
-        keys = [(0, 0), (0.35, side * 6), (0.7, -side * 3), (1, 0)] if i % 2 else [(0, 0), (0.3, side * 7), (0.65, -side * 2), (1, 0)]
-        for part in (f"strip_{i}", f"strip_{i}_fold"):
-            flap += [track(part, "rot", keys), track(part, "scale", [(0, 1), (0.4, 0.9), (0.8, 1.04), (1, 1)])]
+        flap += streamer_tracks(f"strip_{i}", tail(n), side=side, swing=13 + n * 0.6, flick=6 + (i % 3), lag=i * 0.11)
     doc(
         "ss.base.marker",
         "The marker",
@@ -744,11 +750,12 @@ def marker():
         "has the one line cut in it — the same word as the ruin's stones and Eden's iron, which every writer was given and wrote down as an "
         "attack. It is the game's own line: do not come. Rust has bled from its lower rivets. Down the mast, below a collar where two lengths "
         "of it were joined, are eight strips of cold cloth knotted on, alternate sides, one for each expedition that set out from here (T045: "
-        "\"Read as one log they say do not come, eight times\"); they flap in the wind (`flutter`). At the foot the hive is starting up it: "
+        "\"Read as one log they say do not come, eight times\"); they flap in the wind (`flutter`), a wave running out from each knot to its "
+        "frayed end, each strip a little after the one above it — cut into lengths so the cloth bends, not swung whole like a vane. At the foot the hive is starting up it: "
         "two pink buds (A055). feelers stands it in the middle of the base, the stations round it.",
         (64, 136),
         parts,
-        {"flutter": loop("the eight strips flap in the wind, each a little after the one above it", 1.6, flap)},
+        {"flutter": loop("the eight strips flap in the wind, a wave running out from each knot to its frayed end, each strip a little after the one above it", 1.6, flap)},
     )
 
 
@@ -1004,6 +1011,13 @@ def stump():
     )
 
 
+# The cairn's strip of cloth, streaming out from the stake (its knot at (3, -20) in the cairn), with its
+# two frayed tails; cut so the last cut stays clear of the lower tail's notch.
+FLAG = [(0, -4), (11, -1), (9.6, 0.4), (12, 1.6), (9, 3), (12, 5), (0, 4)]
+FLAG_FOLD = [(0, 1), (9, 1.4), (9, 2.6), (0, 2.4)]
+FLAG_CUTS = (0.0, 0.26, 0.48, 0.68, 1.0)
+
+
 def cairn():
     def slab(id, pts, top_fill, face_fill):
         cx = sum(x for x, _ in pts) / len(pts)
@@ -1027,14 +1041,14 @@ def cairn():
         P("stake", R(2.6, 26, 0.8), "$smoke.light", at=(2, -12), stroke=INK_HAIR),
         P("binding_a", R(4, 1.2, 0.4), "$bone.dark", at=(2, -4)),
         P("binding_b", R(4, 1.2, 0.4), "$bone.dark", at=(2, -6)),
-        P("flag", poly([(3, -24), (14, -21), (12.6, -19.6), (15, -18.4), (12, -17), (15, -15), (3, -16)]), "$frost.dark", stroke=INK_HAIR),
-        P("flag_fold", poly([(3, -19), (12, -18.6), (12, -17.4), (3, -17.6)]), "$ink@0.25"),
+        *streamer("flag", 3, -20, FLAG, "$frost.dark", fold=FLAG_FOLD, fold_fill="$frost.dark2", cuts=FLAG_CUTS),
     ]
     anims = {
         "flutter": loop(
-            "the strip of cloth on the stake flaps in the wind off the pan",
+            "the strip of cloth on the stake flaps in the wind off the pan, a wave running out from the stake to its two frayed tails",
             1.4,
-            [track(p, prop, keys) for p in ("flag", "flag_fold") for prop, keys in (("scale", [(0, 1), (0.3, 0.86), (0.6, 1.06), (1, 1)]), ("y", [(0, 0), (0.3, 0.6), (0.6, -0.4), (1, 0)]))],
+            # Tied along its whole edge, so it barely turns at the stake; out at the tails the pan's wind has it.
+            streamer_tracks("flag", FLAG, swing=11, flick=6, gust=4, sag=3, cuts=FLAG_CUTS, lag=0.2),
         )
     }
     doc(
@@ -1042,7 +1056,7 @@ def cairn():
         "Salt cairn",
         "Three slabs of the pan's salt plate stacked by the north-west road, drawn the way the pan's own plates are (`ss.terrain.saltplate`), "
         "salt crusted white along their edges and cracked, a chip fallen at the foot, with a stake bound into them and a frayed strip of cold "
-        "cloth flapping on it (`flutter`). In feelers this is the way out to the Salt Pan.",
+        "cloth flapping on it (`flutter`), cut into lengths so a wave can run out along it to its tails. In feelers this is the way out to the Salt Pan.",
         (32, 52),
         parts,
         anims,
