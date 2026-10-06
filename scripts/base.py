@@ -1011,11 +1011,12 @@ def stump():
     )
 
 
-# The cairn's strip of cloth, streaming out from the stake (its knot at (3, -20) in the cairn), with its
-# two frayed tails; cut so the last cut stays clear of the lower tail's notch.
+# The cairn's flag, hoisted along the stake (the middle of its hoist at (3, -20) in the cairn) and
+# streaming out east with its two frayed tails. Cut in twelve upright slabs of 0.7 so the ripple
+# reads as a curve, and the tails past the notch as one piece that whips.
 FLAG = [(0, -4), (11, -1), (9.6, 0.4), (12, 1.6), (9, 3), (12, 5), (0, 4)]
 FLAG_FOLD = [(0, 1), (9, 1.4), (9, 2.6), (0, 2.4)]
-FLAG_CUTS = (0.0, 0.26, 0.48, 0.68, 1.0)
+FLAG_CUTS = tuple(r2(i * 0.7 / 12) for i in range(13)) + (1.0,)
 
 
 def cairn():
@@ -1045,10 +1046,17 @@ def cairn():
     ]
     anims = {
         "flutter": loop(
-            "the strip of cloth on the stake flaps in the wind off the pan, a wave running out from the stake to its two frayed tails",
+            "the flag on the stake flaps in the wind off the pan: ripples run out from the stake to its two frayed tails, "
+            "the cloth gathering and darkening in each fold as it passes",
             1.4,
-            # Tied along its whole edge, so it barely turns at the stake; out at the tails the pan's wind has it.
-            streamer_tracks("flag", FLAG, swing=11, flick=6, gust=4, sag=3, cuts=FLAG_CUTS, lag=0.2),
+            # Hoisted along its whole edge, so the hoist holds to the stake and the ripple grows from it;
+            # out at the tails the pan's wind has it. Two first passes failed: swung whole about the
+            # stake it read as a board tilting, and cut in six lengths that each turned it read as
+            # boards hinged together, cracking open at the bends. Its slabs stay upright and ride the
+            # wave instead (`upright`), and the folds darken as they run, which is what tells a flag.
+            streamer_tracks("flag", FLAG, swing=26, flick=9, gust=6, sag=5, wave=1.2, root=0.0, bunch=0.0,
+                            twist=0.0, shade=0.75, shade_to="$frost.dark2", cuts=FLAG_CUTS, lag=0.2,
+                            upright=True, tip_turn=0.7),
         )
     }
     doc(
@@ -1056,8 +1064,9 @@ def cairn():
         "Salt cairn",
         "Three slabs of the pan's salt plate stacked by the north-west road, drawn the way the pan's own plates are (`ss.terrain.saltplate`), "
         "salt crusted white along their edges and cracked, a chip fallen at the foot, with a stake bound into them and a frayed strip of cold "
-        "cloth flapping on it (`flutter`), cut into lengths so a wave can run out along it to its tails. In feelers this is the way out to the Salt Pan.",
-        (32, 52),
+        "cloth flapping on it (`flutter`): hoisted along the stake, cut into lengths so ripples run out along it to its tails, each fold darkening "
+        "as it passes. The canvas is wider than the slabs so the tails have room to whip. In feelers this is the way out to the Salt Pan.",
+        (40, 60),
         parts,
         anims,
     )

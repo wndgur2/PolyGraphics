@@ -812,7 +812,8 @@ def streamer(prefix, x, y, outline, fill, side=1, fold=None, fold_fill="$ink@0.2
 
 
 def streamer_tracks(prefix, outline, side=1, flaps=2, flicker=3, swing=14.0, flick=6.0, gust=5.0, sag=4.0,
-                    twist=0.18, lag=0.0, wave=0.9, keys=25, fold=True, cuts=STREAMER_CUTS):
+                    twist=0.18, lag=0.0, wave=0.9, keys=25, fold=True, cuts=STREAMER_CUTS, root=0.25, bunch=0.0,
+                    shade=0.0, shade_to=None, upright=False, tip_turn=0.6):
     """The wind in a `streamer`: a wave that leaves the knot and runs out to the tip, so the root barely
     moves and the frayed end whips, with the whole strip lifting and sagging a little once a loop.
 
@@ -824,6 +825,20 @@ def streamer_tracks(prefix, outline, side=1, flaps=2, flicker=3, swing=14.0, fli
     how much of a wavelength fits along the strip. `twist` narrows the outer lengths as the wave passes
     through them, the cloth turning edge-on. `lag` (0..1 of a flap) is how far behind the wind this strip
     is, so a row of them does not flap in step.
+
+    For a flag hoisted along its whole edge rather than knotted at a point, `root=0` keeps the hoist
+    from turning off the pole (the main wave's reach grows from nothing there instead of from a quarter),
+    `bunch` shortens each length as a crest passes through it (the cloth gathering, taken into the chain
+    so the lengths stay joined), and `shade` tints each length toward `shade_to` as it turns down and
+    away from the light — the dark folds running out along it are what reads as a flag at a few pixels.
+
+    `upright` is for a flag that is taller than it is long. Turning a tall length to follow the wave
+    swings its top and bottom edges the opposite ways, and between two lengths at a bend that opens a
+    crack wider than the overlap can cover, and the cloth reads as boards hinged together. A flag seen
+    side on does not do that: its cross-sections stay upright and ride up and down the wave, closing up
+    in x as the cloth slopes. So with `upright` the lengths only travel along the chain and never turn,
+    except the last (the tails, past the notch), which turns `tip_turn` of the way. Cut it in thin
+    slabs for this (a pixel or less), so the steps between them are too small to see.
     """
     n = max(q[0] for q in outline)
     xs = [n * c for c in cuts]
@@ -836,23 +851,37 @@ def streamer_tracks(prefix, outline, side=1, flaps=2, flicker=3, swing=14.0, fli
         for k in range(segs):
             u = (xs[k] + xs[k + 1]) / 2 / n
             ph = tau * (flaps * t - u * wave - lag)
+            wav = math.sin(ph)
             a = (sag * u
-                 + swing * (0.25 + 0.75 * u) * math.sin(ph)
+                 + swing * (root + (1 - root) * u) * wav
                  + flick * u * math.sin(tau * (flicker * t - u * wave * 1.6 - lag * 1.3))
                  + gust * u * math.sin(tau * (t - lag * 0.5)))
             sy = 1 - twist * u * (0.5 + 0.5 * math.cos(ph))
-            pose.append((px - xs[k], py, a, sy))
-            L = xs[k + 1] - xs[k]
+            sx = 1 - bunch * (0.5 + 0.5 * math.cos(ph))
+            dark = shade * (0.4 + 0.6 * u) * max(0.0, wav)
+            pose.append((px - xs[k], py, a, sy, sx, dark))
+            L = (xs[k + 1] - xs[k]) * sx
             px += L * math.cos(math.radians(a))
             py += L * math.sin(math.radians(a))
         samples.append((t, pose))
     tracks = []
     for k in range(segs):
         ids = [f"{prefix}_{k}_ink", f"{prefix}_{k}"] + ([f"{prefix}_{k}_fold"] if fold else [])
-        for prop, val in (("x", lambda p: side * p[0]), ("y", lambda p: p[1]), ("rot", lambda p: side * p[2]), ("scaleY", lambda p: p[3])):
+        last = k == segs - 1
+        props = [("x", lambda p: side * p[0]), ("y", lambda p: p[1])]
+        if not upright:
+            props.append(("rot", lambda p: side * p[2]))
+        elif last and tip_turn:
+            props.append(("rot", lambda p: side * p[2] * tip_turn))
+        # a squash pair, not a squash and a `scale`: the renderer takes one or the other
+        props += ([("scaleY", lambda p: p[3])] if twist else []) + ([("scaleX", lambda p: p[4])] if bunch else [])
+        for prop, val in props:
             if k == 0 and prop in ("x", "y"):
                 continue  # the root length is knotted on: it turns, it does not travel
             ks = [[r2(t), r2(val(pose[k]))] for t, pose in samples]
             for pid in ids:
                 tracks.append({"part": pid, "prop": prop, "keys": ks, "ease": "linear"})
+        if shade and shade_to:
+            ks = [[r2(t), r2(pose[k][5])] for t, pose in samples]
+            tracks.append({"part": f"{prefix}_{k}", "prop": "tint", "keys": ks, "ease": "linear", "to": shade_to})
     return tracks
