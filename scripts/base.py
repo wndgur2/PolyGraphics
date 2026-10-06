@@ -26,9 +26,10 @@ The camp is what the records draw, and only that:
                  the hive's, borrowed — the cap Sol carried in a dead emitter,
                  planted and spread. The same caps go in jars for lamps
   the lockers    one per writer, with the one thing their log kept
-  the marker     the middle of the camp: the eight writers' analysers, the
-                 records they left, carried back by the swarm and set in the
-                 spire its trail laid round them. Nothing on it is written
+  the marker     the middle of the camp: the survey station, the program's
+                 data collector, with a logger module in its cabinet for each
+                 of the eight expeditions, every lamp dark. Nothing on it is
+                 written
   the marks      the cut spires to the south, ringed inside like trees
                  (T010, A030); a salt cairn on the north-west road; the board
                  the routes are pinned on; boot prints worn out along them
@@ -682,166 +683,167 @@ def hearth():
 
 
 # ============================================================== the marker: the middle of the camp
-# The eight who came before, as the records they left. Every writer carried an
-# analyser and put the ground into it — the air (A001), the caps' light and
-# smell as one number (A023), a list of compounds with no names (T028) — and,
-# at the end, their own body (feelers records-storyboard §4). Paper cannot hold
-# a smell (T028), so that is where the record is. The swarm carries what has a
-# hand's smell on it and knows whose (T003, T043); it brought the eight back to
-# where they landed, and its trail hardened round them as it went, the way a
-# road becomes a spire (A030). Nothing on it is written: the hive has no
-# letters, and this is how it says what it has to say (feelers
-# hub-map-plan §2.1).
+# The eight who came before, as the record they left: one survey station, the
+# program's data collector, standing where the first expedition put it. Every
+# writer's analyser reported to it — the air (A001), the caps' light and smell
+# as one number (A023), the list of compounds with no names (T028), and at the
+# end their own body (feelers records-storyboard §4) — and every expedition
+# slotted its own logger module into its cabinet. Eight bays, eight modules,
+# every lamp dark: each stopped on the day its writer's emitter did. Nothing on
+# it is written (feelers hub-map-plan §2.1). The ground is answering it: the
+# swarm's crust climbs its legs, and its intake, which has breathed the hive's
+# air for fifty-five years, has grown the hive's crystal.
 #
-# (y up the spire, side, tilt, sunk, body fill, what it last measured)
-ANALYSERS = [
-    (46, -1, 8, 0.85, "$smoke.light2", "arin"),    # year 3: bled pale, half in the crust
-    (33, 1, -6, 0.4, "$steel", "sol"),            # spores on it
-    (20, -1, 6, 0.4, "$slate.light", "haram"),    # husk flakes in the seams
-    (7, 1, -9, 0.38, "$steel", "mina"),           # the burrow's wall-earth smeared over
-    (-6, -1, 5, 0.36, "$slate.light", "kano"),    # its strap stiff with trail earth
-    (-19, 1, -5, 0.34, "$steel", "eden"),         # jelly set in the intake
-    (-32, -1, 7, 0.32, "$slate.light", "rowan"),  # the bowl's stone dust
-    (-44, 1, -4, 0.3, "$steel.light", "teo"),     # year 55: still in its paper
-]
+# The eight modules, in the order they came (two columns, read down), and
+# what the field left on each.
+MODULES = ["arin", "sol", "haram", "mina", "kano", "eden", "rowan", "teo"]
 
 
-def spire_half(y):
-    """Half the spire's width at y: broad where the oldest went in, a point where the newest did."""
-    return max(1.0, 3.0 + (y + 60) * 0.12)
-
-
-def analyser(prefix, x, y, side, tilt, fill, who):
-    """One writer's analyser: an upright handheld meter, its foot in the crust, leaning out. A box, a dead screen, two keys, the sensor stub on top, the wrist loop."""
-    def m(pts):
-        return [(side * px, py) for px, py in pts]
-
-    at = (x, y)
-    body = [(-3.6, -5.0), (3.6, -5.0), (3.8, -4.4), (3.8, 4.6), (3.4, 5.2), (-3.4, 5.2), (-3.8, 4.6), (-3.8, -4.4)]
+def module(prefix, x, y, who):
+    """One expedition's logger module in its bay: a face, a dark lamp, a grip, and what its writer's ground left on it."""
+    face = "$smoke.light2" if who == "arin" else "$steel"
     parts = [
-        # The sensor stub: the one part of it that ever touched the ground's air.
-        P(f"{prefix}_stub", R(1.6, 3.6, 0.5), "$slate.dark", at=(side * 1.4, -6.6), stroke=INK_HAIR),
-        P(f"{prefix}_stub_tip", R(2.6, 1.2, 0.5), "$steel.dark", at=(side * 1.4, -8.4), stroke=INK_HAIR),
-        *shaded(f"{prefix}", m(body), fill, [(side * 1.6 if side > 0 else -3.8, 3.8 if side > 0 else -1.6, "$ink@0.22")], stroke=INK_HAIR, axis=0),
-        # Dark: no digits, nothing on it to read (feelers hub-map-plan §2.1). The hearth catches its glass.
-        P(f"{prefix}_screen", R(5.0, 3.8, 0.6), "$coal", at=(0, -2.2)),
-        P(f"{prefix}_glint", poly([(-2.0, -3.6), (-0.2, -3.6), (-1.2, -2.0), (-2.0, -2.0)]), "$spore@0.4"),
-        P(f"{prefix}_lit", R(6.4, 0.7, 0.35), "$white@0.4", at=(0, -4.4)),
-        P(f"{prefix}_key_a", R(1.6, 1.1, 0.4), "$slate.dark", at=(-1.3, 1.6)),
-        P(f"{prefix}_key_b", R(1.6, 1.1, 0.4), "$slate.dark", at=(1.3, 1.6)),
+        P(f"{prefix}_bay", R(11.4, 7.6, 0.8), "$coal", at=(x, y)),
+        P(f"{prefix}", R(10.2, 6.4, 0.8), face, at=(x, y), stroke=INK_HAIR),
+        P(f"{prefix}_lit", R(9.2, 0.6, 0.3), "$white@0.4", at=(x, y - 2.6)),
+        # The lamp: dark. Only the hive's light is lit in this camp.
+        P(f"{prefix}_lamp", circ(0.95), "$ink@0.85", at=(x - 3.3, y - 0.6)),
+        P(f"{prefix}_lamp_rim", circ(1.25), None, at=(x - 3.3, y - 0.6), stroke=INK_HAIR),
+        # The grip it was pushed in by, and its data line out of the bottom.
+        P(f"{prefix}_grip", R(4.4, 1.3, 0.5), "$slate.dark", at=(x + 1.6, y + 1.6)),
+        P(f"{prefix}_vent", R(4.4, 0.6, 0.3), "$ink@0.45", at=(x + 1.6, y - 0.8)),
     ]
-    # The wrist loop, still done up, hanging off the outer foot.
-    strap = "$sand.dark" if who == "kano" else "$slate.dark"
-    parts.append(band(f"{prefix}_strap", m([(2.6, 5.0), (4.6, 7.6), (3.4, 9.6), (1.6, 8.4), (1.4, 5.2)]), 0.9, strap))
-    # What each last measured, still on it.
     if who == "sol":
-        parts += [P(f"{prefix}_spore_{k}", circ(0.55), "$spore", at=(side * dx, dy)) for k, (dx, dy) in enumerate([(-2.6, 3.8), (2.8, 3.4), (0.4, 4.2), (3.0, -4.4)])]
+        parts += [P(f"{prefix}_spore_{k}", circ(0.5), "$spore", at=(x + dx, y + dy)) for k, (dx, dy) in enumerate([(-4.0, 2.2), (3.8, -2.0), (-1.4, 2.6)])]
     elif who == "haram":
-        parts += [P(f"{prefix}_flake_{k}", poly(m([(0, 0), (1.6, -0.6), (1.2, 0.8)])), "$husk", at=(side * dx, dy), stroke=INK_HAIR) for k, (dx, dy) in enumerate([(-3.0, 3.2), (1.6, 3.6), (2.6, -4.6)])]
+        parts += [P(f"{prefix}_flake_{k}", poly([(0, 0), (1.6, -0.6), (1.2, 0.8)]), "$husk", at=(x + dx, y + dy), stroke=INK_HAIR) for k, (dx, dy) in enumerate([(-4.4, 1.4), (3.4, -2.6)])]
     elif who == "mina":
-        parts.append(P(f"{prefix}_earth", poly(m([(-3.8, 1.0), (0.6, 2.6), (3.8, 4.4), (3.4, 5.2), (-3.4, 5.2)])), "$soil.light@0.9"))
+        parts.append(P(f"{prefix}_earth", poly([(-5.1, 0.4), (-1.0, 1.6), (3.0, 3.2), (-5.1, 3.2)]), "$soil.light@0.9", at=(x, y)))
     elif who == "kano":
-        parts += [P(f"{prefix}_grit_{k}", circ(0.5), "$sand", at=(side * dx, dy)) for k, (dx, dy) in enumerate([(4.2, 7.4), (2.8, 9.2)])]
+        parts += [P(f"{prefix}_grit_{k}", circ(0.5), "$sand", at=(x + dx, y + dy)) for k, (dx, dy) in enumerate([(-4.2, 2.4), (-2.6, 2.8), (4.2, 2.6)])]
     elif who == "eden":
         parts += [
-            P(f"{prefix}_jelly", ell(1.7, 1.2), "$gold", at=(side * 1.4, -9.2), stroke=INK_HAIR),
-            P(f"{prefix}_jelly_lit", circ(0.45), "$white@0.6", at=(side * 1.0, -9.6)),
+            P(f"{prefix}_jelly", ell(1.5, 1.1), "$gold", at=(x + 4.0, y + 2.6), stroke=INK_HAIR),
+            P(f"{prefix}_jelly_lit", circ(0.4), "$white@0.6", at=(x + 3.6, y + 2.1)),
         ]
     elif who == "rowan":
-        parts += [P(f"{prefix}_dust_{k}", circ(0.5), "$smoke.light2@0.9", at=(side * dx, dy)) for k, (dx, dy) in enumerate([(-2.6, 3.6), (0.4, 3.0), (2.8, 4.0), (-1.4, -4.4), (2.2, 0.4)])]
+        parts += [P(f"{prefix}_dust_{k}", circ(0.5), "$smoke.light2@0.9", at=(x + dx, y + dy)) for k, (dx, dy) in enumerate([(-4.4, 2.0), (-0.6, 2.6), (4.2, -1.8), (2.4, 2.8)])]
     elif who == "teo":
-        # Still wrapped in a sheet, the cord crossed over it (the bundle on his locker).
+        # A sheet tucked behind its grip, the way he carried everything.
         parts += [
-            P(f"{prefix}_paper", poly(m([(-4.6, -3.6), (4.2, -4.4), (4.8, 5.8), (-4.2, 6.0)])), "$bone", stroke=INK_HAIR),
-            P(f"{prefix}_paper_dk", poly(m([(1.8, -4.2), (4.2, -4.4), (4.8, 5.8), (2.2, 5.9)])), "$bone.dark@0.8"),
-            band(f"{prefix}_cord", m([(-4.4, 1.0), (4.6, 0.4)]), 0.8, "$bone.dark"),
-            P(f"{prefix}_paper_lit", poly(m([(-4.0, -3.2), (3.4, -3.8), (3.4, -3.1), (-4.0, -2.6)])), "$white@0.5"),
+            P(f"{prefix}_page", poly([(0, 0), (4.8, -0.5), (5.2, 4.2), (0.5, 4.6)]), "$bone", at=(x + 1.2, y - 1.6), stroke=INK_HAIR, rot=-8),
+            P(f"{prefix}_page_line", R(3.0, 0.5, 0.25), "$slate.dark@0.7", at=(x + 3.8, y + 0.2), rot=-8),
         ]
-    # Lean the whole meter about its middle: each part's offset turns with it, and so does the part.
-    c, sn = math.cos(math.radians(tilt)), math.sin(math.radians(tilt))
-    out = []
-    for p in parts:
-        ox, oy = p.get("at", [0, 0])
-        out.append({**p, "at": [r2(at[0] + ox * c - oy * sn), r2(at[1] + ox * sn + oy * c)], "rot": r2(p.get("rot", 0) + tilt)})
-    return out
-
-
-def mite_on_paper(prefix, x, y):
-    """A mite at Teo's sheet, its mouth on the corner: it is the one that keeps carrying it (T003)."""
-    return [
-        *[band(f"{prefix}_leg_{k}", [(x + dx, y + 1.0), (x + dx + ex, y + 3.4)], 0.7, "$chitin.dark") for k, (dx, ex) in enumerate([(-2.0, -1.2), (-0.4, -0.4), (1.2, 0.6)])],
-        P(f"{prefix}", ell(3.2, 2.3), "$chitin", at=(x, y), stroke=INK_HAIR),
-        P(f"{prefix}_shield", ell(2.2, 1.2), "$chitin.light", at=(x - 0.6, y - 0.7)),
-        P(f"{prefix}_eye", circ(0.6), "$pheromone", at=(x + 1.6, y - 0.4)),
-        P(f"{prefix}_head", ell(1.2, 1.0), "$chitin.dark", at=(x + 3.2, y + 0.4), stroke=INK_HAIR),
-        band(f"{prefix}_feeler_a", [(x + 3.6, y - 0.4), (x + 4.6, y - 3.2), (x + 6.0, y - 4.0)], 0.6, "$chitin.dark"),
-        band(f"{prefix}_feeler_b", [(x + 3.0, y - 0.6), (x + 3.2, y - 3.6), (x + 4.0, y - 5.0)], 0.6, "$chitin.dark"),
-    ]
+    return parts
 
 
 def marker():
-    # The spire the swarm's trail laid round them: drained mauve where it is
-    # old, faceted the way crystal grows, and still pink at the top where the
-    # last one went in and the passing has not stopped.
-    left = [(-spire_half(y) - (0.8 if k % 2 else 0), y) for k, y in enumerate(range(60, -61, -10))]
-    right = [(spire_half(y) + (0.6 if k % 2 == 0 else 0), y) for k, y in enumerate(range(-60, 61, 10))]
-    body = left + [(0, -64)] + right
-    parts = [
-        shadow("shadow", 0, 62, 22, 5, "0.4"),
-        *shaded("spire", body, "$mauve.dark", [(-64, -36, "$pheromone.dark"), (44, 62, "$mauve.dark2@0.7")], stroke=INK_THIN),
-        P("spire_lit", poly([(-spire_half(y) + 1.2, y) for y in range(58, -37, -12)] + [(-spire_half(-36) + 4, -36)] + [(-spire_half(y) + 4.6, y) for y in range(-36, 59, 12)]), "$mauve@0.85"),
-        P("facet_a", poly([(1, -40), (2.4, -40), (4.6, 60), (2.6, 60)]), "$mauve.dark2@0.7"),
-        P("facet_b", poly([(-6, 10), (-5, 10), (-6.6, 60), (-8, 60)]), "$mauve.dark2@0.5"),
-        # The live top: the newest layer, the field's pink, a little light at its point.
-        P("tip", poly([(-spire_half(-38) + 1, -38), (0, -63), (spire_half(-38) - 1, -38)]), "$pheromone"),
-        P("tip_lit", poly([(-spire_half(-40) + 1.6, -40), (-0.4, -60), (-0.6, -40)]), "$pink.light"),
-        *halo("tip_glow", 0, -56, 7, 7, 0.35, token="$pheromone", n=5),
-        # Chips of it at the foot, the way a cut spire drops them.
-        P("chip_a", poly([(-23, 61), (-20, 56), (-17, 61)]), "$mauve", stroke=INK_HAIR),
-        P("chip_b", poly([(17, 61), (20, 57), (24, 61.4)]), "$mauve.dark", stroke=INK_HAIR),
-    ]
-    # A ring of the crust for each one brought: the spire's layers, one per carrying.
-    for k, (y, *_r) in enumerate(ANALYSERS):
-        h = spire_half(y + 6)
-        parts.append(band(f"layer_{k}", [(-h, y + 6), (-h * 0.3, y + 7.4), (h * 0.4, y + 7.2), (h, y + 5.6)], 0.9, "$mauve.dark2@0.75" if y > -36 else "$pheromone.dark@0.8"))
-    # The eight, oldest at the foot. Each goes in with its sensor end and the
-    # crust closes over that end again (`lip`).
-    for k, (y, side, tilt, sunk, fill, who) in enumerate(ANALYSERS):
-        h = spire_half(y)
-        x = side * (h + 3.4 - 6.0 * sunk)
-        parts += analyser(f"an_{k}_{who}", x, y, side, side * (22 + tilt), fill, who)
-        crust = "$mauve.dark" if y > -36 else "$pheromone.dark"
-        parts.append(P(f"lip_{k}", poly([(side * (h - 2.0), y + 1.6), (side * (h + 1.2), y + 2.4), (side * (h + 2.6 - 3 * sunk), y + 5.6), (side * (h - 2.0), y + 6.4)]), crust, stroke=INK_HAIR))
-        parts.append(P(f"lip_{k}_lit", R(2.0, 0.6, 0.3), "$mauve.light@0.6" if y > -36 else "$pink.light@0.8", at=(side * (h - 0.2), y + 2.4)))
-    # Teo's, the last: a mite at the corner of its sheet.
-    ty = ANALYSERS[-1][0]
-    parts += mite_on_paper("mite", spire_half(ty) + 9.6, ty - 9.0)
-    mite_ids = [p["id"] for p in parts if p["id"].startswith("mite")]
-    tug = []
-    for pid in mite_ids:
-        tug += [
-            track(pid, "x", [(0, 0), (0.15, 0.6), (0.3, 0), (0.62, 0), (0.72, 0.5), (0.82, 0), (1, 0)]),
-            track(pid, "y", [(0, 0), (0.15, -0.3), (0.3, 0), (1, 0)]),
+    # Feet and legs: a surveyor's tripod, the back leg darker behind.
+    hub_y = 22
+    legs = [((0, hub_y), (5, 57), "$steel.dark2"), ((0, hub_y), (-23, 60), "$steel.dark"), ((0, hub_y), (23, 60), "$steel.dark")]
+    parts = [shadow("shadow", 0, 61, 27, 5, "0.4")]
+    for k, ((x0, y0), (x1, y1), fill) in enumerate(legs):
+        leg = band(f"leg_{k}", [(x0, y0), (x1, y1)], 2.8, fill)
+        parts += [
+            {**leg, "stroke": INK_HAIR},
+            P(f"foot_{k}", R(6, 2.2, 0.8), "$slate.dark", at=(x1, y1), stroke=INK_HAIR),
         ]
-    tug += [track("an_7_teo_paper", "rot", [(0, 0), (0.15, 3), (0.3, 0), (0.72, 2), (0.82, 0), (1, 0)])]
-    tug += glow_tracks("tip_glow", 0.6, 1, n=5)
+        if k:
+            parts.append(band(f"leg_{k}_lit", [(x0 - 0.5, y0 + 2), (x1 - 0.5, y1 - 2)], 0.7, "$steel@0.9"))
+    parts += [
+        P("spreader", poly([(-12, 41), (12, 41), (12, 42.4), (-12, 42.4)]), "$slate.dark", stroke=INK_HAIR),
+        P("collar", R(9, 5, 1.2), "$slate", at=(0, hub_y), stroke=INK_HAIR),
+        *bolt("collar_bolt", 2.4, hub_y, 0.9, "$steel"),
+        # The mast, from the tripod's collar to the head.
+        P("mast", R(3.2, 86, 0.8), "$steel.dark", at=(0, -22), stroke=INK_HAIR),
+        P("mast_lit", R(0.9, 84, 0.4), "$steel", at=(-0.8, -20)),
+    ]
+    # The cabinet: the logger itself. A steel box with a dark screen, and under
+    # it the eight bays in two columns, one module to each expedition.
+    cab_top, cab_bot, cab_w = -24, 22, 34
+    cab = [(-cab_w / 2, cab_top + 2), (-cab_w / 2 + 2, cab_top), (cab_w / 2 - 2, cab_top), (cab_w / 2, cab_top + 2), (cab_w / 2, cab_bot), (-cab_w / 2, cab_bot)]
+    parts += [
+        *shaded("cabinet", cab, "$slate", [(cab_top, cab_top + 3, "$slate.light"), (cab_bot - 4, cab_bot, "$slate.dark")]),
+        P("cabinet_side", poly([(cab_w / 2 - 3, cab_top + 1), (cab_w / 2, cab_top + 2), (cab_w / 2, cab_bot), (cab_w / 2 - 3, cab_bot)]), "$ink@0.25"),
+        lit_edge("cabinet_lit", -cab_w / 2 + 2, cab_w / 2 - 3, cab_top + 0.8, 0.9, "$white@0.5"),
+        # A hood over the screen against the wind.
+        P("hood", poly([(-14, cab_top - 1), (14, cab_top - 1), (15.5, cab_top + 2.4), (-15.5, cab_top + 2.4)]), "$steel.dark", stroke=INK_HAIR),
+        # The screen: dark. Nothing on it to read.
+        P("screen_bezel", R(26, 9.4, 1.2), "$slate.dark", at=(0, cab_top + 8), stroke=INK_HAIR),
+        P("screen", R(23, 7, 0.8), "$coal", at=(0, cab_top + 8)),
+        P("screen_glint", poly([(-10.4, cab_top + 5.2), (-4, cab_top + 5.2), (-6.4, cab_top + 7.6), (-10.4, cab_top + 7.6)]), "$spore@0.3"),
+        *rivet_row("cab_rivet", -15, cab_bot - 1.6, 15, cab_bot - 1.6, 6, 0.6),
+        *scratches("cab_scuff", 0, cab_top + 30, 26, 14, 5, "$slate.light@0.6", 7),
+    ]
+    for k, who in enumerate(MODULES):
+        col, row = k // 4, k % 4
+        parts += module(f"mod_{k}_{who}", -7 + 14 * col, cab_top + 17 + 8.6 * row - 0.6, who)
+    # The data lines: out of the cabinet's foot, bundled, down a leg and into
+    # the ground at the probes.
+    parts += [
+        band("cable_a", [(-8, cab_bot), (-9, 30), (-13, 42), (-17, 52), (-15, 59)], 1.2, "$coal"),
+        band("cable_b", [(-5, cab_bot), (-6, 31), (-10, 43), (-12, 54), (-10, 59)], 1.0, "$ink@0.85"),
+        band("cable_c", [(7, cab_bot), (9, 32), (12, 44), (15, 56)], 1.0, "$coal"),
+        P("probe_a", R(1.6, 9, 0.5), "$steel.light", at=(-15, 56), stroke=INK_HAIR, rot=-8),
+        P("probe_b", R(1.6, 7, 0.5), "$steel", at=(16, 54), stroke=INK_HAIR, rot=10),
+        P("tie", R(4, 1.6, 0.5), "$bone.dark", at=(-11.6, 42)),
+    ]
+    # The head: an intake to breathe the ground's air, an arm with the dish
+    # the radio answered through (A044), and a whip aerial.
+    parts += [
+        P("arm", R(18, 2, 0.6), "$steel.dark", at=(-6, -46), stroke=INK_HAIR),
+        P("dish", poly([(-17, -54), (-13, -50), (-12, -43), (-14, -38), (-18, -41), (-19, -48)]), "$steel.light", stroke=INK_HAIR),
+        P("dish_dk", poly([(-15.6, -48), (-13, -50), (-12, -43), (-14, -38), (-15, -42)]), "$steel@0.9"),
+        P("dish_feed", R(4.4, 1.2, 0.4), "$slate.dark", at=(-10.6, -46)),
+        P("intake_neck", R(5, 8, 1), "$slate", at=(0, -54), stroke=INK_HAIR),
+        P("intake", poly([(-6.4, -63), (6.4, -63), (3.4, -57), (-3.4, -57)]), "$steel", stroke=INK_HAIR),
+        P("intake_mouth", ell(6, 1.4), "$coal", at=(0, -63)),
+        lit_edge("intake_lit", -5.4, -1, -61.8, 0.7, "$white@0.5"),
+    ]
+    # Fifty-five years of the hive's air through it: the hive's crystal has
+    # grown in the intake's mouth, still pink, still breathing.
+    parts += [
+        *halo("intake_glow", 0, -64, 8, 5, 0.32, token="$pheromone", n=5),
+        *bud("crystal_a", -2.6, -63, 0.9, -0.3),
+        *bud("crystal_b", 1.8, -62.8, 0.6, 0.4),
+    ]
+    # The aerial stands on the cabinet's roof.
+    whip = [
+        P("whip", R(0.9, 30, 0.4), "$steel.dark", at=(11, -41)),
+        P("whip_tip", circ(0.9), "$slate", at=(11, -56)),
+    ]
+    parts += [P("whip_base", R(3.4, 2.4, 0.6), "$slate.dark", at=(11, -26), stroke=INK_HAIR)] + whip
+    # And the ground answering from below: the swarm's crust has climbed the
+    # feet and the cables, drained mauve, a pink bud where it is newest.
+    crust = [(-28, 62), (-26, 58), (-23, 56), (-21, 53), (-18, 56), (-13, 59), (-6, 60), (1, 58), (6, 60), (13, 59), (18, 55), (21, 53), (24, 56), (28, 62)]
+    parts += [
+        P("crust", poly(crust + [(28, 63), (-27, 63)]), "$mauve.dark", stroke=INK_HAIR),
+        P("crust_lit", poly([(-25, 58.4), (-21.4, 54.6), (-20, 55.2), (-23, 58.6)]), "$mauve@0.85"),
+        *bud("crust_bud", 21, 54, 0.6, 0.3),
+    ]
+    sway = [
+        track("whip", "rot", [(0, 0), (0.3, 2.5), (0.6, -1.5), (1, 0)]),
+        track("whip_tip", "x", [(0, 0), (0.3, 0.6), (0.6, -0.4), (1, 0)]),
+        *glow_tracks("intake_glow", 0.55, 1, n=5),
+        track("crystal_a_lit", "opacity", [(0, 0.7), (0.5, 1), (1, 0.7)]),
+    ]
     doc(
         "ss.base.marker",
         "The marker",
-        "The middle of the camp, and nothing on it is written. It is the eight writers who came before, as the records they left: the "
-        "analyser each of them carried and put the ground into (A001, A023, T028) and, at the end, their own body. The swarm carries what "
-        "has a hand's smell on it and knows whose (T003, T043); it brought the eight back to where they landed, and its trail hardened round "
-        "them as it came and went, the way a road becomes a spire. So they stand set in a spire in the middle of the camp, in the order "
-        "they came, alternate sides: Arin's at the foot, bled pale and half in the crust, Teo's near the top, still in its sheet of paper "
-        "with a mite at the corner of it. Each has its sensor end in the crust, its screen dark, its wrist loop still done up, and on it "
-        "what it last measured: Sol's spores, Haram's husk flakes, the burrow earth on Mina's, Kano's strap stiff with trail grit, jelly set "
-        "in Eden's intake, the bowl's stone dust on Rowan's. A ring of crust marks each carrying. The spire is drained mauve where it is "
-        "old and still the field's pink at the top, where the passing has not stopped. To someone who cannot be spoken to, it says what the "
-        "hive has to say: these came before you, and this is what is left of them (feelers hub-map-plan §2.1). The mite keeps tugging "
-        "Teo's sheet and the tip breathes (`tug`).",
+        "The middle of the camp, and nothing on it is written. It is the eight writers who came before, as the record they left: one "
+        "survey station, the program's data collector, on a surveyor's tripod where the first expedition stood it. Every writer's analyser "
+        "reported to it — the air (A001), the caps' light and smell as one number (A023), the compounds with no names (T028), and at the "
+        "end their own body — and every expedition slotted its own logger module into the cabinet. Eight bays in two columns, read down "
+        "in the order they came: Arin's bled pale, Sol's with spores on it, Haram's with husk flakes, burrow earth on Mina's, trail grit on "
+        "Kano's, jelly set on Eden's, the bowl's stone dust on Rowan's, a sheet tucked behind Teo's. Every lamp is dark, and so is the "
+        "screen above them under its hood. The data lines run down a leg into the ground at two probes. Up top are an intake that breathes "
+        "the ground's air, the dish the radio answered through (A044) and a whip aerial. The ground is answering: the swarm's crust has "
+        "climbed its feet, and the intake, after fifty-five years of the hive's air, has grown the hive's crystal in its mouth, still pink. "
+        "To someone who cannot be spoken to it says what the hive has to say: these came before you, and this is what is left of them "
+        "(feelers hub-map-plan §2.1). The aerial sways and the crystal breathes (`sway`).",
         (64, 136),
         parts,
-        {"tug": loop("the mite tugs at Teo's sheet twice, and the live tip breathes", 2.4, tug)},
+        {"sway": loop("the whip aerial sways and the crystal in the intake breathes", 2.8, sway)},
     )
 
 
