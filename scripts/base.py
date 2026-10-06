@@ -26,10 +26,9 @@ The camp is what the records draw, and only that:
                  the hive's, borrowed — the cap Sol carried in a dead emitter,
                  planted and spread. The same caps go in jars for lamps
   the lockers    one per writer, with the one thing their log kept
-  the marker     the middle of the camp: the survey station, the program's
-                 data collector, with a logger module in its cabinet for each
-                 of the eight expeditions, every lamp dark. Nothing on it is
-                 written
+  the marker     the middle of the camp: a scent vane on the lander's snapped
+                 mast, eight strips of cloth that each answer one smell and
+                 stream the way it is spreading. Nothing on it is written
   the marks      the cut spires to the south, ringed inside like trees
                  (T010, A030); a salt cairn on the north-west road; the board
                  the routes are pinned on; boot prints worn out along them
@@ -683,167 +682,85 @@ def hearth():
 
 
 # ============================================================== the marker: the middle of the camp
-# The eight who came before, as the record they left: one survey station, the
-# program's data collector, standing where the first expedition put it. Every
-# writer's analyser reported to it — the air (A001), the caps' light and smell
-# as one number (A023), the list of compounds with no names (T028), and at the
-# end their own body (feelers records-storyboard §4) — and every expedition
-# slotted its own logger module into its cabinet. Eight bays, eight modules,
-# every lamp dark: each stopped on the day its writer's emitter did. Nothing on
-# it is written (feelers hub-map-plan §2.1). The ground is answering it: the
-# swarm's crust climbs its legs, and its intake, which has breathed the hive's
-# air for fifty-five years, has grown the hive's crystal.
+# A scent vane: the expeditions' instrument for the one thing the ground does
+# that an emitter cannot copy. Smell here arrives like sound, with a
+# direction (E001); with no wind it still runs one way (H013); in the burrow
+# smell is direction (M005). Down the lander's snapped mast are eight strips
+# of cold cloth, each steeped in one reagent so it answers one smell and no
+# other, and each streams the way its smell is spreading, whatever the wind
+# is doing. The tab at its knot is its reagent's colour. Nothing on it is
+# written: it shows, by direction alone (feelers hub-map-plan §2.1).
 #
-# The eight modules, in the order they came (two columns, read down), and
-# what the field left on each.
-MODULES = ["arin", "sol", "haram", "mina", "kano", "eden", "rowan", "teo"]
-
-
-def module(prefix, x, y, who):
-    """One expedition's logger module in its bay: a face, a dark lamp, a grip, and what its writer's ground left on it."""
-    face = "$smoke.light2" if who == "arin" else "$steel"
-    parts = [
-        P(f"{prefix}_bay", R(11.4, 7.6, 0.8), "$coal", at=(x, y)),
-        P(f"{prefix}", R(10.2, 6.4, 0.8), face, at=(x, y), stroke=INK_HAIR),
-        P(f"{prefix}_lit", R(9.2, 0.6, 0.3), "$white@0.4", at=(x, y - 2.6)),
-        # The lamp: dark. Only the hive's light is lit in this camp.
-        P(f"{prefix}_lamp", circ(0.95), "$ink@0.85", at=(x - 3.3, y - 0.6)),
-        P(f"{prefix}_lamp_rim", circ(1.25), None, at=(x - 3.3, y - 0.6), stroke=INK_HAIR),
-        # The grip it was pushed in by, and its data line out of the bottom.
-        P(f"{prefix}_grip", R(4.4, 1.3, 0.5), "$slate.dark", at=(x + 1.6, y + 1.6)),
-        P(f"{prefix}_vent", R(4.4, 0.6, 0.3), "$ink@0.45", at=(x + 1.6, y - 0.8)),
-    ]
-    if who == "sol":
-        parts += [P(f"{prefix}_spore_{k}", circ(0.5), "$spore", at=(x + dx, y + dy)) for k, (dx, dy) in enumerate([(-4.0, 2.2), (3.8, -2.0), (-1.4, 2.6)])]
-    elif who == "haram":
-        parts += [P(f"{prefix}_flake_{k}", poly([(0, 0), (1.6, -0.6), (1.2, 0.8)]), "$husk", at=(x + dx, y + dy), stroke=INK_HAIR) for k, (dx, dy) in enumerate([(-4.4, 1.4), (3.4, -2.6)])]
-    elif who == "mina":
-        parts.append(P(f"{prefix}_earth", poly([(-5.1, 0.4), (-1.0, 1.6), (3.0, 3.2), (-5.1, 3.2)]), "$soil.light@0.9", at=(x, y)))
-    elif who == "kano":
-        parts += [P(f"{prefix}_grit_{k}", circ(0.5), "$sand", at=(x + dx, y + dy)) for k, (dx, dy) in enumerate([(-4.2, 2.4), (-2.6, 2.8), (4.2, 2.6)])]
-    elif who == "eden":
-        parts += [
-            P(f"{prefix}_jelly", ell(1.5, 1.1), "$gold", at=(x + 4.0, y + 2.6), stroke=INK_HAIR),
-            P(f"{prefix}_jelly_lit", circ(0.4), "$white@0.6", at=(x + 3.6, y + 2.1)),
-        ]
-    elif who == "rowan":
-        parts += [P(f"{prefix}_dust_{k}", circ(0.5), "$smoke.light2@0.9", at=(x + dx, y + dy)) for k, (dx, dy) in enumerate([(-4.4, 2.0), (-0.6, 2.6), (4.2, -1.8), (2.4, 2.8)])]
-    elif who == "teo":
-        # A sheet tucked behind its grip, the way he carried everything.
-        parts += [
-            P(f"{prefix}_page", poly([(0, 0), (4.8, -0.5), (5.2, 4.2), (0.5, 4.6)]), "$bone", at=(x + 1.2, y - 1.6), stroke=INK_HAIR, rot=-8),
-            P(f"{prefix}_page_line", R(3.0, 0.5, 0.25), "$slate.dark@0.7", at=(x + 3.8, y + 0.2), rot=-8),
-        ]
-    return parts
+# (y on the mast, heading in degrees on the screen — 0 is east, positive is
+# down, so a strip coming toward you is short — length, cloth, reagent tab,
+# the smell)
+VANES = [
+    (-44, -50, 15, "$frost.dark", "$rust", "iron: the word Eden logged as angry (E180, T041)"),
+    (-36, 195, 14, "$slate.light", "$spore", "the caps (A023, S003)"),
+    (-28, 65, 15, "$frost", "$husk", "husk (H027)"),
+    (-20, 150, 15, "$frost.dark", "$soil.light", "the burrow's wall (M005)"),
+    (-12, -12, 13, "$slate.light", "$gold", "the queen (E093, E104)"),
+    (-4, 208, 12, "$frost", "$smoke.light", "the bowl's old pheromone (R011)"),
+    (4, 105, 14, "$frost.dark", "$sand", "the swarm's trail (K019)"),
+    (12, 178, 13, "$slate.light", "$pheromone", "compound thirty-three, the one the radio answered in (A044)"),
+]
 
 
 def marker():
-    # Feet and legs: a surveyor's tripod, the back leg darker behind.
-    hub_y = 22
-    legs = [((0, hub_y), (5, 57), "$steel.dark2"), ((0, hub_y), (-23, 60), "$steel.dark"), ((0, hub_y), (23, 60), "$steel.dark")]
-    parts = [shadow("shadow", 0, 61, 27, 5, "0.4")]
-    for k, ((x0, y0), (x1, y1), fill) in enumerate(legs):
-        leg = band(f"leg_{k}", [(x0, y0), (x1, y1)], 2.8, fill)
+    parts = [
+        shadow("shadow", 0, 62, 16, 4, "0.4"),
+        # The rest of the lander's mast, driven into the ground, its snapped
+        # end up; a collar where two lengths of it were joined.
+        P("sleeve", R(9, 12, 1.5), "$slate.dark", at=(0, 55), stroke=INK_HAIR),
+        lit_edge("sleeve_lit", -3.6, 3.6, 49.6, 0.8, "$slate.light@0.8"),
+        *shaded("mast", [(-2.6, -50), (-1, -56), (0.6, -52), (2.6, -57), (2.6, 60), (-2.6, 60)], "$steel.dark", [(-60, 61, "$steel.dark")], stroke=INK_HAIR),
+        P("mast_lit", R(1.1, 100, 0.4), "$steel", at=(-1.3, 6)),
+        P("joint", R(7, 4, 1), "$steel", at=(0, 40), stroke=INK_HAIR),
+        lit_edge("joint_lit", -3, 3, 38.6, 0.7, "$white@0.5"),
+        P("snap_lit", poly([(-2.6, -50), (-1, -56), (0.6, -52), (0.6, -50)]), "$steel.light"),
+    ]
+    # The eight vanes. Each is drawn along +x, mirrored if it heads west so its
+    # fold stays under it, then turned to its heading about the knot.
+    flap = []
+    for i, (y, heading, n, fill, reagent, _smell) in enumerate(VANES):
+        side = 1 if math.cos(math.radians(heading)) >= 0 else -1
+        rot = heading if side > 0 else heading - 180
+        # Seen from above at a slant: a strip streaming toward you (down the
+        # screen) is foreshortened, one streaming away is not.
+        n = n * (1 - 0.45 * max(0.0, math.sin(math.radians(heading))))
+        tail = [(0, -1.6), (n * 0.55, -2.2), (n, -0.6), (n * 0.8, 0.6), (n, 2.2), (n * 0.5, 1.8), (0, 1.6)]
+        fold = [(0, 0.6), (n * 0.5, 1.2), (n * 0.95, 2.0), (n * 0.5, 1.9), (0, 1.6)]
+        at = (side * 2.4, y)
         parts += [
-            {**leg, "stroke": INK_HAIR},
-            P(f"foot_{k}", R(6, 2.2, 0.8), "$slate.dark", at=(x1, y1), stroke=INK_HAIR),
+            P(f"strip_{i}", poly([(side * x, y2) for x, y2 in tail]), fill, at=at, stroke=INK_HAIR, rot=rot),
+            P(f"strip_{i}_fold", poly([(side * x, y2) for x, y2 in fold]), "$ink@0.28", at=at, rot=rot),
+            P(f"strip_{i}_tab", poly([(side * x, y2) for x, y2 in [(0.4, -1.5), (2.6, -1.7), (2.6, 1.6), (0.4, 1.5)]]), reagent, at=at, rot=rot),
+            P(f"knot_{i}", R(6.4, 2.6, 1), "$bone.dark", at=(0, y)),
+            P(f"knot_{i}_lit", R(4, 0.7, 0.3), "$bone@0.9", at=(-0.6, y - 0.7)),
         ]
-        if k:
-            parts.append(band(f"leg_{k}_lit", [(x0 - 0.5, y0 + 2), (x1 - 0.5, y1 - 2)], 0.7, "$steel@0.9"))
+        keys = [(0, 0), (0.35, side * 5), (0.7, -side * 3), (1, 0)] if i % 2 else [(0, 0), (0.3, side * 6), (0.65, -side * 2), (1, 0)]
+        for part in (f"strip_{i}", f"strip_{i}_fold", f"strip_{i}_tab"):
+            flap += [track(part, "rot", keys), track(part, "scale", [(0, 1), (0.4, 0.92), (0.8, 1.03), (1, 1)])]
     parts += [
-        P("spreader", poly([(-12, 41), (12, 41), (12, 42.4), (-12, 42.4)]), "$slate.dark", stroke=INK_HAIR),
-        P("collar", R(9, 5, 1.2), "$slate", at=(0, hub_y), stroke=INK_HAIR),
-        *bolt("collar_bolt", 2.4, hub_y, 0.9, "$steel"),
-        # The mast, from the tripod's collar to the head.
-        P("mast", R(3.2, 86, 0.8), "$steel.dark", at=(0, -22), stroke=INK_HAIR),
-        P("mast_lit", R(0.9, 84, 0.4), "$steel", at=(-0.8, -20)),
-    ]
-    # The cabinet: the logger itself. A steel box with a dark screen, and under
-    # it the eight bays in two columns, one module to each expedition.
-    cab_top, cab_bot, cab_w = -24, 22, 34
-    cab = [(-cab_w / 2, cab_top + 2), (-cab_w / 2 + 2, cab_top), (cab_w / 2 - 2, cab_top), (cab_w / 2, cab_top + 2), (cab_w / 2, cab_bot), (-cab_w / 2, cab_bot)]
-    parts += [
-        *shaded("cabinet", cab, "$slate", [(cab_top, cab_top + 3, "$slate.light"), (cab_bot - 4, cab_bot, "$slate.dark")]),
-        P("cabinet_side", poly([(cab_w / 2 - 3, cab_top + 1), (cab_w / 2, cab_top + 2), (cab_w / 2, cab_bot), (cab_w / 2 - 3, cab_bot)]), "$ink@0.25"),
-        lit_edge("cabinet_lit", -cab_w / 2 + 2, cab_w / 2 - 3, cab_top + 0.8, 0.9, "$white@0.5"),
-        # A hood over the screen against the wind.
-        P("hood", poly([(-14, cab_top - 1), (14, cab_top - 1), (15.5, cab_top + 2.4), (-15.5, cab_top + 2.4)]), "$steel.dark", stroke=INK_HAIR),
-        # The screen: dark. Nothing on it to read.
-        P("screen_bezel", R(26, 9.4, 1.2), "$slate.dark", at=(0, cab_top + 8), stroke=INK_HAIR),
-        P("screen", R(23, 7, 0.8), "$coal", at=(0, cab_top + 8)),
-        P("screen_glint", poly([(-10.4, cab_top + 5.2), (-4, cab_top + 5.2), (-6.4, cab_top + 7.6), (-10.4, cab_top + 7.6)]), "$spore@0.3"),
-        *rivet_row("cab_rivet", -15, cab_bot - 1.6, 15, cab_bot - 1.6, 6, 0.6),
-        *scratches("cab_scuff", 0, cab_top + 30, 26, 14, 5, "$slate.light@0.6", 7),
-    ]
-    for k, who in enumerate(MODULES):
-        col, row = k // 4, k % 4
-        parts += module(f"mod_{k}_{who}", -7 + 14 * col, cab_top + 17 + 8.6 * row - 0.6, who)
-    # The data lines: out of the cabinet's foot, bundled, down a leg and into
-    # the ground at the probes.
-    parts += [
-        band("cable_a", [(-8, cab_bot), (-9, 30), (-13, 42), (-17, 52), (-15, 59)], 1.2, "$coal"),
-        band("cable_b", [(-5, cab_bot), (-6, 31), (-10, 43), (-12, 54), (-10, 59)], 1.0, "$ink@0.85"),
-        band("cable_c", [(7, cab_bot), (9, 32), (12, 44), (15, 56)], 1.0, "$coal"),
-        P("probe_a", R(1.6, 9, 0.5), "$steel.light", at=(-15, 56), stroke=INK_HAIR, rot=-8),
-        P("probe_b", R(1.6, 7, 0.5), "$steel", at=(16, 54), stroke=INK_HAIR, rot=10),
-        P("tie", R(4, 1.6, 0.5), "$bone.dark", at=(-11.6, 42)),
-    ]
-    # The head: an intake to breathe the ground's air, an arm with the dish
-    # the radio answered through (A044), and a whip aerial.
-    parts += [
-        P("arm", R(18, 2, 0.6), "$steel.dark", at=(-6, -46), stroke=INK_HAIR),
-        P("dish", poly([(-17, -54), (-13, -50), (-12, -43), (-14, -38), (-18, -41), (-19, -48)]), "$steel.light", stroke=INK_HAIR),
-        P("dish_dk", poly([(-15.6, -48), (-13, -50), (-12, -43), (-14, -38), (-15, -42)]), "$steel@0.9"),
-        P("dish_feed", R(4.4, 1.2, 0.4), "$slate.dark", at=(-10.6, -46)),
-        P("intake_neck", R(5, 8, 1), "$slate", at=(0, -54), stroke=INK_HAIR),
-        P("intake", poly([(-6.4, -63), (6.4, -63), (3.4, -57), (-3.4, -57)]), "$steel", stroke=INK_HAIR),
-        P("intake_mouth", ell(6, 1.4), "$coal", at=(0, -63)),
-        lit_edge("intake_lit", -5.4, -1, -61.8, 0.7, "$white@0.5"),
-    ]
-    # Fifty-five years of the hive's air through it: the hive's crystal has
-    # grown in the intake's mouth, still pink, still breathing.
-    parts += [
-        *halo("intake_glow", 0, -64, 8, 5, 0.32, token="$pheromone", n=5),
-        *bud("crystal_a", -2.6, -63, 0.9, -0.3),
-        *bud("crystal_b", 1.8, -62.8, 0.6, 0.4),
-    ]
-    # The aerial stands on the cabinet's roof.
-    whip = [
-        P("whip", R(0.9, 30, 0.4), "$steel.dark", at=(11, -41)),
-        P("whip_tip", circ(0.9), "$slate", at=(11, -56)),
-    ]
-    parts += [P("whip_base", R(3.4, 2.4, 0.6), "$slate.dark", at=(11, -26), stroke=INK_HAIR)] + whip
-    # And the ground answering from below: the swarm's crust has climbed the
-    # feet and the cables, drained mauve, a pink bud where it is newest.
-    crust = [(-28, 62), (-26, 58), (-23, 56), (-21, 53), (-18, 56), (-13, 59), (-6, 60), (1, 58), (6, 60), (13, 59), (18, 55), (21, 53), (24, 56), (28, 62)]
-    parts += [
-        P("crust", poly(crust + [(28, 63), (-27, 63)]), "$mauve.dark", stroke=INK_HAIR),
-        P("crust_lit", poly([(-25, 58.4), (-21.4, 54.6), (-20, 55.2), (-23, 58.6)]), "$mauve@0.85"),
-        *bud("crust_bud", 21, 54, 0.6, 0.3),
-    ]
-    sway = [
-        track("whip", "rot", [(0, 0), (0.3, 2.5), (0.6, -1.5), (1, 0)]),
-        track("whip_tip", "x", [(0, 0), (0.3, 0.6), (0.6, -0.4), (1, 0)]),
-        *glow_tracks("intake_glow", 0.55, 1, n=5),
-        track("crystal_a_lit", "opacity", [(0, 0.7), (0.5, 1), (1, 0.7)]),
+        # The hive, starting up it from the foot (A055).
+        *bud("bud_a", -4, 50, 0.8, -0.4),
+        *bud("bud_b", 3, 46, 0.6, 0.4),
     ]
     doc(
         "ss.base.marker",
         "The marker",
-        "The middle of the camp, and nothing on it is written. It is the eight writers who came before, as the record they left: one "
-        "survey station, the program's data collector, on a surveyor's tripod where the first expedition stood it. Every writer's analyser "
-        "reported to it — the air (A001), the caps' light and smell as one number (A023), the compounds with no names (T028), and at the "
-        "end their own body — and every expedition slotted its own logger module into the cabinet. Eight bays in two columns, read down "
-        "in the order they came: Arin's bled pale, Sol's with spores on it, Haram's with husk flakes, burrow earth on Mina's, trail grit on "
-        "Kano's, jelly set on Eden's, the bowl's stone dust on Rowan's, a sheet tucked behind Teo's. Every lamp is dark, and so is the "
-        "screen above them under its hood. The data lines run down a leg into the ground at two probes. Up top are an intake that breathes "
-        "the ground's air, the dish the radio answered through (A044) and a whip aerial. The ground is answering: the swarm's crust has "
-        "climbed its feet, and the intake, after fifty-five years of the hive's air, has grown the hive's crystal in its mouth, still pink. "
-        "To someone who cannot be spoken to it says what the hive has to say: these came before you, and this is what is left of them "
-        "(feelers hub-map-plan §2.1). The aerial sways and the crystal breathes (`sway`).",
+        "The middle of the camp: a scent vane, the expeditions' instrument for the one thing here an emitter cannot copy. Smell on this "
+        "ground arrives like sound, with a direction (E001); with no wind it still runs one way (H013). What is left of the lander's mast is "
+        "driven into the ground, its snapped end up, a collar where two lengths of it were joined, and knotted down it are eight strips of "
+        "cold cloth, each steeped in one reagent so that it answers one smell and no other. Each streams the way its smell is spreading, "
+        "whatever the wind is doing, so the eight point eight ways, and the ones streaming toward you are short. The tab at each knot is its "
+        "reagent's colour: iron, the caps, husk, the burrow's wall, the queen, the bowl's old pheromone, the swarm's trail, and compound "
+        "thirty-three, the one the radio answered in (A044). Nothing on it is written; it says what it says by direction. They flutter on "
+        "their headings (`flutter`). At the foot the hive is starting up it: two pink buds (A055). feelers stands it in the middle of the "
+        "base, the stations round it.",
         (64, 136),
         parts,
-        {"sway": loop("the whip aerial sways and the crystal in the intake breathes", 2.8, sway)},
+        {"flutter": loop("the eight strips flutter, each on its own heading", 1.6, flap)},
     )
 
 
