@@ -1,7 +1,7 @@
 {
   "id": "ss.fx.smear",
   "name": "Smear",
-  "description": "The arc a whirled feeler leaves behind its tip — Cowboy's sweep (ss.char.arin `cast_evo`). The leading edge is at 0° and the tail trails back anticlockwise, so the engine turns the whole thing to wherever the tip is and draws it again a few degrees behind, fainter, for the afterimages. Three bands, thick to thin, white to frost, each on a band of ink a little wider: cold and cut-paper, never lit, since the player's marks do not glow. Authored at r 56 and drawn as geometry at the radius the turn really has (drawAsset), because that radius grows with the weapon's area and a bake scaled to it would blur.",
+  "description": "The ground a whirled feeler sweeps — Cowboy's turn (ss.char.arin `cast_evo`). Its reach is the drawing's: the lash runs from the body out to the rim, the rim's outer edge sits on `authoredR`, and the sweep fills everything between, because the turn cuts the whole disc and not a ring at its edge. The lead is at 0° and the tail trails back anticlockwise in three held bands, faint to fainter; the engine turns it to wherever the lash is and draws it once, at the radius the turn really has (drawAsset), with `turn` at the turn's progress — a band shows only once the lash has gone all the way past it, and the last fifth lets go in two held steps. Cold and cut-paper: the lines sit on ink, the fill is a tint with none under it, never lit.",
   "tags": [
     "fx",
     "melee",
@@ -16,70 +16,628 @@
   },
   "parts": [
     {
-      "id": "ink_lead",
+      "id": "sweep_tail",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            -18.98,
+            -52.15
+          ],
+          [
+            -13.11,
+            -53.93
+          ],
+          [
+            -7.08,
+            -55.05
+          ],
+          [
+            -0.97,
+            -55.49
+          ],
+          [
+            5.16,
+            -55.26
+          ],
+          [
+            11.22,
+            -54.35
+          ],
+          [
+            17.15,
+            -52.78
+          ],
+          [
+            2.78,
+            -8.56
+          ],
+          [
+            1.82,
+            -8.81
+          ],
+          [
+            0.84,
+            -8.96
+          ],
+          [
+            -0.16,
+            -9.0
+          ],
+          [
+            -1.15,
+            -8.93
+          ],
+          [
+            -2.13,
+            -8.75
+          ],
+          [
+            -3.08,
+            -8.46
+          ]
+        ]
+      },
+      "fill": "$frost@0.08"
+    },
+    {
+      "id": "sweep_mid",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            17.15,
+            -52.78
+          ],
+          [
+            22.57,
+            -50.7
+          ],
+          [
+            27.75,
+            -48.06
+          ],
+          [
+            32.62,
+            -44.9
+          ],
+          [
+            37.14,
+            -41.24
+          ],
+          [
+            41.24,
+            -37.14
+          ],
+          [
+            44.9,
+            -32.62
+          ],
+          [
+            7.28,
+            -5.29
+          ],
+          [
+            6.69,
+            -6.02
+          ],
+          [
+            6.02,
+            -6.69
+          ],
+          [
+            5.29,
+            -7.28
+          ],
+          [
+            4.5,
+            -7.79
+          ],
+          [
+            3.66,
+            -8.22
+          ],
+          [
+            2.78,
+            -8.56
+          ]
+        ]
+      },
+      "fill": "$frost@0.16"
+    },
+    {
+      "id": "sweep_lead",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            44.9,
+            -32.62
+          ],
+          [
+            48.06,
+            -27.75
+          ],
+          [
+            50.7,
+            -22.57
+          ],
+          [
+            52.78,
+            -17.15
+          ],
+          [
+            54.29,
+            -11.54
+          ],
+          [
+            55.2,
+            -5.8
+          ],
+          [
+            55.5,
+            0.0
+          ],
+          [
+            9.0,
+            0.0
+          ],
+          [
+            8.95,
+            -0.94
+          ],
+          [
+            8.8,
+            -1.87
+          ],
+          [
+            8.56,
+            -2.78
+          ],
+          [
+            8.22,
+            -3.66
+          ],
+          [
+            7.79,
+            -4.5
+          ],
+          [
+            7.28,
+            -5.29
+          ]
+        ]
+      },
+      "fill": "$frost.light@0.28"
+    },
+    {
+      "id": "ink_rim_tail",
       "shape": {
         "kind": "ring",
-        "r": 56,
-        "width": 13.5,
-        "from": -34,
+        "r": 54.6,
+        "width": 2.8,
+        "from": -110,
+        "to": -71
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "ink_rim_mid",
+      "shape": {
+        "kind": "ring",
+        "r": 54.1,
+        "width": 3.8,
+        "from": -72,
+        "to": -35
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "ink_rim_lead",
+      "shape": {
+        "kind": "ring",
+        "r": 53.5,
+        "width": 5,
+        "from": -36,
         "to": 1.5
       },
       "fill": "$ink"
     },
     {
-      "id": "ink_mid",
+      "id": "ink_lash",
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            9,
+            -1.4
+          ],
+          [
+            56,
+            -2.5
+          ],
+          [
+            56,
+            2.5
+          ],
+          [
+            9,
+            1.4
+          ]
+        ]
+      },
+      "fill": "$ink"
+    },
+    {
+      "id": "rim_tail",
       "shape": {
         "kind": "ring",
-        "r": 56,
-        "width": 10,
+        "r": 54.6,
+        "width": 1.1,
+        "from": -108,
+        "to": -71
+      },
+      "fill": "$frost"
+    },
+    {
+      "id": "rim_mid",
+      "shape": {
+        "kind": "ring",
+        "r": 54.1,
+        "width": 1.8,
         "from": -72,
-        "to": -32
+        "to": -35
       },
-      "fill": "$ink"
+      "fill": "$frost.light"
     },
     {
-      "id": "ink_tail",
+      "id": "rim_lead",
       "shape": {
         "kind": "ring",
-        "r": 56,
-        "width": 6.5,
-        "from": -110,
-        "to": -70
-      },
-      "fill": "$ink"
-    },
-    {
-      "id": "lead",
-      "shape": {
-        "kind": "ring",
-        "r": 56,
-        "width": 10,
-        "from": -32,
+        "r": 53.5,
+        "width": 2.8,
+        "from": -36,
         "to": 0
       },
       "fill": "$silent"
     },
     {
-      "id": "mid",
+      "id": "lash",
       "shape": {
-        "kind": "ring",
-        "r": 56,
-        "width": 7,
-        "from": -70,
-        "to": -31
+        "kind": "poly",
+        "points": [
+          [
+            10.5,
+            -0.5
+          ],
+          [
+            54.9,
+            -1.2
+          ],
+          [
+            54.9,
+            1.2
+          ],
+          [
+            10.5,
+            0.5
+          ]
+        ]
       },
-      "fill": "$frost.light"
-    },
-    {
-      "id": "tail",
-      "shape": {
-        "kind": "ring",
-        "r": 56,
-        "width": 4,
-        "from": -108,
-        "to": -69
-      },
-      "fill": "$frost"
+      "fill": "$silent"
     }
-  ]
+  ],
+  "animations": {
+    "turn": {
+      "description": "one full turn: the bands appear as the lash clears them, then let go in held steps",
+      "duration": 0.26,
+      "tracks": [
+        {
+          "part": "sweep_tail",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.306,
+              1,
+              "hold"
+            ],
+            [
+              0.8,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "sweep_mid",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.2,
+              1,
+              "hold"
+            ],
+            [
+              0.8,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "sweep_lead",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.8,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "ink_rim_tail",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.306,
+              1,
+              "hold"
+            ],
+            [
+              0.8,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "ink_rim_mid",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.2,
+              1,
+              "hold"
+            ],
+            [
+              0.8,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "ink_rim_lead",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.8,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "ink_lash",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.8,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "rim_tail",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.306,
+              1,
+              "hold"
+            ],
+            [
+              0.8,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "rim_mid",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              0,
+              "hold"
+            ],
+            [
+              0.2,
+              1,
+              "hold"
+            ],
+            [
+              0.8,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "rim_lead",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.8,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        },
+        {
+          "part": "lash",
+          "prop": "opacity",
+          "keys": [
+            [
+              0,
+              1,
+              "hold"
+            ],
+            [
+              0.8,
+              0.6,
+              "hold"
+            ],
+            [
+              0.9,
+              0.3,
+              "hold"
+            ],
+            [
+              1,
+              0.3
+            ]
+          ]
+        }
+      ]
+    }
+  }
 }
