@@ -4,7 +4,7 @@
 
 Writes every `ss.base.*` document. feelers draws the out-of-run screens as
 this place (its docs/hub-map-plan.md): the chosen writer walks the camp and
-walks up to things — the shelf of paper is the collection, the jelly vat is
+walks up to things — the shelf of paper is the collection, the bio lab is
 EVOLUTION, the field bench is BUILD, the edges lead out to the grounds.
 
 The camp is what the records draw, and only that:
@@ -19,7 +19,10 @@ The camp is what the records draw, and only that:
   the line       pages pegged out on a cord, the ones not filed yet
   the bench      the instrument's own table: the vials and the syringe the
                  level-up draws from
-  the vat        the jelly the expedition trades in — gold is jelly's (D14)
+  the bio lab    where the jelly is taken in: a tank of it with something
+                 steeping (guide §3.4, EVOLUTION). Gold is jelly's (D14).
+                 The jelly vat that stood before it is archived: the tank
+                 is where the camp keeps its jelly now
   the hearth     a ring of stones with glowing caps in it, where a camp
                  elsewhere would keep a fire. An expedition does not glow and
                  lights nothing (guide §7.2): the only light in the camp is
@@ -542,11 +545,12 @@ def vat():
         "The jelly the expedition trades in, kept in a glass vat on a riveted slate stand under a bolted, clamped steel lid. The glass is "
         "drawn behind the jelly so the colour is the jelly's: gold, because gold is jelly's (feelers D14), going to chitin in the deep, with "
         "light moving on the surface, a bubble rising and a few specks hanging in it (`settle`). A paper tag hangs off a clamp on a cord. "
-        "A ladle with gold in its bowl is hooked over the rim and a drop has run down the side. The guide's meta shop is \"to evolve on "
-        "jelly\" (§12.1), so feelers opens EVOLUTION here.",
+        "A ladle with gold in its bowl is hooked over the rim and a drop has run down the side. Archived: feelers no longer stands it in the camp. "
+        "The guide's meta shop is \"to evolve on jelly\" (§12.1), and the bio lab (`ss.base.biolab`) keeps the jelly in its own tank.",
         (60, 84),
         parts,
         anims,
+        tags=["base", "archived"],
     )
 
 
@@ -1278,6 +1282,146 @@ def lab():
     )
 
 
+def biolab():
+    """The bio lab: where the expedition takes the jelly into itself (feelers' EVOLUTION)."""
+    def arch(rx, top, base, n=16, cx=0.0, dy=0.0):
+        return [(cx + rx * math.cos(math.pi * k / n), dy + base - (base - top) * math.sin(math.pi * k / n)) for k in range(n + 1)]
+
+    # The shell: a half-drum of the lander's skin with its end walled in,
+    # and the drum going back up and to the right into the dark.
+    cx, rx, top, base = 18.0, 48.0, -30.0, 48.0
+    wall = arch(rx, top, base, cx=cx)
+    shell = arch(rx + 2, top - 2, base, cx=cx + 16, dy=-10)
+    tank_x = -46.0
+    tg_top, tg_bot, tw = -10.0, 32.0, 28.0
+    jelly_top = 0.0
+    tank_glass = rr(tw, tg_bot - tg_top, 6, (tank_x, (tg_top + tg_bot) / 2))
+    # The thing steeping in the tank: curled up, legs drawn in, seen through gold.
+    spec = (tank_x + 1, 17)
+    specimen = [
+        P("spec_body", ell(6.4, 8.6), "$chitin.dark@0.7", at=spec, rot=24),
+        P("spec_seg_a", R(9, 1, 0.5), "$chitin@0.55", at=(spec[0] - 1, spec[1] - 2), rot=24),
+        P("spec_seg_b", R(9, 1, 0.5), "$chitin@0.55", at=(spec[0] + 1, spec[1] + 2.6), rot=24),
+        P("spec_head", circ(3.4), "$chitin.dark@0.75", at=(spec[0] + 3.4, spec[1] - 8.6)),
+        *[band(f"spec_leg_{i}", [(spec[0] - 3, spec[1] + y), (spec[0] - 8, spec[1] + y + 2), (spec[0] - 6.6, spec[1] + y + 5)], 0.9, "$chitin.dark@0.6")
+          for i, y in enumerate([-2, 2, 6])],
+        band("spec_feeler", [(spec[0] + 5, spec[1] - 10.6), (spec[0] + 8, spec[1] - 15), (spec[0] + 6, spec[1] - 19)], 0.7, "$chitin.dark@0.6"),
+    ]
+    parts = [
+        shadow("shadow", 0, 52, 82, 9, "0.42"),
+        # ── The shell, the drum going back, its ribs.
+        P("shell", poly(shell + [(cx + 16 - rx - 2, base - 10), (cx - rx, base)]), "$smoke.dark", stroke=INK_THIN),
+        *[P(f"shell_rib_{i}", poly([(x, base - 10 - 60 * math.sqrt(max(0.0, 1 - ((x - cx - 16) / (rx + 2)) ** 2))),
+                                     (x + 1.2, base - 10 - 60 * math.sqrt(max(0.0, 1 - ((x + 1.2 - cx - 16) / (rx + 2)) ** 2))),
+                                     (x + 1.2, base - 10), (x, base - 10)]), "$ink@0.22")
+          for i, x in enumerate(range(int(cx + 16 + 8), int(cx + 16 + rx - 4), 9))],
+        # ── The end wall: steel, ribbed at its rim, with a door and a window in it.
+        *shaded("wall", wall, "$smoke", [(top - 1, top + 12, "$steel@0.8"), (34, base + 1, "$smoke.dark")]),
+        band("wall_lip", arch(rx - 1.6, top + 1.6, base, cx=cx)[1:-1], 2.2, "$steel.dark"),
+        *[p for i, x in enumerate([cx - 28, cx + 28]) for p in rivet_row(f"wall_rv_{i}", x, 0, x, 42, 6, 0.7)],
+        *rust("rust", cx + 30, top + 22, 2.4, 16, 0.45),
+        # The door is a hatch out of the lander, dogged shut, with a port in it.
+        *shaded("hatch", rr(24, 42, 5, (cx - 12, 27)), "$steel", [(-30, -12, "$steel.light"), (14, 30, "$steel.dark")], stroke=INK_HAIR, axis=0),
+        P("hatch_seal", R(26, 2, 0.8), "$slate.dark", at=(cx - 12, 47.4)),
+        P("port_ring", circ(5.6), "$slate", at=(cx - 12, 15), stroke=INK_HAIR),
+        P("port", circ(4), "$coal", at=(cx - 12, 15)),
+        P("port_gold", ell(3.2, 1.6), "$gold.dark@0.45", at=(cx - 12, 16.6)),
+        P("port_glint", R(3, 0.8, 0.4), "$frost@0.55", at=(cx - 13.4, 13), rot=-24),
+        *[p for i, y in enumerate([24, 38]) for p in bolt(f"dog_{i}", cx - 1, y, 1.2, "$slate.dark")],
+        P("hatch_wheel", circ(3.2), None, at=(cx - 12, 33), stroke={"color": "$slate.dark", "width": 1.2}),
+        P("hatch_wheel_hub", circ(0.9), "$slate.dark", at=(cx - 12, 33)),
+        # The window: in the dark inside, jars of gold on a shelf, a cap jar on the sill.
+        *shaded("win_frame", rr(24, 18, 2, (cx + 22, 6)), "$slate", [(12, 16, "$slate.dark")], stroke=INK_HAIR),
+        P("win", R(19, 13, 1.2), "$coal", at=(cx + 22, 6)),
+        P("win_shelf", R(19, 0.9, 0.3), "$slate.dark", at=(cx + 22, 6)),
+        *[p for i, x in enumerate([-6, -1.4, 3.4]) for p in [
+            P(f"win_jar_{i}", R(3.4, 4.4, 1), "$gold.dark@0.8", at=(cx + 22 + x, 3.4)),
+            P(f"win_jar_{i}_lit", R(1, 2.6, 0.4), "$gold@0.7", at=(cx + 21.2 + x, 3.2)),
+        ]],
+        *halo("win_glow", cx + 28, 9, 6, 4, 0.5),
+        *cap("win_cap", cx + 28, 9.4, 1.6),
+        P("win_glint", R(6, 0.9, 0.4), "$frost@0.45", at=(cx + 16, 1), rot=-20),
+        P("sill", R(26, 2.4, 1), "$slate.light", at=(cx + 22, 15.8), stroke=INK_HAIR),
+        # Readings by the hatch: the doses, written down.
+        *[p for i, (x, y, r) in enumerate([(cx + 12, 28, -4), (cx + 21, 30, 5)])
+          for p in page(f"sheet_{i}", x, y, rot=r, w=7, h=9, fill="$bone" if i == 0 else "$husk", pin="pin", seed=21 + i)],
+        # ── The gantry the tank hangs its lamp and its lines from.
+        P("gantry", R(3, 100, 1), "$steel.dark", at=(tank_x - 22, -4), stroke=INK_HAIR),
+        P("gantry_lit", R(1, 94, 0.4), "$steel", at=(tank_x - 22.8, -4)),
+        P("gantry_foot", ell(6, 2.2), "$smoke", at=(tank_x - 22, 46), stroke=INK_HAIR),
+        P("gantry_arm", R(30, 2.6, 1), "$steel.dark", at=(tank_x - 8, -50), stroke=INK_HAIR),
+        P("gantry_brace", poly([(tank_x - 21, -46), (tank_x - 19.6, -46.8), (tank_x - 9, -49), (tank_x - 21, -36)]), "$steel.dark", stroke=INK_FINE),
+        P("lamp_cord", R(1.2, 6, 0.4), "$bone.dark", at=(tank_x + 2, -46.4)),
+        *lamp_jar("lamp", tank_x + 2, -33),
+        # ── The tank: a glass drum of jelly on a riveted plinth, capped and piped.
+        shadow("tank_shadow", tank_x, 46, 19, 3.4, "0.35"),
+        *shaded("plinth", rr(32, 12, 2, (tank_x, 39)), "$slate", [(41, 46, "$slate.dark")], stroke=INK_THIN),
+        P("plinth_lit", R(26, 1.4, 0.6), "$slate.light", at=(tank_x, 34)),
+        *[p for i, x in enumerate([-10, 0, 10]) for p in bolt(f"plinth_bolt_{i}", tank_x + x, 40, 1, "$slate.dark")],
+        P("tank_back", poly(tank_glass), "$frost.dark@0.3"),
+        *shaded("jelly", rr(tw - 3, tg_bot - jelly_top - 1.5, 5, (tank_x, (jelly_top + tg_bot - 1.5) / 2)), "$gold",
+                [(-99, tank_x - 6, "$gold.light"), (tank_x + 6, 99, "$chitin")], stroke=None, axis=0),
+        P("jelly_deep", R(tw - 4, 7, 3), "$chitin@0.6", at=(tank_x, tg_bot - 5)),
+        *specimen,
+        P("meniscus", ell(12.4, 2.2), "$gold.light2", at=(tank_x, jelly_top)),
+        P("meniscus_edge", ell(12.4, 2.2), None, at=(tank_x, jelly_top), stroke={"color": "$chitin@0.6", "width": "hair"}),
+        P("bubble_a", circ(1.5), "$gold.light2@0.9", at=(tank_x + 7, 22)),
+        P("bubble_b", circ(1.0), "$gold.light2@0.8", at=(tank_x - 6, 26)),
+        P("bubble_c", circ(0.8), "$gold.light2@0.8", at=(tank_x + 4, 28)),
+        P("tank_glass", poly(tank_glass), None, stroke=INK_THIN),
+        P("tank_lit", R(3.4, 40, 1.6), "$white@0.4", at=(tank_x - 9.6, 8)),
+        P("tank_lit_b", R(1.4, 12, 0.6), "$white@0.28", at=(tank_x + 10.4, -2)),
+        *[P(f"tank_band_{i}", R(tw + 1.4, 2, 0.6), "$steel.dark", at=(tank_x, y), stroke=INK_FINE) for i, y in enumerate([-9, 31.4])],
+        *shaded("tank_cap", rr(tw + 4, 7, 2.4, (tank_x, -13.6)), "$steel", [(tank_x - 20, tank_x - 8, "$steel.light")], axis=0),
+        *[p for i, x in enumerate([-9, 0, 9]) for p in bolt(f"cap_bolt_{i}", tank_x + x, -13.2, 0.9, "$steel.dark")],
+        # The line off the cap into the wall.
+        band("line_in", [(tank_x + 8, -17), (tank_x + 12, -24), (tank_x + 22, -24), (cx - rx + 9, -6), (cx - rx + 14, 2)], 2.2, "$coal"),
+        band("line_in_lit", [(tank_x + 9, -18.6), (tank_x + 12.6, -25), (tank_x + 21, -25)], 0.7, "$slate"),
+        # What is in it, written on a tag off the cap.
+        *tag("tank_tag", tank_x + 13.5, -11, rot=-10, s=1.0),
+        # ── By the tank: a trolley with the dose drawn, gold in the glass.
+        P("trolley_leg_l", R(1.6, 16, 0.6), "$steel.dark", at=(cx + 44, 41), stroke=INK_FINE),
+        P("trolley_leg_r", R(1.6, 16, 0.6), "$steel.dark", at=(cx + 60, 41), stroke=INK_FINE),
+        P("trolley_shelf", R(19, 1.6, 0.6), "$steel.dark", at=(cx + 52, 44)),
+        *shaded("trolley_top", rr(24, 3.6, 1, (cx + 52, 33)), "$steel", [(34, 36, "$steel.dark")], stroke=INK_HAIR),
+        *syringe("dose", cx + 52, 29.4, s=0.62, fill="$gold", level=0.7),
+        *[P(f"wheel_{i}", circ(1.6), "$slate.dark", at=(x, 49.4), stroke=INK_FINE) for i, x in enumerate([cx + 44, cx + 60])],
+    ]
+    anims = {
+        "steep": loop(
+            "the jelly steeps: bubbles rise past the thing in it, which turns a little, and the lamp's caps breathe",
+            3.6,
+            [
+                track("bubble_a", "y", [(0, 0), (0.7, -21), (0.71, 0), (1, 0)]),
+                track("bubble_a", "opacity", [(0, 1), (0.68, 1), (0.7, 0), (0.75, 0), (1, 1)]),
+                track("bubble_b", "y", [(0, -8), (0.4, -25), (0.41, 0), (1, -10)]),
+                track("bubble_b", "opacity", [(0, 1), (0.38, 1), (0.4, 0), (0.45, 0), (1, 1)]),
+                track("bubble_c", "y", [(0, -14), (0.2, -27), (0.21, 0), (1, -14)]),
+                track("bubble_c", "opacity", [(0, 1), (0.18, 1), (0.2, 0), (0.26, 0), (1, 1)]),
+                *[track(q["id"], "y", [(0, 0), (0.5, -1.4), (1, 0)]) for q in specimen],
+                track("meniscus", "scale", [(0, 1), (0.5, 0.95), (1, 1)]),
+                *breathe_tracks("lamp"),
+            ],
+        )
+    }
+    doc(
+        "ss.base.biolab",
+        "The bio lab",
+        "Where the expedition takes the jelly into itself (feelers' EVOLUTION, guide §3.4: Eden took royal jelly in place of the emitter, and "
+        "every writer since walks the same road). A half-drum of the lander's skin with its end walled in and the drum going back into the "
+        "dark; in the wall a hatch off the lander, dogged shut with a port in it, and a window with jars of gold on a shelf behind it, lit "
+        "a little by a cap jar on the sill. Out front, the reason it is here: a glass tank of jelly on a riveted plinth, capped and piped "
+        "into the wall, with something of the field's curled up in it, legs drawn in, steeping. Gold, "
+        "because gold is jelly's (D14); what steeps in it is chitin, dark, seen through it. A tag off the cap says what. A fungus lamp "
+        "hangs over it from a gantry — the hive's light, the only light (§7.2) — and a trolley stands by with the dose drawn, gold in the "
+        "syringe. The bubbles rise, the thing in the jelly turns a little, the caps breathe (`steep`). The camp's jelly is all in this "
+        "tank: the vat that held it before (`ss.base.vat`) is archived.",
+        (168, 150),
+        parts,
+        anims,
+    )
+
+
 def vane():
     # The rotor faces the camp, so its turning reads as turning: three
     # broad blades round a hub, a tail fin behind to keep it into the wind.
@@ -1384,6 +1528,7 @@ if __name__ == "__main__":
     larder()
     cellar()
     lab()
+    biolab()
     vane()
     clutter()
     print("wrote the base")
