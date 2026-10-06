@@ -1,29 +1,33 @@
-"""Cowboy's smear (`ss.fx.smear`), the kit the whip's full turn is drawn from.
+"""Cowboy's smear (`ss.fx.smear`), the kit the whip's swing is drawn from.
 
     python3 scripts/smear.py        # rewrites apps/ss/assets/ss-fx-smear.json
 
-The game does not stamp this document. A turn's trail has to fade smoothly
-along its length and stop exactly where the lash has been, and an adapter
-draws a gradient as its flat mid-colour, so feelers draws the sector itself
-(WeaponSystem `drawSmear`) from what this document holds:
+The game does not stamp this document. Where the rope is at each moment is
+gameplay — feelers `game/whipSwing.ts`, which the hits are tested against —
+and the trail has to fade smoothly, which an adapter (drawing a gradient as
+its flat mid-colour) cannot, so feelers draws the swing itself (WeaponSystem
+`drawSwing`) from what this document holds:
 
-- `meta` — the shape, in document units at `authoredR` (the reach: the rim's
-  outer edge): `inner` (the lash starts clear of the body; the fill runs in
-  to the centre, under it), `trail` (degrees
-  of tail behind the lead), `fillAlpha`, `rimLead`/`rimTail` (the rim's width
-  at the lead and at the end of the tail), `inkPad` (ink showing either side
-  of the rim and the lash), `lashInner`/`lashTip` (the lash's width at the
-  body and at the rim);
+- `meta` — in document units at `authoredR` (the reach: where the tip runs):
+  `trail` (how long the trail lingers, as a share of a swing), `fillAlpha`
+  (the swept ground, newest and at the tip), `rimLead`/`rimTail` (the tip's
+  path, its width at the tip now and at the oldest), `inkPad` (ink showing
+  either side of a line), `lashInner`/`lashTip` (the rope's width at the hand
+  and at the tip);
 - the colours, off the first part of each family: `fill_00`, `ink_rim_00`,
-  `rim_00` (the rim at the lead), `rim_tail_00` (the rim at the end of the
-  tail), `ink_lash`, `lash`.
+  `rim_00` (the tip's path, newest), `rim_tail_00` (oldest), `ink_lash`,
+  `lash`.
 
-The parts themselves are the same drawing in fine slices, so the gallery shows
-what the game draws. Both follow one taper, at k = 0 on the lead and 1 where
-the trail ends (the game's trail is never longer than the ground the lash has
-crossed, so early in a turn k runs over less than `trail`): fill alpha `fillAlpha·(1-k)²`, rim and ink alpha `1-k²`,
-rim width from `rimLead` to `rimTail` and colour from `rim` to `rim_tail`,
-both straight along k.
+The parts are one moment of a forehand swing, drawn by the same rules, so the
+gallery shows what the game draws: the rope curling back from the hand, the
+ground it has just swept behind it, the tip's path along the reach. At k = 0
+now and 1 at the oldest of the trail: fill alpha `fillAlpha·(1-k)²`, heavier
+out towards the tip (`0.25 + 0.75·u`, u along the rope); the tip's path alpha
+`1-k²`, its width from `rimLead` to `rimTail` and colour from `rim` to
+`rim_tail`, both straight along k.
+
+The swing below is a copy of whipSwing.ts for this picture only; the game's
+is the one that counts.
 """
 import json, math, os
 
@@ -32,42 +36,46 @@ PATH = os.path.join(os.path.dirname(__file__), "..", "apps", "ss", "assets", "ss
 R = 56
 META = {
     "authoredR": R,
-    "inner": 9,
-    "trail": 120,
-    "fillAlpha": 0.3,
-    "rimLead": 3,
-    "rimTail": 0.8,
+    "trail": 0.4,
+    "fillAlpha": 0.32,
+    "rimLead": 2.6,
+    "rimTail": 0.7,
     "inkPad": 1.1,
-    "lashInner": 1,
-    "lashTip": 2.4,
+    "lashInner": 2.6,
+    "lashTip": 0.9,
 }
-SLICES = 20  # the gallery's picture only; the game's trail is continuous
+
+# feelers game/whipSwing.ts, for the picture
+SPAN, LAG, CURL_POW, SNAP_FROM, HAND = math.pi * 0.8, math.pi / 4, 2, 0.45, 0.16
+NOW = 0.8          # the moment drawn: the curl half let go, the tip coming through
+STEPS, POINTS = 8, 9
+
+
+def smooth(a, b, x):
+    t = min(1, max(0, (x - a) / (b - a)))
+    return t * t * (3 - 2 * t)
+
+
+def swing_angle(u, t):
+    hand = LAG + SPAN * (1 - math.cos(math.pi * t)) / 2
+    return hand - LAG * u ** CURL_POW * (1 - smooth(SNAP_FROM, 1, t))
+
+
+BASE = -(SPAN + LAG)  # facing 0°, forehand: round from behind, cracking on the facing
+
+
+def rope(u, t):
+    rho = R * (HAND + u * (1 - HAND))
+    a = BASE + swing_angle(u, t)
+    return rho * math.cos(a), rho * math.sin(a)
+
 
 r2 = lambda x: round(x, 2)
+pts = lambda ps: [[r2(x), r2(y)] for x, y in ps]
 
 
-def slice_(r, a0, a1):
-    """A slice of the disc as a polygon (degrees, anticlockwise is negative)."""
-    n = max(1, math.ceil(abs(a1 - a0) / 3))
-    arc = [(r * math.cos(math.radians(a0 + (a1 - a0) * i / n)), r * math.sin(math.radians(a0 + (a1 - a0) * i / n))) for i in range(n + 1)]
-    return [[r2(x), r2(y)] for x, y in [(0, 0)] + arc]
-
-
-def tapered(r1, a0, a1, w0, w1):
-    """A slice of the rim, its outer edge on r1, its width w0 at a0 going to w1 at a1."""
-    n =max(1, math.ceil(abs(a1 - a0) / 3))
-    outer, inner = [], []
-    for i in range(n + 1):
-        f = i / n
-        a = math.radians(a0 + (a1 - a0) * f)
-        w = w0 + (w1 - w0) * f
-        outer.append((r1 * math.cos(a), r1 * math.sin(a)))
-        inner.append(((r1 - w) * math.cos(a), (r1 - w) * math.sin(a)))
-    return [[r2(x), r2(y)] for x, y in outer + inner[::-1]]
-
-
-def part(id_, pts, fill):
-    return {"id": id_, "shape": {"kind": "poly", "points": pts}, "fill": fill}
+def part(id_, ps, fill):
+    return {"id": id_, "shape": {"kind": "poly", "points": pts(ps)}, "fill": fill}
 
 
 def alpha(token, a):
@@ -75,39 +83,77 @@ def alpha(token, a):
 
 
 m = META
-step = m["trail"] / SLICES
+times = [max(0, NOW - m["trail"] * k / STEPS) for k in range(STEPS + 1)]
+grid = [[rope(j / (POINTS - 1), t) for j in range(POINTS)] for t in times]
 pad = m["inkPad"]
-fills, inks, tails, rims = [], [], [], []
-for i in range(SLICES):
-    k0, k1 = i / SLICES, (i + 1) / SLICES
-    km = (k0 + k1) / 2
-    a0, a1 = -i * step, -(i + 1) * step
-    w = lambda k: m["rimLead"] + (m["rimTail"] - m["rimLead"]) * k
-    edge = 1 - km * km
-    fills.append(part(f"fill_{i:02d}", slice_(R - pad, a0, a1), alpha("$frost.light", m["fillAlpha"] * (1 - km) ** 2)))
-    inks.append(part(f"ink_rim_{i:02d}", tapered(R, a0, a1, w(k0) + 2 * pad, w(k1) + 2 * pad), alpha("$ink", edge)))
-    # The rim's colour runs from `rim` to `rim_tail` along k: the tail colour
-    # under, the lead colour over it fading out.
-    tails.append(part(f"rim_tail_{i:02d}", tapered(R - pad, a0, a1, w(k0), w(k1)), alpha("$frost", edge)))
-    rims.append(part(f"rim_{i:02d}", tapered(R - pad, a0, a1, w(k0), w(k1)), alpha("$silent", edge * (1 - km))))
 
-li, lt = m["lashInner"] / 2, m["lashTip"] / 2
+fills = []
+for k in range(STEPS):
+    kk = (k + 0.5) / STEPS
+    for j in range(POINTS - 1):
+        u = (j + 0.5) / (POINTS - 1)
+        a = m["fillAlpha"] * (1 - kk) ** 2 * (0.25 + 0.75 * u)
+        quad = [grid[k][j], grid[k][j + 1], grid[k + 1][j + 1], grid[k + 1][j]]
+        fills.append(part(f"fill_{k * (POINTS - 1) + j:02d}", quad, alpha("$frost.light", a)))
+
+
+def tip_slice(k, outer, w0, w1):
+    a0 = math.atan2(grid[k][-1][1], grid[k][-1][0])
+    a1 = math.atan2(grid[k + 1][-1][1], grid[k + 1][-1][0])
+    n = 4
+    o, i = [], []
+    for s in range(n + 1):
+        f = s / n
+        a = a0 + (a1 - a0) * f
+        w = w0 + (w1 - w0) * f
+        o.append((outer * math.cos(a), outer * math.sin(a)))
+        i.append(((outer - w) * math.cos(a), (outer - w) * math.sin(a)))
+    return o + i[::-1]
+
+
+inks, tails, rims = [], [], []
+w = lambda k: m["rimLead"] + (m["rimTail"] - m["rimLead"]) * k
+for k in range(STEPS):
+    k0, k1 = k / STEPS, (k + 1) / STEPS
+    km = (k0 + k1) / 2
+    edge = 1 - km * km
+    inks.append(part(f"ink_rim_{k:02d}", tip_slice(k, R, w(k0) + 2 * pad, w(k1) + 2 * pad), alpha("$ink", edge)))
+    # The colour runs from `rim` to `rim_tail` along k: the tail colour under,
+    # the lead colour over it fading out.
+    tails.append(part(f"rim_tail_{k:02d}", tip_slice(k, R - pad, w(k0), w(k1)), alpha("$frost", edge)))
+    rims.append(part(f"rim_{k:02d}", tip_slice(k, R - pad, w(k0), w(k1)), alpha("$silent", edge * (1 - km))))
+
+
+def ribbon(w0, w1):
+    line = grid[0]
+    left, right = [], []
+    for j, (x, y) in enumerate(line):
+        ax, ay = line[max(0, j - 1)]
+        bx, by = line[min(len(line) - 1, j + 1)]
+        nx, ny = -(by - ay), bx - ax
+        d = math.hypot(nx, ny) or 1
+        h = (w0 + (w1 - w0) * j / (len(line) - 1)) / 2
+        left.append((x + nx / d * h, y + ny / d * h))
+        right.append((x - nx / d * h, y - ny / d * h))
+    return left + right[::-1]
+
+
 lash = [
-    part("ink_lash", [[m["inner"], -(li + pad)], [R, -(lt + pad)], [R, lt + pad], [m["inner"], li + pad]], "$ink"),
-    part("lash", [[m["inner"] + pad, -li], [R - pad, -lt], [R - pad, lt], [m["inner"] + pad, li]], "$silent"),
+    part("ink_lash", ribbon(m["lashInner"] + 2 * pad, m["lashTip"] + 2 * pad), "$ink"),
+    part("lash", ribbon(m["lashInner"], m["lashTip"]), "$silent"),
 ]
 
 doc = {
     "id": "ss.fx.smear",
     "name": "Smear",
     "description": (
-        "The ground a whirled feeler sweeps — Cowboy's turn (ss.char.arin `cast_evo`). Its reach is the drawing's: "
-        "the lash runs from the body out to the rim, the rim's outer edge sits on `authoredR`, and a cold fill covers "
-        "everything between, because the turn cuts the whole disc and not a ring at its edge. The lead is at 0° and the "
-        "tail trails back anticlockwise, fading smoothly to nothing along its length and with no edge round the body — the one kit that does not let go in held steps, "
-        "since a stepped tail on a disc this size reads as bands rather than speed. The game draws it itself from "
-        "`meta` and the colours of the first slice of each family (scripts/smear.py says which), continuous along the "
-        "trail and only over ground the lash has crossed; these parts are the same drawing in slices, for the gallery."
+        "A whirled feeler's swing — Cowboy (ss.char.arin `cast_evo`): round from behind to the facing, the rope curled "
+        "back behind the hand and the tip catching up at the end to crack. Drawn at one moment of a forehand: the "
+        "rope, thick at the hand and fine at the tip, on ink; the ground it has just swept, a cold fill fading "
+        "smoothly behind it and heavier towards the tip, where it moves fastest; and the tip's path on `authoredR`, "
+        "the reach, fading the same way. The one kit that does not let go in held steps, since a stepped trail on "
+        "a sweep this size reads as bands rather than speed. The game draws it itself from `meta` and the colours "
+        "of the first part of each family (scripts/smear.py says which), wherever its swing puts the rope."
     ),
     "tags": ["fx", "melee", "kit"],
     "size": [128, 128],
