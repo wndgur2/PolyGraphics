@@ -1,7 +1,7 @@
 {
   "id": "ss.base.marker",
   "name": "The marker",
-  "description": "The middle of the camp: the smell compass. Inside the burrow no compass points and the needle only turns; smell is direction (M005). This is the camp's answer: it tells the smells apart and shows which way each is coming from. It stands on what is left of the lander's mast, driven into the ground, with the hearth's caps round its foot. On the crown, bolted through a cap where the mast snapped, are two feelers bent out of steel rod and jointed like the swarm's own, a frost bead at each tip: the camp's own feelers, testing the air the way the swarm does (`flutter` sways them). Under them a compass ring goes round the mast on two stays, seen edge-on, with a bead at each bearing it is read against. Down the mast, below a collar where two lengths of it were joined, are eight strips of cold cloth knotted on, alternate sides, each taking one smell the camp tells apart (E004: wet iron, vinegar, warmed stone; E180: angry is iron, hungry is vinegar, passing is earth). The strip whose smell is on the wind stirs, and streams away from where it comes: which strip says which smell, the way it streams against the ring says from where (`flutter`). At the foot the hive is starting up it: two pink buds (A055). feelers stands it in the middle of the base, the stations round it.",
+  "description": "The middle of the camp: the smell compass. Inside the burrow no compass points and the needle only turns; smell is direction (M005). This is the camp's answer: it tells the smells apart and shows which way each is coming from. It stands on what is left of the lander's mast, driven into the ground, with the hearth's caps round its foot, a cap bolted over the end where it snapped. Under the cap a compass ring goes round the mast on two stays, seen edge-on, with a bead at each bearing it is read against. Down the mast, below a collar where two lengths of it were joined, are eight strips of cold cloth knotted on, alternate sides, each taking one smell the camp tells apart (E004: wet iron, vinegar, warmed stone; E180: angry is iron, hungry is vinegar, passing is earth). The strip whose smell is on the wind stirs, and streams away from where it comes: which strip says which smell, the way it streams against the ring says from where (`flutter`). At the foot the hive is starting up it: two pink buds (A055). feelers stands it in the middle of the base, the stations round it.",
   "tags": ["base"],
   "size": [64, 136],
   "parts": [
@@ -25,22 +25,6 @@
     {"id": "bearing_e", "shape": {"kind": "poly", "points": [[16.6, -40.0], [16.13, -38.87], [15.0, -38.4], [13.87, -38.87], [13.4, -40.0], [13.87, -41.13], [15.0, -41.6], [16.13, -41.13]]}, "fill": "$frost", "stroke": {"color": "$ink", "width": "hair"}},
     {"id": "bearing_w", "shape": {"kind": "poly", "points": [[-13.4, -40.0], [-13.87, -38.87], [-15.0, -38.4], [-16.13, -38.87], [-16.6, -40.0], [-16.13, -41.13], [-15.0, -41.6], [-13.87, -41.13]]}, "fill": "$frost", "stroke": {"color": "$ink", "width": "hair"}},
     {"id": "bearing_s", "shape": {"kind": "poly", "points": [[1.8, -35.8], [1.27, -34.53], [0.0, -34.0], [-1.27, -34.53], [-1.8, -35.8], [-1.27, -37.07], [-0.0, -37.6], [1.27, -37.07]]}, "fill": "$frost.dark", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "feeler_l", "at": [-1.6, -49.0], "shape": {"kind": "poly", "points": [[1.39, -0.79], [-1.44, -5.46], [-5.58, -9.58], [-10.52, -12.61], [-15.88, -14.15], [-20.67, -13.6], [-20.53, -12.0], [-16.12, -12.25], [-11.48, -10.59], [-7.22, -7.62], [-3.76, -3.74], [-1.39, 0.79]]}, "fill": "$steel", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "feeler_l_lit", "at": [-1.6, -49.0], "shape": {"kind": "poly", "points": [[0.39, -0.72], [-2.29, -5.33], [-6.19, -9.35], [-10.89, -12.34], [-15.94, -13.89], [-16.06, -13.51], [-11.11, -11.86], [-6.61, -8.85], [-2.91, -4.87], [-0.39, -0.28]]}, "fill": "$steel.light2@0.8"},
-    {"id": "feeler_l_joint_0", "at": [-1.6, -49.0], "shape": {"kind": "poly", "points": [[-1.1, -4.6], [-1.54, -3.75], [-2.6, -3.4], [-3.66, -3.75], [-4.1, -4.6], [-3.66, -5.45], [-2.6, -5.8], [-1.54, -5.45]]}, "fill": "$steel.dark", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "feeler_l_joint_1", "at": [-1.6, -49.0], "shape": {"kind": "poly", "points": [[-4.9, -8.6], [-5.34, -7.75], [-6.4, -7.4], [-7.46, -7.75], [-7.9, -8.6], [-7.46, -9.45], [-6.4, -9.8], [-5.34, -9.45]]}, "fill": "$steel.dark", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "feeler_l_joint_2", "at": [-1.6, -49.0], "shape": {"kind": "poly", "points": [[-9.5, -11.6], [-9.94, -10.75], [-11.0, -10.4], [-12.06, -10.75], [-12.5, -11.6], [-12.06, -12.45], [-11.0, -12.8], [-9.94, -12.45]]}, "fill": "$steel.dark", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "feeler_l_joint_3", "at": [-1.6, -49.0], "shape": {"kind": "poly", "points": [[-14.5, -13.2], [-14.94, -12.35], [-16.0, -12.0], [-17.06, -12.35], [-17.5, -13.2], [-17.06, -14.05], [-16.0, -14.4], [-14.94, -14.05]]}, "fill": "$steel.dark", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "feeler_l_tip", "at": [-1.6, -49.0], "shape": {"kind": "poly", "points": [[-18.4, -12.8], [-19.04, -11.24], [-20.6, -10.6], [-22.16, -11.24], [-22.8, -12.8], [-22.16, -14.36], [-20.6, -15.0], [-19.04, -14.36]]}, "fill": "$frost", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "feeler_l_tip_lit", "at": [-1.6, -49.0], "shape": {"kind": "poly", "points": [[-20.4, -13.4], [-20.61, -12.91], [-21.1, -12.7], [-21.59, -12.91], [-21.8, -13.4], [-21.59, -13.89], [-21.1, -14.1], [-20.61, -13.89]]}, "fill": "$white@0.7"},
-    {"id": "feeler_r", "at": [1.6, -49.0], "shape": {"kind": "poly", "points": [[1.39, 0.79], [3.76, -3.74], [7.22, -7.62], [11.48, -10.59], [16.12, -12.25], [20.53, -12.0], [20.67, -13.6], [15.88, -14.15], [10.52, -12.61], [5.58, -9.58], [1.44, -5.46], [-1.39, -0.79]]}, "fill": "$steel", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "feeler_r_lit", "at": [1.6, -49.0], "shape": {"kind": "poly", "points": [[0.39, -0.28], [2.91, -4.87], [6.61, -8.85], [11.11, -11.86], [16.06, -13.51], [15.94, -13.89], [10.89, -12.34], [6.19, -9.35], [2.29, -5.33], [-0.39, -0.72]]}, "fill": "$steel.light2@0.8"},
-    {"id": "feeler_r_joint_0", "at": [1.6, -49.0], "shape": {"kind": "poly", "points": [[4.1, -4.6], [3.66, -3.75], [2.6, -3.4], [1.54, -3.75], [1.1, -4.6], [1.54, -5.45], [2.6, -5.8], [3.66, -5.45]]}, "fill": "$steel.dark", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "feeler_r_joint_1", "at": [1.6, -49.0], "shape": {"kind": "poly", "points": [[7.9, -8.6], [7.46, -7.75], [6.4, -7.4], [5.34, -7.75], [4.9, -8.6], [5.34, -9.45], [6.4, -9.8], [7.46, -9.45]]}, "fill": "$steel.dark", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "feeler_r_joint_2", "at": [1.6, -49.0], "shape": {"kind": "poly", "points": [[12.5, -11.6], [12.06, -10.75], [11.0, -10.4], [9.94, -10.75], [9.5, -11.6], [9.94, -12.45], [11.0, -12.8], [12.06, -12.45]]}, "fill": "$steel.dark", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "feeler_r_joint_3", "at": [1.6, -49.0], "shape": {"kind": "poly", "points": [[17.5, -13.2], [17.06, -12.35], [16.0, -12.0], [14.94, -12.35], [14.5, -13.2], [14.94, -14.05], [16.0, -14.4], [17.06, -14.05]]}, "fill": "$steel.dark", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "feeler_r_tip", "at": [1.6, -49.0], "shape": {"kind": "poly", "points": [[22.8, -12.8], [22.16, -11.24], [20.6, -10.6], [19.04, -11.24], [18.4, -12.8], [19.04, -14.36], [20.6, -15.0], [22.16, -14.36]]}, "fill": "$frost", "stroke": {"color": "$ink", "width": "hair"}},
-    {"id": "feeler_r_tip_lit", "at": [1.6, -49.0], "shape": {"kind": "poly", "points": [[20.8, -13.4], [20.59, -12.91], [20.1, -12.7], [19.61, -12.91], [19.4, -13.4], [19.61, -13.89], [20.1, -14.1], [20.59, -13.89]]}, "fill": "$white@0.7"},
     {"id": "crown", "at": [0.0, -49.0], "shape": {"kind": "rect", "w": 9.0, "h": 5.0, "corner": 1.6}, "fill": "$slate", "stroke": {"color": "$ink", "width": "hair"}},
     {"id": "crown_lit", "at": [0.0, -50.8], "shape": {"kind": "rect", "w": 6.8, "h": 0.7, "corner": 0.35}, "fill": "$slate.light@0.9"},
     {"id": "crown_bolt", "at": [0.0, -48.6], "shape": {"kind": "circle", "r": 1.0}, "fill": "$steel", "stroke": {"color": "$ink", "width": "hair"}},
@@ -87,7 +71,7 @@
   ],
   "animations": {
     "flutter": {
-      "description": "the eight strips stir on the wind, each a little after the one above it, and the feelers on the crown sway as they test the air",
+      "description": "the eight strips stir on the wind, each a little after the one above it",
       "duration": 1.6,
       "tracks": [
         {"part": "strip_0", "prop": "rot", "keys": [[0.0, 0.0], [0.3, 7.0], [0.65, -2.0], [1.0, 0.0]]},
@@ -121,23 +105,7 @@
         {"part": "strip_7", "prop": "rot", "keys": [[0.0, 0.0], [0.35, -6.0], [0.7, 3.0], [1.0, 0.0]]},
         {"part": "strip_7", "prop": "scale", "keys": [[0.0, 1.0], [0.4, 0.9], [0.8, 1.04], [1.0, 1.0]]},
         {"part": "strip_7_fold", "prop": "rot", "keys": [[0.0, 0.0], [0.35, -6.0], [0.7, 3.0], [1.0, 0.0]]},
-        {"part": "strip_7_fold", "prop": "scale", "keys": [[0.0, 1.0], [0.4, 0.9], [0.8, 1.04], [1.0, 1.0]]},
-        {"part": "feeler_l", "prop": "rot", "keys": [[0.0, 0.0], [0.3, 4.0], [0.7, -2.5], [1.0, 0.0]]},
-        {"part": "feeler_l_lit", "prop": "rot", "keys": [[0.0, 0.0], [0.3, 4.0], [0.7, -2.5], [1.0, 0.0]]},
-        {"part": "feeler_l_joint_0", "prop": "rot", "keys": [[0.0, 0.0], [0.3, 4.0], [0.7, -2.5], [1.0, 0.0]]},
-        {"part": "feeler_l_joint_1", "prop": "rot", "keys": [[0.0, 0.0], [0.3, 4.0], [0.7, -2.5], [1.0, 0.0]]},
-        {"part": "feeler_l_joint_2", "prop": "rot", "keys": [[0.0, 0.0], [0.3, 4.0], [0.7, -2.5], [1.0, 0.0]]},
-        {"part": "feeler_l_joint_3", "prop": "rot", "keys": [[0.0, 0.0], [0.3, 4.0], [0.7, -2.5], [1.0, 0.0]]},
-        {"part": "feeler_l_tip", "prop": "rot", "keys": [[0.0, 0.0], [0.3, 4.0], [0.7, -2.5], [1.0, 0.0]]},
-        {"part": "feeler_l_tip_lit", "prop": "rot", "keys": [[0.0, 0.0], [0.3, 4.0], [0.7, -2.5], [1.0, 0.0]]},
-        {"part": "feeler_r", "prop": "rot", "keys": [[0.0, 0.0], [0.4, -3.5], [0.8, 2.0], [1.0, 0.0]]},
-        {"part": "feeler_r_lit", "prop": "rot", "keys": [[0.0, 0.0], [0.4, -3.5], [0.8, 2.0], [1.0, 0.0]]},
-        {"part": "feeler_r_joint_0", "prop": "rot", "keys": [[0.0, 0.0], [0.4, -3.5], [0.8, 2.0], [1.0, 0.0]]},
-        {"part": "feeler_r_joint_1", "prop": "rot", "keys": [[0.0, 0.0], [0.4, -3.5], [0.8, 2.0], [1.0, 0.0]]},
-        {"part": "feeler_r_joint_2", "prop": "rot", "keys": [[0.0, 0.0], [0.4, -3.5], [0.8, 2.0], [1.0, 0.0]]},
-        {"part": "feeler_r_joint_3", "prop": "rot", "keys": [[0.0, 0.0], [0.4, -3.5], [0.8, 2.0], [1.0, 0.0]]},
-        {"part": "feeler_r_tip", "prop": "rot", "keys": [[0.0, 0.0], [0.4, -3.5], [0.8, 2.0], [1.0, 0.0]]},
-        {"part": "feeler_r_tip_lit", "prop": "rot", "keys": [[0.0, 0.0], [0.4, -3.5], [0.8, 2.0], [1.0, 0.0]]}
+        {"part": "strip_7_fold", "prop": "scale", "keys": [[0.0, 1.0], [0.4, 0.9], [0.8, 1.04], [1.0, 1.0]]}
       ]
     }
   }

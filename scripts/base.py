@@ -29,9 +29,8 @@ The camp is what the records draw, and only that:
                  the hive's, borrowed — the cap Sol carried in a dead emitter,
                  planted and spread. The same caps go in jars for lamps
   the lockers    one per writer, with the one thing their log kept
-  the marker     the middle of the camp: the smell compass. Two steel
-                 feelers and a compass ring on the snapped mast, and eight
-                 strips of cloth down it, each taking one smell: the one
+  the marker     the middle of the camp: the smell compass. A compass
+                 ring on the snapped mast, and eight strips of cloth down it, each taking one smell: the one
                  that stirs says which smell is on the wind, the way it
                  streams says where from (M005: "Smell is direction")
   the marks      the cut spires to the south, ringed inside like trees
@@ -689,40 +688,9 @@ def marker():
         (12, 1, 11, "$slate.light"), (18, -1, 13, "$frost"), (24, 1, 14, "$frost.dark"), (30, -1, 10, "$slate.light"),
     ]
 
-    def taper(pts, w0, w1):
-        """A rod through `pts`, `w0` wide at the root and `w1` at the tip."""
-        top, bot = [], []
-        for i, (x, y) in enumerate(pts):
-            a = pts[max(0, i - 1)]
-            b = pts[min(len(pts) - 1, i + 1)]
-            dx, dy = b[0] - a[0], b[1] - a[1]
-            n = math.hypot(dx, dy) or 1
-            w = (w0 + (w1 - w0) * i / (len(pts) - 1)) / 2
-            top.append((x - dy / n * w, y + dx / n * w))
-            bot.append((x + dy / n * w, y - dx / n * w))
-        return poly(top + bot[::-1])
-
     def dot(cx, cy, rx, ry=None):
         ry = rx if ry is None else ry
         return poly([(cx + rx * math.cos(k * math.pi / 4), cy + ry * math.sin(k * math.pi / 4)) for k in range(8)])
-
-    # The feelers on the crown: two rods bent out of the lander's mast cable,
-    # jointed like the swarm's own, a frost bead at each tip. Drawn about
-    # their root so they sway as one piece.
-    feeler = [(0, 0), (-2.6, -4.6), (-6.4, -8.6), (-11, -11.6), (-16, -13.2), (-20.6, -12.8)]
-    joints = feeler[1:-1]
-    ROOT_Y = -49
-    feelers = []
-    for side, tag in ((-1, "l"), (1, "r")):
-        pts = [(-side * x, y) for x, y in feeler] if side > 0 else feeler
-        at = (side * 1.6, ROOT_Y)
-        feelers += [
-            P(f"feeler_{tag}", taper(pts, 3.2, 1.6), "$steel", at=at, stroke=INK_HAIR),
-            P(f"feeler_{tag}_lit", taper([(x, y - 0.5) for x, y in pts[:-1]], 0.9, 0.4), "$steel.light2@0.8", at=at),
-            *[P(f"feeler_{tag}_joint_{i}", dot(x, y, 1.5, 1.2), "$steel.dark", at=at, stroke=INK_HAIR) for i, (x, y) in enumerate(pts[1:-1])],
-            P(f"feeler_{tag}_tip", dot(pts[-1][0], pts[-1][1], 2.2), "$frost", at=at, stroke=INK_HAIR),
-            P(f"feeler_{tag}_tip_lit", dot(pts[-1][0] - 0.5, pts[-1][1] - 0.6, 0.7), "$white@0.7", at=at),
-        ]
 
     # The compass ring round the mast: seen from the south, a flat ellipse,
     # its back half behind the mast and its front half before it; a bead at
@@ -758,8 +726,7 @@ def marker():
         P("joint", R(7, 4, 1), "$steel", at=(0, 40), stroke=INK_HAIR),
         lit_edge("joint_lit", -3, 3, 38.6, 0.7, "$white@0.5"),
         *ring_front,
-        *feelers,
-        # The cap the feelers are bolted through, where the mast snapped.
+        # The cap over the snapped end of the mast.
         P("crown", R(9, 5, 1.6), "$slate", at=(0, -49), stroke=INK_HAIR),
         lit_edge("crown_lit", -3.4, 3.4, -50.8, 0.7, "$slate.light@0.9"),
         *bolt("crown_bolt", 0, -48.6, 1.0, "$steel"),
@@ -788,20 +755,13 @@ def marker():
         keys = [(0, 0), (0.35, side * 6), (0.7, -side * 3), (1, 0)] if i % 2 else [(0, 0), (0.3, side * 7), (0.65, -side * 2), (1, 0)]
         for part in (f"strip_{i}", f"strip_{i}_fold"):
             flap += [track(part, "rot", keys), track(part, "scale", [(0, 1), (0.4, 0.9), (0.8, 1.04), (1, 1)])]
-    # The feelers sway as they test the air, a little apart from each other.
-    for tag, keys in (("l", [(0, 0), (0.3, 4), (0.7, -2.5), (1, 0)]), ("r", [(0, 0), (0.4, -3.5), (0.8, 2), (1, 0)])):
-        for p in feelers:
-            if p["id"].startswith(f"feeler_{tag}"):
-                flap.append(track(p["id"], "rot", keys))
     doc(
         "ss.base.marker",
         "The marker",
         "The middle of the camp: the smell compass. Inside the burrow no compass points and the needle only turns; smell is direction "
         "(M005). This is the camp's answer: it tells the smells apart and shows which way each is coming from. It stands on what is left "
-        "of the lander's mast, driven into the ground, with the hearth's caps round its foot. On the crown, bolted through a cap where the "
-        "mast snapped, are two feelers bent out of steel rod and jointed like the swarm's own, a frost bead at each tip: the camp's own "
-        "feelers, testing the air the way the swarm does (`flutter` sways them). Under them a compass ring goes round the mast on two "
-        "stays, seen edge-on, with a bead at each bearing it is read against. Down the mast, below a collar where two lengths of it were "
+        "of the lander's mast, driven into the ground, with the hearth's caps round its foot, a cap bolted over the end where it "
+        "snapped. Under the cap a compass ring goes round the mast on two stays, seen edge-on, with a bead at each bearing it is read against. Down the mast, below a collar where two lengths of it were "
         "joined, are eight strips of cold cloth knotted on, alternate sides, each taking one smell the camp tells apart (E004: wet iron, "
         "vinegar, warmed stone; E180: angry is iron, hungry is vinegar, passing is earth). The strip whose smell is on the wind stirs, and "
         "streams away from where it comes: which strip says which smell, the way it streams against the ring says from where "
@@ -809,7 +769,7 @@ def marker():
         "stations round it.",
         (64, 136),
         parts,
-        {"flutter": loop("the eight strips stir on the wind, each a little after the one above it, and the feelers on the crown sway as they test the air", 1.6, flap)},
+        {"flutter": loop("the eight strips stir on the wind, each a little after the one above it", 1.6, flap)},
     )
 
 
