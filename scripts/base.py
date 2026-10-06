@@ -19,9 +19,10 @@ The camp is what the records draw, and only that:
   the line       pages pegged out on a cord, the ones not filed yet
   the bench      the instrument's own table: the vials and the syringe the
                  level-up draws from
-  the vat        the jelly the expedition trades in — gold is jelly's (D14)
   the bio lab    where the jelly is taken in: a tank of it with something
-                 steeping, piped from the vat (guide §3.4, EVOLUTION)
+                 steeping (guide §3.4, EVOLUTION). Gold is jelly's (D14).
+                 The jelly vat that stood before it is archived: the tank
+                 is where the camp keeps its jelly now
   the hearth     a ring of stones with glowing caps in it, where a camp
                  elsewhere would keep a fire. An expedition does not glow and
                  lights nothing (guide §7.2): the only light in the camp is
@@ -544,11 +545,12 @@ def vat():
         "The jelly the expedition trades in, kept in a glass vat on a riveted slate stand under a bolted, clamped steel lid. The glass is "
         "drawn behind the jelly so the colour is the jelly's: gold, because gold is jelly's (feelers D14), going to chitin in the deep, with "
         "light moving on the surface, a bubble rising and a few specks hanging in it (`settle`). A paper tag hangs off a clamp on a cord. "
-        "A ladle with gold in its bowl is hooked over the rim and a drop has run down the side. It only holds the jelly: the guide's meta "
-        "shop is \"to evolve on jelly\" (§12.1), and feelers opens EVOLUTION at the bio lab (`ss.base.biolab`), which is piped from here.",
+        "A ladle with gold in its bowl is hooked over the rim and a drop has run down the side. Archived: feelers no longer stands it in the camp. "
+        "The guide's meta shop is \"to evolve on jelly\" (§12.1), and the bio lab (`ss.base.biolab`) keeps the jelly in its own tank.",
         (60, 84),
         parts,
         anims,
+        tags=["base", "archived"],
     )
 
 
@@ -1349,11 +1351,9 @@ def biolab():
         *[P(f"tank_band_{i}", R(tw + 1.4, 2, 0.6), "$steel.dark", at=(tank_x, y), stroke=INK_FINE) for i, y in enumerate([-9, 31.4])],
         *shaded("tank_cap", rr(tw + 4, 7, 2.4, (tank_x, -13.6)), "$steel", [(tank_x - 20, tank_x - 8, "$steel.light")], axis=0),
         *[p for i, x in enumerate([-9, 0, 9]) for p in bolt(f"cap_bolt_{i}", tank_x + x, -13.2, 0.9, "$steel.dark")],
-        # The lines: one off the cap into the wall, one off the plinth along the ground toward the vat.
+        # The line off the cap into the wall.
         band("line_in", [(tank_x + 8, -17), (tank_x + 12, -24), (tank_x + 22, -24), (cx - rx + 9, -6), (cx - rx + 14, 2)], 2.2, "$coal"),
         band("line_in_lit", [(tank_x + 9, -18.6), (tank_x + 12.6, -25), (tank_x + 21, -25)], 0.7, "$slate"),
-        band("line_out", [(tank_x - 14, 40), (tank_x - 24, 44), (tank_x - 34, 50), (tank_x - 38, 53)], 2.2, "$coal"),
-        P("valve", R(4, 5, 1), "$steel.light", at=(tank_x - 15, 39), stroke=INK_FINE),
         # What is in it, written on a tag off the cap.
         *tag("tank_tag", tank_x + 13.5, -11, rot=-10, s=1.0),
         # ── By the tank: a trolley with the dose drawn, gold in the glass.
@@ -1388,11 +1388,11 @@ def biolab():
         "every writer since walks the same road). A half-drum of the lander's skin with its end walled in and the drum going back into the "
         "dark; in the wall a hatch off the lander, dogged shut with a port in it, and a window with jars of gold on a shelf behind it, lit "
         "a little by a cap jar on the sill. Out front, the reason it is here: a glass tank of jelly on a riveted plinth, capped and piped "
-        "into the wall and along the ground toward the vat, with something of the field's curled up in it, legs drawn in, steeping. Gold, "
+        "into the wall, with something of the field's curled up in it, legs drawn in, steeping. Gold, "
         "because gold is jelly's (D14); what steeps in it is chitin, dark, seen through it. A tag off the cap says what. A fungus lamp "
         "hangs over it from a gantry — the hive's light, the only light (§7.2) — and a trolley stands by with the dose drawn, gold in the "
-        "syringe. The bubbles rise, the thing in the jelly turns a little, the caps breathe (`steep`). The vat holds the jelly; this is "
-        "where it is used.",
+        "syringe. The bubbles rise, the thing in the jelly turns a little, the caps breathe (`steep`). The camp's jelly is all in this "
+        "tank: the vat that held it before (`ss.base.vat`) is archived.",
         (168, 150),
         parts,
         anims,

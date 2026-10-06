@@ -1,8 +1,8 @@
 {
   "id": "ss.base.vat",
   "name": "The jelly vat",
-  "description": "The jelly the expedition trades in, kept in a glass vat on a riveted slate stand under a bolted, clamped steel lid. The glass is drawn behind the jelly so the colour is the jelly's: gold, because gold is jelly's (feelers D14), going to chitin in the deep, with light moving on the surface, a bubble rising and a few specks hanging in it (`settle`). A paper tag hangs off a clamp on a cord. A ladle with gold in its bowl is hooked over the rim and a drop has run down the side. It only holds the jelly: the guide's meta shop is \"to evolve on jelly\" (§12.1), and feelers opens EVOLUTION at the bio lab (`ss.base.biolab`), which is piped from here.",
-  "tags": ["base"],
+  "description": "The jelly the expedition trades in, kept in a glass vat on a riveted slate stand under a bolted, clamped steel lid. The glass is drawn behind the jelly so the colour is the jelly's: gold, because gold is jelly's (feelers D14), going to chitin in the deep, with light moving on the surface, a bubble rising and a few specks hanging in it (`settle`). A paper tag hangs off a clamp on a cord. A ladle with gold in its bowl is hooked over the rim and a drop has run down the side. Archived: feelers no longer stands it in the camp. The guide's meta shop is \"to evolve on jelly\" (§12.1), and the bio lab (`ss.base.biolab`) keeps the jelly in its own tank.",
+  "tags": ["base", "archived"],
   "size": [60, 84],
   "parts": [
     {"id": "shadow", "at": [0.0, 34.0], "shape": {"kind": "ellipse", "rx": 26.0, "ry": 6.0}, "fill": "$ink@0.45"},
