@@ -46,22 +46,17 @@ META = {
 }
 
 # feelers game/whipSwing.ts, for the picture
-SPAN, LAG, CURL_POW, SNAP_FROM, HAND = math.pi * 0.8, math.pi / 4, 2, 0.45, 0.16
-NOW = 0.8          # the moment drawn: the curl half let go, the tip coming through
+SPAN, LAG, CURL_POW, HAND = math.pi * 0.8, math.pi / 4, 2, 0.16
+NOW = 0.8          # the moment drawn: most of the way round, the rope still curled
 STEPS, POINTS = 8, 9
-
-
-def smooth(a, b, x):
-    t = min(1, max(0, (x - a) / (b - a)))
-    return t * t * (3 - 2 * t)
 
 
 def swing_angle(u, t):
     hand = LAG + SPAN * (1 - math.cos(math.pi * t)) / 2
-    return hand - LAG * u ** CURL_POW * (1 - smooth(SNAP_FROM, 1, t))
+    return hand - LAG * u ** CURL_POW
 
 
-BASE = -(SPAN + LAG)  # facing 0°, forehand: round from behind, cracking on the facing
+BASE = -(SPAN + LAG)  # facing 0°, forehand: round from behind, the hand ending on the facing
 
 
 def rope(u, t):
@@ -148,9 +143,10 @@ doc = {
     "name": "Smear",
     "description": (
         "A whirled feeler's swing — Cowboy (ss.char.arin `cast_evo`): round from behind to the facing, the rope curled "
-        "back behind the hand and the tip catching up at the end to crack. Drawn at one moment of a forehand: the "
+        "back behind the hand the whole way, no crack and no straightening; where the hand stops it stops, still "
+        "bent, and fades. Drawn at one moment of a forehand: the "
         "rope, thick at the hand and fine at the tip, on ink; the ground it has just swept, a cold fill fading "
-        "smoothly behind it and heavier towards the tip, where it moves fastest; and the tip's path on `authoredR`, "
+        "smoothly behind it and heavier towards the tip, where it sweeps furthest; and the tip's path on `authoredR`, "
         "the reach, fading the same way. The one kit that does not let go in held steps, since a stepped trail on "
         "a sweep this size reads as bands rather than speed. The game draws it itself from `meta` and the colours "
         "of the first part of each family (scripts/smear.py says which), wherever its swing puts the rope."
