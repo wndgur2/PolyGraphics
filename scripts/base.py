@@ -29,11 +29,11 @@ The camp is what the records draw, and only that:
                  the hive's, borrowed — the cap Sol carried in a dead emitter,
                  planted and spread. The same caps go in jars for lamps
   the lockers    one per writer, with the one thing their log kept
-  the marker     the middle of the camp: the smell compass. The lander's
-                 plate, blank, on the snapped mast, and eight strips of
-                 cloth down it, each taking one smell: the one that stirs
-                 says which smell is on the wind, the way it streams says
-                 where from (M005: "Smell is direction")
+  the marker     the middle of the camp: the smell compass. Two steel
+                 feelers and a compass ring on the snapped mast, and eight
+                 strips of cloth down it, each taking one smell: the one
+                 that stirs says which smell is on the wind, the way it
+                 streams says where from (M005: "Smell is direction")
   the marks      the cut spires to the south, ringed inside like trees
                  (T010, A030); a salt cairn on the north-west road; the board
                  the routes are pinned on; boot prints worn out along them
@@ -158,9 +158,8 @@ def lander():
         # What the settlers scratched into the skin (X001): a count, in fives.
         *tally("tally", 4, -16, 3, 2),
         *tally("tally_b", 4, 2, 2, 3, 9),
-        # Where the plate was: it has been taken down and stood in the middle
-        # of the camp, on the smell compass (`ss.base.marker`). The skin it
-        # covered is paler, and the four holes it hung from have bled rust.
+        # Where a plate was: it has been taken down. The skin it covered is
+        # paler, and the four holes it hung from have bled rust.
         P("plate_scar", R(30, 18, 2), "$steel.light@0.3", at=(84, -16)),
         *[P(f"rivet_hole_{i}", circ(1.3), "$coal", at=(84 + dx, -16 + dy)) for i, (dx, dy) in enumerate([(-12, -6), (12, -6), (-12, 6), (12, 6)])],
         *rust("rust_hole_a", 72, -9, 2.2, 14, 0.6),
@@ -207,8 +206,8 @@ def lander():
         "from it; a jar of caps sits on the floor inside, so the hull's dark has a little teal in the bottom of it. There is a dead port "
         "bolted round, a leg that broke on the way down, a snapped mast with its cable hanging, and a cold stripe round the nose. Rust runs "
         "down the seams, which is the ground reaching up, and soot runs up the belly from the engines. Beside the hatch is the settlers' "
-        "count, scratched into the skin in fives. Near the nose is where a plate was: a paler patch and four rivet holes bleeding rust, "
-        "because the plate itself stands in the middle of the camp now, on the smell compass (`ss.base.marker`). Two pink buds are pushing out at the engine collar: the hive reclaiming the camp, the way the "
+        "count, scratched into the skin in fives. Near the nose is where a plate was: a paler patch and four rivet holes bleeding rust "
+        "where it has been taken down. Two pink buds are pushing out at the engine collar: the hive reclaiming the camp, the way the "
         "crystal grew on Arin's frame (A055).",
         (344, 160),
         parts,
@@ -689,32 +688,82 @@ def marker():
         (-12, 1, 15, "$frost.dark"), (-6, -1, 13, "$slate.light"), (0, 1, 12, "$frost"), (6, -1, 15, "$frost.dark"),
         (12, 1, 11, "$slate.light"), (18, -1, 13, "$frost"), (24, 1, 14, "$frost.dark"), (30, -1, 10, "$slate.light"),
     ]
+
+    def taper(pts, w0, w1):
+        """A rod through `pts`, `w0` wide at the root and `w1` at the tip."""
+        top, bot = [], []
+        for i, (x, y) in enumerate(pts):
+            a = pts[max(0, i - 1)]
+            b = pts[min(len(pts) - 1, i + 1)]
+            dx, dy = b[0] - a[0], b[1] - a[1]
+            n = math.hypot(dx, dy) or 1
+            w = (w0 + (w1 - w0) * i / (len(pts) - 1)) / 2
+            top.append((x - dy / n * w, y + dx / n * w))
+            bot.append((x + dy / n * w, y - dx / n * w))
+        return poly(top + bot[::-1])
+
+    def dot(cx, cy, rx, ry=None):
+        ry = rx if ry is None else ry
+        return poly([(cx + rx * math.cos(k * math.pi / 4), cy + ry * math.sin(k * math.pi / 4)) for k in range(8)])
+
+    # The feelers on the crown: two rods bent out of the lander's mast cable,
+    # jointed like the swarm's own, a frost bead at each tip. Drawn about
+    # their root so they sway as one piece.
+    feeler = [(0, 0), (-2.6, -4.6), (-6.4, -8.6), (-11, -11.6), (-16, -13.2), (-20.6, -12.8)]
+    joints = feeler[1:-1]
+    ROOT_Y = -49
+    feelers = []
+    for side, tag in ((-1, "l"), (1, "r")):
+        pts = [(-side * x, y) for x, y in feeler] if side > 0 else feeler
+        at = (side * 1.6, ROOT_Y)
+        feelers += [
+            P(f"feeler_{tag}", taper(pts, 3.2, 1.6), "$steel", at=at, stroke=INK_HAIR),
+            P(f"feeler_{tag}_lit", taper([(x, y - 0.5) for x, y in pts[:-1]], 0.9, 0.4), "$steel.light2@0.8", at=at),
+            *[P(f"feeler_{tag}_joint_{i}", dot(x, y, 1.5, 1.2), "$steel.dark", at=at, stroke=INK_HAIR) for i, (x, y) in enumerate(pts[1:-1])],
+            P(f"feeler_{tag}_tip", dot(pts[-1][0], pts[-1][1], 2.2), "$frost", at=at, stroke=INK_HAIR),
+            P(f"feeler_{tag}_tip_lit", dot(pts[-1][0] - 0.5, pts[-1][1] - 0.6, 0.7), "$white@0.7", at=at),
+        ]
+
+    # The compass ring round the mast: seen from the south, a flat ellipse,
+    # its back half behind the mast and its front half before it; a bead at
+    # each bearing it can be read against, and two stays holding it on.
+    CY, RX, RY = -40, 15, 4.2
+    back = [(RX * math.cos(math.radians(t)), CY + RY * math.sin(math.radians(t))) for t in range(180, 361, 15)]
+    front = [(RX * math.cos(math.radians(t)), CY + RY * math.sin(math.radians(t))) for t in range(0, 181, 15)]
+    ring_back = [
+        band("ring_back_ink", back, 2.6, "$ink"),
+        band("ring_back", back, 1.5, "$steel.dark"),
+        P("bearing_n", dot(0, CY - RY, 1.3), "$slate.light", stroke=INK_HAIR),
+    ]
+    ring_front = [
+        band("stay_l", [(-2.6, -46), (-RX + 0.6, CY)], 1.0, "$steel.dark"),
+        band("stay_r", [(2.6, -46), (RX - 0.6, CY)], 1.0, "$steel.dark"),
+        band("ring_front_ink", front, 2.8, "$ink"),
+        band("ring_front", front, 1.7, "$steel"),
+        band("ring_front_lit", [(x, y - 0.4) for x, y in front[2:-2]], 0.6, "$steel.light2@0.7"),
+        P("bearing_e", dot(RX, CY, 1.6), "$frost", stroke=INK_HAIR),
+        P("bearing_w", dot(-RX, CY, 1.6), "$frost", stroke=INK_HAIR),
+        P("bearing_s", dot(0, CY + RY, 1.8), "$frost.dark", stroke=INK_HAIR),
+    ]
+
     parts = [
         shadow("shadow", 0, 62, 16, 4, "0.4"),
-        # The rest of the lander's mast, driven into the ground, its snapped
-        # end up; a collar where two lengths of it were joined.
+        *ring_back,
+        # The rest of the lander's mast, driven into the ground; a collar
+        # where two lengths of it were joined.
         P("sleeve", R(9, 12, 1.5), "$slate.dark", at=(0, 55), stroke=INK_HAIR),
         lit_edge("sleeve_lit", -3.6, 3.6, 49.6, 0.8, "$slate.light@0.8"),
-        *shaded("mast", [(-2.6, -50), (-1, -56), (0.6, -52), (2.6, -57), (2.6, 60), (-2.6, 60)], "$steel.dark", [(-60, 61, "$steel.dark")], stroke=INK_HAIR),
-        P("mast_lit", R(1.1, 100, 0.4), "$steel", at=(-1.3, 6)),
+        *shaded("mast", [(-2.6, -48), (2.6, -48), (2.6, 60), (-2.6, 60)], "$steel.dark", [(-60, 61, "$steel.dark")], stroke=INK_HAIR),
+        P("mast_lit", R(1.1, 98, 0.4), "$steel", at=(-1.3, 7)),
         P("joint", R(7, 4, 1), "$steel", at=(0, 40), stroke=INK_HAIR),
         lit_edge("joint_lit", -3, 3, 38.6, 0.7, "$white@0.5"),
-        P("snap_lit", poly([(-2.6, -50), (-1, -56), (0.6, -52), (0.6, -50)]), "$steel.light"),
-        # The clamps that hold the plate to it, bolted at both ends.
-        P("clamp_top", R(46, 3, 1), "$steel.dark", at=(0, -45), stroke=INK_HAIR),
-        P("clamp_low", R(46, 3, 1), "$steel.dark", at=(0, -23), stroke=INK_HAIR),
-        *[p for i, (x, y) in enumerate([(-22, -45), (22, -45), (-22, -23), (22, -23)]) for p in bolt(f"clamp_bolt_{i}", x, y, 1.1, "$steel")],
-        # The plate off the lander: bevelled, its top edge catching the
-        # hearth's light, blank, scuffed by years of hands.
-        *shaded("plate", rr(38, 24, 2, (0, -34)), "$steel.light", [(-27, -22, "$steel")]),
-        lit_edge("plate_bevel", -17, 17, -45.2, 1.2, "$white@0.6"),
-        P("plate_lit", R(26, 1.6, 0.8), "$white@0.25", at=(-3, -42)),
-        P("plate_under", R(36, 1.2, 0.6), "$steel.dark", at=(0, -22.8)),
-        *scratches("plate_scuff", 0, -32, 30, 14, 5, "$steel.light2@0.7", 3),
-        *[p for i, (dx, dy) in enumerate([(-16, -9), (16, -9), (-16, 9), (16, 9)]) for p in bolt(f"rivet_{i}", dx, -34 + dy, 1.4, "$slate")],
-        *rust("rust_a", -16, -24, 2.4, 16, 0.6),
-        *rust("rust_b", 16, -24, 2.4, 11, 0.5),
-        P("rust_bloom", ell(3, 2), "$rust@0.35", at=(-16, -25)),
+        *ring_front,
+        *feelers,
+        # The cap the feelers are bolted through, where the mast snapped.
+        P("crown", R(9, 5, 1.6), "$slate", at=(0, -49), stroke=INK_HAIR),
+        lit_edge("crown_lit", -3.4, 3.4, -50.8, 0.7, "$slate.light@0.9"),
+        *bolt("crown_bolt", 0, -48.6, 1.0, "$steel"),
+        P("crown_rust", ell(2.4, 1.4), "$rust@0.4", at=(2, -46.6)),
     ]
     # Eight strips of cloth tied down the mast, alternate sides, each taking
     # one smell (E004, E180): the strip whose smell is on the wind stirs, and
@@ -739,21 +788,28 @@ def marker():
         keys = [(0, 0), (0.35, side * 6), (0.7, -side * 3), (1, 0)] if i % 2 else [(0, 0), (0.3, side * 7), (0.65, -side * 2), (1, 0)]
         for part in (f"strip_{i}", f"strip_{i}_fold"):
             flap += [track(part, "rot", keys), track(part, "scale", [(0, 1), (0.4, 0.9), (0.8, 1.04), (1, 1)])]
+    # The feelers sway as they test the air, a little apart from each other.
+    for tag, keys in (("l", [(0, 0), (0.3, 4), (0.7, -2.5), (1, 0)]), ("r", [(0, 0), (0.4, -3.5), (0.8, 2), (1, 0)])):
+        for p in feelers:
+            if p["id"].startswith(f"feeler_{tag}"):
+                flap.append(track(p["id"], "rot", keys))
     doc(
         "ss.base.marker",
         "The marker",
         "The middle of the camp: the smell compass. Inside the burrow no compass points and the needle only turns; smell is direction "
-        "(M005). This is the camp's answer: it tells the smells apart and shows which way each is coming from. The plate off the lander, "
-        "blank, stands on what is left of the lander's mast, driven into the ground, with the hearth's caps round its foot. The plate is "
-        "bevelled and riveted on with two bolted clamps, scuffed by years of hands, and rust has bled from its lower rivets. Down the mast, "
-        "below a collar where two lengths of it were joined, are eight strips of cold cloth knotted on, alternate sides, each taking one "
-        "smell the camp tells apart (E004: wet iron, vinegar, warmed stone; E180: angry is iron, hungry is vinegar, passing is earth). The "
-        "strip whose smell is on the wind stirs, and streams away from where it comes: which strip says which smell, the way it streams "
-        "says from where (`flutter`). At the foot the hive is starting up it: two pink buds (A055). feelers stands it in the middle of the "
-        "base, the stations round it.",
+        "(M005). This is the camp's answer: it tells the smells apart and shows which way each is coming from. It stands on what is left "
+        "of the lander's mast, driven into the ground, with the hearth's caps round its foot. On the crown, bolted through a cap where the "
+        "mast snapped, are two feelers bent out of steel rod and jointed like the swarm's own, a frost bead at each tip: the camp's own "
+        "feelers, testing the air the way the swarm does (`flutter` sways them). Under them a compass ring goes round the mast on two "
+        "stays, seen edge-on, with a bead at each bearing it is read against. Down the mast, below a collar where two lengths of it were "
+        "joined, are eight strips of cold cloth knotted on, alternate sides, each taking one smell the camp tells apart (E004: wet iron, "
+        "vinegar, warmed stone; E180: angry is iron, hungry is vinegar, passing is earth). The strip whose smell is on the wind stirs, and "
+        "streams away from where it comes: which strip says which smell, the way it streams against the ring says from where "
+        "(`flutter`). At the foot the hive is starting up it: two pink buds (A055). feelers stands it in the middle of the base, the "
+        "stations round it.",
         (64, 136),
         parts,
-        {"flutter": loop("the eight strips stir on the wind, each a little after the one above it", 1.6, flap)},
+        {"flutter": loop("the eight strips stir on the wind, each a little after the one above it, and the feelers on the crown sway as they test the air", 1.6, flap)},
     )
 
 
