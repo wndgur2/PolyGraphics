@@ -11,7 +11,7 @@ The camp is what the records draw, and only that:
 
   the lander     the settlers' hull, which will not fly again (X001), half
                  sunk in its own drift, with the scratches on its skin and
-                 the plate that says "do not come" (T041)
+                 the scar where its plate was
   the frame      Arin's frame with a canvas over it, put up on the first day,
                  and its tank (A001). Under the canvas is where the camp
                  sleeps between expeditions
@@ -29,9 +29,11 @@ The camp is what the records draw, and only that:
                  the hive's, borrowed — the cap Sol carried in a dead emitter,
                  planted and spread. The same caps go in jars for lamps
   the lockers    one per writer, with the one thing their log kept
-  the marker     the middle of the camp: the lander's plate (T041), the
-                 game's own line, stood up on the snapped mast with a strip
-                 of cloth tied on for each of the eight expeditions
+  the marker     the middle of the camp: the smell compass. The lander's
+                 plate, blank, on the snapped mast, and eight strips of
+                 cloth down it, each taking one smell: the one that stirs
+                 says which smell is on the wind, the way it streams says
+                 where from (M005: "Smell is direction")
   the marks      the cut spires to the south, ringed inside like trees
                  (T010, A030); a salt cairn on the north-west road; the board
                  the routes are pinned on; boot prints worn out along them
@@ -156,9 +158,9 @@ def lander():
         # What the settlers scratched into the skin (X001): a count, in fives.
         *tally("tally", 4, -16, 3, 2),
         *tally("tally_b", 4, 2, 2, 3, 9),
-        # Where the plate was (T041): it has been taken down and stood in the
-        # middle of the camp (`ss.base.marker`). The skin it covered is paler,
-        # and the four holes it hung from have bled rust.
+        # Where the plate was: it has been taken down and stood in the middle
+        # of the camp, on the smell compass (`ss.base.marker`). The skin it
+        # covered is paler, and the four holes it hung from have bled rust.
         P("plate_scar", R(30, 18, 2), "$steel.light@0.3", at=(84, -16)),
         *[P(f"rivet_hole_{i}", circ(1.3), "$coal", at=(84 + dx, -16 + dy)) for i, (dx, dy) in enumerate([(-12, -6), (12, -6), (-12, 6), (12, 6)])],
         *rust("rust_hole_a", 72, -9, 2.2, 14, 0.6),
@@ -205,9 +207,8 @@ def lander():
         "from it; a jar of caps sits on the floor inside, so the hull's dark has a little teal in the bottom of it. There is a dead port "
         "bolted round, a leg that broke on the way down, a snapped mast with its cable hanging, and a cold stripe round the nose. Rust runs "
         "down the seams, which is the ground reaching up, and soot runs up the belly from the engines. Beside the hatch is the settlers' "
-        "count, scratched into the skin in fives. Near the nose is where the plate was, the one with the same word on it as the ruin's "
-        "stones and Eden's iron (T041): a paler patch and four rivet holes bleeding rust, because the plate itself stands in the middle of "
-        "the camp now (`ss.base.marker`). Two pink buds are pushing out at the engine collar: the hive reclaiming the camp, the way the "
+        "count, scratched into the skin in fives. Near the nose is where a plate was: a paler patch and four rivet holes bleeding rust, "
+        "because the plate itself stands in the middle of the camp now, on the smell compass (`ss.base.marker`). Two pink buds are pushing out at the engine collar: the hive reclaiming the camp, the way the "
         "crystal grew on Arin's frame (A055).",
         (344, 160),
         parts,
@@ -684,7 +685,7 @@ def hearth():
 # ============================================================== the marker: the middle of the camp
 def marker():
     strips = [
-        # (y on the mast, side, length, fill) — eight, one for each expedition.
+        # (y on the mast, side, length, fill) — eight, one for each smell.
         (-12, 1, 15, "$frost.dark"), (-6, -1, 13, "$slate.light"), (0, 1, 12, "$frost"), (6, -1, 15, "$frost.dark"),
         (12, 1, 11, "$slate.light"), (18, -1, 13, "$frost"), (24, 1, 14, "$frost.dark"), (30, -1, 10, "$slate.light"),
     ]
@@ -703,24 +704,22 @@ def marker():
         P("clamp_top", R(46, 3, 1), "$steel.dark", at=(0, -45), stroke=INK_HAIR),
         P("clamp_low", R(46, 3, 1), "$steel.dark", at=(0, -23), stroke=INK_HAIR),
         *[p for i, (x, y) in enumerate([(-22, -45), (22, -45), (-22, -23), (22, -23)]) for p in bolt(f"clamp_bolt_{i}", x, y, 1.1, "$steel")],
-        # The plate (T041): bevelled, its top edge catching the hearth's light,
-        # the one line cut in it — the same word as the ruin's stones and
-        # Eden's iron — scuffed by years of hands.
+        # The plate off the lander: bevelled, its top edge catching the
+        # hearth's light, blank, scuffed by years of hands.
         *shaded("plate", rr(38, 24, 2, (0, -34)), "$steel.light", [(-27, -22, "$steel")]),
         lit_edge("plate_bevel", -17, 17, -45.2, 1.2, "$white@0.6"),
         P("plate_lit", R(26, 1.6, 0.8), "$white@0.25", at=(-3, -42)),
         P("plate_under", R(36, 1.2, 0.6), "$steel.dark", at=(0, -22.8)),
         *scratches("plate_scuff", 0, -32, 30, 14, 5, "$steel.light2@0.7", 3),
-        P("line", R(26, 2, 0.6), "$ink@0.75", at=(0, -35)),
-        P("line_lit", R(26, 0.8, 0.3), "$steel.light2@0.8", at=(0, -33.6)),
         *[p for i, (dx, dy) in enumerate([(-16, -9), (16, -9), (-16, 9), (16, 9)]) for p in bolt(f"rivet_{i}", dx, -34 + dy, 1.4, "$slate")],
         *rust("rust_a", -16, -24, 2.4, 16, 0.6),
         *rust("rust_b", 16, -24, 2.4, 11, 0.5),
         P("rust_bloom", ell(3, 2), "$rust@0.35", at=(-16, -25)),
     ]
-    # Eight strips of cloth tied down the mast, alternate sides: one for each
-    # expedition that set out from here (T045: "eight times, and once in
-    # stone"). Each has its knot, a fold of shade under it and a frayed end.
+    # Eight strips of cloth tied down the mast, alternate sides, each taking
+    # one smell (E004, E180): the strip whose smell is on the wind stirs, and
+    # streams away from where it comes. Each has its knot, a fold of shade
+    # under it and a frayed end.
     for i, (y, side, n, fill) in enumerate(strips):
         tail = [(0, -1.6), (n * 0.55, -2.2), (n, -0.6), (n * 0.8, 0.6), (n, 2.2), (n * 0.5, 1.8), (0, 1.6)]
         fold = [(0, 0.6), (n * 0.5, 1.2), (n * 0.95, 2.0), (n * 0.5, 1.9), (0, 1.6)]
@@ -743,16 +742,18 @@ def marker():
     doc(
         "ss.base.marker",
         "The marker",
-        "The middle of the camp: the plate off the lander (T041), stood up on what is left of the lander's mast and driven into the ground, "
-        "with the hearth's caps round its foot. The plate is bevelled and riveted on with two bolted clamps, scuffed by years of hands, and "
-        "has the one line cut in it — the same word as the ruin's stones and Eden's iron, which every writer was given and wrote down as an "
-        "attack. It is the game's own line: do not come. Rust has bled from its lower rivets. Down the mast, below a collar where two lengths "
-        "of it were joined, are eight strips of cold cloth knotted on, alternate sides, one for each expedition that set out from here (T045: "
-        "\"Read as one log they say do not come, eight times\"); they flap in the wind (`flutter`). At the foot the hive is starting up it: "
-        "two pink buds (A055). feelers stands it in the middle of the base, the stations round it.",
+        "The middle of the camp: the smell compass. Inside the burrow no compass points and the needle only turns; smell is direction "
+        "(M005). This is the camp's answer: it tells the smells apart and shows which way each is coming from. The plate off the lander, "
+        "blank, stands on what is left of the lander's mast, driven into the ground, with the hearth's caps round its foot. The plate is "
+        "bevelled and riveted on with two bolted clamps, scuffed by years of hands, and rust has bled from its lower rivets. Down the mast, "
+        "below a collar where two lengths of it were joined, are eight strips of cold cloth knotted on, alternate sides, each taking one "
+        "smell the camp tells apart (E004: wet iron, vinegar, warmed stone; E180: angry is iron, hungry is vinegar, passing is earth). The "
+        "strip whose smell is on the wind stirs, and streams away from where it comes: which strip says which smell, the way it streams "
+        "says from where (`flutter`). At the foot the hive is starting up it: two pink buds (A055). feelers stands it in the middle of the "
+        "base, the stations round it.",
         (64, 136),
         parts,
-        {"flutter": loop("the eight strips flap in the wind, each a little after the one above it", 1.6, flap)},
+        {"flutter": loop("the eight strips stir on the wind, each a little after the one above it", 1.6, flap)},
     )
 
 
