@@ -26,9 +26,9 @@ The camp is what the records draw, and only that:
                  the hive's, borrowed — the cap Sol carried in a dead emitter,
                  planted and spread. The same caps go in jars for lamps
   the lockers    one per writer, with the one thing their log kept
-  the marker     the middle of the camp: the lander's plate (T041), the
-                 game's own line, stood up on the snapped mast with a strip
-                 of cloth tied on for each of the eight expeditions
+  the marker     the middle of the camp: the eight writers' analysers, the
+                 records they left, carried back by the swarm and set in the
+                 spire its trail laid round them. Nothing on it is written
   the marks      the cut spires to the south, ringed inside like trees
                  (T010, A030); a salt cairn on the north-west road; the board
                  the routes are pinned on; boot prints worn out along them
@@ -153,11 +153,15 @@ def lander():
         # What the settlers scratched into the skin (X001): a count, in fives.
         *tally("tally", 4, -16, 3, 2),
         *tally("tally_b", 4, 2, 2, 3, 9),
-        # Where the plate was (T041): it has been taken down and stood in the
-        # middle of the camp (`ss.base.marker`). The skin it covered is paler,
-        # and the four holes it hung from have bled rust.
-        P("plate_scar", R(30, 18, 2), "$steel.light@0.3", at=(84, -16)),
-        *[P(f"rivet_hole_{i}", circ(1.3), "$coal", at=(84 + dx, -16 + dy)) for i, (dx, dy) in enumerate([(-12, -6), (12, -6), (-12, 6), (12, 6)])],
+        # The plate (T041), still on the hull where the settlers riveted it:
+        # one line cut into it, the same word as the ruin's stones and Eden's
+        # iron, worn too far to read at this size. Rust has bled from its
+        # lower rivets.
+        *shaded("plate", rr(30, 18, 2, (84, -16)), "$steel.light", [(-10, -7, "$steel")]),
+        lit_edge("plate_bevel", 70, 98, -24.6, 0.9, "$white@0.55"),
+        P("plate_line", R(18, 1.4, 0.5), "$ink@0.6", at=(84, -16.4)),
+        *scratches("plate_scuff", 84, -15, 24, 10, 4, "$steel.light2@0.7", 5),
+        *[p for i, (dx, dy) in enumerate([(-12, -6), (12, -6), (-12, 6), (12, 6)]) for p in bolt(f"plate_rivet_{i}", 84 + dx, -16 + dy, 1.1, "$slate")],
         *rust("rust_hole_a", 72, -9, 2.2, 14, 0.6),
         *rust("rust_hole_b", 96, -9, 2.2, 10, 0.5),
         # A few scuffs where hands and packs have gone in and out.
@@ -202,9 +206,9 @@ def lander():
         "from it; a jar of caps sits on the floor inside, so the hull's dark has a little teal in the bottom of it. There is a dead port "
         "bolted round, a leg that broke on the way down, a snapped mast with its cable hanging, and a cold stripe round the nose. Rust runs "
         "down the seams, which is the ground reaching up, and soot runs up the belly from the engines. Beside the hatch is the settlers' "
-        "count, scratched into the skin in fives. Near the nose is where the plate was, the one with the same word on it as the ruin's "
-        "stones and Eden's iron (T041): a paler patch and four rivet holes bleeding rust, because the plate itself stands in the middle of "
-        "the camp now (`ss.base.marker`). Two pink buds are pushing out at the engine collar: the hive reclaiming the camp, the way the "
+        "count, scratched into the skin in fives. Near the nose is the settlers' plate, still riveted where they put it, with one line cut "
+        "in it — the same word as the ruin's stones and Eden's iron (T041) — worn past reading at this size, rust bled from its lower "
+        "rivets. Two pink buds are pushing out at the engine collar: the hive reclaiming the camp, the way the "
         "crystal grew on Arin's frame (A055).",
         (344, 160),
         parts,
@@ -678,77 +682,166 @@ def hearth():
 
 
 # ============================================================== the marker: the middle of the camp
-def marker():
-    strips = [
-        # (y on the mast, side, length, fill) — eight, one for each expedition.
-        (-12, 1, 15, "$frost.dark"), (-6, -1, 13, "$slate.light"), (0, 1, 12, "$frost"), (6, -1, 15, "$frost.dark"),
-        (12, 1, 11, "$slate.light"), (18, -1, 13, "$frost"), (24, 1, 14, "$frost.dark"), (30, -1, 10, "$slate.light"),
-    ]
+# The eight who came before, as the records they left. Every writer carried an
+# analyser and put the ground into it — the air (A001), the caps' light and
+# smell as one number (A023), a list of compounds with no names (T028) — and,
+# at the end, their own body (feelers records-storyboard §4). Paper cannot hold
+# a smell (T028), so that is where the record is. The swarm carries what has a
+# hand's smell on it and knows whose (T003, T043); it brought the eight back to
+# where they landed, and its trail hardened round them as it went, the way a
+# road becomes a spire (A030). Nothing on it is written: the hive has no
+# letters, and this is how it says what it has to say (feelers
+# hub-map-plan §2.1).
+#
+# (y up the spire, side, tilt, sunk, body fill, what it last measured)
+ANALYSERS = [
+    (46, -1, 8, 0.85, "$smoke.light2", "arin"),    # year 3: bled pale, half in the crust
+    (33, 1, -6, 0.4, "$steel", "sol"),            # spores on it
+    (20, -1, 6, 0.4, "$slate.light", "haram"),    # husk flakes in the seams
+    (7, 1, -9, 0.38, "$steel", "mina"),           # the burrow's wall-earth smeared over
+    (-6, -1, 5, 0.36, "$slate.light", "kano"),    # its strap stiff with trail earth
+    (-19, 1, -5, 0.34, "$steel", "eden"),         # jelly set in the intake
+    (-32, -1, 7, 0.32, "$slate.light", "rowan"),  # the bowl's stone dust
+    (-44, 1, -4, 0.3, "$steel.light", "teo"),     # year 55: still in its paper
+]
+
+
+def spire_half(y):
+    """Half the spire's width at y: broad where the oldest went in, a point where the newest did."""
+    return max(1.0, 3.0 + (y + 60) * 0.12)
+
+
+def analyser(prefix, x, y, side, tilt, fill, who):
+    """One writer's analyser: an upright handheld meter, its foot in the crust, leaning out. A box, a dead screen, two keys, the sensor stub on top, the wrist loop."""
+    def m(pts):
+        return [(side * px, py) for px, py in pts]
+
+    at = (x, y)
+    body = [(-3.6, -5.0), (3.6, -5.0), (3.8, -4.4), (3.8, 4.6), (3.4, 5.2), (-3.4, 5.2), (-3.8, 4.6), (-3.8, -4.4)]
     parts = [
-        shadow("shadow", 0, 62, 16, 4, "0.4"),
-        # The rest of the lander's mast, driven into the ground, its snapped
-        # end up; a collar where two lengths of it were joined.
-        P("sleeve", R(9, 12, 1.5), "$slate.dark", at=(0, 55), stroke=INK_HAIR),
-        lit_edge("sleeve_lit", -3.6, 3.6, 49.6, 0.8, "$slate.light@0.8"),
-        *shaded("mast", [(-2.6, -50), (-1, -56), (0.6, -52), (2.6, -57), (2.6, 60), (-2.6, 60)], "$steel.dark", [(-60, 61, "$steel.dark")], stroke=INK_HAIR),
-        P("mast_lit", R(1.1, 100, 0.4), "$steel", at=(-1.3, 6)),
-        P("joint", R(7, 4, 1), "$steel", at=(0, 40), stroke=INK_HAIR),
-        lit_edge("joint_lit", -3, 3, 38.6, 0.7, "$white@0.5"),
-        P("snap_lit", poly([(-2.6, -50), (-1, -56), (0.6, -52), (0.6, -50)]), "$steel.light"),
-        # The clamps that hold the plate to it, bolted at both ends.
-        P("clamp_top", R(46, 3, 1), "$steel.dark", at=(0, -45), stroke=INK_HAIR),
-        P("clamp_low", R(46, 3, 1), "$steel.dark", at=(0, -23), stroke=INK_HAIR),
-        *[p for i, (x, y) in enumerate([(-22, -45), (22, -45), (-22, -23), (22, -23)]) for p in bolt(f"clamp_bolt_{i}", x, y, 1.1, "$steel")],
-        # The plate (T041): bevelled, its top edge catching the hearth's light,
-        # the one line cut in it — the same word as the ruin's stones and
-        # Eden's iron — scuffed by years of hands.
-        *shaded("plate", rr(38, 24, 2, (0, -34)), "$steel.light", [(-27, -22, "$steel")]),
-        lit_edge("plate_bevel", -17, 17, -45.2, 1.2, "$white@0.6"),
-        P("plate_lit", R(26, 1.6, 0.8), "$white@0.25", at=(-3, -42)),
-        P("plate_under", R(36, 1.2, 0.6), "$steel.dark", at=(0, -22.8)),
-        *scratches("plate_scuff", 0, -32, 30, 14, 5, "$steel.light2@0.7", 3),
-        P("line", R(26, 2, 0.6), "$ink@0.75", at=(0, -35)),
-        P("line_lit", R(26, 0.8, 0.3), "$steel.light2@0.8", at=(0, -33.6)),
-        *[p for i, (dx, dy) in enumerate([(-16, -9), (16, -9), (-16, 9), (16, 9)]) for p in bolt(f"rivet_{i}", dx, -34 + dy, 1.4, "$slate")],
-        *rust("rust_a", -16, -24, 2.4, 16, 0.6),
-        *rust("rust_b", 16, -24, 2.4, 11, 0.5),
-        P("rust_bloom", ell(3, 2), "$rust@0.35", at=(-16, -25)),
+        # The sensor stub: the one part of it that ever touched the ground's air.
+        P(f"{prefix}_stub", R(1.6, 3.6, 0.5), "$slate.dark", at=(side * 1.4, -6.6), stroke=INK_HAIR),
+        P(f"{prefix}_stub_tip", R(2.6, 1.2, 0.5), "$steel.dark", at=(side * 1.4, -8.4), stroke=INK_HAIR),
+        *shaded(f"{prefix}", m(body), fill, [(side * 1.6 if side > 0 else -3.8, 3.8 if side > 0 else -1.6, "$ink@0.22")], stroke=INK_HAIR, axis=0),
+        # Dark: no digits, nothing on it to read (feelers hub-map-plan §2.1). The hearth catches its glass.
+        P(f"{prefix}_screen", R(5.0, 3.8, 0.6), "$coal", at=(0, -2.2)),
+        P(f"{prefix}_glint", poly([(-2.0, -3.6), (-0.2, -3.6), (-1.2, -2.0), (-2.0, -2.0)]), "$spore@0.4"),
+        P(f"{prefix}_lit", R(6.4, 0.7, 0.35), "$white@0.4", at=(0, -4.4)),
+        P(f"{prefix}_key_a", R(1.6, 1.1, 0.4), "$slate.dark", at=(-1.3, 1.6)),
+        P(f"{prefix}_key_b", R(1.6, 1.1, 0.4), "$slate.dark", at=(1.3, 1.6)),
     ]
-    # Eight strips of cloth tied down the mast, alternate sides: one for each
-    # expedition that set out from here (T045: "eight times, and once in
-    # stone"). Each has its knot, a fold of shade under it and a frayed end.
-    for i, (y, side, n, fill) in enumerate(strips):
-        tail = [(0, -1.6), (n * 0.55, -2.2), (n, -0.6), (n * 0.8, 0.6), (n, 2.2), (n * 0.5, 1.8), (0, 1.6)]
-        fold = [(0, 0.6), (n * 0.5, 1.2), (n * 0.95, 2.0), (n * 0.5, 1.9), (0, 1.6)]
+    # The wrist loop, still done up, hanging off the outer foot.
+    strap = "$sand.dark" if who == "kano" else "$slate.dark"
+    parts.append(band(f"{prefix}_strap", m([(2.6, 5.0), (4.6, 7.6), (3.4, 9.6), (1.6, 8.4), (1.4, 5.2)]), 0.9, strap))
+    # What each last measured, still on it.
+    if who == "sol":
+        parts += [P(f"{prefix}_spore_{k}", circ(0.55), "$spore", at=(side * dx, dy)) for k, (dx, dy) in enumerate([(-2.6, 3.8), (2.8, 3.4), (0.4, 4.2), (3.0, -4.4)])]
+    elif who == "haram":
+        parts += [P(f"{prefix}_flake_{k}", poly(m([(0, 0), (1.6, -0.6), (1.2, 0.8)])), "$husk", at=(side * dx, dy), stroke=INK_HAIR) for k, (dx, dy) in enumerate([(-3.0, 3.2), (1.6, 3.6), (2.6, -4.6)])]
+    elif who == "mina":
+        parts.append(P(f"{prefix}_earth", poly(m([(-3.8, 1.0), (0.6, 2.6), (3.8, 4.4), (3.4, 5.2), (-3.4, 5.2)])), "$soil.light@0.9"))
+    elif who == "kano":
+        parts += [P(f"{prefix}_grit_{k}", circ(0.5), "$sand", at=(side * dx, dy)) for k, (dx, dy) in enumerate([(4.2, 7.4), (2.8, 9.2)])]
+    elif who == "eden":
         parts += [
-            P(f"strip_{i}", poly([(side * x, y2) for x, y2 in tail]), fill, at=(side * 2.4, y), stroke=INK_HAIR),
-            P(f"strip_{i}_fold", poly([(side * x, y2) for x, y2 in fold]), "$ink@0.28", at=(side * 2.4, y)),
-            P(f"knot_{i}", R(6.4, 2.6, 1), "$bone.dark", at=(0, y)),
-            P(f"knot_{i}_lit", R(4, 0.7, 0.3), "$bone@0.9", at=(-0.6, y - 0.7)),
+            P(f"{prefix}_jelly", ell(1.7, 1.2), "$gold", at=(side * 1.4, -9.2), stroke=INK_HAIR),
+            P(f"{prefix}_jelly_lit", circ(0.45), "$white@0.6", at=(side * 1.0, -9.6)),
         ]
-    parts += [
-        # The hive, starting up it from the foot (A055).
-        *bud("bud_a", -4, 50, 0.8, -0.4),
-        *bud("bud_b", 3, 46, 0.6, 0.4),
+    elif who == "rowan":
+        parts += [P(f"{prefix}_dust_{k}", circ(0.5), "$smoke.light2@0.9", at=(side * dx, dy)) for k, (dx, dy) in enumerate([(-2.6, 3.6), (0.4, 3.0), (2.8, 4.0), (-1.4, -4.4), (2.2, 0.4)])]
+    elif who == "teo":
+        # Still wrapped in a sheet, the cord crossed over it (the bundle on his locker).
+        parts += [
+            P(f"{prefix}_paper", poly(m([(-4.6, -3.6), (4.2, -4.4), (4.8, 5.8), (-4.2, 6.0)])), "$bone", stroke=INK_HAIR),
+            P(f"{prefix}_paper_dk", poly(m([(1.8, -4.2), (4.2, -4.4), (4.8, 5.8), (2.2, 5.9)])), "$bone.dark@0.8"),
+            band(f"{prefix}_cord", m([(-4.4, 1.0), (4.6, 0.4)]), 0.8, "$bone.dark"),
+            P(f"{prefix}_paper_lit", poly(m([(-4.0, -3.2), (3.4, -3.8), (3.4, -3.1), (-4.0, -2.6)])), "$white@0.5"),
+        ]
+    # Lean the whole meter about its middle: each part's offset turns with it, and so does the part.
+    c, sn = math.cos(math.radians(tilt)), math.sin(math.radians(tilt))
+    out = []
+    for p in parts:
+        ox, oy = p.get("at", [0, 0])
+        out.append({**p, "at": [r2(at[0] + ox * c - oy * sn), r2(at[1] + ox * sn + oy * c)], "rot": r2(p.get("rot", 0) + tilt)})
+    return out
+
+
+def mite_on_paper(prefix, x, y):
+    """A mite at Teo's sheet, its mouth on the corner: it is the one that keeps carrying it (T003)."""
+    return [
+        *[band(f"{prefix}_leg_{k}", [(x + dx, y + 1.0), (x + dx + ex, y + 3.4)], 0.7, "$chitin.dark") for k, (dx, ex) in enumerate([(-2.0, -1.2), (-0.4, -0.4), (1.2, 0.6)])],
+        P(f"{prefix}", ell(3.2, 2.3), "$chitin", at=(x, y), stroke=INK_HAIR),
+        P(f"{prefix}_shield", ell(2.2, 1.2), "$chitin.light", at=(x - 0.6, y - 0.7)),
+        P(f"{prefix}_eye", circ(0.6), "$pheromone", at=(x + 1.6, y - 0.4)),
+        P(f"{prefix}_head", ell(1.2, 1.0), "$chitin.dark", at=(x + 3.2, y + 0.4), stroke=INK_HAIR),
+        band(f"{prefix}_feeler_a", [(x + 3.6, y - 0.4), (x + 4.6, y - 3.2), (x + 6.0, y - 4.0)], 0.6, "$chitin.dark"),
+        band(f"{prefix}_feeler_b", [(x + 3.0, y - 0.6), (x + 3.2, y - 3.6), (x + 4.0, y - 5.0)], 0.6, "$chitin.dark"),
     ]
-    flap = []
-    for i, (y, side, n, _f) in enumerate(strips):
-        keys = [(0, 0), (0.35, side * 6), (0.7, -side * 3), (1, 0)] if i % 2 else [(0, 0), (0.3, side * 7), (0.65, -side * 2), (1, 0)]
-        for part in (f"strip_{i}", f"strip_{i}_fold"):
-            flap += [track(part, "rot", keys), track(part, "scale", [(0, 1), (0.4, 0.9), (0.8, 1.04), (1, 1)])]
+
+
+def marker():
+    # The spire the swarm's trail laid round them: drained mauve where it is
+    # old, faceted the way crystal grows, and still pink at the top where the
+    # last one went in and the passing has not stopped.
+    left = [(-spire_half(y) - (0.8 if k % 2 else 0), y) for k, y in enumerate(range(60, -61, -10))]
+    right = [(spire_half(y) + (0.6 if k % 2 == 0 else 0), y) for k, y in enumerate(range(-60, 61, 10))]
+    body = left + [(0, -64)] + right
+    parts = [
+        shadow("shadow", 0, 62, 22, 5, "0.4"),
+        *shaded("spire", body, "$mauve.dark", [(-64, -36, "$pheromone.dark"), (44, 62, "$mauve.dark2@0.7")], stroke=INK_THIN),
+        P("spire_lit", poly([(-spire_half(y) + 1.2, y) for y in range(58, -37, -12)] + [(-spire_half(-36) + 4, -36)] + [(-spire_half(y) + 4.6, y) for y in range(-36, 59, 12)]), "$mauve@0.85"),
+        P("facet_a", poly([(1, -40), (2.4, -40), (4.6, 60), (2.6, 60)]), "$mauve.dark2@0.7"),
+        P("facet_b", poly([(-6, 10), (-5, 10), (-6.6, 60), (-8, 60)]), "$mauve.dark2@0.5"),
+        # The live top: the newest layer, the field's pink, a little light at its point.
+        P("tip", poly([(-spire_half(-38) + 1, -38), (0, -63), (spire_half(-38) - 1, -38)]), "$pheromone"),
+        P("tip_lit", poly([(-spire_half(-40) + 1.6, -40), (-0.4, -60), (-0.6, -40)]), "$pink.light"),
+        *halo("tip_glow", 0, -56, 7, 7, 0.35, token="$pheromone", n=5),
+        # Chips of it at the foot, the way a cut spire drops them.
+        P("chip_a", poly([(-23, 61), (-20, 56), (-17, 61)]), "$mauve", stroke=INK_HAIR),
+        P("chip_b", poly([(17, 61), (20, 57), (24, 61.4)]), "$mauve.dark", stroke=INK_HAIR),
+    ]
+    # A ring of the crust for each one brought: the spire's layers, one per carrying.
+    for k, (y, *_r) in enumerate(ANALYSERS):
+        h = spire_half(y + 6)
+        parts.append(band(f"layer_{k}", [(-h, y + 6), (-h * 0.3, y + 7.4), (h * 0.4, y + 7.2), (h, y + 5.6)], 0.9, "$mauve.dark2@0.75" if y > -36 else "$pheromone.dark@0.8"))
+    # The eight, oldest at the foot. Each goes in with its sensor end and the
+    # crust closes over that end again (`lip`).
+    for k, (y, side, tilt, sunk, fill, who) in enumerate(ANALYSERS):
+        h = spire_half(y)
+        x = side * (h + 3.4 - 6.0 * sunk)
+        parts += analyser(f"an_{k}_{who}", x, y, side, side * (22 + tilt), fill, who)
+        crust = "$mauve.dark" if y > -36 else "$pheromone.dark"
+        parts.append(P(f"lip_{k}", poly([(side * (h - 2.0), y + 1.6), (side * (h + 1.2), y + 2.4), (side * (h + 2.6 - 3 * sunk), y + 5.6), (side * (h - 2.0), y + 6.4)]), crust, stroke=INK_HAIR))
+        parts.append(P(f"lip_{k}_lit", R(2.0, 0.6, 0.3), "$mauve.light@0.6" if y > -36 else "$pink.light@0.8", at=(side * (h - 0.2), y + 2.4)))
+    # Teo's, the last: a mite at the corner of its sheet.
+    ty = ANALYSERS[-1][0]
+    parts += mite_on_paper("mite", spire_half(ty) + 9.6, ty - 9.0)
+    mite_ids = [p["id"] for p in parts if p["id"].startswith("mite")]
+    tug = []
+    for pid in mite_ids:
+        tug += [
+            track(pid, "x", [(0, 0), (0.15, 0.6), (0.3, 0), (0.62, 0), (0.72, 0.5), (0.82, 0), (1, 0)]),
+            track(pid, "y", [(0, 0), (0.15, -0.3), (0.3, 0), (1, 0)]),
+        ]
+    tug += [track("an_7_teo_paper", "rot", [(0, 0), (0.15, 3), (0.3, 0), (0.72, 2), (0.82, 0), (1, 0)])]
+    tug += glow_tracks("tip_glow", 0.6, 1, n=5)
     doc(
         "ss.base.marker",
         "The marker",
-        "The middle of the camp: the plate off the lander (T041), stood up on what is left of the lander's mast and driven into the ground, "
-        "with the hearth's caps round its foot. The plate is bevelled and riveted on with two bolted clamps, scuffed by years of hands, and "
-        "has the one line cut in it — the same word as the ruin's stones and Eden's iron, which every writer was given and wrote down as an "
-        "attack. It is the game's own line: do not come. Rust has bled from its lower rivets. Down the mast, below a collar where two lengths "
-        "of it were joined, are eight strips of cold cloth knotted on, alternate sides, one for each expedition that set out from here (T045: "
-        "\"Read as one log they say do not come, eight times\"); they flap in the wind (`flutter`). At the foot the hive is starting up it: "
-        "two pink buds (A055). feelers stands it in the middle of the base, the stations round it.",
+        "The middle of the camp, and nothing on it is written. It is the eight writers who came before, as the records they left: the "
+        "analyser each of them carried and put the ground into (A001, A023, T028) and, at the end, their own body. The swarm carries what "
+        "has a hand's smell on it and knows whose (T003, T043); it brought the eight back to where they landed, and its trail hardened round "
+        "them as it came and went, the way a road becomes a spire. So they stand set in a spire in the middle of the camp, in the order "
+        "they came, alternate sides: Arin's at the foot, bled pale and half in the crust, Teo's near the top, still in its sheet of paper "
+        "with a mite at the corner of it. Each has its sensor end in the crust, its screen dark, its wrist loop still done up, and on it "
+        "what it last measured: Sol's spores, Haram's husk flakes, the burrow earth on Mina's, Kano's strap stiff with trail grit, jelly set "
+        "in Eden's intake, the bowl's stone dust on Rowan's. A ring of crust marks each carrying. The spire is drained mauve where it is "
+        "old and still the field's pink at the top, where the passing has not stopped. To someone who cannot be spoken to, it says what the "
+        "hive has to say: these came before you, and this is what is left of them (feelers hub-map-plan §2.1). The mite keeps tugging "
+        "Teo's sheet and the tip breathes (`tug`).",
         (64, 136),
         parts,
-        {"flutter": loop("the eight strips flap in the wind, each a little after the one above it", 1.6, flap)},
+        {"tug": loop("the mite tugs at Teo's sheet twice, and the live tip breathes", 2.4, tug)},
     )
 
 
