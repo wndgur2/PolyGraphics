@@ -1,30 +1,55 @@
 {
   "id": "ss.sfx.shoot",
-  "name": "Shot",
-  "description": "Something small leaving the tube: a bright chirp dropping most of an octave inside sixty milliseconds. Fires constantly, so it is short, quiet and pitched where the score already sits.",
+  "name": "Spit",
+  "description": "Acid leaving a mouth. This used to be one bare square wave chirping down an octave, which is a chiptune laser: every harmonic up to Nyquist, the same click on every onset, and the same pitch fall three hundred times a run. Nothing that spits sounds like that, so the pitch is now the smallest part of it.\n\n`puff` is the shot: a short burst of noise under a lowpass closing from `$grit.up` to `$grit.down`, struck in four milliseconds and gone in forty. Air pushed out of a narrow opening is broadband and darkens as the pressure drops, and that closing is most of what the ear reads as a projectile leaving. A lowpass and not a band, because a band left the top of the noise in and the first pass of this was a hiss: the centroid sat at 2.7kHz and more than half its energy above 2kHz, which is the 'noisy' the old one was already accused of. `wet` is the acid: four tiny grains over it, scattered across the first twenty milliseconds and kept well down, so the burst sputters rather than hisses. Their Q is `wide` on purpose — a narrow band on a short grain is a ping, and pings in a row whistle. `body` is the throat: a sine sliding from `$third` down an octave under everything, so the spit has a little weight and a pitch to jitter without a buzzing edge on it.\n\nFires constantly, so it is short, sits at the quiet end of the weapon band, and ships three takes for the engine to round-robin: the noise and the grains land differently each time, and a volley reads as many mouths rather than one sample.",
   "tags": [
     "sfx",
     "weapon"
   ],
-  "duration": 0.06,
+  "duration": 0.075,
+  "takes": 3,
   "meta": {
     "minInterval": 35
   },
   "jitter": {
     "freq": [
-      0.88,
-      1.06
+      0.9,
+      1.08
     ]
   },
   "voices": [
     {
-      "id": "spit",
-      "gain": "soft",
+      "id": "puff",
+      "dur": 0.044,
+      "gain": 0.55,
       "source": {
-        "kind": "osc",
-        "wave": "square",
-        "freq": "$tonic",
-        "to": "$swarm.up"
+        "kind": "noise"
+      },
+      "filter": {
+        "type": "lowpass",
+        "freq": "$grit.up",
+        "to": "$grit.down",
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.004,
+            "decay": 0.038
+          }
+        }
+      ]
+    },
+    {
+      "id": "wet",
+      "at": 0.006,
+      "gain": 0.2,
+      "filter": {
+        "type": "bandpass",
+        "freq": "$gust",
+        "to": "$grit",
+        "q": "wide"
       },
       "env": [
         {
@@ -36,9 +61,41 @@
             ],
             [
               1,
-              0.0
+              0.15
             ]
           ]
+        }
+      ],
+      "repeat": {
+        "of": {
+          "kind": "noise"
+        },
+        "count": 4,
+        "spread": 0.022,
+        "grain": 0.006,
+        "gainRange": [
+          0.4,
+          1
+        ]
+      }
+    },
+    {
+      "id": "body",
+      "dur": 0.05,
+      "gain": "soft",
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$third",
+        "to": "$third.down"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.003,
+            "decay": 0.045
+          }
         }
       ]
     }
