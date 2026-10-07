@@ -1,213 +1,28 @@
 {
   "id": "ss.terrain.saltplate",
   "name": "Salt plate",
-  "description": "Salt Pan set dressing, and the one cover the pan gives: a plate of salt crust heaved up on its edge, a faceted slab lit hard from above \u2014 bone-white crown, husk-coloured face, an ink underside where it left the ground \u2014 with two cracks across it and grit at its foot. Blocking, radius 16; drawn round-ish so the game's circle capsule fits it. Deliberately angular against everything else on the ground, which is all curves: a plate is the only straight edge on the pan, and a straight edge is what a shot stops at.",
-  "tags": [
-    "terrain"
-  ],
-  "size": [
-    44,
-    36
-  ],
-  "meta": {
-    "radius": 16
-  },
+  "description": "Salt Pan set dressing, and the one cover the pan gives: a plate of salt crust heaved up on its edge, a faceted slab lit hard from above — bone-white crown, husk-coloured face, an ink underside where it left the ground — with two cracks across it and grit at its foot. Blocking, radius 16; drawn round-ish so the game's circle capsule fits it. Deliberately angular against everything else on the ground, which is all curves: a plate is the only straight edge on the pan, and a straight edge is what a shot stops at. Second pass: the face in shade along its lower right, a pale facet on the crown, a crust of salt white along the crown's upper edges, a lit lip beside each crack, a chip at the foot and the dark where it meets the pan.",
+  "tags": ["terrain"],
+  "size": [44, 36],
+  "meta": {"radius": 16},
   "parts": [
-    {
-      "id": "shadow",
-      "at": [
-        1.0,
-        13.0
-      ],
-      "shape": {
-        "kind": "ellipse",
-        "rx": 19.0,
-        "ry": 5.0
-      },
-      "fill": "$ink@0.5"
-    },
-    {
-      "id": "under",
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -19.0,
-            10.0
-          ],
-          [
-            -14.0,
-            -2.0
-          ],
-          [
-            2.0,
-            -14.0
-          ],
-          [
-            17.0,
-            -8.0
-          ],
-          [
-            20.0,
-            6.0
-          ],
-          [
-            12.0,
-            13.0
-          ],
-          [
-            -8.0,
-            14.0
-          ]
-        ]
-      },
-      "fill": "$ink"
-    },
-    {
-      "id": "face",
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -17.0,
-            9.0
-          ],
-          [
-            -12.5,
-            -1.0
-          ],
-          [
-            1.5,
-            -12.0
-          ],
-          [
-            15.5,
-            -6.5
-          ],
-          [
-            18.0,
-            5.0
-          ],
-          [
-            11.0,
-            11.5
-          ],
-          [
-            -7.0,
-            12.5
-          ]
-        ]
-      },
-      "fill": "$husk.dark"
-    },
-    {
-      "id": "crown",
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -12.0,
-            3.0
-          ],
-          [
-            -8.0,
-            -3.0
-          ],
-          [
-            2.0,
-            -10.0
-          ],
-          [
-            12.0,
-            -5.5
-          ],
-          [
-            14.0,
-            2.0
-          ],
-          [
-            6.0,
-            6.0
-          ]
-        ]
-      },
-      "fill": "$husk"
-    },
-    {
-      "id": "glare",
-      "opacity": 0.85,
-      "shape": {
-        "kind": "poly",
-        "points": [
-          [
-            -4.0,
-            -4.0
-          ],
-          [
-            2.0,
-            -8.5
-          ],
-          [
-            8.0,
-            -5.0
-          ],
-          [
-            3.0,
-            -1.0
-          ]
-        ]
-      },
-      "fill": "$silent"
-    },
-    {
-      "id": "crack_a",
-      "at": [
-        3.0,
-        6.0
-      ],
-      "rot": -18.0,
-      "shape": {
-        "kind": "rect",
-        "w": 11.0,
-        "h": 1.1,
-        "corner": 0.5
-      },
-      "fill": "$husk.dark2"
-    },
-    {
-      "id": "crack_b",
-      "at": [
-        -8.0,
-        4.0
-      ],
-      "rot": 34.0,
-      "shape": {
-        "kind": "rect",
-        "w": 7.0,
-        "h": 1.0,
-        "corner": 0.5
-      },
-      "fill": "$husk.dark2"
-    },
-    {
-      "id": "grit",
-      "at": [
-        0.0,
-        12.0
-      ],
-      "repeat": {
-        "of": {
-          "kind": "circle",
-          "r": 0.9
-        },
-        "count": 7,
-        "area": [
-          30,
-          8
-        ],
-        "seed": 41
-      },
-      "fill": "$sand.light"
-    }
-  ]
+    {"id": "shadow", "at": [1.0, 13.0], "shape": {"kind": "ellipse", "rx": 19.0, "ry": 5.0}, "fill": "$ink@0.5"},
+    {"id": "under", "shape": {"kind": "poly", "points": [[-19.0, 10.0], [-14.0, -2.0], [2.0, -14.0], [17.0, -8.0], [20.0, 6.0], [12.0, 13.0], [-8.0, 14.0]]}, "fill": "$ink"},
+    {"id": "face", "shape": {"kind": "poly", "points": [[-17.0, 9.0], [-12.5, -1.0], [1.5, -12.0], [15.5, -6.5], [18.0, 5.0], [11.0, 11.5], [-7.0, 12.5]]}, "fill": "$husk.dark"},
+    {"id": "face_shade", "shape": {"kind": "poly", "points": [[15.5, -6.5], [18.0, 5.0], [11.0, 11.5], [-7.0, 12.5], [-2.0, 9.0], [10.0, 8.0], [14.0, 1.0]]}, "fill": "$husk.dark2@0.6"},
+    {"id": "crown", "shape": {"kind": "poly", "points": [[-12.0, 3.0], [-8.0, -3.0], [2.0, -10.0], [12.0, -5.5], [14.0, 2.0], [6.0, 6.0]]}, "fill": "$husk"},
+    {"id": "crust", "shape": {"kind": "poly", "points": [[-12.0, 3.0], [-8.0, -3.0], [2.0, -10.0], [12.0, -5.5], [11.2, -4.2], [2.2, -8.6], [-7.0, -2.0], [-10.6, 3.4]]}, "fill": "$silent@0.6"},
+    {"id": "facet", "shape": {"kind": "poly", "points": [[-8.0, -3.0], [2.0, -10.0], [0.0, -4.0], [-6.0, 1.0]]}, "fill": "$silent@0.35"},
+    {"id": "glare", "opacity": 0.85, "shape": {"kind": "poly", "points": [[-4.0, -4.0], [2.0, -8.5], [8.0, -5.0], [3.0, -1.0]]}, "fill": "$silent"},
+    {"id": "crack_a", "at": [3.0, 6.0], "rot": -18.0, "shape": {"kind": "rect", "w": 11.0, "h": 1.1, "corner": 0.5}, "fill": "$husk.dark2"},
+    {"id": "crack_b", "at": [-8.0, 4.0], "rot": 34.0, "shape": {"kind": "rect", "w": 7.0, "h": 1.0, "corner": 0.5}, "fill": "$husk.dark2"},
+    {"id": "crack_a_lip", "at": [2.6, 5.2], "shape": {"kind": "rect", "w": 10.4, "h": 0.6, "corner": 0.3}, "fill": "$silent@0.45"},
+    {"id": "crack_b_lip", "at": [-8.4, 3.2], "shape": {"kind": "rect", "w": 6.4, "h": 0.6, "corner": 0.3}, "fill": "$silent@0.45"},
+    {"id": "chip", "shape": {"kind": "poly", "points": [[-20.0, 13.0], [-17.6, 10.4], [-15.2, 13.4]]}, "fill": "$husk.dark", "stroke": {"color": "$ink", "width": "hair"}},
+    {"id": "foot_ao", "at": [0.0, 13.4], "shape": {"kind": "ellipse", "rx": 15.0, "ry": 1.6}, "fill": "$ink@0.35"},
+    {"id": "grit", "at": [0.0, 12.0], "repeat": {"of": {"kind": "circle", "r": 0.9}, "count": 7, "area": [30, 8], "seed": 41}, "fill": "$sand.light"}
+  ],
+  "animations": {
+
+  }
 }
