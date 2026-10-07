@@ -77,6 +77,12 @@
     ],
     "levels": {
       "namespace": "error"
+    },
+    "states": {
+      "char": [
+        "bare"
+      ],
+      "lib": "*"
     }
   }
 }
