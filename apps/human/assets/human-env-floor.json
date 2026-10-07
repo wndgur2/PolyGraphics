@@ -1,0 +1,15 @@
+{
+  "id": "human.env.floor",
+  "name": "Floor",
+  "description": "The floor the figure is judged on: dark worn stone, a 64×64 tile with a faint lighter wash on the upper left and a few low-contrast flags, so the body's contrast is measured against the ground it will stand on and nothing on the tile competes with it.",
+  "tags": ["env", "floor"],
+  "size": [64, 64],
+  "parts": [
+    { "id": "ground", "shape": { "kind": "rect", "w": 64, "h": 64, "corner": 0 }, "fill": "$soil" },
+    { "id": "wash", "at": [-14, -16], "shape": { "kind": "ellipse", "rx": 26, "ry": 18 }, "fill": "$soil.light@0.35" },
+    { "id": "flag_a", "at": [-18, 10], "rot": -4, "shape": { "kind": "rect", "w": 22, "h": 12, "corner": 1 }, "fill": "$soil.dark@0.5" },
+    { "id": "flag_b", "at": [16, -12], "rot": 3, "shape": { "kind": "rect", "w": 18, "h": 10, "corner": 1 }, "fill": "$soil.dark@0.4" },
+    { "id": "seam", "at": [6, 22], "rot": 2, "shape": { "kind": "rect", "w": 30, "h": 0.8, "corner": 0.4 }, "fill": "$soil.dark@0.6" },
+    { "id": "grit", "repeat": { "of": { "kind": "circle", "r": 0.6 }, "count": 28, "area": [62, 62], "seed": 7, "scaleRange": [0.6, 1.3] }, "fill": "$soil.light@0.25" }
+  ]
+}

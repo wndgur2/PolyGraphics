@@ -1,0 +1,82 @@
+{
+  "id": "human",
+  "name": "Human",
+  "premise": "A human figure drawn to proportion — seven and a half heads on a skeleton, seen three-quarter from the side — iterated from a rigged mannequin toward a character that would stand beside Dead Cells', Hades' and Dark Souls'.",
+  "engines": [
+    "phaser",
+    "godot",
+    "web"
+  ],
+  "categories": [
+    "char",
+    "env",
+    "lib"
+  ],
+  "reference": {
+    "ground": {
+      "floor": "human.env.floor"
+    },
+    "scale": 1,
+    "contrast": {
+      "sinks": 2.0,
+      "thin": 3.0
+    }
+  },
+  "rules": {
+    "grid": {
+      "applies": [
+        "char"
+      ]
+    },
+    "size": {
+      "char": [
+        128,
+        160
+      ]
+    },
+    "meta": [
+      {
+        "in": [
+          "char"
+        ],
+        "require": [
+          "radius",
+          "height"
+        ]
+      }
+    ],
+    "clips": [
+      {
+        "in": [
+          "char"
+        ],
+        "require": [
+          "idle",
+          "walk"
+        ]
+      }
+    ],
+    "oneShot": {
+      "death": {
+        "settleBy": 0.85
+      }
+    },
+    "layers": [
+      {
+        "in": [
+          "env"
+        ],
+        "layer": "ground"
+      },
+      {
+        "in": [
+          "char"
+        ],
+        "layer": "player"
+      }
+    ],
+    "levels": {
+      "namespace": "error"
+    }
+  }
+}
