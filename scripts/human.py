@@ -64,6 +64,12 @@ meter (scripts/motion.ts) and the inspect page before the next:
      arrives fast, a recovery
   5  polish: folds down the cloak, a glint in the eye, an idle with a glance
      in it, the hood-down state, baselines
+  8  the parts to the measure: the face in thirds with the eye on the skull's
+     midline, a wedge eye under a lid, a tapered brow, a nose with its wing and
+     nostril, lips, a chin; the ear from the brow to the nose's base; a neck
+     0.45 of a head deep with the sternomastoid and the throat; the trapezius
+     and clavicles under the cowl; a fist of four wrapped fingers, ridged
+     knuckles and a thumb with its nail
   7  measured: the rig audited against Drillis & Contini and the head-unit
      figure (scripts/human_audit.py) — the hip joints raised to 0.53 of
      stature, the shank and upper arm lengthened, the forearm shortened,
@@ -163,7 +169,7 @@ BARE_SET = {}       # part id -> the fill it has with no clothes on
 COSTUME = []        # part ids that are clothes and go away in `bare`
 def wear(part, bare_fill):
     """Record what `part` would be painted with no costume on, for the `bare` state."""
-    if bare_fill != part["fill"]: BARE_SET[f"{part['id']}.fill"] = bare_fill
+    if bare_fill is not None and bare_fill != part["fill"]: BARE_SET[f"{part['id']}.fill"] = bare_fill
     return part
 def clothes(part):
     COSTUME.append(part["id"]); return part
@@ -183,7 +189,7 @@ UPPER_C = [(-1.6, -3.4), (3.0, -4.5), (10.0, -3.7), (17.0, -2.9), (21.6, -2.6), 
 FORE_C = [(-1.2, -3.0), (4.0, -3.5), (10.0, -2.7), (16.0, -2.1), (19.4, -1.9), (20.2, 0.0), (19.4, 1.9), (14.0, 2.3), (6.0, 3.3), (2.0, 3.3), (-1.2, 2.4)]
 BRACER_C = [(5.2, -3.5), (11.0, -3.0), (18.8, -2.5), (19.4, 0.0), (18.8, 2.5), (11.0, 3.0), (5.2, 3.6)]
 # the fist, closed on the grip: a rounded block with the knuckles toward +along and the thumb over the fingers
-FIST_C = [(-0.8, -2.6), (3.0, -3.2), (7.0, -3.0), (9.0, -1.4), (9.6, 0.6), (8.8, 2.4), (5.0, 3.0), (0.4, 2.6)]
+FIST_C = [(-0.6, -2.8), (3.0, -3.3), (7.0, -3.1), (9.2, -2.0), (9.8, 0.4), (9.3, 2.4), (6.6, 3.2), (2.4, 3.0), (-0.6, 2.4)]
 # the foot: heel, arch, sole, toe cap, instep, ankle — a boot's shape
 FOOT_C = [(-3.8, -1.0), (-5.0, 1.6), (-4.4, 6.0), (2.0, 6.3), (12.2, 6.3), (13.8, 4.6), (11.0, 2.0), (5.0, 0.6), (2.0, -1.6)]
 BOOT_C = [(9.2, -4.6), (12.0, -3.6), (19.0, -2.9), (26.8, -2.6), (27.6, 0.0), (26.8, 2.6), (18.0, 3.3), (11.0, 5.0), (9.4, 5.8)]
@@ -245,9 +251,15 @@ def arm_parts(s, cloth, leather, skin, stroke):
         clothes(limb(f"strap_{s}_{i}", f"arm_{s}_fore", rect(0.9, 6.4, 0.3), ls, None, along=x))
         clothes(limb(f"strap_{s}_{i}_edge", f"arm_{s}_fore", rect(0.3, 6.4, 0.15), ll or lb, None, along=x - 0.55))
     wear(limb(f"hand_{s}", f"hand_{s}", cpoly(FIST_C), ls, stroke), skin[0])
-    for i, x in enumerate((4.4, 6.6, 8.4)):   # the fingers, as the creases between them
-        wear(limb(f"finger_{s}_{i}", f"hand_{s}", rect(0.5, 3.8 - 0.6 * i, 0.2), "$ink@0.35", None, along=x, across=-0.6 + 0.3 * i, rot=-8.0 * i), "$ink@0.35")
-    wear(limb(f"thumb_{s}", f"hand_{s}", cpoly([(0.4, -2.0), (3.2, -2.9), (5.6, -2.4), (5.8, -0.9), (3.4, -0.3), (0.6, -0.8)]), ls, INK_HAIR), skin[0])
+    # the fingers wrapped round the grip, one band each from the knuckle down, the creases between them
+    for i, (a0, a1) in enumerate(((2.2, 4.0), (4.0, 5.8), (5.8, 7.6), (7.6, 9.4))):
+        wear(limb(f"finger_{s}_{i}", f"hand_{s}", cpoly([(a0, -2.7), (a1 - 0.2, -2.9 - 0.1 * i), (a1, 0.0), (a1 - 0.2, 2.6), (a0, 2.6)], sharp=(0, 4)), ls, None), skin[0])
+        wear(limb(f"crease_{s}_{i}", f"hand_{s}", cpoly([(a0 - 0.2, -2.5), (a0 + 0.2, -2.5), (a0 + 0.2, 2.4), (a0 - 0.2, 2.4)], sharp=(0, 1, 2, 3)), "$ink@0.45", None), "$ink@0.45")
+    # the knuckles: a lit ridge across the end of the fist, bumped once a finger
+    wear(limb(f"knuckles_{s}", f"hand_{s}", cpoly([(8.2, -2.2), (8.9, -1.6), (8.5, -0.7), (9.1, 0.0), (8.6, 0.8), (9.0, 1.6), (8.3, 2.2), (7.6, 2.0), (7.6, -2.0)]), ll or lb, None), skin[2])
+    # the thumb over the first two fingers, its nail at the end
+    wear(limb(f"thumb_{s}", f"hand_{s}", cpoly([(0.2, -2.6), (2.4, -3.1), (4.8, -2.7), (5.8, -1.9), (5.2, -1.1), (3.0, -1.3), (0.6, -1.6)]), ls, INK_HAIR), skin[0])
+    wear(limb(f"thumb_{s}_nail", f"hand_{s}", ell(0.7, 0.45), ll or lb, None, along=5.0, across=-2.1, rot=-20.0), skin[2])
 
 def cape_parts():
     # Three segments down the back, gathered at the shoulder and widening to a
@@ -332,22 +344,41 @@ clothes(put("brooch", "chest", (-6.4, -38.0), 0.0, circ(2.1), "$brass", INK_HAIR
 clothes(put("brooch_in", "chest", (-6.4, -38.0), 0.0, circ(1.0), "$crimson.dark", None))
 clothes(put("brooch_lit", "chest", (-7.1, -38.7), 0.0, circ(0.5), "$brass.light", None))
 
-wear(limb("neck", "neck", cpoly([(-1.0, -2.9), (3.5, -2.6), (7.4, -2.5), (7.8, 0.0), (7.4, 2.5), (3.5, 2.9), (-1.0, 3.3)]), SKIN[0], INK_HAIR), SKIN[0])
-wear(limb("neck_shade", "neck", cpoly([(2.0, -1.4), (6.6, -1.6), (7.0, 1.6), (4.0, 2.4), (1.6, 1.4)]), SKIN[1], None), SKIN[1])        # under the jaw
-wear(limb("throat_line", "neck", rect(4.6, 0.5, 0.2), "$ink@0.25", None, along=4.2, across=-1.4, rot=4.0), "$ink@0.25")
+# the shoulder line under the neck: the trapezius sloping from the skull base out to both
+# acromions, the clavicles across the front. Covered by the cowl; the mannequin shows them.
+wear(put("trapezius", "chest", (0.0, 0.0), 0.0, cpoly([(-3.4, -43.6), (0.6, -44.6), (7.4, -41.4), (6.2, -39.6), (-2.0, -41.6), (-8.8, -38.4), (-9.4, -37.2)], sharp=(0, 1, 2)), SKIN[1], None, opacity=0.5), SKIN[1])
+wear(put("trapezius_lit", "chest", (0.0, 0.0), 0.0, cpoly([(-3.0, -43.0), (0.4, -43.8), (-1.4, -41.6), (-7.0, -38.8)]), SKIN[2], None, opacity=0.7), SKIN[2])
+wear(put("clavicle", "chest", (0.0, 0.0), 0.0, cpoly([(1.2, -40.6), (7.0, -39.8), (7.0, -39.2), (1.0, -39.9), (-5.6, -38.8), (-5.6, -39.4)], sharp=(0, 1, 2, 3, 4, 5)), "$ink@0.3", None), "$ink@0.3")
+# the neck: 0.45 of a head deep, leaning forward off the shoulders; the sternocleidomastoid runs
+# from behind the ear down to the notch of the collarbones, and the throat is in the jaw's shade
+wear(limb("neck", "neck", cpoly([(-1.2, -3.4), (3.5, -3.2), (7.6, -3.0), (8.0, 0.0), (7.6, 3.0), (3.5, 3.5), (-1.2, 3.9)]), SKIN[0], INK_HAIR), SKIN[0])
+wear(limb("neck_shade", "neck", cpoly([(3.6, -2.2), (7.2, -2.4), (7.6, 2.0), (5.2, 3.0), (3.0, 1.6)]), SKIN[1], None), SKIN[1])        # under the jaw
+wear(limb("sternomastoid", "neck", cpoly([(-0.6, 2.4), (2.4, 1.0), (5.4, -0.6), (7.0, -1.4), (7.2, -0.4), (5.6, 0.6), (2.8, 2.2), (-0.4, 3.4)], sharp=(0, 3, 4, 7)), SKIN[2], None, opacity=0.6), SKIN[2])
+wear(limb("throat_line", "neck", rect(3.6, 0.5, 0.2), "$ink@0.22", None, along=3.0, across=-2.0, rot=6.0), "$ink@0.22")
 
 # ---- the head, on its bone: along is up the skull, across is forward. One
-# profile from the crown round the face to the nape: brow ridge, nose, lips, chin.
-HEAD_C = [(16.9, -0.4), (16.3, 4.2), (13.6, 6.3), (12.6, 6.7), (10.8, 6.4), (8.0, 7.8), (7.0, 8.4), (6.0, 6.7), (4.8, 6.9), (4.0, 6.3), (3.2, 6.8), (1.6, 5.9), (0.4, 3.6), (0.6, 0.0), (1.8, -3.2), (4.6, -5.6), (9.0, -7.3), (13.6, -6.2), (16.4, -3.4)]
-HEAD_SHARP = (6, 7, 12)
+# profile from the crown round the face to the nape. The face is in thirds:
+# the brow a third of the way down from the hairline, the nose's base a third
+# above the chin, the eye on the skull's midline (half way from crown to chin),
+# the mouth a third of the way from the nose to the chin, the ear between the
+# brow and the nose's base, set just behind the skull's mid-depth.
+CROWN, CHIN = 16.9, 0.4
+EYE_LINE = (CROWN + CHIN) / 2          # 8.65
+BROW_LINE, NOSE_BASE, MOUTH_LINE = 11.2, 5.9, 4.1
+HEAD_C = [(CROWN, -0.4), (16.0, 4.6), (13.6, 6.0), (BROW_LINE, 6.9), (10.0, 6.2), (8.0, 7.4), (6.6, 8.6), (NOSE_BASE, 7.5), (5.3, 6.2), (4.7, 6.8), (MOUTH_LINE, 6.3), (3.4, 6.7), (2.4, 5.8), (1.3, 6.2), (CHIN, 4.0), (0.6, 0.0), (2.0, -3.4), (4.6, -5.8), (9.0, -7.4), (13.6, -6.3), (16.4, -3.4)]
+HEAD_SHARP = (6, 14)
 limb("head", "head", cpoly(HEAD_C, sharp=HEAD_SHARP), SKIN[0], INK_THIN)
-limb("jaw_shade", "head", cpoly([(0.9, -2.4), (0.9, 1.2), (1.9, 4.2), (3.4, 4.6), (2.9, 1.6), (3.0, -1.6)]), SKIN[1], None)
-limb("cheek_shade", "head", cpoly([(8.2, 3.4), (6.4, 5.6), (5.2, 3.6), (6.8, 2.0)]), SKIN[1], None, opacity=0.6)
-limb("brow_lit", "head", ell(2.4, 1.9), SKIN[2], None, along=13.0, across=3.4, rot=-24.0)
+limb("jaw_shade", "head", cpoly([(0.9, -2.6), (0.8, 1.4), (1.6, 4.4), (3.2, 4.8), (2.8, 1.8), (3.0, -1.8)]), SKIN[1], None)
+limb("temple_shade", "head", cpoly([(12.6, 1.0), (11.0, 2.8), (9.4, 2.4), (9.6, 0.6), (11.2, -0.4)]), SKIN[1], None, opacity=0.45)
+limb("cheek_lit", "head", cpoly([(8.2, 2.6), (7.4, 5.0), (6.0, 5.4), (5.6, 3.6), (6.8, 2.0)]), SKIN[2], None, opacity=0.55)          # the zygomatic
+limb("cheek_shade", "head", cpoly([(5.6, 3.0), (5.0, 5.4), (3.8, 4.8), (3.6, 3.2), (4.6, 2.2)]), SKIN[1], None, opacity=0.5)       # under it
+limb("brow_lit", "head", ell(2.2, 1.7), SKIN[2], None, along=13.2, across=3.6, rot=-24.0)
 limb("hair", "head", cpoly([(13.6, 5.6), (16.2, 4.0), (17.4, 0.8), (16.8, -3.2), (14.6, -6.2), (10.6, -7.8), (6.8, -7.2), (4.6, -5.4), (5.2, -4.4), (7.4, -5.6), (10.0, -6.0), (13.0, -4.6), (15.0, -1.6), (15.2, 2.0), (14.0, 4.4)], sharp=(0, 7, 8, 14)), "$hair", INK_HAIR)
 limb("hair_lit", "head", ell(1.6, 3.2), "$hair.light", None, along=15.4, across=-1.4, rot=22.0)
-limb("ear", "head", cpoly([(9.0, -3.2), (9.4, -1.6), (7.8, -0.8), (6.0, -1.4), (5.6, -3.0), (7.0, -4.4)]), SKIN[0], INK_HAIR)
-limb("ear_in", "head", cpoly([(8.4, -2.8), (8.2, -1.8), (7.0, -1.6), (6.6, -2.8), (7.4, -3.6)]), SKIN[1], None)
+# the ear: from the brow line to the nose's base, the helix curling at the back, the lobe at the front
+limb("ear", "head", cpoly([(11.0, -2.0), (10.6, -3.5), (8.8, -4.2), (7.0, -3.7), (6.0, -2.2), (6.6, -0.7), (8.2, -0.3), (10.2, -0.8)]), SKIN[0], INK_HAIR)
+limb("ear_in", "head", cpoly([(10.0, -2.2), (9.6, -3.2), (8.2, -3.4), (7.2, -2.4), (7.6, -1.2), (8.8, -1.0)]), SKIN[1], None)
+limb("ear_lobe", "head", ell(0.7, 0.9), SKIN[2], None, along=6.9, across=-1.5, opacity=0.6)
 # the hood, up: a C around the skull with a peak over the brow, open at the
 # face, its lining showing crimson along the opening, the face in its shadow
 HOOD_EDGE = [(-2.8, 0.6), (2.8, 2.4), (8.2, 2.8), (12.0, 5.2), (14.8, 8.8)]
@@ -361,14 +392,23 @@ for k, (a, b) in enumerate((((16.6, 1.0), (10.0, -8.8)), ((13.8, 4.8), (6.2, -7.
 clothes(limb("hood_rim", "head", cpoly([(18.4, 3.4), (19.2, -1.6), (17.2, -7.4), (16.6, -7.0), (18.4, -1.6), (17.6, 3.0)], sharp=(0, 2, 3, 5)), "$cloak.light2", None, opacity=0.7))
 clothes(limb("hood_lining", "head", cpoly(HOOD_EDGE + [(13.4, 9.0), (11.0, 6.6), (8.0, 4.4), (2.8, 4.0), (-2.2, 2.4)], sharp=(0, 4, 5, 9)), "$crimson", None))
 clothes(limb("hood_lining_dark", "head", cpoly([(-2.8, 0.6), (2.8, 2.4), (2.8, 4.0), (-2.2, 2.4)], sharp=(0, 1, 2, 3)), "$crimson.dark", None))
-limb("eye_white", "head", cpoly([(9.0, 3.2), (10.4, 3.0), (10.9, 4.6), (10.2, 6.0), (8.8, 5.8)]), "$bone", None, opacity=0.9)
-limb("eye", "head", ell(0.9, 0.9), "$ink", None, along=9.8, across=4.8)
-limb("eye_glint", "head", circ(0.4), "$white", None, along=10.2, across=4.4, opacity=0.85)
-limb("lid", "head", cpoly([(10.2, 2.8), (11.4, 3.6), (11.6, 5.6), (10.6, 6.2), (10.4, 5.2), (10.2, 3.6)], sharp=(0, 3)), SKIN[1], None)
-limb("brow", "head", cpoly([(12.2, 2.6), (12.8, 4.6), (12.4, 6.4), (11.8, 6.2), (12.0, 4.6), (11.4, 3.0)], sharp=(0, 2, 3, 5)), "$hair", None)
-limb("nostril", "head", circ(0.45), SKIN[1], None, along=6.4, across=6.6)
-limb("mouth", "head", cpoly([(4.2, 4.4), (4.4, 6.6), (3.9, 6.5), (3.7, 4.6)], sharp=(0, 1, 2, 3)), "$ink@0.6", None)
-limb("lip_lit", "head", ell(0.45, 0.9), SKIN[2], None, along=4.9, across=6.4)
+# the eye on the midline: a wedge pointing forward, the white behind the iris, the lid folded over it, lashes dark;
+# the brow a tapered stroke thickest toward the nose
+limb("eye_white", "head", cpoly([(EYE_LINE + 0.9, 3.2), (EYE_LINE + 0.6, 5.6), (EYE_LINE - 0.7, 5.4), (EYE_LINE - 0.9, 3.4)]), "$bone", None, opacity=0.9)
+limb("eye", "head", ell(0.75, 0.65), "$ink", None, along=EYE_LINE, across=4.9)
+limb("eye_glint", "head", circ(0.3), "$white", None, along=EYE_LINE + 0.3, across=4.6, opacity=0.85)
+limb("lid", "head", cpoly([(EYE_LINE + 1.4, 2.8), (EYE_LINE + 1.1, 4.4), (EYE_LINE + 0.7, 5.9), (EYE_LINE + 0.2, 5.8), (EYE_LINE + 0.5, 4.6), (EYE_LINE + 0.7, 3.2)], sharp=(0, 2, 3, 5)), SKIN[1], None)
+limb("lash", "head", cpoly([(EYE_LINE + 0.8, 3.0), (EYE_LINE + 0.6, 4.6), (EYE_LINE + 0.4, 5.9), (EYE_LINE + 0.1, 5.8), (EYE_LINE + 0.3, 4.6), (EYE_LINE + 0.5, 3.1)], sharp=(0, 2, 3, 5)), "$ink@0.7", None)
+limb("brow", "head", cpoly([(BROW_LINE + 0.5, 2.6), (BROW_LINE + 0.8, 4.6), (BROW_LINE + 0.4, 6.7), (BROW_LINE - 0.5, 6.6), (BROW_LINE - 0.2, 4.7), (BROW_LINE - 0.1, 2.9)], sharp=(0, 2, 3, 5)), "$hair", None)
+# the nose: the wing (ala) curling back from the tip, the nostril under it, the bridge lit
+limb("nose_bridge_lit", "head", cpoly([(10.2, 5.8), (8.4, 6.8), (7.2, 7.6), (7.0, 6.8), (8.2, 6.1), (9.8, 5.3)], sharp=(0, 2, 3, 5)), SKIN[2], None, opacity=0.6)
+limb("nose_wing", "head", cpoly([(7.2, 5.2), (6.4, 6.4), (5.6, 6.2), (5.6, 5.0), (6.4, 4.6)]), SKIN[1], None, opacity=0.5)
+limb("nostril", "head", ell(0.35, 0.55), "$ink@0.6", None, along=NOSE_BASE - 0.2, across=6.6)
+# the mouth: the line between the lips from the corner forward, the upper lip in shade, the lower lip lit
+limb("mouth", "head", cpoly([(MOUTH_LINE + 0.25, 4.2), (MOUTH_LINE + 0.15, 5.4), (MOUTH_LINE, 6.5), (MOUTH_LINE - 0.3, 6.4), (MOUTH_LINE - 0.2, 5.4), (MOUTH_LINE - 0.15, 4.3)], sharp=(0, 2, 3, 5)), "$ink@0.65", None)
+limb("lip_upper", "head", cpoly([(5.2, 5.6), (4.8, 6.6), (MOUTH_LINE + 0.1, 6.4), (MOUTH_LINE + 0.2, 5.2)]), SKIN[1], None, opacity=0.55)
+limb("lip_lower_lit", "head", ell(0.45, 0.8), SKIN[2], None, along=MOUTH_LINE - 0.7, across=6.3)
+limb("chin_lit", "head", ell(0.9, 0.7), SKIN[2], None, along=1.6, across=5.4, opacity=0.6)
 
 # ---- near side, over everything; the sword's grip lies in the fist and the blade runs on past it
 def sword_grip():
@@ -394,7 +434,7 @@ sword_blade()
 
 RIG.check()
 
-HOOD = ["hood_shadow", "hood", "hood_shade", "hood_lit", "hood_fold_0", "hood_fold_1", "hood_lining", "hood_lining_dark"]
+HOOD = ["hood_shadow", "hood", "hood_shade", "hood_lit", "hood_rim", "hood_fold_0", "hood_fold_1", "hood_lining", "hood_lining_dark"]
 variants = {
     "unhooded": {
         "description": "The hood thrown back: the same figure bareheaded, the hair and the ear showing over the cowl.",
