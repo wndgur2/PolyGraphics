@@ -449,7 +449,7 @@ def idle_pose(t):
     return plant(pose, {"n": REST_ANKLE["n"], "f": REST_ANKLE["f"]}, {"n": 0.0, "f": 0.0})
 
 # ---- walk: contact, recoil, passing, high — twice, the far leg half a loop behind
-STRIDE = 15.0
+STRIDE = 18.0   # a step of 36px = 0.3 of stature — a relaxed walk; a brisk one is 0.4
 def step(u):
     """The ankle's travel, its lift and the foot's pitch at phase `u` of a step (contact at 0)."""
     u %= 1.0
@@ -488,7 +488,7 @@ def walk_pose(t):
     return plant(pose, ankles, pitch)
 
 # ---- run: a short stance that drives back, a flight, the heel kicking up behind and the knee driving through
-RUN_STRIDE = 22.0
+RUN_STRIDE = 29.0   # a step of 58px ≈ 0.5 of stature — a run; a sprint is 0.6–0.7
 def run_step(u):
     u %= 1.0
     if u < 0.4:  # stance: the foot lands under the body and drives back
@@ -499,12 +499,12 @@ def run_step(u):
     else:        # flight and swing: the heel comes up high behind, the knee drives forward, the foot reaches down
         s = (u - 0.4) / 0.6
         dx = lerp(-RUN_STRIDE, RUN_STRIDE * 0.55, smooth(0.0, 1.0, s))
-        lift = 4.5 * (1 - s) + 17.0 * math.sin(math.pi * s ** 0.85)
+        lift = 4.5 * (1 - s) + 19.0 * math.sin(math.pi * s ** 0.85)
         pitch = lerp(34.0, -4.0, smooth(0.15, 1.0, s))
     return dx, lift, pitch
 
 def run_pose(t):
-    bob = 2.0 - 5.0 * math.sin(2 * math.pi * (t - 0.2)) ** 2          # highest in flight, lowest mid-stance (the down, a beat after contact)
+    bob = 2.5 - 7.0 * math.sin(2 * math.pi * (t - 0.2)) ** 2          # highest in flight, lowest mid-stance (the down, a beat after contact); 6% of stature
     pose = {"body": (1.0 * cyc(2 * t, 0.05), bob, 13.0 + 2.5 * cyc(2 * t, 0.15))}
     pose["spine"] = -1.5
     pose["chest"] = -4.0 - 2.0 * cyc(2 * t, 0.1)
@@ -667,13 +667,13 @@ animations = {
     },
     "walk": {
         "description": "Contact, recoil, passing, high — twice a loop, the far leg half a loop behind the near. Each ankle is solved to the ground: the heel lands toe-up, the foot flattens and slides back under the body, the heel lifts and pushes off, and the leg swings through bent with the toe hanging. The body is lowest on contact and highest passing, leaning four degrees into the walk; the arms swing against the leg on their side, the elbow bending as the arm comes forward; the cloak trails and sways a beat behind each step, further down the hem.",
-        "duration": 0.8,
+        "duration": 1.0,                                               # two steps: 120 steps a minute, the walking cadence
         "cues": {"contact": 0.0, "contact_far": 0.5},
         "tracks": tracks(walk_pose, keyset(20)),
     },
     "run": {
         "description": "A short stance that lands under the body and drives back, then flight: the heel kicks up high behind, the knee drives forward and the foot reaches down for the next step. The body leans thirteen degrees, is highest in the air and lowest mid-stance; the arms pump bent at the elbow, fists closed, against the leg on their side; the cloak streams out behind.",
-        "duration": 0.5,
+        "duration": 0.64,                                              # two steps: ~190 a minute, a run's cadence
         "cues": {"contact": 0.0, "contact_far": 0.5},
         "tracks": tracks(run_pose, keyset(20)),
     },
