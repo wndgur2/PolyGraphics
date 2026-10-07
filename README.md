@@ -60,7 +60,7 @@ docs/                     reference-analysis.md — why this exists · app-desig
 
 An **app** is whatever consumes a bundle: one game, one launcher, one screen. It is a directory under
 `apps/`, and the directory is the namespace — every document it holds has an id starting with `<id>.`, and
-its bundle is `dist/<id>/`. `apps/ss/` is The Feelers' roster (`ss` is its historical id, from when the game was called Shape Survivors: the display name moved, and the namespace and every id under it stayed); `apps/demo/` is the worked examples
+its bundle is `dist/<id>/`. `apps/human/` is a human figure drawn to proportion (seven and a half heads, 192×192, on a skeleton — [docs/human-figure.md](docs/human-figure.md)), the template for a character that has to read as a person; `apps/ss/` is The Feelers' roster (`ss` is its historical id, from when the game was called Shape Survivors: the display name moved, and the namespace and every id under it stayed); `apps/demo/` is the worked examples
 this README draws on, and the template for the next app.
 
 An app owns its **palette** (`tokens.json`, over `tokens/base.json`), its **categories**, the **floor** its

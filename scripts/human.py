@@ -44,6 +44,8 @@ meter (scripts/motion.ts) and the inspect page before the next:
   4  the clips a fight needs: attack, hurt, death and a dodge roll, each a
      pose function shaped in time — an anticipation, a hold, a release that
      arrives fast, a recovery
+  5  polish: folds down the cloak, a glint in the eye, an idle with a glance
+     in it, the hood-down state, baselines
   3  the costume: a hood over the face, a cloak off the shoulders in three
      hinged segments with a torn hem, a leather jerkin belted at the waist
      with a pouch, dark cloth under it, bracers, gloves, tall boots, and a
@@ -204,6 +206,12 @@ def cape_parts():
         clothes(limb(f"{n}_shade", n, poly([(a, c + 0.5) for a, c in inner] + [(a, c + 3.4) for a, c in inner][::-1]), shade, None))
         back = [pts[1], pts[2]]
         clothes(limb(f"{n}_lit", n, poly([(a, c - 0.5) for a, c in back] + [(a, c - 2.2) for a, c in back][::-1]), lit, None))
+        # two folds down each segment, where the cloth gathers, each a little further back than the one above
+        (a0, b0), (a1, b1) = W[i], W[i + 1]
+        L = CAPE[i][0]
+        for k, f in enumerate((0.36, 0.68)):
+            c0, c1 = a0 + f * (b0 - a0), a1 + f * (b1 - a1)
+            clothes(limb(f"{n}_fold_{k}", n, poly([(1.5, c0 - 0.5), (L - 1.5, c1 - 0.7), (L - 1.5, c1 + 0.7), (1.5, c0 + 0.5)]), shade, None, opacity=0.55))
 
 # ---- the cloak and the far side, behind everything
 cape_parts()
@@ -270,6 +278,7 @@ clothes(limb("hood_lit", "head", poly([(14.6, 7.2), (18.0, 3.4), (18.6, -1.2), (
 clothes(limb("hood_lining", "head", poly(HOOD_EDGE + [(12.6, 8.4), (10.6, 6.0), (7.8, 3.8), (3.0, 3.6), (-1.8, 2.0)]), "$crimson", None))
 clothes(limb("hood_lining_dark", "head", poly([(-2.4, 0.2), (3.0, 2.0), (3.0, 3.6), (-1.8, 2.0)]), "$crimson.dark", None))
 limb("eye", "head", ell(0.8, 1.5), "$ink", None, along=9.6, across=4.6)
+limb("eye_glint", "head", circ(0.45), "$white", None, along=9.9, across=4.1, opacity=0.8)
 limb("brow", "head", rect(0.9, 3.0, 0.4), "$hair", None, along=11.5, across=5.0, rot=-6.0)
 limb("mouth", "head", ell(0.5, 1.3), SKIN[1], None, along=3.4, across=4.8)
 limb("nose", "head", poly([(7.6, 5.6), (5.6, 7.8), (4.4, 5.8)]), SKIN[0], INK_HAIR)
@@ -293,7 +302,12 @@ sword_blade()
 
 RIG.check()
 
+HOOD = ["hood_shadow", "hood", "hood_shade", "hood_lit", "hood_lining", "hood_lining_dark"]
 variants = {
+    "unhooded": {
+        "description": "The hood thrown back: the same figure bareheaded, the hair and the ear showing over the cowl.",
+        "remove": HOOD,
+    },
     "bare": {
         "description": "The mannequin under the clothes: the same body with nothing on it, one material in four values — passes 1 and 2, kept so the figure can be judged as a figure.",
         "set": dict(sorted(BARE_SET.items())),
@@ -331,14 +345,15 @@ def cape(pose, trail, sway, t, lag=0.1):
 def idle_pose(t):
     breath = 0.5 - 0.5 * math.cos(2 * math.pi * t)                 # in on the first half, out on the second
     sway = cyc(t)
-    pose = {"body": (0.7 * sway, -1.1 * breath, 0.8 * sway)}
-    pose["spine"] = -1.0 * breath
-    pose["chest"] = -2.0 * breath
-    pose["neck"] = 1.4 * breath
-    pose["head"] = 1.6 * breath - 0.8 * sway
-    arms(pose, 2.6 * breath - 2.0 * sway, -2.0 * breath, 0.0, "n")
-    arms(pose, -2.6 * breath + 2.0 * sway, -2.0 * breath, 0.0, "f")
-    for i in range(3): pose[f"cape_{i}"] = -1.2 * cyc(t, -0.08 * (i + 1)) - 0.6 * breath
+    look = smooth(0.28, 0.46, t) * (1 - smooth(0.68, 0.86, t))     # a glance up and ahead, mid-loop
+    pose = {"body": (1.0 * sway, -1.4 * breath, 1.0 * sway)}
+    pose["spine"] = -1.2 * breath
+    pose["chest"] = -2.6 * breath - 1.0 * look
+    pose["neck"] = 1.6 * breath - 4.0 * look
+    pose["head"] = 2.0 * breath - 5.0 * look - 0.8 * sway
+    arms(pose, 3.2 * breath - 2.4 * sway, -2.6 * breath, 4.0 * look - 3.0 * breath, "n")
+    arms(pose, -3.2 * breath + 2.4 * sway, -2.6 * breath, 0.0, "f")
+    for i in range(3): pose[f"cape_{i}"] = -1.8 * cyc(t, -0.1 * (i + 1)) - 0.8 * breath
     return plant(pose, {"n": REST_ANKLE["n"], "f": REST_ANKLE["f"]}, {"n": 0.0, "f": 0.0})
 
 # ---- walk: contact, recoil, passing, high — twice, the far leg half a loop behind
@@ -548,7 +563,7 @@ def roll_pose(t):
 
 animations = {
     "idle": {
-        "description": "The breath and the weight: the chest lifts and the shoulders rise on the in-breath, the head nods back a degree, the arms hang and drift, the cloak stirs; the hips settle from foot to foot with the feet planted.",
+        "description": "The breath and the weight: the chest lifts and the shoulders rise on the in-breath, the head nods back a degree, the arms hang and drift and the sword's point with them, the cloak stirs; the hips settle from foot to foot with the feet planted, and mid-loop the head comes up to look ahead.",
         "duration": 2.4,
         "tracks": tracks(idle_pose, keyset(16)),
     },
