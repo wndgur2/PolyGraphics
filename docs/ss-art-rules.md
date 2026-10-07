@@ -135,3 +135,10 @@ or three values, the light on its upper-left with a lit edge there, the dark whe
 that says what happened to it (a crack with a lit lip, a chipped corner, lichen on the shade side), small things
 gathered on a third of it, and a broken silhouette (a chip at the foot, a jagged break). It keeps its size, anchor
 and shadow when it is redrawn, because feelers fits the collider to the footprint.
+
+The two documents that are not a tile or a prop — the great feeler at the base's edges (`ss.env.antenna`) and the
+earth behind the pages (`ss.env.menu`) — keep their hand-drawn layers and take their detail from a script that
+runs over them (`antenna.py`, `menu_ground.py`): a joint ring, a lighter band and setae placed in each segment's
+own frame with the segment's tracks, so the rig still moves as one; stones, chitin, roots and seam crystals drawn
+into the bands and kept out of the middle, where the page sits. Both are idempotent, so the hand-drawn parts stay
+the source.

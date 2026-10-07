@@ -382,6 +382,8 @@ def rubble():
         P("chip_a_top", poly([(-10, -0.6), (-6, -2.6), (-3.4, -0.2), (-7.4, 1.4)]), "$smoke.light2"),
         *pebble("chip_b", 5, 2, 3.6, 2.6, "$smoke.light", 18),
         P("chip_b_top", poly([(2.4, 0.4), (6, -1), (8, 1.2), (4.6, 2.4)]), "$smoke.light2"),
+        P("chip_a_shade", poly([(-3.4, -0.2), (-2.8, 2.6), (-6, 4), (-7.4, 1.4)]), "$smoke.dark@0.55"),
+        P("chip_b_shade", poly([(8, 1.2), (8.4, 3.6), (5.6, 4.6), (4.6, 2.4)]), "$smoke.dark@0.55"),
         *pebble("chip_c", 0, 6.5, 2.4, 1.6, "$smoke", 0),
         *pebble("chip_d", -11, 6, 1.6, 1.1, "$smoke", 30),
         *pebble("chip_e", 10, -3, 1.9, 1.3, "$smoke.light", -25),
@@ -408,9 +410,14 @@ def ruins():
             cut(f"{prefix}_lit", body, x - w / 2 - 1, x - w / 6, "$carapace.light", axis=0),
             cut(f"{prefix}_shade", body, x + w / 6, x + w / 2 + 1, "$carapace.dark", axis=0),
             band(f"{prefix}_seam", [(x - w / 2 + 0.4, y - 1), (x + w / 2 - 0.4, y + 0.6)], 0.7, "$ink@0.5"),
-            lit_edge(f"{prefix}_top", x - w / 2 + 0.8 + lean, x + w / 2 - 0.8 + lean, y - h / 2 + 0.6, 0.8, "$white@0.3"),
-            # The hive's signal has got into the seams of its own stone.
-            band(f"{prefix}_vein", [(x - 1, y + 1), (x + 1.4, y + h / 2 - 1)], 0.6, "$pheromone@0.5"),
+            # The top face, seen from above and a little to the front: pale, with a dark front edge.
+            P(f"{prefix}_cap", poly([(x - w / 2 + lean, y - h / 2), (x + w / 2 + lean, y - h / 2), (x + w / 2 + lean - 0.6, y - h / 2 + 2.2), (x - w / 2 + lean + 0.6, y - h / 2 + 2.2)]), "$carapace.light2"),
+            band(f"{prefix}_cap_edge", [(x - w / 2 + lean + 0.6, y - h / 2 + 2.4), (x + w / 2 + lean - 0.6, y - h / 2 + 2.4)], 0.7, "$ink@0.5"),
+            # A chip out of one corner, and a crack from it.
+            P(f"{prefix}_chip", poly([(x + w / 2 + lean, y - h / 2), (x + w / 2 + lean - 2.6, y - h / 2), (x + w / 2 + lean - 0.4, y - h / 2 + 3.2)]), "$carapace.dark2"),
+            band(f"{prefix}_crack", [(x + w / 2 + lean - 1.2, y - h / 2 + 3), (x + w / 4, y - 2)], 0.6, "$ink@0.45"),
+            # The hive's signal has got into one seam of its own stone, faintly.
+            band(f"{prefix}_vein", [(x - 1, y + 2), (x + 1, y + h / 2 - 1.5)], 0.5, "$pheromone@0.3"),
             ao(f"{prefix}_ao", x, y + h / 2 - 0.6, w + 2, 1.4, 0.35),
         ] if p]
 
@@ -503,8 +510,10 @@ def husk():
             P(f"rib{i}_crest", {"kind": "ring", "r": r2(r + 1.1), "width": 0.6, "from": 196, "to": 300}, "$white@0.3", at=(0, 9)),
         ]],
         # A hole punched in the shell, dark inside, and the crack running from it.
-        P("hole", poly([(5, -6), (10, -8), (12, -3), (8, 0), (4, -2)]), "$ink@0.8"),
-        P("hole_rim", poly([(4, -6.6), (10.4, -8.8), (12.8, -2.8), (8.4, 0.8), (3.4, -1.6)]), None, stroke=INK_HAIR),
+        P("hole_lip", poly([(3.6, -6.2), (6, -9.6), (10.8, -9.2), (13.6, -5), (12.2, -0.4), (8, 1.6), (4.4, -0.6)]), "$husk.dark2"),
+        P("hole", poly([(5, -6), (7, -8.4), (10.4, -8), (12.4, -4.2), (11.2, -1), (8, 0.2), (5.2, -1.8)]), "$ink@0.85"),
+        P("hole_far", poly([(9.6, -1.2), (11.6, -2.6), (12.4, -4.2), (11, -1.2)]), "$husk.dark@0.6"),
+        P("hole_chip", poly([(14.2, -6.4), (16, -8.2), (16.8, -5.6)]), "$husk.dark", stroke=INK_HAIR),
         *crack("crack", [(12, -3), (15, 1), (14, 6)], 0.8, "$ink@0.5", "$white@0.25"),
         # The broken edge where the rest of it went, and shards of it on the ground.
         P("break", poly([(-21, 9), (-18, 4), (-15, 7), (-12, 3), (-9, 9)]), "$husk.dark2", stroke=INK_HAIR),

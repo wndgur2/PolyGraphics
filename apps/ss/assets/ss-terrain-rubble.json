@@ -14,6 +14,8 @@
     {"id": "chip_b", "at": [5.0, 2.0], "rot": 18.0, "shape": {"kind": "ellipse", "rx": 3.6, "ry": 2.6}, "fill": "$smoke.light", "stroke": {"color": "$ink", "width": "hair"}},
     {"id": "chip_b_lit", "at": [3.92, 1.09], "shape": {"kind": "circle", "r": 0.83}, "fill": "$white@0.4"},
     {"id": "chip_b_top", "shape": {"kind": "poly", "points": [[2.4, 0.4], [6.0, -1.0], [8.0, 1.2], [4.6, 2.4]]}, "fill": "$smoke.light2"},
+    {"id": "chip_a_shade", "shape": {"kind": "poly", "points": [[-3.4, -0.2], [-2.8, 2.6], [-6.0, 4.0], [-7.4, 1.4]]}, "fill": "$smoke.dark@0.55"},
+    {"id": "chip_b_shade", "shape": {"kind": "poly", "points": [[8.0, 1.2], [8.4, 3.6], [5.6, 4.6], [4.6, 2.4]]}, "fill": "$smoke.dark@0.55"},
     {"id": "chip_c_sh", "at": [0.6, 7.3], "shape": {"kind": "ellipse", "rx": 2.4, "ry": 1.28}, "fill": "$ink@0.4"},
     {"id": "chip_c", "at": [0.0, 6.5], "shape": {"kind": "ellipse", "rx": 2.4, "ry": 1.6}, "fill": "$smoke", "stroke": {"color": "$ink", "width": "hair"}},
     {"id": "chip_c_lit", "at": [-0.72, 5.94], "shape": {"kind": "circle", "r": 0.51}, "fill": "$white@0.4"},
