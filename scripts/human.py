@@ -4,9 +4,9 @@
 
 Seven and a half heads tall, seen three-quarter from the side and facing +x
 (the engine mirrors the frame to face left). One head is the unit: H = 16px,
-so the body stands 120px on a 192×192 canvas (room for the sword's swing) with the origin at the hips —
-the pelvis is the root the whole figure hangs from, and the ground is the
-sole line at +60.
+so the body stands 120px on a 192×192 canvas (room for the sword's swing)
+with the origin at the hips — the pelvis is the root the whole figure hangs
+from, and the ground is the sole line at +60.
 
     top of head   −60    0.0 H
     chin          −44    1.0 H
@@ -32,25 +32,43 @@ behind the far (left) one on screen and a little lower; the far arm hangs
 by the chest's line and is drawn under it, the near arm over it. The far
 limbs are a step darker and the far foot stands a pixel higher.
 
+Every outline is a closed Catmull-Rom curve through a few control points
+(`curve`), kinked where a form has a corner — the renderer joins points with
+straight lines, and a body drawn from its dozen bends comes out as elbows.
+The masses are drawn as muscle: a deltoid over the shoulder, the biceps and
+triceps along the upper arm, the forearm fullest under the elbow, the
+quadriceps and hamstring on the thigh, the calf high on the shin; the trunk
+is one shape from the shoulders to below the waist and one from the waist
+over the hips, the seam under the belt.
+
 Light is from the upper left, as the rest of the repo's: the lit side is the
 back and the top, the shade the front and the underside. Every mass carries a
 shade band along its front edge and the bigger ones a light along the back.
+
+The rest pose is a contrapposto: the weight on the far leg, the near knee
+eased, the elbows a little bent, the sword resting point-down and a touch
+back, the head a few degrees down.
 
 Built in passes, each one judged on the sheet (scripts/sheet.ts), the motion
 meter (scripts/motion.ts) and the inspect page before the next:
   1  a mannequin in three values of one material, idle and walk
   2  the body: shade and light bands, deltoids over the shoulder seams, hair,
      an eye, a brow and a mouth, and a run
-  4  the clips a fight needs: attack, hurt, death and a dodge roll, each a
-     pose function shaped in time — an anticipation, a hold, a release that
-     arrives fast, a recovery
-  5  polish: folds down the cloak, a glint in the eye, an idle with a glance
-     in it, the hood-down state, baselines
   3  the costume: a hood over the face, a cloak off the shoulders in three
      hinged segments with a torn hem, a leather jerkin belted at the waist
      with a pouch, dark cloth under it, bracers, gloves, tall boots, and a
      longsword carried point-down in the near hand. The mannequin stays as
      the `bare` state.
+  4  the clips a fight needs: attack, hurt, death and a dodge roll, each a
+     pose function shaped in time — an anticipation, a hold, a release that
+     arrives fast, a recovery
+  5  polish: folds down the cloak, a glint in the eye, an idle with a glance
+     in it, the hood-down state, baselines
+  6  precision: every outline a curve, the masses as muscle, a head with a
+     brow, a nose, lips and a chin, a fist with fingers, a boot with a heel
+     and a toe cap, the trunk in two pieces under the belt, a baldric and a
+     brooch, stitching, the contrapposto rest, and the walk with the chest
+     turning against the hips and the wrists lagging the arms
 """
 import math, os, sys
 
@@ -62,7 +80,7 @@ from rig import (Rig, R, D, r2, lerp, mix, smooth, cyc, wrap, keyset, ik2,
 H = 16.0                 # one head
 GROUND = 60.0            # the near sole line
 FAR_LIFT = 1.0           # the far foot stands this much higher on screen
-THIGH, SHIN = 28.0, 26.0
+THIGH, SHIN = 28.5, 26.5 # a pixel over the hip-to-sole drop, so a standing knee has somewhere to bend
 UPPER, FORE, HAND = 21.0, 19.0, 9.0
 FOOT_H = 6.0             # ankle to sole
 
@@ -74,11 +92,11 @@ bone = RIG.bone
 bone("pelvis", None, (0.0, 0.0), -90.0)
 bone("spine", "pelvis", (0.0, -3.0), -86.0, 15.0)                      # lumbar: leans forward going up
 bone("chest", "spine", B["spine"].end(), -93.0, 19.0)                   # thorax: leans back — the S
-bone("neck", "chest", B["chest"].end(), -78.0, 7.0)                     # forward, as a neck does
-bone("head", "neck", B["neck"].end(), -84.0, 8.0)                       # to the skull's centre
+bone("neck", "chest", B["chest"].end(), -76.0, 7.0)                     # forward, as a neck does
+bone("head", "neck", B["neck"].end(), -81.0, 8.0)                       # to the skull's centre, a few degrees down
 
-SHOULDER = {"n": (-5.0, -35.5), "f": (4.6, -37.5)}
-ARM_REST = {"n": (97.0, 82.0, 80.0), "f": (92.0, 79.0, 77.0)}           # upper, fore, hand headings
+SHOULDER = {"n": (-5.2, -35.4), "f": (4.8, -37.6)}
+ARM_REST = {"n": (100.0, 86.0, 80.0), "f": (90.0, 76.0, 72.0)}          # upper, fore, hand headings: elbows eased
 for s in ("n", "f"):
     u, f, h = ARM_REST[s]
     bone(f"arm_{s}_upper", "chest", SHOULDER[s], u, UPPER)
@@ -86,7 +104,9 @@ for s in ("n", "f"):
     bone(f"hand_{s}", f"arm_{s}_fore", B[f"arm_{s}_fore"].end(), h, HAND)
 
 HIP = {"n": (-2.0, 0.5), "f": (2.0, -0.5)}
-REST_ANKLE = {"n": (-2.0, GROUND - FOOT_H), "f": (4.0, GROUND - FAR_LIFT - FOOT_H)}
+# contrapposto: the far leg carries the weight under the hip, the near foot rests a little forward
+REST_ANKLE = {"n": (1.5, GROUND - FOOT_H), "f": (1.0, GROUND - FAR_LIFT - FOOT_H)}
+REST_PITCH = {"n": 0.0, "f": 0.0}
 def ground_of(s): return GROUND - (FAR_LIFT if s == "f" else 0.0)
 for s in ("n", "f"):
     a1, a2 = ik2(HIP[s], REST_ANKLE[s], THIGH, SHIN, +1)                 # the knee forward
@@ -104,6 +124,25 @@ RIG.seal()
 
 # ============================================================== 3. the parts
 put, on_bone = RIG.put, RIG.on_bone
+
+def curve(ctrl, per=4, sharp=()):
+    """
+    A closed Catmull-Rom curve through `ctrl`, `per` points a span. Indices in
+    `sharp` are corners: the point is tripled so the curve arrives and leaves it
+    straight. Returns the point list (for poly()).
+    """
+    c = []
+    for i, p in enumerate(ctrl):
+        c.extend([tuple(p)] * (3 if i in sharp else 1))
+    n = len(c); out = []
+    for i in range(n):
+        p0, p1, p2, p3 = c[(i - 1) % n], c[i], c[(i + 1) % n], c[(i + 2) % n]
+        if p1 == p2: continue
+        for k in range(per):
+            t = k / per; t2, t3 = t * t, t * t * t
+            out.append(tuple(0.5 * (2 * p1[j] + (-p0[j] + p2[j]) * t + (2 * p0[j] - 5 * p1[j] + 4 * p2[j] - p3[j]) * t2 + (-p0[j] + 3 * p1[j] - 3 * p2[j] + p3[j]) * t3) for j in (0, 1)))
+    return out
+def cpoly(ctrl, per=4, sharp=()): return poly(curve(ctrl, per, sharp))
 
 # ---- materials: each is (base, shade, light); the far side takes the next step down
 def ramp(tok): return (f"${tok}", f"${tok}.dark", f"${tok}.light")
@@ -130,171 +169,204 @@ def limb(name, bone_name, shape, fill, stroke=INK_HAIR, along=0.0, across=0.0, r
 # (along, across) in a bone's frame: along runs down the bone, across is to its
 # right-hand side — for a bone pointing down that is the BACK of the limb. The
 # light is upper-left, so on a hanging limb the back edge is lit and the front
-# edge is in shade; each limb polygon lists its front edge first, then its back.
-THIGH_PTS = [(-1.0, -4.6), (6.0, -5.2), (16.0, -4.6), (24.0, -3.8), (28.6, -3.4), (29.2, 0.0), (28.6, 3.4), (24.0, 3.8), (14.0, 4.6), (4.0, 5.4), (-1.0, 4.8)]
-SHIN_PTS = [(-0.6, -3.6), (0.0, -3.7), (8.0, -3.1), (18.0, -2.4), (26.0, -2.2), (26.6, 0.0), (26.0, 2.2), (18.0, 2.6), (10.0, 3.9), (4.0, 4.3), (0.0, 3.7), (-0.6, 0.0)]
-FOOT_PTS = [(-3.6, -0.6), (-4.6, 2.8), (-3.6, 6.0), (3.0, 6.2), (12.0, 6.2), (12.6, 4.6), (9.0, 2.6), (5.0, 1.0), (2.4, -1.2)]
-BOOT_PTS = [(9.0, -4.6), (8.6, -3.4), (18.0, -2.8), (26.0, -2.6), (26.6, 0.0), (26.0, 2.6), (18.0, 3.2), (10.4, 4.6), (9.4, 5.6)]
-UPPER_PTS = [(-1.0, -3.6), (2.0, -4.0), (9.0, -3.4), (16.0, -2.9), (21.4, -2.7), (22.0, 0.0), (21.4, 2.7), (16.0, 2.9), (8.0, 3.4), (2.0, 3.9), (-1.0, 3.5)]
-FORE_PTS = [(-0.6, -2.8), (3.0, -3.1), (7.0, -2.9), (14.0, -2.2), (19.0, -1.9), (19.6, 0.0), (19.0, 1.9), (14.0, 2.2), (7.0, 2.9), (3.0, 3.1), (-0.6, 2.8)]
-BRACER_PTS = [(5.0, -3.4), (14.0, -2.8), (18.6, -2.5), (19.0, 0.0), (18.6, 2.5), (14.0, 2.8), (5.0, 3.4)]
-HAND_PTS = [(-0.8, -2.2), (3.0, -2.6), (6.5, -2.4), (9.0, -1.2), (9.2, 0.8), (7.6, 2.4), (3.0, 2.6), (-0.8, 2.0)]
+# edge is in shade; each limb's control points list the front edge first, root
+# to tip, then the tip, then the back edge tip to root.
+THIGH_C = [(-1.6, -4.4), (5.0, -5.6), (14.0, -5.2), (22.0, -4.2), (28.6, -3.4), (29.6, 0.2), (28.6, 3.6), (22.0, 4.4), (12.0, 5.6), (4.0, 5.8), (-1.6, 4.2)]
+SHIN_C = [(-1.2, -3.8), (4.0, -3.7), (12.0, -3.1), (20.0, -2.6), (26.6, -2.4), (27.4, 0.0), (26.6, 2.3), (18.0, 2.9), (9.0, 4.8), (3.0, 4.4), (-1.2, 2.6)]
+UPPER_C = [(-1.6, -3.4), (3.0, -4.5), (10.0, -3.7), (17.0, -2.9), (21.6, -2.6), (22.4, 0.0), (21.6, 2.6), (16.0, 3.2), (8.0, 3.9), (2.0, 3.7), (-1.6, 2.8)]
+FORE_C = [(-1.2, -3.0), (4.0, -3.5), (10.0, -2.7), (16.0, -2.1), (19.4, -1.9), (20.2, 0.0), (19.4, 1.9), (14.0, 2.3), (6.0, 3.3), (2.0, 3.3), (-1.2, 2.4)]
+BRACER_C = [(5.2, -3.5), (11.0, -3.0), (18.8, -2.5), (19.4, 0.0), (18.8, 2.5), (11.0, 3.0), (5.2, 3.6)]
+# the fist, closed on the grip: a rounded block with the knuckles toward +along and the thumb over the fingers
+FIST_C = [(-0.8, -2.6), (3.0, -3.2), (7.0, -3.0), (9.0, -1.4), (9.6, 0.6), (8.8, 2.4), (5.0, 3.0), (0.4, 2.6)]
+# the foot: heel, arch, sole, toe cap, instep, ankle — a boot's shape
+FOOT_C = [(-3.8, -1.0), (-5.0, 1.6), (-4.4, 6.0), (2.0, 6.3), (12.2, 6.3), (13.8, 4.6), (11.0, 2.0), (5.0, 0.6), (2.0, -1.6)]
+BOOT_C = [(9.2, -4.6), (12.0, -3.6), (19.0, -2.9), (26.8, -2.6), (27.6, 0.0), (26.8, 2.6), (18.0, 3.3), (11.0, 5.0), (9.4, 5.8)]
 
-def band(pts, i0, i1, w, side, inset=0.35):
-    """A strip `w` deep along the edge pts[i0..i1] of a limb polygon, `inset` off it: side +1 goes toward +across (into a front edge), -1 the other way."""
-    edge = pts[i0:i1 + 1]
+def band(ctrl, i0, i1, w, side, inset=0.35, per=4):
+    """A strip `w` deep along the edge ctrl[i0..i1] of a limb, `inset` off it: side +1 goes toward +across (into a front edge), -1 the other way."""
+    edge = ctrl[i0:i1 + 1]
     outer = [(a, c + side * inset) for a, c in edge]
     inner = [(a, c + side * (inset + w)) for a, c in edge]
-    return poly(outer + inner[::-1])
+    return poly(curve(outer + inner[::-1], per, sharp=(0, len(edge) - 1, len(edge), 2 * len(edge) - 1)))
 
 def leg_parts(s, cloth, leather, skin, stroke):
     base, shade, lit = cloth
     lb, ls, ll = leather
-    wear(limb(f"thigh_{s}", f"leg_{s}_thigh", poly(THIGH_PTS), base, stroke), skin[0])
-    wear(limb(f"thigh_{s}_shade", f"leg_{s}_thigh", band(THIGH_PTS, 0, 4, 2.6, +1), shade, None), skin[1])
-    if lit: wear(limb(f"thigh_{s}_lit", f"leg_{s}_thigh", band(THIGH_PTS, 7, 10, 1.5, -1), lit, None), skin[2])
-    wear(limb(f"shin_{s}", f"leg_{s}_shin", poly(SHIN_PTS), base, stroke), skin[0])
-    wear(limb(f"shin_{s}_shade", f"leg_{s}_shin", band(SHIN_PTS, 0, 4, 1.9, +1), shade, None), skin[1])
-    if lit: wear(limb(f"calf_{s}_lit", f"leg_{s}_shin", band(SHIN_PTS, 7, 9, 1.3, -1), lit, None), skin[2])
-    wear(limb(f"knee_{s}", f"leg_{s}_shin", circ(3.3), base, None), skin[0])
-    # the boot: a tall shaft with its cuff turned over below the knee, over the shin and the foot
-    clothes(limb(f"boot_{s}", f"leg_{s}_shin", poly(BOOT_PTS), lb, stroke))
-    clothes(limb(f"boot_{s}_shade", f"leg_{s}_shin", band(BOOT_PTS, 0, 3, 1.8, +1, 0.5), ls, None))
-    clothes(limb(f"boot_{s}_cuff", f"leg_{s}_shin", poly([(7.6, -5.0), (12.2, -4.2), (12.6, 5.2), (8.0, 6.0)]), ls, INK_HAIR))
-    wear(limb(f"foot_{s}", f"foot_{s}", poly(FOOT_PTS), lb, stroke), skin[0])
-    wear(limb(f"foot_{s}_shade", f"foot_{s}", poly([(-3.0, 3.6), (-2.8, 5.4), (3.0, 5.6), (11.4, 5.6), (11.6, 4.4), (6.0, 3.4), (1.0, 3.2)]), ls, None), skin[1])
-    clothes(limb(f"heel_{s}", f"foot_{s}", poly([(-4.0, 3.2), (-3.4, 6.0), (1.6, 6.0), (1.2, 3.4)]), ls, None))
+    wear(limb(f"thigh_{s}", f"leg_{s}_thigh", cpoly(THIGH_C), base, stroke), skin[0])
+    wear(limb(f"thigh_{s}_shade", f"leg_{s}_thigh", band(THIGH_C, 0, 4, 2.6, +1), shade, None), skin[1])
+    if lit: wear(limb(f"thigh_{s}_lit", f"leg_{s}_thigh", band(THIGH_C, 7, 10, 1.5, -1), lit, None), skin[2])
+    wear(limb(f"shin_{s}", f"leg_{s}_shin", cpoly(SHIN_C), base, stroke), skin[0])
+    wear(limb(f"shin_{s}_shade", f"leg_{s}_shin", band(SHIN_C, 0, 4, 1.9, +1), shade, None), skin[1])
+    if lit: wear(limb(f"calf_{s}_lit", f"leg_{s}_shin", band(SHIN_C, 7, 9, 1.3, -1), lit, None), skin[2])
+    wear(limb(f"knee_{s}", f"leg_{s}_shin", ell(3.6, 3.3), base, None, along=0.4), skin[0])
+    # the boot: a tall shaft, the cuff turned over below the knee, a strap at the ankle, a heel and a toe cap
+    clothes(limb(f"boot_{s}", f"leg_{s}_shin", cpoly(BOOT_C, sharp=(0, 8)), lb, stroke))
+    clothes(limb(f"boot_{s}_shade", f"leg_{s}_shin", band(BOOT_C, 0, 3, 1.8, +1, 0.5), ls, None))
+    clothes(limb(f"boot_{s}_cuff", f"leg_{s}_shin", cpoly([(7.6, -5.2), (10.0, -4.6), (12.6, -4.2), (13.0, 0.0), (12.6, 5.4), (10.0, 6.2), (8.0, 6.0), (7.4, 0.0)], sharp=(0, 2, 4, 6)), ls, INK_HAIR))
+    clothes(limb(f"boot_{s}_cuff_lit", f"leg_{s}_shin", rect(1.2, 4.0, 0.4), ll or lb, None, along=8.6, across=3.4) if ll else limb(f"boot_{s}_cuff_edge", f"leg_{s}_shin", rect(0.6, 9.0, 0.3), ls, None, along=12.4))
+    wear(limb(f"foot_{s}", f"foot_{s}", cpoly(FOOT_C, sharp=(2, 3, 4)), lb, stroke), skin[0])
+    wear(limb(f"foot_{s}_shade", f"foot_{s}", cpoly([(-3.4, 3.4), (-3.2, 5.6), (2.0, 5.8), (11.6, 5.8), (12.2, 4.6), (7.0, 3.2), (1.0, 3.0)], sharp=(1, 2, 3)), ls, None), skin[1])
+    clothes(limb(f"heel_{s}", f"foot_{s}", cpoly([(-4.6, 3.0), (-4.0, 6.1), (1.8, 6.1), (1.4, 3.6)], sharp=(0, 1, 2, 3)), ls, None))
+    clothes(limb(f"toecap_{s}", f"foot_{s}", cpoly([(8.6, 1.4), (12.4, 2.6), (13.4, 4.8), (12.0, 5.9), (8.4, 5.9)], sharp=(3, 4)), ls, None))
+    clothes(limb(f"boot_{s}_strap", f"foot_{s}", cpoly([(-3.8, -0.2), (2.6, -0.8), (3.2, 1.2), (-3.4, 1.6)], sharp=(0, 1, 2, 3)), ls, None))
+    clothes(limb(f"boot_{s}_buckle", f"foot_{s}", rect(1.6, 1.4, 0.3), "$brass", None, along=0.4, across=0.4))
 
 def arm_parts(s, cloth, leather, skin, stroke):
     base, shade, lit = cloth
     lb, ls, ll = leather
-    wear(limb(f"arm_{s}_upper", f"arm_{s}_upper", poly(UPPER_PTS), base, stroke), skin[0])
-    wear(limb(f"arm_{s}_upper_shade", f"arm_{s}_upper", band(UPPER_PTS, 0, 4, 2.0, +1), shade, None), skin[1])
-    wear(limb(f"shoulder_{s}", f"arm_{s}_upper", ell(3.4, 3.9), base, None, along=1.6), skin[0])             # the deltoid over the seam
-    if lit: wear(limb(f"shoulder_{s}_lit", f"arm_{s}_upper", ell(2.0, 2.2), lit, None, along=1.4, across=1.2), skin[2])
-    wear(limb(f"arm_{s}_fore", f"arm_{s}_fore", poly(FORE_PTS), base, stroke), skin[0])
-    wear(limb(f"arm_{s}_fore_shade", f"arm_{s}_fore", band(FORE_PTS, 0, 4, 1.6, +1), shade, None), skin[1])
-    wear(limb(f"elbow_{s}", f"arm_{s}_fore", circ(2.5), base, None), skin[0])
+    wear(limb(f"arm_{s}_upper", f"arm_{s}_upper", cpoly(UPPER_C), base, stroke), skin[0])
+    wear(limb(f"arm_{s}_upper_shade", f"arm_{s}_upper", band(UPPER_C, 0, 4, 2.0, +1), shade, None), skin[1])
+    wear(limb(f"shoulder_{s}", f"arm_{s}_upper", cpoly([(-2.2, -3.2), (1.0, -4.6), (5.0, -4.2), (7.0, -1.0), (6.0, 2.6), (2.0, 4.2), (-2.0, 3.4), (-3.0, 0.0)]), base, None), skin[0])   # the deltoid over the seam
+    if lit: wear(limb(f"shoulder_{s}_lit", f"arm_{s}_upper", ell(2.4, 2.0), lit, None, along=1.2, across=1.4, rot=-20.0), skin[2])
+    wear(limb(f"arm_{s}_fore", f"arm_{s}_fore", cpoly(FORE_C), base, stroke), skin[0])
+    wear(limb(f"arm_{s}_fore_shade", f"arm_{s}_fore", band(FORE_C, 0, 4, 1.6, +1), shade, None), skin[1])
+    wear(limb(f"elbow_{s}", f"arm_{s}_fore", ell(2.8, 2.6), base, None, along=0.2), skin[0])
     # the bracer: wrapped leather from under the elbow to the wrist, with its straps
-    clothes(limb(f"bracer_{s}", f"arm_{s}_fore", poly(BRACER_PTS), lb, stroke))
-    clothes(limb(f"bracer_{s}_shade", f"arm_{s}_fore", band(BRACER_PTS, 0, 2, 1.4, +1, 0.5), ls, None))
+    clothes(limb(f"bracer_{s}", f"arm_{s}_fore", cpoly(BRACER_C, sharp=(0, 6)), lb, stroke))
+    clothes(limb(f"bracer_{s}_shade", f"arm_{s}_fore", band(BRACER_C, 0, 2, 1.4, +1, 0.5), ls, None))
     for i, x in enumerate((8.0, 12.5, 17.0)):
-        clothes(limb(f"strap_{s}_{i}", f"arm_{s}_fore", rect(0.8, 6.2, 0.3), ls, None, along=x))
-    wear(limb(f"hand_{s}", f"hand_{s}", poly(HAND_PTS), ls, stroke), skin[0])
-    wear(limb(f"thumb_{s}", f"hand_{s}", ell(2.2, 1.1), ls, None, along=2.6, across=-2.2, rot=-20.0), skin[0])
+        clothes(limb(f"strap_{s}_{i}", f"arm_{s}_fore", rect(0.9, 6.4, 0.3), ls, None, along=x))
+        clothes(limb(f"strap_{s}_{i}_edge", f"arm_{s}_fore", rect(0.3, 6.4, 0.15), ll or lb, None, along=x - 0.55))
+    wear(limb(f"hand_{s}", f"hand_{s}", cpoly(FIST_C), ls, stroke), skin[0])
+    for i, x in enumerate((4.4, 6.6, 8.4)):   # the fingers, as the creases between them
+        wear(limb(f"finger_{s}_{i}", f"hand_{s}", rect(0.5, 3.8 - 0.6 * i, 0.2), "$ink@0.35", None, along=x, across=-0.6 + 0.3 * i, rot=-8.0 * i), "$ink@0.35")
+    wear(limb(f"thumb_{s}", f"hand_{s}", cpoly([(0.4, -2.0), (3.2, -2.9), (5.6, -2.4), (5.8, -0.9), (3.4, -0.3), (0.6, -0.8)]), ls, INK_HAIR), skin[0])
 
 def cape_parts():
     # Three segments down the back, gathered at the shoulder and widening to a
     # torn hem. Across is +back; the body's side is negative across. The lower
     # segments are drawn first, the upper over them, and a strokeless patch on
     # each lower segment hides the seam. A shade along the body side, a light
-    # down the back edge.
+    # down the back edge, two folds where the cloth gathers.
     base, shade, lit = CLOAK
-    W = [(-6.5, 5.0), (-10.0, 9.0), (-12.0, 12.0), (-14.0, 15.0)]       # (body side, back side) across at each joint, top to hem
+    W = [(-6.5, 5.0), (-10.0, 9.2), (-12.0, 12.4), (-14.0, 15.4)]       # (body side, back side) across at each joint, top to hem
     SEG = [
-        [(-1.0, W[0][0]), (-1.4, W[0][1]), (24.6, W[1][1]), (24.6, W[1][0])],
-        [(-0.6, W[1][0]), (-0.6, W[1][1]), (22.6, W[2][1]), (22.6, W[2][0])],
-        [(-0.6, W[2][0]), (-0.6, W[2][1]), (20.4, W[3][1]), (16.0, 10.4), (20.6, 6.6), (14.4, 3.2), (19.8, -1.2), (14.0, -5.6), (19.0, -9.8), (13.2, W[3][0])],
+        [(-1.0, W[0][0]), (-1.4, W[0][1]), (12.0, 7.6), (24.6, W[1][1]), (24.6, W[1][0]), (12.0, -8.4)],
+        [(-0.6, W[1][0]), (-0.6, W[1][1]), (11.0, 11.2), (22.6, W[2][1]), (22.6, W[2][0]), (11.0, -11.2)],
+        [(-0.6, W[2][0]), (-0.6, W[2][1]), (10.0, 14.2), (20.4, W[3][1]), (16.4, 10.6), (20.8, 6.4), (15.0, 3.0), (20.2, -1.4), (14.6, -5.8), (19.4, -10.0), (13.6, W[3][0])],
     ]
+    SHARP = [(0, 1, 3, 4), (0, 1, 3, 4), tuple(range(3, 11)) + (0, 1)]
     for i in (2, 1, 0):
         n, pts = f"cape_{i}", SEG[i]
-        clothes(limb(n, n, poly(pts), base, INK_THIN))
+        clothes(limb(n, n, cpoly(pts, sharp=SHARP[i]), base, INK_THIN))
         if i > 0:
             a, b = W[i]
             clothes(limb(f"{n}_fold", n, poly([(-3.0, a + 1.2), (-3.0, b - 1.2), (2.6, b - 1.0), (2.6, a + 1.0)]), base, None))
         inner = [pts[0], pts[-1]]
         clothes(limb(f"{n}_shade", n, poly([(a, c + 0.5) for a, c in inner] + [(a, c + 3.4) for a, c in inner][::-1]), shade, None))
-        back = [pts[1], pts[2]]
-        clothes(limb(f"{n}_lit", n, poly([(a, c - 0.5) for a, c in back] + [(a, c - 2.2) for a, c in back][::-1]), lit, None))
-        # two folds down each segment, where the cloth gathers, each a little further back than the one above
+        back = [pts[1], pts[2], pts[3]]
+        clothes(limb(f"{n}_lit", n, cpoly([(a, c - 0.5) for a, c in back] + [(a, c - 2.2) for a, c in back][::-1], sharp=(0, 2, 3, 5)), lit, None))
         (a0, b0), (a1, b1) = W[i], W[i + 1]
         L = CAPE[i][0]
         for k, f in enumerate((0.36, 0.68)):
             c0, c1 = a0 + f * (b0 - a0), a1 + f * (b1 - a1)
-            clothes(limb(f"{n}_fold_{k}", n, poly([(1.5, c0 - 0.5), (L - 1.5, c1 - 0.7), (L - 1.5, c1 + 0.7), (1.5, c0 + 0.5)]), shade, None, opacity=0.55))
+            clothes(limb(f"{n}_fold_{k}", n, cpoly([(1.5, c0 - 0.5), (L * 0.5, (c0 + c1) / 2 - 0.9), (L - 1.5, c1 - 0.7), (L - 1.5, c1 + 0.7), (L * 0.5, (c0 + c1) / 2 + 0.5), (1.5, c0 + 0.5)], sharp=(0, 2, 3, 5)), shade, None, opacity=0.55))
 
 # ---- the cloak and the far side, behind everything
 cape_parts()
 arm_parts("f", CLOTH_F, LEATHER_F, SKIN_F, INK_HAIR)
 leg_parts("f", CLOTH_F, LEATHER_F, SKIN_F, INK_HAIR)
 
-# ---- the trunk: three masses that slide over one another as the spine bends.
-# The jerkin covers all three and hangs past the hips in a split skirt.
+# ---- the trunk: two masses, the seam under the belt. The jerkin covers both
+# and hangs past the hips in a split skirt. World coordinates at rest; each
+# rides its bone from there.
 tb, ts, tl = TUNIC
-wear(put("hips", "pelvis", (0.0, 0.0), 0.0,
-    poly([(-8.2, -7.0), (8.0, -8.0), (9.6, 0.0), (8.6, 7.0), (3.4, 10.2), (-3.0, 10.4), (-8.6, 7.8), (-9.6, 2.0)]), tb, INK_THIN), SKIN[0])
-wear(put("hips_shade", "pelvis", (0.0, 0.0), 0.0,
-    poly([(9.0, -0.4), (8.2, 6.6), (3.4, 9.6), (-3.0, 9.8), (-3.0, 7.4), (2.6, 7.2), (6.2, 5.2), (6.6, -0.4)]), ts, None), SKIN[1])
-clothes(put("skirt_split", "pelvis", (0.0, 0.0), 0.0, poly([(-0.4, 4.0), (0.6, 4.0), (0.4, 10.3), (-0.6, 10.3)]), "$ink@0.5", None))
-wear(put("waist", "spine", (0.0, 0.0), 0.0,
-    poly([(-7.0, -19.0), (7.6, -20.0), (8.2, -12.0), (7.8, -4.0), (-7.0, -4.0), (-7.6, -12.0)]), tb, INK_THIN), SKIN[0])
-wear(put("waist_shade", "spine", (0.0, 0.0), 0.0,
-    poly([(7.2, -19.4), (7.8, -12.0), (7.4, -4.4), (4.4, -4.4), (4.8, -12.0), (4.2, -19.4)]), ts, None), SKIN[1])
-wear(put("chest", "chest", (0.0, 0.0), 0.0,
-    poly([(-10.0, -36.6), (-6.0, -39.0), (6.0, -40.4), (11.0, -38.0), (12.2, -30.0), (10.4, -22.0), (7.8, -17.0), (-7.2, -17.0), (-9.4, -24.0)]), tb, INK_THIN), SKIN[0])
-wear(put("chest_shade", "chest", (0.0, 0.0), 0.0,
-    poly([(10.6, -37.2), (11.8, -30.0), (10.0, -22.0), (7.4, -17.4), (4.2, -17.4), (6.8, -22.0), (8.2, -30.0), (7.0, -36.6)]), ts, None), SKIN[1])
-wear(put("chest_lit", "chest", (0.0, 0.0), 0.0,
-    poly([(-9.4, -35.8), (-5.6, -38.2), (0.0, -39.4), (-1.0, -37.4), (-6.0, -35.8), (-7.8, -30.0), (-8.2, -25.0), (-9.0, -24.4)]), tl, None), SKIN[2])
-# the jerkin's seam and lacing down the front, and the belt over the waist with its buckle and the pouch on the near hip
-clothes(put("lacing", "chest", (0.0, 0.0), 0.0, poly([(5.6, -36.0), (6.8, -36.0), (5.4, -20.0), (4.2, -20.0)]), "$ink@0.35", None))
-for i, y in enumerate((-33.0, -29.0, -25.0)):
-    clothes(put(f"lace_{i}", "chest", (5.6 - 0.1 * (y + 33), y), -12.0, rect(3.6, 0.7, 0.3), LEATHER[1], None))
-clothes(put("belt", "spine", (0.0, 0.0), 0.0, poly([(-7.4, -7.6), (7.9, -8.4), (8.0, -4.6), (-7.2, -3.8)]), LEATHER[0], INK_HAIR))
-clothes(put("belt_shade", "spine", (0.0, 0.0), 0.0, poly([(7.6, -8.2), (7.8, -4.8), (4.0, -4.6), (4.2, -8.0)]), LEATHER[1], None))
-clothes(put("buckle", "spine", (2.6, -6.2), -3.0, rect(3.2, 3.4, 0.5), "$brass", INK_HAIR))
-clothes(put("buckle_pin", "spine", (2.6, -6.2), -3.0, rect(0.7, 2.4, 0.3), "$brass.dark", None))
-clothes(put("pouch", "pelvis", (-6.4, 1.2), 4.0, rect(5.4, 6.0, 1.6), LEATHER[2], INK_HAIR))
-clothes(put("pouch_flap", "pelvis", (-6.4, -0.8), 4.0, rect(5.8, 2.6, 0.8), LEATHER[0], INK_HAIR))
-clothes(put("pouch_stud", "pelvis", (-6.4, 0.4), 0.0, circ(0.6), "$brass", None))
+HIPS_C = [(-8.6, -9.0), (0.0, -9.8), (8.8, -9.4), (10.4, -3.0), (9.8, 4.0), (8.2, 8.6), (3.6, 11.0), (-3.0, 11.2), (-8.4, 9.0), (-10.2, 3.0), (-9.6, -4.0)]
+wear(put("hips", "pelvis", (0.0, 0.0), 0.0, cpoly(HIPS_C), tb, INK_THIN), SKIN[0])
+wear(put("hips_shade", "pelvis", (0.0, 0.0), 0.0, cpoly([(9.4, -3.0), (9.0, 4.0), (7.6, 8.2), (3.6, 10.2), (-3.0, 10.4), (-3.0, 8.0), (2.6, 7.6), (6.0, 5.2), (6.8, -3.0)]), ts, None), SKIN[1])
+clothes(put("skirt_split", "pelvis", (0.0, 0.0), 0.0, cpoly([(-0.6, 3.6), (0.8, 3.8), (0.6, 10.9), (-0.8, 10.9)], sharp=(0, 1, 2, 3)), "$ink@0.45", None))
+clothes(put("skirt_hem", "pelvis", (0.0, 0.0), 0.0, cpoly([(-8.2, 8.2), (-3.0, 10.4), (3.6, 10.2), (8.0, 7.8), (8.4, 8.9), (3.6, 11.3), (-3.0, 11.5), (-8.6, 9.3)], sharp=(0, 3, 4, 7)), ts, None))
+TORSO_C = [(-10.0, -33.4), (-10.2, -27.0), (-9.0, -20.0), (-7.8, -13.0), (-7.6, -6.2), (-4.0, -4.6), (6.0, -4.6), (9.6, -6.4), (9.4, -13.0), (10.0, -18.4), (11.6, -23.0), (13.2, -28.4), (12.8, -35.0), (9.6, -39.6), (3.0, -41.4), (-5.0, -40.2), (-9.6, -37.2)]
+wear(put("torso", "chest", (0.0, 0.0), 0.0, cpoly(TORSO_C), tb, INK_THIN), SKIN[0])
+wear(put("torso_shade", "chest", (0.0, 0.0), 0.0, cpoly([(12.4, -34.4), (12.8, -28.4), (11.2, -23.0), (9.6, -18.4), (9.0, -13.0), (9.2, -6.6), (5.8, -6.6), (6.0, -13.0), (6.4, -18.4), (7.8, -23.0), (9.0, -28.4), (8.6, -34.4)]), ts, None), SKIN[1])
+wear(put("torso_lit", "chest", (0.0, 0.0), 0.0, cpoly([(-9.6, -36.6), (-5.0, -39.6), (1.0, -40.8), (0.0, -38.4), (-5.2, -37.0), (-8.2, -33.4), (-8.6, -27.0), (-7.8, -21.0), (-9.4, -20.0), (-9.6, -27.0)]), tl, None), SKIN[2])
+clothes(put("chest_seam", "chest", (0.0, 0.0), 0.0, cpoly([(4.0, -36.6), (8.6, -33.0), (10.6, -27.4), (10.0, -27.0), (8.0, -32.4), (3.6, -36.0)], sharp=(0, 2, 3, 5)), "$ink@0.25", None))
+# the jerkin's lacing down the front, its stitched edge, and the baldric across the chest from the near shoulder to the far hip
+clothes(put("lacing", "chest", (0.0, 0.0), 0.0, cpoly([(5.6, -36.4), (7.0, -36.4), (5.6, -18.0), (4.2, -18.0)], sharp=(0, 1, 2, 3)), "$ink@0.35", None))
+for i, y in enumerate((-33.5, -30.0, -26.5, -23.0)):
+    clothes(put(f"lace_{i}", "chest", (6.2 - 0.07 * (y + 33.5), y), -14.0, rect(3.8, 0.7, 0.3), LEATHER[1], None))
+for i, (x, y) in enumerate(((-8.6, -31.0), (-8.2, -25.0), (-7.4, -19.0), (-7.0, -13.0), (-6.8, -8.0))):
+    clothes(put(f"stitch_{i}", "chest", (x, y), 84.0, rect(1.6, 0.5, 0.2), "$ink@0.35", None))
+clothes(put("baldric", "chest", (0.0, 0.0), 0.0, cpoly([(-8.2, -34.6), (-3.6, -36.0), (3.0, -27.0), (8.6, -14.0), (9.4, -6.0), (6.4, -6.0), (5.4, -13.0), (0.0, -25.0), (-5.6, -32.0)], sharp=(0, 1, 4, 5)), LEATHER[0], INK_HAIR))
+clothes(put("baldric_edge", "chest", (0.0, 0.0), 0.0, cpoly([(-7.6, -34.2), (-3.6, -35.4), (3.0, -26.6), (8.4, -13.6), (9.0, -6.4), (8.2, -6.4), (7.6, -13.6), (2.2, -26.4), (-4.0, -34.6)], sharp=(0, 1, 4, 5)), LEATHER[2], None))
+clothes(put("baldric_stud", "chest", (3.4, -26.4), 0.0, circ(0.8), "$brass", None))
+clothes(put("baldric_stud_b", "chest", (7.0, -16.6), 0.0, circ(0.8), "$brass", None))
+# the belt over the waist with its buckle, and the pouch on the near hip
+clothes(put("belt", "spine", (0.0, 0.0), 0.0, cpoly([(-7.8, -8.0), (0.0, -8.8), (8.2, -8.6), (8.3, -4.4), (0.0, -4.0), (-7.6, -3.8)], sharp=(0, 2, 3, 5)), LEATHER[0], INK_HAIR))
+clothes(put("belt_shade", "spine", (0.0, 0.0), 0.0, poly([(7.8, -8.4), (8.0, -4.6), (4.0, -4.4), (4.2, -8.4)]), LEATHER[1], None))
+clothes(put("belt_edge", "spine", (0.0, 0.0), 0.0, cpoly([(-7.6, -7.6), (0.0, -8.3), (7.8, -8.1), (7.8, -7.4), (0.0, -7.6), (-7.4, -6.9)], sharp=(0, 2, 3, 5)), LEATHER[2], None))
+clothes(put("buckle", "spine", (2.8, -6.3), -3.0, rect(3.4, 3.6, 0.6), "$brass", INK_HAIR))
+clothes(put("buckle_in", "spine", (2.8, -6.3), -3.0, rect(1.8, 2.0, 0.3), LEATHER[1], None))
+clothes(put("buckle_pin", "spine", (2.8, -6.3), -3.0, rect(0.7, 2.6, 0.3), "$brass.dark", None))
+clothes(put("pouch", "pelvis", (-6.6, 1.4), 4.0, cpoly([(-2.8, -2.6), (2.8, -2.6), (3.2, 2.0), (1.6, 3.4), (-1.6, 3.4), (-3.2, 2.0)], sharp=(0, 1)), LEATHER[2], INK_HAIR))
+clothes(put("pouch_shade", "pelvis", (-6.6, 1.4), 4.0, cpoly([(1.2, -1.6), (2.6, -1.6), (2.8, 1.8), (1.6, 3.0), (0.6, 3.0)]), LEATHER[0], None))
+clothes(put("pouch_flap", "pelvis", (-6.6, -0.6), 4.0, cpoly([(-3.2, -1.4), (3.2, -1.4), (3.2, 0.6), (0.0, 1.6), (-3.2, 0.6)], sharp=(0, 1)), LEATHER[0], INK_HAIR))
+clothes(put("pouch_stud", "pelvis", (-6.6, 0.6), 0.0, circ(0.6), "$brass", None))
 
-# the cowl: the hood's skirt, lying over the shoulders and the top of the chest
+# the cowl: the hood's skirt, lying over the shoulders and the top of the chest, with the brooch that closes it
 cb, cs, cl = CLOAK
-clothes(put("cowl", "chest", (0.0, 0.0), 0.0,
-    poly([(-11.4, -34.6), (-8.0, -40.2), (-1.0, -43.4), (7.0, -42.6), (12.4, -38.0), (11.2, -32.4), (5.0, -34.6), (-3.0, -34.2), (-9.8, -31.4)]), cb, INK_THIN))
-clothes(put("cowl_shade", "chest", (0.0, 0.0), 0.0, poly([(12.0, -37.6), (10.8, -32.8), (5.6, -34.4), (5.2, -36.4), (9.0, -36.0)]), cs, None))
-clothes(put("cowl_lit", "chest", (0.0, 0.0), 0.0, poly([(-10.6, -34.6), (-7.6, -39.4), (-2.0, -42.2), (-2.6, -40.4), (-6.6, -38.0), (-8.6, -33.6)]), cl, None))
+clothes(put("cowl", "chest", (0.0, 0.0), 0.0, cpoly([(-11.6, -34.4), (-8.4, -40.0), (-1.0, -43.6), (7.0, -42.8), (12.6, -38.0), (11.8, -32.0), (5.0, -34.0), (-3.0, -33.8), (-9.6, -31.0)]), cb, INK_THIN))
+clothes(put("cowl_shade", "chest", (0.0, 0.0), 0.0, cpoly([(12.2, -37.6), (11.2, -32.4), (5.6, -34.0), (5.2, -36.6), (9.0, -36.4)]), cs, None))
+clothes(put("cowl_lit", "chest", (0.0, 0.0), 0.0, cpoly([(-10.8, -34.4), (-7.8, -39.2), (-2.0, -42.4), (-2.6, -40.4), (-6.6, -37.8), (-8.6, -33.4)]), cl, None))
+clothes(put("cowl_fold", "chest", (0.0, 0.0), 0.0, cpoly([(-4.0, -41.6), (0.0, -38.0), (3.6, -34.4), (3.0, -34.2), (-0.8, -37.6), (-4.6, -41.0)], sharp=(0, 2, 3, 5)), cs, None, opacity=0.6))
+clothes(put("brooch", "chest", (-6.0, -36.8), 0.0, circ(2.1), "$brass", INK_HAIR))
+clothes(put("brooch_in", "chest", (-6.0, -36.8), 0.0, circ(1.0), "$crimson.dark", None))
+clothes(put("brooch_lit", "chest", (-6.7, -37.5), 0.0, circ(0.5), "$brass.light", None))
 
-wear(limb("neck", "neck", bar(7.2, 5.4, 5.0, 0.8), SKIN[0], INK_HAIR), SKIN[0])
-wear(limb("neck_shade", "neck", ell(1.6, 2.4), SKIN[1], None, along=5.8, across=0.3), SKIN[1])                   # under the jaw
+wear(limb("neck", "neck", cpoly([(-1.0, -2.9), (3.5, -2.6), (7.4, -2.5), (7.8, 0.0), (7.4, 2.5), (3.5, 2.9), (-1.0, 3.3)]), SKIN[0], INK_HAIR), SKIN[0])
+wear(limb("neck_shade", "neck", cpoly([(2.0, -1.4), (6.6, -1.6), (7.0, 1.6), (4.0, 2.4), (1.6, 1.4)]), SKIN[1], None), SKIN[1])        # under the jaw
+wear(limb("throat_line", "neck", rect(4.6, 0.5, 0.2), "$ink@0.25", None, along=4.2, across=-1.4, rot=4.0), "$ink@0.25")
 
-# ---- the head, on its bone: along is up the skull, across is forward
-limb("head", "head", ell(7.6, 6.4), SKIN[0], INK_THIN, along=9.0)
-limb("jaw", "head", poly([(7.0, -3.6), (2.6, -4.4), (0.6, -2.0), (0.0, 1.6), (1.0, 4.0), (3.4, 5.6), (6.6, 6.4), (8.0, 4.0)]), SKIN[0], INK_THIN)
-limb("jaw_shade", "head", poly([(0.5, -1.8), (0.3, 1.6), (1.2, 3.8), (2.6, 3.6), (1.9, 1.5), (2.0, -1.4)]), SKIN[1], None)
-limb("brow_lit", "head", ell(2.2, 2.0), SKIN[2], None, along=12.4, across=3.2)
-limb("hair", "head", poly([(13.0, 5.9), (15.6, 4.6), (17.0, 1.6), (16.8, -2.4), (15.0, -5.6), (11.4, -7.4), (7.6, -7.2), (5.0, -6.0), (4.6, -4.4),
-                           (6.4, -4.8), (9.0, -5.8), (12.0, -5.2), (14.4, -3.0), (15.4, 0.6), (14.6, 3.6), (13.0, 4.8)]), "$hair", INK_HAIR)
-limb("hair_lit", "head", ell(1.5, 3.0), "$hair.light", None, along=15.2, across=-1.6, rot=18.0)
-limb("ear", "head", ell(2.1, 1.3), SKIN[0], INK_HAIR, along=7.4, across=-4.6)
-# the hood, up: a C around the skull open at the face, its lining showing crimson along the opening,
-# and the face in its shadow
-HOOD_EDGE = [(-2.4, 0.2), (3.0, 2.0), (8.0, 2.2), (11.6, 4.6), (14.0, 8.2)]
-HOOD_OUT = [(18.8, 3.6), (19.6, -1.6), (17.2, -7.6), (12.0, -10.6), (5.0, -10.8), (-1.0, -9.0), (-4.0, -5.6), (-4.2, -1.2)]
-clothes(limb("hood_shadow", "head", poly([(-1.4, 0.4), (3.2, 2.4), (8.0, 2.6), (11.2, 4.8), (12.6, 7.4), (10.6, 7.0), (8.6, 4.8), (3.6, 4.6), (-0.4, 2.8)]), "$ink@0.4", None))
-clothes(limb("hood", "head", poly(HOOD_EDGE + HOOD_OUT), cb, INK_THIN))
-clothes(limb("hood_shade", "head", poly([(-3.4, -1.0), (-3.2, -5.0), (-0.6, -8.2), (5.0, -9.8), (5.0, -7.4), (0.6, -6.0), (-1.6, -3.6), (-1.8, -0.8)]), cs, None))
-clothes(limb("hood_lit", "head", poly([(14.6, 7.2), (18.0, 3.4), (18.6, -1.2), (16.6, -6.4), (15.2, -5.4), (16.8, -1.2), (16.2, 2.8), (13.4, 6.0)]), cl, None))
-clothes(limb("hood_lining", "head", poly(HOOD_EDGE + [(12.6, 8.4), (10.6, 6.0), (7.8, 3.8), (3.0, 3.6), (-1.8, 2.0)]), "$crimson", None))
-clothes(limb("hood_lining_dark", "head", poly([(-2.4, 0.2), (3.0, 2.0), (3.0, 3.6), (-1.8, 2.0)]), "$crimson.dark", None))
-limb("eye", "head", ell(0.8, 1.5), "$ink", None, along=9.6, across=4.6)
-limb("eye_glint", "head", circ(0.45), "$white", None, along=9.9, across=4.1, opacity=0.8)
-limb("brow", "head", rect(0.9, 3.0, 0.4), "$hair", None, along=11.5, across=5.0, rot=-6.0)
-limb("mouth", "head", ell(0.5, 1.3), SKIN[1], None, along=3.4, across=4.8)
-limb("nose", "head", poly([(7.6, 5.6), (5.6, 7.8), (4.4, 5.8)]), SKIN[0], INK_HAIR)
+# ---- the head, on its bone: along is up the skull, across is forward. One
+# profile from the crown round the face to the nape: brow ridge, nose, lips, chin.
+HEAD_C = [(16.9, -0.4), (16.3, 4.2), (13.6, 6.3), (12.6, 6.7), (10.8, 6.4), (8.0, 7.8), (7.0, 8.4), (6.0, 6.7), (4.8, 6.9), (4.0, 6.3), (3.2, 6.8), (1.6, 5.9), (0.4, 3.6), (0.6, 0.0), (1.8, -3.2), (4.6, -5.6), (9.0, -7.3), (13.6, -6.2), (16.4, -3.4)]
+HEAD_SHARP = (6, 7, 12)
+limb("head", "head", cpoly(HEAD_C, sharp=HEAD_SHARP), SKIN[0], INK_THIN)
+limb("jaw_shade", "head", cpoly([(0.9, -2.4), (0.9, 1.2), (1.9, 4.2), (3.4, 4.6), (2.9, 1.6), (3.0, -1.6)]), SKIN[1], None)
+limb("cheek_shade", "head", cpoly([(8.2, 3.4), (6.4, 5.6), (5.2, 3.6), (6.8, 2.0)]), SKIN[1], None, opacity=0.6)
+limb("brow_lit", "head", ell(2.4, 1.9), SKIN[2], None, along=13.0, across=3.4, rot=-24.0)
+limb("hair", "head", cpoly([(13.6, 5.6), (16.2, 4.0), (17.4, 0.8), (16.8, -3.2), (14.6, -6.2), (10.6, -7.8), (6.8, -7.2), (4.6, -5.4), (5.2, -4.4), (7.4, -5.6), (10.0, -6.0), (13.0, -4.6), (15.0, -1.6), (15.2, 2.0), (14.0, 4.4)], sharp=(0, 7, 8, 14)), "$hair", INK_HAIR)
+limb("hair_lit", "head", ell(1.6, 3.2), "$hair.light", None, along=15.4, across=-1.4, rot=22.0)
+limb("ear", "head", cpoly([(9.0, -3.2), (9.4, -1.6), (7.8, -0.8), (6.0, -1.4), (5.6, -3.0), (7.0, -4.4)]), SKIN[0], INK_HAIR)
+limb("ear_in", "head", cpoly([(8.4, -2.8), (8.2, -1.8), (7.0, -1.6), (6.6, -2.8), (7.4, -3.6)]), SKIN[1], None)
+# the hood, up: a C around the skull with a peak over the brow, open at the
+# face, its lining showing crimson along the opening, the face in its shadow
+HOOD_EDGE = [(-2.8, 0.6), (2.8, 2.4), (8.2, 2.8), (12.0, 5.2), (14.8, 8.8)]
+HOOD_OUT = [(18.6, 4.4), (19.8, -1.6), (17.6, -8.0), (11.6, -11.4), (4.4, -11.6), (-1.6, -9.6), (-4.2, -5.4), (-4.4, -1.2)]
+clothes(limb("hood_shadow", "head", cpoly([(-1.6, 0.8), (3.2, 2.8), (8.2, 3.2), (11.6, 5.4), (13.2, 8.0), (11.0, 7.6), (8.6, 5.4), (3.4, 5.2), (-0.4, 3.4)]), "$ink@0.42", None))
+clothes(limb("hood", "head", cpoly(HOOD_EDGE + HOOD_OUT, sharp=(0, 4, 5)), cb, INK_THIN))
+clothes(limb("hood_shade", "head", cpoly([(-3.6, -1.2), (-3.4, -5.0), (-1.0, -8.6), (4.6, -10.4), (4.6, -8.0), (0.2, -6.4), (-1.8, -3.6), (-2.0, -1.0)]), cs, None))
+clothes(limb("hood_lit", "head", cpoly([(15.2, 7.6), (18.0, 4.0), (18.8, -1.4), (16.8, -6.8), (15.4, -5.8), (17.0, -1.4), (16.2, 3.0), (13.8, 6.2)]), cl, None))
+for k, (a, b) in enumerate((((16.6, 1.0), (10.0, -8.8)), ((13.8, 4.8), (6.2, -7.2)))):
+    clothes(limb(f"hood_fold_{k}", "head", cpoly([a, ((a[0] + b[0]) / 2 - 0.8, (a[1] + b[1]) / 2), b, (b[0] + 0.5, b[1] + 0.6), ((a[0] + b[0]) / 2 - 0.1, (a[1] + b[1]) / 2 + 0.5), (a[0] + 0.5, a[1] + 0.5)], sharp=(0, 2, 3, 5)), cs, None, opacity=0.5))
+clothes(limb("hood_lining", "head", cpoly(HOOD_EDGE + [(13.4, 9.0), (11.0, 6.6), (8.0, 4.4), (2.8, 4.0), (-2.2, 2.4)], sharp=(0, 4, 5, 9)), "$crimson", None))
+clothes(limb("hood_lining_dark", "head", cpoly([(-2.8, 0.6), (2.8, 2.4), (2.8, 4.0), (-2.2, 2.4)], sharp=(0, 1, 2, 3)), "$crimson.dark", None))
+limb("eye_white", "head", cpoly([(9.0, 3.2), (10.4, 3.0), (10.9, 4.6), (10.2, 6.0), (8.8, 5.8)]), "$bone", None, opacity=0.9)
+limb("eye", "head", ell(0.9, 0.9), "$ink", None, along=9.8, across=4.8)
+limb("eye_glint", "head", circ(0.4), "$white", None, along=10.2, across=4.4, opacity=0.85)
+limb("lid", "head", cpoly([(10.2, 2.8), (11.4, 3.6), (11.6, 5.6), (10.6, 6.2), (10.4, 5.2), (10.2, 3.6)], sharp=(0, 3)), SKIN[1], None)
+limb("brow", "head", cpoly([(12.2, 2.6), (12.8, 4.6), (12.4, 6.4), (11.8, 6.2), (12.0, 4.6), (11.4, 3.0)], sharp=(0, 2, 3, 5)), "$hair", None)
+limb("nostril", "head", circ(0.45), SKIN[1], None, along=6.4, across=6.6)
+limb("mouth", "head", cpoly([(4.2, 4.4), (4.4, 6.6), (3.9, 6.5), (3.7, 4.6)], sharp=(0, 1, 2, 3)), "$ink@0.6", None)
+limb("lip_lit", "head", ell(0.45, 0.9), SKIN[2], None, along=4.9, across=6.4)
 
 # ---- near side, over everything; the sword's grip lies in the fist and the blade runs on past it
 def sword_grip():
     b = "hand_n"
-    clothes(limb("pommel", b, circ(1.8), "$brass", INK_HAIR, along=-2.2, across=0.4))
+    clothes(limb("pommel", b, cpoly([(-3.4, -1.2), (-2.6, -2.2), (-1.0, -2.0), (-0.4, -0.2), (-1.0, 1.9), (-2.6, 2.2), (-3.6, 1.2)]), "$brass", INK_HAIR, across=0.4))
+    clothes(limb("pommel_lit", b, circ(0.6), "$brass.light", None, along=-2.4, across=-0.5))
     clothes(limb("grip", b, rect(10.0, 2.6, 0.6), LEATHER[1], INK_HAIR, along=3.6, across=0.4))
+    for i in range(5):
+        clothes(limb(f"grip_wrap_{i}", b, rect(0.5, 2.6, 0.2), LEATHER[2], None, along=-0.4 + 2.0 * i, across=0.4, rot=18.0))
 def sword_blade():
     b = "hand_n"
-    clothes(limb("guard", b, poly([(9.4, -5.2), (11.8, -4.6), (11.8, 5.0), (9.4, 5.6)]), "$brass", INK_HAIR, across=0.4))
-    clothes(limb("guard_lit", b, rect(1.0, 3.6, 0.3), "$brass.light", None, along=10.2, across=-2.4))
-    clothes(limb("blade", b, poly([(11.6, -1.9), (28.0, -1.5), (46.0, -0.9), (51.0, 0.4), (46.0, 1.6), (28.0, 2.1), (11.6, 2.5)]), "$steel", INK_HAIR, across=0.4))
-    clothes(limb("blade_lit", b, poly([(12.4, -1.2), (42.0, -0.8), (42.0, 0.2), (12.4, 0.3)]), "$steel.light", None, across=0.4))
-    clothes(limb("fuller", b, poly([(14.0, 0.5), (40.0, 0.8), (40.0, 1.4), (14.0, 1.3)]), "$steel.dark", None, across=0.4))
+    clothes(limb("guard", b, cpoly([(9.4, -5.6), (10.6, -5.2), (11.9, -4.4), (11.9, 4.8), (10.6, 5.8), (9.4, 6.2), (9.0, 0.4)], sharp=(0, 1, 2, 3, 4, 5)), "$brass", INK_HAIR, across=0.4))
+    clothes(limb("guard_lit", b, rect(1.0, 3.8, 0.3), "$brass.light", None, along=10.2, across=-2.6))
+    clothes(limb("guard_shade", b, rect(1.0, 3.2, 0.3), "$brass.dark", None, along=11.0, across=3.2))
+    clothes(limb("blade", b, cpoly([(11.6, -2.0), (16.0, -1.9), (30.0, -1.6), (44.0, -1.0), (51.4, 0.4), (44.0, 1.8), (30.0, 2.3), (16.0, 2.6), (11.6, 2.7)], sharp=(0, 4, 8)), "$steel", INK_HAIR, across=0.4))
+    clothes(limb("blade_lit", b, cpoly([(12.4, -1.3), (30.0, -1.0), (44.0, -0.5), (46.0, 0.2), (44.0, 0.1), (30.0, 0.1), (12.4, 0.2)], sharp=(0, 3, 6)), "$steel.light", None, across=0.4))
+    clothes(limb("fuller", b, cpoly([(15.0, 0.6), (30.0, 0.9), (41.0, 1.1), (41.0, 1.6), (30.0, 1.5), (15.0, 1.4)], sharp=(0, 2, 3, 5)), "$steel.dark", None, across=0.4))
+    clothes(limb("ricasso", b, rect(2.4, 4.4, 0.3), "$steel.dark", None, along=12.8, across=0.7))
 leg_parts("n", CLOTH, LEATHER, SKIN, INK_HAIR)
 sword_grip()
 arm_parts("n", CLOTH, LEATHER, SKIN, INK_HAIR)
@@ -302,7 +374,7 @@ sword_blade()
 
 RIG.check()
 
-HOOD = ["hood_shadow", "hood", "hood_shade", "hood_lit", "hood_lining", "hood_lining_dark"]
+HOOD = ["hood_shadow", "hood", "hood_shade", "hood_lit", "hood_fold_0", "hood_fold_1", "hood_lining", "hood_lining_dark"]
 variants = {
     "unhooded": {
         "description": "The hood thrown back: the same figure bareheaded, the hair and the ear showing over the cowl.",
@@ -381,8 +453,10 @@ def walk_pose(t):
     pose["neck"] = -1.0
     pose["head"] = 1.5 * cyc(2 * t, 0.2) - 1.5
     swing = math.cos(2 * math.pi * t)                                # +1: the near arm back, the far arm forward
-    arms(pose, 26.0 * swing, -8.0 - 16.0 * (0.5 + 0.5 * swing), -4.0, "n")
-    arms(pose, -26.0 * swing, -8.0 - 16.0 * (0.5 - 0.5 * swing), -4.0, "f")
+    lag = math.cos(2 * math.pi * (t - 0.05))                         # the forearm a beat behind the upper arm
+    pose["chest"] -= 2.2 * cyc(t, 0.02)                              # the shoulders turn against the hips, once a loop
+    arms(pose, 26.0 * swing, -8.0 - 16.0 * (0.5 + 0.5 * lag), -4.0 + 7.0 * cyc(t, -0.12), "n")
+    arms(pose, -26.0 * swing, -8.0 - 16.0 * (0.5 - 0.5 * lag), -4.0 - 7.0 * cyc(t, -0.12), "f")
     cape(pose, 7.0, 4.0, t)
     ankles, pitch = {}, {}
     for s, ph in (("n", 0.0), ("f", 0.5)):
@@ -415,8 +489,10 @@ def run_pose(t):
     pose["neck"] = -3.0
     pose["head"] = -4.0 + 2.0 * cyc(2 * t, 0.2)
     swing = math.cos(2 * math.pi * t)
-    arms(pose, 10.0 + 38.0 * swing, -78.0 - 14.0 * swing, -12.0, "n")
-    arms(pose, 10.0 - 38.0 * swing, -78.0 + 14.0 * swing, -12.0, "f")
+    lag = math.cos(2 * math.pi * (t - 0.04))
+    pose["chest"] -= 3.0 * cyc(t, 0.02)
+    arms(pose, 10.0 + 38.0 * swing, -78.0 - 14.0 * lag, -12.0 + 6.0 * cyc(t, -0.1), "n")
+    arms(pose, 10.0 - 38.0 * swing, -78.0 + 14.0 * lag, -12.0 - 6.0 * cyc(t, -0.1), "f")
     cape(pose, 34.0, 6.0, t, 0.08)
     ankles, pitch = {}, {}
     for s, ph in (("n", 0.0), ("f", 0.5)):
@@ -571,13 +647,13 @@ animations = {
         "description": "Contact, recoil, passing, high — twice a loop, the far leg half a loop behind the near. Each ankle is solved to the ground: the heel lands toe-up, the foot flattens and slides back under the body, the heel lifts and pushes off, and the leg swings through bent with the toe hanging. The body is lowest on contact and highest passing, leaning four degrees into the walk; the arms swing against the leg on their side, the elbow bending as the arm comes forward; the cloak trails and sways a beat behind each step, further down the hem.",
         "duration": 0.8,
         "cues": {"contact": 0.0, "contact_far": 0.5},
-        "tracks": tracks(walk_pose, keyset(16)),
+        "tracks": tracks(walk_pose, keyset(20)),
     },
     "run": {
         "description": "A short stance that lands under the body and drives back, then flight: the heel kicks up high behind, the knee drives forward and the foot reaches down for the next step. The body leans thirteen degrees, is highest in the air and lowest mid-stance; the arms pump bent at the elbow, fists closed, against the leg on their side; the cloak streams out behind.",
         "duration": 0.5,
         "cues": {"contact": 0.0, "contact_far": 0.5},
-        "tracks": tracks(run_pose, keyset(16)),
+        "tracks": tracks(run_pose, keyset(20)),
     },
     "attack": {
         "description": "A slash. The sword is drawn back and up over the near shoulder as the body coils onto its back foot and the far arm reaches forward — held, trembling with the load — then thrown forward and down across the front in a lunge, the far foot stepping into it, the cloak flung back; the follow-through carries the blade low before everything comes home. `release` is the frame the blade starts, `contact` where it is level in front.",
@@ -590,7 +666,7 @@ animations = {
         "duration": 0.3,
         "tracks": tracks(hurt_pose, keyset(18)) + [
             {"part": p, "prop": "tint", "to": "$white", "keys": [[0, 0.85, "hold"], [0.12, 0.85, "linear"], [0.3, 0, "linear"], [1, 0]]}
-            for p in ("hood", "cowl", "chest", "waist", "hips", "thigh_n", "shin_n", "arm_n_upper", "cape_0")],
+            for p in ("hood", "cowl", "torso", "hips", "thigh_n", "shin_n", "arm_n_upper", "cape_0")],
     },
     "death": {
         "description": "The last chapter: caught on the blow — held up by it for a beat — then let go: the knees fold and the body comes down onto them as the feet slide back, the sword arm drops until the point rests on the ground, the head bows and the cloak settles over the back. Still from 0.85.",
@@ -606,6 +682,7 @@ animations = {
 }
 
 # ============================================================== 5. the document
+# ============================================================== 5. the document
 DESCRIPTION = (
     "A human figure drawn to proportion: seven and a half heads, one head 16px, standing 120px with the origin at the hips and the soles at +60. "
     "Seen three-quarter from the side, facing +x and mirrored by the engine: the near (right) shoulder a little behind and below the far one, "
@@ -613,7 +690,8 @@ DESCRIPTION = (
     "A wanderer: the hood up and the face in its shadow with the lining showing crimson at the edge, a cloak off the shoulders in three hinged segments ending in a torn hem, "
     "a leather jerkin laced down the front and belted at the waist with a brass buckle and a pouch on the near hip, dark cloth under it, wrapped bracers, gloves, "
     "tall boots with the cuff turned under the knee, and a longsword carried point-down in the near fist. "
-    "Every mass carries a shade along its front edge and the bigger ones a light along the back; lit from the upper left. "
+    "Every outline is a closed curve through a few control points and the masses are drawn as muscle — deltoid, biceps and triceps, the forearm full under the elbow, quadriceps and hamstring, the calf high — the trunk one shape from the shoulders to under the belt and one over the hips; a head with a brow ridge, a nose, lips and a chin; a fist with its fingers; a boot with a heel, a toe cap and an ankle strap; a baldric across the chest, a brooch closing the cowl, stitching down the jerkin's back. "
+    "Every mass carries a shade along its front edge and the bigger ones a light along the back; lit from the upper left. The rest is a contrapposto: the weight on the far leg, the near knee eased, the elbows bent, the head a few degrees down. "
     "Built on a skeleton (scripts/human.py): the pelvis is the root, the spine a shallow S of lumbar, chest, neck and head, each arm hinged at the shoulder, elbow and wrist, "
     "each leg a thigh and shin solved every frame to an ankle on the ground with the foot hinged at the ankle, the cloak a chain of three bones that lags the body. "
     "`bare` is the mannequin underneath. Gameplay radius 14, height 120."
