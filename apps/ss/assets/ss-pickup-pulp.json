@@ -1,7 +1,7 @@
 {
   "id": "ss.pickup.pulp",
   "name": "Pulp",
-  "description": "What a hive creature leaves behind when it dies: a torn lump of soft tissue, still wet. You pick them up because the hive grows on what it reclaims — which is why they count as experience. The silhouette is a lobed horizontal chunk — three soft bulges along the top, two along the bottom, no spike and no single bite — because the draft that leaned on one notch and a hanging drip read as a speech bubble at 16px. Lumpiness is what keeps it off the Gland's clean round sac, and it is what carries the flat-silhouette test. Interior detail is deliberately single and off-centre — one sheen up the left, one torn pit down the right — because a second highlight plus a crease across the middle turned the whole thing into a face. The fill is kept near-white and neutral: the game tints this sprite per XP tier at runtime, so any hue baked in here would fight the tint.",
+  "description": "What a hive creature leaves behind when it dies: a torn lump of soft tissue, still wet. You pick them up because the hive grows on what it reclaims — which is why they count as experience. The silhouette is a lobed horizontal chunk — three soft bulges along the top, two along the bottom, no spike and no single bite — because the draft that leaned on one notch and a hanging drip read as a speech bubble at 16px. Lumpiness is what keeps it off the Gland's clean round sac, and it is what carries the flat-silhouette test. Interior detail is deliberately single and off-centre — one sheen up the left, one torn pit down the right — because a second highlight plus a crease across the middle turned the whole thing into a face. The fill is kept near-white and neutral: the game tints this sprite per XP tier at runtime, so any hue baked in here would fight the tint. A rim of light along the upper-left lobes, a crease across the middle and a second speck of wet, all neutral like the rest, because the game tints the lump by its tier.",
   "tags": ["pickup"],
   "size": [16, 16],
   "parts": [
@@ -9,8 +9,11 @@
     {"id": "mass", "shape": {"kind": "poly", "points": [[-6.2, -0.6], [-5.4, -3.2], [-3.4, -4.6], [-1.6, -3.6], [0.2, -5.4], [2.4, -4.4], [4.2, -4.8], [5.8, -2.6], [6.6, -0.2], [6, 2.4], [3.8, 4.4], [1.6, 3.4], [-0.8, 5.2], [-3.6, 4.6], [-5.4, 2.4]]}, "fill": "$smoke"},
     {"id": "flesh", "shape": {"kind": "poly", "points": [[-4.9, -0.5], [-4.2, -2.5], [-2.6, -3.5], [-1.4, -2.7], [0.2, -4.1], [2.1, -3.3], [3.6, -3.6], [4.7, -1.9], [5.3, -0.2], [4.8, 1.8], [3.1, 3.3], [1.4, 2.5], [-0.6, 3.9], [-2.9, 3.4], [-4.3, 1.7]]}, "fill": "$bone"},
     {"id": "shade", "shape": {"kind": "poly", "points": [[5.3, -0.2], [4.8, 1.8], [3.1, 3.3], [1.4, 2.5], [-0.6, 3.9], [-2.9, 3.4], [-4.3, 1.7], [-2.6, 0.9], [0.4, 1.1], [3.2, 0.4]]}, "fill": "$bone.dark"},
+    {"id": "crease", "at": [0.4, 0.2], "rot": -20.0, "shape": {"kind": "ellipse", "rx": 1.6, "ry": 0.6}, "fill": "$smoke.dark@0.55"},
     {"id": "pit", "at": [2.2, 2.2], "rot": 12, "shape": {"kind": "ellipse", "rx": 1.1, "ry": 0.8}, "fill": "$smoke"},
-    {"id": "gloss", "at": [-2.6, -2.4], "rot": -26, "shape": {"kind": "ellipse", "rx": 2.2, "ry": 0.75}, "fill": "$white"}
+    {"id": "gloss", "at": [-2.6, -2.4], "rot": -26, "shape": {"kind": "ellipse", "rx": 2.2, "ry": 0.75}, "fill": "$white"},
+    {"id": "rim", "shape": {"kind": "poly", "points": [[-6.2, -0.6], [-5.4, -3.2], [-3.4, -4.6], [-1.6, -3.6], [0.2, -5.4], [2.4, -4.4], [1.9, -3.4], [0.2, -4.2], [-1.4, -2.6], [-3.2, -3.5], [-4.6, -2.6], [-5.2, -0.6]]}, "fill": "$white@0.3"},
+    {"id": "speck", "at": [2.6, -2.2], "shape": {"kind": "circle", "r": 0.55}, "fill": "$white@0.7"}
   ],
   "variants": {
     "ripe": {
@@ -39,7 +42,10 @@
         {"part": "pit", "prop": "scale", "keys": [[0, 1], [0.5, 1.06], [1, 1]]},
         {"part": "mass", "prop": "scale", "keys": [[0, 1], [0.5, 1.04], [1, 1]]},
         {"part": "gloss", "prop": "opacity", "keys": [[0, 0.45], [0.5, 1], [1, 0.45]]},
-        {"part": "halo", "prop": "scale", "keys": [[0, 0.9], [0.5, 1.15], [1, 0.9]]}
+        {"part": "halo", "prop": "scale", "keys": [[0, 0.9], [0.5, 1.15], [1, 0.9]]},
+        {"part": "rim", "prop": "scale", "keys": [[0, 1], [0.5, 1.06], [1, 1]]},
+        {"part": "crease", "prop": "scale", "keys": [[0, 1], [0.5, 1.06], [1, 1]]},
+        {"part": "speck", "prop": "scale", "keys": [[0, 1], [0.5, 1.06], [1, 1]]}
       ]
     }
   }
