@@ -30,8 +30,8 @@
     },
     "size": {
       "char": [
-        128,
-        160
+        192,
+        192
       ]
     },
     "meta": [
@@ -52,7 +52,11 @@
         ],
         "require": [
           "idle",
-          "walk"
+          "walk",
+          "run",
+          "attack",
+          "hurt",
+          "death"
         ]
       }
     ],

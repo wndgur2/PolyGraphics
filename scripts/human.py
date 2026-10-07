@@ -4,7 +4,7 @@
 
 Seven and a half heads tall, seen three-quarter from the side and facing +x
 (the engine mirrors the frame to face left). One head is the unit: H = 16px,
-so the body stands 120px on a 128×160 canvas with the origin at the hips —
+so the body stands 120px on a 192×192 canvas (room for the sword's swing) with the origin at the hips —
 the pelvis is the root the whole figure hangs from, and the ground is the
 sole line at +60.
 
@@ -41,6 +41,9 @@ meter (scripts/motion.ts) and the inspect page before the next:
   1  a mannequin in three values of one material, idle and walk
   2  the body: shade and light bands, deltoids over the shoulder seams, hair,
      an eye, a brow and a mouth, and a run
+  4  the clips a fight needs: attack, hurt, death and a dodge roll, each a
+     pose function shaped in time — an anticipation, a hold, a release that
+     arrives fast, a recovery
   3  the costume: a hood over the face, a cloak off the shoulders in three
      hinged segments with a torn hem, a leather jerkin belted at the waist
      with a pouch, dark cloth under it, bracers, gloves, tall boots, and a
@@ -407,6 +410,142 @@ def run_pose(t):
         pitch[s] = p
     return plant(pose, ankles, pitch)
 
+# ---- the one-shots. Each is a pose function too, shaped in time with smooth():
+# an anticipation eased into and held, a release that arrives fast, a recovery
+# that settles. Sampled densely so the fast part survives linear keys.
+def snap(a, b, t):
+    """Like smooth(a, b, t) but arriving fast and settling — an expo-out release."""
+    x = max(0.0, min(1.0, (t - a) / (b - a)))
+    return 1.0 - (1.0 - x) ** 3
+
+def arm_abs(pose, s, upper, fore, hand):
+    pose[f"abs:arm_{s}_upper"] = upper; pose[f"abs:arm_{s}_fore"] = fore; pose[f"abs:hand_{s}"] = hand
+
+def rest_arm(s):
+    return ARM_REST[s]
+
+def blend(a, b, k):
+    """Three headings lerped, the short way round."""
+    return tuple(x + wrap(y - x) * k for x, y in zip(a, b))
+
+# attack: the sword drawn back and up over the near shoulder as the body coils
+# onto its back foot, held, then thrown forward and down across the front in a
+# lunge, the far foot stepping into it; the follow-through carries the blade
+# low before it comes home.
+ATK_LIFT = (120.0, 170.0, 300.0)     # upper, fore, hand: on the way up, the blade lifted in front of the chest
+ATK_WIND = (190.0, 245.0, 320.0)     # the blade up and forward over the shoulder
+ATK_HIT = (45.0, 30.0, 25.0)         # the blade out and level in front
+ATK_THROUGH = (75.0, 80.0, 95.0)     # carried down past the hit
+FAR_WIND = (40.0, 20.0, 15.0)        # the far arm reaching forward for balance
+FAR_HIT = (150.0, 170.0, 175.0)      # flung back
+def attack_pose(t):
+    lift = smooth(0.0, 0.15, t)
+    wind = smooth(0.12, 0.28, t)
+    rel = snap(0.40, 0.50, t)
+    through = smooth(0.50, 0.66, t)
+    home = smooth(0.66, 1.0, t)
+    trem = 0.6 * math.sin(2 * math.pi * 9 * t) * smooth(0.26, 0.32, t) * (1 - smooth(0.36, 0.40, t))
+    near = blend(rest_arm("n"), ATK_LIFT, lift)
+    near = blend(near, ATK_WIND, wind)
+    near = blend(near, ATK_HIT, rel)
+    near = blend(near, ATK_THROUGH, through)
+    near = blend(near, rest_arm("n"), home)
+    farv = blend(rest_arm("f"), FAR_WIND, wind)
+    farv = blend(farv, FAR_HIT, rel)
+    farv = blend(farv, rest_arm("f"), home)
+    dx = lerp(lerp(0.0, -3.0, wind), 7.0, rel); dx = lerp(dx, 0.0, home)
+    dy = lerp(lerp(0.0, 2.0, wind), 3.5, rel); dy = lerp(dy, 0.0, home)
+    th = lerp(lerp(0.0, -7.0, wind), 14.0, rel); th = lerp(th, 0.0, home)
+    pose = {"body": (dx, dy, th + trem)}
+    pose["chest"] = lerp(lerp(0.0, -5.0, wind), 8.0, rel) * (1 - home)
+    pose["neck"] = lerp(lerp(0.0, 3.0, wind), -6.0, rel) * (1 - home)
+    pose["head"] = lerp(lerp(0.0, 4.0, wind), -6.0, rel) * (1 - home)
+    arm_abs(pose, "n", *[a + trem * 2 for a in near])
+    arm_abs(pose, "f", *farv)
+    # the cloak lags the lunge: forward as the body coils back, then thrown back and settling
+    for i in range(3):
+        pose[f"cape_{i}"] = lerp(lerp(0.0, 8.0, smooth(0.08 + 0.05 * i, 0.4, t)), -28.0 + 6.0 * i, snap(0.44 + 0.04 * i, 0.62, t)) * (1 - smooth(0.7 + 0.05 * i, 1.0, t))
+    # feet: the near stays; the far steps forward on the release and comes back home
+    step_f = lerp(0.0, 11.0, rel) * (1 - home)
+    lift_f = 5.0 * math.sin(math.pi * max(0.0, min(1.0, (t - 0.38) / 0.16))) if 0.38 < t < 0.54 else 0.0
+    ankles = {"n": REST_ANKLE["n"], "f": (REST_ANKLE["f"][0] + step_f, REST_ANKLE["f"][1] - lift_f)}
+    pitch = {"n": lerp(0.0, 22.0, rel) * (1 - home), "f": -8.0 * (lift_f / 5.0)}
+    return plant(pose, ankles, pitch)
+
+# hurt: the blow has already landed — the head snaps back, the body is knocked
+# off its line, the arms go wide, and it recovers. Laid over the walk or the
+# idle by the game, so the feet stay.
+def hurt_pose(t):
+    hit = 1 - smooth(0.0, 0.08, t) * 0.0          # on from the first frame
+    back = snap(0.0, 0.12, t) * (1 - smooth(0.3, 1.0, t))
+    pose = {"body": (-4.0 * back, 1.5 * back, -9.0 * back)}
+    pose["chest"] = -6.0 * back
+    pose["neck"] = -8.0 * back
+    pose["head"] = -10.0 * back
+    near = blend(rest_arm("n"), (60.0, 40.0, 35.0), back)
+    farv = blend(rest_arm("f"), (120.0, 110.0, 105.0), back)
+    arm_abs(pose, "n", *near); arm_abs(pose, "f", *farv)
+    for i in range(3): pose[f"cape_{i}"] = 14.0 * snap(0.02 + 0.04 * i, 0.2, t) * (1 - smooth(0.35 + 0.05 * i, 1.0, t))
+    return plant(pose, {"n": REST_ANKLE["n"], "f": REST_ANKLE["f"]}, {"n": 0.0, "f": 0.0})
+
+# death: caught — the blow lands and holds the body up for a beat — then let
+# go: the knees fold, the body comes down onto them, the sword arm drops until
+# the point rests on the ground, the head bows, the cloak settles over it.
+# Still by 0.85 (the app's oneShot rule samples a frame short).
+def death_pose(t):
+    t = min(t, 0.85)
+    caught = snap(0.0, 0.08, t) * (1 - smooth(0.12, 0.3, t))
+    fold = smooth(0.12, 0.5, t)
+    down = smooth(0.42, 0.72, t)
+    bow = smooth(0.6, 0.85, t)
+    dy = 22.0 * fold + 6.0 * down - 1.5 * caught
+    th = -6.0 * caught + 16.0 * fold + 18.0 * down
+    pose = {"body": (-3.0 * caught + 2.0 * fold, dy, th)}
+    pose["spine"] = 6.0 * down
+    pose["chest"] = -4.0 * caught + 8.0 * fold + 10.0 * bow
+    pose["neck"] = -6.0 * caught + 10.0 * fold + 14.0 * bow
+    pose["head"] = -8.0 * caught + 12.0 * fold + 18.0 * bow
+    near = blend(rest_arm("n"), (70.0, 50.0, 45.0), caught)
+    near = blend(near, (40.0, 60.0, 70.0), fold)       # the arm drops forward, the point reaching for the ground
+    near = blend(near, (30.0, 70.0, 80.0), bow)
+    farv = blend(rest_arm("f"), (110.0, 100.0, 95.0), caught)
+    farv = blend(farv, (60.0, 75.0, 80.0), fold)
+    farv = blend(farv, (50.0, 85.0, 90.0), bow)
+    arm_abs(pose, "n", *near); arm_abs(pose, "f", *farv)
+    for i in range(3): pose[f"cape_{i}"] = 10.0 * caught - (22.0 - 4.0 * i) * fold + (6.0 + 2.0 * i) * bow
+    # the feet slide back as the knees come down in front of them
+    ankles = {s: (REST_ANKLE[s][0] - 14.0 * fold - 2.0 * down, REST_ANKLE[s][1]) for s in ("n", "f")}
+    pitch = {s: 30.0 * fold for s in ("n", "f")}
+    return plant(pose, ankles, pitch)
+
+# roll: a forward dodge. The body drops and tucks — knees to the chest, the
+# heels up, the sword arm folded in, the head down — turns over once about
+# the hips as it goes, and comes up out of it onto its feet.
+def abs_legs(pose):
+    """The leg bones' world headings under `pose`, as abs: entries."""
+    w = RIG.solve(pose)
+    return {f"abs:{n}": w[n][2] for s in ("n", "f") for n in (f"leg_{s}_thigh", f"leg_{s}_shin", f"foot_{s}")}
+TUCK_LEGS = {"leg_n_thigh": -120.0, "leg_n_shin": 135.0, "foot_n": 20.0, "leg_f_thigh": -110.0, "leg_f_shin": 130.0, "foot_f": 20.0}
+def roll_pose(t):
+    tuck = smooth(0.0, 0.2, t) * (1 - smooth(0.78, 0.98, t))
+    turn = 360.0 * smooth(0.12, 0.84, t)
+    drop = 30.0 * smooth(0.0, 0.2, t) * (1 - smooth(0.8, 1.0, t))
+    pose = {"body": (0.0, drop, turn)}
+    pose["spine"] = 10.0 * tuck
+    pose["chest"] = 18.0 * tuck
+    pose["neck"] = 22.0 * tuck
+    pose["head"] = 24.0 * tuck
+    # arms folded in, the sword along the shin; headings relative to the turning body
+    for s, (u, f, h) in (("n", (-20.0, -110.0, -20.0)), ("f", (-30.0, -100.0, -20.0))):
+        pose[f"arm_{s}_upper"] = u * tuck; pose[f"arm_{s}_fore"] = f * tuck; pose[f"hand_{s}"] = h * tuck
+    for i in range(3): pose[f"cape_{i}"] = -(30.0 - 8.0 * i) * tuck
+    # legs: planted at rest, tucked in the air, blended by heading
+    planted = abs_legs(plant(dict(pose), {"n": REST_ANKLE["n"], "f": REST_ANKLE["f"]}, {"n": 0.0, "f": 0.0}))
+    tucked = abs_legs({**pose, **TUCK_LEGS})
+    for k in planted:
+        pose[k] = planted[k] + wrap(tucked[k] - planted[k]) * tuck
+    return pose
+
 animations = {
     "idle": {
         "description": "The breath and the weight: the chest lifts and the shoulders rise on the in-breath, the head nods back a degree, the arms hang and drift, the cloak stirs; the hips settle from foot to foot with the feet planted.",
@@ -424,6 +563,30 @@ animations = {
         "duration": 0.5,
         "cues": {"contact": 0.0, "contact_far": 0.5},
         "tracks": tracks(run_pose, keyset(16)),
+    },
+    "attack": {
+        "description": "A slash. The sword is drawn back and up over the near shoulder as the body coils onto its back foot and the far arm reaches forward — held, trembling with the load — then thrown forward and down across the front in a lunge, the far foot stepping into it, the cloak flung back; the follow-through carries the blade low before everything comes home. `release` is the frame the blade starts, `contact` where it is level in front.",
+        "duration": 0.55,
+        "cues": {"windup": 0.0, "release": 0.40, "contact": 0.50},
+        "tracks": tracks(attack_pose, keyset(30)),
+    },
+    "hurt": {
+        "description": "Struck: the head snaps back, the body is knocked off its line, the arms go wide and the cloak jumps forward; it recovers over the second half. Arrives on its first frame — a hit has no anticipation — and is laid over the walk or the idle, so the feet stay.",
+        "duration": 0.3,
+        "tracks": tracks(hurt_pose, keyset(18)) + [
+            {"part": p, "prop": "tint", "to": "$white", "keys": [[0, 0.85, "hold"], [0.12, 0.85, "linear"], [0.3, 0, "linear"], [1, 0]]}
+            for p in ("hood", "cowl", "chest", "waist", "hips", "thigh_n", "shin_n", "arm_n_upper", "cape_0")],
+    },
+    "death": {
+        "description": "The last chapter: caught on the blow — held up by it for a beat — then let go: the knees fold and the body comes down onto them as the feet slide back, the sword arm drops until the point rests on the ground, the head bows and the cloak settles over the back. Still from 0.85.",
+        "duration": 1.2,
+        "cues": {"down": 0.6},
+        "tracks": tracks(death_pose, [i / 20 for i in range(18)] + [0.85, 1.0]),
+    },
+    "roll": {
+        "description": "A forward dodge: the body drops and tucks — knees to the chest, heels up, the sword arm folded in, the head down — turns over once about the hips as it goes, and comes up out of it onto its feet. Played in place; the game carries it forward.",
+        "duration": 0.5,
+        "tracks": tracks(roll_pose, keyset(30)),
     },
 }
 
@@ -446,7 +609,7 @@ doc = {
     "name": "Wanderer",
     "description": DESCRIPTION,
     "tags": ["char", "player"],
-    "size": [128, 160],
+    "size": [192, 192],
     "meta": {"radius": 14, "height": 120},
     "parts": RIG.parts,
     "variants": variants,
