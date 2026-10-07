@@ -199,6 +199,8 @@ def leg_parts(s, cloth, leather, skin, stroke):
     wear(limb(f"shin_{s}_shade", f"leg_{s}_shin", band(SHIN_C, 0, 4, 1.9, +1), shade, None), skin[1])
     if lit: wear(limb(f"calf_{s}_lit", f"leg_{s}_shin", band(SHIN_C, 7, 9, 1.3, -1), lit, None), skin[2])
     wear(limb(f"knee_{s}", f"leg_{s}_shin", ell(3.6, 3.3), base, None, along=0.4), skin[0])
+    clothes(limb(f"thigh_{s}_seam", f"leg_{s}_thigh", cpoly([(2.0, -3.4), (14.0, -3.6), (26.0, -2.4), (26.0, -1.9), (14.0, -3.1), (2.0, -2.9)], sharp=(0, 2, 3, 5)), "$ink@0.22", None))
+    clothes(limb(f"knee_{s}_patch", f"leg_{s}_shin", cpoly([(-2.6, -3.0), (2.4, -3.3), (4.6, -0.6), (3.6, 2.6), (-1.6, 3.0), (-3.4, 0.4)]), shade, None, opacity=0.5))
     # the boot: a tall shaft, the cuff turned over below the knee, a strap at the ankle, a heel and a toe cap
     clothes(limb(f"boot_{s}", f"leg_{s}_shin", cpoly(BOOT_C, sharp=(0, 8)), lb, stroke))
     clothes(limb(f"boot_{s}_shade", f"leg_{s}_shin", band(BOOT_C, 0, 3, 1.8, +1, 0.5), ls, None))
@@ -256,6 +258,8 @@ def cape_parts():
         clothes(limb(f"{n}_shade", n, poly([(a, c + 0.5) for a, c in inner] + [(a, c + 3.4) for a, c in inner][::-1]), shade, None))
         back = [pts[1], pts[2], pts[3]]
         clothes(limb(f"{n}_lit", n, cpoly([(a, c - 0.5) for a, c in back] + [(a, c - 2.2) for a, c in back][::-1], sharp=(0, 2, 3, 5)), lit, None))
+        if i == 0:
+            clothes(limb(f"{n}_rim", n, cpoly([(a, c - 0.5) for a, c in back] + [(a, c - 1.1) for a, c in back][::-1], sharp=(0, 2, 3, 5)), "$cloak.light2", None, opacity=0.6))
         (a0, b0), (a1, b1) = W[i], W[i + 1]
         L = CAPE[i][0]
         for k, f in enumerate((0.36, 0.68)):
@@ -339,6 +343,7 @@ clothes(limb("hood_shade", "head", cpoly([(-3.6, -1.2), (-3.4, -5.0), (-1.0, -8.
 clothes(limb("hood_lit", "head", cpoly([(15.2, 7.6), (18.0, 4.0), (18.8, -1.4), (16.8, -6.8), (15.4, -5.8), (17.0, -1.4), (16.2, 3.0), (13.8, 6.2)]), cl, None))
 for k, (a, b) in enumerate((((16.6, 1.0), (10.0, -8.8)), ((13.8, 4.8), (6.2, -7.2)))):
     clothes(limb(f"hood_fold_{k}", "head", cpoly([a, ((a[0] + b[0]) / 2 - 0.8, (a[1] + b[1]) / 2), b, (b[0] + 0.5, b[1] + 0.6), ((a[0] + b[0]) / 2 - 0.1, (a[1] + b[1]) / 2 + 0.5), (a[0] + 0.5, a[1] + 0.5)], sharp=(0, 2, 3, 5)), cs, None, opacity=0.5))
+clothes(limb("hood_rim", "head", cpoly([(18.4, 3.4), (19.2, -1.6), (17.2, -7.4), (16.6, -7.0), (18.4, -1.6), (17.6, 3.0)], sharp=(0, 2, 3, 5)), "$cloak.light2", None, opacity=0.7))
 clothes(limb("hood_lining", "head", cpoly(HOOD_EDGE + [(13.4, 9.0), (11.0, 6.6), (8.0, 4.4), (2.8, 4.0), (-2.2, 2.4)], sharp=(0, 4, 5, 9)), "$crimson", None))
 clothes(limb("hood_lining_dark", "head", cpoly([(-2.8, 0.6), (2.8, 2.4), (2.8, 4.0), (-2.2, 2.4)], sharp=(0, 1, 2, 3)), "$crimson.dark", None))
 limb("eye_white", "head", cpoly([(9.0, 3.2), (10.4, 3.0), (10.9, 4.6), (10.2, 6.0), (8.8, 5.8)]), "$bone", None, opacity=0.9)
