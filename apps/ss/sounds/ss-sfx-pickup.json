@@ -1,40 +1,80 @@
 {
   "id": "ss.sfx.pickup",
   "name": "Pickup",
-  "description": "A drop of pulp landing: one sine chirping up an octave, $fifth.down to $fifth, over 70ms and gone — the plip a droplet makes, not a beep. It fires in streams (a magnet pulls a whole field in at once), so it is built to pile up the way rain does: a pure tone with nothing above it, low enough to sit under the weapons, a pitch that differs drop to drop, and no more than a dozen of it a second.",
+  "description": "A bubble of pulp bursting against the mouth: one sine dropping from $tonic to $third.down in 45ms, a pop rather than a beep. It fires in streams — a magnet pulls a whole field in at once — so it is built to pile up like a pan of something simmering, never like a machine: a pure tone with nothing above it, four takes of different size and shape the engine turns through (the plain pop, a bigger slower bwop, a small quick pip that barely falls, and a pop that splits in two), a pitch rolled wide on top of each, and no more than a dozen of it a second. The takes are written by hand rather than with `takes`, because a pure tone has nothing to reseed; they carry the `take-N` names so the engine round-robins them all the same.",
   "tags": [
     "sfx",
     "pickup"
   ],
-  "duration": 0.08,
+  "duration": 0.07,
   "meta": {
     "minInterval": 75
   },
   "jitter": {
     "freq": [
-      0.94,
-      1.06
+      0.9,
+      1.1
     ]
   },
   "voices": [
     {
-      "id": "drop",
-      "dur": 0.07,
+      "id": "pop",
+      "dur": 0.045,
       "gain": "mid",
       "source": {
         "kind": "osc",
         "wave": "sine",
-        "freq": "$fifth.down",
-        "to": "$fifth"
+        "freq": "$tonic",
+        "to": "$third.down"
       },
       "env": [
         {
           "prop": "gain",
           "adsr": {
-            "attack": 0.003
+            "attack": 0.004
           }
         }
       ]
     }
-  ]
+  ],
+  "variants": {
+    "take-2": {
+      "description": "Bwop: the same pop from a bigger bubble — a fifth-ish lower and a quarter longer.",
+      "pitch": 0.8,
+      "stretch": 1.25
+    },
+    "take-3": {
+      "description": "Pip: a small quick one that only falls to $third, so it reads as a lighter, brighter pop.",
+      "pitch": 1.15,
+      "stretch": 0.8,
+      "set": {
+        "pop.source.to": "$third"
+      }
+    },
+    "take-4": {
+      "description": "Pop-pop: the bubble splits, and a smaller second pop follows the first 30ms later.",
+      "add": [
+        {
+          "id": "split",
+          "at": 0.03,
+          "dur": 0.03,
+          "gain": "soft",
+          "source": {
+            "kind": "osc",
+            "wave": "sine",
+            "freq": "$tonic.up",
+            "to": "$third"
+          },
+          "env": [
+            {
+              "prop": "gain",
+              "adsr": {
+                "attack": 0.004
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
 }
