@@ -52,6 +52,14 @@ The widths are tokens (`tokens/base.json` → `strokes`): `hair` 1, `thin` 2, `b
   (`ss.enemy.foundress`), where `thin` would vanish at the scale they are seen at.
 - **Samples use numbers (`1.1`)** because they are 32px documents shown at up to 56px; their weights are
   tuned per drawing.
+- **A line drawn over the fills shows its whole width; a stroke under them shows half.** A body's `thin`
+  goes on its outermost part and the parts drawn after it cover the inner half, so what reads on screen is
+  about one unit. An ink line laid over the fills at the end (`shaded`'s `*_rim`, the spire's shards) shows
+  all of it, so the same `thin` there reads twice as heavy. A silhouette closed that way is `hair`, and an
+  ink under-shape stands about one unit proud of the face, not two (`ss.terrain.*`).
+- **Count the scale it is drawn at.** A baked stroke grows with the sprite. feelers scatters the field's
+  props at a rolled scale (up to 2.3× for a spire, `data/terrain.ts`), so a prop's line is heavier than a
+  body's by that much again; weigh it at the scale it is mostly seen at, not at 1.
 
 Never stroke a gloss, a shade or a vein. Those are paint on the form, not forms.
 
