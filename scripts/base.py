@@ -29,8 +29,9 @@ The camp is what the records draw, and only that:
                  the hive's, borrowed — the cap Sol carried in a dead emitter,
                  planted and spread. The same caps go in jars for lamps
   the lockers    one per writer, with the one thing their log kept
-  the store      what the ruins handed over, on racks in a lean-to of hull
-                 plate beside the arms locker: the pocket is packed at it
+  the store      racks in a lean-to of hull plate beside the arms locker,
+                 bare: feelers sets the finds met so far on them, and the
+                 pocket is packed at it
   the marker     the middle of the camp: the smell compass. A compass
                  ring on the snapped mast, and eight strips of cloth down it, each taking one smell: the one
                  that stirs says which smell is on the wind, the way it
@@ -942,7 +943,8 @@ def locker():
 def finds():
     """What the ruins handed over (guide §12.1), kept between expeditions: a lean-to store put
     up beside the arms locker out of the lander's skin and the expedition's racks, its cage
-    door swung open, the finds on its shelves in rows as if catalogued. 3/4 on, like the locker."""
+    door swung open, its shelves bare for the game to fill with the finds met so far. 3/4 on,
+    like the locker."""
     ground = 30
     # The roof: a slab of the lander's skin laid across, corrugated, falling to the back.
     roof = [(-35, -25), (-31, -37), (33, -35), (37, -24)]
@@ -975,42 +977,8 @@ def finds():
         *shelf("a", -9),
         *shelf("b", 7),
         *shelf("c", 23),
-        # Top shelf: a carved chip of the ruins' stone, a ring of it, a tablet, a jar with a finger of jelly.
-        P("chip", poly([(-20, -10), (-19, -16), (-14.5, -16.8), (-13.4, -10)]), "$carapace", stroke=INK_HAIR),
-        P("chip_cut", poly([(-18.6, -13.4), (-14.4, -13.8), (-14.4, -12.8), (-18.6, -12.4)]), "$carapace.dark2"),
-        P("chip_lit", poly([(-19.6, -10.6), (-19, -15.6), (-18.2, -15.6), (-18.6, -10.6)]), "$carapace.light@0.6"),
-        P("ring", ell(3.4, 3.4), "$carapace.light", at=(-7.6, -13.6), stroke=INK_HAIR),
-        P("ring_hole", ell(1.6, 1.6), "$coal", at=(-7.6, -13.6)),
-        P("tablet", poly(rr(8, 11, 1, (2, -15.6))), "$carapace.dark", stroke=INK_HAIR),
-        band("tablet_zig", [(-1, -18), (1, -16.4), (3, -18), (5, -16.4)], 0.5, "$carapace.light@0.7"),
-        band("tablet_line", [(-0.6, -13.4), (4.6, -13.4)], 0.5, "$carapace.light@0.5"),
-        P("jar", poly(rr(7, 8.4, 1.6, (15, -14.4))), "$frost.dark@0.55", stroke=INK_HAIR),
-        P("jar_jelly", poly(rr(5.6, 3.6, 1, (15, -12.2))), "$gold"),
-        P("jar_lid", R(7.6, 1.8, 0.5), "$steel", at=(15, -19.2), stroke=INK_HAIR),
-        P("jar_glint", R(1, 5, 0.4), "$white@0.45", at=(12.6, -14.6)),
-        # Middle shelf: a shard with the signal still in its seam (the one pink thing), a stone bowl,
-        # a flake of carapace, a tied bundle with its tag.
-        P("shard", poly([(-20.4, 6), (-18, -2.6), (-15, -0.4), (-14.2, 6)]), "$carapace.dark", stroke=INK_HAIR),
-        band("shard_vein", [(-18, 5.2), (-16.6, 0)], 0.7, "$pheromone@0.85"),
-        P("bowl", poly([(-10.6, 1.6), (-1.8, 1.6), (-3, 5), (-4.8, 6), (-7.6, 6), (-9.4, 5)]), "$carapace", stroke=INK_HAIR),
-        P("bowl_rim", ell(4.4, 1.1), "$carapace.dark2", at=(-6.2, 1.6), stroke=INK_HAIR),
-        band("bowl_band", [(-9.8, 3.2), (-2.6, 3.2)], 0.5, "$carapace.light@0.6"),
-        P("flake", poly([(1.6, 6), (3, -0.6), (8.6, 0), (8, 6)]), "$chitin", stroke=INK_HAIR),
-        band("flake_ridge", [(2.8, 3.4), (7.6, 2.2)], 0.6, "$chitin.dark2@0.8"),
-        band("flake_crest", [(3, 2.2), (7.8, 1.0)], 0.4, "$chitin.light@0.6"),
-        P("bundle", poly(rr(9, 6.6, 2, (16.2, 2.6))), "$husk", stroke=INK_HAIR),
-        band("bundle_cord", [(16.2, -0.7), (16.2, 5.9)], 0.6, "$bone.dark"),
-        band("bundle_cord_b", [(11.7, 2.6), (20.7, 2.6)], 0.6, "$bone.dark"),
-        *tag("bundle_tag", 20.4, 2.6, s=0.6, rot=-8),
-        # Bottom shelf: a crate of the smaller finds, a long slab leaning on the upright.
-        *shaded("crate", rr(16, 9, 1.2, (-13, 18.4)), "$slate", [(20, 24, "$slate.dark")], stroke=INK_HAIR),
-        P("crate_stencil", R(8, 1.4, 0.4), "$frost.dark@0.6", at=(-13, 18)),
-        P("crate_chip", poly([(-18, 14), (-16.4, 11.6), (-14.6, 13.8)]), "$carapace", stroke=INK_HAIR),
-        P("crate_ring", ell(2, 1), "$carapace.light", at=(-10, 13.6), stroke=INK_HAIR),
-        P("slab", poly([(5, 22), (9, 9.6), (15.4, 10.6), (13.6, 22)]), "$carapace.dark", stroke=INK_HAIR),
-        P("slab_lit", poly([(5.8, 21.4), (9.4, 10.4), (10.8, 10.6), (7.6, 21.4)]), "$carapace.light@0.45"),
-        band("slab_seam", [(10, 20), (12.2, 13)], 0.5, "$ink@0.5"),
-        P("pebbles", ell(3, 1.2), "$carapace.light@0.8", at=(19.4, 21.2), stroke=INK_HAIR),
+        # The shelves are bare in the drawing: feelers lays the finds on them, the ones met so far
+        # (its data/hub.ts FINDS_SHELVES), so the store fills as the collection does.
         # The frame round the front, the sill, and the roof over it.
         *[P(f"post_{i}", R(3.6, 57, 0.8), "$steel", at=(x, 2), stroke=INK_THIN) for i, x in enumerate([-27.5, 27.5])],
         P("post_lit", R(1, 54, 0.4), "$steel.light@0.8", at=(-28.6, 2)),
@@ -1043,11 +1011,11 @@ def finds():
         "The finds store",
         "Where the camp keeps what the ruins handed over between expeditions: a lean-to store beside the arms locker, put up out of the "
         "lander's skin and the expedition's racks. A corrugated slab of hull plate for a roof, rusted at one end; a steel frame round an open "
-        "front, and inside, in the dark against a back of riveted plates, two uprights and three shelves with the finds on them in rows as if "
-        "catalogued: a carved chip of the ruins' stone, a ring of it, a tablet cut with a zigzag, a jar with a finger of jelly; a shard with "
-        "the signal still in its seam (the one pink thing), a carved bowl, a flake of carapace, a tied bundle with its tag; on the bottom a crate "
-        "of the smaller ones and a long slab leaning on the upright. The cage door stands swung open, steel mesh in a frame, a padlock hanging open "
-        "on it; the inventory is pinned to the left post; the crates the finds came home in are stacked outside. In feelers the pocket is packed at it.",
+        "front, and inside, in the dark against a back of riveted plates, two uprights and three bare shelves. The shelves are left empty on "
+        "purpose: feelers sets the finds the player has actually met on them, plate-off (each `ss.relic.*` in its `glyph` variant), so the "
+        "store fills as the collection does. The shelves' top faces are at y -10.1, 5.9 and 21.9, between x -22 and 22. The cage door "
+        "stands swung open, steel mesh in a frame, a padlock hanging open on it; the inventory is pinned to the left post; the crates the "
+        "finds came home in are stacked outside.",
         (90, 80),
         parts,
     )
