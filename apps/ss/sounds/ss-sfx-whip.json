@@ -1,47 +1,45 @@
 {
   "id": "ss.sfx.whip",
   "name": "Lash",
-  "description": "A cord snapping: a sawtooth thrown upward from the low end, the opposite gesture to every impact in the set, because a lash is the swing and not the landing.",
-  "tags": [
-    "sfx",
-    "weapon"
-  ],
-  "duration": 0.09,
-  "meta": {
-    "minInterval": 60
-  },
-  "jitter": {
-    "freq": [
-      0.95,
-      1.16
-    ]
-  },
+  "description": "A cord swung and its tip cracking. This was one unfiltered sawtooth thrown upward from `$swarm`: every harmonic to Nyquist, which is a buzz, and a buzz is a synth and not a lash. A real one is two events — the cord moving air as it comes round, and the tip snapping at the end of it — and neither of them buzzes.\n\n`swing` is the cord coming round: noise under a lowpass that opens from `$shell` to `$grit` as the cord speeds up and swells into the crack, so the lash is heard arriving. Lowpassed, not bandpassed, and only fifty milliseconds of it, because a long bright band of noise is the hiss every weapon in the set was accused of. `crack` is the tip, and it is struck rather than sprayed: a sine snapped down from `$gust` to `$grit.down` in twenty milliseconds, over `tick`, four milliseconds of noise for the edge. `cord` is a low sine under the crack, the weight of the thing being swung, short enough to be felt rather than heard as a note.\n\nThe Lash, the Cowboy and every thicket fire this, so it ships three takes.",
+  "tags": ["sfx", "weapon"],
+  "duration": 0.1,
+  "takes": 3,
+  "meta": { "minInterval": 60 },
+  "jitter": { "freq": [0.94, 1.1] },
   "voices": [
     {
-      "id": "lash",
+      "id": "swing",
+      "dur": 0.05,
+      "gain": "soft",
+      "source": { "kind": "noise" },
+      "filter": { "type": "lowpass", "freq": "$shell", "to": "$grit", "q": "wide" },
+      "env": [{ "prop": "gain", "keys": [[0, 0.05], [0.9, 1], [1, 0.3]] }]
+    },
+    {
+      "id": "tick",
+      "at": 0.046,
+      "dur": 0.006,
+      "gain": "faint",
+      "source": { "kind": "noise" },
+      "filter": { "type": "lowpass", "freq": "$gust", "q": "wide" },
+      "env": [{ "prop": "gain", "adsr": { "attack": 0.002, "decay": 0.004 } }]
+    },
+    {
+      "id": "crack",
+      "at": 0.046,
+      "dur": 0.022,
       "gain": "mid",
-      "dur": "blip",
-      "source": {
-        "kind": "osc",
-        "wave": "sawtooth",
-        "freq": "$swarm",
-        "to": "$gust.down"
-      },
-      "env": [
-        {
-          "prop": "gain",
-          "keys": [
-            [
-              0,
-              1
-            ],
-            [
-              1,
-              0.0
-            ]
-          ]
-        }
-      ]
+      "source": { "kind": "osc", "wave": "sine", "freq": "$gust", "to": "$grit.down" },
+      "env": [{ "prop": "gain", "adsr": { "attack": 0.002, "decay": 0.02 } }]
+    },
+    {
+      "id": "cord",
+      "at": 0.046,
+      "dur": 0.045,
+      "gain": "soft",
+      "source": { "kind": "osc", "wave": "sine", "freq": "$shell", "to": "$shell.down" },
+      "env": [{ "prop": "gain", "adsr": { "attack": 0.003, "decay": 0.04 } }]
     }
   ]
 }

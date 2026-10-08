@@ -1,12 +1,12 @@
 {
   "id": "ss.sfx.spore",
   "name": "Spore burst",
-  "description": "A puffball going off. The Spore's blast borrowed ss.sfx.elite-die until now, so every cache the player set off said a large enemy had died, and its Cluster Bloom aftershocks borrowed the hit. A pod of spores bursting is neither: it is a skin giving way and a cloud coming out of it.\n\n`skin` is the membrane splitting, the part a phone hears first: a sine snapped down from `$shell.up` to `$shell` in twenty-five milliseconds over a ten-millisecond crack of noise at `$grit`. `thud` is the weight under it, a sine falling from `$moan`, short enough to be felt rather than heard as a note. `cloud` is the spores: noise under a lowpass that opens to `$gust` as the cloud swells and closes to `$shell` as it settles, swelling in over sixty milliseconds rather than arriving, because a cloud is pushed out, not struck. `settle` is a scatter of faint grains through the back half — the spores pattering down.\n\nThe `small` variant is the same pod a third higher, for the Cluster Bloom's four daughters going off round the crater.",
+  "description": "A puffball going off. The Spore's blast borrowed ss.sfx.elite-die until this, and its Cluster Bloom aftershocks borrowed the hit; a pod of spores bursting is neither, it is a skin giving way and a cloud coming out of it. The first version of this made the cloud out of a third of a second of noise and the settling spores out of more, and that was the part heard as static rather than as spores.\n\nSo the burst is carried by pitch, and the noise is kept short and dark. `skin` is the membrane splitting, a sine snapped down from `$shell.up` to `$shell`, over `crack`, ten milliseconds of lowpassed noise. `pop` is the air inside it getting out — a sine bending up from `$shell` an octave, the way a bubble breaks. `thud` is the weight under it, a sine falling from `$moan`, felt more than heard. `cloud` is the spores, and the only long noise left: a quarter of a second under a lowpass that never opens past 900Hz and closes to 200, so it is a soft push of air and not a hiss.\n\nThe `small` variant is the same pod a third higher, for the Cluster Bloom's four daughters going off round the crater.",
   "tags": [
     "sfx",
     "world"
   ],
-  "duration": 0.42,
+  "duration": 0.3,
   "meta": {
     "minInterval": 50
   },
@@ -25,7 +25,7 @@
         "kind": "noise"
       },
       "filter": {
-        "type": "bandpass",
+        "type": "lowpass",
         "freq": "$grit",
         "q": "wide"
       },
@@ -60,6 +60,27 @@
       ]
     },
     {
+      "id": "pop",
+      "at": 0.006,
+      "dur": 0.045,
+      "gain": "soft",
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$shell",
+        "to": "$shell.up"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.003,
+            "decay": 0.04
+          }
+        }
+      ]
+    },
+    {
       "id": "thud",
       "at": 0.003,
       "dur": 0.12,
@@ -83,14 +104,14 @@
     {
       "id": "cloud",
       "at": 0.01,
-      "dur": 0.38,
-      "gain": 0.8,
+      "dur": 0.24,
+      "gain": 0.5,
       "source": {
         "kind": "noise"
       },
       "filter": {
         "type": "lowpass",
-        "freq": "$grit",
+        "freq": "$shell.up",
         "q": "wide"
       },
       "env": [
@@ -99,15 +120,15 @@
           "keys": [
             [
               0,
+              700
+            ],
+            [
+              0.2,
               900
             ],
             [
-              0.18,
-              1400
-            ],
-            [
               1,
-              310
+              200
             ]
           ]
         },
@@ -119,12 +140,12 @@
               0.1
             ],
             [
-              0.16,
+              0.2,
               1
             ],
             [
-              0.5,
-              0.35
+              0.55,
+              0.3
             ],
             [
               1,
@@ -133,43 +154,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": "settle",
-      "at": 0.15,
-      "gain": "hush",
-      "filter": {
-        "type": "bandpass",
-        "freq": "$gust",
-        "q": "wide"
-      },
-      "env": [
-        {
-          "prop": "gain",
-          "keys": [
-            [
-              0,
-              1
-            ],
-            [
-              1,
-              0.2
-            ]
-          ]
-        }
-      ],
-      "repeat": {
-        "of": {
-          "kind": "noise"
-        },
-        "count": 8,
-        "spread": 0.24,
-        "grain": 0.006,
-        "gainRange": [
-          0.3,
-          1
-        ]
-      }
     }
   ],
   "variants": {

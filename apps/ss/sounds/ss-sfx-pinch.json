@@ -1,112 +1,44 @@
 {
   "id": "ss.sfx.pinch",
   "name": "Pinch",
-  "description": "A jointed arm swinging in and its claw shutting. Spider Hand was the one weapon with nothing to say: up to eight arms reaching and biting on their own clocks, in silence.\n\n`swing` is the arm on its way in, a short band of noise rising from `$shell.up` to `$grit` as it speeds up, so the bite is announced a breath before it lands. `snap` is the claw closing: two hard clicks five milliseconds apart, the two halves of a pincer meeting, bandpassed at `$gust` with a `band` Q so they are chitin and not paper. `ring` is a single short sine at `$grit` under them, gone in fifteen milliseconds — the hardness of the shell, short enough that it never becomes a note. Nothing low: a claw is small, and the hit the bite lands is already the weight.\n\nShips three takes and sits low, because eight arms can bite inside the same second.",
-  "tags": [
-    "sfx",
-    "weapon"
-  ],
-  "duration": 0.08,
+  "description": "A jointed arm swinging in and its claw shutting. Spider Hand was silent; the first version of this gave it a voice made of noise — a band sweeping up for the swing, two noise clicks for the snap — and up to eight arms of that in a second was a fistful of static.\n\nA claw closing is a knock, not a hiss, so the snap is struck now, the way a woodblock is. `clack` is the first half of the pincer meeting: a sine at `$grit` gone in twenty-five milliseconds, with `bite` a hair later at `$gust`, the second half landing a little higher. `partial` is one short sine at `$gust.up` over them — not in any scale, which is what makes the knock read as shell rather than as a note. `swing` is all that is left of the noise: thirty milliseconds under a lowpass, dark and faint, so the bite is announced without the announcement being the loud part. Nothing low: a claw is small, and the hit the bite lands is already the weight.\n\nShips three takes and sits low, because eight arms can bite inside the same second.",
+  "tags": ["sfx", "weapon"],
+  "duration": 0.075,
   "takes": 3,
-  "meta": {
-    "minInterval": 45
-  },
-  "jitter": {
-    "freq": [
-      0.9,
-      1.12
-    ]
-  },
+  "meta": { "minInterval": 45 },
+  "jitter": { "freq": [0.9, 1.12] },
   "voices": [
     {
       "id": "swing",
-      "dur": 0.04,
-      "gain": 0.8,
-      "source": {
-        "kind": "noise"
-      },
-      "filter": {
-        "type": "bandpass",
-        "freq": "$shell.up",
-        "to": "$grit",
-        "q": "band"
-      },
-      "env": [
-        {
-          "prop": "gain",
-          "keys": [
-            [
-              0,
-              0.05
-            ],
-            [
-              0.85,
-              1
-            ],
-            [
-              1,
-              0.2
-            ]
-          ]
-        }
-      ]
+      "dur": 0.032,
+      "gain": "faint",
+      "source": { "kind": "noise" },
+      "filter": { "type": "lowpass", "freq": "$shell.up", "to": "$grit", "q": "wide" },
+      "env": [{ "prop": "gain", "keys": [[0, 0.1], [0.85, 1], [1, 0.2]] }]
     },
     {
-      "id": "snap",
+      "id": "clack",
+      "at": 0.03,
+      "dur": 0.025,
+      "gain": "mid",
+      "source": { "kind": "osc", "wave": "sine", "freq": "$grit" },
+      "env": [{ "prop": "gain", "adsr": { "attack": 0.002, "decay": 0.022 } }]
+    },
+    {
+      "id": "bite",
       "at": 0.036,
-      "gain": 1.3,
-      "filter": {
-        "type": "bandpass",
-        "freq": "$gust",
-        "q": "band"
-      },
-      "env": [
-        {
-          "prop": "gain",
-          "keys": [
-            [
-              0,
-              1
-            ],
-            [
-              1,
-              0.5
-            ]
-          ]
-        }
-      ],
-      "repeat": {
-        "of": {
-          "kind": "noise"
-        },
-        "count": 2,
-        "spread": 0.006,
-        "grain": 0.004,
-        "gainRange": [
-          0.7,
-          1
-        ]
-      }
+      "dur": 0.02,
+      "gain": "soft",
+      "source": { "kind": "osc", "wave": "sine", "freq": "$gust" },
+      "env": [{ "prop": "gain", "adsr": { "attack": 0.002, "decay": 0.018 } }]
     },
     {
-      "id": "ring",
-      "at": 0.037,
-      "dur": 0.016,
-      "gain": "soft",
-      "source": {
-        "kind": "osc",
-        "wave": "sine",
-        "freq": "$grit"
-      },
-      "env": [
-        {
-          "prop": "gain",
-          "adsr": {
-            "attack": 0.002,
-            "decay": 0.014
-          }
-        }
-      ]
+      "id": "partial",
+      "at": 0.03,
+      "dur": 0.012,
+      "gain": "faint",
+      "source": { "kind": "osc", "wave": "sine", "freq": "$gust.up" },
+      "env": [{ "prop": "gain", "adsr": { "attack": 0.002, "decay": 0.01 } }]
     }
   ]
 }
