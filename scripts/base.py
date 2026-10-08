@@ -29,8 +29,8 @@ The camp is what the records draw, and only that:
                  the hive's, borrowed — the cap Sol carried in a dead emitter,
                  planted and spread. The same caps go in jars for lamps
   the lockers    one per writer, with the one thing their log kept
-  the finds case what the ruins handed over, under frost glass, beside the
-                 arms locker: the pocket for the next run is packed at it
+  the store      what the ruins handed over, on racks in a lean-to of hull
+                 plate beside the arms locker: the pocket is packed at it
   the marker     the middle of the camp: the smell compass. A compass
                  ring on the snapped mast, and eight strips of cloth down it, each taking one smell: the one
                  that stirs says which smell is on the wind, the way it
@@ -938,62 +938,117 @@ def locker():
     )
 
 
-# ============================================================== the finds case
+# ============================================================== the finds store
 def finds():
-    """What the ruins handed over (guide §12.1), kept between expeditions in one of the
-    expedition's cases: the slate box the stores came in, its lid replaced with frost glass,
-    so whoever packs a pocket can see what there is to pack. 3/4 on, like the locker beside it."""
-    lid = [(-19, -6), (-16, -15), (16, -15), (19, -6)]
-    glass = [(-16.6, -7.2), (-14.2, -13.8), (14.2, -13.8), (16.6, -7.2)]
+    """What the ruins handed over (guide §12.1), kept between expeditions: a lean-to store put
+    up beside the arms locker out of the lander's skin and the expedition's racks, its cage
+    door swung open, the finds on its shelves in rows as if catalogued. 3/4 on, like the locker."""
+    ground = 30
+    # The roof: a slab of the lander's skin laid across, corrugated, falling to the back.
+    roof = [(-35, -25), (-31, -37), (33, -35), (37, -24)]
+    door = [(28.5, -23), (41, -19), (41, 31), (28.5, 28.5)]
+    mesh = []
+    for i in range(1, 6):
+        t = i / 6
+        x = 28.5 + (41 - 28.5) * t
+        mesh.append(band(f"mesh_v{i}", [(x, -23 + 4 * t), (x, 28.5 + 2.5 * t)], 0.35, "$frost@0.45"))
+    for i in range(1, 9):
+        y = -23 + i * 51.5 / 9
+        mesh.append(band(f"mesh_h{i}", [(28.5, y), (41, y + 4 - 1.5 * i / 9)], 0.35, "$frost@0.45"))
+
+    def shelf(i, y):
+        return [
+            P(f"shelf_{i}", R(48, 2.2, 0.5), "$steel", at=(0, y), stroke=INK_HAIR),
+            lit_edge(f"shelf_{i}_lit", -23, 23, y - 1.0, 0.5, "$white@0.3"),
+            ao(f"shelf_{i}_ao", 0, y + 2.2, 46, 1.4, 0.5),
+        ]
+
     parts = [
-        shadow("shadow", 0, 12, 21, 4),
-        # Two short trestles under it: it stands off the damp, the way the camp keeps paper.
-        *[P(f"leg_{i}", R(3, 6, 0.8), "$slate.dark", at=(x, 9.5), stroke=INK_HAIR) for i, x in enumerate([-14, 14])],
-        P("rail", R(30, 1.4, 0.5), "$steel.dark", at=(0, 10.4)),
-        # The box: the front face, in the same cold slate as the locker and the crates.
-        *shaded("box", rr(38, 13, 2, (0, 0.5)), "$slate", [(4, 8, "$slate.dark")]),
-        P("stripe", R(38, 1.6, 0.4), "$frost.dark@0.5", at=(0, 4.2)),
-        *scratches("scuff", -6, 1, 16, 4, 3, "$slate.light@0.6", 11),
-        *[P(f"corner_{i}", R(3, 3, 0.6), "$steel", at=(x, y)) for i, (x, y) in enumerate([(-17.6, -4.4), (17.6, -4.4), (-17.2, 5.6), (17.2, 5.6)])],
-        # The lid seen from above: a steel frame, frost glass in it, and the finds on a bed of husk-coloured cloth under the glass.
-        P("frame", poly(lid), "$steel", stroke=INK_THIN),
-        P("frame_dk", poly([(-19, -6), (-18.2, -8.4), (18.2, -8.4), (19, -6)]), "$steel.dark"),
-        P("bed", poly(glass), "$husk.dark"),
-        P("bed_fold", poly([(-15.4, -10.8), (15.4, -10.8), (15.8, -9.6), (-15.8, -9.6)]), "$husk.dark2@0.6"),
-        # The finds, laid out in a row as if catalogued: a carved chip of the ruins' stone, a ring of it,
-        # a shard with the signal still in its seam (the one pink thing), a flake of carapace.
-        P("chip", poly([(-12.6, -9.2), (-11.8, -12.6), (-8.2, -13), (-7.4, -9.6)]), "$carapace", stroke=INK_HAIR),
-        P("chip_cut", poly([(-11.6, -11.2), (-8.6, -11.4), (-8.6, -10.8), (-11.6, -10.6)]), "$carapace.dark2"),
-        P("chip_lit", poly([(-12.4, -9.6), (-11.8, -12.4), (-11.2, -12.4), (-11.6, -9.6)]), "$carapace.light@0.6"),
-        P("ring", ell(2.6, 1.4), "$carapace.light", at=(-3.2, -10.8), stroke=INK_HAIR),
-        P("ring_hole", ell(1.2, 0.6), "$husk.dark2", at=(-3.2, -10.9)),
-        P("shard", poly([(1.6, -9.0), (3.2, -13.4), (5.0, -12.2), (5.6, -9.2)]), "$carapace.dark", stroke=INK_HAIR),
-        band("shard_vein", [(3.0, -9.6), (3.9, -12.2)], 0.6, "$pheromone@0.8"),
-        P("flake", poly([(8.6, -9.4), (9.6, -12.4), (13.2, -12.0), (12.6, -9.2)]), "$chitin", stroke=INK_HAIR),
-        band("flake_ridge", [(9.4, -10.4), (12.4, -11.2)], 0.5, "$chitin.dark2@0.8"),
-        # The glass over them: a haze, a cold sheen and frost in its corners.
-        P("glass", poly(glass), "$frost.light@0.22", stroke=INK_FINE),
-        P("sheen", poly([(-12.6, -13.8), (-9.6, -13.8), (-13.8, -7.2), (-16.8, -7.2)]), "$white@0.28"),
-        P("sheen_b", poly([(-7.8, -13.8), (-6.8, -13.8), (-11.0, -7.2), (-12.0, -7.2)]), "$white@0.18"),
-        P("frost_a", poly([(14.2, -13.8), (10.8, -13.8), (14.8, -11.6)]), "$white@0.45"),
-        P("frost_b", poly([(-16.6, -7.2), (-13.2, -7.2), (-15.8, -9.2)]), "$white@0.35"),
-        lit_edge("lid_lit", -16, 16, -15.4, 0.7, "$white@0.4"),
-        *hinge("hinge_a", -10, -15.6, leaf=0, length=4),
-        *hinge("hinge_b", 10, -15.6, leaf=0, length=4),
-        # The hasp down over its staple, open: what is in it goes out in a pocket.
-        *hasp("hasp", 0, -5.6, s=0.7, locked=False),
-        # A tag on the corner, the list of what is in it.
-        *tag("tag", 17.4, -4.2, s=0.9, rot=6),
+        shadow("shadow", 2, ground, 40, 6.5, "0.45"),
+        # Inside: the dark, a back of hull plates with a seam down it.
+        P("back", R(52, 54, 1), "$coal", at=(0, 3)),
+        P("back_plate", R(24, 52, 0.5), "$slate.dark@0.45", at=(-12, 3)),
+        P("back_seam", R(0.8, 52, 0.3), "$ink@0.6", at=(0, 3)),
+        *[P(f"back_rivet_{i}", circ(0.7), "$slate@0.7", at=(1.6, -20 + i * 9)) for i in range(6)],
+        # The racks: two uprights and three shelves.
+        *[P(f"upright_{i}", R(2.4, 54, 0.6), "$steel.dark", at=(x, 3), stroke=INK_HAIR) for i, x in enumerate([-23.5, 23.5])],
+        *shelf("a", -9),
+        *shelf("b", 7),
+        *shelf("c", 23),
+        # Top shelf: a carved chip of the ruins' stone, a ring of it, a tablet, a jar with a finger of jelly.
+        P("chip", poly([(-20, -10), (-19, -16), (-14.5, -16.8), (-13.4, -10)]), "$carapace", stroke=INK_HAIR),
+        P("chip_cut", poly([(-18.6, -13.4), (-14.4, -13.8), (-14.4, -12.8), (-18.6, -12.4)]), "$carapace.dark2"),
+        P("chip_lit", poly([(-19.6, -10.6), (-19, -15.6), (-18.2, -15.6), (-18.6, -10.6)]), "$carapace.light@0.6"),
+        P("ring", ell(3.4, 3.4), "$carapace.light", at=(-7.6, -13.6), stroke=INK_HAIR),
+        P("ring_hole", ell(1.6, 1.6), "$coal", at=(-7.6, -13.6)),
+        P("tablet", poly(rr(8, 11, 1, (2, -15.6))), "$carapace.dark", stroke=INK_HAIR),
+        band("tablet_zig", [(-1, -18), (1, -16.4), (3, -18), (5, -16.4)], 0.5, "$carapace.light@0.7"),
+        band("tablet_line", [(-0.6, -13.4), (4.6, -13.4)], 0.5, "$carapace.light@0.5"),
+        P("jar", poly(rr(7, 8.4, 1.6, (15, -14.4))), "$frost.dark@0.55", stroke=INK_HAIR),
+        P("jar_jelly", poly(rr(5.6, 3.6, 1, (15, -12.2))), "$gold"),
+        P("jar_lid", R(7.6, 1.8, 0.5), "$steel", at=(15, -19.2), stroke=INK_HAIR),
+        P("jar_glint", R(1, 5, 0.4), "$white@0.45", at=(12.6, -14.6)),
+        # Middle shelf: a shard with the signal still in its seam (the one pink thing), a stone bowl,
+        # a flake of carapace, a tied bundle with its tag.
+        P("shard", poly([(-20.4, 6), (-18, -2.6), (-15, -0.4), (-14.2, 6)]), "$carapace.dark", stroke=INK_HAIR),
+        band("shard_vein", [(-18, 5.2), (-16.6, 0)], 0.7, "$pheromone@0.85"),
+        P("bowl", poly([(-10.6, 1.6), (-1.8, 1.6), (-3, 5), (-4.8, 6), (-7.6, 6), (-9.4, 5)]), "$carapace", stroke=INK_HAIR),
+        P("bowl_rim", ell(4.4, 1.1), "$carapace.dark2", at=(-6.2, 1.6), stroke=INK_HAIR),
+        band("bowl_band", [(-9.8, 3.2), (-2.6, 3.2)], 0.5, "$carapace.light@0.6"),
+        P("flake", poly([(1.6, 6), (3, -0.6), (8.6, 0), (8, 6)]), "$chitin", stroke=INK_HAIR),
+        band("flake_ridge", [(2.8, 3.4), (7.6, 2.2)], 0.6, "$chitin.dark2@0.8"),
+        band("flake_crest", [(3, 2.2), (7.8, 1.0)], 0.4, "$chitin.light@0.6"),
+        P("bundle", poly(rr(9, 6.6, 2, (16.2, 2.6))), "$husk", stroke=INK_HAIR),
+        band("bundle_cord", [(16.2, -0.7), (16.2, 5.9)], 0.6, "$bone.dark"),
+        band("bundle_cord_b", [(11.7, 2.6), (20.7, 2.6)], 0.6, "$bone.dark"),
+        *tag("bundle_tag", 20.4, 2.6, s=0.6, rot=-8),
+        # Bottom shelf: a crate of the smaller finds, a long slab leaning on the upright.
+        *shaded("crate", rr(16, 9, 1.2, (-13, 18.4)), "$slate", [(20, 24, "$slate.dark")], stroke=INK_HAIR),
+        P("crate_stencil", R(8, 1.4, 0.4), "$frost.dark@0.6", at=(-13, 18)),
+        P("crate_chip", poly([(-18, 14), (-16.4, 11.6), (-14.6, 13.8)]), "$carapace", stroke=INK_HAIR),
+        P("crate_ring", ell(2, 1), "$carapace.light", at=(-10, 13.6), stroke=INK_HAIR),
+        P("slab", poly([(5, 22), (9, 9.6), (15.4, 10.6), (13.6, 22)]), "$carapace.dark", stroke=INK_HAIR),
+        P("slab_lit", poly([(5.8, 21.4), (9.4, 10.4), (10.8, 10.6), (7.6, 21.4)]), "$carapace.light@0.45"),
+        band("slab_seam", [(10, 20), (12.2, 13)], 0.5, "$ink@0.5"),
+        P("pebbles", ell(3, 1.2), "$carapace.light@0.8", at=(19.4, 21.2), stroke=INK_HAIR),
+        # The frame round the front, the sill, and the roof over it.
+        *[P(f"post_{i}", R(3.6, 57, 0.8), "$steel", at=(x, 2), stroke=INK_THIN) for i, x in enumerate([-27.5, 27.5])],
+        P("post_lit", R(1, 54, 0.4), "$steel.light@0.8", at=(-28.6, 2)),
+        P("sill", R(60, 3.4, 1), "$slate", at=(0, ground - 1.4), stroke=INK_HAIR),
+        P("lintel", R(60, 4, 1), "$slate", at=(0, -24.5), stroke=INK_HAIR),
+        lit_edge("lintel_lit", -28, 28, -26.2, 0.7, "$white@0.35"),
+        *shaded("roof", roof, "$steel.dark", [(-34, -30, "$steel")], stroke=INK_THIN),
+        *[band(f"roof_rib_{i}", [(x - 2.4, -36.4 + 0.03 * x), (x + 0.6, -24.6)], 0.6, "$ink@0.3") for i, x in enumerate(range(-26, 34, 7))],
+        lit_edge("roof_lit", -30, 32, -36.6, 0.8, "$white@0.3"),
+        *rust("roof_rust", 22, -30, 8, 4),
+        # The inventory, pinned to the left post: what is in here, written down.
+        *page("list", -27.5, -6, s=0.55, rot=-4, pin="pin"),
+        # The cage door, swung open: a steel frame with mesh in it, the padlock hanging open on its hasp.
+        P("door", poly(door), "$frost.dark@0.12"),
+        *mesh,
+        P("door_frame", poly(door), None, stroke={"color": "$steel", "width": 1.6}),
+        P("door_frame_ink", poly(door), None, stroke=INK_HAIR),
+        P("door_bar", poly([(28.5, 2.4), (41, 4.8), (41, 6.6), (28.5, 4.2)]), "$steel", stroke=INK_HAIR),
+        *hinge("hinge_a", 28.6, -16, leaf=0, length=4),
+        *hinge("hinge_b", 28.6, 20, leaf=0, length=4),
+        *padlock("lock", 39.4, 7.4, 0.62, open=True),
+        # Crates the finds came home in, stacked outside on the left.
+        *shaded("crate_out", rr(14, 10, 1.4, (-34.6, 25)), "$slate", [(28, 31, "$slate.dark")], stroke=INK_HAIR),
+        P("crate_out_lid", R(15, 2.6, 0.8), "$slate.light", at=(-34.6, 19.6), stroke=INK_HAIR),
+        P("crate_out_stencil", R(7, 1.4, 0.4), "$frost.dark@0.6", at=(-34.6, 25.4)),
+        ao("foot_ao", 2, ground + 0.6, 66, 1.6, 0.4),
     ]
     doc(
         "ss.base.finds",
-        "The finds case",
-        "Where the camp keeps what the ruins handed over between expeditions: one of the expedition's cold slate cases, the box the stores came in, "
-        "standing off the ground on two short trestles, with a steel corner at each corner and a frost stripe. Its lid is a steel frame with frost glass in it, "
-        "so what is inside shows: a bed of husk-coloured cloth with the finds laid out in a row as if catalogued, a carved chip of the ruins' stone, a ring of it, "
-        "a shard with the signal still in its seam (the one pink thing), a flake of carapace. A haze and a sheen over the glass, frost in two corners, two hinges "
-        "at the back, the hasp down and open, and a paper tag on the corner with the list. It stands beside the arms locker; in feelers the pocket is packed at it.",
-        (48, 34),
+        "The finds store",
+        "Where the camp keeps what the ruins handed over between expeditions: a lean-to store beside the arms locker, put up out of the "
+        "lander's skin and the expedition's racks. A corrugated slab of hull plate for a roof, rusted at one end; a steel frame round an open "
+        "front, and inside, in the dark against a back of riveted plates, two uprights and three shelves with the finds on them in rows as if "
+        "catalogued: a carved chip of the ruins' stone, a ring of it, a tablet cut with a zigzag, a jar with a finger of jelly; a shard with "
+        "the signal still in its seam (the one pink thing), a carved bowl, a flake of carapace, a tied bundle with its tag; on the bottom a crate "
+        "of the smaller ones and a long slab leaning on the upright. The cage door stands swung open, steel mesh in a frame, a padlock hanging open "
+        "on it; the inventory is pinned to the left post; the crates the finds came home in are stacked outside. In feelers the pocket is packed at it.",
+        (90, 80),
         parts,
     )
 
