@@ -1,46 +1,52 @@
 {
   "id": "ss.sfx.pickup",
   "name": "Pickup",
-  "description": "A half-second of borrowed voice: the one place the hive's own note reaches the player, so it is the only bright rising thing in the whole set and it is over almost before it starts.",
+  "description": "A bubble of pulp bursting against the mouth: one sine dropping from $tonic to $third.down in 45ms, a pop rather than a beep. It fires in streams — a magnet pulls a whole field in at once — so it ships three takes the engine turns through, all the same pop from bubbles a little bigger or smaller than each other, with a narrow pitch roll on top: enough that sixty in a row are many bubbles and not one played sixty times, not so much that they stop being the same sound. No more than a dozen of it a second. The takes are written by hand rather than with `takes`, because a pure tone has nothing to reseed; they carry the `take-N` names so the engine round-robins them all the same.",
   "tags": [
     "sfx",
     "pickup"
   ],
   "duration": 0.07,
   "meta": {
-    "minInterval": 40
+    "minInterval": 75
   },
   "jitter": {
     "freq": [
-      0.9,
-      1.1
+      0.96,
+      1.04
     ]
   },
   "voices": [
     {
-      "id": "borrowed",
-      "gain": "soft",
+      "id": "pop",
+      "dur": 0.045,
+      "gain": "mid",
       "source": {
         "kind": "osc",
-        "wave": "square",
-        "freq": "$third.up",
-        "to": 1500
+        "wave": "sine",
+        "freq": "$tonic",
+        "to": "$third.down"
       },
       "env": [
         {
           "prop": "gain",
-          "keys": [
-            [
-              0,
-              1
-            ],
-            [
-              1,
-              0.0
-            ]
-          ]
+          "adsr": {
+            "attack": 0.004
+          }
         }
       ]
     }
-  ]
+  ],
+  "variants": {
+    "take-2": {
+      "description": "The same pop from a slightly bigger bubble: a little lower, a little longer.",
+      "pitch": 0.93,
+      "stretch": 1.07
+    },
+    "take-3": {
+      "description": "The same pop from a slightly smaller bubble: a little higher, a little shorter.",
+      "pitch": 1.07,
+      "stretch": 0.94
+    }
+  }
 }
