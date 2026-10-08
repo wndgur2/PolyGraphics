@@ -1,0 +1,165 @@
+{
+  "id": "ss.sfx.spore",
+  "name": "Spore burst",
+  "description": "A puffball going off. The Spore's blast borrowed ss.sfx.elite-die until this, and its Cluster Bloom aftershocks borrowed the hit; a pod of spores bursting is neither, it is a skin giving way and a cloud coming out of it. The first version of this made the cloud out of a third of a second of noise and the settling spores out of more, and that was the part heard as static rather than as spores.\n\nSo the burst is carried by pitch, and the noise is kept short and dark. `skin` is the membrane splitting, a sine snapped down from `$shell.up` to `$shell`, over `crack`, ten milliseconds of lowpassed noise. `pop` is the air inside it getting out — a sine bending up from `$shell` an octave, the way a bubble breaks. `thud` is the weight under it, a sine falling from `$moan`, felt more than heard. `cloud` is the spores, and the only long noise left: a quarter of a second under a lowpass that never opens past 900Hz and closes to 200, so it is a soft push of air and not a hiss.\n\nThe `small` variant is the same pod a third higher, for the Cluster Bloom's four daughters going off round the crater.",
+  "tags": [
+    "sfx",
+    "world"
+  ],
+  "duration": 0.3,
+  "meta": {
+    "minInterval": 50
+  },
+  "jitter": {
+    "freq": [
+      0.92,
+      1.08
+    ]
+  },
+  "voices": [
+    {
+      "id": "crack",
+      "dur": 0.01,
+      "gain": "soft",
+      "source": {
+        "kind": "noise"
+      },
+      "filter": {
+        "type": "lowpass",
+        "freq": "$grit",
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.004,
+            "decay": 0.006
+          }
+        }
+      ]
+    },
+    {
+      "id": "skin",
+      "dur": 0.03,
+      "gain": "mid",
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$shell.up",
+        "to": "$shell"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.003,
+            "decay": 0.027
+          }
+        }
+      ]
+    },
+    {
+      "id": "pop",
+      "at": 0.006,
+      "dur": 0.045,
+      "gain": "soft",
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$shell",
+        "to": "$shell.up"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.003,
+            "decay": 0.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "thud",
+      "at": 0.003,
+      "dur": 0.12,
+      "gain": "mid",
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$moan",
+        "to": "$moan.down"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.004,
+            "decay": 0.11
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloud",
+      "at": 0.01,
+      "dur": 0.24,
+      "gain": 0.5,
+      "source": {
+        "kind": "noise"
+      },
+      "filter": {
+        "type": "lowpass",
+        "freq": "$shell.up",
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "cutoff",
+          "keys": [
+            [
+              0,
+              700
+            ],
+            [
+              0.2,
+              900
+            ],
+            [
+              1,
+              200
+            ]
+          ]
+        },
+        {
+          "prop": "gain",
+          "keys": [
+            [
+              0,
+              0.1
+            ],
+            [
+              0.2,
+              1
+            ],
+            [
+              0.55,
+              0.3
+            ],
+            [
+              1,
+              0.005
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "variants": {
+    "small": {
+      "description": "One of the Cluster Bloom's daughters: the same burst a third higher, so four of them round the crater read as the pod's children and not four more pods. Pitch only — a stretch would squeeze the skin's attack under the declick.",
+      "pitch": 1.33
+    }
+  }
+}

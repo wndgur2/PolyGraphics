@@ -1,0 +1,28 @@
+{
+  "id": "ss.sfx.plop",
+  "name": "Plop",
+  "description": "A grub dropped out of the broodling's vent onto the ground. It played the spit's chirp before, which said a shot was fired when nothing was: the grub is laid, not launched, and it crawls the rest of the way.\n\nSo this is a small wet body landing. `drop` is a sine whose pitch rises rather than falls — the sound a drop makes is the air pocket under it closing, and that closes upward — from `$shell` to a little over `$shell.up`, struck in three milliseconds. A sine because the grub is soft: an edge on it would read as chitin. `slap` is the contact, a few milliseconds of noise under a lowpass at `$grit`, so the plop has a front on a phone, where the sine alone is a little thin.\n\nSoft and short: it repeats on the vent's cooldown for the whole run, and it is the least urgent thing the weapons say.",
+  "tags": ["sfx", "weapon"],
+  "duration": 0.08,
+  "takes": 3,
+  "meta": { "minInterval": 60 },
+  "jitter": { "freq": [0.88, 1.12] },
+  "voices": [
+    {
+      "id": "slap",
+      "dur": 0.014,
+      "gain": "faint",
+      "source": { "kind": "noise" },
+      "filter": { "type": "lowpass", "freq": "$grit", "to": "$shell.up", "q": "wide" },
+      "env": [{ "prop": "gain", "adsr": { "attack": 0.001, "decay": 0.013 } }]
+    },
+    {
+      "id": "drop",
+      "at": 0.002,
+      "dur": 0.07,
+      "gain": "soft",
+      "source": { "kind": "osc", "wave": "sine", "freq": "$shell", "to": "$fifth" },
+      "env": [{ "prop": "gain", "adsr": { "attack": 0.003, "decay": 0.065 } }]
+    }
+  ]
+}

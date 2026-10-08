@@ -1,0 +1,32 @@
+{
+  "id": "ss.sfx.throw",
+  "name": "Throw",
+  "description": "A mandible spun off the hand. It shared the spit's chirp until now, and a blade going out does not chirp: what you hear of something thrown is the air it cuts, rising as it comes past and dropping as it goes.\n\n`flick` is the release, ten milliseconds of noise under a lowpass — the hand letting go, felt more than heard. `cut` is the flight: noise through a `band` Q whose centre climbs from `$shell.up` to above `$grit` and falls back, under a gain that swells in and fades out, so it reads as a pass rather than a burst. The Q is narrower than the whoosh's because a blade edge whistles a little where smoke does not; it is not `sharp`, because then it would whistle and nothing else. Nothing is pitched — the blade is the air.\n\nThe Dancing Mandibles fire a volley of these at once, so three takes and a little jitter keep five of them from landing as one sound five times as loud.",
+  "tags": ["sfx", "weapon"],
+  "duration": 0.15,
+  "takes": 3,
+  "meta": { "minInterval": 50 },
+  "jitter": { "freq": [0.9, 1.1] },
+  "voices": [
+    {
+      "id": "flick",
+      "dur": 0.012,
+      "gain": "faint",
+      "source": { "kind": "noise" },
+      "filter": { "type": "lowpass", "freq": "$grit", "q": "wide" },
+      "env": [{ "prop": "gain", "adsr": { "attack": 0.001, "decay": 0.011 } }]
+    },
+    {
+      "id": "cut",
+      "at": 0.004,
+      "dur": 0.145,
+      "gain": 0.7,
+      "source": { "kind": "noise" },
+      "filter": { "type": "bandpass", "freq": "$shell.up", "q": "band" },
+      "env": [
+        { "prop": "cutoff", "keys": [[0, 620], [0.4, 1900], [1, 900]] },
+        { "prop": "gain", "keys": [[0, 0.05], [0.35, 1], [1, 0.005]] }
+      ]
+    }
+  ]
+}

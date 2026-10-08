@@ -1,44 +1,85 @@
 {
   "id": "ss.sfx.shoot",
-  "name": "Shot",
-  "description": "Something small leaving the tube: a bright chirp dropping most of an octave inside sixty milliseconds. Fires constantly, so it is short, quiet and pitched where the score already sits.",
+  "name": "Spit",
+  "description": "A mouth spitting acid: 퉤. Three passes got here. The square chirp was a chiptune laser. The puff that replaced it was a tube. The mouth after that had the right idea — a plosive, a breath shaped into a vowel, a crackle of spittle — and was built out of noise, so what came out was a mouth full of static: noise through a narrow band is still noise, and at thirty shots a second it reads as hiss before it reads as anything.\n\nSo the mouth is carried by pitch now, and the noise is only its edge. `lips` is the plosive, a low sine knocked from `$tap` down an octave in twenty milliseconds. `thoo` is the vowel after it — the mouth's own resonance, a sine falling from `$fifth` to `$third.down` as the lips round, which is what turns a pop into 'ptoo'. `air` is the breath, twenty-five milliseconds of noise under a lowpass closing from `$shell.up` to `$tap`: dark, short, nothing above the throat. Nothing sits above 1kHz for long, which is where the old one's static lived.\n\nFires constantly, so it stays short and at the quiet end of the weapon band, and ships three takes so the breath differs shot to shot.",
   "tags": [
     "sfx",
     "weapon"
   ],
-  "duration": 0.06,
+  "duration": 0.07,
+  "takes": 3,
   "meta": {
     "minInterval": 35
   },
   "jitter": {
     "freq": [
-      0.88,
-      1.06
+      0.9,
+      1.1
     ]
   },
   "voices": [
     {
-      "id": "spit",
-      "gain": "soft",
+      "id": "lips",
+      "dur": 0.02,
+      "gain": "mid",
       "source": {
         "kind": "osc",
-        "wave": "square",
-        "freq": "$tonic",
-        "to": "$swarm.up"
+        "wave": "sine",
+        "freq": "$tap",
+        "to": "$tap.down"
       },
       "env": [
         {
           "prop": "gain",
-          "keys": [
-            [
-              0,
-              1
-            ],
-            [
-              1,
-              0.0
-            ]
-          ]
+          "adsr": {
+            "attack": 0.003,
+            "decay": 0.017
+          }
+        }
+      ]
+    },
+    {
+      "id": "thoo",
+      "at": 0.004,
+      "dur": 0.05,
+      "gain": "soft",
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$fifth",
+        "to": "$third.down"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.003,
+            "decay": 0.046
+          }
+        }
+      ]
+    },
+    {
+      "id": "air",
+      "at": 0.002,
+      "dur": 0.025,
+      "gain": "soft",
+      "source": {
+        "kind": "noise"
+      },
+      "filter": {
+        "type": "lowpass",
+        "freq": "$shell.up",
+        "to": "$tap",
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.005,
+            "decay": 0.02
+          }
         }
       ]
     }

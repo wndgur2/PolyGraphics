@@ -1,0 +1,27 @@
+{
+  "id": "ss.sfx.pod",
+  "name": "Pod",
+  "description": "A spore pod set down behind the player. The Spore laid its caches in silence, so the player only learned where one was by seeing it. This is the pod meeting the ground: soft, small and a little damp, because it is a sac and not a stone.\n\n`press` is the contact, a few milliseconds of noise under a lowpass closing from `$shell.up` to `$tap` — dull on purpose, a body with no edge. `give` is the sac settling under its own weight: a sine bending down from `$tap.up` to `$tap`, so it lands as a squash rather than a knock. Quiet: it fires on the weapon's cooldown for a whole run and only has to say a cache is there.",
+  "tags": ["sfx", "weapon"],
+  "duration": 0.09,
+  "meta": { "minInterval": 120 },
+  "jitter": { "freq": [0.9, 1.1] },
+  "voices": [
+    {
+      "id": "press",
+      "dur": 0.03,
+      "gain": "mid",
+      "source": { "kind": "noise" },
+      "filter": { "type": "lowpass", "freq": "$shell.up", "to": "$tap", "q": "wide" },
+      "env": [{ "prop": "gain", "adsr": { "attack": 0.003, "decay": 0.027 } }]
+    },
+    {
+      "id": "give",
+      "at": 0.004,
+      "dur": 0.08,
+      "gain": "soft",
+      "source": { "kind": "osc", "wave": "sine", "freq": "$tap.up", "to": "$tap" },
+      "env": [{ "prop": "gain", "adsr": { "attack": 0.004, "decay": 0.075 } }]
+    }
+  ]
+}
