@@ -1,12 +1,12 @@
 {
   "id": "ss.sfx.shoot",
   "name": "Spit",
-  "description": "Acid leaving a mouth. This used to be one bare square wave chirping down an octave, which is a chiptune laser: every harmonic up to Nyquist, the same click on every onset, and the same pitch fall three hundred times a run. Nothing that spits sounds like that, so the pitch is now the smallest part of it.\n\n`puff` is the shot: a short burst of noise under a lowpass closing from `$grit.up` to `$grit.down`, struck in four milliseconds and gone in forty. Air pushed out of a narrow opening is broadband and darkens as the pressure drops, and that closing is most of what the ear reads as a projectile leaving. A lowpass and not a band, because a band left the top of the noise in and the first pass of this was a hiss: the centroid sat at 2.7kHz and more than half its energy above 2kHz, which is the 'noisy' the old one was already accused of. `wet` is the acid: four tiny grains over it, scattered across the first twenty milliseconds and kept well down, so the burst sputters rather than hisses. Their Q is `wide` on purpose — a narrow band on a short grain is a ping, and pings in a row whistle. `body` is the throat: a sine sliding from `$third` down an octave under everything, so the spit has a little weight and a pitch to jitter without a buzzing edge on it.\n\nFires constantly, so it is short, sits at the quiet end of the weapon band, and ships three takes for the engine to round-robin: the noise and the grains land differently each time, and a volley reads as many mouths rather than one sample.",
+  "description": "A mouth spitting acid: 퉤, not a gun. The square chirp this replaced was a chiptune laser, and the puff that replaced that was still air leaving a tube — nothing in it said there was a mouth. What says mouth is the shape of one, so this is built the way the sound is made.\n\n`lips` is the plosive, the closed lips letting go: a low sine knocked from `$tap` down an octave in fifteen milliseconds, under a few milliseconds of dark noise. `mouth` is the breath the spit rides out on, and it is shaped by the mouth rather than by a pipe: noise through two bands at once, the way a whispered vowel is, one low at `$shell` and one falling from `$grit` to `$shell.up` as the lips round off the end of it — the 'tu' after the 'p'. Their Q is `band`, narrow enough to make a vowel of the noise and not so narrow it whistles. `spittle` is what makes it a spit and not a breath: five tiny wet clicks high up, scattered through the first fifty milliseconds and kept down, the saliva crackling as it leaves.\n\nFires constantly, so it stays short and at the quiet end of the weapon band, and ships three takes for the engine to round-robin: the noise and the crackle land differently each time, and a volley reads as many mouths rather than one sample.",
   "tags": [
     "sfx",
     "weapon"
   ],
-  "duration": 0.075,
+  "duration": 0.1,
   "takes": 3,
   "meta": {
     "minInterval": 35
@@ -14,41 +14,106 @@
   "jitter": {
     "freq": [
       0.9,
-      1.08
+      1.1
     ]
   },
   "voices": [
     {
-      "id": "puff",
-      "dur": 0.044,
-      "gain": 0.55,
+      "id": "lips",
+      "dur": 0.016,
+      "gain": "mid",
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$tap",
+        "to": "$tap.down"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.002,
+            "decay": 0.014
+          }
+        }
+      ]
+    },
+    {
+      "id": "lips_air",
+      "dur": 0.01,
+      "gain": "faint",
       "source": {
         "kind": "noise"
       },
       "filter": {
         "type": "lowpass",
-        "freq": "$grit.up",
-        "to": "$grit.down",
+        "freq": "$shell.up",
         "q": "wide"
       },
       "env": [
         {
           "prop": "gain",
           "adsr": {
-            "attack": 0.004,
-            "decay": 0.038
+            "attack": 0.003,
+            "decay": 0.007
           }
         }
       ]
     },
     {
-      "id": "wet",
+      "id": "mouth",
       "at": 0.006,
-      "gain": 0.2,
+      "dur": 0.07,
+      "gain": 2.4,
+      "source": {
+        "kind": "noise"
+      },
       "filter": {
         "type": "bandpass",
-        "freq": "$gust",
-        "to": "$grit",
+        "freq": "$shell",
+        "q": "band"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.004,
+            "decay": 0.066
+          }
+        }
+      ]
+    },
+    {
+      "id": "mouth_high",
+      "at": 0.006,
+      "dur": 0.06,
+      "gain": 1.8,
+      "source": {
+        "kind": "noise"
+      },
+      "filter": {
+        "type": "bandpass",
+        "freq": "$grit",
+        "to": "$shell.up",
+        "q": "band"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.004,
+            "decay": 0.056
+          }
+        }
+      ]
+    },
+    {
+      "id": "spittle",
+      "at": 0.01,
+      "gain": 0.14,
+      "filter": {
+        "type": "bandpass",
+        "freq": "$gust.up",
         "q": "wide"
       },
       "env": [
@@ -61,7 +126,7 @@
             ],
             [
               1,
-              0.15
+              0.3
             ]
           ]
         }
@@ -70,34 +135,14 @@
         "of": {
           "kind": "noise"
         },
-        "count": 4,
-        "spread": 0.022,
-        "grain": 0.006,
+        "count": 5,
+        "spread": 0.05,
+        "grain": 0.004,
         "gainRange": [
-          0.4,
+          0.35,
           1
         ]
       }
-    },
-    {
-      "id": "body",
-      "dur": 0.05,
-      "gain": "soft",
-      "source": {
-        "kind": "osc",
-        "wave": "sine",
-        "freq": "$third",
-        "to": "$third.down"
-      },
-      "env": [
-        {
-          "prop": "gain",
-          "adsr": {
-            "attack": 0.003,
-            "decay": 0.045
-          }
-        }
-      ]
     }
   ]
 }
