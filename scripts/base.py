@@ -29,6 +29,8 @@ The camp is what the records draw, and only that:
                  the hive's, borrowed — the cap Sol carried in a dead emitter,
                  planted and spread. The same caps go in jars for lamps
   the lockers    one per writer, with the one thing their log kept
+  the finds case what the ruins handed over, under frost glass, beside the
+                 arms locker: the pocket for the next run is packed at it
   the marker     the middle of the camp: the smell compass. A compass
                  ring on the snapped mast, and eight strips of cloth down it, each taking one smell: the one
                  that stirs says which smell is on the wind, the way it
@@ -936,6 +938,66 @@ def locker():
     )
 
 
+# ============================================================== the finds case
+def finds():
+    """What the ruins handed over (guide §12.1), kept between expeditions in one of the
+    expedition's cases: the slate box the stores came in, its lid replaced with frost glass,
+    so whoever packs a pocket can see what there is to pack. 3/4 on, like the locker beside it."""
+    lid = [(-19, -6), (-16, -15), (16, -15), (19, -6)]
+    glass = [(-16.6, -7.2), (-14.2, -13.8), (14.2, -13.8), (16.6, -7.2)]
+    parts = [
+        shadow("shadow", 0, 12, 21, 4),
+        # Two short trestles under it: it stands off the damp, the way the camp keeps paper.
+        *[P(f"leg_{i}", R(3, 6, 0.8), "$slate.dark", at=(x, 9.5), stroke=INK_HAIR) for i, x in enumerate([-14, 14])],
+        P("rail", R(30, 1.4, 0.5), "$steel.dark", at=(0, 10.4)),
+        # The box: the front face, in the same cold slate as the locker and the crates.
+        *shaded("box", rr(38, 13, 2, (0, 0.5)), "$slate", [(4, 8, "$slate.dark")]),
+        P("stripe", R(38, 1.6, 0.4), "$frost.dark@0.5", at=(0, 4.2)),
+        *scratches("scuff", -6, 1, 16, 4, 3, "$slate.light@0.6", 11),
+        *[P(f"corner_{i}", R(3, 3, 0.6), "$steel", at=(x, y)) for i, (x, y) in enumerate([(-17.6, -4.4), (17.6, -4.4), (-17.2, 5.6), (17.2, 5.6)])],
+        # The lid seen from above: a steel frame, frost glass in it, and the finds on a bed of husk-coloured cloth under the glass.
+        P("frame", poly(lid), "$steel", stroke=INK_THIN),
+        P("frame_dk", poly([(-19, -6), (-18.2, -8.4), (18.2, -8.4), (19, -6)]), "$steel.dark"),
+        P("bed", poly(glass), "$husk.dark"),
+        P("bed_fold", poly([(-15.4, -10.8), (15.4, -10.8), (15.8, -9.6), (-15.8, -9.6)]), "$husk.dark2@0.6"),
+        # The finds, laid out in a row as if catalogued: a carved chip of the ruins' stone, a ring of it,
+        # a shard with the signal still in its seam (the one pink thing), a flake of carapace.
+        P("chip", poly([(-12.6, -9.2), (-11.8, -12.6), (-8.2, -13), (-7.4, -9.6)]), "$carapace", stroke=INK_HAIR),
+        P("chip_cut", poly([(-11.6, -11.2), (-8.6, -11.4), (-8.6, -10.8), (-11.6, -10.6)]), "$carapace.dark2"),
+        P("chip_lit", poly([(-12.4, -9.6), (-11.8, -12.4), (-11.2, -12.4), (-11.6, -9.6)]), "$carapace.light@0.6"),
+        P("ring", ell(2.6, 1.4), "$carapace.light", at=(-3.2, -10.8), stroke=INK_HAIR),
+        P("ring_hole", ell(1.2, 0.6), "$husk.dark2", at=(-3.2, -10.9)),
+        P("shard", poly([(1.6, -9.0), (3.2, -13.4), (5.0, -12.2), (5.6, -9.2)]), "$carapace.dark", stroke=INK_HAIR),
+        band("shard_vein", [(3.0, -9.6), (3.9, -12.2)], 0.6, "$pheromone@0.8"),
+        P("flake", poly([(8.6, -9.4), (9.6, -12.4), (13.2, -12.0), (12.6, -9.2)]), "$chitin", stroke=INK_HAIR),
+        band("flake_ridge", [(9.4, -10.4), (12.4, -11.2)], 0.5, "$chitin.dark2@0.8"),
+        # The glass over them: a haze, a cold sheen and frost in its corners.
+        P("glass", poly(glass), "$frost.light@0.22", stroke=INK_FINE),
+        P("sheen", poly([(-12.6, -13.8), (-9.6, -13.8), (-13.8, -7.2), (-16.8, -7.2)]), "$white@0.28"),
+        P("sheen_b", poly([(-7.8, -13.8), (-6.8, -13.8), (-11.0, -7.2), (-12.0, -7.2)]), "$white@0.18"),
+        P("frost_a", poly([(14.2, -13.8), (10.8, -13.8), (14.8, -11.6)]), "$white@0.45"),
+        P("frost_b", poly([(-16.6, -7.2), (-13.2, -7.2), (-15.8, -9.2)]), "$white@0.35"),
+        lit_edge("lid_lit", -16, 16, -15.4, 0.7, "$white@0.4"),
+        *hinge("hinge_a", -10, -15.6, leaf=0, length=4),
+        *hinge("hinge_b", 10, -15.6, leaf=0, length=4),
+        # The hasp down over its staple, open: what is in it goes out in a pocket.
+        *hasp("hasp", 0, -5.6, s=0.7, locked=False),
+        # A tag on the corner, the list of what is in it.
+        *tag("tag", 17.4, -4.2, s=0.9, rot=6),
+    ]
+    doc(
+        "ss.base.finds",
+        "The finds case",
+        "Where the camp keeps what the ruins handed over between expeditions: one of the expedition's cold slate cases, the box the stores came in, "
+        "standing off the ground on two short trestles, with a steel corner at each corner and a frost stripe. Its lid is a steel frame with frost glass in it, "
+        "so what is inside shows: a bed of husk-coloured cloth with the finds laid out in a row as if catalogued, a carved chip of the ruins' stone, a ring of it, "
+        "a shard with the signal still in its seam (the one pink thing), a flake of carapace. A haze and a sheen over the glass, frost in two corners, two hinges "
+        "at the back, the hasp down and open, and a paper tag on the corner with the list. It stands beside the arms locker; in feelers the pocket is packed at it.",
+        (48, 34),
+        parts,
+    )
+
+
 # The one thing each writer's log kept, drawn in scripts/bits_keeps.py: each rests on its doc's y=+7
 # (bits_keeps.FOOT), which feelers sets on the locker's lid.
 KEEPS = {
@@ -1537,6 +1599,7 @@ if __name__ == "__main__":
     board()
     lamps()
     locker()
+    finds()
     keeps()
     stump()
     cairn()
