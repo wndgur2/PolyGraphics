@@ -29,6 +29,9 @@ The camp is what the records draw, and only that:
                  the hive's, borrowed — the cap Sol carried in a dead emitter,
                  planted and spread. The same caps go in jars for lamps
   the lockers    one per writer, with the one thing their log kept
+  the store      racks in a lean-to of hull plate beside the arms locker,
+                 bare: feelers sets the finds met so far on them, and the
+                 pocket is packed at it
   the marker     the middle of the camp: the smell compass. A compass
                  ring on the snapped mast, and eight strips of cloth down it, each taking one smell: the one
                  that stirs says which smell is on the wind, the way it
@@ -936,6 +939,88 @@ def locker():
     )
 
 
+# ============================================================== the finds store
+def finds():
+    """What the ruins handed over (guide §12.1), kept between expeditions: a lean-to store put
+    up beside the arms locker out of the lander's skin and the expedition's racks, its cage
+    door swung open, its shelves bare for the game to fill with the finds met so far. 3/4 on,
+    like the locker."""
+    ground = 30
+    # The roof: a slab of the lander's skin laid across, corrugated, falling to the back.
+    roof = [(-35, -25), (-31, -37), (33, -35), (37, -24)]
+    door = [(28.5, -23), (41, -19), (41, 31), (28.5, 28.5)]
+    mesh = []
+    for i in range(1, 6):
+        t = i / 6
+        x = 28.5 + (41 - 28.5) * t
+        mesh.append(band(f"mesh_v{i}", [(x, -23 + 4 * t), (x, 28.5 + 2.5 * t)], 0.35, "$frost@0.45"))
+    for i in range(1, 9):
+        y = -23 + i * 51.5 / 9
+        mesh.append(band(f"mesh_h{i}", [(28.5, y), (41, y + 4 - 1.5 * i / 9)], 0.35, "$frost@0.45"))
+
+    def shelf(i, y):
+        return [
+            P(f"shelf_{i}", R(48, 2.2, 0.5), "$steel", at=(0, y), stroke=INK_HAIR),
+            lit_edge(f"shelf_{i}_lit", -23, 23, y - 1.0, 0.5, "$white@0.3"),
+            ao(f"shelf_{i}_ao", 0, y + 2.2, 46, 1.4, 0.5),
+        ]
+
+    parts = [
+        shadow("shadow", 2, ground, 40, 6.5, "0.45"),
+        # Inside: the dark, a back of hull plates with a seam down it.
+        P("back", R(52, 54, 1), "$coal", at=(0, 3)),
+        P("back_plate", R(24, 52, 0.5), "$slate.dark@0.45", at=(-12, 3)),
+        P("back_seam", R(0.8, 52, 0.3), "$ink@0.6", at=(0, 3)),
+        *[P(f"back_rivet_{i}", circ(0.7), "$slate@0.7", at=(1.6, -20 + i * 9)) for i in range(6)],
+        # The racks: two uprights and three shelves.
+        *[P(f"upright_{i}", R(2.4, 54, 0.6), "$steel.dark", at=(x, 3), stroke=INK_HAIR) for i, x in enumerate([-23.5, 23.5])],
+        *shelf("a", -9),
+        *shelf("b", 7),
+        *shelf("c", 23),
+        # The shelves are bare in the drawing: feelers lays the finds on them, the ones met so far
+        # (its data/hub.ts FINDS_SHELVES), so the store fills as the collection does.
+        # The frame round the front, the sill, and the roof over it.
+        *[P(f"post_{i}", R(3.6, 57, 0.8), "$steel", at=(x, 2), stroke=INK_THIN) for i, x in enumerate([-27.5, 27.5])],
+        P("post_lit", R(1, 54, 0.4), "$steel.light@0.8", at=(-28.6, 2)),
+        P("sill", R(60, 3.4, 1), "$slate", at=(0, ground - 1.4), stroke=INK_HAIR),
+        P("lintel", R(60, 4, 1), "$slate", at=(0, -24.5), stroke=INK_HAIR),
+        lit_edge("lintel_lit", -28, 28, -26.2, 0.7, "$white@0.35"),
+        *shaded("roof", roof, "$steel.dark", [(-34, -30, "$steel")], stroke=INK_THIN),
+        *[band(f"roof_rib_{i}", [(x - 2.4, -36.4 + 0.03 * x), (x + 0.6, -24.6)], 0.6, "$ink@0.3") for i, x in enumerate(range(-26, 34, 7))],
+        lit_edge("roof_lit", -30, 32, -36.6, 0.8, "$white@0.3"),
+        *rust("roof_rust", 22, -30, 8, 4),
+        # The inventory, pinned to the left post: what is in here, written down.
+        *page("list", -27.5, -6, s=0.55, rot=-4, pin="pin"),
+        # The cage door, swung open: a steel frame with mesh in it, the padlock hanging open on its hasp.
+        P("door", poly(door), "$frost.dark@0.12"),
+        *mesh,
+        P("door_frame", poly(door), None, stroke={"color": "$steel", "width": 1.6}),
+        P("door_frame_ink", poly(door), None, stroke=INK_HAIR),
+        P("door_bar", poly([(28.5, 2.4), (41, 4.8), (41, 6.6), (28.5, 4.2)]), "$steel", stroke=INK_HAIR),
+        *hinge("hinge_a", 28.6, -16, leaf=0, length=4),
+        *hinge("hinge_b", 28.6, 20, leaf=0, length=4),
+        *padlock("lock", 39.4, 7.4, 0.62, open=True),
+        # Crates the finds came home in, stacked outside on the left.
+        *shaded("crate_out", rr(14, 10, 1.4, (-34.6, 25)), "$slate", [(28, 31, "$slate.dark")], stroke=INK_HAIR),
+        P("crate_out_lid", R(15, 2.6, 0.8), "$slate.light", at=(-34.6, 19.6), stroke=INK_HAIR),
+        P("crate_out_stencil", R(7, 1.4, 0.4), "$frost.dark@0.6", at=(-34.6, 25.4)),
+        ao("foot_ao", 2, ground + 0.6, 66, 1.6, 0.4),
+    ]
+    doc(
+        "ss.base.finds",
+        "The finds store",
+        "Where the camp keeps what the ruins handed over between expeditions: a lean-to store beside the arms locker, put up out of the "
+        "lander's skin and the expedition's racks. A corrugated slab of hull plate for a roof, rusted at one end; a steel frame round an open "
+        "front, and inside, in the dark against a back of riveted plates, two uprights and three bare shelves. The shelves are left empty on "
+        "purpose: feelers sets the finds the player has actually met on them, plate-off (each `ss.relic.*` in its `glyph` variant), so the "
+        "store fills as the collection does. The shelves' top faces are at y -10.1, 5.9 and 21.9, between x -22 and 22. The cage door "
+        "stands swung open, steel mesh in a frame, a padlock hanging open on it; the inventory is pinned to the left post; the crates the "
+        "finds came home in are stacked outside.",
+        (90, 80),
+        parts,
+    )
+
+
 # The one thing each writer's log kept, drawn in scripts/bits_keeps.py: each rests on its doc's y=+7
 # (bits_keeps.FOOT), which feelers sets on the locker's lid.
 KEEPS = {
@@ -1537,6 +1622,7 @@ if __name__ == "__main__":
     board()
     lamps()
     locker()
+    finds()
     keeps()
     stump()
     cairn()
