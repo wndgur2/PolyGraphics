@@ -1,7 +1,7 @@
 {
   "id": "ss.sfx.pickup",
   "name": "Pickup",
-  "description": "A bubble of pulp bursting against the mouth: one sine dropping from $tonic to $third.down in 45ms, a pop rather than a beep. It fires in streams — a magnet pulls a whole field in at once — so it ships three takes the engine turns through, all the same pop from bubbles a little bigger or smaller than each other, with a narrow pitch roll on top: enough that sixty in a row are many bubbles and not one played sixty times, not so much that they stop being the same sound. No more than a dozen of it a second. The takes are written by hand rather than with `takes`, because a pure tone has nothing to reseed; they carry the `take-N` names so the engine round-robins them all the same.",
+  "description": "A bubble of pulp bursting against the mouth: one sine dropping an octave, $tonic.up to $tonic, in 45ms — a pop rather than a beep. It sits between 880Hz and 1.76kHz on purpose: it fires right after kills and under a weapon that never stops, and `shoot` and `enemy-die` own the octave below (written an octave lower, at $tonic → $third.down, it was all but inaudible in a fight). It fires in streams — a magnet pulls a whole field in at once — so it ships three takes the engine turns through, all the same pop from bubbles a little bigger or smaller than each other, with a narrow pitch roll on top: enough that sixty in a row are many bubbles and not one played sixty times, not so much that they stop being the same sound. No more than a dozen of it a second. The takes are written by hand rather than with `takes`, because a pure tone has nothing to reseed; they carry the `take-N` names so the engine round-robins them all the same.",
   "tags": [
     "sfx",
     "pickup"
@@ -24,8 +24,8 @@
       "source": {
         "kind": "osc",
         "wave": "sine",
-        "freq": "$tonic",
-        "to": "$third.down"
+        "freq": "$tonic.up",
+        "to": "$tonic"
       },
       "env": [
         {
