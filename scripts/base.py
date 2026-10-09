@@ -958,64 +958,157 @@ def finds():
         y = -23 + i * 51.5 / 9
         mesh.append(band(f"mesh_h{i}", [(28.5, y), (41, y + 4 - 1.5 * i / 9)], 0.35, "$frost@0.45"))
 
+    # Where the roof's ridges run: each a lit crest and the dark of the trough beside it, from
+    # the back edge down to the front one.
+    def roof_y(x, back):
+        return (-37 + 0.03 * (x + 31)) if back else (-25 + x / 72)
+
+    ribs = []
+    for i, x in enumerate(range(-29, 34, 5)):
+        xb = x - 2.6
+        ribs.append(band(f"roof_crest_{i}", [(xb, roof_y(xb, True) + 0.7), (x, roof_y(x, False) - 0.5)], 1.2, "$steel@0.55"))
+        ribs.append(band(f"roof_trough_{i}", [(xb + 1.6, roof_y(xb, True) + 0.7), (x + 1.6, roof_y(x, False) - 0.5)], 0.7, "$ink@0.35"))
+
+    # A small label on each shelf's lip, bone, one line written on it: the store is kept in order.
+    labels = {"a": (-13, 9), "b": (-4, 15), "c": (-16, 5)}
+
     def shelf(i, y):
-        return [
+        out = [
             P(f"shelf_{i}", R(48, 2.2, 0.5), "$steel", at=(0, y), stroke=INK_HAIR),
+            P(f"shelf_{i}_lip", R(46, 0.7, 0.3), "$steel.dark", at=(0, y + 0.6)),
             lit_edge(f"shelf_{i}_lit", -23, 23, y - 1.0, 0.5, "$white@0.3"),
             ao(f"shelf_{i}_ao", 0, y + 2.2, 46, 1.4, 0.5),
+        ]
+        # The brackets each shelf rests on, bolted to the uprights.
+        for side, x in (("l", -22.3), ("r", 22.3)):
+            m = 1 if side == "l" else -1
+            out.append(P(f"shelf_{i}_brk_{side}", poly([(x, y + 1.1), (x + 3.4 * m, y + 1.1), (x, y + 4.4)]), "$steel.dark", stroke=INK_HAIR))
+        for j, lx in enumerate(labels[i]):
+            out += [
+                P(f"shelf_{i}_label_{j}", R(4.6, 2.6, 0.4), "$bone", at=(lx, y + 2.1), stroke=INK_FINE),
+                P(f"shelf_{i}_label_{j}_ln", R(2.6, 0.5, 0.25), "$slate.dark@0.6", at=(lx - 0.4, y + 2.2)),
+            ]
+        return out
+
+    # The uprights are slotted angle, punched down their length.
+    def upright(i, x):
+        return [
+            P(f"upright_{i}", R(2.4, 54, 0.6), "$steel.dark", at=(x, 3), stroke=INK_HAIR),
+            P(f"upright_{i}_lit", R(0.5, 52, 0.25), "$steel@0.8", at=(x - 0.7, 3)),
+            *[P(f"upright_{i}_slot_{k}", R(0.7, 1.3, 0.35), "$ink@0.7", at=(x + 0.25, -21 + k * 3.2)) for k in range(16)],
         ]
 
     parts = [
         shadow("shadow", 2, ground, 40, 6.5, "0.45"),
-        # Inside: the dark, a back of hull plates with a seam down it.
+        # Inside: the dark, a back of hull plates patched together, a seam down it and one across.
         P("back", R(52, 54, 1), "$coal", at=(0, 3)),
         P("back_plate", R(24, 52, 0.5), "$slate.dark@0.45", at=(-12, 3)),
+        P("back_plate_b", R(24, 25, 0.5), "$slate.dark@0.25", at=(12, 16)),
         P("back_seam", R(0.8, 52, 0.3), "$ink@0.6", at=(0, 3)),
+        P("back_seam_x", R(25, 0.8, 0.3), "$ink@0.5", at=(12.5, 3.4)),
         *[P(f"back_rivet_{i}", circ(0.7), "$slate@0.7", at=(1.6, -20 + i * 9)) for i in range(6)],
+        *rivet_row("back_rivet_x", 3.4, 4.8, 22, 4.8, 6, 0.6, "$slate@0.6"),
+        # The racks' cross-bracing behind the shelves, and the roof's shade falling in at the top.
+        band("brace_a", [(-22, -22), (22, 28)], 1.1, "$steel.dark@0.55"),
+        band("brace_b", [(22, -22), (-22, 28)], 1.1, "$steel.dark@0.55"),
+        P("brace_bolt", circ(1.0), "$steel.dark", at=(0, 3), stroke=INK_HAIR),
+        P("roof_shade", R(52, 5, 1), "$ink@0.4", at=(0, -21.6)),
         # The racks: two uprights and three shelves.
-        *[P(f"upright_{i}", R(2.4, 54, 0.6), "$steel.dark", at=(x, 3), stroke=INK_HAIR) for i, x in enumerate([-23.5, 23.5])],
+        *upright(0, -23.5),
+        *upright(1, 23.5),
         *shelf("a", -9),
         *shelf("b", 7),
         *shelf("c", 23),
         # The shelves are bare in the drawing: feelers lays the finds on them, the ones met so far
         # (its data/hub.ts FINDS_SHELVES), so the store fills as the collection does.
-        # The frame round the front, the sill, and the roof over it.
+        # The frame round the front, bolted through to the racks; the sill, a tread plate; the roof over it.
         *[P(f"post_{i}", R(3.6, 57, 0.8), "$steel", at=(x, 2), stroke=INK_THIN) for i, x in enumerate([-27.5, 27.5])],
         P("post_lit", R(1, 54, 0.4), "$steel.light@0.8", at=(-28.6, 2)),
+        P("post_1_lit", R(0.6, 54, 0.3), "$steel.light@0.5", at=(26.3, 2)),
+        *[p for i, x in enumerate([-27.5, 27.5]) for j, y in enumerate([-9, 7, 23]) for p in bolt(f"post_{i}_bolt_{j}", x, y, 0.8, "$steel.dark")],
+        *rust("post_rust", 27.6, -22.4, 2.4, 11, 0.5),
         P("sill", R(60, 3.4, 1), "$slate", at=(0, ground - 1.4), stroke=INK_HAIR),
+        lit_edge("sill_lit", -28, 28, ground - 2.7, 0.6, "$white@0.3"),
+        *[P(f"sill_tread_{i}", R(1.5, 0.5, 0.25), "$slate.light@0.7", at=(-25 + i * 2.5, ground - 1.2), rot=30 if i % 2 else -30) for i in range(21)],
         P("lintel", R(60, 4, 1), "$slate", at=(0, -24.5), stroke=INK_HAIR),
         lit_edge("lintel_lit", -28, 28, -26.2, 0.7, "$white@0.35"),
+        *rivet_row("lintel_rv", -24, -23.6, 24, -23.6, 9, 0.55, "$slate.dark@0.8", skip=lambda x, y: abs(x) < 8),
+        # The store's placard, bolted to the lintel.
+        P("placard", R(11, 3, 0.6), "$bone", at=(0, -24.6), stroke=INK_FINE),
+        P("placard_ln", R(7, 0.6, 0.3), "$slate.dark@0.65", at=(-0.3, -24.9)),
+        P("placard_ln2", R(4, 0.5, 0.25), "$slate.dark@0.45", at=(-1.8, -23.8)),
+        *bolt("placard_bolt_a", -4.6, -24.6, 0.5, "$steel"),
+        *bolt("placard_bolt_b", 4.6, -24.6, 0.5, "$steel"),
         *shaded("roof", roof, "$steel.dark", [(-34, -30, "$steel")], stroke=INK_THIN),
-        *[band(f"roof_rib_{i}", [(x - 2.4, -36.4 + 0.03 * x), (x + 0.6, -24.6)], 0.6, "$ink@0.3") for i, x in enumerate(range(-26, 34, 7))],
+        *ribs,
         lit_edge("roof_lit", -30, 32, -36.6, 0.8, "$white@0.3"),
+        # The roof's front edge, turned down and riveted, and two stones keeping the slab on in the wind.
+        band("roof_edge", [(-35, -24.6), (37, -23.6)], 1.6, "$steel"),
+        band("roof_edge_ink", [(-35, -23.5), (37, -22.5)], 0.5, "$ink@0.8"),
+        *rivet_row("roof_edge_rv", -31, -24.5, 33, -23.6, 10, 0.5, "$steel.dark"),
         *rust("roof_rust", 22, -30, 8, 4),
-        # The inventory, pinned to the left post: what is in here, written down.
+        *rust("roof_rust_b", -18, -27.5, 4, 3, 0.45),
+        *stone("roof_stone_a", -22, -28.4, 0.8, -6),
+        *stone("roof_stone_b", 12, -27.6, 0.65, 8, "$smoke.dark"),
+        # The inventory, pinned to the left post: what is in here, written down, with a pencil on a string to keep it.
         *page("list", -27.5, -6, s=0.55, rot=-4, pin="pin"),
-        # The cage door, swung open: a steel frame with mesh in it, the padlock hanging open on its hasp.
+        band("pencil_string", [(-26.2, -1.4), (-25.6, 2.6), (-26.4, 6.4)], 0.35, "$bone.dark"),
+        P("pencil", R(0.9, 5, 0.3), "$timber", at=(-26.6, 8.6), rot=8, stroke=INK_FINE),
+        P("pencil_tip", poly([(-0.45, 0), (0.45, 0), (0, 1.3)]), "$bone.dark", at=(-26.9, 11.1), rot=8),
+        # The cage door, swung open: a steel frame with mesh in it and a brace across, the padlock hanging open on its hasp,
+        # and a tag off the bar for a find that came in without one.
         P("door", poly(door), "$frost.dark@0.12"),
         *mesh,
+        band("door_brace", [(29.4, 26.8), (40.2, 6.8)], 0.9, "$steel"),
         P("door_frame", poly(door), None, stroke={"color": "$steel", "width": 1.6}),
         P("door_frame_ink", poly(door), None, stroke=INK_HAIR),
+        band("door_frame_lit", [(29, -22.4), (40.6, -18.7)], 0.5, "$white@0.4"),
         P("door_bar", poly([(28.5, 2.4), (41, 4.8), (41, 6.6), (28.5, 4.2)]), "$steel", stroke=INK_HAIR),
         *hinge("hinge_a", 28.6, -16, leaf=0, length=4),
         *hinge("hinge_b", 28.6, 20, leaf=0, length=4),
+        *tag("door_tag", 33.4, 4.6, s=0.6, rot=-6),
         *padlock("lock", 39.4, 7.4, 0.62, open=True),
-        # Crates the finds came home in, stacked outside on the left.
+        # Crates the finds came home in, stacked outside on the left: the top one's lid prised up on its packing straw,
+        # and the bar that did it leant against them.
         *shaded("crate_out", rr(14, 10, 1.4, (-34.6, 25)), "$slate", [(28, 31, "$slate.dark")], stroke=INK_HAIR),
         P("crate_out_lid", R(15, 2.6, 0.8), "$slate.light", at=(-34.6, 19.6), stroke=INK_HAIR),
         P("crate_out_stencil", R(7, 1.4, 0.4), "$frost.dark@0.6", at=(-34.6, 25.4)),
+        *[P(f"crate_out_nail_{i}", circ(0.4), "$steel.dark", at=(x, 21.4)) for i, x in enumerate([-40.4, -28.8])],
+        *shaded("crate_top", rr(11, 7.4, 1.2, (-35.2, 14.6)), "$slate", [(16.4, 19, "$slate.dark")], stroke=INK_HAIR),
+        P("crate_top_stencil", R(5, 1.1, 0.3), "$frost.dark@0.55", at=(-35.2, 15)),
+        ao("crate_top_ao", -35.2, 18.5, 11, 1.2, 0.45),
+        *[band(f"straw_{i}", pts, 0.45, "$husk.dark") for i, pts in enumerate([
+            [(-39.2, 11.2), (-40.4, 8.6)],
+            [(-36.6, 11.0), (-36.0, 8.2)],
+            [(-33.4, 10.8), (-32.0, 8.8)],
+            [(-31.4, 10.8), (-29.6, 9.6)],
+        ])],
+        P("crate_top_lid", poly([(-41.2, 10.4), (-29.8, 8.0), (-29.4, 9.7), (-40.8, 12.1)]), "$slate.light", stroke=INK_HAIR),
+        lit_edge("crate_top_lid_lit", -40, -31, 9.6, 0.5, "$white@0.3"),
+        band("bar", [(-43.4, 30.2), (-41.4, 13.6)], 1.2, "$steel.dark"),
+        band("bar_lit", [(-43.7, 29.6), (-41.8, 14.2)], 0.35, "$steel@0.9"),
+        band("bar_claw", [(-41.4, 13.6), (-41.0, 12.0), (-39.8, 11.6)], 1.0, "$steel.dark"),
+        # Straw dropped on the way in.
+        *[band(f"straw_loose_{i}", pts, 0.4, "$husk.dark@0.8") for i, pts in enumerate([
+            [(-24, 31.6), (-21, 32.2)],
+            [(-6, 32.4), (-3.4, 31.6)],
+            [(14, 31.8), (16.6, 32.6)],
+        ])],
         ao("foot_ao", 2, ground + 0.6, 66, 1.6, 0.4),
     ]
     doc(
         "ss.base.finds",
         "The finds store",
         "Where the camp keeps what the ruins handed over between expeditions: a lean-to store beside the arms locker, put up out of the "
-        "lander's skin and the expedition's racks. A corrugated slab of hull plate for a roof, rusted at one end; a steel frame round an open "
-        "front, and inside, in the dark against a back of riveted plates, two uprights and three bare shelves. The shelves are left empty on "
-        "purpose: feelers sets the finds the player has actually met on them, plate-off (each `ss.relic.*` in its `glyph` variant), so the "
-        "store fills as the collection does. The shelves' top faces are at y -10.1, 5.9 and 21.9, between x -22 and 22. The cage door "
-        "stands swung open, steel mesh in a frame, a padlock hanging open on it; the inventory is pinned to the left post; the crates the "
-        "finds came home in are stacked outside.",
+        "lander's skin and the expedition's racks. A corrugated slab of hull plate for a roof, its ridges catching the light, its front edge "
+        "turned down and riveted, rusted at one end and held on with two stones; a steel frame round an open front, bolted through to the "
+        "racks, with a bone placard on the lintel and a tread plate for a sill; and inside, in the dark against a back of riveted plates "
+        "patched together and braced across, two punched uprights and three bare shelves on brackets, a bone label on each shelf's lip. The "
+        "shelves are left empty on purpose: feelers sets the finds the player has actually met on them, plate-off (each `ss.relic.*` in its "
+        "`glyph` variant), so the store fills as the collection does. The shelves' top faces are at y -10.1, 5.9 and 21.9, between x -22 "
+        "and 22. The cage door stands swung open, steel mesh in a braced frame, a padlock hanging open on it and a tag tied to its bar; the "
+        "inventory is pinned to the left post with a pencil on a string; the crates the finds came home in are stacked outside, the top "
+        "one's lid prised up on its packing straw, the bar that did it leant against them, and straw dropped on the way in.",
         (90, 80),
         parts,
     )
