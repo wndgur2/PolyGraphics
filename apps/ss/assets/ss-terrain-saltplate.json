@@ -1,13 +1,13 @@
 {
   "id": "ss.terrain.saltplate",
   "name": "Salt plate",
-  "description": "Salt Pan set dressing, and the one cover the pan gives: a plate of salt crust heaved up on its edge, a faceted slab lit hard from above — bone-white crown, husk-coloured face, an ink underside where it left the ground — with two cracks across it and grit at its foot. Blocking, radius 16; drawn round-ish so the game's circle capsule fits it. Deliberately angular against everything else on the ground, which is all curves: a plate is the only straight edge on the pan, and a straight edge is what a shot stops at. Second pass: the face in shade along its lower right, a pale facet on the crown, a crust of salt white along the crown's upper edges, a lit lip beside each crack, a chip at the foot and the dark where it meets the pan.",
+  "description": "Salt Pan set dressing, and the one cover the pan gives: a plate of salt crust heaved up on its edge, a faceted slab lit hard from above — bone-white crown, husk-coloured face, an ink underside where it left the ground — with two cracks across it and grit at its foot. Blocking, radius 16; drawn round-ish so the game's circle capsule fits it. Deliberately angular against everything else on the ground, which is all curves: a plate is the only straight edge on the pan, and a straight edge is what a shot stops at. Second pass: the face in shade along its lower right, a pale facet on the crown, a crust of salt white along the crown's upper edges, a lit lip beside each crack, a chip at the foot and the dark where it meets the pan. Its ink under-shape stands about one unit proud of the face, not two: at two it drew the plate twice as heavy as the bodies beside it, and feelers scatters it at up to 1.5x.",
   "tags": ["terrain"],
   "size": [44, 36],
   "meta": {"radius": 16},
   "parts": [
     {"id": "shadow", "at": [1.0, 13.0], "shape": {"kind": "ellipse", "rx": 19.0, "ry": 5.0}, "fill": "$ink@0.5"},
-    {"id": "under", "shape": {"kind": "poly", "points": [[-19.0, 10.0], [-14.0, -2.0], [2.0, -14.0], [17.0, -8.0], [20.0, 6.0], [12.0, 13.0], [-8.0, 14.0]]}, "fill": "$ink"},
+    {"id": "under", "shape": {"kind": "poly", "points": [[-18.0, 9.5], [-13.25, -1.5], [1.75, -13.0], [16.25, -7.25], [19.0, 5.5], [11.5, 12.25], [-7.5, 13.25]]}, "fill": "$ink"},
     {"id": "face", "shape": {"kind": "poly", "points": [[-17.0, 9.0], [-12.5, -1.0], [1.5, -12.0], [15.5, -6.5], [18.0, 5.0], [11.0, 11.5], [-7.0, 12.5]]}, "fill": "$husk.dark"},
     {"id": "face_shade", "shape": {"kind": "poly", "points": [[15.5, -6.5], [18.0, 5.0], [11.0, 11.5], [-7.0, 12.5], [-2.0, 9.0], [10.0, 8.0], [14.0, 1.0]]}, "fill": "$husk.dark2@0.6"},
     {"id": "crown", "shape": {"kind": "poly", "points": [[-12.0, 3.0], [-8.0, -3.0], [2.0, -10.0], [12.0, -5.5], [14.0, 2.0], [6.0, 6.0]]}, "fill": "$husk"},
