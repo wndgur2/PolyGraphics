@@ -7,9 +7,11 @@
     "fanfare"
   ],
   "duration": 0.4,
+  "offBand": "Under the set on purpose. Late in a run it plays several times a minute \u2014 every level, every purchase, every magnet \u2014 so at the level of a fanfare heard once a run it is the loudest thing the player hears most often; it only has to say something went up.",
   "voices": [
     {
       "id": "climb",
+      "gain": 0.5,
       "phrase": {
         "use": "ss.lib.note",
         "step": 0.09,
