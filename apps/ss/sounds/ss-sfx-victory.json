@@ -7,9 +7,11 @@
     "fanfare"
   ],
   "duration": 0.81,
+  "offBand": "Under the fanfare band on purpose, and level with ss.sfx.levelup. Despite the name it is not heard once a run: every chest, every awakening and every time stop opens on it, so at the level of a once-a-run fanfare it is the loudest thing those moments make.",
   "voices": [
     {
       "id": "climb",
+      "gain": 0.5,
       "phrase": {
         "use": "ss.lib.note",
         "step": 0.13,
