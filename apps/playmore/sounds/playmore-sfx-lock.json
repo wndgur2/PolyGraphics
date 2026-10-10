@@ -1,0 +1,9 @@
+{
+  "id": "playmore.sfx.lock",
+  "name": "Lock in",
+  "description": "An answer or a ready check sent: a small upward step `$third` to `$fifth` on the party voice, both notes short. Smaller than the reveal (a fourth, held) so a confirmation never reads as an announcement.",
+  "tags": ["sfx", "interface"],
+  "duration": 0.24,
+  "meta": { "minInterval": 200 },
+  "voices": [{ "id": "step", "phrase": { "use": "playmore.lib.note", "step": 0.06, "notes": ["$third", "$fifth"] }, "gain": 0.45 }]
+}

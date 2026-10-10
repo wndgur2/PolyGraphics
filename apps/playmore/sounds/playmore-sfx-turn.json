@@ -1,0 +1,12 @@
+{
+  "id": "playmore.sfx.turn",
+  "name": "Your turn",
+  "description": "It is your turn to speak or act: a doorbell-like double ping, two short `$fifth.up` notes on the party voice 130ms apart. High and brief so it cuts through a noisy room on one phone without sounding like the round-end fanfare.",
+  "tags": ["sfx", "cue"],
+  "duration": 0.32,
+  "meta": { "minInterval": 800 },
+  "voices": [
+    { "id": "ding", "use": "playmore.lib.note", "pitch": "$fifth.up", "dur": 0.1, "gain": 0.5 },
+    { "id": "dong", "at": 0.13, "use": "playmore.lib.note", "pitch": "$fifth.up", "dur": 0.16, "gain": 0.45 }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "playmore.sfx.join",
+  "name": "Join",
+  "description": "Someone came into the lobby: one quick `$third.up` pop on the party voice, 70ms, quiet. Many can arrive at once, so it is short and spaced by `minInterval` instead of stacking into a chord.",
+  "tags": ["sfx", "touch"],
+  "duration": 0.1,
+  "meta": { "minInterval": 150 },
+  "voices": [{ "id": "pop", "use": "playmore.lib.note", "pitch": "$third.up", "dur": 0.07, "gain": 0.22 }]
+}
