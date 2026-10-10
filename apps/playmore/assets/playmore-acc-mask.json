@@ -1,0 +1,14 @@
+{
+  "id": "playmore.acc.mask",
+  "name": "Mask",
+  "description": "White face mask over the mouth and chin: a soft rounded panel with two grey pleats, straps running up to the sides of the head. Leaves the eyes and the outer edges of the blush showing. Socket: `face` — place this document's origin on the body's `face` socket at the body's scale.",
+  "tags": ["acc", "face"],
+  "size": [80, 56],
+  "anchor": [0.5, 0.5],
+  "parts": [
+    {"id": "strap", "mirrorX": true, "shape": {"kind": "poly", "points": [[-14.0, 10.2], [-31.2, 5.2], [-31.2, 7.8], [-14.0, 12.8]]}, "fill": "$ink"},
+    {"id": "panel", "at": [0.0, 13.7], "shape": {"kind": "rect", "w": 28.8, "h": 16.2, "corner": 6.3}, "fill": "$white", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "pleat_top", "at": [0.0, 11.3], "shape": {"kind": "rect", "w": 18.0, "h": 1.4, "corner": 0.7}, "fill": "$snow-shade"},
+    {"id": "pleat_bottom", "at": [0.0, 16.1], "shape": {"kind": "rect", "w": 18.0, "h": 1.4, "corner": 0.7}, "fill": "$snow-shade"}
+  ]
+}

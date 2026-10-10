@@ -1,0 +1,17 @@
+{
+  "id": "playmore.card.mafia",
+  "name": "Mafia",
+  "description": "Role card for 마피아 (mafia): a pale creature in black shades and a black fedora with a red band, on a midnight panel with a red border. 72x96, origin at the centre.",
+  "tags": ["card", "role"],
+  "size": [72, 96],
+  "anchor": [0.5, 0.5],
+  "parts": [
+    {"id": "card", "shape": {"kind": "rect", "w": 66.0, "h": 90.0, "corner": 9.0}, "fill": "$mafia", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "panel", "shape": {"kind": "rect", "w": 56.0, "h": 80.0, "corner": 6.0}, "fill": "$night"},
+    {"id": "creature", "at": [0.0, 10.0], "scale": 0.62, "use": "playmore.char.body", "variant": "snow"},
+    {"id": "shades", "at": [0.0, 10.0], "scale": 0.62, "use": "playmore.acc.shades"},
+    {"id": "fedora_crown", "shape": {"kind": "poly", "points": [[-11.0, -3.86], [-9.5, -14.86], [-3.0, -16.86], [0.0, -14.36], [3.0, -16.86], [9.5, -14.86], [11.0, -3.86]]}, "fill": "$coal", "stroke": {"color": "$ink", "width": "line"}},
+    {"id": "fedora_band", "at": [0.0, -5.86], "shape": {"kind": "rect", "w": 21.0, "h": 3.4, "corner": 0.5}, "fill": "$cap"},
+    {"id": "fedora_brim", "at": [0.0, -3.26], "shape": {"kind": "ellipse", "rx": 19.0, "ry": 3.6}, "fill": "$coal", "stroke": {"color": "$ink", "width": "line"}}
+  ]
+}

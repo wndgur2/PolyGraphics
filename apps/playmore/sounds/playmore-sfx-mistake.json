@@ -1,0 +1,46 @@
+{
+  "id": "playmore.sfx.mistake",
+  "name": "Mistake",
+  "description": "Wrong — a card played out of order, a guess that missed: a low buzz, two squares a few cents apart at `$buzz` under a lowpass, sagging a little in pitch over a quarter of a second. Low enough to mean no, filtered enough not to hurt, and with harmonics up where a phone speaker can play them.",
+  "tags": [
+    "sfx",
+    "cue"
+  ],
+  "duration": 0.3,
+  "meta": {
+    "minInterval": 250
+  },
+  "voices": [
+    {
+      "id": "buzz",
+      "dur": 0.28,
+      "gain": 0.25,
+      "source": {
+        "kind": "osc",
+        "wave": "square",
+        "freq": "$buzz",
+        "to": "$dusk.down",
+        "unison": {
+          "count": 2,
+          "detune": 18
+        }
+      },
+      "filter": {
+        "type": "bandpass",
+        "freq": "$pop.up",
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.006,
+            "decay": 0.06,
+            "sustain": 0.7,
+            "release": 0.08
+          }
+        }
+      ]
+    }
+  ]
+}

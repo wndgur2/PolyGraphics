@@ -1,0 +1,83 @@
+{
+  "id": "playmore.sfx.night",
+  "name": "Night",
+  "description": "Night falls in 마피아: a low swell that rises out of nothing and sinks — a soft wide triangle pair sliding down an octave from `$dusk`, an airy band of noise drifting down with it, and a faint high sine falling from `$fifth` so a phone, which cannot play the low part, still hears the descent.",
+  "tags": [
+    "sfx",
+    "mood"
+  ],
+  "duration": 1.6,
+  "meta": {
+    "minInterval": 1500
+  },
+  "voices": [
+    {
+      "id": "swell",
+      "dur": 1.6,
+      "gain": 0.12,
+      "source": {
+        "kind": "osc",
+        "wave": "triangle",
+        "freq": "$dusk",
+        "to": "$dusk.down",
+        "unison": {
+          "count": 2,
+          "detune": 9
+        }
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.55,
+            "decay": 1.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "air",
+      "dur": 1.5,
+      "gain": 0.12,
+      "source": {
+        "kind": "noise"
+      },
+      "filter": {
+        "type": "bandpass",
+        "freq": "$paper.down",
+        "to": "$pop",
+        "q": "band"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.5,
+            "decay": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "glow",
+      "at": 0.1,
+      "dur": 1.4,
+      "gain": 0.08,
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$fifth",
+        "to": "$fifth.down"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.45,
+            "decay": 0.95
+          }
+        }
+      ]
+    }
+  ]
+}
