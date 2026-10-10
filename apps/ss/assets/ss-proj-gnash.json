@@ -1,0 +1,548 @@
+{
+  "id": "ss.proj.gnash",
+  "name": "Gnashing jaws",
+  "description": "The Mandible awakened: the same paired Bulwark jaws, heavier and no longer thrown to cut but to chew. Each jaw is longer and deeper at the hinge, hooks harder at the tip, and its inside edge is a raked saw of seven teeth rather than three nicks, every tooth leaning toward the tip the way a saw tooth leans into the cut. A groove runs down the back of each jaw in `$husk.dark` and a hard line of light rides the top of the curve, so the bone has a shape at 1:1 and not only an outline. The hook and the teeth are worked dark with blood (`$blood.dark`) because this is the weapon that opens wounds; the stain stops where the teeth stop, so the back of the jaw stays clean bone. The binding is sinew on chitin with a gold knot, gold being what awakened means on this screen. Every jaw layer sits on the same hinge (`at`) and `mirrorX` supplies the left, so `chew` turns them all together: open, snapped shut, held, open. Not spun: the game turns the whole body tips-first onto its heading.",
+  "tags": [
+    "proj",
+    "ranged"
+  ],
+  "size": [
+    28,
+    28
+  ],
+  "anchor": [
+    0.5,
+    0.5
+  ],
+  "parts": [
+    {
+      "id": "jaw",
+      "at": [
+        1.5,
+        7.2
+      ],
+      "mirrorX": true,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            0.7,
+            2.2
+          ],
+          [
+            3.3,
+            0.6
+          ],
+          [
+            5.6,
+            -1.8
+          ],
+          [
+            7.4,
+            -4.7
+          ],
+          [
+            8.6,
+            -7.8
+          ],
+          [
+            9.3,
+            -10.9
+          ],
+          [
+            9.4,
+            -13.6
+          ],
+          [
+            8.9,
+            -15.9
+          ],
+          [
+            7.8,
+            -17.5
+          ],
+          [
+            6.3,
+            -18.4
+          ],
+          [
+            4.8,
+            -18.5
+          ],
+          [
+            5.8,
+            -16.7
+          ],
+          [
+            4.28,
+            -15.69
+          ],
+          [
+            6.0,
+            -14.4
+          ],
+          [
+            4.05,
+            -13.86
+          ],
+          [
+            5.5,
+            -12.0
+          ],
+          [
+            3.55,
+            -11.74
+          ],
+          [
+            4.5,
+            -9.6
+          ],
+          [
+            2.76,
+            -9.61
+          ],
+          [
+            3.3,
+            -7.6
+          ],
+          [
+            1.8,
+            -7.59
+          ],
+          [
+            1.9,
+            -5.7
+          ],
+          [
+            0.66,
+            -5.65
+          ],
+          [
+            0.4,
+            -4.0
+          ],
+          [
+            -0.47,
+            -3.87
+          ],
+          [
+            -1.0,
+            -2.7
+          ],
+          [
+            -2.1,
+            -1.9
+          ]
+        ]
+      },
+      "fill": "$husk",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "ridge",
+      "at": [
+        1.5,
+        7.2
+      ],
+      "mirrorX": true,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            4.16,
+            -2.7
+          ],
+          [
+            5.88,
+            -5.46
+          ],
+          [
+            6.97,
+            -8.3
+          ],
+          [
+            7.62,
+            -11.13
+          ],
+          [
+            7.71,
+            -13.46
+          ],
+          [
+            7.33,
+            -15.25
+          ],
+          [
+            6.4,
+            -16.54
+          ],
+          [
+            5.74,
+            -16.08
+          ],
+          [
+            6.59,
+            -14.95
+          ],
+          [
+            6.91,
+            -13.4
+          ],
+          [
+            6.82,
+            -11.24
+          ],
+          [
+            6.21,
+            -8.53
+          ],
+          [
+            5.16,
+            -5.82
+          ],
+          [
+            3.48,
+            -3.12
+          ]
+        ]
+      },
+      "fill": "$husk.dark"
+    },
+    {
+      "id": "sheen",
+      "at": [
+        1.5,
+        7.2
+      ],
+      "mirrorX": true,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            8.06,
+            -7.92
+          ],
+          [
+            8.76,
+            -10.98
+          ],
+          [
+            8.85,
+            -13.56
+          ],
+          [
+            8.39,
+            -15.69
+          ],
+          [
+            7.42,
+            -17.1
+          ],
+          [
+            6.02,
+            -17.93
+          ],
+          [
+            5.71,
+            -17.41
+          ],
+          [
+            7.0,
+            -16.67
+          ],
+          [
+            7.84,
+            -15.46
+          ],
+          [
+            8.25,
+            -13.51
+          ],
+          [
+            8.16,
+            -11.06
+          ],
+          [
+            7.48,
+            -8.05
+          ]
+        ]
+      },
+      "fill": "$bone.light"
+    },
+    {
+      "id": "stain",
+      "at": [
+        1.5,
+        7.2
+      ],
+      "mirrorX": true,
+      "shape": {
+        "kind": "poly",
+        "points": [
+          [
+            7.8,
+            -17.5
+          ],
+          [
+            6.3,
+            -18.4
+          ],
+          [
+            4.8,
+            -18.5
+          ],
+          [
+            5.8,
+            -16.7
+          ],
+          [
+            4.28,
+            -15.69
+          ],
+          [
+            6.0,
+            -14.4
+          ],
+          [
+            4.05,
+            -13.86
+          ],
+          [
+            5.5,
+            -12.0
+          ],
+          [
+            3.55,
+            -11.74
+          ],
+          [
+            4.5,
+            -9.6
+          ],
+          [
+            2.76,
+            -9.61
+          ],
+          [
+            3.3,
+            -7.6
+          ],
+          [
+            4.51,
+            -7.93
+          ],
+          [
+            3.83,
+            -8.97
+          ],
+          [
+            5.67,
+            -9.16
+          ],
+          [
+            4.7,
+            -11.26
+          ],
+          [
+            6.72,
+            -11.71
+          ],
+          [
+            5.27,
+            -13.6
+          ],
+          [
+            7.24,
+            -14.24
+          ],
+          [
+            5.53,
+            -15.8
+          ],
+          [
+            6.49,
+            -15.66
+          ]
+        ]
+      },
+      "fill": "$blood.dark",
+      "opacity": 0.9
+    },
+    {
+      "id": "binding",
+      "at": [
+        0,
+        8.0
+      ],
+      "shape": {
+        "kind": "rect",
+        "w": 10,
+        "h": 3.6,
+        "corner": 1.4
+      },
+      "fill": "$chitin.dark",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "wrap",
+      "at": [
+        3.0,
+        8.0
+      ],
+      "mirrorX": true,
+      "shape": {
+        "kind": "rect",
+        "w": 1.0,
+        "h": 3.6,
+        "corner": 0.4
+      },
+      "fill": "$chitin"
+    },
+    {
+      "id": "knot",
+      "at": [
+        0,
+        8.0
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 1.35
+      },
+      "fill": "$gold",
+      "stroke": {
+        "color": "$ink",
+        "width": "hair"
+      }
+    },
+    {
+      "id": "knot_glint",
+      "at": [
+        -0.45,
+        7.6
+      ],
+      "shape": {
+        "kind": "circle",
+        "r": 0.4
+      },
+      "fill": "$gold.light"
+    }
+  ],
+  "animations": {
+    "chew": {
+      "description": "one bite: the jaws come open, snap shut fast and hold a beat on whatever is between them, then come open again. Every layer of a jaw turns on the same hinge so the teeth, the groove and the blood go with the bone.",
+      "duration": 0.24,
+      "tracks": [
+        {
+          "part": "jaw",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              7,
+              "quadIn"
+            ],
+            [
+              0.32,
+              -15,
+              "hold"
+            ],
+            [
+              0.52,
+              -15,
+              "quadOut"
+            ],
+            [
+              1,
+              7
+            ]
+          ]
+        },
+        {
+          "part": "ridge",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              7,
+              "quadIn"
+            ],
+            [
+              0.32,
+              -15,
+              "hold"
+            ],
+            [
+              0.52,
+              -15,
+              "quadOut"
+            ],
+            [
+              1,
+              7
+            ]
+          ]
+        },
+        {
+          "part": "sheen",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              7,
+              "quadIn"
+            ],
+            [
+              0.32,
+              -15,
+              "hold"
+            ],
+            [
+              0.52,
+              -15,
+              "quadOut"
+            ],
+            [
+              1,
+              7
+            ]
+          ]
+        },
+        {
+          "part": "stain",
+          "prop": "rot",
+          "keys": [
+            [
+              0,
+              7,
+              "quadIn"
+            ],
+            [
+              0.32,
+              -15,
+              "hold"
+            ],
+            [
+              0.52,
+              -15,
+              "quadOut"
+            ],
+            [
+              1,
+              7
+            ]
+          ]
+        }
+      ],
+      "cues": {
+        "shut": 0.32
+      }
+    }
+  }
+}

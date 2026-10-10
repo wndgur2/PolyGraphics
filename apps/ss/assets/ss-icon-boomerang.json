@@ -11,14 +11,12 @@
   ],
   "variants": {
     "evolved": {
-      "description": "Dancing Mandibles. The rim goes gold the way every evolved slot does, and the one pair of jaws becomes two pairs pinwheeling round the middle of the tile, through the air they drag after them. Two because the evolution throws one more, and every other one spirals the opposite way; each pair is the same `ss.proj.boom` the base slot composes, turned half a circle from the other. Between them are two `ss.fx.gust` — the streaks the weapon lays along its path — swept round the same centre, so the slot shows the spiral and not only the thing riding it. The gusts keep their field alpha: they are the air, and the jaws are what cuts.",
+      "description": "Gnashing Jaws. The rim goes gold the way every evolved slot does, and the bound pair becomes `ss.proj.gnash` — the awakened jaws the weapon actually throws, at their resting gape, teeth bloodied — composed rather than redrawn, so the slot and the field can never disagree about what the thing looks like. One bead of blood (`ss.fx.drip`, the same drop the field sheds off a wound) hangs between the hooks, falling: the slot says what the evolution adds, which is not more jaws but what is left behind when they let go. No pair of jaws and no spiral round it any more — the weapon no longer dances.",
       "set": { "tile.fill": "$gold" },
       "remove": ["glyph"],
       "add": [
-        { "id": "gust_a", "use": "ss.fx.gust", "at": [-1.5, -2], "rot": -35, "scale": 0.75 },
-        { "id": "gust_b", "use": "ss.fx.gust", "at": [1.5, 2], "rot": 145, "scale": 0.75 },
-        { "id": "jaws_a", "use": "ss.proj.boom", "at": [5.5, -5], "rot": 60, "scale": 0.62 },
-        { "id": "jaws_b", "use": "ss.proj.boom", "at": [-5.5, 5], "rot": 240, "scale": 0.62 }
+        { "id": "jaws", "use": "ss.proj.gnash", "at": [0, 0.5], "scale": 0.86 },
+        { "id": "drop", "use": "ss.fx.drip", "at": [0, 1.2], "scale": 0.66 }
       ]
     }
   }
