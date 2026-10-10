@@ -1,0 +1,30 @@
+{
+  "id": "playmore.sfx.reveal",
+  "name": "Reveal",
+  "description": "Something turned over for everyone to see — a role, an answer, the bets: two notes of the party voice rising a fourth, `$fifth` then `$tonic.up`, the second held a little longer so it lands as an announcement.",
+  "tags": [
+    "sfx",
+    "cue"
+  ],
+  "duration": 0.42,
+  "meta": {
+    "minInterval": 300
+  },
+  "voices": [
+    {
+      "id": "lift",
+      "use": "playmore.lib.note",
+      "pitch": "$fifth",
+      "dur": 0.14,
+      "gain": 0.55
+    },
+    {
+      "id": "land",
+      "at": 0.12,
+      "use": "playmore.lib.note",
+      "pitch": "$tonic.up",
+      "dur": 0.3,
+      "gain": 0.55
+    }
+  ]
+}

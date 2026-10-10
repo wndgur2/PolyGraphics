@@ -1,0 +1,40 @@
+{
+  "id": "playmore.sfx.tap",
+  "name": "Tap",
+  "description": "The button press: a tiny soft sine blip sliding down a third, `$tap` to `$tonic.up`, over in 35ms. The quietest thing in the set and the most frequent — every touch on every phone at the table — so it is a confirmation the finger felt, not a sound anyone notices.",
+  "tags": [
+    "sfx",
+    "touch"
+  ],
+  "duration": 0.05,
+  "meta": {
+    "minInterval": 40
+  },
+  "jitter": {
+    "freq": [
+      0.97,
+      1.03
+    ]
+  },
+  "voices": [
+    {
+      "id": "blip",
+      "dur": 0.035,
+      "gain": 0.1,
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$tap",
+        "to": "$tonic.up"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.004
+          }
+        }
+      ]
+    }
+  ]
+}

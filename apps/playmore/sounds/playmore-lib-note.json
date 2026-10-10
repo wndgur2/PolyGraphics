@@ -1,0 +1,23 @@
+{
+  "id": "playmore.lib.note",
+  "name": "Party note",
+  "description": "One note of the bright interface voice the fanfare and the reveal are built from: a square softened by a lowpass, struck in 5ms and left to ring down. Written at `$tonic` and composed with a `pitch` at the call site, so the whole interface retunes from this one file.",
+  "tags": ["lib", "interface"],
+  "duration": 0.16,
+  "root": "$tonic",
+  "voices": [
+    {
+      "id": "tone",
+      "gain": "mid",
+      "source": { "kind": "osc", "wave": "square", "freq": "$tonic" },
+      "filter": { "type": "lowpass", "freq": "$clink", "q": "wide" },
+      "env": [{ "prop": "gain", "adsr": { "attack": 0.005 } }]
+    },
+    {
+      "id": "body",
+      "gain": "soft",
+      "source": { "kind": "osc", "wave": "triangle", "freq": "$tonic" },
+      "env": [{ "prop": "gain", "adsr": { "attack": 0.005 } }]
+    }
+  ]
+}

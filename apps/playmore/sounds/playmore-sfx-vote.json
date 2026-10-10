@@ -1,0 +1,40 @@
+{
+  "id": "playmore.sfx.vote",
+  "name": "Vote",
+  "description": "A vote cast: a soft round pop, one sine rising an octave from `$pop` to `$pop.up` in 60ms — a bubble rather than a beep, so a table of people voting at once sounds like popcorn, not a switchboard.",
+  "tags": [
+    "sfx",
+    "interface"
+  ],
+  "duration": 0.08,
+  "meta": {
+    "minInterval": 50
+  },
+  "jitter": {
+    "freq": [
+      0.93,
+      1.07
+    ]
+  },
+  "voices": [
+    {
+      "id": "pop",
+      "dur": 0.06,
+      "gain": 0.18,
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$pop",
+        "to": "$pop.up"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.006
+          }
+        }
+      ]
+    }
+  ]
+}
