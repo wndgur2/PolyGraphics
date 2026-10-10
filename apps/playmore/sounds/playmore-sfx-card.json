@@ -1,0 +1,67 @@
+{
+  "id": "playmore.sfx.card",
+  "name": "Card",
+  "description": "A card sliding off the deck and flipping over: a soft swish of bandpassed noise sweeping up from `$paper.down` to `$paper`, then a short papery flick as it lands face up. No pitch at all, so it sits under the cues it shares a frame with.",
+  "tags": [
+    "sfx",
+    "interface"
+  ],
+  "duration": 0.18,
+  "meta": {
+    "minInterval": 60
+  },
+  "takes": 3,
+  "jitter": {
+    "freq": [
+      0.92,
+      1.08
+    ]
+  },
+  "voices": [
+    {
+      "id": "slide",
+      "dur": 0.13,
+      "gain": 0.8,
+      "source": {
+        "kind": "noise"
+      },
+      "filter": {
+        "type": "bandpass",
+        "freq": "$paper.down",
+        "to": "$paper",
+        "q": "band"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.04,
+            "decay": 0.09
+          }
+        }
+      ]
+    },
+    {
+      "id": "flick",
+      "at": 0.12,
+      "dur": 0.04,
+      "gain": 0.5,
+      "source": {
+        "kind": "noise"
+      },
+      "filter": {
+        "type": "bandpass",
+        "freq": "$paper.up",
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.002
+          }
+        }
+      ]
+    }
+  ]
+}

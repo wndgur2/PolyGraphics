@@ -1,0 +1,21 @@
+{
+  "id": "playmore.card.attention",
+  "name": "Attention",
+  "description": "Role card for 관종 (attention seeker): a lemon creature on a purple stage under a spotlight, shouting into a red megaphone with sound waves coming out, sparkles above. 72x96, origin at the centre.",
+  "tags": ["card", "role"],
+  "size": [72, 96],
+  "anchor": [0.5, 0.5],
+  "parts": [
+    {"id": "card", "shape": {"kind": "rect", "w": 66.0, "h": 90.0, "corner": 9.0}, "fill": "$ribbon", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "panel", "shape": {"kind": "rect", "w": 56.0, "h": 80.0, "corner": 6.0}, "fill": "$attention"},
+    {"id": "spotlight", "shape": {"kind": "poly", "points": [[-6.0, -40.0], [6.0, -40.0], [26.0, 38.0], [-26.0, 38.0]]}, "fill": "$white@0.3"},
+    {"id": "creature", "at": [0.0, 10.0], "scale": 0.62, "use": "playmore.char.body", "variant": "lemon"},
+    {"id": "megaphone", "shape": {"kind": "poly", "points": [[6.68, 13.2], [20.68, 7.2], [20.68, 25.2], [6.68, 19.2]]}, "fill": "$cap", "stroke": {"color": "$ink", "width": "line"}},
+    {"id": "megaphone_bell", "at": [20.68, 16.2], "shape": {"kind": "ellipse", "rx": 2.4, "ry": 9.0}, "fill": "$cap-dark", "stroke": {"color": "$ink", "width": "line"}},
+    {"id": "megaphone_grip", "at": [11.68, 21.4], "shape": {"kind": "rect", "w": 3.0, "h": 6.0, "corner": 1.0}, "fill": "$coal"},
+    {"id": "wave_1", "at": [21.68, 16.2], "shape": {"kind": "ring", "r": 5.0, "width": 1.8, "from": -40, "to": 40}, "fill": "$ink"},
+    {"id": "wave_2", "at": [21.68, 16.2], "shape": {"kind": "ring", "r": 9.0, "width": 1.8, "from": -40, "to": 40}, "fill": "$ink"},
+    {"id": "sparkle_l", "at": [-22.0, -30.0], "shape": {"kind": "star", "points": 4, "r": 5.0, "r2": 1.6}, "fill": "$white"},
+    {"id": "sparkle_r", "at": [20.0, -34.0], "shape": {"kind": "star", "points": 4, "r": 3.6, "r2": 1.2}, "fill": "$white"}
+  ]
+}

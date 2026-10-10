@@ -1,0 +1,78 @@
+{
+  "id": "playmore.sfx.chip",
+  "name": "Chip",
+  "description": "A betting chip dropped on the pile: a bright clink of two inharmonic sine partials, `$clink` and `$chime`, struck hard and gone in a tenth of a second, over a click of highpassed noise for the contact. Fires in runs when several chips go down, so it rolls its pitch a little per trigger.",
+  "tags": [
+    "sfx",
+    "interface"
+  ],
+  "duration": 0.14,
+  "meta": {
+    "minInterval": 45
+  },
+  "jitter": {
+    "freq": [
+      0.94,
+      1.06
+    ]
+  },
+  "voices": [
+    {
+      "id": "contact",
+      "dur": 0.01,
+      "gain": 0.07,
+      "source": {
+        "kind": "noise"
+      },
+      "filter": {
+        "type": "highpass",
+        "freq": "$clink",
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.004
+          }
+        }
+      ]
+    },
+    {
+      "id": "ring",
+      "dur": 0.12,
+      "gain": 0.1,
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$clink"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.005
+          }
+        }
+      ]
+    },
+    {
+      "id": "shimmer",
+      "dur": 0.07,
+      "gain": 0.07,
+      "source": {
+        "kind": "osc",
+        "wave": "sine",
+        "freq": "$chime"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.005
+          }
+        }
+      ]
+    }
+  ]
+}

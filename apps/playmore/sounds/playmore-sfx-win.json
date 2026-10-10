@@ -1,0 +1,13 @@
+{
+  "id": "playmore.sfx.win",
+  "name": "Win",
+  "description": "A round won: a short four-note fanfare on the party voice climbing the major triad, `$tonic` `$third` `$fifth` and then `$tonic.up` held, with a soft `$third.up` under the last note to open it into a chord.",
+  "tags": ["sfx", "fanfare"],
+  "duration": 0.8,
+  "meta": { "minInterval": 600 },
+  "voices": [
+    { "id": "climb", "phrase": { "use": "playmore.lib.note", "step": 0.1, "notes": ["$tonic", "$third", "$fifth"] } },
+    { "id": "top", "at": 0.3, "use": "playmore.lib.note", "pitch": "$tonic.up", "dur": 0.48 },
+    { "id": "harmony", "at": 0.3, "gain": 0.5, "use": "playmore.lib.note", "pitch": "$third.up", "dur": 0.48 }
+  ]
+}

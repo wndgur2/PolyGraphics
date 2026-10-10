@@ -1,0 +1,15 @@
+{
+  "id": "playmore.acc.glasses",
+  "name": "Glasses",
+  "description": "Round glasses: two thin ink frames around the eyes joined by a bridge, with faint lenses and a glint on each so the eyes still show through. Socket: `face` — place this document's origin on the body's `face` socket at the body's scale.",
+  "tags": ["acc", "face"],
+  "size": [80, 56],
+  "anchor": [0.5, 0.5],
+  "parts": [
+    {"id": "lens", "at": [-11.7, 0.0], "mirrorX": true, "shape": {"kind": "circle", "r": 7.4}, "fill": "$white@0.22"},
+    {"id": "glint", "at": [-15.3, -2.4], "rot": 30.0, "mirrorX": true, "shape": {"kind": "rect", "w": 1.4, "h": 4.6, "corner": 0.7}, "fill": "$white@0.75"},
+    {"id": "rim", "at": [-11.7, 0.0], "mirrorX": true, "shape": {"kind": "ring", "r": 8.1, "width": 2.8}, "fill": "$ink"},
+    {"id": "bridge", "at": [0.0, -0.8], "shape": {"kind": "rect", "w": 7.6, "h": 2.6, "corner": 1.2}, "fill": "$ink"},
+    {"id": "arm", "at": [-21.9, -1.2], "mirrorX": true, "shape": {"kind": "rect", "w": 5.2, "h": 2.4, "corner": 1.2}, "fill": "$ink"}
+  ]
+}

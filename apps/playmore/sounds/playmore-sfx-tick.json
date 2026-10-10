@@ -1,0 +1,54 @@
+{
+  "id": "playmore.sfx.tick",
+  "name": "Tick",
+  "description": "A timer tick for the last seconds of a countdown: a 25ms triangle at `$tick` with a breath of highpassed noise on the front, like a small clock. Soft and dry so that ten of them in a row read as time passing, not as an alarm.",
+  "tags": [
+    "sfx",
+    "touch"
+  ],
+  "duration": 0.04,
+  "meta": {
+    "minInterval": 200
+  },
+  "voices": [
+    {
+      "id": "click",
+      "dur": 0.008,
+      "gain": 0.07,
+      "source": {
+        "kind": "noise"
+      },
+      "filter": {
+        "type": "highpass",
+        "freq": "$clink",
+        "q": "wide"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.003
+          }
+        }
+      ]
+    },
+    {
+      "id": "tock",
+      "dur": 0.025,
+      "gain": 0.1,
+      "source": {
+        "kind": "osc",
+        "wave": "triangle",
+        "freq": "$tick"
+      },
+      "env": [
+        {
+          "prop": "gain",
+          "adsr": {
+            "attack": 0.004
+          }
+        }
+      ]
+    }
+  ]
+}

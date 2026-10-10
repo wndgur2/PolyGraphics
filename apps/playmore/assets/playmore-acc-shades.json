@@ -1,0 +1,14 @@
+{
+  "id": "playmore.acc.shades",
+  "name": "Shades",
+  "description": "Sunglasses: two near-black rounded lenses that cover the eyes completely, a bridge between them, and a pale streak of reflection across each. Socket: `face` — place this document's origin on the body's `face` socket at the body's scale.",
+  "tags": ["acc", "face"],
+  "size": [80, 56],
+  "anchor": [0.5, 0.5],
+  "parts": [
+    {"id": "arm", "at": [-23.65, -1.6], "mirrorX": true, "shape": {"kind": "rect", "w": 6.0, "h": 2.6, "corner": 1.2}, "fill": "$ink"},
+    {"id": "lens", "at": [-12.15, 0.2], "mirrorX": true, "shape": {"kind": "rect", "w": 19.0, "h": 11.0, "corner": 4.6}, "fill": "$shades", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "bridge", "at": [0.0, -1.8], "shape": {"kind": "rect", "w": 6.4, "h": 2.6, "corner": 1.2}, "fill": "$ink"},
+    {"id": "glare", "mirrorX": true, "shape": {"kind": "poly", "points": [[-18.65, -3.0], [-15.65, -3.0], [-18.65, 3.5], [-21.65, 3.5]]}, "fill": "$white@0.55"}
+  ]
+}
