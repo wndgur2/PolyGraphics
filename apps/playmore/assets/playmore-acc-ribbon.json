@@ -1,0 +1,15 @@
+{
+  "id": "playmore.acc.ribbon",
+  "name": "Ribbon",
+  "description": "Pink bow tied on the right side of the top of the head: two rounded loops with a darker fold in each and a knot in the middle. Socket: `head` — place this document's origin on the body's `head` socket at the body's scale.",
+  "tags": ["acc", "head"],
+  "size": [80, 56],
+  "anchor": [0.5, 0.5],
+  "parts": [
+    {"id": "loop_l", "shape": {"kind": "poly", "points": [[10.8, 3.0], [0.0, -5.4], [-1.8, 0.0], [-1.8, 6.0], [0.0, 11.4]]}, "fill": "$ribbon", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "loop_r", "shape": {"kind": "poly", "points": [[10.8, 3.0], [21.6, -5.4], [23.4, 0.0], [23.4, 6.0], [21.6, 11.4]]}, "fill": "$ribbon", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "fold_l", "shape": {"kind": "poly", "points": [[8.8, 3.0], [1.8, -0.5], [1.8, 6.5]]}, "fill": "$ribbon-dark@0.7"},
+    {"id": "fold_r", "shape": {"kind": "poly", "points": [[12.8, 3.0], [19.8, -0.5], [19.8, 6.5]]}, "fill": "$ribbon-dark@0.7"},
+    {"id": "knot", "at": [10.8, 3.0], "shape": {"kind": "ellipse", "rx": 3.8, "ry": 4.4}, "fill": "$ribbon-dark", "stroke": {"color": "$ink", "width": "outline"}}
+  ]
+}

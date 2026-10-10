@@ -1,0 +1,17 @@
+{
+  "id": "playmore.acc.flower",
+  "name": "Flower",
+  "description": "A pink five-petal flower with a yellow centre and one green leaf, tucked on the right of the top of the head. Socket: `head` — place this document's origin on the body's `head` socket at the body's scale.",
+  "tags": ["acc", "head"],
+  "size": [80, 56],
+  "anchor": [0.5, 0.5],
+  "parts": [
+    {"id": "leaf", "shape": {"kind": "poly", "points": [[14.0, 5.2], [5.0, 5.7], [9.0, 10.7]]}, "fill": "$leaf", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "petal_1", "at": [18.0, -4.4], "shape": {"kind": "circle", "r": 4.8}, "fill": "$flower", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "petal_2", "at": [23.33, -0.53], "shape": {"kind": "circle", "r": 4.8}, "fill": "$flower", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "petal_3", "at": [21.29, 5.73], "shape": {"kind": "circle", "r": 4.8}, "fill": "$flower", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "petal_4", "at": [14.71, 5.73], "shape": {"kind": "circle", "r": 4.8}, "fill": "$flower", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "petal_5", "at": [12.67, -0.53], "shape": {"kind": "circle", "r": 4.8}, "fill": "$flower", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "centre", "at": [18.0, 1.2], "shape": {"kind": "circle", "r": 3.8}, "fill": "$gold", "stroke": {"color": "$ink", "width": "line"}}
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "playmore.acc.cap",
+  "name": "Cap",
+  "description": "Red baseball cap: a dome over the top of the head with a seam and a button, and a darker peak sticking out to the right. Socket: `head` — place this document's origin on the body's `head` socket at the body's scale.",
+  "tags": ["acc", "head"],
+  "size": [80, 56],
+  "anchor": [0.5, 0.5],
+  "parts": [
+    {"id": "crown", "shape": {"kind": "poly", "points": [[-23.4, 6.6], [-23.25, 5.19], [-22.81, 3.8], [-22.09, 2.44], [-21.08, 1.13], [-19.81, -0.1], [-18.29, -1.26], [-16.55, -2.31], [-14.59, -3.25], [-12.45, -4.07], [-10.15, -4.75], [-7.73, -5.29], [-5.21, -5.68], [-2.62, -5.92], [-0.0, -6.0], [2.62, -5.92], [5.21, -5.68], [7.73, -5.29], [10.15, -4.75], [12.45, -4.07], [14.59, -3.25], [16.55, -2.31], [18.29, -1.26], [19.81, -0.1], [21.08, 1.13], [22.09, 2.44], [22.81, 3.8], [23.25, 5.19], [23.4, 6.6]]}, "fill": "$cap", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "seam", "at": [1.0, 0.6], "shape": {"kind": "rect", "w": 1.6, "h": 10.5, "corner": 0.8}, "fill": "$cap-dark"},
+    {"id": "panel_shine", "shape": {"kind": "poly", "points": [[-4.5, -0.9], [-4.92, 0.32], [-6.11, 1.36], [-7.9, 2.06], [-10.0, 2.3], [-12.1, 2.06], [-13.89, 1.36], [-15.08, 0.32], [-15.5, -0.9], [-15.08, -2.12], [-13.89, -3.16], [-12.1, -3.86], [-10.0, -4.1], [-7.9, -3.86], [-6.11, -3.16], [-4.92, -2.12]]}, "fill": "$white@0.35"},
+    {"id": "button", "at": [0.0, -6.0], "shape": {"kind": "circle", "r": 2.0}, "fill": "$cap-dark", "stroke": {"color": "$ink", "width": "line"}},
+    {"id": "peak", "at": [18.0, 7.0], "rot": -6.0, "shape": {"kind": "ellipse", "rx": 16.2, "ry": 4.2}, "fill": "$cap-dark", "stroke": {"color": "$ink", "width": "outline"}}
+  ]
+}

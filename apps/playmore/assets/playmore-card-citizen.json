@@ -1,0 +1,16 @@
+{
+  "id": "playmore.card.citizen",
+  "name": "Citizen",
+  "description": "Role card for 시민 (citizen): the plain peach creature with a little green sprout on its head — nobody special, and proud of it — on a warm cream card. 72x96, origin at the centre.",
+  "tags": ["card", "role"],
+  "size": [72, 96],
+  "anchor": [0.5, 0.5],
+  "parts": [
+    {"id": "card", "shape": {"kind": "rect", "w": 66.0, "h": 90.0, "corner": 9.0}, "fill": "$lemon-shade", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "panel", "shape": {"kind": "rect", "w": 56.0, "h": 80.0, "corner": 6.0}, "fill": "$citizen"},
+    {"id": "creature", "at": [0.0, 10.0], "scale": 0.62, "use": "playmore.char.body"},
+    {"id": "stem", "at": [0.0, -10.36], "shape": {"kind": "rect", "w": 1.6, "h": 7.0, "corner": 0.8}, "fill": "$leaf-dark"},
+    {"id": "leaf_l", "at": [-3.6, -14.26], "rot": -25.0, "shape": {"kind": "ellipse", "rx": 4.2, "ry": 2.2}, "fill": "$leaf", "stroke": {"color": "$ink", "width": "line"}},
+    {"id": "leaf_r", "at": [3.6, -14.26], "rot": 25.0, "shape": {"kind": "ellipse", "rx": 4.2, "ry": 2.2}, "fill": "$leaf", "stroke": {"color": "$ink", "width": "line"}}
+  ]
+}

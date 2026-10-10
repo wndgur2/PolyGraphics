@@ -1,0 +1,21 @@
+{
+  "id": "playmore.ui.chip",
+  "name": "Chip",
+  "description": "A betting chip for 신뢰 베팅: a gold coin with a thick ink rim, six white edge marks like a casino chip, a darker inner ring, and a star struck in the middle. 48x48, origin at the centre; meant to be baked flat and stamped many times.",
+  "tags": ["ui", "chip"],
+  "size": [48, 48],
+  "anchor": [0.5, 0.5],
+  "parts": [
+    {"id": "coin", "shape": {"kind": "circle", "r": 20.0}, "fill": "$gold", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "notch_1", "at": [0.0, -17.4], "shape": {"kind": "rect", "w": 4.4, "h": 5.4, "corner": 1.2}, "fill": "$white"},
+    {"id": "notch_2", "at": [15.07, -8.7], "rot": 60.0, "shape": {"kind": "rect", "w": 4.4, "h": 5.4, "corner": 1.2}, "fill": "$white"},
+    {"id": "notch_3", "at": [15.07, 8.7], "rot": 120.0, "shape": {"kind": "rect", "w": 4.4, "h": 5.4, "corner": 1.2}, "fill": "$white"},
+    {"id": "notch_4", "at": [0.0, 17.4], "rot": 180.0, "shape": {"kind": "rect", "w": 4.4, "h": 5.4, "corner": 1.2}, "fill": "$white"},
+    {"id": "notch_5", "at": [-15.07, 8.7], "rot": 240.0, "shape": {"kind": "rect", "w": 4.4, "h": 5.4, "corner": 1.2}, "fill": "$white"},
+    {"id": "notch_6", "at": [-15.07, -8.7], "rot": 300.0, "shape": {"kind": "rect", "w": 4.4, "h": 5.4, "corner": 1.2}, "fill": "$white"},
+    {"id": "face", "shape": {"kind": "circle", "r": 13.0}, "fill": "$gold"},
+    {"id": "inner_ring", "shape": {"kind": "ring", "r": 13.0, "width": 2.4}, "fill": "$gold-dark"},
+    {"id": "star", "shape": {"kind": "star", "points": 5, "r": 7.0, "r2": 3.2}, "fill": "$gold-dark"},
+    {"id": "shine", "shape": {"kind": "ring", "r": 16.6, "width": 1.8, "from": 200, "to": 250}, "fill": "$white@0.6"}
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "playmore",
+  "name": "Playmore",
+  "premise": "A Korean party game for 8–12 friends on their own phones: everyone is the same chunky big-head creature on four stubby legs, told apart by skin and one accessory. Cute, bold, readable at thumbnail size: flat solid fills with a thick ink outline — never gradients (the Phaser adapter flattens a gradient to its middle stop, and the React avatars are drawn through the same path), so a change in value is its own shape. Accessories are separate documents placed on the body's `head` or `face` socket, so any skin wears any of them.",
+  "engines": ["phaser", "web"],
+  "categories": ["char", "acc", "card", "ui", "lib"],
+
+  "reference": {
+    "scale": 0.75
+  },
+
+  "rules": {
+    "grid": { "applies": ["char", "acc", "card", "ui"] },
+    "size": { "char": [96, 96], "acc": [80, 56], "card": [72, 96], "ui": [48, 48] },
+    "clips": [{ "in": ["char"], "require": ["idle", "walk", "cheer"] }],
+    "states": {
+      "char": ["peach", "sky", "mint", "lemon", "lilac", "coral", "cocoa", "snow", "spots", "stripes", "stars", "night"],
+      "acc": [],
+      "card": [],
+      "ui": [],
+      "lib": "*"
+    },
+    "roles": {
+      "skin": ["peach", "sky", "mint", "lemon", "lilac", "coral", "cocoa", "snow", "spots", "stripes", "stars", "night"],
+      "shade": ["peach-shade", "sky-shade", "mint-shade", "lemon-shade", "lilac-shade", "coral-shade", "cocoa-shade", "snow-shade", "spots-shade", "stripes-shade", "stars-shade", "night-shade"],
+      "pattern": ["spots-mark", "stripes-mark", "stars-mark", "night-mark"],
+      "face": ["ink", "blush"],
+      "accessory": ["cap", "cap-dark", "beanie", "beanie-dark", "gold", "gold-dark", "ribbon", "ribbon-dark", "shades", "headband", "flower", "leaf", "leaf-dark"],
+      "role": ["mafia", "attention", "doctor", "police", "police-light", "lover", "citizen"]
+    },
+    "contracts": {
+      "playmore.char.body": { "meta.footY": 44 }
+    },
+    "layers": [
+      { "in": ["char"], "layer": "char" },
+      { "in": ["acc"], "layer": "acc" },
+      { "in": ["card", "ui"], "layer": "ui" }
+    ],
+    "levels": { "contracts": "error", "namespace": "error" }
+  },
+
+  "audio": {
+    "key": ["tonic", "third", "fifth"],
+    "inKey": ["fanfare"],
+    "families": ["touch", "interface", "cue", "fanfare", "mood"]
+  }
+}

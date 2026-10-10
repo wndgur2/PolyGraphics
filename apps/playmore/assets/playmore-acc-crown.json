@@ -1,0 +1,19 @@
+{
+  "id": "playmore.acc.crown",
+  "name": "Crown",
+  "description": "Gold crown standing on top of the head: three points with a ball on each tip and three jewels — red, blue, red — on the band. Socket: `head` — place this document's origin on the body's `head` socket at the body's scale.",
+  "tags": ["acc", "head"],
+  "size": [80, 56],
+  "anchor": [0.5, 0.5],
+  "parts": [
+    {"id": "crown", "shape": {"kind": "poly", "points": [[-18.0, 6.6], [-18.0, -9.6], [-9.0, -0.6], [0.0, -13.2], [9.0, -0.6], [18.0, -9.6], [18.0, 6.6]]}, "fill": "$gold", "stroke": {"color": "$ink", "width": "outline"}},
+    {"id": "band", "shape": {"kind": "poly", "points": [[-18.0, 0.4], [18.0, 0.4], [18.0, 6.6], [-18.0, 6.6]]}, "fill": "$gold-dark"},
+    {"id": "tip_l", "at": [-18.0, -9.6], "shape": {"kind": "circle", "r": 2.2}, "fill": "$gold", "stroke": {"color": "$ink", "width": "line"}},
+    {"id": "tip_m", "at": [0.0, -13.2], "shape": {"kind": "circle", "r": 2.4}, "fill": "$gold", "stroke": {"color": "$ink", "width": "line"}},
+    {"id": "tip_r", "at": [18.0, -9.6], "shape": {"kind": "circle", "r": 2.2}, "fill": "$gold", "stroke": {"color": "$ink", "width": "line"}},
+    {"id": "jewel_l", "at": [-10.0, 3.6], "shape": {"kind": "circle", "r": 1.9}, "fill": "$cap"},
+    {"id": "jewel_m", "at": [0.0, 3.6], "shape": {"kind": "ngon", "sides": 4, "r": 2.6}, "fill": "$beanie"},
+    {"id": "jewel_r", "at": [10.0, 3.6], "shape": {"kind": "circle", "r": 1.9}, "fill": "$cap"},
+    {"id": "shine", "at": [-14.6, -3.2], "shape": {"kind": "rect", "w": 1.4, "h": 4.4, "corner": 0.7}, "fill": "$white@0.5"}
+  ]
+}
