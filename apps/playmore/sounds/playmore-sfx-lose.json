@@ -1,0 +1,12 @@
+{
+  "id": "playmore.sfx.lose",
+  "name": "Lose",
+  "description": "Caught, out, or the other side won: the win fanfare turned upside down, `$fifth` `$third` `$tonic` falling slowly on the party voice with the last note held. Gentle rather than a buzzer — losing is part of the party.",
+  "tags": ["sfx", "fanfare"],
+  "duration": 0.62,
+  "meta": { "minInterval": 600 },
+  "voices": [
+    { "id": "fall", "phrase": { "use": "playmore.lib.note", "step": 0.14, "notes": ["$fifth", "$third"] }, "gain": 0.8 },
+    { "id": "rest", "at": 0.28, "use": "playmore.lib.note", "pitch": "$tonic", "dur": 0.32, "gain": 0.8 }
+  ]
+}
